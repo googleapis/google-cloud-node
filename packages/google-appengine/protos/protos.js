@@ -69,7 +69,7 @@
                 function Duration(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -144,9 +144,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Duration.decode = function decode(reader, length, error) {
+                Duration.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -162,7 +166,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -193,9 +197,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Duration.verify = function verify(message) {
+                Duration.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.seconds != null && message.hasOwnProperty("seconds"))
                         if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
                             return "seconds: integer|Long expected";
@@ -213,9 +221,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.Duration} Duration
                  */
-                Duration.fromObject = function fromObject(object) {
+                Duration.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.Duration)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.Duration();
                     if (object.seconds != null)
                         if ($util.Long)
@@ -312,7 +324,7 @@
                     this.file = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -378,9 +390,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorSet.decode = function decode(reader, length, error) {
+                FileDescriptorSet.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -390,11 +406,11 @@
                         case 1: {
                                 if (!(message.file && message.file.length))
                                     message.file = [];
-                                message.file.push($root.google.protobuf.FileDescriptorProto.decode(reader, reader.uint32()));
+                                message.file.push($root.google.protobuf.FileDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -425,14 +441,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FileDescriptorSet.verify = function verify(message) {
+                FileDescriptorSet.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.file != null && message.hasOwnProperty("file")) {
                         if (!Array.isArray(message.file))
                             return "file: array expected";
                         for (var i = 0; i < message.file.length; ++i) {
-                            var error = $root.google.protobuf.FileDescriptorProto.verify(message.file[i]);
+                            var error = $root.google.protobuf.FileDescriptorProto.verify(message.file[i], long + 1);
                             if (error)
                                 return "file." + error;
                         }
@@ -448,9 +468,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FileDescriptorSet} FileDescriptorSet
                  */
-                FileDescriptorSet.fromObject = function fromObject(object) {
+                FileDescriptorSet.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FileDescriptorSet)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FileDescriptorSet();
                     if (object.file) {
                         if (!Array.isArray(object.file))
@@ -459,7 +483,7 @@
                         for (var i = 0; i < object.file.length; ++i) {
                             if (typeof object.file[i] !== "object")
                                 throw TypeError(".google.protobuf.FileDescriptorSet.file: object expected");
-                            message.file[i] = $root.google.protobuf.FileDescriptorProto.fromObject(object.file[i]);
+                            message.file[i] = $root.google.protobuf.FileDescriptorProto.fromObject(object.file[i], long + 1);
                         }
                     }
                     return message;
@@ -592,7 +616,7 @@
                     this.extension = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -795,9 +819,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorProto.decode = function decode(reader, length, error) {
+                FileDescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -849,33 +877,33 @@
                         case 4: {
                                 if (!(message.messageType && message.messageType.length))
                                     message.messageType = [];
-                                message.messageType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
+                                message.messageType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 5: {
                                 if (!(message.enumType && message.enumType.length))
                                     message.enumType = [];
-                                message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
+                                message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 6: {
                                 if (!(message.service && message.service.length))
                                     message.service = [];
-                                message.service.push($root.google.protobuf.ServiceDescriptorProto.decode(reader, reader.uint32()));
+                                message.service.push($root.google.protobuf.ServiceDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 7: {
                                 if (!(message.extension && message.extension.length))
                                     message.extension = [];
-                                message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 8: {
-                                message.options = $root.google.protobuf.FileOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.FileOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 9: {
-                                message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.decode(reader, reader.uint32());
+                                message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 12: {
@@ -887,7 +915,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -918,9 +946,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FileDescriptorProto.verify = function verify(message) {
+                FileDescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -959,7 +991,7 @@
                         if (!Array.isArray(message.messageType))
                             return "messageType: array expected";
                         for (var i = 0; i < message.messageType.length; ++i) {
-                            var error = $root.google.protobuf.DescriptorProto.verify(message.messageType[i]);
+                            var error = $root.google.protobuf.DescriptorProto.verify(message.messageType[i], long + 1);
                             if (error)
                                 return "messageType." + error;
                         }
@@ -968,7 +1000,7 @@
                         if (!Array.isArray(message.enumType))
                             return "enumType: array expected";
                         for (var i = 0; i < message.enumType.length; ++i) {
-                            var error = $root.google.protobuf.EnumDescriptorProto.verify(message.enumType[i]);
+                            var error = $root.google.protobuf.EnumDescriptorProto.verify(message.enumType[i], long + 1);
                             if (error)
                                 return "enumType." + error;
                         }
@@ -977,7 +1009,7 @@
                         if (!Array.isArray(message.service))
                             return "service: array expected";
                         for (var i = 0; i < message.service.length; ++i) {
-                            var error = $root.google.protobuf.ServiceDescriptorProto.verify(message.service[i]);
+                            var error = $root.google.protobuf.ServiceDescriptorProto.verify(message.service[i], long + 1);
                             if (error)
                                 return "service." + error;
                         }
@@ -986,18 +1018,18 @@
                         if (!Array.isArray(message.extension))
                             return "extension: array expected";
                         for (var i = 0; i < message.extension.length; ++i) {
-                            var error = $root.google.protobuf.FieldDescriptorProto.verify(message.extension[i]);
+                            var error = $root.google.protobuf.FieldDescriptorProto.verify(message.extension[i], long + 1);
                             if (error)
                                 return "extension." + error;
                         }
                     }
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.FileOptions.verify(message.options);
+                        var error = $root.google.protobuf.FileOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
                     if (message.sourceCodeInfo != null && message.hasOwnProperty("sourceCodeInfo")) {
-                        var error = $root.google.protobuf.SourceCodeInfo.verify(message.sourceCodeInfo);
+                        var error = $root.google.protobuf.SourceCodeInfo.verify(message.sourceCodeInfo, long + 1);
                         if (error)
                             return "sourceCodeInfo." + error;
                     }
@@ -1033,9 +1065,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FileDescriptorProto} FileDescriptorProto
                  */
-                FileDescriptorProto.fromObject = function fromObject(object) {
+                FileDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FileDescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FileDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -1076,7 +1112,7 @@
                         for (var i = 0; i < object.messageType.length; ++i) {
                             if (typeof object.messageType[i] !== "object")
                                 throw TypeError(".google.protobuf.FileDescriptorProto.messageType: object expected");
-                            message.messageType[i] = $root.google.protobuf.DescriptorProto.fromObject(object.messageType[i]);
+                            message.messageType[i] = $root.google.protobuf.DescriptorProto.fromObject(object.messageType[i], long + 1);
                         }
                     }
                     if (object.enumType) {
@@ -1086,7 +1122,7 @@
                         for (var i = 0; i < object.enumType.length; ++i) {
                             if (typeof object.enumType[i] !== "object")
                                 throw TypeError(".google.protobuf.FileDescriptorProto.enumType: object expected");
-                            message.enumType[i] = $root.google.protobuf.EnumDescriptorProto.fromObject(object.enumType[i]);
+                            message.enumType[i] = $root.google.protobuf.EnumDescriptorProto.fromObject(object.enumType[i], long + 1);
                         }
                     }
                     if (object.service) {
@@ -1096,7 +1132,7 @@
                         for (var i = 0; i < object.service.length; ++i) {
                             if (typeof object.service[i] !== "object")
                                 throw TypeError(".google.protobuf.FileDescriptorProto.service: object expected");
-                            message.service[i] = $root.google.protobuf.ServiceDescriptorProto.fromObject(object.service[i]);
+                            message.service[i] = $root.google.protobuf.ServiceDescriptorProto.fromObject(object.service[i], long + 1);
                         }
                     }
                     if (object.extension) {
@@ -1106,18 +1142,18 @@
                         for (var i = 0; i < object.extension.length; ++i) {
                             if (typeof object.extension[i] !== "object")
                                 throw TypeError(".google.protobuf.FileDescriptorProto.extension: object expected");
-                            message.extension[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.extension[i]);
+                            message.extension[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.extension[i], long + 1);
                         }
                     }
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.FileDescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.FileOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.FileOptions.fromObject(object.options, long + 1);
                     }
                     if (object.sourceCodeInfo != null) {
                         if (typeof object.sourceCodeInfo !== "object")
                             throw TypeError(".google.protobuf.FileDescriptorProto.sourceCodeInfo: object expected");
-                        message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.fromObject(object.sourceCodeInfo);
+                        message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.fromObject(object.sourceCodeInfo, long + 1);
                     }
                     if (object.syntax != null)
                         message.syntax = String(object.syntax);
@@ -1333,7 +1369,7 @@
                     this.reservedName = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -1506,9 +1542,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DescriptorProto.decode = function decode(reader, length, error) {
+                DescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -1522,47 +1562,47 @@
                         case 2: {
                                 if (!(message.field && message.field.length))
                                     message.field = [];
-                                message.field.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                message.field.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 6: {
                                 if (!(message.extension && message.extension.length))
                                     message.extension = [];
-                                message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 3: {
                                 if (!(message.nestedType && message.nestedType.length))
                                     message.nestedType = [];
-                                message.nestedType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
+                                message.nestedType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 4: {
                                 if (!(message.enumType && message.enumType.length))
                                     message.enumType = [];
-                                message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
+                                message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 5: {
                                 if (!(message.extensionRange && message.extensionRange.length))
                                     message.extensionRange = [];
-                                message.extensionRange.push($root.google.protobuf.DescriptorProto.ExtensionRange.decode(reader, reader.uint32()));
+                                message.extensionRange.push($root.google.protobuf.DescriptorProto.ExtensionRange.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 8: {
                                 if (!(message.oneofDecl && message.oneofDecl.length))
                                     message.oneofDecl = [];
-                                message.oneofDecl.push($root.google.protobuf.OneofDescriptorProto.decode(reader, reader.uint32()));
+                                message.oneofDecl.push($root.google.protobuf.OneofDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 7: {
-                                message.options = $root.google.protobuf.MessageOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.MessageOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 9: {
                                 if (!(message.reservedRange && message.reservedRange.length))
                                     message.reservedRange = [];
-                                message.reservedRange.push($root.google.protobuf.DescriptorProto.ReservedRange.decode(reader, reader.uint32()));
+                                message.reservedRange.push($root.google.protobuf.DescriptorProto.ReservedRange.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 10: {
@@ -1576,7 +1616,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -1607,9 +1647,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                DescriptorProto.verify = function verify(message) {
+                DescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -1617,7 +1661,7 @@
                         if (!Array.isArray(message.field))
                             return "field: array expected";
                         for (var i = 0; i < message.field.length; ++i) {
-                            var error = $root.google.protobuf.FieldDescriptorProto.verify(message.field[i]);
+                            var error = $root.google.protobuf.FieldDescriptorProto.verify(message.field[i], long + 1);
                             if (error)
                                 return "field." + error;
                         }
@@ -1626,7 +1670,7 @@
                         if (!Array.isArray(message.extension))
                             return "extension: array expected";
                         for (var i = 0; i < message.extension.length; ++i) {
-                            var error = $root.google.protobuf.FieldDescriptorProto.verify(message.extension[i]);
+                            var error = $root.google.protobuf.FieldDescriptorProto.verify(message.extension[i], long + 1);
                             if (error)
                                 return "extension." + error;
                         }
@@ -1635,7 +1679,7 @@
                         if (!Array.isArray(message.nestedType))
                             return "nestedType: array expected";
                         for (var i = 0; i < message.nestedType.length; ++i) {
-                            var error = $root.google.protobuf.DescriptorProto.verify(message.nestedType[i]);
+                            var error = $root.google.protobuf.DescriptorProto.verify(message.nestedType[i], long + 1);
                             if (error)
                                 return "nestedType." + error;
                         }
@@ -1644,7 +1688,7 @@
                         if (!Array.isArray(message.enumType))
                             return "enumType: array expected";
                         for (var i = 0; i < message.enumType.length; ++i) {
-                            var error = $root.google.protobuf.EnumDescriptorProto.verify(message.enumType[i]);
+                            var error = $root.google.protobuf.EnumDescriptorProto.verify(message.enumType[i], long + 1);
                             if (error)
                                 return "enumType." + error;
                         }
@@ -1653,7 +1697,7 @@
                         if (!Array.isArray(message.extensionRange))
                             return "extensionRange: array expected";
                         for (var i = 0; i < message.extensionRange.length; ++i) {
-                            var error = $root.google.protobuf.DescriptorProto.ExtensionRange.verify(message.extensionRange[i]);
+                            var error = $root.google.protobuf.DescriptorProto.ExtensionRange.verify(message.extensionRange[i], long + 1);
                             if (error)
                                 return "extensionRange." + error;
                         }
@@ -1662,13 +1706,13 @@
                         if (!Array.isArray(message.oneofDecl))
                             return "oneofDecl: array expected";
                         for (var i = 0; i < message.oneofDecl.length; ++i) {
-                            var error = $root.google.protobuf.OneofDescriptorProto.verify(message.oneofDecl[i]);
+                            var error = $root.google.protobuf.OneofDescriptorProto.verify(message.oneofDecl[i], long + 1);
                             if (error)
                                 return "oneofDecl." + error;
                         }
                     }
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.MessageOptions.verify(message.options);
+                        var error = $root.google.protobuf.MessageOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
@@ -1676,7 +1720,7 @@
                         if (!Array.isArray(message.reservedRange))
                             return "reservedRange: array expected";
                         for (var i = 0; i < message.reservedRange.length; ++i) {
-                            var error = $root.google.protobuf.DescriptorProto.ReservedRange.verify(message.reservedRange[i]);
+                            var error = $root.google.protobuf.DescriptorProto.ReservedRange.verify(message.reservedRange[i], long + 1);
                             if (error)
                                 return "reservedRange." + error;
                         }
@@ -1708,9 +1752,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.DescriptorProto} DescriptorProto
                  */
-                DescriptorProto.fromObject = function fromObject(object) {
+                DescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.DescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.DescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -1721,7 +1769,7 @@
                         for (var i = 0; i < object.field.length; ++i) {
                             if (typeof object.field[i] !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.field: object expected");
-                            message.field[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.field[i]);
+                            message.field[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.field[i], long + 1);
                         }
                     }
                     if (object.extension) {
@@ -1731,7 +1779,7 @@
                         for (var i = 0; i < object.extension.length; ++i) {
                             if (typeof object.extension[i] !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.extension: object expected");
-                            message.extension[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.extension[i]);
+                            message.extension[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.extension[i], long + 1);
                         }
                     }
                     if (object.nestedType) {
@@ -1741,7 +1789,7 @@
                         for (var i = 0; i < object.nestedType.length; ++i) {
                             if (typeof object.nestedType[i] !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.nestedType: object expected");
-                            message.nestedType[i] = $root.google.protobuf.DescriptorProto.fromObject(object.nestedType[i]);
+                            message.nestedType[i] = $root.google.protobuf.DescriptorProto.fromObject(object.nestedType[i], long + 1);
                         }
                     }
                     if (object.enumType) {
@@ -1751,7 +1799,7 @@
                         for (var i = 0; i < object.enumType.length; ++i) {
                             if (typeof object.enumType[i] !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.enumType: object expected");
-                            message.enumType[i] = $root.google.protobuf.EnumDescriptorProto.fromObject(object.enumType[i]);
+                            message.enumType[i] = $root.google.protobuf.EnumDescriptorProto.fromObject(object.enumType[i], long + 1);
                         }
                     }
                     if (object.extensionRange) {
@@ -1761,7 +1809,7 @@
                         for (var i = 0; i < object.extensionRange.length; ++i) {
                             if (typeof object.extensionRange[i] !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.extensionRange: object expected");
-                            message.extensionRange[i] = $root.google.protobuf.DescriptorProto.ExtensionRange.fromObject(object.extensionRange[i]);
+                            message.extensionRange[i] = $root.google.protobuf.DescriptorProto.ExtensionRange.fromObject(object.extensionRange[i], long + 1);
                         }
                     }
                     if (object.oneofDecl) {
@@ -1771,13 +1819,13 @@
                         for (var i = 0; i < object.oneofDecl.length; ++i) {
                             if (typeof object.oneofDecl[i] !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.oneofDecl: object expected");
-                            message.oneofDecl[i] = $root.google.protobuf.OneofDescriptorProto.fromObject(object.oneofDecl[i]);
+                            message.oneofDecl[i] = $root.google.protobuf.OneofDescriptorProto.fromObject(object.oneofDecl[i], long + 1);
                         }
                     }
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.DescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.MessageOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.MessageOptions.fromObject(object.options, long + 1);
                     }
                     if (object.reservedRange) {
                         if (!Array.isArray(object.reservedRange))
@@ -1786,7 +1834,7 @@
                         for (var i = 0; i < object.reservedRange.length; ++i) {
                             if (typeof object.reservedRange[i] !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.reservedRange: object expected");
-                            message.reservedRange[i] = $root.google.protobuf.DescriptorProto.ReservedRange.fromObject(object.reservedRange[i]);
+                            message.reservedRange[i] = $root.google.protobuf.DescriptorProto.ReservedRange.fromObject(object.reservedRange[i], long + 1);
                         }
                     }
                     if (object.reservedName) {
@@ -1944,7 +1992,7 @@
                     function ExtensionRange(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -2029,9 +2077,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ExtensionRange.decode = function decode(reader, length, error) {
+                    ExtensionRange.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -2047,11 +2099,11 @@
                                     break;
                                 }
                             case 3: {
-                                    message.options = $root.google.protobuf.ExtensionRangeOptions.decode(reader, reader.uint32());
+                                    message.options = $root.google.protobuf.ExtensionRangeOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -2082,9 +2134,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ExtensionRange.verify = function verify(message) {
+                    ExtensionRange.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.start != null && message.hasOwnProperty("start"))
                             if (!$util.isInteger(message.start))
                                 return "start: integer expected";
@@ -2092,7 +2148,7 @@
                             if (!$util.isInteger(message.end))
                                 return "end: integer expected";
                         if (message.options != null && message.hasOwnProperty("options")) {
-                            var error = $root.google.protobuf.ExtensionRangeOptions.verify(message.options);
+                            var error = $root.google.protobuf.ExtensionRangeOptions.verify(message.options, long + 1);
                             if (error)
                                 return "options." + error;
                         }
@@ -2107,9 +2163,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.DescriptorProto.ExtensionRange} ExtensionRange
                      */
-                    ExtensionRange.fromObject = function fromObject(object) {
+                    ExtensionRange.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.DescriptorProto.ExtensionRange)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
                         if (object.start != null)
                             message.start = object.start | 0;
@@ -2118,7 +2178,7 @@
                         if (object.options != null) {
                             if (typeof object.options !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.ExtensionRange.options: object expected");
-                            message.options = $root.google.protobuf.ExtensionRangeOptions.fromObject(object.options);
+                            message.options = $root.google.protobuf.ExtensionRangeOptions.fromObject(object.options, long + 1);
                         }
                         return message;
                     };
@@ -2200,7 +2260,7 @@
                     function ReservedRange(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -2275,9 +2335,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReservedRange.decode = function decode(reader, length, error) {
+                    ReservedRange.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -2293,7 +2357,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -2324,9 +2388,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ReservedRange.verify = function verify(message) {
+                    ReservedRange.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.start != null && message.hasOwnProperty("start"))
                             if (!$util.isInteger(message.start))
                                 return "start: integer expected";
@@ -2344,9 +2412,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.DescriptorProto.ReservedRange} ReservedRange
                      */
-                    ReservedRange.fromObject = function fromObject(object) {
+                    ReservedRange.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.DescriptorProto.ReservedRange)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.DescriptorProto.ReservedRange();
                         if (object.start != null)
                             message.start = object.start | 0;
@@ -2436,7 +2508,7 @@
                     this.declaration = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -2533,9 +2605,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ExtensionRangeOptions.decode = function decode(reader, length, error) {
+                ExtensionRangeOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -2545,17 +2621,17 @@
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 2: {
                                 if (!(message.declaration && message.declaration.length))
                                     message.declaration = [];
-                                message.declaration.push($root.google.protobuf.ExtensionRangeOptions.Declaration.decode(reader, reader.uint32()));
+                                message.declaration.push($root.google.protobuf.ExtensionRangeOptions.Declaration.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 50: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 3: {
@@ -2563,7 +2639,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -2594,14 +2670,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                ExtensionRangeOptions.verify = function verify(message) {
+                ExtensionRangeOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
@@ -2610,13 +2690,13 @@
                         if (!Array.isArray(message.declaration))
                             return "declaration: array expected";
                         for (var i = 0; i < message.declaration.length; ++i) {
-                            var error = $root.google.protobuf.ExtensionRangeOptions.Declaration.verify(message.declaration[i]);
+                            var error = $root.google.protobuf.ExtensionRangeOptions.Declaration.verify(message.declaration[i], long + 1);
                             if (error)
                                 return "declaration." + error;
                         }
                     }
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -2639,9 +2719,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.ExtensionRangeOptions} ExtensionRangeOptions
                  */
-                ExtensionRangeOptions.fromObject = function fromObject(object) {
+                ExtensionRangeOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.ExtensionRangeOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.ExtensionRangeOptions();
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -2650,7 +2734,7 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.ExtensionRangeOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     if (object.declaration) {
@@ -2660,13 +2744,13 @@
                         for (var i = 0; i < object.declaration.length; ++i) {
                             if (typeof object.declaration[i] !== "object")
                                 throw TypeError(".google.protobuf.ExtensionRangeOptions.declaration: object expected");
-                            message.declaration[i] = $root.google.protobuf.ExtensionRangeOptions.Declaration.fromObject(object.declaration[i]);
+                            message.declaration[i] = $root.google.protobuf.ExtensionRangeOptions.Declaration.fromObject(object.declaration[i], long + 1);
                         }
                     }
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.ExtensionRangeOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     switch (object.verification) {
                     case "DECLARATION":
@@ -2775,7 +2859,7 @@
                     function Declaration(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -2880,9 +2964,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Declaration.decode = function decode(reader, length, error) {
+                    Declaration.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -2910,7 +2998,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -2941,9 +3029,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    Declaration.verify = function verify(message) {
+                    Declaration.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.number != null && message.hasOwnProperty("number"))
                             if (!$util.isInteger(message.number))
                                 return "number: integer expected";
@@ -2970,9 +3062,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.ExtensionRangeOptions.Declaration} Declaration
                      */
-                    Declaration.fromObject = function fromObject(object) {
+                    Declaration.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.ExtensionRangeOptions.Declaration)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
                         if (object.number != null)
                             message.number = object.number | 0;
@@ -3096,7 +3192,7 @@
                 function FieldDescriptorProto(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -3261,9 +3357,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldDescriptorProto.decode = function decode(reader, length, error) {
+                FieldDescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -3307,7 +3407,7 @@
                                 break;
                             }
                         case 8: {
-                                message.options = $root.google.protobuf.FieldOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.FieldOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 17: {
@@ -3315,7 +3415,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -3346,9 +3446,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FieldDescriptorProto.verify = function verify(message) {
+                FieldDescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -3404,7 +3508,7 @@
                         if (!$util.isString(message.jsonName))
                             return "jsonName: string expected";
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.FieldOptions.verify(message.options);
+                        var error = $root.google.protobuf.FieldOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
@@ -3422,9 +3526,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FieldDescriptorProto} FieldDescriptorProto
                  */
-                FieldDescriptorProto.fromObject = function fromObject(object) {
+                FieldDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FieldDescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FieldDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -3543,7 +3651,7 @@
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.FieldDescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.FieldOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.FieldOptions.fromObject(object.options, long + 1);
                     }
                     if (object.proto3Optional != null)
                         message.proto3Optional = Boolean(object.proto3Optional);
@@ -3713,7 +3821,7 @@
                 function OneofDescriptorProto(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -3788,9 +3896,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofDescriptorProto.decode = function decode(reader, length, error) {
+                OneofDescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -3802,11 +3914,11 @@
                                 break;
                             }
                         case 2: {
-                                message.options = $root.google.protobuf.OneofOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.OneofOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -3837,14 +3949,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                OneofDescriptorProto.verify = function verify(message) {
+                OneofDescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.OneofOptions.verify(message.options);
+                        var error = $root.google.protobuf.OneofOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
@@ -3859,16 +3975,20 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.OneofDescriptorProto} OneofDescriptorProto
                  */
-                OneofDescriptorProto.fromObject = function fromObject(object) {
+                OneofDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.OneofDescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.OneofDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.OneofDescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.OneofOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.OneofOptions.fromObject(object.options, long + 1);
                     }
                     return message;
                 };
@@ -3954,7 +4074,7 @@
                     this.reservedName = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -4072,9 +4192,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumDescriptorProto.decode = function decode(reader, length, error) {
+                EnumDescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -4088,17 +4212,17 @@
                         case 2: {
                                 if (!(message.value && message.value.length))
                                     message.value = [];
-                                message.value.push($root.google.protobuf.EnumValueDescriptorProto.decode(reader, reader.uint32()));
+                                message.value.push($root.google.protobuf.EnumValueDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 3: {
-                                message.options = $root.google.protobuf.EnumOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.EnumOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 4: {
                                 if (!(message.reservedRange && message.reservedRange.length))
                                     message.reservedRange = [];
-                                message.reservedRange.push($root.google.protobuf.EnumDescriptorProto.EnumReservedRange.decode(reader, reader.uint32()));
+                                message.reservedRange.push($root.google.protobuf.EnumDescriptorProto.EnumReservedRange.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 5: {
@@ -4112,7 +4236,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -4143,9 +4267,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                EnumDescriptorProto.verify = function verify(message) {
+                EnumDescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -4153,13 +4281,13 @@
                         if (!Array.isArray(message.value))
                             return "value: array expected";
                         for (var i = 0; i < message.value.length; ++i) {
-                            var error = $root.google.protobuf.EnumValueDescriptorProto.verify(message.value[i]);
+                            var error = $root.google.protobuf.EnumValueDescriptorProto.verify(message.value[i], long + 1);
                             if (error)
                                 return "value." + error;
                         }
                     }
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.EnumOptions.verify(message.options);
+                        var error = $root.google.protobuf.EnumOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
@@ -4167,7 +4295,7 @@
                         if (!Array.isArray(message.reservedRange))
                             return "reservedRange: array expected";
                         for (var i = 0; i < message.reservedRange.length; ++i) {
-                            var error = $root.google.protobuf.EnumDescriptorProto.EnumReservedRange.verify(message.reservedRange[i]);
+                            var error = $root.google.protobuf.EnumDescriptorProto.EnumReservedRange.verify(message.reservedRange[i], long + 1);
                             if (error)
                                 return "reservedRange." + error;
                         }
@@ -4199,9 +4327,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.EnumDescriptorProto} EnumDescriptorProto
                  */
-                EnumDescriptorProto.fromObject = function fromObject(object) {
+                EnumDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.EnumDescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.EnumDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -4212,13 +4344,13 @@
                         for (var i = 0; i < object.value.length; ++i) {
                             if (typeof object.value[i] !== "object")
                                 throw TypeError(".google.protobuf.EnumDescriptorProto.value: object expected");
-                            message.value[i] = $root.google.protobuf.EnumValueDescriptorProto.fromObject(object.value[i]);
+                            message.value[i] = $root.google.protobuf.EnumValueDescriptorProto.fromObject(object.value[i], long + 1);
                         }
                     }
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.EnumDescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.EnumOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.EnumOptions.fromObject(object.options, long + 1);
                     }
                     if (object.reservedRange) {
                         if (!Array.isArray(object.reservedRange))
@@ -4227,7 +4359,7 @@
                         for (var i = 0; i < object.reservedRange.length; ++i) {
                             if (typeof object.reservedRange[i] !== "object")
                                 throw TypeError(".google.protobuf.EnumDescriptorProto.reservedRange: object expected");
-                            message.reservedRange[i] = $root.google.protobuf.EnumDescriptorProto.EnumReservedRange.fromObject(object.reservedRange[i]);
+                            message.reservedRange[i] = $root.google.protobuf.EnumDescriptorProto.EnumReservedRange.fromObject(object.reservedRange[i], long + 1);
                         }
                     }
                     if (object.reservedName) {
@@ -4354,7 +4486,7 @@
                     function EnumReservedRange(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -4429,9 +4561,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EnumReservedRange.decode = function decode(reader, length, error) {
+                    EnumReservedRange.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -4447,7 +4583,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -4478,9 +4614,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    EnumReservedRange.verify = function verify(message) {
+                    EnumReservedRange.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.start != null && message.hasOwnProperty("start"))
                             if (!$util.isInteger(message.start))
                                 return "start: integer expected";
@@ -4498,9 +4638,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.EnumDescriptorProto.EnumReservedRange} EnumReservedRange
                      */
-                    EnumReservedRange.fromObject = function fromObject(object) {
+                    EnumReservedRange.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.EnumDescriptorProto.EnumReservedRange)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
                         if (object.start != null)
                             message.start = object.start | 0;
@@ -4587,7 +4731,7 @@
                 function EnumValueDescriptorProto(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -4672,9 +4816,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueDescriptorProto.decode = function decode(reader, length, error) {
+                EnumValueDescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -4690,11 +4838,11 @@
                                 break;
                             }
                         case 3: {
-                                message.options = $root.google.protobuf.EnumValueOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.EnumValueOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -4725,9 +4873,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                EnumValueDescriptorProto.verify = function verify(message) {
+                EnumValueDescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -4735,7 +4887,7 @@
                         if (!$util.isInteger(message.number))
                             return "number: integer expected";
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.EnumValueOptions.verify(message.options);
+                        var error = $root.google.protobuf.EnumValueOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
@@ -4750,9 +4902,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.EnumValueDescriptorProto} EnumValueDescriptorProto
                  */
-                EnumValueDescriptorProto.fromObject = function fromObject(object) {
+                EnumValueDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.EnumValueDescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.EnumValueDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -4761,7 +4917,7 @@
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.EnumValueDescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.EnumValueOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.EnumValueOptions.fromObject(object.options, long + 1);
                     }
                     return message;
                 };
@@ -4845,7 +5001,7 @@
                     this.method = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -4931,9 +5087,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceDescriptorProto.decode = function decode(reader, length, error) {
+                ServiceDescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -4947,15 +5107,15 @@
                         case 2: {
                                 if (!(message.method && message.method.length))
                                     message.method = [];
-                                message.method.push($root.google.protobuf.MethodDescriptorProto.decode(reader, reader.uint32()));
+                                message.method.push($root.google.protobuf.MethodDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 3: {
-                                message.options = $root.google.protobuf.ServiceOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.ServiceOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -4986,9 +5146,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                ServiceDescriptorProto.verify = function verify(message) {
+                ServiceDescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -4996,13 +5160,13 @@
                         if (!Array.isArray(message.method))
                             return "method: array expected";
                         for (var i = 0; i < message.method.length; ++i) {
-                            var error = $root.google.protobuf.MethodDescriptorProto.verify(message.method[i]);
+                            var error = $root.google.protobuf.MethodDescriptorProto.verify(message.method[i], long + 1);
                             if (error)
                                 return "method." + error;
                         }
                     }
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.ServiceOptions.verify(message.options);
+                        var error = $root.google.protobuf.ServiceOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
@@ -5017,9 +5181,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.ServiceDescriptorProto} ServiceDescriptorProto
                  */
-                ServiceDescriptorProto.fromObject = function fromObject(object) {
+                ServiceDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.ServiceDescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.ServiceDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -5030,13 +5198,13 @@
                         for (var i = 0; i < object.method.length; ++i) {
                             if (typeof object.method[i] !== "object")
                                 throw TypeError(".google.protobuf.ServiceDescriptorProto.method: object expected");
-                            message.method[i] = $root.google.protobuf.MethodDescriptorProto.fromObject(object.method[i]);
+                            message.method[i] = $root.google.protobuf.MethodDescriptorProto.fromObject(object.method[i], long + 1);
                         }
                     }
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.ServiceDescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.ServiceOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.ServiceOptions.fromObject(object.options, long + 1);
                     }
                     return message;
                 };
@@ -5126,7 +5294,7 @@
                 function MethodDescriptorProto(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -5241,9 +5409,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodDescriptorProto.decode = function decode(reader, length, error) {
+                MethodDescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -5263,7 +5435,7 @@
                                 break;
                             }
                         case 4: {
-                                message.options = $root.google.protobuf.MethodOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.MethodOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 5: {
@@ -5275,7 +5447,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -5306,9 +5478,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                MethodDescriptorProto.verify = function verify(message) {
+                MethodDescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -5319,7 +5495,7 @@
                         if (!$util.isString(message.outputType))
                             return "outputType: string expected";
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.MethodOptions.verify(message.options);
+                        var error = $root.google.protobuf.MethodOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
@@ -5340,9 +5516,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.MethodDescriptorProto} MethodDescriptorProto
                  */
-                MethodDescriptorProto.fromObject = function fromObject(object) {
+                MethodDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.MethodDescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.MethodDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -5353,7 +5533,7 @@
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.MethodDescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.MethodOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.MethodOptions.fromObject(object.options, long + 1);
                     }
                     if (object.clientStreaming != null)
                         message.clientStreaming = Boolean(object.clientStreaming);
@@ -5470,7 +5650,7 @@
                     this[".google.api.resourceDefinition"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -5747,9 +5927,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileOptions.decode = function decode(reader, length, error) {
+                FileOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -5833,23 +6017,23 @@
                                 break;
                             }
                         case 50: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 1053: {
                                 if (!(message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length))
                                     message[".google.api.resourceDefinition"] = [];
-                                message[".google.api.resourceDefinition"].push($root.google.api.ResourceDescriptor.decode(reader, reader.uint32()));
+                                message[".google.api.resourceDefinition"].push($root.google.api.ResourceDescriptor.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -5880,9 +6064,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FileOptions.verify = function verify(message) {
+                FileOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.javaPackage != null && message.hasOwnProperty("javaPackage"))
                         if (!$util.isString(message.javaPackage))
                             return "javaPackage: string expected";
@@ -5947,7 +6135,7 @@
                         if (!$util.isString(message.rubyPackage))
                             return "rubyPackage: string expected";
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -5955,7 +6143,7 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
@@ -5964,7 +6152,7 @@
                         if (!Array.isArray(message[".google.api.resourceDefinition"]))
                             return ".google.api.resourceDefinition: array expected";
                         for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i) {
-                            var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resourceDefinition"][i]);
+                            var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resourceDefinition"][i], long + 1);
                             if (error)
                                 return ".google.api.resourceDefinition." + error;
                         }
@@ -5980,9 +6168,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FileOptions} FileOptions
                  */
-                FileOptions.fromObject = function fromObject(object) {
+                FileOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FileOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FileOptions();
                     if (object.javaPackage != null)
                         message.javaPackage = String(object.javaPackage);
@@ -6043,7 +6235,7 @@
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.FileOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -6052,7 +6244,7 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.FileOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     if (object[".google.api.resourceDefinition"]) {
@@ -6062,7 +6254,7 @@
                         for (var i = 0; i < object[".google.api.resourceDefinition"].length; ++i) {
                             if (typeof object[".google.api.resourceDefinition"][i] !== "object")
                                 throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: object expected");
-                            message[".google.api.resourceDefinition"][i] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resourceDefinition"][i]);
+                            message[".google.api.resourceDefinition"][i] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resourceDefinition"][i], long + 1);
                         }
                     }
                     return message;
@@ -6233,7 +6425,7 @@
                     this.uninterpretedOption = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -6369,9 +6561,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MessageOptions.decode = function decode(reader, length, error) {
+                MessageOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MessageOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -6399,21 +6595,21 @@
                                 break;
                             }
                         case 12: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 1053: {
-                                message[".google.api.resource"] = $root.google.api.ResourceDescriptor.decode(reader, reader.uint32());
+                                message[".google.api.resource"] = $root.google.api.ResourceDescriptor.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -6444,9 +6640,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                MessageOptions.verify = function verify(message) {
+                MessageOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.messageSetWireFormat != null && message.hasOwnProperty("messageSetWireFormat"))
                         if (typeof message.messageSetWireFormat !== "boolean")
                             return "messageSetWireFormat: boolean expected";
@@ -6463,7 +6663,7 @@
                         if (typeof message.deprecatedLegacyJsonFieldConflicts !== "boolean")
                             return "deprecatedLegacyJsonFieldConflicts: boolean expected";
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -6471,13 +6671,13 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
                     }
                     if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource")) {
-                        var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resource"]);
+                        var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resource"], long + 1);
                         if (error)
                             return ".google.api.resource." + error;
                     }
@@ -6492,9 +6692,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.MessageOptions} MessageOptions
                  */
-                MessageOptions.fromObject = function fromObject(object) {
+                MessageOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.MessageOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.MessageOptions();
                     if (object.messageSetWireFormat != null)
                         message.messageSetWireFormat = Boolean(object.messageSetWireFormat);
@@ -6509,7 +6713,7 @@
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.MessageOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -6518,13 +6722,13 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.MessageOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     if (object[".google.api.resource"] != null) {
                         if (typeof object[".google.api.resource"] !== "object")
                             throw TypeError(".google.protobuf.MessageOptions..google.api.resource: object expected");
-                        message[".google.api.resource"] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resource"]);
+                        message[".google.api.resource"] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resource"], long + 1);
                     }
                     return message;
                 };
@@ -6643,7 +6847,7 @@
                     this[".google.api.fieldBehavior"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -6862,9 +7066,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldOptions.decode = function decode(reader, length, error) {
+                FieldOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -6921,21 +7129,21 @@
                         case 20: {
                                 if (!(message.editionDefaults && message.editionDefaults.length))
                                     message.editionDefaults = [];
-                                message.editionDefaults.push($root.google.protobuf.FieldOptions.EditionDefault.decode(reader, reader.uint32()));
+                                message.editionDefaults.push($root.google.protobuf.FieldOptions.EditionDefault.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 21: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 22: {
-                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 1052: {
@@ -6950,11 +7158,11 @@
                                 break;
                             }
                         case 1055: {
-                                message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
+                                message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -6985,9 +7193,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FieldOptions.verify = function verify(message) {
+                FieldOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
                         switch (message.ctype) {
                         default:
@@ -7057,18 +7269,18 @@
                         if (!Array.isArray(message.editionDefaults))
                             return "editionDefaults: array expected";
                         for (var i = 0; i < message.editionDefaults.length; ++i) {
-                            var error = $root.google.protobuf.FieldOptions.EditionDefault.verify(message.editionDefaults[i]);
+                            var error = $root.google.protobuf.FieldOptions.EditionDefault.verify(message.editionDefaults[i], long + 1);
                             if (error)
                                 return "editionDefaults." + error;
                         }
                     }
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
                     if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
-                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport, long + 1);
                         if (error)
                             return "featureSupport." + error;
                     }
@@ -7076,7 +7288,7 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
@@ -7101,7 +7313,7 @@
                             }
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
-                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
+                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"], long + 1);
                         if (error)
                             return ".google.api.resourceReference." + error;
                     }
@@ -7116,9 +7328,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FieldOptions} FieldOptions
                  */
-                FieldOptions.fromObject = function fromObject(object) {
+                FieldOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FieldOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
                     default:
@@ -7252,18 +7468,18 @@
                         for (var i = 0; i < object.editionDefaults.length; ++i) {
                             if (typeof object.editionDefaults[i] !== "object")
                                 throw TypeError(".google.protobuf.FieldOptions.editionDefaults: object expected");
-                            message.editionDefaults[i] = $root.google.protobuf.FieldOptions.EditionDefault.fromObject(object.editionDefaults[i]);
+                            message.editionDefaults[i] = $root.google.protobuf.FieldOptions.EditionDefault.fromObject(object.editionDefaults[i], long + 1);
                         }
                     }
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.FieldOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.featureSupport != null) {
                         if (typeof object.featureSupport !== "object")
                             throw TypeError(".google.protobuf.FieldOptions.featureSupport: object expected");
-                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport, long + 1);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -7272,7 +7488,7 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.FieldOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     if (object[".google.api.fieldBehavior"]) {
@@ -7327,7 +7543,7 @@
                     if (object[".google.api.resourceReference"] != null) {
                         if (typeof object[".google.api.resourceReference"] !== "object")
                             throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
-                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
+                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"], long + 1);
                     }
                     return message;
                 };
@@ -7537,7 +7753,7 @@
                     function EditionDefault(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -7612,9 +7828,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EditionDefault.decode = function decode(reader, length, error) {
+                    EditionDefault.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -7630,7 +7850,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -7661,9 +7881,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    EditionDefault.verify = function verify(message) {
+                    EditionDefault.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             switch (message.edition) {
                             default:
@@ -7696,9 +7920,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.FieldOptions.EditionDefault} EditionDefault
                      */
-                    EditionDefault.fromObject = function fromObject(object) {
+                    EditionDefault.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.FieldOptions.EditionDefault)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.FieldOptions.EditionDefault();
                         switch (object.edition) {
                         default:
@@ -7837,7 +8065,7 @@
                     function FeatureSupport(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -7932,9 +8160,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FeatureSupport.decode = function decode(reader, length, error) {
+                    FeatureSupport.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.FeatureSupport();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -7958,7 +8190,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -7989,9 +8221,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    FeatureSupport.verify = function verify(message) {
+                    FeatureSupport.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
                             switch (message.editionIntroduced) {
                             default:
@@ -8060,9 +8296,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
                      */
-                    FeatureSupport.fromObject = function fromObject(object) {
+                    FeatureSupport.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.FieldOptions.FeatureSupport)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.FieldOptions.FeatureSupport();
                         switch (object.editionIntroduced) {
                         default:
@@ -8321,7 +8561,7 @@
                     this.uninterpretedOption = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -8397,9 +8637,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofOptions.decode = function decode(reader, length, error) {
+                OneofOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -8407,17 +8651,17 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -8448,11 +8692,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                OneofOptions.verify = function verify(message) {
+                OneofOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -8460,7 +8708,7 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
@@ -8476,14 +8724,18 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.OneofOptions} OneofOptions
                  */
-                OneofOptions.fromObject = function fromObject(object) {
+                OneofOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.OneofOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.OneofOptions();
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.OneofOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -8492,7 +8744,7 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.OneofOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     return message;
@@ -8579,7 +8831,7 @@
                     this.uninterpretedOption = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -8685,9 +8937,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumOptions.decode = function decode(reader, length, error) {
+                EnumOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -8707,17 +8963,17 @@
                                 break;
                             }
                         case 7: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -8748,9 +9004,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                EnumOptions.verify = function verify(message) {
+                EnumOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.allowAlias != null && message.hasOwnProperty("allowAlias"))
                         if (typeof message.allowAlias !== "boolean")
                             return "allowAlias: boolean expected";
@@ -8761,7 +9021,7 @@
                         if (typeof message.deprecatedLegacyJsonFieldConflicts !== "boolean")
                             return "deprecatedLegacyJsonFieldConflicts: boolean expected";
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -8769,7 +9029,7 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
@@ -8785,9 +9045,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.EnumOptions} EnumOptions
                  */
-                EnumOptions.fromObject = function fromObject(object) {
+                EnumOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.EnumOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.EnumOptions();
                     if (object.allowAlias != null)
                         message.allowAlias = Boolean(object.allowAlias);
@@ -8798,7 +9062,7 @@
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.EnumOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -8807,7 +9071,7 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.EnumOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     return message;
@@ -8904,7 +9168,7 @@
                     this.uninterpretedOption = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -9010,9 +9274,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueOptions.decode = function decode(reader, length, error) {
+                EnumValueOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -9024,7 +9292,7 @@
                                 break;
                             }
                         case 2: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 3: {
@@ -9032,17 +9300,17 @@
                                 break;
                             }
                         case 4: {
-                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -9073,14 +9341,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                EnumValueOptions.verify = function verify(message) {
+                EnumValueOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -9088,7 +9360,7 @@
                         if (typeof message.debugRedact !== "boolean")
                             return "debugRedact: boolean expected";
                     if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
-                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport, long + 1);
                         if (error)
                             return "featureSupport." + error;
                     }
@@ -9096,7 +9368,7 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
@@ -9112,23 +9384,27 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.EnumValueOptions} EnumValueOptions
                  */
-                EnumValueOptions.fromObject = function fromObject(object) {
+                EnumValueOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.EnumValueOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.EnumValueOptions();
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.EnumValueOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.debugRedact != null)
                         message.debugRedact = Boolean(object.debugRedact);
                     if (object.featureSupport != null) {
                         if (typeof object.featureSupport !== "object")
                             throw TypeError(".google.protobuf.EnumValueOptions.featureSupport: object expected");
-                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport, long + 1);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -9137,7 +9413,7 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     return message;
@@ -9235,7 +9511,7 @@
                     this.uninterpretedOption = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -9351,9 +9627,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceOptions.decode = function decode(reader, length, error) {
+                ServiceOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -9361,7 +9641,7 @@
                             break;
                         switch (tag >>> 3) {
                         case 34: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 33: {
@@ -9371,7 +9651,7 @@
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 1049: {
@@ -9387,7 +9667,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -9418,11 +9698,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                ServiceOptions.verify = function verify(message) {
+                ServiceOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -9433,7 +9717,7 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
@@ -9458,14 +9742,18 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.ServiceOptions} ServiceOptions
                  */
-                ServiceOptions.fromObject = function fromObject(object) {
+                ServiceOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.ServiceOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.ServiceOptions();
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.ServiceOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
@@ -9476,7 +9764,7 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.ServiceOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     if (object[".google.api.defaultHost"] != null)
@@ -9585,7 +9873,7 @@
                     this[".google.api.methodSignature"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -9712,9 +10000,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodOptions.decode = function decode(reader, length, error) {
+                MethodOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -9730,17 +10022,17 @@
                                 break;
                             }
                         case 35: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 72295728: {
-                                message[".google.api.http"] = $root.google.api.HttpRule.decode(reader, reader.uint32());
+                                message[".google.api.http"] = $root.google.api.HttpRule.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 1051: {
@@ -9750,11 +10042,11 @@
                                 break;
                             }
                         case 1049: {
-                                message[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.decode(reader, reader.uint32());
+                                message[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -9785,9 +10077,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                MethodOptions.verify = function verify(message) {
+                MethodOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
@@ -9801,7 +10097,7 @@
                             break;
                         }
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -9809,13 +10105,13 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
                     }
                     if (message[".google.api.http"] != null && message.hasOwnProperty(".google.api.http")) {
-                        var error = $root.google.api.HttpRule.verify(message[".google.api.http"]);
+                        var error = $root.google.api.HttpRule.verify(message[".google.api.http"], long + 1);
                         if (error)
                             return ".google.api.http." + error;
                     }
@@ -9827,7 +10123,7 @@
                                 return ".google.api.methodSignature: string[] expected";
                     }
                     if (message[".google.longrunning.operationInfo"] != null && message.hasOwnProperty(".google.longrunning.operationInfo")) {
-                        var error = $root.google.longrunning.OperationInfo.verify(message[".google.longrunning.operationInfo"]);
+                        var error = $root.google.longrunning.OperationInfo.verify(message[".google.longrunning.operationInfo"], long + 1);
                         if (error)
                             return ".google.longrunning.operationInfo." + error;
                     }
@@ -9842,9 +10138,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.MethodOptions} MethodOptions
                  */
-                MethodOptions.fromObject = function fromObject(object) {
+                MethodOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.MethodOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.MethodOptions();
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
@@ -9871,7 +10171,7 @@
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.MethodOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -9880,13 +10180,13 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.MethodOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     if (object[".google.api.http"] != null) {
                         if (typeof object[".google.api.http"] !== "object")
                             throw TypeError(".google.protobuf.MethodOptions..google.api.http: object expected");
-                        message[".google.api.http"] = $root.google.api.HttpRule.fromObject(object[".google.api.http"]);
+                        message[".google.api.http"] = $root.google.api.HttpRule.fromObject(object[".google.api.http"], long + 1);
                     }
                     if (object[".google.api.methodSignature"]) {
                         if (!Array.isArray(object[".google.api.methodSignature"]))
@@ -9898,7 +10198,7 @@
                     if (object[".google.longrunning.operationInfo"] != null) {
                         if (typeof object[".google.longrunning.operationInfo"] !== "object")
                             throw TypeError(".google.protobuf.MethodOptions..google.longrunning.operationInfo: object expected");
-                        message[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.fromObject(object[".google.longrunning.operationInfo"]);
+                        message[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.fromObject(object[".google.longrunning.operationInfo"], long + 1);
                     }
                     return message;
                 };
@@ -10022,7 +10322,7 @@
                     this.name = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -10148,9 +10448,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UninterpretedOption.decode = function decode(reader, length, error) {
+                UninterpretedOption.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -10160,7 +10464,7 @@
                         case 2: {
                                 if (!(message.name && message.name.length))
                                     message.name = [];
-                                message.name.push($root.google.protobuf.UninterpretedOption.NamePart.decode(reader, reader.uint32()));
+                                message.name.push($root.google.protobuf.UninterpretedOption.NamePart.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 3: {
@@ -10188,7 +10492,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -10219,14 +10523,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                UninterpretedOption.verify = function verify(message) {
+                UninterpretedOption.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name")) {
                         if (!Array.isArray(message.name))
                             return "name: array expected";
                         for (var i = 0; i < message.name.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.NamePart.verify(message.name[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.NamePart.verify(message.name[i], long + 1);
                             if (error)
                                 return "name." + error;
                         }
@@ -10260,9 +10568,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.UninterpretedOption} UninterpretedOption
                  */
-                UninterpretedOption.fromObject = function fromObject(object) {
+                UninterpretedOption.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.UninterpretedOption)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.UninterpretedOption();
                     if (object.name) {
                         if (!Array.isArray(object.name))
@@ -10271,7 +10583,7 @@
                         for (var i = 0; i < object.name.length; ++i) {
                             if (typeof object.name[i] !== "object")
                                 throw TypeError(".google.protobuf.UninterpretedOption.name: object expected");
-                            message.name[i] = $root.google.protobuf.UninterpretedOption.NamePart.fromObject(object.name[i]);
+                            message.name[i] = $root.google.protobuf.UninterpretedOption.NamePart.fromObject(object.name[i], long + 1);
                         }
                     }
                     if (object.identifierValue != null)
@@ -10416,7 +10728,7 @@
                     function NamePart(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -10489,9 +10801,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NamePart.decode = function decode(reader, length, error) {
+                    NamePart.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption.NamePart();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -10507,7 +10823,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -10542,9 +10858,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    NamePart.verify = function verify(message) {
+                    NamePart.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (!$util.isString(message.namePart))
                             return "namePart: string expected";
                         if (typeof message.isExtension !== "boolean")
@@ -10560,9 +10880,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.UninterpretedOption.NamePart} NamePart
                      */
-                    NamePart.fromObject = function fromObject(object) {
+                    NamePart.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.UninterpretedOption.NamePart)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.UninterpretedOption.NamePart();
                         if (object.namePart != null)
                             message.namePart = String(object.namePart);
@@ -10654,7 +10978,7 @@
                 function FeatureSet(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -10789,9 +11113,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSet.decode = function decode(reader, length, error) {
+                FeatureSet.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -10831,7 +11159,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -10862,9 +11190,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FeatureSet.verify = function verify(message) {
+                FeatureSet.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
                         switch (message.fieldPresence) {
                         default:
@@ -10951,9 +11283,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FeatureSet} FeatureSet
                  */
-                FeatureSet.fromObject = function fromObject(object) {
+                FeatureSet.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FeatureSet)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FeatureSet();
                     switch (object.fieldPresence) {
                     default:
@@ -11331,7 +11667,7 @@
                     function VisibilityFeature(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -11386,9 +11722,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    VisibilityFeature.decode = function decode(reader, length, error) {
+                    VisibilityFeature.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet.VisibilityFeature();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -11396,7 +11736,7 @@
                                 break;
                             switch (tag >>> 3) {
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -11427,9 +11767,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    VisibilityFeature.verify = function verify(message) {
+                    VisibilityFeature.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         return null;
                     };
     
@@ -11441,9 +11785,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
                      */
-                    VisibilityFeature.fromObject = function fromObject(object) {
+                    VisibilityFeature.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.FeatureSet.VisibilityFeature)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         return new $root.google.protobuf.FeatureSet.VisibilityFeature();
                     };
     
@@ -11535,7 +11883,7 @@
                     this.defaults = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -11621,9 +11969,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSetDefaults.decode = function decode(reader, length, error) {
+                FeatureSetDefaults.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -11633,7 +11985,7 @@
                         case 1: {
                                 if (!(message.defaults && message.defaults.length))
                                     message.defaults = [];
-                                message.defaults.push($root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.decode(reader, reader.uint32()));
+                                message.defaults.push($root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 4: {
@@ -11645,7 +11997,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -11676,14 +12028,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FeatureSetDefaults.verify = function verify(message) {
+                FeatureSetDefaults.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.defaults != null && message.hasOwnProperty("defaults")) {
                         if (!Array.isArray(message.defaults))
                             return "defaults: array expected";
                         for (var i = 0; i < message.defaults.length; ++i) {
-                            var error = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify(message.defaults[i]);
+                            var error = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify(message.defaults[i], long + 1);
                             if (error)
                                 return "defaults." + error;
                         }
@@ -11735,9 +12091,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FeatureSetDefaults} FeatureSetDefaults
                  */
-                FeatureSetDefaults.fromObject = function fromObject(object) {
+                FeatureSetDefaults.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FeatureSetDefaults)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FeatureSetDefaults();
                     if (object.defaults) {
                         if (!Array.isArray(object.defaults))
@@ -11746,7 +12106,7 @@
                         for (var i = 0; i < object.defaults.length; ++i) {
                             if (typeof object.defaults[i] !== "object")
                                 throw TypeError(".google.protobuf.FeatureSetDefaults.defaults: object expected");
-                            message.defaults[i] = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fromObject(object.defaults[i]);
+                            message.defaults[i] = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fromObject(object.defaults[i], long + 1);
                         }
                     }
                     switch (object.minimumEdition) {
@@ -11943,7 +12303,7 @@
                     function FeatureSetEditionDefault(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -12028,9 +12388,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FeatureSetEditionDefault.decode = function decode(reader, length, error) {
+                    FeatureSetEditionDefault.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -12042,15 +12406,15 @@
                                     break;
                                 }
                             case 4: {
-                                    message.overridableFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                    message.overridableFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 5: {
-                                    message.fixedFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                    message.fixedFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -12081,9 +12445,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    FeatureSetEditionDefault.verify = function verify(message) {
+                    FeatureSetEditionDefault.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             switch (message.edition) {
                             default:
@@ -12103,12 +12471,12 @@
                                 break;
                             }
                         if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures);
+                            var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures, long + 1);
                             if (error)
                                 return "overridableFeatures." + error;
                         }
                         if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures);
+                            var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures, long + 1);
                             if (error)
                                 return "fixedFeatures." + error;
                         }
@@ -12123,9 +12491,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} FeatureSetEditionDefault
                      */
-                    FeatureSetEditionDefault.fromObject = function fromObject(object) {
+                    FeatureSetEditionDefault.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
                         switch (object.edition) {
                         default:
@@ -12186,12 +12558,12 @@
                         if (object.overridableFeatures != null) {
                             if (typeof object.overridableFeatures !== "object")
                                 throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.overridableFeatures: object expected");
-                            message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures);
+                            message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures, long + 1);
                         }
                         if (object.fixedFeatures != null) {
                             if (typeof object.fixedFeatures !== "object")
                                 throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fixedFeatures: object expected");
-                            message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures);
+                            message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures, long + 1);
                         }
                         return message;
                     };
@@ -12276,7 +12648,7 @@
                     this.location = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -12342,9 +12714,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SourceCodeInfo.decode = function decode(reader, length, error) {
+                SourceCodeInfo.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -12354,11 +12730,11 @@
                         case 1: {
                                 if (!(message.location && message.location.length))
                                     message.location = [];
-                                message.location.push($root.google.protobuf.SourceCodeInfo.Location.decode(reader, reader.uint32()));
+                                message.location.push($root.google.protobuf.SourceCodeInfo.Location.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -12389,14 +12765,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                SourceCodeInfo.verify = function verify(message) {
+                SourceCodeInfo.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.location != null && message.hasOwnProperty("location")) {
                         if (!Array.isArray(message.location))
                             return "location: array expected";
                         for (var i = 0; i < message.location.length; ++i) {
-                            var error = $root.google.protobuf.SourceCodeInfo.Location.verify(message.location[i]);
+                            var error = $root.google.protobuf.SourceCodeInfo.Location.verify(message.location[i], long + 1);
                             if (error)
                                 return "location." + error;
                         }
@@ -12412,9 +12792,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.SourceCodeInfo} SourceCodeInfo
                  */
-                SourceCodeInfo.fromObject = function fromObject(object) {
+                SourceCodeInfo.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.SourceCodeInfo)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.SourceCodeInfo();
                     if (object.location) {
                         if (!Array.isArray(object.location))
@@ -12423,7 +12807,7 @@
                         for (var i = 0; i < object.location.length; ++i) {
                             if (typeof object.location[i] !== "object")
                                 throw TypeError(".google.protobuf.SourceCodeInfo.location: object expected");
-                            message.location[i] = $root.google.protobuf.SourceCodeInfo.Location.fromObject(object.location[i]);
+                            message.location[i] = $root.google.protobuf.SourceCodeInfo.Location.fromObject(object.location[i], long + 1);
                         }
                     }
                     return message;
@@ -12505,7 +12889,7 @@
                         this.leadingDetachedComments = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -12619,9 +13003,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Location.decode = function decode(reader, length, error) {
+                    Location.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo.Location();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -12665,7 +13053,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -12696,9 +13084,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    Location.verify = function verify(message) {
+                    Location.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.path != null && message.hasOwnProperty("path")) {
                             if (!Array.isArray(message.path))
                                 return "path: array expected";
@@ -12737,9 +13129,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.SourceCodeInfo.Location} Location
                      */
-                    Location.fromObject = function fromObject(object) {
+                    Location.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.SourceCodeInfo.Location)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.SourceCodeInfo.Location();
                         if (object.path) {
                             if (!Array.isArray(object.path))
@@ -12866,7 +13262,7 @@
                     this.annotation = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -12932,9 +13328,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GeneratedCodeInfo.decode = function decode(reader, length, error) {
+                GeneratedCodeInfo.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -12944,11 +13344,11 @@
                         case 1: {
                                 if (!(message.annotation && message.annotation.length))
                                     message.annotation = [];
-                                message.annotation.push($root.google.protobuf.GeneratedCodeInfo.Annotation.decode(reader, reader.uint32()));
+                                message.annotation.push($root.google.protobuf.GeneratedCodeInfo.Annotation.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -12979,14 +13379,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                GeneratedCodeInfo.verify = function verify(message) {
+                GeneratedCodeInfo.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.annotation != null && message.hasOwnProperty("annotation")) {
                         if (!Array.isArray(message.annotation))
                             return "annotation: array expected";
                         for (var i = 0; i < message.annotation.length; ++i) {
-                            var error = $root.google.protobuf.GeneratedCodeInfo.Annotation.verify(message.annotation[i]);
+                            var error = $root.google.protobuf.GeneratedCodeInfo.Annotation.verify(message.annotation[i], long + 1);
                             if (error)
                                 return "annotation." + error;
                         }
@@ -13002,9 +13406,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.GeneratedCodeInfo} GeneratedCodeInfo
                  */
-                GeneratedCodeInfo.fromObject = function fromObject(object) {
+                GeneratedCodeInfo.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.GeneratedCodeInfo)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.GeneratedCodeInfo();
                     if (object.annotation) {
                         if (!Array.isArray(object.annotation))
@@ -13013,7 +13421,7 @@
                         for (var i = 0; i < object.annotation.length; ++i) {
                             if (typeof object.annotation[i] !== "object")
                                 throw TypeError(".google.protobuf.GeneratedCodeInfo.annotation: object expected");
-                            message.annotation[i] = $root.google.protobuf.GeneratedCodeInfo.Annotation.fromObject(object.annotation[i]);
+                            message.annotation[i] = $root.google.protobuf.GeneratedCodeInfo.Annotation.fromObject(object.annotation[i], long + 1);
                         }
                     }
                     return message;
@@ -13093,7 +13501,7 @@
                         this.path = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -13202,9 +13610,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Annotation.decode = function decode(reader, length, error) {
+                    Annotation.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -13239,7 +13651,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -13270,9 +13682,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    Annotation.verify = function verify(message) {
+                    Annotation.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.path != null && message.hasOwnProperty("path")) {
                             if (!Array.isArray(message.path))
                                 return "path: array expected";
@@ -13309,9 +13725,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.GeneratedCodeInfo.Annotation} Annotation
                      */
-                    Annotation.fromObject = function fromObject(object) {
+                    Annotation.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.GeneratedCodeInfo.Annotation)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
                         if (object.path) {
                             if (!Array.isArray(object.path))
@@ -13471,7 +13891,7 @@
                 function Timestamp(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -13546,9 +13966,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Timestamp.decode = function decode(reader, length, error) {
+                Timestamp.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -13564,7 +13988,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -13595,9 +14019,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Timestamp.verify = function verify(message) {
+                Timestamp.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.seconds != null && message.hasOwnProperty("seconds"))
                         if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
                             return "seconds: integer|Long expected";
@@ -13615,9 +14043,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.Timestamp} Timestamp
                  */
-                Timestamp.fromObject = function fromObject(object) {
+                Timestamp.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.Timestamp)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.Timestamp();
                     if (object.seconds != null)
                         if ($util.Long)
@@ -13714,7 +14146,7 @@
                 function Any(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -13789,9 +14221,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Any.decode = function decode(reader, length, error) {
+                Any.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -13807,7 +14243,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -13838,9 +14274,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Any.verify = function verify(message) {
+                Any.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.type_url != null && message.hasOwnProperty("type_url"))
                         if (!$util.isString(message.type_url))
                             return "type_url: string expected";
@@ -13858,9 +14298,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.Any} Any
                  */
-                Any.fromObject = function fromObject(object) {
+                Any.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.Any)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.Any();
                     if (object.type_url != null)
                         message.type_url = String(object.type_url);
@@ -13950,7 +14394,7 @@
                 function Empty(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -14005,9 +14449,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Empty.decode = function decode(reader, length, error) {
+                Empty.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -14015,7 +14463,7 @@
                             break;
                         switch (tag >>> 3) {
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -14046,9 +14494,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Empty.verify = function verify(message) {
+                Empty.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     return null;
                 };
     
@@ -14060,9 +14512,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.Empty} Empty
                  */
-                Empty.fromObject = function fromObject(object) {
+                Empty.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.Empty)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     return new $root.google.protobuf.Empty();
                 };
     
@@ -14129,7 +14585,7 @@
                     this.paths = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -14195,9 +14651,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldMask.decode = function decode(reader, length, error) {
+                FieldMask.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -14211,7 +14671,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -14242,9 +14702,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FieldMask.verify = function verify(message) {
+                FieldMask.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.paths != null && message.hasOwnProperty("paths")) {
                         if (!Array.isArray(message.paths))
                             return "paths: array expected";
@@ -14263,9 +14727,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FieldMask} FieldMask
                  */
-                FieldMask.fromObject = function fromObject(object) {
+                FieldMask.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FieldMask)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FieldMask();
                     if (object.paths) {
                         if (!Array.isArray(object.paths))
@@ -14374,7 +14842,7 @@
                     function ApiConfigHandler(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -14479,9 +14947,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ApiConfigHandler.decode = function decode(reader, length, error) {
+                    ApiConfigHandler.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.ApiConfigHandler();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -14509,7 +14981,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -14540,9 +15012,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ApiConfigHandler.verify = function verify(message) {
+                    ApiConfigHandler.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.authFailAction != null && message.hasOwnProperty("authFailAction"))
                             switch (message.authFailAction) {
                             default:
@@ -14590,9 +15066,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.ApiConfigHandler} ApiConfigHandler
                      */
-                    ApiConfigHandler.fromObject = function fromObject(object) {
+                    ApiConfigHandler.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.ApiConfigHandler)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.ApiConfigHandler();
                         switch (object.authFailAction) {
                         default:
@@ -14757,7 +15237,7 @@
                     function ErrorHandler(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -14842,9 +15322,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ErrorHandler.decode = function decode(reader, length, error) {
+                    ErrorHandler.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.ErrorHandler();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -14864,7 +15348,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -14895,9 +15379,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ErrorHandler.verify = function verify(message) {
+                    ErrorHandler.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.errorCode != null && message.hasOwnProperty("errorCode"))
                             switch (message.errorCode) {
                             default:
@@ -14926,9 +15414,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.ErrorHandler} ErrorHandler
                      */
-                    ErrorHandler.fromObject = function fromObject(object) {
+                    ErrorHandler.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.ErrorHandler)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.ErrorHandler();
                         switch (object.errorCode) {
                         default:
@@ -15068,7 +15560,7 @@
                     function UrlMap(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -15217,9 +15709,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UrlMap.decode = function decode(reader, length, error) {
+                    UrlMap.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.UrlMap();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -15231,15 +15727,15 @@
                                     break;
                                 }
                             case 2: {
-                                    message.staticFiles = $root.google.appengine.v1.StaticFilesHandler.decode(reader, reader.uint32());
+                                    message.staticFiles = $root.google.appengine.v1.StaticFilesHandler.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 3: {
-                                    message.script = $root.google.appengine.v1.ScriptHandler.decode(reader, reader.uint32());
+                                    message.script = $root.google.appengine.v1.ScriptHandler.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 4: {
-                                    message.apiEndpoint = $root.google.appengine.v1.ApiEndpointHandler.decode(reader, reader.uint32());
+                                    message.apiEndpoint = $root.google.appengine.v1.ApiEndpointHandler.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 5: {
@@ -15259,7 +15755,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -15290,9 +15786,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    UrlMap.verify = function verify(message) {
+                    UrlMap.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         var properties = {};
                         if (message.urlRegex != null && message.hasOwnProperty("urlRegex"))
                             if (!$util.isString(message.urlRegex))
@@ -15300,7 +15800,7 @@
                         if (message.staticFiles != null && message.hasOwnProperty("staticFiles")) {
                             properties.handlerType = 1;
                             {
-                                var error = $root.google.appengine.v1.StaticFilesHandler.verify(message.staticFiles);
+                                var error = $root.google.appengine.v1.StaticFilesHandler.verify(message.staticFiles, long + 1);
                                 if (error)
                                     return "staticFiles." + error;
                             }
@@ -15310,7 +15810,7 @@
                                 return "handlerType: multiple values";
                             properties.handlerType = 1;
                             {
-                                var error = $root.google.appengine.v1.ScriptHandler.verify(message.script);
+                                var error = $root.google.appengine.v1.ScriptHandler.verify(message.script, long + 1);
                                 if (error)
                                     return "script." + error;
                             }
@@ -15320,7 +15820,7 @@
                                 return "handlerType: multiple values";
                             properties.handlerType = 1;
                             {
-                                var error = $root.google.appengine.v1.ApiEndpointHandler.verify(message.apiEndpoint);
+                                var error = $root.google.appengine.v1.ApiEndpointHandler.verify(message.apiEndpoint, long + 1);
                                 if (error)
                                     return "apiEndpoint." + error;
                             }
@@ -15377,26 +15877,30 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.UrlMap} UrlMap
                      */
-                    UrlMap.fromObject = function fromObject(object) {
+                    UrlMap.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.UrlMap)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.UrlMap();
                         if (object.urlRegex != null)
                             message.urlRegex = String(object.urlRegex);
                         if (object.staticFiles != null) {
                             if (typeof object.staticFiles !== "object")
                                 throw TypeError(".google.appengine.v1.UrlMap.staticFiles: object expected");
-                            message.staticFiles = $root.google.appengine.v1.StaticFilesHandler.fromObject(object.staticFiles);
+                            message.staticFiles = $root.google.appengine.v1.StaticFilesHandler.fromObject(object.staticFiles, long + 1);
                         }
                         if (object.script != null) {
                             if (typeof object.script !== "object")
                                 throw TypeError(".google.appengine.v1.UrlMap.script: object expected");
-                            message.script = $root.google.appengine.v1.ScriptHandler.fromObject(object.script);
+                            message.script = $root.google.appengine.v1.ScriptHandler.fromObject(object.script, long + 1);
                         }
                         if (object.apiEndpoint != null) {
                             if (typeof object.apiEndpoint !== "object")
                                 throw TypeError(".google.appengine.v1.UrlMap.apiEndpoint: object expected");
-                            message.apiEndpoint = $root.google.appengine.v1.ApiEndpointHandler.fromObject(object.apiEndpoint);
+                            message.apiEndpoint = $root.google.appengine.v1.ApiEndpointHandler.fromObject(object.apiEndpoint, long + 1);
                         }
                         switch (object.securityLevel) {
                         default:
@@ -15625,7 +16129,7 @@
                         this.httpHeaders = {};
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -15751,9 +16255,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    StaticFilesHandler.decode = function decode(reader, length, error) {
+                    StaticFilesHandler.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.StaticFilesHandler(), key, value;
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -15784,10 +16292,12 @@
                                             value = reader.string();
                                             break;
                                         default:
-                                            reader.skipType(tag2 & 7);
+                                            reader.skipType(tag2 & 7, long);
                                             break;
                                         }
                                     }
+                                    if (key === "__proto__")
+                                        $util.makeProp(message.httpHeaders, key);
                                     message.httpHeaders[key] = value;
                                     break;
                                 }
@@ -15796,7 +16306,7 @@
                                     break;
                                 }
                             case 5: {
-                                    message.expiration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.expiration = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 6: {
@@ -15808,7 +16318,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -15839,9 +16349,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    StaticFilesHandler.verify = function verify(message) {
+                    StaticFilesHandler.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.path != null && message.hasOwnProperty("path"))
                             if (!$util.isString(message.path))
                                 return "path: string expected";
@@ -15860,7 +16374,7 @@
                             if (!$util.isString(message.mimeType))
                                 return "mimeType: string expected";
                         if (message.expiration != null && message.hasOwnProperty("expiration")) {
-                            var error = $root.google.protobuf.Duration.verify(message.expiration);
+                            var error = $root.google.protobuf.Duration.verify(message.expiration, long + 1);
                             if (error)
                                 return "expiration." + error;
                         }
@@ -15881,9 +16395,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.StaticFilesHandler} StaticFilesHandler
                      */
-                    StaticFilesHandler.fromObject = function fromObject(object) {
+                    StaticFilesHandler.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.StaticFilesHandler)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.StaticFilesHandler();
                         if (object.path != null)
                             message.path = String(object.path);
@@ -15893,15 +16411,18 @@
                             if (typeof object.httpHeaders !== "object")
                                 throw TypeError(".google.appengine.v1.StaticFilesHandler.httpHeaders: object expected");
                             message.httpHeaders = {};
-                            for (var keys = Object.keys(object.httpHeaders), i = 0; i < keys.length; ++i)
+                            for (var keys = Object.keys(object.httpHeaders), i = 0; i < keys.length; ++i) {
+                                if (keys[i] === "__proto__")
+                                    $util.makeProp(message.httpHeaders, keys[i]);
                                 message.httpHeaders[keys[i]] = String(object.httpHeaders[keys[i]]);
+                            }
                         }
                         if (object.mimeType != null)
                             message.mimeType = String(object.mimeType);
                         if (object.expiration != null) {
                             if (typeof object.expiration !== "object")
                                 throw TypeError(".google.appengine.v1.StaticFilesHandler.expiration: object expected");
-                            message.expiration = $root.google.protobuf.Duration.fromObject(object.expiration);
+                            message.expiration = $root.google.protobuf.Duration.fromObject(object.expiration, long + 1);
                         }
                         if (object.requireMatchingFile != null)
                             message.requireMatchingFile = Boolean(object.requireMatchingFile);
@@ -15940,8 +16461,11 @@
                         var keys2;
                         if (message.httpHeaders && (keys2 = Object.keys(message.httpHeaders)).length) {
                             object.httpHeaders = {};
-                            for (var j = 0; j < keys2.length; ++j)
+                            for (var j = 0; j < keys2.length; ++j) {
+                                if (keys2[j] === "__proto__")
+                                    $util.makeProp(object.httpHeaders, keys2[j]);
                                 object.httpHeaders[keys2[j]] = message.httpHeaders[keys2[j]];
+                            }
                         }
                         if (message.mimeType != null && message.hasOwnProperty("mimeType"))
                             object.mimeType = message.mimeType;
@@ -16003,7 +16527,7 @@
                     function ScriptHandler(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -16068,9 +16592,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ScriptHandler.decode = function decode(reader, length, error) {
+                    ScriptHandler.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.ScriptHandler();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -16082,7 +16610,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -16113,9 +16641,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ScriptHandler.verify = function verify(message) {
+                    ScriptHandler.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.scriptPath != null && message.hasOwnProperty("scriptPath"))
                             if (!$util.isString(message.scriptPath))
                                 return "scriptPath: string expected";
@@ -16130,9 +16662,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.ScriptHandler} ScriptHandler
                      */
-                    ScriptHandler.fromObject = function fromObject(object) {
+                    ScriptHandler.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.ScriptHandler)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.ScriptHandler();
                         if (object.scriptPath != null)
                             message.scriptPath = String(object.scriptPath);
@@ -16208,7 +16744,7 @@
                     function ApiEndpointHandler(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -16273,9 +16809,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ApiEndpointHandler.decode = function decode(reader, length, error) {
+                    ApiEndpointHandler.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.ApiEndpointHandler();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -16287,7 +16827,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -16318,9 +16858,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ApiEndpointHandler.verify = function verify(message) {
+                    ApiEndpointHandler.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.scriptPath != null && message.hasOwnProperty("scriptPath"))
                             if (!$util.isString(message.scriptPath))
                                 return "scriptPath: string expected";
@@ -16335,9 +16879,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.ApiEndpointHandler} ApiEndpointHandler
                      */
-                    ApiEndpointHandler.fromObject = function fromObject(object) {
+                    ApiEndpointHandler.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.ApiEndpointHandler)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.ApiEndpointHandler();
                         if (object.scriptPath != null)
                             message.scriptPath = String(object.scriptPath);
@@ -16419,7 +16967,7 @@
                     function HealthCheck(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -16544,9 +17092,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    HealthCheck.decode = function decode(reader, length, error) {
+                    HealthCheck.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.HealthCheck();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -16574,15 +17126,15 @@
                                     break;
                                 }
                             case 6: {
-                                    message.checkInterval = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.checkInterval = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 7: {
-                                    message.timeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.timeout = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -16613,9 +17165,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    HealthCheck.verify = function verify(message) {
+                    HealthCheck.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.disableHealthCheck != null && message.hasOwnProperty("disableHealthCheck"))
                             if (typeof message.disableHealthCheck !== "boolean")
                                 return "disableHealthCheck: boolean expected";
@@ -16632,12 +17188,12 @@
                             if (!$util.isInteger(message.restartThreshold))
                                 return "restartThreshold: integer expected";
                         if (message.checkInterval != null && message.hasOwnProperty("checkInterval")) {
-                            var error = $root.google.protobuf.Duration.verify(message.checkInterval);
+                            var error = $root.google.protobuf.Duration.verify(message.checkInterval, long + 1);
                             if (error)
                                 return "checkInterval." + error;
                         }
                         if (message.timeout != null && message.hasOwnProperty("timeout")) {
-                            var error = $root.google.protobuf.Duration.verify(message.timeout);
+                            var error = $root.google.protobuf.Duration.verify(message.timeout, long + 1);
                             if (error)
                                 return "timeout." + error;
                         }
@@ -16652,9 +17208,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.HealthCheck} HealthCheck
                      */
-                    HealthCheck.fromObject = function fromObject(object) {
+                    HealthCheck.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.HealthCheck)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.HealthCheck();
                         if (object.disableHealthCheck != null)
                             message.disableHealthCheck = Boolean(object.disableHealthCheck);
@@ -16669,12 +17229,12 @@
                         if (object.checkInterval != null) {
                             if (typeof object.checkInterval !== "object")
                                 throw TypeError(".google.appengine.v1.HealthCheck.checkInterval: object expected");
-                            message.checkInterval = $root.google.protobuf.Duration.fromObject(object.checkInterval);
+                            message.checkInterval = $root.google.protobuf.Duration.fromObject(object.checkInterval, long + 1);
                         }
                         if (object.timeout != null) {
                             if (typeof object.timeout !== "object")
                                 throw TypeError(".google.appengine.v1.HealthCheck.timeout: object expected");
-                            message.timeout = $root.google.protobuf.Duration.fromObject(object.timeout);
+                            message.timeout = $root.google.protobuf.Duration.fromObject(object.timeout, long + 1);
                         }
                         return message;
                     };
@@ -16773,7 +17333,7 @@
                     function ReadinessCheck(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -16898,9 +17458,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReadinessCheck.decode = function decode(reader, length, error) {
+                    ReadinessCheck.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.ReadinessCheck();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -16924,19 +17488,19 @@
                                     break;
                                 }
                             case 5: {
-                                    message.checkInterval = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.checkInterval = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 6: {
-                                    message.timeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.timeout = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 7: {
-                                    message.appStartTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.appStartTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -16967,9 +17531,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ReadinessCheck.verify = function verify(message) {
+                    ReadinessCheck.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.path != null && message.hasOwnProperty("path"))
                             if (!$util.isString(message.path))
                                 return "path: string expected";
@@ -16983,17 +17551,17 @@
                             if (!$util.isInteger(message.successThreshold))
                                 return "successThreshold: integer expected";
                         if (message.checkInterval != null && message.hasOwnProperty("checkInterval")) {
-                            var error = $root.google.protobuf.Duration.verify(message.checkInterval);
+                            var error = $root.google.protobuf.Duration.verify(message.checkInterval, long + 1);
                             if (error)
                                 return "checkInterval." + error;
                         }
                         if (message.timeout != null && message.hasOwnProperty("timeout")) {
-                            var error = $root.google.protobuf.Duration.verify(message.timeout);
+                            var error = $root.google.protobuf.Duration.verify(message.timeout, long + 1);
                             if (error)
                                 return "timeout." + error;
                         }
                         if (message.appStartTimeout != null && message.hasOwnProperty("appStartTimeout")) {
-                            var error = $root.google.protobuf.Duration.verify(message.appStartTimeout);
+                            var error = $root.google.protobuf.Duration.verify(message.appStartTimeout, long + 1);
                             if (error)
                                 return "appStartTimeout." + error;
                         }
@@ -17008,9 +17576,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.ReadinessCheck} ReadinessCheck
                      */
-                    ReadinessCheck.fromObject = function fromObject(object) {
+                    ReadinessCheck.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.ReadinessCheck)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.ReadinessCheck();
                         if (object.path != null)
                             message.path = String(object.path);
@@ -17023,17 +17595,17 @@
                         if (object.checkInterval != null) {
                             if (typeof object.checkInterval !== "object")
                                 throw TypeError(".google.appengine.v1.ReadinessCheck.checkInterval: object expected");
-                            message.checkInterval = $root.google.protobuf.Duration.fromObject(object.checkInterval);
+                            message.checkInterval = $root.google.protobuf.Duration.fromObject(object.checkInterval, long + 1);
                         }
                         if (object.timeout != null) {
                             if (typeof object.timeout !== "object")
                                 throw TypeError(".google.appengine.v1.ReadinessCheck.timeout: object expected");
-                            message.timeout = $root.google.protobuf.Duration.fromObject(object.timeout);
+                            message.timeout = $root.google.protobuf.Duration.fromObject(object.timeout, long + 1);
                         }
                         if (object.appStartTimeout != null) {
                             if (typeof object.appStartTimeout !== "object")
                                 throw TypeError(".google.appengine.v1.ReadinessCheck.appStartTimeout: object expected");
-                            message.appStartTimeout = $root.google.protobuf.Duration.fromObject(object.appStartTimeout);
+                            message.appStartTimeout = $root.google.protobuf.Duration.fromObject(object.appStartTimeout, long + 1);
                         }
                         return message;
                     };
@@ -17132,7 +17704,7 @@
                     function LivenessCheck(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -17257,9 +17829,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    LivenessCheck.decode = function decode(reader, length, error) {
+                    LivenessCheck.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.LivenessCheck();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -17283,19 +17859,19 @@
                                     break;
                                 }
                             case 5: {
-                                    message.checkInterval = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.checkInterval = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 6: {
-                                    message.timeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.timeout = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 7: {
-                                    message.initialDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.initialDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -17326,9 +17902,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    LivenessCheck.verify = function verify(message) {
+                    LivenessCheck.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.path != null && message.hasOwnProperty("path"))
                             if (!$util.isString(message.path))
                                 return "path: string expected";
@@ -17342,17 +17922,17 @@
                             if (!$util.isInteger(message.successThreshold))
                                 return "successThreshold: integer expected";
                         if (message.checkInterval != null && message.hasOwnProperty("checkInterval")) {
-                            var error = $root.google.protobuf.Duration.verify(message.checkInterval);
+                            var error = $root.google.protobuf.Duration.verify(message.checkInterval, long + 1);
                             if (error)
                                 return "checkInterval." + error;
                         }
                         if (message.timeout != null && message.hasOwnProperty("timeout")) {
-                            var error = $root.google.protobuf.Duration.verify(message.timeout);
+                            var error = $root.google.protobuf.Duration.verify(message.timeout, long + 1);
                             if (error)
                                 return "timeout." + error;
                         }
                         if (message.initialDelay != null && message.hasOwnProperty("initialDelay")) {
-                            var error = $root.google.protobuf.Duration.verify(message.initialDelay);
+                            var error = $root.google.protobuf.Duration.verify(message.initialDelay, long + 1);
                             if (error)
                                 return "initialDelay." + error;
                         }
@@ -17367,9 +17947,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.LivenessCheck} LivenessCheck
                      */
-                    LivenessCheck.fromObject = function fromObject(object) {
+                    LivenessCheck.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.LivenessCheck)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.LivenessCheck();
                         if (object.path != null)
                             message.path = String(object.path);
@@ -17382,17 +17966,17 @@
                         if (object.checkInterval != null) {
                             if (typeof object.checkInterval !== "object")
                                 throw TypeError(".google.appengine.v1.LivenessCheck.checkInterval: object expected");
-                            message.checkInterval = $root.google.protobuf.Duration.fromObject(object.checkInterval);
+                            message.checkInterval = $root.google.protobuf.Duration.fromObject(object.checkInterval, long + 1);
                         }
                         if (object.timeout != null) {
                             if (typeof object.timeout !== "object")
                                 throw TypeError(".google.appengine.v1.LivenessCheck.timeout: object expected");
-                            message.timeout = $root.google.protobuf.Duration.fromObject(object.timeout);
+                            message.timeout = $root.google.protobuf.Duration.fromObject(object.timeout, long + 1);
                         }
                         if (object.initialDelay != null) {
                             if (typeof object.initialDelay !== "object")
                                 throw TypeError(".google.appengine.v1.LivenessCheck.initialDelay: object expected");
-                            message.initialDelay = $root.google.protobuf.Duration.fromObject(object.initialDelay);
+                            message.initialDelay = $root.google.protobuf.Duration.fromObject(object.initialDelay, long + 1);
                         }
                         return message;
                     };
@@ -17486,7 +18070,7 @@
                     function Library(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -17561,9 +18145,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Library.decode = function decode(reader, length, error) {
+                    Library.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.Library();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -17579,7 +18167,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -17610,9 +18198,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    Library.verify = function verify(message) {
+                    Library.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -17630,9 +18222,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.Library} Library
                      */
-                    Library.fromObject = function fromObject(object) {
+                    Library.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.Library)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.Library();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -17935,7 +18531,7 @@
                     function GetApplicationRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -18000,9 +18596,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetApplicationRequest.decode = function decode(reader, length, error) {
+                    GetApplicationRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.GetApplicationRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -18014,7 +18614,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -18045,9 +18645,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    GetApplicationRequest.verify = function verify(message) {
+                    GetApplicationRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -18062,9 +18666,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.GetApplicationRequest} GetApplicationRequest
                      */
-                    GetApplicationRequest.fromObject = function fromObject(object) {
+                    GetApplicationRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.GetApplicationRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.GetApplicationRequest();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -18140,7 +18748,7 @@
                     function CreateApplicationRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -18205,9 +18813,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateApplicationRequest.decode = function decode(reader, length, error) {
+                    CreateApplicationRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.CreateApplicationRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -18215,11 +18827,11 @@
                                 break;
                             switch (tag >>> 3) {
                             case 2: {
-                                    message.application = $root.google.appengine.v1.Application.decode(reader, reader.uint32());
+                                    message.application = $root.google.appengine.v1.Application.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -18250,11 +18862,15 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    CreateApplicationRequest.verify = function verify(message) {
+                    CreateApplicationRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.application != null && message.hasOwnProperty("application")) {
-                            var error = $root.google.appengine.v1.Application.verify(message.application);
+                            var error = $root.google.appengine.v1.Application.verify(message.application, long + 1);
                             if (error)
                                 return "application." + error;
                         }
@@ -18269,14 +18885,18 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.CreateApplicationRequest} CreateApplicationRequest
                      */
-                    CreateApplicationRequest.fromObject = function fromObject(object) {
+                    CreateApplicationRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.CreateApplicationRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.CreateApplicationRequest();
                         if (object.application != null) {
                             if (typeof object.application !== "object")
                                 throw TypeError(".google.appengine.v1.CreateApplicationRequest.application: object expected");
-                            message.application = $root.google.appengine.v1.Application.fromObject(object.application);
+                            message.application = $root.google.appengine.v1.Application.fromObject(object.application, long + 1);
                         }
                         return message;
                     };
@@ -18352,7 +18972,7 @@
                     function UpdateApplicationRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -18437,9 +19057,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UpdateApplicationRequest.decode = function decode(reader, length, error) {
+                    UpdateApplicationRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.UpdateApplicationRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -18451,15 +19075,15 @@
                                     break;
                                 }
                             case 2: {
-                                    message.application = $root.google.appengine.v1.Application.decode(reader, reader.uint32());
+                                    message.application = $root.google.appengine.v1.Application.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 3: {
-                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -18490,19 +19114,23 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    UpdateApplicationRequest.verify = function verify(message) {
+                    UpdateApplicationRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
                         if (message.application != null && message.hasOwnProperty("application")) {
-                            var error = $root.google.appengine.v1.Application.verify(message.application);
+                            var error = $root.google.appengine.v1.Application.verify(message.application, long + 1);
                             if (error)
                                 return "application." + error;
                         }
                         if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
-                            var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                            var error = $root.google.protobuf.FieldMask.verify(message.updateMask, long + 1);
                             if (error)
                                 return "updateMask." + error;
                         }
@@ -18517,21 +19145,25 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.UpdateApplicationRequest} UpdateApplicationRequest
                      */
-                    UpdateApplicationRequest.fromObject = function fromObject(object) {
+                    UpdateApplicationRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.UpdateApplicationRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.UpdateApplicationRequest();
                         if (object.name != null)
                             message.name = String(object.name);
                         if (object.application != null) {
                             if (typeof object.application !== "object")
                                 throw TypeError(".google.appengine.v1.UpdateApplicationRequest.application: object expected");
-                            message.application = $root.google.appengine.v1.Application.fromObject(object.application);
+                            message.application = $root.google.appengine.v1.Application.fromObject(object.application, long + 1);
                         }
                         if (object.updateMask != null) {
                             if (typeof object.updateMask !== "object")
                                 throw TypeError(".google.appengine.v1.UpdateApplicationRequest.updateMask: object expected");
-                            message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask, long + 1);
                         }
                         return message;
                     };
@@ -18612,7 +19244,7 @@
                     function RepairApplicationRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -18677,9 +19309,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    RepairApplicationRequest.decode = function decode(reader, length, error) {
+                    RepairApplicationRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.RepairApplicationRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -18691,7 +19327,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -18722,9 +19358,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    RepairApplicationRequest.verify = function verify(message) {
+                    RepairApplicationRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -18739,9 +19379,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.RepairApplicationRequest} RepairApplicationRequest
                      */
-                    RepairApplicationRequest.fromObject = function fromObject(object) {
+                    RepairApplicationRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.RepairApplicationRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.RepairApplicationRequest();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -18986,7 +19630,7 @@
                     function ListServicesRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -19071,9 +19715,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListServicesRequest.decode = function decode(reader, length, error) {
+                    ListServicesRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.ListServicesRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -19093,7 +19741,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -19124,9 +19772,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ListServicesRequest.verify = function verify(message) {
+                    ListServicesRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.parent != null && message.hasOwnProperty("parent"))
                             if (!$util.isString(message.parent))
                                 return "parent: string expected";
@@ -19147,9 +19799,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.ListServicesRequest} ListServicesRequest
                      */
-                    ListServicesRequest.fromObject = function fromObject(object) {
+                    ListServicesRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.ListServicesRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.ListServicesRequest();
                         if (object.parent != null)
                             message.parent = String(object.parent);
@@ -19238,7 +19894,7 @@
                         this.services = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -19314,9 +19970,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListServicesResponse.decode = function decode(reader, length, error) {
+                    ListServicesResponse.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.ListServicesResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -19326,7 +19986,7 @@
                             case 1: {
                                     if (!(message.services && message.services.length))
                                         message.services = [];
-                                    message.services.push($root.google.appengine.v1.Service.decode(reader, reader.uint32()));
+                                    message.services.push($root.google.appengine.v1.Service.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 2: {
@@ -19334,7 +19994,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -19365,14 +20025,18 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ListServicesResponse.verify = function verify(message) {
+                    ListServicesResponse.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.services != null && message.hasOwnProperty("services")) {
                             if (!Array.isArray(message.services))
                                 return "services: array expected";
                             for (var i = 0; i < message.services.length; ++i) {
-                                var error = $root.google.appengine.v1.Service.verify(message.services[i]);
+                                var error = $root.google.appengine.v1.Service.verify(message.services[i], long + 1);
                                 if (error)
                                     return "services." + error;
                             }
@@ -19391,9 +20055,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.ListServicesResponse} ListServicesResponse
                      */
-                    ListServicesResponse.fromObject = function fromObject(object) {
+                    ListServicesResponse.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.ListServicesResponse)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.ListServicesResponse();
                         if (object.services) {
                             if (!Array.isArray(object.services))
@@ -19402,7 +20070,7 @@
                             for (var i = 0; i < object.services.length; ++i) {
                                 if (typeof object.services[i] !== "object")
                                     throw TypeError(".google.appengine.v1.ListServicesResponse.services: object expected");
-                                message.services[i] = $root.google.appengine.v1.Service.fromObject(object.services[i]);
+                                message.services[i] = $root.google.appengine.v1.Service.fromObject(object.services[i], long + 1);
                             }
                         }
                         if (object.nextPageToken != null)
@@ -19486,7 +20154,7 @@
                     function GetServiceRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -19551,9 +20219,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetServiceRequest.decode = function decode(reader, length, error) {
+                    GetServiceRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.GetServiceRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -19565,7 +20237,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -19596,9 +20268,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    GetServiceRequest.verify = function verify(message) {
+                    GetServiceRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -19613,9 +20289,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.GetServiceRequest} GetServiceRequest
                      */
-                    GetServiceRequest.fromObject = function fromObject(object) {
+                    GetServiceRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.GetServiceRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.GetServiceRequest();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -19694,7 +20374,7 @@
                     function UpdateServiceRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -19789,9 +20469,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UpdateServiceRequest.decode = function decode(reader, length, error) {
+                    UpdateServiceRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.UpdateServiceRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -19803,11 +20487,11 @@
                                     break;
                                 }
                             case 2: {
-                                    message.service = $root.google.appengine.v1.Service.decode(reader, reader.uint32());
+                                    message.service = $root.google.appengine.v1.Service.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 3: {
-                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 4: {
@@ -19815,7 +20499,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -19846,19 +20530,23 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    UpdateServiceRequest.verify = function verify(message) {
+                    UpdateServiceRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
                         if (message.service != null && message.hasOwnProperty("service")) {
-                            var error = $root.google.appengine.v1.Service.verify(message.service);
+                            var error = $root.google.appengine.v1.Service.verify(message.service, long + 1);
                             if (error)
                                 return "service." + error;
                         }
                         if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
-                            var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                            var error = $root.google.protobuf.FieldMask.verify(message.updateMask, long + 1);
                             if (error)
                                 return "updateMask." + error;
                         }
@@ -19876,21 +20564,25 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.UpdateServiceRequest} UpdateServiceRequest
                      */
-                    UpdateServiceRequest.fromObject = function fromObject(object) {
+                    UpdateServiceRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.UpdateServiceRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.UpdateServiceRequest();
                         if (object.name != null)
                             message.name = String(object.name);
                         if (object.service != null) {
                             if (typeof object.service !== "object")
                                 throw TypeError(".google.appengine.v1.UpdateServiceRequest.service: object expected");
-                            message.service = $root.google.appengine.v1.Service.fromObject(object.service);
+                            message.service = $root.google.appengine.v1.Service.fromObject(object.service, long + 1);
                         }
                         if (object.updateMask != null) {
                             if (typeof object.updateMask !== "object")
                                 throw TypeError(".google.appengine.v1.UpdateServiceRequest.updateMask: object expected");
-                            message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask, long + 1);
                         }
                         if (object.migrateTraffic != null)
                             message.migrateTraffic = Boolean(object.migrateTraffic);
@@ -19976,7 +20668,7 @@
                     function DeleteServiceRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -20041,9 +20733,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DeleteServiceRequest.decode = function decode(reader, length, error) {
+                    DeleteServiceRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.DeleteServiceRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -20055,7 +20751,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -20086,9 +20782,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    DeleteServiceRequest.verify = function verify(message) {
+                    DeleteServiceRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -20103,9 +20803,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.DeleteServiceRequest} DeleteServiceRequest
                      */
-                    DeleteServiceRequest.fromObject = function fromObject(object) {
+                    DeleteServiceRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.DeleteServiceRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.DeleteServiceRequest();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -20384,7 +21088,7 @@
                     function ListVersionsRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -20479,9 +21183,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListVersionsRequest.decode = function decode(reader, length, error) {
+                    ListVersionsRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.ListVersionsRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -20505,7 +21213,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -20536,9 +21244,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ListVersionsRequest.verify = function verify(message) {
+                    ListVersionsRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.parent != null && message.hasOwnProperty("parent"))
                             if (!$util.isString(message.parent))
                                 return "parent: string expected";
@@ -20567,9 +21279,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.ListVersionsRequest} ListVersionsRequest
                      */
-                    ListVersionsRequest.fromObject = function fromObject(object) {
+                    ListVersionsRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.ListVersionsRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.ListVersionsRequest();
                         if (object.parent != null)
                             message.parent = String(object.parent);
@@ -20677,7 +21393,7 @@
                         this.versions = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -20753,9 +21469,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListVersionsResponse.decode = function decode(reader, length, error) {
+                    ListVersionsResponse.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.ListVersionsResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -20765,7 +21485,7 @@
                             case 1: {
                                     if (!(message.versions && message.versions.length))
                                         message.versions = [];
-                                    message.versions.push($root.google.appengine.v1.Version.decode(reader, reader.uint32()));
+                                    message.versions.push($root.google.appengine.v1.Version.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 2: {
@@ -20773,7 +21493,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -20804,14 +21524,18 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ListVersionsResponse.verify = function verify(message) {
+                    ListVersionsResponse.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.versions != null && message.hasOwnProperty("versions")) {
                             if (!Array.isArray(message.versions))
                                 return "versions: array expected";
                             for (var i = 0; i < message.versions.length; ++i) {
-                                var error = $root.google.appengine.v1.Version.verify(message.versions[i]);
+                                var error = $root.google.appengine.v1.Version.verify(message.versions[i], long + 1);
                                 if (error)
                                     return "versions." + error;
                             }
@@ -20830,9 +21554,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.ListVersionsResponse} ListVersionsResponse
                      */
-                    ListVersionsResponse.fromObject = function fromObject(object) {
+                    ListVersionsResponse.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.ListVersionsResponse)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.ListVersionsResponse();
                         if (object.versions) {
                             if (!Array.isArray(object.versions))
@@ -20841,7 +21569,7 @@
                             for (var i = 0; i < object.versions.length; ++i) {
                                 if (typeof object.versions[i] !== "object")
                                     throw TypeError(".google.appengine.v1.ListVersionsResponse.versions: object expected");
-                                message.versions[i] = $root.google.appengine.v1.Version.fromObject(object.versions[i]);
+                                message.versions[i] = $root.google.appengine.v1.Version.fromObject(object.versions[i], long + 1);
                             }
                         }
                         if (object.nextPageToken != null)
@@ -20940,7 +21668,7 @@
                     function GetVersionRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -21015,9 +21743,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetVersionRequest.decode = function decode(reader, length, error) {
+                    GetVersionRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.GetVersionRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -21033,7 +21765,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -21064,9 +21796,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    GetVersionRequest.verify = function verify(message) {
+                    GetVersionRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -21089,9 +21825,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.GetVersionRequest} GetVersionRequest
                      */
-                    GetVersionRequest.fromObject = function fromObject(object) {
+                    GetVersionRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.GetVersionRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.GetVersionRequest();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -21188,7 +21928,7 @@
                     function CreateVersionRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -21263,9 +22003,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateVersionRequest.decode = function decode(reader, length, error) {
+                    CreateVersionRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.CreateVersionRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -21277,11 +22021,11 @@
                                     break;
                                 }
                             case 2: {
-                                    message.version = $root.google.appengine.v1.Version.decode(reader, reader.uint32());
+                                    message.version = $root.google.appengine.v1.Version.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -21312,14 +22056,18 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    CreateVersionRequest.verify = function verify(message) {
+                    CreateVersionRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.parent != null && message.hasOwnProperty("parent"))
                             if (!$util.isString(message.parent))
                                 return "parent: string expected";
                         if (message.version != null && message.hasOwnProperty("version")) {
-                            var error = $root.google.appengine.v1.Version.verify(message.version);
+                            var error = $root.google.appengine.v1.Version.verify(message.version, long + 1);
                             if (error)
                                 return "version." + error;
                         }
@@ -21334,16 +22082,20 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.CreateVersionRequest} CreateVersionRequest
                      */
-                    CreateVersionRequest.fromObject = function fromObject(object) {
+                    CreateVersionRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.CreateVersionRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.CreateVersionRequest();
                         if (object.parent != null)
                             message.parent = String(object.parent);
                         if (object.version != null) {
                             if (typeof object.version !== "object")
                                 throw TypeError(".google.appengine.v1.CreateVersionRequest.version: object expected");
-                            message.version = $root.google.appengine.v1.Version.fromObject(object.version);
+                            message.version = $root.google.appengine.v1.Version.fromObject(object.version, long + 1);
                         }
                         return message;
                     };
@@ -21423,7 +22175,7 @@
                     function UpdateVersionRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -21508,9 +22260,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UpdateVersionRequest.decode = function decode(reader, length, error) {
+                    UpdateVersionRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.UpdateVersionRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -21522,15 +22278,15 @@
                                     break;
                                 }
                             case 2: {
-                                    message.version = $root.google.appengine.v1.Version.decode(reader, reader.uint32());
+                                    message.version = $root.google.appengine.v1.Version.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 3: {
-                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -21561,19 +22317,23 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    UpdateVersionRequest.verify = function verify(message) {
+                    UpdateVersionRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
                         if (message.version != null && message.hasOwnProperty("version")) {
-                            var error = $root.google.appengine.v1.Version.verify(message.version);
+                            var error = $root.google.appengine.v1.Version.verify(message.version, long + 1);
                             if (error)
                                 return "version." + error;
                         }
                         if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
-                            var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                            var error = $root.google.protobuf.FieldMask.verify(message.updateMask, long + 1);
                             if (error)
                                 return "updateMask." + error;
                         }
@@ -21588,21 +22348,25 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.UpdateVersionRequest} UpdateVersionRequest
                      */
-                    UpdateVersionRequest.fromObject = function fromObject(object) {
+                    UpdateVersionRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.UpdateVersionRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.UpdateVersionRequest();
                         if (object.name != null)
                             message.name = String(object.name);
                         if (object.version != null) {
                             if (typeof object.version !== "object")
                                 throw TypeError(".google.appengine.v1.UpdateVersionRequest.version: object expected");
-                            message.version = $root.google.appengine.v1.Version.fromObject(object.version);
+                            message.version = $root.google.appengine.v1.Version.fromObject(object.version, long + 1);
                         }
                         if (object.updateMask != null) {
                             if (typeof object.updateMask !== "object")
                                 throw TypeError(".google.appengine.v1.UpdateVersionRequest.updateMask: object expected");
-                            message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask, long + 1);
                         }
                         return message;
                     };
@@ -21683,7 +22447,7 @@
                     function DeleteVersionRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -21748,9 +22512,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DeleteVersionRequest.decode = function decode(reader, length, error) {
+                    DeleteVersionRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.DeleteVersionRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -21762,7 +22530,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -21793,9 +22561,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    DeleteVersionRequest.verify = function verify(message) {
+                    DeleteVersionRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -21810,9 +22582,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.DeleteVersionRequest} DeleteVersionRequest
                      */
-                    DeleteVersionRequest.fromObject = function fromObject(object) {
+                    DeleteVersionRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.DeleteVersionRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.DeleteVersionRequest();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -22057,7 +22833,7 @@
                     function ListInstancesRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -22142,9 +22918,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListInstancesRequest.decode = function decode(reader, length, error) {
+                    ListInstancesRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.ListInstancesRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -22164,7 +22944,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -22195,9 +22975,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ListInstancesRequest.verify = function verify(message) {
+                    ListInstancesRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.parent != null && message.hasOwnProperty("parent"))
                             if (!$util.isString(message.parent))
                                 return "parent: string expected";
@@ -22218,9 +23002,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.ListInstancesRequest} ListInstancesRequest
                      */
-                    ListInstancesRequest.fromObject = function fromObject(object) {
+                    ListInstancesRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.ListInstancesRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.ListInstancesRequest();
                         if (object.parent != null)
                             message.parent = String(object.parent);
@@ -22309,7 +23097,7 @@
                         this.instances = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -22385,9 +23173,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListInstancesResponse.decode = function decode(reader, length, error) {
+                    ListInstancesResponse.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.ListInstancesResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -22397,7 +23189,7 @@
                             case 1: {
                                     if (!(message.instances && message.instances.length))
                                         message.instances = [];
-                                    message.instances.push($root.google.appengine.v1.Instance.decode(reader, reader.uint32()));
+                                    message.instances.push($root.google.appengine.v1.Instance.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 2: {
@@ -22405,7 +23197,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -22436,14 +23228,18 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ListInstancesResponse.verify = function verify(message) {
+                    ListInstancesResponse.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.instances != null && message.hasOwnProperty("instances")) {
                             if (!Array.isArray(message.instances))
                                 return "instances: array expected";
                             for (var i = 0; i < message.instances.length; ++i) {
-                                var error = $root.google.appengine.v1.Instance.verify(message.instances[i]);
+                                var error = $root.google.appengine.v1.Instance.verify(message.instances[i], long + 1);
                                 if (error)
                                     return "instances." + error;
                             }
@@ -22462,9 +23258,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.ListInstancesResponse} ListInstancesResponse
                      */
-                    ListInstancesResponse.fromObject = function fromObject(object) {
+                    ListInstancesResponse.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.ListInstancesResponse)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.ListInstancesResponse();
                         if (object.instances) {
                             if (!Array.isArray(object.instances))
@@ -22473,7 +23273,7 @@
                             for (var i = 0; i < object.instances.length; ++i) {
                                 if (typeof object.instances[i] !== "object")
                                     throw TypeError(".google.appengine.v1.ListInstancesResponse.instances: object expected");
-                                message.instances[i] = $root.google.appengine.v1.Instance.fromObject(object.instances[i]);
+                                message.instances[i] = $root.google.appengine.v1.Instance.fromObject(object.instances[i], long + 1);
                             }
                         }
                         if (object.nextPageToken != null)
@@ -22557,7 +23357,7 @@
                     function GetInstanceRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -22622,9 +23422,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetInstanceRequest.decode = function decode(reader, length, error) {
+                    GetInstanceRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.GetInstanceRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -22636,7 +23440,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -22667,9 +23471,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    GetInstanceRequest.verify = function verify(message) {
+                    GetInstanceRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -22684,9 +23492,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.GetInstanceRequest} GetInstanceRequest
                      */
-                    GetInstanceRequest.fromObject = function fromObject(object) {
+                    GetInstanceRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.GetInstanceRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.GetInstanceRequest();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -22762,7 +23574,7 @@
                     function DeleteInstanceRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -22827,9 +23639,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DeleteInstanceRequest.decode = function decode(reader, length, error) {
+                    DeleteInstanceRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.DeleteInstanceRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -22841,7 +23657,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -22872,9 +23688,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    DeleteInstanceRequest.verify = function verify(message) {
+                    DeleteInstanceRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -22889,9 +23709,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.DeleteInstanceRequest} DeleteInstanceRequest
                      */
-                    DeleteInstanceRequest.fromObject = function fromObject(object) {
+                    DeleteInstanceRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.DeleteInstanceRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.DeleteInstanceRequest();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -22968,7 +23792,7 @@
                     function DebugInstanceRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -23043,9 +23867,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DebugInstanceRequest.decode = function decode(reader, length, error) {
+                    DebugInstanceRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.DebugInstanceRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -23061,7 +23889,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -23092,9 +23920,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    DebugInstanceRequest.verify = function verify(message) {
+                    DebugInstanceRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -23112,9 +23944,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.DebugInstanceRequest} DebugInstanceRequest
                      */
-                    DebugInstanceRequest.fromObject = function fromObject(object) {
+                    DebugInstanceRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.DebugInstanceRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.DebugInstanceRequest();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -23432,7 +24268,7 @@
                     function ListIngressRulesRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -23527,9 +24363,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListIngressRulesRequest.decode = function decode(reader, length, error) {
+                    ListIngressRulesRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.ListIngressRulesRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -23553,7 +24393,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -23584,9 +24424,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ListIngressRulesRequest.verify = function verify(message) {
+                    ListIngressRulesRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.parent != null && message.hasOwnProperty("parent"))
                             if (!$util.isString(message.parent))
                                 return "parent: string expected";
@@ -23610,9 +24454,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.ListIngressRulesRequest} ListIngressRulesRequest
                      */
-                    ListIngressRulesRequest.fromObject = function fromObject(object) {
+                    ListIngressRulesRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.ListIngressRulesRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.ListIngressRulesRequest();
                         if (object.parent != null)
                             message.parent = String(object.parent);
@@ -23706,7 +24554,7 @@
                         this.ingressRules = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -23782,9 +24630,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListIngressRulesResponse.decode = function decode(reader, length, error) {
+                    ListIngressRulesResponse.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.ListIngressRulesResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -23794,7 +24646,7 @@
                             case 1: {
                                     if (!(message.ingressRules && message.ingressRules.length))
                                         message.ingressRules = [];
-                                    message.ingressRules.push($root.google.appengine.v1.FirewallRule.decode(reader, reader.uint32()));
+                                    message.ingressRules.push($root.google.appengine.v1.FirewallRule.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 2: {
@@ -23802,7 +24654,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -23833,14 +24685,18 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ListIngressRulesResponse.verify = function verify(message) {
+                    ListIngressRulesResponse.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.ingressRules != null && message.hasOwnProperty("ingressRules")) {
                             if (!Array.isArray(message.ingressRules))
                                 return "ingressRules: array expected";
                             for (var i = 0; i < message.ingressRules.length; ++i) {
-                                var error = $root.google.appengine.v1.FirewallRule.verify(message.ingressRules[i]);
+                                var error = $root.google.appengine.v1.FirewallRule.verify(message.ingressRules[i], long + 1);
                                 if (error)
                                     return "ingressRules." + error;
                             }
@@ -23859,9 +24715,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.ListIngressRulesResponse} ListIngressRulesResponse
                      */
-                    ListIngressRulesResponse.fromObject = function fromObject(object) {
+                    ListIngressRulesResponse.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.ListIngressRulesResponse)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.ListIngressRulesResponse();
                         if (object.ingressRules) {
                             if (!Array.isArray(object.ingressRules))
@@ -23870,7 +24730,7 @@
                             for (var i = 0; i < object.ingressRules.length; ++i) {
                                 if (typeof object.ingressRules[i] !== "object")
                                     throw TypeError(".google.appengine.v1.ListIngressRulesResponse.ingressRules: object expected");
-                                message.ingressRules[i] = $root.google.appengine.v1.FirewallRule.fromObject(object.ingressRules[i]);
+                                message.ingressRules[i] = $root.google.appengine.v1.FirewallRule.fromObject(object.ingressRules[i], long + 1);
                             }
                         }
                         if (object.nextPageToken != null)
@@ -23956,7 +24816,7 @@
                         this.ingressRules = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -24032,9 +24892,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    BatchUpdateIngressRulesRequest.decode = function decode(reader, length, error) {
+                    BatchUpdateIngressRulesRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.BatchUpdateIngressRulesRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -24048,11 +24912,11 @@
                             case 2: {
                                     if (!(message.ingressRules && message.ingressRules.length))
                                         message.ingressRules = [];
-                                    message.ingressRules.push($root.google.appengine.v1.FirewallRule.decode(reader, reader.uint32()));
+                                    message.ingressRules.push($root.google.appengine.v1.FirewallRule.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -24083,9 +24947,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    BatchUpdateIngressRulesRequest.verify = function verify(message) {
+                    BatchUpdateIngressRulesRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -24093,7 +24961,7 @@
                             if (!Array.isArray(message.ingressRules))
                                 return "ingressRules: array expected";
                             for (var i = 0; i < message.ingressRules.length; ++i) {
-                                var error = $root.google.appengine.v1.FirewallRule.verify(message.ingressRules[i]);
+                                var error = $root.google.appengine.v1.FirewallRule.verify(message.ingressRules[i], long + 1);
                                 if (error)
                                     return "ingressRules." + error;
                             }
@@ -24109,9 +24977,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.BatchUpdateIngressRulesRequest} BatchUpdateIngressRulesRequest
                      */
-                    BatchUpdateIngressRulesRequest.fromObject = function fromObject(object) {
+                    BatchUpdateIngressRulesRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.BatchUpdateIngressRulesRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.BatchUpdateIngressRulesRequest();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -24122,7 +24994,7 @@
                             for (var i = 0; i < object.ingressRules.length; ++i) {
                                 if (typeof object.ingressRules[i] !== "object")
                                     throw TypeError(".google.appengine.v1.BatchUpdateIngressRulesRequest.ingressRules: object expected");
-                                message.ingressRules[i] = $root.google.appengine.v1.FirewallRule.fromObject(object.ingressRules[i]);
+                                message.ingressRules[i] = $root.google.appengine.v1.FirewallRule.fromObject(object.ingressRules[i], long + 1);
                             }
                         }
                         return message;
@@ -24205,7 +25077,7 @@
                         this.ingressRules = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -24271,9 +25143,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    BatchUpdateIngressRulesResponse.decode = function decode(reader, length, error) {
+                    BatchUpdateIngressRulesResponse.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.BatchUpdateIngressRulesResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -24283,11 +25159,11 @@
                             case 1: {
                                     if (!(message.ingressRules && message.ingressRules.length))
                                         message.ingressRules = [];
-                                    message.ingressRules.push($root.google.appengine.v1.FirewallRule.decode(reader, reader.uint32()));
+                                    message.ingressRules.push($root.google.appengine.v1.FirewallRule.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -24318,14 +25194,18 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    BatchUpdateIngressRulesResponse.verify = function verify(message) {
+                    BatchUpdateIngressRulesResponse.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.ingressRules != null && message.hasOwnProperty("ingressRules")) {
                             if (!Array.isArray(message.ingressRules))
                                 return "ingressRules: array expected";
                             for (var i = 0; i < message.ingressRules.length; ++i) {
-                                var error = $root.google.appengine.v1.FirewallRule.verify(message.ingressRules[i]);
+                                var error = $root.google.appengine.v1.FirewallRule.verify(message.ingressRules[i], long + 1);
                                 if (error)
                                     return "ingressRules." + error;
                             }
@@ -24341,9 +25221,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.BatchUpdateIngressRulesResponse} BatchUpdateIngressRulesResponse
                      */
-                    BatchUpdateIngressRulesResponse.fromObject = function fromObject(object) {
+                    BatchUpdateIngressRulesResponse.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.BatchUpdateIngressRulesResponse)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.BatchUpdateIngressRulesResponse();
                         if (object.ingressRules) {
                             if (!Array.isArray(object.ingressRules))
@@ -24352,7 +25236,7 @@
                             for (var i = 0; i < object.ingressRules.length; ++i) {
                                 if (typeof object.ingressRules[i] !== "object")
                                     throw TypeError(".google.appengine.v1.BatchUpdateIngressRulesResponse.ingressRules: object expected");
-                                message.ingressRules[i] = $root.google.appengine.v1.FirewallRule.fromObject(object.ingressRules[i]);
+                                message.ingressRules[i] = $root.google.appengine.v1.FirewallRule.fromObject(object.ingressRules[i], long + 1);
                             }
                         }
                         return message;
@@ -24431,7 +25315,7 @@
                     function CreateIngressRuleRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -24506,9 +25390,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateIngressRuleRequest.decode = function decode(reader, length, error) {
+                    CreateIngressRuleRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.CreateIngressRuleRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -24520,11 +25408,11 @@
                                     break;
                                 }
                             case 2: {
-                                    message.rule = $root.google.appengine.v1.FirewallRule.decode(reader, reader.uint32());
+                                    message.rule = $root.google.appengine.v1.FirewallRule.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -24555,14 +25443,18 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    CreateIngressRuleRequest.verify = function verify(message) {
+                    CreateIngressRuleRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.parent != null && message.hasOwnProperty("parent"))
                             if (!$util.isString(message.parent))
                                 return "parent: string expected";
                         if (message.rule != null && message.hasOwnProperty("rule")) {
-                            var error = $root.google.appengine.v1.FirewallRule.verify(message.rule);
+                            var error = $root.google.appengine.v1.FirewallRule.verify(message.rule, long + 1);
                             if (error)
                                 return "rule." + error;
                         }
@@ -24577,16 +25469,20 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.CreateIngressRuleRequest} CreateIngressRuleRequest
                      */
-                    CreateIngressRuleRequest.fromObject = function fromObject(object) {
+                    CreateIngressRuleRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.CreateIngressRuleRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.CreateIngressRuleRequest();
                         if (object.parent != null)
                             message.parent = String(object.parent);
                         if (object.rule != null) {
                             if (typeof object.rule !== "object")
                                 throw TypeError(".google.appengine.v1.CreateIngressRuleRequest.rule: object expected");
-                            message.rule = $root.google.appengine.v1.FirewallRule.fromObject(object.rule);
+                            message.rule = $root.google.appengine.v1.FirewallRule.fromObject(object.rule, long + 1);
                         }
                         return message;
                     };
@@ -24664,7 +25560,7 @@
                     function GetIngressRuleRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -24729,9 +25625,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetIngressRuleRequest.decode = function decode(reader, length, error) {
+                    GetIngressRuleRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.GetIngressRuleRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -24743,7 +25643,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -24774,9 +25674,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    GetIngressRuleRequest.verify = function verify(message) {
+                    GetIngressRuleRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -24791,9 +25695,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.GetIngressRuleRequest} GetIngressRuleRequest
                      */
-                    GetIngressRuleRequest.fromObject = function fromObject(object) {
+                    GetIngressRuleRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.GetIngressRuleRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.GetIngressRuleRequest();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -24871,7 +25779,7 @@
                     function UpdateIngressRuleRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -24956,9 +25864,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UpdateIngressRuleRequest.decode = function decode(reader, length, error) {
+                    UpdateIngressRuleRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.UpdateIngressRuleRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -24970,15 +25882,15 @@
                                     break;
                                 }
                             case 2: {
-                                    message.rule = $root.google.appengine.v1.FirewallRule.decode(reader, reader.uint32());
+                                    message.rule = $root.google.appengine.v1.FirewallRule.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 3: {
-                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -25009,19 +25921,23 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    UpdateIngressRuleRequest.verify = function verify(message) {
+                    UpdateIngressRuleRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
                         if (message.rule != null && message.hasOwnProperty("rule")) {
-                            var error = $root.google.appengine.v1.FirewallRule.verify(message.rule);
+                            var error = $root.google.appengine.v1.FirewallRule.verify(message.rule, long + 1);
                             if (error)
                                 return "rule." + error;
                         }
                         if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
-                            var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                            var error = $root.google.protobuf.FieldMask.verify(message.updateMask, long + 1);
                             if (error)
                                 return "updateMask." + error;
                         }
@@ -25036,21 +25952,25 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.UpdateIngressRuleRequest} UpdateIngressRuleRequest
                      */
-                    UpdateIngressRuleRequest.fromObject = function fromObject(object) {
+                    UpdateIngressRuleRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.UpdateIngressRuleRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.UpdateIngressRuleRequest();
                         if (object.name != null)
                             message.name = String(object.name);
                         if (object.rule != null) {
                             if (typeof object.rule !== "object")
                                 throw TypeError(".google.appengine.v1.UpdateIngressRuleRequest.rule: object expected");
-                            message.rule = $root.google.appengine.v1.FirewallRule.fromObject(object.rule);
+                            message.rule = $root.google.appengine.v1.FirewallRule.fromObject(object.rule, long + 1);
                         }
                         if (object.updateMask != null) {
                             if (typeof object.updateMask !== "object")
                                 throw TypeError(".google.appengine.v1.UpdateIngressRuleRequest.updateMask: object expected");
-                            message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask, long + 1);
                         }
                         return message;
                     };
@@ -25131,7 +26051,7 @@
                     function DeleteIngressRuleRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -25196,9 +26116,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DeleteIngressRuleRequest.decode = function decode(reader, length, error) {
+                    DeleteIngressRuleRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.DeleteIngressRuleRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -25210,7 +26134,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -25241,9 +26165,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    DeleteIngressRuleRequest.verify = function verify(message) {
+                    DeleteIngressRuleRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -25258,9 +26186,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.DeleteIngressRuleRequest} DeleteIngressRuleRequest
                      */
-                    DeleteIngressRuleRequest.fromObject = function fromObject(object) {
+                    DeleteIngressRuleRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.DeleteIngressRuleRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.DeleteIngressRuleRequest();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -25406,7 +26338,7 @@
                     function ListAuthorizedDomainsRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -25491,9 +26423,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListAuthorizedDomainsRequest.decode = function decode(reader, length, error) {
+                    ListAuthorizedDomainsRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.ListAuthorizedDomainsRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -25513,7 +26449,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -25544,9 +26480,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ListAuthorizedDomainsRequest.verify = function verify(message) {
+                    ListAuthorizedDomainsRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.parent != null && message.hasOwnProperty("parent"))
                             if (!$util.isString(message.parent))
                                 return "parent: string expected";
@@ -25567,9 +26507,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.ListAuthorizedDomainsRequest} ListAuthorizedDomainsRequest
                      */
-                    ListAuthorizedDomainsRequest.fromObject = function fromObject(object) {
+                    ListAuthorizedDomainsRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.ListAuthorizedDomainsRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.ListAuthorizedDomainsRequest();
                         if (object.parent != null)
                             message.parent = String(object.parent);
@@ -25658,7 +26602,7 @@
                         this.domains = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -25734,9 +26678,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListAuthorizedDomainsResponse.decode = function decode(reader, length, error) {
+                    ListAuthorizedDomainsResponse.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.ListAuthorizedDomainsResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -25746,7 +26694,7 @@
                             case 1: {
                                     if (!(message.domains && message.domains.length))
                                         message.domains = [];
-                                    message.domains.push($root.google.appengine.v1.AuthorizedDomain.decode(reader, reader.uint32()));
+                                    message.domains.push($root.google.appengine.v1.AuthorizedDomain.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 2: {
@@ -25754,7 +26702,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -25785,14 +26733,18 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ListAuthorizedDomainsResponse.verify = function verify(message) {
+                    ListAuthorizedDomainsResponse.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.domains != null && message.hasOwnProperty("domains")) {
                             if (!Array.isArray(message.domains))
                                 return "domains: array expected";
                             for (var i = 0; i < message.domains.length; ++i) {
-                                var error = $root.google.appengine.v1.AuthorizedDomain.verify(message.domains[i]);
+                                var error = $root.google.appengine.v1.AuthorizedDomain.verify(message.domains[i], long + 1);
                                 if (error)
                                     return "domains." + error;
                             }
@@ -25811,9 +26763,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.ListAuthorizedDomainsResponse} ListAuthorizedDomainsResponse
                      */
-                    ListAuthorizedDomainsResponse.fromObject = function fromObject(object) {
+                    ListAuthorizedDomainsResponse.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.ListAuthorizedDomainsResponse)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.ListAuthorizedDomainsResponse();
                         if (object.domains) {
                             if (!Array.isArray(object.domains))
@@ -25822,7 +26778,7 @@
                             for (var i = 0; i < object.domains.length; ++i) {
                                 if (typeof object.domains[i] !== "object")
                                     throw TypeError(".google.appengine.v1.ListAuthorizedDomainsResponse.domains: object expected");
-                                message.domains[i] = $root.google.appengine.v1.AuthorizedDomain.fromObject(object.domains[i]);
+                                message.domains[i] = $root.google.appengine.v1.AuthorizedDomain.fromObject(object.domains[i], long + 1);
                             }
                         }
                         if (object.nextPageToken != null)
@@ -26109,7 +27065,7 @@
                     function ListAuthorizedCertificatesRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -26204,9 +27160,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListAuthorizedCertificatesRequest.decode = function decode(reader, length, error) {
+                    ListAuthorizedCertificatesRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.ListAuthorizedCertificatesRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -26230,7 +27190,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -26261,9 +27221,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ListAuthorizedCertificatesRequest.verify = function verify(message) {
+                    ListAuthorizedCertificatesRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.parent != null && message.hasOwnProperty("parent"))
                             if (!$util.isString(message.parent))
                                 return "parent: string expected";
@@ -26292,9 +27256,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.ListAuthorizedCertificatesRequest} ListAuthorizedCertificatesRequest
                      */
-                    ListAuthorizedCertificatesRequest.fromObject = function fromObject(object) {
+                    ListAuthorizedCertificatesRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.ListAuthorizedCertificatesRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.ListAuthorizedCertificatesRequest();
                         if (object.parent != null)
                             message.parent = String(object.parent);
@@ -26402,7 +27370,7 @@
                         this.certificates = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -26478,9 +27446,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListAuthorizedCertificatesResponse.decode = function decode(reader, length, error) {
+                    ListAuthorizedCertificatesResponse.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.ListAuthorizedCertificatesResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -26490,7 +27462,7 @@
                             case 1: {
                                     if (!(message.certificates && message.certificates.length))
                                         message.certificates = [];
-                                    message.certificates.push($root.google.appengine.v1.AuthorizedCertificate.decode(reader, reader.uint32()));
+                                    message.certificates.push($root.google.appengine.v1.AuthorizedCertificate.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 2: {
@@ -26498,7 +27470,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -26529,14 +27501,18 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ListAuthorizedCertificatesResponse.verify = function verify(message) {
+                    ListAuthorizedCertificatesResponse.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.certificates != null && message.hasOwnProperty("certificates")) {
                             if (!Array.isArray(message.certificates))
                                 return "certificates: array expected";
                             for (var i = 0; i < message.certificates.length; ++i) {
-                                var error = $root.google.appengine.v1.AuthorizedCertificate.verify(message.certificates[i]);
+                                var error = $root.google.appengine.v1.AuthorizedCertificate.verify(message.certificates[i], long + 1);
                                 if (error)
                                     return "certificates." + error;
                             }
@@ -26555,9 +27531,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.ListAuthorizedCertificatesResponse} ListAuthorizedCertificatesResponse
                      */
-                    ListAuthorizedCertificatesResponse.fromObject = function fromObject(object) {
+                    ListAuthorizedCertificatesResponse.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.ListAuthorizedCertificatesResponse)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.ListAuthorizedCertificatesResponse();
                         if (object.certificates) {
                             if (!Array.isArray(object.certificates))
@@ -26566,7 +27546,7 @@
                             for (var i = 0; i < object.certificates.length; ++i) {
                                 if (typeof object.certificates[i] !== "object")
                                     throw TypeError(".google.appengine.v1.ListAuthorizedCertificatesResponse.certificates: object expected");
-                                message.certificates[i] = $root.google.appengine.v1.AuthorizedCertificate.fromObject(object.certificates[i]);
+                                message.certificates[i] = $root.google.appengine.v1.AuthorizedCertificate.fromObject(object.certificates[i], long + 1);
                             }
                         }
                         if (object.nextPageToken != null)
@@ -26651,7 +27631,7 @@
                     function GetAuthorizedCertificateRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -26726,9 +27706,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetAuthorizedCertificateRequest.decode = function decode(reader, length, error) {
+                    GetAuthorizedCertificateRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.GetAuthorizedCertificateRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -26744,7 +27728,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -26775,9 +27759,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    GetAuthorizedCertificateRequest.verify = function verify(message) {
+                    GetAuthorizedCertificateRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -26800,9 +27788,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.GetAuthorizedCertificateRequest} GetAuthorizedCertificateRequest
                      */
-                    GetAuthorizedCertificateRequest.fromObject = function fromObject(object) {
+                    GetAuthorizedCertificateRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.GetAuthorizedCertificateRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.GetAuthorizedCertificateRequest();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -26913,7 +27905,7 @@
                     function CreateAuthorizedCertificateRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -26988,9 +27980,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateAuthorizedCertificateRequest.decode = function decode(reader, length, error) {
+                    CreateAuthorizedCertificateRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.CreateAuthorizedCertificateRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -27002,11 +27998,11 @@
                                     break;
                                 }
                             case 2: {
-                                    message.certificate = $root.google.appengine.v1.AuthorizedCertificate.decode(reader, reader.uint32());
+                                    message.certificate = $root.google.appengine.v1.AuthorizedCertificate.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -27037,14 +28033,18 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    CreateAuthorizedCertificateRequest.verify = function verify(message) {
+                    CreateAuthorizedCertificateRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.parent != null && message.hasOwnProperty("parent"))
                             if (!$util.isString(message.parent))
                                 return "parent: string expected";
                         if (message.certificate != null && message.hasOwnProperty("certificate")) {
-                            var error = $root.google.appengine.v1.AuthorizedCertificate.verify(message.certificate);
+                            var error = $root.google.appengine.v1.AuthorizedCertificate.verify(message.certificate, long + 1);
                             if (error)
                                 return "certificate." + error;
                         }
@@ -27059,16 +28059,20 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.CreateAuthorizedCertificateRequest} CreateAuthorizedCertificateRequest
                      */
-                    CreateAuthorizedCertificateRequest.fromObject = function fromObject(object) {
+                    CreateAuthorizedCertificateRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.CreateAuthorizedCertificateRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.CreateAuthorizedCertificateRequest();
                         if (object.parent != null)
                             message.parent = String(object.parent);
                         if (object.certificate != null) {
                             if (typeof object.certificate !== "object")
                                 throw TypeError(".google.appengine.v1.CreateAuthorizedCertificateRequest.certificate: object expected");
-                            message.certificate = $root.google.appengine.v1.AuthorizedCertificate.fromObject(object.certificate);
+                            message.certificate = $root.google.appengine.v1.AuthorizedCertificate.fromObject(object.certificate, long + 1);
                         }
                         return message;
                     };
@@ -27148,7 +28152,7 @@
                     function UpdateAuthorizedCertificateRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -27233,9 +28237,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UpdateAuthorizedCertificateRequest.decode = function decode(reader, length, error) {
+                    UpdateAuthorizedCertificateRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.UpdateAuthorizedCertificateRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -27247,15 +28255,15 @@
                                     break;
                                 }
                             case 2: {
-                                    message.certificate = $root.google.appengine.v1.AuthorizedCertificate.decode(reader, reader.uint32());
+                                    message.certificate = $root.google.appengine.v1.AuthorizedCertificate.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 3: {
-                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -27286,19 +28294,23 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    UpdateAuthorizedCertificateRequest.verify = function verify(message) {
+                    UpdateAuthorizedCertificateRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
                         if (message.certificate != null && message.hasOwnProperty("certificate")) {
-                            var error = $root.google.appengine.v1.AuthorizedCertificate.verify(message.certificate);
+                            var error = $root.google.appengine.v1.AuthorizedCertificate.verify(message.certificate, long + 1);
                             if (error)
                                 return "certificate." + error;
                         }
                         if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
-                            var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                            var error = $root.google.protobuf.FieldMask.verify(message.updateMask, long + 1);
                             if (error)
                                 return "updateMask." + error;
                         }
@@ -27313,21 +28325,25 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.UpdateAuthorizedCertificateRequest} UpdateAuthorizedCertificateRequest
                      */
-                    UpdateAuthorizedCertificateRequest.fromObject = function fromObject(object) {
+                    UpdateAuthorizedCertificateRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.UpdateAuthorizedCertificateRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.UpdateAuthorizedCertificateRequest();
                         if (object.name != null)
                             message.name = String(object.name);
                         if (object.certificate != null) {
                             if (typeof object.certificate !== "object")
                                 throw TypeError(".google.appengine.v1.UpdateAuthorizedCertificateRequest.certificate: object expected");
-                            message.certificate = $root.google.appengine.v1.AuthorizedCertificate.fromObject(object.certificate);
+                            message.certificate = $root.google.appengine.v1.AuthorizedCertificate.fromObject(object.certificate, long + 1);
                         }
                         if (object.updateMask != null) {
                             if (typeof object.updateMask !== "object")
                                 throw TypeError(".google.appengine.v1.UpdateAuthorizedCertificateRequest.updateMask: object expected");
-                            message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask, long + 1);
                         }
                         return message;
                     };
@@ -27408,7 +28424,7 @@
                     function DeleteAuthorizedCertificateRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -27473,9 +28489,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DeleteAuthorizedCertificateRequest.decode = function decode(reader, length, error) {
+                    DeleteAuthorizedCertificateRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.DeleteAuthorizedCertificateRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -27487,7 +28507,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -27518,9 +28538,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    DeleteAuthorizedCertificateRequest.verify = function verify(message) {
+                    DeleteAuthorizedCertificateRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -27535,9 +28559,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.DeleteAuthorizedCertificateRequest} DeleteAuthorizedCertificateRequest
                      */
-                    DeleteAuthorizedCertificateRequest.fromObject = function fromObject(object) {
+                    DeleteAuthorizedCertificateRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.DeleteAuthorizedCertificateRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.DeleteAuthorizedCertificateRequest();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -27815,7 +28843,7 @@
                     function ListDomainMappingsRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -27900,9 +28928,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListDomainMappingsRequest.decode = function decode(reader, length, error) {
+                    ListDomainMappingsRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.ListDomainMappingsRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -27922,7 +28954,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -27953,9 +28985,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ListDomainMappingsRequest.verify = function verify(message) {
+                    ListDomainMappingsRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.parent != null && message.hasOwnProperty("parent"))
                             if (!$util.isString(message.parent))
                                 return "parent: string expected";
@@ -27976,9 +29012,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.ListDomainMappingsRequest} ListDomainMappingsRequest
                      */
-                    ListDomainMappingsRequest.fromObject = function fromObject(object) {
+                    ListDomainMappingsRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.ListDomainMappingsRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.ListDomainMappingsRequest();
                         if (object.parent != null)
                             message.parent = String(object.parent);
@@ -28067,7 +29107,7 @@
                         this.domainMappings = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -28143,9 +29183,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListDomainMappingsResponse.decode = function decode(reader, length, error) {
+                    ListDomainMappingsResponse.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.ListDomainMappingsResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -28155,7 +29199,7 @@
                             case 1: {
                                     if (!(message.domainMappings && message.domainMappings.length))
                                         message.domainMappings = [];
-                                    message.domainMappings.push($root.google.appengine.v1.DomainMapping.decode(reader, reader.uint32()));
+                                    message.domainMappings.push($root.google.appengine.v1.DomainMapping.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 2: {
@@ -28163,7 +29207,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -28194,14 +29238,18 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ListDomainMappingsResponse.verify = function verify(message) {
+                    ListDomainMappingsResponse.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.domainMappings != null && message.hasOwnProperty("domainMappings")) {
                             if (!Array.isArray(message.domainMappings))
                                 return "domainMappings: array expected";
                             for (var i = 0; i < message.domainMappings.length; ++i) {
-                                var error = $root.google.appengine.v1.DomainMapping.verify(message.domainMappings[i]);
+                                var error = $root.google.appengine.v1.DomainMapping.verify(message.domainMappings[i], long + 1);
                                 if (error)
                                     return "domainMappings." + error;
                             }
@@ -28220,9 +29268,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.ListDomainMappingsResponse} ListDomainMappingsResponse
                      */
-                    ListDomainMappingsResponse.fromObject = function fromObject(object) {
+                    ListDomainMappingsResponse.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.ListDomainMappingsResponse)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.ListDomainMappingsResponse();
                         if (object.domainMappings) {
                             if (!Array.isArray(object.domainMappings))
@@ -28231,7 +29283,7 @@
                             for (var i = 0; i < object.domainMappings.length; ++i) {
                                 if (typeof object.domainMappings[i] !== "object")
                                     throw TypeError(".google.appengine.v1.ListDomainMappingsResponse.domainMappings: object expected");
-                                message.domainMappings[i] = $root.google.appengine.v1.DomainMapping.fromObject(object.domainMappings[i]);
+                                message.domainMappings[i] = $root.google.appengine.v1.DomainMapping.fromObject(object.domainMappings[i], long + 1);
                             }
                         }
                         if (object.nextPageToken != null)
@@ -28315,7 +29367,7 @@
                     function GetDomainMappingRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -28380,9 +29432,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetDomainMappingRequest.decode = function decode(reader, length, error) {
+                    GetDomainMappingRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.GetDomainMappingRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -28394,7 +29450,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -28425,9 +29481,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    GetDomainMappingRequest.verify = function verify(message) {
+                    GetDomainMappingRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -28442,9 +29502,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.GetDomainMappingRequest} GetDomainMappingRequest
                      */
-                    GetDomainMappingRequest.fromObject = function fromObject(object) {
+                    GetDomainMappingRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.GetDomainMappingRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.GetDomainMappingRequest();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -28538,7 +29602,7 @@
                     function CreateDomainMappingRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -28623,9 +29687,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateDomainMappingRequest.decode = function decode(reader, length, error) {
+                    CreateDomainMappingRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.CreateDomainMappingRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -28637,7 +29705,7 @@
                                     break;
                                 }
                             case 2: {
-                                    message.domainMapping = $root.google.appengine.v1.DomainMapping.decode(reader, reader.uint32());
+                                    message.domainMapping = $root.google.appengine.v1.DomainMapping.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 4: {
@@ -28645,7 +29713,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -28676,14 +29744,18 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    CreateDomainMappingRequest.verify = function verify(message) {
+                    CreateDomainMappingRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.parent != null && message.hasOwnProperty("parent"))
                             if (!$util.isString(message.parent))
                                 return "parent: string expected";
                         if (message.domainMapping != null && message.hasOwnProperty("domainMapping")) {
-                            var error = $root.google.appengine.v1.DomainMapping.verify(message.domainMapping);
+                            var error = $root.google.appengine.v1.DomainMapping.verify(message.domainMapping, long + 1);
                             if (error)
                                 return "domainMapping." + error;
                         }
@@ -28707,16 +29779,20 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.CreateDomainMappingRequest} CreateDomainMappingRequest
                      */
-                    CreateDomainMappingRequest.fromObject = function fromObject(object) {
+                    CreateDomainMappingRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.CreateDomainMappingRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.CreateDomainMappingRequest();
                         if (object.parent != null)
                             message.parent = String(object.parent);
                         if (object.domainMapping != null) {
                             if (typeof object.domainMapping !== "object")
                                 throw TypeError(".google.appengine.v1.CreateDomainMappingRequest.domainMapping: object expected");
-                            message.domainMapping = $root.google.appengine.v1.DomainMapping.fromObject(object.domainMapping);
+                            message.domainMapping = $root.google.appengine.v1.DomainMapping.fromObject(object.domainMapping, long + 1);
                         }
                         switch (object.overrideStrategy) {
                         default:
@@ -28819,7 +29895,7 @@
                     function UpdateDomainMappingRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -28904,9 +29980,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UpdateDomainMappingRequest.decode = function decode(reader, length, error) {
+                    UpdateDomainMappingRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.UpdateDomainMappingRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -28918,15 +29998,15 @@
                                     break;
                                 }
                             case 2: {
-                                    message.domainMapping = $root.google.appengine.v1.DomainMapping.decode(reader, reader.uint32());
+                                    message.domainMapping = $root.google.appengine.v1.DomainMapping.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 3: {
-                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -28957,19 +30037,23 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    UpdateDomainMappingRequest.verify = function verify(message) {
+                    UpdateDomainMappingRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
                         if (message.domainMapping != null && message.hasOwnProperty("domainMapping")) {
-                            var error = $root.google.appengine.v1.DomainMapping.verify(message.domainMapping);
+                            var error = $root.google.appengine.v1.DomainMapping.verify(message.domainMapping, long + 1);
                             if (error)
                                 return "domainMapping." + error;
                         }
                         if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
-                            var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                            var error = $root.google.protobuf.FieldMask.verify(message.updateMask, long + 1);
                             if (error)
                                 return "updateMask." + error;
                         }
@@ -28984,21 +30068,25 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.UpdateDomainMappingRequest} UpdateDomainMappingRequest
                      */
-                    UpdateDomainMappingRequest.fromObject = function fromObject(object) {
+                    UpdateDomainMappingRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.UpdateDomainMappingRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.UpdateDomainMappingRequest();
                         if (object.name != null)
                             message.name = String(object.name);
                         if (object.domainMapping != null) {
                             if (typeof object.domainMapping !== "object")
                                 throw TypeError(".google.appengine.v1.UpdateDomainMappingRequest.domainMapping: object expected");
-                            message.domainMapping = $root.google.appengine.v1.DomainMapping.fromObject(object.domainMapping);
+                            message.domainMapping = $root.google.appengine.v1.DomainMapping.fromObject(object.domainMapping, long + 1);
                         }
                         if (object.updateMask != null) {
                             if (typeof object.updateMask !== "object")
                                 throw TypeError(".google.appengine.v1.UpdateDomainMappingRequest.updateMask: object expected");
-                            message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask, long + 1);
                         }
                         return message;
                     };
@@ -29079,7 +30167,7 @@
                     function DeleteDomainMappingRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -29144,9 +30232,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DeleteDomainMappingRequest.decode = function decode(reader, length, error) {
+                    DeleteDomainMappingRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.DeleteDomainMappingRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -29158,7 +30250,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -29189,9 +30281,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    DeleteDomainMappingRequest.verify = function verify(message) {
+                    DeleteDomainMappingRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -29206,9 +30302,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.DeleteDomainMappingRequest} DeleteDomainMappingRequest
                      */
-                    DeleteDomainMappingRequest.fromObject = function fromObject(object) {
+                    DeleteDomainMappingRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.DeleteDomainMappingRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.DeleteDomainMappingRequest();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -29299,7 +30399,7 @@
                         this.dispatchRules = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -29505,9 +30605,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Application.decode = function decode(reader, length, error) {
+                    Application.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.Application();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -29525,7 +30629,7 @@
                             case 3: {
                                     if (!(message.dispatchRules && message.dispatchRules.length))
                                         message.dispatchRules = [];
-                                    message.dispatchRules.push($root.google.appengine.v1.UrlDispatchRule.decode(reader, reader.uint32()));
+                                    message.dispatchRules.push($root.google.appengine.v1.UrlDispatchRule.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 6: {
@@ -29541,7 +30645,7 @@
                                     break;
                                 }
                             case 9: {
-                                    message.defaultCookieExpiration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.defaultCookieExpiration = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 10: {
@@ -29561,7 +30665,7 @@
                                     break;
                                 }
                             case 14: {
-                                    message.iap = $root.google.appengine.v1.Application.IdentityAwareProxy.decode(reader, reader.uint32());
+                                    message.iap = $root.google.appengine.v1.Application.IdentityAwareProxy.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 16: {
@@ -29573,11 +30677,11 @@
                                     break;
                                 }
                             case 18: {
-                                    message.featureSettings = $root.google.appengine.v1.Application.FeatureSettings.decode(reader, reader.uint32());
+                                    message.featureSettings = $root.google.appengine.v1.Application.FeatureSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -29608,9 +30712,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    Application.verify = function verify(message) {
+                    Application.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -29621,7 +30729,7 @@
                             if (!Array.isArray(message.dispatchRules))
                                 return "dispatchRules: array expected";
                             for (var i = 0; i < message.dispatchRules.length; ++i) {
-                                var error = $root.google.appengine.v1.UrlDispatchRule.verify(message.dispatchRules[i]);
+                                var error = $root.google.appengine.v1.UrlDispatchRule.verify(message.dispatchRules[i], long + 1);
                                 if (error)
                                     return "dispatchRules." + error;
                             }
@@ -29636,7 +30744,7 @@
                             if (!$util.isString(message.codeBucket))
                                 return "codeBucket: string expected";
                         if (message.defaultCookieExpiration != null && message.hasOwnProperty("defaultCookieExpiration")) {
-                            var error = $root.google.protobuf.Duration.verify(message.defaultCookieExpiration);
+                            var error = $root.google.protobuf.Duration.verify(message.defaultCookieExpiration, long + 1);
                             if (error)
                                 return "defaultCookieExpiration." + error;
                         }
@@ -29660,7 +30768,7 @@
                             if (!$util.isString(message.serviceAccount))
                                 return "serviceAccount: string expected";
                         if (message.iap != null && message.hasOwnProperty("iap")) {
-                            var error = $root.google.appengine.v1.Application.IdentityAwareProxy.verify(message.iap);
+                            var error = $root.google.appengine.v1.Application.IdentityAwareProxy.verify(message.iap, long + 1);
                             if (error)
                                 return "iap." + error;
                         }
@@ -29678,7 +30786,7 @@
                                 break;
                             }
                         if (message.featureSettings != null && message.hasOwnProperty("featureSettings")) {
-                            var error = $root.google.appengine.v1.Application.FeatureSettings.verify(message.featureSettings);
+                            var error = $root.google.appengine.v1.Application.FeatureSettings.verify(message.featureSettings, long + 1);
                             if (error)
                                 return "featureSettings." + error;
                         }
@@ -29693,9 +30801,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.Application} Application
                      */
-                    Application.fromObject = function fromObject(object) {
+                    Application.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.Application)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.Application();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -29708,7 +30820,7 @@
                             for (var i = 0; i < object.dispatchRules.length; ++i) {
                                 if (typeof object.dispatchRules[i] !== "object")
                                     throw TypeError(".google.appengine.v1.Application.dispatchRules: object expected");
-                                message.dispatchRules[i] = $root.google.appengine.v1.UrlDispatchRule.fromObject(object.dispatchRules[i]);
+                                message.dispatchRules[i] = $root.google.appengine.v1.UrlDispatchRule.fromObject(object.dispatchRules[i], long + 1);
                             }
                         }
                         if (object.authDomain != null)
@@ -29720,7 +30832,7 @@
                         if (object.defaultCookieExpiration != null) {
                             if (typeof object.defaultCookieExpiration !== "object")
                                 throw TypeError(".google.appengine.v1.Application.defaultCookieExpiration: object expected");
-                            message.defaultCookieExpiration = $root.google.protobuf.Duration.fromObject(object.defaultCookieExpiration);
+                            message.defaultCookieExpiration = $root.google.protobuf.Duration.fromObject(object.defaultCookieExpiration, long + 1);
                         }
                         switch (object.servingStatus) {
                         default:
@@ -29755,7 +30867,7 @@
                         if (object.iap != null) {
                             if (typeof object.iap !== "object")
                                 throw TypeError(".google.appengine.v1.Application.iap: object expected");
-                            message.iap = $root.google.appengine.v1.Application.IdentityAwareProxy.fromObject(object.iap);
+                            message.iap = $root.google.appengine.v1.Application.IdentityAwareProxy.fromObject(object.iap, long + 1);
                         }
                         if (object.gcrDomain != null)
                             message.gcrDomain = String(object.gcrDomain);
@@ -29786,7 +30898,7 @@
                         if (object.featureSettings != null) {
                             if (typeof object.featureSettings !== "object")
                                 throw TypeError(".google.appengine.v1.Application.featureSettings: object expected");
-                            message.featureSettings = $root.google.appengine.v1.Application.FeatureSettings.fromObject(object.featureSettings);
+                            message.featureSettings = $root.google.appengine.v1.Application.FeatureSettings.fromObject(object.featureSettings, long + 1);
                         }
                         return message;
                     };
@@ -29925,7 +31037,7 @@
                         function IdentityAwareProxy(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -30020,9 +31132,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        IdentityAwareProxy.decode = function decode(reader, length, error) {
+                        IdentityAwareProxy.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.Application.IdentityAwareProxy();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -30046,7 +31162,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -30077,9 +31193,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        IdentityAwareProxy.verify = function verify(message) {
+                        IdentityAwareProxy.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.enabled != null && message.hasOwnProperty("enabled"))
                                 if (typeof message.enabled !== "boolean")
                                     return "enabled: boolean expected";
@@ -30103,9 +31223,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.appengine.v1.Application.IdentityAwareProxy} IdentityAwareProxy
                          */
-                        IdentityAwareProxy.fromObject = function fromObject(object) {
+                        IdentityAwareProxy.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.appengine.v1.Application.IdentityAwareProxy)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.appengine.v1.Application.IdentityAwareProxy();
                             if (object.enabled != null)
                                 message.enabled = Boolean(object.enabled);
@@ -30216,7 +31340,7 @@
                         function FeatureSettings(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -30291,9 +31415,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FeatureSettings.decode = function decode(reader, length, error) {
+                        FeatureSettings.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.Application.FeatureSettings();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -30309,7 +31437,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -30340,9 +31468,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        FeatureSettings.verify = function verify(message) {
+                        FeatureSettings.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.splitHealthChecks != null && message.hasOwnProperty("splitHealthChecks"))
                                 if (typeof message.splitHealthChecks !== "boolean")
                                     return "splitHealthChecks: boolean expected";
@@ -30360,9 +31492,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.appengine.v1.Application.FeatureSettings} FeatureSettings
                          */
-                        FeatureSettings.fromObject = function fromObject(object) {
+                        FeatureSettings.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.appengine.v1.Application.FeatureSettings)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.appengine.v1.Application.FeatureSettings();
                             if (object.splitHealthChecks != null)
                                 message.splitHealthChecks = Boolean(object.splitHealthChecks);
@@ -30449,7 +31585,7 @@
                     function UrlDispatchRule(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -30534,9 +31670,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UrlDispatchRule.decode = function decode(reader, length, error) {
+                    UrlDispatchRule.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.UrlDispatchRule();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -30556,7 +31696,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -30587,9 +31727,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    UrlDispatchRule.verify = function verify(message) {
+                    UrlDispatchRule.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.domain != null && message.hasOwnProperty("domain"))
                             if (!$util.isString(message.domain))
                                 return "domain: string expected";
@@ -30610,9 +31754,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.UrlDispatchRule} UrlDispatchRule
                      */
-                    UrlDispatchRule.fromObject = function fromObject(object) {
+                    UrlDispatchRule.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.UrlDispatchRule)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.UrlDispatchRule();
                         if (object.domain != null)
                             message.domain = String(object.domain);
@@ -30709,7 +31857,7 @@
                         this.visibleDomainMappings = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -30856,9 +32004,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    AuthorizedCertificate.decode = function decode(reader, length, error) {
+                    AuthorizedCertificate.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.AuthorizedCertificate();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -30884,15 +32036,15 @@
                                     break;
                                 }
                             case 5: {
-                                    message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 6: {
-                                    message.certificateRawData = $root.google.appengine.v1.CertificateRawData.decode(reader, reader.uint32());
+                                    message.certificateRawData = $root.google.appengine.v1.CertificateRawData.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 7: {
-                                    message.managedCertificate = $root.google.appengine.v1.ManagedCertificate.decode(reader, reader.uint32());
+                                    message.managedCertificate = $root.google.appengine.v1.ManagedCertificate.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 8: {
@@ -30906,7 +32058,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -30937,9 +32089,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    AuthorizedCertificate.verify = function verify(message) {
+                    AuthorizedCertificate.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -30957,17 +32113,17 @@
                                     return "domainNames: string[] expected";
                         }
                         if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.expireTime);
+                            var error = $root.google.protobuf.Timestamp.verify(message.expireTime, long + 1);
                             if (error)
                                 return "expireTime." + error;
                         }
                         if (message.certificateRawData != null && message.hasOwnProperty("certificateRawData")) {
-                            var error = $root.google.appengine.v1.CertificateRawData.verify(message.certificateRawData);
+                            var error = $root.google.appengine.v1.CertificateRawData.verify(message.certificateRawData, long + 1);
                             if (error)
                                 return "certificateRawData." + error;
                         }
                         if (message.managedCertificate != null && message.hasOwnProperty("managedCertificate")) {
-                            var error = $root.google.appengine.v1.ManagedCertificate.verify(message.managedCertificate);
+                            var error = $root.google.appengine.v1.ManagedCertificate.verify(message.managedCertificate, long + 1);
                             if (error)
                                 return "managedCertificate." + error;
                         }
@@ -30992,9 +32148,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.AuthorizedCertificate} AuthorizedCertificate
                      */
-                    AuthorizedCertificate.fromObject = function fromObject(object) {
+                    AuthorizedCertificate.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.AuthorizedCertificate)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.AuthorizedCertificate();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -31012,17 +32172,17 @@
                         if (object.expireTime != null) {
                             if (typeof object.expireTime !== "object")
                                 throw TypeError(".google.appengine.v1.AuthorizedCertificate.expireTime: object expected");
-                            message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
+                            message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime, long + 1);
                         }
                         if (object.certificateRawData != null) {
                             if (typeof object.certificateRawData !== "object")
                                 throw TypeError(".google.appengine.v1.AuthorizedCertificate.certificateRawData: object expected");
-                            message.certificateRawData = $root.google.appengine.v1.CertificateRawData.fromObject(object.certificateRawData);
+                            message.certificateRawData = $root.google.appengine.v1.CertificateRawData.fromObject(object.certificateRawData, long + 1);
                         }
                         if (object.managedCertificate != null) {
                             if (typeof object.managedCertificate !== "object")
                                 throw TypeError(".google.appengine.v1.AuthorizedCertificate.managedCertificate: object expected");
-                            message.managedCertificate = $root.google.appengine.v1.ManagedCertificate.fromObject(object.managedCertificate);
+                            message.managedCertificate = $root.google.appengine.v1.ManagedCertificate.fromObject(object.managedCertificate, long + 1);
                         }
                         if (object.visibleDomainMappings) {
                             if (!Array.isArray(object.visibleDomainMappings))
@@ -31139,7 +32299,7 @@
                     function CertificateRawData(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -31214,9 +32374,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CertificateRawData.decode = function decode(reader, length, error) {
+                    CertificateRawData.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.CertificateRawData();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -31232,7 +32396,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -31263,9 +32427,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    CertificateRawData.verify = function verify(message) {
+                    CertificateRawData.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.publicCertificate != null && message.hasOwnProperty("publicCertificate"))
                             if (!$util.isString(message.publicCertificate))
                                 return "publicCertificate: string expected";
@@ -31283,9 +32451,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.CertificateRawData} CertificateRawData
                      */
-                    CertificateRawData.fromObject = function fromObject(object) {
+                    CertificateRawData.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.CertificateRawData)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.CertificateRawData();
                         if (object.publicCertificate != null)
                             message.publicCertificate = String(object.publicCertificate);
@@ -31392,7 +32564,7 @@
                     function ManagedCertificate(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -31467,9 +32639,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ManagedCertificate.decode = function decode(reader, length, error) {
+                    ManagedCertificate.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.ManagedCertificate();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -31477,7 +32653,7 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.lastRenewalTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.lastRenewalTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 2: {
@@ -31485,7 +32661,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -31516,11 +32692,15 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ManagedCertificate.verify = function verify(message) {
+                    ManagedCertificate.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.lastRenewalTime != null && message.hasOwnProperty("lastRenewalTime")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.lastRenewalTime);
+                            var error = $root.google.protobuf.Timestamp.verify(message.lastRenewalTime, long + 1);
                             if (error)
                                 return "lastRenewalTime." + error;
                         }
@@ -31548,14 +32728,18 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.ManagedCertificate} ManagedCertificate
                      */
-                    ManagedCertificate.fromObject = function fromObject(object) {
+                    ManagedCertificate.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.ManagedCertificate)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.ManagedCertificate();
                         if (object.lastRenewalTime != null) {
                             if (typeof object.lastRenewalTime !== "object")
                                 throw TypeError(".google.appengine.v1.ManagedCertificate.lastRenewalTime: object expected");
-                            message.lastRenewalTime = $root.google.protobuf.Timestamp.fromObject(object.lastRenewalTime);
+                            message.lastRenewalTime = $root.google.protobuf.Timestamp.fromObject(object.lastRenewalTime, long + 1);
                         }
                         switch (object.status) {
                         default:
@@ -31670,7 +32854,7 @@
                     function AuthorizedDomain(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -31745,9 +32929,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    AuthorizedDomain.decode = function decode(reader, length, error) {
+                    AuthorizedDomain.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.AuthorizedDomain();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -31763,7 +32951,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -31794,9 +32982,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    AuthorizedDomain.verify = function verify(message) {
+                    AuthorizedDomain.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -31814,9 +33006,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.AuthorizedDomain} AuthorizedDomain
                      */
-                    AuthorizedDomain.fromObject = function fromObject(object) {
+                    AuthorizedDomain.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.AuthorizedDomain)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.AuthorizedDomain();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -31902,7 +33098,7 @@
                         this.resourceRecords = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -31998,9 +33194,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DomainMapping.decode = function decode(reader, length, error) {
+                    DomainMapping.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.DomainMapping();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -32016,17 +33216,17 @@
                                     break;
                                 }
                             case 3: {
-                                    message.sslSettings = $root.google.appengine.v1.SslSettings.decode(reader, reader.uint32());
+                                    message.sslSettings = $root.google.appengine.v1.SslSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 4: {
                                     if (!(message.resourceRecords && message.resourceRecords.length))
                                         message.resourceRecords = [];
-                                    message.resourceRecords.push($root.google.appengine.v1.ResourceRecord.decode(reader, reader.uint32()));
+                                    message.resourceRecords.push($root.google.appengine.v1.ResourceRecord.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -32057,9 +33257,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    DomainMapping.verify = function verify(message) {
+                    DomainMapping.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -32067,7 +33271,7 @@
                             if (!$util.isString(message.id))
                                 return "id: string expected";
                         if (message.sslSettings != null && message.hasOwnProperty("sslSettings")) {
-                            var error = $root.google.appengine.v1.SslSettings.verify(message.sslSettings);
+                            var error = $root.google.appengine.v1.SslSettings.verify(message.sslSettings, long + 1);
                             if (error)
                                 return "sslSettings." + error;
                         }
@@ -32075,7 +33279,7 @@
                             if (!Array.isArray(message.resourceRecords))
                                 return "resourceRecords: array expected";
                             for (var i = 0; i < message.resourceRecords.length; ++i) {
-                                var error = $root.google.appengine.v1.ResourceRecord.verify(message.resourceRecords[i]);
+                                var error = $root.google.appengine.v1.ResourceRecord.verify(message.resourceRecords[i], long + 1);
                                 if (error)
                                     return "resourceRecords." + error;
                             }
@@ -32091,9 +33295,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.DomainMapping} DomainMapping
                      */
-                    DomainMapping.fromObject = function fromObject(object) {
+                    DomainMapping.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.DomainMapping)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.DomainMapping();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -32102,7 +33310,7 @@
                         if (object.sslSettings != null) {
                             if (typeof object.sslSettings !== "object")
                                 throw TypeError(".google.appengine.v1.DomainMapping.sslSettings: object expected");
-                            message.sslSettings = $root.google.appengine.v1.SslSettings.fromObject(object.sslSettings);
+                            message.sslSettings = $root.google.appengine.v1.SslSettings.fromObject(object.sslSettings, long + 1);
                         }
                         if (object.resourceRecords) {
                             if (!Array.isArray(object.resourceRecords))
@@ -32111,7 +33319,7 @@
                             for (var i = 0; i < object.resourceRecords.length; ++i) {
                                 if (typeof object.resourceRecords[i] !== "object")
                                     throw TypeError(".google.appengine.v1.DomainMapping.resourceRecords: object expected");
-                                message.resourceRecords[i] = $root.google.appengine.v1.ResourceRecord.fromObject(object.resourceRecords[i]);
+                                message.resourceRecords[i] = $root.google.appengine.v1.ResourceRecord.fromObject(object.resourceRecords[i], long + 1);
                             }
                         }
                         return message;
@@ -32202,7 +33410,7 @@
                     function SslSettings(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -32287,9 +33495,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    SslSettings.decode = function decode(reader, length, error) {
+                    SslSettings.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.SslSettings();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -32309,7 +33521,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -32340,9 +33552,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    SslSettings.verify = function verify(message) {
+                    SslSettings.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.certificateId != null && message.hasOwnProperty("certificateId"))
                             if (!$util.isString(message.certificateId))
                                 return "certificateId: string expected";
@@ -32369,9 +33585,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.SslSettings} SslSettings
                      */
-                    SslSettings.fromObject = function fromObject(object) {
+                    SslSettings.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.SslSettings)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.SslSettings();
                         if (object.certificateId != null)
                             message.certificateId = String(object.certificateId);
@@ -32494,7 +33714,7 @@
                     function ResourceRecord(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -32579,9 +33799,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ResourceRecord.decode = function decode(reader, length, error) {
+                    ResourceRecord.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.ResourceRecord();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -32601,7 +33825,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -32632,9 +33856,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ResourceRecord.verify = function verify(message) {
+                    ResourceRecord.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -32662,9 +33890,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.ResourceRecord} ResourceRecord
                      */
-                    ResourceRecord.fromObject = function fromObject(object) {
+                    ResourceRecord.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.ResourceRecord)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.ResourceRecord();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -32794,7 +34026,7 @@
                     function FirewallRule(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -32889,9 +34121,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FirewallRule.decode = function decode(reader, length, error) {
+                    FirewallRule.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.FirewallRule();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -32915,7 +34151,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -32946,9 +34182,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    FirewallRule.verify = function verify(message) {
+                    FirewallRule.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.priority != null && message.hasOwnProperty("priority"))
                             if (!$util.isInteger(message.priority))
                                 return "priority: integer expected";
@@ -32978,9 +34218,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.FirewallRule} FirewallRule
                      */
-                    FirewallRule.fromObject = function fromObject(object) {
+                    FirewallRule.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.FirewallRule)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.FirewallRule();
                         if (object.priority != null)
                             message.priority = object.priority | 0;
@@ -33122,7 +34366,7 @@
                     function Instance(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -33347,9 +34591,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Instance.decode = function decode(reader, length, error) {
+                    Instance.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.Instance();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -33385,7 +34633,7 @@
                                     break;
                                 }
                             case 8: {
-                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 9: {
@@ -33425,7 +34673,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -33456,9 +34704,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    Instance.verify = function verify(message) {
+                    Instance.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -33487,7 +34739,7 @@
                             if (!$util.isString(message.vmId))
                                 return "vmId: string expected";
                         if (message.startTime != null && message.hasOwnProperty("startTime")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                            var error = $root.google.protobuf.Timestamp.verify(message.startTime, long + 1);
                             if (error)
                                 return "startTime." + error;
                         }
@@ -33538,9 +34790,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.Instance} Instance
                      */
-                    Instance.fromObject = function fromObject(object) {
+                    Instance.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.Instance)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.Instance();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -33577,7 +34833,7 @@
                         if (object.startTime != null) {
                             if (typeof object.startTime !== "object")
                                 throw TypeError(".google.appengine.v1.Instance.startTime: object expected");
-                            message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                            message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime, long + 1);
                         }
                         if (object.requests != null)
                             message.requests = object.requests | 0;
@@ -33774,7 +35030,7 @@
                         function Liveness(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -33829,9 +35085,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Liveness.decode = function decode(reader, length, error) {
+                        Liveness.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.Instance.Liveness();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -33839,7 +35099,7 @@
                                     break;
                                 switch (tag >>> 3) {
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -33870,9 +35130,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        Liveness.verify = function verify(message) {
+                        Liveness.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             return null;
                         };
     
@@ -33884,9 +35148,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.appengine.v1.Instance.Liveness} Liveness
                          */
-                        Liveness.fromObject = function fromObject(object) {
+                        Liveness.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.appengine.v1.Instance.Liveness)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             return new $root.google.appengine.v1.Instance.Liveness();
                         };
     
@@ -33982,7 +35250,7 @@
                         this.labels = {};
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -34088,9 +35356,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Service.decode = function decode(reader, length, error) {
+                    Service.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.Service(), key, value;
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -34106,7 +35378,7 @@
                                     break;
                                 }
                             case 3: {
-                                    message.split = $root.google.appengine.v1.TrafficSplit.decode(reader, reader.uint32());
+                                    message.split = $root.google.appengine.v1.TrafficSplit.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 4: {
@@ -34125,19 +35397,21 @@
                                             value = reader.string();
                                             break;
                                         default:
-                                            reader.skipType(tag2 & 7);
+                                            reader.skipType(tag2 & 7, long);
                                             break;
                                         }
                                     }
+                                    if (key === "__proto__")
+                                        $util.makeProp(message.labels, key);
                                     message.labels[key] = value;
                                     break;
                                 }
                             case 6: {
-                                    message.networkSettings = $root.google.appengine.v1.NetworkSettings.decode(reader, reader.uint32());
+                                    message.networkSettings = $root.google.appengine.v1.NetworkSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -34168,9 +35442,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    Service.verify = function verify(message) {
+                    Service.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -34178,7 +35456,7 @@
                             if (!$util.isString(message.id))
                                 return "id: string expected";
                         if (message.split != null && message.hasOwnProperty("split")) {
-                            var error = $root.google.appengine.v1.TrafficSplit.verify(message.split);
+                            var error = $root.google.appengine.v1.TrafficSplit.verify(message.split, long + 1);
                             if (error)
                                 return "split." + error;
                         }
@@ -34191,7 +35469,7 @@
                                     return "labels: string{k:string} expected";
                         }
                         if (message.networkSettings != null && message.hasOwnProperty("networkSettings")) {
-                            var error = $root.google.appengine.v1.NetworkSettings.verify(message.networkSettings);
+                            var error = $root.google.appengine.v1.NetworkSettings.verify(message.networkSettings, long + 1);
                             if (error)
                                 return "networkSettings." + error;
                         }
@@ -34206,9 +35484,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.Service} Service
                      */
-                    Service.fromObject = function fromObject(object) {
+                    Service.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.Service)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.Service();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -34217,19 +35499,22 @@
                         if (object.split != null) {
                             if (typeof object.split !== "object")
                                 throw TypeError(".google.appengine.v1.Service.split: object expected");
-                            message.split = $root.google.appengine.v1.TrafficSplit.fromObject(object.split);
+                            message.split = $root.google.appengine.v1.TrafficSplit.fromObject(object.split, long + 1);
                         }
                         if (object.labels) {
                             if (typeof object.labels !== "object")
                                 throw TypeError(".google.appengine.v1.Service.labels: object expected");
                             message.labels = {};
-                            for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                            for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i) {
+                                if (keys[i] === "__proto__")
+                                    $util.makeProp(message.labels, keys[i]);
                                 message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
                         }
                         if (object.networkSettings != null) {
                             if (typeof object.networkSettings !== "object")
                                 throw TypeError(".google.appengine.v1.Service.networkSettings: object expected");
-                            message.networkSettings = $root.google.appengine.v1.NetworkSettings.fromObject(object.networkSettings);
+                            message.networkSettings = $root.google.appengine.v1.NetworkSettings.fromObject(object.networkSettings, long + 1);
                         }
                         return message;
                     };
@@ -34264,8 +35549,11 @@
                         var keys2;
                         if (message.labels && (keys2 = Object.keys(message.labels)).length) {
                             object.labels = {};
-                            for (var j = 0; j < keys2.length; ++j)
+                            for (var j = 0; j < keys2.length; ++j) {
+                                if (keys2[j] === "__proto__")
+                                    $util.makeProp(object.labels, keys2[j]);
                                 object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
                         }
                         if (message.networkSettings != null && message.hasOwnProperty("networkSettings"))
                             object.networkSettings = $root.google.appengine.v1.NetworkSettings.toObject(message.networkSettings, options);
@@ -34323,7 +35611,7 @@
                         this.allocations = {};
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -34399,9 +35687,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    TrafficSplit.decode = function decode(reader, length, error) {
+                    TrafficSplit.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.TrafficSplit(), key, value;
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -34428,15 +35720,17 @@
                                             value = reader.double();
                                             break;
                                         default:
-                                            reader.skipType(tag2 & 7);
+                                            reader.skipType(tag2 & 7, long);
                                             break;
                                         }
                                     }
+                                    if (key === "__proto__")
+                                        $util.makeProp(message.allocations, key);
                                     message.allocations[key] = value;
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -34467,9 +35761,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    TrafficSplit.verify = function verify(message) {
+                    TrafficSplit.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.shardBy != null && message.hasOwnProperty("shardBy"))
                             switch (message.shardBy) {
                             default:
@@ -34499,9 +35797,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.TrafficSplit} TrafficSplit
                      */
-                    TrafficSplit.fromObject = function fromObject(object) {
+                    TrafficSplit.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.TrafficSplit)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.TrafficSplit();
                         switch (object.shardBy) {
                         default:
@@ -34531,8 +35833,11 @@
                             if (typeof object.allocations !== "object")
                                 throw TypeError(".google.appengine.v1.TrafficSplit.allocations: object expected");
                             message.allocations = {};
-                            for (var keys = Object.keys(object.allocations), i = 0; i < keys.length; ++i)
+                            for (var keys = Object.keys(object.allocations), i = 0; i < keys.length; ++i) {
+                                if (keys[i] === "__proto__")
+                                    $util.makeProp(message.allocations, keys[i]);
                                 message.allocations[keys[i]] = Number(object.allocations[keys[i]]);
+                            }
                         }
                         return message;
                     };
@@ -34559,8 +35864,11 @@
                         var keys2;
                         if (message.allocations && (keys2 = Object.keys(message.allocations)).length) {
                             object.allocations = {};
-                            for (var j = 0; j < keys2.length; ++j)
+                            for (var j = 0; j < keys2.length; ++j) {
+                                if (keys2[j] === "__proto__")
+                                    $util.makeProp(object.allocations, keys2[j]);
                                 object.allocations[keys2[j]] = options.json && !isFinite(message.allocations[keys2[j]]) ? String(message.allocations[keys2[j]]) : message.allocations[keys2[j]];
+                            }
                         }
                         return object;
                     };
@@ -34632,7 +35940,7 @@
                     function NetworkSettings(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -34697,9 +36005,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NetworkSettings.decode = function decode(reader, length, error) {
+                    NetworkSettings.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.NetworkSettings();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -34711,7 +36023,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -34742,9 +36054,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    NetworkSettings.verify = function verify(message) {
+                    NetworkSettings.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.ingressTrafficAllowed != null && message.hasOwnProperty("ingressTrafficAllowed"))
                             switch (message.ingressTrafficAllowed) {
                             default:
@@ -34766,9 +36082,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.NetworkSettings} NetworkSettings
                      */
-                    NetworkSettings.fromObject = function fromObject(object) {
+                    NetworkSettings.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.NetworkSettings)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.NetworkSettings();
                         switch (object.ingressTrafficAllowed) {
                         default:
@@ -34931,7 +36251,7 @@
                         this.buildEnvVariables = {};
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -35411,9 +36731,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Version.decode = function decode(reader, length, error) {
+                    Version.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.Version(), key, value;
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -35429,15 +36753,15 @@
                                     break;
                                 }
                             case 3: {
-                                    message.automaticScaling = $root.google.appengine.v1.AutomaticScaling.decode(reader, reader.uint32());
+                                    message.automaticScaling = $root.google.appengine.v1.AutomaticScaling.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 4: {
-                                    message.basicScaling = $root.google.appengine.v1.BasicScaling.decode(reader, reader.uint32());
+                                    message.basicScaling = $root.google.appengine.v1.BasicScaling.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 5: {
-                                    message.manualScaling = $root.google.appengine.v1.ManualScaling.decode(reader, reader.uint32());
+                                    message.manualScaling = $root.google.appengine.v1.ManualScaling.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 6: {
@@ -35456,7 +36780,7 @@
                                     break;
                                 }
                             case 8: {
-                                    message.network = $root.google.appengine.v1.Network.decode(reader, reader.uint32());
+                                    message.network = $root.google.appengine.v1.Network.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 118: {
@@ -35466,7 +36790,7 @@
                                     break;
                                 }
                             case 9: {
-                                    message.resources = $root.google.appengine.v1.Resources.decode(reader, reader.uint32());
+                                    message.resources = $root.google.appengine.v1.Resources.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 10: {
@@ -35505,10 +36829,12 @@
                                             value = reader.string();
                                             break;
                                         default:
-                                            reader.skipType(tag2 & 7);
+                                            reader.skipType(tag2 & 7, long);
                                             break;
                                         }
                                     }
+                                    if (key === "__proto__")
+                                        $util.makeProp(message.betaSettings, key);
                                     message.betaSettings[key] = value;
                                     break;
                                 }
@@ -35525,7 +36851,7 @@
                                     break;
                                 }
                             case 17: {
-                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 18: {
@@ -35547,23 +36873,23 @@
                             case 100: {
                                     if (!(message.handlers && message.handlers.length))
                                         message.handlers = [];
-                                    message.handlers.push($root.google.appengine.v1.UrlMap.decode(reader, reader.uint32()));
+                                    message.handlers.push($root.google.appengine.v1.UrlMap.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 101: {
                                     if (!(message.errorHandlers && message.errorHandlers.length))
                                         message.errorHandlers = [];
-                                    message.errorHandlers.push($root.google.appengine.v1.ErrorHandler.decode(reader, reader.uint32()));
+                                    message.errorHandlers.push($root.google.appengine.v1.ErrorHandler.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 102: {
                                     if (!(message.libraries && message.libraries.length))
                                         message.libraries = [];
-                                    message.libraries.push($root.google.appengine.v1.Library.decode(reader, reader.uint32()));
+                                    message.libraries.push($root.google.appengine.v1.Library.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 103: {
-                                    message.apiConfig = $root.google.appengine.v1.ApiConfigHandler.decode(reader, reader.uint32());
+                                    message.apiConfig = $root.google.appengine.v1.ApiConfigHandler.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 104: {
@@ -35582,10 +36908,12 @@
                                             value = reader.string();
                                             break;
                                         default:
-                                            reader.skipType(tag2 & 7);
+                                            reader.skipType(tag2 & 7, long);
                                             break;
                                         }
                                     }
+                                    if (key === "__proto__")
+                                        $util.makeProp(message.envVariables, key);
                                     message.envVariables[key] = value;
                                     break;
                                 }
@@ -35605,27 +36933,29 @@
                                             value = reader.string();
                                             break;
                                         default:
-                                            reader.skipType(tag2 & 7);
+                                            reader.skipType(tag2 & 7, long);
                                             break;
                                         }
                                     }
+                                    if (key === "__proto__")
+                                        $util.makeProp(message.buildEnvVariables, key);
                                     message.buildEnvVariables[key] = value;
                                     break;
                                 }
                             case 105: {
-                                    message.defaultExpiration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.defaultExpiration = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 106: {
-                                    message.healthCheck = $root.google.appengine.v1.HealthCheck.decode(reader, reader.uint32());
+                                    message.healthCheck = $root.google.appengine.v1.HealthCheck.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 112: {
-                                    message.readinessCheck = $root.google.appengine.v1.ReadinessCheck.decode(reader, reader.uint32());
+                                    message.readinessCheck = $root.google.appengine.v1.ReadinessCheck.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 113: {
-                                    message.livenessCheck = $root.google.appengine.v1.LivenessCheck.decode(reader, reader.uint32());
+                                    message.livenessCheck = $root.google.appengine.v1.LivenessCheck.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 107: {
@@ -35633,7 +36963,7 @@
                                     break;
                                 }
                             case 108: {
-                                    message.deployment = $root.google.appengine.v1.Deployment.decode(reader, reader.uint32());
+                                    message.deployment = $root.google.appengine.v1.Deployment.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 109: {
@@ -35641,19 +36971,19 @@
                                     break;
                                 }
                             case 110: {
-                                    message.endpointsApiService = $root.google.appengine.v1.EndpointsApiService.decode(reader, reader.uint32());
+                                    message.endpointsApiService = $root.google.appengine.v1.EndpointsApiService.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 122: {
-                                    message.entrypoint = $root.google.appengine.v1.Entrypoint.decode(reader, reader.uint32());
+                                    message.entrypoint = $root.google.appengine.v1.Entrypoint.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 121: {
-                                    message.vpcAccessConnector = $root.google.appengine.v1.VpcAccessConnector.decode(reader, reader.uint32());
+                                    message.vpcAccessConnector = $root.google.appengine.v1.VpcAccessConnector.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -35684,9 +37014,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    Version.verify = function verify(message) {
+                    Version.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         var properties = {};
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
@@ -35697,7 +37031,7 @@
                         if (message.automaticScaling != null && message.hasOwnProperty("automaticScaling")) {
                             properties.scaling = 1;
                             {
-                                var error = $root.google.appengine.v1.AutomaticScaling.verify(message.automaticScaling);
+                                var error = $root.google.appengine.v1.AutomaticScaling.verify(message.automaticScaling, long + 1);
                                 if (error)
                                     return "automaticScaling." + error;
                             }
@@ -35707,7 +37041,7 @@
                                 return "scaling: multiple values";
                             properties.scaling = 1;
                             {
-                                var error = $root.google.appengine.v1.BasicScaling.verify(message.basicScaling);
+                                var error = $root.google.appengine.v1.BasicScaling.verify(message.basicScaling, long + 1);
                                 if (error)
                                     return "basicScaling." + error;
                             }
@@ -35717,7 +37051,7 @@
                                 return "scaling: multiple values";
                             properties.scaling = 1;
                             {
-                                var error = $root.google.appengine.v1.ManualScaling.verify(message.manualScaling);
+                                var error = $root.google.appengine.v1.ManualScaling.verify(message.manualScaling, long + 1);
                                 if (error)
                                     return "manualScaling." + error;
                             }
@@ -35745,7 +37079,7 @@
                             if (!$util.isString(message.instanceClass))
                                 return "instanceClass: string expected";
                         if (message.network != null && message.hasOwnProperty("network")) {
-                            var error = $root.google.appengine.v1.Network.verify(message.network);
+                            var error = $root.google.appengine.v1.Network.verify(message.network, long + 1);
                             if (error)
                                 return "network." + error;
                         }
@@ -35757,7 +37091,7 @@
                                     return "zones: string[] expected";
                         }
                         if (message.resources != null && message.hasOwnProperty("resources")) {
-                            var error = $root.google.appengine.v1.Resources.verify(message.resources);
+                            var error = $root.google.appengine.v1.Resources.verify(message.resources, long + 1);
                             if (error)
                                 return "resources." + error;
                         }
@@ -35800,7 +37134,7 @@
                             if (!$util.isString(message.createdBy))
                                 return "createdBy: string expected";
                         if (message.createTime != null && message.hasOwnProperty("createTime")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                            var error = $root.google.protobuf.Timestamp.verify(message.createTime, long + 1);
                             if (error)
                                 return "createTime." + error;
                         }
@@ -35820,7 +37154,7 @@
                             if (!Array.isArray(message.handlers))
                                 return "handlers: array expected";
                             for (var i = 0; i < message.handlers.length; ++i) {
-                                var error = $root.google.appengine.v1.UrlMap.verify(message.handlers[i]);
+                                var error = $root.google.appengine.v1.UrlMap.verify(message.handlers[i], long + 1);
                                 if (error)
                                     return "handlers." + error;
                             }
@@ -35829,7 +37163,7 @@
                             if (!Array.isArray(message.errorHandlers))
                                 return "errorHandlers: array expected";
                             for (var i = 0; i < message.errorHandlers.length; ++i) {
-                                var error = $root.google.appengine.v1.ErrorHandler.verify(message.errorHandlers[i]);
+                                var error = $root.google.appengine.v1.ErrorHandler.verify(message.errorHandlers[i], long + 1);
                                 if (error)
                                     return "errorHandlers." + error;
                             }
@@ -35838,13 +37172,13 @@
                             if (!Array.isArray(message.libraries))
                                 return "libraries: array expected";
                             for (var i = 0; i < message.libraries.length; ++i) {
-                                var error = $root.google.appengine.v1.Library.verify(message.libraries[i]);
+                                var error = $root.google.appengine.v1.Library.verify(message.libraries[i], long + 1);
                                 if (error)
                                     return "libraries." + error;
                             }
                         }
                         if (message.apiConfig != null && message.hasOwnProperty("apiConfig")) {
-                            var error = $root.google.appengine.v1.ApiConfigHandler.verify(message.apiConfig);
+                            var error = $root.google.appengine.v1.ApiConfigHandler.verify(message.apiConfig, long + 1);
                             if (error)
                                 return "apiConfig." + error;
                         }
@@ -35865,22 +37199,22 @@
                                     return "buildEnvVariables: string{k:string} expected";
                         }
                         if (message.defaultExpiration != null && message.hasOwnProperty("defaultExpiration")) {
-                            var error = $root.google.protobuf.Duration.verify(message.defaultExpiration);
+                            var error = $root.google.protobuf.Duration.verify(message.defaultExpiration, long + 1);
                             if (error)
                                 return "defaultExpiration." + error;
                         }
                         if (message.healthCheck != null && message.hasOwnProperty("healthCheck")) {
-                            var error = $root.google.appengine.v1.HealthCheck.verify(message.healthCheck);
+                            var error = $root.google.appengine.v1.HealthCheck.verify(message.healthCheck, long + 1);
                             if (error)
                                 return "healthCheck." + error;
                         }
                         if (message.readinessCheck != null && message.hasOwnProperty("readinessCheck")) {
-                            var error = $root.google.appengine.v1.ReadinessCheck.verify(message.readinessCheck);
+                            var error = $root.google.appengine.v1.ReadinessCheck.verify(message.readinessCheck, long + 1);
                             if (error)
                                 return "readinessCheck." + error;
                         }
                         if (message.livenessCheck != null && message.hasOwnProperty("livenessCheck")) {
-                            var error = $root.google.appengine.v1.LivenessCheck.verify(message.livenessCheck);
+                            var error = $root.google.appengine.v1.LivenessCheck.verify(message.livenessCheck, long + 1);
                             if (error)
                                 return "livenessCheck." + error;
                         }
@@ -35888,7 +37222,7 @@
                             if (!$util.isString(message.nobuildFilesRegex))
                                 return "nobuildFilesRegex: string expected";
                         if (message.deployment != null && message.hasOwnProperty("deployment")) {
-                            var error = $root.google.appengine.v1.Deployment.verify(message.deployment);
+                            var error = $root.google.appengine.v1.Deployment.verify(message.deployment, long + 1);
                             if (error)
                                 return "deployment." + error;
                         }
@@ -35896,17 +37230,17 @@
                             if (!$util.isString(message.versionUrl))
                                 return "versionUrl: string expected";
                         if (message.endpointsApiService != null && message.hasOwnProperty("endpointsApiService")) {
-                            var error = $root.google.appengine.v1.EndpointsApiService.verify(message.endpointsApiService);
+                            var error = $root.google.appengine.v1.EndpointsApiService.verify(message.endpointsApiService, long + 1);
                             if (error)
                                 return "endpointsApiService." + error;
                         }
                         if (message.entrypoint != null && message.hasOwnProperty("entrypoint")) {
-                            var error = $root.google.appengine.v1.Entrypoint.verify(message.entrypoint);
+                            var error = $root.google.appengine.v1.Entrypoint.verify(message.entrypoint, long + 1);
                             if (error)
                                 return "entrypoint." + error;
                         }
                         if (message.vpcAccessConnector != null && message.hasOwnProperty("vpcAccessConnector")) {
-                            var error = $root.google.appengine.v1.VpcAccessConnector.verify(message.vpcAccessConnector);
+                            var error = $root.google.appengine.v1.VpcAccessConnector.verify(message.vpcAccessConnector, long + 1);
                             if (error)
                                 return "vpcAccessConnector." + error;
                         }
@@ -35921,9 +37255,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.Version} Version
                      */
-                    Version.fromObject = function fromObject(object) {
+                    Version.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.Version)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.Version();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -35932,17 +37270,17 @@
                         if (object.automaticScaling != null) {
                             if (typeof object.automaticScaling !== "object")
                                 throw TypeError(".google.appengine.v1.Version.automaticScaling: object expected");
-                            message.automaticScaling = $root.google.appengine.v1.AutomaticScaling.fromObject(object.automaticScaling);
+                            message.automaticScaling = $root.google.appengine.v1.AutomaticScaling.fromObject(object.automaticScaling, long + 1);
                         }
                         if (object.basicScaling != null) {
                             if (typeof object.basicScaling !== "object")
                                 throw TypeError(".google.appengine.v1.Version.basicScaling: object expected");
-                            message.basicScaling = $root.google.appengine.v1.BasicScaling.fromObject(object.basicScaling);
+                            message.basicScaling = $root.google.appengine.v1.BasicScaling.fromObject(object.basicScaling, long + 1);
                         }
                         if (object.manualScaling != null) {
                             if (typeof object.manualScaling !== "object")
                                 throw TypeError(".google.appengine.v1.Version.manualScaling: object expected");
-                            message.manualScaling = $root.google.appengine.v1.ManualScaling.fromObject(object.manualScaling);
+                            message.manualScaling = $root.google.appengine.v1.ManualScaling.fromObject(object.manualScaling, long + 1);
                         }
                         if (object.inboundServices) {
                             if (!Array.isArray(object.inboundServices))
@@ -35998,7 +37336,7 @@
                         if (object.network != null) {
                             if (typeof object.network !== "object")
                                 throw TypeError(".google.appengine.v1.Version.network: object expected");
-                            message.network = $root.google.appengine.v1.Network.fromObject(object.network);
+                            message.network = $root.google.appengine.v1.Network.fromObject(object.network, long + 1);
                         }
                         if (object.zones) {
                             if (!Array.isArray(object.zones))
@@ -36010,7 +37348,7 @@
                         if (object.resources != null) {
                             if (typeof object.resources !== "object")
                                 throw TypeError(".google.appengine.v1.Version.resources: object expected");
-                            message.resources = $root.google.appengine.v1.Resources.fromObject(object.resources);
+                            message.resources = $root.google.appengine.v1.Resources.fromObject(object.resources, long + 1);
                         }
                         if (object.runtime != null)
                             message.runtime = String(object.runtime);
@@ -36026,8 +37364,11 @@
                             if (typeof object.betaSettings !== "object")
                                 throw TypeError(".google.appengine.v1.Version.betaSettings: object expected");
                             message.betaSettings = {};
-                            for (var keys = Object.keys(object.betaSettings), i = 0; i < keys.length; ++i)
+                            for (var keys = Object.keys(object.betaSettings), i = 0; i < keys.length; ++i) {
+                                if (keys[i] === "__proto__")
+                                    $util.makeProp(message.betaSettings, keys[i]);
                                 message.betaSettings[keys[i]] = String(object.betaSettings[keys[i]]);
+                            }
                         }
                         if (object.env != null)
                             message.env = String(object.env);
@@ -36056,7 +37397,7 @@
                         if (object.createTime != null) {
                             if (typeof object.createTime !== "object")
                                 throw TypeError(".google.appengine.v1.Version.createTime: object expected");
-                            message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime, long + 1);
                         }
                         if (object.diskUsageBytes != null)
                             if ($util.Long)
@@ -36080,7 +37421,7 @@
                             for (var i = 0; i < object.handlers.length; ++i) {
                                 if (typeof object.handlers[i] !== "object")
                                     throw TypeError(".google.appengine.v1.Version.handlers: object expected");
-                                message.handlers[i] = $root.google.appengine.v1.UrlMap.fromObject(object.handlers[i]);
+                                message.handlers[i] = $root.google.appengine.v1.UrlMap.fromObject(object.handlers[i], long + 1);
                             }
                         }
                         if (object.errorHandlers) {
@@ -36090,7 +37431,7 @@
                             for (var i = 0; i < object.errorHandlers.length; ++i) {
                                 if (typeof object.errorHandlers[i] !== "object")
                                     throw TypeError(".google.appengine.v1.Version.errorHandlers: object expected");
-                                message.errorHandlers[i] = $root.google.appengine.v1.ErrorHandler.fromObject(object.errorHandlers[i]);
+                                message.errorHandlers[i] = $root.google.appengine.v1.ErrorHandler.fromObject(object.errorHandlers[i], long + 1);
                             }
                         }
                         if (object.libraries) {
@@ -36100,71 +37441,77 @@
                             for (var i = 0; i < object.libraries.length; ++i) {
                                 if (typeof object.libraries[i] !== "object")
                                     throw TypeError(".google.appengine.v1.Version.libraries: object expected");
-                                message.libraries[i] = $root.google.appengine.v1.Library.fromObject(object.libraries[i]);
+                                message.libraries[i] = $root.google.appengine.v1.Library.fromObject(object.libraries[i], long + 1);
                             }
                         }
                         if (object.apiConfig != null) {
                             if (typeof object.apiConfig !== "object")
                                 throw TypeError(".google.appengine.v1.Version.apiConfig: object expected");
-                            message.apiConfig = $root.google.appengine.v1.ApiConfigHandler.fromObject(object.apiConfig);
+                            message.apiConfig = $root.google.appengine.v1.ApiConfigHandler.fromObject(object.apiConfig, long + 1);
                         }
                         if (object.envVariables) {
                             if (typeof object.envVariables !== "object")
                                 throw TypeError(".google.appengine.v1.Version.envVariables: object expected");
                             message.envVariables = {};
-                            for (var keys = Object.keys(object.envVariables), i = 0; i < keys.length; ++i)
+                            for (var keys = Object.keys(object.envVariables), i = 0; i < keys.length; ++i) {
+                                if (keys[i] === "__proto__")
+                                    $util.makeProp(message.envVariables, keys[i]);
                                 message.envVariables[keys[i]] = String(object.envVariables[keys[i]]);
+                            }
                         }
                         if (object.buildEnvVariables) {
                             if (typeof object.buildEnvVariables !== "object")
                                 throw TypeError(".google.appengine.v1.Version.buildEnvVariables: object expected");
                             message.buildEnvVariables = {};
-                            for (var keys = Object.keys(object.buildEnvVariables), i = 0; i < keys.length; ++i)
+                            for (var keys = Object.keys(object.buildEnvVariables), i = 0; i < keys.length; ++i) {
+                                if (keys[i] === "__proto__")
+                                    $util.makeProp(message.buildEnvVariables, keys[i]);
                                 message.buildEnvVariables[keys[i]] = String(object.buildEnvVariables[keys[i]]);
+                            }
                         }
                         if (object.defaultExpiration != null) {
                             if (typeof object.defaultExpiration !== "object")
                                 throw TypeError(".google.appengine.v1.Version.defaultExpiration: object expected");
-                            message.defaultExpiration = $root.google.protobuf.Duration.fromObject(object.defaultExpiration);
+                            message.defaultExpiration = $root.google.protobuf.Duration.fromObject(object.defaultExpiration, long + 1);
                         }
                         if (object.healthCheck != null) {
                             if (typeof object.healthCheck !== "object")
                                 throw TypeError(".google.appengine.v1.Version.healthCheck: object expected");
-                            message.healthCheck = $root.google.appengine.v1.HealthCheck.fromObject(object.healthCheck);
+                            message.healthCheck = $root.google.appengine.v1.HealthCheck.fromObject(object.healthCheck, long + 1);
                         }
                         if (object.readinessCheck != null) {
                             if (typeof object.readinessCheck !== "object")
                                 throw TypeError(".google.appengine.v1.Version.readinessCheck: object expected");
-                            message.readinessCheck = $root.google.appengine.v1.ReadinessCheck.fromObject(object.readinessCheck);
+                            message.readinessCheck = $root.google.appengine.v1.ReadinessCheck.fromObject(object.readinessCheck, long + 1);
                         }
                         if (object.livenessCheck != null) {
                             if (typeof object.livenessCheck !== "object")
                                 throw TypeError(".google.appengine.v1.Version.livenessCheck: object expected");
-                            message.livenessCheck = $root.google.appengine.v1.LivenessCheck.fromObject(object.livenessCheck);
+                            message.livenessCheck = $root.google.appengine.v1.LivenessCheck.fromObject(object.livenessCheck, long + 1);
                         }
                         if (object.nobuildFilesRegex != null)
                             message.nobuildFilesRegex = String(object.nobuildFilesRegex);
                         if (object.deployment != null) {
                             if (typeof object.deployment !== "object")
                                 throw TypeError(".google.appengine.v1.Version.deployment: object expected");
-                            message.deployment = $root.google.appengine.v1.Deployment.fromObject(object.deployment);
+                            message.deployment = $root.google.appengine.v1.Deployment.fromObject(object.deployment, long + 1);
                         }
                         if (object.versionUrl != null)
                             message.versionUrl = String(object.versionUrl);
                         if (object.endpointsApiService != null) {
                             if (typeof object.endpointsApiService !== "object")
                                 throw TypeError(".google.appengine.v1.Version.endpointsApiService: object expected");
-                            message.endpointsApiService = $root.google.appengine.v1.EndpointsApiService.fromObject(object.endpointsApiService);
+                            message.endpointsApiService = $root.google.appengine.v1.EndpointsApiService.fromObject(object.endpointsApiService, long + 1);
                         }
                         if (object.entrypoint != null) {
                             if (typeof object.entrypoint !== "object")
                                 throw TypeError(".google.appengine.v1.Version.entrypoint: object expected");
-                            message.entrypoint = $root.google.appengine.v1.Entrypoint.fromObject(object.entrypoint);
+                            message.entrypoint = $root.google.appengine.v1.Entrypoint.fromObject(object.entrypoint, long + 1);
                         }
                         if (object.vpcAccessConnector != null) {
                             if (typeof object.vpcAccessConnector !== "object")
                                 throw TypeError(".google.appengine.v1.Version.vpcAccessConnector: object expected");
-                            message.vpcAccessConnector = $root.google.appengine.v1.VpcAccessConnector.fromObject(object.vpcAccessConnector);
+                            message.vpcAccessConnector = $root.google.appengine.v1.VpcAccessConnector.fromObject(object.vpcAccessConnector, long + 1);
                         }
                         return message;
                     };
@@ -36268,8 +37615,11 @@
                         var keys2;
                         if (message.betaSettings && (keys2 = Object.keys(message.betaSettings)).length) {
                             object.betaSettings = {};
-                            for (var j = 0; j < keys2.length; ++j)
+                            for (var j = 0; j < keys2.length; ++j) {
+                                if (keys2[j] === "__proto__")
+                                    $util.makeProp(object.betaSettings, keys2[j]);
                                 object.betaSettings[keys2[j]] = message.betaSettings[keys2[j]];
+                            }
                         }
                         if (message.env != null && message.hasOwnProperty("env"))
                             object.env = message.env;
@@ -36307,8 +37657,11 @@
                             object.apiConfig = $root.google.appengine.v1.ApiConfigHandler.toObject(message.apiConfig, options);
                         if (message.envVariables && (keys2 = Object.keys(message.envVariables)).length) {
                             object.envVariables = {};
-                            for (var j = 0; j < keys2.length; ++j)
+                            for (var j = 0; j < keys2.length; ++j) {
+                                if (keys2[j] === "__proto__")
+                                    $util.makeProp(object.envVariables, keys2[j]);
                                 object.envVariables[keys2[j]] = message.envVariables[keys2[j]];
+                            }
                         }
                         if (message.defaultExpiration != null && message.hasOwnProperty("defaultExpiration"))
                             object.defaultExpiration = $root.google.protobuf.Duration.toObject(message.defaultExpiration, options);
@@ -36339,8 +37692,11 @@
                             object.entrypoint = $root.google.appengine.v1.Entrypoint.toObject(message.entrypoint, options);
                         if (message.buildEnvVariables && (keys2 = Object.keys(message.buildEnvVariables)).length) {
                             object.buildEnvVariables = {};
-                            for (var j = 0; j < keys2.length; ++j)
+                            for (var j = 0; j < keys2.length; ++j) {
+                                if (keys2[j] === "__proto__")
+                                    $util.makeProp(object.buildEnvVariables, keys2[j]);
                                 object.buildEnvVariables[keys2[j]] = message.buildEnvVariables[keys2[j]];
+                            }
                         }
                         if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                             object.serviceAccount = message.serviceAccount;
@@ -36401,7 +37757,7 @@
                     function EndpointsApiService(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -36496,9 +37852,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EndpointsApiService.decode = function decode(reader, length, error) {
+                    EndpointsApiService.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.EndpointsApiService();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -36522,7 +37882,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -36553,9 +37913,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    EndpointsApiService.verify = function verify(message) {
+                    EndpointsApiService.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -36585,9 +37949,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.EndpointsApiService} EndpointsApiService
                      */
-                    EndpointsApiService.fromObject = function fromObject(object) {
+                    EndpointsApiService.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.EndpointsApiService)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.EndpointsApiService();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -36725,7 +38093,7 @@
                     function AutomaticScaling(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -36910,9 +38278,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    AutomaticScaling.decode = function decode(reader, length, error) {
+                    AutomaticScaling.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.AutomaticScaling();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -36920,11 +38292,11 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.coolDownPeriod = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.coolDownPeriod = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 2: {
-                                    message.cpuUtilization = $root.google.appengine.v1.CpuUtilization.decode(reader, reader.uint32());
+                                    message.cpuUtilization = $root.google.appengine.v1.CpuUtilization.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 3: {
@@ -36940,7 +38312,7 @@
                                     break;
                                 }
                             case 6: {
-                                    message.maxPendingLatency = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.maxPendingLatency = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 7: {
@@ -36952,27 +38324,27 @@
                                     break;
                                 }
                             case 9: {
-                                    message.minPendingLatency = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.minPendingLatency = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 10: {
-                                    message.requestUtilization = $root.google.appengine.v1.RequestUtilization.decode(reader, reader.uint32());
+                                    message.requestUtilization = $root.google.appengine.v1.RequestUtilization.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 11: {
-                                    message.diskUtilization = $root.google.appengine.v1.DiskUtilization.decode(reader, reader.uint32());
+                                    message.diskUtilization = $root.google.appengine.v1.DiskUtilization.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 12: {
-                                    message.networkUtilization = $root.google.appengine.v1.NetworkUtilization.decode(reader, reader.uint32());
+                                    message.networkUtilization = $root.google.appengine.v1.NetworkUtilization.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 20: {
-                                    message.standardSchedulerSettings = $root.google.appengine.v1.StandardSchedulerSettings.decode(reader, reader.uint32());
+                                    message.standardSchedulerSettings = $root.google.appengine.v1.StandardSchedulerSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -37003,16 +38375,20 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    AutomaticScaling.verify = function verify(message) {
+                    AutomaticScaling.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.coolDownPeriod != null && message.hasOwnProperty("coolDownPeriod")) {
-                            var error = $root.google.protobuf.Duration.verify(message.coolDownPeriod);
+                            var error = $root.google.protobuf.Duration.verify(message.coolDownPeriod, long + 1);
                             if (error)
                                 return "coolDownPeriod." + error;
                         }
                         if (message.cpuUtilization != null && message.hasOwnProperty("cpuUtilization")) {
-                            var error = $root.google.appengine.v1.CpuUtilization.verify(message.cpuUtilization);
+                            var error = $root.google.appengine.v1.CpuUtilization.verify(message.cpuUtilization, long + 1);
                             if (error)
                                 return "cpuUtilization." + error;
                         }
@@ -37026,7 +38402,7 @@
                             if (!$util.isInteger(message.maxTotalInstances))
                                 return "maxTotalInstances: integer expected";
                         if (message.maxPendingLatency != null && message.hasOwnProperty("maxPendingLatency")) {
-                            var error = $root.google.protobuf.Duration.verify(message.maxPendingLatency);
+                            var error = $root.google.protobuf.Duration.verify(message.maxPendingLatency, long + 1);
                             if (error)
                                 return "maxPendingLatency." + error;
                         }
@@ -37037,27 +38413,27 @@
                             if (!$util.isInteger(message.minTotalInstances))
                                 return "minTotalInstances: integer expected";
                         if (message.minPendingLatency != null && message.hasOwnProperty("minPendingLatency")) {
-                            var error = $root.google.protobuf.Duration.verify(message.minPendingLatency);
+                            var error = $root.google.protobuf.Duration.verify(message.minPendingLatency, long + 1);
                             if (error)
                                 return "minPendingLatency." + error;
                         }
                         if (message.requestUtilization != null && message.hasOwnProperty("requestUtilization")) {
-                            var error = $root.google.appengine.v1.RequestUtilization.verify(message.requestUtilization);
+                            var error = $root.google.appengine.v1.RequestUtilization.verify(message.requestUtilization, long + 1);
                             if (error)
                                 return "requestUtilization." + error;
                         }
                         if (message.diskUtilization != null && message.hasOwnProperty("diskUtilization")) {
-                            var error = $root.google.appengine.v1.DiskUtilization.verify(message.diskUtilization);
+                            var error = $root.google.appengine.v1.DiskUtilization.verify(message.diskUtilization, long + 1);
                             if (error)
                                 return "diskUtilization." + error;
                         }
                         if (message.networkUtilization != null && message.hasOwnProperty("networkUtilization")) {
-                            var error = $root.google.appengine.v1.NetworkUtilization.verify(message.networkUtilization);
+                            var error = $root.google.appengine.v1.NetworkUtilization.verify(message.networkUtilization, long + 1);
                             if (error)
                                 return "networkUtilization." + error;
                         }
                         if (message.standardSchedulerSettings != null && message.hasOwnProperty("standardSchedulerSettings")) {
-                            var error = $root.google.appengine.v1.StandardSchedulerSettings.verify(message.standardSchedulerSettings);
+                            var error = $root.google.appengine.v1.StandardSchedulerSettings.verify(message.standardSchedulerSettings, long + 1);
                             if (error)
                                 return "standardSchedulerSettings." + error;
                         }
@@ -37072,19 +38448,23 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.AutomaticScaling} AutomaticScaling
                      */
-                    AutomaticScaling.fromObject = function fromObject(object) {
+                    AutomaticScaling.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.AutomaticScaling)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.AutomaticScaling();
                         if (object.coolDownPeriod != null) {
                             if (typeof object.coolDownPeriod !== "object")
                                 throw TypeError(".google.appengine.v1.AutomaticScaling.coolDownPeriod: object expected");
-                            message.coolDownPeriod = $root.google.protobuf.Duration.fromObject(object.coolDownPeriod);
+                            message.coolDownPeriod = $root.google.protobuf.Duration.fromObject(object.coolDownPeriod, long + 1);
                         }
                         if (object.cpuUtilization != null) {
                             if (typeof object.cpuUtilization !== "object")
                                 throw TypeError(".google.appengine.v1.AutomaticScaling.cpuUtilization: object expected");
-                            message.cpuUtilization = $root.google.appengine.v1.CpuUtilization.fromObject(object.cpuUtilization);
+                            message.cpuUtilization = $root.google.appengine.v1.CpuUtilization.fromObject(object.cpuUtilization, long + 1);
                         }
                         if (object.maxConcurrentRequests != null)
                             message.maxConcurrentRequests = object.maxConcurrentRequests | 0;
@@ -37095,7 +38475,7 @@
                         if (object.maxPendingLatency != null) {
                             if (typeof object.maxPendingLatency !== "object")
                                 throw TypeError(".google.appengine.v1.AutomaticScaling.maxPendingLatency: object expected");
-                            message.maxPendingLatency = $root.google.protobuf.Duration.fromObject(object.maxPendingLatency);
+                            message.maxPendingLatency = $root.google.protobuf.Duration.fromObject(object.maxPendingLatency, long + 1);
                         }
                         if (object.minIdleInstances != null)
                             message.minIdleInstances = object.minIdleInstances | 0;
@@ -37104,27 +38484,27 @@
                         if (object.minPendingLatency != null) {
                             if (typeof object.minPendingLatency !== "object")
                                 throw TypeError(".google.appengine.v1.AutomaticScaling.minPendingLatency: object expected");
-                            message.minPendingLatency = $root.google.protobuf.Duration.fromObject(object.minPendingLatency);
+                            message.minPendingLatency = $root.google.protobuf.Duration.fromObject(object.minPendingLatency, long + 1);
                         }
                         if (object.requestUtilization != null) {
                             if (typeof object.requestUtilization !== "object")
                                 throw TypeError(".google.appengine.v1.AutomaticScaling.requestUtilization: object expected");
-                            message.requestUtilization = $root.google.appengine.v1.RequestUtilization.fromObject(object.requestUtilization);
+                            message.requestUtilization = $root.google.appengine.v1.RequestUtilization.fromObject(object.requestUtilization, long + 1);
                         }
                         if (object.diskUtilization != null) {
                             if (typeof object.diskUtilization !== "object")
                                 throw TypeError(".google.appengine.v1.AutomaticScaling.diskUtilization: object expected");
-                            message.diskUtilization = $root.google.appengine.v1.DiskUtilization.fromObject(object.diskUtilization);
+                            message.diskUtilization = $root.google.appengine.v1.DiskUtilization.fromObject(object.diskUtilization, long + 1);
                         }
                         if (object.networkUtilization != null) {
                             if (typeof object.networkUtilization !== "object")
                                 throw TypeError(".google.appengine.v1.AutomaticScaling.networkUtilization: object expected");
-                            message.networkUtilization = $root.google.appengine.v1.NetworkUtilization.fromObject(object.networkUtilization);
+                            message.networkUtilization = $root.google.appengine.v1.NetworkUtilization.fromObject(object.networkUtilization, long + 1);
                         }
                         if (object.standardSchedulerSettings != null) {
                             if (typeof object.standardSchedulerSettings !== "object")
                                 throw TypeError(".google.appengine.v1.AutomaticScaling.standardSchedulerSettings: object expected");
-                            message.standardSchedulerSettings = $root.google.appengine.v1.StandardSchedulerSettings.fromObject(object.standardSchedulerSettings);
+                            message.standardSchedulerSettings = $root.google.appengine.v1.StandardSchedulerSettings.fromObject(object.standardSchedulerSettings, long + 1);
                         }
                         return message;
                     };
@@ -37236,7 +38616,7 @@
                     function BasicScaling(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -37311,9 +38691,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    BasicScaling.decode = function decode(reader, length, error) {
+                    BasicScaling.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.BasicScaling();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -37321,7 +38705,7 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.idleTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.idleTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 2: {
@@ -37329,7 +38713,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -37360,11 +38744,15 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    BasicScaling.verify = function verify(message) {
+                    BasicScaling.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.idleTimeout != null && message.hasOwnProperty("idleTimeout")) {
-                            var error = $root.google.protobuf.Duration.verify(message.idleTimeout);
+                            var error = $root.google.protobuf.Duration.verify(message.idleTimeout, long + 1);
                             if (error)
                                 return "idleTimeout." + error;
                         }
@@ -37382,14 +38770,18 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.BasicScaling} BasicScaling
                      */
-                    BasicScaling.fromObject = function fromObject(object) {
+                    BasicScaling.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.BasicScaling)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.BasicScaling();
                         if (object.idleTimeout != null) {
                             if (typeof object.idleTimeout !== "object")
                                 throw TypeError(".google.appengine.v1.BasicScaling.idleTimeout: object expected");
-                            message.idleTimeout = $root.google.protobuf.Duration.fromObject(object.idleTimeout);
+                            message.idleTimeout = $root.google.protobuf.Duration.fromObject(object.idleTimeout, long + 1);
                         }
                         if (object.maxInstances != null)
                             message.maxInstances = object.maxInstances | 0;
@@ -37469,7 +38861,7 @@
                     function ManualScaling(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -37534,9 +38926,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ManualScaling.decode = function decode(reader, length, error) {
+                    ManualScaling.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.ManualScaling();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -37548,7 +38944,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -37579,9 +38975,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ManualScaling.verify = function verify(message) {
+                    ManualScaling.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.instances != null && message.hasOwnProperty("instances"))
                             if (!$util.isInteger(message.instances))
                                 return "instances: integer expected";
@@ -37596,9 +38996,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.ManualScaling} ManualScaling
                      */
-                    ManualScaling.fromObject = function fromObject(object) {
+                    ManualScaling.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.ManualScaling)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.ManualScaling();
                         if (object.instances != null)
                             message.instances = object.instances | 0;
@@ -37675,7 +39079,7 @@
                     function CpuUtilization(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -37750,9 +39154,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CpuUtilization.decode = function decode(reader, length, error) {
+                    CpuUtilization.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.CpuUtilization();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -37760,7 +39168,7 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.aggregationWindowLength = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.aggregationWindowLength = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 2: {
@@ -37768,7 +39176,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -37799,11 +39207,15 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    CpuUtilization.verify = function verify(message) {
+                    CpuUtilization.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.aggregationWindowLength != null && message.hasOwnProperty("aggregationWindowLength")) {
-                            var error = $root.google.protobuf.Duration.verify(message.aggregationWindowLength);
+                            var error = $root.google.protobuf.Duration.verify(message.aggregationWindowLength, long + 1);
                             if (error)
                                 return "aggregationWindowLength." + error;
                         }
@@ -37821,14 +39233,18 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.CpuUtilization} CpuUtilization
                      */
-                    CpuUtilization.fromObject = function fromObject(object) {
+                    CpuUtilization.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.CpuUtilization)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.CpuUtilization();
                         if (object.aggregationWindowLength != null) {
                             if (typeof object.aggregationWindowLength !== "object")
                                 throw TypeError(".google.appengine.v1.CpuUtilization.aggregationWindowLength: object expected");
-                            message.aggregationWindowLength = $root.google.protobuf.Duration.fromObject(object.aggregationWindowLength);
+                            message.aggregationWindowLength = $root.google.protobuf.Duration.fromObject(object.aggregationWindowLength, long + 1);
                         }
                         if (object.targetUtilization != null)
                             message.targetUtilization = Number(object.targetUtilization);
@@ -37909,7 +39325,7 @@
                     function RequestUtilization(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -37984,9 +39400,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    RequestUtilization.decode = function decode(reader, length, error) {
+                    RequestUtilization.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.RequestUtilization();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -38002,7 +39422,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -38033,9 +39453,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    RequestUtilization.verify = function verify(message) {
+                    RequestUtilization.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.targetRequestCountPerSecond != null && message.hasOwnProperty("targetRequestCountPerSecond"))
                             if (!$util.isInteger(message.targetRequestCountPerSecond))
                                 return "targetRequestCountPerSecond: integer expected";
@@ -38053,9 +39477,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.RequestUtilization} RequestUtilization
                      */
-                    RequestUtilization.fromObject = function fromObject(object) {
+                    RequestUtilization.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.RequestUtilization)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.RequestUtilization();
                         if (object.targetRequestCountPerSecond != null)
                             message.targetRequestCountPerSecond = object.targetRequestCountPerSecond | 0;
@@ -38140,7 +39568,7 @@
                     function DiskUtilization(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -38235,9 +39663,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DiskUtilization.decode = function decode(reader, length, error) {
+                    DiskUtilization.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.DiskUtilization();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -38261,7 +39693,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -38292,9 +39724,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    DiskUtilization.verify = function verify(message) {
+                    DiskUtilization.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.targetWriteBytesPerSecond != null && message.hasOwnProperty("targetWriteBytesPerSecond"))
                             if (!$util.isInteger(message.targetWriteBytesPerSecond))
                                 return "targetWriteBytesPerSecond: integer expected";
@@ -38318,9 +39754,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.DiskUtilization} DiskUtilization
                      */
-                    DiskUtilization.fromObject = function fromObject(object) {
+                    DiskUtilization.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.DiskUtilization)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.DiskUtilization();
                         if (object.targetWriteBytesPerSecond != null)
                             message.targetWriteBytesPerSecond = object.targetWriteBytesPerSecond | 0;
@@ -38415,7 +39855,7 @@
                     function NetworkUtilization(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -38510,9 +39950,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NetworkUtilization.decode = function decode(reader, length, error) {
+                    NetworkUtilization.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.NetworkUtilization();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -38536,7 +39980,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -38567,9 +40011,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    NetworkUtilization.verify = function verify(message) {
+                    NetworkUtilization.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.targetSentBytesPerSecond != null && message.hasOwnProperty("targetSentBytesPerSecond"))
                             if (!$util.isInteger(message.targetSentBytesPerSecond))
                                 return "targetSentBytesPerSecond: integer expected";
@@ -38593,9 +40041,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.NetworkUtilization} NetworkUtilization
                      */
-                    NetworkUtilization.fromObject = function fromObject(object) {
+                    NetworkUtilization.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.NetworkUtilization)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.NetworkUtilization();
                         if (object.targetSentBytesPerSecond != null)
                             message.targetSentBytesPerSecond = object.targetSentBytesPerSecond | 0;
@@ -38690,7 +40142,7 @@
                     function StandardSchedulerSettings(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -38785,9 +40237,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    StandardSchedulerSettings.decode = function decode(reader, length, error) {
+                    StandardSchedulerSettings.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.StandardSchedulerSettings();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -38811,7 +40267,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -38842,9 +40298,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    StandardSchedulerSettings.verify = function verify(message) {
+                    StandardSchedulerSettings.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.targetCpuUtilization != null && message.hasOwnProperty("targetCpuUtilization"))
                             if (typeof message.targetCpuUtilization !== "number")
                                 return "targetCpuUtilization: number expected";
@@ -38868,9 +40328,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.StandardSchedulerSettings} StandardSchedulerSettings
                      */
-                    StandardSchedulerSettings.fromObject = function fromObject(object) {
+                    StandardSchedulerSettings.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.StandardSchedulerSettings)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.StandardSchedulerSettings();
                         if (object.targetCpuUtilization != null)
                             message.targetCpuUtilization = Number(object.targetCpuUtilization);
@@ -38967,7 +40431,7 @@
                         this.forwardedPorts = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -39073,9 +40537,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Network.decode = function decode(reader, length, error) {
+                    Network.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.Network();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -39105,7 +40573,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -39136,9 +40604,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    Network.verify = function verify(message) {
+                    Network.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.forwardedPorts != null && message.hasOwnProperty("forwardedPorts")) {
                             if (!Array.isArray(message.forwardedPorts))
                                 return "forwardedPorts: array expected";
@@ -39169,9 +40641,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.Network} Network
                      */
-                    Network.fromObject = function fromObject(object) {
+                    Network.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.Network)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.Network();
                         if (object.forwardedPorts) {
                             if (!Array.isArray(object.forwardedPorts))
@@ -39279,7 +40755,7 @@
                     function Volume(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -39364,9 +40840,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Volume.decode = function decode(reader, length, error) {
+                    Volume.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.Volume();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -39386,7 +40866,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -39417,9 +40897,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    Volume.verify = function verify(message) {
+                    Volume.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -39440,9 +40924,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.Volume} Volume
                      */
-                    Volume.fromObject = function fromObject(object) {
+                    Volume.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.Volume)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.Volume();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -39534,7 +41022,7 @@
                         this.volumes = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -39640,9 +41128,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Resources.decode = function decode(reader, length, error) {
+                    Resources.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.Resources();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -39664,7 +41156,7 @@
                             case 4: {
                                     if (!(message.volumes && message.volumes.length))
                                         message.volumes = [];
-                                    message.volumes.push($root.google.appengine.v1.Volume.decode(reader, reader.uint32()));
+                                    message.volumes.push($root.google.appengine.v1.Volume.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 5: {
@@ -39672,7 +41164,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -39703,9 +41195,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    Resources.verify = function verify(message) {
+                    Resources.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.cpu != null && message.hasOwnProperty("cpu"))
                             if (typeof message.cpu !== "number")
                                 return "cpu: number expected";
@@ -39719,7 +41215,7 @@
                             if (!Array.isArray(message.volumes))
                                 return "volumes: array expected";
                             for (var i = 0; i < message.volumes.length; ++i) {
-                                var error = $root.google.appengine.v1.Volume.verify(message.volumes[i]);
+                                var error = $root.google.appengine.v1.Volume.verify(message.volumes[i], long + 1);
                                 if (error)
                                     return "volumes." + error;
                             }
@@ -39738,9 +41234,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.Resources} Resources
                      */
-                    Resources.fromObject = function fromObject(object) {
+                    Resources.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.Resources)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.Resources();
                         if (object.cpu != null)
                             message.cpu = Number(object.cpu);
@@ -39755,7 +41255,7 @@
                             for (var i = 0; i < object.volumes.length; ++i) {
                                 if (typeof object.volumes[i] !== "object")
                                     throw TypeError(".google.appengine.v1.Resources.volumes: object expected");
-                                message.volumes[i] = $root.google.appengine.v1.Volume.fromObject(object.volumes[i]);
+                                message.volumes[i] = $root.google.appengine.v1.Volume.fromObject(object.volumes[i], long + 1);
                             }
                         }
                         if (object.kmsKeyReference != null)
@@ -39894,7 +41394,7 @@
                     function VpcAccessConnector(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -39969,9 +41469,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    VpcAccessConnector.decode = function decode(reader, length, error) {
+                    VpcAccessConnector.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.VpcAccessConnector();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -39987,7 +41491,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -40018,9 +41522,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    VpcAccessConnector.verify = function verify(message) {
+                    VpcAccessConnector.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -40044,9 +41552,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.VpcAccessConnector} VpcAccessConnector
                      */
-                    VpcAccessConnector.fromObject = function fromObject(object) {
+                    VpcAccessConnector.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.VpcAccessConnector)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.VpcAccessConnector();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -40162,7 +41674,7 @@
                     function Entrypoint(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -40241,9 +41753,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Entrypoint.decode = function decode(reader, length, error) {
+                    Entrypoint.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.Entrypoint();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -40255,7 +41771,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -40286,9 +41802,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    Entrypoint.verify = function verify(message) {
+                    Entrypoint.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         var properties = {};
                         if (message.shell != null && message.hasOwnProperty("shell")) {
                             properties.command = 1;
@@ -40306,9 +41826,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.Entrypoint} Entrypoint
                      */
-                    Entrypoint.fromObject = function fromObject(object) {
+                    Entrypoint.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.Entrypoint)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.Entrypoint();
                         if (object.shell != null)
                             message.shell = String(object.shell);
@@ -40389,7 +41913,7 @@
                         this.files = {};
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -40487,9 +42011,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Deployment.decode = function decode(reader, length, error) {
+                    Deployment.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.Deployment(), key, value;
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -40509,30 +42037,32 @@
                                             key = reader.string();
                                             break;
                                         case 2:
-                                            value = $root.google.appengine.v1.FileInfo.decode(reader, reader.uint32());
+                                            value = $root.google.appengine.v1.FileInfo.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         default:
-                                            reader.skipType(tag2 & 7);
+                                            reader.skipType(tag2 & 7, long);
                                             break;
                                         }
                                     }
+                                    if (key === "__proto__")
+                                        $util.makeProp(message.files, key);
                                     message.files[key] = value;
                                     break;
                                 }
                             case 2: {
-                                    message.container = $root.google.appengine.v1.ContainerInfo.decode(reader, reader.uint32());
+                                    message.container = $root.google.appengine.v1.ContainerInfo.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 3: {
-                                    message.zip = $root.google.appengine.v1.ZipInfo.decode(reader, reader.uint32());
+                                    message.zip = $root.google.appengine.v1.ZipInfo.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 6: {
-                                    message.cloudBuildOptions = $root.google.appengine.v1.CloudBuildOptions.decode(reader, reader.uint32());
+                                    message.cloudBuildOptions = $root.google.appengine.v1.CloudBuildOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -40563,31 +42093,35 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    Deployment.verify = function verify(message) {
+                    Deployment.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.files != null && message.hasOwnProperty("files")) {
                             if (!$util.isObject(message.files))
                                 return "files: object expected";
                             var key = Object.keys(message.files);
                             for (var i = 0; i < key.length; ++i) {
-                                var error = $root.google.appengine.v1.FileInfo.verify(message.files[key[i]]);
+                                var error = $root.google.appengine.v1.FileInfo.verify(message.files[key[i]], long + 1);
                                 if (error)
                                     return "files." + error;
                             }
                         }
                         if (message.container != null && message.hasOwnProperty("container")) {
-                            var error = $root.google.appengine.v1.ContainerInfo.verify(message.container);
+                            var error = $root.google.appengine.v1.ContainerInfo.verify(message.container, long + 1);
                             if (error)
                                 return "container." + error;
                         }
                         if (message.zip != null && message.hasOwnProperty("zip")) {
-                            var error = $root.google.appengine.v1.ZipInfo.verify(message.zip);
+                            var error = $root.google.appengine.v1.ZipInfo.verify(message.zip, long + 1);
                             if (error)
                                 return "zip." + error;
                         }
                         if (message.cloudBuildOptions != null && message.hasOwnProperty("cloudBuildOptions")) {
-                            var error = $root.google.appengine.v1.CloudBuildOptions.verify(message.cloudBuildOptions);
+                            var error = $root.google.appengine.v1.CloudBuildOptions.verify(message.cloudBuildOptions, long + 1);
                             if (error)
                                 return "cloudBuildOptions." + error;
                         }
@@ -40602,34 +42136,40 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.Deployment} Deployment
                      */
-                    Deployment.fromObject = function fromObject(object) {
+                    Deployment.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.Deployment)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.Deployment();
                         if (object.files) {
                             if (typeof object.files !== "object")
                                 throw TypeError(".google.appengine.v1.Deployment.files: object expected");
                             message.files = {};
                             for (var keys = Object.keys(object.files), i = 0; i < keys.length; ++i) {
+                                if (keys[i] === "__proto__")
+                                    $util.makeProp(message.files, keys[i]);
                                 if (typeof object.files[keys[i]] !== "object")
                                     throw TypeError(".google.appengine.v1.Deployment.files: object expected");
-                                message.files[keys[i]] = $root.google.appengine.v1.FileInfo.fromObject(object.files[keys[i]]);
+                                message.files[keys[i]] = $root.google.appengine.v1.FileInfo.fromObject(object.files[keys[i]], long + 1);
                             }
                         }
                         if (object.container != null) {
                             if (typeof object.container !== "object")
                                 throw TypeError(".google.appengine.v1.Deployment.container: object expected");
-                            message.container = $root.google.appengine.v1.ContainerInfo.fromObject(object.container);
+                            message.container = $root.google.appengine.v1.ContainerInfo.fromObject(object.container, long + 1);
                         }
                         if (object.zip != null) {
                             if (typeof object.zip !== "object")
                                 throw TypeError(".google.appengine.v1.Deployment.zip: object expected");
-                            message.zip = $root.google.appengine.v1.ZipInfo.fromObject(object.zip);
+                            message.zip = $root.google.appengine.v1.ZipInfo.fromObject(object.zip, long + 1);
                         }
                         if (object.cloudBuildOptions != null) {
                             if (typeof object.cloudBuildOptions !== "object")
                                 throw TypeError(".google.appengine.v1.Deployment.cloudBuildOptions: object expected");
-                            message.cloudBuildOptions = $root.google.appengine.v1.CloudBuildOptions.fromObject(object.cloudBuildOptions);
+                            message.cloudBuildOptions = $root.google.appengine.v1.CloudBuildOptions.fromObject(object.cloudBuildOptions, long + 1);
                         }
                         return message;
                     };
@@ -40657,8 +42197,11 @@
                         var keys2;
                         if (message.files && (keys2 = Object.keys(message.files)).length) {
                             object.files = {};
-                            for (var j = 0; j < keys2.length; ++j)
+                            for (var j = 0; j < keys2.length; ++j) {
+                                if (keys2[j] === "__proto__")
+                                    $util.makeProp(object.files, keys2[j]);
                                 object.files[keys2[j]] = $root.google.appengine.v1.FileInfo.toObject(message.files[keys2[j]], options);
+                            }
                         }
                         if (message.container != null && message.hasOwnProperty("container"))
                             object.container = $root.google.appengine.v1.ContainerInfo.toObject(message.container, options);
@@ -40720,7 +42263,7 @@
                     function FileInfo(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -40805,9 +42348,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FileInfo.decode = function decode(reader, length, error) {
+                    FileInfo.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.FileInfo();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -40827,7 +42374,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -40858,9 +42405,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    FileInfo.verify = function verify(message) {
+                    FileInfo.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.sourceUrl != null && message.hasOwnProperty("sourceUrl"))
                             if (!$util.isString(message.sourceUrl))
                                 return "sourceUrl: string expected";
@@ -40881,9 +42432,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.FileInfo} FileInfo
                      */
-                    FileInfo.fromObject = function fromObject(object) {
+                    FileInfo.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.FileInfo)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.FileInfo();
                         if (object.sourceUrl != null)
                             message.sourceUrl = String(object.sourceUrl);
@@ -40970,7 +42525,7 @@
                     function ContainerInfo(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -41035,9 +42590,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ContainerInfo.decode = function decode(reader, length, error) {
+                    ContainerInfo.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.ContainerInfo();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -41049,7 +42608,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -41080,9 +42639,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ContainerInfo.verify = function verify(message) {
+                    ContainerInfo.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.image != null && message.hasOwnProperty("image"))
                             if (!$util.isString(message.image))
                                 return "image: string expected";
@@ -41097,9 +42660,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.ContainerInfo} ContainerInfo
                      */
-                    ContainerInfo.fromObject = function fromObject(object) {
+                    ContainerInfo.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.ContainerInfo)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.ContainerInfo();
                         if (object.image != null)
                             message.image = String(object.image);
@@ -41176,7 +42743,7 @@
                     function CloudBuildOptions(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -41251,9 +42818,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CloudBuildOptions.decode = function decode(reader, length, error) {
+                    CloudBuildOptions.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.CloudBuildOptions();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -41265,11 +42836,11 @@
                                     break;
                                 }
                             case 2: {
-                                    message.cloudBuildTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.cloudBuildTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -41300,14 +42871,18 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    CloudBuildOptions.verify = function verify(message) {
+                    CloudBuildOptions.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.appYamlPath != null && message.hasOwnProperty("appYamlPath"))
                             if (!$util.isString(message.appYamlPath))
                                 return "appYamlPath: string expected";
                         if (message.cloudBuildTimeout != null && message.hasOwnProperty("cloudBuildTimeout")) {
-                            var error = $root.google.protobuf.Duration.verify(message.cloudBuildTimeout);
+                            var error = $root.google.protobuf.Duration.verify(message.cloudBuildTimeout, long + 1);
                             if (error)
                                 return "cloudBuildTimeout." + error;
                         }
@@ -41322,16 +42897,20 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.CloudBuildOptions} CloudBuildOptions
                      */
-                    CloudBuildOptions.fromObject = function fromObject(object) {
+                    CloudBuildOptions.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.CloudBuildOptions)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.CloudBuildOptions();
                         if (object.appYamlPath != null)
                             message.appYamlPath = String(object.appYamlPath);
                         if (object.cloudBuildTimeout != null) {
                             if (typeof object.cloudBuildTimeout !== "object")
                                 throw TypeError(".google.appengine.v1.CloudBuildOptions.cloudBuildTimeout: object expected");
-                            message.cloudBuildTimeout = $root.google.protobuf.Duration.fromObject(object.cloudBuildTimeout);
+                            message.cloudBuildTimeout = $root.google.protobuf.Duration.fromObject(object.cloudBuildTimeout, long + 1);
                         }
                         return message;
                     };
@@ -41410,7 +42989,7 @@
                     function ZipInfo(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -41485,9 +43064,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ZipInfo.decode = function decode(reader, length, error) {
+                    ZipInfo.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.ZipInfo();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -41503,7 +43086,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -41534,9 +43117,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ZipInfo.verify = function verify(message) {
+                    ZipInfo.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.sourceUrl != null && message.hasOwnProperty("sourceUrl"))
                             if (!$util.isString(message.sourceUrl))
                                 return "sourceUrl: string expected";
@@ -41554,9 +43141,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.ZipInfo} ZipInfo
                      */
-                    ZipInfo.fromObject = function fromObject(object) {
+                    ZipInfo.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.ZipInfo)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.ZipInfo();
                         if (object.sourceUrl != null)
                             message.sourceUrl = String(object.sourceUrl);
@@ -41639,7 +43230,7 @@
                     function AuditData(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -41728,9 +43319,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    AuditData.decode = function decode(reader, length, error) {
+                    AuditData.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.AuditData();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -41738,15 +43333,15 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.updateService = $root.google.appengine.v1.UpdateServiceMethod.decode(reader, reader.uint32());
+                                    message.updateService = $root.google.appengine.v1.UpdateServiceMethod.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 2: {
-                                    message.createVersion = $root.google.appengine.v1.CreateVersionMethod.decode(reader, reader.uint32());
+                                    message.createVersion = $root.google.appengine.v1.CreateVersionMethod.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -41777,14 +43372,18 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    AuditData.verify = function verify(message) {
+                    AuditData.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         var properties = {};
                         if (message.updateService != null && message.hasOwnProperty("updateService")) {
                             properties.method = 1;
                             {
-                                var error = $root.google.appengine.v1.UpdateServiceMethod.verify(message.updateService);
+                                var error = $root.google.appengine.v1.UpdateServiceMethod.verify(message.updateService, long + 1);
                                 if (error)
                                     return "updateService." + error;
                             }
@@ -41794,7 +43393,7 @@
                                 return "method: multiple values";
                             properties.method = 1;
                             {
-                                var error = $root.google.appengine.v1.CreateVersionMethod.verify(message.createVersion);
+                                var error = $root.google.appengine.v1.CreateVersionMethod.verify(message.createVersion, long + 1);
                                 if (error)
                                     return "createVersion." + error;
                             }
@@ -41810,19 +43409,23 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.AuditData} AuditData
                      */
-                    AuditData.fromObject = function fromObject(object) {
+                    AuditData.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.AuditData)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.AuditData();
                         if (object.updateService != null) {
                             if (typeof object.updateService !== "object")
                                 throw TypeError(".google.appengine.v1.AuditData.updateService: object expected");
-                            message.updateService = $root.google.appengine.v1.UpdateServiceMethod.fromObject(object.updateService);
+                            message.updateService = $root.google.appengine.v1.UpdateServiceMethod.fromObject(object.updateService, long + 1);
                         }
                         if (object.createVersion != null) {
                             if (typeof object.createVersion !== "object")
                                 throw TypeError(".google.appengine.v1.AuditData.createVersion: object expected");
-                            message.createVersion = $root.google.appengine.v1.CreateVersionMethod.fromObject(object.createVersion);
+                            message.createVersion = $root.google.appengine.v1.CreateVersionMethod.fromObject(object.createVersion, long + 1);
                         }
                         return message;
                     };
@@ -41902,7 +43505,7 @@
                     function UpdateServiceMethod(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -41967,9 +43570,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UpdateServiceMethod.decode = function decode(reader, length, error) {
+                    UpdateServiceMethod.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.UpdateServiceMethod();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -41977,11 +43584,11 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.request = $root.google.appengine.v1.UpdateServiceRequest.decode(reader, reader.uint32());
+                                    message.request = $root.google.appengine.v1.UpdateServiceRequest.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -42012,11 +43619,15 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    UpdateServiceMethod.verify = function verify(message) {
+                    UpdateServiceMethod.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.request != null && message.hasOwnProperty("request")) {
-                            var error = $root.google.appengine.v1.UpdateServiceRequest.verify(message.request);
+                            var error = $root.google.appengine.v1.UpdateServiceRequest.verify(message.request, long + 1);
                             if (error)
                                 return "request." + error;
                         }
@@ -42031,14 +43642,18 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.UpdateServiceMethod} UpdateServiceMethod
                      */
-                    UpdateServiceMethod.fromObject = function fromObject(object) {
+                    UpdateServiceMethod.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.UpdateServiceMethod)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.UpdateServiceMethod();
                         if (object.request != null) {
                             if (typeof object.request !== "object")
                                 throw TypeError(".google.appengine.v1.UpdateServiceMethod.request: object expected");
-                            message.request = $root.google.appengine.v1.UpdateServiceRequest.fromObject(object.request);
+                            message.request = $root.google.appengine.v1.UpdateServiceRequest.fromObject(object.request, long + 1);
                         }
                         return message;
                     };
@@ -42112,7 +43727,7 @@
                     function CreateVersionMethod(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -42177,9 +43792,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateVersionMethod.decode = function decode(reader, length, error) {
+                    CreateVersionMethod.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.CreateVersionMethod();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -42187,11 +43806,11 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.request = $root.google.appengine.v1.CreateVersionRequest.decode(reader, reader.uint32());
+                                    message.request = $root.google.appengine.v1.CreateVersionRequest.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -42222,11 +43841,15 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    CreateVersionMethod.verify = function verify(message) {
+                    CreateVersionMethod.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.request != null && message.hasOwnProperty("request")) {
-                            var error = $root.google.appengine.v1.CreateVersionRequest.verify(message.request);
+                            var error = $root.google.appengine.v1.CreateVersionRequest.verify(message.request, long + 1);
                             if (error)
                                 return "request." + error;
                         }
@@ -42241,14 +43864,18 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.CreateVersionMethod} CreateVersionMethod
                      */
-                    CreateVersionMethod.fromObject = function fromObject(object) {
+                    CreateVersionMethod.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.CreateVersionMethod)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.CreateVersionMethod();
                         if (object.request != null) {
                             if (typeof object.request !== "object")
                                 throw TypeError(".google.appengine.v1.CreateVersionMethod.request: object expected");
-                            message.request = $root.google.appengine.v1.CreateVersionRequest.fromObject(object.request);
+                            message.request = $root.google.appengine.v1.CreateVersionRequest.fromObject(object.request, long + 1);
                         }
                         return message;
                     };
@@ -42324,7 +43951,7 @@
                     function LocationMetadata(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -42409,9 +44036,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    LocationMetadata.decode = function decode(reader, length, error) {
+                    LocationMetadata.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.LocationMetadata();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -42431,7 +44062,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -42462,9 +44093,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    LocationMetadata.verify = function verify(message) {
+                    LocationMetadata.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.standardEnvironmentAvailable != null && message.hasOwnProperty("standardEnvironmentAvailable"))
                             if (typeof message.standardEnvironmentAvailable !== "boolean")
                                 return "standardEnvironmentAvailable: boolean expected";
@@ -42485,9 +44120,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.LocationMetadata} LocationMetadata
                      */
-                    LocationMetadata.fromObject = function fromObject(object) {
+                    LocationMetadata.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.LocationMetadata)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.LocationMetadata();
                         if (object.standardEnvironmentAvailable != null)
                             message.standardEnvironmentAvailable = Boolean(object.standardEnvironmentAvailable);
@@ -42582,7 +44221,7 @@
                         this.warning = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -42732,9 +44371,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    OperationMetadataV1.decode = function decode(reader, length, error) {
+                    OperationMetadataV1.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.OperationMetadataV1();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -42746,11 +44389,11 @@
                                     break;
                                 }
                             case 2: {
-                                    message.insertTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.insertTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 3: {
-                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 4: {
@@ -42772,11 +44415,11 @@
                                     break;
                                 }
                             case 8: {
-                                    message.createVersionMetadata = $root.google.appengine.v1.CreateVersionMetadataV1.decode(reader, reader.uint32());
+                                    message.createVersionMetadata = $root.google.appengine.v1.CreateVersionMetadataV1.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -42807,20 +44450,24 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    OperationMetadataV1.verify = function verify(message) {
+                    OperationMetadataV1.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         var properties = {};
                         if (message.method != null && message.hasOwnProperty("method"))
                             if (!$util.isString(message.method))
                                 return "method: string expected";
                         if (message.insertTime != null && message.hasOwnProperty("insertTime")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.insertTime);
+                            var error = $root.google.protobuf.Timestamp.verify(message.insertTime, long + 1);
                             if (error)
                                 return "insertTime." + error;
                         }
                         if (message.endTime != null && message.hasOwnProperty("endTime")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                            var error = $root.google.protobuf.Timestamp.verify(message.endTime, long + 1);
                             if (error)
                                 return "endTime." + error;
                         }
@@ -42843,7 +44490,7 @@
                         if (message.createVersionMetadata != null && message.hasOwnProperty("createVersionMetadata")) {
                             properties.methodMetadata = 1;
                             {
-                                var error = $root.google.appengine.v1.CreateVersionMetadataV1.verify(message.createVersionMetadata);
+                                var error = $root.google.appengine.v1.CreateVersionMetadataV1.verify(message.createVersionMetadata, long + 1);
                                 if (error)
                                     return "createVersionMetadata." + error;
                             }
@@ -42859,21 +44506,25 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.OperationMetadataV1} OperationMetadataV1
                      */
-                    OperationMetadataV1.fromObject = function fromObject(object) {
+                    OperationMetadataV1.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.OperationMetadataV1)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.OperationMetadataV1();
                         if (object.method != null)
                             message.method = String(object.method);
                         if (object.insertTime != null) {
                             if (typeof object.insertTime !== "object")
                                 throw TypeError(".google.appengine.v1.OperationMetadataV1.insertTime: object expected");
-                            message.insertTime = $root.google.protobuf.Timestamp.fromObject(object.insertTime);
+                            message.insertTime = $root.google.protobuf.Timestamp.fromObject(object.insertTime, long + 1);
                         }
                         if (object.endTime != null) {
                             if (typeof object.endTime !== "object")
                                 throw TypeError(".google.appengine.v1.OperationMetadataV1.endTime: object expected");
-                            message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime, long + 1);
                         }
                         if (object.user != null)
                             message.user = String(object.user);
@@ -42891,7 +44542,7 @@
                         if (object.createVersionMetadata != null) {
                             if (typeof object.createVersionMetadata !== "object")
                                 throw TypeError(".google.appengine.v1.OperationMetadataV1.createVersionMetadata: object expected");
-                            message.createVersionMetadata = $root.google.appengine.v1.CreateVersionMetadataV1.fromObject(object.createVersionMetadata);
+                            message.createVersionMetadata = $root.google.appengine.v1.CreateVersionMetadataV1.fromObject(object.createVersionMetadata, long + 1);
                         }
                         return message;
                     };
@@ -42993,7 +44644,7 @@
                     function CreateVersionMetadataV1(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -43058,9 +44709,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateVersionMetadataV1.decode = function decode(reader, length, error) {
+                    CreateVersionMetadataV1.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.appengine.v1.CreateVersionMetadataV1();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -43072,7 +44727,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -43103,9 +44758,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    CreateVersionMetadataV1.verify = function verify(message) {
+                    CreateVersionMetadataV1.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.cloudBuildId != null && message.hasOwnProperty("cloudBuildId"))
                             if (!$util.isString(message.cloudBuildId))
                                 return "cloudBuildId: string expected";
@@ -43120,9 +44779,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.appengine.v1.CreateVersionMetadataV1} CreateVersionMetadataV1
                      */
-                    CreateVersionMetadataV1.fromObject = function fromObject(object) {
+                    CreateVersionMetadataV1.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.appengine.v1.CreateVersionMetadataV1)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.appengine.v1.CreateVersionMetadataV1();
                         if (object.cloudBuildId != null)
                             message.cloudBuildId = String(object.cloudBuildId);
@@ -43215,7 +44878,7 @@
                     this.rules = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -43291,9 +44954,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Http.decode = function decode(reader, length, error) {
+                Http.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Http();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -43303,7 +44970,7 @@
                         case 1: {
                                 if (!(message.rules && message.rules.length))
                                     message.rules = [];
-                                message.rules.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
+                                message.rules.push($root.google.api.HttpRule.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 2: {
@@ -43311,7 +44978,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -43342,14 +45009,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Http.verify = function verify(message) {
+                Http.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.rules != null && message.hasOwnProperty("rules")) {
                         if (!Array.isArray(message.rules))
                             return "rules: array expected";
                         for (var i = 0; i < message.rules.length; ++i) {
-                            var error = $root.google.api.HttpRule.verify(message.rules[i]);
+                            var error = $root.google.api.HttpRule.verify(message.rules[i], long + 1);
                             if (error)
                                 return "rules." + error;
                         }
@@ -43368,9 +45039,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.Http} Http
                  */
-                Http.fromObject = function fromObject(object) {
+                Http.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.Http)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.Http();
                     if (object.rules) {
                         if (!Array.isArray(object.rules))
@@ -43379,7 +45054,7 @@
                         for (var i = 0; i < object.rules.length; ++i) {
                             if (typeof object.rules[i] !== "object")
                                 throw TypeError(".google.api.Http.rules: object expected");
-                            message.rules[i] = $root.google.api.HttpRule.fromObject(object.rules[i]);
+                            message.rules[i] = $root.google.api.HttpRule.fromObject(object.rules[i], long + 1);
                         }
                     }
                     if (object.fullyDecodeReservedExpansion != null)
@@ -43473,7 +45148,7 @@
                     this.additionalBindings = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -43643,9 +45318,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                HttpRule.decode = function decode(reader, length, error) {
+                HttpRule.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.HttpRule();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -43677,7 +45356,7 @@
                                 break;
                             }
                         case 8: {
-                                message.custom = $root.google.api.CustomHttpPattern.decode(reader, reader.uint32());
+                                message.custom = $root.google.api.CustomHttpPattern.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 7: {
@@ -43691,11 +45370,11 @@
                         case 11: {
                                 if (!(message.additionalBindings && message.additionalBindings.length))
                                     message.additionalBindings = [];
-                                message.additionalBindings.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
+                                message.additionalBindings.push($root.google.api.HttpRule.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -43726,9 +45405,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                HttpRule.verify = function verify(message) {
+                HttpRule.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     var properties = {};
                     if (message.selector != null && message.hasOwnProperty("selector"))
                         if (!$util.isString(message.selector))
@@ -43771,7 +45454,7 @@
                             return "pattern: multiple values";
                         properties.pattern = 1;
                         {
-                            var error = $root.google.api.CustomHttpPattern.verify(message.custom);
+                            var error = $root.google.api.CustomHttpPattern.verify(message.custom, long + 1);
                             if (error)
                                 return "custom." + error;
                         }
@@ -43786,7 +45469,7 @@
                         if (!Array.isArray(message.additionalBindings))
                             return "additionalBindings: array expected";
                         for (var i = 0; i < message.additionalBindings.length; ++i) {
-                            var error = $root.google.api.HttpRule.verify(message.additionalBindings[i]);
+                            var error = $root.google.api.HttpRule.verify(message.additionalBindings[i], long + 1);
                             if (error)
                                 return "additionalBindings." + error;
                         }
@@ -43802,9 +45485,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.HttpRule} HttpRule
                  */
-                HttpRule.fromObject = function fromObject(object) {
+                HttpRule.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.HttpRule)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.HttpRule();
                     if (object.selector != null)
                         message.selector = String(object.selector);
@@ -43821,7 +45508,7 @@
                     if (object.custom != null) {
                         if (typeof object.custom !== "object")
                             throw TypeError(".google.api.HttpRule.custom: object expected");
-                        message.custom = $root.google.api.CustomHttpPattern.fromObject(object.custom);
+                        message.custom = $root.google.api.CustomHttpPattern.fromObject(object.custom, long + 1);
                     }
                     if (object.body != null)
                         message.body = String(object.body);
@@ -43834,7 +45521,7 @@
                         for (var i = 0; i < object.additionalBindings.length; ++i) {
                             if (typeof object.additionalBindings[i] !== "object")
                                 throw TypeError(".google.api.HttpRule.additionalBindings: object expected");
-                            message.additionalBindings[i] = $root.google.api.HttpRule.fromObject(object.additionalBindings[i]);
+                            message.additionalBindings[i] = $root.google.api.HttpRule.fromObject(object.additionalBindings[i], long + 1);
                         }
                     }
                     return message;
@@ -43954,7 +45641,7 @@
                 function CustomHttpPattern(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -44029,9 +45716,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CustomHttpPattern.decode = function decode(reader, length, error) {
+                CustomHttpPattern.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CustomHttpPattern();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -44047,7 +45738,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -44078,9 +45769,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                CustomHttpPattern.verify = function verify(message) {
+                CustomHttpPattern.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.kind != null && message.hasOwnProperty("kind"))
                         if (!$util.isString(message.kind))
                             return "kind: string expected";
@@ -44098,9 +45793,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.CustomHttpPattern} CustomHttpPattern
                  */
-                CustomHttpPattern.fromObject = function fromObject(object) {
+                CustomHttpPattern.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.CustomHttpPattern)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.CustomHttpPattern();
                     if (object.kind != null)
                         message.kind = String(object.kind);
@@ -44185,7 +45884,7 @@
                     this.destinations = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -44274,9 +45973,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CommonLanguageSettings.decode = function decode(reader, length, error) {
+                CommonLanguageSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CommonLanguageSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -44299,11 +46002,11 @@
                                 break;
                             }
                         case 3: {
-                                message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.decode(reader, reader.uint32());
+                                message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -44334,9 +46037,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                CommonLanguageSettings.verify = function verify(message) {
+                CommonLanguageSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
                         if (!$util.isString(message.referenceDocsUri))
                             return "referenceDocsUri: string expected";
@@ -44354,7 +46061,7 @@
                             }
                     }
                     if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration")) {
-                        var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration);
+                        var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration, long + 1);
                         if (error)
                             return "selectiveGapicGeneration." + error;
                     }
@@ -44369,9 +46076,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.CommonLanguageSettings} CommonLanguageSettings
                  */
-                CommonLanguageSettings.fromObject = function fromObject(object) {
+                CommonLanguageSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.CommonLanguageSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.CommonLanguageSettings();
                     if (object.referenceDocsUri != null)
                         message.referenceDocsUri = String(object.referenceDocsUri);
@@ -44403,7 +46114,7 @@
                     if (object.selectiveGapicGeneration != null) {
                         if (typeof object.selectiveGapicGeneration !== "object")
                             throw TypeError(".google.api.CommonLanguageSettings.selectiveGapicGeneration: object expected");
-                        message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration);
+                        message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration, long + 1);
                     }
                     return message;
                 };
@@ -44498,7 +46209,7 @@
                 function ClientLibrarySettings(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -44663,9 +46374,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ClientLibrarySettings.decode = function decode(reader, length, error) {
+                ClientLibrarySettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ClientLibrarySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -44685,39 +46400,39 @@
                                 break;
                             }
                         case 21: {
-                                message.javaSettings = $root.google.api.JavaSettings.decode(reader, reader.uint32());
+                                message.javaSettings = $root.google.api.JavaSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 22: {
-                                message.cppSettings = $root.google.api.CppSettings.decode(reader, reader.uint32());
+                                message.cppSettings = $root.google.api.CppSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 23: {
-                                message.phpSettings = $root.google.api.PhpSettings.decode(reader, reader.uint32());
+                                message.phpSettings = $root.google.api.PhpSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 24: {
-                                message.pythonSettings = $root.google.api.PythonSettings.decode(reader, reader.uint32());
+                                message.pythonSettings = $root.google.api.PythonSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 25: {
-                                message.nodeSettings = $root.google.api.NodeSettings.decode(reader, reader.uint32());
+                                message.nodeSettings = $root.google.api.NodeSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 26: {
-                                message.dotnetSettings = $root.google.api.DotnetSettings.decode(reader, reader.uint32());
+                                message.dotnetSettings = $root.google.api.DotnetSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 27: {
-                                message.rubySettings = $root.google.api.RubySettings.decode(reader, reader.uint32());
+                                message.rubySettings = $root.google.api.RubySettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 28: {
-                                message.goSettings = $root.google.api.GoSettings.decode(reader, reader.uint32());
+                                message.goSettings = $root.google.api.GoSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -44748,9 +46463,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                ClientLibrarySettings.verify = function verify(message) {
+                ClientLibrarySettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.version != null && message.hasOwnProperty("version"))
                         if (!$util.isString(message.version))
                             return "version: string expected";
@@ -44772,42 +46491,42 @@
                         if (typeof message.restNumericEnums !== "boolean")
                             return "restNumericEnums: boolean expected";
                     if (message.javaSettings != null && message.hasOwnProperty("javaSettings")) {
-                        var error = $root.google.api.JavaSettings.verify(message.javaSettings);
+                        var error = $root.google.api.JavaSettings.verify(message.javaSettings, long + 1);
                         if (error)
                             return "javaSettings." + error;
                     }
                     if (message.cppSettings != null && message.hasOwnProperty("cppSettings")) {
-                        var error = $root.google.api.CppSettings.verify(message.cppSettings);
+                        var error = $root.google.api.CppSettings.verify(message.cppSettings, long + 1);
                         if (error)
                             return "cppSettings." + error;
                     }
                     if (message.phpSettings != null && message.hasOwnProperty("phpSettings")) {
-                        var error = $root.google.api.PhpSettings.verify(message.phpSettings);
+                        var error = $root.google.api.PhpSettings.verify(message.phpSettings, long + 1);
                         if (error)
                             return "phpSettings." + error;
                     }
                     if (message.pythonSettings != null && message.hasOwnProperty("pythonSettings")) {
-                        var error = $root.google.api.PythonSettings.verify(message.pythonSettings);
+                        var error = $root.google.api.PythonSettings.verify(message.pythonSettings, long + 1);
                         if (error)
                             return "pythonSettings." + error;
                     }
                     if (message.nodeSettings != null && message.hasOwnProperty("nodeSettings")) {
-                        var error = $root.google.api.NodeSettings.verify(message.nodeSettings);
+                        var error = $root.google.api.NodeSettings.verify(message.nodeSettings, long + 1);
                         if (error)
                             return "nodeSettings." + error;
                     }
                     if (message.dotnetSettings != null && message.hasOwnProperty("dotnetSettings")) {
-                        var error = $root.google.api.DotnetSettings.verify(message.dotnetSettings);
+                        var error = $root.google.api.DotnetSettings.verify(message.dotnetSettings, long + 1);
                         if (error)
                             return "dotnetSettings." + error;
                     }
                     if (message.rubySettings != null && message.hasOwnProperty("rubySettings")) {
-                        var error = $root.google.api.RubySettings.verify(message.rubySettings);
+                        var error = $root.google.api.RubySettings.verify(message.rubySettings, long + 1);
                         if (error)
                             return "rubySettings." + error;
                     }
                     if (message.goSettings != null && message.hasOwnProperty("goSettings")) {
-                        var error = $root.google.api.GoSettings.verify(message.goSettings);
+                        var error = $root.google.api.GoSettings.verify(message.goSettings, long + 1);
                         if (error)
                             return "goSettings." + error;
                     }
@@ -44822,9 +46541,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.ClientLibrarySettings} ClientLibrarySettings
                  */
-                ClientLibrarySettings.fromObject = function fromObject(object) {
+                ClientLibrarySettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.ClientLibrarySettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.ClientLibrarySettings();
                     if (object.version != null)
                         message.version = String(object.version);
@@ -44873,42 +46596,42 @@
                     if (object.javaSettings != null) {
                         if (typeof object.javaSettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.javaSettings: object expected");
-                        message.javaSettings = $root.google.api.JavaSettings.fromObject(object.javaSettings);
+                        message.javaSettings = $root.google.api.JavaSettings.fromObject(object.javaSettings, long + 1);
                     }
                     if (object.cppSettings != null) {
                         if (typeof object.cppSettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.cppSettings: object expected");
-                        message.cppSettings = $root.google.api.CppSettings.fromObject(object.cppSettings);
+                        message.cppSettings = $root.google.api.CppSettings.fromObject(object.cppSettings, long + 1);
                     }
                     if (object.phpSettings != null) {
                         if (typeof object.phpSettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.phpSettings: object expected");
-                        message.phpSettings = $root.google.api.PhpSettings.fromObject(object.phpSettings);
+                        message.phpSettings = $root.google.api.PhpSettings.fromObject(object.phpSettings, long + 1);
                     }
                     if (object.pythonSettings != null) {
                         if (typeof object.pythonSettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.pythonSettings: object expected");
-                        message.pythonSettings = $root.google.api.PythonSettings.fromObject(object.pythonSettings);
+                        message.pythonSettings = $root.google.api.PythonSettings.fromObject(object.pythonSettings, long + 1);
                     }
                     if (object.nodeSettings != null) {
                         if (typeof object.nodeSettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.nodeSettings: object expected");
-                        message.nodeSettings = $root.google.api.NodeSettings.fromObject(object.nodeSettings);
+                        message.nodeSettings = $root.google.api.NodeSettings.fromObject(object.nodeSettings, long + 1);
                     }
                     if (object.dotnetSettings != null) {
                         if (typeof object.dotnetSettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.dotnetSettings: object expected");
-                        message.dotnetSettings = $root.google.api.DotnetSettings.fromObject(object.dotnetSettings);
+                        message.dotnetSettings = $root.google.api.DotnetSettings.fromObject(object.dotnetSettings, long + 1);
                     }
                     if (object.rubySettings != null) {
                         if (typeof object.rubySettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.rubySettings: object expected");
-                        message.rubySettings = $root.google.api.RubySettings.fromObject(object.rubySettings);
+                        message.rubySettings = $root.google.api.RubySettings.fromObject(object.rubySettings, long + 1);
                     }
                     if (object.goSettings != null) {
                         if (typeof object.goSettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.goSettings: object expected");
-                        message.goSettings = $root.google.api.GoSettings.fromObject(object.goSettings);
+                        message.goSettings = $root.google.api.GoSettings.fromObject(object.goSettings, long + 1);
                     }
                     return message;
                 };
@@ -45026,7 +46749,7 @@
                     this.librarySettings = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -45194,9 +46917,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Publishing.decode = function decode(reader, length, error) {
+                Publishing.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Publishing();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -45206,7 +46933,7 @@
                         case 2: {
                                 if (!(message.methodSettings && message.methodSettings.length))
                                     message.methodSettings = [];
-                                message.methodSettings.push($root.google.api.MethodSettings.decode(reader, reader.uint32()));
+                                message.methodSettings.push($root.google.api.MethodSettings.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 101: {
@@ -45242,7 +46969,7 @@
                         case 109: {
                                 if (!(message.librarySettings && message.librarySettings.length))
                                     message.librarySettings = [];
-                                message.librarySettings.push($root.google.api.ClientLibrarySettings.decode(reader, reader.uint32()));
+                                message.librarySettings.push($root.google.api.ClientLibrarySettings.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 110: {
@@ -45254,7 +46981,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -45285,14 +47012,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Publishing.verify = function verify(message) {
+                Publishing.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.methodSettings != null && message.hasOwnProperty("methodSettings")) {
                         if (!Array.isArray(message.methodSettings))
                             return "methodSettings: array expected";
                         for (var i = 0; i < message.methodSettings.length; ++i) {
-                            var error = $root.google.api.MethodSettings.verify(message.methodSettings[i]);
+                            var error = $root.google.api.MethodSettings.verify(message.methodSettings[i], long + 1);
                             if (error)
                                 return "methodSettings." + error;
                         }
@@ -45337,7 +47068,7 @@
                         if (!Array.isArray(message.librarySettings))
                             return "librarySettings: array expected";
                         for (var i = 0; i < message.librarySettings.length; ++i) {
-                            var error = $root.google.api.ClientLibrarySettings.verify(message.librarySettings[i]);
+                            var error = $root.google.api.ClientLibrarySettings.verify(message.librarySettings[i], long + 1);
                             if (error)
                                 return "librarySettings." + error;
                         }
@@ -45359,9 +47090,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.Publishing} Publishing
                  */
-                Publishing.fromObject = function fromObject(object) {
+                Publishing.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.Publishing)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.Publishing();
                     if (object.methodSettings) {
                         if (!Array.isArray(object.methodSettings))
@@ -45370,7 +47105,7 @@
                         for (var i = 0; i < object.methodSettings.length; ++i) {
                             if (typeof object.methodSettings[i] !== "object")
                                 throw TypeError(".google.api.Publishing.methodSettings: object expected");
-                            message.methodSettings[i] = $root.google.api.MethodSettings.fromObject(object.methodSettings[i]);
+                            message.methodSettings[i] = $root.google.api.MethodSettings.fromObject(object.methodSettings[i], long + 1);
                         }
                     }
                     if (object.newIssueUri != null)
@@ -45437,7 +47172,7 @@
                         for (var i = 0; i < object.librarySettings.length; ++i) {
                             if (typeof object.librarySettings[i] !== "object")
                                 throw TypeError(".google.api.Publishing.librarySettings: object expected");
-                            message.librarySettings[i] = $root.google.api.ClientLibrarySettings.fromObject(object.librarySettings[i]);
+                            message.librarySettings[i] = $root.google.api.ClientLibrarySettings.fromObject(object.librarySettings[i], long + 1);
                         }
                     }
                     if (object.protoReferenceDocumentationUri != null)
@@ -45561,7 +47296,7 @@
                     this.serviceClassNames = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -45647,9 +47382,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                JavaSettings.decode = function decode(reader, length, error) {
+                JavaSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.JavaSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -45676,19 +47415,21 @@
                                         value = reader.string();
                                         break;
                                     default:
-                                        reader.skipType(tag2 & 7);
+                                        reader.skipType(tag2 & 7, long);
                                         break;
                                     }
                                 }
+                                if (key === "__proto__")
+                                    $util.makeProp(message.serviceClassNames, key);
                                 message.serviceClassNames[key] = value;
                                 break;
                             }
                         case 3: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -45719,9 +47460,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                JavaSettings.verify = function verify(message) {
+                JavaSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.libraryPackage != null && message.hasOwnProperty("libraryPackage"))
                         if (!$util.isString(message.libraryPackage))
                             return "libraryPackage: string expected";
@@ -45734,7 +47479,7 @@
                                 return "serviceClassNames: string{k:string} expected";
                     }
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
@@ -45749,9 +47494,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.JavaSettings} JavaSettings
                  */
-                JavaSettings.fromObject = function fromObject(object) {
+                JavaSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.JavaSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.JavaSettings();
                     if (object.libraryPackage != null)
                         message.libraryPackage = String(object.libraryPackage);
@@ -45759,13 +47508,16 @@
                         if (typeof object.serviceClassNames !== "object")
                             throw TypeError(".google.api.JavaSettings.serviceClassNames: object expected");
                         message.serviceClassNames = {};
-                        for (var keys = Object.keys(object.serviceClassNames), i = 0; i < keys.length; ++i)
+                        for (var keys = Object.keys(object.serviceClassNames), i = 0; i < keys.length; ++i) {
+                            if (keys[i] === "__proto__")
+                                $util.makeProp(message.serviceClassNames, keys[i]);
                             message.serviceClassNames[keys[i]] = String(object.serviceClassNames[keys[i]]);
+                        }
                     }
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.JavaSettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     return message;
                 };
@@ -45794,8 +47546,11 @@
                     var keys2;
                     if (message.serviceClassNames && (keys2 = Object.keys(message.serviceClassNames)).length) {
                         object.serviceClassNames = {};
-                        for (var j = 0; j < keys2.length; ++j)
+                        for (var j = 0; j < keys2.length; ++j) {
+                            if (keys2[j] === "__proto__")
+                                $util.makeProp(object.serviceClassNames, keys2[j]);
                             object.serviceClassNames[keys2[j]] = message.serviceClassNames[keys2[j]];
+                        }
                     }
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
@@ -45851,7 +47606,7 @@
                 function CppSettings(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -45916,9 +47671,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CppSettings.decode = function decode(reader, length, error) {
+                CppSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CppSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -45926,11 +47685,11 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -45961,11 +47720,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                CppSettings.verify = function verify(message) {
+                CppSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
@@ -45980,14 +47743,18 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.CppSettings} CppSettings
                  */
-                CppSettings.fromObject = function fromObject(object) {
+                CppSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.CppSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.CppSettings();
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.CppSettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     return message;
                 };
@@ -46061,7 +47828,7 @@
                 function PhpSettings(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -46126,9 +47893,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PhpSettings.decode = function decode(reader, length, error) {
+                PhpSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PhpSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -46136,11 +47907,11 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -46171,11 +47942,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                PhpSettings.verify = function verify(message) {
+                PhpSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
@@ -46190,14 +47965,18 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.PhpSettings} PhpSettings
                  */
-                PhpSettings.fromObject = function fromObject(object) {
+                PhpSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.PhpSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.PhpSettings();
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.PhpSettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     return message;
                 };
@@ -46272,7 +48051,7 @@
                 function PythonSettings(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -46347,9 +48126,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PythonSettings.decode = function decode(reader, length, error) {
+                PythonSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -46357,15 +48140,15 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 2: {
-                                message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.decode(reader, reader.uint32());
+                                message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -46396,16 +48179,20 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                PythonSettings.verify = function verify(message) {
+                PythonSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
                     if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures")) {
-                        var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures);
+                        var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures, long + 1);
                         if (error)
                             return "experimentalFeatures." + error;
                     }
@@ -46420,19 +48207,23 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.PythonSettings} PythonSettings
                  */
-                PythonSettings.fromObject = function fromObject(object) {
+                PythonSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.PythonSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.PythonSettings();
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.PythonSettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     if (object.experimentalFeatures != null) {
                         if (typeof object.experimentalFeatures !== "object")
                             throw TypeError(".google.api.PythonSettings.experimentalFeatures: object expected");
-                        message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures);
+                        message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures, long + 1);
                     }
                     return message;
                 };
@@ -46509,7 +48300,7 @@
                     function ExperimentalFeatures(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -46594,9 +48385,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ExperimentalFeatures.decode = function decode(reader, length, error) {
+                    ExperimentalFeatures.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings.ExperimentalFeatures();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -46616,7 +48411,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -46647,9 +48442,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ExperimentalFeatures.verify = function verify(message) {
+                    ExperimentalFeatures.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
                             if (typeof message.restAsyncIoEnabled !== "boolean")
                                 return "restAsyncIoEnabled: boolean expected";
@@ -46670,9 +48469,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
                      */
-                    ExperimentalFeatures.fromObject = function fromObject(object) {
+                    ExperimentalFeatures.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.api.PythonSettings.ExperimentalFeatures)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.api.PythonSettings.ExperimentalFeatures();
                         if (object.restAsyncIoEnabled != null)
                             message.restAsyncIoEnabled = Boolean(object.restAsyncIoEnabled);
@@ -46762,7 +48565,7 @@
                 function NodeSettings(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -46827,9 +48630,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                NodeSettings.decode = function decode(reader, length, error) {
+                NodeSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.NodeSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -46837,11 +48644,11 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -46872,11 +48679,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                NodeSettings.verify = function verify(message) {
+                NodeSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
@@ -46891,14 +48702,18 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.NodeSettings} NodeSettings
                  */
-                NodeSettings.fromObject = function fromObject(object) {
+                NodeSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.NodeSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.NodeSettings();
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.NodeSettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     return message;
                 };
@@ -46982,7 +48797,7 @@
                     this.handwrittenSignatures = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -47102,9 +48917,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DotnetSettings.decode = function decode(reader, length, error) {
+                DotnetSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -47112,7 +48931,7 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 2: {
@@ -47131,10 +48950,12 @@
                                         value = reader.string();
                                         break;
                                     default:
-                                        reader.skipType(tag2 & 7);
+                                        reader.skipType(tag2 & 7, long);
                                         break;
                                     }
                                 }
+                                if (key === "__proto__")
+                                    $util.makeProp(message.renamedServices, key);
                                 message.renamedServices[key] = value;
                                 break;
                             }
@@ -47154,10 +48975,12 @@
                                         value = reader.string();
                                         break;
                                     default:
-                                        reader.skipType(tag2 & 7);
+                                        reader.skipType(tag2 & 7, long);
                                         break;
                                     }
                                 }
+                                if (key === "__proto__")
+                                    $util.makeProp(message.renamedResources, key);
                                 message.renamedResources[key] = value;
                                 break;
                             }
@@ -47180,7 +49003,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -47211,11 +49034,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                DotnetSettings.verify = function verify(message) {
+                DotnetSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
@@ -47267,28 +49094,38 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.DotnetSettings} DotnetSettings
                  */
-                DotnetSettings.fromObject = function fromObject(object) {
+                DotnetSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.DotnetSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.DotnetSettings();
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.DotnetSettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     if (object.renamedServices) {
                         if (typeof object.renamedServices !== "object")
                             throw TypeError(".google.api.DotnetSettings.renamedServices: object expected");
                         message.renamedServices = {};
-                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
+                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i) {
+                            if (keys[i] === "__proto__")
+                                $util.makeProp(message.renamedServices, keys[i]);
                             message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
+                        }
                     }
                     if (object.renamedResources) {
                         if (typeof object.renamedResources !== "object")
                             throw TypeError(".google.api.DotnetSettings.renamedResources: object expected");
                         message.renamedResources = {};
-                        for (var keys = Object.keys(object.renamedResources), i = 0; i < keys.length; ++i)
+                        for (var keys = Object.keys(object.renamedResources), i = 0; i < keys.length; ++i) {
+                            if (keys[i] === "__proto__")
+                                $util.makeProp(message.renamedResources, keys[i]);
                             message.renamedResources[keys[i]] = String(object.renamedResources[keys[i]]);
+                        }
                     }
                     if (object.ignoredResources) {
                         if (!Array.isArray(object.ignoredResources))
@@ -47343,13 +49180,19 @@
                     var keys2;
                     if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
                         object.renamedServices = {};
-                        for (var j = 0; j < keys2.length; ++j)
+                        for (var j = 0; j < keys2.length; ++j) {
+                            if (keys2[j] === "__proto__")
+                                $util.makeProp(object.renamedServices, keys2[j]);
                             object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
+                        }
                     }
                     if (message.renamedResources && (keys2 = Object.keys(message.renamedResources)).length) {
                         object.renamedResources = {};
-                        for (var j = 0; j < keys2.length; ++j)
+                        for (var j = 0; j < keys2.length; ++j) {
+                            if (keys2[j] === "__proto__")
+                                $util.makeProp(object.renamedResources, keys2[j]);
                             object.renamedResources[keys2[j]] = message.renamedResources[keys2[j]];
+                        }
                     }
                     if (message.ignoredResources && message.ignoredResources.length) {
                         object.ignoredResources = [];
@@ -47418,7 +49261,7 @@
                 function RubySettings(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -47483,9 +49326,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RubySettings.decode = function decode(reader, length, error) {
+                RubySettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RubySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -47493,11 +49340,11 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -47528,11 +49375,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                RubySettings.verify = function verify(message) {
+                RubySettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
@@ -47547,14 +49398,18 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.RubySettings} RubySettings
                  */
-                RubySettings.fromObject = function fromObject(object) {
+                RubySettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.RubySettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.RubySettings();
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.RubySettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     return message;
                 };
@@ -47630,7 +49485,7 @@
                     this.renamedServices = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -47706,9 +49561,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GoSettings.decode = function decode(reader, length, error) {
+                GoSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -47716,7 +49575,7 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 2: {
@@ -47735,15 +49594,17 @@
                                         value = reader.string();
                                         break;
                                     default:
-                                        reader.skipType(tag2 & 7);
+                                        reader.skipType(tag2 & 7, long);
                                         break;
                                     }
                                 }
+                                if (key === "__proto__")
+                                    $util.makeProp(message.renamedServices, key);
                                 message.renamedServices[key] = value;
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -47774,11 +49635,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                GoSettings.verify = function verify(message) {
+                GoSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
@@ -47801,21 +49666,28 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.GoSettings} GoSettings
                  */
-                GoSettings.fromObject = function fromObject(object) {
+                GoSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.GoSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.GoSettings();
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.GoSettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     if (object.renamedServices) {
                         if (typeof object.renamedServices !== "object")
                             throw TypeError(".google.api.GoSettings.renamedServices: object expected");
                         message.renamedServices = {};
-                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
+                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i) {
+                            if (keys[i] === "__proto__")
+                                $util.makeProp(message.renamedServices, keys[i]);
                             message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
+                        }
                     }
                     return message;
                 };
@@ -47842,8 +49714,11 @@
                     var keys2;
                     if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
                         object.renamedServices = {};
-                        for (var j = 0; j < keys2.length; ++j)
+                        for (var j = 0; j < keys2.length; ++j) {
+                            if (keys2[j] === "__proto__")
+                                $util.makeProp(object.renamedServices, keys2[j]);
                             object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
+                        }
                     }
                     return object;
                 };
@@ -47900,7 +49775,7 @@
                     this.autoPopulatedFields = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -47986,9 +49861,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodSettings.decode = function decode(reader, length, error) {
+                MethodSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -48000,7 +49879,7 @@
                                 break;
                             }
                         case 2: {
-                                message.longRunning = $root.google.api.MethodSettings.LongRunning.decode(reader, reader.uint32());
+                                message.longRunning = $root.google.api.MethodSettings.LongRunning.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 3: {
@@ -48010,7 +49889,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -48041,14 +49920,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                MethodSettings.verify = function verify(message) {
+                MethodSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.selector != null && message.hasOwnProperty("selector"))
                         if (!$util.isString(message.selector))
                             return "selector: string expected";
                     if (message.longRunning != null && message.hasOwnProperty("longRunning")) {
-                        var error = $root.google.api.MethodSettings.LongRunning.verify(message.longRunning);
+                        var error = $root.google.api.MethodSettings.LongRunning.verify(message.longRunning, long + 1);
                         if (error)
                             return "longRunning." + error;
                     }
@@ -48070,16 +49953,20 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.MethodSettings} MethodSettings
                  */
-                MethodSettings.fromObject = function fromObject(object) {
+                MethodSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.MethodSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.MethodSettings();
                     if (object.selector != null)
                         message.selector = String(object.selector);
                     if (object.longRunning != null) {
                         if (typeof object.longRunning !== "object")
                             throw TypeError(".google.api.MethodSettings.longRunning: object expected");
-                        message.longRunning = $root.google.api.MethodSettings.LongRunning.fromObject(object.longRunning);
+                        message.longRunning = $root.google.api.MethodSettings.LongRunning.fromObject(object.longRunning, long + 1);
                     }
                     if (object.autoPopulatedFields) {
                         if (!Array.isArray(object.autoPopulatedFields))
@@ -48171,7 +50058,7 @@
                     function LongRunning(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -48266,9 +50153,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    LongRunning.decode = function decode(reader, length, error) {
+                    LongRunning.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings.LongRunning();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -48276,7 +50167,7 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.initialPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.initialPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 2: {
@@ -48284,15 +50175,15 @@
                                     break;
                                 }
                             case 3: {
-                                    message.maxPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.maxPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 4: {
-                                    message.totalPollTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.totalPollTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -48323,11 +50214,15 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    LongRunning.verify = function verify(message) {
+                    LongRunning.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.initialPollDelay != null && message.hasOwnProperty("initialPollDelay")) {
-                            var error = $root.google.protobuf.Duration.verify(message.initialPollDelay);
+                            var error = $root.google.protobuf.Duration.verify(message.initialPollDelay, long + 1);
                             if (error)
                                 return "initialPollDelay." + error;
                         }
@@ -48335,12 +50230,12 @@
                             if (typeof message.pollDelayMultiplier !== "number")
                                 return "pollDelayMultiplier: number expected";
                         if (message.maxPollDelay != null && message.hasOwnProperty("maxPollDelay")) {
-                            var error = $root.google.protobuf.Duration.verify(message.maxPollDelay);
+                            var error = $root.google.protobuf.Duration.verify(message.maxPollDelay, long + 1);
                             if (error)
                                 return "maxPollDelay." + error;
                         }
                         if (message.totalPollTimeout != null && message.hasOwnProperty("totalPollTimeout")) {
-                            var error = $root.google.protobuf.Duration.verify(message.totalPollTimeout);
+                            var error = $root.google.protobuf.Duration.verify(message.totalPollTimeout, long + 1);
                             if (error)
                                 return "totalPollTimeout." + error;
                         }
@@ -48355,26 +50250,30 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.api.MethodSettings.LongRunning} LongRunning
                      */
-                    LongRunning.fromObject = function fromObject(object) {
+                    LongRunning.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.api.MethodSettings.LongRunning)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.api.MethodSettings.LongRunning();
                         if (object.initialPollDelay != null) {
                             if (typeof object.initialPollDelay !== "object")
                                 throw TypeError(".google.api.MethodSettings.LongRunning.initialPollDelay: object expected");
-                            message.initialPollDelay = $root.google.protobuf.Duration.fromObject(object.initialPollDelay);
+                            message.initialPollDelay = $root.google.protobuf.Duration.fromObject(object.initialPollDelay, long + 1);
                         }
                         if (object.pollDelayMultiplier != null)
                             message.pollDelayMultiplier = Number(object.pollDelayMultiplier);
                         if (object.maxPollDelay != null) {
                             if (typeof object.maxPollDelay !== "object")
                                 throw TypeError(".google.api.MethodSettings.LongRunning.maxPollDelay: object expected");
-                            message.maxPollDelay = $root.google.protobuf.Duration.fromObject(object.maxPollDelay);
+                            message.maxPollDelay = $root.google.protobuf.Duration.fromObject(object.maxPollDelay, long + 1);
                         }
                         if (object.totalPollTimeout != null) {
                             if (typeof object.totalPollTimeout !== "object")
                                 throw TypeError(".google.api.MethodSettings.LongRunning.totalPollTimeout: object expected");
-                            message.totalPollTimeout = $root.google.protobuf.Duration.fromObject(object.totalPollTimeout);
+                            message.totalPollTimeout = $root.google.protobuf.Duration.fromObject(object.totalPollTimeout, long + 1);
                         }
                         return message;
                     };
@@ -48505,7 +50404,7 @@
                     this.methods = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -48581,9 +50480,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SelectiveGapicGeneration.decode = function decode(reader, length, error) {
+                SelectiveGapicGeneration.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.SelectiveGapicGeneration();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -48601,7 +50504,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -48632,9 +50535,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                SelectiveGapicGeneration.verify = function verify(message) {
+                SelectiveGapicGeneration.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.methods != null && message.hasOwnProperty("methods")) {
                         if (!Array.isArray(message.methods))
                             return "methods: array expected";
@@ -48656,9 +50563,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
                  */
-                SelectiveGapicGeneration.fromObject = function fromObject(object) {
+                SelectiveGapicGeneration.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.SelectiveGapicGeneration)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.SelectiveGapicGeneration();
                     if (object.methods) {
                         if (!Array.isArray(object.methods))
@@ -48810,7 +50721,7 @@
                     this.style = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -48940,9 +50851,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceDescriptor.decode = function decode(reader, length, error) {
+                ResourceDescriptor.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -48987,7 +50902,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -49018,9 +50933,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                ResourceDescriptor.verify = function verify(message) {
+                ResourceDescriptor.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.type != null && message.hasOwnProperty("type"))
                         if (!$util.isString(message.type))
                             return "type: string expected";
@@ -49072,9 +50991,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.ResourceDescriptor} ResourceDescriptor
                  */
-                ResourceDescriptor.fromObject = function fromObject(object) {
+                ResourceDescriptor.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.ResourceDescriptor)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.ResourceDescriptor();
                     if (object.type != null)
                         message.type = String(object.type);
@@ -49262,7 +51185,7 @@
                 function ResourceReference(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -49337,9 +51260,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceReference.decode = function decode(reader, length, error) {
+                ResourceReference.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -49355,7 +51282,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -49386,9 +51313,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                ResourceReference.verify = function verify(message) {
+                ResourceReference.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.type != null && message.hasOwnProperty("type"))
                         if (!$util.isString(message.type))
                             return "type: string expected";
@@ -49406,9 +51337,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.ResourceReference} ResourceReference
                  */
-                ResourceReference.fromObject = function fromObject(object) {
+                ResourceReference.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.ResourceReference)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.ResourceReference();
                     if (object.type != null)
                         message.type = String(object.type);
@@ -49706,7 +51641,7 @@
                 function Operation(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -49825,9 +51760,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Operation.decode = function decode(reader, length, error) {
+                Operation.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.Operation();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -49839,7 +51778,7 @@
                                 break;
                             }
                         case 2: {
-                                message.metadata = $root.google.protobuf.Any.decode(reader, reader.uint32());
+                                message.metadata = $root.google.protobuf.Any.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 3: {
@@ -49847,15 +51786,15 @@
                                 break;
                             }
                         case 4: {
-                                message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                message.error = $root.google.rpc.Status.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 5: {
-                                message.response = $root.google.protobuf.Any.decode(reader, reader.uint32());
+                                message.response = $root.google.protobuf.Any.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -49886,15 +51825,19 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Operation.verify = function verify(message) {
+                Operation.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     var properties = {};
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
                     if (message.metadata != null && message.hasOwnProperty("metadata")) {
-                        var error = $root.google.protobuf.Any.verify(message.metadata);
+                        var error = $root.google.protobuf.Any.verify(message.metadata, long + 1);
                         if (error)
                             return "metadata." + error;
                     }
@@ -49904,7 +51847,7 @@
                     if (message.error != null && message.hasOwnProperty("error")) {
                         properties.result = 1;
                         {
-                            var error = $root.google.rpc.Status.verify(message.error);
+                            var error = $root.google.rpc.Status.verify(message.error, long + 1);
                             if (error)
                                 return "error." + error;
                         }
@@ -49914,7 +51857,7 @@
                             return "result: multiple values";
                         properties.result = 1;
                         {
-                            var error = $root.google.protobuf.Any.verify(message.response);
+                            var error = $root.google.protobuf.Any.verify(message.response, long + 1);
                             if (error)
                                 return "response." + error;
                         }
@@ -49930,28 +51873,32 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.longrunning.Operation} Operation
                  */
-                Operation.fromObject = function fromObject(object) {
+                Operation.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.longrunning.Operation)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.longrunning.Operation();
                     if (object.name != null)
                         message.name = String(object.name);
                     if (object.metadata != null) {
                         if (typeof object.metadata !== "object")
                             throw TypeError(".google.longrunning.Operation.metadata: object expected");
-                        message.metadata = $root.google.protobuf.Any.fromObject(object.metadata);
+                        message.metadata = $root.google.protobuf.Any.fromObject(object.metadata, long + 1);
                     }
                     if (object.done != null)
                         message.done = Boolean(object.done);
                     if (object.error != null) {
                         if (typeof object.error !== "object")
                             throw TypeError(".google.longrunning.Operation.error: object expected");
-                        message.error = $root.google.rpc.Status.fromObject(object.error);
+                        message.error = $root.google.rpc.Status.fromObject(object.error, long + 1);
                     }
                     if (object.response != null) {
                         if (typeof object.response !== "object")
                             throw TypeError(".google.longrunning.Operation.response: object expected");
-                        message.response = $root.google.protobuf.Any.fromObject(object.response);
+                        message.response = $root.google.protobuf.Any.fromObject(object.response, long + 1);
                     }
                     return message;
                 };
@@ -50042,7 +51989,7 @@
                 function GetOperationRequest(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -50107,9 +52054,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GetOperationRequest.decode = function decode(reader, length, error) {
+                GetOperationRequest.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.GetOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -50121,7 +52072,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -50152,9 +52103,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                GetOperationRequest.verify = function verify(message) {
+                GetOperationRequest.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -50169,9 +52124,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.longrunning.GetOperationRequest} GetOperationRequest
                  */
-                GetOperationRequest.fromObject = function fromObject(object) {
+                GetOperationRequest.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.longrunning.GetOperationRequest)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.longrunning.GetOperationRequest();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -50250,7 +52209,7 @@
                 function ListOperationsRequest(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -50345,9 +52304,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListOperationsRequest.decode = function decode(reader, length, error) {
+                ListOperationsRequest.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -50371,7 +52334,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -50402,9 +52365,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                ListOperationsRequest.verify = function verify(message) {
+                ListOperationsRequest.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -50428,9 +52395,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.longrunning.ListOperationsRequest} ListOperationsRequest
                  */
-                ListOperationsRequest.fromObject = function fromObject(object) {
+                ListOperationsRequest.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.longrunning.ListOperationsRequest)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.longrunning.ListOperationsRequest();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -50524,7 +52495,7 @@
                     this.operations = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -50600,9 +52571,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ListOperationsResponse.decode = function decode(reader, length, error) {
+                ListOperationsResponse.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsResponse();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -50612,7 +52587,7 @@
                         case 1: {
                                 if (!(message.operations && message.operations.length))
                                     message.operations = [];
-                                message.operations.push($root.google.longrunning.Operation.decode(reader, reader.uint32()));
+                                message.operations.push($root.google.longrunning.Operation.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 2: {
@@ -50620,7 +52595,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -50651,14 +52626,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                ListOperationsResponse.verify = function verify(message) {
+                ListOperationsResponse.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.operations != null && message.hasOwnProperty("operations")) {
                         if (!Array.isArray(message.operations))
                             return "operations: array expected";
                         for (var i = 0; i < message.operations.length; ++i) {
-                            var error = $root.google.longrunning.Operation.verify(message.operations[i]);
+                            var error = $root.google.longrunning.Operation.verify(message.operations[i], long + 1);
                             if (error)
                                 return "operations." + error;
                         }
@@ -50677,9 +52656,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.longrunning.ListOperationsResponse} ListOperationsResponse
                  */
-                ListOperationsResponse.fromObject = function fromObject(object) {
+                ListOperationsResponse.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.longrunning.ListOperationsResponse)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.longrunning.ListOperationsResponse();
                     if (object.operations) {
                         if (!Array.isArray(object.operations))
@@ -50688,7 +52671,7 @@
                         for (var i = 0; i < object.operations.length; ++i) {
                             if (typeof object.operations[i] !== "object")
                                 throw TypeError(".google.longrunning.ListOperationsResponse.operations: object expected");
-                            message.operations[i] = $root.google.longrunning.Operation.fromObject(object.operations[i]);
+                            message.operations[i] = $root.google.longrunning.Operation.fromObject(object.operations[i], long + 1);
                         }
                     }
                     if (object.nextPageToken != null)
@@ -50772,7 +52755,7 @@
                 function CancelOperationRequest(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -50837,9 +52820,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CancelOperationRequest.decode = function decode(reader, length, error) {
+                CancelOperationRequest.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.CancelOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -50851,7 +52838,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -50882,9 +52869,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                CancelOperationRequest.verify = function verify(message) {
+                CancelOperationRequest.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -50899,9 +52890,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.longrunning.CancelOperationRequest} CancelOperationRequest
                  */
-                CancelOperationRequest.fromObject = function fromObject(object) {
+                CancelOperationRequest.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.longrunning.CancelOperationRequest)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.longrunning.CancelOperationRequest();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -50977,7 +52972,7 @@
                 function DeleteOperationRequest(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -51042,9 +53037,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DeleteOperationRequest.decode = function decode(reader, length, error) {
+                DeleteOperationRequest.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.DeleteOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -51056,7 +53055,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -51087,9 +53086,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                DeleteOperationRequest.verify = function verify(message) {
+                DeleteOperationRequest.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -51104,9 +53107,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.longrunning.DeleteOperationRequest} DeleteOperationRequest
                  */
-                DeleteOperationRequest.fromObject = function fromObject(object) {
+                DeleteOperationRequest.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.longrunning.DeleteOperationRequest)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.longrunning.DeleteOperationRequest();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -51183,7 +53190,7 @@
                 function WaitOperationRequest(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -51258,9 +53265,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                WaitOperationRequest.decode = function decode(reader, length, error) {
+                WaitOperationRequest.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.WaitOperationRequest();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -51272,11 +53283,11 @@
                                 break;
                             }
                         case 2: {
-                                message.timeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                message.timeout = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -51307,14 +53318,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                WaitOperationRequest.verify = function verify(message) {
+                WaitOperationRequest.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
                     if (message.timeout != null && message.hasOwnProperty("timeout")) {
-                        var error = $root.google.protobuf.Duration.verify(message.timeout);
+                        var error = $root.google.protobuf.Duration.verify(message.timeout, long + 1);
                         if (error)
                             return "timeout." + error;
                     }
@@ -51329,16 +53344,20 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.longrunning.WaitOperationRequest} WaitOperationRequest
                  */
-                WaitOperationRequest.fromObject = function fromObject(object) {
+                WaitOperationRequest.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.longrunning.WaitOperationRequest)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.longrunning.WaitOperationRequest();
                     if (object.name != null)
                         message.name = String(object.name);
                     if (object.timeout != null) {
                         if (typeof object.timeout !== "object")
                             throw TypeError(".google.longrunning.WaitOperationRequest.timeout: object expected");
-                        message.timeout = $root.google.protobuf.Duration.fromObject(object.timeout);
+                        message.timeout = $root.google.protobuf.Duration.fromObject(object.timeout, long + 1);
                     }
                     return message;
                 };
@@ -51417,7 +53436,7 @@
                 function OperationInfo(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -51492,9 +53511,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OperationInfo.decode = function decode(reader, length, error) {
+                OperationInfo.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.OperationInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -51510,7 +53533,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -51541,9 +53564,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                OperationInfo.verify = function verify(message) {
+                OperationInfo.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.responseType != null && message.hasOwnProperty("responseType"))
                         if (!$util.isString(message.responseType))
                             return "responseType: string expected";
@@ -51561,9 +53588,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.longrunning.OperationInfo} OperationInfo
                  */
-                OperationInfo.fromObject = function fromObject(object) {
+                OperationInfo.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.longrunning.OperationInfo)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.longrunning.OperationInfo();
                     if (object.responseType != null)
                         message.responseType = String(object.responseType);
@@ -51660,7 +53691,7 @@
                     this.details = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -51746,9 +53777,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Status.decode = function decode(reader, length, error) {
+                Status.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -51766,11 +53801,11 @@
                         case 3: {
                                 if (!(message.details && message.details.length))
                                     message.details = [];
-                                message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                                message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -51801,9 +53836,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Status.verify = function verify(message) {
+                Status.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.code != null && message.hasOwnProperty("code"))
                         if (!$util.isInteger(message.code))
                             return "code: integer expected";
@@ -51814,7 +53853,7 @@
                         if (!Array.isArray(message.details))
                             return "details: array expected";
                         for (var i = 0; i < message.details.length; ++i) {
-                            var error = $root.google.protobuf.Any.verify(message.details[i]);
+                            var error = $root.google.protobuf.Any.verify(message.details[i], long + 1);
                             if (error)
                                 return "details." + error;
                         }
@@ -51830,9 +53869,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.rpc.Status} Status
                  */
-                Status.fromObject = function fromObject(object) {
+                Status.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.rpc.Status)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.rpc.Status();
                     if (object.code != null)
                         message.code = object.code | 0;
@@ -51845,7 +53888,7 @@
                         for (var i = 0; i < object.details.length; ++i) {
                             if (typeof object.details[i] !== "object")
                                 throw TypeError(".google.rpc.Status.details: object expected");
-                            message.details[i] = $root.google.protobuf.Any.fromObject(object.details[i]);
+                            message.details[i] = $root.google.protobuf.Any.fromObject(object.details[i], long + 1);
                         }
                     }
                     return message;

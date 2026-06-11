@@ -64,7 +64,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | enable service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1/service_usage.enable_service.js) |
 | get service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1/service_usage.get_service.js) |
 | list services | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1/service_usage.list_services.js) |
-| api | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1/snippet_metadata_google.api.serviceusage.v1.json) |
 | batch enable services | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.batch_enable_services.js) |
 | create admin override | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.create_admin_override.js) |
 | create consumer override | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.create_consumer_override.js) |
@@ -84,7 +83,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list services | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.list_services.js) |
 | update admin override | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.update_admin_override.js) |
 | update consumer override | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.update_consumer_override.js) |
-| api | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1beta1/snippet_metadata_google.api.serviceusage.v1beta1.json) |
 
 
 ## Supported Node.js Versions

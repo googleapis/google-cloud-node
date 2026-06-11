@@ -61,10 +61,8 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | allocate quota | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicecontrol/samples/generated/v1/quota_controller.allocate_quota.js) |
 | check | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicecontrol/samples/generated/v1/service_controller.check.js) |
 | report | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicecontrol/samples/generated/v1/service_controller.report.js) |
-| api | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicecontrol/samples/generated/v1/snippet_metadata_google.api.servicecontrol.v1.json) |
 | check | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicecontrol/samples/generated/v2/service_controller.check.js) |
 | report | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicecontrol/samples/generated/v2/service_controller.report.js) |
-| api | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicecontrol/samples/generated/v2/snippet_metadata_google.api.servicecontrol.v2.json) |
 
 
 ## Supported Node.js Versions

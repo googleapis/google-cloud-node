@@ -87,7 +87,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/services.get_service.js) |
 | list services | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/services.list_services.js) |
 | update service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/services.update_service.js) |
-| appengine | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/snippet_metadata_google.appengine.v1.json) |
 | create version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/versions.create_version.js) |
 | delete version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/versions.delete_version.js) |
 | get version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/versions.get_version.js) |

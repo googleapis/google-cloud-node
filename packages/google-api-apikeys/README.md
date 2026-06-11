@@ -66,7 +66,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | lookup key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-apikeys/samples/generated/v2/api_keys.lookup_key.js) |
 | undelete key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-apikeys/samples/generated/v2/api_keys.undelete_key.js) |
 | update key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-apikeys/samples/generated/v2/api_keys.update_key.js) |
-| api | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-apikeys/samples/generated/v2/snippet_metadata_google.api.apikeys.v2.json) |
 
 
 ## Supported Node.js Versions
