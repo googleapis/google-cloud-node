@@ -29,6 +29,7 @@ import {
   protobuf,
   LROperation,
   operationsProtos,
+  IamProtos,
   LocationProtos,
 } from 'google-gax';
 
