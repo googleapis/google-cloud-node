@@ -68,7 +68,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | render parameter version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.render_parameter_version.js) |
 | update parameter | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.update_parameter.js) |
 | update parameter version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parametermanager/samples/generated/v1/parameter_manager.update_parameter_version.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parametermanager/samples/generated/v1/snippet_metadata_google.cloud.parametermanager.v1.json) |
 
 
 ## Supported Node.js Versions
@@ -102,7 +101,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parametermanager/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -112,7 +111,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-parametermanager/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

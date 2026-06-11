@@ -23,7 +23,7 @@ import shutil
 
 logging.basicConfig(level=logging.DEBUG)
 
-staging = Path("owl-bot-staging")
+staging = Path("owl-bot-staging/datastore")
 
 if staging.is_dir():
     logging.info(f"Copying files from staging directory ${staging}.")
@@ -32,20 +32,20 @@ if staging.is_dir():
     for version in ['v1']:
         library = staging / version
         _tracked_paths.add(library)
-        s.copy([library],excludes=[
+        s.copy([library], destination="handwritten/datastore", excludes=[
             'package.json', 'README.md', 'src/index.ts', 'src/v1/index.ts'])
 
     # Copy the admin library.
     for version in ['v1']:
         library = staging / 'admin' / version
         _tracked_paths.add(library)
-        s.copy([library],excludes=[
+        s.copy([library], destination="handwritten/datastore", excludes=[
             'package.json', 'README.md', 'src/index.ts', 'src/v1/index.ts', 'tsconfig.json', 'tslint.json',
               'system-test/fixtures/sample/src/index.ts', 'system-test/fixtures/sample/src/index.js',
               '.jsdoc.js', 'webpack.config.js'])
 
     # Patch the code.
-    system_test_files = ['system-test/fixtures/sample/src/index.ts', 'system-test/fixtures/sample/src/index.js']
+    system_test_files = ['handwritten/datastore/system-test/fixtures/sample/src/index.ts', 'handwritten/datastore/system-test/fixtures/sample/src/index.js']
     for file in system_test_files:
         s.replace(file, 'DatastoreClient', 'Datastore')
         s.replace(file, 'client.close', '// client.close'); # does not work with the manual layer
@@ -54,7 +54,7 @@ if staging.is_dir():
     shutil.rmtree(staging)
 
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library(source_location="build/src")
-s.copy(templates)
+templates = common_templates.node_mono_repo_library(relative_dir="handwritten/datastore", source_location="build/src")
+s.copy(templates, destination="handwritten/datastore", excludes=["README.md"])
 
-node.postprocess_gapic_library_hermetic()
+node.postprocess_gapic_library_hermetic(relative_dir="handwritten/datastore")

@@ -61,6 +61,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | create recurring audience list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.create_recurring_audience_list.js) |
 | create report task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.create_report_task.js) |
 | get audience list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.get_audience_list.js) |
+| get metadata | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.get_metadata.js) |
 | get property quotas snapshot | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.get_property_quotas_snapshot.js) |
 | get recurring audience list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.get_recurring_audience_list.js) |
 | get report task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.get_report_task.js) |
@@ -70,8 +71,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | query audience list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.query_audience_list.js) |
 | query report task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.query_report_task.js) |
 | run funnel report | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.run_funnel_report.js) |
-| sheet export audience list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.sheet_export_audience_list.js) |
-| analytics | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/snippet_metadata_google.analytics.data.v1alpha.json) |
+| run report | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.run_report.js) |
 | batch run pivot reports | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.batch_run_pivot_reports.js) |
 | batch run reports | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.batch_run_reports.js) |
 | check compatibility | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.check_compatibility.js) |
@@ -83,7 +83,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | run pivot report | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.run_pivot_report.js) |
 | run realtime report | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.run_realtime_report.js) |
 | run report | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.run_report.js) |
-| analytics | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1beta/snippet_metadata_google.analytics.data.v1beta.json) |
 
 
 ## Supported Node.js Versions
@@ -117,7 +116,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -127,7 +126,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

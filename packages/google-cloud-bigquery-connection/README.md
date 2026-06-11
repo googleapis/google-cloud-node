@@ -66,7 +66,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | set iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-connection/samples/generated/v1/connection_service.set_iam_policy.js) |
 | test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-connection/samples/generated/v1/connection_service.test_iam_permissions.js) |
 | update connection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-connection/samples/generated/v1/connection_service.update_connection.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-connection/samples/generated/v1/snippet_metadata_google.cloud.bigquery.connection.v1.json) |
 | create connection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-connection/samples/generated/v1beta1/connection_service.create_connection.js) |
 | delete connection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-connection/samples/generated/v1beta1/connection_service.delete_connection.js) |
 | get connection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-connection/samples/generated/v1beta1/connection_service.get_connection.js) |
@@ -76,7 +75,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-connection/samples/generated/v1beta1/connection_service.test_iam_permissions.js) |
 | update connection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-connection/samples/generated/v1beta1/connection_service.update_connection.js) |
 | update connection credential | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-connection/samples/generated/v1beta1/connection_service.update_connection_credential.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-connection/samples/generated/v1beta1/snippet_metadata_google.cloud.bigquery.connection.v1beta1.json) |
 
 
 ## Supported Node.js Versions
@@ -110,7 +108,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-connection/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -120,7 +118,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-connection/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

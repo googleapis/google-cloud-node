@@ -27,13 +27,13 @@ import {
   isObject,
   isString,
   isUndefined,
+  isUuid,
   toArray,
 } from './helper';
 import {Big} from 'big.js';
 import {common as p} from 'protobufjs';
 import {google as spannerClient} from '../protos/protos';
 import {GoogleError} from 'google-gax';
-import * as uuid from 'uuid';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Value = any;
@@ -1170,7 +1170,7 @@ function getType(value: Value): Type {
       );
       uuidUntypedFlagWarned = true;
     }
-    if (uuid.validate(value)) {
+    if (isUuid(value)) {
       return {type: 'unspecified'};
     }
   }

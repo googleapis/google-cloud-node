@@ -1,4 +1,4 @@
-{%- macro operationsServiceMethods() -%}
+{%- macro operationsServiceMethods(service) -%}
 {#-
   This part will be added into src/version/client.ts.
   If the --service-yaml contains "google.longrunning.Operations", it means the client requires Operations methods [getOperation, listOperationsAsync, cancelOperation, deleteOperation].
@@ -36,6 +36,7 @@
    * // doThingsWith(response)
    * ```
    */
+{%- if service.longRunningOperationsMixinFlags.getOperation %}
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
     optionsOrCallback?:
@@ -67,6 +68,8 @@
        });
     return this.operationsClient.getOperation(request, options, callback);
   }
+{%- endif %}
+{%- if service.longRunningOperationsMixinFlags.listOperations %}
   /**
    * Lists operations that match the specified filter in the request. If the
    * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
@@ -110,6 +113,8 @@
        });
     return this.operationsClient.listOperationsAsync(request, options);
   }
+{%- endif %}
+{%- if service.longRunningOperationsMixinFlags.cancelOperation %}
   /**
    * Starts asynchronous cancellation on a long-running operation.  The server
    * makes a best effort to cancel the operation, but success is not
@@ -172,7 +177,9 @@
        });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
+{%- endif %}
 
+{%- if service.longRunningOperationsMixinFlags.deleteOperation %}
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -229,4 +236,5 @@
        });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
+{%- endif %}
 {%- endmacro -%}

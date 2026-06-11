@@ -71,7 +71,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update project billing info | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing/samples/generated/v1/cloud_billing.update_project_billing_info.js) |
 | list services | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing/samples/generated/v1/cloud_catalog.list_services.js) |
 | list skus | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing/samples/generated/v1/cloud_catalog.list_skus.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing/samples/generated/v1/snippet_metadata_google.cloud.billing.v1.json) |
 
 
 ## Supported Node.js Versions
@@ -105,7 +104,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -115,7 +114,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

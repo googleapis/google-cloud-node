@@ -164,6 +164,7 @@ describe('Test metrics with mock server', () => {
       port,
       sslCreds: grpc.credentials.createInsecure(),
     });
+    (spanner as any)._metricsEnabled = true;
     instance = spanner.instance('instance');
   }
 

@@ -1,6 +1,6 @@
 {
   "name": "google-auth-library",
-  "version": "10.6.2",
+  "version": "10.7.0",
   "author": "Google Inc.",
   "description": "Google APIs Authentication Client Library for Node.js",
   "engines": {
@@ -58,7 +58,7 @@
     "nock": "^14.0.5",
     "null-loader": "^4.0.1",
     "puppeteer": "^24.0.0",
-    "sinon": "^21.0.0",
+    "sinon": "21.0.3",
     "ts-loader": "^9.5.2",
     "typescript": "5.8.3",
     "webpack": "^5.97.1",
@@ -83,8 +83,6 @@
     "presystem-test": "npm run compile -- --sourceMap",
     "webpack": "webpack",
     "browser-test": "karma start",
-    "docs-test": "echo 'disabled until linkinator is fixed'",
-    "predocs-test": "npm run docs",
     "prelint": "cd samples; npm link ../; npm install"
   },
   "license": "Apache-2.0",

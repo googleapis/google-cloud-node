@@ -4,6 +4,34 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [6.5.1](https://github.com/googleapis/google-cloud-node/compare/dataproc-v6.5.0...dataproc-v6.5.1) (2026-06-01)
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+
+## [6.5.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v6.4.0...dataproc-v6.5.0) (2026-05-12)
+
+
+### Features
+
+* [dataproc] add support for Cloud Resource Manager tags for Dataproc Serverless workloads ([#8179](https://github.com/googleapis/google-cloud-node/issues/8179)) ([3b19b3a](https://github.com/googleapis/google-cloud-node/commit/3b19b3a827a22d92bf0592382611bfe8bce1d507))
+
+## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v6.3.0...dataproc-v6.4.0) (2026-05-01)
+
+
+### Features
+
+* [dataproc] Add `Engine` field to support LightningEngine in clusters and add support for stop ttl ([#8008](https://github.com/googleapis/google-cloud-node/issues/8008)) ([91f3e22](https://github.com/googleapis/google-cloud-node/commit/91f3e227590fa0a47b5287d947641a568585c6b1))
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* Do not publish the protos to npm ([#8079](https://github.com/googleapis/google-cloud-node/issues/8079)) ([816216b](https://github.com/googleapis/google-cloud-node/commit/816216bbf51afb25935cd930a0d97ed6efd6b91e))
+* Revert "fix: Do not publish the protos to npm" ([#8096](https://github.com/googleapis/google-cloud-node/issues/8096)) ([ac0fbb6](https://github.com/googleapis/google-cloud-node/commit/ac0fbb682409bb117fd54d344df10970a240772f))
+
 ## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v6.2.1...dataproc-v6.3.0) (2026-02-19)
 
 

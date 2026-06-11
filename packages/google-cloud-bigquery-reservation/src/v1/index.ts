@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {ReservationServiceClient} from './reservation_service_client';
+export { ReservationServiceClient } from './reservation_service_client';

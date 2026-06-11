@@ -67,19 +67,19 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get backup collection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1/memorystore.get_backup_collection.js) |
 | get certificate authority | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1/memorystore.get_certificate_authority.js) |
 | get instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1/memorystore.get_instance.js) |
+| get shared regional certificate authority | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1/memorystore.get_shared_regional_certificate_authority.js) |
 | list backup collections | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1/memorystore.list_backup_collections.js) |
 | list backups | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1/memorystore.list_backups.js) |
 | list instances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1/memorystore.list_instances.js) |
 | reschedule maintenance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1/memorystore.reschedule_maintenance.js) |
 | update instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1/memorystore.update_instance.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1/snippet_metadata_google.cloud.memorystore.v1.json) |
 | create instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1beta/memorystore.create_instance.js) |
 | delete instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1beta/memorystore.delete_instance.js) |
 | get certificate authority | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1beta/memorystore.get_certificate_authority.js) |
 | get instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1beta/memorystore.get_instance.js) |
+| get shared regional certificate authority | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1beta/memorystore.get_shared_regional_certificate_authority.js) |
 | list instances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1beta/memorystore.list_instances.js) |
 | update instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1beta/memorystore.update_instance.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/samples/generated/v1beta/snippet_metadata_google.cloud.memorystore.v1beta.json) |
 
 
 ## Supported Node.js Versions
@@ -113,7 +113,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -123,7 +123,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-memorystore/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

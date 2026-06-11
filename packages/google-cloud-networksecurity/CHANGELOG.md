@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/network-security-v3.4.1...network-security-v3.5.0) (2026-06-01)
+
+
+### Features
+
+* [networksecurity] add networksecurity v1 client library ([#8348](https://github.com/googleapis/google-cloud-node/issues/8348)) ([4f49c6f](https://github.com/googleapis/google-cloud-node/commit/4f49c6ff43031718838555e67a50a495c8cd7c89))
+
+## [3.4.1](https://github.com/googleapis/google-cloud-node/compare/network-security-v3.4.0...network-security-v3.4.1) (2026-05-01)
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* Do not publish the protos to npm ([#8079](https://github.com/googleapis/google-cloud-node/issues/8079)) ([816216b](https://github.com/googleapis/google-cloud-node/commit/816216bbf51afb25935cd930a0d97ed6efd6b91e))
+* Revert "fix: Do not publish the protos to npm" ([#8096](https://github.com/googleapis/google-cloud-node/issues/8096)) ([ac0fbb6](https://github.com/googleapis/google-cloud-node/commit/ac0fbb682409bb117fd54d344df10970a240772f))
+
 ## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/network-security-v3.3.1...network-security-v3.4.0) (2026-04-08)
 
 

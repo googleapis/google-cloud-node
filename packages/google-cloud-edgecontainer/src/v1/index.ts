@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {EdgeContainerClient} from './edge_container_client';
+export { EdgeContainerClient } from './edge_container_client';

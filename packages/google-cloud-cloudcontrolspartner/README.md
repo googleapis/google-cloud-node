@@ -71,7 +71,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.update_customer.js) |
 | get violation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_monitoring.get_violation.js) |
 | list violations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_monitoring.list_violations.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/snippet_metadata_google.cloud.cloudcontrolspartner.v1.json) |
 | create customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.create_customer.js) |
 | delete customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.delete_customer.js) |
 | get customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_customer.js) |
@@ -85,7 +84,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.update_customer.js) |
 | get violation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_monitoring.get_violation.js) |
 | list violations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_monitoring.list_violations.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/snippet_metadata_google.cloud.cloudcontrolspartner.v1beta.json) |
 
 
 ## Supported Node.js Versions
@@ -119,7 +117,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -129,7 +127,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

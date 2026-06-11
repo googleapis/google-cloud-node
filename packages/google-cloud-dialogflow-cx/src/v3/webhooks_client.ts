@@ -18,11 +18,21 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +54,7 @@ export class WebhooksClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('dialogflow-cx');
@@ -57,11 +67,11 @@ export class WebhooksClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  webhooksStub?: Promise<{[name: string]: Function}>;
+  webhooksStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of WebhooksClient.
@@ -102,21 +112,42 @@ export class WebhooksClient {
    *     const client = new WebhooksClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof WebhooksClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'dialogflow.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -141,7 +172,7 @@ export class WebhooksClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -155,15 +186,11 @@ export class WebhooksClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -185,100 +212,105 @@ export class WebhooksClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       agentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}'
+        'projects/{project}/locations/{location}/agents/{agent}',
       ),
       agentGenerativeSettingsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/generativeSettings'
+        'projects/{project}/locations/{location}/agents/{agent}/generativeSettings',
       ),
       agentValidationResultPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/validationResult'
+        'projects/{project}/locations/{location}/agents/{agent}/validationResult',
       ),
       changelogPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/changelogs/{changelog}'
+        'projects/{project}/locations/{location}/agents/{agent}/changelogs/{changelog}',
       ),
       continuousTestResultPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/continuousTestResults/{continuous_test_result}'
+        'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/continuousTestResults/{continuous_test_result}',
       ),
       deploymentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/deployments/{deployment}'
+        'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/deployments/{deployment}',
       ),
       entityTypePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/entityTypes/{entity_type}'
+        'projects/{project}/locations/{location}/agents/{agent}/entityTypes/{entity_type}',
       ),
       environmentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}'
+        'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}',
       ),
       examplePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/playbooks/{playbook}/examples/{example}'
+        'projects/{project}/locations/{location}/agents/{agent}/playbooks/{playbook}/examples/{example}',
       ),
       experimentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/experiments/{experiment}'
+        'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/experiments/{experiment}',
       ),
       flowPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}'
+        'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}',
       ),
       flowValidationResultPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/validationResult'
+        'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/validationResult',
       ),
       generatorPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/generators/{generator}'
+        'projects/{project}/locations/{location}/agents/{agent}/generators/{generator}',
       ),
       intentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/intents/{intent}'
+        'projects/{project}/locations/{location}/agents/{agent}/intents/{intent}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       pagePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/pages/{page}'
+        'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/pages/{page}',
       ),
       playbookPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/playbooks/{playbook}'
+        'projects/{project}/locations/{location}/agents/{agent}/playbooks/{playbook}',
       ),
       playbookVersionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/playbooks/{playbook}/versions/{version}'
+        'projects/{project}/locations/{location}/agents/{agent}/playbooks/{playbook}/versions/{version}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
-      projectLocationAgentEnvironmentSessionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/sessions/{session}'
-      ),
-      projectLocationAgentEnvironmentSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/sessions/{session}/entityTypes/{entity_type}'
-      ),
-      projectLocationAgentFlowTransitionRouteGroupsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/transitionRouteGroups/{transition_route_group}'
-      ),
+      projectLocationAgentEnvironmentSessionPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/sessions/{session}',
+        ),
+      projectLocationAgentEnvironmentSessionEntityTypePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/sessions/{session}/entityTypes/{entity_type}',
+        ),
+      projectLocationAgentFlowTransitionRouteGroupsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/transitionRouteGroups/{transition_route_group}',
+        ),
       projectLocationAgentSessionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/sessions/{session}'
+        'projects/{project}/locations/{location}/agents/{agent}/sessions/{session}',
       ),
-      projectLocationAgentSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/sessions/{session}/entityTypes/{entity_type}'
-      ),
-      projectLocationAgentTransitionRouteGroupsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/transitionRouteGroups/{transition_route_group}'
-      ),
+      projectLocationAgentSessionEntityTypePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agents/{agent}/sessions/{session}/entityTypes/{entity_type}',
+        ),
+      projectLocationAgentTransitionRouteGroupsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agents/{agent}/transitionRouteGroups/{transition_route_group}',
+        ),
       securitySettingsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/securitySettings/{security_settings}'
+        'projects/{project}/locations/{location}/securitySettings/{security_settings}',
       ),
       testCasePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/testCases/{test_case}'
+        'projects/{project}/locations/{location}/agents/{agent}/testCases/{test_case}',
       ),
       testCaseResultPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/testCases/{test_case}/results/{result}'
+        'projects/{project}/locations/{location}/agents/{agent}/testCases/{test_case}/results/{result}',
       ),
       toolPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/tools/{tool}'
+        'projects/{project}/locations/{location}/agents/{agent}/tools/{tool}',
       ),
       toolVersionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/tools/{tool}/versions/{version}'
+        'projects/{project}/locations/{location}/agents/{agent}/tools/{tool}/versions/{version}',
       ),
       versionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/versions/{version}'
+        'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/versions/{version}',
       ),
       webhookPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/webhooks/{webhook}'
+        'projects/{project}/locations/{location}/agents/{agent}/webhooks/{webhook}',
       ),
     };
 
@@ -286,8 +318,11 @@ export class WebhooksClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listWebhooks:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'webhooks')
+      listWebhooks: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'webhooks',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -296,24 +331,55 @@ export class WebhooksClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v3/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v3/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v3/{name=projects/*/operations/*}:cancel',additional_bindings: [{post: '/v3/{name=projects/*/locations/*/operations/*}:cancel',}],
-      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v3/{name=projects/*/operations/*}',additional_bindings: [{get: '/v3/{name=projects/*/locations/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v3/{name=projects/*}/operations',additional_bindings: [{get: '/v3/{name=projects/*/locations/*}/operations',}],
-      }];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v3/{name=projects/*/locations/*}',
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v3/{name=projects/*}/locations',
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v3/{name=projects/*/operations/*}:cancel',
+          additional_bindings: [
+            { post: '/v3/{name=projects/*/locations/*/operations/*}:cancel' },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v3/{name=projects/*/operations/*}',
+          additional_bindings: [
+            { get: '/v3/{name=projects/*/locations/*/operations/*}' },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v3/{name=projects/*}/operations',
+          additional_bindings: [
+            { get: '/v3/{name=projects/*/locations/*}/operations' },
+          ],
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
 
-    this.descriptors.longrunning = {
-    };
+    this.descriptors.longrunning = {};
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.dialogflow.cx.v3.Webhooks', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.dialogflow.cx.v3.Webhooks',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -344,37 +410,46 @@ export class WebhooksClient {
     // Put together the "service stub" for
     // google.cloud.dialogflow.cx.v3.Webhooks.
     this.webhooksStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.dialogflow.cx.v3.Webhooks') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.dialogflow.cx.v3.Webhooks',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.dialogflow.cx.v3.Webhooks,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const webhooksStubMethods =
-        ['listWebhooks', 'getWebhook', 'createWebhook', 'updateWebhook', 'deleteWebhook'];
+    const webhooksStubMethods = [
+      'listWebhooks',
+      'getWebhook',
+      'createWebhook',
+      'updateWebhook',
+      'deleteWebhook',
+    ];
     for (const methodName of webhooksStubMethods) {
       const callPromise = this.webhooksStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -389,8 +464,14 @@ export class WebhooksClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'dialogflow.googleapis.com';
   }
@@ -401,8 +482,14 @@ export class WebhooksClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'dialogflow.googleapis.com';
   }
@@ -435,7 +522,7 @@ export class WebhooksClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/dialogflow'
+      'https://www.googleapis.com/auth/dialogflow',
     ];
   }
 
@@ -445,8 +532,9 @@ export class WebhooksClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -457,487 +545,681 @@ export class WebhooksClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Retrieves the specified webhook.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the webhook.
- *   Format:
- *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/webhooks/<WebhookID>`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.Webhook|Webhook}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/webhooks.get_webhook.js</caption>
- * region_tag:dialogflow_v3_generated_Webhooks_GetWebhook_async
- */
+  /**
+   * Retrieves the specified webhook.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the webhook.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/webhooks/<WebhookID>`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.Webhook|Webhook}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/webhooks.get_webhook.js</caption>
+   * region_tag:dialogflow_v3_generated_Webhooks_GetWebhook_async
+   */
   getWebhook(
-      request?: protos.google.cloud.dialogflow.cx.v3.IGetWebhookRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dialogflow.cx.v3.IWebhook,
-        protos.google.cloud.dialogflow.cx.v3.IGetWebhookRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dialogflow.cx.v3.IGetWebhookRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.cx.v3.IWebhook,
+      protos.google.cloud.dialogflow.cx.v3.IGetWebhookRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getWebhook(
-      request: protos.google.cloud.dialogflow.cx.v3.IGetWebhookRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.dialogflow.cx.v3.IWebhook,
-          protos.google.cloud.dialogflow.cx.v3.IGetWebhookRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.cx.v3.IGetWebhookRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.cx.v3.IWebhook,
+      | protos.google.cloud.dialogflow.cx.v3.IGetWebhookRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getWebhook(
-      request: protos.google.cloud.dialogflow.cx.v3.IGetWebhookRequest,
-      callback: Callback<
-          protos.google.cloud.dialogflow.cx.v3.IWebhook,
-          protos.google.cloud.dialogflow.cx.v3.IGetWebhookRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.cx.v3.IGetWebhookRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.cx.v3.IWebhook,
+      | protos.google.cloud.dialogflow.cx.v3.IGetWebhookRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getWebhook(
-      request?: protos.google.cloud.dialogflow.cx.v3.IGetWebhookRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.dialogflow.cx.v3.IGetWebhookRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.dialogflow.cx.v3.IWebhook,
-          protos.google.cloud.dialogflow.cx.v3.IGetWebhookRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.dialogflow.cx.v3.IWebhook,
-          protos.google.cloud.dialogflow.cx.v3.IGetWebhookRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.dialogflow.cx.v3.IWebhook,
-        protos.google.cloud.dialogflow.cx.v3.IGetWebhookRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.dialogflow.cx.v3.IGetWebhookRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dialogflow.cx.v3.IWebhook,
+      | protos.google.cloud.dialogflow.cx.v3.IGetWebhookRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.cx.v3.IWebhook,
+      protos.google.cloud.dialogflow.cx.v3.IGetWebhookRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getWebhook request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.dialogflow.cx.v3.IWebhook,
-        protos.google.cloud.dialogflow.cx.v3.IGetWebhookRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3.IWebhook,
+          | protos.google.cloud.dialogflow.cx.v3.IGetWebhookRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getWebhook response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getWebhook(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.dialogflow.cx.v3.IWebhook,
-        protos.google.cloud.dialogflow.cx.v3.IGetWebhookRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getWebhook response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getWebhook(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3.IWebhook,
+          protos.google.cloud.dialogflow.cx.v3.IGetWebhookRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getWebhook response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Creates a webhook in the specified agent.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The agent to create a webhook for.
- *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
- * @param {google.cloud.dialogflow.cx.v3.Webhook} request.webhook
- *   Required. The webhook to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.Webhook|Webhook}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/webhooks.create_webhook.js</caption>
- * region_tag:dialogflow_v3_generated_Webhooks_CreateWebhook_async
- */
+  /**
+   * Creates a webhook in the specified agent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The agent to create a webhook for.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
+   * @param {google.cloud.dialogflow.cx.v3.Webhook} request.webhook
+   *   Required. The webhook to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.Webhook|Webhook}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/webhooks.create_webhook.js</caption>
+   * region_tag:dialogflow_v3_generated_Webhooks_CreateWebhook_async
+   */
   createWebhook(
-      request?: protos.google.cloud.dialogflow.cx.v3.ICreateWebhookRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dialogflow.cx.v3.IWebhook,
-        protos.google.cloud.dialogflow.cx.v3.ICreateWebhookRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dialogflow.cx.v3.ICreateWebhookRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.cx.v3.IWebhook,
+      protos.google.cloud.dialogflow.cx.v3.ICreateWebhookRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   createWebhook(
-      request: protos.google.cloud.dialogflow.cx.v3.ICreateWebhookRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.dialogflow.cx.v3.IWebhook,
-          protos.google.cloud.dialogflow.cx.v3.ICreateWebhookRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.cx.v3.ICreateWebhookRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.cx.v3.IWebhook,
+      | protos.google.cloud.dialogflow.cx.v3.ICreateWebhookRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createWebhook(
-      request: protos.google.cloud.dialogflow.cx.v3.ICreateWebhookRequest,
-      callback: Callback<
-          protos.google.cloud.dialogflow.cx.v3.IWebhook,
-          protos.google.cloud.dialogflow.cx.v3.ICreateWebhookRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.cx.v3.ICreateWebhookRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.cx.v3.IWebhook,
+      | protos.google.cloud.dialogflow.cx.v3.ICreateWebhookRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createWebhook(
-      request?: protos.google.cloud.dialogflow.cx.v3.ICreateWebhookRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.dialogflow.cx.v3.ICreateWebhookRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.dialogflow.cx.v3.IWebhook,
-          protos.google.cloud.dialogflow.cx.v3.ICreateWebhookRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.dialogflow.cx.v3.IWebhook,
-          protos.google.cloud.dialogflow.cx.v3.ICreateWebhookRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.dialogflow.cx.v3.IWebhook,
-        protos.google.cloud.dialogflow.cx.v3.ICreateWebhookRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.dialogflow.cx.v3.ICreateWebhookRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dialogflow.cx.v3.IWebhook,
+      | protos.google.cloud.dialogflow.cx.v3.ICreateWebhookRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.cx.v3.IWebhook,
+      protos.google.cloud.dialogflow.cx.v3.ICreateWebhookRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createWebhook request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.dialogflow.cx.v3.IWebhook,
-        protos.google.cloud.dialogflow.cx.v3.ICreateWebhookRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3.IWebhook,
+          | protos.google.cloud.dialogflow.cx.v3.ICreateWebhookRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createWebhook response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createWebhook(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.dialogflow.cx.v3.IWebhook,
-        protos.google.cloud.dialogflow.cx.v3.ICreateWebhookRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createWebhook response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createWebhook(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3.IWebhook,
+          (
+            | protos.google.cloud.dialogflow.cx.v3.ICreateWebhookRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createWebhook response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates the specified webhook.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.dialogflow.cx.v3.Webhook} request.webhook
- *   Required. The webhook to update.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   The mask to control which fields get updated. If the mask is not present,
- *   all fields will be updated.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.Webhook|Webhook}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/webhooks.update_webhook.js</caption>
- * region_tag:dialogflow_v3_generated_Webhooks_UpdateWebhook_async
- */
+  /**
+   * Updates the specified webhook.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.dialogflow.cx.v3.Webhook} request.webhook
+   *   Required. The webhook to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The mask to control which fields get updated. If the mask is not present,
+   *   all fields will be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.Webhook|Webhook}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/webhooks.update_webhook.js</caption>
+   * region_tag:dialogflow_v3_generated_Webhooks_UpdateWebhook_async
+   */
   updateWebhook(
-      request?: protos.google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dialogflow.cx.v3.IWebhook,
-        protos.google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.cx.v3.IWebhook,
+      protos.google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   updateWebhook(
-      request: protos.google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.dialogflow.cx.v3.IWebhook,
-          protos.google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.cx.v3.IWebhook,
+      | protos.google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateWebhook(
-      request: protos.google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest,
-      callback: Callback<
-          protos.google.cloud.dialogflow.cx.v3.IWebhook,
-          protos.google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.cx.v3.IWebhook,
+      | protos.google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateWebhook(
-      request?: protos.google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.dialogflow.cx.v3.IWebhook,
-          protos.google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.dialogflow.cx.v3.IWebhook,
-          protos.google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.dialogflow.cx.v3.IWebhook,
-        protos.google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dialogflow.cx.v3.IWebhook,
+      | protos.google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.cx.v3.IWebhook,
+      protos.google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'webhook.name': request.webhook!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'webhook.name': request.webhook!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateWebhook request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.dialogflow.cx.v3.IWebhook,
-        protos.google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3.IWebhook,
+          | protos.google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateWebhook response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateWebhook(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.dialogflow.cx.v3.IWebhook,
-        protos.google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateWebhook response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateWebhook(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3.IWebhook,
+          (
+            | protos.google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateWebhook response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes the specified webhook.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the webhook to delete.
- *   Format:
- *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/webhooks/<WebhookID>`.
- * @param {boolean} request.force
- *   This field has no effect for webhook not being used.
- *   For webhooks that are used by pages/flows/transition route groups:
- *
- *   *  If `force` is set to false, an error will be returned with message
- *      indicating the referenced resources.
- *   *  If `force` is set to true, Dialogflow will remove the webhook, as well
- *      as any references to the webhook (i.e.
- *      {@link protos.google.cloud.dialogflow.cx.v3.Fulfillment.webhook|Webhook} and
- *      {@link protos.google.cloud.dialogflow.cx.v3.Fulfillment.tag|tag}in fulfillments that
- *      point to this webhook will be removed).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/webhooks.delete_webhook.js</caption>
- * region_tag:dialogflow_v3_generated_Webhooks_DeleteWebhook_async
- */
+  /**
+   * Deletes the specified webhook.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the webhook to delete.
+   *   Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/webhooks/<WebhookID>`.
+   * @param {boolean} request.force
+   *   This field has no effect for webhook not being used.
+   *   For webhooks that are used by pages/flows/transition route groups:
+   *
+   *   *  If `force` is set to false, an error will be returned with message
+   *      indicating the referenced resources.
+   *   *  If `force` is set to true, Dialogflow will remove the webhook, as well
+   *      as any references to the webhook (i.e.
+   *      {@link protos.google.cloud.dialogflow.cx.v3.Fulfillment.webhook|Webhook} and
+   *      {@link protos.google.cloud.dialogflow.cx.v3.Fulfillment.tag|tag}in fulfillments that
+   *      point to this webhook will be removed).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/webhooks.delete_webhook.js</caption>
+   * region_tag:dialogflow_v3_generated_Webhooks_DeleteWebhook_async
+   */
   deleteWebhook(
-      request?: protos.google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteWebhook(
-      request: protos.google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteWebhook(
-      request: protos.google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteWebhook(
-      request?: protos.google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteWebhook request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteWebhook response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteWebhook(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteWebhook response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteWebhook(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteWebhook response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * Returns the list of all webhooks in the specified agent.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The agent to list all webhooks for.
- *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
- * @param {number} request.pageSize
- *   The maximum number of items to return in a single page. By default 100 and
- *   at most 1000.
- * @param {string} request.pageToken
- *   The next_page_token value returned from a previous list request.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.cx.v3.Webhook|Webhook}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listWebhooksAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Returns the list of all webhooks in the specified agent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The agent to list all webhooks for.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return in a single page. By default 100 and
+   *   at most 1000.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.cx.v3.Webhook|Webhook}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listWebhooksAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listWebhooks(
-      request?: protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dialogflow.cx.v3.IWebhook[],
-        protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest|null,
-        protos.google.cloud.dialogflow.cx.v3.IListWebhooksResponse
-      ]>;
+    request?: protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.cx.v3.IWebhook[],
+      protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest | null,
+      protos.google.cloud.dialogflow.cx.v3.IListWebhooksResponse,
+    ]
+  >;
   listWebhooks(
-      request: protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest,
-          protos.google.cloud.dialogflow.cx.v3.IListWebhooksResponse|null|undefined,
-          protos.google.cloud.dialogflow.cx.v3.IWebhook>): void;
+    request: protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest,
+      | protos.google.cloud.dialogflow.cx.v3.IListWebhooksResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.cx.v3.IWebhook
+    >,
+  ): void;
   listWebhooks(
-      request: protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest,
-          protos.google.cloud.dialogflow.cx.v3.IListWebhooksResponse|null|undefined,
-          protos.google.cloud.dialogflow.cx.v3.IWebhook>): void;
+    request: protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest,
+      | protos.google.cloud.dialogflow.cx.v3.IListWebhooksResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.cx.v3.IWebhook
+    >,
+  ): void;
   listWebhooks(
-      request?: protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest,
-          protos.google.cloud.dialogflow.cx.v3.IListWebhooksResponse|null|undefined,
-          protos.google.cloud.dialogflow.cx.v3.IWebhook>,
-      callback?: PaginationCallback<
-          protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest,
-          protos.google.cloud.dialogflow.cx.v3.IListWebhooksResponse|null|undefined,
-          protos.google.cloud.dialogflow.cx.v3.IWebhook>):
-      Promise<[
-        protos.google.cloud.dialogflow.cx.v3.IWebhook[],
-        protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest|null,
-        protos.google.cloud.dialogflow.cx.v3.IListWebhooksResponse
-      ]>|void {
+          | protos.google.cloud.dialogflow.cx.v3.IListWebhooksResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.cx.v3.IWebhook
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest,
+      | protos.google.cloud.dialogflow.cx.v3.IListWebhooksResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.cx.v3.IWebhook
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.cx.v3.IWebhook[],
+      protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest | null,
+      protos.google.cloud.dialogflow.cx.v3.IListWebhooksResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest,
-      protos.google.cloud.dialogflow.cx.v3.IListWebhooksResponse|null|undefined,
-      protos.google.cloud.dialogflow.cx.v3.IWebhook>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest,
+          | protos.google.cloud.dialogflow.cx.v3.IListWebhooksResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.cx.v3.IWebhook
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listWebhooks values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -946,113 +1228,118 @@ export class WebhooksClient {
     this._log.info('listWebhooks request %j', request);
     return this.innerApiCalls
       .listWebhooks(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.dialogflow.cx.v3.IWebhook[],
-        protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest|null,
-        protos.google.cloud.dialogflow.cx.v3.IListWebhooksResponse
-      ]) => {
-        this._log.info('listWebhooks values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.cx.v3.IWebhook[],
+          protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest | null,
+          protos.google.cloud.dialogflow.cx.v3.IListWebhooksResponse,
+        ]) => {
+          this._log.info('listWebhooks values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listWebhooks`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The agent to list all webhooks for.
- *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
- * @param {number} request.pageSize
- *   The maximum number of items to return in a single page. By default 100 and
- *   at most 1000.
- * @param {string} request.pageToken
- *   The next_page_token value returned from a previous list request.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.cx.v3.Webhook|Webhook} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listWebhooksAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listWebhooks`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The agent to list all webhooks for.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return in a single page. By default 100 and
+   *   at most 1000.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.cx.v3.Webhook|Webhook} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listWebhooksAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listWebhooksStream(
-      request?: protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listWebhooks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listWebhooks stream %j', request);
     return this.descriptors.page.listWebhooks.createStream(
       this.innerApiCalls.listWebhooks as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listWebhooks`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The agent to list all webhooks for.
- *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
- * @param {number} request.pageSize
- *   The maximum number of items to return in a single page. By default 100 and
- *   at most 1000.
- * @param {string} request.pageToken
- *   The next_page_token value returned from a previous list request.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.dialogflow.cx.v3.Webhook|Webhook}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/webhooks.list_webhooks.js</caption>
- * region_tag:dialogflow_v3_generated_Webhooks_ListWebhooks_async
- */
+  /**
+   * Equivalent to `listWebhooks`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The agent to list all webhooks for.
+   *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return in a single page. By default 100 and
+   *   at most 1000.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.dialogflow.cx.v3.Webhook|Webhook}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/webhooks.list_webhooks.js</caption>
+   * region_tag:dialogflow_v3_generated_Webhooks_ListWebhooks_async
+   */
   listWebhooksAsync(
-      request?: protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.dialogflow.cx.v3.IWebhook>{
+    request?: protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.dialogflow.cx.v3.IWebhook> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listWebhooks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listWebhooks iterate %j', request);
     return this.descriptors.page.listWebhooks.asyncIterate(
       this.innerApiCalls['listWebhooks'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.dialogflow.cx.v3.IWebhook>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1087,12 +1374,11 @@ export class WebhooksClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1125,12 +1411,12 @@ export class WebhooksClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1173,22 +1459,22 @@ export class WebhooksClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1223,15 +1509,15 @@ export class WebhooksClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1265,7 +1551,7 @@ export class WebhooksClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1278,25 +1564,24 @@ export class WebhooksClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -1335,22 +1620,22 @@ export class WebhooksClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1366,7 +1651,7 @@ export class WebhooksClient {
    * @param {string} agent
    * @returns {string} Resource name string.
    */
-  agentPath(project:string,location:string,agent:string) {
+  agentPath(project: string, location: string, agent: string) {
     return this.pathTemplates.agentPathTemplate.render({
       project: project,
       location: location,
@@ -1415,7 +1700,11 @@ export class WebhooksClient {
    * @param {string} agent
    * @returns {string} Resource name string.
    */
-  agentGenerativeSettingsPath(project:string,location:string,agent:string) {
+  agentGenerativeSettingsPath(
+    project: string,
+    location: string,
+    agent: string,
+  ) {
     return this.pathTemplates.agentGenerativeSettingsPathTemplate.render({
       project: project,
       location: location,
@@ -1430,8 +1719,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing AgentGenerativeSettings resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromAgentGenerativeSettingsName(agentGenerativeSettingsName: string) {
-    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(agentGenerativeSettingsName).project;
+  matchProjectFromAgentGenerativeSettingsName(
+    agentGenerativeSettingsName: string,
+  ) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(
+      agentGenerativeSettingsName,
+    ).project;
   }
 
   /**
@@ -1441,8 +1734,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing AgentGenerativeSettings resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromAgentGenerativeSettingsName(agentGenerativeSettingsName: string) {
-    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(agentGenerativeSettingsName).location;
+  matchLocationFromAgentGenerativeSettingsName(
+    agentGenerativeSettingsName: string,
+  ) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(
+      agentGenerativeSettingsName,
+    ).location;
   }
 
   /**
@@ -1452,8 +1749,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing AgentGenerativeSettings resource.
    * @returns {string} A string representing the agent.
    */
-  matchAgentFromAgentGenerativeSettingsName(agentGenerativeSettingsName: string) {
-    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(agentGenerativeSettingsName).agent;
+  matchAgentFromAgentGenerativeSettingsName(
+    agentGenerativeSettingsName: string,
+  ) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(
+      agentGenerativeSettingsName,
+    ).agent;
   }
 
   /**
@@ -1464,7 +1765,7 @@ export class WebhooksClient {
    * @param {string} agent
    * @returns {string} Resource name string.
    */
-  agentValidationResultPath(project:string,location:string,agent:string) {
+  agentValidationResultPath(project: string, location: string, agent: string) {
     return this.pathTemplates.agentValidationResultPathTemplate.render({
       project: project,
       location: location,
@@ -1480,7 +1781,9 @@ export class WebhooksClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAgentValidationResultName(agentValidationResultName: string) {
-    return this.pathTemplates.agentValidationResultPathTemplate.match(agentValidationResultName).project;
+    return this.pathTemplates.agentValidationResultPathTemplate.match(
+      agentValidationResultName,
+    ).project;
   }
 
   /**
@@ -1490,8 +1793,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing AgentValidationResult resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromAgentValidationResultName(agentValidationResultName: string) {
-    return this.pathTemplates.agentValidationResultPathTemplate.match(agentValidationResultName).location;
+  matchLocationFromAgentValidationResultName(
+    agentValidationResultName: string,
+  ) {
+    return this.pathTemplates.agentValidationResultPathTemplate.match(
+      agentValidationResultName,
+    ).location;
   }
 
   /**
@@ -1502,7 +1809,9 @@ export class WebhooksClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromAgentValidationResultName(agentValidationResultName: string) {
-    return this.pathTemplates.agentValidationResultPathTemplate.match(agentValidationResultName).agent;
+    return this.pathTemplates.agentValidationResultPathTemplate.match(
+      agentValidationResultName,
+    ).agent;
   }
 
   /**
@@ -1514,7 +1823,12 @@ export class WebhooksClient {
    * @param {string} changelog
    * @returns {string} Resource name string.
    */
-  changelogPath(project:string,location:string,agent:string,changelog:string) {
+  changelogPath(
+    project: string,
+    location: string,
+    agent: string,
+    changelog: string,
+  ) {
     return this.pathTemplates.changelogPathTemplate.render({
       project: project,
       location: location,
@@ -1531,7 +1845,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromChangelogName(changelogName: string) {
-    return this.pathTemplates.changelogPathTemplate.match(changelogName).project;
+    return this.pathTemplates.changelogPathTemplate.match(changelogName)
+      .project;
   }
 
   /**
@@ -1542,7 +1857,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromChangelogName(changelogName: string) {
-    return this.pathTemplates.changelogPathTemplate.match(changelogName).location;
+    return this.pathTemplates.changelogPathTemplate.match(changelogName)
+      .location;
   }
 
   /**
@@ -1564,7 +1880,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the changelog.
    */
   matchChangelogFromChangelogName(changelogName: string) {
-    return this.pathTemplates.changelogPathTemplate.match(changelogName).changelog;
+    return this.pathTemplates.changelogPathTemplate.match(changelogName)
+      .changelog;
   }
 
   /**
@@ -1577,7 +1894,13 @@ export class WebhooksClient {
    * @param {string} continuous_test_result
    * @returns {string} Resource name string.
    */
-  continuousTestResultPath(project:string,location:string,agent:string,environment:string,continuousTestResult:string) {
+  continuousTestResultPath(
+    project: string,
+    location: string,
+    agent: string,
+    environment: string,
+    continuousTestResult: string,
+  ) {
     return this.pathTemplates.continuousTestResultPathTemplate.render({
       project: project,
       location: location,
@@ -1595,7 +1918,9 @@ export class WebhooksClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromContinuousTestResultName(continuousTestResultName: string) {
-    return this.pathTemplates.continuousTestResultPathTemplate.match(continuousTestResultName).project;
+    return this.pathTemplates.continuousTestResultPathTemplate.match(
+      continuousTestResultName,
+    ).project;
   }
 
   /**
@@ -1606,7 +1931,9 @@ export class WebhooksClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromContinuousTestResultName(continuousTestResultName: string) {
-    return this.pathTemplates.continuousTestResultPathTemplate.match(continuousTestResultName).location;
+    return this.pathTemplates.continuousTestResultPathTemplate.match(
+      continuousTestResultName,
+    ).location;
   }
 
   /**
@@ -1617,7 +1944,9 @@ export class WebhooksClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromContinuousTestResultName(continuousTestResultName: string) {
-    return this.pathTemplates.continuousTestResultPathTemplate.match(continuousTestResultName).agent;
+    return this.pathTemplates.continuousTestResultPathTemplate.match(
+      continuousTestResultName,
+    ).agent;
   }
 
   /**
@@ -1627,8 +1956,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing ContinuousTestResult resource.
    * @returns {string} A string representing the environment.
    */
-  matchEnvironmentFromContinuousTestResultName(continuousTestResultName: string) {
-    return this.pathTemplates.continuousTestResultPathTemplate.match(continuousTestResultName).environment;
+  matchEnvironmentFromContinuousTestResultName(
+    continuousTestResultName: string,
+  ) {
+    return this.pathTemplates.continuousTestResultPathTemplate.match(
+      continuousTestResultName,
+    ).environment;
   }
 
   /**
@@ -1638,8 +1971,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing ContinuousTestResult resource.
    * @returns {string} A string representing the continuous_test_result.
    */
-  matchContinuousTestResultFromContinuousTestResultName(continuousTestResultName: string) {
-    return this.pathTemplates.continuousTestResultPathTemplate.match(continuousTestResultName).continuous_test_result;
+  matchContinuousTestResultFromContinuousTestResultName(
+    continuousTestResultName: string,
+  ) {
+    return this.pathTemplates.continuousTestResultPathTemplate.match(
+      continuousTestResultName,
+    ).continuous_test_result;
   }
 
   /**
@@ -1652,7 +1989,13 @@ export class WebhooksClient {
    * @param {string} deployment
    * @returns {string} Resource name string.
    */
-  deploymentPath(project:string,location:string,agent:string,environment:string,deployment:string) {
+  deploymentPath(
+    project: string,
+    location: string,
+    agent: string,
+    environment: string,
+    deployment: string,
+  ) {
     return this.pathTemplates.deploymentPathTemplate.render({
       project: project,
       location: location,
@@ -1670,7 +2013,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).project;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .project;
   }
 
   /**
@@ -1681,7 +2025,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).location;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .location;
   }
 
   /**
@@ -1692,7 +2037,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).agent;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .agent;
   }
 
   /**
@@ -1703,7 +2049,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the environment.
    */
   matchEnvironmentFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).environment;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .environment;
   }
 
   /**
@@ -1714,7 +2061,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the deployment.
    */
   matchDeploymentFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).deployment;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .deployment;
   }
 
   /**
@@ -1726,7 +2074,12 @@ export class WebhooksClient {
    * @param {string} entity_type
    * @returns {string} Resource name string.
    */
-  entityTypePath(project:string,location:string,agent:string,entityType:string) {
+  entityTypePath(
+    project: string,
+    location: string,
+    agent: string,
+    entityType: string,
+  ) {
     return this.pathTemplates.entityTypePathTemplate.render({
       project: project,
       location: location,
@@ -1743,7 +2096,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).project;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
+      .project;
   }
 
   /**
@@ -1754,7 +2108,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).location;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
+      .location;
   }
 
   /**
@@ -1765,7 +2120,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).agent;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
+      .agent;
   }
 
   /**
@@ -1776,7 +2132,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the entity_type.
    */
   matchEntityTypeFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).entity_type;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
+      .entity_type;
   }
 
   /**
@@ -1788,7 +2145,12 @@ export class WebhooksClient {
    * @param {string} environment
    * @returns {string} Resource name string.
    */
-  environmentPath(project:string,location:string,agent:string,environment:string) {
+  environmentPath(
+    project: string,
+    location: string,
+    agent: string,
+    environment: string,
+  ) {
     return this.pathTemplates.environmentPathTemplate.render({
       project: project,
       location: location,
@@ -1805,7 +2167,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName).project;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .project;
   }
 
   /**
@@ -1816,7 +2179,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName).location;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .location;
   }
 
   /**
@@ -1827,7 +2191,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName).agent;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .agent;
   }
 
   /**
@@ -1838,7 +2203,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the environment.
    */
   matchEnvironmentFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName).environment;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .environment;
   }
 
   /**
@@ -1851,7 +2217,13 @@ export class WebhooksClient {
    * @param {string} example
    * @returns {string} Resource name string.
    */
-  examplePath(project:string,location:string,agent:string,playbook:string,example:string) {
+  examplePath(
+    project: string,
+    location: string,
+    agent: string,
+    playbook: string,
+    example: string,
+  ) {
     return this.pathTemplates.examplePathTemplate.render({
       project: project,
       location: location,
@@ -1926,7 +2298,13 @@ export class WebhooksClient {
    * @param {string} experiment
    * @returns {string} Resource name string.
    */
-  experimentPath(project:string,location:string,agent:string,environment:string,experiment:string) {
+  experimentPath(
+    project: string,
+    location: string,
+    agent: string,
+    environment: string,
+    experiment: string,
+  ) {
     return this.pathTemplates.experimentPathTemplate.render({
       project: project,
       location: location,
@@ -1944,7 +2322,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromExperimentName(experimentName: string) {
-    return this.pathTemplates.experimentPathTemplate.match(experimentName).project;
+    return this.pathTemplates.experimentPathTemplate.match(experimentName)
+      .project;
   }
 
   /**
@@ -1955,7 +2334,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromExperimentName(experimentName: string) {
-    return this.pathTemplates.experimentPathTemplate.match(experimentName).location;
+    return this.pathTemplates.experimentPathTemplate.match(experimentName)
+      .location;
   }
 
   /**
@@ -1966,7 +2346,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromExperimentName(experimentName: string) {
-    return this.pathTemplates.experimentPathTemplate.match(experimentName).agent;
+    return this.pathTemplates.experimentPathTemplate.match(experimentName)
+      .agent;
   }
 
   /**
@@ -1977,7 +2358,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the environment.
    */
   matchEnvironmentFromExperimentName(experimentName: string) {
-    return this.pathTemplates.experimentPathTemplate.match(experimentName).environment;
+    return this.pathTemplates.experimentPathTemplate.match(experimentName)
+      .environment;
   }
 
   /**
@@ -1988,7 +2370,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the experiment.
    */
   matchExperimentFromExperimentName(experimentName: string) {
-    return this.pathTemplates.experimentPathTemplate.match(experimentName).experiment;
+    return this.pathTemplates.experimentPathTemplate.match(experimentName)
+      .experiment;
   }
 
   /**
@@ -2000,7 +2383,7 @@ export class WebhooksClient {
    * @param {string} flow
    * @returns {string} Resource name string.
    */
-  flowPath(project:string,location:string,agent:string,flow:string) {
+  flowPath(project: string, location: string, agent: string, flow: string) {
     return this.pathTemplates.flowPathTemplate.render({
       project: project,
       location: location,
@@ -2062,7 +2445,12 @@ export class WebhooksClient {
    * @param {string} flow
    * @returns {string} Resource name string.
    */
-  flowValidationResultPath(project:string,location:string,agent:string,flow:string) {
+  flowValidationResultPath(
+    project: string,
+    location: string,
+    agent: string,
+    flow: string,
+  ) {
     return this.pathTemplates.flowValidationResultPathTemplate.render({
       project: project,
       location: location,
@@ -2079,7 +2467,9 @@ export class WebhooksClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFlowValidationResultName(flowValidationResultName: string) {
-    return this.pathTemplates.flowValidationResultPathTemplate.match(flowValidationResultName).project;
+    return this.pathTemplates.flowValidationResultPathTemplate.match(
+      flowValidationResultName,
+    ).project;
   }
 
   /**
@@ -2090,7 +2480,9 @@ export class WebhooksClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFlowValidationResultName(flowValidationResultName: string) {
-    return this.pathTemplates.flowValidationResultPathTemplate.match(flowValidationResultName).location;
+    return this.pathTemplates.flowValidationResultPathTemplate.match(
+      flowValidationResultName,
+    ).location;
   }
 
   /**
@@ -2101,7 +2493,9 @@ export class WebhooksClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromFlowValidationResultName(flowValidationResultName: string) {
-    return this.pathTemplates.flowValidationResultPathTemplate.match(flowValidationResultName).agent;
+    return this.pathTemplates.flowValidationResultPathTemplate.match(
+      flowValidationResultName,
+    ).agent;
   }
 
   /**
@@ -2112,7 +2506,9 @@ export class WebhooksClient {
    * @returns {string} A string representing the flow.
    */
   matchFlowFromFlowValidationResultName(flowValidationResultName: string) {
-    return this.pathTemplates.flowValidationResultPathTemplate.match(flowValidationResultName).flow;
+    return this.pathTemplates.flowValidationResultPathTemplate.match(
+      flowValidationResultName,
+    ).flow;
   }
 
   /**
@@ -2124,7 +2520,12 @@ export class WebhooksClient {
    * @param {string} generator
    * @returns {string} Resource name string.
    */
-  generatorPath(project:string,location:string,agent:string,generator:string) {
+  generatorPath(
+    project: string,
+    location: string,
+    agent: string,
+    generator: string,
+  ) {
     return this.pathTemplates.generatorPathTemplate.render({
       project: project,
       location: location,
@@ -2141,7 +2542,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGeneratorName(generatorName: string) {
-    return this.pathTemplates.generatorPathTemplate.match(generatorName).project;
+    return this.pathTemplates.generatorPathTemplate.match(generatorName)
+      .project;
   }
 
   /**
@@ -2152,7 +2554,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromGeneratorName(generatorName: string) {
-    return this.pathTemplates.generatorPathTemplate.match(generatorName).location;
+    return this.pathTemplates.generatorPathTemplate.match(generatorName)
+      .location;
   }
 
   /**
@@ -2174,7 +2577,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the generator.
    */
   matchGeneratorFromGeneratorName(generatorName: string) {
-    return this.pathTemplates.generatorPathTemplate.match(generatorName).generator;
+    return this.pathTemplates.generatorPathTemplate.match(generatorName)
+      .generator;
   }
 
   /**
@@ -2186,7 +2590,7 @@ export class WebhooksClient {
    * @param {string} intent
    * @returns {string} Resource name string.
    */
-  intentPath(project:string,location:string,agent:string,intent:string) {
+  intentPath(project: string, location: string, agent: string, intent: string) {
     return this.pathTemplates.intentPathTemplate.render({
       project: project,
       location: location,
@@ -2246,7 +2650,7 @@ export class WebhooksClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -2285,7 +2689,13 @@ export class WebhooksClient {
    * @param {string} page
    * @returns {string} Resource name string.
    */
-  pagePath(project:string,location:string,agent:string,flow:string,page:string) {
+  pagePath(
+    project: string,
+    location: string,
+    agent: string,
+    flow: string,
+    page: string,
+  ) {
     return this.pathTemplates.pagePathTemplate.render({
       project: project,
       location: location,
@@ -2359,7 +2769,12 @@ export class WebhooksClient {
    * @param {string} playbook
    * @returns {string} Resource name string.
    */
-  playbookPath(project:string,location:string,agent:string,playbook:string) {
+  playbookPath(
+    project: string,
+    location: string,
+    agent: string,
+    playbook: string,
+  ) {
     return this.pathTemplates.playbookPathTemplate.render({
       project: project,
       location: location,
@@ -2422,7 +2837,13 @@ export class WebhooksClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  playbookVersionPath(project:string,location:string,agent:string,playbook:string,version:string) {
+  playbookVersionPath(
+    project: string,
+    location: string,
+    agent: string,
+    playbook: string,
+    version: string,
+  ) {
     return this.pathTemplates.playbookVersionPathTemplate.render({
       project: project,
       location: location,
@@ -2440,7 +2861,9 @@ export class WebhooksClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPlaybookVersionName(playbookVersionName: string) {
-    return this.pathTemplates.playbookVersionPathTemplate.match(playbookVersionName).project;
+    return this.pathTemplates.playbookVersionPathTemplate.match(
+      playbookVersionName,
+    ).project;
   }
 
   /**
@@ -2451,7 +2874,9 @@ export class WebhooksClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPlaybookVersionName(playbookVersionName: string) {
-    return this.pathTemplates.playbookVersionPathTemplate.match(playbookVersionName).location;
+    return this.pathTemplates.playbookVersionPathTemplate.match(
+      playbookVersionName,
+    ).location;
   }
 
   /**
@@ -2462,7 +2887,9 @@ export class WebhooksClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromPlaybookVersionName(playbookVersionName: string) {
-    return this.pathTemplates.playbookVersionPathTemplate.match(playbookVersionName).agent;
+    return this.pathTemplates.playbookVersionPathTemplate.match(
+      playbookVersionName,
+    ).agent;
   }
 
   /**
@@ -2473,7 +2900,9 @@ export class WebhooksClient {
    * @returns {string} A string representing the playbook.
    */
   matchPlaybookFromPlaybookVersionName(playbookVersionName: string) {
-    return this.pathTemplates.playbookVersionPathTemplate.match(playbookVersionName).playbook;
+    return this.pathTemplates.playbookVersionPathTemplate.match(
+      playbookVersionName,
+    ).playbook;
   }
 
   /**
@@ -2484,7 +2913,9 @@ export class WebhooksClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromPlaybookVersionName(playbookVersionName: string) {
-    return this.pathTemplates.playbookVersionPathTemplate.match(playbookVersionName).version;
+    return this.pathTemplates.playbookVersionPathTemplate.match(
+      playbookVersionName,
+    ).version;
   }
 
   /**
@@ -2493,7 +2924,7 @@ export class WebhooksClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -2520,14 +2951,22 @@ export class WebhooksClient {
    * @param {string} session
    * @returns {string} Resource name string.
    */
-  projectLocationAgentEnvironmentSessionPath(project:string,location:string,agent:string,environment:string,session:string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionPathTemplate.render({
-      project: project,
-      location: location,
-      agent: agent,
-      environment: environment,
-      session: session,
-    });
+  projectLocationAgentEnvironmentSessionPath(
+    project: string,
+    location: string,
+    agent: string,
+    environment: string,
+    session: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        agent: agent,
+        environment: environment,
+        session: session,
+      },
+    );
   }
 
   /**
@@ -2537,8 +2976,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing project_location_agent_environment_session resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentEnvironmentSessionName(projectLocationAgentEnvironmentSessionName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionPathTemplate.match(projectLocationAgentEnvironmentSessionName).project;
+  matchProjectFromProjectLocationAgentEnvironmentSessionName(
+    projectLocationAgentEnvironmentSessionName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionPathTemplate.match(
+      projectLocationAgentEnvironmentSessionName,
+    ).project;
   }
 
   /**
@@ -2548,8 +2991,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing project_location_agent_environment_session resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentEnvironmentSessionName(projectLocationAgentEnvironmentSessionName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionPathTemplate.match(projectLocationAgentEnvironmentSessionName).location;
+  matchLocationFromProjectLocationAgentEnvironmentSessionName(
+    projectLocationAgentEnvironmentSessionName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionPathTemplate.match(
+      projectLocationAgentEnvironmentSessionName,
+    ).location;
   }
 
   /**
@@ -2559,8 +3006,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing project_location_agent_environment_session resource.
    * @returns {string} A string representing the agent.
    */
-  matchAgentFromProjectLocationAgentEnvironmentSessionName(projectLocationAgentEnvironmentSessionName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionPathTemplate.match(projectLocationAgentEnvironmentSessionName).agent;
+  matchAgentFromProjectLocationAgentEnvironmentSessionName(
+    projectLocationAgentEnvironmentSessionName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionPathTemplate.match(
+      projectLocationAgentEnvironmentSessionName,
+    ).agent;
   }
 
   /**
@@ -2570,8 +3021,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing project_location_agent_environment_session resource.
    * @returns {string} A string representing the environment.
    */
-  matchEnvironmentFromProjectLocationAgentEnvironmentSessionName(projectLocationAgentEnvironmentSessionName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionPathTemplate.match(projectLocationAgentEnvironmentSessionName).environment;
+  matchEnvironmentFromProjectLocationAgentEnvironmentSessionName(
+    projectLocationAgentEnvironmentSessionName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionPathTemplate.match(
+      projectLocationAgentEnvironmentSessionName,
+    ).environment;
   }
 
   /**
@@ -2581,8 +3036,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing project_location_agent_environment_session resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationAgentEnvironmentSessionName(projectLocationAgentEnvironmentSessionName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionPathTemplate.match(projectLocationAgentEnvironmentSessionName).session;
+  matchSessionFromProjectLocationAgentEnvironmentSessionName(
+    projectLocationAgentEnvironmentSessionName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionPathTemplate.match(
+      projectLocationAgentEnvironmentSessionName,
+    ).session;
   }
 
   /**
@@ -2596,15 +3055,24 @@ export class WebhooksClient {
    * @param {string} entity_type
    * @returns {string} Resource name string.
    */
-  projectLocationAgentEnvironmentSessionEntityTypePath(project:string,location:string,agent:string,environment:string,session:string,entityType:string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.render({
-      project: project,
-      location: location,
-      agent: agent,
-      environment: environment,
-      session: session,
-      entity_type: entityType,
-    });
+  projectLocationAgentEnvironmentSessionEntityTypePath(
+    project: string,
+    location: string,
+    agent: string,
+    environment: string,
+    session: string,
+    entityType: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        agent: agent,
+        environment: environment,
+        session: session,
+        entity_type: entityType,
+      },
+    );
   }
 
   /**
@@ -2614,8 +3082,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing project_location_agent_environment_session_entity_type resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentEnvironmentSessionEntityTypeName(projectLocationAgentEnvironmentSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentSessionEntityTypeName).project;
+  matchProjectFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+    projectLocationAgentEnvironmentSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentSessionEntityTypeName,
+    ).project;
   }
 
   /**
@@ -2625,8 +3097,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing project_location_agent_environment_session_entity_type resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentEnvironmentSessionEntityTypeName(projectLocationAgentEnvironmentSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentSessionEntityTypeName).location;
+  matchLocationFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+    projectLocationAgentEnvironmentSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentSessionEntityTypeName,
+    ).location;
   }
 
   /**
@@ -2636,8 +3112,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing project_location_agent_environment_session_entity_type resource.
    * @returns {string} A string representing the agent.
    */
-  matchAgentFromProjectLocationAgentEnvironmentSessionEntityTypeName(projectLocationAgentEnvironmentSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentSessionEntityTypeName).agent;
+  matchAgentFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+    projectLocationAgentEnvironmentSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentSessionEntityTypeName,
+    ).agent;
   }
 
   /**
@@ -2647,8 +3127,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing project_location_agent_environment_session_entity_type resource.
    * @returns {string} A string representing the environment.
    */
-  matchEnvironmentFromProjectLocationAgentEnvironmentSessionEntityTypeName(projectLocationAgentEnvironmentSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentSessionEntityTypeName).environment;
+  matchEnvironmentFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+    projectLocationAgentEnvironmentSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentSessionEntityTypeName,
+    ).environment;
   }
 
   /**
@@ -2658,8 +3142,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing project_location_agent_environment_session_entity_type resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationAgentEnvironmentSessionEntityTypeName(projectLocationAgentEnvironmentSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentSessionEntityTypeName).session;
+  matchSessionFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+    projectLocationAgentEnvironmentSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentSessionEntityTypeName,
+    ).session;
   }
 
   /**
@@ -2669,8 +3157,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing project_location_agent_environment_session_entity_type resource.
    * @returns {string} A string representing the entity_type.
    */
-  matchEntityTypeFromProjectLocationAgentEnvironmentSessionEntityTypeName(projectLocationAgentEnvironmentSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentSessionEntityTypeName).entity_type;
+  matchEntityTypeFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+    projectLocationAgentEnvironmentSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentSessionEntityTypeName,
+    ).entity_type;
   }
 
   /**
@@ -2683,14 +3175,22 @@ export class WebhooksClient {
    * @param {string} transition_route_group
    * @returns {string} Resource name string.
    */
-  projectLocationAgentFlowTransitionRouteGroupsPath(project:string,location:string,agent:string,flow:string,transitionRouteGroup:string) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.render({
-      project: project,
-      location: location,
-      agent: agent,
-      flow: flow,
-      transition_route_group: transitionRouteGroup,
-    });
+  projectLocationAgentFlowTransitionRouteGroupsPath(
+    project: string,
+    location: string,
+    agent: string,
+    flow: string,
+    transitionRouteGroup: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        agent: agent,
+        flow: flow,
+        transition_route_group: transitionRouteGroup,
+      },
+    );
   }
 
   /**
@@ -2700,8 +3200,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing project_location_agent_flow_transitionRouteGroups resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentFlowTransitionRouteGroupsName(projectLocationAgentFlowTransitionRouteGroupsName: string) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupsName).project;
+  matchProjectFromProjectLocationAgentFlowTransitionRouteGroupsName(
+    projectLocationAgentFlowTransitionRouteGroupsName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupsName,
+    ).project;
   }
 
   /**
@@ -2711,8 +3215,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing project_location_agent_flow_transitionRouteGroups resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentFlowTransitionRouteGroupsName(projectLocationAgentFlowTransitionRouteGroupsName: string) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupsName).location;
+  matchLocationFromProjectLocationAgentFlowTransitionRouteGroupsName(
+    projectLocationAgentFlowTransitionRouteGroupsName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupsName,
+    ).location;
   }
 
   /**
@@ -2722,8 +3230,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing project_location_agent_flow_transitionRouteGroups resource.
    * @returns {string} A string representing the agent.
    */
-  matchAgentFromProjectLocationAgentFlowTransitionRouteGroupsName(projectLocationAgentFlowTransitionRouteGroupsName: string) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupsName).agent;
+  matchAgentFromProjectLocationAgentFlowTransitionRouteGroupsName(
+    projectLocationAgentFlowTransitionRouteGroupsName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupsName,
+    ).agent;
   }
 
   /**
@@ -2733,8 +3245,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing project_location_agent_flow_transitionRouteGroups resource.
    * @returns {string} A string representing the flow.
    */
-  matchFlowFromProjectLocationAgentFlowTransitionRouteGroupsName(projectLocationAgentFlowTransitionRouteGroupsName: string) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupsName).flow;
+  matchFlowFromProjectLocationAgentFlowTransitionRouteGroupsName(
+    projectLocationAgentFlowTransitionRouteGroupsName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupsName,
+    ).flow;
   }
 
   /**
@@ -2744,8 +3260,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing project_location_agent_flow_transitionRouteGroups resource.
    * @returns {string} A string representing the transition_route_group.
    */
-  matchTransitionRouteGroupFromProjectLocationAgentFlowTransitionRouteGroupsName(projectLocationAgentFlowTransitionRouteGroupsName: string) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupsName).transition_route_group;
+  matchTransitionRouteGroupFromProjectLocationAgentFlowTransitionRouteGroupsName(
+    projectLocationAgentFlowTransitionRouteGroupsName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupsName,
+    ).transition_route_group;
   }
 
   /**
@@ -2757,7 +3277,12 @@ export class WebhooksClient {
    * @param {string} session
    * @returns {string} Resource name string.
    */
-  projectLocationAgentSessionPath(project:string,location:string,agent:string,session:string) {
+  projectLocationAgentSessionPath(
+    project: string,
+    location: string,
+    agent: string,
+    session: string,
+  ) {
     return this.pathTemplates.projectLocationAgentSessionPathTemplate.render({
       project: project,
       location: location,
@@ -2773,8 +3298,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing project_location_agent_session resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentSessionName(projectLocationAgentSessionName: string) {
-    return this.pathTemplates.projectLocationAgentSessionPathTemplate.match(projectLocationAgentSessionName).project;
+  matchProjectFromProjectLocationAgentSessionName(
+    projectLocationAgentSessionName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionPathTemplate.match(
+      projectLocationAgentSessionName,
+    ).project;
   }
 
   /**
@@ -2784,8 +3313,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing project_location_agent_session resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentSessionName(projectLocationAgentSessionName: string) {
-    return this.pathTemplates.projectLocationAgentSessionPathTemplate.match(projectLocationAgentSessionName).location;
+  matchLocationFromProjectLocationAgentSessionName(
+    projectLocationAgentSessionName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionPathTemplate.match(
+      projectLocationAgentSessionName,
+    ).location;
   }
 
   /**
@@ -2795,8 +3328,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing project_location_agent_session resource.
    * @returns {string} A string representing the agent.
    */
-  matchAgentFromProjectLocationAgentSessionName(projectLocationAgentSessionName: string) {
-    return this.pathTemplates.projectLocationAgentSessionPathTemplate.match(projectLocationAgentSessionName).agent;
+  matchAgentFromProjectLocationAgentSessionName(
+    projectLocationAgentSessionName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionPathTemplate.match(
+      projectLocationAgentSessionName,
+    ).agent;
   }
 
   /**
@@ -2806,8 +3343,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing project_location_agent_session resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationAgentSessionName(projectLocationAgentSessionName: string) {
-    return this.pathTemplates.projectLocationAgentSessionPathTemplate.match(projectLocationAgentSessionName).session;
+  matchSessionFromProjectLocationAgentSessionName(
+    projectLocationAgentSessionName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionPathTemplate.match(
+      projectLocationAgentSessionName,
+    ).session;
   }
 
   /**
@@ -2820,14 +3361,22 @@ export class WebhooksClient {
    * @param {string} entity_type
    * @returns {string} Resource name string.
    */
-  projectLocationAgentSessionEntityTypePath(project:string,location:string,agent:string,session:string,entityType:string) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render({
-      project: project,
-      location: location,
-      agent: agent,
-      session: session,
-      entity_type: entityType,
-    });
+  projectLocationAgentSessionEntityTypePath(
+    project: string,
+    location: string,
+    agent: string,
+    session: string,
+    entityType: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        agent: agent,
+        session: session,
+        entity_type: entityType,
+      },
+    );
   }
 
   /**
@@ -2837,8 +3386,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing project_location_agent_session_entity_type resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentSessionEntityTypeName(projectLocationAgentSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(projectLocationAgentSessionEntityTypeName).project;
+  matchProjectFromProjectLocationAgentSessionEntityTypeName(
+    projectLocationAgentSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
+      projectLocationAgentSessionEntityTypeName,
+    ).project;
   }
 
   /**
@@ -2848,8 +3401,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing project_location_agent_session_entity_type resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentSessionEntityTypeName(projectLocationAgentSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(projectLocationAgentSessionEntityTypeName).location;
+  matchLocationFromProjectLocationAgentSessionEntityTypeName(
+    projectLocationAgentSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
+      projectLocationAgentSessionEntityTypeName,
+    ).location;
   }
 
   /**
@@ -2859,8 +3416,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing project_location_agent_session_entity_type resource.
    * @returns {string} A string representing the agent.
    */
-  matchAgentFromProjectLocationAgentSessionEntityTypeName(projectLocationAgentSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(projectLocationAgentSessionEntityTypeName).agent;
+  matchAgentFromProjectLocationAgentSessionEntityTypeName(
+    projectLocationAgentSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
+      projectLocationAgentSessionEntityTypeName,
+    ).agent;
   }
 
   /**
@@ -2870,8 +3431,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing project_location_agent_session_entity_type resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationAgentSessionEntityTypeName(projectLocationAgentSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(projectLocationAgentSessionEntityTypeName).session;
+  matchSessionFromProjectLocationAgentSessionEntityTypeName(
+    projectLocationAgentSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
+      projectLocationAgentSessionEntityTypeName,
+    ).session;
   }
 
   /**
@@ -2881,8 +3446,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing project_location_agent_session_entity_type resource.
    * @returns {string} A string representing the entity_type.
    */
-  matchEntityTypeFromProjectLocationAgentSessionEntityTypeName(projectLocationAgentSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(projectLocationAgentSessionEntityTypeName).entity_type;
+  matchEntityTypeFromProjectLocationAgentSessionEntityTypeName(
+    projectLocationAgentSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
+      projectLocationAgentSessionEntityTypeName,
+    ).entity_type;
   }
 
   /**
@@ -2894,13 +3463,20 @@ export class WebhooksClient {
    * @param {string} transition_route_group
    * @returns {string} Resource name string.
    */
-  projectLocationAgentTransitionRouteGroupsPath(project:string,location:string,agent:string,transitionRouteGroup:string) {
-    return this.pathTemplates.projectLocationAgentTransitionRouteGroupsPathTemplate.render({
-      project: project,
-      location: location,
-      agent: agent,
-      transition_route_group: transitionRouteGroup,
-    });
+  projectLocationAgentTransitionRouteGroupsPath(
+    project: string,
+    location: string,
+    agent: string,
+    transitionRouteGroup: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        agent: agent,
+        transition_route_group: transitionRouteGroup,
+      },
+    );
   }
 
   /**
@@ -2910,8 +3486,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing project_location_agent_transitionRouteGroups resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentTransitionRouteGroupsName(projectLocationAgentTransitionRouteGroupsName: string) {
-    return this.pathTemplates.projectLocationAgentTransitionRouteGroupsPathTemplate.match(projectLocationAgentTransitionRouteGroupsName).project;
+  matchProjectFromProjectLocationAgentTransitionRouteGroupsName(
+    projectLocationAgentTransitionRouteGroupsName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupsPathTemplate.match(
+      projectLocationAgentTransitionRouteGroupsName,
+    ).project;
   }
 
   /**
@@ -2921,8 +3501,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing project_location_agent_transitionRouteGroups resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentTransitionRouteGroupsName(projectLocationAgentTransitionRouteGroupsName: string) {
-    return this.pathTemplates.projectLocationAgentTransitionRouteGroupsPathTemplate.match(projectLocationAgentTransitionRouteGroupsName).location;
+  matchLocationFromProjectLocationAgentTransitionRouteGroupsName(
+    projectLocationAgentTransitionRouteGroupsName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupsPathTemplate.match(
+      projectLocationAgentTransitionRouteGroupsName,
+    ).location;
   }
 
   /**
@@ -2932,8 +3516,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing project_location_agent_transitionRouteGroups resource.
    * @returns {string} A string representing the agent.
    */
-  matchAgentFromProjectLocationAgentTransitionRouteGroupsName(projectLocationAgentTransitionRouteGroupsName: string) {
-    return this.pathTemplates.projectLocationAgentTransitionRouteGroupsPathTemplate.match(projectLocationAgentTransitionRouteGroupsName).agent;
+  matchAgentFromProjectLocationAgentTransitionRouteGroupsName(
+    projectLocationAgentTransitionRouteGroupsName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupsPathTemplate.match(
+      projectLocationAgentTransitionRouteGroupsName,
+    ).agent;
   }
 
   /**
@@ -2943,8 +3531,12 @@ export class WebhooksClient {
    *   A fully-qualified path representing project_location_agent_transitionRouteGroups resource.
    * @returns {string} A string representing the transition_route_group.
    */
-  matchTransitionRouteGroupFromProjectLocationAgentTransitionRouteGroupsName(projectLocationAgentTransitionRouteGroupsName: string) {
-    return this.pathTemplates.projectLocationAgentTransitionRouteGroupsPathTemplate.match(projectLocationAgentTransitionRouteGroupsName).transition_route_group;
+  matchTransitionRouteGroupFromProjectLocationAgentTransitionRouteGroupsName(
+    projectLocationAgentTransitionRouteGroupsName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupsPathTemplate.match(
+      projectLocationAgentTransitionRouteGroupsName,
+    ).transition_route_group;
   }
 
   /**
@@ -2955,7 +3547,11 @@ export class WebhooksClient {
    * @param {string} security_settings
    * @returns {string} Resource name string.
    */
-  securitySettingsPath(project:string,location:string,securitySettings:string) {
+  securitySettingsPath(
+    project: string,
+    location: string,
+    securitySettings: string,
+  ) {
     return this.pathTemplates.securitySettingsPathTemplate.render({
       project: project,
       location: location,
@@ -2971,7 +3567,9 @@ export class WebhooksClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSecuritySettingsName(securitySettingsName: string) {
-    return this.pathTemplates.securitySettingsPathTemplate.match(securitySettingsName).project;
+    return this.pathTemplates.securitySettingsPathTemplate.match(
+      securitySettingsName,
+    ).project;
   }
 
   /**
@@ -2982,7 +3580,9 @@ export class WebhooksClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSecuritySettingsName(securitySettingsName: string) {
-    return this.pathTemplates.securitySettingsPathTemplate.match(securitySettingsName).location;
+    return this.pathTemplates.securitySettingsPathTemplate.match(
+      securitySettingsName,
+    ).location;
   }
 
   /**
@@ -2993,7 +3593,9 @@ export class WebhooksClient {
    * @returns {string} A string representing the security_settings.
    */
   matchSecuritySettingsFromSecuritySettingsName(securitySettingsName: string) {
-    return this.pathTemplates.securitySettingsPathTemplate.match(securitySettingsName).security_settings;
+    return this.pathTemplates.securitySettingsPathTemplate.match(
+      securitySettingsName,
+    ).security_settings;
   }
 
   /**
@@ -3005,7 +3607,12 @@ export class WebhooksClient {
    * @param {string} test_case
    * @returns {string} Resource name string.
    */
-  testCasePath(project:string,location:string,agent:string,testCase:string) {
+  testCasePath(
+    project: string,
+    location: string,
+    agent: string,
+    testCase: string,
+  ) {
     return this.pathTemplates.testCasePathTemplate.render({
       project: project,
       location: location,
@@ -3055,7 +3662,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the test_case.
    */
   matchTestCaseFromTestCaseName(testCaseName: string) {
-    return this.pathTemplates.testCasePathTemplate.match(testCaseName).test_case;
+    return this.pathTemplates.testCasePathTemplate.match(testCaseName)
+      .test_case;
   }
 
   /**
@@ -3068,7 +3676,13 @@ export class WebhooksClient {
    * @param {string} result
    * @returns {string} Resource name string.
    */
-  testCaseResultPath(project:string,location:string,agent:string,testCase:string,result:string) {
+  testCaseResultPath(
+    project: string,
+    location: string,
+    agent: string,
+    testCase: string,
+    result: string,
+  ) {
     return this.pathTemplates.testCaseResultPathTemplate.render({
       project: project,
       location: location,
@@ -3086,7 +3700,9 @@ export class WebhooksClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTestCaseResultName(testCaseResultName: string) {
-    return this.pathTemplates.testCaseResultPathTemplate.match(testCaseResultName).project;
+    return this.pathTemplates.testCaseResultPathTemplate.match(
+      testCaseResultName,
+    ).project;
   }
 
   /**
@@ -3097,7 +3713,9 @@ export class WebhooksClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTestCaseResultName(testCaseResultName: string) {
-    return this.pathTemplates.testCaseResultPathTemplate.match(testCaseResultName).location;
+    return this.pathTemplates.testCaseResultPathTemplate.match(
+      testCaseResultName,
+    ).location;
   }
 
   /**
@@ -3108,7 +3726,9 @@ export class WebhooksClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromTestCaseResultName(testCaseResultName: string) {
-    return this.pathTemplates.testCaseResultPathTemplate.match(testCaseResultName).agent;
+    return this.pathTemplates.testCaseResultPathTemplate.match(
+      testCaseResultName,
+    ).agent;
   }
 
   /**
@@ -3119,7 +3739,9 @@ export class WebhooksClient {
    * @returns {string} A string representing the test_case.
    */
   matchTestCaseFromTestCaseResultName(testCaseResultName: string) {
-    return this.pathTemplates.testCaseResultPathTemplate.match(testCaseResultName).test_case;
+    return this.pathTemplates.testCaseResultPathTemplate.match(
+      testCaseResultName,
+    ).test_case;
   }
 
   /**
@@ -3130,7 +3752,9 @@ export class WebhooksClient {
    * @returns {string} A string representing the result.
    */
   matchResultFromTestCaseResultName(testCaseResultName: string) {
-    return this.pathTemplates.testCaseResultPathTemplate.match(testCaseResultName).result;
+    return this.pathTemplates.testCaseResultPathTemplate.match(
+      testCaseResultName,
+    ).result;
   }
 
   /**
@@ -3142,7 +3766,7 @@ export class WebhooksClient {
    * @param {string} tool
    * @returns {string} Resource name string.
    */
-  toolPath(project:string,location:string,agent:string,tool:string) {
+  toolPath(project: string, location: string, agent: string, tool: string) {
     return this.pathTemplates.toolPathTemplate.render({
       project: project,
       location: location,
@@ -3205,7 +3829,13 @@ export class WebhooksClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  toolVersionPath(project:string,location:string,agent:string,tool:string,version:string) {
+  toolVersionPath(
+    project: string,
+    location: string,
+    agent: string,
+    tool: string,
+    version: string,
+  ) {
     return this.pathTemplates.toolVersionPathTemplate.render({
       project: project,
       location: location,
@@ -3223,7 +3853,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromToolVersionName(toolVersionName: string) {
-    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName).project;
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .project;
   }
 
   /**
@@ -3234,7 +3865,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromToolVersionName(toolVersionName: string) {
-    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName).location;
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .location;
   }
 
   /**
@@ -3245,7 +3877,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromToolVersionName(toolVersionName: string) {
-    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName).agent;
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .agent;
   }
 
   /**
@@ -3256,7 +3889,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the tool.
    */
   matchToolFromToolVersionName(toolVersionName: string) {
-    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName).tool;
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .tool;
   }
 
   /**
@@ -3267,7 +3901,8 @@ export class WebhooksClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromToolVersionName(toolVersionName: string) {
-    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName).version;
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .version;
   }
 
   /**
@@ -3280,7 +3915,13 @@ export class WebhooksClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  versionPath(project:string,location:string,agent:string,flow:string,version:string) {
+  versionPath(
+    project: string,
+    location: string,
+    agent: string,
+    flow: string,
+    version: string,
+  ) {
     return this.pathTemplates.versionPathTemplate.render({
       project: project,
       location: location,
@@ -3354,7 +3995,12 @@ export class WebhooksClient {
    * @param {string} webhook
    * @returns {string} Resource name string.
    */
-  webhookPath(project:string,location:string,agent:string,webhook:string) {
+  webhookPath(
+    project: string,
+    location: string,
+    agent: string,
+    webhook: string,
+  ) {
     return this.pathTemplates.webhookPathTemplate.render({
       project: project,
       location: location,
@@ -3415,11 +4061,13 @@ export class WebhooksClient {
    */
   close(): Promise<void> {
     if (this.webhooksStub && !this._terminated) {
-      return this.webhooksStub.then(stub => {
+      return this.webhooksStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

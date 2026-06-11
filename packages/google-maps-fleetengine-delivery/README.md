@@ -89,7 +89,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list tasks | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.list_tasks.js) |
 | update delivery vehicle | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.update_delivery_vehicle.js) |
 | update task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.update_task.js) |
-| fleetengine | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine-delivery/samples/generated/v1/snippet_metadata_maps.fleetengine.delivery.v1.json) |
 
 
 ## Supported Node.js Versions
@@ -123,7 +122,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/maps-fleetengine-delivery/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -133,7 +132,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/maps-fleetengine-delivery/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

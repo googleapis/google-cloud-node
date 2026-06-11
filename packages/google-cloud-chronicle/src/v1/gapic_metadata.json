@@ -5,6 +5,118 @@
   "protoPackage": "google.cloud.chronicle.v1",
   "libraryPackage": "@google-cloud/chronicle",
   "services": {
+    "BigQueryExportService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "BigQueryExportServiceClient",
+          "rpcs": {
+            "GetBigQueryExport": {
+              "methods": [
+                "getBigQueryExport"
+              ]
+            },
+            "UpdateBigQueryExport": {
+              "methods": [
+                "updateBigQueryExport"
+              ]
+            },
+            "ProvisionBigQueryExport": {
+              "methods": [
+                "provisionBigQueryExport"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "BigQueryExportServiceClient",
+          "rpcs": {
+            "GetBigQueryExport": {
+              "methods": [
+                "getBigQueryExport"
+              ]
+            },
+            "UpdateBigQueryExport": {
+              "methods": [
+                "updateBigQueryExport"
+              ]
+            },
+            "ProvisionBigQueryExport": {
+              "methods": [
+                "provisionBigQueryExport"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "DashboardChartService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DashboardChartServiceClient",
+          "rpcs": {
+            "GetDashboardChart": {
+              "methods": [
+                "getDashboardChart"
+              ]
+            },
+            "BatchGetDashboardCharts": {
+              "methods": [
+                "batchGetDashboardCharts"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DashboardChartServiceClient",
+          "rpcs": {
+            "GetDashboardChart": {
+              "methods": [
+                "getDashboardChart"
+              ]
+            },
+            "BatchGetDashboardCharts": {
+              "methods": [
+                "batchGetDashboardCharts"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "DashboardQueryService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DashboardQueryServiceClient",
+          "rpcs": {
+            "GetDashboardQuery": {
+              "methods": [
+                "getDashboardQuery"
+              ]
+            },
+            "ExecuteDashboardQuery": {
+              "methods": [
+                "executeDashboardQuery"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DashboardQueryServiceClient",
+          "rpcs": {
+            "GetDashboardQuery": {
+              "methods": [
+                "getDashboardQuery"
+              ]
+            },
+            "ExecuteDashboardQuery": {
+              "methods": [
+                "executeDashboardQuery"
+              ]
+            }
+          }
+        }
+      }
+    },
     "DataAccessControlService": {
       "clients": {
         "grpc": {
@@ -127,6 +239,178 @@
         }
       }
     },
+    "DataTableService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataTableServiceClient",
+          "rpcs": {
+            "CreateDataTable": {
+              "methods": [
+                "createDataTable"
+              ]
+            },
+            "GetDataTable": {
+              "methods": [
+                "getDataTable"
+              ]
+            },
+            "UpdateDataTable": {
+              "methods": [
+                "updateDataTable"
+              ]
+            },
+            "DeleteDataTable": {
+              "methods": [
+                "deleteDataTable"
+              ]
+            },
+            "CreateDataTableRow": {
+              "methods": [
+                "createDataTableRow"
+              ]
+            },
+            "UpdateDataTableRow": {
+              "methods": [
+                "updateDataTableRow"
+              ]
+            },
+            "GetDataTableRow": {
+              "methods": [
+                "getDataTableRow"
+              ]
+            },
+            "DeleteDataTableRow": {
+              "methods": [
+                "deleteDataTableRow"
+              ]
+            },
+            "BulkCreateDataTableRows": {
+              "methods": [
+                "bulkCreateDataTableRows"
+              ]
+            },
+            "BulkGetDataTableRows": {
+              "methods": [
+                "bulkGetDataTableRows"
+              ]
+            },
+            "BulkReplaceDataTableRows": {
+              "methods": [
+                "bulkReplaceDataTableRows"
+              ]
+            },
+            "BulkUpdateDataTableRows": {
+              "methods": [
+                "bulkUpdateDataTableRows"
+              ]
+            },
+            "GetDataTableOperationErrors": {
+              "methods": [
+                "getDataTableOperationErrors"
+              ]
+            },
+            "ListDataTables": {
+              "methods": [
+                "listDataTables",
+                "listDataTablesStream",
+                "listDataTablesAsync"
+              ]
+            },
+            "ListDataTableRows": {
+              "methods": [
+                "listDataTableRows",
+                "listDataTableRowsStream",
+                "listDataTableRowsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataTableServiceClient",
+          "rpcs": {
+            "CreateDataTable": {
+              "methods": [
+                "createDataTable"
+              ]
+            },
+            "GetDataTable": {
+              "methods": [
+                "getDataTable"
+              ]
+            },
+            "UpdateDataTable": {
+              "methods": [
+                "updateDataTable"
+              ]
+            },
+            "DeleteDataTable": {
+              "methods": [
+                "deleteDataTable"
+              ]
+            },
+            "CreateDataTableRow": {
+              "methods": [
+                "createDataTableRow"
+              ]
+            },
+            "UpdateDataTableRow": {
+              "methods": [
+                "updateDataTableRow"
+              ]
+            },
+            "GetDataTableRow": {
+              "methods": [
+                "getDataTableRow"
+              ]
+            },
+            "DeleteDataTableRow": {
+              "methods": [
+                "deleteDataTableRow"
+              ]
+            },
+            "BulkCreateDataTableRows": {
+              "methods": [
+                "bulkCreateDataTableRows"
+              ]
+            },
+            "BulkGetDataTableRows": {
+              "methods": [
+                "bulkGetDataTableRows"
+              ]
+            },
+            "BulkReplaceDataTableRows": {
+              "methods": [
+                "bulkReplaceDataTableRows"
+              ]
+            },
+            "BulkUpdateDataTableRows": {
+              "methods": [
+                "bulkUpdateDataTableRows"
+              ]
+            },
+            "GetDataTableOperationErrors": {
+              "methods": [
+                "getDataTableOperationErrors"
+              ]
+            },
+            "ListDataTables": {
+              "methods": [
+                "listDataTables",
+                "listDataTablesStream",
+                "listDataTablesAsync"
+              ]
+            },
+            "ListDataTableRows": {
+              "methods": [
+                "listDataTableRows",
+                "listDataTableRowsStream",
+                "listDataTableRowsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "EntityService": {
       "clients": {
         "grpc": {
@@ -195,6 +479,54 @@
         }
       }
     },
+    "FeaturedContentNativeDashboardService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "FeaturedContentNativeDashboardServiceClient",
+          "rpcs": {
+            "GetFeaturedContentNativeDashboard": {
+              "methods": [
+                "getFeaturedContentNativeDashboard"
+              ]
+            },
+            "InstallFeaturedContentNativeDashboard": {
+              "methods": [
+                "installFeaturedContentNativeDashboard"
+              ]
+            },
+            "ListFeaturedContentNativeDashboards": {
+              "methods": [
+                "listFeaturedContentNativeDashboards",
+                "listFeaturedContentNativeDashboardsStream",
+                "listFeaturedContentNativeDashboardsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "FeaturedContentNativeDashboardServiceClient",
+          "rpcs": {
+            "GetFeaturedContentNativeDashboard": {
+              "methods": [
+                "getFeaturedContentNativeDashboard"
+              ]
+            },
+            "InstallFeaturedContentNativeDashboard": {
+              "methods": [
+                "installFeaturedContentNativeDashboard"
+              ]
+            },
+            "ListFeaturedContentNativeDashboards": {
+              "methods": [
+                "listFeaturedContentNativeDashboards",
+                "listFeaturedContentNativeDashboardsStream",
+                "listFeaturedContentNativeDashboardsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "InstanceService": {
       "clients": {
         "grpc": {
@@ -213,6 +545,144 @@
             "GetInstance": {
               "methods": [
                 "getInstance"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "NativeDashboardService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "NativeDashboardServiceClient",
+          "rpcs": {
+            "CreateNativeDashboard": {
+              "methods": [
+                "createNativeDashboard"
+              ]
+            },
+            "GetNativeDashboard": {
+              "methods": [
+                "getNativeDashboard"
+              ]
+            },
+            "UpdateNativeDashboard": {
+              "methods": [
+                "updateNativeDashboard"
+              ]
+            },
+            "DuplicateNativeDashboard": {
+              "methods": [
+                "duplicateNativeDashboard"
+              ]
+            },
+            "DeleteNativeDashboard": {
+              "methods": [
+                "deleteNativeDashboard"
+              ]
+            },
+            "AddChart": {
+              "methods": [
+                "addChart"
+              ]
+            },
+            "RemoveChart": {
+              "methods": [
+                "removeChart"
+              ]
+            },
+            "EditChart": {
+              "methods": [
+                "editChart"
+              ]
+            },
+            "DuplicateChart": {
+              "methods": [
+                "duplicateChart"
+              ]
+            },
+            "ExportNativeDashboards": {
+              "methods": [
+                "exportNativeDashboards"
+              ]
+            },
+            "ImportNativeDashboards": {
+              "methods": [
+                "importNativeDashboards"
+              ]
+            },
+            "ListNativeDashboards": {
+              "methods": [
+                "listNativeDashboards",
+                "listNativeDashboardsStream",
+                "listNativeDashboardsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "NativeDashboardServiceClient",
+          "rpcs": {
+            "CreateNativeDashboard": {
+              "methods": [
+                "createNativeDashboard"
+              ]
+            },
+            "GetNativeDashboard": {
+              "methods": [
+                "getNativeDashboard"
+              ]
+            },
+            "UpdateNativeDashboard": {
+              "methods": [
+                "updateNativeDashboard"
+              ]
+            },
+            "DuplicateNativeDashboard": {
+              "methods": [
+                "duplicateNativeDashboard"
+              ]
+            },
+            "DeleteNativeDashboard": {
+              "methods": [
+                "deleteNativeDashboard"
+              ]
+            },
+            "AddChart": {
+              "methods": [
+                "addChart"
+              ]
+            },
+            "RemoveChart": {
+              "methods": [
+                "removeChart"
+              ]
+            },
+            "EditChart": {
+              "methods": [
+                "editChart"
+              ]
+            },
+            "DuplicateChart": {
+              "methods": [
+                "duplicateChart"
+              ]
+            },
+            "ExportNativeDashboards": {
+              "methods": [
+                "exportNativeDashboards"
+              ]
+            },
+            "ImportNativeDashboards": {
+              "methods": [
+                "importNativeDashboards"
+              ]
+            },
+            "ListNativeDashboards": {
+              "methods": [
+                "listNativeDashboards",
+                "listNativeDashboardsStream",
+                "listNativeDashboardsAsync"
               ]
             }
           }

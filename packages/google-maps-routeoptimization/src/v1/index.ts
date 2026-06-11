@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {RouteOptimizationClient} from './route_optimization_client';
+export { RouteOptimizationClient } from './route_optimization_client';

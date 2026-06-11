@@ -4,6 +4,27 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [6.7.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v6.6.1...dlp-v6.7.0) (2026-06-01)
+
+
+### Features
+
+* [dlp] Supporting Conversation Content Type ([#8369](https://github.com/googleapis/google-cloud-node/issues/8369)) ([56fc6d7](https://github.com/googleapis/google-cloud-node/commit/56fc6d77a42f2f2a49ac6cc6fde7758d5ab10a02))
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+
+## [6.6.1](https://github.com/googleapis/google-cloud-node/compare/dlp-v6.6.0...dlp-v6.6.1) (2026-05-01)
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* Do not publish the protos to npm ([#8079](https://github.com/googleapis/google-cloud-node/issues/8079)) ([816216b](https://github.com/googleapis/google-cloud-node/commit/816216bbf51afb25935cd930a0d97ed6efd6b91e))
+* Revert "fix: Do not publish the protos to npm" ([#8096](https://github.com/googleapis/google-cloud-node/issues/8096)) ([ac0fbb6](https://github.com/googleapis/google-cloud-node/commit/ac0fbb682409bb117fd54d344df10970a240772f))
+
 ## [6.6.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v6.5.0...dlp-v6.6.0) (2026-03-19)
 
 

@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,5 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {ContainerAnalysisV1Beta1Client} from './container_analysis_v1_beta1_client';
-export {GrafeasV1Beta1Client} from './grafeas_v1_beta1_client';
+export { ContainerAnalysisV1Beta1Client } from './container_analysis_v1_beta1_client';
+export { GrafeasV1Beta1Client } from './grafeas_v1_beta1_client';

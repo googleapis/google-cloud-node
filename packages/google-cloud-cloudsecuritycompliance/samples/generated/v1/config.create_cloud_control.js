@@ -29,8 +29,9 @@ function main(parent, cloudControlId, cloudControl) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent resource name, in the format
-   *  `organizations/{organization}/locations/{location}`.
+   *  Required. The parent resource name, in one of the following formats:
+   *  - `organizations/{organization}/locations/{location}`.
+   *  - `projects/{project}/locations/{location}`.
    *  The only supported location is `global`.
    */
   // const parent = 'abc123'

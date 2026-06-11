@@ -1,8 +1,16 @@
 # Changelog
 
+
 [npm history][1]
 
 [1]: https://www.npmjs.com/package/nodejs-promisify?activeTab=versions
+
+## [5.0.1](https://github.com/googleapis/google-cloud-node/compare/promisify-v5.0.0...promisify-v5.0.1) (2026-05-11)
+
+
+### Bug Fixes
+
+* Bump all node submodules ([#8178](https://github.com/googleapis/google-cloud-node/issues/8178)) ([9fd76ef](https://github.com/googleapis/google-cloud-node/commit/9fd76eff87b1cf02db6205f141449b31e8ab7d8f))
 
 ## [5.0.0](https://github.com/googleapis/nodejs-promisify/compare/v4.1.0...v5.0.0) (2025-03-11)
 

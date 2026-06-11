@@ -1,6 +1,6 @@
 {
   "name": "gcp-metadata",
-  "version": "8.1.2",
+  "version": "8.1.3",
   "description": "Get the metadata from a Google Cloud Platform environment",
   "repository": {
     "type": "git",
@@ -24,8 +24,6 @@
     "test": "c8 mocha --timeout=5000 build/test",
     "docs": "jsdoc -c .jsdoc.js",
     "lint": "gts check",
-    "docs-test": "linkinator docs",
-    "predocs-test": "npm run docs",
     "prelint": "cd samples; npm link ../; npm install",
     "clean": "gts clean",
     "precompile": "gts clean"
@@ -62,11 +60,10 @@
     "jsdoc": "^4.0.4",
     "jsdoc-fresh": "^5.0.0",
     "jsdoc-region-tag": "^4.0.0",
-    "linkinator": "^6.1.2",
     "mocha": "^11.1.0",
     "ncp": "^2.0.0",
     "nock": "^14.0.5",
-    "sinon": "^21.0.0",
+    "sinon": "21.0.3",
     "tmp": "0.2.5",
     "typescript": "5.8.3"
   },

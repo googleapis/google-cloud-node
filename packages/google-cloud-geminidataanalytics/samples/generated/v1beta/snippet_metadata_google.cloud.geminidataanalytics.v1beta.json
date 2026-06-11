@@ -559,14 +559,14 @@
       "regionTag": "geminidataanalytics_v1beta_generated_DataChatService_Chat_async",
       "title": "DataAgentService chat Sample",
       "origin": "API_DEFINITION",
-      "description": " Answers a data question by generating a stream of [Message][google.cloud.geminidataanalytics.v1alpha.Message] objects.",
+      "description": " Answers a data question by generating a stream of [Message][google.cloud.geminidataanalytics.v1.Message] objects.",
       "canonical": true,
       "file": "data_chat_service.chat.js",
       "language": "JAVASCRIPT",
       "segments": [
         {
           "start": 25,
-          "end": 93,
+          "end": 108,
           "type": "FULL"
         }
       ],
@@ -592,6 +592,10 @@
             "type": ".google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext"
           },
           {
+            "name": "looker_settings",
+            "type": ".google.cloud.geminidataanalytics.v1beta.LookerSettings"
+          },
+          {
             "name": "project",
             "type": "TYPE_STRING"
           },
@@ -604,8 +608,16 @@
             "type": "TYPE_MESSAGE[]"
           },
           {
+            "name": "credentials",
+            "type": ".google.cloud.geminidataanalytics.v1beta.Credentials"
+          },
+          {
             "name": "thinking_mode",
             "type": ".google.cloud.geminidataanalytics.v1beta.ChatRequest.ThinkingMode"
+          },
+          {
+            "name": "model",
+            "type": ".google.cloud.geminidataanalytics.v1beta.ChatRequest.Model"
           }
         ],
         "resultType": ".google.cloud.geminidataanalytics.v1beta.Message",
@@ -766,7 +778,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 73,
+          "end": 74,
           "type": "FULL"
         }
       ],
@@ -818,7 +830,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 75,
+          "end": 76,
           "type": "FULL"
         }
       ],

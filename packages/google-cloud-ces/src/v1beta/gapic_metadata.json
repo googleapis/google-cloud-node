@@ -210,6 +210,11 @@
                 "restoreAppVersion"
               ]
             },
+            "GenerateAppResource": {
+              "methods": [
+                "generateAppResource"
+              ]
+            },
             "ListApps": {
               "methods": [
                 "listApps",
@@ -485,6 +490,11 @@
                 "restoreAppVersion"
               ]
             },
+            "GenerateAppResource": {
+              "methods": [
+                "generateAppResource"
+              ]
+            },
             "ListApps": {
               "methods": [
                 "listApps",
@@ -689,6 +699,26 @@
                 "deleteEvaluationRun"
               ]
             },
+            "ExportEvaluations": {
+              "methods": [
+                "exportEvaluations"
+              ]
+            },
+            "ExportEvaluationRuns": {
+              "methods": [
+                "exportEvaluationRuns"
+              ]
+            },
+            "ExportEvaluationResults": {
+              "methods": [
+                "exportEvaluationResults"
+              ]
+            },
+            "RunEvaluationResultMetrics": {
+              "methods": [
+                "runEvaluationResultMetrics"
+              ]
+            },
             "ListEvaluations": {
               "methods": [
                 "listEvaluations",
@@ -859,6 +889,26 @@
             "DeleteEvaluationRun": {
               "methods": [
                 "deleteEvaluationRun"
+              ]
+            },
+            "ExportEvaluations": {
+              "methods": [
+                "exportEvaluations"
+              ]
+            },
+            "ExportEvaluationRuns": {
+              "methods": [
+                "exportEvaluationRuns"
+              ]
+            },
+            "ExportEvaluationResults": {
+              "methods": [
+                "exportEvaluationResults"
+              ]
+            },
+            "RunEvaluationResultMetrics": {
+              "methods": [
+                "runEvaluationResultMetrics"
               ]
             },
             "ListEvaluations": {

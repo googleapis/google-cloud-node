@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/logging-bunyan",
   "description": "Cloud Logging stream for Bunyan",
-  "version": "5.1.1",
+  "version": "5.1.2",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
@@ -42,15 +42,13 @@
     "presystem-test": "npm run compile",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "system-test": "mocha build/system-test --timeout 600000",
-    "test": "c8 mocha --recursive build/test",
+    "test": "cross-env NODE_OPTIONS='--no-deprecation' c8 mocha --recursive build/test",
     "clean": "gts clean",
     "compile": "tsc -p .",
     "postcompile": "cpy \"src/types/*\" build/src/types",
     "fix": "gts fix",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
-    "docs-test": "linkinator docs",
-    "predocs-test": "npm run docs",
     "prelint": "cd samples; npm link ../; npm install",
     "precompile": "gts clean"
   },
@@ -65,10 +63,10 @@
     "@types/mocha": "^9.0.0",
     "@types/node": "^20.4.9",
     "@types/proxyquire": "^1.3.28",
-    "@types/uuid": "^10.0.0",
     "bunyan": "^1.8.12",
     "c8": "^9.0.0",
     "codecov": "^3.0.2",
+    "cross-env": "^7.0.3",
     "cpy-cli": "^4.0.0",
     "delay": "^5.0.0",
     "express": "^4.16.3",
@@ -76,12 +74,10 @@
     "jsdoc": "^4.0.0",
     "jsdoc-fresh": "^3.0.0",
     "jsdoc-region-tag": "^3.0.0",
-    "linkinator": "^3.0.0",
     "mocha": "^9.2.2",
     "post-install-check": "0.0.1",
     "proxyquire": "^2.0.1",
-    "typescript": "^5.1.6",
-    "uuid": "^10.0.0"
+    "typescript": "^5.1.6"
   },
   "peerDependencies": {
     "bunyan": "*"

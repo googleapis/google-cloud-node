@@ -64,7 +64,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1/batch_service.get_task.js) |
 | list jobs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1/batch_service.list_jobs.js) |
 | list tasks | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1/batch_service.list_tasks.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1/snippet_metadata_google.cloud.batch.v1.json) |
 | cancel job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.cancel_job.js) |
 | create job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.create_job.js) |
 | create resource allowance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.create_resource_allowance.js) |
@@ -78,7 +77,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list tasks | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.list_tasks.js) |
 | update job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.update_job.js) |
 | update resource allowance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.update_resource_allowance.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1alpha/snippet_metadata_google.cloud.batch.v1alpha.json) |
 
 
 ## Supported Node.js Versions
@@ -112,7 +110,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -122,7 +120,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

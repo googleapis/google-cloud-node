@@ -24,7 +24,7 @@ import * as proxyquire from 'proxyquire';
 import * as through from 'through2';
 import {util} from '@google-cloud/common';
 import {PreciseDate} from '@google-cloud/precise-date';
-import {replaceProjectIdToken} from '@google-cloud/projectify';
+import {replaceProjectIdToken} from '../src/helper';
 import * as pfy from '@google-cloud/promisify';
 import {grpc} from 'google-gax';
 import * as sinon from 'sinon';
@@ -190,7 +190,7 @@ describe('Spanner', () => {
         GrpcService: FakeGrpcService,
       },
       '@google-cloud/promisify': fakePfy,
-      '@google-cloud/projectify': {
+      './helper.js': {
         replaceProjectIdToken: fakeReplaceProjectIdToken,
       },
       'google-auth-library': {
@@ -339,8 +339,7 @@ describe('Spanner', () => {
 
     it('should optionally accept disableBuiltInMetrics', () => {
       const spanner = new Spanner({disableBuiltInMetrics: true});
-      assert.strictEqual(MetricsTracerFactory.enabled, false);
-      MetricsTracerFactory.enabled = true; // Reset for other tests.
+      assert.strictEqual(asAny(spanner)._metricsEnabled, false);
     });
 
     it('should optionally accept directedReadOptions', () => {

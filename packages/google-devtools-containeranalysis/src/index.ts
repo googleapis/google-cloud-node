@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import * as v1beta1 from './v1beta1';
 
 const ContainerAnalysisClient = v1.ContainerAnalysisClient;
 type ContainerAnalysisClient = v1.ContainerAnalysisClient;
+
 
 export {v1, v1beta1, ContainerAnalysisClient};
 export default {v1, v1beta1, ContainerAnalysisClient};

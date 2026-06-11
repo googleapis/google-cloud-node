@@ -65,7 +65,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get lfp store | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/samples/generated/v1/lfp_store_service.get_lfp_store.js) |
 | insert lfp store | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/samples/generated/v1/lfp_store_service.insert_lfp_store.js) |
 | list lfp stores | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/samples/generated/v1/lfp_store_service.list_lfp_stores.js) |
-| shopping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/samples/generated/v1/snippet_metadata_google.shopping.merchant.lfp.v1.json) |
 | insert lfp inventory | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_inventory_service.insert_lfp_inventory.js) |
 | get lfp merchant state | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_merchant_state_service.get_lfp_merchant_state.js) |
 | insert lfp sale | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_sale_service.insert_lfp_sale.js) |
@@ -73,7 +72,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get lfp store | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_store_service.get_lfp_store.js) |
 | insert lfp store | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_store_service.insert_lfp_store.js) |
 | list lfp stores | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/samples/generated/v1beta/lfp_store_service.list_lfp_stores.js) |
-| shopping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/samples/generated/v1beta/snippet_metadata_google.shopping.merchant.lfp.v1beta.json) |
 
 
 ## Supported Node.js Versions
@@ -107,7 +105,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -117,7 +115,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-lfp/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

@@ -38,6 +38,15 @@ function main(parent, session) {
    *  Required. The session to create.
    */
   // const session = {}
+  /**
+   *  Optional. The user defined ID to use for session, which will become the
+   *  final component of the session resource name. If not provided, Vertex AI
+   *  will generate a value for this ID.
+   *  This value may be up to 63 characters, and valid characters are
+   *  `[a-z0-9-]`. The first character must be a letter, and the last character
+   *  must be a letter or number.
+   */
+  // const sessionId = 'abc123'
 
   // Imports the Aiplatform library
   const {SessionServiceClient} = require('@google-cloud/aiplatform').v1beta1;

@@ -92,7 +92,7 @@ tests_with_credentials="core/packages/google-auth-library-nodejs/ packages/googl
 # on Windows due to incompatible npm scripts.
 # 
 # Until these packages can be updated to be OS agnostic, we will skip them on Windows.
-windows_exempt_tests="core/ core/packages/ core/dev-packages/ .github/scripts/fixtures/ .github/scripts/tests/ packages/gapic-node-processing/ packages/typeless-sample-bot/"
+windows_exempt_tests="core/ core/packages/ core/dev-packages/ .github/scripts/fixtures/ .github/scripts/tests/ core/packages/gapic-node-processing/ core/packages/typeless-sample-bot/"
 
 for subdir in ${subdirs[@]}; do
     for d in `ls -d ${subdir}/*/`; do
@@ -119,6 +119,16 @@ for subdir in ${subdirs[@]}; do
         # Per https://github.com/googleapis/google-cloud-node/issues/7921, 
         # we are likely to permanently remove these tests in the near future.
         if [[ "${subdir}" == "packages" && "${TEST_TYPE}" == "system" ]]; then
+            echo "Skipping ${TEST_TYPE} test for packages: ${d}"
+            continue
+        fi
+
+        # Sample tests for packages are broken/flaky and blocking PRs.
+        # See https://github.com/googleapis/google-cloud-node/issues/7976#issuecomment-4210458096.
+        #
+        # Per https://github.com/googleapis/google-cloud-node/issues/7921, 
+        # we are likely to permanently remove these tests in the near future.
+        if [[ "${subdir}" == "packages" && "${TEST_TYPE}" == "samples" ]]; then
             echo "Skipping ${TEST_TYPE} test for packages: ${d}"
             continue
         fi

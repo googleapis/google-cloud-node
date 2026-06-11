@@ -67,6 +67,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get backup collection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1/cloud_redis_cluster.get_backup_collection.js) |
 | get cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1/cloud_redis_cluster.get_cluster.js) |
 | get cluster certificate authority | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1/cloud_redis_cluster.get_cluster_certificate_authority.js) |
+| get shared regional certificate authority | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1/cloud_redis_cluster.get_shared_regional_certificate_authority.js) |
 | list backup collections | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1/cloud_redis_cluster.list_backup_collections.js) |
 | list backups | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1/cloud_redis_cluster.list_backups.js) |
 | list clusters | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1/cloud_redis_cluster.list_clusters.js) |
@@ -82,6 +83,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get backup collection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1beta1/cloud_redis_cluster.get_backup_collection.js) |
 | get cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1beta1/cloud_redis_cluster.get_cluster.js) |
 | get cluster certificate authority | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1beta1/cloud_redis_cluster.get_cluster_certificate_authority.js) |
+| get shared regional certificate authority | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1beta1/cloud_redis_cluster.get_shared_regional_certificate_authority.js) |
 | list backup collections | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1beta1/cloud_redis_cluster.list_backup_collections.js) |
 | list backups | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1beta1/cloud_redis_cluster.list_backups.js) |
 | list clusters | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1beta1/cloud_redis_cluster.list_clusters.js) |
@@ -121,7 +123,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -131,7 +133,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

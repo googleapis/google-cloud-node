@@ -90,7 +90,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list deployment events | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/insights_config_service.list_deployment_events.js) |
 | list insights configs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/insights_config_service.list_insights_configs.js) |
 | update insights config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/insights_config_service.update_insights_config.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/snippet_metadata_google.cloud.developerconnect.v1.json) |
 
 
 ## Supported Node.js Versions
@@ -124,7 +123,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -134,7 +133,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

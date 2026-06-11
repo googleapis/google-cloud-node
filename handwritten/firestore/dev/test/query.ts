@@ -1957,6 +1957,20 @@ describe('limit() interface', () => {
     query = query.limit(1).limit(2).limit(3);
     await query.get();
   });
+
+  it('handles limit(0) correctly', async () => {
+    const overrides: ApiOverride = {
+      runQuery: request => {
+        queryEquals(request, limit(0));
+        return emptyQueryStream();
+      },
+    };
+
+    firestore = await createInstance(overrides);
+    let query: Query = firestore.collection('collectionId');
+    query = query.limit(0);
+    await query.get();
+  });
 });
 
 describe('limitToLast() interface', () => {

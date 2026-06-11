@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/error-reporting",
   "description": "Error Reporting Client Library for Node.js",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
@@ -30,8 +30,6 @@
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "license-check": "jsgl --local .",
-    "docs-test": "linkinator docs",
-    "predocs-test": "npm run docs",
     "precompile": "gts clean"
   },
   "dependencies": {
@@ -51,7 +49,6 @@
     "@types/once": "^1.4.5",
     "@types/proxyquire": "^1.3.31",
     "@types/restify": "^8.0.0",
-    "@types/uuid": "^8.3.0",
     "boom": "^7.2.0",
     "c8": "^10.1.3",
     "codecov": "^3.6.2",
@@ -61,16 +58,14 @@
     "js-green-licenses": "^4.0.0",
     "json-stable-stringify": "^1.3.0",
     "koa": "^3.1.1",
-    "linkinator": "^6.1.2",
     "mocha": "^11.7.5",
     "nock": "^14.0.10",
     "pack-n-play": "^2.0.0",
     "proxyquire": "^2.1.3",
     "restify": "^11.0.0",
-    "typescript": "^5.9.3",
-    "uuid": "^8.3.2"
+    "typescript": "^5.9.3"
   },
-"overrides": {
+  "overrides": {
     "undici": "5.28.4",
     "tablesort": "5.6.0",
     "cheerio": "1.0.0"

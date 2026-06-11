@@ -84,7 +84,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | stop backfill job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.stop_backfill_job.js) |
 | update connection profile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.update_connection_profile.js) |
 | update stream | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/datastream.update_stream.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1/snippet_metadata_google.cloud.datastream.v1.json) |
 | create connection profile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.create_connection_profile.js) |
 | create private connection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.create_private_connection.js) |
 | create route | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.create_route.js) |
@@ -106,7 +105,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list streams | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.list_streams.js) |
 | update connection profile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.update_connection_profile.js) |
 | update stream | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1alpha1/datastream.update_stream.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/samples/generated/v1alpha1/snippet_metadata_google.cloud.datastream.v1alpha1.json) |
 
 
 ## Supported Node.js Versions
@@ -140,7 +138,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -150,7 +148,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datastream/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

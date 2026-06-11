@@ -1,5 +1,25 @@
 # Changelog
 
+
+## [4.12.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v4.11.14...gapic-generator-v4.12.0) (2026-06-08)
+
+
+### Features
+
+* Clean up per-package eslintrc configurations ([b053d0e](https://github.com/googleapis/google-cloud-node/commit/b053d0edfa1ade74ce069279af86f058c77a589b))
+* Consolidate package manager to pnpm on gapic-generator-typescript ([#8365](https://github.com/googleapis/google-cloud-node/issues/8365)) ([5c16c62](https://github.com/googleapis/google-cloud-node/commit/5c16c6218730d4835fae3c2c6abe78f21d856bcb))
+* **doc:** Add space to readme ([#8448](https://github.com/googleapis/google-cloud-node/issues/8448)) ([d56eb08](https://github.com/googleapis/google-cloud-node/commit/d56eb080b89bf58bd8235f4843f3801ecd1ae8be))
+* **gapic-generator-typescript:** Disable snippet metadata generation ([#8403](https://github.com/googleapis/google-cloud-node/issues/8403)) ([1c44d96](https://github.com/googleapis/google-cloud-node/commit/1c44d96461b5e8729352001ec9027c20e074470b))
+
+## [4.11.14](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v4.11.13...gapic-generator-v4.11.14) (2026-05-11)
+
+
+### Bug Fixes
+
+* Add logic to check for IAM RPC methods within the service before adding mixin to avoid generating duplicate methods ([#7929](https://github.com/googleapis/google-cloud-node/issues/7929)) ([b908005](https://github.com/googleapis/google-cloud-node/commit/b90800518eb02799a812e6c2d21f57216564da30))
+* Bump all node submodules ([#8178](https://github.com/googleapis/google-cloud-node/issues/8178)) ([9fd76ef](https://github.com/googleapis/google-cloud-node/commit/9fd76eff87b1cf02db6205f141449b31e8ab7d8f))
+* **gapic-generator-typescript:** Add .boolean() to diregapic and handwritten_layer ([#8100](https://github.com/googleapis/google-cloud-node/issues/8100)) ([5b4ab3b](https://github.com/googleapis/google-cloud-node/commit/5b4ab3bd8487ad5ba4816157e0deb33d418ed836))
+
 ## [4.11.13](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v4.11.12...gapic-generator-v4.11.13) (2026-04-06)
 
 

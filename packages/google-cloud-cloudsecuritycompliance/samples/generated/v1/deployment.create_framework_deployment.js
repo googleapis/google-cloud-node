@@ -30,7 +30,9 @@ function main(parent, frameworkDeployment) {
    */
   /**
    *  Required. The parent resource of the framework deployment in the format
-   *  `organizations/{organization}/locations/{location}`.
+   *  `organizations/{organization}/locations/{location}`
+   *  or
+   *  `projects/{project}/locations/{location}`.
    *  Only the global location is supported.
    */
   // const parent = 'abc123'

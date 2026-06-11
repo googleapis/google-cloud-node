@@ -1,6 +1,6 @@
 {
   "name": "google-logging-utils",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "A debug logger package for other Google libraries",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
@@ -18,8 +18,7 @@
     "precompile": "gts clean",
     "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
     "system-test": "echo no system tests 🙀",
-    "docs": "echo no docs needed",
-    "docs-test": "echo no docs tests"
+    "docs": "echo no docs needed"
   },
   "author": "Google API Authors",
   "license": "Apache-2.0",
@@ -35,7 +34,7 @@
     "c8": "^10.1.3",
     "gts": "^6.0.2",
     "mocha": "^11.1.0",
-    "sinon": "^21.0.0",
+    "sinon": "21.0.3",
     "typescript": "5.8.3"
   },
   "bugs": {

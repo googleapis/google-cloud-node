@@ -81,7 +81,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get rule set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/rule_set_service.get_rule_set.js) |
 | list rule sets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/rule_set_service.list_rule_sets.js) |
 | update rule set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/rule_set_service.update_rule_set.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/snippet_metadata_google.cloud.contentwarehouse.v1.json) |
 | create synonym set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/synonym_set_service.create_synonym_set.js) |
 | delete synonym set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/synonym_set_service.delete_synonym_set.js) |
 | get synonym set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/synonym_set_service.get_synonym_set.js) |
@@ -120,7 +119,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -130,7 +129,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

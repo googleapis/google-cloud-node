@@ -62,13 +62,16 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | create membership | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.create_membership.js) |
 | create message | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.create_message.js) |
 | create reaction | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.create_reaction.js) |
+| create section | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.create_section.js) |
 | create space | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.create_space.js) |
 | delete custom emoji | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.delete_custom_emoji.js) |
 | delete membership | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.delete_membership.js) |
 | delete message | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.delete_message.js) |
 | delete reaction | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.delete_reaction.js) |
+| delete section | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.delete_section.js) |
 | delete space | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.delete_space.js) |
 | find direct message | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.find_direct_message.js) |
+| find group chats | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.find_group_chats.js) |
 | get attachment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.get_attachment.js) |
 | get custom emoji | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.get_custom_emoji.js) |
 | get membership | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.get_membership.js) |
@@ -82,17 +85,21 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list memberships | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.list_memberships.js) |
 | list messages | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.list_messages.js) |
 | list reactions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.list_reactions.js) |
+| list section items | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.list_section_items.js) |
+| list sections | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.list_sections.js) |
 | list space events | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.list_space_events.js) |
 | list spaces | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.list_spaces.js) |
+| move section item | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.move_section_item.js) |
+| position section | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.position_section.js) |
 | search spaces | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.search_spaces.js) |
 | set up space | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.set_up_space.js) |
 | update membership | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.update_membership.js) |
 | update message | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.update_message.js) |
+| update section | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.update_section.js) |
 | update space | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.update_space.js) |
 | update space notification setting | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.update_space_notification_setting.js) |
 | update space read state | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.update_space_read_state.js) |
 | upload attachment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/chat_service.upload_attachment.js) |
-| chat | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/samples/generated/v1/snippet_metadata_google.chat.v1.json) |
 
 
 ## Supported Node.js Versions
@@ -126,7 +133,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -136,7 +143,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-chat/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

@@ -16,10 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {CloudFunctionsServiceClient} from '@google-cloud/functions';
+import { CloudFunctionsServiceClient } from '@google-cloud/functions';
 
 // check that the client class type name can be used
-function doStuffWithCloudFunctionsServiceClient(client: CloudFunctionsServiceClient) {
+function doStuffWithCloudFunctionsServiceClient(
+  client: CloudFunctionsServiceClient,
+) {
   client.close();
 }
 

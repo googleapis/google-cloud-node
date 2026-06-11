@@ -63,7 +63,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get question | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.get_question.js) |
 | get user feedback | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.get_user_feedback.js) |
 | update user feedback | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.update_user_feedback.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/generated/v1alpha/snippet_metadata_google.cloud.dataqna.v1alpha.json) |
 
 
 ## Supported Node.js Versions
@@ -97,7 +96,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -107,7 +106,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

@@ -79,7 +79,7 @@
                     function TerminalPointId(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -178,9 +178,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    TerminalPointId.decode = function decode(reader, length, error) {
+                    TerminalPointId.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.TerminalPointId();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -200,7 +204,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -231,9 +235,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    TerminalPointId.verify = function verify(message) {
+                    TerminalPointId.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         var properties = {};
                         if (message.placeId != null && message.hasOwnProperty("placeId")) {
                             properties.Id = 1;
@@ -261,9 +269,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.TerminalPointId} TerminalPointId
                      */
-                    TerminalPointId.fromObject = function fromObject(object) {
+                    TerminalPointId.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.TerminalPointId)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.TerminalPointId();
                         if (object.placeId != null)
                             message.placeId = String(object.placeId);
@@ -357,7 +369,7 @@
                     function TerminalLocation(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -462,9 +474,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    TerminalLocation.decode = function decode(reader, length, error) {
+                    TerminalLocation.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.TerminalLocation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -472,11 +488,11 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.point = $root.google.type.LatLng.decode(reader, reader.uint32());
+                                    message.point = $root.google.type.LatLng.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 2: {
-                                    message.terminalPointId = $root.maps.fleetengine.v1.TerminalPointId.decode(reader, reader.uint32());
+                                    message.terminalPointId = $root.maps.fleetengine.v1.TerminalPointId.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 3: {
@@ -492,7 +508,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -523,16 +539,20 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    TerminalLocation.verify = function verify(message) {
+                    TerminalLocation.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.point != null && message.hasOwnProperty("point")) {
-                            var error = $root.google.type.LatLng.verify(message.point);
+                            var error = $root.google.type.LatLng.verify(message.point, long + 1);
                             if (error)
                                 return "point." + error;
                         }
                         if (message.terminalPointId != null && message.hasOwnProperty("terminalPointId")) {
-                            var error = $root.maps.fleetengine.v1.TerminalPointId.verify(message.terminalPointId);
+                            var error = $root.maps.fleetengine.v1.TerminalPointId.verify(message.terminalPointId, long + 1);
                             if (error)
                                 return "terminalPointId." + error;
                         }
@@ -563,19 +583,23 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.TerminalLocation} TerminalLocation
                      */
-                    TerminalLocation.fromObject = function fromObject(object) {
+                    TerminalLocation.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.TerminalLocation)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.TerminalLocation();
                         if (object.point != null) {
                             if (typeof object.point !== "object")
                                 throw TypeError(".maps.fleetengine.v1.TerminalLocation.point: object expected");
-                            message.point = $root.google.type.LatLng.fromObject(object.point);
+                            message.point = $root.google.type.LatLng.fromObject(object.point, long + 1);
                         }
                         if (object.terminalPointId != null) {
                             if (typeof object.terminalPointId !== "object")
                                 throw TypeError(".maps.fleetengine.v1.TerminalLocation.terminalPointId: object expected");
-                            message.terminalPointId = $root.maps.fleetengine.v1.TerminalPointId.fromObject(object.terminalPointId);
+                            message.terminalPointId = $root.maps.fleetengine.v1.TerminalPointId.fromObject(object.terminalPointId, long + 1);
                         }
                         if (object.accessPointId != null)
                             message.accessPointId = String(object.accessPointId);
@@ -699,7 +723,7 @@
                         this.pathToWaypoint = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -845,9 +869,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    TripWaypoint.decode = function decode(reader, length, error) {
+                    TripWaypoint.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.TripWaypoint();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -855,7 +883,7 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.location = $root.maps.fleetengine.v1.TerminalLocation.decode(reader, reader.uint32());
+                                    message.location = $root.maps.fleetengine.v1.TerminalLocation.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 2: {
@@ -869,7 +897,7 @@
                             case 4: {
                                     if (!(message.pathToWaypoint && message.pathToWaypoint.length))
                                         message.pathToWaypoint = [];
-                                    message.pathToWaypoint.push($root.google.type.LatLng.decode(reader, reader.uint32()));
+                                    message.pathToWaypoint.push($root.google.type.LatLng.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 5: {
@@ -877,23 +905,23 @@
                                     break;
                                 }
                             case 10: {
-                                    message.trafficToWaypoint = $root.maps.fleetengine.v1.ConsumableTrafficPolyline.decode(reader, reader.uint32());
+                                    message.trafficToWaypoint = $root.maps.fleetengine.v1.ConsumableTrafficPolyline.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 6: {
-                                    message.distanceMeters = $root.google.protobuf.Int32Value.decode(reader, reader.uint32());
+                                    message.distanceMeters = $root.google.protobuf.Int32Value.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 7: {
-                                    message.eta = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.eta = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 8: {
-                                    message.duration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.duration = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -924,11 +952,15 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    TripWaypoint.verify = function verify(message) {
+                    TripWaypoint.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.location != null && message.hasOwnProperty("location")) {
-                            var error = $root.maps.fleetengine.v1.TerminalLocation.verify(message.location);
+                            var error = $root.maps.fleetengine.v1.TerminalLocation.verify(message.location, long + 1);
                             if (error)
                                 return "location." + error;
                         }
@@ -949,7 +981,7 @@
                             if (!Array.isArray(message.pathToWaypoint))
                                 return "pathToWaypoint: array expected";
                             for (var i = 0; i < message.pathToWaypoint.length; ++i) {
-                                var error = $root.google.type.LatLng.verify(message.pathToWaypoint[i]);
+                                var error = $root.google.type.LatLng.verify(message.pathToWaypoint[i], long + 1);
                                 if (error)
                                     return "pathToWaypoint." + error;
                             }
@@ -958,22 +990,22 @@
                             if (!$util.isString(message.encodedPathToWaypoint))
                                 return "encodedPathToWaypoint: string expected";
                         if (message.trafficToWaypoint != null && message.hasOwnProperty("trafficToWaypoint")) {
-                            var error = $root.maps.fleetengine.v1.ConsumableTrafficPolyline.verify(message.trafficToWaypoint);
+                            var error = $root.maps.fleetengine.v1.ConsumableTrafficPolyline.verify(message.trafficToWaypoint, long + 1);
                             if (error)
                                 return "trafficToWaypoint." + error;
                         }
                         if (message.distanceMeters != null && message.hasOwnProperty("distanceMeters")) {
-                            var error = $root.google.protobuf.Int32Value.verify(message.distanceMeters);
+                            var error = $root.google.protobuf.Int32Value.verify(message.distanceMeters, long + 1);
                             if (error)
                                 return "distanceMeters." + error;
                         }
                         if (message.eta != null && message.hasOwnProperty("eta")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.eta);
+                            var error = $root.google.protobuf.Timestamp.verify(message.eta, long + 1);
                             if (error)
                                 return "eta." + error;
                         }
                         if (message.duration != null && message.hasOwnProperty("duration")) {
-                            var error = $root.google.protobuf.Duration.verify(message.duration);
+                            var error = $root.google.protobuf.Duration.verify(message.duration, long + 1);
                             if (error)
                                 return "duration." + error;
                         }
@@ -988,14 +1020,18 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.TripWaypoint} TripWaypoint
                      */
-                    TripWaypoint.fromObject = function fromObject(object) {
+                    TripWaypoint.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.TripWaypoint)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.TripWaypoint();
                         if (object.location != null) {
                             if (typeof object.location !== "object")
                                 throw TypeError(".maps.fleetengine.v1.TripWaypoint.location: object expected");
-                            message.location = $root.maps.fleetengine.v1.TerminalLocation.fromObject(object.location);
+                            message.location = $root.maps.fleetengine.v1.TerminalLocation.fromObject(object.location, long + 1);
                         }
                         if (object.tripId != null)
                             message.tripId = String(object.tripId);
@@ -1030,7 +1066,7 @@
                             for (var i = 0; i < object.pathToWaypoint.length; ++i) {
                                 if (typeof object.pathToWaypoint[i] !== "object")
                                     throw TypeError(".maps.fleetengine.v1.TripWaypoint.pathToWaypoint: object expected");
-                                message.pathToWaypoint[i] = $root.google.type.LatLng.fromObject(object.pathToWaypoint[i]);
+                                message.pathToWaypoint[i] = $root.google.type.LatLng.fromObject(object.pathToWaypoint[i], long + 1);
                             }
                         }
                         if (object.encodedPathToWaypoint != null)
@@ -1038,22 +1074,22 @@
                         if (object.trafficToWaypoint != null) {
                             if (typeof object.trafficToWaypoint !== "object")
                                 throw TypeError(".maps.fleetengine.v1.TripWaypoint.trafficToWaypoint: object expected");
-                            message.trafficToWaypoint = $root.maps.fleetengine.v1.ConsumableTrafficPolyline.fromObject(object.trafficToWaypoint);
+                            message.trafficToWaypoint = $root.maps.fleetengine.v1.ConsumableTrafficPolyline.fromObject(object.trafficToWaypoint, long + 1);
                         }
                         if (object.distanceMeters != null) {
                             if (typeof object.distanceMeters !== "object")
                                 throw TypeError(".maps.fleetengine.v1.TripWaypoint.distanceMeters: object expected");
-                            message.distanceMeters = $root.google.protobuf.Int32Value.fromObject(object.distanceMeters);
+                            message.distanceMeters = $root.google.protobuf.Int32Value.fromObject(object.distanceMeters, long + 1);
                         }
                         if (object.eta != null) {
                             if (typeof object.eta !== "object")
                                 throw TypeError(".maps.fleetengine.v1.TripWaypoint.eta: object expected");
-                            message.eta = $root.google.protobuf.Timestamp.fromObject(object.eta);
+                            message.eta = $root.google.protobuf.Timestamp.fromObject(object.eta, long + 1);
                         }
                         if (object.duration != null) {
                             if (typeof object.duration !== "object")
                                 throw TypeError(".maps.fleetengine.v1.TripWaypoint.duration: object expected");
-                            message.duration = $root.google.protobuf.Duration.fromObject(object.duration);
+                            message.duration = $root.google.protobuf.Duration.fromObject(object.duration, long + 1);
                         }
                         return message;
                     };
@@ -1230,7 +1266,7 @@
                     function VehicleAttribute(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -1349,9 +1385,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    VehicleAttribute.decode = function decode(reader, length, error) {
+                    VehicleAttribute.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.VehicleAttribute();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -1379,7 +1419,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -1410,9 +1450,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    VehicleAttribute.verify = function verify(message) {
+                    VehicleAttribute.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         var properties = {};
                         if (message.key != null && message.hasOwnProperty("key"))
                             if (!$util.isString(message.key))
@@ -1450,9 +1494,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.VehicleAttribute} VehicleAttribute
                      */
-                    VehicleAttribute.fromObject = function fromObject(object) {
+                    VehicleAttribute.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.VehicleAttribute)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.VehicleAttribute();
                         if (object.key != null)
                             message.key = String(object.key);
@@ -1586,7 +1634,7 @@
                     function VehicleLocation(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -1961,9 +2009,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    VehicleLocation.decode = function decode(reader, length, error) {
+                    VehicleLocation.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.VehicleLocation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -1971,59 +2023,59 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.location = $root.google.type.LatLng.decode(reader, reader.uint32());
+                                    message.location = $root.google.type.LatLng.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 8: {
-                                    message.horizontalAccuracy = $root.google.protobuf.DoubleValue.decode(reader, reader.uint32());
+                                    message.horizontalAccuracy = $root.google.protobuf.DoubleValue.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 22: {
-                                    message.latlngAccuracy = $root.google.protobuf.DoubleValue.decode(reader, reader.uint32());
+                                    message.latlngAccuracy = $root.google.protobuf.DoubleValue.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 2: {
-                                    message.heading = $root.google.protobuf.Int32Value.decode(reader, reader.uint32());
+                                    message.heading = $root.google.protobuf.Int32Value.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 10: {
-                                    message.bearingAccuracy = $root.google.protobuf.DoubleValue.decode(reader, reader.uint32());
+                                    message.bearingAccuracy = $root.google.protobuf.DoubleValue.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 23: {
-                                    message.headingAccuracy = $root.google.protobuf.DoubleValue.decode(reader, reader.uint32());
+                                    message.headingAccuracy = $root.google.protobuf.DoubleValue.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 5: {
-                                    message.altitude = $root.google.protobuf.DoubleValue.decode(reader, reader.uint32());
+                                    message.altitude = $root.google.protobuf.DoubleValue.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 9: {
-                                    message.verticalAccuracy = $root.google.protobuf.DoubleValue.decode(reader, reader.uint32());
+                                    message.verticalAccuracy = $root.google.protobuf.DoubleValue.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 24: {
-                                    message.altitudeAccuracy = $root.google.protobuf.DoubleValue.decode(reader, reader.uint32());
+                                    message.altitudeAccuracy = $root.google.protobuf.DoubleValue.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 3: {
-                                    message.speedKmph = $root.google.protobuf.Int32Value.decode(reader, reader.uint32());
+                                    message.speedKmph = $root.google.protobuf.Int32Value.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 6: {
-                                    message.speed = $root.google.protobuf.DoubleValue.decode(reader, reader.uint32());
+                                    message.speed = $root.google.protobuf.DoubleValue.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 7: {
-                                    message.speedAccuracy = $root.google.protobuf.DoubleValue.decode(reader, reader.uint32());
+                                    message.speedAccuracy = $root.google.protobuf.DoubleValue.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 4: {
-                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 13: {
-                                    message.serverTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.serverTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 11: {
@@ -2031,27 +2083,27 @@
                                     break;
                                 }
                             case 27: {
-                                    message.isRoadSnapped = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
+                                    message.isRoadSnapped = $root.google.protobuf.BoolValue.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 12: {
-                                    message.isGpsSensorEnabled = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
+                                    message.isGpsSensorEnabled = $root.google.protobuf.BoolValue.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 14: {
-                                    message.timeSinceUpdate = $root.google.protobuf.Int32Value.decode(reader, reader.uint32());
+                                    message.timeSinceUpdate = $root.google.protobuf.Int32Value.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 15: {
-                                    message.numStaleUpdates = $root.google.protobuf.Int32Value.decode(reader, reader.uint32());
+                                    message.numStaleUpdates = $root.google.protobuf.Int32Value.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 16: {
-                                    message.rawLocation = $root.google.type.LatLng.decode(reader, reader.uint32());
+                                    message.rawLocation = $root.google.type.LatLng.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 17: {
-                                    message.rawLocationTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.rawLocationTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 28: {
@@ -2059,31 +2111,31 @@
                                     break;
                                 }
                             case 25: {
-                                    message.rawLocationAccuracy = $root.google.protobuf.DoubleValue.decode(reader, reader.uint32());
+                                    message.rawLocationAccuracy = $root.google.protobuf.DoubleValue.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 29: {
-                                    message.flpLocation = $root.google.type.LatLng.decode(reader, reader.uint32());
+                                    message.flpLocation = $root.google.type.LatLng.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 30: {
-                                    message.flpUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.flpUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 31: {
-                                    message.flpLatlngAccuracyMeters = $root.google.protobuf.DoubleValue.decode(reader, reader.uint32());
+                                    message.flpLatlngAccuracyMeters = $root.google.protobuf.DoubleValue.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 32: {
-                                    message.flpHeadingDegrees = $root.google.protobuf.Int32Value.decode(reader, reader.uint32());
+                                    message.flpHeadingDegrees = $root.google.protobuf.Int32Value.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 18: {
-                                    message.supplementalLocation = $root.google.type.LatLng.decode(reader, reader.uint32());
+                                    message.supplementalLocation = $root.google.type.LatLng.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 19: {
-                                    message.supplementalLocationTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.supplementalLocationTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 20: {
@@ -2091,7 +2143,7 @@
                                     break;
                                 }
                             case 21: {
-                                    message.supplementalLocationAccuracy = $root.google.protobuf.DoubleValue.decode(reader, reader.uint32());
+                                    message.supplementalLocationAccuracy = $root.google.protobuf.DoubleValue.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 26: {
@@ -2099,7 +2151,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -2130,76 +2182,80 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    VehicleLocation.verify = function verify(message) {
+                    VehicleLocation.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.location != null && message.hasOwnProperty("location")) {
-                            var error = $root.google.type.LatLng.verify(message.location);
+                            var error = $root.google.type.LatLng.verify(message.location, long + 1);
                             if (error)
                                 return "location." + error;
                         }
                         if (message.horizontalAccuracy != null && message.hasOwnProperty("horizontalAccuracy")) {
-                            var error = $root.google.protobuf.DoubleValue.verify(message.horizontalAccuracy);
+                            var error = $root.google.protobuf.DoubleValue.verify(message.horizontalAccuracy, long + 1);
                             if (error)
                                 return "horizontalAccuracy." + error;
                         }
                         if (message.latlngAccuracy != null && message.hasOwnProperty("latlngAccuracy")) {
-                            var error = $root.google.protobuf.DoubleValue.verify(message.latlngAccuracy);
+                            var error = $root.google.protobuf.DoubleValue.verify(message.latlngAccuracy, long + 1);
                             if (error)
                                 return "latlngAccuracy." + error;
                         }
                         if (message.heading != null && message.hasOwnProperty("heading")) {
-                            var error = $root.google.protobuf.Int32Value.verify(message.heading);
+                            var error = $root.google.protobuf.Int32Value.verify(message.heading, long + 1);
                             if (error)
                                 return "heading." + error;
                         }
                         if (message.bearingAccuracy != null && message.hasOwnProperty("bearingAccuracy")) {
-                            var error = $root.google.protobuf.DoubleValue.verify(message.bearingAccuracy);
+                            var error = $root.google.protobuf.DoubleValue.verify(message.bearingAccuracy, long + 1);
                             if (error)
                                 return "bearingAccuracy." + error;
                         }
                         if (message.headingAccuracy != null && message.hasOwnProperty("headingAccuracy")) {
-                            var error = $root.google.protobuf.DoubleValue.verify(message.headingAccuracy);
+                            var error = $root.google.protobuf.DoubleValue.verify(message.headingAccuracy, long + 1);
                             if (error)
                                 return "headingAccuracy." + error;
                         }
                         if (message.altitude != null && message.hasOwnProperty("altitude")) {
-                            var error = $root.google.protobuf.DoubleValue.verify(message.altitude);
+                            var error = $root.google.protobuf.DoubleValue.verify(message.altitude, long + 1);
                             if (error)
                                 return "altitude." + error;
                         }
                         if (message.verticalAccuracy != null && message.hasOwnProperty("verticalAccuracy")) {
-                            var error = $root.google.protobuf.DoubleValue.verify(message.verticalAccuracy);
+                            var error = $root.google.protobuf.DoubleValue.verify(message.verticalAccuracy, long + 1);
                             if (error)
                                 return "verticalAccuracy." + error;
                         }
                         if (message.altitudeAccuracy != null && message.hasOwnProperty("altitudeAccuracy")) {
-                            var error = $root.google.protobuf.DoubleValue.verify(message.altitudeAccuracy);
+                            var error = $root.google.protobuf.DoubleValue.verify(message.altitudeAccuracy, long + 1);
                             if (error)
                                 return "altitudeAccuracy." + error;
                         }
                         if (message.speedKmph != null && message.hasOwnProperty("speedKmph")) {
-                            var error = $root.google.protobuf.Int32Value.verify(message.speedKmph);
+                            var error = $root.google.protobuf.Int32Value.verify(message.speedKmph, long + 1);
                             if (error)
                                 return "speedKmph." + error;
                         }
                         if (message.speed != null && message.hasOwnProperty("speed")) {
-                            var error = $root.google.protobuf.DoubleValue.verify(message.speed);
+                            var error = $root.google.protobuf.DoubleValue.verify(message.speed, long + 1);
                             if (error)
                                 return "speed." + error;
                         }
                         if (message.speedAccuracy != null && message.hasOwnProperty("speedAccuracy")) {
-                            var error = $root.google.protobuf.DoubleValue.verify(message.speedAccuracy);
+                            var error = $root.google.protobuf.DoubleValue.verify(message.speedAccuracy, long + 1);
                             if (error)
                                 return "speedAccuracy." + error;
                         }
                         if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                            var error = $root.google.protobuf.Timestamp.verify(message.updateTime, long + 1);
                             if (error)
                                 return "updateTime." + error;
                         }
                         if (message.serverTime != null && message.hasOwnProperty("serverTime")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.serverTime);
+                            var error = $root.google.protobuf.Timestamp.verify(message.serverTime, long + 1);
                             if (error)
                                 return "serverTime." + error;
                         }
@@ -2219,32 +2275,32 @@
                                 break;
                             }
                         if (message.isRoadSnapped != null && message.hasOwnProperty("isRoadSnapped")) {
-                            var error = $root.google.protobuf.BoolValue.verify(message.isRoadSnapped);
+                            var error = $root.google.protobuf.BoolValue.verify(message.isRoadSnapped, long + 1);
                             if (error)
                                 return "isRoadSnapped." + error;
                         }
                         if (message.isGpsSensorEnabled != null && message.hasOwnProperty("isGpsSensorEnabled")) {
-                            var error = $root.google.protobuf.BoolValue.verify(message.isGpsSensorEnabled);
+                            var error = $root.google.protobuf.BoolValue.verify(message.isGpsSensorEnabled, long + 1);
                             if (error)
                                 return "isGpsSensorEnabled." + error;
                         }
                         if (message.timeSinceUpdate != null && message.hasOwnProperty("timeSinceUpdate")) {
-                            var error = $root.google.protobuf.Int32Value.verify(message.timeSinceUpdate);
+                            var error = $root.google.protobuf.Int32Value.verify(message.timeSinceUpdate, long + 1);
                             if (error)
                                 return "timeSinceUpdate." + error;
                         }
                         if (message.numStaleUpdates != null && message.hasOwnProperty("numStaleUpdates")) {
-                            var error = $root.google.protobuf.Int32Value.verify(message.numStaleUpdates);
+                            var error = $root.google.protobuf.Int32Value.verify(message.numStaleUpdates, long + 1);
                             if (error)
                                 return "numStaleUpdates." + error;
                         }
                         if (message.rawLocation != null && message.hasOwnProperty("rawLocation")) {
-                            var error = $root.google.type.LatLng.verify(message.rawLocation);
+                            var error = $root.google.type.LatLng.verify(message.rawLocation, long + 1);
                             if (error)
                                 return "rawLocation." + error;
                         }
                         if (message.rawLocationTime != null && message.hasOwnProperty("rawLocationTime")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.rawLocationTime);
+                            var error = $root.google.protobuf.Timestamp.verify(message.rawLocationTime, long + 1);
                             if (error)
                                 return "rawLocationTime." + error;
                         }
@@ -2264,37 +2320,37 @@
                                 break;
                             }
                         if (message.rawLocationAccuracy != null && message.hasOwnProperty("rawLocationAccuracy")) {
-                            var error = $root.google.protobuf.DoubleValue.verify(message.rawLocationAccuracy);
+                            var error = $root.google.protobuf.DoubleValue.verify(message.rawLocationAccuracy, long + 1);
                             if (error)
                                 return "rawLocationAccuracy." + error;
                         }
                         if (message.flpLocation != null && message.hasOwnProperty("flpLocation")) {
-                            var error = $root.google.type.LatLng.verify(message.flpLocation);
+                            var error = $root.google.type.LatLng.verify(message.flpLocation, long + 1);
                             if (error)
                                 return "flpLocation." + error;
                         }
                         if (message.flpUpdateTime != null && message.hasOwnProperty("flpUpdateTime")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.flpUpdateTime);
+                            var error = $root.google.protobuf.Timestamp.verify(message.flpUpdateTime, long + 1);
                             if (error)
                                 return "flpUpdateTime." + error;
                         }
                         if (message.flpLatlngAccuracyMeters != null && message.hasOwnProperty("flpLatlngAccuracyMeters")) {
-                            var error = $root.google.protobuf.DoubleValue.verify(message.flpLatlngAccuracyMeters);
+                            var error = $root.google.protobuf.DoubleValue.verify(message.flpLatlngAccuracyMeters, long + 1);
                             if (error)
                                 return "flpLatlngAccuracyMeters." + error;
                         }
                         if (message.flpHeadingDegrees != null && message.hasOwnProperty("flpHeadingDegrees")) {
-                            var error = $root.google.protobuf.Int32Value.verify(message.flpHeadingDegrees);
+                            var error = $root.google.protobuf.Int32Value.verify(message.flpHeadingDegrees, long + 1);
                             if (error)
                                 return "flpHeadingDegrees." + error;
                         }
                         if (message.supplementalLocation != null && message.hasOwnProperty("supplementalLocation")) {
-                            var error = $root.google.type.LatLng.verify(message.supplementalLocation);
+                            var error = $root.google.type.LatLng.verify(message.supplementalLocation, long + 1);
                             if (error)
                                 return "supplementalLocation." + error;
                         }
                         if (message.supplementalLocationTime != null && message.hasOwnProperty("supplementalLocationTime")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.supplementalLocationTime);
+                            var error = $root.google.protobuf.Timestamp.verify(message.supplementalLocationTime, long + 1);
                             if (error)
                                 return "supplementalLocationTime." + error;
                         }
@@ -2314,7 +2370,7 @@
                                 break;
                             }
                         if (message.supplementalLocationAccuracy != null && message.hasOwnProperty("supplementalLocationAccuracy")) {
-                            var error = $root.google.protobuf.DoubleValue.verify(message.supplementalLocationAccuracy);
+                            var error = $root.google.protobuf.DoubleValue.verify(message.supplementalLocationAccuracy, long + 1);
                             if (error)
                                 return "supplementalLocationAccuracy." + error;
                         }
@@ -2332,79 +2388,83 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.VehicleLocation} VehicleLocation
                      */
-                    VehicleLocation.fromObject = function fromObject(object) {
+                    VehicleLocation.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.VehicleLocation)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.VehicleLocation();
                         if (object.location != null) {
                             if (typeof object.location !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.location: object expected");
-                            message.location = $root.google.type.LatLng.fromObject(object.location);
+                            message.location = $root.google.type.LatLng.fromObject(object.location, long + 1);
                         }
                         if (object.horizontalAccuracy != null) {
                             if (typeof object.horizontalAccuracy !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.horizontalAccuracy: object expected");
-                            message.horizontalAccuracy = $root.google.protobuf.DoubleValue.fromObject(object.horizontalAccuracy);
+                            message.horizontalAccuracy = $root.google.protobuf.DoubleValue.fromObject(object.horizontalAccuracy, long + 1);
                         }
                         if (object.latlngAccuracy != null) {
                             if (typeof object.latlngAccuracy !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.latlngAccuracy: object expected");
-                            message.latlngAccuracy = $root.google.protobuf.DoubleValue.fromObject(object.latlngAccuracy);
+                            message.latlngAccuracy = $root.google.protobuf.DoubleValue.fromObject(object.latlngAccuracy, long + 1);
                         }
                         if (object.heading != null) {
                             if (typeof object.heading !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.heading: object expected");
-                            message.heading = $root.google.protobuf.Int32Value.fromObject(object.heading);
+                            message.heading = $root.google.protobuf.Int32Value.fromObject(object.heading, long + 1);
                         }
                         if (object.bearingAccuracy != null) {
                             if (typeof object.bearingAccuracy !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.bearingAccuracy: object expected");
-                            message.bearingAccuracy = $root.google.protobuf.DoubleValue.fromObject(object.bearingAccuracy);
+                            message.bearingAccuracy = $root.google.protobuf.DoubleValue.fromObject(object.bearingAccuracy, long + 1);
                         }
                         if (object.headingAccuracy != null) {
                             if (typeof object.headingAccuracy !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.headingAccuracy: object expected");
-                            message.headingAccuracy = $root.google.protobuf.DoubleValue.fromObject(object.headingAccuracy);
+                            message.headingAccuracy = $root.google.protobuf.DoubleValue.fromObject(object.headingAccuracy, long + 1);
                         }
                         if (object.altitude != null) {
                             if (typeof object.altitude !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.altitude: object expected");
-                            message.altitude = $root.google.protobuf.DoubleValue.fromObject(object.altitude);
+                            message.altitude = $root.google.protobuf.DoubleValue.fromObject(object.altitude, long + 1);
                         }
                         if (object.verticalAccuracy != null) {
                             if (typeof object.verticalAccuracy !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.verticalAccuracy: object expected");
-                            message.verticalAccuracy = $root.google.protobuf.DoubleValue.fromObject(object.verticalAccuracy);
+                            message.verticalAccuracy = $root.google.protobuf.DoubleValue.fromObject(object.verticalAccuracy, long + 1);
                         }
                         if (object.altitudeAccuracy != null) {
                             if (typeof object.altitudeAccuracy !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.altitudeAccuracy: object expected");
-                            message.altitudeAccuracy = $root.google.protobuf.DoubleValue.fromObject(object.altitudeAccuracy);
+                            message.altitudeAccuracy = $root.google.protobuf.DoubleValue.fromObject(object.altitudeAccuracy, long + 1);
                         }
                         if (object.speedKmph != null) {
                             if (typeof object.speedKmph !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.speedKmph: object expected");
-                            message.speedKmph = $root.google.protobuf.Int32Value.fromObject(object.speedKmph);
+                            message.speedKmph = $root.google.protobuf.Int32Value.fromObject(object.speedKmph, long + 1);
                         }
                         if (object.speed != null) {
                             if (typeof object.speed !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.speed: object expected");
-                            message.speed = $root.google.protobuf.DoubleValue.fromObject(object.speed);
+                            message.speed = $root.google.protobuf.DoubleValue.fromObject(object.speed, long + 1);
                         }
                         if (object.speedAccuracy != null) {
                             if (typeof object.speedAccuracy !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.speedAccuracy: object expected");
-                            message.speedAccuracy = $root.google.protobuf.DoubleValue.fromObject(object.speedAccuracy);
+                            message.speedAccuracy = $root.google.protobuf.DoubleValue.fromObject(object.speedAccuracy, long + 1);
                         }
                         if (object.updateTime != null) {
                             if (typeof object.updateTime !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.updateTime: object expected");
-                            message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime, long + 1);
                         }
                         if (object.serverTime != null) {
                             if (typeof object.serverTime !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.serverTime: object expected");
-                            message.serverTime = $root.google.protobuf.Timestamp.fromObject(object.serverTime);
+                            message.serverTime = $root.google.protobuf.Timestamp.fromObject(object.serverTime, long + 1);
                         }
                         switch (object.locationSensor) {
                         default:
@@ -2453,32 +2513,32 @@
                         if (object.isRoadSnapped != null) {
                             if (typeof object.isRoadSnapped !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.isRoadSnapped: object expected");
-                            message.isRoadSnapped = $root.google.protobuf.BoolValue.fromObject(object.isRoadSnapped);
+                            message.isRoadSnapped = $root.google.protobuf.BoolValue.fromObject(object.isRoadSnapped, long + 1);
                         }
                         if (object.isGpsSensorEnabled != null) {
                             if (typeof object.isGpsSensorEnabled !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.isGpsSensorEnabled: object expected");
-                            message.isGpsSensorEnabled = $root.google.protobuf.BoolValue.fromObject(object.isGpsSensorEnabled);
+                            message.isGpsSensorEnabled = $root.google.protobuf.BoolValue.fromObject(object.isGpsSensorEnabled, long + 1);
                         }
                         if (object.timeSinceUpdate != null) {
                             if (typeof object.timeSinceUpdate !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.timeSinceUpdate: object expected");
-                            message.timeSinceUpdate = $root.google.protobuf.Int32Value.fromObject(object.timeSinceUpdate);
+                            message.timeSinceUpdate = $root.google.protobuf.Int32Value.fromObject(object.timeSinceUpdate, long + 1);
                         }
                         if (object.numStaleUpdates != null) {
                             if (typeof object.numStaleUpdates !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.numStaleUpdates: object expected");
-                            message.numStaleUpdates = $root.google.protobuf.Int32Value.fromObject(object.numStaleUpdates);
+                            message.numStaleUpdates = $root.google.protobuf.Int32Value.fromObject(object.numStaleUpdates, long + 1);
                         }
                         if (object.rawLocation != null) {
                             if (typeof object.rawLocation !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.rawLocation: object expected");
-                            message.rawLocation = $root.google.type.LatLng.fromObject(object.rawLocation);
+                            message.rawLocation = $root.google.type.LatLng.fromObject(object.rawLocation, long + 1);
                         }
                         if (object.rawLocationTime != null) {
                             if (typeof object.rawLocationTime !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.rawLocationTime: object expected");
-                            message.rawLocationTime = $root.google.protobuf.Timestamp.fromObject(object.rawLocationTime);
+                            message.rawLocationTime = $root.google.protobuf.Timestamp.fromObject(object.rawLocationTime, long + 1);
                         }
                         switch (object.rawLocationSensor) {
                         default:
@@ -2527,37 +2587,37 @@
                         if (object.rawLocationAccuracy != null) {
                             if (typeof object.rawLocationAccuracy !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.rawLocationAccuracy: object expected");
-                            message.rawLocationAccuracy = $root.google.protobuf.DoubleValue.fromObject(object.rawLocationAccuracy);
+                            message.rawLocationAccuracy = $root.google.protobuf.DoubleValue.fromObject(object.rawLocationAccuracy, long + 1);
                         }
                         if (object.flpLocation != null) {
                             if (typeof object.flpLocation !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.flpLocation: object expected");
-                            message.flpLocation = $root.google.type.LatLng.fromObject(object.flpLocation);
+                            message.flpLocation = $root.google.type.LatLng.fromObject(object.flpLocation, long + 1);
                         }
                         if (object.flpUpdateTime != null) {
                             if (typeof object.flpUpdateTime !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.flpUpdateTime: object expected");
-                            message.flpUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.flpUpdateTime);
+                            message.flpUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.flpUpdateTime, long + 1);
                         }
                         if (object.flpLatlngAccuracyMeters != null) {
                             if (typeof object.flpLatlngAccuracyMeters !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.flpLatlngAccuracyMeters: object expected");
-                            message.flpLatlngAccuracyMeters = $root.google.protobuf.DoubleValue.fromObject(object.flpLatlngAccuracyMeters);
+                            message.flpLatlngAccuracyMeters = $root.google.protobuf.DoubleValue.fromObject(object.flpLatlngAccuracyMeters, long + 1);
                         }
                         if (object.flpHeadingDegrees != null) {
                             if (typeof object.flpHeadingDegrees !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.flpHeadingDegrees: object expected");
-                            message.flpHeadingDegrees = $root.google.protobuf.Int32Value.fromObject(object.flpHeadingDegrees);
+                            message.flpHeadingDegrees = $root.google.protobuf.Int32Value.fromObject(object.flpHeadingDegrees, long + 1);
                         }
                         if (object.supplementalLocation != null) {
                             if (typeof object.supplementalLocation !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.supplementalLocation: object expected");
-                            message.supplementalLocation = $root.google.type.LatLng.fromObject(object.supplementalLocation);
+                            message.supplementalLocation = $root.google.type.LatLng.fromObject(object.supplementalLocation, long + 1);
                         }
                         if (object.supplementalLocationTime != null) {
                             if (typeof object.supplementalLocationTime !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.supplementalLocationTime: object expected");
-                            message.supplementalLocationTime = $root.google.protobuf.Timestamp.fromObject(object.supplementalLocationTime);
+                            message.supplementalLocationTime = $root.google.protobuf.Timestamp.fromObject(object.supplementalLocationTime, long + 1);
                         }
                         switch (object.supplementalLocationSensor) {
                         default:
@@ -2606,7 +2666,7 @@
                         if (object.supplementalLocationAccuracy != null) {
                             if (typeof object.supplementalLocationAccuracy !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleLocation.supplementalLocationAccuracy: object expected");
-                            message.supplementalLocationAccuracy = $root.google.protobuf.DoubleValue.fromObject(object.supplementalLocationAccuracy);
+                            message.supplementalLocationAccuracy = $root.google.protobuf.DoubleValue.fromObject(object.supplementalLocationAccuracy, long + 1);
                         }
                         if (object.roadSnapped != null)
                             message.roadSnapped = Boolean(object.roadSnapped);
@@ -2807,7 +2867,7 @@
                     function TripAttribute(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -2916,9 +2976,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    TripAttribute.decode = function decode(reader, length, error) {
+                    TripAttribute.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.TripAttribute();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -2942,7 +3006,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -2973,9 +3037,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    TripAttribute.verify = function verify(message) {
+                    TripAttribute.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         var properties = {};
                         if (message.key != null && message.hasOwnProperty("key"))
                             if (!$util.isString(message.key))
@@ -3010,9 +3078,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.TripAttribute} TripAttribute
                      */
-                    TripAttribute.fromObject = function fromObject(object) {
+                    TripAttribute.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.TripAttribute)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.TripAttribute();
                         if (object.key != null)
                             message.key = String(object.key);
@@ -3111,7 +3183,7 @@
                     function SpeedReadingInterval(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -3196,9 +3268,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    SpeedReadingInterval.decode = function decode(reader, length, error) {
+                    SpeedReadingInterval.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.SpeedReadingInterval();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -3218,7 +3294,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -3249,9 +3325,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    SpeedReadingInterval.verify = function verify(message) {
+                    SpeedReadingInterval.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.startPolylinePointIndex != null && message.hasOwnProperty("startPolylinePointIndex"))
                             if (!$util.isInteger(message.startPolylinePointIndex))
                                 return "startPolylinePointIndex: integer expected";
@@ -3279,9 +3359,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.SpeedReadingInterval} SpeedReadingInterval
                      */
-                    SpeedReadingInterval.fromObject = function fromObject(object) {
+                    SpeedReadingInterval.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.SpeedReadingInterval)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.SpeedReadingInterval();
                         if (object.startPolylinePointIndex != null)
                             message.startPolylinePointIndex = object.startPolylinePointIndex | 0;
@@ -3410,7 +3494,7 @@
                         this.speedReadingInterval = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -3486,9 +3570,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ConsumableTrafficPolyline.decode = function decode(reader, length, error) {
+                    ConsumableTrafficPolyline.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.ConsumableTrafficPolyline();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -3498,7 +3586,7 @@
                             case 1: {
                                     if (!(message.speedReadingInterval && message.speedReadingInterval.length))
                                         message.speedReadingInterval = [];
-                                    message.speedReadingInterval.push($root.maps.fleetengine.v1.SpeedReadingInterval.decode(reader, reader.uint32()));
+                                    message.speedReadingInterval.push($root.maps.fleetengine.v1.SpeedReadingInterval.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 2: {
@@ -3506,7 +3594,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -3537,14 +3625,18 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ConsumableTrafficPolyline.verify = function verify(message) {
+                    ConsumableTrafficPolyline.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.speedReadingInterval != null && message.hasOwnProperty("speedReadingInterval")) {
                             if (!Array.isArray(message.speedReadingInterval))
                                 return "speedReadingInterval: array expected";
                             for (var i = 0; i < message.speedReadingInterval.length; ++i) {
-                                var error = $root.maps.fleetengine.v1.SpeedReadingInterval.verify(message.speedReadingInterval[i]);
+                                var error = $root.maps.fleetengine.v1.SpeedReadingInterval.verify(message.speedReadingInterval[i], long + 1);
                                 if (error)
                                     return "speedReadingInterval." + error;
                             }
@@ -3563,9 +3655,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.ConsumableTrafficPolyline} ConsumableTrafficPolyline
                      */
-                    ConsumableTrafficPolyline.fromObject = function fromObject(object) {
+                    ConsumableTrafficPolyline.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.ConsumableTrafficPolyline)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.ConsumableTrafficPolyline();
                         if (object.speedReadingInterval) {
                             if (!Array.isArray(object.speedReadingInterval))
@@ -3574,7 +3670,7 @@
                             for (var i = 0; i < object.speedReadingInterval.length; ++i) {
                                 if (typeof object.speedReadingInterval[i] !== "object")
                                     throw TypeError(".maps.fleetengine.v1.ConsumableTrafficPolyline.speedReadingInterval: object expected");
-                                message.speedReadingInterval[i] = $root.maps.fleetengine.v1.SpeedReadingInterval.fromObject(object.speedReadingInterval[i]);
+                                message.speedReadingInterval[i] = $root.maps.fleetengine.v1.SpeedReadingInterval.fromObject(object.speedReadingInterval[i], long + 1);
                             }
                         }
                         if (object.encodedPathToWaypoint != null)
@@ -3669,7 +3765,7 @@
                     function RequestHeader(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -3844,9 +3940,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    RequestHeader.decode = function decode(reader, length, error) {
+                    RequestHeader.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.RequestHeader();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -3902,7 +4002,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -3933,9 +4033,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    RequestHeader.verify = function verify(message) {
+                    RequestHeader.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                             if (!$util.isString(message.languageCode))
                                 return "languageCode: string expected";
@@ -3997,9 +4101,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.RequestHeader} RequestHeader
                      */
-                    RequestHeader.fromObject = function fromObject(object) {
+                    RequestHeader.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.RequestHeader)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.RequestHeader();
                         if (object.languageCode != null)
                             message.languageCode = String(object.languageCode);
@@ -4447,7 +4555,7 @@
                     function CreateTripRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -4542,9 +4650,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateTripRequest.decode = function decode(reader, length, error) {
+                    CreateTripRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.CreateTripRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -4552,7 +4664,7 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.header = $root.maps.fleetengine.v1.RequestHeader.decode(reader, reader.uint32());
+                                    message.header = $root.maps.fleetengine.v1.RequestHeader.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 3: {
@@ -4564,11 +4676,11 @@
                                     break;
                                 }
                             case 4: {
-                                    message.trip = $root.maps.fleetengine.v1.Trip.decode(reader, reader.uint32());
+                                    message.trip = $root.maps.fleetengine.v1.Trip.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -4599,11 +4711,15 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    CreateTripRequest.verify = function verify(message) {
+                    CreateTripRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.header != null && message.hasOwnProperty("header")) {
-                            var error = $root.maps.fleetengine.v1.RequestHeader.verify(message.header);
+                            var error = $root.maps.fleetengine.v1.RequestHeader.verify(message.header, long + 1);
                             if (error)
                                 return "header." + error;
                         }
@@ -4614,7 +4730,7 @@
                             if (!$util.isString(message.tripId))
                                 return "tripId: string expected";
                         if (message.trip != null && message.hasOwnProperty("trip")) {
-                            var error = $root.maps.fleetengine.v1.Trip.verify(message.trip);
+                            var error = $root.maps.fleetengine.v1.Trip.verify(message.trip, long + 1);
                             if (error)
                                 return "trip." + error;
                         }
@@ -4629,14 +4745,18 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.CreateTripRequest} CreateTripRequest
                      */
-                    CreateTripRequest.fromObject = function fromObject(object) {
+                    CreateTripRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.CreateTripRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.CreateTripRequest();
                         if (object.header != null) {
                             if (typeof object.header !== "object")
                                 throw TypeError(".maps.fleetengine.v1.CreateTripRequest.header: object expected");
-                            message.header = $root.maps.fleetengine.v1.RequestHeader.fromObject(object.header);
+                            message.header = $root.maps.fleetengine.v1.RequestHeader.fromObject(object.header, long + 1);
                         }
                         if (object.parent != null)
                             message.parent = String(object.parent);
@@ -4645,7 +4765,7 @@
                         if (object.trip != null) {
                             if (typeof object.trip !== "object")
                                 throw TypeError(".maps.fleetengine.v1.CreateTripRequest.trip: object expected");
-                            message.trip = $root.maps.fleetengine.v1.Trip.fromObject(object.trip);
+                            message.trip = $root.maps.fleetengine.v1.Trip.fromObject(object.trip, long + 1);
                         }
                         return message;
                     };
@@ -4736,7 +4856,7 @@
                     function GetTripRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -4871,9 +4991,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetTripRequest.decode = function decode(reader, length, error) {
+                    GetTripRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.GetTripRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -4881,7 +5005,7 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.header = $root.maps.fleetengine.v1.RequestHeader.decode(reader, reader.uint32());
+                                    message.header = $root.maps.fleetengine.v1.RequestHeader.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 3: {
@@ -4893,11 +5017,11 @@
                                     break;
                                 }
                             case 6: {
-                                    message.currentRouteSegmentVersion = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.currentRouteSegmentVersion = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 7: {
-                                    message.remainingWaypointsVersion = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.remainingWaypointsVersion = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 8: {
@@ -4905,15 +5029,15 @@
                                     break;
                                 }
                             case 9: {
-                                    message.currentRouteSegmentTrafficVersion = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.currentRouteSegmentTrafficVersion = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 10: {
-                                    message.remainingWaypointsRouteVersion = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.remainingWaypointsRouteVersion = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -4944,11 +5068,15 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    GetTripRequest.verify = function verify(message) {
+                    GetTripRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.header != null && message.hasOwnProperty("header")) {
-                            var error = $root.maps.fleetengine.v1.RequestHeader.verify(message.header);
+                            var error = $root.maps.fleetengine.v1.RequestHeader.verify(message.header, long + 1);
                             if (error)
                                 return "header." + error;
                         }
@@ -4965,12 +5093,12 @@
                                 break;
                             }
                         if (message.currentRouteSegmentVersion != null && message.hasOwnProperty("currentRouteSegmentVersion")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.currentRouteSegmentVersion);
+                            var error = $root.google.protobuf.Timestamp.verify(message.currentRouteSegmentVersion, long + 1);
                             if (error)
                                 return "currentRouteSegmentVersion." + error;
                         }
                         if (message.remainingWaypointsVersion != null && message.hasOwnProperty("remainingWaypointsVersion")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.remainingWaypointsVersion);
+                            var error = $root.google.protobuf.Timestamp.verify(message.remainingWaypointsVersion, long + 1);
                             if (error)
                                 return "remainingWaypointsVersion." + error;
                         }
@@ -4984,12 +5112,12 @@
                                 break;
                             }
                         if (message.currentRouteSegmentTrafficVersion != null && message.hasOwnProperty("currentRouteSegmentTrafficVersion")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.currentRouteSegmentTrafficVersion);
+                            var error = $root.google.protobuf.Timestamp.verify(message.currentRouteSegmentTrafficVersion, long + 1);
                             if (error)
                                 return "currentRouteSegmentTrafficVersion." + error;
                         }
                         if (message.remainingWaypointsRouteVersion != null && message.hasOwnProperty("remainingWaypointsRouteVersion")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.remainingWaypointsRouteVersion);
+                            var error = $root.google.protobuf.Timestamp.verify(message.remainingWaypointsRouteVersion, long + 1);
                             if (error)
                                 return "remainingWaypointsRouteVersion." + error;
                         }
@@ -5004,14 +5132,18 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.GetTripRequest} GetTripRequest
                      */
-                    GetTripRequest.fromObject = function fromObject(object) {
+                    GetTripRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.GetTripRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.GetTripRequest();
                         if (object.header != null) {
                             if (typeof object.header !== "object")
                                 throw TypeError(".maps.fleetengine.v1.GetTripRequest.header: object expected");
-                            message.header = $root.maps.fleetengine.v1.RequestHeader.fromObject(object.header);
+                            message.header = $root.maps.fleetengine.v1.RequestHeader.fromObject(object.header, long + 1);
                         }
                         if (object.name != null)
                             message.name = String(object.name);
@@ -5038,12 +5170,12 @@
                         if (object.currentRouteSegmentVersion != null) {
                             if (typeof object.currentRouteSegmentVersion !== "object")
                                 throw TypeError(".maps.fleetengine.v1.GetTripRequest.currentRouteSegmentVersion: object expected");
-                            message.currentRouteSegmentVersion = $root.google.protobuf.Timestamp.fromObject(object.currentRouteSegmentVersion);
+                            message.currentRouteSegmentVersion = $root.google.protobuf.Timestamp.fromObject(object.currentRouteSegmentVersion, long + 1);
                         }
                         if (object.remainingWaypointsVersion != null) {
                             if (typeof object.remainingWaypointsVersion !== "object")
                                 throw TypeError(".maps.fleetengine.v1.GetTripRequest.remainingWaypointsVersion: object expected");
-                            message.remainingWaypointsVersion = $root.google.protobuf.Timestamp.fromObject(object.remainingWaypointsVersion);
+                            message.remainingWaypointsVersion = $root.google.protobuf.Timestamp.fromObject(object.remainingWaypointsVersion, long + 1);
                         }
                         switch (object.routeFormatType) {
                         default:
@@ -5068,12 +5200,12 @@
                         if (object.currentRouteSegmentTrafficVersion != null) {
                             if (typeof object.currentRouteSegmentTrafficVersion !== "object")
                                 throw TypeError(".maps.fleetengine.v1.GetTripRequest.currentRouteSegmentTrafficVersion: object expected");
-                            message.currentRouteSegmentTrafficVersion = $root.google.protobuf.Timestamp.fromObject(object.currentRouteSegmentTrafficVersion);
+                            message.currentRouteSegmentTrafficVersion = $root.google.protobuf.Timestamp.fromObject(object.currentRouteSegmentTrafficVersion, long + 1);
                         }
                         if (object.remainingWaypointsRouteVersion != null) {
                             if (typeof object.remainingWaypointsRouteVersion !== "object")
                                 throw TypeError(".maps.fleetengine.v1.GetTripRequest.remainingWaypointsRouteVersion: object expected");
-                            message.remainingWaypointsRouteVersion = $root.google.protobuf.Timestamp.fromObject(object.remainingWaypointsRouteVersion);
+                            message.remainingWaypointsRouteVersion = $root.google.protobuf.Timestamp.fromObject(object.remainingWaypointsRouteVersion, long + 1);
                         }
                         return message;
                     };
@@ -5170,7 +5302,7 @@
                     function DeleteTripRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -5245,9 +5377,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DeleteTripRequest.decode = function decode(reader, length, error) {
+                    DeleteTripRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.DeleteTripRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -5255,7 +5391,7 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.header = $root.maps.fleetengine.v1.RequestHeader.decode(reader, reader.uint32());
+                                    message.header = $root.maps.fleetengine.v1.RequestHeader.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 2: {
@@ -5263,7 +5399,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -5294,11 +5430,15 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    DeleteTripRequest.verify = function verify(message) {
+                    DeleteTripRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.header != null && message.hasOwnProperty("header")) {
-                            var error = $root.maps.fleetengine.v1.RequestHeader.verify(message.header);
+                            var error = $root.maps.fleetengine.v1.RequestHeader.verify(message.header, long + 1);
                             if (error)
                                 return "header." + error;
                         }
@@ -5316,14 +5456,18 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.DeleteTripRequest} DeleteTripRequest
                      */
-                    DeleteTripRequest.fromObject = function fromObject(object) {
+                    DeleteTripRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.DeleteTripRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.DeleteTripRequest();
                         if (object.header != null) {
                             if (typeof object.header !== "object")
                                 throw TypeError(".maps.fleetengine.v1.DeleteTripRequest.header: object expected");
-                            message.header = $root.maps.fleetengine.v1.RequestHeader.fromObject(object.header);
+                            message.header = $root.maps.fleetengine.v1.RequestHeader.fromObject(object.header, long + 1);
                         }
                         if (object.name != null)
                             message.name = String(object.name);
@@ -5408,7 +5552,7 @@
                         this.relatedIds = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -5514,9 +5658,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReportBillableTripRequest.decode = function decode(reader, length, error) {
+                    ReportBillableTripRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.ReportBillableTripRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -5546,7 +5694,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -5577,9 +5725,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ReportBillableTripRequest.verify = function verify(message) {
+                    ReportBillableTripRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -5624,9 +5776,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.ReportBillableTripRequest} ReportBillableTripRequest
                      */
-                    ReportBillableTripRequest.fromObject = function fromObject(object) {
+                    ReportBillableTripRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.ReportBillableTripRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.ReportBillableTripRequest();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -5793,7 +5949,7 @@
                     function UpdateTripRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -5888,9 +6044,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UpdateTripRequest.decode = function decode(reader, length, error) {
+                    UpdateTripRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.UpdateTripRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -5898,7 +6058,7 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.header = $root.maps.fleetengine.v1.RequestHeader.decode(reader, reader.uint32());
+                                    message.header = $root.maps.fleetengine.v1.RequestHeader.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 3: {
@@ -5906,15 +6066,15 @@
                                     break;
                                 }
                             case 4: {
-                                    message.trip = $root.maps.fleetengine.v1.Trip.decode(reader, reader.uint32());
+                                    message.trip = $root.maps.fleetengine.v1.Trip.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 5: {
-                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -5945,11 +6105,15 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    UpdateTripRequest.verify = function verify(message) {
+                    UpdateTripRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.header != null && message.hasOwnProperty("header")) {
-                            var error = $root.maps.fleetengine.v1.RequestHeader.verify(message.header);
+                            var error = $root.maps.fleetengine.v1.RequestHeader.verify(message.header, long + 1);
                             if (error)
                                 return "header." + error;
                         }
@@ -5957,12 +6121,12 @@
                             if (!$util.isString(message.name))
                                 return "name: string expected";
                         if (message.trip != null && message.hasOwnProperty("trip")) {
-                            var error = $root.maps.fleetengine.v1.Trip.verify(message.trip);
+                            var error = $root.maps.fleetengine.v1.Trip.verify(message.trip, long + 1);
                             if (error)
                                 return "trip." + error;
                         }
                         if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
-                            var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                            var error = $root.google.protobuf.FieldMask.verify(message.updateMask, long + 1);
                             if (error)
                                 return "updateMask." + error;
                         }
@@ -5977,26 +6141,30 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.UpdateTripRequest} UpdateTripRequest
                      */
-                    UpdateTripRequest.fromObject = function fromObject(object) {
+                    UpdateTripRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.UpdateTripRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.UpdateTripRequest();
                         if (object.header != null) {
                             if (typeof object.header !== "object")
                                 throw TypeError(".maps.fleetengine.v1.UpdateTripRequest.header: object expected");
-                            message.header = $root.maps.fleetengine.v1.RequestHeader.fromObject(object.header);
+                            message.header = $root.maps.fleetengine.v1.RequestHeader.fromObject(object.header, long + 1);
                         }
                         if (object.name != null)
                             message.name = String(object.name);
                         if (object.trip != null) {
                             if (typeof object.trip !== "object")
                                 throw TypeError(".maps.fleetengine.v1.UpdateTripRequest.trip: object expected");
-                            message.trip = $root.maps.fleetengine.v1.Trip.fromObject(object.trip);
+                            message.trip = $root.maps.fleetengine.v1.Trip.fromObject(object.trip, long + 1);
                         }
                         if (object.updateMask != null) {
                             if (typeof object.updateMask !== "object")
                                 throw TypeError(".maps.fleetengine.v1.UpdateTripRequest.updateMask: object expected");
-                            message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask, long + 1);
                         }
                         return message;
                     };
@@ -6086,7 +6254,7 @@
                     function SearchTripsRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -6211,9 +6379,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    SearchTripsRequest.decode = function decode(reader, length, error) {
+                    SearchTripsRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.SearchTripsRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -6221,7 +6393,7 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.header = $root.maps.fleetengine.v1.RequestHeader.decode(reader, reader.uint32());
+                                    message.header = $root.maps.fleetengine.v1.RequestHeader.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 3: {
@@ -6245,11 +6417,11 @@
                                     break;
                                 }
                             case 8: {
-                                    message.minimumStaleness = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.minimumStaleness = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -6280,11 +6452,15 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    SearchTripsRequest.verify = function verify(message) {
+                    SearchTripsRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.header != null && message.hasOwnProperty("header")) {
-                            var error = $root.maps.fleetengine.v1.RequestHeader.verify(message.header);
+                            var error = $root.maps.fleetengine.v1.RequestHeader.verify(message.header, long + 1);
                             if (error)
                                 return "header." + error;
                         }
@@ -6304,7 +6480,7 @@
                             if (!$util.isString(message.pageToken))
                                 return "pageToken: string expected";
                         if (message.minimumStaleness != null && message.hasOwnProperty("minimumStaleness")) {
-                            var error = $root.google.protobuf.Duration.verify(message.minimumStaleness);
+                            var error = $root.google.protobuf.Duration.verify(message.minimumStaleness, long + 1);
                             if (error)
                                 return "minimumStaleness." + error;
                         }
@@ -6319,14 +6495,18 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.SearchTripsRequest} SearchTripsRequest
                      */
-                    SearchTripsRequest.fromObject = function fromObject(object) {
+                    SearchTripsRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.SearchTripsRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.SearchTripsRequest();
                         if (object.header != null) {
                             if (typeof object.header !== "object")
                                 throw TypeError(".maps.fleetengine.v1.SearchTripsRequest.header: object expected");
-                            message.header = $root.maps.fleetengine.v1.RequestHeader.fromObject(object.header);
+                            message.header = $root.maps.fleetengine.v1.RequestHeader.fromObject(object.header, long + 1);
                         }
                         if (object.parent != null)
                             message.parent = String(object.parent);
@@ -6341,7 +6521,7 @@
                         if (object.minimumStaleness != null) {
                             if (typeof object.minimumStaleness !== "object")
                                 throw TypeError(".maps.fleetengine.v1.SearchTripsRequest.minimumStaleness: object expected");
-                            message.minimumStaleness = $root.google.protobuf.Duration.fromObject(object.minimumStaleness);
+                            message.minimumStaleness = $root.google.protobuf.Duration.fromObject(object.minimumStaleness, long + 1);
                         }
                         return message;
                     };
@@ -6436,7 +6616,7 @@
                         this.trips = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -6512,9 +6692,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    SearchTripsResponse.decode = function decode(reader, length, error) {
+                    SearchTripsResponse.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.SearchTripsResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -6524,7 +6708,7 @@
                             case 1: {
                                     if (!(message.trips && message.trips.length))
                                         message.trips = [];
-                                    message.trips.push($root.maps.fleetengine.v1.Trip.decode(reader, reader.uint32()));
+                                    message.trips.push($root.maps.fleetengine.v1.Trip.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 2: {
@@ -6532,7 +6716,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -6563,14 +6747,18 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    SearchTripsResponse.verify = function verify(message) {
+                    SearchTripsResponse.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.trips != null && message.hasOwnProperty("trips")) {
                             if (!Array.isArray(message.trips))
                                 return "trips: array expected";
                             for (var i = 0; i < message.trips.length; ++i) {
-                                var error = $root.maps.fleetengine.v1.Trip.verify(message.trips[i]);
+                                var error = $root.maps.fleetengine.v1.Trip.verify(message.trips[i], long + 1);
                                 if (error)
                                     return "trips." + error;
                             }
@@ -6589,9 +6777,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.SearchTripsResponse} SearchTripsResponse
                      */
-                    SearchTripsResponse.fromObject = function fromObject(object) {
+                    SearchTripsResponse.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.SearchTripsResponse)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.SearchTripsResponse();
                         if (object.trips) {
                             if (!Array.isArray(object.trips))
@@ -6600,7 +6792,7 @@
                             for (var i = 0; i < object.trips.length; ++i) {
                                 if (typeof object.trips[i] !== "object")
                                     throw TypeError(".maps.fleetengine.v1.SearchTripsResponse.trips: object expected");
-                                message.trips[i] = $root.maps.fleetengine.v1.Trip.fromObject(object.trips[i]);
+                                message.trips[i] = $root.maps.fleetengine.v1.Trip.fromObject(object.trips[i], long + 1);
                             }
                         }
                         if (object.nextPageToken != null)
@@ -6724,7 +6916,7 @@
                         this.attributes = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -7126,9 +7318,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Trip.decode = function decode(reader, length, error) {
+                    Trip.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.Trip();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -7152,29 +7348,29 @@
                                     break;
                                 }
                             case 5: {
-                                    message.pickupPoint = $root.maps.fleetengine.v1.TerminalLocation.decode(reader, reader.uint32());
+                                    message.pickupPoint = $root.maps.fleetengine.v1.TerminalLocation.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 22: {
-                                    message.actualPickupPoint = $root.maps.fleetengine.v1.StopLocation.decode(reader, reader.uint32());
+                                    message.actualPickupPoint = $root.maps.fleetengine.v1.StopLocation.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 32: {
-                                    message.actualPickupArrivalPoint = $root.maps.fleetengine.v1.StopLocation.decode(reader, reader.uint32());
+                                    message.actualPickupArrivalPoint = $root.maps.fleetengine.v1.StopLocation.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 6: {
-                                    message.pickupTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.pickupTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 14: {
                                     if (!(message.intermediateDestinations && message.intermediateDestinations.length))
                                         message.intermediateDestinations = [];
-                                    message.intermediateDestinations.push($root.maps.fleetengine.v1.TerminalLocation.decode(reader, reader.uint32()));
+                                    message.intermediateDestinations.push($root.maps.fleetengine.v1.TerminalLocation.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 25: {
-                                    message.intermediateDestinationsVersion = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.intermediateDestinationsVersion = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 15: {
@@ -7184,43 +7380,43 @@
                             case 33: {
                                     if (!(message.actualIntermediateDestinationArrivalPoints && message.actualIntermediateDestinationArrivalPoints.length))
                                         message.actualIntermediateDestinationArrivalPoints = [];
-                                    message.actualIntermediateDestinationArrivalPoints.push($root.maps.fleetengine.v1.StopLocation.decode(reader, reader.uint32()));
+                                    message.actualIntermediateDestinationArrivalPoints.push($root.maps.fleetengine.v1.StopLocation.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 34: {
                                     if (!(message.actualIntermediateDestinations && message.actualIntermediateDestinations.length))
                                         message.actualIntermediateDestinations = [];
-                                    message.actualIntermediateDestinations.push($root.maps.fleetengine.v1.StopLocation.decode(reader, reader.uint32()));
+                                    message.actualIntermediateDestinations.push($root.maps.fleetengine.v1.StopLocation.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 7: {
-                                    message.dropoffPoint = $root.maps.fleetengine.v1.TerminalLocation.decode(reader, reader.uint32());
+                                    message.dropoffPoint = $root.maps.fleetengine.v1.TerminalLocation.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 23: {
-                                    message.actualDropoffPoint = $root.maps.fleetengine.v1.StopLocation.decode(reader, reader.uint32());
+                                    message.actualDropoffPoint = $root.maps.fleetengine.v1.StopLocation.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 8: {
-                                    message.dropoffTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.dropoffTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 16: {
                                     if (!(message.remainingWaypoints && message.remainingWaypoints.length))
                                         message.remainingWaypoints = [];
-                                    message.remainingWaypoints.push($root.maps.fleetengine.v1.TripWaypoint.decode(reader, reader.uint32()));
+                                    message.remainingWaypoints.push($root.maps.fleetengine.v1.TripWaypoint.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 20: {
                                     if (!(message.vehicleWaypoints && message.vehicleWaypoints.length))
                                         message.vehicleWaypoints = [];
-                                    message.vehicleWaypoints.push($root.maps.fleetengine.v1.TripWaypoint.decode(reader, reader.uint32()));
+                                    message.vehicleWaypoints.push($root.maps.fleetengine.v1.TripWaypoint.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 9: {
                                     if (!(message.route && message.route.length))
                                         message.route = [];
-                                    message.route.push($root.google.type.LatLng.decode(reader, reader.uint32()));
+                                    message.route.push($root.google.type.LatLng.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 21: {
@@ -7228,39 +7424,39 @@
                                     break;
                                 }
                             case 17: {
-                                    message.currentRouteSegmentVersion = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.currentRouteSegmentVersion = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 28: {
-                                    message.currentRouteSegmentTraffic = $root.maps.fleetengine.v1.ConsumableTrafficPolyline.decode(reader, reader.uint32());
+                                    message.currentRouteSegmentTraffic = $root.maps.fleetengine.v1.ConsumableTrafficPolyline.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 30: {
-                                    message.currentRouteSegmentTrafficVersion = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.currentRouteSegmentTrafficVersion = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 24: {
-                                    message.currentRouteSegmentEndPoint = $root.maps.fleetengine.v1.TripWaypoint.decode(reader, reader.uint32());
+                                    message.currentRouteSegmentEndPoint = $root.maps.fleetengine.v1.TripWaypoint.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 12: {
-                                    message.remainingDistanceMeters = $root.google.protobuf.Int32Value.decode(reader, reader.uint32());
+                                    message.remainingDistanceMeters = $root.google.protobuf.Int32Value.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 13: {
-                                    message.etaToFirstWaypoint = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.etaToFirstWaypoint = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 27: {
-                                    message.remainingTimeToFirstWaypoint = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.remainingTimeToFirstWaypoint = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 19: {
-                                    message.remainingWaypointsVersion = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.remainingWaypointsVersion = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 29: {
-                                    message.remainingWaypointsRouteVersion = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.remainingWaypointsRouteVersion = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 10: {
@@ -7268,7 +7464,7 @@
                                     break;
                                 }
                             case 11: {
-                                    message.lastLocation = $root.maps.fleetengine.v1.VehicleLocation.decode(reader, reader.uint32());
+                                    message.lastLocation = $root.maps.fleetengine.v1.VehicleLocation.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 26: {
@@ -7282,11 +7478,11 @@
                             case 35: {
                                     if (!(message.attributes && message.attributes.length))
                                         message.attributes = [];
-                                    message.attributes.push($root.maps.fleetengine.v1.TripAttribute.decode(reader, reader.uint32()));
+                                    message.attributes.push($root.maps.fleetengine.v1.TripAttribute.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -7317,9 +7513,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    Trip.verify = function verify(message) {
+                    Trip.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -7351,22 +7551,22 @@
                                 break;
                             }
                         if (message.pickupPoint != null && message.hasOwnProperty("pickupPoint")) {
-                            var error = $root.maps.fleetengine.v1.TerminalLocation.verify(message.pickupPoint);
+                            var error = $root.maps.fleetengine.v1.TerminalLocation.verify(message.pickupPoint, long + 1);
                             if (error)
                                 return "pickupPoint." + error;
                         }
                         if (message.actualPickupPoint != null && message.hasOwnProperty("actualPickupPoint")) {
-                            var error = $root.maps.fleetengine.v1.StopLocation.verify(message.actualPickupPoint);
+                            var error = $root.maps.fleetengine.v1.StopLocation.verify(message.actualPickupPoint, long + 1);
                             if (error)
                                 return "actualPickupPoint." + error;
                         }
                         if (message.actualPickupArrivalPoint != null && message.hasOwnProperty("actualPickupArrivalPoint")) {
-                            var error = $root.maps.fleetengine.v1.StopLocation.verify(message.actualPickupArrivalPoint);
+                            var error = $root.maps.fleetengine.v1.StopLocation.verify(message.actualPickupArrivalPoint, long + 1);
                             if (error)
                                 return "actualPickupArrivalPoint." + error;
                         }
                         if (message.pickupTime != null && message.hasOwnProperty("pickupTime")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.pickupTime);
+                            var error = $root.google.protobuf.Timestamp.verify(message.pickupTime, long + 1);
                             if (error)
                                 return "pickupTime." + error;
                         }
@@ -7374,13 +7574,13 @@
                             if (!Array.isArray(message.intermediateDestinations))
                                 return "intermediateDestinations: array expected";
                             for (var i = 0; i < message.intermediateDestinations.length; ++i) {
-                                var error = $root.maps.fleetengine.v1.TerminalLocation.verify(message.intermediateDestinations[i]);
+                                var error = $root.maps.fleetengine.v1.TerminalLocation.verify(message.intermediateDestinations[i], long + 1);
                                 if (error)
                                     return "intermediateDestinations." + error;
                             }
                         }
                         if (message.intermediateDestinationsVersion != null && message.hasOwnProperty("intermediateDestinationsVersion")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.intermediateDestinationsVersion);
+                            var error = $root.google.protobuf.Timestamp.verify(message.intermediateDestinationsVersion, long + 1);
                             if (error)
                                 return "intermediateDestinationsVersion." + error;
                         }
@@ -7391,7 +7591,7 @@
                             if (!Array.isArray(message.actualIntermediateDestinationArrivalPoints))
                                 return "actualIntermediateDestinationArrivalPoints: array expected";
                             for (var i = 0; i < message.actualIntermediateDestinationArrivalPoints.length; ++i) {
-                                var error = $root.maps.fleetengine.v1.StopLocation.verify(message.actualIntermediateDestinationArrivalPoints[i]);
+                                var error = $root.maps.fleetengine.v1.StopLocation.verify(message.actualIntermediateDestinationArrivalPoints[i], long + 1);
                                 if (error)
                                     return "actualIntermediateDestinationArrivalPoints." + error;
                             }
@@ -7400,23 +7600,23 @@
                             if (!Array.isArray(message.actualIntermediateDestinations))
                                 return "actualIntermediateDestinations: array expected";
                             for (var i = 0; i < message.actualIntermediateDestinations.length; ++i) {
-                                var error = $root.maps.fleetengine.v1.StopLocation.verify(message.actualIntermediateDestinations[i]);
+                                var error = $root.maps.fleetengine.v1.StopLocation.verify(message.actualIntermediateDestinations[i], long + 1);
                                 if (error)
                                     return "actualIntermediateDestinations." + error;
                             }
                         }
                         if (message.dropoffPoint != null && message.hasOwnProperty("dropoffPoint")) {
-                            var error = $root.maps.fleetengine.v1.TerminalLocation.verify(message.dropoffPoint);
+                            var error = $root.maps.fleetengine.v1.TerminalLocation.verify(message.dropoffPoint, long + 1);
                             if (error)
                                 return "dropoffPoint." + error;
                         }
                         if (message.actualDropoffPoint != null && message.hasOwnProperty("actualDropoffPoint")) {
-                            var error = $root.maps.fleetengine.v1.StopLocation.verify(message.actualDropoffPoint);
+                            var error = $root.maps.fleetengine.v1.StopLocation.verify(message.actualDropoffPoint, long + 1);
                             if (error)
                                 return "actualDropoffPoint." + error;
                         }
                         if (message.dropoffTime != null && message.hasOwnProperty("dropoffTime")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.dropoffTime);
+                            var error = $root.google.protobuf.Timestamp.verify(message.dropoffTime, long + 1);
                             if (error)
                                 return "dropoffTime." + error;
                         }
@@ -7424,7 +7624,7 @@
                             if (!Array.isArray(message.remainingWaypoints))
                                 return "remainingWaypoints: array expected";
                             for (var i = 0; i < message.remainingWaypoints.length; ++i) {
-                                var error = $root.maps.fleetengine.v1.TripWaypoint.verify(message.remainingWaypoints[i]);
+                                var error = $root.maps.fleetengine.v1.TripWaypoint.verify(message.remainingWaypoints[i], long + 1);
                                 if (error)
                                     return "remainingWaypoints." + error;
                             }
@@ -7433,7 +7633,7 @@
                             if (!Array.isArray(message.vehicleWaypoints))
                                 return "vehicleWaypoints: array expected";
                             for (var i = 0; i < message.vehicleWaypoints.length; ++i) {
-                                var error = $root.maps.fleetengine.v1.TripWaypoint.verify(message.vehicleWaypoints[i]);
+                                var error = $root.maps.fleetengine.v1.TripWaypoint.verify(message.vehicleWaypoints[i], long + 1);
                                 if (error)
                                     return "vehicleWaypoints." + error;
                             }
@@ -7442,7 +7642,7 @@
                             if (!Array.isArray(message.route))
                                 return "route: array expected";
                             for (var i = 0; i < message.route.length; ++i) {
-                                var error = $root.google.type.LatLng.verify(message.route[i]);
+                                var error = $root.google.type.LatLng.verify(message.route[i], long + 1);
                                 if (error)
                                     return "route." + error;
                             }
@@ -7451,47 +7651,47 @@
                             if (!$util.isString(message.currentRouteSegment))
                                 return "currentRouteSegment: string expected";
                         if (message.currentRouteSegmentVersion != null && message.hasOwnProperty("currentRouteSegmentVersion")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.currentRouteSegmentVersion);
+                            var error = $root.google.protobuf.Timestamp.verify(message.currentRouteSegmentVersion, long + 1);
                             if (error)
                                 return "currentRouteSegmentVersion." + error;
                         }
                         if (message.currentRouteSegmentTraffic != null && message.hasOwnProperty("currentRouteSegmentTraffic")) {
-                            var error = $root.maps.fleetengine.v1.ConsumableTrafficPolyline.verify(message.currentRouteSegmentTraffic);
+                            var error = $root.maps.fleetengine.v1.ConsumableTrafficPolyline.verify(message.currentRouteSegmentTraffic, long + 1);
                             if (error)
                                 return "currentRouteSegmentTraffic." + error;
                         }
                         if (message.currentRouteSegmentTrafficVersion != null && message.hasOwnProperty("currentRouteSegmentTrafficVersion")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.currentRouteSegmentTrafficVersion);
+                            var error = $root.google.protobuf.Timestamp.verify(message.currentRouteSegmentTrafficVersion, long + 1);
                             if (error)
                                 return "currentRouteSegmentTrafficVersion." + error;
                         }
                         if (message.currentRouteSegmentEndPoint != null && message.hasOwnProperty("currentRouteSegmentEndPoint")) {
-                            var error = $root.maps.fleetengine.v1.TripWaypoint.verify(message.currentRouteSegmentEndPoint);
+                            var error = $root.maps.fleetengine.v1.TripWaypoint.verify(message.currentRouteSegmentEndPoint, long + 1);
                             if (error)
                                 return "currentRouteSegmentEndPoint." + error;
                         }
                         if (message.remainingDistanceMeters != null && message.hasOwnProperty("remainingDistanceMeters")) {
-                            var error = $root.google.protobuf.Int32Value.verify(message.remainingDistanceMeters);
+                            var error = $root.google.protobuf.Int32Value.verify(message.remainingDistanceMeters, long + 1);
                             if (error)
                                 return "remainingDistanceMeters." + error;
                         }
                         if (message.etaToFirstWaypoint != null && message.hasOwnProperty("etaToFirstWaypoint")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.etaToFirstWaypoint);
+                            var error = $root.google.protobuf.Timestamp.verify(message.etaToFirstWaypoint, long + 1);
                             if (error)
                                 return "etaToFirstWaypoint." + error;
                         }
                         if (message.remainingTimeToFirstWaypoint != null && message.hasOwnProperty("remainingTimeToFirstWaypoint")) {
-                            var error = $root.google.protobuf.Duration.verify(message.remainingTimeToFirstWaypoint);
+                            var error = $root.google.protobuf.Duration.verify(message.remainingTimeToFirstWaypoint, long + 1);
                             if (error)
                                 return "remainingTimeToFirstWaypoint." + error;
                         }
                         if (message.remainingWaypointsVersion != null && message.hasOwnProperty("remainingWaypointsVersion")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.remainingWaypointsVersion);
+                            var error = $root.google.protobuf.Timestamp.verify(message.remainingWaypointsVersion, long + 1);
                             if (error)
                                 return "remainingWaypointsVersion." + error;
                         }
                         if (message.remainingWaypointsRouteVersion != null && message.hasOwnProperty("remainingWaypointsRouteVersion")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.remainingWaypointsRouteVersion);
+                            var error = $root.google.protobuf.Timestamp.verify(message.remainingWaypointsRouteVersion, long + 1);
                             if (error)
                                 return "remainingWaypointsRouteVersion." + error;
                         }
@@ -7499,7 +7699,7 @@
                             if (!$util.isInteger(message.numberOfPassengers))
                                 return "numberOfPassengers: integer expected";
                         if (message.lastLocation != null && message.hasOwnProperty("lastLocation")) {
-                            var error = $root.maps.fleetengine.v1.VehicleLocation.verify(message.lastLocation);
+                            var error = $root.maps.fleetengine.v1.VehicleLocation.verify(message.lastLocation, long + 1);
                             if (error)
                                 return "lastLocation." + error;
                         }
@@ -7519,7 +7719,7 @@
                             if (!Array.isArray(message.attributes))
                                 return "attributes: array expected";
                             for (var i = 0; i < message.attributes.length; ++i) {
-                                var error = $root.maps.fleetengine.v1.TripAttribute.verify(message.attributes[i]);
+                                var error = $root.maps.fleetengine.v1.TripAttribute.verify(message.attributes[i], long + 1);
                                 if (error)
                                     return "attributes." + error;
                             }
@@ -7535,9 +7735,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.Trip} Trip
                      */
-                    Trip.fromObject = function fromObject(object) {
+                    Trip.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.Trip)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.Trip();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -7610,22 +7814,22 @@
                         if (object.pickupPoint != null) {
                             if (typeof object.pickupPoint !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Trip.pickupPoint: object expected");
-                            message.pickupPoint = $root.maps.fleetengine.v1.TerminalLocation.fromObject(object.pickupPoint);
+                            message.pickupPoint = $root.maps.fleetengine.v1.TerminalLocation.fromObject(object.pickupPoint, long + 1);
                         }
                         if (object.actualPickupPoint != null) {
                             if (typeof object.actualPickupPoint !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Trip.actualPickupPoint: object expected");
-                            message.actualPickupPoint = $root.maps.fleetengine.v1.StopLocation.fromObject(object.actualPickupPoint);
+                            message.actualPickupPoint = $root.maps.fleetengine.v1.StopLocation.fromObject(object.actualPickupPoint, long + 1);
                         }
                         if (object.actualPickupArrivalPoint != null) {
                             if (typeof object.actualPickupArrivalPoint !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Trip.actualPickupArrivalPoint: object expected");
-                            message.actualPickupArrivalPoint = $root.maps.fleetengine.v1.StopLocation.fromObject(object.actualPickupArrivalPoint);
+                            message.actualPickupArrivalPoint = $root.maps.fleetengine.v1.StopLocation.fromObject(object.actualPickupArrivalPoint, long + 1);
                         }
                         if (object.pickupTime != null) {
                             if (typeof object.pickupTime !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Trip.pickupTime: object expected");
-                            message.pickupTime = $root.google.protobuf.Timestamp.fromObject(object.pickupTime);
+                            message.pickupTime = $root.google.protobuf.Timestamp.fromObject(object.pickupTime, long + 1);
                         }
                         if (object.intermediateDestinations) {
                             if (!Array.isArray(object.intermediateDestinations))
@@ -7634,13 +7838,13 @@
                             for (var i = 0; i < object.intermediateDestinations.length; ++i) {
                                 if (typeof object.intermediateDestinations[i] !== "object")
                                     throw TypeError(".maps.fleetengine.v1.Trip.intermediateDestinations: object expected");
-                                message.intermediateDestinations[i] = $root.maps.fleetengine.v1.TerminalLocation.fromObject(object.intermediateDestinations[i]);
+                                message.intermediateDestinations[i] = $root.maps.fleetengine.v1.TerminalLocation.fromObject(object.intermediateDestinations[i], long + 1);
                             }
                         }
                         if (object.intermediateDestinationsVersion != null) {
                             if (typeof object.intermediateDestinationsVersion !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Trip.intermediateDestinationsVersion: object expected");
-                            message.intermediateDestinationsVersion = $root.google.protobuf.Timestamp.fromObject(object.intermediateDestinationsVersion);
+                            message.intermediateDestinationsVersion = $root.google.protobuf.Timestamp.fromObject(object.intermediateDestinationsVersion, long + 1);
                         }
                         if (object.intermediateDestinationIndex != null)
                             message.intermediateDestinationIndex = object.intermediateDestinationIndex | 0;
@@ -7651,7 +7855,7 @@
                             for (var i = 0; i < object.actualIntermediateDestinationArrivalPoints.length; ++i) {
                                 if (typeof object.actualIntermediateDestinationArrivalPoints[i] !== "object")
                                     throw TypeError(".maps.fleetengine.v1.Trip.actualIntermediateDestinationArrivalPoints: object expected");
-                                message.actualIntermediateDestinationArrivalPoints[i] = $root.maps.fleetengine.v1.StopLocation.fromObject(object.actualIntermediateDestinationArrivalPoints[i]);
+                                message.actualIntermediateDestinationArrivalPoints[i] = $root.maps.fleetengine.v1.StopLocation.fromObject(object.actualIntermediateDestinationArrivalPoints[i], long + 1);
                             }
                         }
                         if (object.actualIntermediateDestinations) {
@@ -7661,23 +7865,23 @@
                             for (var i = 0; i < object.actualIntermediateDestinations.length; ++i) {
                                 if (typeof object.actualIntermediateDestinations[i] !== "object")
                                     throw TypeError(".maps.fleetengine.v1.Trip.actualIntermediateDestinations: object expected");
-                                message.actualIntermediateDestinations[i] = $root.maps.fleetengine.v1.StopLocation.fromObject(object.actualIntermediateDestinations[i]);
+                                message.actualIntermediateDestinations[i] = $root.maps.fleetengine.v1.StopLocation.fromObject(object.actualIntermediateDestinations[i], long + 1);
                             }
                         }
                         if (object.dropoffPoint != null) {
                             if (typeof object.dropoffPoint !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Trip.dropoffPoint: object expected");
-                            message.dropoffPoint = $root.maps.fleetengine.v1.TerminalLocation.fromObject(object.dropoffPoint);
+                            message.dropoffPoint = $root.maps.fleetengine.v1.TerminalLocation.fromObject(object.dropoffPoint, long + 1);
                         }
                         if (object.actualDropoffPoint != null) {
                             if (typeof object.actualDropoffPoint !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Trip.actualDropoffPoint: object expected");
-                            message.actualDropoffPoint = $root.maps.fleetengine.v1.StopLocation.fromObject(object.actualDropoffPoint);
+                            message.actualDropoffPoint = $root.maps.fleetengine.v1.StopLocation.fromObject(object.actualDropoffPoint, long + 1);
                         }
                         if (object.dropoffTime != null) {
                             if (typeof object.dropoffTime !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Trip.dropoffTime: object expected");
-                            message.dropoffTime = $root.google.protobuf.Timestamp.fromObject(object.dropoffTime);
+                            message.dropoffTime = $root.google.protobuf.Timestamp.fromObject(object.dropoffTime, long + 1);
                         }
                         if (object.remainingWaypoints) {
                             if (!Array.isArray(object.remainingWaypoints))
@@ -7686,7 +7890,7 @@
                             for (var i = 0; i < object.remainingWaypoints.length; ++i) {
                                 if (typeof object.remainingWaypoints[i] !== "object")
                                     throw TypeError(".maps.fleetengine.v1.Trip.remainingWaypoints: object expected");
-                                message.remainingWaypoints[i] = $root.maps.fleetengine.v1.TripWaypoint.fromObject(object.remainingWaypoints[i]);
+                                message.remainingWaypoints[i] = $root.maps.fleetengine.v1.TripWaypoint.fromObject(object.remainingWaypoints[i], long + 1);
                             }
                         }
                         if (object.vehicleWaypoints) {
@@ -7696,7 +7900,7 @@
                             for (var i = 0; i < object.vehicleWaypoints.length; ++i) {
                                 if (typeof object.vehicleWaypoints[i] !== "object")
                                     throw TypeError(".maps.fleetengine.v1.Trip.vehicleWaypoints: object expected");
-                                message.vehicleWaypoints[i] = $root.maps.fleetengine.v1.TripWaypoint.fromObject(object.vehicleWaypoints[i]);
+                                message.vehicleWaypoints[i] = $root.maps.fleetengine.v1.TripWaypoint.fromObject(object.vehicleWaypoints[i], long + 1);
                             }
                         }
                         if (object.route) {
@@ -7706,7 +7910,7 @@
                             for (var i = 0; i < object.route.length; ++i) {
                                 if (typeof object.route[i] !== "object")
                                     throw TypeError(".maps.fleetengine.v1.Trip.route: object expected");
-                                message.route[i] = $root.google.type.LatLng.fromObject(object.route[i]);
+                                message.route[i] = $root.google.type.LatLng.fromObject(object.route[i], long + 1);
                             }
                         }
                         if (object.currentRouteSegment != null)
@@ -7714,54 +7918,54 @@
                         if (object.currentRouteSegmentVersion != null) {
                             if (typeof object.currentRouteSegmentVersion !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Trip.currentRouteSegmentVersion: object expected");
-                            message.currentRouteSegmentVersion = $root.google.protobuf.Timestamp.fromObject(object.currentRouteSegmentVersion);
+                            message.currentRouteSegmentVersion = $root.google.protobuf.Timestamp.fromObject(object.currentRouteSegmentVersion, long + 1);
                         }
                         if (object.currentRouteSegmentTraffic != null) {
                             if (typeof object.currentRouteSegmentTraffic !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Trip.currentRouteSegmentTraffic: object expected");
-                            message.currentRouteSegmentTraffic = $root.maps.fleetengine.v1.ConsumableTrafficPolyline.fromObject(object.currentRouteSegmentTraffic);
+                            message.currentRouteSegmentTraffic = $root.maps.fleetengine.v1.ConsumableTrafficPolyline.fromObject(object.currentRouteSegmentTraffic, long + 1);
                         }
                         if (object.currentRouteSegmentTrafficVersion != null) {
                             if (typeof object.currentRouteSegmentTrafficVersion !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Trip.currentRouteSegmentTrafficVersion: object expected");
-                            message.currentRouteSegmentTrafficVersion = $root.google.protobuf.Timestamp.fromObject(object.currentRouteSegmentTrafficVersion);
+                            message.currentRouteSegmentTrafficVersion = $root.google.protobuf.Timestamp.fromObject(object.currentRouteSegmentTrafficVersion, long + 1);
                         }
                         if (object.currentRouteSegmentEndPoint != null) {
                             if (typeof object.currentRouteSegmentEndPoint !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Trip.currentRouteSegmentEndPoint: object expected");
-                            message.currentRouteSegmentEndPoint = $root.maps.fleetengine.v1.TripWaypoint.fromObject(object.currentRouteSegmentEndPoint);
+                            message.currentRouteSegmentEndPoint = $root.maps.fleetengine.v1.TripWaypoint.fromObject(object.currentRouteSegmentEndPoint, long + 1);
                         }
                         if (object.remainingDistanceMeters != null) {
                             if (typeof object.remainingDistanceMeters !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Trip.remainingDistanceMeters: object expected");
-                            message.remainingDistanceMeters = $root.google.protobuf.Int32Value.fromObject(object.remainingDistanceMeters);
+                            message.remainingDistanceMeters = $root.google.protobuf.Int32Value.fromObject(object.remainingDistanceMeters, long + 1);
                         }
                         if (object.etaToFirstWaypoint != null) {
                             if (typeof object.etaToFirstWaypoint !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Trip.etaToFirstWaypoint: object expected");
-                            message.etaToFirstWaypoint = $root.google.protobuf.Timestamp.fromObject(object.etaToFirstWaypoint);
+                            message.etaToFirstWaypoint = $root.google.protobuf.Timestamp.fromObject(object.etaToFirstWaypoint, long + 1);
                         }
                         if (object.remainingTimeToFirstWaypoint != null) {
                             if (typeof object.remainingTimeToFirstWaypoint !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Trip.remainingTimeToFirstWaypoint: object expected");
-                            message.remainingTimeToFirstWaypoint = $root.google.protobuf.Duration.fromObject(object.remainingTimeToFirstWaypoint);
+                            message.remainingTimeToFirstWaypoint = $root.google.protobuf.Duration.fromObject(object.remainingTimeToFirstWaypoint, long + 1);
                         }
                         if (object.remainingWaypointsVersion != null) {
                             if (typeof object.remainingWaypointsVersion !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Trip.remainingWaypointsVersion: object expected");
-                            message.remainingWaypointsVersion = $root.google.protobuf.Timestamp.fromObject(object.remainingWaypointsVersion);
+                            message.remainingWaypointsVersion = $root.google.protobuf.Timestamp.fromObject(object.remainingWaypointsVersion, long + 1);
                         }
                         if (object.remainingWaypointsRouteVersion != null) {
                             if (typeof object.remainingWaypointsRouteVersion !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Trip.remainingWaypointsRouteVersion: object expected");
-                            message.remainingWaypointsRouteVersion = $root.google.protobuf.Timestamp.fromObject(object.remainingWaypointsRouteVersion);
+                            message.remainingWaypointsRouteVersion = $root.google.protobuf.Timestamp.fromObject(object.remainingWaypointsRouteVersion, long + 1);
                         }
                         if (object.numberOfPassengers != null)
                             message.numberOfPassengers = object.numberOfPassengers | 0;
                         if (object.lastLocation != null) {
                             if (typeof object.lastLocation !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Trip.lastLocation: object expected");
-                            message.lastLocation = $root.maps.fleetengine.v1.VehicleLocation.fromObject(object.lastLocation);
+                            message.lastLocation = $root.maps.fleetengine.v1.VehicleLocation.fromObject(object.lastLocation, long + 1);
                         }
                         if (object.lastLocationSnappable != null)
                             message.lastLocationSnappable = Boolean(object.lastLocationSnappable);
@@ -7792,7 +7996,7 @@
                             for (var i = 0; i < object.attributes.length; ++i) {
                                 if (typeof object.attributes[i] !== "object")
                                     throw TypeError(".maps.fleetengine.v1.Trip.attributes: object expected");
-                                message.attributes[i] = $root.maps.fleetengine.v1.TripAttribute.fromObject(object.attributes[i]);
+                                message.attributes[i] = $root.maps.fleetengine.v1.TripAttribute.fromObject(object.attributes[i], long + 1);
                             }
                         }
                         return message;
@@ -7992,7 +8196,7 @@
                     function StopLocation(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -8077,9 +8281,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    StopLocation.decode = function decode(reader, length, error) {
+                    StopLocation.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.StopLocation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -8087,19 +8295,19 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.point = $root.google.type.LatLng.decode(reader, reader.uint32());
+                                    message.point = $root.google.type.LatLng.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 2: {
-                                    message.timestamp = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.timestamp = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 3: {
-                                    message.stopTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.stopTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -8130,21 +8338,25 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    StopLocation.verify = function verify(message) {
+                    StopLocation.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.point != null && message.hasOwnProperty("point")) {
-                            var error = $root.google.type.LatLng.verify(message.point);
+                            var error = $root.google.type.LatLng.verify(message.point, long + 1);
                             if (error)
                                 return "point." + error;
                         }
                         if (message.timestamp != null && message.hasOwnProperty("timestamp")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.timestamp);
+                            var error = $root.google.protobuf.Timestamp.verify(message.timestamp, long + 1);
                             if (error)
                                 return "timestamp." + error;
                         }
                         if (message.stopTime != null && message.hasOwnProperty("stopTime")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.stopTime);
+                            var error = $root.google.protobuf.Timestamp.verify(message.stopTime, long + 1);
                             if (error)
                                 return "stopTime." + error;
                         }
@@ -8159,24 +8371,28 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.StopLocation} StopLocation
                      */
-                    StopLocation.fromObject = function fromObject(object) {
+                    StopLocation.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.StopLocation)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.StopLocation();
                         if (object.point != null) {
                             if (typeof object.point !== "object")
                                 throw TypeError(".maps.fleetengine.v1.StopLocation.point: object expected");
-                            message.point = $root.google.type.LatLng.fromObject(object.point);
+                            message.point = $root.google.type.LatLng.fromObject(object.point, long + 1);
                         }
                         if (object.timestamp != null) {
                             if (typeof object.timestamp !== "object")
                                 throw TypeError(".maps.fleetengine.v1.StopLocation.timestamp: object expected");
-                            message.timestamp = $root.google.protobuf.Timestamp.fromObject(object.timestamp);
+                            message.timestamp = $root.google.protobuf.Timestamp.fromObject(object.timestamp, long + 1);
                         }
                         if (object.stopTime != null) {
                             if (typeof object.stopTime !== "object")
                                 throw TypeError(".maps.fleetengine.v1.StopLocation.stopTime: object expected");
-                            message.stopTime = $root.google.protobuf.Timestamp.fromObject(object.stopTime);
+                            message.stopTime = $root.google.protobuf.Timestamp.fromObject(object.stopTime, long + 1);
                         }
                         return message;
                     };
@@ -8592,7 +8808,7 @@
                     function CreateVehicleRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -8687,9 +8903,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    CreateVehicleRequest.decode = function decode(reader, length, error) {
+                    CreateVehicleRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.CreateVehicleRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -8697,7 +8917,7 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.header = $root.maps.fleetengine.v1.RequestHeader.decode(reader, reader.uint32());
+                                    message.header = $root.maps.fleetengine.v1.RequestHeader.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 3: {
@@ -8709,11 +8929,11 @@
                                     break;
                                 }
                             case 5: {
-                                    message.vehicle = $root.maps.fleetengine.v1.Vehicle.decode(reader, reader.uint32());
+                                    message.vehicle = $root.maps.fleetengine.v1.Vehicle.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -8744,11 +8964,15 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    CreateVehicleRequest.verify = function verify(message) {
+                    CreateVehicleRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.header != null && message.hasOwnProperty("header")) {
-                            var error = $root.maps.fleetengine.v1.RequestHeader.verify(message.header);
+                            var error = $root.maps.fleetengine.v1.RequestHeader.verify(message.header, long + 1);
                             if (error)
                                 return "header." + error;
                         }
@@ -8759,7 +8983,7 @@
                             if (!$util.isString(message.vehicleId))
                                 return "vehicleId: string expected";
                         if (message.vehicle != null && message.hasOwnProperty("vehicle")) {
-                            var error = $root.maps.fleetengine.v1.Vehicle.verify(message.vehicle);
+                            var error = $root.maps.fleetengine.v1.Vehicle.verify(message.vehicle, long + 1);
                             if (error)
                                 return "vehicle." + error;
                         }
@@ -8774,14 +8998,18 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.CreateVehicleRequest} CreateVehicleRequest
                      */
-                    CreateVehicleRequest.fromObject = function fromObject(object) {
+                    CreateVehicleRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.CreateVehicleRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.CreateVehicleRequest();
                         if (object.header != null) {
                             if (typeof object.header !== "object")
                                 throw TypeError(".maps.fleetengine.v1.CreateVehicleRequest.header: object expected");
-                            message.header = $root.maps.fleetengine.v1.RequestHeader.fromObject(object.header);
+                            message.header = $root.maps.fleetengine.v1.RequestHeader.fromObject(object.header, long + 1);
                         }
                         if (object.parent != null)
                             message.parent = String(object.parent);
@@ -8790,7 +9018,7 @@
                         if (object.vehicle != null) {
                             if (typeof object.vehicle !== "object")
                                 throw TypeError(".maps.fleetengine.v1.CreateVehicleRequest.vehicle: object expected");
-                            message.vehicle = $root.maps.fleetengine.v1.Vehicle.fromObject(object.vehicle);
+                            message.vehicle = $root.maps.fleetengine.v1.Vehicle.fromObject(object.vehicle, long + 1);
                         }
                         return message;
                     };
@@ -8877,7 +9105,7 @@
                     function GetVehicleRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -8972,9 +9200,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    GetVehicleRequest.decode = function decode(reader, length, error) {
+                    GetVehicleRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.GetVehicleRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -8982,7 +9214,7 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.header = $root.maps.fleetengine.v1.RequestHeader.decode(reader, reader.uint32());
+                                    message.header = $root.maps.fleetengine.v1.RequestHeader.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 3: {
@@ -8990,15 +9222,15 @@
                                     break;
                                 }
                             case 4: {
-                                    message.currentRouteSegmentVersion = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.currentRouteSegmentVersion = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 5: {
-                                    message.waypointsVersion = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.waypointsVersion = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -9029,11 +9261,15 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    GetVehicleRequest.verify = function verify(message) {
+                    GetVehicleRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.header != null && message.hasOwnProperty("header")) {
-                            var error = $root.maps.fleetengine.v1.RequestHeader.verify(message.header);
+                            var error = $root.maps.fleetengine.v1.RequestHeader.verify(message.header, long + 1);
                             if (error)
                                 return "header." + error;
                         }
@@ -9041,12 +9277,12 @@
                             if (!$util.isString(message.name))
                                 return "name: string expected";
                         if (message.currentRouteSegmentVersion != null && message.hasOwnProperty("currentRouteSegmentVersion")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.currentRouteSegmentVersion);
+                            var error = $root.google.protobuf.Timestamp.verify(message.currentRouteSegmentVersion, long + 1);
                             if (error)
                                 return "currentRouteSegmentVersion." + error;
                         }
                         if (message.waypointsVersion != null && message.hasOwnProperty("waypointsVersion")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.waypointsVersion);
+                            var error = $root.google.protobuf.Timestamp.verify(message.waypointsVersion, long + 1);
                             if (error)
                                 return "waypointsVersion." + error;
                         }
@@ -9061,26 +9297,30 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.GetVehicleRequest} GetVehicleRequest
                      */
-                    GetVehicleRequest.fromObject = function fromObject(object) {
+                    GetVehicleRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.GetVehicleRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.GetVehicleRequest();
                         if (object.header != null) {
                             if (typeof object.header !== "object")
                                 throw TypeError(".maps.fleetengine.v1.GetVehicleRequest.header: object expected");
-                            message.header = $root.maps.fleetengine.v1.RequestHeader.fromObject(object.header);
+                            message.header = $root.maps.fleetengine.v1.RequestHeader.fromObject(object.header, long + 1);
                         }
                         if (object.name != null)
                             message.name = String(object.name);
                         if (object.currentRouteSegmentVersion != null) {
                             if (typeof object.currentRouteSegmentVersion !== "object")
                                 throw TypeError(".maps.fleetengine.v1.GetVehicleRequest.currentRouteSegmentVersion: object expected");
-                            message.currentRouteSegmentVersion = $root.google.protobuf.Timestamp.fromObject(object.currentRouteSegmentVersion);
+                            message.currentRouteSegmentVersion = $root.google.protobuf.Timestamp.fromObject(object.currentRouteSegmentVersion, long + 1);
                         }
                         if (object.waypointsVersion != null) {
                             if (typeof object.waypointsVersion !== "object")
                                 throw TypeError(".maps.fleetengine.v1.GetVehicleRequest.waypointsVersion: object expected");
-                            message.waypointsVersion = $root.google.protobuf.Timestamp.fromObject(object.waypointsVersion);
+                            message.waypointsVersion = $root.google.protobuf.Timestamp.fromObject(object.waypointsVersion, long + 1);
                         }
                         return message;
                     };
@@ -9165,7 +9405,7 @@
                     function DeleteVehicleRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -9240,9 +9480,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DeleteVehicleRequest.decode = function decode(reader, length, error) {
+                    DeleteVehicleRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.DeleteVehicleRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -9250,7 +9494,7 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.header = $root.maps.fleetengine.v1.RequestHeader.decode(reader, reader.uint32());
+                                    message.header = $root.maps.fleetengine.v1.RequestHeader.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 2: {
@@ -9258,7 +9502,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -9289,11 +9533,15 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    DeleteVehicleRequest.verify = function verify(message) {
+                    DeleteVehicleRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.header != null && message.hasOwnProperty("header")) {
-                            var error = $root.maps.fleetengine.v1.RequestHeader.verify(message.header);
+                            var error = $root.maps.fleetengine.v1.RequestHeader.verify(message.header, long + 1);
                             if (error)
                                 return "header." + error;
                         }
@@ -9311,14 +9559,18 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.DeleteVehicleRequest} DeleteVehicleRequest
                      */
-                    DeleteVehicleRequest.fromObject = function fromObject(object) {
+                    DeleteVehicleRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.DeleteVehicleRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.DeleteVehicleRequest();
                         if (object.header != null) {
                             if (typeof object.header !== "object")
                                 throw TypeError(".maps.fleetengine.v1.DeleteVehicleRequest.header: object expected");
-                            message.header = $root.maps.fleetengine.v1.RequestHeader.fromObject(object.header);
+                            message.header = $root.maps.fleetengine.v1.RequestHeader.fromObject(object.header, long + 1);
                         }
                         if (object.name != null)
                             message.name = String(object.name);
@@ -9401,7 +9653,7 @@
                     function UpdateVehicleRequest(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -9496,9 +9748,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UpdateVehicleRequest.decode = function decode(reader, length, error) {
+                    UpdateVehicleRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.UpdateVehicleRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -9506,7 +9762,7 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.header = $root.maps.fleetengine.v1.RequestHeader.decode(reader, reader.uint32());
+                                    message.header = $root.maps.fleetengine.v1.RequestHeader.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 3: {
@@ -9514,15 +9770,15 @@
                                     break;
                                 }
                             case 4: {
-                                    message.vehicle = $root.maps.fleetengine.v1.Vehicle.decode(reader, reader.uint32());
+                                    message.vehicle = $root.maps.fleetengine.v1.Vehicle.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 5: {
-                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -9553,11 +9809,15 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    UpdateVehicleRequest.verify = function verify(message) {
+                    UpdateVehicleRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.header != null && message.hasOwnProperty("header")) {
-                            var error = $root.maps.fleetengine.v1.RequestHeader.verify(message.header);
+                            var error = $root.maps.fleetengine.v1.RequestHeader.verify(message.header, long + 1);
                             if (error)
                                 return "header." + error;
                         }
@@ -9565,12 +9825,12 @@
                             if (!$util.isString(message.name))
                                 return "name: string expected";
                         if (message.vehicle != null && message.hasOwnProperty("vehicle")) {
-                            var error = $root.maps.fleetengine.v1.Vehicle.verify(message.vehicle);
+                            var error = $root.maps.fleetengine.v1.Vehicle.verify(message.vehicle, long + 1);
                             if (error)
                                 return "vehicle." + error;
                         }
                         if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
-                            var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                            var error = $root.google.protobuf.FieldMask.verify(message.updateMask, long + 1);
                             if (error)
                                 return "updateMask." + error;
                         }
@@ -9585,26 +9845,30 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.UpdateVehicleRequest} UpdateVehicleRequest
                      */
-                    UpdateVehicleRequest.fromObject = function fromObject(object) {
+                    UpdateVehicleRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.UpdateVehicleRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.UpdateVehicleRequest();
                         if (object.header != null) {
                             if (typeof object.header !== "object")
                                 throw TypeError(".maps.fleetengine.v1.UpdateVehicleRequest.header: object expected");
-                            message.header = $root.maps.fleetengine.v1.RequestHeader.fromObject(object.header);
+                            message.header = $root.maps.fleetengine.v1.RequestHeader.fromObject(object.header, long + 1);
                         }
                         if (object.name != null)
                             message.name = String(object.name);
                         if (object.vehicle != null) {
                             if (typeof object.vehicle !== "object")
                                 throw TypeError(".maps.fleetengine.v1.UpdateVehicleRequest.vehicle: object expected");
-                            message.vehicle = $root.maps.fleetengine.v1.Vehicle.fromObject(object.vehicle);
+                            message.vehicle = $root.maps.fleetengine.v1.Vehicle.fromObject(object.vehicle, long + 1);
                         }
                         if (object.updateMask != null) {
                             if (typeof object.updateMask !== "object")
                                 throw TypeError(".maps.fleetengine.v1.UpdateVehicleRequest.updateMask: object expected");
-                            message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask, long + 1);
                         }
                         return message;
                     };
@@ -9691,7 +9955,7 @@
                         this.attributes = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -9777,9 +10041,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UpdateVehicleAttributesRequest.decode = function decode(reader, length, error) {
+                    UpdateVehicleAttributesRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.UpdateVehicleAttributesRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -9787,7 +10055,7 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.header = $root.maps.fleetengine.v1.RequestHeader.decode(reader, reader.uint32());
+                                    message.header = $root.maps.fleetengine.v1.RequestHeader.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 3: {
@@ -9797,11 +10065,11 @@
                             case 4: {
                                     if (!(message.attributes && message.attributes.length))
                                         message.attributes = [];
-                                    message.attributes.push($root.maps.fleetengine.v1.VehicleAttribute.decode(reader, reader.uint32()));
+                                    message.attributes.push($root.maps.fleetengine.v1.VehicleAttribute.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -9832,11 +10100,15 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    UpdateVehicleAttributesRequest.verify = function verify(message) {
+                    UpdateVehicleAttributesRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.header != null && message.hasOwnProperty("header")) {
-                            var error = $root.maps.fleetengine.v1.RequestHeader.verify(message.header);
+                            var error = $root.maps.fleetengine.v1.RequestHeader.verify(message.header, long + 1);
                             if (error)
                                 return "header." + error;
                         }
@@ -9847,7 +10119,7 @@
                             if (!Array.isArray(message.attributes))
                                 return "attributes: array expected";
                             for (var i = 0; i < message.attributes.length; ++i) {
-                                var error = $root.maps.fleetengine.v1.VehicleAttribute.verify(message.attributes[i]);
+                                var error = $root.maps.fleetengine.v1.VehicleAttribute.verify(message.attributes[i], long + 1);
                                 if (error)
                                     return "attributes." + error;
                             }
@@ -9863,14 +10135,18 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.UpdateVehicleAttributesRequest} UpdateVehicleAttributesRequest
                      */
-                    UpdateVehicleAttributesRequest.fromObject = function fromObject(object) {
+                    UpdateVehicleAttributesRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.UpdateVehicleAttributesRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.UpdateVehicleAttributesRequest();
                         if (object.header != null) {
                             if (typeof object.header !== "object")
                                 throw TypeError(".maps.fleetengine.v1.UpdateVehicleAttributesRequest.header: object expected");
-                            message.header = $root.maps.fleetengine.v1.RequestHeader.fromObject(object.header);
+                            message.header = $root.maps.fleetengine.v1.RequestHeader.fromObject(object.header, long + 1);
                         }
                         if (object.name != null)
                             message.name = String(object.name);
@@ -9881,7 +10157,7 @@
                             for (var i = 0; i < object.attributes.length; ++i) {
                                 if (typeof object.attributes[i] !== "object")
                                     throw TypeError(".maps.fleetengine.v1.UpdateVehicleAttributesRequest.attributes: object expected");
-                                message.attributes[i] = $root.maps.fleetengine.v1.VehicleAttribute.fromObject(object.attributes[i]);
+                                message.attributes[i] = $root.maps.fleetengine.v1.VehicleAttribute.fromObject(object.attributes[i], long + 1);
                             }
                         }
                         return message;
@@ -9968,7 +10244,7 @@
                         this.attributes = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -10034,9 +10310,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    UpdateVehicleAttributesResponse.decode = function decode(reader, length, error) {
+                    UpdateVehicleAttributesResponse.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.UpdateVehicleAttributesResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -10046,11 +10326,11 @@
                             case 1: {
                                     if (!(message.attributes && message.attributes.length))
                                         message.attributes = [];
-                                    message.attributes.push($root.maps.fleetengine.v1.VehicleAttribute.decode(reader, reader.uint32()));
+                                    message.attributes.push($root.maps.fleetengine.v1.VehicleAttribute.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -10081,14 +10361,18 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    UpdateVehicleAttributesResponse.verify = function verify(message) {
+                    UpdateVehicleAttributesResponse.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.attributes != null && message.hasOwnProperty("attributes")) {
                             if (!Array.isArray(message.attributes))
                                 return "attributes: array expected";
                             for (var i = 0; i < message.attributes.length; ++i) {
-                                var error = $root.maps.fleetengine.v1.VehicleAttribute.verify(message.attributes[i]);
+                                var error = $root.maps.fleetengine.v1.VehicleAttribute.verify(message.attributes[i], long + 1);
                                 if (error)
                                     return "attributes." + error;
                             }
@@ -10104,9 +10388,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.UpdateVehicleAttributesResponse} UpdateVehicleAttributesResponse
                      */
-                    UpdateVehicleAttributesResponse.fromObject = function fromObject(object) {
+                    UpdateVehicleAttributesResponse.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.UpdateVehicleAttributesResponse)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.UpdateVehicleAttributesResponse();
                         if (object.attributes) {
                             if (!Array.isArray(object.attributes))
@@ -10115,7 +10403,7 @@
                             for (var i = 0; i < object.attributes.length; ++i) {
                                 if (typeof object.attributes[i] !== "object")
                                     throw TypeError(".maps.fleetengine.v1.UpdateVehicleAttributesResponse.attributes: object expected");
-                                message.attributes[i] = $root.maps.fleetengine.v1.VehicleAttribute.fromObject(object.attributes[i]);
+                                message.attributes[i] = $root.maps.fleetengine.v1.VehicleAttribute.fromObject(object.attributes[i], long + 1);
                             }
                         }
                         return message;
@@ -10215,7 +10503,7 @@
                         this.requiredOneOfAttributeSets = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -10458,9 +10746,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    SearchVehiclesRequest.decode = function decode(reader, length, error) {
+                    SearchVehiclesRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.SearchVehiclesRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -10468,7 +10760,7 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.header = $root.maps.fleetengine.v1.RequestHeader.decode(reader, reader.uint32());
+                                    message.header = $root.maps.fleetengine.v1.RequestHeader.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 3: {
@@ -10476,11 +10768,11 @@
                                     break;
                                 }
                             case 4: {
-                                    message.pickupPoint = $root.maps.fleetengine.v1.TerminalLocation.decode(reader, reader.uint32());
+                                    message.pickupPoint = $root.maps.fleetengine.v1.TerminalLocation.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 5: {
-                                    message.dropoffPoint = $root.maps.fleetengine.v1.TerminalLocation.decode(reader, reader.uint32());
+                                    message.dropoffPoint = $root.maps.fleetengine.v1.TerminalLocation.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 6: {
@@ -10507,31 +10799,31 @@
                                     break;
                                 }
                             case 10: {
-                                    message.maximumStaleness = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.maximumStaleness = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 14: {
                                     if (!(message.vehicleTypes && message.vehicleTypes.length))
                                         message.vehicleTypes = [];
-                                    message.vehicleTypes.push($root.maps.fleetengine.v1.Vehicle.VehicleType.decode(reader, reader.uint32()));
+                                    message.vehicleTypes.push($root.maps.fleetengine.v1.Vehicle.VehicleType.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 12: {
                                     if (!(message.requiredAttributes && message.requiredAttributes.length))
                                         message.requiredAttributes = [];
-                                    message.requiredAttributes.push($root.maps.fleetengine.v1.VehicleAttribute.decode(reader, reader.uint32()));
+                                    message.requiredAttributes.push($root.maps.fleetengine.v1.VehicleAttribute.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 15: {
                                     if (!(message.requiredOneOfAttributes && message.requiredOneOfAttributes.length))
                                         message.requiredOneOfAttributes = [];
-                                    message.requiredOneOfAttributes.push($root.maps.fleetengine.v1.VehicleAttributeList.decode(reader, reader.uint32()));
+                                    message.requiredOneOfAttributes.push($root.maps.fleetengine.v1.VehicleAttributeList.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 20: {
                                     if (!(message.requiredOneOfAttributeSets && message.requiredOneOfAttributeSets.length))
                                         message.requiredOneOfAttributeSets = [];
-                                    message.requiredOneOfAttributeSets.push($root.maps.fleetengine.v1.VehicleAttributeList.decode(reader, reader.uint32()));
+                                    message.requiredOneOfAttributeSets.push($root.maps.fleetengine.v1.VehicleAttributeList.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 13: {
@@ -10555,7 +10847,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -10586,11 +10878,15 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    SearchVehiclesRequest.verify = function verify(message) {
+                    SearchVehiclesRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.header != null && message.hasOwnProperty("header")) {
-                            var error = $root.maps.fleetengine.v1.RequestHeader.verify(message.header);
+                            var error = $root.maps.fleetengine.v1.RequestHeader.verify(message.header, long + 1);
                             if (error)
                                 return "header." + error;
                         }
@@ -10598,12 +10894,12 @@
                             if (!$util.isString(message.parent))
                                 return "parent: string expected";
                         if (message.pickupPoint != null && message.hasOwnProperty("pickupPoint")) {
-                            var error = $root.maps.fleetengine.v1.TerminalLocation.verify(message.pickupPoint);
+                            var error = $root.maps.fleetengine.v1.TerminalLocation.verify(message.pickupPoint, long + 1);
                             if (error)
                                 return "pickupPoint." + error;
                         }
                         if (message.dropoffPoint != null && message.hasOwnProperty("dropoffPoint")) {
-                            var error = $root.maps.fleetengine.v1.TerminalLocation.verify(message.dropoffPoint);
+                            var error = $root.maps.fleetengine.v1.TerminalLocation.verify(message.dropoffPoint, long + 1);
                             if (error)
                                 return "dropoffPoint." + error;
                         }
@@ -10630,7 +10926,7 @@
                                 }
                         }
                         if (message.maximumStaleness != null && message.hasOwnProperty("maximumStaleness")) {
-                            var error = $root.google.protobuf.Duration.verify(message.maximumStaleness);
+                            var error = $root.google.protobuf.Duration.verify(message.maximumStaleness, long + 1);
                             if (error)
                                 return "maximumStaleness." + error;
                         }
@@ -10638,7 +10934,7 @@
                             if (!Array.isArray(message.vehicleTypes))
                                 return "vehicleTypes: array expected";
                             for (var i = 0; i < message.vehicleTypes.length; ++i) {
-                                var error = $root.maps.fleetengine.v1.Vehicle.VehicleType.verify(message.vehicleTypes[i]);
+                                var error = $root.maps.fleetengine.v1.Vehicle.VehicleType.verify(message.vehicleTypes[i], long + 1);
                                 if (error)
                                     return "vehicleTypes." + error;
                             }
@@ -10647,7 +10943,7 @@
                             if (!Array.isArray(message.requiredAttributes))
                                 return "requiredAttributes: array expected";
                             for (var i = 0; i < message.requiredAttributes.length; ++i) {
-                                var error = $root.maps.fleetengine.v1.VehicleAttribute.verify(message.requiredAttributes[i]);
+                                var error = $root.maps.fleetengine.v1.VehicleAttribute.verify(message.requiredAttributes[i], long + 1);
                                 if (error)
                                     return "requiredAttributes." + error;
                             }
@@ -10656,7 +10952,7 @@
                             if (!Array.isArray(message.requiredOneOfAttributes))
                                 return "requiredOneOfAttributes: array expected";
                             for (var i = 0; i < message.requiredOneOfAttributes.length; ++i) {
-                                var error = $root.maps.fleetengine.v1.VehicleAttributeList.verify(message.requiredOneOfAttributes[i]);
+                                var error = $root.maps.fleetengine.v1.VehicleAttributeList.verify(message.requiredOneOfAttributes[i], long + 1);
                                 if (error)
                                     return "requiredOneOfAttributes." + error;
                             }
@@ -10665,7 +10961,7 @@
                             if (!Array.isArray(message.requiredOneOfAttributeSets))
                                 return "requiredOneOfAttributeSets: array expected";
                             for (var i = 0; i < message.requiredOneOfAttributeSets.length; ++i) {
-                                var error = $root.maps.fleetengine.v1.VehicleAttributeList.verify(message.requiredOneOfAttributeSets[i]);
+                                var error = $root.maps.fleetengine.v1.VehicleAttributeList.verify(message.requiredOneOfAttributeSets[i], long + 1);
                                 if (error)
                                     return "requiredOneOfAttributeSets." + error;
                             }
@@ -10711,26 +11007,30 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.SearchVehiclesRequest} SearchVehiclesRequest
                      */
-                    SearchVehiclesRequest.fromObject = function fromObject(object) {
+                    SearchVehiclesRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.SearchVehiclesRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.SearchVehiclesRequest();
                         if (object.header != null) {
                             if (typeof object.header !== "object")
                                 throw TypeError(".maps.fleetengine.v1.SearchVehiclesRequest.header: object expected");
-                            message.header = $root.maps.fleetengine.v1.RequestHeader.fromObject(object.header);
+                            message.header = $root.maps.fleetengine.v1.RequestHeader.fromObject(object.header, long + 1);
                         }
                         if (object.parent != null)
                             message.parent = String(object.parent);
                         if (object.pickupPoint != null) {
                             if (typeof object.pickupPoint !== "object")
                                 throw TypeError(".maps.fleetengine.v1.SearchVehiclesRequest.pickupPoint: object expected");
-                            message.pickupPoint = $root.maps.fleetengine.v1.TerminalLocation.fromObject(object.pickupPoint);
+                            message.pickupPoint = $root.maps.fleetengine.v1.TerminalLocation.fromObject(object.pickupPoint, long + 1);
                         }
                         if (object.dropoffPoint != null) {
                             if (typeof object.dropoffPoint !== "object")
                                 throw TypeError(".maps.fleetengine.v1.SearchVehiclesRequest.dropoffPoint: object expected");
-                            message.dropoffPoint = $root.maps.fleetengine.v1.TerminalLocation.fromObject(object.dropoffPoint);
+                            message.dropoffPoint = $root.maps.fleetengine.v1.TerminalLocation.fromObject(object.dropoffPoint, long + 1);
                         }
                         if (object.pickupRadiusMeters != null)
                             message.pickupRadiusMeters = object.pickupRadiusMeters | 0;
@@ -10766,7 +11066,7 @@
                         if (object.maximumStaleness != null) {
                             if (typeof object.maximumStaleness !== "object")
                                 throw TypeError(".maps.fleetengine.v1.SearchVehiclesRequest.maximumStaleness: object expected");
-                            message.maximumStaleness = $root.google.protobuf.Duration.fromObject(object.maximumStaleness);
+                            message.maximumStaleness = $root.google.protobuf.Duration.fromObject(object.maximumStaleness, long + 1);
                         }
                         if (object.vehicleTypes) {
                             if (!Array.isArray(object.vehicleTypes))
@@ -10775,7 +11075,7 @@
                             for (var i = 0; i < object.vehicleTypes.length; ++i) {
                                 if (typeof object.vehicleTypes[i] !== "object")
                                     throw TypeError(".maps.fleetengine.v1.SearchVehiclesRequest.vehicleTypes: object expected");
-                                message.vehicleTypes[i] = $root.maps.fleetengine.v1.Vehicle.VehicleType.fromObject(object.vehicleTypes[i]);
+                                message.vehicleTypes[i] = $root.maps.fleetengine.v1.Vehicle.VehicleType.fromObject(object.vehicleTypes[i], long + 1);
                             }
                         }
                         if (object.requiredAttributes) {
@@ -10785,7 +11085,7 @@
                             for (var i = 0; i < object.requiredAttributes.length; ++i) {
                                 if (typeof object.requiredAttributes[i] !== "object")
                                     throw TypeError(".maps.fleetengine.v1.SearchVehiclesRequest.requiredAttributes: object expected");
-                                message.requiredAttributes[i] = $root.maps.fleetengine.v1.VehicleAttribute.fromObject(object.requiredAttributes[i]);
+                                message.requiredAttributes[i] = $root.maps.fleetengine.v1.VehicleAttribute.fromObject(object.requiredAttributes[i], long + 1);
                             }
                         }
                         if (object.requiredOneOfAttributes) {
@@ -10795,7 +11095,7 @@
                             for (var i = 0; i < object.requiredOneOfAttributes.length; ++i) {
                                 if (typeof object.requiredOneOfAttributes[i] !== "object")
                                     throw TypeError(".maps.fleetengine.v1.SearchVehiclesRequest.requiredOneOfAttributes: object expected");
-                                message.requiredOneOfAttributes[i] = $root.maps.fleetengine.v1.VehicleAttributeList.fromObject(object.requiredOneOfAttributes[i]);
+                                message.requiredOneOfAttributes[i] = $root.maps.fleetengine.v1.VehicleAttributeList.fromObject(object.requiredOneOfAttributes[i], long + 1);
                             }
                         }
                         if (object.requiredOneOfAttributeSets) {
@@ -10805,7 +11105,7 @@
                             for (var i = 0; i < object.requiredOneOfAttributeSets.length; ++i) {
                                 if (typeof object.requiredOneOfAttributeSets[i] !== "object")
                                     throw TypeError(".maps.fleetengine.v1.SearchVehiclesRequest.requiredOneOfAttributeSets: object expected");
-                                message.requiredOneOfAttributeSets[i] = $root.maps.fleetengine.v1.VehicleAttributeList.fromObject(object.requiredOneOfAttributeSets[i]);
+                                message.requiredOneOfAttributeSets[i] = $root.maps.fleetengine.v1.VehicleAttributeList.fromObject(object.requiredOneOfAttributeSets[i], long + 1);
                             }
                         }
                         switch (object.orderBy) {
@@ -11046,7 +11346,7 @@
                         this.matches = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -11112,9 +11412,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    SearchVehiclesResponse.decode = function decode(reader, length, error) {
+                    SearchVehiclesResponse.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.SearchVehiclesResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -11124,11 +11428,11 @@
                             case 1: {
                                     if (!(message.matches && message.matches.length))
                                         message.matches = [];
-                                    message.matches.push($root.maps.fleetengine.v1.VehicleMatch.decode(reader, reader.uint32()));
+                                    message.matches.push($root.maps.fleetengine.v1.VehicleMatch.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -11159,14 +11463,18 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    SearchVehiclesResponse.verify = function verify(message) {
+                    SearchVehiclesResponse.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.matches != null && message.hasOwnProperty("matches")) {
                             if (!Array.isArray(message.matches))
                                 return "matches: array expected";
                             for (var i = 0; i < message.matches.length; ++i) {
-                                var error = $root.maps.fleetengine.v1.VehicleMatch.verify(message.matches[i]);
+                                var error = $root.maps.fleetengine.v1.VehicleMatch.verify(message.matches[i], long + 1);
                                 if (error)
                                     return "matches." + error;
                             }
@@ -11182,9 +11490,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.SearchVehiclesResponse} SearchVehiclesResponse
                      */
-                    SearchVehiclesResponse.fromObject = function fromObject(object) {
+                    SearchVehiclesResponse.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.SearchVehiclesResponse)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.SearchVehiclesResponse();
                         if (object.matches) {
                             if (!Array.isArray(object.matches))
@@ -11193,7 +11505,7 @@
                             for (var i = 0; i < object.matches.length; ++i) {
                                 if (typeof object.matches[i] !== "object")
                                     throw TypeError(".maps.fleetengine.v1.SearchVehiclesResponse.matches: object expected");
-                                message.matches[i] = $root.maps.fleetengine.v1.VehicleMatch.fromObject(object.matches[i]);
+                                message.matches[i] = $root.maps.fleetengine.v1.VehicleMatch.fromObject(object.matches[i], long + 1);
                             }
                         }
                         return message;
@@ -11290,7 +11602,7 @@
                         this.requiredOneOfAttributeSets = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -11506,9 +11818,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListVehiclesRequest.decode = function decode(reader, length, error) {
+                    ListVehiclesRequest.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.ListVehiclesRequest();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -11516,7 +11832,7 @@
                                 break;
                             switch (tag >>> 3) {
                             case 12: {
-                                    message.header = $root.maps.fleetengine.v1.RequestHeader.decode(reader, reader.uint32());
+                                    message.header = $root.maps.fleetengine.v1.RequestHeader.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 1: {
@@ -11532,7 +11848,7 @@
                                     break;
                                 }
                             case 6: {
-                                    message.minimumCapacity = $root.google.protobuf.Int32Value.decode(reader, reader.uint32());
+                                    message.minimumCapacity = $root.google.protobuf.Int32Value.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 7: {
@@ -11547,7 +11863,7 @@
                                     break;
                                 }
                             case 8: {
-                                    message.maximumStaleness = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.maximumStaleness = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 9: {
@@ -11592,11 +11908,11 @@
                                     break;
                                 }
                             case 17: {
-                                    message.viewport = $root.google.geo.type.Viewport.decode(reader, reader.uint32());
+                                    message.viewport = $root.google.geo.type.Viewport.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -11627,11 +11943,15 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ListVehiclesRequest.verify = function verify(message) {
+                    ListVehiclesRequest.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.header != null && message.hasOwnProperty("header")) {
-                            var error = $root.maps.fleetengine.v1.RequestHeader.verify(message.header);
+                            var error = $root.maps.fleetengine.v1.RequestHeader.verify(message.header, long + 1);
                             if (error)
                                 return "header." + error;
                         }
@@ -11645,7 +11965,7 @@
                             if (!$util.isString(message.pageToken))
                                 return "pageToken: string expected";
                         if (message.minimumCapacity != null && message.hasOwnProperty("minimumCapacity")) {
-                            var error = $root.google.protobuf.Int32Value.verify(message.minimumCapacity);
+                            var error = $root.google.protobuf.Int32Value.verify(message.minimumCapacity, long + 1);
                             if (error)
                                 return "minimumCapacity." + error;
                         }
@@ -11663,7 +11983,7 @@
                                 }
                         }
                         if (message.maximumStaleness != null && message.hasOwnProperty("maximumStaleness")) {
-                            var error = $root.google.protobuf.Duration.verify(message.maximumStaleness);
+                            var error = $root.google.protobuf.Duration.verify(message.maximumStaleness, long + 1);
                             if (error)
                                 return "maximumStaleness." + error;
                         }
@@ -11721,7 +12041,7 @@
                             if (!$util.isString(message.filter))
                                 return "filter: string expected";
                         if (message.viewport != null && message.hasOwnProperty("viewport")) {
-                            var error = $root.google.geo.type.Viewport.verify(message.viewport);
+                            var error = $root.google.geo.type.Viewport.verify(message.viewport, long + 1);
                             if (error)
                                 return "viewport." + error;
                         }
@@ -11736,14 +12056,18 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.ListVehiclesRequest} ListVehiclesRequest
                      */
-                    ListVehiclesRequest.fromObject = function fromObject(object) {
+                    ListVehiclesRequest.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.ListVehiclesRequest)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.ListVehiclesRequest();
                         if (object.header != null) {
                             if (typeof object.header !== "object")
                                 throw TypeError(".maps.fleetengine.v1.ListVehiclesRequest.header: object expected");
-                            message.header = $root.maps.fleetengine.v1.RequestHeader.fromObject(object.header);
+                            message.header = $root.maps.fleetengine.v1.RequestHeader.fromObject(object.header, long + 1);
                         }
                         if (object.parent != null)
                             message.parent = String(object.parent);
@@ -11754,7 +12078,7 @@
                         if (object.minimumCapacity != null) {
                             if (typeof object.minimumCapacity !== "object")
                                 throw TypeError(".maps.fleetengine.v1.ListVehiclesRequest.minimumCapacity: object expected");
-                            message.minimumCapacity = $root.google.protobuf.Int32Value.fromObject(object.minimumCapacity);
+                            message.minimumCapacity = $root.google.protobuf.Int32Value.fromObject(object.minimumCapacity, long + 1);
                         }
                         if (object.tripTypes) {
                             if (!Array.isArray(object.tripTypes))
@@ -11784,7 +12108,7 @@
                         if (object.maximumStaleness != null) {
                             if (typeof object.maximumStaleness !== "object")
                                 throw TypeError(".maps.fleetengine.v1.ListVehiclesRequest.maximumStaleness: object expected");
-                            message.maximumStaleness = $root.google.protobuf.Duration.fromObject(object.maximumStaleness);
+                            message.maximumStaleness = $root.google.protobuf.Duration.fromObject(object.maximumStaleness, long + 1);
                         }
                         if (object.vehicleTypeCategories) {
                             if (!Array.isArray(object.vehicleTypeCategories))
@@ -11875,7 +12199,7 @@
                         if (object.viewport != null) {
                             if (typeof object.viewport !== "object")
                                 throw TypeError(".maps.fleetengine.v1.ListVehiclesRequest.viewport: object expected");
-                            message.viewport = $root.google.geo.type.Viewport.fromObject(object.viewport);
+                            message.viewport = $root.google.geo.type.Viewport.fromObject(object.viewport, long + 1);
                         }
                         return message;
                     };
@@ -12012,7 +12336,7 @@
                         this.vehicles = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -12098,9 +12422,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ListVehiclesResponse.decode = function decode(reader, length, error) {
+                    ListVehiclesResponse.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.ListVehiclesResponse();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -12110,7 +12438,7 @@
                             case 1: {
                                     if (!(message.vehicles && message.vehicles.length))
                                         message.vehicles = [];
-                                    message.vehicles.push($root.maps.fleetengine.v1.Vehicle.decode(reader, reader.uint32()));
+                                    message.vehicles.push($root.maps.fleetengine.v1.Vehicle.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 2: {
@@ -12122,7 +12450,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -12153,14 +12481,18 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ListVehiclesResponse.verify = function verify(message) {
+                    ListVehiclesResponse.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.vehicles != null && message.hasOwnProperty("vehicles")) {
                             if (!Array.isArray(message.vehicles))
                                 return "vehicles: array expected";
                             for (var i = 0; i < message.vehicles.length; ++i) {
-                                var error = $root.maps.fleetengine.v1.Vehicle.verify(message.vehicles[i]);
+                                var error = $root.maps.fleetengine.v1.Vehicle.verify(message.vehicles[i], long + 1);
                                 if (error)
                                     return "vehicles." + error;
                             }
@@ -12182,9 +12514,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.ListVehiclesResponse} ListVehiclesResponse
                      */
-                    ListVehiclesResponse.fromObject = function fromObject(object) {
+                    ListVehiclesResponse.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.ListVehiclesResponse)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.ListVehiclesResponse();
                         if (object.vehicles) {
                             if (!Array.isArray(object.vehicles))
@@ -12193,7 +12529,7 @@
                             for (var i = 0; i < object.vehicles.length; ++i) {
                                 if (typeof object.vehicles[i] !== "object")
                                     throw TypeError(".maps.fleetengine.v1.ListVehiclesResponse.vehicles: object expected");
-                                message.vehicles[i] = $root.maps.fleetengine.v1.Vehicle.fromObject(object.vehicles[i]);
+                                message.vehicles[i] = $root.maps.fleetengine.v1.Vehicle.fromObject(object.vehicles[i], long + 1);
                             }
                         }
                         if (object.nextPageToken != null)
@@ -12298,7 +12634,7 @@
                     function Waypoint(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -12373,9 +12709,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Waypoint.decode = function decode(reader, length, error) {
+                    Waypoint.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.Waypoint();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -12383,15 +12723,15 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.latLng = $root.google.type.LatLng.decode(reader, reader.uint32());
+                                    message.latLng = $root.google.type.LatLng.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 2: {
-                                    message.eta = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.eta = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -12422,16 +12762,20 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    Waypoint.verify = function verify(message) {
+                    Waypoint.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.latLng != null && message.hasOwnProperty("latLng")) {
-                            var error = $root.google.type.LatLng.verify(message.latLng);
+                            var error = $root.google.type.LatLng.verify(message.latLng, long + 1);
                             if (error)
                                 return "latLng." + error;
                         }
                         if (message.eta != null && message.hasOwnProperty("eta")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.eta);
+                            var error = $root.google.protobuf.Timestamp.verify(message.eta, long + 1);
                             if (error)
                                 return "eta." + error;
                         }
@@ -12446,19 +12790,23 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.Waypoint} Waypoint
                      */
-                    Waypoint.fromObject = function fromObject(object) {
+                    Waypoint.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.Waypoint)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.Waypoint();
                         if (object.latLng != null) {
                             if (typeof object.latLng !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Waypoint.latLng: object expected");
-                            message.latLng = $root.google.type.LatLng.fromObject(object.latLng);
+                            message.latLng = $root.google.type.LatLng.fromObject(object.latLng, long + 1);
                         }
                         if (object.eta != null) {
                             if (typeof object.eta !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Waypoint.eta: object expected");
-                            message.eta = $root.google.protobuf.Timestamp.fromObject(object.eta);
+                            message.eta = $root.google.protobuf.Timestamp.fromObject(object.eta, long + 1);
                         }
                         return message;
                     };
@@ -12547,7 +12895,7 @@
                         this.vehicleTripsWaypoints = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -12713,9 +13061,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    VehicleMatch.decode = function decode(reader, length, error) {
+                    VehicleMatch.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.VehicleMatch();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -12723,27 +13075,27 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.vehicle = $root.maps.fleetengine.v1.Vehicle.decode(reader, reader.uint32());
+                                    message.vehicle = $root.maps.fleetengine.v1.Vehicle.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 2: {
-                                    message.vehiclePickupEta = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.vehiclePickupEta = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 3: {
-                                    message.vehiclePickupDistanceMeters = $root.google.protobuf.Int32Value.decode(reader, reader.uint32());
+                                    message.vehiclePickupDistanceMeters = $root.google.protobuf.Int32Value.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 11: {
-                                    message.vehiclePickupStraightLineDistanceMeters = $root.google.protobuf.Int32Value.decode(reader, reader.uint32());
+                                    message.vehiclePickupStraightLineDistanceMeters = $root.google.protobuf.Int32Value.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 4: {
-                                    message.vehicleDropoffEta = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.vehicleDropoffEta = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 5: {
-                                    message.vehiclePickupToDropoffDistanceMeters = $root.google.protobuf.Int32Value.decode(reader, reader.uint32());
+                                    message.vehiclePickupToDropoffDistanceMeters = $root.google.protobuf.Int32Value.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 6: {
@@ -12753,7 +13105,7 @@
                             case 7: {
                                     if (!(message.vehicleTripsWaypoints && message.vehicleTripsWaypoints.length))
                                         message.vehicleTripsWaypoints = [];
-                                    message.vehicleTripsWaypoints.push($root.maps.fleetengine.v1.Waypoint.decode(reader, reader.uint32()));
+                                    message.vehicleTripsWaypoints.push($root.maps.fleetengine.v1.Waypoint.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 8: {
@@ -12769,7 +13121,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -12800,36 +13152,40 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    VehicleMatch.verify = function verify(message) {
+                    VehicleMatch.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.vehicle != null && message.hasOwnProperty("vehicle")) {
-                            var error = $root.maps.fleetengine.v1.Vehicle.verify(message.vehicle);
+                            var error = $root.maps.fleetengine.v1.Vehicle.verify(message.vehicle, long + 1);
                             if (error)
                                 return "vehicle." + error;
                         }
                         if (message.vehiclePickupEta != null && message.hasOwnProperty("vehiclePickupEta")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.vehiclePickupEta);
+                            var error = $root.google.protobuf.Timestamp.verify(message.vehiclePickupEta, long + 1);
                             if (error)
                                 return "vehiclePickupEta." + error;
                         }
                         if (message.vehiclePickupDistanceMeters != null && message.hasOwnProperty("vehiclePickupDistanceMeters")) {
-                            var error = $root.google.protobuf.Int32Value.verify(message.vehiclePickupDistanceMeters);
+                            var error = $root.google.protobuf.Int32Value.verify(message.vehiclePickupDistanceMeters, long + 1);
                             if (error)
                                 return "vehiclePickupDistanceMeters." + error;
                         }
                         if (message.vehiclePickupStraightLineDistanceMeters != null && message.hasOwnProperty("vehiclePickupStraightLineDistanceMeters")) {
-                            var error = $root.google.protobuf.Int32Value.verify(message.vehiclePickupStraightLineDistanceMeters);
+                            var error = $root.google.protobuf.Int32Value.verify(message.vehiclePickupStraightLineDistanceMeters, long + 1);
                             if (error)
                                 return "vehiclePickupStraightLineDistanceMeters." + error;
                         }
                         if (message.vehicleDropoffEta != null && message.hasOwnProperty("vehicleDropoffEta")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.vehicleDropoffEta);
+                            var error = $root.google.protobuf.Timestamp.verify(message.vehicleDropoffEta, long + 1);
                             if (error)
                                 return "vehicleDropoffEta." + error;
                         }
                         if (message.vehiclePickupToDropoffDistanceMeters != null && message.hasOwnProperty("vehiclePickupToDropoffDistanceMeters")) {
-                            var error = $root.google.protobuf.Int32Value.verify(message.vehiclePickupToDropoffDistanceMeters);
+                            var error = $root.google.protobuf.Int32Value.verify(message.vehiclePickupToDropoffDistanceMeters, long + 1);
                             if (error)
                                 return "vehiclePickupToDropoffDistanceMeters." + error;
                         }
@@ -12846,7 +13202,7 @@
                             if (!Array.isArray(message.vehicleTripsWaypoints))
                                 return "vehicleTripsWaypoints: array expected";
                             for (var i = 0; i < message.vehicleTripsWaypoints.length; ++i) {
-                                var error = $root.maps.fleetengine.v1.Waypoint.verify(message.vehicleTripsWaypoints[i]);
+                                var error = $root.maps.fleetengine.v1.Waypoint.verify(message.vehicleTripsWaypoints[i], long + 1);
                                 if (error)
                                     return "vehicleTripsWaypoints." + error;
                             }
@@ -12897,39 +13253,43 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.VehicleMatch} VehicleMatch
                      */
-                    VehicleMatch.fromObject = function fromObject(object) {
+                    VehicleMatch.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.VehicleMatch)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.VehicleMatch();
                         if (object.vehicle != null) {
                             if (typeof object.vehicle !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleMatch.vehicle: object expected");
-                            message.vehicle = $root.maps.fleetengine.v1.Vehicle.fromObject(object.vehicle);
+                            message.vehicle = $root.maps.fleetengine.v1.Vehicle.fromObject(object.vehicle, long + 1);
                         }
                         if (object.vehiclePickupEta != null) {
                             if (typeof object.vehiclePickupEta !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleMatch.vehiclePickupEta: object expected");
-                            message.vehiclePickupEta = $root.google.protobuf.Timestamp.fromObject(object.vehiclePickupEta);
+                            message.vehiclePickupEta = $root.google.protobuf.Timestamp.fromObject(object.vehiclePickupEta, long + 1);
                         }
                         if (object.vehiclePickupDistanceMeters != null) {
                             if (typeof object.vehiclePickupDistanceMeters !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleMatch.vehiclePickupDistanceMeters: object expected");
-                            message.vehiclePickupDistanceMeters = $root.google.protobuf.Int32Value.fromObject(object.vehiclePickupDistanceMeters);
+                            message.vehiclePickupDistanceMeters = $root.google.protobuf.Int32Value.fromObject(object.vehiclePickupDistanceMeters, long + 1);
                         }
                         if (object.vehiclePickupStraightLineDistanceMeters != null) {
                             if (typeof object.vehiclePickupStraightLineDistanceMeters !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleMatch.vehiclePickupStraightLineDistanceMeters: object expected");
-                            message.vehiclePickupStraightLineDistanceMeters = $root.google.protobuf.Int32Value.fromObject(object.vehiclePickupStraightLineDistanceMeters);
+                            message.vehiclePickupStraightLineDistanceMeters = $root.google.protobuf.Int32Value.fromObject(object.vehiclePickupStraightLineDistanceMeters, long + 1);
                         }
                         if (object.vehicleDropoffEta != null) {
                             if (typeof object.vehicleDropoffEta !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleMatch.vehicleDropoffEta: object expected");
-                            message.vehicleDropoffEta = $root.google.protobuf.Timestamp.fromObject(object.vehicleDropoffEta);
+                            message.vehicleDropoffEta = $root.google.protobuf.Timestamp.fromObject(object.vehicleDropoffEta, long + 1);
                         }
                         if (object.vehiclePickupToDropoffDistanceMeters != null) {
                             if (typeof object.vehiclePickupToDropoffDistanceMeters !== "object")
                                 throw TypeError(".maps.fleetengine.v1.VehicleMatch.vehiclePickupToDropoffDistanceMeters: object expected");
-                            message.vehiclePickupToDropoffDistanceMeters = $root.google.protobuf.Int32Value.fromObject(object.vehiclePickupToDropoffDistanceMeters);
+                            message.vehiclePickupToDropoffDistanceMeters = $root.google.protobuf.Int32Value.fromObject(object.vehiclePickupToDropoffDistanceMeters, long + 1);
                         }
                         switch (object.tripType) {
                         default:
@@ -12958,7 +13318,7 @@
                             for (var i = 0; i < object.vehicleTripsWaypoints.length; ++i) {
                                 if (typeof object.vehicleTripsWaypoints[i] !== "object")
                                     throw TypeError(".maps.fleetengine.v1.VehicleMatch.vehicleTripsWaypoints: object expected");
-                                message.vehicleTripsWaypoints[i] = $root.maps.fleetengine.v1.Waypoint.fromObject(object.vehicleTripsWaypoints[i]);
+                                message.vehicleTripsWaypoints[i] = $root.maps.fleetengine.v1.Waypoint.fromObject(object.vehicleTripsWaypoints[i], long + 1);
                             }
                         }
                         switch (object.vehicleMatchType) {
@@ -13181,7 +13541,7 @@
                         this.attributes = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -13247,9 +13607,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    VehicleAttributeList.decode = function decode(reader, length, error) {
+                    VehicleAttributeList.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.VehicleAttributeList();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -13259,11 +13623,11 @@
                             case 1: {
                                     if (!(message.attributes && message.attributes.length))
                                         message.attributes = [];
-                                    message.attributes.push($root.maps.fleetengine.v1.VehicleAttribute.decode(reader, reader.uint32()));
+                                    message.attributes.push($root.maps.fleetengine.v1.VehicleAttribute.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -13294,14 +13658,18 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    VehicleAttributeList.verify = function verify(message) {
+                    VehicleAttributeList.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.attributes != null && message.hasOwnProperty("attributes")) {
                             if (!Array.isArray(message.attributes))
                                 return "attributes: array expected";
                             for (var i = 0; i < message.attributes.length; ++i) {
-                                var error = $root.maps.fleetengine.v1.VehicleAttribute.verify(message.attributes[i]);
+                                var error = $root.maps.fleetengine.v1.VehicleAttribute.verify(message.attributes[i], long + 1);
                                 if (error)
                                     return "attributes." + error;
                             }
@@ -13317,9 +13685,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.VehicleAttributeList} VehicleAttributeList
                      */
-                    VehicleAttributeList.fromObject = function fromObject(object) {
+                    VehicleAttributeList.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.VehicleAttributeList)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.VehicleAttributeList();
                         if (object.attributes) {
                             if (!Array.isArray(object.attributes))
@@ -13328,7 +13700,7 @@
                             for (var i = 0; i < object.attributes.length; ++i) {
                                 if (typeof object.attributes[i] !== "object")
                                     throw TypeError(".maps.fleetengine.v1.VehicleAttributeList.attributes: object expected");
-                                message.attributes[i] = $root.maps.fleetengine.v1.VehicleAttribute.fromObject(object.attributes[i]);
+                                message.attributes[i] = $root.maps.fleetengine.v1.VehicleAttribute.fromObject(object.attributes[i], long + 1);
                             }
                         }
                         return message;
@@ -13434,7 +13806,7 @@
                         this.waypoints = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -13728,9 +14100,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Vehicle.decode = function decode(reader, length, error) {
+                    Vehicle.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.Vehicle();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -13763,13 +14139,13 @@
                                     break;
                                 }
                             case 5: {
-                                    message.lastLocation = $root.maps.fleetengine.v1.VehicleLocation.decode(reader, reader.uint32());
+                                    message.lastLocation = $root.maps.fleetengine.v1.VehicleLocation.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 30: {
                                     if (!(message.pastLocations && message.pastLocations.length))
                                         message.pastLocations = [];
-                                    message.pastLocations.push($root.maps.fleetengine.v1.VehicleLocation.decode(reader, reader.uint32()));
+                                    message.pastLocations.push($root.maps.fleetengine.v1.VehicleLocation.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 6: {
@@ -13779,21 +14155,21 @@
                             case 8: {
                                     if (!(message.attributes && message.attributes.length))
                                         message.attributes = [];
-                                    message.attributes.push($root.maps.fleetengine.v1.VehicleAttribute.decode(reader, reader.uint32()));
+                                    message.attributes.push($root.maps.fleetengine.v1.VehicleAttribute.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 9: {
-                                    message.vehicleType = $root.maps.fleetengine.v1.Vehicle.VehicleType.decode(reader, reader.uint32());
+                                    message.vehicleType = $root.maps.fleetengine.v1.Vehicle.VehicleType.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 10: {
-                                    message.licensePlate = $root.maps.fleetengine.v1.LicensePlate.decode(reader, reader.uint32());
+                                    message.licensePlate = $root.maps.fleetengine.v1.LicensePlate.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 12: {
                                     if (!(message.route && message.route.length))
                                         message.route = [];
-                                    message.route.push($root.maps.fleetengine.v1.TerminalLocation.decode(reader, reader.uint32()));
+                                    message.route.push($root.maps.fleetengine.v1.TerminalLocation.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 20: {
@@ -13801,37 +14177,37 @@
                                     break;
                                 }
                             case 28: {
-                                    message.currentRouteSegmentTraffic = $root.maps.fleetengine.v1.TrafficPolylineData.decode(reader, reader.uint32());
+                                    message.currentRouteSegmentTraffic = $root.maps.fleetengine.v1.TrafficPolylineData.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 15: {
-                                    message.currentRouteSegmentVersion = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.currentRouteSegmentVersion = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 24: {
-                                    message.currentRouteSegmentEndPoint = $root.maps.fleetengine.v1.TripWaypoint.decode(reader, reader.uint32());
+                                    message.currentRouteSegmentEndPoint = $root.maps.fleetengine.v1.TripWaypoint.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 18: {
-                                    message.remainingDistanceMeters = $root.google.protobuf.Int32Value.decode(reader, reader.uint32());
+                                    message.remainingDistanceMeters = $root.google.protobuf.Int32Value.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 19: {
-                                    message.etaToFirstWaypoint = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.etaToFirstWaypoint = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 25: {
-                                    message.remainingTimeSeconds = $root.google.protobuf.Int32Value.decode(reader, reader.uint32());
+                                    message.remainingTimeSeconds = $root.google.protobuf.Int32Value.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 22: {
                                     if (!(message.waypoints && message.waypoints.length))
                                         message.waypoints = [];
-                                    message.waypoints.push($root.maps.fleetengine.v1.TripWaypoint.decode(reader, reader.uint32()));
+                                    message.waypoints.push($root.maps.fleetengine.v1.TripWaypoint.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             case 16: {
-                                    message.waypointsVersion = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    message.waypointsVersion = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 23: {
@@ -13843,11 +14219,11 @@
                                     break;
                                 }
                             case 27: {
-                                    message.deviceSettings = $root.maps.fleetengine.v1.DeviceSettings.decode(reader, reader.uint32());
+                                    message.deviceSettings = $root.maps.fleetengine.v1.DeviceSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -13878,9 +14254,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    Vehicle.verify = function verify(message) {
+                    Vehicle.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -13914,7 +14294,7 @@
                                     return "currentTrips: string[] expected";
                         }
                         if (message.lastLocation != null && message.hasOwnProperty("lastLocation")) {
-                            var error = $root.maps.fleetengine.v1.VehicleLocation.verify(message.lastLocation);
+                            var error = $root.maps.fleetengine.v1.VehicleLocation.verify(message.lastLocation, long + 1);
                             if (error)
                                 return "lastLocation." + error;
                         }
@@ -13922,7 +14302,7 @@
                             if (!Array.isArray(message.pastLocations))
                                 return "pastLocations: array expected";
                             for (var i = 0; i < message.pastLocations.length; ++i) {
-                                var error = $root.maps.fleetengine.v1.VehicleLocation.verify(message.pastLocations[i]);
+                                var error = $root.maps.fleetengine.v1.VehicleLocation.verify(message.pastLocations[i], long + 1);
                                 if (error)
                                     return "pastLocations." + error;
                             }
@@ -13934,18 +14314,18 @@
                             if (!Array.isArray(message.attributes))
                                 return "attributes: array expected";
                             for (var i = 0; i < message.attributes.length; ++i) {
-                                var error = $root.maps.fleetengine.v1.VehicleAttribute.verify(message.attributes[i]);
+                                var error = $root.maps.fleetengine.v1.VehicleAttribute.verify(message.attributes[i], long + 1);
                                 if (error)
                                     return "attributes." + error;
                             }
                         }
                         if (message.vehicleType != null && message.hasOwnProperty("vehicleType")) {
-                            var error = $root.maps.fleetengine.v1.Vehicle.VehicleType.verify(message.vehicleType);
+                            var error = $root.maps.fleetengine.v1.Vehicle.VehicleType.verify(message.vehicleType, long + 1);
                             if (error)
                                 return "vehicleType." + error;
                         }
                         if (message.licensePlate != null && message.hasOwnProperty("licensePlate")) {
-                            var error = $root.maps.fleetengine.v1.LicensePlate.verify(message.licensePlate);
+                            var error = $root.maps.fleetengine.v1.LicensePlate.verify(message.licensePlate, long + 1);
                             if (error)
                                 return "licensePlate." + error;
                         }
@@ -13953,7 +14333,7 @@
                             if (!Array.isArray(message.route))
                                 return "route: array expected";
                             for (var i = 0; i < message.route.length; ++i) {
-                                var error = $root.maps.fleetengine.v1.TerminalLocation.verify(message.route[i]);
+                                var error = $root.maps.fleetengine.v1.TerminalLocation.verify(message.route[i], long + 1);
                                 if (error)
                                     return "route." + error;
                             }
@@ -13962,32 +14342,32 @@
                             if (!$util.isString(message.currentRouteSegment))
                                 return "currentRouteSegment: string expected";
                         if (message.currentRouteSegmentTraffic != null && message.hasOwnProperty("currentRouteSegmentTraffic")) {
-                            var error = $root.maps.fleetengine.v1.TrafficPolylineData.verify(message.currentRouteSegmentTraffic);
+                            var error = $root.maps.fleetengine.v1.TrafficPolylineData.verify(message.currentRouteSegmentTraffic, long + 1);
                             if (error)
                                 return "currentRouteSegmentTraffic." + error;
                         }
                         if (message.currentRouteSegmentVersion != null && message.hasOwnProperty("currentRouteSegmentVersion")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.currentRouteSegmentVersion);
+                            var error = $root.google.protobuf.Timestamp.verify(message.currentRouteSegmentVersion, long + 1);
                             if (error)
                                 return "currentRouteSegmentVersion." + error;
                         }
                         if (message.currentRouteSegmentEndPoint != null && message.hasOwnProperty("currentRouteSegmentEndPoint")) {
-                            var error = $root.maps.fleetengine.v1.TripWaypoint.verify(message.currentRouteSegmentEndPoint);
+                            var error = $root.maps.fleetengine.v1.TripWaypoint.verify(message.currentRouteSegmentEndPoint, long + 1);
                             if (error)
                                 return "currentRouteSegmentEndPoint." + error;
                         }
                         if (message.remainingDistanceMeters != null && message.hasOwnProperty("remainingDistanceMeters")) {
-                            var error = $root.google.protobuf.Int32Value.verify(message.remainingDistanceMeters);
+                            var error = $root.google.protobuf.Int32Value.verify(message.remainingDistanceMeters, long + 1);
                             if (error)
                                 return "remainingDistanceMeters." + error;
                         }
                         if (message.etaToFirstWaypoint != null && message.hasOwnProperty("etaToFirstWaypoint")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.etaToFirstWaypoint);
+                            var error = $root.google.protobuf.Timestamp.verify(message.etaToFirstWaypoint, long + 1);
                             if (error)
                                 return "etaToFirstWaypoint." + error;
                         }
                         if (message.remainingTimeSeconds != null && message.hasOwnProperty("remainingTimeSeconds")) {
-                            var error = $root.google.protobuf.Int32Value.verify(message.remainingTimeSeconds);
+                            var error = $root.google.protobuf.Int32Value.verify(message.remainingTimeSeconds, long + 1);
                             if (error)
                                 return "remainingTimeSeconds." + error;
                         }
@@ -13995,13 +14375,13 @@
                             if (!Array.isArray(message.waypoints))
                                 return "waypoints: array expected";
                             for (var i = 0; i < message.waypoints.length; ++i) {
-                                var error = $root.maps.fleetengine.v1.TripWaypoint.verify(message.waypoints[i]);
+                                var error = $root.maps.fleetengine.v1.TripWaypoint.verify(message.waypoints[i], long + 1);
                                 if (error)
                                     return "waypoints." + error;
                             }
                         }
                         if (message.waypointsVersion != null && message.hasOwnProperty("waypointsVersion")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.waypointsVersion);
+                            var error = $root.google.protobuf.Timestamp.verify(message.waypointsVersion, long + 1);
                             if (error)
                                 return "waypointsVersion." + error;
                         }
@@ -14020,7 +14400,7 @@
                                 break;
                             }
                         if (message.deviceSettings != null && message.hasOwnProperty("deviceSettings")) {
-                            var error = $root.maps.fleetengine.v1.DeviceSettings.verify(message.deviceSettings);
+                            var error = $root.maps.fleetengine.v1.DeviceSettings.verify(message.deviceSettings, long + 1);
                             if (error)
                                 return "deviceSettings." + error;
                         }
@@ -14035,9 +14415,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.Vehicle} Vehicle
                      */
-                    Vehicle.fromObject = function fromObject(object) {
+                    Vehicle.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.Vehicle)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.Vehicle();
                         if (object.name != null)
                             message.name = String(object.name);
@@ -14096,7 +14480,7 @@
                         if (object.lastLocation != null) {
                             if (typeof object.lastLocation !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Vehicle.lastLocation: object expected");
-                            message.lastLocation = $root.maps.fleetengine.v1.VehicleLocation.fromObject(object.lastLocation);
+                            message.lastLocation = $root.maps.fleetengine.v1.VehicleLocation.fromObject(object.lastLocation, long + 1);
                         }
                         if (object.pastLocations) {
                             if (!Array.isArray(object.pastLocations))
@@ -14105,7 +14489,7 @@
                             for (var i = 0; i < object.pastLocations.length; ++i) {
                                 if (typeof object.pastLocations[i] !== "object")
                                     throw TypeError(".maps.fleetengine.v1.Vehicle.pastLocations: object expected");
-                                message.pastLocations[i] = $root.maps.fleetengine.v1.VehicleLocation.fromObject(object.pastLocations[i]);
+                                message.pastLocations[i] = $root.maps.fleetengine.v1.VehicleLocation.fromObject(object.pastLocations[i], long + 1);
                             }
                         }
                         if (object.maximumCapacity != null)
@@ -14117,18 +14501,18 @@
                             for (var i = 0; i < object.attributes.length; ++i) {
                                 if (typeof object.attributes[i] !== "object")
                                     throw TypeError(".maps.fleetengine.v1.Vehicle.attributes: object expected");
-                                message.attributes[i] = $root.maps.fleetengine.v1.VehicleAttribute.fromObject(object.attributes[i]);
+                                message.attributes[i] = $root.maps.fleetengine.v1.VehicleAttribute.fromObject(object.attributes[i], long + 1);
                             }
                         }
                         if (object.vehicleType != null) {
                             if (typeof object.vehicleType !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Vehicle.vehicleType: object expected");
-                            message.vehicleType = $root.maps.fleetengine.v1.Vehicle.VehicleType.fromObject(object.vehicleType);
+                            message.vehicleType = $root.maps.fleetengine.v1.Vehicle.VehicleType.fromObject(object.vehicleType, long + 1);
                         }
                         if (object.licensePlate != null) {
                             if (typeof object.licensePlate !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Vehicle.licensePlate: object expected");
-                            message.licensePlate = $root.maps.fleetengine.v1.LicensePlate.fromObject(object.licensePlate);
+                            message.licensePlate = $root.maps.fleetengine.v1.LicensePlate.fromObject(object.licensePlate, long + 1);
                         }
                         if (object.route) {
                             if (!Array.isArray(object.route))
@@ -14137,7 +14521,7 @@
                             for (var i = 0; i < object.route.length; ++i) {
                                 if (typeof object.route[i] !== "object")
                                     throw TypeError(".maps.fleetengine.v1.Vehicle.route: object expected");
-                                message.route[i] = $root.maps.fleetengine.v1.TerminalLocation.fromObject(object.route[i]);
+                                message.route[i] = $root.maps.fleetengine.v1.TerminalLocation.fromObject(object.route[i], long + 1);
                             }
                         }
                         if (object.currentRouteSegment != null)
@@ -14145,32 +14529,32 @@
                         if (object.currentRouteSegmentTraffic != null) {
                             if (typeof object.currentRouteSegmentTraffic !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Vehicle.currentRouteSegmentTraffic: object expected");
-                            message.currentRouteSegmentTraffic = $root.maps.fleetengine.v1.TrafficPolylineData.fromObject(object.currentRouteSegmentTraffic);
+                            message.currentRouteSegmentTraffic = $root.maps.fleetengine.v1.TrafficPolylineData.fromObject(object.currentRouteSegmentTraffic, long + 1);
                         }
                         if (object.currentRouteSegmentVersion != null) {
                             if (typeof object.currentRouteSegmentVersion !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Vehicle.currentRouteSegmentVersion: object expected");
-                            message.currentRouteSegmentVersion = $root.google.protobuf.Timestamp.fromObject(object.currentRouteSegmentVersion);
+                            message.currentRouteSegmentVersion = $root.google.protobuf.Timestamp.fromObject(object.currentRouteSegmentVersion, long + 1);
                         }
                         if (object.currentRouteSegmentEndPoint != null) {
                             if (typeof object.currentRouteSegmentEndPoint !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Vehicle.currentRouteSegmentEndPoint: object expected");
-                            message.currentRouteSegmentEndPoint = $root.maps.fleetengine.v1.TripWaypoint.fromObject(object.currentRouteSegmentEndPoint);
+                            message.currentRouteSegmentEndPoint = $root.maps.fleetengine.v1.TripWaypoint.fromObject(object.currentRouteSegmentEndPoint, long + 1);
                         }
                         if (object.remainingDistanceMeters != null) {
                             if (typeof object.remainingDistanceMeters !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Vehicle.remainingDistanceMeters: object expected");
-                            message.remainingDistanceMeters = $root.google.protobuf.Int32Value.fromObject(object.remainingDistanceMeters);
+                            message.remainingDistanceMeters = $root.google.protobuf.Int32Value.fromObject(object.remainingDistanceMeters, long + 1);
                         }
                         if (object.etaToFirstWaypoint != null) {
                             if (typeof object.etaToFirstWaypoint !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Vehicle.etaToFirstWaypoint: object expected");
-                            message.etaToFirstWaypoint = $root.google.protobuf.Timestamp.fromObject(object.etaToFirstWaypoint);
+                            message.etaToFirstWaypoint = $root.google.protobuf.Timestamp.fromObject(object.etaToFirstWaypoint, long + 1);
                         }
                         if (object.remainingTimeSeconds != null) {
                             if (typeof object.remainingTimeSeconds !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Vehicle.remainingTimeSeconds: object expected");
-                            message.remainingTimeSeconds = $root.google.protobuf.Int32Value.fromObject(object.remainingTimeSeconds);
+                            message.remainingTimeSeconds = $root.google.protobuf.Int32Value.fromObject(object.remainingTimeSeconds, long + 1);
                         }
                         if (object.waypoints) {
                             if (!Array.isArray(object.waypoints))
@@ -14179,13 +14563,13 @@
                             for (var i = 0; i < object.waypoints.length; ++i) {
                                 if (typeof object.waypoints[i] !== "object")
                                     throw TypeError(".maps.fleetengine.v1.Vehicle.waypoints: object expected");
-                                message.waypoints[i] = $root.maps.fleetengine.v1.TripWaypoint.fromObject(object.waypoints[i]);
+                                message.waypoints[i] = $root.maps.fleetengine.v1.TripWaypoint.fromObject(object.waypoints[i], long + 1);
                             }
                         }
                         if (object.waypointsVersion != null) {
                             if (typeof object.waypointsVersion !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Vehicle.waypointsVersion: object expected");
-                            message.waypointsVersion = $root.google.protobuf.Timestamp.fromObject(object.waypointsVersion);
+                            message.waypointsVersion = $root.google.protobuf.Timestamp.fromObject(object.waypointsVersion, long + 1);
                         }
                         if (object.backToBackEnabled != null)
                             message.backToBackEnabled = Boolean(object.backToBackEnabled);
@@ -14220,7 +14604,7 @@
                         if (object.deviceSettings != null) {
                             if (typeof object.deviceSettings !== "object")
                                 throw TypeError(".maps.fleetengine.v1.Vehicle.deviceSettings: object expected");
-                            message.deviceSettings = $root.maps.fleetengine.v1.DeviceSettings.fromObject(object.deviceSettings);
+                            message.deviceSettings = $root.maps.fleetengine.v1.DeviceSettings.fromObject(object.deviceSettings, long + 1);
                         }
                         return message;
                     };
@@ -14378,7 +14762,7 @@
                         function VehicleType(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -14443,9 +14827,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        VehicleType.decode = function decode(reader, length, error) {
+                        VehicleType.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.Vehicle.VehicleType();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -14457,7 +14845,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -14488,9 +14876,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        VehicleType.verify = function verify(message) {
+                        VehicleType.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.category != null && message.hasOwnProperty("category"))
                                 switch (message.category) {
                                 default:
@@ -14515,9 +14907,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {maps.fleetengine.v1.Vehicle.VehicleType} VehicleType
                          */
-                        VehicleType.fromObject = function fromObject(object) {
+                        VehicleType.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.maps.fleetengine.v1.Vehicle.VehicleType)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.maps.fleetengine.v1.Vehicle.VehicleType();
                             switch (object.category) {
                             default:
@@ -14656,7 +15052,7 @@
                     function BatteryInfo(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -14741,9 +15137,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    BatteryInfo.decode = function decode(reader, length, error) {
+                    BatteryInfo.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.BatteryInfo();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -14763,7 +15163,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -14794,9 +15194,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    BatteryInfo.verify = function verify(message) {
+                    BatteryInfo.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.batteryStatus != null && message.hasOwnProperty("batteryStatus"))
                             switch (message.batteryStatus) {
                             default:
@@ -14834,9 +15238,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.BatteryInfo} BatteryInfo
                      */
-                    BatteryInfo.fromObject = function fromObject(object) {
+                    BatteryInfo.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.BatteryInfo)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.BatteryInfo();
                         switch (object.batteryStatus) {
                         default:
@@ -14982,7 +15390,7 @@
                     function DeviceSettings(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -15077,9 +15485,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    DeviceSettings.decode = function decode(reader, length, error) {
+                    DeviceSettings.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.DeviceSettings();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -15099,11 +15511,11 @@
                                     break;
                                 }
                             case 4: {
-                                    message.batteryInfo = $root.maps.fleetengine.v1.BatteryInfo.decode(reader, reader.uint32());
+                                    message.batteryInfo = $root.maps.fleetengine.v1.BatteryInfo.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -15134,9 +15546,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    DeviceSettings.verify = function verify(message) {
+                    DeviceSettings.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.locationPowerSaveMode != null && message.hasOwnProperty("locationPowerSaveMode"))
                             switch (message.locationPowerSaveMode) {
                             default:
@@ -15156,7 +15572,7 @@
                             if (typeof message.isInteractive !== "boolean")
                                 return "isInteractive: boolean expected";
                         if (message.batteryInfo != null && message.hasOwnProperty("batteryInfo")) {
-                            var error = $root.maps.fleetengine.v1.BatteryInfo.verify(message.batteryInfo);
+                            var error = $root.maps.fleetengine.v1.BatteryInfo.verify(message.batteryInfo, long + 1);
                             if (error)
                                 return "batteryInfo." + error;
                         }
@@ -15171,9 +15587,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.DeviceSettings} DeviceSettings
                      */
-                    DeviceSettings.fromObject = function fromObject(object) {
+                    DeviceSettings.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.DeviceSettings)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.DeviceSettings();
                         switch (object.locationPowerSaveMode) {
                         default:
@@ -15214,7 +15634,7 @@
                         if (object.batteryInfo != null) {
                             if (typeof object.batteryInfo !== "object")
                                 throw TypeError(".maps.fleetengine.v1.DeviceSettings.batteryInfo: object expected");
-                            message.batteryInfo = $root.maps.fleetengine.v1.BatteryInfo.fromObject(object.batteryInfo);
+                            message.batteryInfo = $root.maps.fleetengine.v1.BatteryInfo.fromObject(object.batteryInfo, long + 1);
                         }
                         return message;
                     };
@@ -15299,7 +15719,7 @@
                     function LicensePlate(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -15374,9 +15794,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    LicensePlate.decode = function decode(reader, length, error) {
+                    LicensePlate.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.LicensePlate();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -15392,7 +15816,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -15423,9 +15847,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    LicensePlate.verify = function verify(message) {
+                    LicensePlate.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.countryCode != null && message.hasOwnProperty("countryCode"))
                             if (!$util.isString(message.countryCode))
                                 return "countryCode: string expected";
@@ -15443,9 +15871,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.LicensePlate} LicensePlate
                      */
-                    LicensePlate.fromObject = function fromObject(object) {
+                    LicensePlate.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.LicensePlate)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.LicensePlate();
                         if (object.countryCode != null)
                             message.countryCode = String(object.countryCode);
@@ -15528,7 +15960,7 @@
                         this.roadStretch = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -15594,9 +16026,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    VisualTrafficReportPolylineRendering.decode = function decode(reader, length, error) {
+                    VisualTrafficReportPolylineRendering.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.VisualTrafficReportPolylineRendering();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -15606,11 +16042,11 @@
                             case 1: {
                                     if (!(message.roadStretch && message.roadStretch.length))
                                         message.roadStretch = [];
-                                    message.roadStretch.push($root.maps.fleetengine.v1.VisualTrafficReportPolylineRendering.RoadStretch.decode(reader, reader.uint32()));
+                                    message.roadStretch.push($root.maps.fleetengine.v1.VisualTrafficReportPolylineRendering.RoadStretch.decode(reader, reader.uint32(), undefined, long + 1));
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -15641,14 +16077,18 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    VisualTrafficReportPolylineRendering.verify = function verify(message) {
+                    VisualTrafficReportPolylineRendering.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.roadStretch != null && message.hasOwnProperty("roadStretch")) {
                             if (!Array.isArray(message.roadStretch))
                                 return "roadStretch: array expected";
                             for (var i = 0; i < message.roadStretch.length; ++i) {
-                                var error = $root.maps.fleetengine.v1.VisualTrafficReportPolylineRendering.RoadStretch.verify(message.roadStretch[i]);
+                                var error = $root.maps.fleetengine.v1.VisualTrafficReportPolylineRendering.RoadStretch.verify(message.roadStretch[i], long + 1);
                                 if (error)
                                     return "roadStretch." + error;
                             }
@@ -15664,9 +16104,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.VisualTrafficReportPolylineRendering} VisualTrafficReportPolylineRendering
                      */
-                    VisualTrafficReportPolylineRendering.fromObject = function fromObject(object) {
+                    VisualTrafficReportPolylineRendering.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.VisualTrafficReportPolylineRendering)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.VisualTrafficReportPolylineRendering();
                         if (object.roadStretch) {
                             if (!Array.isArray(object.roadStretch))
@@ -15675,7 +16119,7 @@
                             for (var i = 0; i < object.roadStretch.length; ++i) {
                                 if (typeof object.roadStretch[i] !== "object")
                                     throw TypeError(".maps.fleetengine.v1.VisualTrafficReportPolylineRendering.roadStretch: object expected");
-                                message.roadStretch[i] = $root.maps.fleetengine.v1.VisualTrafficReportPolylineRendering.RoadStretch.fromObject(object.roadStretch[i]);
+                                message.roadStretch[i] = $root.maps.fleetengine.v1.VisualTrafficReportPolylineRendering.RoadStretch.fromObject(object.roadStretch[i], long + 1);
                             }
                         }
                         return message;
@@ -15752,7 +16196,7 @@
                         function RoadStretch(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -15837,9 +16281,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RoadStretch.decode = function decode(reader, length, error) {
+                        RoadStretch.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.VisualTrafficReportPolylineRendering.RoadStretch();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -15859,7 +16307,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -15890,9 +16338,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        RoadStretch.verify = function verify(message) {
+                        RoadStretch.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.style != null && message.hasOwnProperty("style"))
                                 switch (message.style) {
                                 default:
@@ -15919,9 +16371,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {maps.fleetengine.v1.VisualTrafficReportPolylineRendering.RoadStretch} RoadStretch
                          */
-                        RoadStretch.fromObject = function fromObject(object) {
+                        RoadStretch.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.maps.fleetengine.v1.VisualTrafficReportPolylineRendering.RoadStretch)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.maps.fleetengine.v1.VisualTrafficReportPolylineRendering.RoadStretch();
                             switch (object.style) {
                             default:
@@ -16045,7 +16501,7 @@
                     function TrafficPolylineData(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -16110,9 +16566,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    TrafficPolylineData.decode = function decode(reader, length, error) {
+                    TrafficPolylineData.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.v1.TrafficPolylineData();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -16120,11 +16580,11 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.trafficRendering = $root.maps.fleetengine.v1.VisualTrafficReportPolylineRendering.decode(reader, reader.uint32());
+                                    message.trafficRendering = $root.maps.fleetengine.v1.VisualTrafficReportPolylineRendering.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -16155,11 +16615,15 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    TrafficPolylineData.verify = function verify(message) {
+                    TrafficPolylineData.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.trafficRendering != null && message.hasOwnProperty("trafficRendering")) {
-                            var error = $root.maps.fleetengine.v1.VisualTrafficReportPolylineRendering.verify(message.trafficRendering);
+                            var error = $root.maps.fleetengine.v1.VisualTrafficReportPolylineRendering.verify(message.trafficRendering, long + 1);
                             if (error)
                                 return "trafficRendering." + error;
                         }
@@ -16174,14 +16638,18 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {maps.fleetengine.v1.TrafficPolylineData} TrafficPolylineData
                      */
-                    TrafficPolylineData.fromObject = function fromObject(object) {
+                    TrafficPolylineData.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.maps.fleetengine.v1.TrafficPolylineData)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.maps.fleetengine.v1.TrafficPolylineData();
                         if (object.trafficRendering != null) {
                             if (typeof object.trafficRendering !== "object")
                                 throw TypeError(".maps.fleetengine.v1.TrafficPolylineData.trafficRendering: object expected");
-                            message.trafficRendering = $root.maps.fleetengine.v1.VisualTrafficReportPolylineRendering.fromObject(object.trafficRendering);
+                            message.trafficRendering = $root.maps.fleetengine.v1.VisualTrafficReportPolylineRendering.fromObject(object.trafficRendering, long + 1);
                         }
                         return message;
                     };
@@ -16372,7 +16840,7 @@
                     function Viewport(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -16447,9 +16915,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Viewport.decode = function decode(reader, length, error) {
+                    Viewport.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.geo.type.Viewport();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -16457,15 +16929,15 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.low = $root.google.type.LatLng.decode(reader, reader.uint32());
+                                    message.low = $root.google.type.LatLng.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 2: {
-                                    message.high = $root.google.type.LatLng.decode(reader, reader.uint32());
+                                    message.high = $root.google.type.LatLng.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -16496,16 +16968,20 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    Viewport.verify = function verify(message) {
+                    Viewport.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.low != null && message.hasOwnProperty("low")) {
-                            var error = $root.google.type.LatLng.verify(message.low);
+                            var error = $root.google.type.LatLng.verify(message.low, long + 1);
                             if (error)
                                 return "low." + error;
                         }
                         if (message.high != null && message.hasOwnProperty("high")) {
-                            var error = $root.google.type.LatLng.verify(message.high);
+                            var error = $root.google.type.LatLng.verify(message.high, long + 1);
                             if (error)
                                 return "high." + error;
                         }
@@ -16520,19 +16996,23 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.geo.type.Viewport} Viewport
                      */
-                    Viewport.fromObject = function fromObject(object) {
+                    Viewport.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.geo.type.Viewport)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.geo.type.Viewport();
                         if (object.low != null) {
                             if (typeof object.low !== "object")
                                 throw TypeError(".google.geo.type.Viewport.low: object expected");
-                            message.low = $root.google.type.LatLng.fromObject(object.low);
+                            message.low = $root.google.type.LatLng.fromObject(object.low, long + 1);
                         }
                         if (object.high != null) {
                             if (typeof object.high !== "object")
                                 throw TypeError(".google.geo.type.Viewport.high: object expected");
-                            message.high = $root.google.type.LatLng.fromObject(object.high);
+                            message.high = $root.google.type.LatLng.fromObject(object.high, long + 1);
                         }
                         return message;
                     };
@@ -16626,7 +17106,7 @@
                 function LatLng(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -16701,9 +17181,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                LatLng.decode = function decode(reader, length, error) {
+                LatLng.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.LatLng();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -16719,7 +17203,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -16750,9 +17234,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                LatLng.verify = function verify(message) {
+                LatLng.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.latitude != null && message.hasOwnProperty("latitude"))
                         if (typeof message.latitude !== "number")
                             return "latitude: number expected";
@@ -16770,9 +17258,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.type.LatLng} LatLng
                  */
-                LatLng.fromObject = function fromObject(object) {
+                LatLng.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.type.LatLng)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.type.LatLng();
                     if (object.latitude != null)
                         message.latitude = Number(object.latitude);
@@ -16902,7 +17394,7 @@
                     this.style = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -17032,9 +17524,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceDescriptor.decode = function decode(reader, length, error) {
+                ResourceDescriptor.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -17079,7 +17575,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -17110,9 +17606,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                ResourceDescriptor.verify = function verify(message) {
+                ResourceDescriptor.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.type != null && message.hasOwnProperty("type"))
                         if (!$util.isString(message.type))
                             return "type: string expected";
@@ -17164,9 +17664,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.ResourceDescriptor} ResourceDescriptor
                  */
-                ResourceDescriptor.fromObject = function fromObject(object) {
+                ResourceDescriptor.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.ResourceDescriptor)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.ResourceDescriptor();
                     if (object.type != null)
                         message.type = String(object.type);
@@ -17354,7 +17858,7 @@
                 function ResourceReference(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -17429,9 +17933,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceReference.decode = function decode(reader, length, error) {
+                ResourceReference.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -17447,7 +17955,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -17478,9 +17986,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                ResourceReference.verify = function verify(message) {
+                ResourceReference.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.type != null && message.hasOwnProperty("type"))
                         if (!$util.isString(message.type))
                             return "type: string expected";
@@ -17498,9 +18010,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.ResourceReference} ResourceReference
                  */
-                ResourceReference.fromObject = function fromObject(object) {
+                ResourceReference.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.ResourceReference)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.ResourceReference();
                     if (object.type != null)
                         message.type = String(object.type);
@@ -17584,7 +18100,7 @@
                     this.rules = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -17660,9 +18176,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Http.decode = function decode(reader, length, error) {
+                Http.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Http();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -17672,7 +18192,7 @@
                         case 1: {
                                 if (!(message.rules && message.rules.length))
                                     message.rules = [];
-                                message.rules.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
+                                message.rules.push($root.google.api.HttpRule.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 2: {
@@ -17680,7 +18200,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -17711,14 +18231,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Http.verify = function verify(message) {
+                Http.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.rules != null && message.hasOwnProperty("rules")) {
                         if (!Array.isArray(message.rules))
                             return "rules: array expected";
                         for (var i = 0; i < message.rules.length; ++i) {
-                            var error = $root.google.api.HttpRule.verify(message.rules[i]);
+                            var error = $root.google.api.HttpRule.verify(message.rules[i], long + 1);
                             if (error)
                                 return "rules." + error;
                         }
@@ -17737,9 +18261,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.Http} Http
                  */
-                Http.fromObject = function fromObject(object) {
+                Http.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.Http)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.Http();
                     if (object.rules) {
                         if (!Array.isArray(object.rules))
@@ -17748,7 +18276,7 @@
                         for (var i = 0; i < object.rules.length; ++i) {
                             if (typeof object.rules[i] !== "object")
                                 throw TypeError(".google.api.Http.rules: object expected");
-                            message.rules[i] = $root.google.api.HttpRule.fromObject(object.rules[i]);
+                            message.rules[i] = $root.google.api.HttpRule.fromObject(object.rules[i], long + 1);
                         }
                     }
                     if (object.fullyDecodeReservedExpansion != null)
@@ -17842,7 +18370,7 @@
                     this.additionalBindings = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -18012,9 +18540,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                HttpRule.decode = function decode(reader, length, error) {
+                HttpRule.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.HttpRule();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -18046,7 +18578,7 @@
                                 break;
                             }
                         case 8: {
-                                message.custom = $root.google.api.CustomHttpPattern.decode(reader, reader.uint32());
+                                message.custom = $root.google.api.CustomHttpPattern.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 7: {
@@ -18060,11 +18592,11 @@
                         case 11: {
                                 if (!(message.additionalBindings && message.additionalBindings.length))
                                     message.additionalBindings = [];
-                                message.additionalBindings.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
+                                message.additionalBindings.push($root.google.api.HttpRule.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -18095,9 +18627,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                HttpRule.verify = function verify(message) {
+                HttpRule.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     var properties = {};
                     if (message.selector != null && message.hasOwnProperty("selector"))
                         if (!$util.isString(message.selector))
@@ -18140,7 +18676,7 @@
                             return "pattern: multiple values";
                         properties.pattern = 1;
                         {
-                            var error = $root.google.api.CustomHttpPattern.verify(message.custom);
+                            var error = $root.google.api.CustomHttpPattern.verify(message.custom, long + 1);
                             if (error)
                                 return "custom." + error;
                         }
@@ -18155,7 +18691,7 @@
                         if (!Array.isArray(message.additionalBindings))
                             return "additionalBindings: array expected";
                         for (var i = 0; i < message.additionalBindings.length; ++i) {
-                            var error = $root.google.api.HttpRule.verify(message.additionalBindings[i]);
+                            var error = $root.google.api.HttpRule.verify(message.additionalBindings[i], long + 1);
                             if (error)
                                 return "additionalBindings." + error;
                         }
@@ -18171,9 +18707,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.HttpRule} HttpRule
                  */
-                HttpRule.fromObject = function fromObject(object) {
+                HttpRule.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.HttpRule)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.HttpRule();
                     if (object.selector != null)
                         message.selector = String(object.selector);
@@ -18190,7 +18730,7 @@
                     if (object.custom != null) {
                         if (typeof object.custom !== "object")
                             throw TypeError(".google.api.HttpRule.custom: object expected");
-                        message.custom = $root.google.api.CustomHttpPattern.fromObject(object.custom);
+                        message.custom = $root.google.api.CustomHttpPattern.fromObject(object.custom, long + 1);
                     }
                     if (object.body != null)
                         message.body = String(object.body);
@@ -18203,7 +18743,7 @@
                         for (var i = 0; i < object.additionalBindings.length; ++i) {
                             if (typeof object.additionalBindings[i] !== "object")
                                 throw TypeError(".google.api.HttpRule.additionalBindings: object expected");
-                            message.additionalBindings[i] = $root.google.api.HttpRule.fromObject(object.additionalBindings[i]);
+                            message.additionalBindings[i] = $root.google.api.HttpRule.fromObject(object.additionalBindings[i], long + 1);
                         }
                     }
                     return message;
@@ -18323,7 +18863,7 @@
                 function CustomHttpPattern(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -18398,9 +18938,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CustomHttpPattern.decode = function decode(reader, length, error) {
+                CustomHttpPattern.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CustomHttpPattern();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -18416,7 +18960,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -18447,9 +18991,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                CustomHttpPattern.verify = function verify(message) {
+                CustomHttpPattern.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.kind != null && message.hasOwnProperty("kind"))
                         if (!$util.isString(message.kind))
                             return "kind: string expected";
@@ -18467,9 +19015,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.CustomHttpPattern} CustomHttpPattern
                  */
-                CustomHttpPattern.fromObject = function fromObject(object) {
+                CustomHttpPattern.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.CustomHttpPattern)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.CustomHttpPattern();
                     if (object.kind != null)
                         message.kind = String(object.kind);
@@ -18539,6 +19091,7 @@
                  * @interface ICommonLanguageSettings
                  * @property {string|null} [referenceDocsUri] CommonLanguageSettings referenceDocsUri
                  * @property {Array.<google.api.ClientLibraryDestination>|null} [destinations] CommonLanguageSettings destinations
+                 * @property {google.api.ISelectiveGapicGeneration|null} [selectiveGapicGeneration] CommonLanguageSettings selectiveGapicGeneration
                  */
     
                 /**
@@ -18553,7 +19106,7 @@
                     this.destinations = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -18572,6 +19125,14 @@
                  * @instance
                  */
                 CommonLanguageSettings.prototype.destinations = $util.emptyArray;
+    
+                /**
+                 * CommonLanguageSettings selectiveGapicGeneration.
+                 * @member {google.api.ISelectiveGapicGeneration|null|undefined} selectiveGapicGeneration
+                 * @memberof google.api.CommonLanguageSettings
+                 * @instance
+                 */
+                CommonLanguageSettings.prototype.selectiveGapicGeneration = null;
     
                 /**
                  * Creates a new CommonLanguageSettings instance using the specified properties.
@@ -18605,6 +19166,8 @@
                             writer.int32(message.destinations[i]);
                         writer.ldelim();
                     }
+                    if (message.selectiveGapicGeneration != null && Object.hasOwnProperty.call(message, "selectiveGapicGeneration"))
+                        $root.google.api.SelectiveGapicGeneration.encode(message.selectiveGapicGeneration, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
     
@@ -18632,9 +19195,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CommonLanguageSettings.decode = function decode(reader, length, error) {
+                CommonLanguageSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CommonLanguageSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -18656,8 +19223,12 @@
                                     message.destinations.push(reader.int32());
                                 break;
                             }
+                        case 3: {
+                                message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.decode(reader, reader.uint32(), undefined, long + 1);
+                                break;
+                            }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -18688,9 +19259,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                CommonLanguageSettings.verify = function verify(message) {
+                CommonLanguageSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
                         if (!$util.isString(message.referenceDocsUri))
                             return "referenceDocsUri: string expected";
@@ -18707,6 +19282,11 @@
                                 break;
                             }
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration")) {
+                        var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration, long + 1);
+                        if (error)
+                            return "selectiveGapicGeneration." + error;
+                    }
                     return null;
                 };
     
@@ -18718,9 +19298,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.CommonLanguageSettings} CommonLanguageSettings
                  */
-                CommonLanguageSettings.fromObject = function fromObject(object) {
+                CommonLanguageSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.CommonLanguageSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.CommonLanguageSettings();
                     if (object.referenceDocsUri != null)
                         message.referenceDocsUri = String(object.referenceDocsUri);
@@ -18749,6 +19333,11 @@
                                 break;
                             }
                     }
+                    if (object.selectiveGapicGeneration != null) {
+                        if (typeof object.selectiveGapicGeneration !== "object")
+                            throw TypeError(".google.api.CommonLanguageSettings.selectiveGapicGeneration: object expected");
+                        message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration, long + 1);
+                    }
                     return message;
                 };
     
@@ -18767,8 +19356,10 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.destinations = [];
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.referenceDocsUri = "";
+                        object.selectiveGapicGeneration = null;
+                    }
                     if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
                         object.referenceDocsUri = message.referenceDocsUri;
                     if (message.destinations && message.destinations.length) {
@@ -18776,6 +19367,8 @@
                         for (var j = 0; j < message.destinations.length; ++j)
                             object.destinations[j] = options.enums === String ? $root.google.api.ClientLibraryDestination[message.destinations[j]] === undefined ? message.destinations[j] : $root.google.api.ClientLibraryDestination[message.destinations[j]] : message.destinations[j];
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration"))
+                        object.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.toObject(message.selectiveGapicGeneration, options);
                     return object;
                 };
     
@@ -18838,7 +19431,7 @@
                 function ClientLibrarySettings(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -19003,9 +19596,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ClientLibrarySettings.decode = function decode(reader, length, error) {
+                ClientLibrarySettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ClientLibrarySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -19025,39 +19622,39 @@
                                 break;
                             }
                         case 21: {
-                                message.javaSettings = $root.google.api.JavaSettings.decode(reader, reader.uint32());
+                                message.javaSettings = $root.google.api.JavaSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 22: {
-                                message.cppSettings = $root.google.api.CppSettings.decode(reader, reader.uint32());
+                                message.cppSettings = $root.google.api.CppSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 23: {
-                                message.phpSettings = $root.google.api.PhpSettings.decode(reader, reader.uint32());
+                                message.phpSettings = $root.google.api.PhpSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 24: {
-                                message.pythonSettings = $root.google.api.PythonSettings.decode(reader, reader.uint32());
+                                message.pythonSettings = $root.google.api.PythonSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 25: {
-                                message.nodeSettings = $root.google.api.NodeSettings.decode(reader, reader.uint32());
+                                message.nodeSettings = $root.google.api.NodeSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 26: {
-                                message.dotnetSettings = $root.google.api.DotnetSettings.decode(reader, reader.uint32());
+                                message.dotnetSettings = $root.google.api.DotnetSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 27: {
-                                message.rubySettings = $root.google.api.RubySettings.decode(reader, reader.uint32());
+                                message.rubySettings = $root.google.api.RubySettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 28: {
-                                message.goSettings = $root.google.api.GoSettings.decode(reader, reader.uint32());
+                                message.goSettings = $root.google.api.GoSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -19088,9 +19685,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                ClientLibrarySettings.verify = function verify(message) {
+                ClientLibrarySettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.version != null && message.hasOwnProperty("version"))
                         if (!$util.isString(message.version))
                             return "version: string expected";
@@ -19112,42 +19713,42 @@
                         if (typeof message.restNumericEnums !== "boolean")
                             return "restNumericEnums: boolean expected";
                     if (message.javaSettings != null && message.hasOwnProperty("javaSettings")) {
-                        var error = $root.google.api.JavaSettings.verify(message.javaSettings);
+                        var error = $root.google.api.JavaSettings.verify(message.javaSettings, long + 1);
                         if (error)
                             return "javaSettings." + error;
                     }
                     if (message.cppSettings != null && message.hasOwnProperty("cppSettings")) {
-                        var error = $root.google.api.CppSettings.verify(message.cppSettings);
+                        var error = $root.google.api.CppSettings.verify(message.cppSettings, long + 1);
                         if (error)
                             return "cppSettings." + error;
                     }
                     if (message.phpSettings != null && message.hasOwnProperty("phpSettings")) {
-                        var error = $root.google.api.PhpSettings.verify(message.phpSettings);
+                        var error = $root.google.api.PhpSettings.verify(message.phpSettings, long + 1);
                         if (error)
                             return "phpSettings." + error;
                     }
                     if (message.pythonSettings != null && message.hasOwnProperty("pythonSettings")) {
-                        var error = $root.google.api.PythonSettings.verify(message.pythonSettings);
+                        var error = $root.google.api.PythonSettings.verify(message.pythonSettings, long + 1);
                         if (error)
                             return "pythonSettings." + error;
                     }
                     if (message.nodeSettings != null && message.hasOwnProperty("nodeSettings")) {
-                        var error = $root.google.api.NodeSettings.verify(message.nodeSettings);
+                        var error = $root.google.api.NodeSettings.verify(message.nodeSettings, long + 1);
                         if (error)
                             return "nodeSettings." + error;
                     }
                     if (message.dotnetSettings != null && message.hasOwnProperty("dotnetSettings")) {
-                        var error = $root.google.api.DotnetSettings.verify(message.dotnetSettings);
+                        var error = $root.google.api.DotnetSettings.verify(message.dotnetSettings, long + 1);
                         if (error)
                             return "dotnetSettings." + error;
                     }
                     if (message.rubySettings != null && message.hasOwnProperty("rubySettings")) {
-                        var error = $root.google.api.RubySettings.verify(message.rubySettings);
+                        var error = $root.google.api.RubySettings.verify(message.rubySettings, long + 1);
                         if (error)
                             return "rubySettings." + error;
                     }
                     if (message.goSettings != null && message.hasOwnProperty("goSettings")) {
-                        var error = $root.google.api.GoSettings.verify(message.goSettings);
+                        var error = $root.google.api.GoSettings.verify(message.goSettings, long + 1);
                         if (error)
                             return "goSettings." + error;
                     }
@@ -19162,9 +19763,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.ClientLibrarySettings} ClientLibrarySettings
                  */
-                ClientLibrarySettings.fromObject = function fromObject(object) {
+                ClientLibrarySettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.ClientLibrarySettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.ClientLibrarySettings();
                     if (object.version != null)
                         message.version = String(object.version);
@@ -19213,42 +19818,42 @@
                     if (object.javaSettings != null) {
                         if (typeof object.javaSettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.javaSettings: object expected");
-                        message.javaSettings = $root.google.api.JavaSettings.fromObject(object.javaSettings);
+                        message.javaSettings = $root.google.api.JavaSettings.fromObject(object.javaSettings, long + 1);
                     }
                     if (object.cppSettings != null) {
                         if (typeof object.cppSettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.cppSettings: object expected");
-                        message.cppSettings = $root.google.api.CppSettings.fromObject(object.cppSettings);
+                        message.cppSettings = $root.google.api.CppSettings.fromObject(object.cppSettings, long + 1);
                     }
                     if (object.phpSettings != null) {
                         if (typeof object.phpSettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.phpSettings: object expected");
-                        message.phpSettings = $root.google.api.PhpSettings.fromObject(object.phpSettings);
+                        message.phpSettings = $root.google.api.PhpSettings.fromObject(object.phpSettings, long + 1);
                     }
                     if (object.pythonSettings != null) {
                         if (typeof object.pythonSettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.pythonSettings: object expected");
-                        message.pythonSettings = $root.google.api.PythonSettings.fromObject(object.pythonSettings);
+                        message.pythonSettings = $root.google.api.PythonSettings.fromObject(object.pythonSettings, long + 1);
                     }
                     if (object.nodeSettings != null) {
                         if (typeof object.nodeSettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.nodeSettings: object expected");
-                        message.nodeSettings = $root.google.api.NodeSettings.fromObject(object.nodeSettings);
+                        message.nodeSettings = $root.google.api.NodeSettings.fromObject(object.nodeSettings, long + 1);
                     }
                     if (object.dotnetSettings != null) {
                         if (typeof object.dotnetSettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.dotnetSettings: object expected");
-                        message.dotnetSettings = $root.google.api.DotnetSettings.fromObject(object.dotnetSettings);
+                        message.dotnetSettings = $root.google.api.DotnetSettings.fromObject(object.dotnetSettings, long + 1);
                     }
                     if (object.rubySettings != null) {
                         if (typeof object.rubySettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.rubySettings: object expected");
-                        message.rubySettings = $root.google.api.RubySettings.fromObject(object.rubySettings);
+                        message.rubySettings = $root.google.api.RubySettings.fromObject(object.rubySettings, long + 1);
                     }
                     if (object.goSettings != null) {
                         if (typeof object.goSettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.goSettings: object expected");
-                        message.goSettings = $root.google.api.GoSettings.fromObject(object.goSettings);
+                        message.goSettings = $root.google.api.GoSettings.fromObject(object.goSettings, long + 1);
                     }
                     return message;
                 };
@@ -19366,7 +19971,7 @@
                     this.librarySettings = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -19534,9 +20139,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Publishing.decode = function decode(reader, length, error) {
+                Publishing.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Publishing();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -19546,7 +20155,7 @@
                         case 2: {
                                 if (!(message.methodSettings && message.methodSettings.length))
                                     message.methodSettings = [];
-                                message.methodSettings.push($root.google.api.MethodSettings.decode(reader, reader.uint32()));
+                                message.methodSettings.push($root.google.api.MethodSettings.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 101: {
@@ -19582,7 +20191,7 @@
                         case 109: {
                                 if (!(message.librarySettings && message.librarySettings.length))
                                     message.librarySettings = [];
-                                message.librarySettings.push($root.google.api.ClientLibrarySettings.decode(reader, reader.uint32()));
+                                message.librarySettings.push($root.google.api.ClientLibrarySettings.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 110: {
@@ -19594,7 +20203,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -19625,14 +20234,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Publishing.verify = function verify(message) {
+                Publishing.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.methodSettings != null && message.hasOwnProperty("methodSettings")) {
                         if (!Array.isArray(message.methodSettings))
                             return "methodSettings: array expected";
                         for (var i = 0; i < message.methodSettings.length; ++i) {
-                            var error = $root.google.api.MethodSettings.verify(message.methodSettings[i]);
+                            var error = $root.google.api.MethodSettings.verify(message.methodSettings[i], long + 1);
                             if (error)
                                 return "methodSettings." + error;
                         }
@@ -19677,7 +20290,7 @@
                         if (!Array.isArray(message.librarySettings))
                             return "librarySettings: array expected";
                         for (var i = 0; i < message.librarySettings.length; ++i) {
-                            var error = $root.google.api.ClientLibrarySettings.verify(message.librarySettings[i]);
+                            var error = $root.google.api.ClientLibrarySettings.verify(message.librarySettings[i], long + 1);
                             if (error)
                                 return "librarySettings." + error;
                         }
@@ -19699,9 +20312,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.Publishing} Publishing
                  */
-                Publishing.fromObject = function fromObject(object) {
+                Publishing.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.Publishing)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.Publishing();
                     if (object.methodSettings) {
                         if (!Array.isArray(object.methodSettings))
@@ -19710,7 +20327,7 @@
                         for (var i = 0; i < object.methodSettings.length; ++i) {
                             if (typeof object.methodSettings[i] !== "object")
                                 throw TypeError(".google.api.Publishing.methodSettings: object expected");
-                            message.methodSettings[i] = $root.google.api.MethodSettings.fromObject(object.methodSettings[i]);
+                            message.methodSettings[i] = $root.google.api.MethodSettings.fromObject(object.methodSettings[i], long + 1);
                         }
                     }
                     if (object.newIssueUri != null)
@@ -19777,7 +20394,7 @@
                         for (var i = 0; i < object.librarySettings.length; ++i) {
                             if (typeof object.librarySettings[i] !== "object")
                                 throw TypeError(".google.api.Publishing.librarySettings: object expected");
-                            message.librarySettings[i] = $root.google.api.ClientLibrarySettings.fromObject(object.librarySettings[i]);
+                            message.librarySettings[i] = $root.google.api.ClientLibrarySettings.fromObject(object.librarySettings[i], long + 1);
                         }
                     }
                     if (object.protoReferenceDocumentationUri != null)
@@ -19901,7 +20518,7 @@
                     this.serviceClassNames = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -19987,9 +20604,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                JavaSettings.decode = function decode(reader, length, error) {
+                JavaSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.JavaSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -20016,19 +20637,21 @@
                                         value = reader.string();
                                         break;
                                     default:
-                                        reader.skipType(tag2 & 7);
+                                        reader.skipType(tag2 & 7, long);
                                         break;
                                     }
                                 }
+                                if (key === "__proto__")
+                                    $util.makeProp(message.serviceClassNames, key);
                                 message.serviceClassNames[key] = value;
                                 break;
                             }
                         case 3: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -20059,9 +20682,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                JavaSettings.verify = function verify(message) {
+                JavaSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.libraryPackage != null && message.hasOwnProperty("libraryPackage"))
                         if (!$util.isString(message.libraryPackage))
                             return "libraryPackage: string expected";
@@ -20074,7 +20701,7 @@
                                 return "serviceClassNames: string{k:string} expected";
                     }
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
@@ -20089,9 +20716,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.JavaSettings} JavaSettings
                  */
-                JavaSettings.fromObject = function fromObject(object) {
+                JavaSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.JavaSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.JavaSettings();
                     if (object.libraryPackage != null)
                         message.libraryPackage = String(object.libraryPackage);
@@ -20099,13 +20730,16 @@
                         if (typeof object.serviceClassNames !== "object")
                             throw TypeError(".google.api.JavaSettings.serviceClassNames: object expected");
                         message.serviceClassNames = {};
-                        for (var keys = Object.keys(object.serviceClassNames), i = 0; i < keys.length; ++i)
+                        for (var keys = Object.keys(object.serviceClassNames), i = 0; i < keys.length; ++i) {
+                            if (keys[i] === "__proto__")
+                                $util.makeProp(message.serviceClassNames, keys[i]);
                             message.serviceClassNames[keys[i]] = String(object.serviceClassNames[keys[i]]);
+                        }
                     }
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.JavaSettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     return message;
                 };
@@ -20134,8 +20768,11 @@
                     var keys2;
                     if (message.serviceClassNames && (keys2 = Object.keys(message.serviceClassNames)).length) {
                         object.serviceClassNames = {};
-                        for (var j = 0; j < keys2.length; ++j)
+                        for (var j = 0; j < keys2.length; ++j) {
+                            if (keys2[j] === "__proto__")
+                                $util.makeProp(object.serviceClassNames, keys2[j]);
                             object.serviceClassNames[keys2[j]] = message.serviceClassNames[keys2[j]];
+                        }
                     }
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
@@ -20191,7 +20828,7 @@
                 function CppSettings(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -20256,9 +20893,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CppSettings.decode = function decode(reader, length, error) {
+                CppSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CppSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -20266,11 +20907,11 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -20301,11 +20942,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                CppSettings.verify = function verify(message) {
+                CppSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
@@ -20320,14 +20965,18 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.CppSettings} CppSettings
                  */
-                CppSettings.fromObject = function fromObject(object) {
+                CppSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.CppSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.CppSettings();
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.CppSettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     return message;
                 };
@@ -20401,7 +21050,7 @@
                 function PhpSettings(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -20466,9 +21115,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PhpSettings.decode = function decode(reader, length, error) {
+                PhpSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PhpSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -20476,11 +21129,11 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -20511,11 +21164,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                PhpSettings.verify = function verify(message) {
+                PhpSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
@@ -20530,14 +21187,18 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.PhpSettings} PhpSettings
                  */
-                PhpSettings.fromObject = function fromObject(object) {
+                PhpSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.PhpSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.PhpSettings();
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.PhpSettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     return message;
                 };
@@ -20598,6 +21259,7 @@
                  * @memberof google.api
                  * @interface IPythonSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] PythonSettings common
+                 * @property {google.api.PythonSettings.IExperimentalFeatures|null} [experimentalFeatures] PythonSettings experimentalFeatures
                  */
     
                 /**
@@ -20611,7 +21273,7 @@
                 function PythonSettings(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -20622,6 +21284,14 @@
                  * @instance
                  */
                 PythonSettings.prototype.common = null;
+    
+                /**
+                 * PythonSettings experimentalFeatures.
+                 * @member {google.api.PythonSettings.IExperimentalFeatures|null|undefined} experimentalFeatures
+                 * @memberof google.api.PythonSettings
+                 * @instance
+                 */
+                PythonSettings.prototype.experimentalFeatures = null;
     
                 /**
                  * Creates a new PythonSettings instance using the specified properties.
@@ -20649,6 +21319,8 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.experimentalFeatures != null && Object.hasOwnProperty.call(message, "experimentalFeatures"))
+                        $root.google.api.PythonSettings.ExperimentalFeatures.encode(message.experimentalFeatures, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -20676,9 +21348,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PythonSettings.decode = function decode(reader, length, error) {
+                PythonSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -20686,11 +21362,15 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
+                                break;
+                            }
+                        case 2: {
+                                message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -20721,13 +21401,22 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                PythonSettings.verify = function verify(message) {
+                PythonSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
+                    }
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures")) {
+                        var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures, long + 1);
+                        if (error)
+                            return "experimentalFeatures." + error;
                     }
                     return null;
                 };
@@ -20740,14 +21429,23 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.PythonSettings} PythonSettings
                  */
-                PythonSettings.fromObject = function fromObject(object) {
+                PythonSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.PythonSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.PythonSettings();
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.PythonSettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
+                    }
+                    if (object.experimentalFeatures != null) {
+                        if (typeof object.experimentalFeatures !== "object")
+                            throw TypeError(".google.api.PythonSettings.experimentalFeatures: object expected");
+                        message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures, long + 1);
                     }
                     return message;
                 };
@@ -20765,10 +21463,14 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.common = null;
+                        object.experimentalFeatures = null;
+                    }
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures"))
+                        object.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.toObject(message.experimentalFeatures, options);
                     return object;
                 };
     
@@ -20798,6 +21500,270 @@
                     return typeUrlPrefix + "/google.api.PythonSettings";
                 };
     
+                PythonSettings.ExperimentalFeatures = (function() {
+    
+                    /**
+                     * Properties of an ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @interface IExperimentalFeatures
+                     * @property {boolean|null} [restAsyncIoEnabled] ExperimentalFeatures restAsyncIoEnabled
+                     * @property {boolean|null} [protobufPythonicTypesEnabled] ExperimentalFeatures protobufPythonicTypesEnabled
+                     * @property {boolean|null} [unversionedPackageDisabled] ExperimentalFeatures unversionedPackageDisabled
+                     */
+    
+                    /**
+                     * Constructs a new ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @classdesc Represents an ExperimentalFeatures.
+                     * @implements IExperimentalFeatures
+                     * @constructor
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     */
+                    function ExperimentalFeatures(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ExperimentalFeatures restAsyncIoEnabled.
+                     * @member {boolean} restAsyncIoEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.restAsyncIoEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures protobufPythonicTypesEnabled.
+                     * @member {boolean} protobufPythonicTypesEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.protobufPythonicTypesEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures unversionedPackageDisabled.
+                     * @member {boolean} unversionedPackageDisabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.unversionedPackageDisabled = false;
+    
+                    /**
+                     * Creates a new ExperimentalFeatures instance using the specified properties.
+                     * @function create
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures instance
+                     */
+                    ExperimentalFeatures.create = function create(properties) {
+                        return new ExperimentalFeatures(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.restAsyncIoEnabled != null && Object.hasOwnProperty.call(message, "restAsyncIoEnabled"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.restAsyncIoEnabled);
+                        if (message.protobufPythonicTypesEnabled != null && Object.hasOwnProperty.call(message, "protobufPythonicTypesEnabled"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.protobufPythonicTypesEnabled);
+                        if (message.unversionedPackageDisabled != null && Object.hasOwnProperty.call(message, "unversionedPackageDisabled"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.unversionedPackageDisabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decode = function decode(reader, length, error, long) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.restAsyncIoEnabled = reader.bool();
+                                    break;
+                                }
+                            case 2: {
+                                    message.protobufPythonicTypesEnabled = reader.bool();
+                                    break;
+                                }
+                            case 3: {
+                                    message.unversionedPackageDisabled = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7, long);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an ExperimentalFeatures message.
+                     * @function verify
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ExperimentalFeatures.verify = function verify(message, long) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            if (typeof message.restAsyncIoEnabled !== "boolean")
+                                return "restAsyncIoEnabled: boolean expected";
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            if (typeof message.protobufPythonicTypesEnabled !== "boolean")
+                                return "protobufPythonicTypesEnabled: boolean expected";
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            if (typeof message.unversionedPackageDisabled !== "boolean")
+                                return "unversionedPackageDisabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     */
+                    ExperimentalFeatures.fromObject = function fromObject(object, long) {
+                        if (object instanceof $root.google.api.PythonSettings.ExperimentalFeatures)
+                            return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        var message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        if (object.restAsyncIoEnabled != null)
+                            message.restAsyncIoEnabled = Boolean(object.restAsyncIoEnabled);
+                        if (object.protobufPythonicTypesEnabled != null)
+                            message.protobufPythonicTypesEnabled = Boolean(object.protobufPythonicTypesEnabled);
+                        if (object.unversionedPackageDisabled != null)
+                            message.unversionedPackageDisabled = Boolean(object.unversionedPackageDisabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.ExperimentalFeatures} message ExperimentalFeatures
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ExperimentalFeatures.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.restAsyncIoEnabled = false;
+                            object.protobufPythonicTypesEnabled = false;
+                            object.unversionedPackageDisabled = false;
+                        }
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            object.restAsyncIoEnabled = message.restAsyncIoEnabled;
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            object.protobufPythonicTypesEnabled = message.protobufPythonicTypesEnabled;
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            object.unversionedPackageDisabled = message.unversionedPackageDisabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ExperimentalFeatures to JSON.
+                     * @function toJSON
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ExperimentalFeatures.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ExperimentalFeatures
+                     * @function getTypeUrl
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ExperimentalFeatures.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.api.PythonSettings.ExperimentalFeatures";
+                    };
+    
+                    return ExperimentalFeatures;
+                })();
+    
                 return PythonSettings;
             })();
     
@@ -20821,7 +21787,7 @@
                 function NodeSettings(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -20886,9 +21852,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                NodeSettings.decode = function decode(reader, length, error) {
+                NodeSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.NodeSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -20896,11 +21866,11 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -20931,11 +21901,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                NodeSettings.verify = function verify(message) {
+                NodeSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
@@ -20950,14 +21924,18 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.NodeSettings} NodeSettings
                  */
-                NodeSettings.fromObject = function fromObject(object) {
+                NodeSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.NodeSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.NodeSettings();
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.NodeSettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     return message;
                 };
@@ -21041,7 +22019,7 @@
                     this.handwrittenSignatures = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -21161,9 +22139,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DotnetSettings.decode = function decode(reader, length, error) {
+                DotnetSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -21171,7 +22153,7 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 2: {
@@ -21190,10 +22172,12 @@
                                         value = reader.string();
                                         break;
                                     default:
-                                        reader.skipType(tag2 & 7);
+                                        reader.skipType(tag2 & 7, long);
                                         break;
                                     }
                                 }
+                                if (key === "__proto__")
+                                    $util.makeProp(message.renamedServices, key);
                                 message.renamedServices[key] = value;
                                 break;
                             }
@@ -21213,10 +22197,12 @@
                                         value = reader.string();
                                         break;
                                     default:
-                                        reader.skipType(tag2 & 7);
+                                        reader.skipType(tag2 & 7, long);
                                         break;
                                     }
                                 }
+                                if (key === "__proto__")
+                                    $util.makeProp(message.renamedResources, key);
                                 message.renamedResources[key] = value;
                                 break;
                             }
@@ -21239,7 +22225,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -21270,11 +22256,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                DotnetSettings.verify = function verify(message) {
+                DotnetSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
@@ -21326,28 +22316,38 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.DotnetSettings} DotnetSettings
                  */
-                DotnetSettings.fromObject = function fromObject(object) {
+                DotnetSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.DotnetSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.DotnetSettings();
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.DotnetSettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     if (object.renamedServices) {
                         if (typeof object.renamedServices !== "object")
                             throw TypeError(".google.api.DotnetSettings.renamedServices: object expected");
                         message.renamedServices = {};
-                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
+                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i) {
+                            if (keys[i] === "__proto__")
+                                $util.makeProp(message.renamedServices, keys[i]);
                             message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
+                        }
                     }
                     if (object.renamedResources) {
                         if (typeof object.renamedResources !== "object")
                             throw TypeError(".google.api.DotnetSettings.renamedResources: object expected");
                         message.renamedResources = {};
-                        for (var keys = Object.keys(object.renamedResources), i = 0; i < keys.length; ++i)
+                        for (var keys = Object.keys(object.renamedResources), i = 0; i < keys.length; ++i) {
+                            if (keys[i] === "__proto__")
+                                $util.makeProp(message.renamedResources, keys[i]);
                             message.renamedResources[keys[i]] = String(object.renamedResources[keys[i]]);
+                        }
                     }
                     if (object.ignoredResources) {
                         if (!Array.isArray(object.ignoredResources))
@@ -21402,13 +22402,19 @@
                     var keys2;
                     if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
                         object.renamedServices = {};
-                        for (var j = 0; j < keys2.length; ++j)
+                        for (var j = 0; j < keys2.length; ++j) {
+                            if (keys2[j] === "__proto__")
+                                $util.makeProp(object.renamedServices, keys2[j]);
                             object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
+                        }
                     }
                     if (message.renamedResources && (keys2 = Object.keys(message.renamedResources)).length) {
                         object.renamedResources = {};
-                        for (var j = 0; j < keys2.length; ++j)
+                        for (var j = 0; j < keys2.length; ++j) {
+                            if (keys2[j] === "__proto__")
+                                $util.makeProp(object.renamedResources, keys2[j]);
                             object.renamedResources[keys2[j]] = message.renamedResources[keys2[j]];
+                        }
                     }
                     if (message.ignoredResources && message.ignoredResources.length) {
                         object.ignoredResources = [];
@@ -21477,7 +22483,7 @@
                 function RubySettings(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -21542,9 +22548,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RubySettings.decode = function decode(reader, length, error) {
+                RubySettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RubySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -21552,11 +22562,11 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -21587,11 +22597,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                RubySettings.verify = function verify(message) {
+                RubySettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
@@ -21606,14 +22620,18 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.RubySettings} RubySettings
                  */
-                RubySettings.fromObject = function fromObject(object) {
+                RubySettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.RubySettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.RubySettings();
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.RubySettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     return message;
                 };
@@ -21674,6 +22692,7 @@
                  * @memberof google.api
                  * @interface IGoSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] GoSettings common
+                 * @property {Object.<string,string>|null} [renamedServices] GoSettings renamedServices
                  */
     
                 /**
@@ -21685,9 +22704,10 @@
                  * @param {google.api.IGoSettings=} [properties] Properties to set
                  */
                 function GoSettings(properties) {
+                    this.renamedServices = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -21698,6 +22718,14 @@
                  * @instance
                  */
                 GoSettings.prototype.common = null;
+    
+                /**
+                 * GoSettings renamedServices.
+                 * @member {Object.<string,string>} renamedServices
+                 * @memberof google.api.GoSettings
+                 * @instance
+                 */
+                GoSettings.prototype.renamedServices = $util.emptyObject;
     
                 /**
                  * Creates a new GoSettings instance using the specified properties.
@@ -21725,6 +22753,9 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
+                        for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
                     return writer;
                 };
     
@@ -21752,21 +22783,50 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GoSettings.decode = function decode(reader, length, error) {
+                GoSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
+                                break;
+                            }
+                        case 2: {
+                                if (message.renamedServices === $util.emptyObject)
+                                    message.renamedServices = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7, long);
+                                        break;
+                                    }
+                                }
+                                if (key === "__proto__")
+                                    $util.makeProp(message.renamedServices, key);
+                                message.renamedServices[key] = value;
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -21797,13 +22857,25 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                GoSettings.verify = function verify(message) {
+                GoSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
+                    }
+                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
+                        if (!$util.isObject(message.renamedServices))
+                            return "renamedServices: object expected";
+                        var key = Object.keys(message.renamedServices);
+                        for (var i = 0; i < key.length; ++i)
+                            if (!$util.isString(message.renamedServices[key[i]]))
+                                return "renamedServices: string{k:string} expected";
                     }
                     return null;
                 };
@@ -21816,14 +22888,28 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.GoSettings} GoSettings
                  */
-                GoSettings.fromObject = function fromObject(object) {
+                GoSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.GoSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.GoSettings();
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.GoSettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
+                    }
+                    if (object.renamedServices) {
+                        if (typeof object.renamedServices !== "object")
+                            throw TypeError(".google.api.GoSettings.renamedServices: object expected");
+                        message.renamedServices = {};
+                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i) {
+                            if (keys[i] === "__proto__")
+                                $util.makeProp(message.renamedServices, keys[i]);
+                            message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
+                        }
                     }
                     return message;
                 };
@@ -21841,10 +22927,21 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.objects || options.defaults)
+                        object.renamedServices = {};
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    var keys2;
+                    if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
+                        object.renamedServices = {};
+                        for (var j = 0; j < keys2.length; ++j) {
+                            if (keys2[j] === "__proto__")
+                                $util.makeProp(object.renamedServices, keys2[j]);
+                            object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
+                        }
+                    }
                     return object;
                 };
     
@@ -21900,7 +22997,7 @@
                     this.autoPopulatedFields = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -21986,9 +23083,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodSettings.decode = function decode(reader, length, error) {
+                MethodSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -22000,7 +23101,7 @@
                                 break;
                             }
                         case 2: {
-                                message.longRunning = $root.google.api.MethodSettings.LongRunning.decode(reader, reader.uint32());
+                                message.longRunning = $root.google.api.MethodSettings.LongRunning.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 3: {
@@ -22010,7 +23111,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -22041,14 +23142,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                MethodSettings.verify = function verify(message) {
+                MethodSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.selector != null && message.hasOwnProperty("selector"))
                         if (!$util.isString(message.selector))
                             return "selector: string expected";
                     if (message.longRunning != null && message.hasOwnProperty("longRunning")) {
-                        var error = $root.google.api.MethodSettings.LongRunning.verify(message.longRunning);
+                        var error = $root.google.api.MethodSettings.LongRunning.verify(message.longRunning, long + 1);
                         if (error)
                             return "longRunning." + error;
                     }
@@ -22070,16 +23175,20 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.MethodSettings} MethodSettings
                  */
-                MethodSettings.fromObject = function fromObject(object) {
+                MethodSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.MethodSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.MethodSettings();
                     if (object.selector != null)
                         message.selector = String(object.selector);
                     if (object.longRunning != null) {
                         if (typeof object.longRunning !== "object")
                             throw TypeError(".google.api.MethodSettings.longRunning: object expected");
-                        message.longRunning = $root.google.api.MethodSettings.LongRunning.fromObject(object.longRunning);
+                        message.longRunning = $root.google.api.MethodSettings.LongRunning.fromObject(object.longRunning, long + 1);
                     }
                     if (object.autoPopulatedFields) {
                         if (!Array.isArray(object.autoPopulatedFields))
@@ -22171,7 +23280,7 @@
                     function LongRunning(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -22266,9 +23375,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    LongRunning.decode = function decode(reader, length, error) {
+                    LongRunning.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings.LongRunning();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -22276,7 +23389,7 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.initialPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.initialPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 2: {
@@ -22284,15 +23397,15 @@
                                     break;
                                 }
                             case 3: {
-                                    message.maxPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.maxPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 4: {
-                                    message.totalPollTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.totalPollTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -22323,11 +23436,15 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    LongRunning.verify = function verify(message) {
+                    LongRunning.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.initialPollDelay != null && message.hasOwnProperty("initialPollDelay")) {
-                            var error = $root.google.protobuf.Duration.verify(message.initialPollDelay);
+                            var error = $root.google.protobuf.Duration.verify(message.initialPollDelay, long + 1);
                             if (error)
                                 return "initialPollDelay." + error;
                         }
@@ -22335,12 +23452,12 @@
                             if (typeof message.pollDelayMultiplier !== "number")
                                 return "pollDelayMultiplier: number expected";
                         if (message.maxPollDelay != null && message.hasOwnProperty("maxPollDelay")) {
-                            var error = $root.google.protobuf.Duration.verify(message.maxPollDelay);
+                            var error = $root.google.protobuf.Duration.verify(message.maxPollDelay, long + 1);
                             if (error)
                                 return "maxPollDelay." + error;
                         }
                         if (message.totalPollTimeout != null && message.hasOwnProperty("totalPollTimeout")) {
-                            var error = $root.google.protobuf.Duration.verify(message.totalPollTimeout);
+                            var error = $root.google.protobuf.Duration.verify(message.totalPollTimeout, long + 1);
                             if (error)
                                 return "totalPollTimeout." + error;
                         }
@@ -22355,26 +23472,30 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.api.MethodSettings.LongRunning} LongRunning
                      */
-                    LongRunning.fromObject = function fromObject(object) {
+                    LongRunning.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.api.MethodSettings.LongRunning)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.api.MethodSettings.LongRunning();
                         if (object.initialPollDelay != null) {
                             if (typeof object.initialPollDelay !== "object")
                                 throw TypeError(".google.api.MethodSettings.LongRunning.initialPollDelay: object expected");
-                            message.initialPollDelay = $root.google.protobuf.Duration.fromObject(object.initialPollDelay);
+                            message.initialPollDelay = $root.google.protobuf.Duration.fromObject(object.initialPollDelay, long + 1);
                         }
                         if (object.pollDelayMultiplier != null)
                             message.pollDelayMultiplier = Number(object.pollDelayMultiplier);
                         if (object.maxPollDelay != null) {
                             if (typeof object.maxPollDelay !== "object")
                                 throw TypeError(".google.api.MethodSettings.LongRunning.maxPollDelay: object expected");
-                            message.maxPollDelay = $root.google.protobuf.Duration.fromObject(object.maxPollDelay);
+                            message.maxPollDelay = $root.google.protobuf.Duration.fromObject(object.maxPollDelay, long + 1);
                         }
                         if (object.totalPollTimeout != null) {
                             if (typeof object.totalPollTimeout !== "object")
                                 throw TypeError(".google.api.MethodSettings.LongRunning.totalPollTimeout: object expected");
-                            message.totalPollTimeout = $root.google.protobuf.Duration.fromObject(object.totalPollTimeout);
+                            message.totalPollTimeout = $root.google.protobuf.Duration.fromObject(object.totalPollTimeout, long + 1);
                         }
                         return message;
                     };
@@ -22483,6 +23604,263 @@
                 return values;
             })();
     
+            api.SelectiveGapicGeneration = (function() {
+    
+                /**
+                 * Properties of a SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @interface ISelectiveGapicGeneration
+                 * @property {Array.<string>|null} [methods] SelectiveGapicGeneration methods
+                 * @property {boolean|null} [generateOmittedAsInternal] SelectiveGapicGeneration generateOmittedAsInternal
+                 */
+    
+                /**
+                 * Constructs a new SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @classdesc Represents a SelectiveGapicGeneration.
+                 * @implements ISelectiveGapicGeneration
+                 * @constructor
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 */
+                function SelectiveGapicGeneration(properties) {
+                    this.methods = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * SelectiveGapicGeneration methods.
+                 * @member {Array.<string>} methods
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.methods = $util.emptyArray;
+    
+                /**
+                 * SelectiveGapicGeneration generateOmittedAsInternal.
+                 * @member {boolean} generateOmittedAsInternal
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.generateOmittedAsInternal = false;
+    
+                /**
+                 * Creates a new SelectiveGapicGeneration instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration instance
+                 */
+                SelectiveGapicGeneration.create = function create(properties) {
+                    return new SelectiveGapicGeneration(properties);
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.methods != null && message.methods.length)
+                        for (var i = 0; i < message.methods.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.methods[i]);
+                    if (message.generateOmittedAsInternal != null && Object.hasOwnProperty.call(message, "generateOmittedAsInternal"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.generateOmittedAsInternal);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decode = function decode(reader, length, error, long) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.SelectiveGapicGeneration();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.methods && message.methods.length))
+                                    message.methods = [];
+                                message.methods.push(reader.string());
+                                break;
+                            }
+                        case 2: {
+                                message.generateOmittedAsInternal = reader.bool();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7, long);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a SelectiveGapicGeneration message.
+                 * @function verify
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                SelectiveGapicGeneration.verify = function verify(message, long) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
+                    if (message.methods != null && message.hasOwnProperty("methods")) {
+                        if (!Array.isArray(message.methods))
+                            return "methods: array expected";
+                        for (var i = 0; i < message.methods.length; ++i)
+                            if (!$util.isString(message.methods[i]))
+                                return "methods: string[] expected";
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        if (typeof message.generateOmittedAsInternal !== "boolean")
+                            return "generateOmittedAsInternal: boolean expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 */
+                SelectiveGapicGeneration.fromObject = function fromObject(object, long) {
+                    if (object instanceof $root.google.api.SelectiveGapicGeneration)
+                        return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
+                    var message = new $root.google.api.SelectiveGapicGeneration();
+                    if (object.methods) {
+                        if (!Array.isArray(object.methods))
+                            throw TypeError(".google.api.SelectiveGapicGeneration.methods: array expected");
+                        message.methods = [];
+                        for (var i = 0; i < object.methods.length; ++i)
+                            message.methods[i] = String(object.methods[i]);
+                    }
+                    if (object.generateOmittedAsInternal != null)
+                        message.generateOmittedAsInternal = Boolean(object.generateOmittedAsInternal);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.SelectiveGapicGeneration} message SelectiveGapicGeneration
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                SelectiveGapicGeneration.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.methods = [];
+                    if (options.defaults)
+                        object.generateOmittedAsInternal = false;
+                    if (message.methods && message.methods.length) {
+                        object.methods = [];
+                        for (var j = 0; j < message.methods.length; ++j)
+                            object.methods[j] = message.methods[j];
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        object.generateOmittedAsInternal = message.generateOmittedAsInternal;
+                    return object;
+                };
+    
+                /**
+                 * Converts this SelectiveGapicGeneration to JSON.
+                 * @function toJSON
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                SelectiveGapicGeneration.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for SelectiveGapicGeneration
+                 * @function getTypeUrl
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SelectiveGapicGeneration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.SelectiveGapicGeneration";
+                };
+    
+                return SelectiveGapicGeneration;
+            })();
+    
             /**
              * LaunchStage enum.
              * @name google.api.LaunchStage
@@ -22530,7 +23908,7 @@
                     this.routingParameters = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -22596,9 +23974,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RoutingRule.decode = function decode(reader, length, error) {
+                RoutingRule.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RoutingRule();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -22608,11 +23990,11 @@
                         case 2: {
                                 if (!(message.routingParameters && message.routingParameters.length))
                                     message.routingParameters = [];
-                                message.routingParameters.push($root.google.api.RoutingParameter.decode(reader, reader.uint32()));
+                                message.routingParameters.push($root.google.api.RoutingParameter.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -22643,14 +24025,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                RoutingRule.verify = function verify(message) {
+                RoutingRule.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.routingParameters != null && message.hasOwnProperty("routingParameters")) {
                         if (!Array.isArray(message.routingParameters))
                             return "routingParameters: array expected";
                         for (var i = 0; i < message.routingParameters.length; ++i) {
-                            var error = $root.google.api.RoutingParameter.verify(message.routingParameters[i]);
+                            var error = $root.google.api.RoutingParameter.verify(message.routingParameters[i], long + 1);
                             if (error)
                                 return "routingParameters." + error;
                         }
@@ -22666,9 +24052,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.RoutingRule} RoutingRule
                  */
-                RoutingRule.fromObject = function fromObject(object) {
+                RoutingRule.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.RoutingRule)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.RoutingRule();
                     if (object.routingParameters) {
                         if (!Array.isArray(object.routingParameters))
@@ -22677,7 +24067,7 @@
                         for (var i = 0; i < object.routingParameters.length; ++i) {
                             if (typeof object.routingParameters[i] !== "object")
                                 throw TypeError(".google.api.RoutingRule.routingParameters: object expected");
-                            message.routingParameters[i] = $root.google.api.RoutingParameter.fromObject(object.routingParameters[i]);
+                            message.routingParameters[i] = $root.google.api.RoutingParameter.fromObject(object.routingParameters[i], long + 1);
                         }
                     }
                     return message;
@@ -22756,7 +24146,7 @@
                 function RoutingParameter(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -22831,9 +24221,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RoutingParameter.decode = function decode(reader, length, error) {
+                RoutingParameter.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RoutingParameter();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -22849,7 +24243,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -22880,9 +24274,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                RoutingParameter.verify = function verify(message) {
+                RoutingParameter.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.field != null && message.hasOwnProperty("field"))
                         if (!$util.isString(message.field))
                             return "field: string expected";
@@ -22900,9 +24298,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.RoutingParameter} RoutingParameter
                  */
-                RoutingParameter.fromObject = function fromObject(object) {
+                RoutingParameter.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.RoutingParameter)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.RoutingParameter();
                     if (object.field != null)
                         message.field = String(object.field);
@@ -22997,7 +24399,7 @@
                     this.file = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -23063,9 +24465,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorSet.decode = function decode(reader, length, error) {
+                FileDescriptorSet.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -23075,11 +24481,11 @@
                         case 1: {
                                 if (!(message.file && message.file.length))
                                     message.file = [];
-                                message.file.push($root.google.protobuf.FileDescriptorProto.decode(reader, reader.uint32()));
+                                message.file.push($root.google.protobuf.FileDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -23110,14 +24516,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FileDescriptorSet.verify = function verify(message) {
+                FileDescriptorSet.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.file != null && message.hasOwnProperty("file")) {
                         if (!Array.isArray(message.file))
                             return "file: array expected";
                         for (var i = 0; i < message.file.length; ++i) {
-                            var error = $root.google.protobuf.FileDescriptorProto.verify(message.file[i]);
+                            var error = $root.google.protobuf.FileDescriptorProto.verify(message.file[i], long + 1);
                             if (error)
                                 return "file." + error;
                         }
@@ -23133,9 +24543,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FileDescriptorSet} FileDescriptorSet
                  */
-                FileDescriptorSet.fromObject = function fromObject(object) {
+                FileDescriptorSet.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FileDescriptorSet)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FileDescriptorSet();
                     if (object.file) {
                         if (!Array.isArray(object.file))
@@ -23144,7 +24558,7 @@
                         for (var i = 0; i < object.file.length; ++i) {
                             if (typeof object.file[i] !== "object")
                                 throw TypeError(".google.protobuf.FileDescriptorSet.file: object expected");
-                            message.file[i] = $root.google.protobuf.FileDescriptorProto.fromObject(object.file[i]);
+                            message.file[i] = $root.google.protobuf.FileDescriptorProto.fromObject(object.file[i], long + 1);
                         }
                     }
                     return message;
@@ -23207,6 +24621,7 @@
              * @name google.protobuf.Edition
              * @enum {number}
              * @property {number} EDITION_UNKNOWN=0 EDITION_UNKNOWN value
+             * @property {number} EDITION_LEGACY=900 EDITION_LEGACY value
              * @property {number} EDITION_PROTO2=998 EDITION_PROTO2 value
              * @property {number} EDITION_PROTO3=999 EDITION_PROTO3 value
              * @property {number} EDITION_2023=1000 EDITION_2023 value
@@ -23221,6 +24636,7 @@
             protobuf.Edition = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "EDITION_UNKNOWN"] = 0;
+                values[valuesById[900] = "EDITION_LEGACY"] = 900;
                 values[valuesById[998] = "EDITION_PROTO2"] = 998;
                 values[valuesById[999] = "EDITION_PROTO3"] = 999;
                 values[valuesById[1000] = "EDITION_2023"] = 1000;
@@ -23245,6 +24661,7 @@
                  * @property {Array.<string>|null} [dependency] FileDescriptorProto dependency
                  * @property {Array.<number>|null} [publicDependency] FileDescriptorProto publicDependency
                  * @property {Array.<number>|null} [weakDependency] FileDescriptorProto weakDependency
+                 * @property {Array.<string>|null} [optionDependency] FileDescriptorProto optionDependency
                  * @property {Array.<google.protobuf.IDescriptorProto>|null} [messageType] FileDescriptorProto messageType
                  * @property {Array.<google.protobuf.IEnumDescriptorProto>|null} [enumType] FileDescriptorProto enumType
                  * @property {Array.<google.protobuf.IServiceDescriptorProto>|null} [service] FileDescriptorProto service
@@ -23267,13 +24684,14 @@
                     this.dependency = [];
                     this.publicDependency = [];
                     this.weakDependency = [];
+                    this.optionDependency = [];
                     this.messageType = [];
                     this.enumType = [];
                     this.service = [];
                     this.extension = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -23316,6 +24734,14 @@
                  * @instance
                  */
                 FileDescriptorProto.prototype.weakDependency = $util.emptyArray;
+    
+                /**
+                 * FileDescriptorProto optionDependency.
+                 * @member {Array.<string>} optionDependency
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.optionDependency = $util.emptyArray;
     
                 /**
                  * FileDescriptorProto messageType.
@@ -23438,6 +24864,9 @@
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                         writer.uint32(/* id 14, wireType 0 =*/112).int32(message.edition);
+                    if (message.optionDependency != null && message.optionDependency.length)
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            writer.uint32(/* id 15, wireType 2 =*/122).string(message.optionDependency[i]);
                     return writer;
                 };
     
@@ -23465,9 +24894,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorProto.decode = function decode(reader, length, error) {
+                FileDescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -23510,36 +24943,42 @@
                                     message.weakDependency.push(reader.int32());
                                 break;
                             }
+                        case 15: {
+                                if (!(message.optionDependency && message.optionDependency.length))
+                                    message.optionDependency = [];
+                                message.optionDependency.push(reader.string());
+                                break;
+                            }
                         case 4: {
                                 if (!(message.messageType && message.messageType.length))
                                     message.messageType = [];
-                                message.messageType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
+                                message.messageType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 5: {
                                 if (!(message.enumType && message.enumType.length))
                                     message.enumType = [];
-                                message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
+                                message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 6: {
                                 if (!(message.service && message.service.length))
                                     message.service = [];
-                                message.service.push($root.google.protobuf.ServiceDescriptorProto.decode(reader, reader.uint32()));
+                                message.service.push($root.google.protobuf.ServiceDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 7: {
                                 if (!(message.extension && message.extension.length))
                                     message.extension = [];
-                                message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 8: {
-                                message.options = $root.google.protobuf.FileOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.FileOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 9: {
-                                message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.decode(reader, reader.uint32());
+                                message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 12: {
@@ -23551,7 +24990,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -23582,9 +25021,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FileDescriptorProto.verify = function verify(message) {
+                FileDescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -23612,11 +25055,18 @@
                             if (!$util.isInteger(message.weakDependency[i]))
                                 return "weakDependency: integer[] expected";
                     }
+                    if (message.optionDependency != null && message.hasOwnProperty("optionDependency")) {
+                        if (!Array.isArray(message.optionDependency))
+                            return "optionDependency: array expected";
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            if (!$util.isString(message.optionDependency[i]))
+                                return "optionDependency: string[] expected";
+                    }
                     if (message.messageType != null && message.hasOwnProperty("messageType")) {
                         if (!Array.isArray(message.messageType))
                             return "messageType: array expected";
                         for (var i = 0; i < message.messageType.length; ++i) {
-                            var error = $root.google.protobuf.DescriptorProto.verify(message.messageType[i]);
+                            var error = $root.google.protobuf.DescriptorProto.verify(message.messageType[i], long + 1);
                             if (error)
                                 return "messageType." + error;
                         }
@@ -23625,7 +25075,7 @@
                         if (!Array.isArray(message.enumType))
                             return "enumType: array expected";
                         for (var i = 0; i < message.enumType.length; ++i) {
-                            var error = $root.google.protobuf.EnumDescriptorProto.verify(message.enumType[i]);
+                            var error = $root.google.protobuf.EnumDescriptorProto.verify(message.enumType[i], long + 1);
                             if (error)
                                 return "enumType." + error;
                         }
@@ -23634,7 +25084,7 @@
                         if (!Array.isArray(message.service))
                             return "service: array expected";
                         for (var i = 0; i < message.service.length; ++i) {
-                            var error = $root.google.protobuf.ServiceDescriptorProto.verify(message.service[i]);
+                            var error = $root.google.protobuf.ServiceDescriptorProto.verify(message.service[i], long + 1);
                             if (error)
                                 return "service." + error;
                         }
@@ -23643,18 +25093,18 @@
                         if (!Array.isArray(message.extension))
                             return "extension: array expected";
                         for (var i = 0; i < message.extension.length; ++i) {
-                            var error = $root.google.protobuf.FieldDescriptorProto.verify(message.extension[i]);
+                            var error = $root.google.protobuf.FieldDescriptorProto.verify(message.extension[i], long + 1);
                             if (error)
                                 return "extension." + error;
                         }
                     }
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.FileOptions.verify(message.options);
+                        var error = $root.google.protobuf.FileOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
                     if (message.sourceCodeInfo != null && message.hasOwnProperty("sourceCodeInfo")) {
-                        var error = $root.google.protobuf.SourceCodeInfo.verify(message.sourceCodeInfo);
+                        var error = $root.google.protobuf.SourceCodeInfo.verify(message.sourceCodeInfo, long + 1);
                         if (error)
                             return "sourceCodeInfo." + error;
                     }
@@ -23666,6 +25116,7 @@
                         default:
                             return "edition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -23689,9 +25140,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FileDescriptorProto} FileDescriptorProto
                  */
-                FileDescriptorProto.fromObject = function fromObject(object) {
+                FileDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FileDescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FileDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -23718,6 +25173,13 @@
                         for (var i = 0; i < object.weakDependency.length; ++i)
                             message.weakDependency[i] = object.weakDependency[i] | 0;
                     }
+                    if (object.optionDependency) {
+                        if (!Array.isArray(object.optionDependency))
+                            throw TypeError(".google.protobuf.FileDescriptorProto.optionDependency: array expected");
+                        message.optionDependency = [];
+                        for (var i = 0; i < object.optionDependency.length; ++i)
+                            message.optionDependency[i] = String(object.optionDependency[i]);
+                    }
                     if (object.messageType) {
                         if (!Array.isArray(object.messageType))
                             throw TypeError(".google.protobuf.FileDescriptorProto.messageType: array expected");
@@ -23725,7 +25187,7 @@
                         for (var i = 0; i < object.messageType.length; ++i) {
                             if (typeof object.messageType[i] !== "object")
                                 throw TypeError(".google.protobuf.FileDescriptorProto.messageType: object expected");
-                            message.messageType[i] = $root.google.protobuf.DescriptorProto.fromObject(object.messageType[i]);
+                            message.messageType[i] = $root.google.protobuf.DescriptorProto.fromObject(object.messageType[i], long + 1);
                         }
                     }
                     if (object.enumType) {
@@ -23735,7 +25197,7 @@
                         for (var i = 0; i < object.enumType.length; ++i) {
                             if (typeof object.enumType[i] !== "object")
                                 throw TypeError(".google.protobuf.FileDescriptorProto.enumType: object expected");
-                            message.enumType[i] = $root.google.protobuf.EnumDescriptorProto.fromObject(object.enumType[i]);
+                            message.enumType[i] = $root.google.protobuf.EnumDescriptorProto.fromObject(object.enumType[i], long + 1);
                         }
                     }
                     if (object.service) {
@@ -23745,7 +25207,7 @@
                         for (var i = 0; i < object.service.length; ++i) {
                             if (typeof object.service[i] !== "object")
                                 throw TypeError(".google.protobuf.FileDescriptorProto.service: object expected");
-                            message.service[i] = $root.google.protobuf.ServiceDescriptorProto.fromObject(object.service[i]);
+                            message.service[i] = $root.google.protobuf.ServiceDescriptorProto.fromObject(object.service[i], long + 1);
                         }
                     }
                     if (object.extension) {
@@ -23755,18 +25217,18 @@
                         for (var i = 0; i < object.extension.length; ++i) {
                             if (typeof object.extension[i] !== "object")
                                 throw TypeError(".google.protobuf.FileDescriptorProto.extension: object expected");
-                            message.extension[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.extension[i]);
+                            message.extension[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.extension[i], long + 1);
                         }
                     }
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.FileDescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.FileOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.FileOptions.fromObject(object.options, long + 1);
                     }
                     if (object.sourceCodeInfo != null) {
                         if (typeof object.sourceCodeInfo !== "object")
                             throw TypeError(".google.protobuf.FileDescriptorProto.sourceCodeInfo: object expected");
-                        message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.fromObject(object.sourceCodeInfo);
+                        message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.fromObject(object.sourceCodeInfo, long + 1);
                     }
                     if (object.syntax != null)
                         message.syntax = String(object.syntax);
@@ -23780,6 +25242,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.edition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.edition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -23846,6 +25312,7 @@
                         object.extension = [];
                         object.publicDependency = [];
                         object.weakDependency = [];
+                        object.optionDependency = [];
                     }
                     if (options.defaults) {
                         object.name = "";
@@ -23902,6 +25369,11 @@
                         object.syntax = message.syntax;
                     if (message.edition != null && message.hasOwnProperty("edition"))
                         object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                    if (message.optionDependency && message.optionDependency.length) {
+                        object.optionDependency = [];
+                        for (var j = 0; j < message.optionDependency.length; ++j)
+                            object.optionDependency[j] = message.optionDependency[j];
+                    }
                     return object;
                 };
     
@@ -23950,6 +25422,7 @@
                  * @property {google.protobuf.IMessageOptions|null} [options] DescriptorProto options
                  * @property {Array.<google.protobuf.DescriptorProto.IReservedRange>|null} [reservedRange] DescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] DescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] DescriptorProto visibility
                  */
     
                 /**
@@ -23971,7 +25444,7 @@
                     this.reservedName = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -24056,6 +25529,14 @@
                 DescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * DescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new DescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.DescriptorProto
@@ -24107,6 +25588,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 10, wireType 2 =*/82).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 11, wireType 0 =*/88).int32(message.visibility);
                     return writer;
                 };
     
@@ -24134,9 +25617,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DescriptorProto.decode = function decode(reader, length, error) {
+                DescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -24150,47 +25637,47 @@
                         case 2: {
                                 if (!(message.field && message.field.length))
                                     message.field = [];
-                                message.field.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                message.field.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 6: {
                                 if (!(message.extension && message.extension.length))
                                     message.extension = [];
-                                message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 3: {
                                 if (!(message.nestedType && message.nestedType.length))
                                     message.nestedType = [];
-                                message.nestedType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
+                                message.nestedType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 4: {
                                 if (!(message.enumType && message.enumType.length))
                                     message.enumType = [];
-                                message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
+                                message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 5: {
                                 if (!(message.extensionRange && message.extensionRange.length))
                                     message.extensionRange = [];
-                                message.extensionRange.push($root.google.protobuf.DescriptorProto.ExtensionRange.decode(reader, reader.uint32()));
+                                message.extensionRange.push($root.google.protobuf.DescriptorProto.ExtensionRange.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 8: {
                                 if (!(message.oneofDecl && message.oneofDecl.length))
                                     message.oneofDecl = [];
-                                message.oneofDecl.push($root.google.protobuf.OneofDescriptorProto.decode(reader, reader.uint32()));
+                                message.oneofDecl.push($root.google.protobuf.OneofDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 7: {
-                                message.options = $root.google.protobuf.MessageOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.MessageOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 9: {
                                 if (!(message.reservedRange && message.reservedRange.length))
                                     message.reservedRange = [];
-                                message.reservedRange.push($root.google.protobuf.DescriptorProto.ReservedRange.decode(reader, reader.uint32()));
+                                message.reservedRange.push($root.google.protobuf.DescriptorProto.ReservedRange.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 10: {
@@ -24199,8 +25686,12 @@
                                 message.reservedName.push(reader.string());
                                 break;
                             }
+                        case 11: {
+                                message.visibility = reader.int32();
+                                break;
+                            }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -24231,9 +25722,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                DescriptorProto.verify = function verify(message) {
+                DescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -24241,7 +25736,7 @@
                         if (!Array.isArray(message.field))
                             return "field: array expected";
                         for (var i = 0; i < message.field.length; ++i) {
-                            var error = $root.google.protobuf.FieldDescriptorProto.verify(message.field[i]);
+                            var error = $root.google.protobuf.FieldDescriptorProto.verify(message.field[i], long + 1);
                             if (error)
                                 return "field." + error;
                         }
@@ -24250,7 +25745,7 @@
                         if (!Array.isArray(message.extension))
                             return "extension: array expected";
                         for (var i = 0; i < message.extension.length; ++i) {
-                            var error = $root.google.protobuf.FieldDescriptorProto.verify(message.extension[i]);
+                            var error = $root.google.protobuf.FieldDescriptorProto.verify(message.extension[i], long + 1);
                             if (error)
                                 return "extension." + error;
                         }
@@ -24259,7 +25754,7 @@
                         if (!Array.isArray(message.nestedType))
                             return "nestedType: array expected";
                         for (var i = 0; i < message.nestedType.length; ++i) {
-                            var error = $root.google.protobuf.DescriptorProto.verify(message.nestedType[i]);
+                            var error = $root.google.protobuf.DescriptorProto.verify(message.nestedType[i], long + 1);
                             if (error)
                                 return "nestedType." + error;
                         }
@@ -24268,7 +25763,7 @@
                         if (!Array.isArray(message.enumType))
                             return "enumType: array expected";
                         for (var i = 0; i < message.enumType.length; ++i) {
-                            var error = $root.google.protobuf.EnumDescriptorProto.verify(message.enumType[i]);
+                            var error = $root.google.protobuf.EnumDescriptorProto.verify(message.enumType[i], long + 1);
                             if (error)
                                 return "enumType." + error;
                         }
@@ -24277,7 +25772,7 @@
                         if (!Array.isArray(message.extensionRange))
                             return "extensionRange: array expected";
                         for (var i = 0; i < message.extensionRange.length; ++i) {
-                            var error = $root.google.protobuf.DescriptorProto.ExtensionRange.verify(message.extensionRange[i]);
+                            var error = $root.google.protobuf.DescriptorProto.ExtensionRange.verify(message.extensionRange[i], long + 1);
                             if (error)
                                 return "extensionRange." + error;
                         }
@@ -24286,13 +25781,13 @@
                         if (!Array.isArray(message.oneofDecl))
                             return "oneofDecl: array expected";
                         for (var i = 0; i < message.oneofDecl.length; ++i) {
-                            var error = $root.google.protobuf.OneofDescriptorProto.verify(message.oneofDecl[i]);
+                            var error = $root.google.protobuf.OneofDescriptorProto.verify(message.oneofDecl[i], long + 1);
                             if (error)
                                 return "oneofDecl." + error;
                         }
                     }
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.MessageOptions.verify(message.options);
+                        var error = $root.google.protobuf.MessageOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
@@ -24300,7 +25795,7 @@
                         if (!Array.isArray(message.reservedRange))
                             return "reservedRange: array expected";
                         for (var i = 0; i < message.reservedRange.length; ++i) {
-                            var error = $root.google.protobuf.DescriptorProto.ReservedRange.verify(message.reservedRange[i]);
+                            var error = $root.google.protobuf.DescriptorProto.ReservedRange.verify(message.reservedRange[i], long + 1);
                             if (error)
                                 return "reservedRange." + error;
                         }
@@ -24312,6 +25807,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -24323,9 +25827,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.DescriptorProto} DescriptorProto
                  */
-                DescriptorProto.fromObject = function fromObject(object) {
+                DescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.DescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.DescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -24336,7 +25844,7 @@
                         for (var i = 0; i < object.field.length; ++i) {
                             if (typeof object.field[i] !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.field: object expected");
-                            message.field[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.field[i]);
+                            message.field[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.field[i], long + 1);
                         }
                     }
                     if (object.extension) {
@@ -24346,7 +25854,7 @@
                         for (var i = 0; i < object.extension.length; ++i) {
                             if (typeof object.extension[i] !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.extension: object expected");
-                            message.extension[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.extension[i]);
+                            message.extension[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.extension[i], long + 1);
                         }
                     }
                     if (object.nestedType) {
@@ -24356,7 +25864,7 @@
                         for (var i = 0; i < object.nestedType.length; ++i) {
                             if (typeof object.nestedType[i] !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.nestedType: object expected");
-                            message.nestedType[i] = $root.google.protobuf.DescriptorProto.fromObject(object.nestedType[i]);
+                            message.nestedType[i] = $root.google.protobuf.DescriptorProto.fromObject(object.nestedType[i], long + 1);
                         }
                     }
                     if (object.enumType) {
@@ -24366,7 +25874,7 @@
                         for (var i = 0; i < object.enumType.length; ++i) {
                             if (typeof object.enumType[i] !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.enumType: object expected");
-                            message.enumType[i] = $root.google.protobuf.EnumDescriptorProto.fromObject(object.enumType[i]);
+                            message.enumType[i] = $root.google.protobuf.EnumDescriptorProto.fromObject(object.enumType[i], long + 1);
                         }
                     }
                     if (object.extensionRange) {
@@ -24376,7 +25884,7 @@
                         for (var i = 0; i < object.extensionRange.length; ++i) {
                             if (typeof object.extensionRange[i] !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.extensionRange: object expected");
-                            message.extensionRange[i] = $root.google.protobuf.DescriptorProto.ExtensionRange.fromObject(object.extensionRange[i]);
+                            message.extensionRange[i] = $root.google.protobuf.DescriptorProto.ExtensionRange.fromObject(object.extensionRange[i], long + 1);
                         }
                     }
                     if (object.oneofDecl) {
@@ -24386,13 +25894,13 @@
                         for (var i = 0; i < object.oneofDecl.length; ++i) {
                             if (typeof object.oneofDecl[i] !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.oneofDecl: object expected");
-                            message.oneofDecl[i] = $root.google.protobuf.OneofDescriptorProto.fromObject(object.oneofDecl[i]);
+                            message.oneofDecl[i] = $root.google.protobuf.OneofDescriptorProto.fromObject(object.oneofDecl[i], long + 1);
                         }
                     }
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.DescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.MessageOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.MessageOptions.fromObject(object.options, long + 1);
                     }
                     if (object.reservedRange) {
                         if (!Array.isArray(object.reservedRange))
@@ -24401,7 +25909,7 @@
                         for (var i = 0; i < object.reservedRange.length; ++i) {
                             if (typeof object.reservedRange[i] !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.reservedRange: object expected");
-                            message.reservedRange[i] = $root.google.protobuf.DescriptorProto.ReservedRange.fromObject(object.reservedRange[i]);
+                            message.reservedRange[i] = $root.google.protobuf.DescriptorProto.ReservedRange.fromObject(object.reservedRange[i], long + 1);
                         }
                     }
                     if (object.reservedName) {
@@ -24410,6 +25918,26 @@
                         message.reservedName = [];
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
+                    }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
                     }
                     return message;
                 };
@@ -24440,6 +25968,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -24485,6 +26014,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -24536,7 +26067,7 @@
                     function ExtensionRange(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -24621,9 +26152,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ExtensionRange.decode = function decode(reader, length, error) {
+                    ExtensionRange.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -24639,11 +26174,11 @@
                                     break;
                                 }
                             case 3: {
-                                    message.options = $root.google.protobuf.ExtensionRangeOptions.decode(reader, reader.uint32());
+                                    message.options = $root.google.protobuf.ExtensionRangeOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -24674,9 +26209,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ExtensionRange.verify = function verify(message) {
+                    ExtensionRange.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.start != null && message.hasOwnProperty("start"))
                             if (!$util.isInteger(message.start))
                                 return "start: integer expected";
@@ -24684,7 +26223,7 @@
                             if (!$util.isInteger(message.end))
                                 return "end: integer expected";
                         if (message.options != null && message.hasOwnProperty("options")) {
-                            var error = $root.google.protobuf.ExtensionRangeOptions.verify(message.options);
+                            var error = $root.google.protobuf.ExtensionRangeOptions.verify(message.options, long + 1);
                             if (error)
                                 return "options." + error;
                         }
@@ -24699,9 +26238,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.DescriptorProto.ExtensionRange} ExtensionRange
                      */
-                    ExtensionRange.fromObject = function fromObject(object) {
+                    ExtensionRange.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.DescriptorProto.ExtensionRange)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
                         if (object.start != null)
                             message.start = object.start | 0;
@@ -24710,7 +26253,7 @@
                         if (object.options != null) {
                             if (typeof object.options !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.ExtensionRange.options: object expected");
-                            message.options = $root.google.protobuf.ExtensionRangeOptions.fromObject(object.options);
+                            message.options = $root.google.protobuf.ExtensionRangeOptions.fromObject(object.options, long + 1);
                         }
                         return message;
                     };
@@ -24792,7 +26335,7 @@
                     function ReservedRange(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -24867,9 +26410,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReservedRange.decode = function decode(reader, length, error) {
+                    ReservedRange.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -24885,7 +26432,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -24916,9 +26463,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ReservedRange.verify = function verify(message) {
+                    ReservedRange.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.start != null && message.hasOwnProperty("start"))
                             if (!$util.isInteger(message.start))
                                 return "start: integer expected";
@@ -24936,9 +26487,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.DescriptorProto.ReservedRange} ReservedRange
                      */
-                    ReservedRange.fromObject = function fromObject(object) {
+                    ReservedRange.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.DescriptorProto.ReservedRange)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.DescriptorProto.ReservedRange();
                         if (object.start != null)
                             message.start = object.start | 0;
@@ -25028,7 +26583,7 @@
                     this.declaration = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -25125,9 +26680,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ExtensionRangeOptions.decode = function decode(reader, length, error) {
+                ExtensionRangeOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -25137,17 +26696,17 @@
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 2: {
                                 if (!(message.declaration && message.declaration.length))
                                     message.declaration = [];
-                                message.declaration.push($root.google.protobuf.ExtensionRangeOptions.Declaration.decode(reader, reader.uint32()));
+                                message.declaration.push($root.google.protobuf.ExtensionRangeOptions.Declaration.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 50: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 3: {
@@ -25155,7 +26714,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -25186,14 +26745,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                ExtensionRangeOptions.verify = function verify(message) {
+                ExtensionRangeOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
@@ -25202,13 +26765,13 @@
                         if (!Array.isArray(message.declaration))
                             return "declaration: array expected";
                         for (var i = 0; i < message.declaration.length; ++i) {
-                            var error = $root.google.protobuf.ExtensionRangeOptions.Declaration.verify(message.declaration[i]);
+                            var error = $root.google.protobuf.ExtensionRangeOptions.Declaration.verify(message.declaration[i], long + 1);
                             if (error)
                                 return "declaration." + error;
                         }
                     }
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -25231,9 +26794,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.ExtensionRangeOptions} ExtensionRangeOptions
                  */
-                ExtensionRangeOptions.fromObject = function fromObject(object) {
+                ExtensionRangeOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.ExtensionRangeOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.ExtensionRangeOptions();
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -25242,7 +26809,7 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.ExtensionRangeOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     if (object.declaration) {
@@ -25252,13 +26819,13 @@
                         for (var i = 0; i < object.declaration.length; ++i) {
                             if (typeof object.declaration[i] !== "object")
                                 throw TypeError(".google.protobuf.ExtensionRangeOptions.declaration: object expected");
-                            message.declaration[i] = $root.google.protobuf.ExtensionRangeOptions.Declaration.fromObject(object.declaration[i]);
+                            message.declaration[i] = $root.google.protobuf.ExtensionRangeOptions.Declaration.fromObject(object.declaration[i], long + 1);
                         }
                     }
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.ExtensionRangeOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     switch (object.verification) {
                     case "DECLARATION":
@@ -25367,7 +26934,7 @@
                     function Declaration(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -25472,9 +27039,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Declaration.decode = function decode(reader, length, error) {
+                    Declaration.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -25502,7 +27073,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -25533,9 +27104,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    Declaration.verify = function verify(message) {
+                    Declaration.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.number != null && message.hasOwnProperty("number"))
                             if (!$util.isInteger(message.number))
                                 return "number: integer expected";
@@ -25562,9 +27137,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.ExtensionRangeOptions.Declaration} Declaration
                      */
-                    Declaration.fromObject = function fromObject(object) {
+                    Declaration.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.ExtensionRangeOptions.Declaration)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
                         if (object.number != null)
                             message.number = object.number | 0;
@@ -25688,7 +27267,7 @@
                 function FieldDescriptorProto(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -25853,9 +27432,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldDescriptorProto.decode = function decode(reader, length, error) {
+                FieldDescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -25899,7 +27482,7 @@
                                 break;
                             }
                         case 8: {
-                                message.options = $root.google.protobuf.FieldOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.FieldOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 17: {
@@ -25907,7 +27490,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -25938,9 +27521,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FieldDescriptorProto.verify = function verify(message) {
+                FieldDescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -25996,7 +27583,7 @@
                         if (!$util.isString(message.jsonName))
                             return "jsonName: string expected";
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.FieldOptions.verify(message.options);
+                        var error = $root.google.protobuf.FieldOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
@@ -26014,9 +27601,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FieldDescriptorProto} FieldDescriptorProto
                  */
-                FieldDescriptorProto.fromObject = function fromObject(object) {
+                FieldDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FieldDescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FieldDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -26135,7 +27726,7 @@
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.FieldDescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.FieldOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.FieldOptions.fromObject(object.options, long + 1);
                     }
                     if (object.proto3Optional != null)
                         message.proto3Optional = Boolean(object.proto3Optional);
@@ -26305,7 +27896,7 @@
                 function OneofDescriptorProto(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -26380,9 +27971,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofDescriptorProto.decode = function decode(reader, length, error) {
+                OneofDescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -26394,11 +27989,11 @@
                                 break;
                             }
                         case 2: {
-                                message.options = $root.google.protobuf.OneofOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.OneofOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -26429,14 +28024,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                OneofDescriptorProto.verify = function verify(message) {
+                OneofDescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.OneofOptions.verify(message.options);
+                        var error = $root.google.protobuf.OneofOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
@@ -26451,16 +28050,20 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.OneofDescriptorProto} OneofDescriptorProto
                  */
-                OneofDescriptorProto.fromObject = function fromObject(object) {
+                OneofDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.OneofDescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.OneofDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.OneofDescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.OneofOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.OneofOptions.fromObject(object.options, long + 1);
                     }
                     return message;
                 };
@@ -26529,6 +28132,7 @@
                  * @property {google.protobuf.IEnumOptions|null} [options] EnumDescriptorProto options
                  * @property {Array.<google.protobuf.EnumDescriptorProto.IEnumReservedRange>|null} [reservedRange] EnumDescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] EnumDescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] EnumDescriptorProto visibility
                  */
     
                 /**
@@ -26545,7 +28149,7 @@
                     this.reservedName = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -26590,6 +28194,14 @@
                 EnumDescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * EnumDescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @instance
+                 */
+                EnumDescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new EnumDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.EnumDescriptorProto
@@ -26626,6 +28238,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.visibility);
                     return writer;
                 };
     
@@ -26653,9 +28267,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumDescriptorProto.decode = function decode(reader, length, error) {
+                EnumDescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -26669,17 +28287,17 @@
                         case 2: {
                                 if (!(message.value && message.value.length))
                                     message.value = [];
-                                message.value.push($root.google.protobuf.EnumValueDescriptorProto.decode(reader, reader.uint32()));
+                                message.value.push($root.google.protobuf.EnumValueDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 3: {
-                                message.options = $root.google.protobuf.EnumOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.EnumOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 4: {
                                 if (!(message.reservedRange && message.reservedRange.length))
                                     message.reservedRange = [];
-                                message.reservedRange.push($root.google.protobuf.EnumDescriptorProto.EnumReservedRange.decode(reader, reader.uint32()));
+                                message.reservedRange.push($root.google.protobuf.EnumDescriptorProto.EnumReservedRange.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 5: {
@@ -26688,8 +28306,12 @@
                                 message.reservedName.push(reader.string());
                                 break;
                             }
+                        case 6: {
+                                message.visibility = reader.int32();
+                                break;
+                            }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -26720,9 +28342,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                EnumDescriptorProto.verify = function verify(message) {
+                EnumDescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -26730,13 +28356,13 @@
                         if (!Array.isArray(message.value))
                             return "value: array expected";
                         for (var i = 0; i < message.value.length; ++i) {
-                            var error = $root.google.protobuf.EnumValueDescriptorProto.verify(message.value[i]);
+                            var error = $root.google.protobuf.EnumValueDescriptorProto.verify(message.value[i], long + 1);
                             if (error)
                                 return "value." + error;
                         }
                     }
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.EnumOptions.verify(message.options);
+                        var error = $root.google.protobuf.EnumOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
@@ -26744,7 +28370,7 @@
                         if (!Array.isArray(message.reservedRange))
                             return "reservedRange: array expected";
                         for (var i = 0; i < message.reservedRange.length; ++i) {
-                            var error = $root.google.protobuf.EnumDescriptorProto.EnumReservedRange.verify(message.reservedRange[i]);
+                            var error = $root.google.protobuf.EnumDescriptorProto.EnumReservedRange.verify(message.reservedRange[i], long + 1);
                             if (error)
                                 return "reservedRange." + error;
                         }
@@ -26756,6 +28382,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -26767,9 +28402,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.EnumDescriptorProto} EnumDescriptorProto
                  */
-                EnumDescriptorProto.fromObject = function fromObject(object) {
+                EnumDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.EnumDescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.EnumDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -26780,13 +28419,13 @@
                         for (var i = 0; i < object.value.length; ++i) {
                             if (typeof object.value[i] !== "object")
                                 throw TypeError(".google.protobuf.EnumDescriptorProto.value: object expected");
-                            message.value[i] = $root.google.protobuf.EnumValueDescriptorProto.fromObject(object.value[i]);
+                            message.value[i] = $root.google.protobuf.EnumValueDescriptorProto.fromObject(object.value[i], long + 1);
                         }
                     }
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.EnumDescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.EnumOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.EnumOptions.fromObject(object.options, long + 1);
                     }
                     if (object.reservedRange) {
                         if (!Array.isArray(object.reservedRange))
@@ -26795,7 +28434,7 @@
                         for (var i = 0; i < object.reservedRange.length; ++i) {
                             if (typeof object.reservedRange[i] !== "object")
                                 throw TypeError(".google.protobuf.EnumDescriptorProto.reservedRange: object expected");
-                            message.reservedRange[i] = $root.google.protobuf.EnumDescriptorProto.EnumReservedRange.fromObject(object.reservedRange[i]);
+                            message.reservedRange[i] = $root.google.protobuf.EnumDescriptorProto.EnumReservedRange.fromObject(object.reservedRange[i], long + 1);
                         }
                     }
                     if (object.reservedName) {
@@ -26804,6 +28443,26 @@
                         message.reservedName = [];
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
+                    }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
                     }
                     return message;
                 };
@@ -26829,6 +28488,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -26849,6 +28509,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -26899,7 +28561,7 @@
                     function EnumReservedRange(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -26974,9 +28636,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EnumReservedRange.decode = function decode(reader, length, error) {
+                    EnumReservedRange.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -26992,7 +28658,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -27023,9 +28689,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    EnumReservedRange.verify = function verify(message) {
+                    EnumReservedRange.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.start != null && message.hasOwnProperty("start"))
                             if (!$util.isInteger(message.start))
                                 return "start: integer expected";
@@ -27043,9 +28713,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.EnumDescriptorProto.EnumReservedRange} EnumReservedRange
                      */
-                    EnumReservedRange.fromObject = function fromObject(object) {
+                    EnumReservedRange.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.EnumDescriptorProto.EnumReservedRange)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
                         if (object.start != null)
                             message.start = object.start | 0;
@@ -27132,7 +28806,7 @@
                 function EnumValueDescriptorProto(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -27217,9 +28891,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueDescriptorProto.decode = function decode(reader, length, error) {
+                EnumValueDescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -27235,11 +28913,11 @@
                                 break;
                             }
                         case 3: {
-                                message.options = $root.google.protobuf.EnumValueOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.EnumValueOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -27270,9 +28948,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                EnumValueDescriptorProto.verify = function verify(message) {
+                EnumValueDescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -27280,7 +28962,7 @@
                         if (!$util.isInteger(message.number))
                             return "number: integer expected";
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.EnumValueOptions.verify(message.options);
+                        var error = $root.google.protobuf.EnumValueOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
@@ -27295,9 +28977,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.EnumValueDescriptorProto} EnumValueDescriptorProto
                  */
-                EnumValueDescriptorProto.fromObject = function fromObject(object) {
+                EnumValueDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.EnumValueDescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.EnumValueDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -27306,7 +28992,7 @@
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.EnumValueDescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.EnumValueOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.EnumValueOptions.fromObject(object.options, long + 1);
                     }
                     return message;
                 };
@@ -27390,7 +29076,7 @@
                     this.method = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -27476,9 +29162,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceDescriptorProto.decode = function decode(reader, length, error) {
+                ServiceDescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -27492,15 +29182,15 @@
                         case 2: {
                                 if (!(message.method && message.method.length))
                                     message.method = [];
-                                message.method.push($root.google.protobuf.MethodDescriptorProto.decode(reader, reader.uint32()));
+                                message.method.push($root.google.protobuf.MethodDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 3: {
-                                message.options = $root.google.protobuf.ServiceOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.ServiceOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -27531,9 +29221,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                ServiceDescriptorProto.verify = function verify(message) {
+                ServiceDescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -27541,13 +29235,13 @@
                         if (!Array.isArray(message.method))
                             return "method: array expected";
                         for (var i = 0; i < message.method.length; ++i) {
-                            var error = $root.google.protobuf.MethodDescriptorProto.verify(message.method[i]);
+                            var error = $root.google.protobuf.MethodDescriptorProto.verify(message.method[i], long + 1);
                             if (error)
                                 return "method." + error;
                         }
                     }
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.ServiceOptions.verify(message.options);
+                        var error = $root.google.protobuf.ServiceOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
@@ -27562,9 +29256,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.ServiceDescriptorProto} ServiceDescriptorProto
                  */
-                ServiceDescriptorProto.fromObject = function fromObject(object) {
+                ServiceDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.ServiceDescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.ServiceDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -27575,13 +29273,13 @@
                         for (var i = 0; i < object.method.length; ++i) {
                             if (typeof object.method[i] !== "object")
                                 throw TypeError(".google.protobuf.ServiceDescriptorProto.method: object expected");
-                            message.method[i] = $root.google.protobuf.MethodDescriptorProto.fromObject(object.method[i]);
+                            message.method[i] = $root.google.protobuf.MethodDescriptorProto.fromObject(object.method[i], long + 1);
                         }
                     }
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.ServiceDescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.ServiceOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.ServiceOptions.fromObject(object.options, long + 1);
                     }
                     return message;
                 };
@@ -27671,7 +29369,7 @@
                 function MethodDescriptorProto(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -27786,9 +29484,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodDescriptorProto.decode = function decode(reader, length, error) {
+                MethodDescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -27808,7 +29510,7 @@
                                 break;
                             }
                         case 4: {
-                                message.options = $root.google.protobuf.MethodOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.MethodOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 5: {
@@ -27820,7 +29522,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -27851,9 +29553,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                MethodDescriptorProto.verify = function verify(message) {
+                MethodDescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -27864,7 +29570,7 @@
                         if (!$util.isString(message.outputType))
                             return "outputType: string expected";
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.MethodOptions.verify(message.options);
+                        var error = $root.google.protobuf.MethodOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
@@ -27885,9 +29591,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.MethodDescriptorProto} MethodDescriptorProto
                  */
-                MethodDescriptorProto.fromObject = function fromObject(object) {
+                MethodDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.MethodDescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.MethodDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -27898,7 +29608,7 @@
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.MethodDescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.MethodOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.MethodOptions.fromObject(object.options, long + 1);
                     }
                     if (object.clientStreaming != null)
                         message.clientStreaming = Boolean(object.clientStreaming);
@@ -28015,7 +29725,7 @@
                     this[".google.api.resourceDefinition"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -28292,9 +30002,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileOptions.decode = function decode(reader, length, error) {
+                FileOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -28378,23 +30092,23 @@
                                 break;
                             }
                         case 50: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 1053: {
                                 if (!(message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length))
                                     message[".google.api.resourceDefinition"] = [];
-                                message[".google.api.resourceDefinition"].push($root.google.api.ResourceDescriptor.decode(reader, reader.uint32()));
+                                message[".google.api.resourceDefinition"].push($root.google.api.ResourceDescriptor.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -28425,9 +30139,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FileOptions.verify = function verify(message) {
+                FileOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.javaPackage != null && message.hasOwnProperty("javaPackage"))
                         if (!$util.isString(message.javaPackage))
                             return "javaPackage: string expected";
@@ -28492,7 +30210,7 @@
                         if (!$util.isString(message.rubyPackage))
                             return "rubyPackage: string expected";
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -28500,7 +30218,7 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
@@ -28509,7 +30227,7 @@
                         if (!Array.isArray(message[".google.api.resourceDefinition"]))
                             return ".google.api.resourceDefinition: array expected";
                         for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i) {
-                            var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resourceDefinition"][i]);
+                            var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resourceDefinition"][i], long + 1);
                             if (error)
                                 return ".google.api.resourceDefinition." + error;
                         }
@@ -28525,9 +30243,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FileOptions} FileOptions
                  */
-                FileOptions.fromObject = function fromObject(object) {
+                FileOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FileOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FileOptions();
                     if (object.javaPackage != null)
                         message.javaPackage = String(object.javaPackage);
@@ -28588,7 +30310,7 @@
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.FileOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -28597,7 +30319,7 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.FileOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     if (object[".google.api.resourceDefinition"]) {
@@ -28607,7 +30329,7 @@
                         for (var i = 0; i < object[".google.api.resourceDefinition"].length; ++i) {
                             if (typeof object[".google.api.resourceDefinition"][i] !== "object")
                                 throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: object expected");
-                            message[".google.api.resourceDefinition"][i] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resourceDefinition"][i]);
+                            message[".google.api.resourceDefinition"][i] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resourceDefinition"][i], long + 1);
                         }
                     }
                     return message;
@@ -28778,7 +30500,7 @@
                     this.uninterpretedOption = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -28914,9 +30636,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MessageOptions.decode = function decode(reader, length, error) {
+                MessageOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MessageOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -28944,21 +30670,21 @@
                                 break;
                             }
                         case 12: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 1053: {
-                                message[".google.api.resource"] = $root.google.api.ResourceDescriptor.decode(reader, reader.uint32());
+                                message[".google.api.resource"] = $root.google.api.ResourceDescriptor.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -28989,9 +30715,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                MessageOptions.verify = function verify(message) {
+                MessageOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.messageSetWireFormat != null && message.hasOwnProperty("messageSetWireFormat"))
                         if (typeof message.messageSetWireFormat !== "boolean")
                             return "messageSetWireFormat: boolean expected";
@@ -29008,7 +30738,7 @@
                         if (typeof message.deprecatedLegacyJsonFieldConflicts !== "boolean")
                             return "deprecatedLegacyJsonFieldConflicts: boolean expected";
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -29016,13 +30746,13 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
                     }
                     if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource")) {
-                        var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resource"]);
+                        var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resource"], long + 1);
                         if (error)
                             return ".google.api.resource." + error;
                     }
@@ -29037,9 +30767,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.MessageOptions} MessageOptions
                  */
-                MessageOptions.fromObject = function fromObject(object) {
+                MessageOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.MessageOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.MessageOptions();
                     if (object.messageSetWireFormat != null)
                         message.messageSetWireFormat = Boolean(object.messageSetWireFormat);
@@ -29054,7 +30788,7 @@
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.MessageOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -29063,13 +30797,13 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.MessageOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     if (object[".google.api.resource"] != null) {
                         if (typeof object[".google.api.resource"] !== "object")
                             throw TypeError(".google.protobuf.MessageOptions..google.api.resource: object expected");
-                        message[".google.api.resource"] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resource"]);
+                        message[".google.api.resource"] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resource"], long + 1);
                     }
                     return message;
                 };
@@ -29167,6 +30901,7 @@
                  * @property {Array.<google.protobuf.FieldOptions.OptionTargetType>|null} [targets] FieldOptions targets
                  * @property {Array.<google.protobuf.FieldOptions.IEditionDefault>|null} [editionDefaults] FieldOptions editionDefaults
                  * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] FieldOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
@@ -29187,7 +30922,7 @@
                     this[".google.api.fieldBehavior"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -29288,6 +31023,14 @@
                 FieldOptions.prototype.features = null;
     
                 /**
+                 * FieldOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.featureSupport = null;
+    
+                /**
                  * FieldOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.FieldOptions
@@ -29361,6 +31104,8 @@
                             $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -29396,9 +31141,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldOptions.decode = function decode(reader, length, error) {
+                FieldOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -29455,17 +31204,21 @@
                         case 20: {
                                 if (!(message.editionDefaults && message.editionDefaults.length))
                                     message.editionDefaults = [];
-                                message.editionDefaults.push($root.google.protobuf.FieldOptions.EditionDefault.decode(reader, reader.uint32()));
+                                message.editionDefaults.push($root.google.protobuf.FieldOptions.EditionDefault.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 21: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
+                                break;
+                            }
+                        case 22: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 1052: {
@@ -29480,11 +31233,11 @@
                                 break;
                             }
                         case 1055: {
-                                message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
+                                message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -29515,9 +31268,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FieldOptions.verify = function verify(message) {
+                FieldOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
                         switch (message.ctype) {
                         default:
@@ -29587,21 +31344,26 @@
                         if (!Array.isArray(message.editionDefaults))
                             return "editionDefaults: array expected";
                         for (var i = 0; i < message.editionDefaults.length; ++i) {
-                            var error = $root.google.protobuf.FieldOptions.EditionDefault.verify(message.editionDefaults[i]);
+                            var error = $root.google.protobuf.FieldOptions.EditionDefault.verify(message.editionDefaults[i], long + 1);
                             if (error)
                                 return "editionDefaults." + error;
                         }
                     }
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
+                    }
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport, long + 1);
+                        if (error)
+                            return "featureSupport." + error;
                     }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
@@ -29626,7 +31388,7 @@
                             }
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
-                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
+                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"], long + 1);
                         if (error)
                             return ".google.api.resourceReference." + error;
                     }
@@ -29641,9 +31403,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FieldOptions} FieldOptions
                  */
-                FieldOptions.fromObject = function fromObject(object) {
+                FieldOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FieldOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
                     default:
@@ -29777,13 +31543,18 @@
                         for (var i = 0; i < object.editionDefaults.length; ++i) {
                             if (typeof object.editionDefaults[i] !== "object")
                                 throw TypeError(".google.protobuf.FieldOptions.editionDefaults: object expected");
-                            message.editionDefaults[i] = $root.google.protobuf.FieldOptions.EditionDefault.fromObject(object.editionDefaults[i]);
+                            message.editionDefaults[i] = $root.google.protobuf.FieldOptions.EditionDefault.fromObject(object.editionDefaults[i], long + 1);
                         }
                     }
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.FieldOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
+                    }
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport, long + 1);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -29792,7 +31563,7 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.FieldOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     if (object[".google.api.fieldBehavior"]) {
@@ -29847,7 +31618,7 @@
                     if (object[".google.api.resourceReference"] != null) {
                         if (typeof object[".google.api.resourceReference"] !== "object")
                             throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
-                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
+                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"], long + 1);
                     }
                     return message;
                 };
@@ -29882,6 +31653,7 @@
                         object.debugRedact = false;
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
+                        object.featureSupport = null;
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
@@ -29914,6 +31686,8 @@
                     }
                     if (message.features != null && message.hasOwnProperty("features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -30054,7 +31828,7 @@
                     function EditionDefault(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -30129,9 +31903,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EditionDefault.decode = function decode(reader, length, error) {
+                    EditionDefault.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -30147,7 +31925,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -30178,14 +31956,19 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    EditionDefault.verify = function verify(message) {
+                    EditionDefault.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             switch (message.edition) {
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -30212,9 +31995,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.FieldOptions.EditionDefault} EditionDefault
                      */
-                    EditionDefault.fromObject = function fromObject(object) {
+                    EditionDefault.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.FieldOptions.EditionDefault)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.FieldOptions.EditionDefault();
                         switch (object.edition) {
                         default:
@@ -30226,6 +32013,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -30326,6 +32117,500 @@
                     return EditionDefault;
                 })();
     
+                FieldOptions.FeatureSupport = (function() {
+    
+                    /**
+                     * Properties of a FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @interface IFeatureSupport
+                     * @property {google.protobuf.Edition|null} [editionIntroduced] FeatureSupport editionIntroduced
+                     * @property {google.protobuf.Edition|null} [editionDeprecated] FeatureSupport editionDeprecated
+                     * @property {string|null} [deprecationWarning] FeatureSupport deprecationWarning
+                     * @property {google.protobuf.Edition|null} [editionRemoved] FeatureSupport editionRemoved
+                     */
+    
+                    /**
+                     * Constructs a new FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @classdesc Represents a FeatureSupport.
+                     * @implements IFeatureSupport
+                     * @constructor
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     */
+                    function FeatureSupport(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * FeatureSupport editionIntroduced.
+                     * @member {google.protobuf.Edition} editionIntroduced
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionIntroduced = 0;
+    
+                    /**
+                     * FeatureSupport editionDeprecated.
+                     * @member {google.protobuf.Edition} editionDeprecated
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionDeprecated = 0;
+    
+                    /**
+                     * FeatureSupport deprecationWarning.
+                     * @member {string} deprecationWarning
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.deprecationWarning = "";
+    
+                    /**
+                     * FeatureSupport editionRemoved.
+                     * @member {google.protobuf.Edition} editionRemoved
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionRemoved = 0;
+    
+                    /**
+                     * Creates a new FeatureSupport instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport instance
+                     */
+                    FeatureSupport.create = function create(properties) {
+                        return new FeatureSupport(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.editionIntroduced != null && Object.hasOwnProperty.call(message, "editionIntroduced"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.editionIntroduced);
+                        if (message.editionDeprecated != null && Object.hasOwnProperty.call(message, "editionDeprecated"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.editionDeprecated);
+                        if (message.deprecationWarning != null && Object.hasOwnProperty.call(message, "deprecationWarning"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.deprecationWarning);
+                        if (message.editionRemoved != null && Object.hasOwnProperty.call(message, "editionRemoved"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.editionRemoved);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decode = function decode(reader, length, error, long) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.editionIntroduced = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.editionDeprecated = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.deprecationWarning = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.editionRemoved = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7, long);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a FeatureSupport message.
+                     * @function verify
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    FeatureSupport.verify = function verify(message, long) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            switch (message.editionIntroduced) {
+                            default:
+                                return "editionIntroduced: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            switch (message.editionDeprecated) {
+                            default:
+                                return "editionDeprecated: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            if (!$util.isString(message.deprecationWarning))
+                                return "deprecationWarning: string expected";
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            switch (message.editionRemoved) {
+                            default:
+                                return "editionRemoved: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     */
+                    FeatureSupport.fromObject = function fromObject(object, long) {
+                        if (object instanceof $root.google.protobuf.FieldOptions.FeatureSupport)
+                            return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        var message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        switch (object.editionIntroduced) {
+                        default:
+                            if (typeof object.editionIntroduced === "number") {
+                                message.editionIntroduced = object.editionIntroduced;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionIntroduced = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionIntroduced = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionIntroduced = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionIntroduced = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionIntroduced = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionIntroduced = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionIntroduced = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionIntroduced = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionIntroduced = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionIntroduced = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionIntroduced = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionIntroduced = 2147483647;
+                            break;
+                        }
+                        switch (object.editionDeprecated) {
+                        default:
+                            if (typeof object.editionDeprecated === "number") {
+                                message.editionDeprecated = object.editionDeprecated;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionDeprecated = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionDeprecated = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionDeprecated = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionDeprecated = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionDeprecated = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionDeprecated = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionDeprecated = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionDeprecated = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionDeprecated = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionDeprecated = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionDeprecated = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionDeprecated = 2147483647;
+                            break;
+                        }
+                        if (object.deprecationWarning != null)
+                            message.deprecationWarning = String(object.deprecationWarning);
+                        switch (object.editionRemoved) {
+                        default:
+                            if (typeof object.editionRemoved === "number") {
+                                message.editionRemoved = object.editionRemoved;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionRemoved = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionRemoved = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionRemoved = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionRemoved = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionRemoved = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionRemoved = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionRemoved = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionRemoved = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionRemoved = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionRemoved = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionRemoved = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionRemoved = 2147483647;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.FeatureSupport} message FeatureSupport
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    FeatureSupport.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.editionIntroduced = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.editionDeprecated = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.deprecationWarning = "";
+                            object.editionRemoved = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                        }
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            object.editionIntroduced = options.enums === String ? $root.google.protobuf.Edition[message.editionIntroduced] === undefined ? message.editionIntroduced : $root.google.protobuf.Edition[message.editionIntroduced] : message.editionIntroduced;
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            object.editionDeprecated = options.enums === String ? $root.google.protobuf.Edition[message.editionDeprecated] === undefined ? message.editionDeprecated : $root.google.protobuf.Edition[message.editionDeprecated] : message.editionDeprecated;
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            object.deprecationWarning = message.deprecationWarning;
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            object.editionRemoved = options.enums === String ? $root.google.protobuf.Edition[message.editionRemoved] === undefined ? message.editionRemoved : $root.google.protobuf.Edition[message.editionRemoved] : message.editionRemoved;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this FeatureSupport to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    FeatureSupport.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for FeatureSupport
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    FeatureSupport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FieldOptions.FeatureSupport";
+                    };
+    
+                    return FeatureSupport;
+                })();
+    
                 return FieldOptions;
             })();
     
@@ -30351,7 +32636,7 @@
                     this.uninterpretedOption = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -30427,9 +32712,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofOptions.decode = function decode(reader, length, error) {
+                OneofOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -30437,17 +32726,17 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -30478,11 +32767,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                OneofOptions.verify = function verify(message) {
+                OneofOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -30490,7 +32783,7 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
@@ -30506,14 +32799,18 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.OneofOptions} OneofOptions
                  */
-                OneofOptions.fromObject = function fromObject(object) {
+                OneofOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.OneofOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.OneofOptions();
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.OneofOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -30522,7 +32819,7 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.OneofOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     return message;
@@ -30609,7 +32906,7 @@
                     this.uninterpretedOption = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -30715,9 +33012,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumOptions.decode = function decode(reader, length, error) {
+                EnumOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -30737,17 +33038,17 @@
                                 break;
                             }
                         case 7: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -30778,9 +33079,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                EnumOptions.verify = function verify(message) {
+                EnumOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.allowAlias != null && message.hasOwnProperty("allowAlias"))
                         if (typeof message.allowAlias !== "boolean")
                             return "allowAlias: boolean expected";
@@ -30791,7 +33096,7 @@
                         if (typeof message.deprecatedLegacyJsonFieldConflicts !== "boolean")
                             return "deprecatedLegacyJsonFieldConflicts: boolean expected";
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -30799,7 +33104,7 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
@@ -30815,9 +33120,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.EnumOptions} EnumOptions
                  */
-                EnumOptions.fromObject = function fromObject(object) {
+                EnumOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.EnumOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.EnumOptions();
                     if (object.allowAlias != null)
                         message.allowAlias = Boolean(object.allowAlias);
@@ -30828,7 +33137,7 @@
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.EnumOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -30837,7 +33146,7 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.EnumOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     return message;
@@ -30918,6 +33227,7 @@
                  * @property {boolean|null} [deprecated] EnumValueOptions deprecated
                  * @property {google.protobuf.IFeatureSet|null} [features] EnumValueOptions features
                  * @property {boolean|null} [debugRedact] EnumValueOptions debugRedact
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] EnumValueOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumValueOptions uninterpretedOption
                  */
     
@@ -30933,7 +33243,7 @@
                     this.uninterpretedOption = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -30960,6 +33270,14 @@
                  * @instance
                  */
                 EnumValueOptions.prototype.debugRedact = false;
+    
+                /**
+                 * EnumValueOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @instance
+                 */
+                EnumValueOptions.prototype.featureSupport = null;
     
                 /**
                  * EnumValueOptions uninterpretedOption.
@@ -30999,6 +33317,8 @@
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.debugRedact);
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -31029,9 +33349,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueOptions.decode = function decode(reader, length, error) {
+                EnumValueOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -31043,21 +33367,25 @@
                                 break;
                             }
                         case 2: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 3: {
                                 message.debugRedact = reader.bool();
                                 break;
                             }
+                        case 4: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32(), undefined, long + 1);
+                                break;
+                            }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -31088,25 +33416,34 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                EnumValueOptions.verify = function verify(message) {
+                EnumValueOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         if (typeof message.debugRedact !== "boolean")
                             return "debugRedact: boolean expected";
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport, long + 1);
+                        if (error)
+                            return "featureSupport." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
@@ -31122,19 +33459,28 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.EnumValueOptions} EnumValueOptions
                  */
-                EnumValueOptions.fromObject = function fromObject(object) {
+                EnumValueOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.EnumValueOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.EnumValueOptions();
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.EnumValueOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.debugRedact != null)
                         message.debugRedact = Boolean(object.debugRedact);
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.EnumValueOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport, long + 1);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: array expected");
@@ -31142,7 +33488,7 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     return message;
@@ -31167,6 +33513,7 @@
                         object.deprecated = false;
                         object.features = null;
                         object.debugRedact = false;
+                        object.featureSupport = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -31174,6 +33521,8 @@
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         object.debugRedact = message.debugRedact;
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -31237,7 +33586,7 @@
                     this.uninterpretedOption = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -31353,9 +33702,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceOptions.decode = function decode(reader, length, error) {
+                ServiceOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -31363,7 +33716,7 @@
                             break;
                         switch (tag >>> 3) {
                         case 34: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 33: {
@@ -31373,7 +33726,7 @@
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 1049: {
@@ -31389,7 +33742,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -31420,11 +33773,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                ServiceOptions.verify = function verify(message) {
+                ServiceOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -31435,7 +33792,7 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
@@ -31460,14 +33817,18 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.ServiceOptions} ServiceOptions
                  */
-                ServiceOptions.fromObject = function fromObject(object) {
+                ServiceOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.ServiceOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.ServiceOptions();
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.ServiceOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
@@ -31478,7 +33839,7 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.ServiceOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     if (object[".google.api.defaultHost"] != null)
@@ -31587,7 +33948,7 @@
                     this[".google.api.methodSignature"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -31714,9 +34075,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodOptions.decode = function decode(reader, length, error) {
+                MethodOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -31732,17 +34097,17 @@
                                 break;
                             }
                         case 35: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 72295728: {
-                                message[".google.api.http"] = $root.google.api.HttpRule.decode(reader, reader.uint32());
+                                message[".google.api.http"] = $root.google.api.HttpRule.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 1051: {
@@ -31752,11 +34117,11 @@
                                 break;
                             }
                         case 72295729: {
-                                message[".google.api.routing"] = $root.google.api.RoutingRule.decode(reader, reader.uint32());
+                                message[".google.api.routing"] = $root.google.api.RoutingRule.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -31787,9 +34152,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                MethodOptions.verify = function verify(message) {
+                MethodOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
@@ -31803,7 +34172,7 @@
                             break;
                         }
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -31811,13 +34180,13 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
                     }
                     if (message[".google.api.http"] != null && message.hasOwnProperty(".google.api.http")) {
-                        var error = $root.google.api.HttpRule.verify(message[".google.api.http"]);
+                        var error = $root.google.api.HttpRule.verify(message[".google.api.http"], long + 1);
                         if (error)
                             return ".google.api.http." + error;
                     }
@@ -31829,7 +34198,7 @@
                                 return ".google.api.methodSignature: string[] expected";
                     }
                     if (message[".google.api.routing"] != null && message.hasOwnProperty(".google.api.routing")) {
-                        var error = $root.google.api.RoutingRule.verify(message[".google.api.routing"]);
+                        var error = $root.google.api.RoutingRule.verify(message[".google.api.routing"], long + 1);
                         if (error)
                             return ".google.api.routing." + error;
                     }
@@ -31844,9 +34213,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.MethodOptions} MethodOptions
                  */
-                MethodOptions.fromObject = function fromObject(object) {
+                MethodOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.MethodOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.MethodOptions();
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
@@ -31873,7 +34246,7 @@
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.MethodOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -31882,13 +34255,13 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.MethodOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     if (object[".google.api.http"] != null) {
                         if (typeof object[".google.api.http"] !== "object")
                             throw TypeError(".google.protobuf.MethodOptions..google.api.http: object expected");
-                        message[".google.api.http"] = $root.google.api.HttpRule.fromObject(object[".google.api.http"]);
+                        message[".google.api.http"] = $root.google.api.HttpRule.fromObject(object[".google.api.http"], long + 1);
                     }
                     if (object[".google.api.methodSignature"]) {
                         if (!Array.isArray(object[".google.api.methodSignature"]))
@@ -31900,7 +34273,7 @@
                     if (object[".google.api.routing"] != null) {
                         if (typeof object[".google.api.routing"] !== "object")
                             throw TypeError(".google.protobuf.MethodOptions..google.api.routing: object expected");
-                        message[".google.api.routing"] = $root.google.api.RoutingRule.fromObject(object[".google.api.routing"]);
+                        message[".google.api.routing"] = $root.google.api.RoutingRule.fromObject(object[".google.api.routing"], long + 1);
                     }
                     return message;
                 };
@@ -32024,7 +34397,7 @@
                     this.name = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -32150,9 +34523,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UninterpretedOption.decode = function decode(reader, length, error) {
+                UninterpretedOption.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -32162,7 +34539,7 @@
                         case 2: {
                                 if (!(message.name && message.name.length))
                                     message.name = [];
-                                message.name.push($root.google.protobuf.UninterpretedOption.NamePart.decode(reader, reader.uint32()));
+                                message.name.push($root.google.protobuf.UninterpretedOption.NamePart.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 3: {
@@ -32190,7 +34567,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -32221,14 +34598,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                UninterpretedOption.verify = function verify(message) {
+                UninterpretedOption.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name")) {
                         if (!Array.isArray(message.name))
                             return "name: array expected";
                         for (var i = 0; i < message.name.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.NamePart.verify(message.name[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.NamePart.verify(message.name[i], long + 1);
                             if (error)
                                 return "name." + error;
                         }
@@ -32262,9 +34643,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.UninterpretedOption} UninterpretedOption
                  */
-                UninterpretedOption.fromObject = function fromObject(object) {
+                UninterpretedOption.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.UninterpretedOption)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.UninterpretedOption();
                     if (object.name) {
                         if (!Array.isArray(object.name))
@@ -32273,7 +34658,7 @@
                         for (var i = 0; i < object.name.length; ++i) {
                             if (typeof object.name[i] !== "object")
                                 throw TypeError(".google.protobuf.UninterpretedOption.name: object expected");
-                            message.name[i] = $root.google.protobuf.UninterpretedOption.NamePart.fromObject(object.name[i]);
+                            message.name[i] = $root.google.protobuf.UninterpretedOption.NamePart.fromObject(object.name[i], long + 1);
                         }
                     }
                     if (object.identifierValue != null)
@@ -32418,7 +34803,7 @@
                     function NamePart(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -32491,9 +34876,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NamePart.decode = function decode(reader, length, error) {
+                    NamePart.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption.NamePart();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -32509,7 +34898,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -32544,9 +34933,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    NamePart.verify = function verify(message) {
+                    NamePart.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (!$util.isString(message.namePart))
                             return "namePart: string expected";
                         if (typeof message.isExtension !== "boolean")
@@ -32562,9 +34955,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.UninterpretedOption.NamePart} NamePart
                      */
-                    NamePart.fromObject = function fromObject(object) {
+                    NamePart.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.UninterpretedOption.NamePart)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.UninterpretedOption.NamePart();
                         if (object.namePart != null)
                             message.namePart = String(object.namePart);
@@ -32641,6 +35038,8 @@
                  * @property {google.protobuf.FeatureSet.Utf8Validation|null} [utf8Validation] FeatureSet utf8Validation
                  * @property {google.protobuf.FeatureSet.MessageEncoding|null} [messageEncoding] FeatureSet messageEncoding
                  * @property {google.protobuf.FeatureSet.JsonFormat|null} [jsonFormat] FeatureSet jsonFormat
+                 * @property {google.protobuf.FeatureSet.EnforceNamingStyle|null} [enforceNamingStyle] FeatureSet enforceNamingStyle
+                 * @property {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null} [defaultSymbolVisibility] FeatureSet defaultSymbolVisibility
                  */
     
                 /**
@@ -32654,7 +35053,7 @@
                 function FeatureSet(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -32707,6 +35106,22 @@
                 FeatureSet.prototype.jsonFormat = 0;
     
                 /**
+                 * FeatureSet enforceNamingStyle.
+                 * @member {google.protobuf.FeatureSet.EnforceNamingStyle} enforceNamingStyle
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.enforceNamingStyle = 0;
+    
+                /**
+                 * FeatureSet defaultSymbolVisibility.
+                 * @member {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility} defaultSymbolVisibility
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.defaultSymbolVisibility = 0;
+    
+                /**
                  * Creates a new FeatureSet instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FeatureSet
@@ -32742,6 +35157,10 @@
                         writer.uint32(/* id 5, wireType 0 =*/40).int32(message.messageEncoding);
                     if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
                         writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jsonFormat);
+                    if (message.enforceNamingStyle != null && Object.hasOwnProperty.call(message, "enforceNamingStyle"))
+                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.enforceNamingStyle);
+                    if (message.defaultSymbolVisibility != null && Object.hasOwnProperty.call(message, "defaultSymbolVisibility"))
+                        writer.uint32(/* id 8, wireType 0 =*/64).int32(message.defaultSymbolVisibility);
                     return writer;
                 };
     
@@ -32769,9 +35188,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSet.decode = function decode(reader, length, error) {
+                FeatureSet.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -32802,8 +35225,16 @@
                                 message.jsonFormat = reader.int32();
                                 break;
                             }
+                        case 7: {
+                                message.enforceNamingStyle = reader.int32();
+                                break;
+                            }
+                        case 8: {
+                                message.defaultSymbolVisibility = reader.int32();
+                                break;
+                            }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -32834,9 +35265,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FeatureSet.verify = function verify(message) {
+                FeatureSet.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
                         switch (message.fieldPresence) {
                         default:
@@ -32892,6 +35327,26 @@
                         case 2:
                             break;
                         }
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        switch (message.enforceNamingStyle) {
+                        default:
+                            return "enforceNamingStyle: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        switch (message.defaultSymbolVisibility) {
+                        default:
+                            return "defaultSymbolVisibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                            break;
+                        }
                     return null;
                 };
     
@@ -32903,9 +35358,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FeatureSet} FeatureSet
                  */
-                FeatureSet.fromObject = function fromObject(object) {
+                FeatureSet.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FeatureSet)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FeatureSet();
                     switch (object.fieldPresence) {
                     default:
@@ -33031,6 +35490,54 @@
                         message.jsonFormat = 2;
                         break;
                     }
+                    switch (object.enforceNamingStyle) {
+                    default:
+                        if (typeof object.enforceNamingStyle === "number") {
+                            message.enforceNamingStyle = object.enforceNamingStyle;
+                            break;
+                        }
+                        break;
+                    case "ENFORCE_NAMING_STYLE_UNKNOWN":
+                    case 0:
+                        message.enforceNamingStyle = 0;
+                        break;
+                    case "STYLE2024":
+                    case 1:
+                        message.enforceNamingStyle = 1;
+                        break;
+                    case "STYLE_LEGACY":
+                    case 2:
+                        message.enforceNamingStyle = 2;
+                        break;
+                    }
+                    switch (object.defaultSymbolVisibility) {
+                    default:
+                        if (typeof object.defaultSymbolVisibility === "number") {
+                            message.defaultSymbolVisibility = object.defaultSymbolVisibility;
+                            break;
+                        }
+                        break;
+                    case "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN":
+                    case 0:
+                        message.defaultSymbolVisibility = 0;
+                        break;
+                    case "EXPORT_ALL":
+                    case 1:
+                        message.defaultSymbolVisibility = 1;
+                        break;
+                    case "EXPORT_TOP_LEVEL":
+                    case 2:
+                        message.defaultSymbolVisibility = 2;
+                        break;
+                    case "LOCAL_ALL":
+                    case 3:
+                        message.defaultSymbolVisibility = 3;
+                        break;
+                    case "STRICT":
+                    case 4:
+                        message.defaultSymbolVisibility = 4;
+                        break;
+                    }
                     return message;
                 };
     
@@ -33054,6 +35561,8 @@
                         object.utf8Validation = options.enums === String ? "UTF8_VALIDATION_UNKNOWN" : 0;
                         object.messageEncoding = options.enums === String ? "MESSAGE_ENCODING_UNKNOWN" : 0;
                         object.jsonFormat = options.enums === String ? "JSON_FORMAT_UNKNOWN" : 0;
+                        object.enforceNamingStyle = options.enums === String ? "ENFORCE_NAMING_STYLE_UNKNOWN" : 0;
+                        object.defaultSymbolVisibility = options.enums === String ? "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN" : 0;
                     }
                     if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
                         object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
@@ -33067,6 +35576,10 @@
                         object.messageEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] === undefined ? message.messageEncoding : $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] : message.messageEncoding;
                     if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
                         object.jsonFormat = options.enums === String ? $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] === undefined ? message.jsonFormat : $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] : message.jsonFormat;
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        object.enforceNamingStyle = options.enums === String ? $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] === undefined ? message.enforceNamingStyle : $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] : message.enforceNamingStyle;
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        object.defaultSymbolVisibility = options.enums === String ? $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] === undefined ? message.defaultSymbolVisibility : $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] : message.defaultSymbolVisibility;
                     return object;
                 };
     
@@ -33194,6 +35707,231 @@
                     return values;
                 })();
     
+                /**
+                 * EnforceNamingStyle enum.
+                 * @name google.protobuf.FeatureSet.EnforceNamingStyle
+                 * @enum {number}
+                 * @property {number} ENFORCE_NAMING_STYLE_UNKNOWN=0 ENFORCE_NAMING_STYLE_UNKNOWN value
+                 * @property {number} STYLE2024=1 STYLE2024 value
+                 * @property {number} STYLE_LEGACY=2 STYLE_LEGACY value
+                 */
+                FeatureSet.EnforceNamingStyle = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "ENFORCE_NAMING_STYLE_UNKNOWN"] = 0;
+                    values[valuesById[1] = "STYLE2024"] = 1;
+                    values[valuesById[2] = "STYLE_LEGACY"] = 2;
+                    return values;
+                })();
+    
+                FeatureSet.VisibilityFeature = (function() {
+    
+                    /**
+                     * Properties of a VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @interface IVisibilityFeature
+                     */
+    
+                    /**
+                     * Constructs a new VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @classdesc Represents a VisibilityFeature.
+                     * @implements IVisibilityFeature
+                     * @constructor
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     */
+                    function VisibilityFeature(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Creates a new VisibilityFeature instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature instance
+                     */
+                    VisibilityFeature.create = function create(properties) {
+                        return new VisibilityFeature(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decode = function decode(reader, length, error, long) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            default:
+                                reader.skipType(tag & 7, long);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a VisibilityFeature message.
+                     * @function verify
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    VisibilityFeature.verify = function verify(message, long) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     */
+                    VisibilityFeature.fromObject = function fromObject(object, long) {
+                        if (object instanceof $root.google.protobuf.FeatureSet.VisibilityFeature)
+                            return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        return new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                    };
+    
+                    /**
+                     * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.VisibilityFeature} message VisibilityFeature
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    VisibilityFeature.toObject = function toObject() {
+                        return {};
+                    };
+    
+                    /**
+                     * Converts this VisibilityFeature to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    VisibilityFeature.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for VisibilityFeature
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    VisibilityFeature.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FeatureSet.VisibilityFeature";
+                    };
+    
+                    /**
+                     * DefaultSymbolVisibility enum.
+                     * @name google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility
+                     * @enum {number}
+                     * @property {number} DEFAULT_SYMBOL_VISIBILITY_UNKNOWN=0 DEFAULT_SYMBOL_VISIBILITY_UNKNOWN value
+                     * @property {number} EXPORT_ALL=1 EXPORT_ALL value
+                     * @property {number} EXPORT_TOP_LEVEL=2 EXPORT_TOP_LEVEL value
+                     * @property {number} LOCAL_ALL=3 LOCAL_ALL value
+                     * @property {number} STRICT=4 STRICT value
+                     */
+                    VisibilityFeature.DefaultSymbolVisibility = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN"] = 0;
+                        values[valuesById[1] = "EXPORT_ALL"] = 1;
+                        values[valuesById[2] = "EXPORT_TOP_LEVEL"] = 2;
+                        values[valuesById[3] = "LOCAL_ALL"] = 3;
+                        values[valuesById[4] = "STRICT"] = 4;
+                        return values;
+                    })();
+    
+                    return VisibilityFeature;
+                })();
+    
                 return FeatureSet;
             })();
     
@@ -33220,7 +35958,7 @@
                     this.defaults = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -33306,9 +36044,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSetDefaults.decode = function decode(reader, length, error) {
+                FeatureSetDefaults.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -33318,7 +36060,7 @@
                         case 1: {
                                 if (!(message.defaults && message.defaults.length))
                                     message.defaults = [];
-                                message.defaults.push($root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.decode(reader, reader.uint32()));
+                                message.defaults.push($root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 4: {
@@ -33330,7 +36072,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -33361,14 +36103,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FeatureSetDefaults.verify = function verify(message) {
+                FeatureSetDefaults.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.defaults != null && message.hasOwnProperty("defaults")) {
                         if (!Array.isArray(message.defaults))
                             return "defaults: array expected";
                         for (var i = 0; i < message.defaults.length; ++i) {
-                            var error = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify(message.defaults[i]);
+                            var error = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify(message.defaults[i], long + 1);
                             if (error)
                                 return "defaults." + error;
                         }
@@ -33378,6 +36124,7 @@
                         default:
                             return "minimumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -33395,6 +36142,7 @@
                         default:
                             return "maximumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -33418,9 +36166,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FeatureSetDefaults} FeatureSetDefaults
                  */
-                FeatureSetDefaults.fromObject = function fromObject(object) {
+                FeatureSetDefaults.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FeatureSetDefaults)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FeatureSetDefaults();
                     if (object.defaults) {
                         if (!Array.isArray(object.defaults))
@@ -33429,7 +36181,7 @@
                         for (var i = 0; i < object.defaults.length; ++i) {
                             if (typeof object.defaults[i] !== "object")
                                 throw TypeError(".google.protobuf.FeatureSetDefaults.defaults: object expected");
-                            message.defaults[i] = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fromObject(object.defaults[i]);
+                            message.defaults[i] = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fromObject(object.defaults[i], long + 1);
                         }
                     }
                     switch (object.minimumEdition) {
@@ -33442,6 +36194,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.minimumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.minimumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -33494,6 +36250,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.maximumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.maximumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -33603,7 +36363,8 @@
                      * @memberof google.protobuf.FeatureSetDefaults
                      * @interface IFeatureSetEditionDefault
                      * @property {google.protobuf.Edition|null} [edition] FeatureSetEditionDefault edition
-                     * @property {google.protobuf.IFeatureSet|null} [features] FeatureSetEditionDefault features
+                     * @property {google.protobuf.IFeatureSet|null} [overridableFeatures] FeatureSetEditionDefault overridableFeatures
+                     * @property {google.protobuf.IFeatureSet|null} [fixedFeatures] FeatureSetEditionDefault fixedFeatures
                      */
     
                     /**
@@ -33617,7 +36378,7 @@
                     function FeatureSetEditionDefault(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -33630,12 +36391,20 @@
                     FeatureSetEditionDefault.prototype.edition = 0;
     
                     /**
-                     * FeatureSetEditionDefault features.
-                     * @member {google.protobuf.IFeatureSet|null|undefined} features
+                     * FeatureSetEditionDefault overridableFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} overridableFeatures
                      * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
                      * @instance
                      */
-                    FeatureSetEditionDefault.prototype.features = null;
+                    FeatureSetEditionDefault.prototype.overridableFeatures = null;
+    
+                    /**
+                     * FeatureSetEditionDefault fixedFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} fixedFeatures
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @instance
+                     */
+                    FeatureSetEditionDefault.prototype.fixedFeatures = null;
     
                     /**
                      * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -33661,10 +36430,12 @@
                     FeatureSetEditionDefault.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
-                        if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                            $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
+                        if (message.overridableFeatures != null && Object.hasOwnProperty.call(message, "overridableFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.overridableFeatures, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.fixedFeatures != null && Object.hasOwnProperty.call(message, "fixedFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.fixedFeatures, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -33692,9 +36463,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FeatureSetEditionDefault.decode = function decode(reader, length, error) {
+                    FeatureSetEditionDefault.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -33705,12 +36480,16 @@
                                     message.edition = reader.int32();
                                     break;
                                 }
-                            case 2: {
-                                    message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                            case 4: {
+                                    message.overridableFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            case 5: {
+                                    message.fixedFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -33741,14 +36520,19 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    FeatureSetEditionDefault.verify = function verify(message) {
+                    FeatureSetEditionDefault.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             switch (message.edition) {
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -33761,10 +36545,15 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.features != null && message.hasOwnProperty("features")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures, long + 1);
                             if (error)
-                                return "features." + error;
+                                return "overridableFeatures." + error;
+                        }
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures, long + 1);
+                            if (error)
+                                return "fixedFeatures." + error;
                         }
                         return null;
                     };
@@ -33777,9 +36566,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} FeatureSetEditionDefault
                      */
-                    FeatureSetEditionDefault.fromObject = function fromObject(object) {
+                    FeatureSetEditionDefault.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
                         switch (object.edition) {
                         default:
@@ -33791,6 +36584,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -33833,10 +36630,15 @@
                             message.edition = 2147483647;
                             break;
                         }
-                        if (object.features != null) {
-                            if (typeof object.features !== "object")
-                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.features: object expected");
-                            message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        if (object.overridableFeatures != null) {
+                            if (typeof object.overridableFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.overridableFeatures: object expected");
+                            message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures, long + 1);
+                        }
+                        if (object.fixedFeatures != null) {
+                            if (typeof object.fixedFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fixedFeatures: object expected");
+                            message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures, long + 1);
                         }
                         return message;
                     };
@@ -33855,13 +36657,16 @@
                             options = {};
                         var object = {};
                         if (options.defaults) {
-                            object.features = null;
                             object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.overridableFeatures = null;
+                            object.fixedFeatures = null;
                         }
-                        if (message.features != null && message.hasOwnProperty("features"))
-                            object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures"))
+                            object.overridableFeatures = $root.google.protobuf.FeatureSet.toObject(message.overridableFeatures, options);
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures"))
+                            object.fixedFeatures = $root.google.protobuf.FeatureSet.toObject(message.fixedFeatures, options);
                         return object;
                     };
     
@@ -33918,7 +36723,7 @@
                     this.location = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -33984,9 +36789,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SourceCodeInfo.decode = function decode(reader, length, error) {
+                SourceCodeInfo.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -33996,11 +36805,11 @@
                         case 1: {
                                 if (!(message.location && message.location.length))
                                     message.location = [];
-                                message.location.push($root.google.protobuf.SourceCodeInfo.Location.decode(reader, reader.uint32()));
+                                message.location.push($root.google.protobuf.SourceCodeInfo.Location.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -34031,14 +36840,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                SourceCodeInfo.verify = function verify(message) {
+                SourceCodeInfo.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.location != null && message.hasOwnProperty("location")) {
                         if (!Array.isArray(message.location))
                             return "location: array expected";
                         for (var i = 0; i < message.location.length; ++i) {
-                            var error = $root.google.protobuf.SourceCodeInfo.Location.verify(message.location[i]);
+                            var error = $root.google.protobuf.SourceCodeInfo.Location.verify(message.location[i], long + 1);
                             if (error)
                                 return "location." + error;
                         }
@@ -34054,9 +36867,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.SourceCodeInfo} SourceCodeInfo
                  */
-                SourceCodeInfo.fromObject = function fromObject(object) {
+                SourceCodeInfo.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.SourceCodeInfo)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.SourceCodeInfo();
                     if (object.location) {
                         if (!Array.isArray(object.location))
@@ -34065,7 +36882,7 @@
                         for (var i = 0; i < object.location.length; ++i) {
                             if (typeof object.location[i] !== "object")
                                 throw TypeError(".google.protobuf.SourceCodeInfo.location: object expected");
-                            message.location[i] = $root.google.protobuf.SourceCodeInfo.Location.fromObject(object.location[i]);
+                            message.location[i] = $root.google.protobuf.SourceCodeInfo.Location.fromObject(object.location[i], long + 1);
                         }
                     }
                     return message;
@@ -34147,7 +36964,7 @@
                         this.leadingDetachedComments = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -34261,9 +37078,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Location.decode = function decode(reader, length, error) {
+                    Location.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo.Location();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -34307,7 +37128,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -34338,9 +37159,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    Location.verify = function verify(message) {
+                    Location.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.path != null && message.hasOwnProperty("path")) {
                             if (!Array.isArray(message.path))
                                 return "path: array expected";
@@ -34379,9 +37204,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.SourceCodeInfo.Location} Location
                      */
-                    Location.fromObject = function fromObject(object) {
+                    Location.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.SourceCodeInfo.Location)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.SourceCodeInfo.Location();
                         if (object.path) {
                             if (!Array.isArray(object.path))
@@ -34508,7 +37337,7 @@
                     this.annotation = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -34574,9 +37403,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GeneratedCodeInfo.decode = function decode(reader, length, error) {
+                GeneratedCodeInfo.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -34586,11 +37419,11 @@
                         case 1: {
                                 if (!(message.annotation && message.annotation.length))
                                     message.annotation = [];
-                                message.annotation.push($root.google.protobuf.GeneratedCodeInfo.Annotation.decode(reader, reader.uint32()));
+                                message.annotation.push($root.google.protobuf.GeneratedCodeInfo.Annotation.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -34621,14 +37454,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                GeneratedCodeInfo.verify = function verify(message) {
+                GeneratedCodeInfo.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.annotation != null && message.hasOwnProperty("annotation")) {
                         if (!Array.isArray(message.annotation))
                             return "annotation: array expected";
                         for (var i = 0; i < message.annotation.length; ++i) {
-                            var error = $root.google.protobuf.GeneratedCodeInfo.Annotation.verify(message.annotation[i]);
+                            var error = $root.google.protobuf.GeneratedCodeInfo.Annotation.verify(message.annotation[i], long + 1);
                             if (error)
                                 return "annotation." + error;
                         }
@@ -34644,9 +37481,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.GeneratedCodeInfo} GeneratedCodeInfo
                  */
-                GeneratedCodeInfo.fromObject = function fromObject(object) {
+                GeneratedCodeInfo.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.GeneratedCodeInfo)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.GeneratedCodeInfo();
                     if (object.annotation) {
                         if (!Array.isArray(object.annotation))
@@ -34655,7 +37496,7 @@
                         for (var i = 0; i < object.annotation.length; ++i) {
                             if (typeof object.annotation[i] !== "object")
                                 throw TypeError(".google.protobuf.GeneratedCodeInfo.annotation: object expected");
-                            message.annotation[i] = $root.google.protobuf.GeneratedCodeInfo.Annotation.fromObject(object.annotation[i]);
+                            message.annotation[i] = $root.google.protobuf.GeneratedCodeInfo.Annotation.fromObject(object.annotation[i], long + 1);
                         }
                     }
                     return message;
@@ -34735,7 +37576,7 @@
                         this.path = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -34844,9 +37685,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Annotation.decode = function decode(reader, length, error) {
+                    Annotation.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -34881,7 +37726,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -34912,9 +37757,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    Annotation.verify = function verify(message) {
+                    Annotation.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.path != null && message.hasOwnProperty("path")) {
                             if (!Array.isArray(message.path))
                                 return "path: array expected";
@@ -34951,9 +37800,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.GeneratedCodeInfo.Annotation} Annotation
                      */
-                    Annotation.fromObject = function fromObject(object) {
+                    Annotation.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.GeneratedCodeInfo.Annotation)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
                         if (object.path) {
                             if (!Array.isArray(object.path))
@@ -35076,6 +37929,22 @@
                 return GeneratedCodeInfo;
             })();
     
+            /**
+             * SymbolVisibility enum.
+             * @name google.protobuf.SymbolVisibility
+             * @enum {number}
+             * @property {number} VISIBILITY_UNSET=0 VISIBILITY_UNSET value
+             * @property {number} VISIBILITY_LOCAL=1 VISIBILITY_LOCAL value
+             * @property {number} VISIBILITY_EXPORT=2 VISIBILITY_EXPORT value
+             */
+            protobuf.SymbolVisibility = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "VISIBILITY_UNSET"] = 0;
+                values[valuesById[1] = "VISIBILITY_LOCAL"] = 1;
+                values[valuesById[2] = "VISIBILITY_EXPORT"] = 2;
+                return values;
+            })();
+    
             protobuf.Duration = (function() {
     
                 /**
@@ -35097,7 +37966,7 @@
                 function Duration(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -35172,9 +38041,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Duration.decode = function decode(reader, length, error) {
+                Duration.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -35190,7 +38063,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -35221,9 +38094,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Duration.verify = function verify(message) {
+                Duration.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.seconds != null && message.hasOwnProperty("seconds"))
                         if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
                             return "seconds: integer|Long expected";
@@ -35241,9 +38118,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.Duration} Duration
                  */
-                Duration.fromObject = function fromObject(object) {
+                Duration.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.Duration)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.Duration();
                     if (object.seconds != null)
                         if ($util.Long)
@@ -35340,7 +38221,7 @@
                 function Timestamp(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -35415,9 +38296,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Timestamp.decode = function decode(reader, length, error) {
+                Timestamp.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -35433,7 +38318,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -35464,9 +38349,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Timestamp.verify = function verify(message) {
+                Timestamp.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.seconds != null && message.hasOwnProperty("seconds"))
                         if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
                             return "seconds: integer|Long expected";
@@ -35484,9 +38373,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.Timestamp} Timestamp
                  */
-                Timestamp.fromObject = function fromObject(object) {
+                Timestamp.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.Timestamp)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.Timestamp();
                     if (object.seconds != null)
                         if ($util.Long)
@@ -35582,7 +38475,7 @@
                 function DoubleValue(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -35647,9 +38540,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DoubleValue.decode = function decode(reader, length, error) {
+                DoubleValue.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DoubleValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -35661,7 +38558,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -35692,9 +38589,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                DoubleValue.verify = function verify(message) {
+                DoubleValue.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.value != null && message.hasOwnProperty("value"))
                         if (typeof message.value !== "number")
                             return "value: number expected";
@@ -35709,9 +38610,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.DoubleValue} DoubleValue
                  */
-                DoubleValue.fromObject = function fromObject(object) {
+                DoubleValue.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.DoubleValue)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.DoubleValue();
                     if (object.value != null)
                         message.value = Number(object.value);
@@ -35787,7 +38692,7 @@
                 function FloatValue(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -35852,9 +38757,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FloatValue.decode = function decode(reader, length, error) {
+                FloatValue.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FloatValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -35866,7 +38775,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -35897,9 +38806,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FloatValue.verify = function verify(message) {
+                FloatValue.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.value != null && message.hasOwnProperty("value"))
                         if (typeof message.value !== "number")
                             return "value: number expected";
@@ -35914,9 +38827,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FloatValue} FloatValue
                  */
-                FloatValue.fromObject = function fromObject(object) {
+                FloatValue.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FloatValue)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FloatValue();
                     if (object.value != null)
                         message.value = Number(object.value);
@@ -35992,7 +38909,7 @@
                 function Int64Value(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -36057,9 +38974,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Int64Value.decode = function decode(reader, length, error) {
+                Int64Value.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Int64Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -36071,7 +38992,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -36102,9 +39023,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Int64Value.verify = function verify(message) {
+                Int64Value.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.value != null && message.hasOwnProperty("value"))
                         if (!$util.isInteger(message.value) && !(message.value && $util.isInteger(message.value.low) && $util.isInteger(message.value.high)))
                             return "value: integer|Long expected";
@@ -36119,9 +39044,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.Int64Value} Int64Value
                  */
-                Int64Value.fromObject = function fromObject(object) {
+                Int64Value.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.Int64Value)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.Int64Value();
                     if (object.value != null)
                         if ($util.Long)
@@ -36211,7 +39140,7 @@
                 function UInt64Value(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -36276,9 +39205,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UInt64Value.decode = function decode(reader, length, error) {
+                UInt64Value.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UInt64Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -36290,7 +39223,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -36321,9 +39254,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                UInt64Value.verify = function verify(message) {
+                UInt64Value.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.value != null && message.hasOwnProperty("value"))
                         if (!$util.isInteger(message.value) && !(message.value && $util.isInteger(message.value.low) && $util.isInteger(message.value.high)))
                             return "value: integer|Long expected";
@@ -36338,9 +39275,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.UInt64Value} UInt64Value
                  */
-                UInt64Value.fromObject = function fromObject(object) {
+                UInt64Value.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.UInt64Value)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.UInt64Value();
                     if (object.value != null)
                         if ($util.Long)
@@ -36430,7 +39371,7 @@
                 function Int32Value(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -36495,9 +39436,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Int32Value.decode = function decode(reader, length, error) {
+                Int32Value.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Int32Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -36509,7 +39454,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -36540,9 +39485,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Int32Value.verify = function verify(message) {
+                Int32Value.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.value != null && message.hasOwnProperty("value"))
                         if (!$util.isInteger(message.value))
                             return "value: integer expected";
@@ -36557,9 +39506,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.Int32Value} Int32Value
                  */
-                Int32Value.fromObject = function fromObject(object) {
+                Int32Value.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.Int32Value)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.Int32Value();
                     if (object.value != null)
                         message.value = object.value | 0;
@@ -36635,7 +39588,7 @@
                 function UInt32Value(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -36700,9 +39653,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UInt32Value.decode = function decode(reader, length, error) {
+                UInt32Value.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UInt32Value();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -36714,7 +39671,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -36745,9 +39702,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                UInt32Value.verify = function verify(message) {
+                UInt32Value.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.value != null && message.hasOwnProperty("value"))
                         if (!$util.isInteger(message.value))
                             return "value: integer expected";
@@ -36762,9 +39723,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.UInt32Value} UInt32Value
                  */
-                UInt32Value.fromObject = function fromObject(object) {
+                UInt32Value.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.UInt32Value)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.UInt32Value();
                     if (object.value != null)
                         message.value = object.value >>> 0;
@@ -36840,7 +39805,7 @@
                 function BoolValue(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -36905,9 +39870,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                BoolValue.decode = function decode(reader, length, error) {
+                BoolValue.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.BoolValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -36919,7 +39888,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -36950,9 +39919,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                BoolValue.verify = function verify(message) {
+                BoolValue.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.value != null && message.hasOwnProperty("value"))
                         if (typeof message.value !== "boolean")
                             return "value: boolean expected";
@@ -36967,9 +39940,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.BoolValue} BoolValue
                  */
-                BoolValue.fromObject = function fromObject(object) {
+                BoolValue.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.BoolValue)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.BoolValue();
                     if (object.value != null)
                         message.value = Boolean(object.value);
@@ -37045,7 +40022,7 @@
                 function StringValue(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -37110,9 +40087,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                StringValue.decode = function decode(reader, length, error) {
+                StringValue.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.StringValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -37124,7 +40105,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -37155,9 +40136,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                StringValue.verify = function verify(message) {
+                StringValue.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.value != null && message.hasOwnProperty("value"))
                         if (!$util.isString(message.value))
                             return "value: string expected";
@@ -37172,9 +40157,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.StringValue} StringValue
                  */
-                StringValue.fromObject = function fromObject(object) {
+                StringValue.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.StringValue)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.StringValue();
                     if (object.value != null)
                         message.value = String(object.value);
@@ -37250,7 +40239,7 @@
                 function BytesValue(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -37315,9 +40304,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                BytesValue.decode = function decode(reader, length, error) {
+                BytesValue.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.BytesValue();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -37329,7 +40322,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -37360,9 +40353,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                BytesValue.verify = function verify(message) {
+                BytesValue.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.value != null && message.hasOwnProperty("value"))
                         if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
                             return "value: buffer expected";
@@ -37377,9 +40374,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.BytesValue} BytesValue
                  */
-                BytesValue.fromObject = function fromObject(object) {
+                BytesValue.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.BytesValue)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.BytesValue();
                     if (object.value != null)
                         if (typeof object.value === "string")
@@ -37463,7 +40464,7 @@
                 function Empty(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -37518,9 +40519,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Empty.decode = function decode(reader, length, error) {
+                Empty.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -37528,7 +40533,7 @@
                             break;
                         switch (tag >>> 3) {
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -37559,9 +40564,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Empty.verify = function verify(message) {
+                Empty.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     return null;
                 };
     
@@ -37573,9 +40582,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.Empty} Empty
                  */
-                Empty.fromObject = function fromObject(object) {
+                Empty.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.Empty)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     return new $root.google.protobuf.Empty();
                 };
     
@@ -37642,7 +40655,7 @@
                     this.paths = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -37708,9 +40721,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldMask.decode = function decode(reader, length, error) {
+                FieldMask.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -37724,7 +40741,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -37755,9 +40772,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FieldMask.verify = function verify(message) {
+                FieldMask.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.paths != null && message.hasOwnProperty("paths")) {
                         if (!Array.isArray(message.paths))
                             return "paths: array expected";
@@ -37776,9 +40797,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FieldMask} FieldMask
                  */
-                FieldMask.fromObject = function fromObject(object) {
+                FieldMask.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FieldMask)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FieldMask();
                     if (object.paths) {
                         if (!Array.isArray(object.paths))

@@ -269,6 +269,7 @@ if [[ "${RUNNING_IN_CI:-}" == "true" ]]; then
     # Safe default: HEAD~1..HEAD
     DIFF_RANGE="HEAD~1..HEAD"
 
+    git fetch --deepen=10 2>/dev/null || true
     if git diff --quiet "${DIFF_RANGE}" -- "${RELATIVE_PKG_PATH}"; then
         echo "No changes detected in ${RELATIVE_PKG_PATH}. Skipping tests."
         exit 0
@@ -316,6 +317,7 @@ done
 # We want to support legacy style TRAMPOLINE_BUILD_FILE used with V1
 # script: e.g. "github/repo-name/.kokoro/run_tests.sh"
 TRAMPOLINE_BUILD_FILE="${TRAMPOLINE_BUILD_FILE#github/*/}"
+TRAMPOLINE_BUILD_FILE="${TRAMPOLINE_BUILD_FILE#handwritten/spanner/}"
 log_yellow "Using TRAMPOLINE_BUILD_FILE: ${TRAMPOLINE_BUILD_FILE}"
 
 # ignore error on docker operations and test execution

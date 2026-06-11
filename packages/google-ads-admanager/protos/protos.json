@@ -182,7 +182,7 @@
                     "AdBreakService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetAdBreak": {
@@ -419,7 +419,7 @@
                           "type": "google.protobuf.FieldMask",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -445,6 +445,21 @@
                             "ALLOWED": 1,
                             "BLOCKED": 2,
                             "UNREVIEWED": 3
+                          }
+                        }
+                      }
+                    },
+                    "ManualAdReviewCenterAdStatusEnum": {
+                      "fields": {},
+                      "nested": {
+                        "ManualAdReviewCenterAdStatus": {
+                          "values": {
+                            "MANUAL_AD_REVIEW_CENTER_AD_STATUS_UNSPECIFIED": 0,
+                            "ALLOWED": 1,
+                            "BLOCKED": 2,
+                            "ARCHIVED": 3,
+                            "PENDING": 4,
+                            "SERVING": 5
                           }
                         }
                       }
@@ -489,6 +504,14 @@
                           "type": "AdReviewCenterAdStatusEnum.AdReviewCenterAdStatus",
                           "id": 4
                         },
+                        "manualReviewStatuses": {
+                          "rule": "repeated",
+                          "type": "ManualAdReviewCenterAdStatusEnum.ManualAdReviewCenterAdStatus",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "previewUrl": {
                           "type": "string",
                           "id": 5,
@@ -516,7 +539,7 @@
                     "AdReviewCenterAdService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "SearchAdReviewCenterAds": {
@@ -596,7 +619,29 @@
                       }
                     },
                     "SearchAdReviewCenterAdsRequest": {
+                      "oneofs": {
+                        "adReviewStatus": {
+                          "oneof": [
+                            "status",
+                            "manualReviewStatus"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "status": {
+                          "type": "AdReviewCenterAdStatusEnum.AdReviewCenterAdStatus",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "manualReviewStatus": {
+                          "type": "ManualAdReviewCenterAdStatusEnum.ManualAdReviewCenterAdStatus",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "parent": {
                           "type": "string",
                           "id": 1,
@@ -615,13 +660,6 @@
                         "pageToken": {
                           "type": "string",
                           "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "status": {
-                          "type": "AdReviewCenterAdStatusEnum.AdReviewCenterAdStatus",
-                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -863,6 +901,7 @@
                           "type": "int64",
                           "id": 15,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
@@ -1304,7 +1343,7 @@
                     "AdUnitService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetAdUnit": {
@@ -1611,7 +1650,7 @@
                           "type": "google.protobuf.FieldMask",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -1839,6 +1878,75 @@
                         }
                       }
                     },
+                    "ApplicationStoreEnum": {
+                      "fields": {},
+                      "nested": {
+                        "ApplicationStore": {
+                          "values": {
+                            "APPLICATION_STORE_UNSPECIFIED": 0,
+                            "APPLE_APP_STORE": 1,
+                            "GOOGLE_PLAY_STORE": 2,
+                            "AMAZON_APP_STORE": 14,
+                            "OPPO_APP_STORE": 15,
+                            "SAMSUNG_APP_STORE": 16,
+                            "VIVO_APP_STORE": 17,
+                            "XIAOMI_APP_STORE": 18,
+                            "AMAZON_FIRETV_STORE": 7,
+                            "LG_TV_STORE": 19,
+                            "PLAYSTATION_STORE": 8,
+                            "ROKU_STORE": 6,
+                            "SAMSUNG_TV_STORE": 11,
+                            "XBOX_STORE": 10
+                          }
+                        }
+                      }
+                    },
+                    "ApplicationApprovalStatusEnum": {
+                      "fields": {},
+                      "nested": {
+                        "ApplicationApprovalStatus": {
+                          "values": {
+                            "APPLICATION_APPROVAL_STATUS_UNSPECIFIED": 0,
+                            "APPEALING": 1,
+                            "APPROVED": 2,
+                            "DISAPPROVED": 3,
+                            "DRAFT": 4,
+                            "UNCHECKED": 5
+                          }
+                        }
+                      }
+                    },
+                    "ApplicationPlatformEnum": {
+                      "fields": {},
+                      "nested": {
+                        "ApplicationPlatform": {
+                          "values": {
+                            "APPLICATION_PLATFORM_UNSPECIFIED": 0,
+                            "UNSUPPORTED": 14,
+                            "AMAZON_TV": 6,
+                            "ANDROID": 1,
+                            "IOS": 2,
+                            "LG_TV": 12,
+                            "PLAYSTATION": 7,
+                            "ROKU": 5,
+                            "SAMSUNG_TV": 10,
+                            "XBOX": 9
+                          }
+                        }
+                      }
+                    },
+                    "WebviewClaimingStatusEnum": {
+                      "fields": {},
+                      "nested": {
+                        "WebviewClaimingStatus": {
+                          "values": {
+                            "WEBVIEW_CLAIMING_STATUS_UNSPECIFIED": 0,
+                            "SOFT_CLAIMED": 1,
+                            "SOFT_CLAIMING_REVERTED": 2
+                          }
+                        }
+                      }
+                    },
                     "Application": {
                       "options": {
                         "(google.api.resource).type": "admanager.googleapis.com/Application",
@@ -1850,6 +1958,56 @@
                         "_displayName": {
                           "oneof": [
                             "displayName"
+                          ]
+                        },
+                        "_appStoreId": {
+                          "oneof": [
+                            "appStoreId"
+                          ]
+                        },
+                        "_archived": {
+                          "oneof": [
+                            "archived"
+                          ]
+                        },
+                        "_appStoreDisplayName": {
+                          "oneof": [
+                            "appStoreDisplayName"
+                          ]
+                        },
+                        "_applicationCode": {
+                          "oneof": [
+                            "applicationCode"
+                          ]
+                        },
+                        "_developer": {
+                          "oneof": [
+                            "developer"
+                          ]
+                        },
+                        "_platform": {
+                          "oneof": [
+                            "platform"
+                          ]
+                        },
+                        "_free": {
+                          "oneof": [
+                            "free"
+                          ]
+                        },
+                        "_downloadUrl": {
+                          "oneof": [
+                            "downloadUrl"
+                          ]
+                        },
+                        "_approvalStatus": {
+                          "oneof": [
+                            "approvalStatus"
+                          ]
+                        },
+                        "_webviewClaimingStatus": {
+                          "oneof": [
+                            "webviewClaimingStatus"
                           ]
                         }
                       },
@@ -1865,7 +2023,95 @@
                           "type": "string",
                           "id": 4,
                           "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        },
+                        "appStoreId": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "appStores": {
+                          "rule": "repeated",
+                          "type": "ApplicationStoreEnum.ApplicationStore",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "archived": {
+                          "type": "bool",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "appStoreDisplayName": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "applicationCode": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "developer": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "platform": {
+                          "type": "ApplicationPlatformEnum.ApplicationPlatform",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "free": {
+                          "type": "bool",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "downloadUrl": {
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "approvalStatus": {
+                          "type": "ApplicationApprovalStatusEnum.ApplicationApprovalStatus",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "webviewClaimingStatus": {
+                          "type": "WebviewClaimingStatusEnum.WebviewClaimingStatus",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
                           }
                         }
@@ -1874,7 +2120,7 @@
                     "ApplicationService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetApplication": {
@@ -1910,6 +2156,126 @@
                             },
                             {
                               "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateApplication": {
+                          "requestType": "CreateApplicationRequest",
+                          "responseType": "Application",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=networks/*}/applications",
+                            "(google.api.http).body": "application",
+                            "(google.api.method_signature)": "parent,application"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=networks/*}/applications",
+                                "body": "application"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,application"
+                            }
+                          ]
+                        },
+                        "BatchCreateApplications": {
+                          "requestType": "BatchCreateApplicationsRequest",
+                          "responseType": "BatchCreateApplicationsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=networks/*}/applications:batchCreate",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,requests"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=networks/*}/applications:batchCreate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,requests"
+                            }
+                          ]
+                        },
+                        "UpdateApplication": {
+                          "requestType": "UpdateApplicationRequest",
+                          "responseType": "Application",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{application.name=networks/*/applications/*}",
+                            "(google.api.http).body": "application",
+                            "(google.api.method_signature)": "application,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{application.name=networks/*/applications/*}",
+                                "body": "application"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "application,update_mask"
+                            }
+                          ]
+                        },
+                        "BatchUpdateApplications": {
+                          "requestType": "BatchUpdateApplicationsRequest",
+                          "responseType": "BatchUpdateApplicationsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=networks/*}/applications:batchUpdate",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,requests"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=networks/*}/applications:batchUpdate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,requests"
+                            }
+                          ]
+                        },
+                        "BatchArchiveApplications": {
+                          "requestType": "BatchArchiveApplicationsRequest",
+                          "responseType": "BatchArchiveApplicationsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=networks/*}/applications:batchArchive",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,names"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=networks/*}/applications:batchArchive",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,names"
+                            }
+                          ]
+                        },
+                        "BatchUnarchiveApplications": {
+                          "requestType": "BatchUnarchiveApplicationsRequest",
+                          "responseType": "BatchUnarchiveApplicationsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=networks/*}/applications:batchUnarchive",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,names"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=networks/*}/applications:batchUnarchive",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,names"
                             }
                           ]
                         }
@@ -1991,6 +2357,149 @@
                         }
                       }
                     },
+                    "CreateApplicationRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/Network"
+                          }
+                        },
+                        "application": {
+                          "type": "Application",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BatchCreateApplicationsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/Network"
+                          }
+                        },
+                        "requests": {
+                          "rule": "repeated",
+                          "type": "CreateApplicationRequest",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BatchCreateApplicationsResponse": {
+                      "fields": {
+                        "applications": {
+                          "rule": "repeated",
+                          "type": "Application",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "UpdateApplicationRequest": {
+                      "fields": {
+                        "application": {
+                          "type": "Application",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "BatchUpdateApplicationsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/Network"
+                          }
+                        },
+                        "requests": {
+                          "rule": "repeated",
+                          "type": "UpdateApplicationRequest",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BatchUpdateApplicationsResponse": {
+                      "fields": {
+                        "applications": {
+                          "rule": "repeated",
+                          "type": "Application",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "BatchArchiveApplicationsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/Network"
+                          }
+                        },
+                        "names": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/Application"
+                          }
+                        }
+                      }
+                    },
+                    "BatchArchiveApplicationsResponse": {
+                      "fields": {}
+                    },
+                    "BatchUnarchiveApplicationsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/Network"
+                          }
+                        },
+                        "names": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/Application"
+                          }
+                        }
+                      }
+                    },
+                    "BatchUnarchiveApplicationsResponse": {
+                      "fields": {}
+                    },
                     "AudienceSegment": {
                       "options": {
                         "(google.api.resource).type": "admanager.googleapis.com/AudienceSegment",
@@ -2026,7 +2535,7 @@
                     "AudienceSegmentService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetAudienceSegment": {
@@ -2184,7 +2693,7 @@
                     "BandwidthGroupService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetBandwidthGroup": {
@@ -2336,7 +2845,7 @@
                     "BrowserLanguageService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetBrowserLanguage": {
@@ -2514,7 +3023,7 @@
                     "BrowserService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetBrowser": {
@@ -2631,6 +3140,23 @@
                         }
                       }
                     },
+                    "ChildPublisher": {
+                      "options": {
+                        "(google.api.resource).type": "admanager.googleapis.com/ChildPublisher",
+                        "(google.api.resource).pattern": "networks/{network_code}/childPublishers/{child_publisher}",
+                        "(google.api.resource).plural": "childPublishers",
+                        "(google.api.resource).singular": "childPublisher"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        }
+                      }
+                    },
                     "CmsMetadataKeyStatusEnum": {
                       "fields": {},
                       "nested": {
@@ -2677,7 +3203,7 @@
                     "CmsMetadataKeyService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetCmsMetadataKey": {
@@ -2713,6 +3239,46 @@
                             },
                             {
                               "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "BatchActivateCmsMetadataKeys": {
+                          "requestType": "BatchActivateCmsMetadataKeysRequest",
+                          "responseType": "BatchActivateCmsMetadataKeysResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=networks/*}/cmsMetadataKeys:batchActivate",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,names"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=networks/*}/cmsMetadataKeys:batchActivate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,names"
+                            }
+                          ]
+                        },
+                        "BatchDeactivateCmsMetadataKeys": {
+                          "requestType": "BatchDeactivateCmsMetadataKeysRequest",
+                          "responseType": "BatchDeactivateCmsMetadataKeysResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=networks/*}/cmsMetadataKeys:batchDeactivate",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,names"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=networks/*}/cmsMetadataKeys:batchDeactivate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,names"
                             }
                           ]
                         }
@@ -2794,6 +3360,54 @@
                         }
                       }
                     },
+                    "BatchActivateCmsMetadataKeysRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/Network"
+                          }
+                        },
+                        "names": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/CmsMetadataKey"
+                          }
+                        }
+                      }
+                    },
+                    "BatchActivateCmsMetadataKeysResponse": {
+                      "fields": {}
+                    },
+                    "BatchDeactivateCmsMetadataKeysRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/Network"
+                          }
+                        },
+                        "names": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/CmsMetadataKey"
+                          }
+                        }
+                      }
+                    },
+                    "BatchDeactivateCmsMetadataKeysResponse": {
+                      "fields": {}
+                    },
                     "CmsMetadataValueStatusEnum": {
                       "fields": {},
                       "nested": {
@@ -2846,7 +3460,7 @@
                     "CmsMetadataValueService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetCmsMetadataValue": {
@@ -2882,6 +3496,46 @@
                             },
                             {
                               "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "BatchActivateCmsMetadataValues": {
+                          "requestType": "BatchActivateCmsMetadataValuesRequest",
+                          "responseType": "BatchActivateCmsMetadataValuesResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=networks/*}/cmsMetadataValues:batchActivate",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,names"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=networks/*}/cmsMetadataValues:batchActivate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,names"
+                            }
+                          ]
+                        },
+                        "BatchDeactivateCmsMetadataValues": {
+                          "requestType": "BatchDeactivateCmsMetadataValuesRequest",
+                          "responseType": "BatchDeactivateCmsMetadataValuesResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=networks/*}/cmsMetadataValues:batchDeactivate",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,names"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=networks/*}/cmsMetadataValues:batchDeactivate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,names"
                             }
                           ]
                         }
@@ -2962,6 +3616,54 @@
                           "id": 3
                         }
                       }
+                    },
+                    "BatchActivateCmsMetadataValuesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/Network"
+                          }
+                        },
+                        "names": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/CmsMetadataValue"
+                          }
+                        }
+                      }
+                    },
+                    "BatchActivateCmsMetadataValuesResponse": {
+                      "fields": {}
+                    },
+                    "BatchDeactivateCmsMetadataValuesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/Network"
+                          }
+                        },
+                        "names": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/CmsMetadataValue"
+                          }
+                        }
+                      }
+                    },
+                    "BatchDeactivateCmsMetadataValuesResponse": {
+                      "fields": {}
                     },
                     "CompanyTypeEnum": {
                       "fields": {},
@@ -3079,6 +3781,7 @@
                           "type": "int64",
                           "id": 2,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
                           }
@@ -3202,7 +3905,7 @@
                     "CompanyService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetCompany": {
@@ -3488,7 +4191,7 @@
                     "ContactService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetContact": {
@@ -3746,7 +4449,7 @@
                           "type": "google.protobuf.FieldMask",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -3807,7 +4510,7 @@
                     "ContentBundleService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetContentBundle": {
@@ -3951,7 +4654,7 @@
                     "ContentLabelService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetContentLabel": {
@@ -4103,7 +4806,7 @@
                     "ContentService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetContent": {
@@ -4728,7 +5431,7 @@
                     "CreativeTemplateService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetCreativeTemplate": {
@@ -4955,6 +5658,7 @@
                           "type": "int64",
                           "id": 2,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
                           }
@@ -5038,7 +5742,7 @@
                     "CustomFieldService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetCustomField": {
@@ -5336,7 +6040,7 @@
                           "type": "google.protobuf.FieldMask",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -5565,6 +6269,7 @@
                           "type": "int64",
                           "id": 2,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
                           }
@@ -5614,7 +6319,7 @@
                     "CustomTargetingKeyService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetCustomTargetingKey": {
@@ -5912,7 +6617,7 @@
                           "type": "google.protobuf.FieldMask",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -6110,7 +6815,7 @@
                     "CustomTargetingValueService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetCustomTargetingValue": {
@@ -6282,7 +6987,7 @@
                     "DeviceCapabilityService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetDeviceCapability": {
@@ -6434,7 +7139,7 @@
                     "DeviceCategoryService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetDeviceCategory": {
@@ -6586,7 +7291,7 @@
                     "DeviceManufacturerService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetDeviceManufacturer": {
@@ -6748,6 +7453,7 @@
                           "type": "int64",
                           "id": 2,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
                           }
@@ -6765,7 +7471,7 @@
                     "EntitySignalsMappingService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetEntitySignalsMapping": {
@@ -6977,7 +7683,7 @@
                           "type": "google.protobuf.FieldMask",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -7153,7 +7859,7 @@
                     "GeoTargetService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetGeoTarget": {
@@ -7337,7 +8043,23 @@
                             "VIEW_THROUGH_CPA_CONVERSIONS": 4,
                             "TOTAL_CPA_CONVERSIONS": 5,
                             "VIEWABLE_IMPRESSIONS": 6,
-                            "IN_TARGET_IMPRESSIONS": 7
+                            "IN_TARGET_IMPRESSIONS": 7,
+                            "COMPLETED_VIEWS": 8
+                          }
+                        }
+                      }
+                    },
+                    "LabelTypeEnum": {
+                      "fields": {},
+                      "nested": {
+                        "LabelType": {
+                          "values": {
+                            "LABEL_TYPE_UNSPECIFIED": 0,
+                            "AD_EXCLUSION": 1,
+                            "AD_UNIT_FREQUENCY_CAP": 2,
+                            "CANONICAL_CATEGORY": 3,
+                            "COMPETITIVE_EXCLUSION": 4,
+                            "CREATIVE_WRAPPER": 5
                           }
                         }
                       }
@@ -7349,6 +8071,23 @@
                         "(google.api.resource).plural": "labels",
                         "(google.api.resource).singular": "label"
                       },
+                      "oneofs": {
+                        "_displayName": {
+                          "oneof": [
+                            "displayName"
+                          ]
+                        },
+                        "_description": {
+                          "oneof": [
+                            "description"
+                          ]
+                        },
+                        "_active": {
+                          "oneof": [
+                            "active"
+                          ]
+                        }
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -7356,8 +8095,423 @@
                           "options": {
                             "(google.api.field_behavior)": "IDENTIFIER"
                           }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "active": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "types": {
+                          "rule": "repeated",
+                          "type": "LabelTypeEnum.LabelType",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "UNORDERED_LIST"
+                          }
                         }
                       }
+                    },
+                    "LabelService": {
+                      "options": {
+                        "(google.api.default_host)": "admanager.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
+                      },
+                      "methods": {
+                        "GetLabel": {
+                          "requestType": "GetLabelRequest",
+                          "responseType": "Label",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=networks/*/labels/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=networks/*/labels/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListLabels": {
+                          "requestType": "ListLabelsRequest",
+                          "responseType": "ListLabelsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=networks/*}/labels",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=networks/*}/labels"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateLabel": {
+                          "requestType": "CreateLabelRequest",
+                          "responseType": "Label",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=networks/*}/labels",
+                            "(google.api.http).body": "label",
+                            "(google.api.method_signature)": "parent,label"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=networks/*}/labels",
+                                "body": "label"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,label"
+                            }
+                          ]
+                        },
+                        "BatchCreateLabels": {
+                          "requestType": "BatchCreateLabelsRequest",
+                          "responseType": "BatchCreateLabelsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=networks/*}/labels:batchCreate",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,requests"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=networks/*}/labels:batchCreate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,requests"
+                            }
+                          ]
+                        },
+                        "UpdateLabel": {
+                          "requestType": "UpdateLabelRequest",
+                          "responseType": "Label",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{label.name=networks/*/labels/*}",
+                            "(google.api.http).body": "label",
+                            "(google.api.method_signature)": "label,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{label.name=networks/*/labels/*}",
+                                "body": "label"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "label,update_mask"
+                            }
+                          ]
+                        },
+                        "BatchUpdateLabels": {
+                          "requestType": "BatchUpdateLabelsRequest",
+                          "responseType": "BatchUpdateLabelsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=networks/*}/labels:batchUpdate",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,requests"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=networks/*}/labels:batchUpdate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,requests"
+                            }
+                          ]
+                        },
+                        "BatchActivateLabels": {
+                          "requestType": "BatchActivateLabelsRequest",
+                          "responseType": "BatchActivateLabelsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=networks/*}/labels:batchActivate",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,names"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=networks/*}/labels:batchActivate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,names"
+                            }
+                          ]
+                        },
+                        "BatchDeactivateLabels": {
+                          "requestType": "BatchDeactivateLabelsRequest",
+                          "responseType": "BatchDeactivateLabelsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=networks/*}/labels:batchDeactivate",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,names"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=networks/*}/labels:batchDeactivate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,names"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "GetLabelRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/Label"
+                          }
+                        }
+                      }
+                    },
+                    "ListLabelsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/Network"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "skip": {
+                          "type": "int32",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListLabelsResponse": {
+                      "fields": {
+                        "labels": {
+                          "rule": "repeated",
+                          "type": "Label",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "totalSize": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "CreateLabelRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/Network"
+                          }
+                        },
+                        "label": {
+                          "type": "Label",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BatchCreateLabelsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/Network"
+                          }
+                        },
+                        "requests": {
+                          "rule": "repeated",
+                          "type": "CreateLabelRequest",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BatchCreateLabelsResponse": {
+                      "fields": {
+                        "labels": {
+                          "rule": "repeated",
+                          "type": "Label",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "UpdateLabelRequest": {
+                      "fields": {
+                        "label": {
+                          "type": "Label",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "BatchUpdateLabelsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/Network"
+                          }
+                        },
+                        "requests": {
+                          "rule": "repeated",
+                          "type": "UpdateLabelRequest",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BatchUpdateLabelsResponse": {
+                      "fields": {
+                        "labels": {
+                          "rule": "repeated",
+                          "type": "Label",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "BatchActivateLabelsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/Network"
+                          }
+                        },
+                        "names": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/Label"
+                          }
+                        }
+                      }
+                    },
+                    "BatchActivateLabelsResponse": {
+                      "fields": {}
+                    },
+                    "BatchDeactivateLabelsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/Network"
+                          }
+                        },
+                        "names": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/Label"
+                          }
+                        }
+                      }
+                    },
+                    "BatchDeactivateLabelsResponse": {
+                      "fields": {}
                     },
                     "LineItemTypeEnum": {
                       "fields": {},
@@ -7442,7 +8596,7 @@
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.field_behavior)": "IMMUTABLE",
                             "(google.api.resource_reference).type": "admanager.googleapis.com/Order",
                             "proto3_optional": true
                           }
@@ -7516,7 +8670,7 @@
                     "LineItemService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetLineItem": {
@@ -7633,6 +8787,197 @@
                         }
                       }
                     },
+                    "LinkedDeviceVisibilityEnum": {
+                      "fields": {},
+                      "nested": {
+                        "LinkedDeviceVisibility": {
+                          "values": {
+                            "LINKED_DEVICE_VISIBILITY_UNSPECIFIED": 0,
+                            "PRIVATE": 2,
+                            "PUBLIC": 3
+                          }
+                        }
+                      }
+                    },
+                    "LinkedDevice": {
+                      "options": {
+                        "(google.api.resource).type": "admanager.googleapis.com/LinkedDevice",
+                        "(google.api.resource).pattern": "networks/{network_code}/linkedDevices/{linked_device}",
+                        "(google.api.resource).plural": "linkedDevices",
+                        "(google.api.resource).singular": "linkedDevice"
+                      },
+                      "oneofs": {
+                        "_displayName": {
+                          "oneof": [
+                            "displayName"
+                          ]
+                        },
+                        "_owner": {
+                          "oneof": [
+                            "owner"
+                          ]
+                        },
+                        "_visibility": {
+                          "oneof": [
+                            "visibility"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        },
+                        "owner": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/User",
+                            "proto3_optional": true
+                          }
+                        },
+                        "visibility": {
+                          "type": "LinkedDeviceVisibilityEnum.LinkedDeviceVisibility",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "LinkedDeviceService": {
+                      "options": {
+                        "(google.api.default_host)": "admanager.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
+                      },
+                      "methods": {
+                        "GetLinkedDevice": {
+                          "requestType": "GetLinkedDeviceRequest",
+                          "responseType": "LinkedDevice",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=networks/*/linkedDevices/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=networks/*/linkedDevices/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListLinkedDevices": {
+                          "requestType": "ListLinkedDevicesRequest",
+                          "responseType": "ListLinkedDevicesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=networks/*}/linkedDevices",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=networks/*}/linkedDevices"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "GetLinkedDeviceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/LinkedDevice"
+                          }
+                        }
+                      }
+                    },
+                    "ListLinkedDevicesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/Network"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "skip": {
+                          "type": "int32",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListLinkedDevicesResponse": {
+                      "fields": {
+                        "linkedDevices": {
+                          "rule": "repeated",
+                          "type": "LinkedDevice",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "totalSize": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      }
+                    },
                     "LiveStreamEvent": {
                       "options": {
                         "(google.api.resource).type": "admanager.googleapis.com/LiveStreamEvent",
@@ -7647,6 +8992,351 @@
                           "options": {
                             "(google.api.field_behavior)": "IDENTIFIER"
                           }
+                        }
+                      }
+                    },
+                    "McmEarnings": {
+                      "oneofs": {
+                        "_month": {
+                          "oneof": [
+                            "month"
+                          ]
+                        },
+                        "_delegationType": {
+                          "oneof": [
+                            "delegationType"
+                          ]
+                        },
+                        "_parentDisplayName": {
+                          "oneof": [
+                            "parentDisplayName"
+                          ]
+                        },
+                        "_childPublisher": {
+                          "oneof": [
+                            "childPublisher"
+                          ]
+                        },
+                        "_childDisplayName": {
+                          "oneof": [
+                            "childDisplayName"
+                          ]
+                        },
+                        "_totalEarnings": {
+                          "oneof": [
+                            "totalEarnings"
+                          ]
+                        },
+                        "_parentPayment": {
+                          "oneof": [
+                            "parentPayment"
+                          ]
+                        },
+                        "_childPayment": {
+                          "oneof": [
+                            "childPayment"
+                          ]
+                        },
+                        "_deductions": {
+                          "oneof": [
+                            "deductions"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "month": {
+                          "type": "google.type.Date",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "delegationType": {
+                          "type": "DelegationTypeEnum.DelegationType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/Network"
+                          }
+                        },
+                        "parentDisplayName": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "child": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/Network"
+                          }
+                        },
+                        "childPublisher": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/ChildPublisher",
+                            "proto3_optional": true
+                          }
+                        },
+                        "childDisplayName": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "totalEarnings": {
+                          "type": "google.type.Money",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "parentPayment": {
+                          "type": "google.type.Money",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "childPayment": {
+                          "type": "google.type.Money",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "deductions": {
+                          "type": "google.type.Money",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "earningsProductBreakdown": {
+                          "rule": "repeated",
+                          "type": "EarningsProductBreakdown",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "EarningsProductBreakdown": {
+                      "oneofs": {
+                        "_productType": {
+                          "oneof": [
+                            "productType"
+                          ]
+                        },
+                        "_totalEarnings": {
+                          "oneof": [
+                            "totalEarnings"
+                          ]
+                        },
+                        "_parentPayment": {
+                          "oneof": [
+                            "parentPayment"
+                          ]
+                        },
+                        "_childPayment": {
+                          "oneof": [
+                            "childPayment"
+                          ]
+                        },
+                        "_deductions": {
+                          "oneof": [
+                            "deductions"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "productType": {
+                          "type": "McmEarningsProductTypeEnum.McmEarningsProductType",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "totalEarnings": {
+                          "type": "google.type.Money",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "parentPayment": {
+                          "type": "google.type.Money",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "childPayment": {
+                          "type": "google.type.Money",
+                          "id": 4,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "deductions": {
+                          "type": "google.type.Money",
+                          "id": 5,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "DelegationTypeEnum": {
+                      "fields": {},
+                      "nested": {
+                        "DelegationType": {
+                          "values": {
+                            "DELEGATION_TYPE_UNSPECIFIED": 0,
+                            "MANAGE_ACCOUNT": 1,
+                            "MANAGE_INVENTORY": 2
+                          }
+                        }
+                      }
+                    },
+                    "McmEarningsProductTypeEnum": {
+                      "fields": {},
+                      "nested": {
+                        "McmEarningsProductType": {
+                          "values": {
+                            "MCM_EARNINGS_PRODUCT_TYPE_UNSPECIFIED": 0,
+                            "AD_EXCHANGE_CONTENT": 1,
+                            "AD_EXCHANGE_CONTENT_HOST": 2,
+                            "AD_EXCHANGE_GAMES": 3,
+                            "AD_EXCHANGE_GAMES_HOST": 4,
+                            "AD_EXCHANGE_MOBILE_CONTENT_APP": 5,
+                            "AD_EXCHANGE_MOBILE_CONTENT_APP_HOST": 6,
+                            "AD_EXCHANGE_VIDEO": 7,
+                            "AD_EXCHANGE_VIDEO_HOST": 8,
+                            "AD_EXCHANGE_RESERVATIONS": 9,
+                            "AD_EXCHANGE_PREFERRED_DEALS": 10,
+                            "OFFERWALL": 11,
+                            "BUYER_DIRECT": 12
+                          }
+                        }
+                      }
+                    },
+                    "McmEarningsService": {
+                      "options": {
+                        "(google.api.default_host)": "admanager.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
+                      },
+                      "methods": {
+                        "FetchMcmEarnings": {
+                          "requestType": "FetchMcmEarningsRequest",
+                          "responseType": "FetchMcmEarningsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=networks/*}/mcmEarnings:fetch",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=networks/*}/mcmEarnings:fetch"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "FetchMcmEarningsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/Network"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "skip": {
+                          "type": "int32",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "month": {
+                          "type": "google.type.Date",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "FetchMcmEarningsResponse": {
+                      "fields": {
+                        "mcmEarnings": {
+                          "rule": "repeated",
+                          "type": "McmEarnings",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "totalSize": {
+                          "type": "int32",
+                          "id": 3
                         }
                       }
                     },
@@ -7698,7 +9388,7 @@
                     "MobileCarrierService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetMobileCarrier": {
@@ -7864,7 +9554,7 @@
                     "MobileDeviceService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetMobileDevice": {
@@ -8030,7 +9720,7 @@
                     "MobileDeviceSubmodelService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetMobileDeviceSubmodel": {
@@ -8282,7 +9972,7 @@
                     "NetworkService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetNetwork": {
@@ -8408,7 +10098,7 @@
                     "OperatingSystemService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetOperatingSystem": {
@@ -8586,7 +10276,7 @@
                     "OperatingSystemVersionService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetOperatingSystemVersion": {
@@ -8836,6 +10526,7 @@
                           "type": "int64",
                           "id": 4,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
                           }
@@ -9072,7 +10763,7 @@
                     "OrderService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetOrder": {
@@ -9248,6 +10939,7 @@
                           "type": "int64",
                           "id": 2,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
@@ -9305,7 +10997,7 @@
                     "PlacementService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetPlacement": {
@@ -9623,7 +11315,7 @@
                           "type": "google.protobuf.FieldMask",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -9825,6 +11517,7 @@
                           "type": "int64",
                           "id": 2,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
                           }
@@ -9975,7 +11668,8 @@
                             "ACTIVE": 2,
                             "CANCELED": 3,
                             "SELLER_PAUSED": 4,
-                            "BUYER_PAUSED": 5
+                            "BUYER_PAUSED": 5,
+                            "COMPLETED": 6
                           }
                         }
                       }
@@ -10810,7 +12504,7 @@
                     "PrivateAuctionDealService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetPrivateAuctionDeal": {
@@ -10999,7 +12693,7 @@
                           "type": "google.protobuf.FieldMask",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -11055,6 +12749,7 @@
                           "type": "int64",
                           "id": 2,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
                           }
@@ -11113,7 +12808,7 @@
                     "PrivateAuctionService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetPrivateAuction": {
@@ -11302,7 +12997,7 @@
                           "type": "google.protobuf.FieldMask",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -11420,7 +13115,7 @@
                     "ProgrammaticBuyerService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetProgrammaticBuyer": {
@@ -11606,10 +13301,26 @@
                             "proto3_optional": true
                           }
                         },
+                        "cmsMetadataDimensionKeyIds": {
+                          "rule": "repeated",
+                          "type": "int64",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "customDimensionKeyIds": {
                           "rule": "repeated",
                           "type": "int64",
                           "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "ekvDimensionKeyIds": {
+                          "rule": "repeated",
+                          "type": "int64",
+                          "id": 21,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -11664,6 +13375,13 @@
                           "rule": "repeated",
                           "type": "Sort",
                           "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "expandedCompatibility": {
+                          "type": "bool",
+                          "id": 22,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -11735,12 +13453,16 @@
                                 "YESTERDAY": 2,
                                 "THIS_WEEK": 3,
                                 "THIS_WEEK_TO_DATE": 29,
+                                "THIS_WEEK_TO_YESTERDAY": 40,
                                 "THIS_MONTH": 4,
                                 "THIS_MONTH_TO_DATE": 26,
+                                "THIS_MONTH_TO_YESTERDAY": 41,
                                 "THIS_QUARTER": 5,
                                 "THIS_QUARTER_TO_DATE": 27,
+                                "THIS_QUARTER_TO_YESTERDAY": 42,
                                 "THIS_YEAR": 6,
                                 "THIS_YEAR_TO_DATE": 28,
+                                "THIS_YEAR_TO_YESTERDAY": 43,
                                 "LAST_WEEK": 7,
                                 "LAST_WEEK_STARTING_SUNDAY": 39,
                                 "LAST_MONTH": 8,
@@ -11998,25 +13720,22 @@
                           "values": {
                             "REPORT_TYPE_UNSPECIFIED": 0,
                             "HISTORICAL": 1,
+                            "FUTURE_SELL_THROUGH": 4,
                             "REACH": 5,
                             "PRIVACY_AND_MESSAGING": 6,
                             "REVENUE_VERIFICATION": 7,
                             "PARTNER_FINANCE": 8,
-                            "AD_SPEED": 13
+                            "AD_SPEED": 13,
+                            "REAL_TIME_VIDEO": 15,
+                            "YOUTUBE_CONSOLIDATED": 16,
+                            "ADS_TRAFFIC_NAVIGATOR": 21,
+                            "OFF_PROPERTY_CAMPAIGNS": 22,
+                            "ON_PLATFORM_MULTICALL": 24
                           }
                         },
                         "Dimension": {
-                          "options": {
-                            "allow_alias": true
-                          },
                           "valuesOptions": {
                             "DEVICE_NAME": {
-                              "deprecated": true
-                            },
-                            "PROGRAMMATIC_BUYER_ID": {
-                              "deprecated": true
-                            },
-                            "PROGRAMMATIC_BUYER_NAME": {
                               "deprecated": true
                             }
                           },
@@ -12159,7 +13878,6 @@
                             "BROWSER_NAME": 236,
                             "BUYER_NETWORK_ID": 448,
                             "BUYER_NETWORK_NAME": 449,
-                            "CALLOUT_STATUS_CATEGORY": 588,
                             "CALLOUT_STATUS_CATEGORY_NAME": 589,
                             "CARRIER_ID": 369,
                             "CARRIER_NAME": 368,
@@ -12193,12 +13911,19 @@
                             "CREATIVE_CLICK_THROUGH_URL": 174,
                             "CREATIVE_ID": 138,
                             "CREATIVE_NAME": 139,
+                            "CREATIVE_OR_CREATIVE_SET": 682,
+                            "CREATIVE_OR_CREATIVE_SET_NAME": 683,
                             "CREATIVE_POLICIES_FILTERING": 711,
                             "CREATIVE_POLICIES_FILTERING_NAME": 712,
                             "CREATIVE_PROTECTIONS_FILTERING": 704,
                             "CREATIVE_PROTECTIONS_FILTERING_NAME": 705,
                             "CREATIVE_SET_ROLE_TYPE": 686,
                             "CREATIVE_SET_ROLE_TYPE_NAME": 687,
+                            "CREATIVE_SSL_COMPLIANCE_OVERRIDE": 784,
+                            "CREATIVE_SSL_COMPLIANCE_OVERRIDE_NAME": 786,
+                            "CREATIVE_SSL_SCAN_RESULT": 785,
+                            "CREATIVE_SSL_SCAN_RESULT_NAME": 787,
+                            "CREATIVE_TARGET_AD_UNIT_SIZE": 770,
                             "CREATIVE_TECHNOLOGY": 148,
                             "CREATIVE_TECHNOLOGY_NAME": 149,
                             "CREATIVE_THIRD_PARTY_VENDOR": 361,
@@ -12220,12 +13945,14 @@
                             "DEAL_BUYER_ID": 240,
                             "DEAL_BUYER_NAME": 241,
                             "DEAL_ID": 436,
+                            "DEAL_ID_ALL": 781,
                             "DEAL_NAME": 437,
                             "DELIVERED_SECURE_SIGNAL_ID": 309,
                             "DELIVERED_SECURE_SIGNAL_NAME": 310,
                             "DEMAND_CHANNEL": 9,
                             "DEMAND_CHANNEL_NAME": 10,
                             "DEMAND_SOURCE": 592,
+                            "DEMAND_SOURCE_ALL": 782,
                             "DEMAND_SOURCE_NAME": 593,
                             "DEMAND_SUBCHANNEL": 22,
                             "DEMAND_SUBCHANNEL_NAME": 23,
@@ -12289,6 +14016,7 @@
                             "KEY_VALUES_SET": 713,
                             "LINE_ITEM_AGENCY": 663,
                             "LINE_ITEM_ARCHIVED": 188,
+                            "LINE_ITEM_AVERAGE_NUMBER_OF_VIEWERS": 694,
                             "LINE_ITEM_COMPANION_DELIVERY_OPTION": 204,
                             "LINE_ITEM_COMPANION_DELIVERY_OPTION_NAME": 205,
                             "LINE_ITEM_COMPUTED_STATUS": 250,
@@ -12374,7 +14102,14 @@
                             "NATIVE_AD_FORMAT_NAME": 254,
                             "NATIVE_STYLE_ID": 253,
                             "NATIVE_STYLE_NAME": 252,
-                            "NO_FILL_REASON_CATEGORY": 586,
+                            "NIELSEN_DEMOGRAPHICS": 695,
+                            "NIELSEN_DEMOGRAPHICS_NAME": 768,
+                            "NIELSEN_DEVICE": 696,
+                            "NIELSEN_DEVICE_NAME": 697,
+                            "NIELSEN_IN_TARGET": 769,
+                            "NIELSEN_RESTATEMENT_DATE": 698,
+                            "NIELSEN_SEGMENT": 699,
+                            "NIELSEN_SITE_URL": 700,
                             "NO_FILL_REASON_CATEGORY_NAME": 587,
                             "OPERATING_SYSTEM_CATEGORY": 117,
                             "OPERATING_SYSTEM_CATEGORY_NAME": 118,
@@ -12432,10 +14167,10 @@
                             "PREDICTED_VIEWABILITY_BUCKET_NAME": 634,
                             "PRESENTED_SECURE_SIGNAL_ID": 495,
                             "PRESENTED_SECURE_SIGNAL_NAME": 496,
+                            "PRICING_RULE_ID": 393,
+                            "PRICING_RULE_NAME": 394,
                             "PRIMARY_PERSONALIZATION_ID_TYPE": 408,
                             "PRIMARY_PERSONALIZATION_ID_TYPE_NAME": 409,
-                            "PROGRAMMATIC_BUYER_ID": 240,
-                            "PROGRAMMATIC_BUYER_NAME": 241,
                             "PROGRAMMATIC_CHANNEL": 13,
                             "PROGRAMMATIC_CHANNEL_NAME": 14,
                             "PUBLISHER_PROVIDED_SIGNALS_ALL_LEVELS_EXTERNAL_CODE": 410,
@@ -12457,7 +14192,6 @@
                             "PUBLISHER_PROVIDED_SIGNAL_DATA_PROVIDER_NAME": 137,
                             "REGION_ID": 457,
                             "REGION_NAME": 458,
-                            "REJECTION_CLASS_CATEGORY": 590,
                             "REJECTION_CLASS_CATEGORY_NAME": 591,
                             "RENDERED_CREATIVE_SIZE": 343,
                             "REQUESTED_AD_SIZES": 352,
@@ -12472,6 +14206,7 @@
                             "TARGETING_NAME": 233,
                             "TARGETING_TYPE": 385,
                             "TARGETING_TYPE_NAME": 386,
+                            "TARGETS_CUSTOMER_MATCHING_LIST": 789,
                             "THIRD_PARTY_ID_STATUS": 402,
                             "THIRD_PARTY_ID_STATUS_NAME": 403,
                             "TOPICS_STATUS": 504,
@@ -12479,8 +14214,6 @@
                             "TOP_PRIVATE_DOMAIN": 444,
                             "TRAFFIC_SOURCE": 388,
                             "TRAFFIC_SOURCE_NAME": 389,
-                            "UNIFIED_PRICING_RULE_ID": 393,
-                            "UNIFIED_PRICING_RULE_NAME": 394,
                             "URL": 506,
                             "URL_ID": 507,
                             "USER_MESSAGES_CHOICE": 702,
@@ -12562,6 +14295,36 @@
                             "LINE_ITEM_CUSTOM_FIELD_12_VALUE": 11012,
                             "LINE_ITEM_CUSTOM_FIELD_13_VALUE": 11013,
                             "LINE_ITEM_CUSTOM_FIELD_14_VALUE": 11014,
+                            "LINE_ITEM_CUSTOM_FIELD_0_VALUE_DOUBLE": 11015,
+                            "LINE_ITEM_CUSTOM_FIELD_1_VALUE_DOUBLE": 11016,
+                            "LINE_ITEM_CUSTOM_FIELD_2_VALUE_DOUBLE": 11017,
+                            "LINE_ITEM_CUSTOM_FIELD_3_VALUE_DOUBLE": 11018,
+                            "LINE_ITEM_CUSTOM_FIELD_4_VALUE_DOUBLE": 11019,
+                            "LINE_ITEM_CUSTOM_FIELD_5_VALUE_DOUBLE": 11020,
+                            "LINE_ITEM_CUSTOM_FIELD_6_VALUE_DOUBLE": 11021,
+                            "LINE_ITEM_CUSTOM_FIELD_7_VALUE_DOUBLE": 11022,
+                            "LINE_ITEM_CUSTOM_FIELD_8_VALUE_DOUBLE": 11023,
+                            "LINE_ITEM_CUSTOM_FIELD_9_VALUE_DOUBLE": 11024,
+                            "LINE_ITEM_CUSTOM_FIELD_10_VALUE_DOUBLE": 11025,
+                            "LINE_ITEM_CUSTOM_FIELD_11_VALUE_DOUBLE": 11026,
+                            "LINE_ITEM_CUSTOM_FIELD_12_VALUE_DOUBLE": 11027,
+                            "LINE_ITEM_CUSTOM_FIELD_13_VALUE_DOUBLE": 11028,
+                            "LINE_ITEM_CUSTOM_FIELD_14_VALUE_DOUBLE": 11029,
+                            "LINE_ITEM_CUSTOM_FIELD_0_VALUE_BOOL": 11030,
+                            "LINE_ITEM_CUSTOM_FIELD_1_VALUE_BOOL": 11031,
+                            "LINE_ITEM_CUSTOM_FIELD_2_VALUE_BOOL": 11032,
+                            "LINE_ITEM_CUSTOM_FIELD_3_VALUE_BOOL": 11033,
+                            "LINE_ITEM_CUSTOM_FIELD_4_VALUE_BOOL": 11034,
+                            "LINE_ITEM_CUSTOM_FIELD_5_VALUE_BOOL": 11035,
+                            "LINE_ITEM_CUSTOM_FIELD_6_VALUE_BOOL": 11036,
+                            "LINE_ITEM_CUSTOM_FIELD_7_VALUE_BOOL": 11037,
+                            "LINE_ITEM_CUSTOM_FIELD_8_VALUE_BOOL": 11038,
+                            "LINE_ITEM_CUSTOM_FIELD_9_VALUE_BOOL": 11039,
+                            "LINE_ITEM_CUSTOM_FIELD_10_VALUE_BOOL": 11040,
+                            "LINE_ITEM_CUSTOM_FIELD_11_VALUE_BOOL": 11041,
+                            "LINE_ITEM_CUSTOM_FIELD_12_VALUE_BOOL": 11042,
+                            "LINE_ITEM_CUSTOM_FIELD_13_VALUE_BOOL": 11043,
+                            "LINE_ITEM_CUSTOM_FIELD_14_VALUE_BOOL": 11044,
                             "ORDER_CUSTOM_FIELD_0_OPTION_ID": 12000,
                             "ORDER_CUSTOM_FIELD_1_OPTION_ID": 12001,
                             "ORDER_CUSTOM_FIELD_2_OPTION_ID": 12002,
@@ -12592,6 +14355,36 @@
                             "ORDER_CUSTOM_FIELD_12_VALUE": 13012,
                             "ORDER_CUSTOM_FIELD_13_VALUE": 13013,
                             "ORDER_CUSTOM_FIELD_14_VALUE": 13014,
+                            "ORDER_CUSTOM_FIELD_0_VALUE_DOUBLE": 13015,
+                            "ORDER_CUSTOM_FIELD_1_VALUE_DOUBLE": 13016,
+                            "ORDER_CUSTOM_FIELD_2_VALUE_DOUBLE": 13017,
+                            "ORDER_CUSTOM_FIELD_3_VALUE_DOUBLE": 13018,
+                            "ORDER_CUSTOM_FIELD_4_VALUE_DOUBLE": 13019,
+                            "ORDER_CUSTOM_FIELD_5_VALUE_DOUBLE": 13020,
+                            "ORDER_CUSTOM_FIELD_6_VALUE_DOUBLE": 13021,
+                            "ORDER_CUSTOM_FIELD_7_VALUE_DOUBLE": 13022,
+                            "ORDER_CUSTOM_FIELD_8_VALUE_DOUBLE": 13023,
+                            "ORDER_CUSTOM_FIELD_9_VALUE_DOUBLE": 13024,
+                            "ORDER_CUSTOM_FIELD_10_VALUE_DOUBLE": 13025,
+                            "ORDER_CUSTOM_FIELD_11_VALUE_DOUBLE": 13026,
+                            "ORDER_CUSTOM_FIELD_12_VALUE_DOUBLE": 13027,
+                            "ORDER_CUSTOM_FIELD_13_VALUE_DOUBLE": 13028,
+                            "ORDER_CUSTOM_FIELD_14_VALUE_DOUBLE": 13029,
+                            "ORDER_CUSTOM_FIELD_0_VALUE_BOOL": 13030,
+                            "ORDER_CUSTOM_FIELD_1_VALUE_BOOL": 13031,
+                            "ORDER_CUSTOM_FIELD_2_VALUE_BOOL": 13032,
+                            "ORDER_CUSTOM_FIELD_3_VALUE_BOOL": 13033,
+                            "ORDER_CUSTOM_FIELD_4_VALUE_BOOL": 13034,
+                            "ORDER_CUSTOM_FIELD_5_VALUE_BOOL": 13035,
+                            "ORDER_CUSTOM_FIELD_6_VALUE_BOOL": 13036,
+                            "ORDER_CUSTOM_FIELD_7_VALUE_BOOL": 13037,
+                            "ORDER_CUSTOM_FIELD_8_VALUE_BOOL": 13038,
+                            "ORDER_CUSTOM_FIELD_9_VALUE_BOOL": 13039,
+                            "ORDER_CUSTOM_FIELD_10_VALUE_BOOL": 13040,
+                            "ORDER_CUSTOM_FIELD_11_VALUE_BOOL": 13041,
+                            "ORDER_CUSTOM_FIELD_12_VALUE_BOOL": 13042,
+                            "ORDER_CUSTOM_FIELD_13_VALUE_BOOL": 13043,
+                            "ORDER_CUSTOM_FIELD_14_VALUE_BOOL": 13044,
                             "CREATIVE_CUSTOM_FIELD_0_OPTION_ID": 14000,
                             "CREATIVE_CUSTOM_FIELD_1_OPTION_ID": 14001,
                             "CREATIVE_CUSTOM_FIELD_2_OPTION_ID": 14002,
@@ -12622,96 +14415,56 @@
                             "CREATIVE_CUSTOM_FIELD_12_VALUE": 15012,
                             "CREATIVE_CUSTOM_FIELD_13_VALUE": 15013,
                             "CREATIVE_CUSTOM_FIELD_14_VALUE": 15014,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_0_OPTION_ID": 16000,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_1_OPTION_ID": 16001,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_2_OPTION_ID": 16002,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_3_OPTION_ID": 16003,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_4_OPTION_ID": 16004,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_5_OPTION_ID": 16005,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_6_OPTION_ID": 16006,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_7_OPTION_ID": 16007,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_8_OPTION_ID": 16008,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_9_OPTION_ID": 16009,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_10_OPTION_ID": 16010,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_11_OPTION_ID": 16011,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_12_OPTION_ID": 16012,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_13_OPTION_ID": 16013,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_14_OPTION_ID": 16014,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_0_VALUE": 17000,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_1_VALUE": 17001,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_2_VALUE": 17002,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_3_VALUE": 17003,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_4_VALUE": 17004,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_5_VALUE": 17005,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_6_VALUE": 17006,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_7_VALUE": 17007,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_8_VALUE": 17008,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_9_VALUE": 17009,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_10_VALUE": 17010,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_11_VALUE": 17011,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_12_VALUE": 17012,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_13_VALUE": 17013,
-                            "BACKFILL_LINE_ITEM_CUSTOM_FIELD_14_VALUE": 17014,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_0_OPTION_ID": 18000,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_1_OPTION_ID": 18001,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_2_OPTION_ID": 18002,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_3_OPTION_ID": 18003,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_4_OPTION_ID": 18004,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_5_OPTION_ID": 18005,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_6_OPTION_ID": 18006,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_7_OPTION_ID": 18007,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_8_OPTION_ID": 18008,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_9_OPTION_ID": 18009,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_10_OPTION_ID": 18010,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_11_OPTION_ID": 18011,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_12_OPTION_ID": 18012,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_13_OPTION_ID": 18013,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_14_OPTION_ID": 18014,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_0_VALUE": 19000,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_1_VALUE": 19001,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_2_VALUE": 19002,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_3_VALUE": 19003,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_4_VALUE": 19004,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_5_VALUE": 19005,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_6_VALUE": 19006,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_7_VALUE": 19007,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_8_VALUE": 19008,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_9_VALUE": 19009,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_10_VALUE": 19010,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_11_VALUE": 19011,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_12_VALUE": 19012,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_13_VALUE": 19013,
-                            "BACKFILL_ORDER_CUSTOM_FIELD_14_VALUE": 19014,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_0_OPTION_ID": 20000,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_1_OPTION_ID": 20001,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_2_OPTION_ID": 20002,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_3_OPTION_ID": 20003,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_4_OPTION_ID": 20004,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_5_OPTION_ID": 20005,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_6_OPTION_ID": 20006,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_7_OPTION_ID": 20007,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_8_OPTION_ID": 20008,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_9_OPTION_ID": 20009,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_10_OPTION_ID": 20010,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_11_OPTION_ID": 20011,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_12_OPTION_ID": 20012,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_13_OPTION_ID": 20013,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_14_OPTION_ID": 20014,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_0_VALUE": 21000,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_1_VALUE": 21001,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_2_VALUE": 21002,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_3_VALUE": 21003,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_4_VALUE": 21004,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_5_VALUE": 21005,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_6_VALUE": 21006,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_7_VALUE": 21007,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_8_VALUE": 21008,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_9_VALUE": 21009,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_10_VALUE": 21010,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_11_VALUE": 21011,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_12_VALUE": 21012,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_13_VALUE": 21013,
-                            "BACKFILL_CREATIVE_CUSTOM_FIELD_14_VALUE": 21014,
+                            "CREATIVE_CUSTOM_FIELD_0_VALUE_DOUBLE": 15015,
+                            "CREATIVE_CUSTOM_FIELD_1_VALUE_DOUBLE": 15016,
+                            "CREATIVE_CUSTOM_FIELD_2_VALUE_DOUBLE": 15017,
+                            "CREATIVE_CUSTOM_FIELD_3_VALUE_DOUBLE": 15018,
+                            "CREATIVE_CUSTOM_FIELD_4_VALUE_DOUBLE": 15019,
+                            "CREATIVE_CUSTOM_FIELD_5_VALUE_DOUBLE": 15020,
+                            "CREATIVE_CUSTOM_FIELD_6_VALUE_DOUBLE": 15021,
+                            "CREATIVE_CUSTOM_FIELD_7_VALUE_DOUBLE": 15022,
+                            "CREATIVE_CUSTOM_FIELD_8_VALUE_DOUBLE": 15023,
+                            "CREATIVE_CUSTOM_FIELD_9_VALUE_DOUBLE": 15024,
+                            "CREATIVE_CUSTOM_FIELD_10_VALUE_DOUBLE": 15025,
+                            "CREATIVE_CUSTOM_FIELD_11_VALUE_DOUBLE": 15026,
+                            "CREATIVE_CUSTOM_FIELD_12_VALUE_DOUBLE": 15027,
+                            "CREATIVE_CUSTOM_FIELD_13_VALUE_DOUBLE": 15028,
+                            "CREATIVE_CUSTOM_FIELD_14_VALUE_DOUBLE": 15029,
+                            "CREATIVE_CUSTOM_FIELD_0_VALUE_BOOL": 15030,
+                            "CREATIVE_CUSTOM_FIELD_1_VALUE_BOOL": 15031,
+                            "CREATIVE_CUSTOM_FIELD_2_VALUE_BOOL": 15032,
+                            "CREATIVE_CUSTOM_FIELD_3_VALUE_BOOL": 15033,
+                            "CREATIVE_CUSTOM_FIELD_4_VALUE_BOOL": 15034,
+                            "CREATIVE_CUSTOM_FIELD_5_VALUE_BOOL": 15035,
+                            "CREATIVE_CUSTOM_FIELD_6_VALUE_BOOL": 15036,
+                            "CREATIVE_CUSTOM_FIELD_7_VALUE_BOOL": 15037,
+                            "CREATIVE_CUSTOM_FIELD_8_VALUE_BOOL": 15038,
+                            "CREATIVE_CUSTOM_FIELD_9_VALUE_BOOL": 15039,
+                            "CREATIVE_CUSTOM_FIELD_10_VALUE_BOOL": 15040,
+                            "CREATIVE_CUSTOM_FIELD_11_VALUE_BOOL": 15041,
+                            "CREATIVE_CUSTOM_FIELD_12_VALUE_BOOL": 15042,
+                            "CREATIVE_CUSTOM_FIELD_13_VALUE_BOOL": 15043,
+                            "CREATIVE_CUSTOM_FIELD_14_VALUE_BOOL": 15044,
+                            "CMS_METADATA_DIMENSION_0_VALUE_ID": 102000,
+                            "CMS_METADATA_DIMENSION_1_VALUE_ID": 102001,
+                            "CMS_METADATA_DIMENSION_2_VALUE_ID": 102002,
+                            "CMS_METADATA_DIMENSION_3_VALUE_ID": 102003,
+                            "CMS_METADATA_DIMENSION_4_VALUE_ID": 102004,
+                            "CMS_METADATA_DIMENSION_5_VALUE_ID": 102005,
+                            "CMS_METADATA_DIMENSION_6_VALUE_ID": 102006,
+                            "CMS_METADATA_DIMENSION_7_VALUE_ID": 102007,
+                            "CMS_METADATA_DIMENSION_8_VALUE_ID": 102008,
+                            "CMS_METADATA_DIMENSION_9_VALUE_ID": 102009,
+                            "CMS_METADATA_DIMENSION_0_VALUE": 103000,
+                            "CMS_METADATA_DIMENSION_1_VALUE": 103001,
+                            "CMS_METADATA_DIMENSION_2_VALUE": 103002,
+                            "CMS_METADATA_DIMENSION_3_VALUE": 103003,
+                            "CMS_METADATA_DIMENSION_4_VALUE": 103004,
+                            "CMS_METADATA_DIMENSION_5_VALUE": 103005,
+                            "CMS_METADATA_DIMENSION_6_VALUE": 103006,
+                            "CMS_METADATA_DIMENSION_7_VALUE": 103007,
+                            "CMS_METADATA_DIMENSION_8_VALUE": 103008,
+                            "CMS_METADATA_DIMENSION_9_VALUE": 103009,
                             "CUSTOM_DIMENSION_0_VALUE_ID": 100000,
                             "CUSTOM_DIMENSION_1_VALUE_ID": 100001,
                             "CUSTOM_DIMENSION_2_VALUE_ID": 100002,
@@ -12731,7 +14484,27 @@
                             "CUSTOM_DIMENSION_6_VALUE": 101006,
                             "CUSTOM_DIMENSION_7_VALUE": 101007,
                             "CUSTOM_DIMENSION_8_VALUE": 101008,
-                            "CUSTOM_DIMENSION_9_VALUE": 101009
+                            "CUSTOM_DIMENSION_9_VALUE": 101009,
+                            "EKV_DIMENSION_0_VALUE_ID": 105000,
+                            "EKV_DIMENSION_1_VALUE_ID": 105001,
+                            "EKV_DIMENSION_2_VALUE_ID": 105002,
+                            "EKV_DIMENSION_3_VALUE_ID": 105003,
+                            "EKV_DIMENSION_4_VALUE_ID": 105004,
+                            "EKV_DIMENSION_5_VALUE_ID": 105005,
+                            "EKV_DIMENSION_6_VALUE_ID": 105006,
+                            "EKV_DIMENSION_7_VALUE_ID": 105007,
+                            "EKV_DIMENSION_8_VALUE_ID": 105008,
+                            "EKV_DIMENSION_9_VALUE_ID": 105009,
+                            "EKV_DIMENSION_0_VALUE": 106000,
+                            "EKV_DIMENSION_1_VALUE": 106001,
+                            "EKV_DIMENSION_2_VALUE": 106002,
+                            "EKV_DIMENSION_3_VALUE": 106003,
+                            "EKV_DIMENSION_4_VALUE": 106004,
+                            "EKV_DIMENSION_5_VALUE": 106005,
+                            "EKV_DIMENSION_6_VALUE": 106006,
+                            "EKV_DIMENSION_7_VALUE": 106007,
+                            "EKV_DIMENSION_8_VALUE": 106008,
+                            "EKV_DIMENSION_9_VALUE": 106009
                           }
                         },
                         "Metric": {
@@ -12842,6 +14615,7 @@
                             "AD_SERVER_ACTIVE_VIEW_NON_MEASURABLE_IMPRESSIONS": 332,
                             "AD_SERVER_ACTIVE_VIEW_NON_VIEWABLE_IMPRESSIONS": 331,
                             "AD_SERVER_ACTIVE_VIEW_NON_VIEWABLE_IMPRESSIONS_DISTRIBUTION": 334,
+                            "AD_SERVER_ACTIVE_VIEW_REVENUE": 704,
                             "AD_SERVER_ACTIVE_VIEW_UNDETERMINED_IMPRESSIONS_DISTRIBUTION": 335,
                             "AD_SERVER_ACTIVE_VIEW_VIEWABLE_IMPRESSIONS": 62,
                             "AD_SERVER_ACTIVE_VIEW_VIEWABLE_IMPRESSIONS_DISTRIBUTION": 333,
@@ -12906,7 +14680,7 @@
                             "ATN_MEDIATION_PARTNERS_IN_AUCTION_AD_REQUESTS": 360,
                             "ATN_MEDIATION_REJECTED_PARTNERS": 361,
                             "ATN_MEDIATION_TARGETED_PARTNERS": 362,
-                            "ATN_MEDIATION_TOTAL_YIELD_PARTNERS": 442,
+                            "ATN_MEDIATION_TOTAL_ADS_IN_CHAINS": 703,
                             "ATN_MEDIATION_UNLOADED_ADS_FROM_CHAINS": 363,
                             "ATN_MEDIATION_UNUSED_BIDS_OR_PARTNERS": 364,
                             "ATN_MEDIATION_VALID_AD_REQUESTS": 365,
@@ -12930,7 +14704,6 @@
                             "ATN_SERVED_SINGLE_ADS": 382,
                             "ATN_TARGETED_LINE_ITEMS": 383,
                             "ATN_TOTAL_AD_REQUESTS": 384,
-                            "ATN_TOTAL_COMPETING_ADS_IN_AUCTION": 385,
                             "ATN_TOTAL_LOADED_ADS": 387,
                             "ATN_VALID_AD_REQUESTS": 389,
                             "ATN_YIELD_GROUP_MEDIATION_PASSBACKS": 390,
@@ -13005,6 +14778,31 @@
                             "MEDIATION_CHAINS_FILLED": 584,
                             "MUTED_IMPRESSIONS": 412,
                             "MUTE_ELIGIBLE_IMPRESSIONS": 409,
+                            "NIELSEN_AUDIENCE_INDEX": 568,
+                            "NIELSEN_AVERAGE_FREQUENCY": 569,
+                            "NIELSEN_AVERAGE_NUMBER_OF_VIEWERS": 570,
+                            "NIELSEN_GROSS_RATING_POINTS": 571,
+                            "NIELSEN_IMPRESSIONS": 572,
+                            "NIELSEN_IMPRESSIONS_INDEX": 573,
+                            "NIELSEN_IN_TARGET_RATIO": 576,
+                            "NIELSEN_PERCENT_AUDIENCE_REACH": 578,
+                            "NIELSEN_PERCENT_AUDIENCE_SHARE": 579,
+                            "NIELSEN_PERCENT_IMPRESSIONS_SHARE": 580,
+                            "NIELSEN_PERCENT_POPULATION_SHARE": 581,
+                            "NIELSEN_POPULATION_BASE": 582,
+                            "NIELSEN_UNIQUE_AUDIENCE": 583,
+                            "OFF_PROPERTY_ACTIVE_VIEW_MEASURABLE_IMPRESSIONS": 395,
+                            "OFF_PROPERTY_ACTIVE_VIEW_VIEWABLE_IMPRESSIONS": 396,
+                            "OFF_PROPERTY_ACTIVE_VIEW_VIEWABLE_IMPRESSIONS_RATE": 397,
+                            "OFF_PROPERTY_CLICKS": 398,
+                            "OFF_PROPERTY_CTR": 399,
+                            "OFF_PROPERTY_IMPRESSIONS": 400,
+                            "OFF_PROPERTY_REVENUE": 401,
+                            "OFF_PROPERTY_SPEND": 402,
+                            "OFF_PROPERTY_SPEND_ECPM": 403,
+                            "ON_PLATFORM_MULTIPLE_CALL_ECPM": 678,
+                            "ON_PLATFORM_MULTIPLE_CALL_IMPRESSIONS": 676,
+                            "ON_PLATFORM_MULTIPLE_CALL_REVENUE": 677,
                             "OPPORTUNITIES": 463,
                             "OVERDELIVERED_IMPRESSIONS": 432,
                             "PARTNER_FINANCE_GROSS_REVENUE": 648,
@@ -13206,10 +15004,15 @@
                             "VIDEO_TRUE_OPPORTUNITIES_TOTAL_BREAK_END": 279,
                             "VIDEO_TRUE_OPPORTUNITIES_TOTAL_BREAK_START": 280,
                             "VIDEO_TRUE_OPPORTUNITIES_TOTAL_CAPPED_OPPORTUNITIES_ADBREAK": 281,
+                            "VIDEO_TRUE_OPPORTUNITIES_TOTAL_CAPPED_OPPORTUNITIES_SUBPOD": 282,
                             "VIDEO_TRUE_OPPORTUNITIES_TOTAL_DURATION_ADBREAK": 283,
+                            "VIDEO_TRUE_OPPORTUNITIES_TOTAL_DURATION_SUBPOD": 284,
                             "VIDEO_TRUE_OPPORTUNITIES_TOTAL_MATCHED_DURATION_ADBREAK": 285,
+                            "VIDEO_TRUE_OPPORTUNITIES_TOTAL_MATCHED_DURATION_SUBPOD": 286,
                             "VIDEO_TRUE_OPPORTUNITIES_TOTAL_MATCHED_OPPORTUNITIES_ADBREAK": 287,
+                            "VIDEO_TRUE_OPPORTUNITIES_TOTAL_MATCHED_OPPORTUNITIES_SUBPOD": 288,
                             "VIDEO_TRUE_OPPORTUNITIES_TOTAL_VIEWED_OPPORTUNITIES_ADBREAK": 289,
+                            "VIDEO_TRUE_OPPORTUNITIES_TOTAL_VIEWED_OPPORTUNITIES_SUBPOD": 290,
                             "VIDEO_TRUE_VIEWS": 392,
                             "VIDEO_TRUE_VIEW_SKIP_RATE": 393,
                             "VIDEO_TRUE_VIEW_VIEW_THROUGH_RATE": 394,
@@ -13438,8 +15241,8 @@
                           "values": {
                             "HIDDEN": 0,
                             "DRAFT": 1,
-                            "SAVED": 2,
-                            "VISIBLE": 2
+                            "VISIBLE": 2,
+                            "SAVED": 2
                           }
                         }
                       }
@@ -13602,7 +15405,7 @@
                     "ReportService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetReport": {
@@ -13872,7 +15675,7 @@
                           "type": "google.protobuf.FieldMask",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -13927,6 +15730,212 @@
                         "nextPageToken": {
                           "type": "string",
                           "id": 6
+                        }
+                      }
+                    },
+                    "RichMediaAdsCompanyGdprStatusEnum": {
+                      "fields": {},
+                      "nested": {
+                        "RichMediaAdsCompanyGdprStatus": {
+                          "values": {
+                            "RICH_MEDIA_ADS_COMPANY_GDPR_STATUS_UNSPECIFIED": 0,
+                            "COMPLIANCE_UNKNOWN": 1,
+                            "COMPLIANT": 2,
+                            "COMPLIANT_AND_DEFAULT": 3,
+                            "COMPLIANT_LIGHTWEIGHT_VERIFIED": 4,
+                            "NOT_COMPLIANT": 5
+                          }
+                        }
+                      }
+                    },
+                    "RichMediaAdsCompany": {
+                      "options": {
+                        "(google.api.resource).type": "admanager.googleapis.com/RichMediaAdsCompany",
+                        "(google.api.resource).pattern": "networks/{network_code}/richMediaAdsCompanies/{rich_media_ads_company}",
+                        "(google.api.resource).plural": "richMediaAdsCompanies",
+                        "(google.api.resource).singular": "richMediaAdsCompany"
+                      },
+                      "oneofs": {
+                        "_displayName": {
+                          "oneof": [
+                            "displayName"
+                          ]
+                        },
+                        "_policyUrl": {
+                          "oneof": [
+                            "policyUrl"
+                          ]
+                        },
+                        "_gdprStatus": {
+                          "oneof": [
+                            "gdprStatus"
+                          ]
+                        },
+                        "_companyGvlId": {
+                          "oneof": [
+                            "companyGvlId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "policyUrl": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "gdprStatus": {
+                          "type": "RichMediaAdsCompanyGdprStatusEnum.RichMediaAdsCompanyGdprStatus",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "companyGvlId": {
+                          "type": "int64",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "RichMediaAdsCompanyService": {
+                      "options": {
+                        "(google.api.default_host)": "admanager.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
+                      },
+                      "methods": {
+                        "GetRichMediaAdsCompany": {
+                          "requestType": "GetRichMediaAdsCompanyRequest",
+                          "responseType": "RichMediaAdsCompany",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=networks/*/richMediaAdsCompanies/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=networks/*/richMediaAdsCompanies/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListRichMediaAdsCompanies": {
+                          "requestType": "ListRichMediaAdsCompaniesRequest",
+                          "responseType": "ListRichMediaAdsCompaniesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=networks/*}/richMediaAdsCompanies",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=networks/*}/richMediaAdsCompanies"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "GetRichMediaAdsCompanyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/RichMediaAdsCompany"
+                          }
+                        }
+                      }
+                    },
+                    "ListRichMediaAdsCompaniesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "admanager.googleapis.com/Network"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "skip": {
+                          "type": "int32",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListRichMediaAdsCompaniesResponse": {
+                      "fields": {
+                        "richMediaAdsCompanies": {
+                          "rule": "repeated",
+                          "type": "RichMediaAdsCompany",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "totalSize": {
+                          "type": "int32",
+                          "id": 3
                         }
                       }
                     },
@@ -13988,6 +15997,7 @@
                           "type": "int64",
                           "id": 2,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
                           }
@@ -14029,7 +16039,7 @@
                     "RoleService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetRole": {
@@ -14288,7 +16298,7 @@
                     "SiteService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetSite": {
@@ -14586,7 +16596,7 @@
                           "type": "google.protobuf.FieldMask",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -14712,6 +16722,7 @@
                           "type": "int64",
                           "id": 2,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
                           }
@@ -14785,7 +16796,7 @@
                     "TaxonomyCategoryService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetTaxonomyCategory": {
@@ -15027,7 +17038,7 @@
                     "TeamService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetTeam": {
@@ -15325,7 +17336,7 @@
                           "type": "google.protobuf.FieldMask",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -15468,6 +17479,7 @@
                           "type": "int64",
                           "id": 10,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
                           }
@@ -15534,7 +17546,7 @@
                     "UserService": {
                       "options": {
                         "(google.api.default_host)": "admanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/admanager,https://www.googleapis.com/auth/admanager.readonly"
                       },
                       "methods": {
                         "GetUser": {
@@ -15619,8 +17631,7 @@
             "java_multiple_files": true,
             "java_outer_classname": "LaunchStageProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI",
-            "cc_enable_arenas": true
+            "objc_class_prefix": "GAPI"
           },
           "nested": {
             "fieldBehavior": {
@@ -15843,6 +17854,10 @@
                   "rule": "repeated",
                   "type": "ClientLibraryDestination",
                   "id": 2
+                },
+                "selectiveGapicGeneration": {
+                  "type": "SelectiveGapicGeneration",
+                  "id": 3
                 }
               }
             },
@@ -15983,6 +17998,28 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "experimentalFeatures": {
+                  "type": "ExperimentalFeatures",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "ExperimentalFeatures": {
+                  "fields": {
+                    "restAsyncIoEnabled": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "protobufPythonicTypesEnabled": {
+                      "type": "bool",
+                      "id": 2
+                    },
+                    "unversionedPackageDisabled": {
+                      "type": "bool",
+                      "id": 3
+                    }
+                  }
                 }
               }
             },
@@ -16040,6 +18077,11 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "renamedServices": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
                 }
               }
             },
@@ -16101,6 +18143,19 @@
                 "PACKAGE_MANAGER": 20
               }
             },
+            "SelectiveGapicGeneration": {
+              "fields": {
+                "methods": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                },
+                "generateOmittedAsInternal": {
+                  "type": "bool",
+                  "id": 2
+                }
+              }
+            },
             "LaunchStage": {
               "values": {
                 "LAUNCH_STAGE_UNSPECIFIED": 0,
@@ -16134,12 +18189,19 @@
                   "type": "FileDescriptorProto",
                   "id": 1
                 }
-              }
+              },
+              "extensions": [
+                [
+                  536000000,
+                  536000000
+                ]
+              ]
             },
             "Edition": {
               "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
+                "EDITION_LEGACY": 900,
                 "EDITION_PROTO2": 998,
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
@@ -16177,6 +18239,11 @@
                   "rule": "repeated",
                   "type": "int32",
                   "id": 11
+                },
+                "optionDependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 15
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -16266,6 +18333,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 10
+                },
+                "visibility": {
+                  "type": "SymbolVisibility",
+                  "id": 11
                 }
               },
               "nested": {
@@ -16491,6 +18562,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 5
+                },
+                "visibility": {
+                  "type": "SymbolVisibility",
+                  "id": 6
                 }
               },
               "nested": {
@@ -16541,7 +18616,14 @@
                   "type": "ServiceOptions",
                   "id": 3
                 }
-              }
+              },
+              "reserved": [
+                [
+                  4,
+                  4
+                ],
+                "stream"
+              ]
             },
             "MethodDescriptorProto": {
               "edition": "proto2",
@@ -16705,6 +18787,7 @@
                   42,
                   42
                 ],
+                "php_generic_services",
                 [
                   38,
                   38
@@ -16840,7 +18923,8 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false
+                    "default": false,
+                    "deprecated": true
                   }
                 },
                 "debugRedact": {
@@ -16867,6 +18951,10 @@
                 "features": {
                   "type": "FeatureSet",
                   "id": 21
+                },
+                "featureSupport": {
+                  "type": "FeatureSupport",
+                  "id": 22
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -16935,6 +19023,26 @@
                     "value": {
                       "type": "string",
                       "id": 2
+                    }
+                  }
+                },
+                "FeatureSupport": {
+                  "fields": {
+                    "editionIntroduced": {
+                      "type": "Edition",
+                      "id": 1
+                    },
+                    "editionDeprecated": {
+                      "type": "Edition",
+                      "id": 2
+                    },
+                    "deprecationWarning": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "editionRemoved": {
+                      "type": "Edition",
+                      "id": 4
                     }
                   }
                 }
@@ -17024,6 +19132,10 @@
                   "options": {
                     "default": false
                   }
+                },
+                "featureSupport": {
+                  "type": "FieldOptions.FeatureSupport",
+                  "id": 4
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -17167,6 +19279,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_2023",
                     "edition_defaults.value": "EXPLICIT"
                   }
@@ -17177,6 +19290,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "OPEN"
                   }
@@ -17187,6 +19301,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "PACKED"
                   }
@@ -17197,6 +19312,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "VERIFY"
                   }
@@ -17207,7 +19323,8 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "edition_defaults.edition": "EDITION_PROTO2",
+                    "feature_support.edition_introduced": "EDITION_2023",
+                    "edition_defaults.edition": "EDITION_LEGACY",
                     "edition_defaults.value": "LENGTH_PREFIXED"
                   }
                 },
@@ -17217,27 +19334,38 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "ALLOW"
+                  }
+                },
+                "enforceNamingStyle": {
+                  "type": "EnforceNamingStyle",
+                  "id": 7,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_METHOD",
+                    "feature_support.edition_introduced": "EDITION_2024",
+                    "edition_defaults.edition": "EDITION_2024",
+                    "edition_defaults.value": "STYLE2024"
+                  }
+                },
+                "defaultSymbolVisibility": {
+                  "type": "VisibilityFeature.DefaultSymbolVisibility",
+                  "id": 8,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2024",
+                    "edition_defaults.edition": "EDITION_2024",
+                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
                   }
                 }
               },
               "extensions": [
                 [
                   1000,
-                  1000
-                ],
-                [
-                  1001,
-                  1001
-                ],
-                [
-                  1002,
-                  1002
-                ],
-                [
-                  9990,
-                  9990
+                  9994
                 ],
                 [
                   9995,
@@ -17282,7 +19410,13 @@
                     "UTF8_VALIDATION_UNKNOWN": 0,
                     "VERIFY": 2,
                     "NONE": 3
-                  }
+                  },
+                  "reserved": [
+                    [
+                      1,
+                      1
+                    ]
+                  ]
                 },
                 "MessageEncoding": {
                   "values": {
@@ -17296,6 +19430,33 @@
                     "JSON_FORMAT_UNKNOWN": 0,
                     "ALLOW": 1,
                     "LEGACY_BEST_EFFORT": 2
+                  }
+                },
+                "EnforceNamingStyle": {
+                  "values": {
+                    "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
+                    "STYLE2024": 1,
+                    "STYLE_LEGACY": 2
+                  }
+                },
+                "VisibilityFeature": {
+                  "fields": {},
+                  "reserved": [
+                    [
+                      1,
+                      536870911
+                    ]
+                  ],
+                  "nested": {
+                    "DefaultSymbolVisibility": {
+                      "values": {
+                        "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN": 0,
+                        "EXPORT_ALL": 1,
+                        "EXPORT_TOP_LEVEL": 2,
+                        "LOCAL_ALL": 3,
+                        "STRICT": 4
+                      }
+                    }
                   }
                 }
               }
@@ -17324,11 +19485,26 @@
                       "type": "Edition",
                       "id": 3
                     },
-                    "features": {
+                    "overridableFeatures": {
                       "type": "FeatureSet",
-                      "id": 2
+                      "id": 4
+                    },
+                    "fixedFeatures": {
+                      "type": "FeatureSet",
+                      "id": 5
                     }
-                  }
+                  },
+                  "reserved": [
+                    [
+                      1,
+                      1
+                    ],
+                    [
+                      2,
+                      2
+                    ],
+                    "features"
+                  ]
                 }
               }
             },
@@ -17341,6 +19517,12 @@
                   "id": 1
                 }
               },
+              "extensions": [
+                [
+                  536000000,
+                  536000000
+                ]
+              ],
               "nested": {
                 "Location": {
                   "fields": {
@@ -17426,6 +19608,14 @@
                 }
               }
             },
+            "SymbolVisibility": {
+              "edition": "proto2",
+              "values": {
+                "VISIBILITY_UNSET": 0,
+                "VISIBILITY_LOCAL": 1,
+                "VISIBILITY_EXPORT": 2
+              }
+            },
             "Duration": {
               "fields": {
                 "seconds": {
@@ -17484,6 +19674,7 @@
             "java_multiple_files": true,
             "java_outer_classname": "OperationsProto",
             "java_package": "com.google.longrunning",
+            "objc_class_prefix": "GLRUN",
             "php_namespace": "Google\\LongRunning"
           },
           "nested": {
