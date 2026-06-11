@@ -518,7 +518,6 @@ libraries:
     apis:
       - path: google/cloud/cloudsecuritycompliance/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-commerce-consumer-procurement
@@ -527,7 +526,6 @@ libraries:
       - path: google/cloud/commerce/consumer/procurement/v1
       - path: google/cloud/commerce/consumer/procurement/v1alpha1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/procurement'
@@ -569,7 +567,6 @@ libraries:
       - path: google/cloud/confidentialcomputing/v1
       - path: google/cloud/confidentialcomputing/v1alpha1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1alpha1
   - name: google-cloud-config
