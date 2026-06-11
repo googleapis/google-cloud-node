@@ -1759,6 +1759,8 @@ libraries:
     apis:
       - path: google/devtools/cloudbuild/v2
       - path: google/devtools/cloudbuild/v1
+    keep:
+      - system-test/system.js
     copyright_year: "2026"
     nodejs:
       default_version: v1
