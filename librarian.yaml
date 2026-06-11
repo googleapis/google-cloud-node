@@ -1631,6 +1631,8 @@ libraries:
     nodejs:
       default_version: v1
       client_documentation_override: https://googleapis.dev/nodejs/videostitcher/latest/
+      additional_protos:
+        - google/cloud/common/operation_metadata.proto
   - name: google-cloud-video-transcoder
     version: 4.4.3
     apis:
