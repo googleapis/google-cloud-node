@@ -1,4 +1,5 @@
 {
+    "api_description": "Builds and manages container-based applications, powered by the open source\nKubernetes technology.",
     "api_id": "container.googleapis.com",
     "api_shortname": "container",
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/container/latest",
@@ -8,9 +9,8 @@
     "language": "nodejs",
     "library_type": "GAPIC_AUTO",
     "name": "container",
-    "name_pretty": "Kubernetes Engine Cluster Manager API",
-    "product_documentation": "https://cloud.google.com/kubernetes-engine",
+    "name_pretty": "Kubernetes Engine",
+    "product_documentation": "https://cloud.google.com/kubernetes-engine/docs",
     "release_level": "stable",
-    "repo": "googleapis/google-cloud-node",
-    "requires_billing": true
+    "repo": "googleapis/google-cloud-node"
 }

@@ -1,4 +1,5 @@
 {
+    "api_description": "You can use OS Login to manage access to your VM instances using IAM roles.",
     "api_id": "oslogin.googleapis.com",
     "api_shortname": "oslogin",
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/os-login/latest",
@@ -8,9 +9,8 @@
     "language": "nodejs",
     "library_type": "GAPIC_AUTO",
     "name": "oslogin",
-    "name_pretty": "Google Cloud OS Login",
-    "product_documentation": "https://cloud.google.com/compute/docs/oslogin/",
+    "name_pretty": "Cloud OS Login",
+    "product_documentation": "https://cloud.google.com/compute/docs",
     "release_level": "stable",
-    "repo": "googleapis/google-cloud-node",
-    "requires_billing": true
+    "repo": "googleapis/google-cloud-node"
 }
