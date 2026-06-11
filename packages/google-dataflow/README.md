@@ -72,7 +72,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | delete snapshot | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-dataflow/samples/generated/v1beta3/snapshots_v1_beta3.delete_snapshot.js) |
 | get snapshot | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-dataflow/samples/generated/v1beta3/snapshots_v1_beta3.get_snapshot.js) |
 | list snapshots | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-dataflow/samples/generated/v1beta3/snapshots_v1_beta3.list_snapshots.js) |
-| dataflow | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-dataflow/samples/generated/v1beta3/snippet_metadata_google.dataflow.v1beta3.json) |
 | create job from template | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-dataflow/samples/generated/v1beta3/templates_service.create_job_from_template.js) |
 | get template | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-dataflow/samples/generated/v1beta3/templates_service.get_template.js) |
 | launch template | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-dataflow/samples/generated/v1beta3/templates_service.launch_template.js) |

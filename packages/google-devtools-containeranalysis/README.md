@@ -77,7 +77,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list occurrences | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.list_occurrences.js) |
 | update note | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.update_note.js) |
 | update occurrence | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.update_occurrence.js) |
-| devtools | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1/snippet_metadata_google.devtools.containeranalysis.v1.json) |
 | export s b o m | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.export_s_b_o_m.js) |
 | generate packages summary | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.generate_packages_summary.js) |
 | get iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.get_iam_policy.js) |
@@ -98,7 +97,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list occurrences | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.list_occurrences.js) |
 | update note | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.update_note.js) |
 | update occurrence | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.update_occurrence.js) |
-| devtools | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/snippet_metadata_google.devtools.containeranalysis.v1beta1.json) |
 
 
 ## Supported Node.js Versions

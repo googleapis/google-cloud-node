@@ -58,7 +58,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vpcaccess/samples/generated/v1/snippet_metadata_google.cloud.vpcaccess.v1.json) |
 | create connector | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vpcaccess/samples/generated/v1/vpc_access_service.create_connector.js) |
 | delete connector | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vpcaccess/samples/generated/v1/vpc_access_service.delete_connector.js) |
 | get connector | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vpcaccess/samples/generated/v1/vpc_access_service.get_connector.js) |

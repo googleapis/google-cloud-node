@@ -57,7 +57,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workloadmanager/samples/generated/v1/snippet_metadata_google.cloud.workloadmanager.v1.json) |
 | create evaluation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workloadmanager/samples/generated/v1/workload_manager.create_evaluation.js) |
 | delete evaluation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workloadmanager/samples/generated/v1/workload_manager.delete_evaluation.js) |
 | delete execution | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workloadmanager/samples/generated/v1/workload_manager.delete_execution.js) |

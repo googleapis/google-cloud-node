@@ -80,7 +80,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | --------------------------- | --------------------------------- |
 | provide validation feedback | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-addressvalidation/samples/generated/v1/address_validation.provide_validation_feedback.js) |
 | validate address | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-addressvalidation/samples/generated/v1/address_validation.validate_address.js) |
-| maps | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-addressvalidation/samples/generated/v1/snippet_metadata_google.maps.addressvalidation.v1.json) |
 
 
 ## Supported Node.js Versions

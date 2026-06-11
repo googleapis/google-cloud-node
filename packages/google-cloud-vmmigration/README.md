@@ -58,7 +58,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/snippet_metadata_google.cloud.vmmigration.v1.json) |
 | add group migration | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.add_group_migration.js) |
 | cancel clone job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.cancel_clone_job.js) |
 | cancel cutover job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmmigration/samples/generated/v1/vm_migration.cancel_cutover_job.js) |

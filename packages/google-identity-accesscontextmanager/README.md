@@ -84,7 +84,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update access policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.update_access_policy.js) |
 | update gcp user access binding | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.update_gcp_user_access_binding.js) |
 | update service perimeter | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/access_context_manager.update_service_perimeter.js) |
-| identity | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-identity-accesscontextmanager/samples/generated/v1/snippet_metadata_google.identity.accesscontextmanager.v1.json) |
 
 
 ## Supported Node.js Versions

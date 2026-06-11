@@ -102,7 +102,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update analysis | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-visionai/samples/generated/v1/live_video_analytics.update_analysis.js) |
 | update operator | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-visionai/samples/generated/v1/live_video_analytics.update_operator.js) |
 | update process | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-visionai/samples/generated/v1/live_video_analytics.update_process.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-visionai/samples/generated/v1/snippet_metadata_google.cloud.visionai.v1.json) |
 | acquire lease | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-visionai/samples/generated/v1/streaming_service.acquire_lease.js) |
 | receive events | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-visionai/samples/generated/v1/streaming_service.receive_events.js) |
 | receive packets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-visionai/samples/generated/v1/streaming_service.receive_packets.js) |

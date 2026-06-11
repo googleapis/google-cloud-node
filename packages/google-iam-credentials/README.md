@@ -62,7 +62,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | generate id token | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam-credentials/samples/generated/v1/i_a_m_credentials.generate_id_token.js) |
 | sign blob | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam-credentials/samples/generated/v1/i_a_m_credentials.sign_blob.js) |
 | sign jwt | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam-credentials/samples/generated/v1/i_a_m_credentials.sign_jwt.js) |
-| iam | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam-credentials/samples/generated/v1/snippet_metadata_google.iam.credentials.v1.json) |
 
 
 ## Supported Node.js Versions

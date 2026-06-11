@@ -88,7 +88,7 @@
                         function CrawledUrl(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -173,9 +173,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CrawledUrl.decode = function decode(reader, length, error) {
+                        CrawledUrl.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.CrawledUrl();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -195,7 +199,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -226,9 +230,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        CrawledUrl.verify = function verify(message) {
+                        CrawledUrl.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.httpMethod != null && message.hasOwnProperty("httpMethod"))
                                 if (!$util.isString(message.httpMethod))
                                     return "httpMethod: string expected";
@@ -249,9 +257,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.CrawledUrl} CrawledUrl
                          */
-                        CrawledUrl.fromObject = function fromObject(object) {
+                        CrawledUrl.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.CrawledUrl)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.CrawledUrl();
                             if (object.httpMethod != null)
                                 message.httpMethod = String(object.httpMethod);
@@ -355,7 +367,7 @@
                         function Finding(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -590,9 +602,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Finding.decode = function decode(reader, length, error) {
+                        Finding.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.Finding();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -644,35 +660,35 @@
                                         break;
                                     }
                                 case 16: {
-                                        message.form = $root.google.cloud.websecurityscanner.v1.Form.decode(reader, reader.uint32());
+                                        message.form = $root.google.cloud.websecurityscanner.v1.Form.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 11: {
-                                        message.outdatedLibrary = $root.google.cloud.websecurityscanner.v1.OutdatedLibrary.decode(reader, reader.uint32());
+                                        message.outdatedLibrary = $root.google.cloud.websecurityscanner.v1.OutdatedLibrary.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 12: {
-                                        message.violatingResource = $root.google.cloud.websecurityscanner.v1.ViolatingResource.decode(reader, reader.uint32());
+                                        message.violatingResource = $root.google.cloud.websecurityscanner.v1.ViolatingResource.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 15: {
-                                        message.vulnerableHeaders = $root.google.cloud.websecurityscanner.v1.VulnerableHeaders.decode(reader, reader.uint32());
+                                        message.vulnerableHeaders = $root.google.cloud.websecurityscanner.v1.VulnerableHeaders.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 13: {
-                                        message.vulnerableParameters = $root.google.cloud.websecurityscanner.v1.VulnerableParameters.decode(reader, reader.uint32());
+                                        message.vulnerableParameters = $root.google.cloud.websecurityscanner.v1.VulnerableParameters.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 14: {
-                                        message.xss = $root.google.cloud.websecurityscanner.v1.Xss.decode(reader, reader.uint32());
+                                        message.xss = $root.google.cloud.websecurityscanner.v1.Xss.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 18: {
-                                        message.xxe = $root.google.cloud.websecurityscanner.v1.Xxe.decode(reader, reader.uint32());
+                                        message.xxe = $root.google.cloud.websecurityscanner.v1.Xxe.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -703,9 +719,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        Finding.verify = function verify(message) {
+                        Finding.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -748,37 +768,37 @@
                                 if (!$util.isString(message.trackingId))
                                     return "trackingId: string expected";
                             if (message.form != null && message.hasOwnProperty("form")) {
-                                var error = $root.google.cloud.websecurityscanner.v1.Form.verify(message.form);
+                                var error = $root.google.cloud.websecurityscanner.v1.Form.verify(message.form, long + 1);
                                 if (error)
                                     return "form." + error;
                             }
                             if (message.outdatedLibrary != null && message.hasOwnProperty("outdatedLibrary")) {
-                                var error = $root.google.cloud.websecurityscanner.v1.OutdatedLibrary.verify(message.outdatedLibrary);
+                                var error = $root.google.cloud.websecurityscanner.v1.OutdatedLibrary.verify(message.outdatedLibrary, long + 1);
                                 if (error)
                                     return "outdatedLibrary." + error;
                             }
                             if (message.violatingResource != null && message.hasOwnProperty("violatingResource")) {
-                                var error = $root.google.cloud.websecurityscanner.v1.ViolatingResource.verify(message.violatingResource);
+                                var error = $root.google.cloud.websecurityscanner.v1.ViolatingResource.verify(message.violatingResource, long + 1);
                                 if (error)
                                     return "violatingResource." + error;
                             }
                             if (message.vulnerableHeaders != null && message.hasOwnProperty("vulnerableHeaders")) {
-                                var error = $root.google.cloud.websecurityscanner.v1.VulnerableHeaders.verify(message.vulnerableHeaders);
+                                var error = $root.google.cloud.websecurityscanner.v1.VulnerableHeaders.verify(message.vulnerableHeaders, long + 1);
                                 if (error)
                                     return "vulnerableHeaders." + error;
                             }
                             if (message.vulnerableParameters != null && message.hasOwnProperty("vulnerableParameters")) {
-                                var error = $root.google.cloud.websecurityscanner.v1.VulnerableParameters.verify(message.vulnerableParameters);
+                                var error = $root.google.cloud.websecurityscanner.v1.VulnerableParameters.verify(message.vulnerableParameters, long + 1);
                                 if (error)
                                     return "vulnerableParameters." + error;
                             }
                             if (message.xss != null && message.hasOwnProperty("xss")) {
-                                var error = $root.google.cloud.websecurityscanner.v1.Xss.verify(message.xss);
+                                var error = $root.google.cloud.websecurityscanner.v1.Xss.verify(message.xss, long + 1);
                                 if (error)
                                     return "xss." + error;
                             }
                             if (message.xxe != null && message.hasOwnProperty("xxe")) {
-                                var error = $root.google.cloud.websecurityscanner.v1.Xxe.verify(message.xxe);
+                                var error = $root.google.cloud.websecurityscanner.v1.Xxe.verify(message.xxe, long + 1);
                                 if (error)
                                     return "xxe." + error;
                             }
@@ -793,9 +813,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.Finding} Finding
                          */
-                        Finding.fromObject = function fromObject(object) {
+                        Finding.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.Finding)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.Finding();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -848,37 +872,37 @@
                             if (object.form != null) {
                                 if (typeof object.form !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1.Finding.form: object expected");
-                                message.form = $root.google.cloud.websecurityscanner.v1.Form.fromObject(object.form);
+                                message.form = $root.google.cloud.websecurityscanner.v1.Form.fromObject(object.form, long + 1);
                             }
                             if (object.outdatedLibrary != null) {
                                 if (typeof object.outdatedLibrary !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1.Finding.outdatedLibrary: object expected");
-                                message.outdatedLibrary = $root.google.cloud.websecurityscanner.v1.OutdatedLibrary.fromObject(object.outdatedLibrary);
+                                message.outdatedLibrary = $root.google.cloud.websecurityscanner.v1.OutdatedLibrary.fromObject(object.outdatedLibrary, long + 1);
                             }
                             if (object.violatingResource != null) {
                                 if (typeof object.violatingResource !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1.Finding.violatingResource: object expected");
-                                message.violatingResource = $root.google.cloud.websecurityscanner.v1.ViolatingResource.fromObject(object.violatingResource);
+                                message.violatingResource = $root.google.cloud.websecurityscanner.v1.ViolatingResource.fromObject(object.violatingResource, long + 1);
                             }
                             if (object.vulnerableHeaders != null) {
                                 if (typeof object.vulnerableHeaders !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1.Finding.vulnerableHeaders: object expected");
-                                message.vulnerableHeaders = $root.google.cloud.websecurityscanner.v1.VulnerableHeaders.fromObject(object.vulnerableHeaders);
+                                message.vulnerableHeaders = $root.google.cloud.websecurityscanner.v1.VulnerableHeaders.fromObject(object.vulnerableHeaders, long + 1);
                             }
                             if (object.vulnerableParameters != null) {
                                 if (typeof object.vulnerableParameters !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1.Finding.vulnerableParameters: object expected");
-                                message.vulnerableParameters = $root.google.cloud.websecurityscanner.v1.VulnerableParameters.fromObject(object.vulnerableParameters);
+                                message.vulnerableParameters = $root.google.cloud.websecurityscanner.v1.VulnerableParameters.fromObject(object.vulnerableParameters, long + 1);
                             }
                             if (object.xss != null) {
                                 if (typeof object.xss !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1.Finding.xss: object expected");
-                                message.xss = $root.google.cloud.websecurityscanner.v1.Xss.fromObject(object.xss);
+                                message.xss = $root.google.cloud.websecurityscanner.v1.Xss.fromObject(object.xss, long + 1);
                             }
                             if (object.xxe != null) {
                                 if (typeof object.xxe !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1.Finding.xxe: object expected");
-                                message.xxe = $root.google.cloud.websecurityscanner.v1.Xxe.fromObject(object.xxe);
+                                message.xxe = $root.google.cloud.websecurityscanner.v1.Xxe.fromObject(object.xxe, long + 1);
                             }
                             return message;
                         };
@@ -1026,7 +1050,7 @@
                             this.fields = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -1102,9 +1126,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Form.decode = function decode(reader, length, error) {
+                        Form.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.Form();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -1122,7 +1150,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -1153,9 +1181,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        Form.verify = function verify(message) {
+                        Form.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.actionUri != null && message.hasOwnProperty("actionUri"))
                                 if (!$util.isString(message.actionUri))
                                     return "actionUri: string expected";
@@ -1177,9 +1209,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.Form} Form
                          */
-                        Form.fromObject = function fromObject(object) {
+                        Form.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.Form)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.Form();
                             if (object.actionUri != null)
                                 message.actionUri = String(object.actionUri);
@@ -1272,7 +1308,7 @@
                             this.learnMoreUrls = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -1358,9 +1394,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OutdatedLibrary.decode = function decode(reader, length, error) {
+                        OutdatedLibrary.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.OutdatedLibrary();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -1382,7 +1422,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -1413,9 +1453,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        OutdatedLibrary.verify = function verify(message) {
+                        OutdatedLibrary.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.libraryName != null && message.hasOwnProperty("libraryName"))
                                 if (!$util.isString(message.libraryName))
                                     return "libraryName: string expected";
@@ -1440,9 +1484,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.OutdatedLibrary} OutdatedLibrary
                          */
-                        OutdatedLibrary.fromObject = function fromObject(object) {
+                        OutdatedLibrary.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.OutdatedLibrary)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.OutdatedLibrary();
                             if (object.libraryName != null)
                                 message.libraryName = String(object.libraryName);
@@ -1539,7 +1587,7 @@
                         function ViolatingResource(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -1614,9 +1662,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ViolatingResource.decode = function decode(reader, length, error) {
+                        ViolatingResource.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.ViolatingResource();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -1632,7 +1684,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -1663,9 +1715,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ViolatingResource.verify = function verify(message) {
+                        ViolatingResource.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.contentType != null && message.hasOwnProperty("contentType"))
                                 if (!$util.isString(message.contentType))
                                     return "contentType: string expected";
@@ -1683,9 +1739,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.ViolatingResource} ViolatingResource
                          */
-                        ViolatingResource.fromObject = function fromObject(object) {
+                        ViolatingResource.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.ViolatingResource)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.ViolatingResource();
                             if (object.contentType != null)
                                 message.contentType = String(object.contentType);
@@ -1768,7 +1828,7 @@
                             this.parameterNames = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -1834,9 +1894,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        VulnerableParameters.decode = function decode(reader, length, error) {
+                        VulnerableParameters.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.VulnerableParameters();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -1850,7 +1914,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -1881,9 +1945,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        VulnerableParameters.verify = function verify(message) {
+                        VulnerableParameters.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.parameterNames != null && message.hasOwnProperty("parameterNames")) {
                                 if (!Array.isArray(message.parameterNames))
                                     return "parameterNames: array expected";
@@ -1902,9 +1970,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.VulnerableParameters} VulnerableParameters
                          */
-                        VulnerableParameters.fromObject = function fromObject(object) {
+                        VulnerableParameters.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.VulnerableParameters)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.VulnerableParameters();
                             if (object.parameterNames) {
                                 if (!Array.isArray(object.parameterNames))
@@ -1991,7 +2063,7 @@
                             this.missingHeaders = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -2068,9 +2140,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        VulnerableHeaders.decode = function decode(reader, length, error) {
+                        VulnerableHeaders.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.VulnerableHeaders();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -2080,17 +2156,17 @@
                                 case 1: {
                                         if (!(message.headers && message.headers.length))
                                             message.headers = [];
-                                        message.headers.push($root.google.cloud.websecurityscanner.v1.VulnerableHeaders.Header.decode(reader, reader.uint32()));
+                                        message.headers.push($root.google.cloud.websecurityscanner.v1.VulnerableHeaders.Header.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 2: {
                                         if (!(message.missingHeaders && message.missingHeaders.length))
                                             message.missingHeaders = [];
-                                        message.missingHeaders.push($root.google.cloud.websecurityscanner.v1.VulnerableHeaders.Header.decode(reader, reader.uint32()));
+                                        message.missingHeaders.push($root.google.cloud.websecurityscanner.v1.VulnerableHeaders.Header.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -2121,14 +2197,18 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        VulnerableHeaders.verify = function verify(message) {
+                        VulnerableHeaders.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.headers != null && message.hasOwnProperty("headers")) {
                                 if (!Array.isArray(message.headers))
                                     return "headers: array expected";
                                 for (var i = 0; i < message.headers.length; ++i) {
-                                    var error = $root.google.cloud.websecurityscanner.v1.VulnerableHeaders.Header.verify(message.headers[i]);
+                                    var error = $root.google.cloud.websecurityscanner.v1.VulnerableHeaders.Header.verify(message.headers[i], long + 1);
                                     if (error)
                                         return "headers." + error;
                                 }
@@ -2137,7 +2217,7 @@
                                 if (!Array.isArray(message.missingHeaders))
                                     return "missingHeaders: array expected";
                                 for (var i = 0; i < message.missingHeaders.length; ++i) {
-                                    var error = $root.google.cloud.websecurityscanner.v1.VulnerableHeaders.Header.verify(message.missingHeaders[i]);
+                                    var error = $root.google.cloud.websecurityscanner.v1.VulnerableHeaders.Header.verify(message.missingHeaders[i], long + 1);
                                     if (error)
                                         return "missingHeaders." + error;
                                 }
@@ -2153,9 +2233,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.VulnerableHeaders} VulnerableHeaders
                          */
-                        VulnerableHeaders.fromObject = function fromObject(object) {
+                        VulnerableHeaders.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.VulnerableHeaders)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.VulnerableHeaders();
                             if (object.headers) {
                                 if (!Array.isArray(object.headers))
@@ -2164,7 +2248,7 @@
                                 for (var i = 0; i < object.headers.length; ++i) {
                                     if (typeof object.headers[i] !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1.VulnerableHeaders.headers: object expected");
-                                    message.headers[i] = $root.google.cloud.websecurityscanner.v1.VulnerableHeaders.Header.fromObject(object.headers[i]);
+                                    message.headers[i] = $root.google.cloud.websecurityscanner.v1.VulnerableHeaders.Header.fromObject(object.headers[i], long + 1);
                                 }
                             }
                             if (object.missingHeaders) {
@@ -2174,7 +2258,7 @@
                                 for (var i = 0; i < object.missingHeaders.length; ++i) {
                                     if (typeof object.missingHeaders[i] !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1.VulnerableHeaders.missingHeaders: object expected");
-                                    message.missingHeaders[i] = $root.google.cloud.websecurityscanner.v1.VulnerableHeaders.Header.fromObject(object.missingHeaders[i]);
+                                    message.missingHeaders[i] = $root.google.cloud.websecurityscanner.v1.VulnerableHeaders.Header.fromObject(object.missingHeaders[i], long + 1);
                                 }
                             }
                             return message;
@@ -2257,7 +2341,7 @@
                             function Header(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -2332,9 +2416,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Header.decode = function decode(reader, length, error) {
+                            Header.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.VulnerableHeaders.Header();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -2350,7 +2438,7 @@
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -2381,9 +2469,13 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            Header.verify = function verify(message) {
+                            Header.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
@@ -2401,9 +2493,13 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.cloud.websecurityscanner.v1.VulnerableHeaders.Header} Header
                              */
-                            Header.fromObject = function fromObject(object) {
+                            Header.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.cloud.websecurityscanner.v1.VulnerableHeaders.Header)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.cloud.websecurityscanner.v1.VulnerableHeaders.Header();
                                 if (object.name != null)
                                     message.name = String(object.name);
@@ -2492,7 +2588,7 @@
                             this.stackTraces = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -2588,9 +2684,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Xss.decode = function decode(reader, length, error) {
+                        Xss.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.Xss();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -2616,7 +2716,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -2647,9 +2747,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        Xss.verify = function verify(message) {
+                        Xss.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.stackTraces != null && message.hasOwnProperty("stackTraces")) {
                                 if (!Array.isArray(message.stackTraces))
                                     return "stackTraces: array expected";
@@ -2696,9 +2800,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.Xss} Xss
                          */
-                        Xss.fromObject = function fromObject(object) {
+                        Xss.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.Xss)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.Xss();
                             if (object.stackTraces) {
                                 if (!Array.isArray(object.stackTraces))
@@ -2912,7 +3020,7 @@
                         function Xxe(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -2987,9 +3095,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Xxe.decode = function decode(reader, length, error) {
+                        Xxe.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.Xxe();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -3005,7 +3117,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -3036,9 +3148,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        Xxe.verify = function verify(message) {
+                        Xxe.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.payloadValue != null && message.hasOwnProperty("payloadValue"))
                                 if (!$util.isString(message.payloadValue))
                                     return "payloadValue: string expected";
@@ -3061,9 +3177,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.Xxe} Xxe
                          */
-                        Xxe.fromObject = function fromObject(object) {
+                        Xxe.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.Xxe)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.Xxe();
                             if (object.payloadValue != null)
                                 message.payloadValue = String(object.payloadValue);
@@ -3174,7 +3294,7 @@
                         function FindingTypeStats(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -3249,9 +3369,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FindingTypeStats.decode = function decode(reader, length, error) {
+                        FindingTypeStats.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.FindingTypeStats();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -3267,7 +3391,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -3298,9 +3422,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        FindingTypeStats.verify = function verify(message) {
+                        FindingTypeStats.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.findingType != null && message.hasOwnProperty("findingType"))
                                 if (!$util.isString(message.findingType))
                                     return "findingType: string expected";
@@ -3318,9 +3446,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.FindingTypeStats} FindingTypeStats
                          */
-                        FindingTypeStats.fromObject = function fromObject(object) {
+                        FindingTypeStats.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.FindingTypeStats)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.FindingTypeStats();
                             if (object.findingType != null)
                                 message.findingType = String(object.findingType);
@@ -3416,7 +3548,7 @@
                             this.blacklistPatterns = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -3603,9 +3735,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ScanConfig.decode = function decode(reader, length, error) {
+                        ScanConfig.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.ScanConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -3631,7 +3767,7 @@
                                         break;
                                     }
                                 case 5: {
-                                        message.authentication = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.decode(reader, reader.uint32());
+                                        message.authentication = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 6: {
@@ -3645,7 +3781,7 @@
                                         break;
                                     }
                                 case 8: {
-                                        message.schedule = $root.google.cloud.websecurityscanner.v1.ScanConfig.Schedule.decode(reader, reader.uint32());
+                                        message.schedule = $root.google.cloud.websecurityscanner.v1.ScanConfig.Schedule.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 10: {
@@ -3669,7 +3805,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -3700,9 +3836,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ScanConfig.verify = function verify(message) {
+                        ScanConfig.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -3720,7 +3860,7 @@
                                         return "startingUrls: string[] expected";
                             }
                             if (message.authentication != null && message.hasOwnProperty("authentication")) {
-                                var error = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.verify(message.authentication);
+                                var error = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.verify(message.authentication, long + 1);
                                 if (error)
                                     return "authentication." + error;
                             }
@@ -3742,7 +3882,7 @@
                                         return "blacklistPatterns: string[] expected";
                             }
                             if (message.schedule != null && message.hasOwnProperty("schedule")) {
-                                var error = $root.google.cloud.websecurityscanner.v1.ScanConfig.Schedule.verify(message.schedule);
+                                var error = $root.google.cloud.websecurityscanner.v1.ScanConfig.Schedule.verify(message.schedule, long + 1);
                                 if (error)
                                     return "schedule." + error;
                             }
@@ -3784,9 +3924,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.ScanConfig} ScanConfig
                          */
-                        ScanConfig.fromObject = function fromObject(object) {
+                        ScanConfig.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.ScanConfig)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.ScanConfig();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -3804,7 +3948,7 @@
                             if (object.authentication != null) {
                                 if (typeof object.authentication !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1.ScanConfig.authentication: object expected");
-                                message.authentication = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.fromObject(object.authentication);
+                                message.authentication = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.fromObject(object.authentication, long + 1);
                             }
                             switch (object.userAgent) {
                             default:
@@ -3840,7 +3984,7 @@
                             if (object.schedule != null) {
                                 if (typeof object.schedule !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1.ScanConfig.schedule: object expected");
-                                message.schedule = $root.google.cloud.websecurityscanner.v1.ScanConfig.Schedule.fromObject(object.schedule);
+                                message.schedule = $root.google.cloud.websecurityscanner.v1.ScanConfig.Schedule.fromObject(object.schedule, long + 1);
                             }
                             switch (object.exportToSecurityCommandCenter) {
                             default:
@@ -4004,7 +4148,7 @@
                             function Authentication(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -4103,9 +4247,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Authentication.decode = function decode(reader, length, error) {
+                            Authentication.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -4113,19 +4261,19 @@
                                         break;
                                     switch (tag >>> 3) {
                                     case 1: {
-                                            message.googleAccount = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.GoogleAccount.decode(reader, reader.uint32());
+                                            message.googleAccount = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.GoogleAccount.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     case 2: {
-                                            message.customAccount = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.CustomAccount.decode(reader, reader.uint32());
+                                            message.customAccount = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.CustomAccount.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     case 4: {
-                                            message.iapCredential = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.IapCredential.decode(reader, reader.uint32());
+                                            message.iapCredential = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.IapCredential.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -4156,14 +4304,18 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            Authentication.verify = function verify(message) {
+                            Authentication.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 var properties = {};
                                 if (message.googleAccount != null && message.hasOwnProperty("googleAccount")) {
                                     properties.authentication = 1;
                                     {
-                                        var error = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.GoogleAccount.verify(message.googleAccount);
+                                        var error = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.GoogleAccount.verify(message.googleAccount, long + 1);
                                         if (error)
                                             return "googleAccount." + error;
                                     }
@@ -4173,7 +4325,7 @@
                                         return "authentication: multiple values";
                                     properties.authentication = 1;
                                     {
-                                        var error = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.CustomAccount.verify(message.customAccount);
+                                        var error = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.CustomAccount.verify(message.customAccount, long + 1);
                                         if (error)
                                             return "customAccount." + error;
                                     }
@@ -4183,7 +4335,7 @@
                                         return "authentication: multiple values";
                                     properties.authentication = 1;
                                     {
-                                        var error = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.IapCredential.verify(message.iapCredential);
+                                        var error = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.IapCredential.verify(message.iapCredential, long + 1);
                                         if (error)
                                             return "iapCredential." + error;
                                     }
@@ -4199,24 +4351,28 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.cloud.websecurityscanner.v1.ScanConfig.Authentication} Authentication
                              */
-                            Authentication.fromObject = function fromObject(object) {
+                            Authentication.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication();
                                 if (object.googleAccount != null) {
                                     if (typeof object.googleAccount !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1.ScanConfig.Authentication.googleAccount: object expected");
-                                    message.googleAccount = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.GoogleAccount.fromObject(object.googleAccount);
+                                    message.googleAccount = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.GoogleAccount.fromObject(object.googleAccount, long + 1);
                                 }
                                 if (object.customAccount != null) {
                                     if (typeof object.customAccount !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1.ScanConfig.Authentication.customAccount: object expected");
-                                    message.customAccount = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.CustomAccount.fromObject(object.customAccount);
+                                    message.customAccount = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.CustomAccount.fromObject(object.customAccount, long + 1);
                                 }
                                 if (object.iapCredential != null) {
                                     if (typeof object.iapCredential !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1.ScanConfig.Authentication.iapCredential: object expected");
-                                    message.iapCredential = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.IapCredential.fromObject(object.iapCredential);
+                                    message.iapCredential = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.IapCredential.fromObject(object.iapCredential, long + 1);
                                 }
                                 return message;
                             };
@@ -4299,7 +4455,7 @@
                                 function GoogleAccount(properties) {
                                     if (properties)
                                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                            if (properties[keys[i]] != null)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                                 this[keys[i]] = properties[keys[i]];
                                 }
     
@@ -4374,9 +4530,13 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                GoogleAccount.decode = function decode(reader, length, error) {
+                                GoogleAccount.decode = function decode(reader, length, error, long) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.GoogleAccount();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
@@ -4392,7 +4552,7 @@
                                                 break;
                                             }
                                         default:
-                                            reader.skipType(tag & 7);
+                                            reader.skipType(tag & 7, long);
                                             break;
                                         }
                                     }
@@ -4423,9 +4583,13 @@
                                  * @param {Object.<string,*>} message Plain object to verify
                                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                                  */
-                                GoogleAccount.verify = function verify(message) {
+                                GoogleAccount.verify = function verify(message, long) {
                                     if (typeof message !== "object" || message === null)
                                         return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
                                     if (message.username != null && message.hasOwnProperty("username"))
                                         if (!$util.isString(message.username))
                                             return "username: string expected";
@@ -4443,9 +4607,13 @@
                                  * @param {Object.<string,*>} object Plain object
                                  * @returns {google.cloud.websecurityscanner.v1.ScanConfig.Authentication.GoogleAccount} GoogleAccount
                                  */
-                                GoogleAccount.fromObject = function fromObject(object) {
+                                GoogleAccount.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.GoogleAccount)
                                         return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var message = new $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.GoogleAccount();
                                     if (object.username != null)
                                         message.username = String(object.username);
@@ -4529,7 +4697,7 @@
                                 function CustomAccount(properties) {
                                     if (properties)
                                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                            if (properties[keys[i]] != null)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                                 this[keys[i]] = properties[keys[i]];
                                 }
     
@@ -4614,9 +4782,13 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                CustomAccount.decode = function decode(reader, length, error) {
+                                CustomAccount.decode = function decode(reader, length, error, long) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.CustomAccount();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
@@ -4636,7 +4808,7 @@
                                                 break;
                                             }
                                         default:
-                                            reader.skipType(tag & 7);
+                                            reader.skipType(tag & 7, long);
                                             break;
                                         }
                                     }
@@ -4667,9 +4839,13 @@
                                  * @param {Object.<string,*>} message Plain object to verify
                                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                                  */
-                                CustomAccount.verify = function verify(message) {
+                                CustomAccount.verify = function verify(message, long) {
                                     if (typeof message !== "object" || message === null)
                                         return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
                                     if (message.username != null && message.hasOwnProperty("username"))
                                         if (!$util.isString(message.username))
                                             return "username: string expected";
@@ -4690,9 +4866,13 @@
                                  * @param {Object.<string,*>} object Plain object
                                  * @returns {google.cloud.websecurityscanner.v1.ScanConfig.Authentication.CustomAccount} CustomAccount
                                  */
-                                CustomAccount.fromObject = function fromObject(object) {
+                                CustomAccount.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.CustomAccount)
                                         return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var message = new $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.CustomAccount();
                                     if (object.username != null)
                                         message.username = String(object.username);
@@ -4779,7 +4959,7 @@
                                 function IapCredential(properties) {
                                     if (properties)
                                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                            if (properties[keys[i]] != null)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                                 this[keys[i]] = properties[keys[i]];
                                 }
     
@@ -4858,9 +5038,13 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                IapCredential.decode = function decode(reader, length, error) {
+                                IapCredential.decode = function decode(reader, length, error, long) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.IapCredential();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
@@ -4868,11 +5052,11 @@
                                             break;
                                         switch (tag >>> 3) {
                                         case 1: {
-                                                message.iapTestServiceAccountInfo = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.IapCredential.IapTestServiceAccountInfo.decode(reader, reader.uint32());
+                                                message.iapTestServiceAccountInfo = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.IapCredential.IapTestServiceAccountInfo.decode(reader, reader.uint32(), undefined, long + 1);
                                                 break;
                                             }
                                         default:
-                                            reader.skipType(tag & 7);
+                                            reader.skipType(tag & 7, long);
                                             break;
                                         }
                                     }
@@ -4903,14 +5087,18 @@
                                  * @param {Object.<string,*>} message Plain object to verify
                                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                                  */
-                                IapCredential.verify = function verify(message) {
+                                IapCredential.verify = function verify(message, long) {
                                     if (typeof message !== "object" || message === null)
                                         return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
                                     var properties = {};
                                     if (message.iapTestServiceAccountInfo != null && message.hasOwnProperty("iapTestServiceAccountInfo")) {
                                         properties.iapCredentials = 1;
                                         {
-                                            var error = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.IapCredential.IapTestServiceAccountInfo.verify(message.iapTestServiceAccountInfo);
+                                            var error = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.IapCredential.IapTestServiceAccountInfo.verify(message.iapTestServiceAccountInfo, long + 1);
                                             if (error)
                                                 return "iapTestServiceAccountInfo." + error;
                                         }
@@ -4926,14 +5114,18 @@
                                  * @param {Object.<string,*>} object Plain object
                                  * @returns {google.cloud.websecurityscanner.v1.ScanConfig.Authentication.IapCredential} IapCredential
                                  */
-                                IapCredential.fromObject = function fromObject(object) {
+                                IapCredential.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.IapCredential)
                                         return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var message = new $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.IapCredential();
                                     if (object.iapTestServiceAccountInfo != null) {
                                         if (typeof object.iapTestServiceAccountInfo !== "object")
                                             throw TypeError(".google.cloud.websecurityscanner.v1.ScanConfig.Authentication.IapCredential.iapTestServiceAccountInfo: object expected");
-                                        message.iapTestServiceAccountInfo = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.IapCredential.IapTestServiceAccountInfo.fromObject(object.iapTestServiceAccountInfo);
+                                        message.iapTestServiceAccountInfo = $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.IapCredential.IapTestServiceAccountInfo.fromObject(object.iapTestServiceAccountInfo, long + 1);
                                     }
                                     return message;
                                 };
@@ -5005,7 +5197,7 @@
                                     function IapTestServiceAccountInfo(properties) {
                                         if (properties)
                                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                                if (properties[keys[i]] != null)
+                                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                                     this[keys[i]] = properties[keys[i]];
                                     }
     
@@ -5070,9 +5262,13 @@
                                      * @throws {Error} If the payload is not a reader or valid buffer
                                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                      */
-                                    IapTestServiceAccountInfo.decode = function decode(reader, length, error) {
+                                    IapTestServiceAccountInfo.decode = function decode(reader, length, error, long) {
                                         if (!(reader instanceof $Reader))
                                             reader = $Reader.create(reader);
+                                        if (long === undefined)
+                                            long = 0;
+                                        if (long > $Reader.recursionLimit)
+                                            throw Error("maximum nesting depth exceeded");
                                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.IapCredential.IapTestServiceAccountInfo();
                                         while (reader.pos < end) {
                                             var tag = reader.uint32();
@@ -5084,7 +5280,7 @@
                                                     break;
                                                 }
                                             default:
-                                                reader.skipType(tag & 7);
+                                                reader.skipType(tag & 7, long);
                                                 break;
                                             }
                                         }
@@ -5115,9 +5311,13 @@
                                      * @param {Object.<string,*>} message Plain object to verify
                                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                                      */
-                                    IapTestServiceAccountInfo.verify = function verify(message) {
+                                    IapTestServiceAccountInfo.verify = function verify(message, long) {
                                         if (typeof message !== "object" || message === null)
                                             return "object expected";
+                                        if (long === undefined)
+                                            long = 0;
+                                        if (long > $util.recursionLimit)
+                                            return "maximum nesting depth exceeded";
                                         if (message.targetAudienceClientId != null && message.hasOwnProperty("targetAudienceClientId"))
                                             if (!$util.isString(message.targetAudienceClientId))
                                                 return "targetAudienceClientId: string expected";
@@ -5132,9 +5332,13 @@
                                      * @param {Object.<string,*>} object Plain object
                                      * @returns {google.cloud.websecurityscanner.v1.ScanConfig.Authentication.IapCredential.IapTestServiceAccountInfo} IapTestServiceAccountInfo
                                      */
-                                    IapTestServiceAccountInfo.fromObject = function fromObject(object) {
+                                    IapTestServiceAccountInfo.fromObject = function fromObject(object, long) {
                                         if (object instanceof $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.IapCredential.IapTestServiceAccountInfo)
                                             return object;
+                                        if (long === undefined)
+                                            long = 0;
+                                        if (long > $util.recursionLimit)
+                                            throw Error("maximum nesting depth exceeded");
                                         var message = new $root.google.cloud.websecurityscanner.v1.ScanConfig.Authentication.IapCredential.IapTestServiceAccountInfo();
                                         if (object.targetAudienceClientId != null)
                                             message.targetAudienceClientId = String(object.targetAudienceClientId);
@@ -5217,7 +5421,7 @@
                             function Schedule(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -5292,9 +5496,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Schedule.decode = function decode(reader, length, error) {
+                            Schedule.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.ScanConfig.Schedule();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -5302,7 +5510,7 @@
                                         break;
                                     switch (tag >>> 3) {
                                     case 1: {
-                                            message.scheduleTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            message.scheduleTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     case 2: {
@@ -5310,7 +5518,7 @@
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -5341,11 +5549,15 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            Schedule.verify = function verify(message) {
+                            Schedule.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 if (message.scheduleTime != null && message.hasOwnProperty("scheduleTime")) {
-                                    var error = $root.google.protobuf.Timestamp.verify(message.scheduleTime);
+                                    var error = $root.google.protobuf.Timestamp.verify(message.scheduleTime, long + 1);
                                     if (error)
                                         return "scheduleTime." + error;
                                 }
@@ -5363,14 +5575,18 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.cloud.websecurityscanner.v1.ScanConfig.Schedule} Schedule
                              */
-                            Schedule.fromObject = function fromObject(object) {
+                            Schedule.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.cloud.websecurityscanner.v1.ScanConfig.Schedule)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.cloud.websecurityscanner.v1.ScanConfig.Schedule();
                                 if (object.scheduleTime != null) {
                                     if (typeof object.scheduleTime !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1.ScanConfig.Schedule.scheduleTime: object expected");
-                                    message.scheduleTime = $root.google.protobuf.Timestamp.fromObject(object.scheduleTime);
+                                    message.scheduleTime = $root.google.protobuf.Timestamp.fromObject(object.scheduleTime, long + 1);
                                 }
                                 if (object.intervalDurationDays != null)
                                     message.intervalDurationDays = object.intervalDurationDays | 0;
@@ -5504,7 +5720,7 @@
                         function ScanConfigError(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -5579,9 +5795,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ScanConfigError.decode = function decode(reader, length, error) {
+                        ScanConfigError.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.ScanConfigError();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -5597,7 +5817,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -5628,9 +5848,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ScanConfigError.verify = function verify(message) {
+                        ScanConfigError.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.code != null && message.hasOwnProperty("code"))
                                 switch (message.code) {
                                 default:
@@ -5693,9 +5917,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.ScanConfigError} ScanConfigError
                          */
-                        ScanConfigError.fromObject = function fromObject(object) {
+                        ScanConfigError.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.ScanConfigError)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.ScanConfigError();
                             switch (object.code) {
                             default:
@@ -6056,7 +6284,7 @@
                             this.warningTraces = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -6222,9 +6450,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ScanRun.decode = function decode(reader, length, error) {
+                        ScanRun.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.ScanRun();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -6244,11 +6476,11 @@
                                         break;
                                     }
                                 case 4: {
-                                        message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 5: {
-                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 6: {
@@ -6268,17 +6500,17 @@
                                         break;
                                     }
                                 case 10: {
-                                        message.errorTrace = $root.google.cloud.websecurityscanner.v1.ScanRunErrorTrace.decode(reader, reader.uint32());
+                                        message.errorTrace = $root.google.cloud.websecurityscanner.v1.ScanRunErrorTrace.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 11: {
                                         if (!(message.warningTraces && message.warningTraces.length))
                                             message.warningTraces = [];
-                                        message.warningTraces.push($root.google.cloud.websecurityscanner.v1.ScanRunWarningTrace.decode(reader, reader.uint32()));
+                                        message.warningTraces.push($root.google.cloud.websecurityscanner.v1.ScanRunWarningTrace.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -6309,9 +6541,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ScanRun.verify = function verify(message) {
+                        ScanRun.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -6336,12 +6572,12 @@
                                     break;
                                 }
                             if (message.startTime != null && message.hasOwnProperty("startTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                var error = $root.google.protobuf.Timestamp.verify(message.startTime, long + 1);
                                 if (error)
                                     return "startTime." + error;
                             }
                             if (message.endTime != null && message.hasOwnProperty("endTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime, long + 1);
                                 if (error)
                                     return "endTime." + error;
                             }
@@ -6358,7 +6594,7 @@
                                 if (!$util.isInteger(message.progressPercent))
                                     return "progressPercent: integer expected";
                             if (message.errorTrace != null && message.hasOwnProperty("errorTrace")) {
-                                var error = $root.google.cloud.websecurityscanner.v1.ScanRunErrorTrace.verify(message.errorTrace);
+                                var error = $root.google.cloud.websecurityscanner.v1.ScanRunErrorTrace.verify(message.errorTrace, long + 1);
                                 if (error)
                                     return "errorTrace." + error;
                             }
@@ -6366,7 +6602,7 @@
                                 if (!Array.isArray(message.warningTraces))
                                     return "warningTraces: array expected";
                                 for (var i = 0; i < message.warningTraces.length; ++i) {
-                                    var error = $root.google.cloud.websecurityscanner.v1.ScanRunWarningTrace.verify(message.warningTraces[i]);
+                                    var error = $root.google.cloud.websecurityscanner.v1.ScanRunWarningTrace.verify(message.warningTraces[i], long + 1);
                                     if (error)
                                         return "warningTraces." + error;
                                 }
@@ -6382,9 +6618,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.ScanRun} ScanRun
                          */
-                        ScanRun.fromObject = function fromObject(object) {
+                        ScanRun.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.ScanRun)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.ScanRun();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -6439,12 +6679,12 @@
                             if (object.startTime != null) {
                                 if (typeof object.startTime !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1.ScanRun.startTime: object expected");
-                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime, long + 1);
                             }
                             if (object.endTime != null) {
                                 if (typeof object.endTime !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1.ScanRun.endTime: object expected");
-                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime, long + 1);
                             }
                             if (object.urlsCrawledCount != null)
                                 if ($util.Long)
@@ -6471,7 +6711,7 @@
                             if (object.errorTrace != null) {
                                 if (typeof object.errorTrace !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1.ScanRun.errorTrace: object expected");
-                                message.errorTrace = $root.google.cloud.websecurityscanner.v1.ScanRunErrorTrace.fromObject(object.errorTrace);
+                                message.errorTrace = $root.google.cloud.websecurityscanner.v1.ScanRunErrorTrace.fromObject(object.errorTrace, long + 1);
                             }
                             if (object.warningTraces) {
                                 if (!Array.isArray(object.warningTraces))
@@ -6480,7 +6720,7 @@
                                 for (var i = 0; i < object.warningTraces.length; ++i) {
                                     if (typeof object.warningTraces[i] !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1.ScanRun.warningTraces: object expected");
-                                    message.warningTraces[i] = $root.google.cloud.websecurityscanner.v1.ScanRunWarningTrace.fromObject(object.warningTraces[i]);
+                                    message.warningTraces[i] = $root.google.cloud.websecurityscanner.v1.ScanRunWarningTrace.fromObject(object.warningTraces[i], long + 1);
                                 }
                             }
                             return message;
@@ -6642,7 +6882,7 @@
                         function ScanRunErrorTrace(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -6727,9 +6967,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ScanRunErrorTrace.decode = function decode(reader, length, error) {
+                        ScanRunErrorTrace.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.ScanRunErrorTrace();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -6741,7 +6985,7 @@
                                         break;
                                     }
                                 case 2: {
-                                        message.scanConfigError = $root.google.cloud.websecurityscanner.v1.ScanConfigError.decode(reader, reader.uint32());
+                                        message.scanConfigError = $root.google.cloud.websecurityscanner.v1.ScanConfigError.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 3: {
@@ -6749,7 +6993,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -6780,9 +7024,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ScanRunErrorTrace.verify = function verify(message) {
+                        ScanRunErrorTrace.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.code != null && message.hasOwnProperty("code"))
                                 switch (message.code) {
                                 default:
@@ -6797,7 +7045,7 @@
                                     break;
                                 }
                             if (message.scanConfigError != null && message.hasOwnProperty("scanConfigError")) {
-                                var error = $root.google.cloud.websecurityscanner.v1.ScanConfigError.verify(message.scanConfigError);
+                                var error = $root.google.cloud.websecurityscanner.v1.ScanConfigError.verify(message.scanConfigError, long + 1);
                                 if (error)
                                     return "scanConfigError." + error;
                             }
@@ -6815,9 +7063,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.ScanRunErrorTrace} ScanRunErrorTrace
                          */
-                        ScanRunErrorTrace.fromObject = function fromObject(object) {
+                        ScanRunErrorTrace.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.ScanRunErrorTrace)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.ScanRunErrorTrace();
                             switch (object.code) {
                             default:
@@ -6858,7 +7110,7 @@
                             if (object.scanConfigError != null) {
                                 if (typeof object.scanConfigError !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1.ScanRunErrorTrace.scanConfigError: object expected");
-                                message.scanConfigError = $root.google.cloud.websecurityscanner.v1.ScanConfigError.fromObject(object.scanConfigError);
+                                message.scanConfigError = $root.google.cloud.websecurityscanner.v1.ScanConfigError.fromObject(object.scanConfigError, long + 1);
                             }
                             if (object.mostCommonHttpErrorCode != null)
                                 message.mostCommonHttpErrorCode = object.mostCommonHttpErrorCode | 0;
@@ -6965,7 +7217,7 @@
                         function ScanRunWarningTrace(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -7030,9 +7282,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ScanRunWarningTrace.decode = function decode(reader, length, error) {
+                        ScanRunWarningTrace.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.ScanRunWarningTrace();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -7044,7 +7300,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -7075,9 +7331,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ScanRunWarningTrace.verify = function verify(message) {
+                        ScanRunWarningTrace.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.code != null && message.hasOwnProperty("code"))
                                 switch (message.code) {
                                 default:
@@ -7101,9 +7361,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.ScanRunWarningTrace} ScanRunWarningTrace
                          */
-                        ScanRunWarningTrace.fromObject = function fromObject(object) {
+                        ScanRunWarningTrace.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.ScanRunWarningTrace)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.ScanRunWarningTrace();
                             switch (object.code) {
                             default:
@@ -7238,7 +7502,7 @@
                         function ScanRunLog(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -7373,9 +7637,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ScanRunLog.decode = function decode(reader, length, error) {
+                        ScanRunLog.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.ScanRunLog();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -7411,11 +7679,11 @@
                                         break;
                                     }
                                 case 8: {
-                                        message.errorTrace = $root.google.cloud.websecurityscanner.v1.ScanRunErrorTrace.decode(reader, reader.uint32());
+                                        message.errorTrace = $root.google.cloud.websecurityscanner.v1.ScanRunErrorTrace.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -7446,9 +7714,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ScanRunLog.verify = function verify(message) {
+                        ScanRunLog.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.summary != null && message.hasOwnProperty("summary"))
                                 if (!$util.isString(message.summary))
                                     return "summary: string expected";
@@ -7485,7 +7757,7 @@
                                 if (typeof message.hasFindings !== "boolean")
                                     return "hasFindings: boolean expected";
                             if (message.errorTrace != null && message.hasOwnProperty("errorTrace")) {
-                                var error = $root.google.cloud.websecurityscanner.v1.ScanRunErrorTrace.verify(message.errorTrace);
+                                var error = $root.google.cloud.websecurityscanner.v1.ScanRunErrorTrace.verify(message.errorTrace, long + 1);
                                 if (error)
                                     return "errorTrace." + error;
                             }
@@ -7500,9 +7772,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.ScanRunLog} ScanRunLog
                          */
-                        ScanRunLog.fromObject = function fromObject(object) {
+                        ScanRunLog.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.ScanRunLog)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.ScanRunLog();
                             if (object.summary != null)
                                 message.summary = String(object.summary);
@@ -7579,7 +7855,7 @@
                             if (object.errorTrace != null) {
                                 if (typeof object.errorTrace !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1.ScanRunLog.errorTrace: object expected");
-                                message.errorTrace = $root.google.cloud.websecurityscanner.v1.ScanRunErrorTrace.fromObject(object.errorTrace);
+                                message.errorTrace = $root.google.cloud.websecurityscanner.v1.ScanRunErrorTrace.fromObject(object.errorTrace, long + 1);
                             }
                             return message;
                         };
@@ -8154,7 +8430,7 @@
                         function CreateScanConfigRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -8229,9 +8505,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateScanConfigRequest.decode = function decode(reader, length, error) {
+                        CreateScanConfigRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.CreateScanConfigRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -8243,11 +8523,11 @@
                                         break;
                                     }
                                 case 2: {
-                                        message.scanConfig = $root.google.cloud.websecurityscanner.v1.ScanConfig.decode(reader, reader.uint32());
+                                        message.scanConfig = $root.google.cloud.websecurityscanner.v1.ScanConfig.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -8278,14 +8558,18 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        CreateScanConfigRequest.verify = function verify(message) {
+                        CreateScanConfigRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
                             if (message.scanConfig != null && message.hasOwnProperty("scanConfig")) {
-                                var error = $root.google.cloud.websecurityscanner.v1.ScanConfig.verify(message.scanConfig);
+                                var error = $root.google.cloud.websecurityscanner.v1.ScanConfig.verify(message.scanConfig, long + 1);
                                 if (error)
                                     return "scanConfig." + error;
                             }
@@ -8300,16 +8584,20 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.CreateScanConfigRequest} CreateScanConfigRequest
                          */
-                        CreateScanConfigRequest.fromObject = function fromObject(object) {
+                        CreateScanConfigRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.CreateScanConfigRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.CreateScanConfigRequest();
                             if (object.parent != null)
                                 message.parent = String(object.parent);
                             if (object.scanConfig != null) {
                                 if (typeof object.scanConfig !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1.CreateScanConfigRequest.scanConfig: object expected");
-                                message.scanConfig = $root.google.cloud.websecurityscanner.v1.ScanConfig.fromObject(object.scanConfig);
+                                message.scanConfig = $root.google.cloud.websecurityscanner.v1.ScanConfig.fromObject(object.scanConfig, long + 1);
                             }
                             return message;
                         };
@@ -8387,7 +8675,7 @@
                         function DeleteScanConfigRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -8452,9 +8740,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteScanConfigRequest.decode = function decode(reader, length, error) {
+                        DeleteScanConfigRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.DeleteScanConfigRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -8466,7 +8758,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -8497,9 +8789,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        DeleteScanConfigRequest.verify = function verify(message) {
+                        DeleteScanConfigRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -8514,9 +8810,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.DeleteScanConfigRequest} DeleteScanConfigRequest
                          */
-                        DeleteScanConfigRequest.fromObject = function fromObject(object) {
+                        DeleteScanConfigRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.DeleteScanConfigRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.DeleteScanConfigRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -8592,7 +8892,7 @@
                         function GetScanConfigRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -8657,9 +8957,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetScanConfigRequest.decode = function decode(reader, length, error) {
+                        GetScanConfigRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.GetScanConfigRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -8671,7 +8975,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -8702,9 +9006,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        GetScanConfigRequest.verify = function verify(message) {
+                        GetScanConfigRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -8719,9 +9027,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.GetScanConfigRequest} GetScanConfigRequest
                          */
-                        GetScanConfigRequest.fromObject = function fromObject(object) {
+                        GetScanConfigRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.GetScanConfigRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.GetScanConfigRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -8799,7 +9111,7 @@
                         function ListScanConfigsRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -8884,9 +9196,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListScanConfigsRequest.decode = function decode(reader, length, error) {
+                        ListScanConfigsRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.ListScanConfigsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -8906,7 +9222,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -8937,9 +9253,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListScanConfigsRequest.verify = function verify(message) {
+                        ListScanConfigsRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
@@ -8960,9 +9280,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.ListScanConfigsRequest} ListScanConfigsRequest
                          */
-                        ListScanConfigsRequest.fromObject = function fromObject(object) {
+                        ListScanConfigsRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.ListScanConfigsRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.ListScanConfigsRequest();
                             if (object.parent != null)
                                 message.parent = String(object.parent);
@@ -9050,7 +9374,7 @@
                         function UpdateScanConfigRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -9125,9 +9449,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateScanConfigRequest.decode = function decode(reader, length, error) {
+                        UpdateScanConfigRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.UpdateScanConfigRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -9135,15 +9463,15 @@
                                     break;
                                 switch (tag >>> 3) {
                                 case 2: {
-                                        message.scanConfig = $root.google.cloud.websecurityscanner.v1.ScanConfig.decode(reader, reader.uint32());
+                                        message.scanConfig = $root.google.cloud.websecurityscanner.v1.ScanConfig.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 3: {
-                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -9174,16 +9502,20 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        UpdateScanConfigRequest.verify = function verify(message) {
+                        UpdateScanConfigRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.scanConfig != null && message.hasOwnProperty("scanConfig")) {
-                                var error = $root.google.cloud.websecurityscanner.v1.ScanConfig.verify(message.scanConfig);
+                                var error = $root.google.cloud.websecurityscanner.v1.ScanConfig.verify(message.scanConfig, long + 1);
                                 if (error)
                                     return "scanConfig." + error;
                             }
                             if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
-                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask, long + 1);
                                 if (error)
                                     return "updateMask." + error;
                             }
@@ -9198,19 +9530,23 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.UpdateScanConfigRequest} UpdateScanConfigRequest
                          */
-                        UpdateScanConfigRequest.fromObject = function fromObject(object) {
+                        UpdateScanConfigRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.UpdateScanConfigRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.UpdateScanConfigRequest();
                             if (object.scanConfig != null) {
                                 if (typeof object.scanConfig !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1.UpdateScanConfigRequest.scanConfig: object expected");
-                                message.scanConfig = $root.google.cloud.websecurityscanner.v1.ScanConfig.fromObject(object.scanConfig);
+                                message.scanConfig = $root.google.cloud.websecurityscanner.v1.ScanConfig.fromObject(object.scanConfig, long + 1);
                             }
                             if (object.updateMask != null) {
                                 if (typeof object.updateMask !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1.UpdateScanConfigRequest.updateMask: object expected");
-                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask, long + 1);
                             }
                             return message;
                         };
@@ -9290,7 +9626,7 @@
                             this.scanConfigs = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -9366,9 +9702,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListScanConfigsResponse.decode = function decode(reader, length, error) {
+                        ListScanConfigsResponse.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.ListScanConfigsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -9378,7 +9718,7 @@
                                 case 1: {
                                         if (!(message.scanConfigs && message.scanConfigs.length))
                                             message.scanConfigs = [];
-                                        message.scanConfigs.push($root.google.cloud.websecurityscanner.v1.ScanConfig.decode(reader, reader.uint32()));
+                                        message.scanConfigs.push($root.google.cloud.websecurityscanner.v1.ScanConfig.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 2: {
@@ -9386,7 +9726,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -9417,14 +9757,18 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListScanConfigsResponse.verify = function verify(message) {
+                        ListScanConfigsResponse.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.scanConfigs != null && message.hasOwnProperty("scanConfigs")) {
                                 if (!Array.isArray(message.scanConfigs))
                                     return "scanConfigs: array expected";
                                 for (var i = 0; i < message.scanConfigs.length; ++i) {
-                                    var error = $root.google.cloud.websecurityscanner.v1.ScanConfig.verify(message.scanConfigs[i]);
+                                    var error = $root.google.cloud.websecurityscanner.v1.ScanConfig.verify(message.scanConfigs[i], long + 1);
                                     if (error)
                                         return "scanConfigs." + error;
                                 }
@@ -9443,9 +9787,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.ListScanConfigsResponse} ListScanConfigsResponse
                          */
-                        ListScanConfigsResponse.fromObject = function fromObject(object) {
+                        ListScanConfigsResponse.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.ListScanConfigsResponse)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.ListScanConfigsResponse();
                             if (object.scanConfigs) {
                                 if (!Array.isArray(object.scanConfigs))
@@ -9454,7 +9802,7 @@
                                 for (var i = 0; i < object.scanConfigs.length; ++i) {
                                     if (typeof object.scanConfigs[i] !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1.ListScanConfigsResponse.scanConfigs: object expected");
-                                    message.scanConfigs[i] = $root.google.cloud.websecurityscanner.v1.ScanConfig.fromObject(object.scanConfigs[i]);
+                                    message.scanConfigs[i] = $root.google.cloud.websecurityscanner.v1.ScanConfig.fromObject(object.scanConfigs[i], long + 1);
                                 }
                             }
                             if (object.nextPageToken != null)
@@ -9538,7 +9886,7 @@
                         function StartScanRunRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -9603,9 +9951,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        StartScanRunRequest.decode = function decode(reader, length, error) {
+                        StartScanRunRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.StartScanRunRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -9617,7 +9969,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -9648,9 +10000,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        StartScanRunRequest.verify = function verify(message) {
+                        StartScanRunRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -9665,9 +10021,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.StartScanRunRequest} StartScanRunRequest
                          */
-                        StartScanRunRequest.fromObject = function fromObject(object) {
+                        StartScanRunRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.StartScanRunRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.StartScanRunRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -9743,7 +10103,7 @@
                         function GetScanRunRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -9808,9 +10168,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetScanRunRequest.decode = function decode(reader, length, error) {
+                        GetScanRunRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.GetScanRunRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -9822,7 +10186,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -9853,9 +10217,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        GetScanRunRequest.verify = function verify(message) {
+                        GetScanRunRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -9870,9 +10238,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.GetScanRunRequest} GetScanRunRequest
                          */
-                        GetScanRunRequest.fromObject = function fromObject(object) {
+                        GetScanRunRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.GetScanRunRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.GetScanRunRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -9950,7 +10322,7 @@
                         function ListScanRunsRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -10035,9 +10407,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListScanRunsRequest.decode = function decode(reader, length, error) {
+                        ListScanRunsRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.ListScanRunsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -10057,7 +10433,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -10088,9 +10464,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListScanRunsRequest.verify = function verify(message) {
+                        ListScanRunsRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
@@ -10111,9 +10491,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.ListScanRunsRequest} ListScanRunsRequest
                          */
-                        ListScanRunsRequest.fromObject = function fromObject(object) {
+                        ListScanRunsRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.ListScanRunsRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.ListScanRunsRequest();
                             if (object.parent != null)
                                 message.parent = String(object.parent);
@@ -10202,7 +10586,7 @@
                             this.scanRuns = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -10278,9 +10662,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListScanRunsResponse.decode = function decode(reader, length, error) {
+                        ListScanRunsResponse.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.ListScanRunsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -10290,7 +10678,7 @@
                                 case 1: {
                                         if (!(message.scanRuns && message.scanRuns.length))
                                             message.scanRuns = [];
-                                        message.scanRuns.push($root.google.cloud.websecurityscanner.v1.ScanRun.decode(reader, reader.uint32()));
+                                        message.scanRuns.push($root.google.cloud.websecurityscanner.v1.ScanRun.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 2: {
@@ -10298,7 +10686,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -10329,14 +10717,18 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListScanRunsResponse.verify = function verify(message) {
+                        ListScanRunsResponse.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.scanRuns != null && message.hasOwnProperty("scanRuns")) {
                                 if (!Array.isArray(message.scanRuns))
                                     return "scanRuns: array expected";
                                 for (var i = 0; i < message.scanRuns.length; ++i) {
-                                    var error = $root.google.cloud.websecurityscanner.v1.ScanRun.verify(message.scanRuns[i]);
+                                    var error = $root.google.cloud.websecurityscanner.v1.ScanRun.verify(message.scanRuns[i], long + 1);
                                     if (error)
                                         return "scanRuns." + error;
                                 }
@@ -10355,9 +10747,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.ListScanRunsResponse} ListScanRunsResponse
                          */
-                        ListScanRunsResponse.fromObject = function fromObject(object) {
+                        ListScanRunsResponse.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.ListScanRunsResponse)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.ListScanRunsResponse();
                             if (object.scanRuns) {
                                 if (!Array.isArray(object.scanRuns))
@@ -10366,7 +10762,7 @@
                                 for (var i = 0; i < object.scanRuns.length; ++i) {
                                     if (typeof object.scanRuns[i] !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1.ListScanRunsResponse.scanRuns: object expected");
-                                    message.scanRuns[i] = $root.google.cloud.websecurityscanner.v1.ScanRun.fromObject(object.scanRuns[i]);
+                                    message.scanRuns[i] = $root.google.cloud.websecurityscanner.v1.ScanRun.fromObject(object.scanRuns[i], long + 1);
                                 }
                             }
                             if (object.nextPageToken != null)
@@ -10450,7 +10846,7 @@
                         function StopScanRunRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -10515,9 +10911,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        StopScanRunRequest.decode = function decode(reader, length, error) {
+                        StopScanRunRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.StopScanRunRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -10529,7 +10929,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -10560,9 +10960,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        StopScanRunRequest.verify = function verify(message) {
+                        StopScanRunRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -10577,9 +10981,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.StopScanRunRequest} StopScanRunRequest
                          */
-                        StopScanRunRequest.fromObject = function fromObject(object) {
+                        StopScanRunRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.StopScanRunRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.StopScanRunRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -10657,7 +11065,7 @@
                         function ListCrawledUrlsRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -10742,9 +11150,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListCrawledUrlsRequest.decode = function decode(reader, length, error) {
+                        ListCrawledUrlsRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.ListCrawledUrlsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -10764,7 +11176,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -10795,9 +11207,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListCrawledUrlsRequest.verify = function verify(message) {
+                        ListCrawledUrlsRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
@@ -10818,9 +11234,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.ListCrawledUrlsRequest} ListCrawledUrlsRequest
                          */
-                        ListCrawledUrlsRequest.fromObject = function fromObject(object) {
+                        ListCrawledUrlsRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.ListCrawledUrlsRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.ListCrawledUrlsRequest();
                             if (object.parent != null)
                                 message.parent = String(object.parent);
@@ -10909,7 +11329,7 @@
                             this.crawledUrls = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -10985,9 +11405,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListCrawledUrlsResponse.decode = function decode(reader, length, error) {
+                        ListCrawledUrlsResponse.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.ListCrawledUrlsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -10997,7 +11421,7 @@
                                 case 1: {
                                         if (!(message.crawledUrls && message.crawledUrls.length))
                                             message.crawledUrls = [];
-                                        message.crawledUrls.push($root.google.cloud.websecurityscanner.v1.CrawledUrl.decode(reader, reader.uint32()));
+                                        message.crawledUrls.push($root.google.cloud.websecurityscanner.v1.CrawledUrl.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 2: {
@@ -11005,7 +11429,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -11036,14 +11460,18 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListCrawledUrlsResponse.verify = function verify(message) {
+                        ListCrawledUrlsResponse.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.crawledUrls != null && message.hasOwnProperty("crawledUrls")) {
                                 if (!Array.isArray(message.crawledUrls))
                                     return "crawledUrls: array expected";
                                 for (var i = 0; i < message.crawledUrls.length; ++i) {
-                                    var error = $root.google.cloud.websecurityscanner.v1.CrawledUrl.verify(message.crawledUrls[i]);
+                                    var error = $root.google.cloud.websecurityscanner.v1.CrawledUrl.verify(message.crawledUrls[i], long + 1);
                                     if (error)
                                         return "crawledUrls." + error;
                                 }
@@ -11062,9 +11490,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.ListCrawledUrlsResponse} ListCrawledUrlsResponse
                          */
-                        ListCrawledUrlsResponse.fromObject = function fromObject(object) {
+                        ListCrawledUrlsResponse.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.ListCrawledUrlsResponse)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.ListCrawledUrlsResponse();
                             if (object.crawledUrls) {
                                 if (!Array.isArray(object.crawledUrls))
@@ -11073,7 +11505,7 @@
                                 for (var i = 0; i < object.crawledUrls.length; ++i) {
                                     if (typeof object.crawledUrls[i] !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1.ListCrawledUrlsResponse.crawledUrls: object expected");
-                                    message.crawledUrls[i] = $root.google.cloud.websecurityscanner.v1.CrawledUrl.fromObject(object.crawledUrls[i]);
+                                    message.crawledUrls[i] = $root.google.cloud.websecurityscanner.v1.CrawledUrl.fromObject(object.crawledUrls[i], long + 1);
                                 }
                             }
                             if (object.nextPageToken != null)
@@ -11157,7 +11589,7 @@
                         function GetFindingRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -11222,9 +11654,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetFindingRequest.decode = function decode(reader, length, error) {
+                        GetFindingRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.GetFindingRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -11236,7 +11672,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -11267,9 +11703,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        GetFindingRequest.verify = function verify(message) {
+                        GetFindingRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -11284,9 +11724,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.GetFindingRequest} GetFindingRequest
                          */
-                        GetFindingRequest.fromObject = function fromObject(object) {
+                        GetFindingRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.GetFindingRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.GetFindingRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -11365,7 +11809,7 @@
                         function ListFindingsRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -11460,9 +11904,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListFindingsRequest.decode = function decode(reader, length, error) {
+                        ListFindingsRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.ListFindingsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -11486,7 +11934,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -11517,9 +11965,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListFindingsRequest.verify = function verify(message) {
+                        ListFindingsRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
@@ -11543,9 +11995,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.ListFindingsRequest} ListFindingsRequest
                          */
-                        ListFindingsRequest.fromObject = function fromObject(object) {
+                        ListFindingsRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.ListFindingsRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.ListFindingsRequest();
                             if (object.parent != null)
                                 message.parent = String(object.parent);
@@ -11639,7 +12095,7 @@
                             this.findings = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -11715,9 +12171,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListFindingsResponse.decode = function decode(reader, length, error) {
+                        ListFindingsResponse.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.ListFindingsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -11727,7 +12187,7 @@
                                 case 1: {
                                         if (!(message.findings && message.findings.length))
                                             message.findings = [];
-                                        message.findings.push($root.google.cloud.websecurityscanner.v1.Finding.decode(reader, reader.uint32()));
+                                        message.findings.push($root.google.cloud.websecurityscanner.v1.Finding.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 2: {
@@ -11735,7 +12195,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -11766,14 +12226,18 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListFindingsResponse.verify = function verify(message) {
+                        ListFindingsResponse.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.findings != null && message.hasOwnProperty("findings")) {
                                 if (!Array.isArray(message.findings))
                                     return "findings: array expected";
                                 for (var i = 0; i < message.findings.length; ++i) {
-                                    var error = $root.google.cloud.websecurityscanner.v1.Finding.verify(message.findings[i]);
+                                    var error = $root.google.cloud.websecurityscanner.v1.Finding.verify(message.findings[i], long + 1);
                                     if (error)
                                         return "findings." + error;
                                 }
@@ -11792,9 +12256,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.ListFindingsResponse} ListFindingsResponse
                          */
-                        ListFindingsResponse.fromObject = function fromObject(object) {
+                        ListFindingsResponse.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.ListFindingsResponse)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.ListFindingsResponse();
                             if (object.findings) {
                                 if (!Array.isArray(object.findings))
@@ -11803,7 +12271,7 @@
                                 for (var i = 0; i < object.findings.length; ++i) {
                                     if (typeof object.findings[i] !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1.ListFindingsResponse.findings: object expected");
-                                    message.findings[i] = $root.google.cloud.websecurityscanner.v1.Finding.fromObject(object.findings[i]);
+                                    message.findings[i] = $root.google.cloud.websecurityscanner.v1.Finding.fromObject(object.findings[i], long + 1);
                                 }
                             }
                             if (object.nextPageToken != null)
@@ -11887,7 +12355,7 @@
                         function ListFindingTypeStatsRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -11952,9 +12420,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListFindingTypeStatsRequest.decode = function decode(reader, length, error) {
+                        ListFindingTypeStatsRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.ListFindingTypeStatsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -11966,7 +12438,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -11997,9 +12469,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListFindingTypeStatsRequest.verify = function verify(message) {
+                        ListFindingTypeStatsRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
@@ -12014,9 +12490,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.ListFindingTypeStatsRequest} ListFindingTypeStatsRequest
                          */
-                        ListFindingTypeStatsRequest.fromObject = function fromObject(object) {
+                        ListFindingTypeStatsRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.ListFindingTypeStatsRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.ListFindingTypeStatsRequest();
                             if (object.parent != null)
                                 message.parent = String(object.parent);
@@ -12093,7 +12573,7 @@
                             this.findingTypeStats = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -12159,9 +12639,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListFindingTypeStatsResponse.decode = function decode(reader, length, error) {
+                        ListFindingTypeStatsResponse.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1.ListFindingTypeStatsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -12171,11 +12655,11 @@
                                 case 1: {
                                         if (!(message.findingTypeStats && message.findingTypeStats.length))
                                             message.findingTypeStats = [];
-                                        message.findingTypeStats.push($root.google.cloud.websecurityscanner.v1.FindingTypeStats.decode(reader, reader.uint32()));
+                                        message.findingTypeStats.push($root.google.cloud.websecurityscanner.v1.FindingTypeStats.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -12206,14 +12690,18 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListFindingTypeStatsResponse.verify = function verify(message) {
+                        ListFindingTypeStatsResponse.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.findingTypeStats != null && message.hasOwnProperty("findingTypeStats")) {
                                 if (!Array.isArray(message.findingTypeStats))
                                     return "findingTypeStats: array expected";
                                 for (var i = 0; i < message.findingTypeStats.length; ++i) {
-                                    var error = $root.google.cloud.websecurityscanner.v1.FindingTypeStats.verify(message.findingTypeStats[i]);
+                                    var error = $root.google.cloud.websecurityscanner.v1.FindingTypeStats.verify(message.findingTypeStats[i], long + 1);
                                     if (error)
                                         return "findingTypeStats." + error;
                                 }
@@ -12229,9 +12717,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1.ListFindingTypeStatsResponse} ListFindingTypeStatsResponse
                          */
-                        ListFindingTypeStatsResponse.fromObject = function fromObject(object) {
+                        ListFindingTypeStatsResponse.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1.ListFindingTypeStatsResponse)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1.ListFindingTypeStatsResponse();
                             if (object.findingTypeStats) {
                                 if (!Array.isArray(object.findingTypeStats))
@@ -12240,7 +12732,7 @@
                                 for (var i = 0; i < object.findingTypeStats.length; ++i) {
                                     if (typeof object.findingTypeStats[i] !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1.ListFindingTypeStatsResponse.findingTypeStats: object expected");
-                                    message.findingTypeStats[i] = $root.google.cloud.websecurityscanner.v1.FindingTypeStats.fromObject(object.findingTypeStats[i]);
+                                    message.findingTypeStats[i] = $root.google.cloud.websecurityscanner.v1.FindingTypeStats.fromObject(object.findingTypeStats[i], long + 1);
                                 }
                             }
                             return message;
@@ -12332,7 +12824,7 @@
                         function CrawledUrl(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -12417,9 +12909,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CrawledUrl.decode = function decode(reader, length, error) {
+                        CrawledUrl.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.CrawledUrl();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -12439,7 +12935,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -12470,9 +12966,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        CrawledUrl.verify = function verify(message) {
+                        CrawledUrl.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.httpMethod != null && message.hasOwnProperty("httpMethod"))
                                 if (!$util.isString(message.httpMethod))
                                     return "httpMethod: string expected";
@@ -12493,9 +12993,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1alpha.CrawledUrl} CrawledUrl
                          */
-                        CrawledUrl.fromObject = function fromObject(object) {
+                        CrawledUrl.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.CrawledUrl)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1alpha.CrawledUrl();
                             if (object.httpMethod != null)
                                 message.httpMethod = String(object.httpMethod);
@@ -12596,7 +13100,7 @@
                         function Finding(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -12801,9 +13305,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Finding.decode = function decode(reader, length, error) {
+                        Finding.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.Finding();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -12851,27 +13359,27 @@
                                         break;
                                     }
                                 case 11: {
-                                        message.outdatedLibrary = $root.google.cloud.websecurityscanner.v1alpha.OutdatedLibrary.decode(reader, reader.uint32());
+                                        message.outdatedLibrary = $root.google.cloud.websecurityscanner.v1alpha.OutdatedLibrary.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 12: {
-                                        message.violatingResource = $root.google.cloud.websecurityscanner.v1alpha.ViolatingResource.decode(reader, reader.uint32());
+                                        message.violatingResource = $root.google.cloud.websecurityscanner.v1alpha.ViolatingResource.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 15: {
-                                        message.vulnerableHeaders = $root.google.cloud.websecurityscanner.v1alpha.VulnerableHeaders.decode(reader, reader.uint32());
+                                        message.vulnerableHeaders = $root.google.cloud.websecurityscanner.v1alpha.VulnerableHeaders.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 13: {
-                                        message.vulnerableParameters = $root.google.cloud.websecurityscanner.v1alpha.VulnerableParameters.decode(reader, reader.uint32());
+                                        message.vulnerableParameters = $root.google.cloud.websecurityscanner.v1alpha.VulnerableParameters.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 14: {
-                                        message.xss = $root.google.cloud.websecurityscanner.v1alpha.Xss.decode(reader, reader.uint32());
+                                        message.xss = $root.google.cloud.websecurityscanner.v1alpha.Xss.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -12902,9 +13410,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        Finding.verify = function verify(message) {
+                        Finding.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -12951,27 +13463,27 @@
                                 if (!$util.isString(message.trackingId))
                                     return "trackingId: string expected";
                             if (message.outdatedLibrary != null && message.hasOwnProperty("outdatedLibrary")) {
-                                var error = $root.google.cloud.websecurityscanner.v1alpha.OutdatedLibrary.verify(message.outdatedLibrary);
+                                var error = $root.google.cloud.websecurityscanner.v1alpha.OutdatedLibrary.verify(message.outdatedLibrary, long + 1);
                                 if (error)
                                     return "outdatedLibrary." + error;
                             }
                             if (message.violatingResource != null && message.hasOwnProperty("violatingResource")) {
-                                var error = $root.google.cloud.websecurityscanner.v1alpha.ViolatingResource.verify(message.violatingResource);
+                                var error = $root.google.cloud.websecurityscanner.v1alpha.ViolatingResource.verify(message.violatingResource, long + 1);
                                 if (error)
                                     return "violatingResource." + error;
                             }
                             if (message.vulnerableHeaders != null && message.hasOwnProperty("vulnerableHeaders")) {
-                                var error = $root.google.cloud.websecurityscanner.v1alpha.VulnerableHeaders.verify(message.vulnerableHeaders);
+                                var error = $root.google.cloud.websecurityscanner.v1alpha.VulnerableHeaders.verify(message.vulnerableHeaders, long + 1);
                                 if (error)
                                     return "vulnerableHeaders." + error;
                             }
                             if (message.vulnerableParameters != null && message.hasOwnProperty("vulnerableParameters")) {
-                                var error = $root.google.cloud.websecurityscanner.v1alpha.VulnerableParameters.verify(message.vulnerableParameters);
+                                var error = $root.google.cloud.websecurityscanner.v1alpha.VulnerableParameters.verify(message.vulnerableParameters, long + 1);
                                 if (error)
                                     return "vulnerableParameters." + error;
                             }
                             if (message.xss != null && message.hasOwnProperty("xss")) {
-                                var error = $root.google.cloud.websecurityscanner.v1alpha.Xss.verify(message.xss);
+                                var error = $root.google.cloud.websecurityscanner.v1alpha.Xss.verify(message.xss, long + 1);
                                 if (error)
                                     return "xss." + error;
                             }
@@ -12986,9 +13498,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1alpha.Finding} Finding
                          */
-                        Finding.fromObject = function fromObject(object) {
+                        Finding.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.Finding)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1alpha.Finding();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -13067,27 +13583,27 @@
                             if (object.outdatedLibrary != null) {
                                 if (typeof object.outdatedLibrary !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1alpha.Finding.outdatedLibrary: object expected");
-                                message.outdatedLibrary = $root.google.cloud.websecurityscanner.v1alpha.OutdatedLibrary.fromObject(object.outdatedLibrary);
+                                message.outdatedLibrary = $root.google.cloud.websecurityscanner.v1alpha.OutdatedLibrary.fromObject(object.outdatedLibrary, long + 1);
                             }
                             if (object.violatingResource != null) {
                                 if (typeof object.violatingResource !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1alpha.Finding.violatingResource: object expected");
-                                message.violatingResource = $root.google.cloud.websecurityscanner.v1alpha.ViolatingResource.fromObject(object.violatingResource);
+                                message.violatingResource = $root.google.cloud.websecurityscanner.v1alpha.ViolatingResource.fromObject(object.violatingResource, long + 1);
                             }
                             if (object.vulnerableHeaders != null) {
                                 if (typeof object.vulnerableHeaders !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1alpha.Finding.vulnerableHeaders: object expected");
-                                message.vulnerableHeaders = $root.google.cloud.websecurityscanner.v1alpha.VulnerableHeaders.fromObject(object.vulnerableHeaders);
+                                message.vulnerableHeaders = $root.google.cloud.websecurityscanner.v1alpha.VulnerableHeaders.fromObject(object.vulnerableHeaders, long + 1);
                             }
                             if (object.vulnerableParameters != null) {
                                 if (typeof object.vulnerableParameters !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1alpha.Finding.vulnerableParameters: object expected");
-                                message.vulnerableParameters = $root.google.cloud.websecurityscanner.v1alpha.VulnerableParameters.fromObject(object.vulnerableParameters);
+                                message.vulnerableParameters = $root.google.cloud.websecurityscanner.v1alpha.VulnerableParameters.fromObject(object.vulnerableParameters, long + 1);
                             }
                             if (object.xss != null) {
                                 if (typeof object.xss !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1alpha.Finding.xss: object expected");
-                                message.xss = $root.google.cloud.websecurityscanner.v1alpha.Xss.fromObject(object.xss);
+                                message.xss = $root.google.cloud.websecurityscanner.v1alpha.Xss.fromObject(object.xss, long + 1);
                             }
                             return message;
                         };
@@ -13241,7 +13757,7 @@
                             this.learnMoreUrls = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -13327,9 +13843,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OutdatedLibrary.decode = function decode(reader, length, error) {
+                        OutdatedLibrary.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.OutdatedLibrary();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -13351,7 +13871,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -13382,9 +13902,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        OutdatedLibrary.verify = function verify(message) {
+                        OutdatedLibrary.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.libraryName != null && message.hasOwnProperty("libraryName"))
                                 if (!$util.isString(message.libraryName))
                                     return "libraryName: string expected";
@@ -13409,9 +13933,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1alpha.OutdatedLibrary} OutdatedLibrary
                          */
-                        OutdatedLibrary.fromObject = function fromObject(object) {
+                        OutdatedLibrary.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.OutdatedLibrary)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1alpha.OutdatedLibrary();
                             if (object.libraryName != null)
                                 message.libraryName = String(object.libraryName);
@@ -13508,7 +14036,7 @@
                         function ViolatingResource(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -13583,9 +14111,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ViolatingResource.decode = function decode(reader, length, error) {
+                        ViolatingResource.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.ViolatingResource();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -13601,7 +14133,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -13632,9 +14164,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ViolatingResource.verify = function verify(message) {
+                        ViolatingResource.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.contentType != null && message.hasOwnProperty("contentType"))
                                 if (!$util.isString(message.contentType))
                                     return "contentType: string expected";
@@ -13652,9 +14188,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1alpha.ViolatingResource} ViolatingResource
                          */
-                        ViolatingResource.fromObject = function fromObject(object) {
+                        ViolatingResource.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.ViolatingResource)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1alpha.ViolatingResource();
                             if (object.contentType != null)
                                 message.contentType = String(object.contentType);
@@ -13737,7 +14277,7 @@
                             this.parameterNames = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -13803,9 +14343,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        VulnerableParameters.decode = function decode(reader, length, error) {
+                        VulnerableParameters.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.VulnerableParameters();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -13819,7 +14363,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -13850,9 +14394,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        VulnerableParameters.verify = function verify(message) {
+                        VulnerableParameters.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.parameterNames != null && message.hasOwnProperty("parameterNames")) {
                                 if (!Array.isArray(message.parameterNames))
                                     return "parameterNames: array expected";
@@ -13871,9 +14419,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1alpha.VulnerableParameters} VulnerableParameters
                          */
-                        VulnerableParameters.fromObject = function fromObject(object) {
+                        VulnerableParameters.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.VulnerableParameters)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1alpha.VulnerableParameters();
                             if (object.parameterNames) {
                                 if (!Array.isArray(object.parameterNames))
@@ -13960,7 +14512,7 @@
                             this.missingHeaders = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -14037,9 +14589,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        VulnerableHeaders.decode = function decode(reader, length, error) {
+                        VulnerableHeaders.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.VulnerableHeaders();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -14049,17 +14605,17 @@
                                 case 1: {
                                         if (!(message.headers && message.headers.length))
                                             message.headers = [];
-                                        message.headers.push($root.google.cloud.websecurityscanner.v1alpha.VulnerableHeaders.Header.decode(reader, reader.uint32()));
+                                        message.headers.push($root.google.cloud.websecurityscanner.v1alpha.VulnerableHeaders.Header.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 2: {
                                         if (!(message.missingHeaders && message.missingHeaders.length))
                                             message.missingHeaders = [];
-                                        message.missingHeaders.push($root.google.cloud.websecurityscanner.v1alpha.VulnerableHeaders.Header.decode(reader, reader.uint32()));
+                                        message.missingHeaders.push($root.google.cloud.websecurityscanner.v1alpha.VulnerableHeaders.Header.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -14090,14 +14646,18 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        VulnerableHeaders.verify = function verify(message) {
+                        VulnerableHeaders.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.headers != null && message.hasOwnProperty("headers")) {
                                 if (!Array.isArray(message.headers))
                                     return "headers: array expected";
                                 for (var i = 0; i < message.headers.length; ++i) {
-                                    var error = $root.google.cloud.websecurityscanner.v1alpha.VulnerableHeaders.Header.verify(message.headers[i]);
+                                    var error = $root.google.cloud.websecurityscanner.v1alpha.VulnerableHeaders.Header.verify(message.headers[i], long + 1);
                                     if (error)
                                         return "headers." + error;
                                 }
@@ -14106,7 +14666,7 @@
                                 if (!Array.isArray(message.missingHeaders))
                                     return "missingHeaders: array expected";
                                 for (var i = 0; i < message.missingHeaders.length; ++i) {
-                                    var error = $root.google.cloud.websecurityscanner.v1alpha.VulnerableHeaders.Header.verify(message.missingHeaders[i]);
+                                    var error = $root.google.cloud.websecurityscanner.v1alpha.VulnerableHeaders.Header.verify(message.missingHeaders[i], long + 1);
                                     if (error)
                                         return "missingHeaders." + error;
                                 }
@@ -14122,9 +14682,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1alpha.VulnerableHeaders} VulnerableHeaders
                          */
-                        VulnerableHeaders.fromObject = function fromObject(object) {
+                        VulnerableHeaders.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.VulnerableHeaders)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1alpha.VulnerableHeaders();
                             if (object.headers) {
                                 if (!Array.isArray(object.headers))
@@ -14133,7 +14697,7 @@
                                 for (var i = 0; i < object.headers.length; ++i) {
                                     if (typeof object.headers[i] !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1alpha.VulnerableHeaders.headers: object expected");
-                                    message.headers[i] = $root.google.cloud.websecurityscanner.v1alpha.VulnerableHeaders.Header.fromObject(object.headers[i]);
+                                    message.headers[i] = $root.google.cloud.websecurityscanner.v1alpha.VulnerableHeaders.Header.fromObject(object.headers[i], long + 1);
                                 }
                             }
                             if (object.missingHeaders) {
@@ -14143,7 +14707,7 @@
                                 for (var i = 0; i < object.missingHeaders.length; ++i) {
                                     if (typeof object.missingHeaders[i] !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1alpha.VulnerableHeaders.missingHeaders: object expected");
-                                    message.missingHeaders[i] = $root.google.cloud.websecurityscanner.v1alpha.VulnerableHeaders.Header.fromObject(object.missingHeaders[i]);
+                                    message.missingHeaders[i] = $root.google.cloud.websecurityscanner.v1alpha.VulnerableHeaders.Header.fromObject(object.missingHeaders[i], long + 1);
                                 }
                             }
                             return message;
@@ -14226,7 +14790,7 @@
                             function Header(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -14301,9 +14865,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Header.decode = function decode(reader, length, error) {
+                            Header.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.VulnerableHeaders.Header();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -14319,7 +14887,7 @@
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -14350,9 +14918,13 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            Header.verify = function verify(message) {
+                            Header.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
@@ -14370,9 +14942,13 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.cloud.websecurityscanner.v1alpha.VulnerableHeaders.Header} Header
                              */
-                            Header.fromObject = function fromObject(object) {
+                            Header.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.VulnerableHeaders.Header)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.cloud.websecurityscanner.v1alpha.VulnerableHeaders.Header();
                                 if (object.name != null)
                                     message.name = String(object.name);
@@ -14459,7 +15035,7 @@
                             this.stackTraces = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -14535,9 +15111,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Xss.decode = function decode(reader, length, error) {
+                        Xss.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.Xss();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -14555,7 +15135,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -14586,9 +15166,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        Xss.verify = function verify(message) {
+                        Xss.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.stackTraces != null && message.hasOwnProperty("stackTraces")) {
                                 if (!Array.isArray(message.stackTraces))
                                     return "stackTraces: array expected";
@@ -14610,9 +15194,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1alpha.Xss} Xss
                          */
-                        Xss.fromObject = function fromObject(object) {
+                        Xss.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.Xss)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1alpha.Xss();
                             if (object.stackTraces) {
                                 if (!Array.isArray(object.stackTraces))
@@ -14703,7 +15291,7 @@
                         function FindingTypeStats(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -14778,9 +15366,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FindingTypeStats.decode = function decode(reader, length, error) {
+                        FindingTypeStats.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.FindingTypeStats();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -14796,7 +15388,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -14827,9 +15419,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        FindingTypeStats.verify = function verify(message) {
+                        FindingTypeStats.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.findingType != null && message.hasOwnProperty("findingType"))
                                 switch (message.findingType) {
                                 default:
@@ -14862,9 +15458,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1alpha.FindingTypeStats} FindingTypeStats
                          */
-                        FindingTypeStats.fromObject = function fromObject(object) {
+                        FindingTypeStats.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.FindingTypeStats)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1alpha.FindingTypeStats();
                             switch (object.findingType) {
                             default:
@@ -15012,7 +15612,7 @@
                             this.targetPlatforms = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -15173,9 +15773,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ScanConfig.decode = function decode(reader, length, error) {
+                        ScanConfig.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.ScanConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -15201,7 +15805,7 @@
                                         break;
                                     }
                                 case 5: {
-                                        message.authentication = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.decode(reader, reader.uint32());
+                                        message.authentication = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 6: {
@@ -15215,7 +15819,7 @@
                                         break;
                                     }
                                 case 8: {
-                                        message.schedule = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Schedule.decode(reader, reader.uint32());
+                                        message.schedule = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Schedule.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 9: {
@@ -15230,11 +15834,11 @@
                                         break;
                                     }
                                 case 11: {
-                                        message.latestRun = $root.google.cloud.websecurityscanner.v1alpha.ScanRun.decode(reader, reader.uint32());
+                                        message.latestRun = $root.google.cloud.websecurityscanner.v1alpha.ScanRun.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -15265,9 +15869,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ScanConfig.verify = function verify(message) {
+                        ScanConfig.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -15285,7 +15893,7 @@
                                         return "startingUrls: string[] expected";
                             }
                             if (message.authentication != null && message.hasOwnProperty("authentication")) {
-                                var error = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.verify(message.authentication);
+                                var error = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.verify(message.authentication, long + 1);
                                 if (error)
                                     return "authentication." + error;
                             }
@@ -15307,7 +15915,7 @@
                                         return "blacklistPatterns: string[] expected";
                             }
                             if (message.schedule != null && message.hasOwnProperty("schedule")) {
-                                var error = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Schedule.verify(message.schedule);
+                                var error = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Schedule.verify(message.schedule, long + 1);
                                 if (error)
                                     return "schedule." + error;
                             }
@@ -15325,7 +15933,7 @@
                                     }
                             }
                             if (message.latestRun != null && message.hasOwnProperty("latestRun")) {
-                                var error = $root.google.cloud.websecurityscanner.v1alpha.ScanRun.verify(message.latestRun);
+                                var error = $root.google.cloud.websecurityscanner.v1alpha.ScanRun.verify(message.latestRun, long + 1);
                                 if (error)
                                     return "latestRun." + error;
                             }
@@ -15340,9 +15948,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1alpha.ScanConfig} ScanConfig
                          */
-                        ScanConfig.fromObject = function fromObject(object) {
+                        ScanConfig.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.ScanConfig)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1alpha.ScanConfig();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -15360,7 +15972,7 @@
                             if (object.authentication != null) {
                                 if (typeof object.authentication !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1alpha.ScanConfig.authentication: object expected");
-                                message.authentication = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.fromObject(object.authentication);
+                                message.authentication = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.fromObject(object.authentication, long + 1);
                             }
                             switch (object.userAgent) {
                             default:
@@ -15396,7 +16008,7 @@
                             if (object.schedule != null) {
                                 if (typeof object.schedule !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1alpha.ScanConfig.schedule: object expected");
-                                message.schedule = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Schedule.fromObject(object.schedule);
+                                message.schedule = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Schedule.fromObject(object.schedule, long + 1);
                             }
                             if (object.targetPlatforms) {
                                 if (!Array.isArray(object.targetPlatforms))
@@ -15426,7 +16038,7 @@
                             if (object.latestRun != null) {
                                 if (typeof object.latestRun !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1alpha.ScanConfig.latestRun: object expected");
-                                message.latestRun = $root.google.cloud.websecurityscanner.v1alpha.ScanRun.fromObject(object.latestRun);
+                                message.latestRun = $root.google.cloud.websecurityscanner.v1alpha.ScanRun.fromObject(object.latestRun, long + 1);
                             }
                             return message;
                         };
@@ -15537,7 +16149,7 @@
                             function Authentication(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -15626,9 +16238,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Authentication.decode = function decode(reader, length, error) {
+                            Authentication.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -15636,15 +16252,15 @@
                                         break;
                                     switch (tag >>> 3) {
                                     case 1: {
-                                            message.googleAccount = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.GoogleAccount.decode(reader, reader.uint32());
+                                            message.googleAccount = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.GoogleAccount.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     case 2: {
-                                            message.customAccount = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.CustomAccount.decode(reader, reader.uint32());
+                                            message.customAccount = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.CustomAccount.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -15675,14 +16291,18 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            Authentication.verify = function verify(message) {
+                            Authentication.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 var properties = {};
                                 if (message.googleAccount != null && message.hasOwnProperty("googleAccount")) {
                                     properties.authentication = 1;
                                     {
-                                        var error = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.GoogleAccount.verify(message.googleAccount);
+                                        var error = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.GoogleAccount.verify(message.googleAccount, long + 1);
                                         if (error)
                                             return "googleAccount." + error;
                                     }
@@ -15692,7 +16312,7 @@
                                         return "authentication: multiple values";
                                     properties.authentication = 1;
                                     {
-                                        var error = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.CustomAccount.verify(message.customAccount);
+                                        var error = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.CustomAccount.verify(message.customAccount, long + 1);
                                         if (error)
                                             return "customAccount." + error;
                                     }
@@ -15708,19 +16328,23 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication} Authentication
                              */
-                            Authentication.fromObject = function fromObject(object) {
+                            Authentication.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication();
                                 if (object.googleAccount != null) {
                                     if (typeof object.googleAccount !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.googleAccount: object expected");
-                                    message.googleAccount = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.GoogleAccount.fromObject(object.googleAccount);
+                                    message.googleAccount = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.GoogleAccount.fromObject(object.googleAccount, long + 1);
                                 }
                                 if (object.customAccount != null) {
                                     if (typeof object.customAccount !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.customAccount: object expected");
-                                    message.customAccount = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.CustomAccount.fromObject(object.customAccount);
+                                    message.customAccount = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.CustomAccount.fromObject(object.customAccount, long + 1);
                                 }
                                 return message;
                             };
@@ -15798,7 +16422,7 @@
                                 function GoogleAccount(properties) {
                                     if (properties)
                                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                            if (properties[keys[i]] != null)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                                 this[keys[i]] = properties[keys[i]];
                                 }
     
@@ -15873,9 +16497,13 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                GoogleAccount.decode = function decode(reader, length, error) {
+                                GoogleAccount.decode = function decode(reader, length, error, long) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.GoogleAccount();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
@@ -15891,7 +16519,7 @@
                                                 break;
                                             }
                                         default:
-                                            reader.skipType(tag & 7);
+                                            reader.skipType(tag & 7, long);
                                             break;
                                         }
                                     }
@@ -15922,9 +16550,13 @@
                                  * @param {Object.<string,*>} message Plain object to verify
                                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                                  */
-                                GoogleAccount.verify = function verify(message) {
+                                GoogleAccount.verify = function verify(message, long) {
                                     if (typeof message !== "object" || message === null)
                                         return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
                                     if (message.username != null && message.hasOwnProperty("username"))
                                         if (!$util.isString(message.username))
                                             return "username: string expected";
@@ -15942,9 +16574,13 @@
                                  * @param {Object.<string,*>} object Plain object
                                  * @returns {google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.GoogleAccount} GoogleAccount
                                  */
-                                GoogleAccount.fromObject = function fromObject(object) {
+                                GoogleAccount.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.GoogleAccount)
                                         return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var message = new $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.GoogleAccount();
                                     if (object.username != null)
                                         message.username = String(object.username);
@@ -16028,7 +16664,7 @@
                                 function CustomAccount(properties) {
                                     if (properties)
                                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                            if (properties[keys[i]] != null)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                                 this[keys[i]] = properties[keys[i]];
                                 }
     
@@ -16113,9 +16749,13 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                CustomAccount.decode = function decode(reader, length, error) {
+                                CustomAccount.decode = function decode(reader, length, error, long) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.CustomAccount();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
@@ -16135,7 +16775,7 @@
                                                 break;
                                             }
                                         default:
-                                            reader.skipType(tag & 7);
+                                            reader.skipType(tag & 7, long);
                                             break;
                                         }
                                     }
@@ -16166,9 +16806,13 @@
                                  * @param {Object.<string,*>} message Plain object to verify
                                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                                  */
-                                CustomAccount.verify = function verify(message) {
+                                CustomAccount.verify = function verify(message, long) {
                                     if (typeof message !== "object" || message === null)
                                         return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
                                     if (message.username != null && message.hasOwnProperty("username"))
                                         if (!$util.isString(message.username))
                                             return "username: string expected";
@@ -16189,9 +16833,13 @@
                                  * @param {Object.<string,*>} object Plain object
                                  * @returns {google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.CustomAccount} CustomAccount
                                  */
-                                CustomAccount.fromObject = function fromObject(object) {
+                                CustomAccount.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.CustomAccount)
                                         return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var message = new $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Authentication.CustomAccount();
                                     if (object.username != null)
                                         message.username = String(object.username);
@@ -16282,7 +16930,7 @@
                             function Schedule(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -16357,9 +17005,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Schedule.decode = function decode(reader, length, error) {
+                            Schedule.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Schedule();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -16367,7 +17019,7 @@
                                         break;
                                     switch (tag >>> 3) {
                                     case 1: {
-                                            message.scheduleTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            message.scheduleTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     case 2: {
@@ -16375,7 +17027,7 @@
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -16406,11 +17058,15 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            Schedule.verify = function verify(message) {
+                            Schedule.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 if (message.scheduleTime != null && message.hasOwnProperty("scheduleTime")) {
-                                    var error = $root.google.protobuf.Timestamp.verify(message.scheduleTime);
+                                    var error = $root.google.protobuf.Timestamp.verify(message.scheduleTime, long + 1);
                                     if (error)
                                         return "scheduleTime." + error;
                                 }
@@ -16428,14 +17084,18 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.cloud.websecurityscanner.v1alpha.ScanConfig.Schedule} Schedule
                              */
-                            Schedule.fromObject = function fromObject(object) {
+                            Schedule.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Schedule)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.Schedule();
                                 if (object.scheduleTime != null) {
                                     if (typeof object.scheduleTime !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1alpha.ScanConfig.Schedule.scheduleTime: object expected");
-                                    message.scheduleTime = $root.google.protobuf.Timestamp.fromObject(object.scheduleTime);
+                                    message.scheduleTime = $root.google.protobuf.Timestamp.fromObject(object.scheduleTime, long + 1);
                                 }
                                 if (object.intervalDurationDays != null)
                                     message.intervalDurationDays = object.intervalDurationDays | 0;
@@ -16560,7 +17220,7 @@
                         function ScanRun(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -16705,9 +17365,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ScanRun.decode = function decode(reader, length, error) {
+                        ScanRun.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.ScanRun();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -16727,11 +17391,11 @@
                                         break;
                                     }
                                 case 4: {
-                                        message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 5: {
-                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 6: {
@@ -16751,7 +17415,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -16782,9 +17446,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ScanRun.verify = function verify(message) {
+                        ScanRun.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -16809,12 +17477,12 @@
                                     break;
                                 }
                             if (message.startTime != null && message.hasOwnProperty("startTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                var error = $root.google.protobuf.Timestamp.verify(message.startTime, long + 1);
                                 if (error)
                                     return "startTime." + error;
                             }
                             if (message.endTime != null && message.hasOwnProperty("endTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime, long + 1);
                                 if (error)
                                     return "endTime." + error;
                             }
@@ -16841,9 +17509,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1alpha.ScanRun} ScanRun
                          */
-                        ScanRun.fromObject = function fromObject(object) {
+                        ScanRun.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.ScanRun)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1alpha.ScanRun();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -16898,12 +17570,12 @@
                             if (object.startTime != null) {
                                 if (typeof object.startTime !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1alpha.ScanRun.startTime: object expected");
-                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime, long + 1);
                             }
                             if (object.endTime != null) {
                                 if (typeof object.endTime !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1alpha.ScanRun.endTime: object expected");
-                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime, long + 1);
                             }
                             if (object.urlsCrawledCount != null)
                                 if ($util.Long)
@@ -17539,7 +18211,7 @@
                         function CreateScanConfigRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -17614,9 +18286,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateScanConfigRequest.decode = function decode(reader, length, error) {
+                        CreateScanConfigRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.CreateScanConfigRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -17628,11 +18304,11 @@
                                         break;
                                     }
                                 case 2: {
-                                        message.scanConfig = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.decode(reader, reader.uint32());
+                                        message.scanConfig = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -17663,14 +18339,18 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        CreateScanConfigRequest.verify = function verify(message) {
+                        CreateScanConfigRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
                             if (message.scanConfig != null && message.hasOwnProperty("scanConfig")) {
-                                var error = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.verify(message.scanConfig);
+                                var error = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.verify(message.scanConfig, long + 1);
                                 if (error)
                                     return "scanConfig." + error;
                             }
@@ -17685,16 +18365,20 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1alpha.CreateScanConfigRequest} CreateScanConfigRequest
                          */
-                        CreateScanConfigRequest.fromObject = function fromObject(object) {
+                        CreateScanConfigRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.CreateScanConfigRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1alpha.CreateScanConfigRequest();
                             if (object.parent != null)
                                 message.parent = String(object.parent);
                             if (object.scanConfig != null) {
                                 if (typeof object.scanConfig !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1alpha.CreateScanConfigRequest.scanConfig: object expected");
-                                message.scanConfig = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.fromObject(object.scanConfig);
+                                message.scanConfig = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.fromObject(object.scanConfig, long + 1);
                             }
                             return message;
                         };
@@ -17772,7 +18456,7 @@
                         function DeleteScanConfigRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -17837,9 +18521,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteScanConfigRequest.decode = function decode(reader, length, error) {
+                        DeleteScanConfigRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.DeleteScanConfigRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -17851,7 +18539,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -17882,9 +18570,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        DeleteScanConfigRequest.verify = function verify(message) {
+                        DeleteScanConfigRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -17899,9 +18591,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1alpha.DeleteScanConfigRequest} DeleteScanConfigRequest
                          */
-                        DeleteScanConfigRequest.fromObject = function fromObject(object) {
+                        DeleteScanConfigRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.DeleteScanConfigRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1alpha.DeleteScanConfigRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -17977,7 +18673,7 @@
                         function GetScanConfigRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -18042,9 +18738,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetScanConfigRequest.decode = function decode(reader, length, error) {
+                        GetScanConfigRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.GetScanConfigRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -18056,7 +18756,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -18087,9 +18787,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        GetScanConfigRequest.verify = function verify(message) {
+                        GetScanConfigRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -18104,9 +18808,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1alpha.GetScanConfigRequest} GetScanConfigRequest
                          */
-                        GetScanConfigRequest.fromObject = function fromObject(object) {
+                        GetScanConfigRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.GetScanConfigRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1alpha.GetScanConfigRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -18184,7 +18892,7 @@
                         function ListScanConfigsRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -18269,9 +18977,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListScanConfigsRequest.decode = function decode(reader, length, error) {
+                        ListScanConfigsRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -18291,7 +19003,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -18322,9 +19034,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListScanConfigsRequest.verify = function verify(message) {
+                        ListScanConfigsRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
@@ -18345,9 +19061,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest} ListScanConfigsRequest
                          */
-                        ListScanConfigsRequest.fromObject = function fromObject(object) {
+                        ListScanConfigsRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest();
                             if (object.parent != null)
                                 message.parent = String(object.parent);
@@ -18435,7 +19155,7 @@
                         function UpdateScanConfigRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -18510,9 +19230,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateScanConfigRequest.decode = function decode(reader, length, error) {
+                        UpdateScanConfigRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.UpdateScanConfigRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -18520,15 +19244,15 @@
                                     break;
                                 switch (tag >>> 3) {
                                 case 2: {
-                                        message.scanConfig = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.decode(reader, reader.uint32());
+                                        message.scanConfig = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 3: {
-                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -18559,16 +19283,20 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        UpdateScanConfigRequest.verify = function verify(message) {
+                        UpdateScanConfigRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.scanConfig != null && message.hasOwnProperty("scanConfig")) {
-                                var error = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.verify(message.scanConfig);
+                                var error = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.verify(message.scanConfig, long + 1);
                                 if (error)
                                     return "scanConfig." + error;
                             }
                             if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
-                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask, long + 1);
                                 if (error)
                                     return "updateMask." + error;
                             }
@@ -18583,19 +19311,23 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1alpha.UpdateScanConfigRequest} UpdateScanConfigRequest
                          */
-                        UpdateScanConfigRequest.fromObject = function fromObject(object) {
+                        UpdateScanConfigRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.UpdateScanConfigRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1alpha.UpdateScanConfigRequest();
                             if (object.scanConfig != null) {
                                 if (typeof object.scanConfig !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1alpha.UpdateScanConfigRequest.scanConfig: object expected");
-                                message.scanConfig = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.fromObject(object.scanConfig);
+                                message.scanConfig = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.fromObject(object.scanConfig, long + 1);
                             }
                             if (object.updateMask != null) {
                                 if (typeof object.updateMask !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1alpha.UpdateScanConfigRequest.updateMask: object expected");
-                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask, long + 1);
                             }
                             return message;
                         };
@@ -18675,7 +19407,7 @@
                             this.scanConfigs = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -18751,9 +19483,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListScanConfigsResponse.decode = function decode(reader, length, error) {
+                        ListScanConfigsResponse.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.ListScanConfigsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -18763,7 +19499,7 @@
                                 case 1: {
                                         if (!(message.scanConfigs && message.scanConfigs.length))
                                             message.scanConfigs = [];
-                                        message.scanConfigs.push($root.google.cloud.websecurityscanner.v1alpha.ScanConfig.decode(reader, reader.uint32()));
+                                        message.scanConfigs.push($root.google.cloud.websecurityscanner.v1alpha.ScanConfig.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 2: {
@@ -18771,7 +19507,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -18802,14 +19538,18 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListScanConfigsResponse.verify = function verify(message) {
+                        ListScanConfigsResponse.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.scanConfigs != null && message.hasOwnProperty("scanConfigs")) {
                                 if (!Array.isArray(message.scanConfigs))
                                     return "scanConfigs: array expected";
                                 for (var i = 0; i < message.scanConfigs.length; ++i) {
-                                    var error = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.verify(message.scanConfigs[i]);
+                                    var error = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.verify(message.scanConfigs[i], long + 1);
                                     if (error)
                                         return "scanConfigs." + error;
                                 }
@@ -18828,9 +19568,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1alpha.ListScanConfigsResponse} ListScanConfigsResponse
                          */
-                        ListScanConfigsResponse.fromObject = function fromObject(object) {
+                        ListScanConfigsResponse.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.ListScanConfigsResponse)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1alpha.ListScanConfigsResponse();
                             if (object.scanConfigs) {
                                 if (!Array.isArray(object.scanConfigs))
@@ -18839,7 +19583,7 @@
                                 for (var i = 0; i < object.scanConfigs.length; ++i) {
                                     if (typeof object.scanConfigs[i] !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1alpha.ListScanConfigsResponse.scanConfigs: object expected");
-                                    message.scanConfigs[i] = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.fromObject(object.scanConfigs[i]);
+                                    message.scanConfigs[i] = $root.google.cloud.websecurityscanner.v1alpha.ScanConfig.fromObject(object.scanConfigs[i], long + 1);
                                 }
                             }
                             if (object.nextPageToken != null)
@@ -18923,7 +19667,7 @@
                         function StartScanRunRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -18988,9 +19732,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        StartScanRunRequest.decode = function decode(reader, length, error) {
+                        StartScanRunRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.StartScanRunRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -19002,7 +19750,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -19033,9 +19781,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        StartScanRunRequest.verify = function verify(message) {
+                        StartScanRunRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -19050,9 +19802,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1alpha.StartScanRunRequest} StartScanRunRequest
                          */
-                        StartScanRunRequest.fromObject = function fromObject(object) {
+                        StartScanRunRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.StartScanRunRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1alpha.StartScanRunRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -19128,7 +19884,7 @@
                         function GetScanRunRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -19193,9 +19949,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetScanRunRequest.decode = function decode(reader, length, error) {
+                        GetScanRunRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.GetScanRunRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -19207,7 +19967,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -19238,9 +19998,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        GetScanRunRequest.verify = function verify(message) {
+                        GetScanRunRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -19255,9 +20019,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1alpha.GetScanRunRequest} GetScanRunRequest
                          */
-                        GetScanRunRequest.fromObject = function fromObject(object) {
+                        GetScanRunRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.GetScanRunRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1alpha.GetScanRunRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -19335,7 +20103,7 @@
                         function ListScanRunsRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -19420,9 +20188,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListScanRunsRequest.decode = function decode(reader, length, error) {
+                        ListScanRunsRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -19442,7 +20214,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -19473,9 +20245,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListScanRunsRequest.verify = function verify(message) {
+                        ListScanRunsRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
@@ -19496,9 +20272,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest} ListScanRunsRequest
                          */
-                        ListScanRunsRequest.fromObject = function fromObject(object) {
+                        ListScanRunsRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest();
                             if (object.parent != null)
                                 message.parent = String(object.parent);
@@ -19587,7 +20367,7 @@
                             this.scanRuns = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -19663,9 +20443,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListScanRunsResponse.decode = function decode(reader, length, error) {
+                        ListScanRunsResponse.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.ListScanRunsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -19675,7 +20459,7 @@
                                 case 1: {
                                         if (!(message.scanRuns && message.scanRuns.length))
                                             message.scanRuns = [];
-                                        message.scanRuns.push($root.google.cloud.websecurityscanner.v1alpha.ScanRun.decode(reader, reader.uint32()));
+                                        message.scanRuns.push($root.google.cloud.websecurityscanner.v1alpha.ScanRun.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 2: {
@@ -19683,7 +20467,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -19714,14 +20498,18 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListScanRunsResponse.verify = function verify(message) {
+                        ListScanRunsResponse.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.scanRuns != null && message.hasOwnProperty("scanRuns")) {
                                 if (!Array.isArray(message.scanRuns))
                                     return "scanRuns: array expected";
                                 for (var i = 0; i < message.scanRuns.length; ++i) {
-                                    var error = $root.google.cloud.websecurityscanner.v1alpha.ScanRun.verify(message.scanRuns[i]);
+                                    var error = $root.google.cloud.websecurityscanner.v1alpha.ScanRun.verify(message.scanRuns[i], long + 1);
                                     if (error)
                                         return "scanRuns." + error;
                                 }
@@ -19740,9 +20528,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1alpha.ListScanRunsResponse} ListScanRunsResponse
                          */
-                        ListScanRunsResponse.fromObject = function fromObject(object) {
+                        ListScanRunsResponse.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.ListScanRunsResponse)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1alpha.ListScanRunsResponse();
                             if (object.scanRuns) {
                                 if (!Array.isArray(object.scanRuns))
@@ -19751,7 +20543,7 @@
                                 for (var i = 0; i < object.scanRuns.length; ++i) {
                                     if (typeof object.scanRuns[i] !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1alpha.ListScanRunsResponse.scanRuns: object expected");
-                                    message.scanRuns[i] = $root.google.cloud.websecurityscanner.v1alpha.ScanRun.fromObject(object.scanRuns[i]);
+                                    message.scanRuns[i] = $root.google.cloud.websecurityscanner.v1alpha.ScanRun.fromObject(object.scanRuns[i], long + 1);
                                 }
                             }
                             if (object.nextPageToken != null)
@@ -19835,7 +20627,7 @@
                         function StopScanRunRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -19900,9 +20692,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        StopScanRunRequest.decode = function decode(reader, length, error) {
+                        StopScanRunRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.StopScanRunRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -19914,7 +20710,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -19945,9 +20741,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        StopScanRunRequest.verify = function verify(message) {
+                        StopScanRunRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -19962,9 +20762,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1alpha.StopScanRunRequest} StopScanRunRequest
                          */
-                        StopScanRunRequest.fromObject = function fromObject(object) {
+                        StopScanRunRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.StopScanRunRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1alpha.StopScanRunRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -20042,7 +20846,7 @@
                         function ListCrawledUrlsRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -20127,9 +20931,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListCrawledUrlsRequest.decode = function decode(reader, length, error) {
+                        ListCrawledUrlsRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -20149,7 +20957,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -20180,9 +20988,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListCrawledUrlsRequest.verify = function verify(message) {
+                        ListCrawledUrlsRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
@@ -20203,9 +21015,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest} ListCrawledUrlsRequest
                          */
-                        ListCrawledUrlsRequest.fromObject = function fromObject(object) {
+                        ListCrawledUrlsRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest();
                             if (object.parent != null)
                                 message.parent = String(object.parent);
@@ -20294,7 +21110,7 @@
                             this.crawledUrls = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -20370,9 +21186,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListCrawledUrlsResponse.decode = function decode(reader, length, error) {
+                        ListCrawledUrlsResponse.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -20382,7 +21202,7 @@
                                 case 1: {
                                         if (!(message.crawledUrls && message.crawledUrls.length))
                                             message.crawledUrls = [];
-                                        message.crawledUrls.push($root.google.cloud.websecurityscanner.v1alpha.CrawledUrl.decode(reader, reader.uint32()));
+                                        message.crawledUrls.push($root.google.cloud.websecurityscanner.v1alpha.CrawledUrl.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 2: {
@@ -20390,7 +21210,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -20421,14 +21241,18 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListCrawledUrlsResponse.verify = function verify(message) {
+                        ListCrawledUrlsResponse.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.crawledUrls != null && message.hasOwnProperty("crawledUrls")) {
                                 if (!Array.isArray(message.crawledUrls))
                                     return "crawledUrls: array expected";
                                 for (var i = 0; i < message.crawledUrls.length; ++i) {
-                                    var error = $root.google.cloud.websecurityscanner.v1alpha.CrawledUrl.verify(message.crawledUrls[i]);
+                                    var error = $root.google.cloud.websecurityscanner.v1alpha.CrawledUrl.verify(message.crawledUrls[i], long + 1);
                                     if (error)
                                         return "crawledUrls." + error;
                                 }
@@ -20447,9 +21271,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsResponse} ListCrawledUrlsResponse
                          */
-                        ListCrawledUrlsResponse.fromObject = function fromObject(object) {
+                        ListCrawledUrlsResponse.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsResponse)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsResponse();
                             if (object.crawledUrls) {
                                 if (!Array.isArray(object.crawledUrls))
@@ -20458,7 +21286,7 @@
                                 for (var i = 0; i < object.crawledUrls.length; ++i) {
                                     if (typeof object.crawledUrls[i] !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsResponse.crawledUrls: object expected");
-                                    message.crawledUrls[i] = $root.google.cloud.websecurityscanner.v1alpha.CrawledUrl.fromObject(object.crawledUrls[i]);
+                                    message.crawledUrls[i] = $root.google.cloud.websecurityscanner.v1alpha.CrawledUrl.fromObject(object.crawledUrls[i], long + 1);
                                 }
                             }
                             if (object.nextPageToken != null)
@@ -20542,7 +21370,7 @@
                         function GetFindingRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -20607,9 +21435,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetFindingRequest.decode = function decode(reader, length, error) {
+                        GetFindingRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.GetFindingRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -20621,7 +21453,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -20652,9 +21484,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        GetFindingRequest.verify = function verify(message) {
+                        GetFindingRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -20669,9 +21505,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1alpha.GetFindingRequest} GetFindingRequest
                          */
-                        GetFindingRequest.fromObject = function fromObject(object) {
+                        GetFindingRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.GetFindingRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1alpha.GetFindingRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -20750,7 +21590,7 @@
                         function ListFindingsRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -20845,9 +21685,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListFindingsRequest.decode = function decode(reader, length, error) {
+                        ListFindingsRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -20871,7 +21715,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -20902,9 +21746,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListFindingsRequest.verify = function verify(message) {
+                        ListFindingsRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
@@ -20928,9 +21776,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1alpha.ListFindingsRequest} ListFindingsRequest
                          */
-                        ListFindingsRequest.fromObject = function fromObject(object) {
+                        ListFindingsRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest();
                             if (object.parent != null)
                                 message.parent = String(object.parent);
@@ -21024,7 +21876,7 @@
                             this.findings = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -21100,9 +21952,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListFindingsResponse.decode = function decode(reader, length, error) {
+                        ListFindingsResponse.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.ListFindingsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -21112,7 +21968,7 @@
                                 case 1: {
                                         if (!(message.findings && message.findings.length))
                                             message.findings = [];
-                                        message.findings.push($root.google.cloud.websecurityscanner.v1alpha.Finding.decode(reader, reader.uint32()));
+                                        message.findings.push($root.google.cloud.websecurityscanner.v1alpha.Finding.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 2: {
@@ -21120,7 +21976,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -21151,14 +22007,18 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListFindingsResponse.verify = function verify(message) {
+                        ListFindingsResponse.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.findings != null && message.hasOwnProperty("findings")) {
                                 if (!Array.isArray(message.findings))
                                     return "findings: array expected";
                                 for (var i = 0; i < message.findings.length; ++i) {
-                                    var error = $root.google.cloud.websecurityscanner.v1alpha.Finding.verify(message.findings[i]);
+                                    var error = $root.google.cloud.websecurityscanner.v1alpha.Finding.verify(message.findings[i], long + 1);
                                     if (error)
                                         return "findings." + error;
                                 }
@@ -21177,9 +22037,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1alpha.ListFindingsResponse} ListFindingsResponse
                          */
-                        ListFindingsResponse.fromObject = function fromObject(object) {
+                        ListFindingsResponse.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.ListFindingsResponse)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1alpha.ListFindingsResponse();
                             if (object.findings) {
                                 if (!Array.isArray(object.findings))
@@ -21188,7 +22052,7 @@
                                 for (var i = 0; i < object.findings.length; ++i) {
                                     if (typeof object.findings[i] !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1alpha.ListFindingsResponse.findings: object expected");
-                                    message.findings[i] = $root.google.cloud.websecurityscanner.v1alpha.Finding.fromObject(object.findings[i]);
+                                    message.findings[i] = $root.google.cloud.websecurityscanner.v1alpha.Finding.fromObject(object.findings[i], long + 1);
                                 }
                             }
                             if (object.nextPageToken != null)
@@ -21272,7 +22136,7 @@
                         function ListFindingTypeStatsRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -21337,9 +22201,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListFindingTypeStatsRequest.decode = function decode(reader, length, error) {
+                        ListFindingTypeStatsRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.ListFindingTypeStatsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -21351,7 +22219,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -21382,9 +22250,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListFindingTypeStatsRequest.verify = function verify(message) {
+                        ListFindingTypeStatsRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
@@ -21399,9 +22271,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1alpha.ListFindingTypeStatsRequest} ListFindingTypeStatsRequest
                          */
-                        ListFindingTypeStatsRequest.fromObject = function fromObject(object) {
+                        ListFindingTypeStatsRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.ListFindingTypeStatsRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1alpha.ListFindingTypeStatsRequest();
                             if (object.parent != null)
                                 message.parent = String(object.parent);
@@ -21478,7 +22354,7 @@
                             this.findingTypeStats = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -21544,9 +22420,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListFindingTypeStatsResponse.decode = function decode(reader, length, error) {
+                        ListFindingTypeStatsResponse.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1alpha.ListFindingTypeStatsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -21556,11 +22436,11 @@
                                 case 1: {
                                         if (!(message.findingTypeStats && message.findingTypeStats.length))
                                             message.findingTypeStats = [];
-                                        message.findingTypeStats.push($root.google.cloud.websecurityscanner.v1alpha.FindingTypeStats.decode(reader, reader.uint32()));
+                                        message.findingTypeStats.push($root.google.cloud.websecurityscanner.v1alpha.FindingTypeStats.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -21591,14 +22471,18 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListFindingTypeStatsResponse.verify = function verify(message) {
+                        ListFindingTypeStatsResponse.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.findingTypeStats != null && message.hasOwnProperty("findingTypeStats")) {
                                 if (!Array.isArray(message.findingTypeStats))
                                     return "findingTypeStats: array expected";
                                 for (var i = 0; i < message.findingTypeStats.length; ++i) {
-                                    var error = $root.google.cloud.websecurityscanner.v1alpha.FindingTypeStats.verify(message.findingTypeStats[i]);
+                                    var error = $root.google.cloud.websecurityscanner.v1alpha.FindingTypeStats.verify(message.findingTypeStats[i], long + 1);
                                     if (error)
                                         return "findingTypeStats." + error;
                                 }
@@ -21614,9 +22498,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1alpha.ListFindingTypeStatsResponse} ListFindingTypeStatsResponse
                          */
-                        ListFindingTypeStatsResponse.fromObject = function fromObject(object) {
+                        ListFindingTypeStatsResponse.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1alpha.ListFindingTypeStatsResponse)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1alpha.ListFindingTypeStatsResponse();
                             if (object.findingTypeStats) {
                                 if (!Array.isArray(object.findingTypeStats))
@@ -21625,7 +22513,7 @@
                                 for (var i = 0; i < object.findingTypeStats.length; ++i) {
                                     if (typeof object.findingTypeStats[i] !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1alpha.ListFindingTypeStatsResponse.findingTypeStats: object expected");
-                                    message.findingTypeStats[i] = $root.google.cloud.websecurityscanner.v1alpha.FindingTypeStats.fromObject(object.findingTypeStats[i]);
+                                    message.findingTypeStats[i] = $root.google.cloud.websecurityscanner.v1alpha.FindingTypeStats.fromObject(object.findingTypeStats[i], long + 1);
                                 }
                             }
                             return message;
@@ -21717,7 +22605,7 @@
                         function CrawledUrl(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -21802,9 +22690,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CrawledUrl.decode = function decode(reader, length, error) {
+                        CrawledUrl.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.CrawledUrl();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -21824,7 +22716,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -21855,9 +22747,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        CrawledUrl.verify = function verify(message) {
+                        CrawledUrl.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.httpMethod != null && message.hasOwnProperty("httpMethod"))
                                 if (!$util.isString(message.httpMethod))
                                     return "httpMethod: string expected";
@@ -21878,9 +22774,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.CrawledUrl} CrawledUrl
                          */
-                        CrawledUrl.fromObject = function fromObject(object) {
+                        CrawledUrl.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.CrawledUrl)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.CrawledUrl();
                             if (object.httpMethod != null)
                                 message.httpMethod = String(object.httpMethod);
@@ -21982,7 +22882,7 @@
                         function Finding(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -22197,9 +23097,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Finding.decode = function decode(reader, length, error) {
+                        Finding.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.Finding();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -22247,31 +23151,31 @@
                                         break;
                                     }
                                 case 16: {
-                                        message.form = $root.google.cloud.websecurityscanner.v1beta.Form.decode(reader, reader.uint32());
+                                        message.form = $root.google.cloud.websecurityscanner.v1beta.Form.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 11: {
-                                        message.outdatedLibrary = $root.google.cloud.websecurityscanner.v1beta.OutdatedLibrary.decode(reader, reader.uint32());
+                                        message.outdatedLibrary = $root.google.cloud.websecurityscanner.v1beta.OutdatedLibrary.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 12: {
-                                        message.violatingResource = $root.google.cloud.websecurityscanner.v1beta.ViolatingResource.decode(reader, reader.uint32());
+                                        message.violatingResource = $root.google.cloud.websecurityscanner.v1beta.ViolatingResource.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 15: {
-                                        message.vulnerableHeaders = $root.google.cloud.websecurityscanner.v1beta.VulnerableHeaders.decode(reader, reader.uint32());
+                                        message.vulnerableHeaders = $root.google.cloud.websecurityscanner.v1beta.VulnerableHeaders.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 13: {
-                                        message.vulnerableParameters = $root.google.cloud.websecurityscanner.v1beta.VulnerableParameters.decode(reader, reader.uint32());
+                                        message.vulnerableParameters = $root.google.cloud.websecurityscanner.v1beta.VulnerableParameters.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 14: {
-                                        message.xss = $root.google.cloud.websecurityscanner.v1beta.Xss.decode(reader, reader.uint32());
+                                        message.xss = $root.google.cloud.websecurityscanner.v1beta.Xss.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -22302,9 +23206,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        Finding.verify = function verify(message) {
+                        Finding.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -22336,32 +23244,32 @@
                                 if (!$util.isString(message.trackingId))
                                     return "trackingId: string expected";
                             if (message.form != null && message.hasOwnProperty("form")) {
-                                var error = $root.google.cloud.websecurityscanner.v1beta.Form.verify(message.form);
+                                var error = $root.google.cloud.websecurityscanner.v1beta.Form.verify(message.form, long + 1);
                                 if (error)
                                     return "form." + error;
                             }
                             if (message.outdatedLibrary != null && message.hasOwnProperty("outdatedLibrary")) {
-                                var error = $root.google.cloud.websecurityscanner.v1beta.OutdatedLibrary.verify(message.outdatedLibrary);
+                                var error = $root.google.cloud.websecurityscanner.v1beta.OutdatedLibrary.verify(message.outdatedLibrary, long + 1);
                                 if (error)
                                     return "outdatedLibrary." + error;
                             }
                             if (message.violatingResource != null && message.hasOwnProperty("violatingResource")) {
-                                var error = $root.google.cloud.websecurityscanner.v1beta.ViolatingResource.verify(message.violatingResource);
+                                var error = $root.google.cloud.websecurityscanner.v1beta.ViolatingResource.verify(message.violatingResource, long + 1);
                                 if (error)
                                     return "violatingResource." + error;
                             }
                             if (message.vulnerableHeaders != null && message.hasOwnProperty("vulnerableHeaders")) {
-                                var error = $root.google.cloud.websecurityscanner.v1beta.VulnerableHeaders.verify(message.vulnerableHeaders);
+                                var error = $root.google.cloud.websecurityscanner.v1beta.VulnerableHeaders.verify(message.vulnerableHeaders, long + 1);
                                 if (error)
                                     return "vulnerableHeaders." + error;
                             }
                             if (message.vulnerableParameters != null && message.hasOwnProperty("vulnerableParameters")) {
-                                var error = $root.google.cloud.websecurityscanner.v1beta.VulnerableParameters.verify(message.vulnerableParameters);
+                                var error = $root.google.cloud.websecurityscanner.v1beta.VulnerableParameters.verify(message.vulnerableParameters, long + 1);
                                 if (error)
                                     return "vulnerableParameters." + error;
                             }
                             if (message.xss != null && message.hasOwnProperty("xss")) {
-                                var error = $root.google.cloud.websecurityscanner.v1beta.Xss.verify(message.xss);
+                                var error = $root.google.cloud.websecurityscanner.v1beta.Xss.verify(message.xss, long + 1);
                                 if (error)
                                     return "xss." + error;
                             }
@@ -22376,9 +23284,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.Finding} Finding
                          */
-                        Finding.fromObject = function fromObject(object) {
+                        Finding.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.Finding)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.Finding();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -22403,32 +23315,32 @@
                             if (object.form != null) {
                                 if (typeof object.form !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1beta.Finding.form: object expected");
-                                message.form = $root.google.cloud.websecurityscanner.v1beta.Form.fromObject(object.form);
+                                message.form = $root.google.cloud.websecurityscanner.v1beta.Form.fromObject(object.form, long + 1);
                             }
                             if (object.outdatedLibrary != null) {
                                 if (typeof object.outdatedLibrary !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1beta.Finding.outdatedLibrary: object expected");
-                                message.outdatedLibrary = $root.google.cloud.websecurityscanner.v1beta.OutdatedLibrary.fromObject(object.outdatedLibrary);
+                                message.outdatedLibrary = $root.google.cloud.websecurityscanner.v1beta.OutdatedLibrary.fromObject(object.outdatedLibrary, long + 1);
                             }
                             if (object.violatingResource != null) {
                                 if (typeof object.violatingResource !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1beta.Finding.violatingResource: object expected");
-                                message.violatingResource = $root.google.cloud.websecurityscanner.v1beta.ViolatingResource.fromObject(object.violatingResource);
+                                message.violatingResource = $root.google.cloud.websecurityscanner.v1beta.ViolatingResource.fromObject(object.violatingResource, long + 1);
                             }
                             if (object.vulnerableHeaders != null) {
                                 if (typeof object.vulnerableHeaders !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1beta.Finding.vulnerableHeaders: object expected");
-                                message.vulnerableHeaders = $root.google.cloud.websecurityscanner.v1beta.VulnerableHeaders.fromObject(object.vulnerableHeaders);
+                                message.vulnerableHeaders = $root.google.cloud.websecurityscanner.v1beta.VulnerableHeaders.fromObject(object.vulnerableHeaders, long + 1);
                             }
                             if (object.vulnerableParameters != null) {
                                 if (typeof object.vulnerableParameters !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1beta.Finding.vulnerableParameters: object expected");
-                                message.vulnerableParameters = $root.google.cloud.websecurityscanner.v1beta.VulnerableParameters.fromObject(object.vulnerableParameters);
+                                message.vulnerableParameters = $root.google.cloud.websecurityscanner.v1beta.VulnerableParameters.fromObject(object.vulnerableParameters, long + 1);
                             }
                             if (object.xss != null) {
                                 if (typeof object.xss !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1beta.Finding.xss: object expected");
-                                message.xss = $root.google.cloud.websecurityscanner.v1beta.Xss.fromObject(object.xss);
+                                message.xss = $root.google.cloud.websecurityscanner.v1beta.Xss.fromObject(object.xss, long + 1);
                             }
                             return message;
                         };
@@ -22550,7 +23462,7 @@
                             this.fields = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -22626,9 +23538,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Form.decode = function decode(reader, length, error) {
+                        Form.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.Form();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -22646,7 +23562,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -22677,9 +23593,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        Form.verify = function verify(message) {
+                        Form.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.actionUri != null && message.hasOwnProperty("actionUri"))
                                 if (!$util.isString(message.actionUri))
                                     return "actionUri: string expected";
@@ -22701,9 +23621,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.Form} Form
                          */
-                        Form.fromObject = function fromObject(object) {
+                        Form.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.Form)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.Form();
                             if (object.actionUri != null)
                                 message.actionUri = String(object.actionUri);
@@ -22796,7 +23720,7 @@
                             this.learnMoreUrls = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -22882,9 +23806,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        OutdatedLibrary.decode = function decode(reader, length, error) {
+                        OutdatedLibrary.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.OutdatedLibrary();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -22906,7 +23834,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -22937,9 +23865,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        OutdatedLibrary.verify = function verify(message) {
+                        OutdatedLibrary.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.libraryName != null && message.hasOwnProperty("libraryName"))
                                 if (!$util.isString(message.libraryName))
                                     return "libraryName: string expected";
@@ -22964,9 +23896,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.OutdatedLibrary} OutdatedLibrary
                          */
-                        OutdatedLibrary.fromObject = function fromObject(object) {
+                        OutdatedLibrary.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.OutdatedLibrary)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.OutdatedLibrary();
                             if (object.libraryName != null)
                                 message.libraryName = String(object.libraryName);
@@ -23063,7 +23999,7 @@
                         function ViolatingResource(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -23138,9 +24074,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ViolatingResource.decode = function decode(reader, length, error) {
+                        ViolatingResource.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.ViolatingResource();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -23156,7 +24096,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -23187,9 +24127,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ViolatingResource.verify = function verify(message) {
+                        ViolatingResource.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.contentType != null && message.hasOwnProperty("contentType"))
                                 if (!$util.isString(message.contentType))
                                     return "contentType: string expected";
@@ -23207,9 +24151,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.ViolatingResource} ViolatingResource
                          */
-                        ViolatingResource.fromObject = function fromObject(object) {
+                        ViolatingResource.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.ViolatingResource)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.ViolatingResource();
                             if (object.contentType != null)
                                 message.contentType = String(object.contentType);
@@ -23292,7 +24240,7 @@
                             this.parameterNames = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -23358,9 +24306,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        VulnerableParameters.decode = function decode(reader, length, error) {
+                        VulnerableParameters.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.VulnerableParameters();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -23374,7 +24326,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -23405,9 +24357,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        VulnerableParameters.verify = function verify(message) {
+                        VulnerableParameters.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.parameterNames != null && message.hasOwnProperty("parameterNames")) {
                                 if (!Array.isArray(message.parameterNames))
                                     return "parameterNames: array expected";
@@ -23426,9 +24382,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.VulnerableParameters} VulnerableParameters
                          */
-                        VulnerableParameters.fromObject = function fromObject(object) {
+                        VulnerableParameters.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.VulnerableParameters)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.VulnerableParameters();
                             if (object.parameterNames) {
                                 if (!Array.isArray(object.parameterNames))
@@ -23515,7 +24475,7 @@
                             this.missingHeaders = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -23592,9 +24552,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        VulnerableHeaders.decode = function decode(reader, length, error) {
+                        VulnerableHeaders.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.VulnerableHeaders();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -23604,17 +24568,17 @@
                                 case 1: {
                                         if (!(message.headers && message.headers.length))
                                             message.headers = [];
-                                        message.headers.push($root.google.cloud.websecurityscanner.v1beta.VulnerableHeaders.Header.decode(reader, reader.uint32()));
+                                        message.headers.push($root.google.cloud.websecurityscanner.v1beta.VulnerableHeaders.Header.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 2: {
                                         if (!(message.missingHeaders && message.missingHeaders.length))
                                             message.missingHeaders = [];
-                                        message.missingHeaders.push($root.google.cloud.websecurityscanner.v1beta.VulnerableHeaders.Header.decode(reader, reader.uint32()));
+                                        message.missingHeaders.push($root.google.cloud.websecurityscanner.v1beta.VulnerableHeaders.Header.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -23645,14 +24609,18 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        VulnerableHeaders.verify = function verify(message) {
+                        VulnerableHeaders.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.headers != null && message.hasOwnProperty("headers")) {
                                 if (!Array.isArray(message.headers))
                                     return "headers: array expected";
                                 for (var i = 0; i < message.headers.length; ++i) {
-                                    var error = $root.google.cloud.websecurityscanner.v1beta.VulnerableHeaders.Header.verify(message.headers[i]);
+                                    var error = $root.google.cloud.websecurityscanner.v1beta.VulnerableHeaders.Header.verify(message.headers[i], long + 1);
                                     if (error)
                                         return "headers." + error;
                                 }
@@ -23661,7 +24629,7 @@
                                 if (!Array.isArray(message.missingHeaders))
                                     return "missingHeaders: array expected";
                                 for (var i = 0; i < message.missingHeaders.length; ++i) {
-                                    var error = $root.google.cloud.websecurityscanner.v1beta.VulnerableHeaders.Header.verify(message.missingHeaders[i]);
+                                    var error = $root.google.cloud.websecurityscanner.v1beta.VulnerableHeaders.Header.verify(message.missingHeaders[i], long + 1);
                                     if (error)
                                         return "missingHeaders." + error;
                                 }
@@ -23677,9 +24645,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.VulnerableHeaders} VulnerableHeaders
                          */
-                        VulnerableHeaders.fromObject = function fromObject(object) {
+                        VulnerableHeaders.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.VulnerableHeaders)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.VulnerableHeaders();
                             if (object.headers) {
                                 if (!Array.isArray(object.headers))
@@ -23688,7 +24660,7 @@
                                 for (var i = 0; i < object.headers.length; ++i) {
                                     if (typeof object.headers[i] !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1beta.VulnerableHeaders.headers: object expected");
-                                    message.headers[i] = $root.google.cloud.websecurityscanner.v1beta.VulnerableHeaders.Header.fromObject(object.headers[i]);
+                                    message.headers[i] = $root.google.cloud.websecurityscanner.v1beta.VulnerableHeaders.Header.fromObject(object.headers[i], long + 1);
                                 }
                             }
                             if (object.missingHeaders) {
@@ -23698,7 +24670,7 @@
                                 for (var i = 0; i < object.missingHeaders.length; ++i) {
                                     if (typeof object.missingHeaders[i] !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1beta.VulnerableHeaders.missingHeaders: object expected");
-                                    message.missingHeaders[i] = $root.google.cloud.websecurityscanner.v1beta.VulnerableHeaders.Header.fromObject(object.missingHeaders[i]);
+                                    message.missingHeaders[i] = $root.google.cloud.websecurityscanner.v1beta.VulnerableHeaders.Header.fromObject(object.missingHeaders[i], long + 1);
                                 }
                             }
                             return message;
@@ -23781,7 +24753,7 @@
                             function Header(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -23856,9 +24828,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Header.decode = function decode(reader, length, error) {
+                            Header.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.VulnerableHeaders.Header();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -23874,7 +24850,7 @@
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -23905,9 +24881,13 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            Header.verify = function verify(message) {
+                            Header.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
@@ -23925,9 +24905,13 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.cloud.websecurityscanner.v1beta.VulnerableHeaders.Header} Header
                              */
-                            Header.fromObject = function fromObject(object) {
+                            Header.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.cloud.websecurityscanner.v1beta.VulnerableHeaders.Header)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.cloud.websecurityscanner.v1beta.VulnerableHeaders.Header();
                                 if (object.name != null)
                                     message.name = String(object.name);
@@ -24014,7 +24998,7 @@
                             this.stackTraces = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -24090,9 +25074,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        Xss.decode = function decode(reader, length, error) {
+                        Xss.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.Xss();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -24110,7 +25098,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -24141,9 +25129,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        Xss.verify = function verify(message) {
+                        Xss.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.stackTraces != null && message.hasOwnProperty("stackTraces")) {
                                 if (!Array.isArray(message.stackTraces))
                                     return "stackTraces: array expected";
@@ -24165,9 +25157,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.Xss} Xss
                          */
-                        Xss.fromObject = function fromObject(object) {
+                        Xss.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.Xss)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.Xss();
                             if (object.stackTraces) {
                                 if (!Array.isArray(object.stackTraces))
@@ -24258,7 +25254,7 @@
                         function FindingTypeStats(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -24333,9 +25329,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        FindingTypeStats.decode = function decode(reader, length, error) {
+                        FindingTypeStats.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.FindingTypeStats();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -24351,7 +25351,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -24382,9 +25382,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        FindingTypeStats.verify = function verify(message) {
+                        FindingTypeStats.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.findingType != null && message.hasOwnProperty("findingType"))
                                 if (!$util.isString(message.findingType))
                                     return "findingType: string expected";
@@ -24402,9 +25406,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.FindingTypeStats} FindingTypeStats
                          */
-                        FindingTypeStats.fromObject = function fromObject(object) {
+                        FindingTypeStats.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.FindingTypeStats)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.FindingTypeStats();
                             if (object.findingType != null)
                                 message.findingType = String(object.findingType);
@@ -24500,7 +25508,7 @@
                             this.targetPlatforms = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -24681,9 +25689,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ScanConfig.decode = function decode(reader, length, error) {
+                        ScanConfig.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.ScanConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -24709,7 +25721,7 @@
                                         break;
                                     }
                                 case 5: {
-                                        message.authentication = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.decode(reader, reader.uint32());
+                                        message.authentication = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 6: {
@@ -24723,7 +25735,7 @@
                                         break;
                                     }
                                 case 8: {
-                                        message.schedule = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Schedule.decode(reader, reader.uint32());
+                                        message.schedule = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Schedule.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 9: {
@@ -24742,7 +25754,7 @@
                                         break;
                                     }
                                 case 11: {
-                                        message.latestRun = $root.google.cloud.websecurityscanner.v1beta.ScanRun.decode(reader, reader.uint32());
+                                        message.latestRun = $root.google.cloud.websecurityscanner.v1beta.ScanRun.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 12: {
@@ -24750,7 +25762,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -24781,9 +25793,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ScanConfig.verify = function verify(message) {
+                        ScanConfig.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -24801,7 +25817,7 @@
                                         return "startingUrls: string[] expected";
                             }
                             if (message.authentication != null && message.hasOwnProperty("authentication")) {
-                                var error = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.verify(message.authentication);
+                                var error = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.verify(message.authentication, long + 1);
                                 if (error)
                                     return "authentication." + error;
                             }
@@ -24823,7 +25839,7 @@
                                         return "blacklistPatterns: string[] expected";
                             }
                             if (message.schedule != null && message.hasOwnProperty("schedule")) {
-                                var error = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Schedule.verify(message.schedule);
+                                var error = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Schedule.verify(message.schedule, long + 1);
                                 if (error)
                                     return "schedule." + error;
                             }
@@ -24850,7 +25866,7 @@
                                     break;
                                 }
                             if (message.latestRun != null && message.hasOwnProperty("latestRun")) {
-                                var error = $root.google.cloud.websecurityscanner.v1beta.ScanRun.verify(message.latestRun);
+                                var error = $root.google.cloud.websecurityscanner.v1beta.ScanRun.verify(message.latestRun, long + 1);
                                 if (error)
                                     return "latestRun." + error;
                             }
@@ -24874,9 +25890,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.ScanConfig} ScanConfig
                          */
-                        ScanConfig.fromObject = function fromObject(object) {
+                        ScanConfig.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.ScanConfig)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.ScanConfig();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -24894,7 +25914,7 @@
                             if (object.authentication != null) {
                                 if (typeof object.authentication !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1beta.ScanConfig.authentication: object expected");
-                                message.authentication = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.fromObject(object.authentication);
+                                message.authentication = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.fromObject(object.authentication, long + 1);
                             }
                             switch (object.userAgent) {
                             default:
@@ -24930,7 +25950,7 @@
                             if (object.schedule != null) {
                                 if (typeof object.schedule !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1beta.ScanConfig.schedule: object expected");
-                                message.schedule = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Schedule.fromObject(object.schedule);
+                                message.schedule = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Schedule.fromObject(object.schedule, long + 1);
                             }
                             if (object.targetPlatforms) {
                                 if (!Array.isArray(object.targetPlatforms))
@@ -24980,7 +26000,7 @@
                             if (object.latestRun != null) {
                                 if (typeof object.latestRun !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1beta.ScanConfig.latestRun: object expected");
-                                message.latestRun = $root.google.cloud.websecurityscanner.v1beta.ScanRun.fromObject(object.latestRun);
+                                message.latestRun = $root.google.cloud.websecurityscanner.v1beta.ScanRun.fromObject(object.latestRun, long + 1);
                             }
                             switch (object.riskLevel) {
                             default:
@@ -25117,7 +26137,7 @@
                             function Authentication(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -25206,9 +26226,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Authentication.decode = function decode(reader, length, error) {
+                            Authentication.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -25216,15 +26240,15 @@
                                         break;
                                     switch (tag >>> 3) {
                                     case 1: {
-                                            message.googleAccount = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.GoogleAccount.decode(reader, reader.uint32());
+                                            message.googleAccount = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.GoogleAccount.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     case 2: {
-                                            message.customAccount = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.CustomAccount.decode(reader, reader.uint32());
+                                            message.customAccount = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.CustomAccount.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -25255,14 +26279,18 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            Authentication.verify = function verify(message) {
+                            Authentication.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 var properties = {};
                                 if (message.googleAccount != null && message.hasOwnProperty("googleAccount")) {
                                     properties.authentication = 1;
                                     {
-                                        var error = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.GoogleAccount.verify(message.googleAccount);
+                                        var error = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.GoogleAccount.verify(message.googleAccount, long + 1);
                                         if (error)
                                             return "googleAccount." + error;
                                     }
@@ -25272,7 +26300,7 @@
                                         return "authentication: multiple values";
                                     properties.authentication = 1;
                                     {
-                                        var error = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.CustomAccount.verify(message.customAccount);
+                                        var error = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.CustomAccount.verify(message.customAccount, long + 1);
                                         if (error)
                                             return "customAccount." + error;
                                     }
@@ -25288,19 +26316,23 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication} Authentication
                              */
-                            Authentication.fromObject = function fromObject(object) {
+                            Authentication.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication();
                                 if (object.googleAccount != null) {
                                     if (typeof object.googleAccount !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.googleAccount: object expected");
-                                    message.googleAccount = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.GoogleAccount.fromObject(object.googleAccount);
+                                    message.googleAccount = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.GoogleAccount.fromObject(object.googleAccount, long + 1);
                                 }
                                 if (object.customAccount != null) {
                                     if (typeof object.customAccount !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.customAccount: object expected");
-                                    message.customAccount = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.CustomAccount.fromObject(object.customAccount);
+                                    message.customAccount = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.CustomAccount.fromObject(object.customAccount, long + 1);
                                 }
                                 return message;
                             };
@@ -25378,7 +26410,7 @@
                                 function GoogleAccount(properties) {
                                     if (properties)
                                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                            if (properties[keys[i]] != null)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                                 this[keys[i]] = properties[keys[i]];
                                 }
     
@@ -25453,9 +26485,13 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                GoogleAccount.decode = function decode(reader, length, error) {
+                                GoogleAccount.decode = function decode(reader, length, error, long) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.GoogleAccount();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
@@ -25471,7 +26507,7 @@
                                                 break;
                                             }
                                         default:
-                                            reader.skipType(tag & 7);
+                                            reader.skipType(tag & 7, long);
                                             break;
                                         }
                                     }
@@ -25502,9 +26538,13 @@
                                  * @param {Object.<string,*>} message Plain object to verify
                                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                                  */
-                                GoogleAccount.verify = function verify(message) {
+                                GoogleAccount.verify = function verify(message, long) {
                                     if (typeof message !== "object" || message === null)
                                         return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
                                     if (message.username != null && message.hasOwnProperty("username"))
                                         if (!$util.isString(message.username))
                                             return "username: string expected";
@@ -25522,9 +26562,13 @@
                                  * @param {Object.<string,*>} object Plain object
                                  * @returns {google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.GoogleAccount} GoogleAccount
                                  */
-                                GoogleAccount.fromObject = function fromObject(object) {
+                                GoogleAccount.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.GoogleAccount)
                                         return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var message = new $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.GoogleAccount();
                                     if (object.username != null)
                                         message.username = String(object.username);
@@ -25608,7 +26652,7 @@
                                 function CustomAccount(properties) {
                                     if (properties)
                                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                            if (properties[keys[i]] != null)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                                 this[keys[i]] = properties[keys[i]];
                                 }
     
@@ -25693,9 +26737,13 @@
                                  * @throws {Error} If the payload is not a reader or valid buffer
                                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                                  */
-                                CustomAccount.decode = function decode(reader, length, error) {
+                                CustomAccount.decode = function decode(reader, length, error, long) {
                                     if (!(reader instanceof $Reader))
                                         reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.CustomAccount();
                                     while (reader.pos < end) {
                                         var tag = reader.uint32();
@@ -25715,7 +26763,7 @@
                                                 break;
                                             }
                                         default:
-                                            reader.skipType(tag & 7);
+                                            reader.skipType(tag & 7, long);
                                             break;
                                         }
                                     }
@@ -25746,9 +26794,13 @@
                                  * @param {Object.<string,*>} message Plain object to verify
                                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                                  */
-                                CustomAccount.verify = function verify(message) {
+                                CustomAccount.verify = function verify(message, long) {
                                     if (typeof message !== "object" || message === null)
                                         return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
                                     if (message.username != null && message.hasOwnProperty("username"))
                                         if (!$util.isString(message.username))
                                             return "username: string expected";
@@ -25769,9 +26821,13 @@
                                  * @param {Object.<string,*>} object Plain object
                                  * @returns {google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.CustomAccount} CustomAccount
                                  */
-                                CustomAccount.fromObject = function fromObject(object) {
+                                CustomAccount.fromObject = function fromObject(object, long) {
                                     if (object instanceof $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.CustomAccount)
                                         return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
                                     var message = new $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Authentication.CustomAccount();
                                     if (object.username != null)
                                         message.username = String(object.username);
@@ -25862,7 +26918,7 @@
                             function Schedule(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                             this[keys[i]] = properties[keys[i]];
                             }
     
@@ -25937,9 +26993,13 @@
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            Schedule.decode = function decode(reader, length, error) {
+                            Schedule.decode = function decode(reader, length, error, long) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Schedule();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
@@ -25947,7 +27007,7 @@
                                         break;
                                     switch (tag >>> 3) {
                                     case 1: {
-                                            message.scheduleTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            message.scheduleTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     case 2: {
@@ -25955,7 +27015,7 @@
                                             break;
                                         }
                                     default:
-                                        reader.skipType(tag & 7);
+                                        reader.skipType(tag & 7, long);
                                         break;
                                     }
                                 }
@@ -25986,11 +27046,15 @@
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            Schedule.verify = function verify(message) {
+                            Schedule.verify = function verify(message, long) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
                                 if (message.scheduleTime != null && message.hasOwnProperty("scheduleTime")) {
-                                    var error = $root.google.protobuf.Timestamp.verify(message.scheduleTime);
+                                    var error = $root.google.protobuf.Timestamp.verify(message.scheduleTime, long + 1);
                                     if (error)
                                         return "scheduleTime." + error;
                                 }
@@ -26008,14 +27072,18 @@
                              * @param {Object.<string,*>} object Plain object
                              * @returns {google.cloud.websecurityscanner.v1beta.ScanConfig.Schedule} Schedule
                              */
-                            Schedule.fromObject = function fromObject(object) {
+                            Schedule.fromObject = function fromObject(object, long) {
                                 if (object instanceof $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Schedule)
                                     return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
                                 var message = new $root.google.cloud.websecurityscanner.v1beta.ScanConfig.Schedule();
                                 if (object.scheduleTime != null) {
                                     if (typeof object.scheduleTime !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1beta.ScanConfig.Schedule.scheduleTime: object expected");
-                                    message.scheduleTime = $root.google.protobuf.Timestamp.fromObject(object.scheduleTime);
+                                    message.scheduleTime = $root.google.protobuf.Timestamp.fromObject(object.scheduleTime, long + 1);
                                 }
                                 if (object.intervalDurationDays != null)
                                     message.intervalDurationDays = object.intervalDurationDays | 0;
@@ -26175,7 +27243,7 @@
                             this.warningTraces = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -26341,9 +27409,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ScanRun.decode = function decode(reader, length, error) {
+                        ScanRun.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.ScanRun();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -26363,11 +27435,11 @@
                                         break;
                                     }
                                 case 4: {
-                                        message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 5: {
-                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 6: {
@@ -26387,17 +27459,17 @@
                                         break;
                                     }
                                 case 10: {
-                                        message.errorTrace = $root.google.cloud.websecurityscanner.v1beta.ScanRunErrorTrace.decode(reader, reader.uint32());
+                                        message.errorTrace = $root.google.cloud.websecurityscanner.v1beta.ScanRunErrorTrace.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 11: {
                                         if (!(message.warningTraces && message.warningTraces.length))
                                             message.warningTraces = [];
-                                        message.warningTraces.push($root.google.cloud.websecurityscanner.v1beta.ScanRunWarningTrace.decode(reader, reader.uint32()));
+                                        message.warningTraces.push($root.google.cloud.websecurityscanner.v1beta.ScanRunWarningTrace.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -26428,9 +27500,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ScanRun.verify = function verify(message) {
+                        ScanRun.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -26455,12 +27531,12 @@
                                     break;
                                 }
                             if (message.startTime != null && message.hasOwnProperty("startTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                var error = $root.google.protobuf.Timestamp.verify(message.startTime, long + 1);
                                 if (error)
                                     return "startTime." + error;
                             }
                             if (message.endTime != null && message.hasOwnProperty("endTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime, long + 1);
                                 if (error)
                                     return "endTime." + error;
                             }
@@ -26477,7 +27553,7 @@
                                 if (!$util.isInteger(message.progressPercent))
                                     return "progressPercent: integer expected";
                             if (message.errorTrace != null && message.hasOwnProperty("errorTrace")) {
-                                var error = $root.google.cloud.websecurityscanner.v1beta.ScanRunErrorTrace.verify(message.errorTrace);
+                                var error = $root.google.cloud.websecurityscanner.v1beta.ScanRunErrorTrace.verify(message.errorTrace, long + 1);
                                 if (error)
                                     return "errorTrace." + error;
                             }
@@ -26485,7 +27561,7 @@
                                 if (!Array.isArray(message.warningTraces))
                                     return "warningTraces: array expected";
                                 for (var i = 0; i < message.warningTraces.length; ++i) {
-                                    var error = $root.google.cloud.websecurityscanner.v1beta.ScanRunWarningTrace.verify(message.warningTraces[i]);
+                                    var error = $root.google.cloud.websecurityscanner.v1beta.ScanRunWarningTrace.verify(message.warningTraces[i], long + 1);
                                     if (error)
                                         return "warningTraces." + error;
                                 }
@@ -26501,9 +27577,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.ScanRun} ScanRun
                          */
-                        ScanRun.fromObject = function fromObject(object) {
+                        ScanRun.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.ScanRun)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.ScanRun();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -26558,12 +27638,12 @@
                             if (object.startTime != null) {
                                 if (typeof object.startTime !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1beta.ScanRun.startTime: object expected");
-                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime, long + 1);
                             }
                             if (object.endTime != null) {
                                 if (typeof object.endTime !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1beta.ScanRun.endTime: object expected");
-                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime, long + 1);
                             }
                             if (object.urlsCrawledCount != null)
                                 if ($util.Long)
@@ -26590,7 +27670,7 @@
                             if (object.errorTrace != null) {
                                 if (typeof object.errorTrace !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1beta.ScanRun.errorTrace: object expected");
-                                message.errorTrace = $root.google.cloud.websecurityscanner.v1beta.ScanRunErrorTrace.fromObject(object.errorTrace);
+                                message.errorTrace = $root.google.cloud.websecurityscanner.v1beta.ScanRunErrorTrace.fromObject(object.errorTrace, long + 1);
                             }
                             if (object.warningTraces) {
                                 if (!Array.isArray(object.warningTraces))
@@ -26599,7 +27679,7 @@
                                 for (var i = 0; i < object.warningTraces.length; ++i) {
                                     if (typeof object.warningTraces[i] !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1beta.ScanRun.warningTraces: object expected");
-                                    message.warningTraces[i] = $root.google.cloud.websecurityscanner.v1beta.ScanRunWarningTrace.fromObject(object.warningTraces[i]);
+                                    message.warningTraces[i] = $root.google.cloud.websecurityscanner.v1beta.ScanRunWarningTrace.fromObject(object.warningTraces[i], long + 1);
                                 }
                             }
                             return message;
@@ -26761,7 +27841,7 @@
                         function ScanRunErrorTrace(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -26846,9 +27926,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ScanRunErrorTrace.decode = function decode(reader, length, error) {
+                        ScanRunErrorTrace.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.ScanRunErrorTrace();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -26860,7 +27944,7 @@
                                         break;
                                     }
                                 case 2: {
-                                        message.scanConfigError = $root.google.cloud.websecurityscanner.v1beta.ScanConfigError.decode(reader, reader.uint32());
+                                        message.scanConfigError = $root.google.cloud.websecurityscanner.v1beta.ScanConfigError.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 3: {
@@ -26868,7 +27952,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -26899,9 +27983,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ScanRunErrorTrace.verify = function verify(message) {
+                        ScanRunErrorTrace.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.code != null && message.hasOwnProperty("code"))
                                 switch (message.code) {
                                 default:
@@ -26916,7 +28004,7 @@
                                     break;
                                 }
                             if (message.scanConfigError != null && message.hasOwnProperty("scanConfigError")) {
-                                var error = $root.google.cloud.websecurityscanner.v1beta.ScanConfigError.verify(message.scanConfigError);
+                                var error = $root.google.cloud.websecurityscanner.v1beta.ScanConfigError.verify(message.scanConfigError, long + 1);
                                 if (error)
                                     return "scanConfigError." + error;
                             }
@@ -26934,9 +28022,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.ScanRunErrorTrace} ScanRunErrorTrace
                          */
-                        ScanRunErrorTrace.fromObject = function fromObject(object) {
+                        ScanRunErrorTrace.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.ScanRunErrorTrace)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.ScanRunErrorTrace();
                             switch (object.code) {
                             default:
@@ -26977,7 +28069,7 @@
                             if (object.scanConfigError != null) {
                                 if (typeof object.scanConfigError !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1beta.ScanRunErrorTrace.scanConfigError: object expected");
-                                message.scanConfigError = $root.google.cloud.websecurityscanner.v1beta.ScanConfigError.fromObject(object.scanConfigError);
+                                message.scanConfigError = $root.google.cloud.websecurityscanner.v1beta.ScanConfigError.fromObject(object.scanConfigError, long + 1);
                             }
                             if (object.mostCommonHttpErrorCode != null)
                                 message.mostCommonHttpErrorCode = object.mostCommonHttpErrorCode | 0;
@@ -27085,7 +28177,7 @@
                         function ScanConfigError(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -27160,9 +28252,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ScanConfigError.decode = function decode(reader, length, error) {
+                        ScanConfigError.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.ScanConfigError();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -27178,7 +28274,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -27209,9 +28305,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ScanConfigError.verify = function verify(message) {
+                        ScanConfigError.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.code != null && message.hasOwnProperty("code"))
                                 switch (message.code) {
                                 default:
@@ -27274,9 +28374,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.ScanConfigError} ScanConfigError
                          */
-                        ScanConfigError.fromObject = function fromObject(object) {
+                        ScanConfigError.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.ScanConfigError)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.ScanConfigError();
                             switch (object.code) {
                             default:
@@ -27626,7 +28730,7 @@
                         function ScanRunWarningTrace(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -27691,9 +28795,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ScanRunWarningTrace.decode = function decode(reader, length, error) {
+                        ScanRunWarningTrace.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.ScanRunWarningTrace();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -27705,7 +28813,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -27736,9 +28844,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ScanRunWarningTrace.verify = function verify(message) {
+                        ScanRunWarningTrace.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.code != null && message.hasOwnProperty("code"))
                                 switch (message.code) {
                                 default:
@@ -27761,9 +28873,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.ScanRunWarningTrace} ScanRunWarningTrace
                          */
-                        ScanRunWarningTrace.fromObject = function fromObject(object) {
+                        ScanRunWarningTrace.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.ScanRunWarningTrace)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.ScanRunWarningTrace();
                             switch (object.code) {
                             default:
@@ -28350,7 +29466,7 @@
                         function CreateScanConfigRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -28425,9 +29541,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        CreateScanConfigRequest.decode = function decode(reader, length, error) {
+                        CreateScanConfigRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.CreateScanConfigRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -28439,11 +29559,11 @@
                                         break;
                                     }
                                 case 2: {
-                                        message.scanConfig = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.decode(reader, reader.uint32());
+                                        message.scanConfig = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -28474,14 +29594,18 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        CreateScanConfigRequest.verify = function verify(message) {
+                        CreateScanConfigRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
                             if (message.scanConfig != null && message.hasOwnProperty("scanConfig")) {
-                                var error = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.verify(message.scanConfig);
+                                var error = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.verify(message.scanConfig, long + 1);
                                 if (error)
                                     return "scanConfig." + error;
                             }
@@ -28496,16 +29620,20 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.CreateScanConfigRequest} CreateScanConfigRequest
                          */
-                        CreateScanConfigRequest.fromObject = function fromObject(object) {
+                        CreateScanConfigRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.CreateScanConfigRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.CreateScanConfigRequest();
                             if (object.parent != null)
                                 message.parent = String(object.parent);
                             if (object.scanConfig != null) {
                                 if (typeof object.scanConfig !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1beta.CreateScanConfigRequest.scanConfig: object expected");
-                                message.scanConfig = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.fromObject(object.scanConfig);
+                                message.scanConfig = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.fromObject(object.scanConfig, long + 1);
                             }
                             return message;
                         };
@@ -28583,7 +29711,7 @@
                         function DeleteScanConfigRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -28648,9 +29776,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DeleteScanConfigRequest.decode = function decode(reader, length, error) {
+                        DeleteScanConfigRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.DeleteScanConfigRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -28662,7 +29794,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -28693,9 +29825,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        DeleteScanConfigRequest.verify = function verify(message) {
+                        DeleteScanConfigRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -28710,9 +29846,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.DeleteScanConfigRequest} DeleteScanConfigRequest
                          */
-                        DeleteScanConfigRequest.fromObject = function fromObject(object) {
+                        DeleteScanConfigRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.DeleteScanConfigRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.DeleteScanConfigRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -28788,7 +29928,7 @@
                         function GetScanConfigRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -28853,9 +29993,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetScanConfigRequest.decode = function decode(reader, length, error) {
+                        GetScanConfigRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.GetScanConfigRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -28867,7 +30011,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -28898,9 +30042,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        GetScanConfigRequest.verify = function verify(message) {
+                        GetScanConfigRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -28915,9 +30063,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.GetScanConfigRequest} GetScanConfigRequest
                          */
-                        GetScanConfigRequest.fromObject = function fromObject(object) {
+                        GetScanConfigRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.GetScanConfigRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.GetScanConfigRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -28995,7 +30147,7 @@
                         function ListScanConfigsRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -29080,9 +30232,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListScanConfigsRequest.decode = function decode(reader, length, error) {
+                        ListScanConfigsRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.ListScanConfigsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -29102,7 +30258,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -29133,9 +30289,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListScanConfigsRequest.verify = function verify(message) {
+                        ListScanConfigsRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
@@ -29156,9 +30316,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.ListScanConfigsRequest} ListScanConfigsRequest
                          */
-                        ListScanConfigsRequest.fromObject = function fromObject(object) {
+                        ListScanConfigsRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.ListScanConfigsRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.ListScanConfigsRequest();
                             if (object.parent != null)
                                 message.parent = String(object.parent);
@@ -29246,7 +30410,7 @@
                         function UpdateScanConfigRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -29321,9 +30485,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateScanConfigRequest.decode = function decode(reader, length, error) {
+                        UpdateScanConfigRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.UpdateScanConfigRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -29331,15 +30499,15 @@
                                     break;
                                 switch (tag >>> 3) {
                                 case 2: {
-                                        message.scanConfig = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.decode(reader, reader.uint32());
+                                        message.scanConfig = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 case 3: {
-                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -29370,16 +30538,20 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        UpdateScanConfigRequest.verify = function verify(message) {
+                        UpdateScanConfigRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.scanConfig != null && message.hasOwnProperty("scanConfig")) {
-                                var error = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.verify(message.scanConfig);
+                                var error = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.verify(message.scanConfig, long + 1);
                                 if (error)
                                     return "scanConfig." + error;
                             }
                             if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
-                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask, long + 1);
                                 if (error)
                                     return "updateMask." + error;
                             }
@@ -29394,19 +30566,23 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.UpdateScanConfigRequest} UpdateScanConfigRequest
                          */
-                        UpdateScanConfigRequest.fromObject = function fromObject(object) {
+                        UpdateScanConfigRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.UpdateScanConfigRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.UpdateScanConfigRequest();
                             if (object.scanConfig != null) {
                                 if (typeof object.scanConfig !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1beta.UpdateScanConfigRequest.scanConfig: object expected");
-                                message.scanConfig = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.fromObject(object.scanConfig);
+                                message.scanConfig = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.fromObject(object.scanConfig, long + 1);
                             }
                             if (object.updateMask != null) {
                                 if (typeof object.updateMask !== "object")
                                     throw TypeError(".google.cloud.websecurityscanner.v1beta.UpdateScanConfigRequest.updateMask: object expected");
-                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask, long + 1);
                             }
                             return message;
                         };
@@ -29486,7 +30662,7 @@
                             this.scanConfigs = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -29562,9 +30738,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListScanConfigsResponse.decode = function decode(reader, length, error) {
+                        ListScanConfigsResponse.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.ListScanConfigsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -29574,7 +30754,7 @@
                                 case 1: {
                                         if (!(message.scanConfigs && message.scanConfigs.length))
                                             message.scanConfigs = [];
-                                        message.scanConfigs.push($root.google.cloud.websecurityscanner.v1beta.ScanConfig.decode(reader, reader.uint32()));
+                                        message.scanConfigs.push($root.google.cloud.websecurityscanner.v1beta.ScanConfig.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 2: {
@@ -29582,7 +30762,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -29613,14 +30793,18 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListScanConfigsResponse.verify = function verify(message) {
+                        ListScanConfigsResponse.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.scanConfigs != null && message.hasOwnProperty("scanConfigs")) {
                                 if (!Array.isArray(message.scanConfigs))
                                     return "scanConfigs: array expected";
                                 for (var i = 0; i < message.scanConfigs.length; ++i) {
-                                    var error = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.verify(message.scanConfigs[i]);
+                                    var error = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.verify(message.scanConfigs[i], long + 1);
                                     if (error)
                                         return "scanConfigs." + error;
                                 }
@@ -29639,9 +30823,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.ListScanConfigsResponse} ListScanConfigsResponse
                          */
-                        ListScanConfigsResponse.fromObject = function fromObject(object) {
+                        ListScanConfigsResponse.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.ListScanConfigsResponse)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.ListScanConfigsResponse();
                             if (object.scanConfigs) {
                                 if (!Array.isArray(object.scanConfigs))
@@ -29650,7 +30838,7 @@
                                 for (var i = 0; i < object.scanConfigs.length; ++i) {
                                     if (typeof object.scanConfigs[i] !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1beta.ListScanConfigsResponse.scanConfigs: object expected");
-                                    message.scanConfigs[i] = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.fromObject(object.scanConfigs[i]);
+                                    message.scanConfigs[i] = $root.google.cloud.websecurityscanner.v1beta.ScanConfig.fromObject(object.scanConfigs[i], long + 1);
                                 }
                             }
                             if (object.nextPageToken != null)
@@ -29734,7 +30922,7 @@
                         function StartScanRunRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -29799,9 +30987,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        StartScanRunRequest.decode = function decode(reader, length, error) {
+                        StartScanRunRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.StartScanRunRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -29813,7 +31005,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -29844,9 +31036,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        StartScanRunRequest.verify = function verify(message) {
+                        StartScanRunRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -29861,9 +31057,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.StartScanRunRequest} StartScanRunRequest
                          */
-                        StartScanRunRequest.fromObject = function fromObject(object) {
+                        StartScanRunRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.StartScanRunRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.StartScanRunRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -29939,7 +31139,7 @@
                         function GetScanRunRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -30004,9 +31204,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetScanRunRequest.decode = function decode(reader, length, error) {
+                        GetScanRunRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.GetScanRunRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -30018,7 +31222,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -30049,9 +31253,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        GetScanRunRequest.verify = function verify(message) {
+                        GetScanRunRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -30066,9 +31274,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.GetScanRunRequest} GetScanRunRequest
                          */
-                        GetScanRunRequest.fromObject = function fromObject(object) {
+                        GetScanRunRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.GetScanRunRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.GetScanRunRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -30146,7 +31358,7 @@
                         function ListScanRunsRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -30231,9 +31443,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListScanRunsRequest.decode = function decode(reader, length, error) {
+                        ListScanRunsRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.ListScanRunsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -30253,7 +31469,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -30284,9 +31500,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListScanRunsRequest.verify = function verify(message) {
+                        ListScanRunsRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
@@ -30307,9 +31527,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.ListScanRunsRequest} ListScanRunsRequest
                          */
-                        ListScanRunsRequest.fromObject = function fromObject(object) {
+                        ListScanRunsRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.ListScanRunsRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.ListScanRunsRequest();
                             if (object.parent != null)
                                 message.parent = String(object.parent);
@@ -30398,7 +31622,7 @@
                             this.scanRuns = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -30474,9 +31698,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListScanRunsResponse.decode = function decode(reader, length, error) {
+                        ListScanRunsResponse.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.ListScanRunsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -30486,7 +31714,7 @@
                                 case 1: {
                                         if (!(message.scanRuns && message.scanRuns.length))
                                             message.scanRuns = [];
-                                        message.scanRuns.push($root.google.cloud.websecurityscanner.v1beta.ScanRun.decode(reader, reader.uint32()));
+                                        message.scanRuns.push($root.google.cloud.websecurityscanner.v1beta.ScanRun.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 2: {
@@ -30494,7 +31722,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -30525,14 +31753,18 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListScanRunsResponse.verify = function verify(message) {
+                        ListScanRunsResponse.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.scanRuns != null && message.hasOwnProperty("scanRuns")) {
                                 if (!Array.isArray(message.scanRuns))
                                     return "scanRuns: array expected";
                                 for (var i = 0; i < message.scanRuns.length; ++i) {
-                                    var error = $root.google.cloud.websecurityscanner.v1beta.ScanRun.verify(message.scanRuns[i]);
+                                    var error = $root.google.cloud.websecurityscanner.v1beta.ScanRun.verify(message.scanRuns[i], long + 1);
                                     if (error)
                                         return "scanRuns." + error;
                                 }
@@ -30551,9 +31783,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.ListScanRunsResponse} ListScanRunsResponse
                          */
-                        ListScanRunsResponse.fromObject = function fromObject(object) {
+                        ListScanRunsResponse.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.ListScanRunsResponse)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.ListScanRunsResponse();
                             if (object.scanRuns) {
                                 if (!Array.isArray(object.scanRuns))
@@ -30562,7 +31798,7 @@
                                 for (var i = 0; i < object.scanRuns.length; ++i) {
                                     if (typeof object.scanRuns[i] !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1beta.ListScanRunsResponse.scanRuns: object expected");
-                                    message.scanRuns[i] = $root.google.cloud.websecurityscanner.v1beta.ScanRun.fromObject(object.scanRuns[i]);
+                                    message.scanRuns[i] = $root.google.cloud.websecurityscanner.v1beta.ScanRun.fromObject(object.scanRuns[i], long + 1);
                                 }
                             }
                             if (object.nextPageToken != null)
@@ -30646,7 +31882,7 @@
                         function StopScanRunRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -30711,9 +31947,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        StopScanRunRequest.decode = function decode(reader, length, error) {
+                        StopScanRunRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.StopScanRunRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -30725,7 +31965,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -30756,9 +31996,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        StopScanRunRequest.verify = function verify(message) {
+                        StopScanRunRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -30773,9 +32017,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.StopScanRunRequest} StopScanRunRequest
                          */
-                        StopScanRunRequest.fromObject = function fromObject(object) {
+                        StopScanRunRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.StopScanRunRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.StopScanRunRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -30853,7 +32101,7 @@
                         function ListCrawledUrlsRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -30938,9 +32186,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListCrawledUrlsRequest.decode = function decode(reader, length, error) {
+                        ListCrawledUrlsRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.ListCrawledUrlsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -30960,7 +32212,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -30991,9 +32243,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListCrawledUrlsRequest.verify = function verify(message) {
+                        ListCrawledUrlsRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
@@ -31014,9 +32270,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.ListCrawledUrlsRequest} ListCrawledUrlsRequest
                          */
-                        ListCrawledUrlsRequest.fromObject = function fromObject(object) {
+                        ListCrawledUrlsRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.ListCrawledUrlsRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.ListCrawledUrlsRequest();
                             if (object.parent != null)
                                 message.parent = String(object.parent);
@@ -31105,7 +32365,7 @@
                             this.crawledUrls = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -31181,9 +32441,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListCrawledUrlsResponse.decode = function decode(reader, length, error) {
+                        ListCrawledUrlsResponse.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.ListCrawledUrlsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -31193,7 +32457,7 @@
                                 case 1: {
                                         if (!(message.crawledUrls && message.crawledUrls.length))
                                             message.crawledUrls = [];
-                                        message.crawledUrls.push($root.google.cloud.websecurityscanner.v1beta.CrawledUrl.decode(reader, reader.uint32()));
+                                        message.crawledUrls.push($root.google.cloud.websecurityscanner.v1beta.CrawledUrl.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 2: {
@@ -31201,7 +32465,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -31232,14 +32496,18 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListCrawledUrlsResponse.verify = function verify(message) {
+                        ListCrawledUrlsResponse.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.crawledUrls != null && message.hasOwnProperty("crawledUrls")) {
                                 if (!Array.isArray(message.crawledUrls))
                                     return "crawledUrls: array expected";
                                 for (var i = 0; i < message.crawledUrls.length; ++i) {
-                                    var error = $root.google.cloud.websecurityscanner.v1beta.CrawledUrl.verify(message.crawledUrls[i]);
+                                    var error = $root.google.cloud.websecurityscanner.v1beta.CrawledUrl.verify(message.crawledUrls[i], long + 1);
                                     if (error)
                                         return "crawledUrls." + error;
                                 }
@@ -31258,9 +32526,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.ListCrawledUrlsResponse} ListCrawledUrlsResponse
                          */
-                        ListCrawledUrlsResponse.fromObject = function fromObject(object) {
+                        ListCrawledUrlsResponse.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.ListCrawledUrlsResponse)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.ListCrawledUrlsResponse();
                             if (object.crawledUrls) {
                                 if (!Array.isArray(object.crawledUrls))
@@ -31269,7 +32541,7 @@
                                 for (var i = 0; i < object.crawledUrls.length; ++i) {
                                     if (typeof object.crawledUrls[i] !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1beta.ListCrawledUrlsResponse.crawledUrls: object expected");
-                                    message.crawledUrls[i] = $root.google.cloud.websecurityscanner.v1beta.CrawledUrl.fromObject(object.crawledUrls[i]);
+                                    message.crawledUrls[i] = $root.google.cloud.websecurityscanner.v1beta.CrawledUrl.fromObject(object.crawledUrls[i], long + 1);
                                 }
                             }
                             if (object.nextPageToken != null)
@@ -31353,7 +32625,7 @@
                         function GetFindingRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -31418,9 +32690,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        GetFindingRequest.decode = function decode(reader, length, error) {
+                        GetFindingRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.GetFindingRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -31432,7 +32708,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -31463,9 +32739,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        GetFindingRequest.verify = function verify(message) {
+                        GetFindingRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -31480,9 +32760,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.GetFindingRequest} GetFindingRequest
                          */
-                        GetFindingRequest.fromObject = function fromObject(object) {
+                        GetFindingRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.GetFindingRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.GetFindingRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
@@ -31561,7 +32845,7 @@
                         function ListFindingsRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -31656,9 +32940,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListFindingsRequest.decode = function decode(reader, length, error) {
+                        ListFindingsRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.ListFindingsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -31682,7 +32970,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -31713,9 +33001,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListFindingsRequest.verify = function verify(message) {
+                        ListFindingsRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
@@ -31739,9 +33031,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.ListFindingsRequest} ListFindingsRequest
                          */
-                        ListFindingsRequest.fromObject = function fromObject(object) {
+                        ListFindingsRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.ListFindingsRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.ListFindingsRequest();
                             if (object.parent != null)
                                 message.parent = String(object.parent);
@@ -31835,7 +33131,7 @@
                             this.findings = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -31911,9 +33207,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListFindingsResponse.decode = function decode(reader, length, error) {
+                        ListFindingsResponse.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.ListFindingsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -31923,7 +33223,7 @@
                                 case 1: {
                                         if (!(message.findings && message.findings.length))
                                             message.findings = [];
-                                        message.findings.push($root.google.cloud.websecurityscanner.v1beta.Finding.decode(reader, reader.uint32()));
+                                        message.findings.push($root.google.cloud.websecurityscanner.v1beta.Finding.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 case 2: {
@@ -31931,7 +33231,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -31962,14 +33262,18 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListFindingsResponse.verify = function verify(message) {
+                        ListFindingsResponse.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.findings != null && message.hasOwnProperty("findings")) {
                                 if (!Array.isArray(message.findings))
                                     return "findings: array expected";
                                 for (var i = 0; i < message.findings.length; ++i) {
-                                    var error = $root.google.cloud.websecurityscanner.v1beta.Finding.verify(message.findings[i]);
+                                    var error = $root.google.cloud.websecurityscanner.v1beta.Finding.verify(message.findings[i], long + 1);
                                     if (error)
                                         return "findings." + error;
                                 }
@@ -31988,9 +33292,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.ListFindingsResponse} ListFindingsResponse
                          */
-                        ListFindingsResponse.fromObject = function fromObject(object) {
+                        ListFindingsResponse.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.ListFindingsResponse)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.ListFindingsResponse();
                             if (object.findings) {
                                 if (!Array.isArray(object.findings))
@@ -31999,7 +33307,7 @@
                                 for (var i = 0; i < object.findings.length; ++i) {
                                     if (typeof object.findings[i] !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1beta.ListFindingsResponse.findings: object expected");
-                                    message.findings[i] = $root.google.cloud.websecurityscanner.v1beta.Finding.fromObject(object.findings[i]);
+                                    message.findings[i] = $root.google.cloud.websecurityscanner.v1beta.Finding.fromObject(object.findings[i], long + 1);
                                 }
                             }
                             if (object.nextPageToken != null)
@@ -32083,7 +33391,7 @@
                         function ListFindingTypeStatsRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -32148,9 +33456,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListFindingTypeStatsRequest.decode = function decode(reader, length, error) {
+                        ListFindingTypeStatsRequest.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.ListFindingTypeStatsRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -32162,7 +33474,7 @@
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -32193,9 +33505,13 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListFindingTypeStatsRequest.verify = function verify(message) {
+                        ListFindingTypeStatsRequest.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
@@ -32210,9 +33526,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.ListFindingTypeStatsRequest} ListFindingTypeStatsRequest
                          */
-                        ListFindingTypeStatsRequest.fromObject = function fromObject(object) {
+                        ListFindingTypeStatsRequest.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.ListFindingTypeStatsRequest)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.ListFindingTypeStatsRequest();
                             if (object.parent != null)
                                 message.parent = String(object.parent);
@@ -32289,7 +33609,7 @@
                             this.findingTypeStats = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                         this[keys[i]] = properties[keys[i]];
                         }
     
@@ -32355,9 +33675,13 @@
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        ListFindingTypeStatsResponse.decode = function decode(reader, length, error) {
+                        ListFindingTypeStatsResponse.decode = function decode(reader, length, error, long) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.websecurityscanner.v1beta.ListFindingTypeStatsResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
@@ -32367,11 +33691,11 @@
                                 case 1: {
                                         if (!(message.findingTypeStats && message.findingTypeStats.length))
                                             message.findingTypeStats = [];
-                                        message.findingTypeStats.push($root.google.cloud.websecurityscanner.v1beta.FindingTypeStats.decode(reader, reader.uint32()));
+                                        message.findingTypeStats.push($root.google.cloud.websecurityscanner.v1beta.FindingTypeStats.decode(reader, reader.uint32(), undefined, long + 1));
                                         break;
                                     }
                                 default:
-                                    reader.skipType(tag & 7);
+                                    reader.skipType(tag & 7, long);
                                     break;
                                 }
                             }
@@ -32402,14 +33726,18 @@
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        ListFindingTypeStatsResponse.verify = function verify(message) {
+                        ListFindingTypeStatsResponse.verify = function verify(message, long) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
                             if (message.findingTypeStats != null && message.hasOwnProperty("findingTypeStats")) {
                                 if (!Array.isArray(message.findingTypeStats))
                                     return "findingTypeStats: array expected";
                                 for (var i = 0; i < message.findingTypeStats.length; ++i) {
-                                    var error = $root.google.cloud.websecurityscanner.v1beta.FindingTypeStats.verify(message.findingTypeStats[i]);
+                                    var error = $root.google.cloud.websecurityscanner.v1beta.FindingTypeStats.verify(message.findingTypeStats[i], long + 1);
                                     if (error)
                                         return "findingTypeStats." + error;
                                 }
@@ -32425,9 +33753,13 @@
                          * @param {Object.<string,*>} object Plain object
                          * @returns {google.cloud.websecurityscanner.v1beta.ListFindingTypeStatsResponse} ListFindingTypeStatsResponse
                          */
-                        ListFindingTypeStatsResponse.fromObject = function fromObject(object) {
+                        ListFindingTypeStatsResponse.fromObject = function fromObject(object, long) {
                             if (object instanceof $root.google.cloud.websecurityscanner.v1beta.ListFindingTypeStatsResponse)
                                 return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
                             var message = new $root.google.cloud.websecurityscanner.v1beta.ListFindingTypeStatsResponse();
                             if (object.findingTypeStats) {
                                 if (!Array.isArray(object.findingTypeStats))
@@ -32436,7 +33768,7 @@
                                 for (var i = 0; i < object.findingTypeStats.length; ++i) {
                                     if (typeof object.findingTypeStats[i] !== "object")
                                         throw TypeError(".google.cloud.websecurityscanner.v1beta.ListFindingTypeStatsResponse.findingTypeStats: object expected");
-                                    message.findingTypeStats[i] = $root.google.cloud.websecurityscanner.v1beta.FindingTypeStats.fromObject(object.findingTypeStats[i]);
+                                    message.findingTypeStats[i] = $root.google.cloud.websecurityscanner.v1beta.FindingTypeStats.fromObject(object.findingTypeStats[i], long + 1);
                                 }
                             }
                             return message;
@@ -32568,7 +33900,7 @@
                     this.style = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -32698,9 +34030,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceDescriptor.decode = function decode(reader, length, error) {
+                ResourceDescriptor.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -32745,7 +34081,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -32776,9 +34112,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                ResourceDescriptor.verify = function verify(message) {
+                ResourceDescriptor.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.type != null && message.hasOwnProperty("type"))
                         if (!$util.isString(message.type))
                             return "type: string expected";
@@ -32830,9 +34170,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.ResourceDescriptor} ResourceDescriptor
                  */
-                ResourceDescriptor.fromObject = function fromObject(object) {
+                ResourceDescriptor.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.ResourceDescriptor)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.ResourceDescriptor();
                     if (object.type != null)
                         message.type = String(object.type);
@@ -33020,7 +34364,7 @@
                 function ResourceReference(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -33095,9 +34439,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ResourceReference.decode = function decode(reader, length, error) {
+                ResourceReference.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -33113,7 +34461,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -33144,9 +34492,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                ResourceReference.verify = function verify(message) {
+                ResourceReference.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.type != null && message.hasOwnProperty("type"))
                         if (!$util.isString(message.type))
                             return "type: string expected";
@@ -33164,9 +34516,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.ResourceReference} ResourceReference
                  */
-                ResourceReference.fromObject = function fromObject(object) {
+                ResourceReference.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.ResourceReference)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.ResourceReference();
                     if (object.type != null)
                         message.type = String(object.type);
@@ -33250,7 +34606,7 @@
                     this.rules = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -33326,9 +34682,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Http.decode = function decode(reader, length, error) {
+                Http.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Http();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -33338,7 +34698,7 @@
                         case 1: {
                                 if (!(message.rules && message.rules.length))
                                     message.rules = [];
-                                message.rules.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
+                                message.rules.push($root.google.api.HttpRule.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 2: {
@@ -33346,7 +34706,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -33377,14 +34737,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Http.verify = function verify(message) {
+                Http.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.rules != null && message.hasOwnProperty("rules")) {
                         if (!Array.isArray(message.rules))
                             return "rules: array expected";
                         for (var i = 0; i < message.rules.length; ++i) {
-                            var error = $root.google.api.HttpRule.verify(message.rules[i]);
+                            var error = $root.google.api.HttpRule.verify(message.rules[i], long + 1);
                             if (error)
                                 return "rules." + error;
                         }
@@ -33403,9 +34767,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.Http} Http
                  */
-                Http.fromObject = function fromObject(object) {
+                Http.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.Http)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.Http();
                     if (object.rules) {
                         if (!Array.isArray(object.rules))
@@ -33414,7 +34782,7 @@
                         for (var i = 0; i < object.rules.length; ++i) {
                             if (typeof object.rules[i] !== "object")
                                 throw TypeError(".google.api.Http.rules: object expected");
-                            message.rules[i] = $root.google.api.HttpRule.fromObject(object.rules[i]);
+                            message.rules[i] = $root.google.api.HttpRule.fromObject(object.rules[i], long + 1);
                         }
                     }
                     if (object.fullyDecodeReservedExpansion != null)
@@ -33508,7 +34876,7 @@
                     this.additionalBindings = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -33678,9 +35046,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                HttpRule.decode = function decode(reader, length, error) {
+                HttpRule.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.HttpRule();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -33712,7 +35084,7 @@
                                 break;
                             }
                         case 8: {
-                                message.custom = $root.google.api.CustomHttpPattern.decode(reader, reader.uint32());
+                                message.custom = $root.google.api.CustomHttpPattern.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 7: {
@@ -33726,11 +35098,11 @@
                         case 11: {
                                 if (!(message.additionalBindings && message.additionalBindings.length))
                                     message.additionalBindings = [];
-                                message.additionalBindings.push($root.google.api.HttpRule.decode(reader, reader.uint32()));
+                                message.additionalBindings.push($root.google.api.HttpRule.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -33761,9 +35133,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                HttpRule.verify = function verify(message) {
+                HttpRule.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     var properties = {};
                     if (message.selector != null && message.hasOwnProperty("selector"))
                         if (!$util.isString(message.selector))
@@ -33806,7 +35182,7 @@
                             return "pattern: multiple values";
                         properties.pattern = 1;
                         {
-                            var error = $root.google.api.CustomHttpPattern.verify(message.custom);
+                            var error = $root.google.api.CustomHttpPattern.verify(message.custom, long + 1);
                             if (error)
                                 return "custom." + error;
                         }
@@ -33821,7 +35197,7 @@
                         if (!Array.isArray(message.additionalBindings))
                             return "additionalBindings: array expected";
                         for (var i = 0; i < message.additionalBindings.length; ++i) {
-                            var error = $root.google.api.HttpRule.verify(message.additionalBindings[i]);
+                            var error = $root.google.api.HttpRule.verify(message.additionalBindings[i], long + 1);
                             if (error)
                                 return "additionalBindings." + error;
                         }
@@ -33837,9 +35213,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.HttpRule} HttpRule
                  */
-                HttpRule.fromObject = function fromObject(object) {
+                HttpRule.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.HttpRule)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.HttpRule();
                     if (object.selector != null)
                         message.selector = String(object.selector);
@@ -33856,7 +35236,7 @@
                     if (object.custom != null) {
                         if (typeof object.custom !== "object")
                             throw TypeError(".google.api.HttpRule.custom: object expected");
-                        message.custom = $root.google.api.CustomHttpPattern.fromObject(object.custom);
+                        message.custom = $root.google.api.CustomHttpPattern.fromObject(object.custom, long + 1);
                     }
                     if (object.body != null)
                         message.body = String(object.body);
@@ -33869,7 +35249,7 @@
                         for (var i = 0; i < object.additionalBindings.length; ++i) {
                             if (typeof object.additionalBindings[i] !== "object")
                                 throw TypeError(".google.api.HttpRule.additionalBindings: object expected");
-                            message.additionalBindings[i] = $root.google.api.HttpRule.fromObject(object.additionalBindings[i]);
+                            message.additionalBindings[i] = $root.google.api.HttpRule.fromObject(object.additionalBindings[i], long + 1);
                         }
                     }
                     return message;
@@ -33989,7 +35369,7 @@
                 function CustomHttpPattern(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -34064,9 +35444,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CustomHttpPattern.decode = function decode(reader, length, error) {
+                CustomHttpPattern.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CustomHttpPattern();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -34082,7 +35466,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -34113,9 +35497,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                CustomHttpPattern.verify = function verify(message) {
+                CustomHttpPattern.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.kind != null && message.hasOwnProperty("kind"))
                         if (!$util.isString(message.kind))
                             return "kind: string expected";
@@ -34133,9 +35521,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.CustomHttpPattern} CustomHttpPattern
                  */
-                CustomHttpPattern.fromObject = function fromObject(object) {
+                CustomHttpPattern.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.CustomHttpPattern)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.CustomHttpPattern();
                     if (object.kind != null)
                         message.kind = String(object.kind);
@@ -34220,7 +35612,7 @@
                     this.destinations = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -34309,9 +35701,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CommonLanguageSettings.decode = function decode(reader, length, error) {
+                CommonLanguageSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CommonLanguageSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -34334,11 +35730,11 @@
                                 break;
                             }
                         case 3: {
-                                message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.decode(reader, reader.uint32());
+                                message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -34369,9 +35765,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                CommonLanguageSettings.verify = function verify(message) {
+                CommonLanguageSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
                         if (!$util.isString(message.referenceDocsUri))
                             return "referenceDocsUri: string expected";
@@ -34389,7 +35789,7 @@
                             }
                     }
                     if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration")) {
-                        var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration);
+                        var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration, long + 1);
                         if (error)
                             return "selectiveGapicGeneration." + error;
                     }
@@ -34404,9 +35804,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.CommonLanguageSettings} CommonLanguageSettings
                  */
-                CommonLanguageSettings.fromObject = function fromObject(object) {
+                CommonLanguageSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.CommonLanguageSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.CommonLanguageSettings();
                     if (object.referenceDocsUri != null)
                         message.referenceDocsUri = String(object.referenceDocsUri);
@@ -34438,7 +35842,7 @@
                     if (object.selectiveGapicGeneration != null) {
                         if (typeof object.selectiveGapicGeneration !== "object")
                             throw TypeError(".google.api.CommonLanguageSettings.selectiveGapicGeneration: object expected");
-                        message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration);
+                        message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration, long + 1);
                     }
                     return message;
                 };
@@ -34533,7 +35937,7 @@
                 function ClientLibrarySettings(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -34698,9 +36102,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ClientLibrarySettings.decode = function decode(reader, length, error) {
+                ClientLibrarySettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ClientLibrarySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -34720,39 +36128,39 @@
                                 break;
                             }
                         case 21: {
-                                message.javaSettings = $root.google.api.JavaSettings.decode(reader, reader.uint32());
+                                message.javaSettings = $root.google.api.JavaSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 22: {
-                                message.cppSettings = $root.google.api.CppSettings.decode(reader, reader.uint32());
+                                message.cppSettings = $root.google.api.CppSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 23: {
-                                message.phpSettings = $root.google.api.PhpSettings.decode(reader, reader.uint32());
+                                message.phpSettings = $root.google.api.PhpSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 24: {
-                                message.pythonSettings = $root.google.api.PythonSettings.decode(reader, reader.uint32());
+                                message.pythonSettings = $root.google.api.PythonSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 25: {
-                                message.nodeSettings = $root.google.api.NodeSettings.decode(reader, reader.uint32());
+                                message.nodeSettings = $root.google.api.NodeSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 26: {
-                                message.dotnetSettings = $root.google.api.DotnetSettings.decode(reader, reader.uint32());
+                                message.dotnetSettings = $root.google.api.DotnetSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 27: {
-                                message.rubySettings = $root.google.api.RubySettings.decode(reader, reader.uint32());
+                                message.rubySettings = $root.google.api.RubySettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 28: {
-                                message.goSettings = $root.google.api.GoSettings.decode(reader, reader.uint32());
+                                message.goSettings = $root.google.api.GoSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -34783,9 +36191,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                ClientLibrarySettings.verify = function verify(message) {
+                ClientLibrarySettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.version != null && message.hasOwnProperty("version"))
                         if (!$util.isString(message.version))
                             return "version: string expected";
@@ -34807,42 +36219,42 @@
                         if (typeof message.restNumericEnums !== "boolean")
                             return "restNumericEnums: boolean expected";
                     if (message.javaSettings != null && message.hasOwnProperty("javaSettings")) {
-                        var error = $root.google.api.JavaSettings.verify(message.javaSettings);
+                        var error = $root.google.api.JavaSettings.verify(message.javaSettings, long + 1);
                         if (error)
                             return "javaSettings." + error;
                     }
                     if (message.cppSettings != null && message.hasOwnProperty("cppSettings")) {
-                        var error = $root.google.api.CppSettings.verify(message.cppSettings);
+                        var error = $root.google.api.CppSettings.verify(message.cppSettings, long + 1);
                         if (error)
                             return "cppSettings." + error;
                     }
                     if (message.phpSettings != null && message.hasOwnProperty("phpSettings")) {
-                        var error = $root.google.api.PhpSettings.verify(message.phpSettings);
+                        var error = $root.google.api.PhpSettings.verify(message.phpSettings, long + 1);
                         if (error)
                             return "phpSettings." + error;
                     }
                     if (message.pythonSettings != null && message.hasOwnProperty("pythonSettings")) {
-                        var error = $root.google.api.PythonSettings.verify(message.pythonSettings);
+                        var error = $root.google.api.PythonSettings.verify(message.pythonSettings, long + 1);
                         if (error)
                             return "pythonSettings." + error;
                     }
                     if (message.nodeSettings != null && message.hasOwnProperty("nodeSettings")) {
-                        var error = $root.google.api.NodeSettings.verify(message.nodeSettings);
+                        var error = $root.google.api.NodeSettings.verify(message.nodeSettings, long + 1);
                         if (error)
                             return "nodeSettings." + error;
                     }
                     if (message.dotnetSettings != null && message.hasOwnProperty("dotnetSettings")) {
-                        var error = $root.google.api.DotnetSettings.verify(message.dotnetSettings);
+                        var error = $root.google.api.DotnetSettings.verify(message.dotnetSettings, long + 1);
                         if (error)
                             return "dotnetSettings." + error;
                     }
                     if (message.rubySettings != null && message.hasOwnProperty("rubySettings")) {
-                        var error = $root.google.api.RubySettings.verify(message.rubySettings);
+                        var error = $root.google.api.RubySettings.verify(message.rubySettings, long + 1);
                         if (error)
                             return "rubySettings." + error;
                     }
                     if (message.goSettings != null && message.hasOwnProperty("goSettings")) {
-                        var error = $root.google.api.GoSettings.verify(message.goSettings);
+                        var error = $root.google.api.GoSettings.verify(message.goSettings, long + 1);
                         if (error)
                             return "goSettings." + error;
                     }
@@ -34857,9 +36269,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.ClientLibrarySettings} ClientLibrarySettings
                  */
-                ClientLibrarySettings.fromObject = function fromObject(object) {
+                ClientLibrarySettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.ClientLibrarySettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.ClientLibrarySettings();
                     if (object.version != null)
                         message.version = String(object.version);
@@ -34908,42 +36324,42 @@
                     if (object.javaSettings != null) {
                         if (typeof object.javaSettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.javaSettings: object expected");
-                        message.javaSettings = $root.google.api.JavaSettings.fromObject(object.javaSettings);
+                        message.javaSettings = $root.google.api.JavaSettings.fromObject(object.javaSettings, long + 1);
                     }
                     if (object.cppSettings != null) {
                         if (typeof object.cppSettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.cppSettings: object expected");
-                        message.cppSettings = $root.google.api.CppSettings.fromObject(object.cppSettings);
+                        message.cppSettings = $root.google.api.CppSettings.fromObject(object.cppSettings, long + 1);
                     }
                     if (object.phpSettings != null) {
                         if (typeof object.phpSettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.phpSettings: object expected");
-                        message.phpSettings = $root.google.api.PhpSettings.fromObject(object.phpSettings);
+                        message.phpSettings = $root.google.api.PhpSettings.fromObject(object.phpSettings, long + 1);
                     }
                     if (object.pythonSettings != null) {
                         if (typeof object.pythonSettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.pythonSettings: object expected");
-                        message.pythonSettings = $root.google.api.PythonSettings.fromObject(object.pythonSettings);
+                        message.pythonSettings = $root.google.api.PythonSettings.fromObject(object.pythonSettings, long + 1);
                     }
                     if (object.nodeSettings != null) {
                         if (typeof object.nodeSettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.nodeSettings: object expected");
-                        message.nodeSettings = $root.google.api.NodeSettings.fromObject(object.nodeSettings);
+                        message.nodeSettings = $root.google.api.NodeSettings.fromObject(object.nodeSettings, long + 1);
                     }
                     if (object.dotnetSettings != null) {
                         if (typeof object.dotnetSettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.dotnetSettings: object expected");
-                        message.dotnetSettings = $root.google.api.DotnetSettings.fromObject(object.dotnetSettings);
+                        message.dotnetSettings = $root.google.api.DotnetSettings.fromObject(object.dotnetSettings, long + 1);
                     }
                     if (object.rubySettings != null) {
                         if (typeof object.rubySettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.rubySettings: object expected");
-                        message.rubySettings = $root.google.api.RubySettings.fromObject(object.rubySettings);
+                        message.rubySettings = $root.google.api.RubySettings.fromObject(object.rubySettings, long + 1);
                     }
                     if (object.goSettings != null) {
                         if (typeof object.goSettings !== "object")
                             throw TypeError(".google.api.ClientLibrarySettings.goSettings: object expected");
-                        message.goSettings = $root.google.api.GoSettings.fromObject(object.goSettings);
+                        message.goSettings = $root.google.api.GoSettings.fromObject(object.goSettings, long + 1);
                     }
                     return message;
                 };
@@ -35061,7 +36477,7 @@
                     this.librarySettings = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -35229,9 +36645,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Publishing.decode = function decode(reader, length, error) {
+                Publishing.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Publishing();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -35241,7 +36661,7 @@
                         case 2: {
                                 if (!(message.methodSettings && message.methodSettings.length))
                                     message.methodSettings = [];
-                                message.methodSettings.push($root.google.api.MethodSettings.decode(reader, reader.uint32()));
+                                message.methodSettings.push($root.google.api.MethodSettings.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 101: {
@@ -35277,7 +36697,7 @@
                         case 109: {
                                 if (!(message.librarySettings && message.librarySettings.length))
                                     message.librarySettings = [];
-                                message.librarySettings.push($root.google.api.ClientLibrarySettings.decode(reader, reader.uint32()));
+                                message.librarySettings.push($root.google.api.ClientLibrarySettings.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 110: {
@@ -35289,7 +36709,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -35320,14 +36740,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Publishing.verify = function verify(message) {
+                Publishing.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.methodSettings != null && message.hasOwnProperty("methodSettings")) {
                         if (!Array.isArray(message.methodSettings))
                             return "methodSettings: array expected";
                         for (var i = 0; i < message.methodSettings.length; ++i) {
-                            var error = $root.google.api.MethodSettings.verify(message.methodSettings[i]);
+                            var error = $root.google.api.MethodSettings.verify(message.methodSettings[i], long + 1);
                             if (error)
                                 return "methodSettings." + error;
                         }
@@ -35372,7 +36796,7 @@
                         if (!Array.isArray(message.librarySettings))
                             return "librarySettings: array expected";
                         for (var i = 0; i < message.librarySettings.length; ++i) {
-                            var error = $root.google.api.ClientLibrarySettings.verify(message.librarySettings[i]);
+                            var error = $root.google.api.ClientLibrarySettings.verify(message.librarySettings[i], long + 1);
                             if (error)
                                 return "librarySettings." + error;
                         }
@@ -35394,9 +36818,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.Publishing} Publishing
                  */
-                Publishing.fromObject = function fromObject(object) {
+                Publishing.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.Publishing)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.Publishing();
                     if (object.methodSettings) {
                         if (!Array.isArray(object.methodSettings))
@@ -35405,7 +36833,7 @@
                         for (var i = 0; i < object.methodSettings.length; ++i) {
                             if (typeof object.methodSettings[i] !== "object")
                                 throw TypeError(".google.api.Publishing.methodSettings: object expected");
-                            message.methodSettings[i] = $root.google.api.MethodSettings.fromObject(object.methodSettings[i]);
+                            message.methodSettings[i] = $root.google.api.MethodSettings.fromObject(object.methodSettings[i], long + 1);
                         }
                     }
                     if (object.newIssueUri != null)
@@ -35472,7 +36900,7 @@
                         for (var i = 0; i < object.librarySettings.length; ++i) {
                             if (typeof object.librarySettings[i] !== "object")
                                 throw TypeError(".google.api.Publishing.librarySettings: object expected");
-                            message.librarySettings[i] = $root.google.api.ClientLibrarySettings.fromObject(object.librarySettings[i]);
+                            message.librarySettings[i] = $root.google.api.ClientLibrarySettings.fromObject(object.librarySettings[i], long + 1);
                         }
                     }
                     if (object.protoReferenceDocumentationUri != null)
@@ -35596,7 +37024,7 @@
                     this.serviceClassNames = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -35682,9 +37110,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                JavaSettings.decode = function decode(reader, length, error) {
+                JavaSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.JavaSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -35711,19 +37143,21 @@
                                         value = reader.string();
                                         break;
                                     default:
-                                        reader.skipType(tag2 & 7);
+                                        reader.skipType(tag2 & 7, long);
                                         break;
                                     }
                                 }
+                                if (key === "__proto__")
+                                    $util.makeProp(message.serviceClassNames, key);
                                 message.serviceClassNames[key] = value;
                                 break;
                             }
                         case 3: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -35754,9 +37188,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                JavaSettings.verify = function verify(message) {
+                JavaSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.libraryPackage != null && message.hasOwnProperty("libraryPackage"))
                         if (!$util.isString(message.libraryPackage))
                             return "libraryPackage: string expected";
@@ -35769,7 +37207,7 @@
                                 return "serviceClassNames: string{k:string} expected";
                     }
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
@@ -35784,9 +37222,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.JavaSettings} JavaSettings
                  */
-                JavaSettings.fromObject = function fromObject(object) {
+                JavaSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.JavaSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.JavaSettings();
                     if (object.libraryPackage != null)
                         message.libraryPackage = String(object.libraryPackage);
@@ -35794,13 +37236,16 @@
                         if (typeof object.serviceClassNames !== "object")
                             throw TypeError(".google.api.JavaSettings.serviceClassNames: object expected");
                         message.serviceClassNames = {};
-                        for (var keys = Object.keys(object.serviceClassNames), i = 0; i < keys.length; ++i)
+                        for (var keys = Object.keys(object.serviceClassNames), i = 0; i < keys.length; ++i) {
+                            if (keys[i] === "__proto__")
+                                $util.makeProp(message.serviceClassNames, keys[i]);
                             message.serviceClassNames[keys[i]] = String(object.serviceClassNames[keys[i]]);
+                        }
                     }
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.JavaSettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     return message;
                 };
@@ -35829,8 +37274,11 @@
                     var keys2;
                     if (message.serviceClassNames && (keys2 = Object.keys(message.serviceClassNames)).length) {
                         object.serviceClassNames = {};
-                        for (var j = 0; j < keys2.length; ++j)
+                        for (var j = 0; j < keys2.length; ++j) {
+                            if (keys2[j] === "__proto__")
+                                $util.makeProp(object.serviceClassNames, keys2[j]);
                             object.serviceClassNames[keys2[j]] = message.serviceClassNames[keys2[j]];
+                        }
                     }
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
@@ -35886,7 +37334,7 @@
                 function CppSettings(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -35951,9 +37399,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                CppSettings.decode = function decode(reader, length, error) {
+                CppSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.CppSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -35961,11 +37413,11 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -35996,11 +37448,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                CppSettings.verify = function verify(message) {
+                CppSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
@@ -36015,14 +37471,18 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.CppSettings} CppSettings
                  */
-                CppSettings.fromObject = function fromObject(object) {
+                CppSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.CppSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.CppSettings();
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.CppSettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     return message;
                 };
@@ -36096,7 +37556,7 @@
                 function PhpSettings(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -36161,9 +37621,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PhpSettings.decode = function decode(reader, length, error) {
+                PhpSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PhpSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -36171,11 +37635,11 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -36206,11 +37670,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                PhpSettings.verify = function verify(message) {
+                PhpSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
@@ -36225,14 +37693,18 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.PhpSettings} PhpSettings
                  */
-                PhpSettings.fromObject = function fromObject(object) {
+                PhpSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.PhpSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.PhpSettings();
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.PhpSettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     return message;
                 };
@@ -36307,7 +37779,7 @@
                 function PythonSettings(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -36382,9 +37854,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                PythonSettings.decode = function decode(reader, length, error) {
+                PythonSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -36392,15 +37868,15 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 2: {
-                                message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.decode(reader, reader.uint32());
+                                message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -36431,16 +37907,20 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                PythonSettings.verify = function verify(message) {
+                PythonSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
                     if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures")) {
-                        var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures);
+                        var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures, long + 1);
                         if (error)
                             return "experimentalFeatures." + error;
                     }
@@ -36455,19 +37935,23 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.PythonSettings} PythonSettings
                  */
-                PythonSettings.fromObject = function fromObject(object) {
+                PythonSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.PythonSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.PythonSettings();
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.PythonSettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     if (object.experimentalFeatures != null) {
                         if (typeof object.experimentalFeatures !== "object")
                             throw TypeError(".google.api.PythonSettings.experimentalFeatures: object expected");
-                        message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures);
+                        message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures, long + 1);
                     }
                     return message;
                 };
@@ -36544,7 +38028,7 @@
                     function ExperimentalFeatures(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -36629,9 +38113,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ExperimentalFeatures.decode = function decode(reader, length, error) {
+                    ExperimentalFeatures.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings.ExperimentalFeatures();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -36651,7 +38139,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -36682,9 +38170,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ExperimentalFeatures.verify = function verify(message) {
+                    ExperimentalFeatures.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
                             if (typeof message.restAsyncIoEnabled !== "boolean")
                                 return "restAsyncIoEnabled: boolean expected";
@@ -36705,9 +38197,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
                      */
-                    ExperimentalFeatures.fromObject = function fromObject(object) {
+                    ExperimentalFeatures.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.api.PythonSettings.ExperimentalFeatures)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.api.PythonSettings.ExperimentalFeatures();
                         if (object.restAsyncIoEnabled != null)
                             message.restAsyncIoEnabled = Boolean(object.restAsyncIoEnabled);
@@ -36797,7 +38293,7 @@
                 function NodeSettings(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -36862,9 +38358,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                NodeSettings.decode = function decode(reader, length, error) {
+                NodeSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.NodeSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -36872,11 +38372,11 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -36907,11 +38407,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                NodeSettings.verify = function verify(message) {
+                NodeSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
@@ -36926,14 +38430,18 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.NodeSettings} NodeSettings
                  */
-                NodeSettings.fromObject = function fromObject(object) {
+                NodeSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.NodeSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.NodeSettings();
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.NodeSettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     return message;
                 };
@@ -37017,7 +38525,7 @@
                     this.handwrittenSignatures = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -37137,9 +38645,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DotnetSettings.decode = function decode(reader, length, error) {
+                DotnetSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -37147,7 +38659,7 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 2: {
@@ -37166,10 +38678,12 @@
                                         value = reader.string();
                                         break;
                                     default:
-                                        reader.skipType(tag2 & 7);
+                                        reader.skipType(tag2 & 7, long);
                                         break;
                                     }
                                 }
+                                if (key === "__proto__")
+                                    $util.makeProp(message.renamedServices, key);
                                 message.renamedServices[key] = value;
                                 break;
                             }
@@ -37189,10 +38703,12 @@
                                         value = reader.string();
                                         break;
                                     default:
-                                        reader.skipType(tag2 & 7);
+                                        reader.skipType(tag2 & 7, long);
                                         break;
                                     }
                                 }
+                                if (key === "__proto__")
+                                    $util.makeProp(message.renamedResources, key);
                                 message.renamedResources[key] = value;
                                 break;
                             }
@@ -37215,7 +38731,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -37246,11 +38762,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                DotnetSettings.verify = function verify(message) {
+                DotnetSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
@@ -37302,28 +38822,38 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.DotnetSettings} DotnetSettings
                  */
-                DotnetSettings.fromObject = function fromObject(object) {
+                DotnetSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.DotnetSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.DotnetSettings();
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.DotnetSettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     if (object.renamedServices) {
                         if (typeof object.renamedServices !== "object")
                             throw TypeError(".google.api.DotnetSettings.renamedServices: object expected");
                         message.renamedServices = {};
-                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
+                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i) {
+                            if (keys[i] === "__proto__")
+                                $util.makeProp(message.renamedServices, keys[i]);
                             message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
+                        }
                     }
                     if (object.renamedResources) {
                         if (typeof object.renamedResources !== "object")
                             throw TypeError(".google.api.DotnetSettings.renamedResources: object expected");
                         message.renamedResources = {};
-                        for (var keys = Object.keys(object.renamedResources), i = 0; i < keys.length; ++i)
+                        for (var keys = Object.keys(object.renamedResources), i = 0; i < keys.length; ++i) {
+                            if (keys[i] === "__proto__")
+                                $util.makeProp(message.renamedResources, keys[i]);
                             message.renamedResources[keys[i]] = String(object.renamedResources[keys[i]]);
+                        }
                     }
                     if (object.ignoredResources) {
                         if (!Array.isArray(object.ignoredResources))
@@ -37378,13 +38908,19 @@
                     var keys2;
                     if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
                         object.renamedServices = {};
-                        for (var j = 0; j < keys2.length; ++j)
+                        for (var j = 0; j < keys2.length; ++j) {
+                            if (keys2[j] === "__proto__")
+                                $util.makeProp(object.renamedServices, keys2[j]);
                             object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
+                        }
                     }
                     if (message.renamedResources && (keys2 = Object.keys(message.renamedResources)).length) {
                         object.renamedResources = {};
-                        for (var j = 0; j < keys2.length; ++j)
+                        for (var j = 0; j < keys2.length; ++j) {
+                            if (keys2[j] === "__proto__")
+                                $util.makeProp(object.renamedResources, keys2[j]);
                             object.renamedResources[keys2[j]] = message.renamedResources[keys2[j]];
+                        }
                     }
                     if (message.ignoredResources && message.ignoredResources.length) {
                         object.ignoredResources = [];
@@ -37453,7 +38989,7 @@
                 function RubySettings(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -37518,9 +39054,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                RubySettings.decode = function decode(reader, length, error) {
+                RubySettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.RubySettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -37528,11 +39068,11 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -37563,11 +39103,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                RubySettings.verify = function verify(message) {
+                RubySettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
@@ -37582,14 +39126,18 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.RubySettings} RubySettings
                  */
-                RubySettings.fromObject = function fromObject(object) {
+                RubySettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.RubySettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.RubySettings();
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.RubySettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     return message;
                 };
@@ -37665,7 +39213,7 @@
                     this.renamedServices = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -37741,9 +39289,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GoSettings.decode = function decode(reader, length, error) {
+                GoSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -37751,7 +39303,7 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 2: {
@@ -37770,15 +39322,17 @@
                                         value = reader.string();
                                         break;
                                     default:
-                                        reader.skipType(tag2 & 7);
+                                        reader.skipType(tag2 & 7, long);
                                         break;
                                     }
                                 }
+                                if (key === "__proto__")
+                                    $util.makeProp(message.renamedServices, key);
                                 message.renamedServices[key] = value;
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -37809,11 +39363,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                GoSettings.verify = function verify(message) {
+                GoSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.common != null && message.hasOwnProperty("common")) {
-                        var error = $root.google.api.CommonLanguageSettings.verify(message.common);
+                        var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
@@ -37836,21 +39394,28 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.GoSettings} GoSettings
                  */
-                GoSettings.fromObject = function fromObject(object) {
+                GoSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.GoSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.GoSettings();
                     if (object.common != null) {
                         if (typeof object.common !== "object")
                             throw TypeError(".google.api.GoSettings.common: object expected");
-                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
+                        message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
                     if (object.renamedServices) {
                         if (typeof object.renamedServices !== "object")
                             throw TypeError(".google.api.GoSettings.renamedServices: object expected");
                         message.renamedServices = {};
-                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
+                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i) {
+                            if (keys[i] === "__proto__")
+                                $util.makeProp(message.renamedServices, keys[i]);
                             message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
+                        }
                     }
                     return message;
                 };
@@ -37877,8 +39442,11 @@
                     var keys2;
                     if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
                         object.renamedServices = {};
-                        for (var j = 0; j < keys2.length; ++j)
+                        for (var j = 0; j < keys2.length; ++j) {
+                            if (keys2[j] === "__proto__")
+                                $util.makeProp(object.renamedServices, keys2[j]);
                             object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
+                        }
                     }
                     return object;
                 };
@@ -37935,7 +39503,7 @@
                     this.autoPopulatedFields = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -38021,9 +39589,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodSettings.decode = function decode(reader, length, error) {
+                MethodSettings.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -38035,7 +39607,7 @@
                                 break;
                             }
                         case 2: {
-                                message.longRunning = $root.google.api.MethodSettings.LongRunning.decode(reader, reader.uint32());
+                                message.longRunning = $root.google.api.MethodSettings.LongRunning.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 3: {
@@ -38045,7 +39617,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -38076,14 +39648,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                MethodSettings.verify = function verify(message) {
+                MethodSettings.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.selector != null && message.hasOwnProperty("selector"))
                         if (!$util.isString(message.selector))
                             return "selector: string expected";
                     if (message.longRunning != null && message.hasOwnProperty("longRunning")) {
-                        var error = $root.google.api.MethodSettings.LongRunning.verify(message.longRunning);
+                        var error = $root.google.api.MethodSettings.LongRunning.verify(message.longRunning, long + 1);
                         if (error)
                             return "longRunning." + error;
                     }
@@ -38105,16 +39681,20 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.MethodSettings} MethodSettings
                  */
-                MethodSettings.fromObject = function fromObject(object) {
+                MethodSettings.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.MethodSettings)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.MethodSettings();
                     if (object.selector != null)
                         message.selector = String(object.selector);
                     if (object.longRunning != null) {
                         if (typeof object.longRunning !== "object")
                             throw TypeError(".google.api.MethodSettings.longRunning: object expected");
-                        message.longRunning = $root.google.api.MethodSettings.LongRunning.fromObject(object.longRunning);
+                        message.longRunning = $root.google.api.MethodSettings.LongRunning.fromObject(object.longRunning, long + 1);
                     }
                     if (object.autoPopulatedFields) {
                         if (!Array.isArray(object.autoPopulatedFields))
@@ -38206,7 +39786,7 @@
                     function LongRunning(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -38301,9 +39881,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    LongRunning.decode = function decode(reader, length, error) {
+                    LongRunning.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.MethodSettings.LongRunning();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -38311,7 +39895,7 @@
                                 break;
                             switch (tag >>> 3) {
                             case 1: {
-                                    message.initialPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.initialPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 2: {
@@ -38319,15 +39903,15 @@
                                     break;
                                 }
                             case 3: {
-                                    message.maxPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.maxPollDelay = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 4: {
-                                    message.totalPollTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    message.totalPollTimeout = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -38358,11 +39942,15 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    LongRunning.verify = function verify(message) {
+                    LongRunning.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.initialPollDelay != null && message.hasOwnProperty("initialPollDelay")) {
-                            var error = $root.google.protobuf.Duration.verify(message.initialPollDelay);
+                            var error = $root.google.protobuf.Duration.verify(message.initialPollDelay, long + 1);
                             if (error)
                                 return "initialPollDelay." + error;
                         }
@@ -38370,12 +39958,12 @@
                             if (typeof message.pollDelayMultiplier !== "number")
                                 return "pollDelayMultiplier: number expected";
                         if (message.maxPollDelay != null && message.hasOwnProperty("maxPollDelay")) {
-                            var error = $root.google.protobuf.Duration.verify(message.maxPollDelay);
+                            var error = $root.google.protobuf.Duration.verify(message.maxPollDelay, long + 1);
                             if (error)
                                 return "maxPollDelay." + error;
                         }
                         if (message.totalPollTimeout != null && message.hasOwnProperty("totalPollTimeout")) {
-                            var error = $root.google.protobuf.Duration.verify(message.totalPollTimeout);
+                            var error = $root.google.protobuf.Duration.verify(message.totalPollTimeout, long + 1);
                             if (error)
                                 return "totalPollTimeout." + error;
                         }
@@ -38390,26 +39978,30 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.api.MethodSettings.LongRunning} LongRunning
                      */
-                    LongRunning.fromObject = function fromObject(object) {
+                    LongRunning.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.api.MethodSettings.LongRunning)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.api.MethodSettings.LongRunning();
                         if (object.initialPollDelay != null) {
                             if (typeof object.initialPollDelay !== "object")
                                 throw TypeError(".google.api.MethodSettings.LongRunning.initialPollDelay: object expected");
-                            message.initialPollDelay = $root.google.protobuf.Duration.fromObject(object.initialPollDelay);
+                            message.initialPollDelay = $root.google.protobuf.Duration.fromObject(object.initialPollDelay, long + 1);
                         }
                         if (object.pollDelayMultiplier != null)
                             message.pollDelayMultiplier = Number(object.pollDelayMultiplier);
                         if (object.maxPollDelay != null) {
                             if (typeof object.maxPollDelay !== "object")
                                 throw TypeError(".google.api.MethodSettings.LongRunning.maxPollDelay: object expected");
-                            message.maxPollDelay = $root.google.protobuf.Duration.fromObject(object.maxPollDelay);
+                            message.maxPollDelay = $root.google.protobuf.Duration.fromObject(object.maxPollDelay, long + 1);
                         }
                         if (object.totalPollTimeout != null) {
                             if (typeof object.totalPollTimeout !== "object")
                                 throw TypeError(".google.api.MethodSettings.LongRunning.totalPollTimeout: object expected");
-                            message.totalPollTimeout = $root.google.protobuf.Duration.fromObject(object.totalPollTimeout);
+                            message.totalPollTimeout = $root.google.protobuf.Duration.fromObject(object.totalPollTimeout, long + 1);
                         }
                         return message;
                     };
@@ -38540,7 +40132,7 @@
                     this.methods = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -38616,9 +40208,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SelectiveGapicGeneration.decode = function decode(reader, length, error) {
+                SelectiveGapicGeneration.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.SelectiveGapicGeneration();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -38636,7 +40232,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -38667,9 +40263,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                SelectiveGapicGeneration.verify = function verify(message) {
+                SelectiveGapicGeneration.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.methods != null && message.hasOwnProperty("methods")) {
                         if (!Array.isArray(message.methods))
                             return "methods: array expected";
@@ -38691,9 +40291,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
                  */
-                SelectiveGapicGeneration.fromObject = function fromObject(object) {
+                SelectiveGapicGeneration.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.api.SelectiveGapicGeneration)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.api.SelectiveGapicGeneration();
                     if (object.methods) {
                         if (!Array.isArray(object.methods))
@@ -38822,7 +40426,7 @@
                     this.file = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -38888,9 +40492,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorSet.decode = function decode(reader, length, error) {
+                FileDescriptorSet.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -38900,11 +40508,11 @@
                         case 1: {
                                 if (!(message.file && message.file.length))
                                     message.file = [];
-                                message.file.push($root.google.protobuf.FileDescriptorProto.decode(reader, reader.uint32()));
+                                message.file.push($root.google.protobuf.FileDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -38935,14 +40543,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FileDescriptorSet.verify = function verify(message) {
+                FileDescriptorSet.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.file != null && message.hasOwnProperty("file")) {
                         if (!Array.isArray(message.file))
                             return "file: array expected";
                         for (var i = 0; i < message.file.length; ++i) {
-                            var error = $root.google.protobuf.FileDescriptorProto.verify(message.file[i]);
+                            var error = $root.google.protobuf.FileDescriptorProto.verify(message.file[i], long + 1);
                             if (error)
                                 return "file." + error;
                         }
@@ -38958,9 +40570,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FileDescriptorSet} FileDescriptorSet
                  */
-                FileDescriptorSet.fromObject = function fromObject(object) {
+                FileDescriptorSet.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FileDescriptorSet)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FileDescriptorSet();
                     if (object.file) {
                         if (!Array.isArray(object.file))
@@ -38969,7 +40585,7 @@
                         for (var i = 0; i < object.file.length; ++i) {
                             if (typeof object.file[i] !== "object")
                                 throw TypeError(".google.protobuf.FileDescriptorSet.file: object expected");
-                            message.file[i] = $root.google.protobuf.FileDescriptorProto.fromObject(object.file[i]);
+                            message.file[i] = $root.google.protobuf.FileDescriptorProto.fromObject(object.file[i], long + 1);
                         }
                     }
                     return message;
@@ -39102,7 +40718,7 @@
                     this.extension = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -39305,9 +40921,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileDescriptorProto.decode = function decode(reader, length, error) {
+                FileDescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -39359,33 +40979,33 @@
                         case 4: {
                                 if (!(message.messageType && message.messageType.length))
                                     message.messageType = [];
-                                message.messageType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
+                                message.messageType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 5: {
                                 if (!(message.enumType && message.enumType.length))
                                     message.enumType = [];
-                                message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
+                                message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 6: {
                                 if (!(message.service && message.service.length))
                                     message.service = [];
-                                message.service.push($root.google.protobuf.ServiceDescriptorProto.decode(reader, reader.uint32()));
+                                message.service.push($root.google.protobuf.ServiceDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 7: {
                                 if (!(message.extension && message.extension.length))
                                     message.extension = [];
-                                message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 8: {
-                                message.options = $root.google.protobuf.FileOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.FileOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 9: {
-                                message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.decode(reader, reader.uint32());
+                                message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 12: {
@@ -39397,7 +41017,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -39428,9 +41048,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FileDescriptorProto.verify = function verify(message) {
+                FileDescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -39469,7 +41093,7 @@
                         if (!Array.isArray(message.messageType))
                             return "messageType: array expected";
                         for (var i = 0; i < message.messageType.length; ++i) {
-                            var error = $root.google.protobuf.DescriptorProto.verify(message.messageType[i]);
+                            var error = $root.google.protobuf.DescriptorProto.verify(message.messageType[i], long + 1);
                             if (error)
                                 return "messageType." + error;
                         }
@@ -39478,7 +41102,7 @@
                         if (!Array.isArray(message.enumType))
                             return "enumType: array expected";
                         for (var i = 0; i < message.enumType.length; ++i) {
-                            var error = $root.google.protobuf.EnumDescriptorProto.verify(message.enumType[i]);
+                            var error = $root.google.protobuf.EnumDescriptorProto.verify(message.enumType[i], long + 1);
                             if (error)
                                 return "enumType." + error;
                         }
@@ -39487,7 +41111,7 @@
                         if (!Array.isArray(message.service))
                             return "service: array expected";
                         for (var i = 0; i < message.service.length; ++i) {
-                            var error = $root.google.protobuf.ServiceDescriptorProto.verify(message.service[i]);
+                            var error = $root.google.protobuf.ServiceDescriptorProto.verify(message.service[i], long + 1);
                             if (error)
                                 return "service." + error;
                         }
@@ -39496,18 +41120,18 @@
                         if (!Array.isArray(message.extension))
                             return "extension: array expected";
                         for (var i = 0; i < message.extension.length; ++i) {
-                            var error = $root.google.protobuf.FieldDescriptorProto.verify(message.extension[i]);
+                            var error = $root.google.protobuf.FieldDescriptorProto.verify(message.extension[i], long + 1);
                             if (error)
                                 return "extension." + error;
                         }
                     }
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.FileOptions.verify(message.options);
+                        var error = $root.google.protobuf.FileOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
                     if (message.sourceCodeInfo != null && message.hasOwnProperty("sourceCodeInfo")) {
-                        var error = $root.google.protobuf.SourceCodeInfo.verify(message.sourceCodeInfo);
+                        var error = $root.google.protobuf.SourceCodeInfo.verify(message.sourceCodeInfo, long + 1);
                         if (error)
                             return "sourceCodeInfo." + error;
                     }
@@ -39543,9 +41167,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FileDescriptorProto} FileDescriptorProto
                  */
-                FileDescriptorProto.fromObject = function fromObject(object) {
+                FileDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FileDescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FileDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -39586,7 +41214,7 @@
                         for (var i = 0; i < object.messageType.length; ++i) {
                             if (typeof object.messageType[i] !== "object")
                                 throw TypeError(".google.protobuf.FileDescriptorProto.messageType: object expected");
-                            message.messageType[i] = $root.google.protobuf.DescriptorProto.fromObject(object.messageType[i]);
+                            message.messageType[i] = $root.google.protobuf.DescriptorProto.fromObject(object.messageType[i], long + 1);
                         }
                     }
                     if (object.enumType) {
@@ -39596,7 +41224,7 @@
                         for (var i = 0; i < object.enumType.length; ++i) {
                             if (typeof object.enumType[i] !== "object")
                                 throw TypeError(".google.protobuf.FileDescriptorProto.enumType: object expected");
-                            message.enumType[i] = $root.google.protobuf.EnumDescriptorProto.fromObject(object.enumType[i]);
+                            message.enumType[i] = $root.google.protobuf.EnumDescriptorProto.fromObject(object.enumType[i], long + 1);
                         }
                     }
                     if (object.service) {
@@ -39606,7 +41234,7 @@
                         for (var i = 0; i < object.service.length; ++i) {
                             if (typeof object.service[i] !== "object")
                                 throw TypeError(".google.protobuf.FileDescriptorProto.service: object expected");
-                            message.service[i] = $root.google.protobuf.ServiceDescriptorProto.fromObject(object.service[i]);
+                            message.service[i] = $root.google.protobuf.ServiceDescriptorProto.fromObject(object.service[i], long + 1);
                         }
                     }
                     if (object.extension) {
@@ -39616,18 +41244,18 @@
                         for (var i = 0; i < object.extension.length; ++i) {
                             if (typeof object.extension[i] !== "object")
                                 throw TypeError(".google.protobuf.FileDescriptorProto.extension: object expected");
-                            message.extension[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.extension[i]);
+                            message.extension[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.extension[i], long + 1);
                         }
                     }
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.FileDescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.FileOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.FileOptions.fromObject(object.options, long + 1);
                     }
                     if (object.sourceCodeInfo != null) {
                         if (typeof object.sourceCodeInfo !== "object")
                             throw TypeError(".google.protobuf.FileDescriptorProto.sourceCodeInfo: object expected");
-                        message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.fromObject(object.sourceCodeInfo);
+                        message.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.fromObject(object.sourceCodeInfo, long + 1);
                     }
                     if (object.syntax != null)
                         message.syntax = String(object.syntax);
@@ -39843,7 +41471,7 @@
                     this.reservedName = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -40016,9 +41644,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                DescriptorProto.decode = function decode(reader, length, error) {
+                DescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -40032,47 +41664,47 @@
                         case 2: {
                                 if (!(message.field && message.field.length))
                                     message.field = [];
-                                message.field.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                message.field.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 6: {
                                 if (!(message.extension && message.extension.length))
                                     message.extension = [];
-                                message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32()));
+                                message.extension.push($root.google.protobuf.FieldDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 3: {
                                 if (!(message.nestedType && message.nestedType.length))
                                     message.nestedType = [];
-                                message.nestedType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32()));
+                                message.nestedType.push($root.google.protobuf.DescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 4: {
                                 if (!(message.enumType && message.enumType.length))
                                     message.enumType = [];
-                                message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32()));
+                                message.enumType.push($root.google.protobuf.EnumDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 5: {
                                 if (!(message.extensionRange && message.extensionRange.length))
                                     message.extensionRange = [];
-                                message.extensionRange.push($root.google.protobuf.DescriptorProto.ExtensionRange.decode(reader, reader.uint32()));
+                                message.extensionRange.push($root.google.protobuf.DescriptorProto.ExtensionRange.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 8: {
                                 if (!(message.oneofDecl && message.oneofDecl.length))
                                     message.oneofDecl = [];
-                                message.oneofDecl.push($root.google.protobuf.OneofDescriptorProto.decode(reader, reader.uint32()));
+                                message.oneofDecl.push($root.google.protobuf.OneofDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 7: {
-                                message.options = $root.google.protobuf.MessageOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.MessageOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 9: {
                                 if (!(message.reservedRange && message.reservedRange.length))
                                     message.reservedRange = [];
-                                message.reservedRange.push($root.google.protobuf.DescriptorProto.ReservedRange.decode(reader, reader.uint32()));
+                                message.reservedRange.push($root.google.protobuf.DescriptorProto.ReservedRange.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 10: {
@@ -40086,7 +41718,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -40117,9 +41749,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                DescriptorProto.verify = function verify(message) {
+                DescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -40127,7 +41763,7 @@
                         if (!Array.isArray(message.field))
                             return "field: array expected";
                         for (var i = 0; i < message.field.length; ++i) {
-                            var error = $root.google.protobuf.FieldDescriptorProto.verify(message.field[i]);
+                            var error = $root.google.protobuf.FieldDescriptorProto.verify(message.field[i], long + 1);
                             if (error)
                                 return "field." + error;
                         }
@@ -40136,7 +41772,7 @@
                         if (!Array.isArray(message.extension))
                             return "extension: array expected";
                         for (var i = 0; i < message.extension.length; ++i) {
-                            var error = $root.google.protobuf.FieldDescriptorProto.verify(message.extension[i]);
+                            var error = $root.google.protobuf.FieldDescriptorProto.verify(message.extension[i], long + 1);
                             if (error)
                                 return "extension." + error;
                         }
@@ -40145,7 +41781,7 @@
                         if (!Array.isArray(message.nestedType))
                             return "nestedType: array expected";
                         for (var i = 0; i < message.nestedType.length; ++i) {
-                            var error = $root.google.protobuf.DescriptorProto.verify(message.nestedType[i]);
+                            var error = $root.google.protobuf.DescriptorProto.verify(message.nestedType[i], long + 1);
                             if (error)
                                 return "nestedType." + error;
                         }
@@ -40154,7 +41790,7 @@
                         if (!Array.isArray(message.enumType))
                             return "enumType: array expected";
                         for (var i = 0; i < message.enumType.length; ++i) {
-                            var error = $root.google.protobuf.EnumDescriptorProto.verify(message.enumType[i]);
+                            var error = $root.google.protobuf.EnumDescriptorProto.verify(message.enumType[i], long + 1);
                             if (error)
                                 return "enumType." + error;
                         }
@@ -40163,7 +41799,7 @@
                         if (!Array.isArray(message.extensionRange))
                             return "extensionRange: array expected";
                         for (var i = 0; i < message.extensionRange.length; ++i) {
-                            var error = $root.google.protobuf.DescriptorProto.ExtensionRange.verify(message.extensionRange[i]);
+                            var error = $root.google.protobuf.DescriptorProto.ExtensionRange.verify(message.extensionRange[i], long + 1);
                             if (error)
                                 return "extensionRange." + error;
                         }
@@ -40172,13 +41808,13 @@
                         if (!Array.isArray(message.oneofDecl))
                             return "oneofDecl: array expected";
                         for (var i = 0; i < message.oneofDecl.length; ++i) {
-                            var error = $root.google.protobuf.OneofDescriptorProto.verify(message.oneofDecl[i]);
+                            var error = $root.google.protobuf.OneofDescriptorProto.verify(message.oneofDecl[i], long + 1);
                             if (error)
                                 return "oneofDecl." + error;
                         }
                     }
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.MessageOptions.verify(message.options);
+                        var error = $root.google.protobuf.MessageOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
@@ -40186,7 +41822,7 @@
                         if (!Array.isArray(message.reservedRange))
                             return "reservedRange: array expected";
                         for (var i = 0; i < message.reservedRange.length; ++i) {
-                            var error = $root.google.protobuf.DescriptorProto.ReservedRange.verify(message.reservedRange[i]);
+                            var error = $root.google.protobuf.DescriptorProto.ReservedRange.verify(message.reservedRange[i], long + 1);
                             if (error)
                                 return "reservedRange." + error;
                         }
@@ -40218,9 +41854,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.DescriptorProto} DescriptorProto
                  */
-                DescriptorProto.fromObject = function fromObject(object) {
+                DescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.DescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.DescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -40231,7 +41871,7 @@
                         for (var i = 0; i < object.field.length; ++i) {
                             if (typeof object.field[i] !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.field: object expected");
-                            message.field[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.field[i]);
+                            message.field[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.field[i], long + 1);
                         }
                     }
                     if (object.extension) {
@@ -40241,7 +41881,7 @@
                         for (var i = 0; i < object.extension.length; ++i) {
                             if (typeof object.extension[i] !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.extension: object expected");
-                            message.extension[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.extension[i]);
+                            message.extension[i] = $root.google.protobuf.FieldDescriptorProto.fromObject(object.extension[i], long + 1);
                         }
                     }
                     if (object.nestedType) {
@@ -40251,7 +41891,7 @@
                         for (var i = 0; i < object.nestedType.length; ++i) {
                             if (typeof object.nestedType[i] !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.nestedType: object expected");
-                            message.nestedType[i] = $root.google.protobuf.DescriptorProto.fromObject(object.nestedType[i]);
+                            message.nestedType[i] = $root.google.protobuf.DescriptorProto.fromObject(object.nestedType[i], long + 1);
                         }
                     }
                     if (object.enumType) {
@@ -40261,7 +41901,7 @@
                         for (var i = 0; i < object.enumType.length; ++i) {
                             if (typeof object.enumType[i] !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.enumType: object expected");
-                            message.enumType[i] = $root.google.protobuf.EnumDescriptorProto.fromObject(object.enumType[i]);
+                            message.enumType[i] = $root.google.protobuf.EnumDescriptorProto.fromObject(object.enumType[i], long + 1);
                         }
                     }
                     if (object.extensionRange) {
@@ -40271,7 +41911,7 @@
                         for (var i = 0; i < object.extensionRange.length; ++i) {
                             if (typeof object.extensionRange[i] !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.extensionRange: object expected");
-                            message.extensionRange[i] = $root.google.protobuf.DescriptorProto.ExtensionRange.fromObject(object.extensionRange[i]);
+                            message.extensionRange[i] = $root.google.protobuf.DescriptorProto.ExtensionRange.fromObject(object.extensionRange[i], long + 1);
                         }
                     }
                     if (object.oneofDecl) {
@@ -40281,13 +41921,13 @@
                         for (var i = 0; i < object.oneofDecl.length; ++i) {
                             if (typeof object.oneofDecl[i] !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.oneofDecl: object expected");
-                            message.oneofDecl[i] = $root.google.protobuf.OneofDescriptorProto.fromObject(object.oneofDecl[i]);
+                            message.oneofDecl[i] = $root.google.protobuf.OneofDescriptorProto.fromObject(object.oneofDecl[i], long + 1);
                         }
                     }
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.DescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.MessageOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.MessageOptions.fromObject(object.options, long + 1);
                     }
                     if (object.reservedRange) {
                         if (!Array.isArray(object.reservedRange))
@@ -40296,7 +41936,7 @@
                         for (var i = 0; i < object.reservedRange.length; ++i) {
                             if (typeof object.reservedRange[i] !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.reservedRange: object expected");
-                            message.reservedRange[i] = $root.google.protobuf.DescriptorProto.ReservedRange.fromObject(object.reservedRange[i]);
+                            message.reservedRange[i] = $root.google.protobuf.DescriptorProto.ReservedRange.fromObject(object.reservedRange[i], long + 1);
                         }
                     }
                     if (object.reservedName) {
@@ -40454,7 +42094,7 @@
                     function ExtensionRange(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -40539,9 +42179,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ExtensionRange.decode = function decode(reader, length, error) {
+                    ExtensionRange.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -40557,11 +42201,11 @@
                                     break;
                                 }
                             case 3: {
-                                    message.options = $root.google.protobuf.ExtensionRangeOptions.decode(reader, reader.uint32());
+                                    message.options = $root.google.protobuf.ExtensionRangeOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -40592,9 +42236,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ExtensionRange.verify = function verify(message) {
+                    ExtensionRange.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.start != null && message.hasOwnProperty("start"))
                             if (!$util.isInteger(message.start))
                                 return "start: integer expected";
@@ -40602,7 +42250,7 @@
                             if (!$util.isInteger(message.end))
                                 return "end: integer expected";
                         if (message.options != null && message.hasOwnProperty("options")) {
-                            var error = $root.google.protobuf.ExtensionRangeOptions.verify(message.options);
+                            var error = $root.google.protobuf.ExtensionRangeOptions.verify(message.options, long + 1);
                             if (error)
                                 return "options." + error;
                         }
@@ -40617,9 +42265,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.DescriptorProto.ExtensionRange} ExtensionRange
                      */
-                    ExtensionRange.fromObject = function fromObject(object) {
+                    ExtensionRange.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.DescriptorProto.ExtensionRange)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.DescriptorProto.ExtensionRange();
                         if (object.start != null)
                             message.start = object.start | 0;
@@ -40628,7 +42280,7 @@
                         if (object.options != null) {
                             if (typeof object.options !== "object")
                                 throw TypeError(".google.protobuf.DescriptorProto.ExtensionRange.options: object expected");
-                            message.options = $root.google.protobuf.ExtensionRangeOptions.fromObject(object.options);
+                            message.options = $root.google.protobuf.ExtensionRangeOptions.fromObject(object.options, long + 1);
                         }
                         return message;
                     };
@@ -40710,7 +42362,7 @@
                     function ReservedRange(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -40785,9 +42437,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    ReservedRange.decode = function decode(reader, length, error) {
+                    ReservedRange.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.DescriptorProto.ReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -40803,7 +42459,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -40834,9 +42490,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    ReservedRange.verify = function verify(message) {
+                    ReservedRange.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.start != null && message.hasOwnProperty("start"))
                             if (!$util.isInteger(message.start))
                                 return "start: integer expected";
@@ -40854,9 +42514,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.DescriptorProto.ReservedRange} ReservedRange
                      */
-                    ReservedRange.fromObject = function fromObject(object) {
+                    ReservedRange.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.DescriptorProto.ReservedRange)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.DescriptorProto.ReservedRange();
                         if (object.start != null)
                             message.start = object.start | 0;
@@ -40946,7 +42610,7 @@
                     this.declaration = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -41043,9 +42707,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ExtensionRangeOptions.decode = function decode(reader, length, error) {
+                ExtensionRangeOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -41055,17 +42723,17 @@
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 2: {
                                 if (!(message.declaration && message.declaration.length))
                                     message.declaration = [];
-                                message.declaration.push($root.google.protobuf.ExtensionRangeOptions.Declaration.decode(reader, reader.uint32()));
+                                message.declaration.push($root.google.protobuf.ExtensionRangeOptions.Declaration.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 50: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 3: {
@@ -41073,7 +42741,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -41104,14 +42772,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                ExtensionRangeOptions.verify = function verify(message) {
+                ExtensionRangeOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
@@ -41120,13 +42792,13 @@
                         if (!Array.isArray(message.declaration))
                             return "declaration: array expected";
                         for (var i = 0; i < message.declaration.length; ++i) {
-                            var error = $root.google.protobuf.ExtensionRangeOptions.Declaration.verify(message.declaration[i]);
+                            var error = $root.google.protobuf.ExtensionRangeOptions.Declaration.verify(message.declaration[i], long + 1);
                             if (error)
                                 return "declaration." + error;
                         }
                     }
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -41149,9 +42821,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.ExtensionRangeOptions} ExtensionRangeOptions
                  */
-                ExtensionRangeOptions.fromObject = function fromObject(object) {
+                ExtensionRangeOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.ExtensionRangeOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.ExtensionRangeOptions();
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -41160,7 +42836,7 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.ExtensionRangeOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     if (object.declaration) {
@@ -41170,13 +42846,13 @@
                         for (var i = 0; i < object.declaration.length; ++i) {
                             if (typeof object.declaration[i] !== "object")
                                 throw TypeError(".google.protobuf.ExtensionRangeOptions.declaration: object expected");
-                            message.declaration[i] = $root.google.protobuf.ExtensionRangeOptions.Declaration.fromObject(object.declaration[i]);
+                            message.declaration[i] = $root.google.protobuf.ExtensionRangeOptions.Declaration.fromObject(object.declaration[i], long + 1);
                         }
                     }
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.ExtensionRangeOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     switch (object.verification) {
                     case "DECLARATION":
@@ -41285,7 +42961,7 @@
                     function Declaration(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -41390,9 +43066,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Declaration.decode = function decode(reader, length, error) {
+                    Declaration.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -41420,7 +43100,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -41451,9 +43131,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    Declaration.verify = function verify(message) {
+                    Declaration.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.number != null && message.hasOwnProperty("number"))
                             if (!$util.isInteger(message.number))
                                 return "number: integer expected";
@@ -41480,9 +43164,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.ExtensionRangeOptions.Declaration} Declaration
                      */
-                    Declaration.fromObject = function fromObject(object) {
+                    Declaration.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.ExtensionRangeOptions.Declaration)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
                         if (object.number != null)
                             message.number = object.number | 0;
@@ -41606,7 +43294,7 @@
                 function FieldDescriptorProto(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -41771,9 +43459,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldDescriptorProto.decode = function decode(reader, length, error) {
+                FieldDescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -41817,7 +43509,7 @@
                                 break;
                             }
                         case 8: {
-                                message.options = $root.google.protobuf.FieldOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.FieldOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 17: {
@@ -41825,7 +43517,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -41856,9 +43548,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FieldDescriptorProto.verify = function verify(message) {
+                FieldDescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -41914,7 +43610,7 @@
                         if (!$util.isString(message.jsonName))
                             return "jsonName: string expected";
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.FieldOptions.verify(message.options);
+                        var error = $root.google.protobuf.FieldOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
@@ -41932,9 +43628,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FieldDescriptorProto} FieldDescriptorProto
                  */
-                FieldDescriptorProto.fromObject = function fromObject(object) {
+                FieldDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FieldDescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FieldDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -42053,7 +43753,7 @@
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.FieldDescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.FieldOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.FieldOptions.fromObject(object.options, long + 1);
                     }
                     if (object.proto3Optional != null)
                         message.proto3Optional = Boolean(object.proto3Optional);
@@ -42223,7 +43923,7 @@
                 function OneofDescriptorProto(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -42298,9 +43998,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofDescriptorProto.decode = function decode(reader, length, error) {
+                OneofDescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -42312,11 +44016,11 @@
                                 break;
                             }
                         case 2: {
-                                message.options = $root.google.protobuf.OneofOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.OneofOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -42347,14 +44051,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                OneofDescriptorProto.verify = function verify(message) {
+                OneofDescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.OneofOptions.verify(message.options);
+                        var error = $root.google.protobuf.OneofOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
@@ -42369,16 +44077,20 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.OneofDescriptorProto} OneofDescriptorProto
                  */
-                OneofDescriptorProto.fromObject = function fromObject(object) {
+                OneofDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.OneofDescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.OneofDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.OneofDescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.OneofOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.OneofOptions.fromObject(object.options, long + 1);
                     }
                     return message;
                 };
@@ -42464,7 +44176,7 @@
                     this.reservedName = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -42582,9 +44294,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumDescriptorProto.decode = function decode(reader, length, error) {
+                EnumDescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -42598,17 +44314,17 @@
                         case 2: {
                                 if (!(message.value && message.value.length))
                                     message.value = [];
-                                message.value.push($root.google.protobuf.EnumValueDescriptorProto.decode(reader, reader.uint32()));
+                                message.value.push($root.google.protobuf.EnumValueDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 3: {
-                                message.options = $root.google.protobuf.EnumOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.EnumOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 4: {
                                 if (!(message.reservedRange && message.reservedRange.length))
                                     message.reservedRange = [];
-                                message.reservedRange.push($root.google.protobuf.EnumDescriptorProto.EnumReservedRange.decode(reader, reader.uint32()));
+                                message.reservedRange.push($root.google.protobuf.EnumDescriptorProto.EnumReservedRange.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 5: {
@@ -42622,7 +44338,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -42653,9 +44369,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                EnumDescriptorProto.verify = function verify(message) {
+                EnumDescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -42663,13 +44383,13 @@
                         if (!Array.isArray(message.value))
                             return "value: array expected";
                         for (var i = 0; i < message.value.length; ++i) {
-                            var error = $root.google.protobuf.EnumValueDescriptorProto.verify(message.value[i]);
+                            var error = $root.google.protobuf.EnumValueDescriptorProto.verify(message.value[i], long + 1);
                             if (error)
                                 return "value." + error;
                         }
                     }
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.EnumOptions.verify(message.options);
+                        var error = $root.google.protobuf.EnumOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
@@ -42677,7 +44397,7 @@
                         if (!Array.isArray(message.reservedRange))
                             return "reservedRange: array expected";
                         for (var i = 0; i < message.reservedRange.length; ++i) {
-                            var error = $root.google.protobuf.EnumDescriptorProto.EnumReservedRange.verify(message.reservedRange[i]);
+                            var error = $root.google.protobuf.EnumDescriptorProto.EnumReservedRange.verify(message.reservedRange[i], long + 1);
                             if (error)
                                 return "reservedRange." + error;
                         }
@@ -42709,9 +44429,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.EnumDescriptorProto} EnumDescriptorProto
                  */
-                EnumDescriptorProto.fromObject = function fromObject(object) {
+                EnumDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.EnumDescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.EnumDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -42722,13 +44446,13 @@
                         for (var i = 0; i < object.value.length; ++i) {
                             if (typeof object.value[i] !== "object")
                                 throw TypeError(".google.protobuf.EnumDescriptorProto.value: object expected");
-                            message.value[i] = $root.google.protobuf.EnumValueDescriptorProto.fromObject(object.value[i]);
+                            message.value[i] = $root.google.protobuf.EnumValueDescriptorProto.fromObject(object.value[i], long + 1);
                         }
                     }
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.EnumDescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.EnumOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.EnumOptions.fromObject(object.options, long + 1);
                     }
                     if (object.reservedRange) {
                         if (!Array.isArray(object.reservedRange))
@@ -42737,7 +44461,7 @@
                         for (var i = 0; i < object.reservedRange.length; ++i) {
                             if (typeof object.reservedRange[i] !== "object")
                                 throw TypeError(".google.protobuf.EnumDescriptorProto.reservedRange: object expected");
-                            message.reservedRange[i] = $root.google.protobuf.EnumDescriptorProto.EnumReservedRange.fromObject(object.reservedRange[i]);
+                            message.reservedRange[i] = $root.google.protobuf.EnumDescriptorProto.EnumReservedRange.fromObject(object.reservedRange[i], long + 1);
                         }
                     }
                     if (object.reservedName) {
@@ -42864,7 +44588,7 @@
                     function EnumReservedRange(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -42939,9 +44663,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EnumReservedRange.decode = function decode(reader, length, error) {
+                    EnumReservedRange.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -42957,7 +44685,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -42988,9 +44716,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    EnumReservedRange.verify = function verify(message) {
+                    EnumReservedRange.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.start != null && message.hasOwnProperty("start"))
                             if (!$util.isInteger(message.start))
                                 return "start: integer expected";
@@ -43008,9 +44740,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.EnumDescriptorProto.EnumReservedRange} EnumReservedRange
                      */
-                    EnumReservedRange.fromObject = function fromObject(object) {
+                    EnumReservedRange.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.EnumDescriptorProto.EnumReservedRange)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.EnumDescriptorProto.EnumReservedRange();
                         if (object.start != null)
                             message.start = object.start | 0;
@@ -43097,7 +44833,7 @@
                 function EnumValueDescriptorProto(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -43182,9 +44918,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueDescriptorProto.decode = function decode(reader, length, error) {
+                EnumValueDescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -43200,11 +44940,11 @@
                                 break;
                             }
                         case 3: {
-                                message.options = $root.google.protobuf.EnumValueOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.EnumValueOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -43235,9 +44975,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                EnumValueDescriptorProto.verify = function verify(message) {
+                EnumValueDescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -43245,7 +44989,7 @@
                         if (!$util.isInteger(message.number))
                             return "number: integer expected";
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.EnumValueOptions.verify(message.options);
+                        var error = $root.google.protobuf.EnumValueOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
@@ -43260,9 +45004,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.EnumValueDescriptorProto} EnumValueDescriptorProto
                  */
-                EnumValueDescriptorProto.fromObject = function fromObject(object) {
+                EnumValueDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.EnumValueDescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.EnumValueDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -43271,7 +45019,7 @@
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.EnumValueDescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.EnumValueOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.EnumValueOptions.fromObject(object.options, long + 1);
                     }
                     return message;
                 };
@@ -43355,7 +45103,7 @@
                     this.method = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -43441,9 +45189,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceDescriptorProto.decode = function decode(reader, length, error) {
+                ServiceDescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -43457,15 +45209,15 @@
                         case 2: {
                                 if (!(message.method && message.method.length))
                                     message.method = [];
-                                message.method.push($root.google.protobuf.MethodDescriptorProto.decode(reader, reader.uint32()));
+                                message.method.push($root.google.protobuf.MethodDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 3: {
-                                message.options = $root.google.protobuf.ServiceOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.ServiceOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -43496,9 +45248,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                ServiceDescriptorProto.verify = function verify(message) {
+                ServiceDescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -43506,13 +45262,13 @@
                         if (!Array.isArray(message.method))
                             return "method: array expected";
                         for (var i = 0; i < message.method.length; ++i) {
-                            var error = $root.google.protobuf.MethodDescriptorProto.verify(message.method[i]);
+                            var error = $root.google.protobuf.MethodDescriptorProto.verify(message.method[i], long + 1);
                             if (error)
                                 return "method." + error;
                         }
                     }
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.ServiceOptions.verify(message.options);
+                        var error = $root.google.protobuf.ServiceOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
@@ -43527,9 +45283,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.ServiceDescriptorProto} ServiceDescriptorProto
                  */
-                ServiceDescriptorProto.fromObject = function fromObject(object) {
+                ServiceDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.ServiceDescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.ServiceDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -43540,13 +45300,13 @@
                         for (var i = 0; i < object.method.length; ++i) {
                             if (typeof object.method[i] !== "object")
                                 throw TypeError(".google.protobuf.ServiceDescriptorProto.method: object expected");
-                            message.method[i] = $root.google.protobuf.MethodDescriptorProto.fromObject(object.method[i]);
+                            message.method[i] = $root.google.protobuf.MethodDescriptorProto.fromObject(object.method[i], long + 1);
                         }
                     }
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.ServiceDescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.ServiceOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.ServiceOptions.fromObject(object.options, long + 1);
                     }
                     return message;
                 };
@@ -43636,7 +45396,7 @@
                 function MethodDescriptorProto(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -43751,9 +45511,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodDescriptorProto.decode = function decode(reader, length, error) {
+                MethodDescriptorProto.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodDescriptorProto();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -43773,7 +45537,7 @@
                                 break;
                             }
                         case 4: {
-                                message.options = $root.google.protobuf.MethodOptions.decode(reader, reader.uint32());
+                                message.options = $root.google.protobuf.MethodOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 5: {
@@ -43785,7 +45549,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -43816,9 +45580,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                MethodDescriptorProto.verify = function verify(message) {
+                MethodDescriptorProto.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
@@ -43829,7 +45597,7 @@
                         if (!$util.isString(message.outputType))
                             return "outputType: string expected";
                     if (message.options != null && message.hasOwnProperty("options")) {
-                        var error = $root.google.protobuf.MethodOptions.verify(message.options);
+                        var error = $root.google.protobuf.MethodOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
@@ -43850,9 +45618,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.MethodDescriptorProto} MethodDescriptorProto
                  */
-                MethodDescriptorProto.fromObject = function fromObject(object) {
+                MethodDescriptorProto.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.MethodDescriptorProto)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.MethodDescriptorProto();
                     if (object.name != null)
                         message.name = String(object.name);
@@ -43863,7 +45635,7 @@
                     if (object.options != null) {
                         if (typeof object.options !== "object")
                             throw TypeError(".google.protobuf.MethodDescriptorProto.options: object expected");
-                        message.options = $root.google.protobuf.MethodOptions.fromObject(object.options);
+                        message.options = $root.google.protobuf.MethodOptions.fromObject(object.options, long + 1);
                     }
                     if (object.clientStreaming != null)
                         message.clientStreaming = Boolean(object.clientStreaming);
@@ -43980,7 +45752,7 @@
                     this[".google.api.resourceDefinition"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -44257,9 +46029,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FileOptions.decode = function decode(reader, length, error) {
+                FileOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FileOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -44343,23 +46119,23 @@
                                 break;
                             }
                         case 50: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 1053: {
                                 if (!(message[".google.api.resourceDefinition"] && message[".google.api.resourceDefinition"].length))
                                     message[".google.api.resourceDefinition"] = [];
-                                message[".google.api.resourceDefinition"].push($root.google.api.ResourceDescriptor.decode(reader, reader.uint32()));
+                                message[".google.api.resourceDefinition"].push($root.google.api.ResourceDescriptor.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -44390,9 +46166,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FileOptions.verify = function verify(message) {
+                FileOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.javaPackage != null && message.hasOwnProperty("javaPackage"))
                         if (!$util.isString(message.javaPackage))
                             return "javaPackage: string expected";
@@ -44457,7 +46237,7 @@
                         if (!$util.isString(message.rubyPackage))
                             return "rubyPackage: string expected";
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -44465,7 +46245,7 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
@@ -44474,7 +46254,7 @@
                         if (!Array.isArray(message[".google.api.resourceDefinition"]))
                             return ".google.api.resourceDefinition: array expected";
                         for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i) {
-                            var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resourceDefinition"][i]);
+                            var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resourceDefinition"][i], long + 1);
                             if (error)
                                 return ".google.api.resourceDefinition." + error;
                         }
@@ -44490,9 +46270,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FileOptions} FileOptions
                  */
-                FileOptions.fromObject = function fromObject(object) {
+                FileOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FileOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FileOptions();
                     if (object.javaPackage != null)
                         message.javaPackage = String(object.javaPackage);
@@ -44553,7 +46337,7 @@
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.FileOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -44562,7 +46346,7 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.FileOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     if (object[".google.api.resourceDefinition"]) {
@@ -44572,7 +46356,7 @@
                         for (var i = 0; i < object[".google.api.resourceDefinition"].length; ++i) {
                             if (typeof object[".google.api.resourceDefinition"][i] !== "object")
                                 throw TypeError(".google.protobuf.FileOptions..google.api.resourceDefinition: object expected");
-                            message[".google.api.resourceDefinition"][i] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resourceDefinition"][i]);
+                            message[".google.api.resourceDefinition"][i] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resourceDefinition"][i], long + 1);
                         }
                     }
                     return message;
@@ -44743,7 +46527,7 @@
                     this.uninterpretedOption = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -44879,9 +46663,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MessageOptions.decode = function decode(reader, length, error) {
+                MessageOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MessageOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -44909,21 +46697,21 @@
                                 break;
                             }
                         case 12: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 1053: {
-                                message[".google.api.resource"] = $root.google.api.ResourceDescriptor.decode(reader, reader.uint32());
+                                message[".google.api.resource"] = $root.google.api.ResourceDescriptor.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -44954,9 +46742,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                MessageOptions.verify = function verify(message) {
+                MessageOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.messageSetWireFormat != null && message.hasOwnProperty("messageSetWireFormat"))
                         if (typeof message.messageSetWireFormat !== "boolean")
                             return "messageSetWireFormat: boolean expected";
@@ -44973,7 +46765,7 @@
                         if (typeof message.deprecatedLegacyJsonFieldConflicts !== "boolean")
                             return "deprecatedLegacyJsonFieldConflicts: boolean expected";
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -44981,13 +46773,13 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
                     }
                     if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource")) {
-                        var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resource"]);
+                        var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resource"], long + 1);
                         if (error)
                             return ".google.api.resource." + error;
                     }
@@ -45002,9 +46794,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.MessageOptions} MessageOptions
                  */
-                MessageOptions.fromObject = function fromObject(object) {
+                MessageOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.MessageOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.MessageOptions();
                     if (object.messageSetWireFormat != null)
                         message.messageSetWireFormat = Boolean(object.messageSetWireFormat);
@@ -45019,7 +46815,7 @@
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.MessageOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -45028,13 +46824,13 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.MessageOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     if (object[".google.api.resource"] != null) {
                         if (typeof object[".google.api.resource"] !== "object")
                             throw TypeError(".google.protobuf.MessageOptions..google.api.resource: object expected");
-                        message[".google.api.resource"] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resource"]);
+                        message[".google.api.resource"] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resource"], long + 1);
                     }
                     return message;
                 };
@@ -45153,7 +46949,7 @@
                     this[".google.api.fieldBehavior"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -45372,9 +47168,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldOptions.decode = function decode(reader, length, error) {
+                FieldOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -45431,21 +47231,21 @@
                         case 20: {
                                 if (!(message.editionDefaults && message.editionDefaults.length))
                                     message.editionDefaults = [];
-                                message.editionDefaults.push($root.google.protobuf.FieldOptions.EditionDefault.decode(reader, reader.uint32()));
+                                message.editionDefaults.push($root.google.protobuf.FieldOptions.EditionDefault.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 21: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 22: {
-                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 1052: {
@@ -45460,11 +47260,11 @@
                                 break;
                             }
                         case 1055: {
-                                message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
+                                message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -45495,9 +47295,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FieldOptions.verify = function verify(message) {
+                FieldOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
                         switch (message.ctype) {
                         default:
@@ -45567,18 +47371,18 @@
                         if (!Array.isArray(message.editionDefaults))
                             return "editionDefaults: array expected";
                         for (var i = 0; i < message.editionDefaults.length; ++i) {
-                            var error = $root.google.protobuf.FieldOptions.EditionDefault.verify(message.editionDefaults[i]);
+                            var error = $root.google.protobuf.FieldOptions.EditionDefault.verify(message.editionDefaults[i], long + 1);
                             if (error)
                                 return "editionDefaults." + error;
                         }
                     }
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
                     if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
-                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport, long + 1);
                         if (error)
                             return "featureSupport." + error;
                     }
@@ -45586,7 +47390,7 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
@@ -45611,7 +47415,7 @@
                             }
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
-                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
+                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"], long + 1);
                         if (error)
                             return ".google.api.resourceReference." + error;
                     }
@@ -45626,9 +47430,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FieldOptions} FieldOptions
                  */
-                FieldOptions.fromObject = function fromObject(object) {
+                FieldOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FieldOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
                     default:
@@ -45762,18 +47570,18 @@
                         for (var i = 0; i < object.editionDefaults.length; ++i) {
                             if (typeof object.editionDefaults[i] !== "object")
                                 throw TypeError(".google.protobuf.FieldOptions.editionDefaults: object expected");
-                            message.editionDefaults[i] = $root.google.protobuf.FieldOptions.EditionDefault.fromObject(object.editionDefaults[i]);
+                            message.editionDefaults[i] = $root.google.protobuf.FieldOptions.EditionDefault.fromObject(object.editionDefaults[i], long + 1);
                         }
                     }
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.FieldOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.featureSupport != null) {
                         if (typeof object.featureSupport !== "object")
                             throw TypeError(".google.protobuf.FieldOptions.featureSupport: object expected");
-                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport, long + 1);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -45782,7 +47590,7 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.FieldOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     if (object[".google.api.fieldBehavior"]) {
@@ -45837,7 +47645,7 @@
                     if (object[".google.api.resourceReference"] != null) {
                         if (typeof object[".google.api.resourceReference"] !== "object")
                             throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
-                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
+                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"], long + 1);
                     }
                     return message;
                 };
@@ -46047,7 +47855,7 @@
                     function EditionDefault(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -46122,9 +47930,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    EditionDefault.decode = function decode(reader, length, error) {
+                    EditionDefault.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -46140,7 +47952,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -46171,9 +47983,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    EditionDefault.verify = function verify(message) {
+                    EditionDefault.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             switch (message.edition) {
                             default:
@@ -46206,9 +48022,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.FieldOptions.EditionDefault} EditionDefault
                      */
-                    EditionDefault.fromObject = function fromObject(object) {
+                    EditionDefault.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.FieldOptions.EditionDefault)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.FieldOptions.EditionDefault();
                         switch (object.edition) {
                         default:
@@ -46347,7 +48167,7 @@
                     function FeatureSupport(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -46442,9 +48262,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FeatureSupport.decode = function decode(reader, length, error) {
+                    FeatureSupport.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.FeatureSupport();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -46468,7 +48292,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -46499,9 +48323,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    FeatureSupport.verify = function verify(message) {
+                    FeatureSupport.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
                             switch (message.editionIntroduced) {
                             default:
@@ -46570,9 +48398,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
                      */
-                    FeatureSupport.fromObject = function fromObject(object) {
+                    FeatureSupport.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.FieldOptions.FeatureSupport)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.FieldOptions.FeatureSupport();
                         switch (object.editionIntroduced) {
                         default:
@@ -46831,7 +48663,7 @@
                     this.uninterpretedOption = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -46907,9 +48739,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                OneofOptions.decode = function decode(reader, length, error) {
+                OneofOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.OneofOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -46917,17 +48753,17 @@
                             break;
                         switch (tag >>> 3) {
                         case 1: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -46958,11 +48794,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                OneofOptions.verify = function verify(message) {
+                OneofOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -46970,7 +48810,7 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
@@ -46986,14 +48826,18 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.OneofOptions} OneofOptions
                  */
-                OneofOptions.fromObject = function fromObject(object) {
+                OneofOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.OneofOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.OneofOptions();
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.OneofOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -47002,7 +48846,7 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.OneofOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     return message;
@@ -47089,7 +48933,7 @@
                     this.uninterpretedOption = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -47195,9 +49039,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumOptions.decode = function decode(reader, length, error) {
+                EnumOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -47217,17 +49065,17 @@
                                 break;
                             }
                         case 7: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -47258,9 +49106,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                EnumOptions.verify = function verify(message) {
+                EnumOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.allowAlias != null && message.hasOwnProperty("allowAlias"))
                         if (typeof message.allowAlias !== "boolean")
                             return "allowAlias: boolean expected";
@@ -47271,7 +49123,7 @@
                         if (typeof message.deprecatedLegacyJsonFieldConflicts !== "boolean")
                             return "deprecatedLegacyJsonFieldConflicts: boolean expected";
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -47279,7 +49131,7 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
@@ -47295,9 +49147,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.EnumOptions} EnumOptions
                  */
-                EnumOptions.fromObject = function fromObject(object) {
+                EnumOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.EnumOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.EnumOptions();
                     if (object.allowAlias != null)
                         message.allowAlias = Boolean(object.allowAlias);
@@ -47308,7 +49164,7 @@
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.EnumOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -47317,7 +49173,7 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.EnumOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     return message;
@@ -47414,7 +49270,7 @@
                     this.uninterpretedOption = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -47520,9 +49376,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                EnumValueOptions.decode = function decode(reader, length, error) {
+                EnumValueOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.EnumValueOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -47534,7 +49394,7 @@
                                 break;
                             }
                         case 2: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 3: {
@@ -47542,17 +49402,17 @@
                                 break;
                             }
                         case 4: {
-                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -47583,14 +49443,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                EnumValueOptions.verify = function verify(message) {
+                EnumValueOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -47598,7 +49462,7 @@
                         if (typeof message.debugRedact !== "boolean")
                             return "debugRedact: boolean expected";
                     if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
-                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport, long + 1);
                         if (error)
                             return "featureSupport." + error;
                     }
@@ -47606,7 +49470,7 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
@@ -47622,23 +49486,27 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.EnumValueOptions} EnumValueOptions
                  */
-                EnumValueOptions.fromObject = function fromObject(object) {
+                EnumValueOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.EnumValueOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.EnumValueOptions();
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.EnumValueOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.debugRedact != null)
                         message.debugRedact = Boolean(object.debugRedact);
                     if (object.featureSupport != null) {
                         if (typeof object.featureSupport !== "object")
                             throw TypeError(".google.protobuf.EnumValueOptions.featureSupport: object expected");
-                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport, long + 1);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -47647,7 +49515,7 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     return message;
@@ -47745,7 +49613,7 @@
                     this.uninterpretedOption = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -47861,9 +49729,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                ServiceOptions.decode = function decode(reader, length, error) {
+                ServiceOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ServiceOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -47871,7 +49743,7 @@
                             break;
                         switch (tag >>> 3) {
                         case 34: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 33: {
@@ -47881,7 +49753,7 @@
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 1049: {
@@ -47897,7 +49769,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -47928,11 +49800,15 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                ServiceOptions.verify = function verify(message) {
+                ServiceOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -47943,7 +49819,7 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
@@ -47968,14 +49844,18 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.ServiceOptions} ServiceOptions
                  */
-                ServiceOptions.fromObject = function fromObject(object) {
+                ServiceOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.ServiceOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.ServiceOptions();
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.ServiceOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
@@ -47986,7 +49866,7 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.ServiceOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     if (object[".google.api.defaultHost"] != null)
@@ -48094,7 +49974,7 @@
                     this[".google.api.methodSignature"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -48211,9 +50091,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                MethodOptions.decode = function decode(reader, length, error) {
+                MethodOptions.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.MethodOptions();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -48229,17 +50113,17 @@
                                 break;
                             }
                         case 35: {
-                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
-                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 72295728: {
-                                message[".google.api.http"] = $root.google.api.HttpRule.decode(reader, reader.uint32());
+                                message[".google.api.http"] = $root.google.api.HttpRule.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         case 1051: {
@@ -48249,7 +50133,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -48280,9 +50164,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                MethodOptions.verify = function verify(message) {
+                MethodOptions.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
@@ -48296,7 +50184,7 @@
                             break;
                         }
                     if (message.features != null && message.hasOwnProperty("features")) {
-                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
@@ -48304,13 +50192,13 @@
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.verify(message.uninterpretedOption[i], long + 1);
                             if (error)
                                 return "uninterpretedOption." + error;
                         }
                     }
                     if (message[".google.api.http"] != null && message.hasOwnProperty(".google.api.http")) {
-                        var error = $root.google.api.HttpRule.verify(message[".google.api.http"]);
+                        var error = $root.google.api.HttpRule.verify(message[".google.api.http"], long + 1);
                         if (error)
                             return ".google.api.http." + error;
                     }
@@ -48332,9 +50220,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.MethodOptions} MethodOptions
                  */
-                MethodOptions.fromObject = function fromObject(object) {
+                MethodOptions.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.MethodOptions)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.MethodOptions();
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
@@ -48361,7 +50253,7 @@
                     if (object.features != null) {
                         if (typeof object.features !== "object")
                             throw TypeError(".google.protobuf.MethodOptions.features: object expected");
-                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features, long + 1);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -48370,13 +50262,13 @@
                         for (var i = 0; i < object.uninterpretedOption.length; ++i) {
                             if (typeof object.uninterpretedOption[i] !== "object")
                                 throw TypeError(".google.protobuf.MethodOptions.uninterpretedOption: object expected");
-                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
+                            message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i], long + 1);
                         }
                     }
                     if (object[".google.api.http"] != null) {
                         if (typeof object[".google.api.http"] !== "object")
                             throw TypeError(".google.protobuf.MethodOptions..google.api.http: object expected");
-                        message[".google.api.http"] = $root.google.api.HttpRule.fromObject(object[".google.api.http"]);
+                        message[".google.api.http"] = $root.google.api.HttpRule.fromObject(object[".google.api.http"], long + 1);
                     }
                     if (object[".google.api.methodSignature"]) {
                         if (!Array.isArray(object[".google.api.methodSignature"]))
@@ -48504,7 +50396,7 @@
                     this.name = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -48630,9 +50522,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                UninterpretedOption.decode = function decode(reader, length, error) {
+                UninterpretedOption.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -48642,7 +50538,7 @@
                         case 2: {
                                 if (!(message.name && message.name.length))
                                     message.name = [];
-                                message.name.push($root.google.protobuf.UninterpretedOption.NamePart.decode(reader, reader.uint32()));
+                                message.name.push($root.google.protobuf.UninterpretedOption.NamePart.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 3: {
@@ -48670,7 +50566,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -48701,14 +50597,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                UninterpretedOption.verify = function verify(message) {
+                UninterpretedOption.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.name != null && message.hasOwnProperty("name")) {
                         if (!Array.isArray(message.name))
                             return "name: array expected";
                         for (var i = 0; i < message.name.length; ++i) {
-                            var error = $root.google.protobuf.UninterpretedOption.NamePart.verify(message.name[i]);
+                            var error = $root.google.protobuf.UninterpretedOption.NamePart.verify(message.name[i], long + 1);
                             if (error)
                                 return "name." + error;
                         }
@@ -48742,9 +50642,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.UninterpretedOption} UninterpretedOption
                  */
-                UninterpretedOption.fromObject = function fromObject(object) {
+                UninterpretedOption.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.UninterpretedOption)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.UninterpretedOption();
                     if (object.name) {
                         if (!Array.isArray(object.name))
@@ -48753,7 +50657,7 @@
                         for (var i = 0; i < object.name.length; ++i) {
                             if (typeof object.name[i] !== "object")
                                 throw TypeError(".google.protobuf.UninterpretedOption.name: object expected");
-                            message.name[i] = $root.google.protobuf.UninterpretedOption.NamePart.fromObject(object.name[i]);
+                            message.name[i] = $root.google.protobuf.UninterpretedOption.NamePart.fromObject(object.name[i], long + 1);
                         }
                     }
                     if (object.identifierValue != null)
@@ -48898,7 +50802,7 @@
                     function NamePart(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -48971,9 +50875,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    NamePart.decode = function decode(reader, length, error) {
+                    NamePart.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.UninterpretedOption.NamePart();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -48989,7 +50897,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -49024,9 +50932,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    NamePart.verify = function verify(message) {
+                    NamePart.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (!$util.isString(message.namePart))
                             return "namePart: string expected";
                         if (typeof message.isExtension !== "boolean")
@@ -49042,9 +50954,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.UninterpretedOption.NamePart} NamePart
                      */
-                    NamePart.fromObject = function fromObject(object) {
+                    NamePart.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.UninterpretedOption.NamePart)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.UninterpretedOption.NamePart();
                         if (object.namePart != null)
                             message.namePart = String(object.namePart);
@@ -49136,7 +51052,7 @@
                 function FeatureSet(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -49271,9 +51187,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSet.decode = function decode(reader, length, error) {
+                FeatureSet.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -49313,7 +51233,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -49344,9 +51264,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FeatureSet.verify = function verify(message) {
+                FeatureSet.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
                         switch (message.fieldPresence) {
                         default:
@@ -49433,9 +51357,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FeatureSet} FeatureSet
                  */
-                FeatureSet.fromObject = function fromObject(object) {
+                FeatureSet.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FeatureSet)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FeatureSet();
                     switch (object.fieldPresence) {
                     default:
@@ -49813,7 +51741,7 @@
                     function VisibilityFeature(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -49868,9 +51796,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    VisibilityFeature.decode = function decode(reader, length, error) {
+                    VisibilityFeature.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet.VisibilityFeature();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -49878,7 +51810,7 @@
                                 break;
                             switch (tag >>> 3) {
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -49909,9 +51841,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    VisibilityFeature.verify = function verify(message) {
+                    VisibilityFeature.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         return null;
                     };
     
@@ -49923,9 +51859,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
                      */
-                    VisibilityFeature.fromObject = function fromObject(object) {
+                    VisibilityFeature.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.FeatureSet.VisibilityFeature)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         return new $root.google.protobuf.FeatureSet.VisibilityFeature();
                     };
     
@@ -50017,7 +51957,7 @@
                     this.defaults = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -50103,9 +52043,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FeatureSetDefaults.decode = function decode(reader, length, error) {
+                FeatureSetDefaults.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -50115,7 +52059,7 @@
                         case 1: {
                                 if (!(message.defaults && message.defaults.length))
                                     message.defaults = [];
-                                message.defaults.push($root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.decode(reader, reader.uint32()));
+                                message.defaults.push($root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         case 4: {
@@ -50127,7 +52071,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -50158,14 +52102,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FeatureSetDefaults.verify = function verify(message) {
+                FeatureSetDefaults.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.defaults != null && message.hasOwnProperty("defaults")) {
                         if (!Array.isArray(message.defaults))
                             return "defaults: array expected";
                         for (var i = 0; i < message.defaults.length; ++i) {
-                            var error = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify(message.defaults[i]);
+                            var error = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify(message.defaults[i], long + 1);
                             if (error)
                                 return "defaults." + error;
                         }
@@ -50217,9 +52165,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FeatureSetDefaults} FeatureSetDefaults
                  */
-                FeatureSetDefaults.fromObject = function fromObject(object) {
+                FeatureSetDefaults.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FeatureSetDefaults)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FeatureSetDefaults();
                     if (object.defaults) {
                         if (!Array.isArray(object.defaults))
@@ -50228,7 +52180,7 @@
                         for (var i = 0; i < object.defaults.length; ++i) {
                             if (typeof object.defaults[i] !== "object")
                                 throw TypeError(".google.protobuf.FeatureSetDefaults.defaults: object expected");
-                            message.defaults[i] = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fromObject(object.defaults[i]);
+                            message.defaults[i] = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fromObject(object.defaults[i], long + 1);
                         }
                     }
                     switch (object.minimumEdition) {
@@ -50425,7 +52377,7 @@
                     function FeatureSetEditionDefault(properties) {
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -50510,9 +52462,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    FeatureSetEditionDefault.decode = function decode(reader, length, error) {
+                    FeatureSetEditionDefault.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -50524,15 +52480,15 @@
                                     break;
                                 }
                             case 4: {
-                                    message.overridableFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                    message.overridableFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             case 5: {
-                                    message.fixedFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                    message.fixedFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -50563,9 +52519,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    FeatureSetEditionDefault.verify = function verify(message) {
+                    FeatureSetEditionDefault.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             switch (message.edition) {
                             default:
@@ -50585,12 +52545,12 @@
                                 break;
                             }
                         if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures);
+                            var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures, long + 1);
                             if (error)
                                 return "overridableFeatures." + error;
                         }
                         if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures);
+                            var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures, long + 1);
                             if (error)
                                 return "fixedFeatures." + error;
                         }
@@ -50605,9 +52565,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} FeatureSetEditionDefault
                      */
-                    FeatureSetEditionDefault.fromObject = function fromObject(object) {
+                    FeatureSetEditionDefault.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
                         switch (object.edition) {
                         default:
@@ -50668,12 +52632,12 @@
                         if (object.overridableFeatures != null) {
                             if (typeof object.overridableFeatures !== "object")
                                 throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.overridableFeatures: object expected");
-                            message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures);
+                            message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures, long + 1);
                         }
                         if (object.fixedFeatures != null) {
                             if (typeof object.fixedFeatures !== "object")
                                 throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fixedFeatures: object expected");
-                            message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures);
+                            message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures, long + 1);
                         }
                         return message;
                     };
@@ -50758,7 +52722,7 @@
                     this.location = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -50824,9 +52788,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                SourceCodeInfo.decode = function decode(reader, length, error) {
+                SourceCodeInfo.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -50836,11 +52804,11 @@
                         case 1: {
                                 if (!(message.location && message.location.length))
                                     message.location = [];
-                                message.location.push($root.google.protobuf.SourceCodeInfo.Location.decode(reader, reader.uint32()));
+                                message.location.push($root.google.protobuf.SourceCodeInfo.Location.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -50871,14 +52839,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                SourceCodeInfo.verify = function verify(message) {
+                SourceCodeInfo.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.location != null && message.hasOwnProperty("location")) {
                         if (!Array.isArray(message.location))
                             return "location: array expected";
                         for (var i = 0; i < message.location.length; ++i) {
-                            var error = $root.google.protobuf.SourceCodeInfo.Location.verify(message.location[i]);
+                            var error = $root.google.protobuf.SourceCodeInfo.Location.verify(message.location[i], long + 1);
                             if (error)
                                 return "location." + error;
                         }
@@ -50894,9 +52866,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.SourceCodeInfo} SourceCodeInfo
                  */
-                SourceCodeInfo.fromObject = function fromObject(object) {
+                SourceCodeInfo.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.SourceCodeInfo)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.SourceCodeInfo();
                     if (object.location) {
                         if (!Array.isArray(object.location))
@@ -50905,7 +52881,7 @@
                         for (var i = 0; i < object.location.length; ++i) {
                             if (typeof object.location[i] !== "object")
                                 throw TypeError(".google.protobuf.SourceCodeInfo.location: object expected");
-                            message.location[i] = $root.google.protobuf.SourceCodeInfo.Location.fromObject(object.location[i]);
+                            message.location[i] = $root.google.protobuf.SourceCodeInfo.Location.fromObject(object.location[i], long + 1);
                         }
                     }
                     return message;
@@ -50987,7 +52963,7 @@
                         this.leadingDetachedComments = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -51101,9 +53077,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Location.decode = function decode(reader, length, error) {
+                    Location.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.SourceCodeInfo.Location();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -51147,7 +53127,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -51178,9 +53158,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    Location.verify = function verify(message) {
+                    Location.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.path != null && message.hasOwnProperty("path")) {
                             if (!Array.isArray(message.path))
                                 return "path: array expected";
@@ -51219,9 +53203,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.SourceCodeInfo.Location} Location
                      */
-                    Location.fromObject = function fromObject(object) {
+                    Location.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.SourceCodeInfo.Location)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.SourceCodeInfo.Location();
                         if (object.path) {
                             if (!Array.isArray(object.path))
@@ -51348,7 +53336,7 @@
                     this.annotation = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -51414,9 +53402,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                GeneratedCodeInfo.decode = function decode(reader, length, error) {
+                GeneratedCodeInfo.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -51426,11 +53418,11 @@
                         case 1: {
                                 if (!(message.annotation && message.annotation.length))
                                     message.annotation = [];
-                                message.annotation.push($root.google.protobuf.GeneratedCodeInfo.Annotation.decode(reader, reader.uint32()));
+                                message.annotation.push($root.google.protobuf.GeneratedCodeInfo.Annotation.decode(reader, reader.uint32(), undefined, long + 1));
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -51461,14 +53453,18 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                GeneratedCodeInfo.verify = function verify(message) {
+                GeneratedCodeInfo.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.annotation != null && message.hasOwnProperty("annotation")) {
                         if (!Array.isArray(message.annotation))
                             return "annotation: array expected";
                         for (var i = 0; i < message.annotation.length; ++i) {
-                            var error = $root.google.protobuf.GeneratedCodeInfo.Annotation.verify(message.annotation[i]);
+                            var error = $root.google.protobuf.GeneratedCodeInfo.Annotation.verify(message.annotation[i], long + 1);
                             if (error)
                                 return "annotation." + error;
                         }
@@ -51484,9 +53480,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.GeneratedCodeInfo} GeneratedCodeInfo
                  */
-                GeneratedCodeInfo.fromObject = function fromObject(object) {
+                GeneratedCodeInfo.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.GeneratedCodeInfo)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.GeneratedCodeInfo();
                     if (object.annotation) {
                         if (!Array.isArray(object.annotation))
@@ -51495,7 +53495,7 @@
                         for (var i = 0; i < object.annotation.length; ++i) {
                             if (typeof object.annotation[i] !== "object")
                                 throw TypeError(".google.protobuf.GeneratedCodeInfo.annotation: object expected");
-                            message.annotation[i] = $root.google.protobuf.GeneratedCodeInfo.Annotation.fromObject(object.annotation[i]);
+                            message.annotation[i] = $root.google.protobuf.GeneratedCodeInfo.Annotation.fromObject(object.annotation[i], long + 1);
                         }
                     }
                     return message;
@@ -51575,7 +53575,7 @@
                         this.path = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                     this[keys[i]] = properties[keys[i]];
                     }
     
@@ -51684,9 +53684,13 @@
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    Annotation.decode = function decode(reader, length, error) {
+                    Annotation.decode = function decode(reader, length, error, long) {
                         if (!(reader instanceof $Reader))
                             reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
                         while (reader.pos < end) {
                             var tag = reader.uint32();
@@ -51721,7 +53725,7 @@
                                     break;
                                 }
                             default:
-                                reader.skipType(tag & 7);
+                                reader.skipType(tag & 7, long);
                                 break;
                             }
                         }
@@ -51752,9 +53756,13 @@
                      * @param {Object.<string,*>} message Plain object to verify
                      * @returns {string|null} `null` if valid, otherwise the reason why it is not
                      */
-                    Annotation.verify = function verify(message) {
+                    Annotation.verify = function verify(message, long) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
                         if (message.path != null && message.hasOwnProperty("path")) {
                             if (!Array.isArray(message.path))
                                 return "path: array expected";
@@ -51791,9 +53799,13 @@
                      * @param {Object.<string,*>} object Plain object
                      * @returns {google.protobuf.GeneratedCodeInfo.Annotation} Annotation
                      */
-                    Annotation.fromObject = function fromObject(object) {
+                    Annotation.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.GeneratedCodeInfo.Annotation)
                             return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
                         var message = new $root.google.protobuf.GeneratedCodeInfo.Annotation();
                         if (object.path) {
                             if (!Array.isArray(object.path))
@@ -51953,7 +53965,7 @@
                 function Timestamp(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -52028,9 +54040,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Timestamp.decode = function decode(reader, length, error) {
+                Timestamp.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -52046,7 +54062,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -52077,9 +54093,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Timestamp.verify = function verify(message) {
+                Timestamp.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.seconds != null && message.hasOwnProperty("seconds"))
                         if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
                             return "seconds: integer|Long expected";
@@ -52097,9 +54117,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.Timestamp} Timestamp
                  */
-                Timestamp.fromObject = function fromObject(object) {
+                Timestamp.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.Timestamp)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.Timestamp();
                     if (object.seconds != null)
                         if ($util.Long)
@@ -52196,7 +54220,7 @@
                 function Duration(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -52271,9 +54295,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Duration.decode = function decode(reader, length, error) {
+                Duration.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Duration();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -52289,7 +54317,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -52320,9 +54348,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Duration.verify = function verify(message) {
+                Duration.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.seconds != null && message.hasOwnProperty("seconds"))
                         if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
                             return "seconds: integer|Long expected";
@@ -52340,9 +54372,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.Duration} Duration
                  */
-                Duration.fromObject = function fromObject(object) {
+                Duration.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.Duration)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.Duration();
                     if (object.seconds != null)
                         if ($util.Long)
@@ -52437,7 +54473,7 @@
                 function Empty(properties) {
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -52492,9 +54528,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                Empty.decode = function decode(reader, length, error) {
+                Empty.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -52502,7 +54542,7 @@
                             break;
                         switch (tag >>> 3) {
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -52533,9 +54573,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                Empty.verify = function verify(message) {
+                Empty.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     return null;
                 };
     
@@ -52547,9 +54591,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.Empty} Empty
                  */
-                Empty.fromObject = function fromObject(object) {
+                Empty.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.Empty)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     return new $root.google.protobuf.Empty();
                 };
     
@@ -52616,7 +54664,7 @@
                     this.paths = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
                                 this[keys[i]] = properties[keys[i]];
                 }
     
@@ -52682,9 +54730,13 @@
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                FieldMask.decode = function decode(reader, length, error) {
+                FieldMask.decode = function decode(reader, length, error, long) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
@@ -52698,7 +54750,7 @@
                                 break;
                             }
                         default:
-                            reader.skipType(tag & 7);
+                            reader.skipType(tag & 7, long);
                             break;
                         }
                     }
@@ -52729,9 +54781,13 @@
                  * @param {Object.<string,*>} message Plain object to verify
                  * @returns {string|null} `null` if valid, otherwise the reason why it is not
                  */
-                FieldMask.verify = function verify(message) {
+                FieldMask.verify = function verify(message, long) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
                     if (message.paths != null && message.hasOwnProperty("paths")) {
                         if (!Array.isArray(message.paths))
                             return "paths: array expected";
@@ -52750,9 +54806,13 @@
                  * @param {Object.<string,*>} object Plain object
                  * @returns {google.protobuf.FieldMask} FieldMask
                  */
-                FieldMask.fromObject = function fromObject(object) {
+                FieldMask.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.FieldMask)
                         return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
                     var message = new $root.google.protobuf.FieldMask();
                     if (object.paths) {
                         if (!Array.isArray(object.paths))

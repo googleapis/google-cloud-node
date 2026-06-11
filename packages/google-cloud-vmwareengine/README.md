@@ -58,7 +58,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/snippet_metadata_google.cloud.vmwareengine.v1.json) |
 | create cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_cluster.js) |
 | create external access rule | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_external_access_rule.js) |
 | create external address | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vmwareengine/samples/generated/v1/vmware_engine.create_external_address.js) |

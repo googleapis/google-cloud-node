@@ -395,6 +395,12 @@ export class WorkstationsClient {
     const stopWorkstationMetadata = protoFilesRoot.lookup(
       '.google.cloud.workstations.v1beta.OperationMetadata',
     ) as gax.protobuf.Type;
+    const pushCredentialsResponse = protoFilesRoot.lookup(
+      '.google.cloud.workstations.v1beta.Workstation',
+    ) as gax.protobuf.Type;
+    const pushCredentialsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.workstations.v1beta.PushCredentialsMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createWorkstationCluster: new this._gaxModule.LongrunningDescriptor(
@@ -476,6 +482,11 @@ export class WorkstationsClient {
         stopWorkstationResponse.decode.bind(stopWorkstationResponse),
         stopWorkstationMetadata.decode.bind(stopWorkstationMetadata),
       ),
+      pushCredentials: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        pushCredentialsResponse.decode.bind(pushCredentialsResponse),
+        pushCredentialsMetadata.decode.bind(pushCredentialsMetadata),
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -548,6 +559,7 @@ export class WorkstationsClient {
       'startWorkstation',
       'stopWorkstation',
       'generateAccessToken',
+      'pushCredentials',
     ];
     for (const methodName of workstationsStubMethods) {
       const callPromise = this.workstationsStub.then(
@@ -1097,6 +1109,8 @@ export class WorkstationsClient {
   /**
    * Returns a short-lived credential that can be used to send authenticated and
    * authorized traffic to a workstation.
+   * Once generated this token cannot be revoked and is good for the lifetime
+   * of the token.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1112,6 +1126,12 @@ export class WorkstationsClient {
    * @param {string} request.workstation
    *   Required. Name of the workstation for which the access token should be
    *   generated.
+   * @param {number} [request.port]
+   *   Optional. Port for which the access token should be generated. If
+   *   specified, the generated access token grants access only to the
+   *   specified port of the workstation. If specified, values must be within the
+   *   range [1 - 65535]. If not specified, the generated access token grants
+   *   access to all ports of the workstation.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1261,7 +1281,7 @@ export class WorkstationsClient {
    * @param {google.cloud.workstations.v1beta.WorkstationCluster} request.workstationCluster
    *   Required. Workstation cluster to create.
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set, validate the request and preview the review, but do not
+   *   Optional. If set, validate the request and preview the result, but do not
    *   actually apply it.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1436,7 +1456,7 @@ export class WorkstationsClient {
    *   Required. Mask that specifies which fields in the workstation cluster
    *   should be updated.
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set, validate the request and preview the review, but do not
+   *   Optional. If set, validate the request and preview the result, but do not
    *   actually apply it.
    * @param {boolean} [request.allowMissing]
    *   Optional. If set, and the workstation cluster is not found, a new
@@ -1612,7 +1632,7 @@ export class WorkstationsClient {
    * @param {string} request.name
    *   Required. Name of the workstation cluster to delete.
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set, validate the request and preview the review, but do not
+   *   Optional. If set, validate the request and preview the result, but do not
    *   apply it.
    * @param {string} [request.etag]
    *   Optional. If set, the request will be rejected if the latest version of the
@@ -1793,9 +1813,9 @@ export class WorkstationsClient {
    * @param {string} request.workstationConfigId
    *   Required. ID to use for the workstation configuration.
    * @param {google.cloud.workstations.v1beta.WorkstationConfig} request.workstationConfig
-   *   Required. Config to create.
+   *   Required. Workstation configuration to create.
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set, validate the request and preview the review, but do not
+   *   Optional. If set, validate the request and preview the result, but do not
    *   actually apply it.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1965,12 +1985,12 @@ export class WorkstationsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.workstations.v1beta.WorkstationConfig} request.workstationConfig
-   *   Required. Config to update.
+   *   Required. Workstation configuration to update.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. Mask specifying which fields in the workstation configuration
    *   should be updated.
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set, validate the request and preview the review, but do not
+   *   Optional. If set, validate the request and preview the result, but do not
    *   actually apply it.
    * @param {boolean} [request.allowMissing]
    *   Optional. If set and the workstation configuration is not found, a new
@@ -2146,7 +2166,7 @@ export class WorkstationsClient {
    * @param {string} request.name
    *   Required. Name of the workstation configuration to delete.
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set, validate the request and preview the review, but do not
+   *   Optional. If set, validate the request and preview the result, but do not
    *   actually apply it.
    * @param {string} [request.etag]
    *   Optional. If set, the request is rejected if the latest version of the
@@ -2327,9 +2347,13 @@ export class WorkstationsClient {
    * @param {string} request.workstationId
    *   Required. ID to use for the workstation.
    * @param {google.cloud.workstations.v1beta.Workstation} request.workstation
-   *   Required. Workstation to create.
+   *   Required. Workstation to create. If source_workstation is specified, the
+   *   user must have `workstations.workstations.use` permission on the source
+   *   workstation, and the Cloud Workstations Service Agent for the project where
+   *   you are creating the new workstation must have compute.disks.createSnapshot
+   *   and compute.snapshots.useReadOnly on the source project.
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set, validate the request and preview the review, but do not
+   *   Optional. If set, validate the request and preview the result, but do not
    *   actually apply it.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2501,15 +2525,14 @@ export class WorkstationsClient {
    * @param {google.cloud.workstations.v1beta.Workstation} request.workstation
    *   Required. Workstation to update.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask specifying which fields in the workstation configuration
-   *   should be updated.
+   *   Required. Mask specifying which fields in the workstation should be
+   *   updated.
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set, validate the request and preview the review, but do not
+   *   Optional. If set, validate the request and preview the result, but do not
    *   actually apply it.
    * @param {boolean} [request.allowMissing]
-   *   Optional. If set and the workstation configuration is not found, a new
-   *   workstation configuration is created. In this situation, update_mask
-   *   is ignored.
+   *   Optional. If set and the workstation is not found, a new workstation is
+   *   created. In this situation, update_mask is ignored.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2680,7 +2703,7 @@ export class WorkstationsClient {
    * @param {string} request.name
    *   Required. Name of the workstation to delete.
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set, validate the request and preview the review, but do not
+   *   Optional. If set, validate the request and preview the result, but do not
    *   actually apply it.
    * @param {string} [request.etag]
    *   Optional. If set, the request will be rejected if the latest version of the
@@ -2855,11 +2878,14 @@ export class WorkstationsClient {
    * @param {string} request.name
    *   Required. Name of the workstation to start.
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set, validate the request and preview the review, but do not
+   *   Optional. If set, validate the request and preview the result, but do not
    *   actually apply it.
    * @param {string} [request.etag]
    *   Optional. If set, the request will be rejected if the latest version of the
    *   workstation on the server does not have this ETag.
+   * @param {string} [request.boostConfig]
+   *   Optional. If set, the workstation starts using the boost configuration with
+   *   the specified ID.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3030,7 +3056,7 @@ export class WorkstationsClient {
    * @param {string} request.name
    *   Required. Name of the workstation to stop.
    * @param {boolean} [request.validateOnly]
-   *   Optional. If set, validate the request and preview the review, but do not
+   *   Optional. If set, validate the request and preview the result, but do not
    *   actually apply it.
    * @param {string} [request.etag]
    *   Optional. If set, the request will be rejected if the latest version of the
@@ -3198,6 +3224,182 @@ export class WorkstationsClient {
     >;
   }
   /**
+   * Pushes credentials to a running workstation on behalf of a user. Once
+   * complete, supported credential types (application_default_credentials) are
+   * made available to processes running in the user container.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.workstation
+   *   Required. Name of the workstation for which the credentials should be
+   *   pushed.
+   * @param {google.cloud.workstations.v1beta.PushCredentialsRequest.OAuthToken} [request.applicationDefaultCredentials]
+   *   Optional. Credentials used by Cloud Client Libraries, Google API Client
+   *   Libraries, and other tooling within the user conainer:
+   *   https://cloud.google.com/docs/authentication/application-default-credentials
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/workstations.push_credentials.js</caption>
+   * region_tag:workstations_v1beta_generated_Workstations_PushCredentials_async
+   */
+  pushCredentials(
+    request?: protos.google.cloud.workstations.v1beta.IPushCredentialsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.workstations.v1beta.IWorkstation,
+        protos.google.cloud.workstations.v1beta.IPushCredentialsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  pushCredentials(
+    request: protos.google.cloud.workstations.v1beta.IPushCredentialsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.workstations.v1beta.IWorkstation,
+        protos.google.cloud.workstations.v1beta.IPushCredentialsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  pushCredentials(
+    request: protos.google.cloud.workstations.v1beta.IPushCredentialsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.workstations.v1beta.IWorkstation,
+        protos.google.cloud.workstations.v1beta.IPushCredentialsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  pushCredentials(
+    request?: protos.google.cloud.workstations.v1beta.IPushCredentialsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.workstations.v1beta.IWorkstation,
+            protos.google.cloud.workstations.v1beta.IPushCredentialsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.workstations.v1beta.IWorkstation,
+        protos.google.cloud.workstations.v1beta.IPushCredentialsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.workstations.v1beta.IWorkstation,
+        protos.google.cloud.workstations.v1beta.IPushCredentialsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        workstation: request.workstation ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.workstations.v1beta.IWorkstation,
+            protos.google.cloud.workstations.v1beta.IPushCredentialsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('pushCredentials response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('pushCredentials request %j', request);
+    return this.innerApiCalls
+      .pushCredentials(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.workstations.v1beta.IWorkstation,
+            protos.google.cloud.workstations.v1beta.IPushCredentialsMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('pushCredentials response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `pushCredentials()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/workstations.push_credentials.js</caption>
+   * region_tag:workstations_v1beta_generated_Workstations_PushCredentials_async
+   */
+  async checkPushCredentialsProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.workstations.v1beta.Workstation,
+      protos.google.cloud.workstations.v1beta.PushCredentialsMetadata
+    >
+  > {
+    this._log.info('pushCredentials long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.pushCredentials,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.workstations.v1beta.Workstation,
+      protos.google.cloud.workstations.v1beta.PushCredentialsMetadata
+    >;
+  }
+  /**
    * Returns all workstation clusters in the specified location.
    *
    * @param {Object} request
@@ -3209,6 +3411,9 @@ export class WorkstationsClient {
    * @param {string} [request.pageToken]
    *   Optional. next_page_token value returned from a previous List request, if
    *   any.
+   * @param {string} [request.filter]
+   *   Optional. Filter the WorkstationClusters to be listed. Possible filters are
+   *   described in https://google.aip.dev/160.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3335,6 +3540,9 @@ export class WorkstationsClient {
    * @param {string} [request.pageToken]
    *   Optional. next_page_token value returned from a previous List request, if
    *   any.
+   * @param {string} [request.filter]
+   *   Optional. Filter the WorkstationClusters to be listed. Possible filters are
+   *   described in https://google.aip.dev/160.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3384,6 +3592,9 @@ export class WorkstationsClient {
    * @param {string} [request.pageToken]
    *   Optional. next_page_token value returned from a previous List request, if
    *   any.
+   * @param {string} [request.filter]
+   *   Optional. Filter the WorkstationClusters to be listed. Possible filters are
+   *   described in https://google.aip.dev/160.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3432,6 +3643,9 @@ export class WorkstationsClient {
    * @param {string} [request.pageToken]
    *   Optional. next_page_token value returned from a previous List request, if
    *   any.
+   * @param {string} [request.filter]
+   *   Optional. Filter the WorkstationConfigs to be listed. Possible filters are
+   *   described in https://google.aip.dev/160.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3558,6 +3772,9 @@ export class WorkstationsClient {
    * @param {string} [request.pageToken]
    *   Optional. next_page_token value returned from a previous List request, if
    *   any.
+   * @param {string} [request.filter]
+   *   Optional. Filter the WorkstationConfigs to be listed. Possible filters are
+   *   described in https://google.aip.dev/160.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3607,6 +3824,9 @@ export class WorkstationsClient {
    * @param {string} [request.pageToken]
    *   Optional. next_page_token value returned from a previous List request, if
    *   any.
+   * @param {string} [request.filter]
+   *   Optional. Filter the WorkstationConfigs to be listed. Possible filters are
+   *   described in https://google.aip.dev/160.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3879,6 +4099,9 @@ export class WorkstationsClient {
    * @param {string} [request.pageToken]
    *   Optional. next_page_token value returned from a previous List request, if
    *   any.
+   * @param {string} [request.filter]
+   *   Optional. Filter the Workstations to be listed. Possible filters are
+   *   described in https://google.aip.dev/160.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4005,6 +4228,9 @@ export class WorkstationsClient {
    * @param {string} [request.pageToken]
    *   Optional. next_page_token value returned from a previous List request, if
    *   any.
+   * @param {string} [request.filter]
+   *   Optional. Filter the Workstations to be listed. Possible filters are
+   *   described in https://google.aip.dev/160.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -4054,6 +4280,9 @@ export class WorkstationsClient {
    * @param {string} [request.pageToken]
    *   Optional. next_page_token value returned from a previous List request, if
    *   any.
+   * @param {string} [request.filter]
+   *   Optional. Filter the Workstations to be listed. Possible filters are
+   *   described in https://google.aip.dev/160.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

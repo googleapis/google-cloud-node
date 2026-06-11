@@ -61,7 +61,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | create offline profile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudprofiler/samples/generated/v2/profiler_service.create_offline_profile.js) |
 | create profile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudprofiler/samples/generated/v2/profiler_service.create_profile.js) |
 | update profile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudprofiler/samples/generated/v2/profiler_service.update_profile.js) |
-| devtools | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudprofiler/samples/generated/v2/snippet_metadata_google.devtools.cloudprofiler.v2.json) |
 
 
 ## Supported Node.js Versions

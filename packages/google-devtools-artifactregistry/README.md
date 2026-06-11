@@ -108,7 +108,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update tag | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.update_tag.js) |
 | update v p c s c config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.update_v_p_c_s_c_config.js) |
 | update version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/artifact_registry.update_version.js) |
-| devtools | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1/snippet_metadata_google.devtools.artifactregistry.v1.json) |
 | create repository | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1beta2/artifact_registry.create_repository.js) |
 | create tag | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1beta2/artifact_registry.create_tag.js) |
 | delete package | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1beta2/artifact_registry.delete_package.js) |
@@ -134,7 +133,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update project settings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1beta2/artifact_registry.update_project_settings.js) |
 | update repository | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1beta2/artifact_registry.update_repository.js) |
 | update tag | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1beta2/artifact_registry.update_tag.js) |
-| devtools | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-artifactregistry/samples/generated/v1beta2/snippet_metadata_google.devtools.artifactregistry.v1beta2.json) |
 
 
 ## Supported Node.js Versions
