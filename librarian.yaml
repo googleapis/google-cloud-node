@@ -1629,8 +1629,6 @@ libraries:
       - path: google/cloud/video/stitcher/v1
     copyright_year: "2026"
     nodejs:
-      additional_protos:
-        - google/cloud/common/operation_metadata.proto
       default_version: v1
       client_documentation_override: https://googleapis.dev/nodejs/videostitcher/latest/
   - name: google-cloud-video-transcoder
