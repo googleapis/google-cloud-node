@@ -1,0 +1,119 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.policysimulator.v1",
+  "libraryPackage": "@google-cloud/policysimulator",
+  "services": {
+    "OrgPolicyViolationsPreviewService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "OrgPolicyViolationsPreviewServiceClient",
+          "rpcs": {
+            "GetOrgPolicyViolationsPreview": {
+              "methods": [
+                "getOrgPolicyViolationsPreview"
+              ]
+            },
+            "CreateOrgPolicyViolationsPreview": {
+              "methods": [
+                "createOrgPolicyViolationsPreview"
+              ]
+            },
+            "ListOrgPolicyViolationsPreviews": {
+              "methods": [
+                "listOrgPolicyViolationsPreviews",
+                "listOrgPolicyViolationsPreviewsStream",
+                "listOrgPolicyViolationsPreviewsAsync"
+              ]
+            },
+            "ListOrgPolicyViolations": {
+              "methods": [
+                "listOrgPolicyViolations",
+                "listOrgPolicyViolationsStream",
+                "listOrgPolicyViolationsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "OrgPolicyViolationsPreviewServiceClient",
+          "rpcs": {
+            "GetOrgPolicyViolationsPreview": {
+              "methods": [
+                "getOrgPolicyViolationsPreview"
+              ]
+            },
+            "CreateOrgPolicyViolationsPreview": {
+              "methods": [
+                "createOrgPolicyViolationsPreview"
+              ]
+            },
+            "ListOrgPolicyViolationsPreviews": {
+              "methods": [
+                "listOrgPolicyViolationsPreviews",
+                "listOrgPolicyViolationsPreviewsStream",
+                "listOrgPolicyViolationsPreviewsAsync"
+              ]
+            },
+            "ListOrgPolicyViolations": {
+              "methods": [
+                "listOrgPolicyViolations",
+                "listOrgPolicyViolationsStream",
+                "listOrgPolicyViolationsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Simulator": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SimulatorClient",
+          "rpcs": {
+            "GetReplay": {
+              "methods": [
+                "getReplay"
+              ]
+            },
+            "CreateReplay": {
+              "methods": [
+                "createReplay"
+              ]
+            },
+            "ListReplayResults": {
+              "methods": [
+                "listReplayResults",
+                "listReplayResultsStream",
+                "listReplayResultsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SimulatorClient",
+          "rpcs": {
+            "GetReplay": {
+              "methods": [
+                "getReplay"
+              ]
+            },
+            "CreateReplay": {
+              "methods": [
+                "createReplay"
+              ]
+            },
+            "ListReplayResults": {
+              "methods": [
+                "listReplayResults",
+                "listReplayResultsStream",
+                "listReplayResultsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
