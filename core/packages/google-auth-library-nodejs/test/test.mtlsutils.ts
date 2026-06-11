@@ -18,7 +18,12 @@ import * as sinon from 'sinon';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
-import {canMtlsBeEnabled, getClientCertAndKey} from '../src/auth/mtlsutils';
+import {
+  canMtlsBeEnabled,
+  getClientCertAndKey,
+  CertificateSourceUnavailableError,
+  InvalidConfigurationError,
+} from '../src/auth/mtlsutils';
 import * as util from '../src/util';
 
 describe('mtlsutils', () => {
@@ -56,16 +61,37 @@ describe('mtlsutils', () => {
       assert.strictEqual(result, true);
     });
 
-    it('throws error if cert config file is malformed', async () => {
+    it('returns true even if cert config file is malformed', async () => {
       process.env.GOOGLE_API_CERTIFICATE_CONFIG =
         './test/fixtures/external-account-cert/cert_config_empty.json';
-      await assert.rejects(canMtlsBeEnabled());
+      const result = await canMtlsBeEnabled();
+      assert.strictEqual(result, true);
     });
 
-    it('throws error if cert config has missing files', async () => {
+    it('returns true even if cert config is missing required workload properties', async () => {
       process.env.GOOGLE_API_CERTIFICATE_CONFIG =
         './test/fixtures/external-account-cert/cert_config_missing_cert_path.json';
-      await assert.rejects(canMtlsBeEnabled());
+      const result = await canMtlsBeEnabled();
+      assert.strictEqual(result, true);
+    });
+
+    it('returns true even if cert config referenced files do not exist', async () => {
+      const invalidConfigPath = path.join(tempDir, 'invalid_config.json');
+      const invalidConfigJson = {
+        cert_configs: {
+          workload: {
+            cert_path: path.join(tempDir, 'non_existent.crt'),
+            key_path: path.join(tempDir, 'non_existent.key'),
+          },
+        },
+      };
+      await fs.promises.writeFile(
+        invalidConfigPath,
+        JSON.stringify(invalidConfigJson),
+      );
+      process.env.GOOGLE_API_CERTIFICATE_CONFIG = invalidConfigPath;
+      const result = await canMtlsBeEnabled();
+      assert.strictEqual(result, true);
     });
 
     it('returns false if no config is present', async () => {
@@ -111,6 +137,44 @@ describe('mtlsutils', () => {
         getClientCertAndKey(
           './test/fixtures/external-account-cert/cert_config_with_malformed_key.json',
         ),
+      );
+    });
+
+    it('throws error if cert config file is malformed', async () => {
+      await assert.rejects(
+        getClientCertAndKey(
+          './test/fixtures/external-account-cert/cert_config_empty.json',
+        ),
+        InvalidConfigurationError,
+      );
+    });
+
+    it('throws error if cert config is missing required workload properties', async () => {
+      await assert.rejects(
+        getClientCertAndKey(
+          './test/fixtures/external-account-cert/cert_config_missing_cert_path.json',
+        ),
+        InvalidConfigurationError,
+      );
+    });
+
+    it('throws error if cert config referenced files do not exist', async () => {
+      const invalidConfigPath = path.join(tempDir, 'invalid_config.json');
+      const invalidConfigJson = {
+        cert_configs: {
+          workload: {
+            cert_path: path.join(tempDir, 'non_existent.crt'),
+            key_path: path.join(tempDir, 'non_existent.key'),
+          },
+        },
+      };
+      await fs.promises.writeFile(
+        invalidConfigPath,
+        JSON.stringify(invalidConfigJson),
+      );
+      await assert.rejects(
+        getClientCertAndKey(invalidConfigPath),
+        CertificateSourceUnavailableError,
       );
     });
   });

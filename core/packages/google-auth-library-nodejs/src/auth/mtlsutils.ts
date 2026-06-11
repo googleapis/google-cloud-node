@@ -106,24 +106,27 @@ export async function canMtlsBeEnabled(
   }
 
   // Check for certificate configuration file
-  let configPath: string | null = null;
-  try {
-    configPath = await resolveCertificateConfigFilePath(certConfigPathOverride);
-  } catch (e) {
-    // Config file is simply not present.
-    return false;
+  if (
+    certConfigPathOverride ||
+    process.env[CERTIFICATE_CONFIGURATION_ENV_VARIABLE]
+  ) {
+    const configPath =
+      certConfigPathOverride ||
+      process.env[CERTIFICATE_CONFIGURATION_ENV_VARIABLE]!;
+    if (!(await isValidFile(configPath))) {
+      throw new CertificateSourceUnavailableError(
+        `Certificate configuration file does not exist or is not a file: ${configPath}`,
+      );
+    }
+    return true;
   }
 
-  // Config file exists / was specified. We must validate it.
-  // Any failure here must propagate as a hard error.
-  const {certPath, keyPath} =
-    await getCertAndKeyFilePathsFromConfig(configPath);
-  if (!(await isValidFile(certPath)) || !(await isValidFile(keyPath))) {
-    throw new Error(
-      `Certificate configuration exists but referenced files are missing: cert_path=${certPath}, key_path=${keyPath}`,
-    );
+  const wellKnownPath = getWellKnownCertificateConfigFileLocation();
+  if (await isValidFile(wellKnownPath)) {
+    return true;
   }
-  return true;
+
+  return false;
 }
 
 /**
