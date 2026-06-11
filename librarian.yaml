@@ -878,7 +878,6 @@ libraries:
       - path: google/cloud/gkeconnect/gateway/v1
       - path: google/cloud/gkeconnect/gateway/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta1
       package_name: '@google-cloud/gke-connect-gateway'
