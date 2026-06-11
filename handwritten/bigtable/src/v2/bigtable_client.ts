@@ -1487,6 +1487,9 @@ export class BigtableClient {
    * which can be used to break up the data for distributed tasks like
    * mapreduces.
    *
+   * If a `row_range` is provided in the request, the returned samples will be
+   * restricted to the specified range.
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} [request.tableName]
@@ -1508,6 +1511,11 @@ export class BigtableClient {
    * @param {string} request.appProfileId
    *   This value specifies routing for replication. If not specified, the
    *   "default" application profile will be used.
+   * @param {google.bigtable.v2.RowRange} [request.rowRange]
+   *   Optional. The row range to sample. If not specified, samples
+   *   from all rows.
+   *   The output will always return the end key in the range as the last sample
+   *   returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1862,6 +1870,13 @@ export class BigtableClient {
    *   inferred from the `param_types` in the `PrepareQueryRequest`. Any non-empty
    *   `Value.type` must match the corresponding `param_types` entry, or be
    *   rejected with `INVALID_ARGUMENT`.
+   * @param {number[]} [request.viewParameters]
+   *   Optional. This map provides the runtime values returned by the
+   *   VIEW_PARAMETERS() function calls, typically used for user-level scoping of
+   *   data based on identity.
+   *
+   *   The key is the name of the view parameter e.g. `user_id`, and
+   *   the value is the parameter value e.g. `alice@example.com`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}

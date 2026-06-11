@@ -5579,6 +5579,13 @@
                     "appProfileId": {
                       "type": "string",
                       "id": 2
+                    },
+                    "rowRange": {
+                      "type": "RowRange",
+                      "id": 6,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -6124,6 +6131,14 @@
                       "id": 7,
                       "options": {
                         "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "viewParameters": {
+                      "keyType": "string",
+                      "type": "Value",
+                      "id": 12,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
                       }
                     }
                   }

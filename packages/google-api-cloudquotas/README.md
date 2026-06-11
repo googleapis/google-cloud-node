@@ -64,7 +64,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list quota infos | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1/cloud_quotas.list_quota_infos.js) |
 | list quota preferences | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1/cloud_quotas.list_quota_preferences.js) |
 | update quota preference | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1/cloud_quotas.update_quota_preference.js) |
-| api | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1/snippet_metadata_google.api.cloudquotas.v1.json) |
 | create quota preference | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.create_quota_preference.js) |
 | get quota info | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.get_quota_info.js) |
 | get quota preference | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.get_quota_preference.js) |
@@ -73,7 +72,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update quota preference | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1beta/cloud_quotas.update_quota_preference.js) |
 | get quota adjuster settings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1beta/quota_adjuster_settings_manager.get_quota_adjuster_settings.js) |
 | update quota adjuster settings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1beta/quota_adjuster_settings_manager.update_quota_adjuster_settings.js) |
-| api | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-cloudquotas/samples/generated/v1beta/snippet_metadata_google.api.cloudquotas.v1beta.json) |
 
 
 ## Supported Node.js Versions
