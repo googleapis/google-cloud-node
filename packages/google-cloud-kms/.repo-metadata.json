@@ -1,17 +1,16 @@
 {
+    "api_description": "Manages keys and performs cryptographic operations in a central cloud\nservice, for direct use by other cloud resources and applications.",
     "api_id": "cloudkms.googleapis.com",
     "api_shortname": "cloudkms",
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/kms/latest",
-    "codeowner_team": "@googleapis/api-kms",
     "default_version": "v1",
     "distribution_name": "@google-cloud/kms",
     "issue_tracker": "https://issuetracker.google.com/savedsearches/5264932",
     "language": "nodejs",
     "library_type": "GAPIC_AUTO",
-    "name": "kms",
-    "name_pretty": "Google Cloud Key Management Service",
-    "product_documentation": "https://cloud.google.com/kms",
+    "name": "cloudkms",
+    "name_pretty": "Cloud Key Management Service (KMS)",
+    "product_documentation": "https://cloud.google.com/kms/docs",
     "release_level": "stable",
-    "repo": "googleapis/google-cloud-node",
-    "requires_billing": true
+    "repo": "googleapis/google-cloud-node"
 }
