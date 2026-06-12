@@ -20,6 +20,7 @@ import * as v1 from './v1';
 import * as v1beta1 from './v1beta1';
 import * as v1alpha from './v1alpha';
 import * as v1beta from './v1beta';
+import * as v1beta2 from './v1beta2';
 import * as managedwriter from './managedwriter';
 import * as reader from './reader';
 const BigQueryReadClient = v1.BigQueryReadClient;
@@ -38,6 +39,7 @@ export {
   v1beta1,
   v1alpha,
   v1beta,
+  v1beta2,
   BigQueryStorageClient,
   BigQueryWriteClient,
   managedwriter,

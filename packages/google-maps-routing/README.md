@@ -79,7 +79,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | --------------------------- | --------------------------------- |
 | compute route matrix | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-routing/samples/generated/v2/routes.compute_route_matrix.js) |
 | compute routes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-routing/samples/generated/v2/routes.compute_routes.js) |
-| maps | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-routing/samples/generated/v2/snippet_metadata_google.maps.routing.v2.json) |
 
 
 ## Supported Node.js Versions

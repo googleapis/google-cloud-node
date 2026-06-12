@@ -271,6 +271,9 @@ describe('Database', () => {
     formattedName_: 'instance-name',
     databases_: new Map(),
     parent: SPANNER,
+    commonHeaders_: {
+      [AFE_SERVER_TIMING_HEADER]: 'true',
+    },
   } as {} as Instance;
 
   const NAME = 'table-name';
