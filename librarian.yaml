@@ -1016,7 +1016,8 @@ libraries:
     apis:
       - path: google/cloud/mediatranslation/v1beta1
     copyright_year: "2026"
-    skip_generate: true
+    keep:
+      - samples/resources/audio.raw
     nodejs:
       default_version: v1beta1
       package_name: '@google-cloud/media-translation'
