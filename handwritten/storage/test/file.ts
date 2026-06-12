@@ -119,11 +119,11 @@ const fakePromisify = {
 
 const fsCached = fs;
 const safeFs: any = {};
-for (const key of Object.keys(fsCached)) {
-  try {
-    safeFs[key] = (fsCached as any)[key];
-  } catch (e) {
-    // Ignore deprecated getters
+const descriptors = Object.getOwnPropertyDescriptors(fsCached);
+for (const key of Object.keys(descriptors)) {
+  const desc = descriptors[key];
+  if (desc && !desc.get) {
+    Object.defineProperty(safeFs, key, desc);
   }
 }
 const fakeFs = {...safeFs} as typeof fs;
