@@ -686,7 +686,6 @@ libraries:
     apis:
       - path: google/cloud/dataqna/v1alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1alpha
       package_name: '@google-cloud/data-qna'
@@ -696,7 +695,6 @@ libraries:
       - path: google/cloud/datastream/v1
       - path: google/cloud/datastream/v1alpha1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-deploy
@@ -704,7 +702,6 @@ libraries:
     apis:
       - path: google/cloud/deploy/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-developerconnect
@@ -712,7 +709,6 @@ libraries:
     apis:
       - path: google/cloud/developerconnect/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-devicestreaming
@@ -720,7 +716,6 @@ libraries:
     apis:
       - path: google/cloud/devicestreaming/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-dialogflow
