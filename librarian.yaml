@@ -1463,7 +1463,6 @@ libraries:
       - path: google/cloud/talent/v4
       - path: google/cloud/talent/v4beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v4
       main_service: talent
