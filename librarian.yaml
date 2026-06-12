@@ -749,7 +749,6 @@ libraries:
       - path: google/cloud/dialogflow/cx/v3
       - path: google/cloud/dialogflow/cx/v3beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v3
       mixins: google.longrunning.Operations;google.cloud.location.Locations
