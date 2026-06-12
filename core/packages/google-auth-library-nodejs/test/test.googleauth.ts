@@ -1188,6 +1188,15 @@ describe('googleauth', () => {
       await assert.rejects(auth.getApplicationDefault(), e);
     });
 
+    it('getApplicationDefault should reject with NO_ADC_FOUND if _checkIsGCE returns false', async () => {
+      mockWindows();
+      sandbox.stub(auth, '_checkIsGCE').resolves(false);
+      await assert.rejects(
+        auth.getApplicationDefault(),
+        new Error(GoogleAuthExceptionMessages.NO_ADC_FOUND)
+      );
+    });
+
     it('getApplicationDefault should also get project ID', async () => {
       // Set up the creds.
       // * Environment variable is set up to point to private.json
