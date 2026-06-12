@@ -1383,7 +1383,6 @@ libraries:
     apis:
       - path: google/cloud/servicehealth/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-shell
@@ -1391,7 +1390,6 @@ libraries:
     apis:
       - path: google/cloud/shell/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-speech
@@ -1423,7 +1421,6 @@ libraries:
     apis:
       - path: google/cloud/storagebatchoperations/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-storageinsights
@@ -1431,7 +1428,6 @@ libraries:
     apis:
       - path: google/cloud/storageinsights/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-support
@@ -1440,7 +1436,6 @@ libraries:
       - path: google/cloud/support/v2
       - path: google/cloud/support/v2beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v2
   - name: google-cloud-talent
@@ -1575,7 +1570,6 @@ libraries:
     apis:
       - path: google/cloud/vmmigration/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-vmwareengine
@@ -1583,7 +1577,6 @@ libraries:
     apis:
       - path: google/cloud/vmwareengine/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-vpcaccess
@@ -1591,7 +1584,6 @@ libraries:
     apis:
       - path: google/cloud/vpcaccess/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/vpc-access'
