@@ -895,7 +895,6 @@ libraries:
     apis:
       - path: google/cloud/gkemulticloud/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-gkerecommender
@@ -903,7 +902,6 @@ libraries:
     apis:
       - path: google/cloud/gkerecommender/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-gsuiteaddons
@@ -911,7 +909,6 @@ libraries:
     apis:
       - path: google/cloud/gsuiteaddons/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-hypercomputecluster
@@ -930,7 +927,6 @@ libraries:
       - path: google/cloud/iap/v1
       - path: google/cloud/iap/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-ids
@@ -938,7 +934,6 @@ libraries:
     apis:
       - path: google/cloud/ids/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       client_documentation_override: https://cloud.google.com/intrusion-detection-system
