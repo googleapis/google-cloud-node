@@ -1302,7 +1302,7 @@ describe('storage', function () {
         await ipFilterBucket.delete().catch(() => { });
       });
 
-      it('should enable and set ipFilter', async () => {
+      it('should set ipFilter', async () => {
         const metadata: BucketMetadata = {
           ipFilter: {
             mode: 'Disabled',
@@ -1339,7 +1339,7 @@ describe('storage', function () {
         assert.deepStrictEqual(meta.ipFilter, metadata.ipFilter);
       });
 
-      it('should clear ipFilter', async () => {
+      it('should clear allowedIpCidrRanges', async () => {
         const [getMeta] = await ipFilterBucket.getMetadata();
         assert.strictEqual(getMeta.ipFilter?.mode, 'Disabled');
         assert.deepStrictEqual(

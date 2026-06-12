@@ -3551,6 +3551,17 @@ describe('Bucket', () => {
       it('should get ipFilter', done => {
         const ipFilter = {
           mode: 'Enabled',
+          publicNetworkSource: {
+            allowedIpCidrRanges: ['192.168.1.1/32'],
+          },
+          vpcNetworkSources: [
+            {
+              network: 'projects/my-project/global/networks/my-vpc',
+              allowedIpCidrRanges: ['10.0.0.0/8'],
+            },
+          ],
+          allowAllServiceAgentAccess: true,
+          allowCrossOrgVpcs: true,
         };
 
         bucket.getMetadata = () => {
