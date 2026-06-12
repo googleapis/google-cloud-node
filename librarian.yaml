@@ -545,7 +545,6 @@ libraries:
       - src/v1small/region_operations_proto_list.json
       - test/gapic_addresses_v1small.ts
       - test/gapic_region_operations_v1small.ts
-    skip_generate: true
     nodejs:
       default_version: v1
       nodejs_apis:
