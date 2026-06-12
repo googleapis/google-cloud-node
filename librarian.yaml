@@ -1212,7 +1212,6 @@ libraries:
       - path: google/cloud/policytroubleshooter/iam/v3
       - path: google/cloud/policytroubleshooter/iam/v3beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v3beta
       package_name: '@google-cloud/policy-troubleshooter-iam'
