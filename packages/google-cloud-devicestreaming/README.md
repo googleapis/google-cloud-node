@@ -63,6 +63,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get device session | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-devicestreaming/samples/generated/v1/direct_access_service.get_device_session.js) |
 | list device sessions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-devicestreaming/samples/generated/v1/direct_access_service.list_device_sessions.js) |
 | update device session | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-devicestreaming/samples/generated/v1/direct_access_service.update_device_session.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-devicestreaming/samples/generated/v1/snippet_metadata_google.cloud.devicestreaming.v1.json) |
 
 
 ## Supported Node.js Versions
@@ -96,7 +97,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-devicestreaming/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -106,7 +107,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-devicestreaming/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

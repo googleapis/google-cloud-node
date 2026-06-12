@@ -16,28 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  AgentsClient,
-  ChangelogsClient,
-  DeploymentsClient,
-  EntityTypesClient,
-  EnvironmentsClient,
-  ExamplesClient,
-  ExperimentsClient,
-  FlowsClient,
-  GeneratorsClient,
-  IntentsClient,
-  PagesClient,
-  PlaybooksClient,
-  SecuritySettingsServiceClient,
-  SessionEntityTypesClient,
-  SessionsClient,
-  TestCasesClient,
-  ToolsClient,
-  TransitionRouteGroupsClient,
-  VersionsClient,
-  WebhooksClient,
-} from '@google-cloud/dialogflow-cx';
+import {AgentsClient, ChangelogsClient, DeploymentsClient, EntityTypesClient, EnvironmentsClient, ExamplesClient, ExperimentsClient, FlowsClient, GeneratorsClient, IntentsClient, PagesClient, PlaybooksClient, SecuritySettingsServiceClient, SessionEntityTypesClient, SessionsClient, TestCasesClient, ToolsClient, TransitionRouteGroupsClient, VersionsClient, WebhooksClient} from '@google-cloud/dialogflow-cx';
 
 // check that the client class type name can be used
 function doStuffWithAgentsClient(client: AgentsClient) {
@@ -76,9 +55,7 @@ function doStuffWithPagesClient(client: PagesClient) {
 function doStuffWithPlaybooksClient(client: PlaybooksClient) {
   client.close();
 }
-function doStuffWithSecuritySettingsServiceClient(
-  client: SecuritySettingsServiceClient,
-) {
+function doStuffWithSecuritySettingsServiceClient(client: SecuritySettingsServiceClient) {
   client.close();
 }
 function doStuffWithSessionEntityTypesClient(client: SessionEntityTypesClient) {
@@ -93,9 +70,7 @@ function doStuffWithTestCasesClient(client: TestCasesClient) {
 function doStuffWithToolsClient(client: ToolsClient) {
   client.close();
 }
-function doStuffWithTransitionRouteGroupsClient(
-  client: TransitionRouteGroupsClient,
-) {
+function doStuffWithTransitionRouteGroupsClient(client: TransitionRouteGroupsClient) {
   client.close();
 }
 function doStuffWithVersionsClient(client: VersionsClient) {
