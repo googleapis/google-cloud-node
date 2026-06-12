@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {LicenseManagerClient} from './license_manager_client';
+export { LicenseManagerClient } from './license_manager_client';

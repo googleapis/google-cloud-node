@@ -1,17 +1,16 @@
 {
-  "name": "gdchardwaremanagement",
-  "name_pretty": "GDC Hardware Management API",
-  "product_documentation": "https://cloud.google.com/distributed-cloud/edge/latest/docs",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/gdchardwaremanagement/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/gdchardwaremanagement",
-  "api_id": "gdchardwaremanagement.googleapis.com",
-  "default_version": "v1alpha",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "gdchardwaremanagement"
+    "api_description": "GDC is a fully managed software and hardware solution for data centers and edge locations to address regulatory, local data processing, survivability, and low-latency needs.",
+    "api_id": "gdchardwaremanagement.googleapis.com",
+    "api_shortname": "gdchardwaremanagement",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/gdchardwaremanagement/latest",
+    "default_version": "v1alpha",
+    "distribution_name": "@google-cloud/gdchardwaremanagement",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1563150",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "gdchardwaremanagement",
+    "name_pretty": "GDC Hardware Management",
+    "product_documentation": "https://cloud.google.com/distributed-cloud/edge/latest/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

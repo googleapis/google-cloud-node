@@ -82,7 +82,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update release | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-configdelivery/samples/generated/v1/config_delivery.update_release.js) |
 | update resource bundle | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-configdelivery/samples/generated/v1/config_delivery.update_resource_bundle.js) |
 | update variant | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-configdelivery/samples/generated/v1/config_delivery.update_variant.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-configdelivery/samples/generated/v1/snippet_metadata_google.cloud.configdelivery.v1.json) |
 | abort rollout | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-configdelivery/samples/generated/v1alpha/config_delivery.abort_rollout.js) |
 | create fleet package | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-configdelivery/samples/generated/v1alpha/config_delivery.create_fleet_package.js) |
 | create release | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-configdelivery/samples/generated/v1alpha/config_delivery.create_release.js) |
@@ -108,7 +107,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update release | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-configdelivery/samples/generated/v1alpha/config_delivery.update_release.js) |
 | update resource bundle | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-configdelivery/samples/generated/v1alpha/config_delivery.update_resource_bundle.js) |
 | update variant | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-configdelivery/samples/generated/v1alpha/config_delivery.update_variant.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-configdelivery/samples/generated/v1alpha/snippet_metadata_google.cloud.configdelivery.v1alpha.json) |
 | abort rollout | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-configdelivery/samples/generated/v1beta/config_delivery.abort_rollout.js) |
 | create fleet package | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-configdelivery/samples/generated/v1beta/config_delivery.create_fleet_package.js) |
 | create release | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-configdelivery/samples/generated/v1beta/config_delivery.create_release.js) |
@@ -134,7 +132,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update release | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-configdelivery/samples/generated/v1beta/config_delivery.update_release.js) |
 | update resource bundle | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-configdelivery/samples/generated/v1beta/config_delivery.update_resource_bundle.js) |
 | update variant | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-configdelivery/samples/generated/v1beta/config_delivery.update_variant.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-configdelivery/samples/generated/v1beta/snippet_metadata_google.cloud.configdelivery.v1beta.json) |
 
 
 ## Supported Node.js Versions

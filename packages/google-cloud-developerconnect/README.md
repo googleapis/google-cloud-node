@@ -90,7 +90,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list deployment events | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/insights_config_service.list_deployment_events.js) |
 | list insights configs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/insights_config_service.list_insights_configs.js) |
 | update insights config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/insights_config_service.update_insights_config.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/snippet_metadata_google.cloud.developerconnect.v1.json) |
 
 
 ## Supported Node.js Versions

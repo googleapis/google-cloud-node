@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {IAMCredentialsClient} from './i_a_m_credentials_client';
+export { IAMCredentialsClient } from './i_a_m_credentials_client';

@@ -1,17 +1,16 @@
 {
-  "name": "maintenance",
-  "name_pretty": "Maintenance API",
-  "product_documentation": "https://cloud.google.com/unified-maintenance/docs/overview",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/maintenance/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/maintenance-api",
-  "api_id": "maintenance.googleapis.com",
-  "default_version": "v1beta",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "maintenance"
+    "api_description": "The Maintenance API provides a centralized view of planned disruptive\nmaintenance events across supported Google Cloud products. It offers users\nvisibility into upcoming, ongoing, and completed maintenance, along with\ncontrols to manage certain maintenance activities, such as maintenance\nwindows, rescheduling, and on-demand updates.",
+    "api_id": "maintenance.googleapis.com",
+    "api_shortname": "maintenance",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/maintenance-api/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/maintenance-api",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1673988&template=1161103",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "maintenance",
+    "name_pretty": "Maintenance",
+    "product_documentation": "https://cloud.google.com/unified-maintenance/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

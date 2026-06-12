@@ -18,11 +18,22 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +55,7 @@ export class HypercomputeClusterClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('hypercomputecluster');
@@ -57,11 +68,11 @@ export class HypercomputeClusterClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  hypercomputeClusterStub?: Promise<{[name: string]: Function}>;
+  hypercomputeClusterStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of HypercomputeClusterClient.
@@ -102,21 +113,42 @@ export class HypercomputeClusterClient {
    *     const client = new HypercomputeClusterClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof HypercomputeClusterClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'hypercomputecluster.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -141,7 +173,7 @@ export class HypercomputeClusterClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -155,15 +187,11 @@ export class HypercomputeClusterClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -185,64 +213,64 @@ export class HypercomputeClusterClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       bucketPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/buckets/{bucket}'
+        'projects/{project}/buckets/{bucket}',
       ),
       clusterPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/clusters/{cluster}'
+        'projects/{project}/locations/{location}/clusters/{cluster}',
       ),
       computeInstancePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/zones/{zone}/instances/{instance}'
+        'projects/{project}/zones/{zone}/instances/{instance}',
       ),
       diskTypePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/zones/{zone}/diskTypes/{disk_type}'
+        'projects/{project}/zones/{zone}/diskTypes/{disk_type}',
       ),
       imagePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/global/images/{image}'
+        'projects/{project}/global/images/{image}',
       ),
       instancePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}'
+        'projects/{project}/locations/{location}/instances/{instance}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       machineLearningRunPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}'
+        'projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}',
       ),
       monitoredEventPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/monitoredEvents/{monitored_event}'
+        'projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/monitoredEvents/{monitored_event}',
       ),
       networkPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/global/networks/{network}'
+        'projects/{project}/global/networks/{network}',
       ),
       nodePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/clusters/{cluster}/nodes/{node}'
+        'projects/{project}/locations/{location}/clusters/{cluster}/nodes/{node}',
       ),
       podPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/clusters/{cluster}/k8s/namespaces/{namespace}/pods/{pod}'
+        'projects/{project}/locations/{location}/clusters/{cluster}/k8s/namespaces/{namespace}/pods/{pod}',
       ),
       profileSessionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/profileSessions/{profile_session}'
+        'projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/profileSessions/{profile_session}',
       ),
       profilerSessionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/profilerSessions/{profiler_session}'
+        'projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/profilerSessions/{profiler_session}',
       ),
       profilerTargetPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/profilerTargets/{profiler_target}'
+        'projects/{project}/locations/{location}/machineLearningRuns/{machine_learning_run}/profilerTargets/{profiler_target}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
       reservationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/zones/{zone}/reservations/{reservation}'
+        'projects/{project}/zones/{zone}/reservations/{reservation}',
       ),
       reservationBlockPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/zones/{zone}/reservations/{reservation}/reservationBlocks/{reservation_block}'
+        'projects/{project}/zones/{zone}/reservations/{reservation}/reservationBlocks/{reservation_block}',
       ),
       reservationSubBlockPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/zones/{zone}/reservations/{reservation}/reservationBlocks/{reservation_block}/reservationSubBlocks/{reservation_sub_block}'
+        'projects/{project}/zones/{zone}/reservations/{reservation}/reservationBlocks/{reservation_block}/reservationSubBlocks/{reservation_sub_block}',
       ),
       subnetworkPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/regions/{region}/subnetworks/{subnetwork}'
+        'projects/{project}/regions/{region}/subnetworks/{subnetwork}',
       ),
     };
 
@@ -250,10 +278,16 @@ export class HypercomputeClusterClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listClusters:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'clusters'),
-      listNodes:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'nodes')
+      listClusters: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'clusters',
+      ),
+      listNodes: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'nodes',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -262,45 +296,85 @@ export class HypercomputeClusterClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1alpha/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1alpha/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1alpha/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1alpha/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1alpha/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1alpha/{name=projects/*/locations/*}/operations',}];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v1alpha/{name=projects/*/locations/*}',
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v1alpha/{name=projects/*}/locations',
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1alpha/{name=projects/*/locations/*/operations/*}:cancel',
+          body: '*',
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1alpha/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1alpha/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1alpha/{name=projects/*/locations/*}/operations',
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createClusterResponse = protoFilesRoot.lookup(
-      '.google.cloud.hypercomputecluster.v1alpha.Cluster') as gax.protobuf.Type;
+      '.google.cloud.hypercomputecluster.v1alpha.Cluster',
+    ) as gax.protobuf.Type;
     const createClusterMetadata = protoFilesRoot.lookup(
-      '.google.cloud.hypercomputecluster.v1alpha.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.hypercomputecluster.v1alpha.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateClusterResponse = protoFilesRoot.lookup(
-      '.google.cloud.hypercomputecluster.v1alpha.Cluster') as gax.protobuf.Type;
+      '.google.cloud.hypercomputecluster.v1alpha.Cluster',
+    ) as gax.protobuf.Type;
     const updateClusterMetadata = protoFilesRoot.lookup(
-      '.google.cloud.hypercomputecluster.v1alpha.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.hypercomputecluster.v1alpha.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteClusterResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteClusterMetadata = protoFilesRoot.lookup(
-      '.google.cloud.hypercomputecluster.v1alpha.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.hypercomputecluster.v1alpha.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createClusterResponse.decode.bind(createClusterResponse),
-        createClusterMetadata.decode.bind(createClusterMetadata)),
+        createClusterMetadata.decode.bind(createClusterMetadata),
+      ),
       updateCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateClusterResponse.decode.bind(updateClusterResponse),
-        updateClusterMetadata.decode.bind(updateClusterMetadata)),
+        updateClusterMetadata.decode.bind(updateClusterMetadata),
+      ),
       deleteCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteClusterResponse.decode.bind(deleteClusterResponse),
-        deleteClusterMetadata.decode.bind(deleteClusterMetadata))
+        deleteClusterMetadata.decode.bind(deleteClusterMetadata),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.hypercomputecluster.v1alpha.HypercomputeCluster', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.hypercomputecluster.v1alpha.HypercomputeCluster',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -331,28 +405,42 @@ export class HypercomputeClusterClient {
     // Put together the "service stub" for
     // google.cloud.hypercomputecluster.v1alpha.HypercomputeCluster.
     this.hypercomputeClusterStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.hypercomputecluster.v1alpha.HypercomputeCluster') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.hypercomputecluster.v1alpha.HypercomputeCluster,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.hypercomputecluster.v1alpha.HypercomputeCluster',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.hypercomputecluster.v1alpha
+            .HypercomputeCluster,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const hypercomputeClusterStubMethods =
-        ['listClusters', 'getCluster', 'createCluster', 'updateCluster', 'deleteCluster', 'getNode', 'listNodes'];
+    const hypercomputeClusterStubMethods = [
+      'listClusters',
+      'getCluster',
+      'createCluster',
+      'updateCluster',
+      'deleteCluster',
+      'getNode',
+      'listNodes',
+    ];
     for (const methodName of hypercomputeClusterStubMethods) {
       const callPromise = this.hypercomputeClusterStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -362,7 +450,7 @@ export class HypercomputeClusterClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -377,8 +465,14 @@ export class HypercomputeClusterClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'hypercomputecluster.googleapis.com';
   }
@@ -389,8 +483,14 @@ export class HypercomputeClusterClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'hypercomputecluster.googleapis.com';
   }
@@ -421,9 +521,7 @@ export class HypercomputeClusterClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -432,8 +530,9 @@ export class HypercomputeClusterClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -444,641 +543,950 @@ export class HypercomputeClusterClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets details of a single Cluster.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the cluster to retrieve, in the format
- *   `projects/{project}/locations/{location}/clusters/{cluster}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.hypercomputecluster.v1alpha.Cluster|Cluster}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/hypercompute_cluster.get_cluster.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_HypercomputeCluster_GetCluster_async
- */
+  /**
+   * Gets details of a single Cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the cluster to retrieve, in the format
+   *   `projects/{project}/locations/{location}/clusters/{cluster}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.hypercomputecluster.v1alpha.Cluster|Cluster}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/hypercompute_cluster.get_cluster.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_HypercomputeCluster_GetCluster_async
+   */
   getCluster(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IGetClusterRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
-        protos.google.cloud.hypercomputecluster.v1alpha.IGetClusterRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IGetClusterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
+      (
+        | protos.google.cloud.hypercomputecluster.v1alpha.IGetClusterRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getCluster(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IGetClusterRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
-          protos.google.cloud.hypercomputecluster.v1alpha.IGetClusterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IGetClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IGetClusterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getCluster(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IGetClusterRequest,
-      callback: Callback<
-          protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
-          protos.google.cloud.hypercomputecluster.v1alpha.IGetClusterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IGetClusterRequest,
+    callback: Callback<
+      protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IGetClusterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getCluster(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IGetClusterRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IGetClusterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
-          protos.google.cloud.hypercomputecluster.v1alpha.IGetClusterRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
-          protos.google.cloud.hypercomputecluster.v1alpha.IGetClusterRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
-        protos.google.cloud.hypercomputecluster.v1alpha.IGetClusterRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.hypercomputecluster.v1alpha.IGetClusterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IGetClusterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
+      (
+        | protos.google.cloud.hypercomputecluster.v1alpha.IGetClusterRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getCluster request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
-        protos.google.cloud.hypercomputecluster.v1alpha.IGetClusterRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
+          | protos.google.cloud.hypercomputecluster.v1alpha.IGetClusterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCluster response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getCluster(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
-        protos.google.cloud.hypercomputecluster.v1alpha.IGetClusterRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getCluster response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
+          (
+            | protos.google.cloud.hypercomputecluster.v1alpha.IGetClusterRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getCluster response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details of a single Node.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the node to retrieve, in the format
- *   `projects/{project}/locations/{location}/clusters/{cluster}/nodes/{node}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.hypercomputecluster.v1alpha.Node|Node}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/hypercompute_cluster.get_node.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_HypercomputeCluster_GetNode_async
- */
+  /**
+   * Gets details of a single Node.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the node to retrieve, in the format
+   *   `projects/{project}/locations/{location}/clusters/{cluster}/nodes/{node}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.hypercomputecluster.v1alpha.Node|Node}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/hypercompute_cluster.get_node.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_HypercomputeCluster_GetNode_async
+   */
   getNode(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.hypercomputecluster.v1alpha.INode,
-        protos.google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1alpha.INode,
+      (
+        | protos.google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getNode(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.hypercomputecluster.v1alpha.INode,
-          protos.google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.hypercomputecluster.v1alpha.INode,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getNode(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest,
-      callback: Callback<
-          protos.google.cloud.hypercomputecluster.v1alpha.INode,
-          protos.google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest,
+    callback: Callback<
+      protos.google.cloud.hypercomputecluster.v1alpha.INode,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getNode(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.hypercomputecluster.v1alpha.INode,
-          protos.google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.hypercomputecluster.v1alpha.INode,
-          protos.google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.hypercomputecluster.v1alpha.INode,
-        protos.google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.hypercomputecluster.v1alpha.INode,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1alpha.INode,
+      (
+        | protos.google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getNode request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.hypercomputecluster.v1alpha.INode,
-        protos.google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.hypercomputecluster.v1alpha.INode,
+          | protos.google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getNode response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getNode(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.hypercomputecluster.v1alpha.INode,
-        protos.google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getNode response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getNode(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.hypercomputecluster.v1alpha.INode,
+          (
+            | protos.google.cloud.hypercomputecluster.v1alpha.IGetNodeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getNode response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Creates a new Cluster in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent location in which the cluster should be created, in the
- *   format `projects/{project}/locations/{location}`.
- * @param {string} request.clusterId
- *   Required. ID of the cluster to create. Must conform to
- *   [RFC-1034](https://datatracker.ietf.org/doc/html/rfc1034) (lower-case,
- *   alphanumeric, and at most 63 characters).
- * @param {google.cloud.hypercomputecluster.v1alpha.Cluster} request.cluster
- *   Required. Cluster to create.
- * @param {string} [request.requestId]
- *   Optional. A unique identifier for this request. A random UUID is
- *   recommended. This request is idempotent if and only if `request_id` is
- *   provided.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/hypercompute_cluster.create_cluster.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_HypercomputeCluster_CreateCluster_async
- */
+  /**
+   * Creates a new Cluster in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent location in which the cluster should be created, in the
+   *   format `projects/{project}/locations/{location}`.
+   * @param {string} request.clusterId
+   *   Required. ID of the cluster to create. Must conform to
+   *   [RFC-1034](https://datatracker.ietf.org/doc/html/rfc1034) (lower-case,
+   *   alphanumeric, and at most 63 characters).
+   * @param {google.cloud.hypercomputecluster.v1alpha.Cluster} request.cluster
+   *   Required. Cluster to create.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. A random UUID is
+   *   recommended. This request is idempotent if and only if `request_id` is
+   *   provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/hypercompute_cluster.create_cluster.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_HypercomputeCluster_CreateCluster_async
+   */
   createCluster(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.ICreateClusterRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.hypercomputecluster.v1alpha.ICluster, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.ICreateClusterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createCluster(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.ICreateClusterRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.ICluster, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.ICreateClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createCluster(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.ICreateClusterRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.ICluster, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.ICreateClusterRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createCluster(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.ICreateClusterRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.ICluster, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.ICluster, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.hypercomputecluster.v1alpha.ICluster, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.ICreateClusterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.ICluster, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createCluster request %j', request);
-    return this.innerApiCalls.createCluster(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.hypercomputecluster.v1alpha.ICluster, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createCluster response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createCluster()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/hypercompute_cluster.create_cluster.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_HypercomputeCluster_CreateCluster_async
- */
-  async checkCreateClusterProgress(name: string): Promise<LROperation<protos.google.cloud.hypercomputecluster.v1alpha.Cluster, protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createCluster()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/hypercompute_cluster.create_cluster.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_HypercomputeCluster_CreateCluster_async
+   */
+  async checkCreateClusterProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.hypercomputecluster.v1alpha.Cluster,
+      protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata
+    >
+  > {
     this._log.info('createCluster long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createCluster, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.hypercomputecluster.v1alpha.Cluster, protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createCluster,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.hypercomputecluster.v1alpha.Cluster,
+      protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata
+    >;
   }
-/**
- * Updates the parameters of a single Cluster.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.hypercomputecluster.v1alpha.Cluster} request.cluster
- *   Required. Cluster to update.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. Mask specifying which fields in the cluster to update. All paths
- *   must be specified explicitly - wildcards are not supported. At least one
- *   path must be provided.
- * @param {string} [request.requestId]
- *   Optional. A unique identifier for this request. A random UUID is
- *   recommended. This request is idempotent if and only if `request_id` is
- *   provided.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/hypercompute_cluster.update_cluster.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_HypercomputeCluster_UpdateCluster_async
- */
+  /**
+   * Updates the parameters of a single Cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.hypercomputecluster.v1alpha.Cluster} request.cluster
+   *   Required. Cluster to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Mask specifying which fields in the cluster to update. All paths
+   *   must be specified explicitly - wildcards are not supported. At least one
+   *   path must be provided.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. A random UUID is
+   *   recommended. This request is idempotent if and only if `request_id` is
+   *   provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/hypercompute_cluster.update_cluster.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_HypercomputeCluster_UpdateCluster_async
+   */
   updateCluster(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IUpdateClusterRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.hypercomputecluster.v1alpha.ICluster, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IUpdateClusterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateCluster(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IUpdateClusterRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.ICluster, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IUpdateClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateCluster(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IUpdateClusterRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.ICluster, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IUpdateClusterRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateCluster(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IUpdateClusterRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.ICluster, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.ICluster, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.hypercomputecluster.v1alpha.ICluster, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IUpdateClusterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'cluster.name': request.cluster!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'cluster.name': request.cluster!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.hypercomputecluster.v1alpha.ICluster, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateCluster request %j', request);
-    return this.innerApiCalls.updateCluster(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.hypercomputecluster.v1alpha.ICluster, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateCluster response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.hypercomputecluster.v1alpha.ICluster,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateCluster()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/hypercompute_cluster.update_cluster.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_HypercomputeCluster_UpdateCluster_async
- */
-  async checkUpdateClusterProgress(name: string): Promise<LROperation<protos.google.cloud.hypercomputecluster.v1alpha.Cluster, protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateCluster()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/hypercompute_cluster.update_cluster.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_HypercomputeCluster_UpdateCluster_async
+   */
+  async checkUpdateClusterProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.hypercomputecluster.v1alpha.Cluster,
+      protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata
+    >
+  > {
     this._log.info('updateCluster long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateCluster, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.hypercomputecluster.v1alpha.Cluster, protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateCluster,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.hypercomputecluster.v1alpha.Cluster,
+      protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata
+    >;
   }
-/**
- * Deletes a single Cluster.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the cluster to delete, in the format
- *   `projects/{project}/locations/{location}/clusters/{cluster}`.
- * @param {string} [request.requestId]
- *   Optional. A unique identifier for this request. A random UUID is
- *   recommended. This request is idempotent if and only if `request_id` is
- *   provided.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/hypercompute_cluster.delete_cluster.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_HypercomputeCluster_DeleteCluster_async
- */
+  /**
+   * Deletes a single Cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the cluster to delete, in the format
+   *   `projects/{project}/locations/{location}/clusters/{cluster}`.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. A random UUID is
+   *   recommended. This request is idempotent if and only if `request_id` is
+   *   provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/hypercompute_cluster.delete_cluster.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_HypercomputeCluster_DeleteCluster_async
+   */
   deleteCluster(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteClusterRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteClusterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteCluster(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteClusterRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteCluster(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteClusterRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteClusterRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteCluster(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteClusterRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IDeleteClusterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteCluster request %j', request);
-    return this.innerApiCalls.deleteCluster(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteCluster response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteCluster()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/hypercompute_cluster.delete_cluster.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_HypercomputeCluster_DeleteCluster_async
- */
-  async checkDeleteClusterProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteCluster()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/hypercompute_cluster.delete_cluster.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_HypercomputeCluster_DeleteCluster_async
+   */
+  async checkDeleteClusterProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata
+    >
+  > {
     this._log.info('deleteCluster long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteCluster, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteCluster,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.hypercomputecluster.v1alpha.OperationMetadata
+    >;
   }
- /**
- * Lists Clusters in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent location of the clusters to list, in the format
- *   `projects/{project}/locations/{location}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of clusters to return. The service may return
- *   fewer than this value.
- * @param {string} [request.pageToken]
- *   Optional. A page token received from a previous `ListClusters` call.
- *   Provide this to retrieve the subsequent page. When paginating, all other
- *   parameters provided to `ListClusters` must match the call that provided the
- *   page token.
- * @param {string} [request.filter]
- *   Optional. [Filter](https://google.aip.dev/160) to apply to the returned
- *   results.
- * @param {string} [request.orderBy]
- *   Optional. How to order the resulting clusters. Must be one of the following
- *   strings:
- *
- *   * `name`
- *   * `name desc`
- *   * `create_time`
- *   * `create_time desc`
- *
- *   If not specified, clusters will be returned in an arbitrary order.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.hypercomputecluster.v1alpha.Cluster|Cluster}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listClustersAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists Clusters in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent location of the clusters to list, in the format
+   *   `projects/{project}/locations/{location}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of clusters to return. The service may return
+   *   fewer than this value.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token received from a previous `ListClusters` call.
+   *   Provide this to retrieve the subsequent page. When paginating, all other
+   *   parameters provided to `ListClusters` must match the call that provided the
+   *   page token.
+   * @param {string} [request.filter]
+   *   Optional. [Filter](https://google.aip.dev/160) to apply to the returned
+   *   results.
+   * @param {string} [request.orderBy]
+   *   Optional. How to order the resulting clusters. Must be one of the following
+   *   strings:
+   *
+   *   * `name`
+   *   * `name desc`
+   *   * `create_time`
+   *   * `create_time desc`
+   *
+   *   If not specified, clusters will be returned in an arbitrary order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.hypercomputecluster.v1alpha.Cluster|Cluster}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listClustersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listClusters(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IListClustersRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.hypercomputecluster.v1alpha.ICluster[],
-        protos.google.cloud.hypercomputecluster.v1alpha.IListClustersRequest|null,
-        protos.google.cloud.hypercomputecluster.v1alpha.IListClustersResponse
-      ]>;
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IListClustersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1alpha.ICluster[],
+      protos.google.cloud.hypercomputecluster.v1alpha.IListClustersRequest | null,
+      protos.google.cloud.hypercomputecluster.v1alpha.IListClustersResponse,
+    ]
+  >;
   listClusters(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IListClustersRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IListClustersRequest,
-          protos.google.cloud.hypercomputecluster.v1alpha.IListClustersResponse|null|undefined,
-          protos.google.cloud.hypercomputecluster.v1alpha.ICluster>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IListClustersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IListClustersRequest,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IListClustersResponse
+      | null
+      | undefined,
+      protos.google.cloud.hypercomputecluster.v1alpha.ICluster
+    >,
+  ): void;
   listClusters(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IListClustersRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IListClustersRequest,
-          protos.google.cloud.hypercomputecluster.v1alpha.IListClustersResponse|null|undefined,
-          protos.google.cloud.hypercomputecluster.v1alpha.ICluster>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IListClustersRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IListClustersRequest,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IListClustersResponse
+      | null
+      | undefined,
+      protos.google.cloud.hypercomputecluster.v1alpha.ICluster
+    >,
+  ): void;
   listClusters(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IListClustersRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IListClustersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.hypercomputecluster.v1alpha.IListClustersRequest,
-          protos.google.cloud.hypercomputecluster.v1alpha.IListClustersResponse|null|undefined,
-          protos.google.cloud.hypercomputecluster.v1alpha.ICluster>,
-      callback?: PaginationCallback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IListClustersRequest,
-          protos.google.cloud.hypercomputecluster.v1alpha.IListClustersResponse|null|undefined,
-          protos.google.cloud.hypercomputecluster.v1alpha.ICluster>):
-      Promise<[
-        protos.google.cloud.hypercomputecluster.v1alpha.ICluster[],
-        protos.google.cloud.hypercomputecluster.v1alpha.IListClustersRequest|null,
-        protos.google.cloud.hypercomputecluster.v1alpha.IListClustersResponse
-      ]>|void {
+          | protos.google.cloud.hypercomputecluster.v1alpha.IListClustersResponse
+          | null
+          | undefined,
+          protos.google.cloud.hypercomputecluster.v1alpha.ICluster
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IListClustersRequest,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IListClustersResponse
+      | null
+      | undefined,
+      protos.google.cloud.hypercomputecluster.v1alpha.ICluster
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1alpha.ICluster[],
+      protos.google.cloud.hypercomputecluster.v1alpha.IListClustersRequest | null,
+      protos.google.cloud.hypercomputecluster.v1alpha.IListClustersResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.hypercomputecluster.v1alpha.IListClustersRequest,
-      protos.google.cloud.hypercomputecluster.v1alpha.IListClustersResponse|null|undefined,
-      protos.google.cloud.hypercomputecluster.v1alpha.ICluster>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.hypercomputecluster.v1alpha.IListClustersRequest,
+          | protos.google.cloud.hypercomputecluster.v1alpha.IListClustersResponse
+          | null
+          | undefined,
+          protos.google.cloud.hypercomputecluster.v1alpha.ICluster
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listClusters values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1087,241 +1495,270 @@ export class HypercomputeClusterClient {
     this._log.info('listClusters request %j', request);
     return this.innerApiCalls
       .listClusters(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.hypercomputecluster.v1alpha.ICluster[],
-        protos.google.cloud.hypercomputecluster.v1alpha.IListClustersRequest|null,
-        protos.google.cloud.hypercomputecluster.v1alpha.IListClustersResponse
-      ]) => {
-        this._log.info('listClusters values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.hypercomputecluster.v1alpha.ICluster[],
+          protos.google.cloud.hypercomputecluster.v1alpha.IListClustersRequest | null,
+          protos.google.cloud.hypercomputecluster.v1alpha.IListClustersResponse,
+        ]) => {
+          this._log.info('listClusters values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listClusters`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent location of the clusters to list, in the format
- *   `projects/{project}/locations/{location}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of clusters to return. The service may return
- *   fewer than this value.
- * @param {string} [request.pageToken]
- *   Optional. A page token received from a previous `ListClusters` call.
- *   Provide this to retrieve the subsequent page. When paginating, all other
- *   parameters provided to `ListClusters` must match the call that provided the
- *   page token.
- * @param {string} [request.filter]
- *   Optional. [Filter](https://google.aip.dev/160) to apply to the returned
- *   results.
- * @param {string} [request.orderBy]
- *   Optional. How to order the resulting clusters. Must be one of the following
- *   strings:
- *
- *   * `name`
- *   * `name desc`
- *   * `create_time`
- *   * `create_time desc`
- *
- *   If not specified, clusters will be returned in an arbitrary order.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.hypercomputecluster.v1alpha.Cluster|Cluster} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listClustersAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listClusters`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent location of the clusters to list, in the format
+   *   `projects/{project}/locations/{location}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of clusters to return. The service may return
+   *   fewer than this value.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token received from a previous `ListClusters` call.
+   *   Provide this to retrieve the subsequent page. When paginating, all other
+   *   parameters provided to `ListClusters` must match the call that provided the
+   *   page token.
+   * @param {string} [request.filter]
+   *   Optional. [Filter](https://google.aip.dev/160) to apply to the returned
+   *   results.
+   * @param {string} [request.orderBy]
+   *   Optional. How to order the resulting clusters. Must be one of the following
+   *   strings:
+   *
+   *   * `name`
+   *   * `name desc`
+   *   * `create_time`
+   *   * `create_time desc`
+   *
+   *   If not specified, clusters will be returned in an arbitrary order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.hypercomputecluster.v1alpha.Cluster|Cluster} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listClustersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listClustersStream(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IListClustersRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IListClustersRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listClusters stream %j', request);
     return this.descriptors.page.listClusters.createStream(
       this.innerApiCalls.listClusters as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listClusters`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent location of the clusters to list, in the format
- *   `projects/{project}/locations/{location}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of clusters to return. The service may return
- *   fewer than this value.
- * @param {string} [request.pageToken]
- *   Optional. A page token received from a previous `ListClusters` call.
- *   Provide this to retrieve the subsequent page. When paginating, all other
- *   parameters provided to `ListClusters` must match the call that provided the
- *   page token.
- * @param {string} [request.filter]
- *   Optional. [Filter](https://google.aip.dev/160) to apply to the returned
- *   results.
- * @param {string} [request.orderBy]
- *   Optional. How to order the resulting clusters. Must be one of the following
- *   strings:
- *
- *   * `name`
- *   * `name desc`
- *   * `create_time`
- *   * `create_time desc`
- *
- *   If not specified, clusters will be returned in an arbitrary order.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.hypercomputecluster.v1alpha.Cluster|Cluster}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/hypercompute_cluster.list_clusters.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_HypercomputeCluster_ListClusters_async
- */
+  /**
+   * Equivalent to `listClusters`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent location of the clusters to list, in the format
+   *   `projects/{project}/locations/{location}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of clusters to return. The service may return
+   *   fewer than this value.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token received from a previous `ListClusters` call.
+   *   Provide this to retrieve the subsequent page. When paginating, all other
+   *   parameters provided to `ListClusters` must match the call that provided the
+   *   page token.
+   * @param {string} [request.filter]
+   *   Optional. [Filter](https://google.aip.dev/160) to apply to the returned
+   *   results.
+   * @param {string} [request.orderBy]
+   *   Optional. How to order the resulting clusters. Must be one of the following
+   *   strings:
+   *
+   *   * `name`
+   *   * `name desc`
+   *   * `create_time`
+   *   * `create_time desc`
+   *
+   *   If not specified, clusters will be returned in an arbitrary order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.hypercomputecluster.v1alpha.Cluster|Cluster}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/hypercompute_cluster.list_clusters.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_HypercomputeCluster_ListClusters_async
+   */
   listClustersAsync(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IListClustersRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.hypercomputecluster.v1alpha.ICluster>{
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IListClustersRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.hypercomputecluster.v1alpha.ICluster> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listClusters iterate %j', request);
     return this.descriptors.page.listClusters.asyncIterate(
       this.innerApiCalls['listClusters'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.hypercomputecluster.v1alpha.ICluster>;
   }
- /**
- * Lists Nodes in a given cluster.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent cluster of the nodes to list, in the format
- *   `projects/{project}/locations/{location}/clusters/{cluster}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of nodes to return. The service may return fewer
- *   than this value.
- * @param {string} [request.pageToken]
- *   Optional. A page token received from a previous `ListNodes` call. Provide
- *   this to retrieve the subsequent page. When paginating, all other parameters
- *   provided to `ListNodes` must match the call that provided the page
- *   token.
- * @param {string} [request.filter]
- *   Optional. [Filter](https://google.aip.dev/160) to apply to the returned
- *   results.
- * @param {string} [request.orderBy]
- *   Optional. How to order the resulting nodes. Must be one of the following
- *   strings:
- *
- *   * `name`
- *   * `name desc`
- *
- *   If not specified, nodes will be returned in an arbitrary order.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.hypercomputecluster.v1alpha.Node|Node}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listNodesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists Nodes in a given cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent cluster of the nodes to list, in the format
+   *   `projects/{project}/locations/{location}/clusters/{cluster}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of nodes to return. The service may return fewer
+   *   than this value.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token received from a previous `ListNodes` call. Provide
+   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListNodes` must match the call that provided the page
+   *   token.
+   * @param {string} [request.filter]
+   *   Optional. [Filter](https://google.aip.dev/160) to apply to the returned
+   *   results.
+   * @param {string} [request.orderBy]
+   *   Optional. How to order the resulting nodes. Must be one of the following
+   *   strings:
+   *
+   *   * `name`
+   *   * `name desc`
+   *
+   *   If not specified, nodes will be returned in an arbitrary order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.hypercomputecluster.v1alpha.Node|Node}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listNodesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listNodes(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IListNodesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.hypercomputecluster.v1alpha.INode[],
-        protos.google.cloud.hypercomputecluster.v1alpha.IListNodesRequest|null,
-        protos.google.cloud.hypercomputecluster.v1alpha.IListNodesResponse
-      ]>;
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IListNodesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1alpha.INode[],
+      protos.google.cloud.hypercomputecluster.v1alpha.IListNodesRequest | null,
+      protos.google.cloud.hypercomputecluster.v1alpha.IListNodesResponse,
+    ]
+  >;
   listNodes(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IListNodesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IListNodesRequest,
-          protos.google.cloud.hypercomputecluster.v1alpha.IListNodesResponse|null|undefined,
-          protos.google.cloud.hypercomputecluster.v1alpha.INode>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IListNodesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IListNodesRequest,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IListNodesResponse
+      | null
+      | undefined,
+      protos.google.cloud.hypercomputecluster.v1alpha.INode
+    >,
+  ): void;
   listNodes(
-      request: protos.google.cloud.hypercomputecluster.v1alpha.IListNodesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IListNodesRequest,
-          protos.google.cloud.hypercomputecluster.v1alpha.IListNodesResponse|null|undefined,
-          protos.google.cloud.hypercomputecluster.v1alpha.INode>): void;
+    request: protos.google.cloud.hypercomputecluster.v1alpha.IListNodesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IListNodesRequest,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IListNodesResponse
+      | null
+      | undefined,
+      protos.google.cloud.hypercomputecluster.v1alpha.INode
+    >,
+  ): void;
   listNodes(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IListNodesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IListNodesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.hypercomputecluster.v1alpha.IListNodesRequest,
-          protos.google.cloud.hypercomputecluster.v1alpha.IListNodesResponse|null|undefined,
-          protos.google.cloud.hypercomputecluster.v1alpha.INode>,
-      callback?: PaginationCallback<
-          protos.google.cloud.hypercomputecluster.v1alpha.IListNodesRequest,
-          protos.google.cloud.hypercomputecluster.v1alpha.IListNodesResponse|null|undefined,
-          protos.google.cloud.hypercomputecluster.v1alpha.INode>):
-      Promise<[
-        protos.google.cloud.hypercomputecluster.v1alpha.INode[],
-        protos.google.cloud.hypercomputecluster.v1alpha.IListNodesRequest|null,
-        protos.google.cloud.hypercomputecluster.v1alpha.IListNodesResponse
-      ]>|void {
+          | protos.google.cloud.hypercomputecluster.v1alpha.IListNodesResponse
+          | null
+          | undefined,
+          protos.google.cloud.hypercomputecluster.v1alpha.INode
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.hypercomputecluster.v1alpha.IListNodesRequest,
+      | protos.google.cloud.hypercomputecluster.v1alpha.IListNodesResponse
+      | null
+      | undefined,
+      protos.google.cloud.hypercomputecluster.v1alpha.INode
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.hypercomputecluster.v1alpha.INode[],
+      protos.google.cloud.hypercomputecluster.v1alpha.IListNodesRequest | null,
+      protos.google.cloud.hypercomputecluster.v1alpha.IListNodesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.hypercomputecluster.v1alpha.IListNodesRequest,
-      protos.google.cloud.hypercomputecluster.v1alpha.IListNodesResponse|null|undefined,
-      protos.google.cloud.hypercomputecluster.v1alpha.INode>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.hypercomputecluster.v1alpha.IListNodesRequest,
+          | protos.google.cloud.hypercomputecluster.v1alpha.IListNodesResponse
+          | null
+          | undefined,
+          protos.google.cloud.hypercomputecluster.v1alpha.INode
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listNodes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1330,141 +1767,146 @@ export class HypercomputeClusterClient {
     this._log.info('listNodes request %j', request);
     return this.innerApiCalls
       .listNodes(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.hypercomputecluster.v1alpha.INode[],
-        protos.google.cloud.hypercomputecluster.v1alpha.IListNodesRequest|null,
-        protos.google.cloud.hypercomputecluster.v1alpha.IListNodesResponse
-      ]) => {
-        this._log.info('listNodes values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.hypercomputecluster.v1alpha.INode[],
+          protos.google.cloud.hypercomputecluster.v1alpha.IListNodesRequest | null,
+          protos.google.cloud.hypercomputecluster.v1alpha.IListNodesResponse,
+        ]) => {
+          this._log.info('listNodes values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listNodes`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent cluster of the nodes to list, in the format
- *   `projects/{project}/locations/{location}/clusters/{cluster}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of nodes to return. The service may return fewer
- *   than this value.
- * @param {string} [request.pageToken]
- *   Optional. A page token received from a previous `ListNodes` call. Provide
- *   this to retrieve the subsequent page. When paginating, all other parameters
- *   provided to `ListNodes` must match the call that provided the page
- *   token.
- * @param {string} [request.filter]
- *   Optional. [Filter](https://google.aip.dev/160) to apply to the returned
- *   results.
- * @param {string} [request.orderBy]
- *   Optional. How to order the resulting nodes. Must be one of the following
- *   strings:
- *
- *   * `name`
- *   * `name desc`
- *
- *   If not specified, nodes will be returned in an arbitrary order.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.hypercomputecluster.v1alpha.Node|Node} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listNodesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listNodes`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent cluster of the nodes to list, in the format
+   *   `projects/{project}/locations/{location}/clusters/{cluster}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of nodes to return. The service may return fewer
+   *   than this value.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token received from a previous `ListNodes` call. Provide
+   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListNodes` must match the call that provided the page
+   *   token.
+   * @param {string} [request.filter]
+   *   Optional. [Filter](https://google.aip.dev/160) to apply to the returned
+   *   results.
+   * @param {string} [request.orderBy]
+   *   Optional. How to order the resulting nodes. Must be one of the following
+   *   strings:
+   *
+   *   * `name`
+   *   * `name desc`
+   *
+   *   If not specified, nodes will be returned in an arbitrary order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.hypercomputecluster.v1alpha.Node|Node} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listNodesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listNodesStream(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IListNodesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IListNodesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listNodes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listNodes stream %j', request);
     return this.descriptors.page.listNodes.createStream(
       this.innerApiCalls.listNodes as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listNodes`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent cluster of the nodes to list, in the format
- *   `projects/{project}/locations/{location}/clusters/{cluster}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of nodes to return. The service may return fewer
- *   than this value.
- * @param {string} [request.pageToken]
- *   Optional. A page token received from a previous `ListNodes` call. Provide
- *   this to retrieve the subsequent page. When paginating, all other parameters
- *   provided to `ListNodes` must match the call that provided the page
- *   token.
- * @param {string} [request.filter]
- *   Optional. [Filter](https://google.aip.dev/160) to apply to the returned
- *   results.
- * @param {string} [request.orderBy]
- *   Optional. How to order the resulting nodes. Must be one of the following
- *   strings:
- *
- *   * `name`
- *   * `name desc`
- *
- *   If not specified, nodes will be returned in an arbitrary order.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.hypercomputecluster.v1alpha.Node|Node}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/hypercompute_cluster.list_nodes.js</caption>
- * region_tag:hypercomputecluster_v1alpha_generated_HypercomputeCluster_ListNodes_async
- */
+  /**
+   * Equivalent to `listNodes`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent cluster of the nodes to list, in the format
+   *   `projects/{project}/locations/{location}/clusters/{cluster}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of nodes to return. The service may return fewer
+   *   than this value.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token received from a previous `ListNodes` call. Provide
+   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListNodes` must match the call that provided the page
+   *   token.
+   * @param {string} [request.filter]
+   *   Optional. [Filter](https://google.aip.dev/160) to apply to the returned
+   *   results.
+   * @param {string} [request.orderBy]
+   *   Optional. How to order the resulting nodes. Must be one of the following
+   *   strings:
+   *
+   *   * `name`
+   *   * `name desc`
+   *
+   *   If not specified, nodes will be returned in an arbitrary order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.hypercomputecluster.v1alpha.Node|Node}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/hypercompute_cluster.list_nodes.js</caption>
+   * region_tag:hypercomputecluster_v1alpha_generated_HypercomputeCluster_ListNodes_async
+   */
   listNodesAsync(
-      request?: protos.google.cloud.hypercomputecluster.v1alpha.IListNodesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.hypercomputecluster.v1alpha.INode>{
+    request?: protos.google.cloud.hypercomputecluster.v1alpha.IListNodesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.hypercomputecluster.v1alpha.INode> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listNodes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listNodes iterate %j', request);
     return this.descriptors.page.listNodes.asyncIterate(
       this.innerApiCalls['listNodes'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.hypercomputecluster.v1alpha.INode>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1499,12 +1941,11 @@ export class HypercomputeClusterClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1537,12 +1978,12 @@ export class HypercomputeClusterClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1585,22 +2026,22 @@ export class HypercomputeClusterClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1635,15 +2076,15 @@ export class HypercomputeClusterClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1677,7 +2118,7 @@ export class HypercomputeClusterClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1690,25 +2131,24 @@ export class HypercomputeClusterClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -1747,22 +2187,22 @@ export class HypercomputeClusterClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1777,7 +2217,7 @@ export class HypercomputeClusterClient {
    * @param {string} bucket
    * @returns {string} Resource name string.
    */
-  bucketPath(project:string,bucket:string) {
+  bucketPath(project: string, bucket: string) {
     return this.pathTemplates.bucketPathTemplate.render({
       project: project,
       bucket: bucket,
@@ -1814,7 +2254,7 @@ export class HypercomputeClusterClient {
    * @param {string} cluster
    * @returns {string} Resource name string.
    */
-  clusterPath(project:string,location:string,cluster:string) {
+  clusterPath(project: string, location: string, cluster: string) {
     return this.pathTemplates.clusterPathTemplate.render({
       project: project,
       location: location,
@@ -1863,7 +2303,7 @@ export class HypercomputeClusterClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  computeInstancePath(project:string,zone:string,instance:string) {
+  computeInstancePath(project: string, zone: string, instance: string) {
     return this.pathTemplates.computeInstancePathTemplate.render({
       project: project,
       zone: zone,
@@ -1879,7 +2319,9 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromComputeInstanceName(computeInstanceName: string) {
-    return this.pathTemplates.computeInstancePathTemplate.match(computeInstanceName).project;
+    return this.pathTemplates.computeInstancePathTemplate.match(
+      computeInstanceName,
+    ).project;
   }
 
   /**
@@ -1890,7 +2332,9 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the zone.
    */
   matchZoneFromComputeInstanceName(computeInstanceName: string) {
-    return this.pathTemplates.computeInstancePathTemplate.match(computeInstanceName).zone;
+    return this.pathTemplates.computeInstancePathTemplate.match(
+      computeInstanceName,
+    ).zone;
   }
 
   /**
@@ -1901,7 +2345,9 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromComputeInstanceName(computeInstanceName: string) {
-    return this.pathTemplates.computeInstancePathTemplate.match(computeInstanceName).instance;
+    return this.pathTemplates.computeInstancePathTemplate.match(
+      computeInstanceName,
+    ).instance;
   }
 
   /**
@@ -1912,7 +2358,7 @@ export class HypercomputeClusterClient {
    * @param {string} disk_type
    * @returns {string} Resource name string.
    */
-  diskTypePath(project:string,zone:string,diskType:string) {
+  diskTypePath(project: string, zone: string, diskType: string) {
     return this.pathTemplates.diskTypePathTemplate.render({
       project: project,
       zone: zone,
@@ -1950,7 +2396,8 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the disk_type.
    */
   matchDiskTypeFromDiskTypeName(diskTypeName: string) {
-    return this.pathTemplates.diskTypePathTemplate.match(diskTypeName).disk_type;
+    return this.pathTemplates.diskTypePathTemplate.match(diskTypeName)
+      .disk_type;
   }
 
   /**
@@ -1960,7 +2407,7 @@ export class HypercomputeClusterClient {
    * @param {string} image
    * @returns {string} Resource name string.
    */
-  imagePath(project:string,image:string) {
+  imagePath(project: string, image: string) {
     return this.pathTemplates.imagePathTemplate.render({
       project: project,
       image: image,
@@ -1997,7 +2444,7 @@ export class HypercomputeClusterClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  instancePath(project:string,location:string,instance:string) {
+  instancePath(project: string, location: string, instance: string) {
     return this.pathTemplates.instancePathTemplate.render({
       project: project,
       location: location,
@@ -2045,7 +2492,7 @@ export class HypercomputeClusterClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -2082,7 +2529,11 @@ export class HypercomputeClusterClient {
    * @param {string} machine_learning_run
    * @returns {string} Resource name string.
    */
-  machineLearningRunPath(project:string,location:string,machineLearningRun:string) {
+  machineLearningRunPath(
+    project: string,
+    location: string,
+    machineLearningRun: string,
+  ) {
     return this.pathTemplates.machineLearningRunPathTemplate.render({
       project: project,
       location: location,
@@ -2098,7 +2549,9 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMachineLearningRunName(machineLearningRunName: string) {
-    return this.pathTemplates.machineLearningRunPathTemplate.match(machineLearningRunName).project;
+    return this.pathTemplates.machineLearningRunPathTemplate.match(
+      machineLearningRunName,
+    ).project;
   }
 
   /**
@@ -2109,7 +2562,9 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMachineLearningRunName(machineLearningRunName: string) {
-    return this.pathTemplates.machineLearningRunPathTemplate.match(machineLearningRunName).location;
+    return this.pathTemplates.machineLearningRunPathTemplate.match(
+      machineLearningRunName,
+    ).location;
   }
 
   /**
@@ -2119,8 +2574,12 @@ export class HypercomputeClusterClient {
    *   A fully-qualified path representing MachineLearningRun resource.
    * @returns {string} A string representing the machine_learning_run.
    */
-  matchMachineLearningRunFromMachineLearningRunName(machineLearningRunName: string) {
-    return this.pathTemplates.machineLearningRunPathTemplate.match(machineLearningRunName).machine_learning_run;
+  matchMachineLearningRunFromMachineLearningRunName(
+    machineLearningRunName: string,
+  ) {
+    return this.pathTemplates.machineLearningRunPathTemplate.match(
+      machineLearningRunName,
+    ).machine_learning_run;
   }
 
   /**
@@ -2132,7 +2591,12 @@ export class HypercomputeClusterClient {
    * @param {string} monitored_event
    * @returns {string} Resource name string.
    */
-  monitoredEventPath(project:string,location:string,machineLearningRun:string,monitoredEvent:string) {
+  monitoredEventPath(
+    project: string,
+    location: string,
+    machineLearningRun: string,
+    monitoredEvent: string,
+  ) {
     return this.pathTemplates.monitoredEventPathTemplate.render({
       project: project,
       location: location,
@@ -2149,7 +2613,9 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMonitoredEventName(monitoredEventName: string) {
-    return this.pathTemplates.monitoredEventPathTemplate.match(monitoredEventName).project;
+    return this.pathTemplates.monitoredEventPathTemplate.match(
+      monitoredEventName,
+    ).project;
   }
 
   /**
@@ -2160,7 +2626,9 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMonitoredEventName(monitoredEventName: string) {
-    return this.pathTemplates.monitoredEventPathTemplate.match(monitoredEventName).location;
+    return this.pathTemplates.monitoredEventPathTemplate.match(
+      monitoredEventName,
+    ).location;
   }
 
   /**
@@ -2171,7 +2639,9 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the machine_learning_run.
    */
   matchMachineLearningRunFromMonitoredEventName(monitoredEventName: string) {
-    return this.pathTemplates.monitoredEventPathTemplate.match(monitoredEventName).machine_learning_run;
+    return this.pathTemplates.monitoredEventPathTemplate.match(
+      monitoredEventName,
+    ).machine_learning_run;
   }
 
   /**
@@ -2182,7 +2652,9 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the monitored_event.
    */
   matchMonitoredEventFromMonitoredEventName(monitoredEventName: string) {
-    return this.pathTemplates.monitoredEventPathTemplate.match(monitoredEventName).monitored_event;
+    return this.pathTemplates.monitoredEventPathTemplate.match(
+      monitoredEventName,
+    ).monitored_event;
   }
 
   /**
@@ -2192,7 +2664,7 @@ export class HypercomputeClusterClient {
    * @param {string} network
    * @returns {string} Resource name string.
    */
-  networkPath(project:string,network:string) {
+  networkPath(project: string, network: string) {
     return this.pathTemplates.networkPathTemplate.render({
       project: project,
       network: network,
@@ -2230,7 +2702,7 @@ export class HypercomputeClusterClient {
    * @param {string} node
    * @returns {string} Resource name string.
    */
-  nodePath(project:string,location:string,cluster:string,node:string) {
+  nodePath(project: string, location: string, cluster: string, node: string) {
     return this.pathTemplates.nodePathTemplate.render({
       project: project,
       location: location,
@@ -2293,7 +2765,13 @@ export class HypercomputeClusterClient {
    * @param {string} pod
    * @returns {string} Resource name string.
    */
-  podPath(project:string,location:string,cluster:string,namespace:string,pod:string) {
+  podPath(
+    project: string,
+    location: string,
+    cluster: string,
+    namespace: string,
+    pod: string,
+  ) {
     return this.pathTemplates.podPathTemplate.render({
       project: project,
       location: location,
@@ -2367,7 +2845,12 @@ export class HypercomputeClusterClient {
    * @param {string} profile_session
    * @returns {string} Resource name string.
    */
-  profileSessionPath(project:string,location:string,machineLearningRun:string,profileSession:string) {
+  profileSessionPath(
+    project: string,
+    location: string,
+    machineLearningRun: string,
+    profileSession: string,
+  ) {
     return this.pathTemplates.profileSessionPathTemplate.render({
       project: project,
       location: location,
@@ -2384,7 +2867,9 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProfileSessionName(profileSessionName: string) {
-    return this.pathTemplates.profileSessionPathTemplate.match(profileSessionName).project;
+    return this.pathTemplates.profileSessionPathTemplate.match(
+      profileSessionName,
+    ).project;
   }
 
   /**
@@ -2395,7 +2880,9 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProfileSessionName(profileSessionName: string) {
-    return this.pathTemplates.profileSessionPathTemplate.match(profileSessionName).location;
+    return this.pathTemplates.profileSessionPathTemplate.match(
+      profileSessionName,
+    ).location;
   }
 
   /**
@@ -2406,7 +2893,9 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the machine_learning_run.
    */
   matchMachineLearningRunFromProfileSessionName(profileSessionName: string) {
-    return this.pathTemplates.profileSessionPathTemplate.match(profileSessionName).machine_learning_run;
+    return this.pathTemplates.profileSessionPathTemplate.match(
+      profileSessionName,
+    ).machine_learning_run;
   }
 
   /**
@@ -2417,7 +2906,9 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the profile_session.
    */
   matchProfileSessionFromProfileSessionName(profileSessionName: string) {
-    return this.pathTemplates.profileSessionPathTemplate.match(profileSessionName).profile_session;
+    return this.pathTemplates.profileSessionPathTemplate.match(
+      profileSessionName,
+    ).profile_session;
   }
 
   /**
@@ -2429,7 +2920,12 @@ export class HypercomputeClusterClient {
    * @param {string} profiler_session
    * @returns {string} Resource name string.
    */
-  profilerSessionPath(project:string,location:string,machineLearningRun:string,profilerSession:string) {
+  profilerSessionPath(
+    project: string,
+    location: string,
+    machineLearningRun: string,
+    profilerSession: string,
+  ) {
     return this.pathTemplates.profilerSessionPathTemplate.render({
       project: project,
       location: location,
@@ -2446,7 +2942,9 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProfilerSessionName(profilerSessionName: string) {
-    return this.pathTemplates.profilerSessionPathTemplate.match(profilerSessionName).project;
+    return this.pathTemplates.profilerSessionPathTemplate.match(
+      profilerSessionName,
+    ).project;
   }
 
   /**
@@ -2457,7 +2955,9 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProfilerSessionName(profilerSessionName: string) {
-    return this.pathTemplates.profilerSessionPathTemplate.match(profilerSessionName).location;
+    return this.pathTemplates.profilerSessionPathTemplate.match(
+      profilerSessionName,
+    ).location;
   }
 
   /**
@@ -2468,7 +2968,9 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the machine_learning_run.
    */
   matchMachineLearningRunFromProfilerSessionName(profilerSessionName: string) {
-    return this.pathTemplates.profilerSessionPathTemplate.match(profilerSessionName).machine_learning_run;
+    return this.pathTemplates.profilerSessionPathTemplate.match(
+      profilerSessionName,
+    ).machine_learning_run;
   }
 
   /**
@@ -2479,7 +2981,9 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the profiler_session.
    */
   matchProfilerSessionFromProfilerSessionName(profilerSessionName: string) {
-    return this.pathTemplates.profilerSessionPathTemplate.match(profilerSessionName).profiler_session;
+    return this.pathTemplates.profilerSessionPathTemplate.match(
+      profilerSessionName,
+    ).profiler_session;
   }
 
   /**
@@ -2491,7 +2995,12 @@ export class HypercomputeClusterClient {
    * @param {string} profiler_target
    * @returns {string} Resource name string.
    */
-  profilerTargetPath(project:string,location:string,machineLearningRun:string,profilerTarget:string) {
+  profilerTargetPath(
+    project: string,
+    location: string,
+    machineLearningRun: string,
+    profilerTarget: string,
+  ) {
     return this.pathTemplates.profilerTargetPathTemplate.render({
       project: project,
       location: location,
@@ -2508,7 +3017,9 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProfilerTargetName(profilerTargetName: string) {
-    return this.pathTemplates.profilerTargetPathTemplate.match(profilerTargetName).project;
+    return this.pathTemplates.profilerTargetPathTemplate.match(
+      profilerTargetName,
+    ).project;
   }
 
   /**
@@ -2519,7 +3030,9 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProfilerTargetName(profilerTargetName: string) {
-    return this.pathTemplates.profilerTargetPathTemplate.match(profilerTargetName).location;
+    return this.pathTemplates.profilerTargetPathTemplate.match(
+      profilerTargetName,
+    ).location;
   }
 
   /**
@@ -2530,7 +3043,9 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the machine_learning_run.
    */
   matchMachineLearningRunFromProfilerTargetName(profilerTargetName: string) {
-    return this.pathTemplates.profilerTargetPathTemplate.match(profilerTargetName).machine_learning_run;
+    return this.pathTemplates.profilerTargetPathTemplate.match(
+      profilerTargetName,
+    ).machine_learning_run;
   }
 
   /**
@@ -2541,7 +3056,9 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the profiler_target.
    */
   matchProfilerTargetFromProfilerTargetName(profilerTargetName: string) {
-    return this.pathTemplates.profilerTargetPathTemplate.match(profilerTargetName).profiler_target;
+    return this.pathTemplates.profilerTargetPathTemplate.match(
+      profilerTargetName,
+    ).profiler_target;
   }
 
   /**
@@ -2550,7 +3067,7 @@ export class HypercomputeClusterClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -2575,7 +3092,7 @@ export class HypercomputeClusterClient {
    * @param {string} reservation
    * @returns {string} Resource name string.
    */
-  reservationPath(project:string,zone:string,reservation:string) {
+  reservationPath(project: string, zone: string, reservation: string) {
     return this.pathTemplates.reservationPathTemplate.render({
       project: project,
       zone: zone,
@@ -2591,7 +3108,8 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromReservationName(reservationName: string) {
-    return this.pathTemplates.reservationPathTemplate.match(reservationName).project;
+    return this.pathTemplates.reservationPathTemplate.match(reservationName)
+      .project;
   }
 
   /**
@@ -2602,7 +3120,8 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the zone.
    */
   matchZoneFromReservationName(reservationName: string) {
-    return this.pathTemplates.reservationPathTemplate.match(reservationName).zone;
+    return this.pathTemplates.reservationPathTemplate.match(reservationName)
+      .zone;
   }
 
   /**
@@ -2613,7 +3132,8 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the reservation.
    */
   matchReservationFromReservationName(reservationName: string) {
-    return this.pathTemplates.reservationPathTemplate.match(reservationName).reservation;
+    return this.pathTemplates.reservationPathTemplate.match(reservationName)
+      .reservation;
   }
 
   /**
@@ -2625,7 +3145,12 @@ export class HypercomputeClusterClient {
    * @param {string} reservation_block
    * @returns {string} Resource name string.
    */
-  reservationBlockPath(project:string,zone:string,reservation:string,reservationBlock:string) {
+  reservationBlockPath(
+    project: string,
+    zone: string,
+    reservation: string,
+    reservationBlock: string,
+  ) {
     return this.pathTemplates.reservationBlockPathTemplate.render({
       project: project,
       zone: zone,
@@ -2642,7 +3167,9 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromReservationBlockName(reservationBlockName: string) {
-    return this.pathTemplates.reservationBlockPathTemplate.match(reservationBlockName).project;
+    return this.pathTemplates.reservationBlockPathTemplate.match(
+      reservationBlockName,
+    ).project;
   }
 
   /**
@@ -2653,7 +3180,9 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the zone.
    */
   matchZoneFromReservationBlockName(reservationBlockName: string) {
-    return this.pathTemplates.reservationBlockPathTemplate.match(reservationBlockName).zone;
+    return this.pathTemplates.reservationBlockPathTemplate.match(
+      reservationBlockName,
+    ).zone;
   }
 
   /**
@@ -2664,7 +3193,9 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the reservation.
    */
   matchReservationFromReservationBlockName(reservationBlockName: string) {
-    return this.pathTemplates.reservationBlockPathTemplate.match(reservationBlockName).reservation;
+    return this.pathTemplates.reservationBlockPathTemplate.match(
+      reservationBlockName,
+    ).reservation;
   }
 
   /**
@@ -2675,7 +3206,9 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the reservation_block.
    */
   matchReservationBlockFromReservationBlockName(reservationBlockName: string) {
-    return this.pathTemplates.reservationBlockPathTemplate.match(reservationBlockName).reservation_block;
+    return this.pathTemplates.reservationBlockPathTemplate.match(
+      reservationBlockName,
+    ).reservation_block;
   }
 
   /**
@@ -2688,7 +3221,13 @@ export class HypercomputeClusterClient {
    * @param {string} reservation_sub_block
    * @returns {string} Resource name string.
    */
-  reservationSubBlockPath(project:string,zone:string,reservation:string,reservationBlock:string,reservationSubBlock:string) {
+  reservationSubBlockPath(
+    project: string,
+    zone: string,
+    reservation: string,
+    reservationBlock: string,
+    reservationSubBlock: string,
+  ) {
     return this.pathTemplates.reservationSubBlockPathTemplate.render({
       project: project,
       zone: zone,
@@ -2706,7 +3245,9 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromReservationSubBlockName(reservationSubBlockName: string) {
-    return this.pathTemplates.reservationSubBlockPathTemplate.match(reservationSubBlockName).project;
+    return this.pathTemplates.reservationSubBlockPathTemplate.match(
+      reservationSubBlockName,
+    ).project;
   }
 
   /**
@@ -2717,7 +3258,9 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the zone.
    */
   matchZoneFromReservationSubBlockName(reservationSubBlockName: string) {
-    return this.pathTemplates.reservationSubBlockPathTemplate.match(reservationSubBlockName).zone;
+    return this.pathTemplates.reservationSubBlockPathTemplate.match(
+      reservationSubBlockName,
+    ).zone;
   }
 
   /**
@@ -2728,7 +3271,9 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the reservation.
    */
   matchReservationFromReservationSubBlockName(reservationSubBlockName: string) {
-    return this.pathTemplates.reservationSubBlockPathTemplate.match(reservationSubBlockName).reservation;
+    return this.pathTemplates.reservationSubBlockPathTemplate.match(
+      reservationSubBlockName,
+    ).reservation;
   }
 
   /**
@@ -2738,8 +3283,12 @@ export class HypercomputeClusterClient {
    *   A fully-qualified path representing ReservationSubBlock resource.
    * @returns {string} A string representing the reservation_block.
    */
-  matchReservationBlockFromReservationSubBlockName(reservationSubBlockName: string) {
-    return this.pathTemplates.reservationSubBlockPathTemplate.match(reservationSubBlockName).reservation_block;
+  matchReservationBlockFromReservationSubBlockName(
+    reservationSubBlockName: string,
+  ) {
+    return this.pathTemplates.reservationSubBlockPathTemplate.match(
+      reservationSubBlockName,
+    ).reservation_block;
   }
 
   /**
@@ -2749,8 +3298,12 @@ export class HypercomputeClusterClient {
    *   A fully-qualified path representing ReservationSubBlock resource.
    * @returns {string} A string representing the reservation_sub_block.
    */
-  matchReservationSubBlockFromReservationSubBlockName(reservationSubBlockName: string) {
-    return this.pathTemplates.reservationSubBlockPathTemplate.match(reservationSubBlockName).reservation_sub_block;
+  matchReservationSubBlockFromReservationSubBlockName(
+    reservationSubBlockName: string,
+  ) {
+    return this.pathTemplates.reservationSubBlockPathTemplate.match(
+      reservationSubBlockName,
+    ).reservation_sub_block;
   }
 
   /**
@@ -2761,7 +3314,7 @@ export class HypercomputeClusterClient {
    * @param {string} subnetwork
    * @returns {string} Resource name string.
    */
-  subnetworkPath(project:string,region:string,subnetwork:string) {
+  subnetworkPath(project: string, region: string, subnetwork: string) {
     return this.pathTemplates.subnetworkPathTemplate.render({
       project: project,
       region: region,
@@ -2777,7 +3330,8 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSubnetworkName(subnetworkName: string) {
-    return this.pathTemplates.subnetworkPathTemplate.match(subnetworkName).project;
+    return this.pathTemplates.subnetworkPathTemplate.match(subnetworkName)
+      .project;
   }
 
   /**
@@ -2788,7 +3342,8 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the region.
    */
   matchRegionFromSubnetworkName(subnetworkName: string) {
-    return this.pathTemplates.subnetworkPathTemplate.match(subnetworkName).region;
+    return this.pathTemplates.subnetworkPathTemplate.match(subnetworkName)
+      .region;
   }
 
   /**
@@ -2799,7 +3354,8 @@ export class HypercomputeClusterClient {
    * @returns {string} A string representing the subnetwork.
    */
   matchSubnetworkFromSubnetworkName(subnetworkName: string) {
-    return this.pathTemplates.subnetworkPathTemplate.match(subnetworkName).subnetwork;
+    return this.pathTemplates.subnetworkPathTemplate.match(subnetworkName)
+      .subnetwork;
   }
 
   /**
@@ -2810,11 +3366,13 @@ export class HypercomputeClusterClient {
    */
   close(): Promise<void> {
     if (this.hypercomputeClusterStub && !this._terminated) {
-      return this.hypercomputeClusterStub.then(stub => {
+      return this.hypercomputeClusterStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

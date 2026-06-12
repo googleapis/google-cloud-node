@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import {SinonStub} from 'sinon';
-import {describe, it} from 'mocha';
+import { SinonStub } from 'sinon';
+import { describe, it } from 'mocha';
 import * as datastoreModule from '../src';
 
-import {protobuf, operationsProtos} from 'google-gax';
+import { protobuf, operationsProtos } from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
+  ).toObject(instance as protobuf.Message<T>, { defaults: true });
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -77,9 +77,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
+            return Promise.resolve({ done: true, value: undefined });
           }
-          return Promise.resolve({done: false, value: responses![counter++]});
+          return Promise.resolve({ done: false, value: responses![counter++] });
         },
       };
     },
@@ -197,7 +197,7 @@ describe('v1.DatastoreClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       assert.strictEqual(client.datastoreStub, undefined);
@@ -205,35 +205,45 @@ describe('v1.DatastoreClient', () => {
       assert(client.datastoreStub);
     });
 
-    it('has close method for the initialized client', done => {
+    it('has close method for the initialized client', (done) => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
-      client.initialize().catch((err: any) => {
+      client.initialize().catch((err) => {
         throw err;
       });
       assert(client.datastoreStub);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch((err) => {
+          throw err;
+        });
     });
 
-    it('has close method for the non-initialized client', done => {
+    it('has close method for the non-initialized client', (done) => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       assert.strictEqual(client.datastoreStub, undefined);
-      client.close().then(() => {
-        done();
-      });
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch((err) => {
+          throw err;
+        });
     });
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -245,7 +255,7 @@ describe('v1.DatastoreClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -268,7 +278,7 @@ describe('v1.DatastoreClient', () => {
   describe('lookup', () => {
     it('invokes lookup without error', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -296,7 +306,7 @@ describe('v1.DatastoreClient', () => {
 
     it('invokes lookup without error using callback', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -340,7 +350,7 @@ describe('v1.DatastoreClient', () => {
 
     it('invokes lookup with error', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -365,7 +375,7 @@ describe('v1.DatastoreClient', () => {
 
     it('invokes lookup with closed client', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -375,7 +385,9 @@ describe('v1.DatastoreClient', () => {
       // path template is empty
       request.databaseId = 'value';
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch((err) => {
+        throw err;
+      });
       await assert.rejects(client.lookup(request), expectedError);
     });
   });
@@ -383,7 +395,7 @@ describe('v1.DatastoreClient', () => {
   describe('runQuery', () => {
     it('invokes runQuery without error', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -411,7 +423,7 @@ describe('v1.DatastoreClient', () => {
 
     it('invokes runQuery without error using callback', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -455,7 +467,7 @@ describe('v1.DatastoreClient', () => {
 
     it('invokes runQuery with error', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -480,7 +492,7 @@ describe('v1.DatastoreClient', () => {
 
     it('invokes runQuery with closed client', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -490,7 +502,9 @@ describe('v1.DatastoreClient', () => {
       // path template is empty
       request.databaseId = 'value';
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch((err) => {
+        throw err;
+      });
       await assert.rejects(client.runQuery(request), expectedError);
     });
   });
@@ -498,7 +512,7 @@ describe('v1.DatastoreClient', () => {
   describe('runAggregationQuery', () => {
     it('invokes runAggregationQuery without error', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -527,7 +541,7 @@ describe('v1.DatastoreClient', () => {
 
     it('invokes runAggregationQuery without error using callback', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -571,7 +585,7 @@ describe('v1.DatastoreClient', () => {
 
     it('invokes runAggregationQuery with error', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -599,7 +613,7 @@ describe('v1.DatastoreClient', () => {
 
     it('invokes runAggregationQuery with closed client', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -609,7 +623,9 @@ describe('v1.DatastoreClient', () => {
       // path template is empty
       request.databaseId = 'value';
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch((err) => {
+        throw err;
+      });
       await assert.rejects(client.runAggregationQuery(request), expectedError);
     });
   });
@@ -617,7 +633,7 @@ describe('v1.DatastoreClient', () => {
   describe('beginTransaction', () => {
     it('invokes beginTransaction without error', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -645,7 +661,7 @@ describe('v1.DatastoreClient', () => {
 
     it('invokes beginTransaction without error using callback', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -689,7 +705,7 @@ describe('v1.DatastoreClient', () => {
 
     it('invokes beginTransaction with error', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -717,7 +733,7 @@ describe('v1.DatastoreClient', () => {
 
     it('invokes beginTransaction with closed client', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -727,7 +743,9 @@ describe('v1.DatastoreClient', () => {
       // path template is empty
       request.databaseId = 'value';
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch((err) => {
+        throw err;
+      });
       await assert.rejects(client.beginTransaction(request), expectedError);
     });
   });
@@ -735,7 +753,7 @@ describe('v1.DatastoreClient', () => {
   describe('commit', () => {
     it('invokes commit without error', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -763,7 +781,7 @@ describe('v1.DatastoreClient', () => {
 
     it('invokes commit without error using callback', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -807,7 +825,7 @@ describe('v1.DatastoreClient', () => {
 
     it('invokes commit with error', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -832,7 +850,7 @@ describe('v1.DatastoreClient', () => {
 
     it('invokes commit with closed client', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -842,7 +860,9 @@ describe('v1.DatastoreClient', () => {
       // path template is empty
       request.databaseId = 'value';
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch((err) => {
+        throw err;
+      });
       await assert.rejects(client.commit(request), expectedError);
     });
   });
@@ -850,7 +870,7 @@ describe('v1.DatastoreClient', () => {
   describe('rollback', () => {
     it('invokes rollback without error', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -878,7 +898,7 @@ describe('v1.DatastoreClient', () => {
 
     it('invokes rollback without error using callback', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -922,7 +942,7 @@ describe('v1.DatastoreClient', () => {
 
     it('invokes rollback with error', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -947,7 +967,7 @@ describe('v1.DatastoreClient', () => {
 
     it('invokes rollback with closed client', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -957,7 +977,9 @@ describe('v1.DatastoreClient', () => {
       // path template is empty
       request.databaseId = 'value';
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch((err) => {
+        throw err;
+      });
       await assert.rejects(client.rollback(request), expectedError);
     });
   });
@@ -965,7 +987,7 @@ describe('v1.DatastoreClient', () => {
   describe('allocateIds', () => {
     it('invokes allocateIds without error', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -993,7 +1015,7 @@ describe('v1.DatastoreClient', () => {
 
     it('invokes allocateIds without error using callback', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1037,7 +1059,7 @@ describe('v1.DatastoreClient', () => {
 
     it('invokes allocateIds with error', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1065,7 +1087,7 @@ describe('v1.DatastoreClient', () => {
 
     it('invokes allocateIds with closed client', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1075,7 +1097,9 @@ describe('v1.DatastoreClient', () => {
       // path template is empty
       request.databaseId = 'value';
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch((err) => {
+        throw err;
+      });
       await assert.rejects(client.allocateIds(request), expectedError);
     });
   });
@@ -1083,7 +1107,7 @@ describe('v1.DatastoreClient', () => {
   describe('reserveIds', () => {
     it('invokes reserveIds without error', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1111,7 +1135,7 @@ describe('v1.DatastoreClient', () => {
 
     it('invokes reserveIds without error using callback', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1155,7 +1179,7 @@ describe('v1.DatastoreClient', () => {
 
     it('invokes reserveIds with error', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1183,7 +1207,7 @@ describe('v1.DatastoreClient', () => {
 
     it('invokes reserveIds with closed client', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1193,14 +1217,16 @@ describe('v1.DatastoreClient', () => {
       // path template is empty
       request.databaseId = 'value';
       const expectedError = new Error('The client has already been closed.');
-      client.close();
+      client.close().catch((err) => {
+        throw err;
+      });
       await assert.rejects(client.reserveIds(request), expectedError);
     });
   });
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1221,7 +1247,7 @@ describe('v1.DatastoreClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1234,20 +1260,24 @@ describe('v1.DatastoreClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.getOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: operationsProtos.google.longrunning.Operation | null,
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          },
-        );
+        client.operationsClient
+          .getOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: operationsProtos.google.longrunning.Operation | null,
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
+            },
+          )
+          .catch((err) => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -1255,7 +1285,7 @@ describe('v1.DatastoreClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1279,7 +1309,7 @@ describe('v1.DatastoreClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1301,7 +1331,7 @@ describe('v1.DatastoreClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1314,20 +1344,24 @@ describe('v1.DatastoreClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.cancelOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null,
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          },
-        );
+        client.operationsClient
+          .cancelOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null,
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
+            },
+          )
+          .catch((err) => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -1335,7 +1369,7 @@ describe('v1.DatastoreClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1359,7 +1393,7 @@ describe('v1.DatastoreClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1381,7 +1415,7 @@ describe('v1.DatastoreClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1394,20 +1428,24 @@ describe('v1.DatastoreClient', () => {
         .stub()
         .callsArgWith(2, null, expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.operationsClient.deleteOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null,
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          },
-        );
+        client.operationsClient
+          .deleteOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null,
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
+            },
+          )
+          .catch((err) => {
+            throw err;
+          });
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
@@ -1415,7 +1453,7 @@ describe('v1.DatastoreClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1439,7 +1477,7 @@ describe('v1.DatastoreClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1474,7 +1512,7 @@ describe('v1.DatastoreClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new datastoreModule.v1.DatastoreClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();

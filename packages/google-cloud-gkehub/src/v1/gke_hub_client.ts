@@ -18,11 +18,20 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -60,7 +69,7 @@ export class GkeHubClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('gke-hub');
@@ -73,10 +82,10 @@ export class GkeHubClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  gkeHubStub?: Promise<{[name: string]: Function}>;
+  gkeHubStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of GkeHubClient.
@@ -117,21 +126,42 @@ export class GkeHubClient {
    *     const client = new GkeHubClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof GkeHubClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'gkehub.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -156,7 +186,7 @@ export class GkeHubClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -170,10 +200,7 @@ export class GkeHubClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -195,37 +222,39 @@ export class GkeHubClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       featurePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/features/{feature}'
+        'projects/{project}/locations/{location}/features/{feature}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       membershipPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/memberships/{membership}'
+        'projects/{project}/locations/{location}/memberships/{membership}',
       ),
       membershipBindingPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/memberships/{membership}/bindings/{membershipbinding}'
+        'projects/{project}/locations/{location}/memberships/{membership}/bindings/{membershipbinding}',
       ),
       namespacePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/scopes/{scope}/namespaces/{namespace}'
+        'projects/{project}/locations/{location}/scopes/{scope}/namespaces/{namespace}',
       ),
       organizationLocationFleetPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/fleets/{fleet}'
+        'organizations/{organization}/locations/{location}/fleets/{fleet}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
       projectLocationFleetPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/fleets/{fleet}'
+        'projects/{project}/locations/{location}/fleets/{fleet}',
       ),
-      projectLocationMembershipRbacrolebindingPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/memberships/{membership}/rbacrolebindings/{rbacrolebinding}'
-      ),
-      projectLocationScopeRbacrolebindingPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/scopes/{scope}/rbacrolebindings/{rbacrolebinding}'
-      ),
+      projectLocationMembershipRbacrolebindingPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/memberships/{membership}/rbacrolebindings/{rbacrolebinding}',
+        ),
+      projectLocationScopeRbacrolebindingPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/scopes/{scope}/rbacrolebindings/{rbacrolebinding}',
+        ),
       scopePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/scopes/{scope}'
+        'projects/{project}/locations/{location}/scopes/{scope}',
       ),
     };
 
@@ -233,26 +262,56 @@ export class GkeHubClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listMemberships:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'resources'),
-      listBoundMemberships:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'memberships'),
-      listFeatures:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'resources'),
-      listFleets:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'fleets'),
-      listScopeNamespaces:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'scopeNamespaces'),
-      listScopeRBACRoleBindings:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'rbacrolebindings'),
-      listScopes:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'scopes'),
-      listPermittedScopes:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'scopes'),
-      listMembershipBindings:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'membershipBindings'),
-      listMembershipRBACRoleBindings:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'rbacrolebindings')
+      listMemberships: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'resources',
+      ),
+      listBoundMemberships: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'memberships',
+      ),
+      listFeatures: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'resources',
+      ),
+      listFleets: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'fleets',
+      ),
+      listScopeNamespaces: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'scopeNamespaces',
+      ),
+      listScopeRBACRoleBindings: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'rbacrolebindings',
+      ),
+      listScopes: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'scopes',
+      ),
+      listPermittedScopes: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'scopes',
+      ),
+      listMembershipBindings: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'membershipBindings',
+      ),
+      listMembershipRBACRoleBindings: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'rbacrolebindings',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -261,216 +320,386 @@ export class GkeHubClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/*/memberships/*}:getIamPolicy',additional_bindings: [{get: '/v1/{resource=projects/*/locations/*/features/*}:getIamPolicy',}],
-      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/memberships/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/features/*}:setIamPolicy',body: '*',}],
-      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/memberships/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/features/*}:testIamPermissions',body: '*',}],
-      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v1/{name=projects/*/locations/*}',
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v1/{name=projects/*}/locations',
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
+          get: '/v1/{resource=projects/*/locations/*/memberships/*}:getIamPolicy',
+          additional_bindings: [
+            {
+              get: '/v1/{resource=projects/*/locations/*/features/*}:getIamPolicy',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
+          post: '/v1/{resource=projects/*/locations/*/memberships/*}:setIamPolicy',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/features/*}:setIamPolicy',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
+          post: '/v1/{resource=projects/*/locations/*/memberships/*}:testIamPermissions',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/features/*}:testIamPermissions',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
+          body: '*',
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1/{name=projects/*/locations/*}/operations',
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createMembershipResponse = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.Membership') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.Membership',
+    ) as gax.protobuf.Type;
     const createMembershipMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createFeatureResponse = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.Feature') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.Feature',
+    ) as gax.protobuf.Type;
     const createFeatureMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteMembershipResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteMembershipMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteFeatureResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteFeatureMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateMembershipResponse = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.Membership') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.Membership',
+    ) as gax.protobuf.Type;
     const updateMembershipMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateFeatureResponse = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.Feature') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.Feature',
+    ) as gax.protobuf.Type;
     const updateFeatureMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createFleetResponse = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.Fleet') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.Fleet',
+    ) as gax.protobuf.Type;
     const createFleetMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateFleetResponse = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.Fleet') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.Fleet',
+    ) as gax.protobuf.Type;
     const updateFleetMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteFleetResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteFleetMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createScopeNamespaceResponse = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.Namespace') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.Namespace',
+    ) as gax.protobuf.Type;
     const createScopeNamespaceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateScopeNamespaceResponse = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.Namespace') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.Namespace',
+    ) as gax.protobuf.Type;
     const updateScopeNamespaceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteScopeNamespaceResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteScopeNamespaceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createScopeRBACRoleBindingResponse = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.RBACRoleBinding') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.RBACRoleBinding',
+    ) as gax.protobuf.Type;
     const createScopeRBACRoleBindingMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateScopeRBACRoleBindingResponse = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.RBACRoleBinding') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.RBACRoleBinding',
+    ) as gax.protobuf.Type;
     const updateScopeRBACRoleBindingMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteScopeRBACRoleBindingResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteScopeRBACRoleBindingMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createScopeResponse = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.Scope') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.Scope',
+    ) as gax.protobuf.Type;
     const createScopeMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateScopeResponse = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.Scope') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.Scope',
+    ) as gax.protobuf.Type;
     const updateScopeMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteScopeResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteScopeMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createMembershipBindingResponse = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.MembershipBinding') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.MembershipBinding',
+    ) as gax.protobuf.Type;
     const createMembershipBindingMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateMembershipBindingResponse = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.MembershipBinding') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.MembershipBinding',
+    ) as gax.protobuf.Type;
     const updateMembershipBindingMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteMembershipBindingResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteMembershipBindingMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createMembershipRBACRoleBindingResponse = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.RBACRoleBinding') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.RBACRoleBinding',
+    ) as gax.protobuf.Type;
     const createMembershipRBACRoleBindingMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateMembershipRBACRoleBindingResponse = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.RBACRoleBinding') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.RBACRoleBinding',
+    ) as gax.protobuf.Type;
     const updateMembershipRBACRoleBindingMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteMembershipRBACRoleBindingResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteMembershipRBACRoleBindingMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkehub.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkehub.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createMembership: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createMembershipResponse.decode.bind(createMembershipResponse),
-        createMembershipMetadata.decode.bind(createMembershipMetadata)),
+        createMembershipMetadata.decode.bind(createMembershipMetadata),
+      ),
       createFeature: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createFeatureResponse.decode.bind(createFeatureResponse),
-        createFeatureMetadata.decode.bind(createFeatureMetadata)),
+        createFeatureMetadata.decode.bind(createFeatureMetadata),
+      ),
       deleteMembership: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteMembershipResponse.decode.bind(deleteMembershipResponse),
-        deleteMembershipMetadata.decode.bind(deleteMembershipMetadata)),
+        deleteMembershipMetadata.decode.bind(deleteMembershipMetadata),
+      ),
       deleteFeature: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteFeatureResponse.decode.bind(deleteFeatureResponse),
-        deleteFeatureMetadata.decode.bind(deleteFeatureMetadata)),
+        deleteFeatureMetadata.decode.bind(deleteFeatureMetadata),
+      ),
       updateMembership: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateMembershipResponse.decode.bind(updateMembershipResponse),
-        updateMembershipMetadata.decode.bind(updateMembershipMetadata)),
+        updateMembershipMetadata.decode.bind(updateMembershipMetadata),
+      ),
       updateFeature: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateFeatureResponse.decode.bind(updateFeatureResponse),
-        updateFeatureMetadata.decode.bind(updateFeatureMetadata)),
+        updateFeatureMetadata.decode.bind(updateFeatureMetadata),
+      ),
       createFleet: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createFleetResponse.decode.bind(createFleetResponse),
-        createFleetMetadata.decode.bind(createFleetMetadata)),
+        createFleetMetadata.decode.bind(createFleetMetadata),
+      ),
       updateFleet: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateFleetResponse.decode.bind(updateFleetResponse),
-        updateFleetMetadata.decode.bind(updateFleetMetadata)),
+        updateFleetMetadata.decode.bind(updateFleetMetadata),
+      ),
       deleteFleet: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteFleetResponse.decode.bind(deleteFleetResponse),
-        deleteFleetMetadata.decode.bind(deleteFleetMetadata)),
+        deleteFleetMetadata.decode.bind(deleteFleetMetadata),
+      ),
       createScopeNamespace: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createScopeNamespaceResponse.decode.bind(createScopeNamespaceResponse),
-        createScopeNamespaceMetadata.decode.bind(createScopeNamespaceMetadata)),
+        createScopeNamespaceMetadata.decode.bind(createScopeNamespaceMetadata),
+      ),
       updateScopeNamespace: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateScopeNamespaceResponse.decode.bind(updateScopeNamespaceResponse),
-        updateScopeNamespaceMetadata.decode.bind(updateScopeNamespaceMetadata)),
+        updateScopeNamespaceMetadata.decode.bind(updateScopeNamespaceMetadata),
+      ),
       deleteScopeNamespace: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteScopeNamespaceResponse.decode.bind(deleteScopeNamespaceResponse),
-        deleteScopeNamespaceMetadata.decode.bind(deleteScopeNamespaceMetadata)),
+        deleteScopeNamespaceMetadata.decode.bind(deleteScopeNamespaceMetadata),
+      ),
       createScopeRBACRoleBinding: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createScopeRBACRoleBindingResponse.decode.bind(createScopeRBACRoleBindingResponse),
-        createScopeRBACRoleBindingMetadata.decode.bind(createScopeRBACRoleBindingMetadata)),
+        createScopeRBACRoleBindingResponse.decode.bind(
+          createScopeRBACRoleBindingResponse,
+        ),
+        createScopeRBACRoleBindingMetadata.decode.bind(
+          createScopeRBACRoleBindingMetadata,
+        ),
+      ),
       updateScopeRBACRoleBinding: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updateScopeRBACRoleBindingResponse.decode.bind(updateScopeRBACRoleBindingResponse),
-        updateScopeRBACRoleBindingMetadata.decode.bind(updateScopeRBACRoleBindingMetadata)),
+        updateScopeRBACRoleBindingResponse.decode.bind(
+          updateScopeRBACRoleBindingResponse,
+        ),
+        updateScopeRBACRoleBindingMetadata.decode.bind(
+          updateScopeRBACRoleBindingMetadata,
+        ),
+      ),
       deleteScopeRBACRoleBinding: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteScopeRBACRoleBindingResponse.decode.bind(deleteScopeRBACRoleBindingResponse),
-        deleteScopeRBACRoleBindingMetadata.decode.bind(deleteScopeRBACRoleBindingMetadata)),
+        deleteScopeRBACRoleBindingResponse.decode.bind(
+          deleteScopeRBACRoleBindingResponse,
+        ),
+        deleteScopeRBACRoleBindingMetadata.decode.bind(
+          deleteScopeRBACRoleBindingMetadata,
+        ),
+      ),
       createScope: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createScopeResponse.decode.bind(createScopeResponse),
-        createScopeMetadata.decode.bind(createScopeMetadata)),
+        createScopeMetadata.decode.bind(createScopeMetadata),
+      ),
       updateScope: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateScopeResponse.decode.bind(updateScopeResponse),
-        updateScopeMetadata.decode.bind(updateScopeMetadata)),
+        updateScopeMetadata.decode.bind(updateScopeMetadata),
+      ),
       deleteScope: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteScopeResponse.decode.bind(deleteScopeResponse),
-        deleteScopeMetadata.decode.bind(deleteScopeMetadata)),
+        deleteScopeMetadata.decode.bind(deleteScopeMetadata),
+      ),
       createMembershipBinding: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createMembershipBindingResponse.decode.bind(createMembershipBindingResponse),
-        createMembershipBindingMetadata.decode.bind(createMembershipBindingMetadata)),
+        createMembershipBindingResponse.decode.bind(
+          createMembershipBindingResponse,
+        ),
+        createMembershipBindingMetadata.decode.bind(
+          createMembershipBindingMetadata,
+        ),
+      ),
       updateMembershipBinding: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updateMembershipBindingResponse.decode.bind(updateMembershipBindingResponse),
-        updateMembershipBindingMetadata.decode.bind(updateMembershipBindingMetadata)),
+        updateMembershipBindingResponse.decode.bind(
+          updateMembershipBindingResponse,
+        ),
+        updateMembershipBindingMetadata.decode.bind(
+          updateMembershipBindingMetadata,
+        ),
+      ),
       deleteMembershipBinding: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteMembershipBindingResponse.decode.bind(deleteMembershipBindingResponse),
-        deleteMembershipBindingMetadata.decode.bind(deleteMembershipBindingMetadata)),
-      createMembershipRBACRoleBinding: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        createMembershipRBACRoleBindingResponse.decode.bind(createMembershipRBACRoleBindingResponse),
-        createMembershipRBACRoleBindingMetadata.decode.bind(createMembershipRBACRoleBindingMetadata)),
-      updateMembershipRBACRoleBinding: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        updateMembershipRBACRoleBindingResponse.decode.bind(updateMembershipRBACRoleBindingResponse),
-        updateMembershipRBACRoleBindingMetadata.decode.bind(updateMembershipRBACRoleBindingMetadata)),
-      deleteMembershipRBACRoleBinding: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        deleteMembershipRBACRoleBindingResponse.decode.bind(deleteMembershipRBACRoleBindingResponse),
-        deleteMembershipRBACRoleBindingMetadata.decode.bind(deleteMembershipRBACRoleBindingMetadata))
+        deleteMembershipBindingResponse.decode.bind(
+          deleteMembershipBindingResponse,
+        ),
+        deleteMembershipBindingMetadata.decode.bind(
+          deleteMembershipBindingMetadata,
+        ),
+      ),
+      createMembershipRBACRoleBinding:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          createMembershipRBACRoleBindingResponse.decode.bind(
+            createMembershipRBACRoleBindingResponse,
+          ),
+          createMembershipRBACRoleBindingMetadata.decode.bind(
+            createMembershipRBACRoleBindingMetadata,
+          ),
+        ),
+      updateMembershipRBACRoleBinding:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          updateMembershipRBACRoleBindingResponse.decode.bind(
+            updateMembershipRBACRoleBindingResponse,
+          ),
+          updateMembershipRBACRoleBindingMetadata.decode.bind(
+            updateMembershipRBACRoleBindingMetadata,
+          ),
+        ),
+      deleteMembershipRBACRoleBinding:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          deleteMembershipRBACRoleBindingResponse.decode.bind(
+            deleteMembershipRBACRoleBindingResponse,
+          ),
+          deleteMembershipRBACRoleBindingMetadata.decode.bind(
+            deleteMembershipRBACRoleBindingMetadata,
+          ),
+        ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.gkehub.v1.GkeHub', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.gkehub.v1.GkeHub',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -501,28 +730,78 @@ export class GkeHubClient {
     // Put together the "service stub" for
     // google.cloud.gkehub.v1.GkeHub.
     this.gkeHubStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.gkehub.v1.GkeHub') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.gkehub.v1.GkeHub',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.gkehub.v1.GkeHub,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const gkeHubStubMethods =
-        ['listMemberships', 'listBoundMemberships', 'listFeatures', 'getMembership', 'getFeature', 'createMembership', 'createFeature', 'deleteMembership', 'deleteFeature', 'updateMembership', 'updateFeature', 'generateConnectManifest', 'createFleet', 'getFleet', 'updateFleet', 'deleteFleet', 'listFleets', 'getScopeNamespace', 'createScopeNamespace', 'updateScopeNamespace', 'deleteScopeNamespace', 'listScopeNamespaces', 'getScopeRbacRoleBinding', 'createScopeRbacRoleBinding', 'updateScopeRbacRoleBinding', 'deleteScopeRbacRoleBinding', 'listScopeRbacRoleBindings', 'getScope', 'createScope', 'updateScope', 'deleteScope', 'listScopes', 'listPermittedScopes', 'getMembershipBinding', 'createMembershipBinding', 'updateMembershipBinding', 'deleteMembershipBinding', 'listMembershipBindings', 'getMembershipRbacRoleBinding', 'createMembershipRbacRoleBinding', 'updateMembershipRbacRoleBinding', 'deleteMembershipRbacRoleBinding', 'listMembershipRbacRoleBindings', 'generateMembershipRbacRoleBindingYamL'];
+    const gkeHubStubMethods = [
+      'listMemberships',
+      'listBoundMemberships',
+      'listFeatures',
+      'getMembership',
+      'getFeature',
+      'createMembership',
+      'createFeature',
+      'deleteMembership',
+      'deleteFeature',
+      'updateMembership',
+      'updateFeature',
+      'generateConnectManifest',
+      'createFleet',
+      'getFleet',
+      'updateFleet',
+      'deleteFleet',
+      'listFleets',
+      'getScopeNamespace',
+      'createScopeNamespace',
+      'updateScopeNamespace',
+      'deleteScopeNamespace',
+      'listScopeNamespaces',
+      'getScopeRbacRoleBinding',
+      'createScopeRbacRoleBinding',
+      'updateScopeRbacRoleBinding',
+      'deleteScopeRbacRoleBinding',
+      'listScopeRbacRoleBindings',
+      'getScope',
+      'createScope',
+      'updateScope',
+      'deleteScope',
+      'listScopes',
+      'listPermittedScopes',
+      'getMembershipBinding',
+      'createMembershipBinding',
+      'updateMembershipBinding',
+      'deleteMembershipBinding',
+      'listMembershipBindings',
+      'getMembershipRbacRoleBinding',
+      'createMembershipRbacRoleBinding',
+      'updateMembershipRbacRoleBinding',
+      'deleteMembershipRbacRoleBinding',
+      'listMembershipRbacRoleBindings',
+      'generateMembershipRbacRoleBindingYamL',
+    ];
     for (const methodName of gkeHubStubMethods) {
       const callPromise = this.gkeHubStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -532,7 +811,7 @@ export class GkeHubClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -547,8 +826,14 @@ export class GkeHubClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'gkehub.googleapis.com';
   }
@@ -559,8 +844,14 @@ export class GkeHubClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'gkehub.googleapis.com';
   }
@@ -591,9 +882,7 @@ export class GkeHubClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -602,8 +891,9 @@ export class GkeHubClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -614,3905 +904,5827 @@ export class GkeHubClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets the details of a Membership.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The Membership resource name in the format
- *   `projects/* /locations/* /memberships/*`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.gkehub.v1.Membership|Membership}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.get_membership.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_GetMembership_async
- */
+  /**
+   * Gets the details of a Membership.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The Membership resource name in the format
+   *   `projects/* /locations/* /memberships/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkehub.v1.Membership|Membership}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.get_membership.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_GetMembership_async
+   */
   getMembership(
-      request?: protos.google.cloud.gkehub.v1.IGetMembershipRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IMembership,
-        protos.google.cloud.gkehub.v1.IGetMembershipRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IGetMembershipRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IMembership,
+      protos.google.cloud.gkehub.v1.IGetMembershipRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getMembership(
-      request: protos.google.cloud.gkehub.v1.IGetMembershipRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.gkehub.v1.IMembership,
-          protos.google.cloud.gkehub.v1.IGetMembershipRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IGetMembershipRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.gkehub.v1.IMembership,
+      protos.google.cloud.gkehub.v1.IGetMembershipRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMembership(
-      request: protos.google.cloud.gkehub.v1.IGetMembershipRequest,
-      callback: Callback<
-          protos.google.cloud.gkehub.v1.IMembership,
-          protos.google.cloud.gkehub.v1.IGetMembershipRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IGetMembershipRequest,
+    callback: Callback<
+      protos.google.cloud.gkehub.v1.IMembership,
+      protos.google.cloud.gkehub.v1.IGetMembershipRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMembership(
-      request?: protos.google.cloud.gkehub.v1.IGetMembershipRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.gkehub.v1.IGetMembershipRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.gkehub.v1.IMembership,
-          protos.google.cloud.gkehub.v1.IGetMembershipRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.gkehub.v1.IMembership,
-          protos.google.cloud.gkehub.v1.IGetMembershipRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IMembership,
-        protos.google.cloud.gkehub.v1.IGetMembershipRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.gkehub.v1.IGetMembershipRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.gkehub.v1.IMembership,
+      protos.google.cloud.gkehub.v1.IGetMembershipRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IMembership,
+      protos.google.cloud.gkehub.v1.IGetMembershipRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getMembership request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.gkehub.v1.IMembership,
-        protos.google.cloud.gkehub.v1.IGetMembershipRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkehub.v1.IMembership,
+          | protos.google.cloud.gkehub.v1.IGetMembershipRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getMembership response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getMembership(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.gkehub.v1.IMembership,
-        protos.google.cloud.gkehub.v1.IGetMembershipRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getMembership response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getMembership(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkehub.v1.IMembership,
+          protos.google.cloud.gkehub.v1.IGetMembershipRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getMembership response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details of a single Feature.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The Feature resource name in the format
- *   `projects/* /locations/* /features/*`
- * @param {boolean} [request.returnPartialSuccess]
- *   Optional. If set to true, the response will return partial results when
- *   some regions are unreachable and the unreachable field in Feature proto
- *   will be populated. If set to false, the request will fail when some regions
- *   are unreachable.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.gkehub.v1.Feature|Feature}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.get_feature.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_GetFeature_async
- */
+  /**
+   * Gets details of a single Feature.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The Feature resource name in the format
+   *   `projects/* /locations/* /features/*`
+   * @param {boolean} [request.returnPartialSuccess]
+   *   Optional. If set to true, the response will return partial results when
+   *   some regions are unreachable and the unreachable field in Feature proto
+   *   will be populated. If set to false, the request will fail when some regions
+   *   are unreachable.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkehub.v1.Feature|Feature}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.get_feature.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_GetFeature_async
+   */
   getFeature(
-      request?: protos.google.cloud.gkehub.v1.IGetFeatureRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IFeature,
-        protos.google.cloud.gkehub.v1.IGetFeatureRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IGetFeatureRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IFeature,
+      protos.google.cloud.gkehub.v1.IGetFeatureRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getFeature(
-      request: protos.google.cloud.gkehub.v1.IGetFeatureRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.gkehub.v1.IFeature,
-          protos.google.cloud.gkehub.v1.IGetFeatureRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IGetFeatureRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.gkehub.v1.IFeature,
+      protos.google.cloud.gkehub.v1.IGetFeatureRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getFeature(
-      request: protos.google.cloud.gkehub.v1.IGetFeatureRequest,
-      callback: Callback<
-          protos.google.cloud.gkehub.v1.IFeature,
-          protos.google.cloud.gkehub.v1.IGetFeatureRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IGetFeatureRequest,
+    callback: Callback<
+      protos.google.cloud.gkehub.v1.IFeature,
+      protos.google.cloud.gkehub.v1.IGetFeatureRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getFeature(
-      request?: protos.google.cloud.gkehub.v1.IGetFeatureRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.gkehub.v1.IGetFeatureRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.gkehub.v1.IFeature,
-          protos.google.cloud.gkehub.v1.IGetFeatureRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.gkehub.v1.IFeature,
-          protos.google.cloud.gkehub.v1.IGetFeatureRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IFeature,
-        protos.google.cloud.gkehub.v1.IGetFeatureRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.gkehub.v1.IGetFeatureRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.gkehub.v1.IFeature,
+      protos.google.cloud.gkehub.v1.IGetFeatureRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IFeature,
+      protos.google.cloud.gkehub.v1.IGetFeatureRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getFeature request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.gkehub.v1.IFeature,
-        protos.google.cloud.gkehub.v1.IGetFeatureRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkehub.v1.IFeature,
+          protos.google.cloud.gkehub.v1.IGetFeatureRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getFeature response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getFeature(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.gkehub.v1.IFeature,
-        protos.google.cloud.gkehub.v1.IGetFeatureRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getFeature response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getFeature(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkehub.v1.IFeature,
+          protos.google.cloud.gkehub.v1.IGetFeatureRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getFeature response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Generates the manifest for deployment of the GKE connect agent.
- *
- * **This method is used internally by Google-provided libraries.**
- * Most clients should not need to call this method directly.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The Membership resource name the Agent will associate with, in
- *   the format `projects/* /locations/* /memberships/*`.
- * @param {string} [request.namespace]
- *   Optional. Namespace for GKE Connect agent resources. Defaults to
- *   `gke-connect`.
- *
- *   The Connect Agent is authorized automatically when run in the default
- *   namespace. Otherwise, explicit authorization must be granted with an
- *   additional IAM binding.
- * @param {Buffer} [request.proxy]
- *   Optional. URI of a proxy if connectivity from the agent to
- *   gkeconnect.googleapis.com requires the use of a proxy. Format must be in
- *   the form `http(s)://{proxy_address}`, depending on the HTTP/HTTPS protocol
- *   supported by the proxy. This will direct the connect agent's outbound
- *   traffic through a HTTP(S) proxy.
- * @param {string} [request.version]
- *   Optional. The Connect agent version to use. Defaults to the most current
- *   version.
- * @param {boolean} [request.isUpgrade]
- *   Optional. If true, generate the resources for upgrade only. Some resources
- *   generated only for installation (e.g. secrets) will be excluded.
- * @param {string} [request.registry]
- *   Optional. The registry to fetch the connect agent image from. Defaults to
- *   gcr.io/gkeconnect.
- * @param {Buffer} [request.imagePullSecretContent]
- *   Optional. The image pull secret content for the registry, if not public.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.gkehub.v1.GenerateConnectManifestResponse|GenerateConnectManifestResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.generate_connect_manifest.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_GenerateConnectManifest_async
- */
+  /**
+   * Generates the manifest for deployment of the GKE connect agent.
+   *
+   * **This method is used internally by Google-provided libraries.**
+   * Most clients should not need to call this method directly.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The Membership resource name the Agent will associate with, in
+   *   the format `projects/* /locations/* /memberships/*`.
+   * @param {string} [request.namespace]
+   *   Optional. Namespace for GKE Connect agent resources. Defaults to
+   *   `gke-connect`.
+   *
+   *   The Connect Agent is authorized automatically when run in the default
+   *   namespace. Otherwise, explicit authorization must be granted with an
+   *   additional IAM binding.
+   * @param {Buffer} [request.proxy]
+   *   Optional. URI of a proxy if connectivity from the agent to
+   *   gkeconnect.googleapis.com requires the use of a proxy. Format must be in
+   *   the form `http(s)://{proxy_address}`, depending on the HTTP/HTTPS protocol
+   *   supported by the proxy. This will direct the connect agent's outbound
+   *   traffic through a HTTP(S) proxy.
+   * @param {string} [request.version]
+   *   Optional. The Connect agent version to use. Defaults to the most current
+   *   version.
+   * @param {boolean} [request.isUpgrade]
+   *   Optional. If true, generate the resources for upgrade only. Some resources
+   *   generated only for installation (e.g. secrets) will be excluded.
+   * @param {string} [request.registry]
+   *   Optional. The registry to fetch the connect agent image from. Defaults to
+   *   gcr.io/gkeconnect.
+   * @param {Buffer} [request.imagePullSecretContent]
+   *   Optional. The image pull secret content for the registry, if not public.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkehub.v1.GenerateConnectManifestResponse|GenerateConnectManifestResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.generate_connect_manifest.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_GenerateConnectManifest_async
+   */
   generateConnectManifest(
-      request?: protos.google.cloud.gkehub.v1.IGenerateConnectManifestRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IGenerateConnectManifestResponse,
-        protos.google.cloud.gkehub.v1.IGenerateConnectManifestRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IGenerateConnectManifestRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IGenerateConnectManifestResponse,
+      protos.google.cloud.gkehub.v1.IGenerateConnectManifestRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   generateConnectManifest(
-      request: protos.google.cloud.gkehub.v1.IGenerateConnectManifestRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.gkehub.v1.IGenerateConnectManifestResponse,
-          protos.google.cloud.gkehub.v1.IGenerateConnectManifestRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IGenerateConnectManifestRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.gkehub.v1.IGenerateConnectManifestResponse,
+      | protos.google.cloud.gkehub.v1.IGenerateConnectManifestRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   generateConnectManifest(
-      request: protos.google.cloud.gkehub.v1.IGenerateConnectManifestRequest,
-      callback: Callback<
-          protos.google.cloud.gkehub.v1.IGenerateConnectManifestResponse,
-          protos.google.cloud.gkehub.v1.IGenerateConnectManifestRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IGenerateConnectManifestRequest,
+    callback: Callback<
+      protos.google.cloud.gkehub.v1.IGenerateConnectManifestResponse,
+      | protos.google.cloud.gkehub.v1.IGenerateConnectManifestRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   generateConnectManifest(
-      request?: protos.google.cloud.gkehub.v1.IGenerateConnectManifestRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.gkehub.v1.IGenerateConnectManifestRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.gkehub.v1.IGenerateConnectManifestResponse,
-          protos.google.cloud.gkehub.v1.IGenerateConnectManifestRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.gkehub.v1.IGenerateConnectManifestResponse,
-          protos.google.cloud.gkehub.v1.IGenerateConnectManifestRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IGenerateConnectManifestResponse,
-        protos.google.cloud.gkehub.v1.IGenerateConnectManifestRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.gkehub.v1.IGenerateConnectManifestRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.gkehub.v1.IGenerateConnectManifestResponse,
+      | protos.google.cloud.gkehub.v1.IGenerateConnectManifestRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IGenerateConnectManifestResponse,
+      protos.google.cloud.gkehub.v1.IGenerateConnectManifestRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('generateConnectManifest request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.gkehub.v1.IGenerateConnectManifestResponse,
-        protos.google.cloud.gkehub.v1.IGenerateConnectManifestRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkehub.v1.IGenerateConnectManifestResponse,
+          | protos.google.cloud.gkehub.v1.IGenerateConnectManifestRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('generateConnectManifest response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.generateConnectManifest(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.gkehub.v1.IGenerateConnectManifestResponse,
-        protos.google.cloud.gkehub.v1.IGenerateConnectManifestRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('generateConnectManifest response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .generateConnectManifest(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkehub.v1.IGenerateConnectManifestResponse,
+          (
+            | protos.google.cloud.gkehub.v1.IGenerateConnectManifestRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('generateConnectManifest response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Returns the details of a fleet.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The Fleet resource name in the format
- *   `projects/* /locations/* /fleets/*`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.gkehub.v1.Fleet|Fleet}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.get_fleet.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_GetFleet_async
- */
+  /**
+   * Returns the details of a fleet.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The Fleet resource name in the format
+   *   `projects/* /locations/* /fleets/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkehub.v1.Fleet|Fleet}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.get_fleet.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_GetFleet_async
+   */
   getFleet(
-      request?: protos.google.cloud.gkehub.v1.IGetFleetRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IFleet,
-        protos.google.cloud.gkehub.v1.IGetFleetRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IGetFleetRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IFleet,
+      protos.google.cloud.gkehub.v1.IGetFleetRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getFleet(
-      request: protos.google.cloud.gkehub.v1.IGetFleetRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.gkehub.v1.IFleet,
-          protos.google.cloud.gkehub.v1.IGetFleetRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IGetFleetRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.gkehub.v1.IFleet,
+      protos.google.cloud.gkehub.v1.IGetFleetRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getFleet(
-      request: protos.google.cloud.gkehub.v1.IGetFleetRequest,
-      callback: Callback<
-          protos.google.cloud.gkehub.v1.IFleet,
-          protos.google.cloud.gkehub.v1.IGetFleetRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IGetFleetRequest,
+    callback: Callback<
+      protos.google.cloud.gkehub.v1.IFleet,
+      protos.google.cloud.gkehub.v1.IGetFleetRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getFleet(
-      request?: protos.google.cloud.gkehub.v1.IGetFleetRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.gkehub.v1.IGetFleetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.gkehub.v1.IFleet,
-          protos.google.cloud.gkehub.v1.IGetFleetRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.gkehub.v1.IFleet,
-          protos.google.cloud.gkehub.v1.IGetFleetRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IFleet,
-        protos.google.cloud.gkehub.v1.IGetFleetRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.gkehub.v1.IGetFleetRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.gkehub.v1.IFleet,
+      protos.google.cloud.gkehub.v1.IGetFleetRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IFleet,
+      protos.google.cloud.gkehub.v1.IGetFleetRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getFleet request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.gkehub.v1.IFleet,
-        protos.google.cloud.gkehub.v1.IGetFleetRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkehub.v1.IFleet,
+          protos.google.cloud.gkehub.v1.IGetFleetRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getFleet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getFleet(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.gkehub.v1.IFleet,
-        protos.google.cloud.gkehub.v1.IGetFleetRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getFleet response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getFleet(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkehub.v1.IFleet,
+          protos.google.cloud.gkehub.v1.IGetFleetRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getFleet response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Returns the details of a fleet namespace.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The Namespace resource name in the format
- *   `projects/* /locations/* /scopes/* /namespaces/*`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.gkehub.v1.Namespace|Namespace}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.get_scope_namespace.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_GetScopeNamespace_async
- */
+  /**
+   * Returns the details of a fleet namespace.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The Namespace resource name in the format
+   *   `projects/* /locations/* /scopes/* /namespaces/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkehub.v1.Namespace|Namespace}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.get_scope_namespace.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_GetScopeNamespace_async
+   */
   getScopeNamespace(
-      request?: protos.google.cloud.gkehub.v1.IGetScopeNamespaceRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkehub.v1.INamespace,
-        protos.google.cloud.gkehub.v1.IGetScopeNamespaceRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IGetScopeNamespaceRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.INamespace,
+      protos.google.cloud.gkehub.v1.IGetScopeNamespaceRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getScopeNamespace(
-      request: protos.google.cloud.gkehub.v1.IGetScopeNamespaceRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.gkehub.v1.INamespace,
-          protos.google.cloud.gkehub.v1.IGetScopeNamespaceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IGetScopeNamespaceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.gkehub.v1.INamespace,
+      | protos.google.cloud.gkehub.v1.IGetScopeNamespaceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getScopeNamespace(
-      request: protos.google.cloud.gkehub.v1.IGetScopeNamespaceRequest,
-      callback: Callback<
-          protos.google.cloud.gkehub.v1.INamespace,
-          protos.google.cloud.gkehub.v1.IGetScopeNamespaceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IGetScopeNamespaceRequest,
+    callback: Callback<
+      protos.google.cloud.gkehub.v1.INamespace,
+      | protos.google.cloud.gkehub.v1.IGetScopeNamespaceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getScopeNamespace(
-      request?: protos.google.cloud.gkehub.v1.IGetScopeNamespaceRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.gkehub.v1.IGetScopeNamespaceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.gkehub.v1.INamespace,
-          protos.google.cloud.gkehub.v1.IGetScopeNamespaceRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.gkehub.v1.INamespace,
-          protos.google.cloud.gkehub.v1.IGetScopeNamespaceRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.gkehub.v1.INamespace,
-        protos.google.cloud.gkehub.v1.IGetScopeNamespaceRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.gkehub.v1.IGetScopeNamespaceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.gkehub.v1.INamespace,
+      | protos.google.cloud.gkehub.v1.IGetScopeNamespaceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.INamespace,
+      protos.google.cloud.gkehub.v1.IGetScopeNamespaceRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getScopeNamespace request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.gkehub.v1.INamespace,
-        protos.google.cloud.gkehub.v1.IGetScopeNamespaceRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkehub.v1.INamespace,
+          | protos.google.cloud.gkehub.v1.IGetScopeNamespaceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getScopeNamespace response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getScopeNamespace(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.gkehub.v1.INamespace,
-        protos.google.cloud.gkehub.v1.IGetScopeNamespaceRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getScopeNamespace response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getScopeNamespace(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkehub.v1.INamespace,
+          protos.google.cloud.gkehub.v1.IGetScopeNamespaceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getScopeNamespace response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Returns the details of a Scope RBACRoleBinding.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The RBACRoleBinding resource name in the format
- *   `projects/* /locations/* /scopes/* /rbacrolebindings/*`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.gkehub.v1.RBACRoleBinding|RBACRoleBinding}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.get_scope_r_b_a_c_role_binding.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_GetScopeRBACRoleBinding_async
- */
+  /**
+   * Returns the details of a Scope RBACRoleBinding.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The RBACRoleBinding resource name in the format
+   *   `projects/* /locations/* /scopes/* /rbacrolebindings/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkehub.v1.RBACRoleBinding|RBACRoleBinding}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.get_scope_r_b_a_c_role_binding.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_GetScopeRBACRoleBinding_async
+   */
   getScopeRBACRoleBinding(
-      request?: protos.google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IRBACRoleBinding,
-        protos.google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+      protos.google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getScopeRBACRoleBinding(
-      request: protos.google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.gkehub.v1.IRBACRoleBinding,
-          protos.google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+      | protos.google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getScopeRBACRoleBinding(
-      request: protos.google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest,
-      callback: Callback<
-          protos.google.cloud.gkehub.v1.IRBACRoleBinding,
-          protos.google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest,
+    callback: Callback<
+      protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+      | protos.google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getScopeRBACRoleBinding(
-      request?: protos.google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.gkehub.v1.IRBACRoleBinding,
-          protos.google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.gkehub.v1.IRBACRoleBinding,
-          protos.google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IRBACRoleBinding,
-        protos.google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+      | protos.google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+      protos.google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getScopeRBACRoleBinding request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.gkehub.v1.IRBACRoleBinding,
-        protos.google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+          | protos.google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getScopeRBACRoleBinding response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getScopeRbacRoleBinding(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.gkehub.v1.IRBACRoleBinding,
-        protos.google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getScopeRBACRoleBinding response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getScopeRbacRoleBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+          (
+            | protos.google.cloud.gkehub.v1.IGetScopeRBACRoleBindingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getScopeRBACRoleBinding response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Returns the details of a Scope.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The Scope resource name in the format
- *   `projects/* /locations/* /scopes/*`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.gkehub.v1.Scope|Scope}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.get_scope.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_GetScope_async
- */
+  /**
+   * Returns the details of a Scope.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The Scope resource name in the format
+   *   `projects/* /locations/* /scopes/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkehub.v1.Scope|Scope}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.get_scope.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_GetScope_async
+   */
   getScope(
-      request?: protos.google.cloud.gkehub.v1.IGetScopeRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IScope,
-        protos.google.cloud.gkehub.v1.IGetScopeRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IGetScopeRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IScope,
+      protos.google.cloud.gkehub.v1.IGetScopeRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getScope(
-      request: protos.google.cloud.gkehub.v1.IGetScopeRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.gkehub.v1.IScope,
-          protos.google.cloud.gkehub.v1.IGetScopeRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IGetScopeRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.gkehub.v1.IScope,
+      protos.google.cloud.gkehub.v1.IGetScopeRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getScope(
-      request: protos.google.cloud.gkehub.v1.IGetScopeRequest,
-      callback: Callback<
-          protos.google.cloud.gkehub.v1.IScope,
-          protos.google.cloud.gkehub.v1.IGetScopeRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IGetScopeRequest,
+    callback: Callback<
+      protos.google.cloud.gkehub.v1.IScope,
+      protos.google.cloud.gkehub.v1.IGetScopeRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getScope(
-      request?: protos.google.cloud.gkehub.v1.IGetScopeRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.gkehub.v1.IGetScopeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.gkehub.v1.IScope,
-          protos.google.cloud.gkehub.v1.IGetScopeRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.gkehub.v1.IScope,
-          protos.google.cloud.gkehub.v1.IGetScopeRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IScope,
-        protos.google.cloud.gkehub.v1.IGetScopeRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.gkehub.v1.IGetScopeRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.gkehub.v1.IScope,
+      protos.google.cloud.gkehub.v1.IGetScopeRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IScope,
+      protos.google.cloud.gkehub.v1.IGetScopeRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getScope request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.gkehub.v1.IScope,
-        protos.google.cloud.gkehub.v1.IGetScopeRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkehub.v1.IScope,
+          protos.google.cloud.gkehub.v1.IGetScopeRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getScope response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getScope(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.gkehub.v1.IScope,
-        protos.google.cloud.gkehub.v1.IGetScopeRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getScope response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getScope(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkehub.v1.IScope,
+          protos.google.cloud.gkehub.v1.IGetScopeRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getScope response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Returns the details of a MembershipBinding.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The MembershipBinding resource name in the format
- *   `projects/* /locations/* /memberships/* /bindings/*`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.gkehub.v1.MembershipBinding|MembershipBinding}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.get_membership_binding.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_GetMembershipBinding_async
- */
+  /**
+   * Returns the details of a MembershipBinding.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The MembershipBinding resource name in the format
+   *   `projects/* /locations/* /memberships/* /bindings/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkehub.v1.MembershipBinding|MembershipBinding}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.get_membership_binding.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_GetMembershipBinding_async
+   */
   getMembershipBinding(
-      request?: protos.google.cloud.gkehub.v1.IGetMembershipBindingRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IMembershipBinding,
-        protos.google.cloud.gkehub.v1.IGetMembershipBindingRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IGetMembershipBindingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IMembershipBinding,
+      protos.google.cloud.gkehub.v1.IGetMembershipBindingRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getMembershipBinding(
-      request: protos.google.cloud.gkehub.v1.IGetMembershipBindingRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.gkehub.v1.IMembershipBinding,
-          protos.google.cloud.gkehub.v1.IGetMembershipBindingRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IGetMembershipBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.gkehub.v1.IMembershipBinding,
+      | protos.google.cloud.gkehub.v1.IGetMembershipBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMembershipBinding(
-      request: protos.google.cloud.gkehub.v1.IGetMembershipBindingRequest,
-      callback: Callback<
-          protos.google.cloud.gkehub.v1.IMembershipBinding,
-          protos.google.cloud.gkehub.v1.IGetMembershipBindingRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IGetMembershipBindingRequest,
+    callback: Callback<
+      protos.google.cloud.gkehub.v1.IMembershipBinding,
+      | protos.google.cloud.gkehub.v1.IGetMembershipBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMembershipBinding(
-      request?: protos.google.cloud.gkehub.v1.IGetMembershipBindingRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.gkehub.v1.IGetMembershipBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.gkehub.v1.IMembershipBinding,
-          protos.google.cloud.gkehub.v1.IGetMembershipBindingRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.gkehub.v1.IMembershipBinding,
-          protos.google.cloud.gkehub.v1.IGetMembershipBindingRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IMembershipBinding,
-        protos.google.cloud.gkehub.v1.IGetMembershipBindingRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.gkehub.v1.IGetMembershipBindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.gkehub.v1.IMembershipBinding,
+      | protos.google.cloud.gkehub.v1.IGetMembershipBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IMembershipBinding,
+      protos.google.cloud.gkehub.v1.IGetMembershipBindingRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getMembershipBinding request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.gkehub.v1.IMembershipBinding,
-        protos.google.cloud.gkehub.v1.IGetMembershipBindingRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkehub.v1.IMembershipBinding,
+          | protos.google.cloud.gkehub.v1.IGetMembershipBindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getMembershipBinding response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getMembershipBinding(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.gkehub.v1.IMembershipBinding,
-        protos.google.cloud.gkehub.v1.IGetMembershipBindingRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getMembershipBinding response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getMembershipBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkehub.v1.IMembershipBinding,
+          (
+            | protos.google.cloud.gkehub.v1.IGetMembershipBindingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getMembershipBinding response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Returns the details of a Membership RBACRoleBinding.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The RBACRoleBinding resource name in the format
- *   `projects/* /locations/* /memberships/* /rbacrolebindings/*`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.gkehub.v1.RBACRoleBinding|RBACRoleBinding}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.get_membership_r_b_a_c_role_binding.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_GetMembershipRBACRoleBinding_async
- */
+  /**
+   * Returns the details of a Membership RBACRoleBinding.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The RBACRoleBinding resource name in the format
+   *   `projects/* /locations/* /memberships/* /rbacrolebindings/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkehub.v1.RBACRoleBinding|RBACRoleBinding}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.get_membership_r_b_a_c_role_binding.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_GetMembershipRBACRoleBinding_async
+   */
   getMembershipRBACRoleBinding(
-      request?: protos.google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IRBACRoleBinding,
-        protos.google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+      (
+        | protos.google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getMembershipRBACRoleBinding(
-      request: protos.google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.gkehub.v1.IRBACRoleBinding,
-          protos.google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+      | protos.google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMembershipRBACRoleBinding(
-      request: protos.google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest,
-      callback: Callback<
-          protos.google.cloud.gkehub.v1.IRBACRoleBinding,
-          protos.google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest,
+    callback: Callback<
+      protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+      | protos.google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMembershipRBACRoleBinding(
-      request?: protos.google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.gkehub.v1.IRBACRoleBinding,
-          protos.google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.gkehub.v1.IRBACRoleBinding,
-          protos.google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IRBACRoleBinding,
-        protos.google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+      | protos.google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+      (
+        | protos.google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getMembershipRBACRoleBinding request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.gkehub.v1.IRBACRoleBinding,
-        protos.google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+          | protos.google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getMembershipRBACRoleBinding response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getMembershipRbacRoleBinding(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.gkehub.v1.IRBACRoleBinding,
-        protos.google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getMembershipRBACRoleBinding response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getMembershipRbacRoleBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+          (
+            | protos.google.cloud.gkehub.v1.IGetMembershipRBACRoleBindingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getMembershipRBACRoleBinding response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Generates a YAML of the  RBAC policies for the specified
- * RoleBinding and its associated impersonation resources.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the RBACRoleBinding will
- *   be created. Specified in the format `projects/* /locations/* /memberships/*`.
- * @param {string} request.rbacrolebindingId
- *   Required. Client chosen ID for the RBACRoleBinding. `rbacrolebinding_id`
- *   must be a valid RFC 1123 compliant DNS label:
- *
- *     1. At most 63 characters in length
- *     2. It must consist of lower case alphanumeric characters or `-`
- *     3. It must start and end with an alphanumeric character
- *
- *   Which can be expressed as the regex: `[a-z0-9]([-a-z0-9]*[a-z0-9])?`,
- *   with a maximum length of 63 characters.
- * @param {google.cloud.gkehub.v1.RBACRoleBinding} request.rbacrolebinding
- *   Required. The rbacrolebindings to generate the YAML for.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.gkehub.v1.GenerateMembershipRBACRoleBindingYAMLResponse|GenerateMembershipRBACRoleBindingYAMLResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.generate_membership_r_b_a_c_role_binding_y_a_m_l.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_GenerateMembershipRBACRoleBindingYAML_async
- */
+  /**
+   * Generates a YAML of the  RBAC policies for the specified
+   * RoleBinding and its associated impersonation resources.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the RBACRoleBinding will
+   *   be created. Specified in the format `projects/* /locations/* /memberships/*`.
+   * @param {string} request.rbacrolebindingId
+   *   Required. Client chosen ID for the RBACRoleBinding. `rbacrolebinding_id`
+   *   must be a valid RFC 1123 compliant DNS label:
+   *
+   *     1. At most 63 characters in length
+   *     2. It must consist of lower case alphanumeric characters or `-`
+   *     3. It must start and end with an alphanumeric character
+   *
+   *   Which can be expressed as the regex: `[a-z0-9]([-a-z0-9]*[a-z0-9])?`,
+   *   with a maximum length of 63 characters.
+   * @param {google.cloud.gkehub.v1.RBACRoleBinding} request.rbacrolebinding
+   *   Required. The rbacrolebindings to generate the YAML for.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkehub.v1.GenerateMembershipRBACRoleBindingYAMLResponse|GenerateMembershipRBACRoleBindingYAMLResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.generate_membership_r_b_a_c_role_binding_y_a_m_l.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_GenerateMembershipRBACRoleBindingYAML_async
+   */
   generateMembershipRBACRoleBindingYAML(
-      request?: protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLResponse,
-        protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLResponse,
+      (
+        | protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   generateMembershipRBACRoleBindingYAML(
-      request: protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLResponse,
-          protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLResponse,
+      | protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   generateMembershipRBACRoleBindingYAML(
-      request: protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest,
-      callback: Callback<
-          protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLResponse,
-          protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest,
+    callback: Callback<
+      protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLResponse,
+      | protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   generateMembershipRBACRoleBindingYAML(
-      request?: protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLResponse,
-          protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLResponse,
-          protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLResponse,
-        protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLResponse,
+      | protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLResponse,
+      (
+        | protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('generateMembershipRBACRoleBindingYAML request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLResponse,
-        protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLResponse,
+          | protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('generateMembershipRBACRoleBindingYAML response %j', response);
+          this._log.info(
+            'generateMembershipRBACRoleBindingYAML response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.generateMembershipRbacRoleBindingYamL(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLResponse,
-        protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('generateMembershipRBACRoleBindingYAML response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .generateMembershipRbacRoleBindingYamL(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLResponse,
+          (
+            | protos.google.cloud.gkehub.v1.IGenerateMembershipRBACRoleBindingYAMLRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'generateMembershipRBACRoleBindingYAML response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Creates a new Membership.
- *
- * **This is currently only supported for GKE clusters on Google Cloud**.
- * To register other clusters, follow the instructions at
- * https://cloud.google.com/anthos/multicluster-management/connect/registering-a-cluster.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the Memberships will be
- *   created. Specified in the format `projects/* /locations/*`.
- * @param {string} request.membershipId
- *   Required. Client chosen ID for the membership. `membership_id` must be a
- *   valid RFC 1123 compliant DNS label:
- *
- *     1. At most 63 characters in length
- *     2. It must consist of lower case alphanumeric characters or `-`
- *     3. It must start and end with an alphanumeric character
- *
- *   Which can be expressed as the regex: `[a-z0-9]([-a-z0-9]*[a-z0-9])?`,
- *   with a maximum length of 63 characters.
- * @param {google.cloud.gkehub.v1.Membership} request.resource
- *   Required. The membership to create.
- * @param {string} [request.requestId]
- *   Optional. A request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes after the first request.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.create_membership.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_CreateMembership_async
- */
+  /**
+   * Creates a new Membership.
+   *
+   * **This is currently only supported for GKE clusters on Google Cloud**.
+   * To register other clusters, follow the instructions at
+   * https://cloud.google.com/anthos/multicluster-management/connect/registering-a-cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the Memberships will be
+   *   created. Specified in the format `projects/* /locations/*`.
+   * @param {string} request.membershipId
+   *   Required. Client chosen ID for the membership. `membership_id` must be a
+   *   valid RFC 1123 compliant DNS label:
+   *
+   *     1. At most 63 characters in length
+   *     2. It must consist of lower case alphanumeric characters or `-`
+   *     3. It must start and end with an alphanumeric character
+   *
+   *   Which can be expressed as the regex: `[a-z0-9]([-a-z0-9]*[a-z0-9])?`,
+   *   with a maximum length of 63 characters.
+   * @param {google.cloud.gkehub.v1.Membership} request.resource
+   *   Required. The membership to create.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.create_membership.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_CreateMembership_async
+   */
   createMembership(
-      request?: protos.google.cloud.gkehub.v1.ICreateMembershipRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.IMembership, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.ICreateMembershipRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.IMembership,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createMembership(
-      request: protos.google.cloud.gkehub.v1.ICreateMembershipRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IMembership, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.ICreateMembershipRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IMembership,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createMembership(
-      request: protos.google.cloud.gkehub.v1.ICreateMembershipRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IMembership, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.ICreateMembershipRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IMembership,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createMembership(
-      request?: protos.google.cloud.gkehub.v1.ICreateMembershipRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IMembership, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IMembership, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.IMembership, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkehub.v1.ICreateMembershipRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IMembership,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IMembership,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.IMembership,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IMembership, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IMembership,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createMembership response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createMembership request %j', request);
-    return this.innerApiCalls.createMembership(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.gkehub.v1.IMembership, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createMembership response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createMembership(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkehub.v1.IMembership,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createMembership response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createMembership()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.create_membership.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_CreateMembership_async
- */
-  async checkCreateMembershipProgress(name: string): Promise<LROperation<protos.google.cloud.gkehub.v1.Membership, protos.google.cloud.gkehub.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createMembership()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.create_membership.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_CreateMembership_async
+   */
+  async checkCreateMembershipProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gkehub.v1.Membership,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >
+  > {
     this._log.info('createMembership long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createMembership, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.gkehub.v1.Membership, protos.google.cloud.gkehub.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createMembership,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gkehub.v1.Membership,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >;
   }
-/**
- * Adds a new Feature.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the Feature will be
- *   created. Specified in the format `projects/* /locations/*`.
- * @param {string} request.featureId
- *   The ID of the feature to create.
- * @param {google.cloud.gkehub.v1.Feature} request.resource
- *   The Feature resource to create.
- * @param {string} request.requestId
- *   A request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes after the first request.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.create_feature.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_CreateFeature_async
- */
+  /**
+   * Adds a new Feature.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the Feature will be
+   *   created. Specified in the format `projects/* /locations/*`.
+   * @param {string} request.featureId
+   *   The ID of the feature to create.
+   * @param {google.cloud.gkehub.v1.Feature} request.resource
+   *   The Feature resource to create.
+   * @param {string} request.requestId
+   *   A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.create_feature.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_CreateFeature_async
+   */
   createFeature(
-      request?: protos.google.cloud.gkehub.v1.ICreateFeatureRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.IFeature, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.ICreateFeatureRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.IFeature,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createFeature(
-      request: protos.google.cloud.gkehub.v1.ICreateFeatureRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IFeature, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.ICreateFeatureRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IFeature,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createFeature(
-      request: protos.google.cloud.gkehub.v1.ICreateFeatureRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IFeature, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.ICreateFeatureRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IFeature,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createFeature(
-      request?: protos.google.cloud.gkehub.v1.ICreateFeatureRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IFeature, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IFeature, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.IFeature, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkehub.v1.ICreateFeatureRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IFeature,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IFeature,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.IFeature,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IFeature, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IFeature,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createFeature response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createFeature request %j', request);
-    return this.innerApiCalls.createFeature(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.gkehub.v1.IFeature, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createFeature response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createFeature(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkehub.v1.IFeature,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createFeature response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createFeature()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.create_feature.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_CreateFeature_async
- */
-  async checkCreateFeatureProgress(name: string): Promise<LROperation<protos.google.cloud.gkehub.v1.Feature, protos.google.cloud.gkehub.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createFeature()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.create_feature.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_CreateFeature_async
+   */
+  async checkCreateFeatureProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gkehub.v1.Feature,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >
+  > {
     this._log.info('createFeature long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createFeature, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.gkehub.v1.Feature, protos.google.cloud.gkehub.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createFeature,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gkehub.v1.Feature,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >;
   }
-/**
- * Removes a Membership.
- *
- * **This is currently only supported for GKE clusters on Google Cloud**.
- * To unregister other clusters, follow the instructions at
- * https://cloud.google.com/anthos/multicluster-management/connect/unregistering-a-cluster.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The Membership resource name in the format
- *   `projects/* /locations/* /memberships/*`.
- * @param {string} [request.requestId]
- *   Optional. A request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes after the first request.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {boolean} [request.force]
- *   Optional. If set to true, any subresource from this Membership will also be
- *   deleted. Otherwise, the request will only work if the Membership has no
- *   subresource.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.delete_membership.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_DeleteMembership_async
- */
+  /**
+   * Removes a Membership.
+   *
+   * **This is currently only supported for GKE clusters on Google Cloud**.
+   * To unregister other clusters, follow the instructions at
+   * https://cloud.google.com/anthos/multicluster-management/connect/unregistering-a-cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The Membership resource name in the format
+   *   `projects/* /locations/* /memberships/*`.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {boolean} [request.force]
+   *   Optional. If set to true, any subresource from this Membership will also be
+   *   deleted. Otherwise, the request will only work if the Membership has no
+   *   subresource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.delete_membership.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_DeleteMembership_async
+   */
   deleteMembership(
-      request?: protos.google.cloud.gkehub.v1.IDeleteMembershipRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IDeleteMembershipRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteMembership(
-      request: protos.google.cloud.gkehub.v1.IDeleteMembershipRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IDeleteMembershipRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteMembership(
-      request: protos.google.cloud.gkehub.v1.IDeleteMembershipRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IDeleteMembershipRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteMembership(
-      request?: protos.google.cloud.gkehub.v1.IDeleteMembershipRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkehub.v1.IDeleteMembershipRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteMembership response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteMembership request %j', request);
-    return this.innerApiCalls.deleteMembership(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteMembership response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteMembership(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteMembership response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteMembership()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.delete_membership.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_DeleteMembership_async
- */
-  async checkDeleteMembershipProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkehub.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteMembership()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.delete_membership.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_DeleteMembership_async
+   */
+  async checkDeleteMembershipProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteMembership long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteMembership, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkehub.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteMembership,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >;
   }
-/**
- * Removes a Feature.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The Feature resource name in the format
- *   `projects/* /locations/* /features/*`.
- * @param {boolean} request.force
- *   If set to true, the delete will ignore any outstanding resources for
- *   this Feature (that is, `FeatureState.has_resources` is set to true). These
- *   resources will NOT be cleaned up or modified in any way.
- * @param {string} [request.requestId]
- *   Optional. A request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes after the first request.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.delete_feature.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_DeleteFeature_async
- */
+  /**
+   * Removes a Feature.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The Feature resource name in the format
+   *   `projects/* /locations/* /features/*`.
+   * @param {boolean} request.force
+   *   If set to true, the delete will ignore any outstanding resources for
+   *   this Feature (that is, `FeatureState.has_resources` is set to true). These
+   *   resources will NOT be cleaned up or modified in any way.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.delete_feature.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_DeleteFeature_async
+   */
   deleteFeature(
-      request?: protos.google.cloud.gkehub.v1.IDeleteFeatureRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IDeleteFeatureRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteFeature(
-      request: protos.google.cloud.gkehub.v1.IDeleteFeatureRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IDeleteFeatureRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteFeature(
-      request: protos.google.cloud.gkehub.v1.IDeleteFeatureRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IDeleteFeatureRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteFeature(
-      request?: protos.google.cloud.gkehub.v1.IDeleteFeatureRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkehub.v1.IDeleteFeatureRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteFeature response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteFeature request %j', request);
-    return this.innerApiCalls.deleteFeature(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteFeature response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteFeature(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteFeature response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteFeature()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.delete_feature.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_DeleteFeature_async
- */
-  async checkDeleteFeatureProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkehub.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteFeature()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.delete_feature.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_DeleteFeature_async
+   */
+  async checkDeleteFeatureProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteFeature long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteFeature, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkehub.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteFeature,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >;
   }
-/**
- * Updates an existing Membership.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The Membership resource name in the format
- *   `projects/* /locations/* /memberships/*`.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. Mask of fields to update.
- * @param {google.cloud.gkehub.v1.Membership} request.resource
- *   Required. Only fields specified in update_mask are updated.
- *   If you specify a field in the update_mask but don't specify its value here
- *   that field will be deleted.
- *   If you are updating a map field, set the value of a key to null or empty
- *   string to delete the key from the map. It's not possible to update a key's
- *   value to the empty string.
- *   If you specify the update_mask to be a special path "*", fully replaces all
- *   user-modifiable fields to match `resource`.
- * @param {string} [request.requestId]
- *   Optional. A request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes after the first request.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.update_membership.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_UpdateMembership_async
- */
+  /**
+   * Updates an existing Membership.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The Membership resource name in the format
+   *   `projects/* /locations/* /memberships/*`.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Mask of fields to update.
+   * @param {google.cloud.gkehub.v1.Membership} request.resource
+   *   Required. Only fields specified in update_mask are updated.
+   *   If you specify a field in the update_mask but don't specify its value here
+   *   that field will be deleted.
+   *   If you are updating a map field, set the value of a key to null or empty
+   *   string to delete the key from the map. It's not possible to update a key's
+   *   value to the empty string.
+   *   If you specify the update_mask to be a special path "*", fully replaces all
+   *   user-modifiable fields to match `resource`.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.update_membership.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_UpdateMembership_async
+   */
   updateMembership(
-      request?: protos.google.cloud.gkehub.v1.IUpdateMembershipRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.IMembership, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IUpdateMembershipRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.IMembership,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateMembership(
-      request: protos.google.cloud.gkehub.v1.IUpdateMembershipRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IMembership, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IUpdateMembershipRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IMembership,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateMembership(
-      request: protos.google.cloud.gkehub.v1.IUpdateMembershipRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IMembership, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IUpdateMembershipRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IMembership,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateMembership(
-      request?: protos.google.cloud.gkehub.v1.IUpdateMembershipRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IMembership, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IMembership, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.IMembership, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkehub.v1.IUpdateMembershipRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IMembership,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IMembership,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.IMembership,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IMembership, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IMembership,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateMembership response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateMembership request %j', request);
-    return this.innerApiCalls.updateMembership(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.gkehub.v1.IMembership, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateMembership response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateMembership(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkehub.v1.IMembership,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateMembership response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateMembership()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.update_membership.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_UpdateMembership_async
- */
-  async checkUpdateMembershipProgress(name: string): Promise<LROperation<protos.google.cloud.gkehub.v1.Membership, protos.google.cloud.gkehub.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateMembership()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.update_membership.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_UpdateMembership_async
+   */
+  async checkUpdateMembershipProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gkehub.v1.Membership,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateMembership long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateMembership, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.gkehub.v1.Membership, protos.google.cloud.gkehub.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateMembership,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gkehub.v1.Membership,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >;
   }
-/**
- * Updates an existing Feature.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The Feature resource name in the format
- *   `projects/* /locations/* /features/*`.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Mask of fields to update.
- * @param {google.cloud.gkehub.v1.Feature} request.resource
- *   Only fields specified in update_mask are updated.
- *   If you specify a field in the update_mask but don't specify its value here
- *   that field will be deleted.
- *   If you are updating a map field, set the value of a key to null or empty
- *   string to delete the key from the map. It's not possible to update a key's
- *   value to the empty string.
- *   If you specify the update_mask to be a special path "*", fully replaces all
- *   user-modifiable fields to match `resource`.
- * @param {string} request.requestId
- *   A request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes after the first request.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.update_feature.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_UpdateFeature_async
- */
+  /**
+   * Updates an existing Feature.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The Feature resource name in the format
+   *   `projects/* /locations/* /features/*`.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Mask of fields to update.
+   * @param {google.cloud.gkehub.v1.Feature} request.resource
+   *   Only fields specified in update_mask are updated.
+   *   If you specify a field in the update_mask but don't specify its value here
+   *   that field will be deleted.
+   *   If you are updating a map field, set the value of a key to null or empty
+   *   string to delete the key from the map. It's not possible to update a key's
+   *   value to the empty string.
+   *   If you specify the update_mask to be a special path "*", fully replaces all
+   *   user-modifiable fields to match `resource`.
+   * @param {string} request.requestId
+   *   A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.update_feature.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_UpdateFeature_async
+   */
   updateFeature(
-      request?: protos.google.cloud.gkehub.v1.IUpdateFeatureRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.IFeature, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IUpdateFeatureRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.IFeature,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateFeature(
-      request: protos.google.cloud.gkehub.v1.IUpdateFeatureRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IFeature, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IUpdateFeatureRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IFeature,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateFeature(
-      request: protos.google.cloud.gkehub.v1.IUpdateFeatureRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IFeature, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IUpdateFeatureRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IFeature,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateFeature(
-      request?: protos.google.cloud.gkehub.v1.IUpdateFeatureRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IFeature, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IFeature, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.IFeature, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkehub.v1.IUpdateFeatureRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IFeature,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IFeature,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.IFeature,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IFeature, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IFeature,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateFeature response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateFeature request %j', request);
-    return this.innerApiCalls.updateFeature(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.gkehub.v1.IFeature, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateFeature response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateFeature(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkehub.v1.IFeature,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateFeature response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateFeature()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.update_feature.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_UpdateFeature_async
- */
-  async checkUpdateFeatureProgress(name: string): Promise<LROperation<protos.google.cloud.gkehub.v1.Feature, protos.google.cloud.gkehub.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateFeature()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.update_feature.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_UpdateFeature_async
+   */
+  async checkUpdateFeatureProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gkehub.v1.Feature,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateFeature long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateFeature, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.gkehub.v1.Feature, protos.google.cloud.gkehub.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateFeature,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gkehub.v1.Feature,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >;
   }
-/**
- * Creates a fleet.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the Fleet will be
- *   created. Specified in the format `projects/* /locations/*`.
- * @param {google.cloud.gkehub.v1.Fleet} request.fleet
- *   Required. The fleet to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.create_fleet.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_CreateFleet_async
- */
+  /**
+   * Creates a fleet.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the Fleet will be
+   *   created. Specified in the format `projects/* /locations/*`.
+   * @param {google.cloud.gkehub.v1.Fleet} request.fleet
+   *   Required. The fleet to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.create_fleet.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_CreateFleet_async
+   */
   createFleet(
-      request?: protos.google.cloud.gkehub.v1.ICreateFleetRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.IFleet, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.ICreateFleetRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.IFleet,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createFleet(
-      request: protos.google.cloud.gkehub.v1.ICreateFleetRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IFleet, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.ICreateFleetRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IFleet,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createFleet(
-      request: protos.google.cloud.gkehub.v1.ICreateFleetRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IFleet, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.ICreateFleetRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IFleet,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createFleet(
-      request?: protos.google.cloud.gkehub.v1.ICreateFleetRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IFleet, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IFleet, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.IFleet, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkehub.v1.ICreateFleetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IFleet,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IFleet,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.IFleet,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IFleet, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IFleet,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createFleet response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createFleet request %j', request);
-    return this.innerApiCalls.createFleet(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.gkehub.v1.IFleet, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createFleet response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createFleet(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkehub.v1.IFleet,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createFleet response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createFleet()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.create_fleet.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_CreateFleet_async
- */
-  async checkCreateFleetProgress(name: string): Promise<LROperation<protos.google.cloud.gkehub.v1.Fleet, protos.google.cloud.gkehub.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createFleet()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.create_fleet.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_CreateFleet_async
+   */
+  async checkCreateFleetProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gkehub.v1.Fleet,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >
+  > {
     this._log.info('createFleet long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createFleet, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.gkehub.v1.Fleet, protos.google.cloud.gkehub.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createFleet,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gkehub.v1.Fleet,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >;
   }
-/**
- * Updates a fleet.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.gkehub.v1.Fleet} request.fleet
- *   Required. The Fleet to update.
- *
- *   The `name` field of the Fleet object identifies which fleet will be
- *   updated.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. The fields to be updated;
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.update_fleet.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_UpdateFleet_async
- */
+  /**
+   * Updates a fleet.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.gkehub.v1.Fleet} request.fleet
+   *   Required. The Fleet to update.
+   *
+   *   The `name` field of the Fleet object identifies which fleet will be
+   *   updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The fields to be updated;
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.update_fleet.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_UpdateFleet_async
+   */
   updateFleet(
-      request?: protos.google.cloud.gkehub.v1.IUpdateFleetRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.IFleet, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IUpdateFleetRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.IFleet,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateFleet(
-      request: protos.google.cloud.gkehub.v1.IUpdateFleetRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IFleet, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IUpdateFleetRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IFleet,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateFleet(
-      request: protos.google.cloud.gkehub.v1.IUpdateFleetRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IFleet, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IUpdateFleetRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IFleet,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateFleet(
-      request?: protos.google.cloud.gkehub.v1.IUpdateFleetRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IFleet, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IFleet, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.IFleet, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkehub.v1.IUpdateFleetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IFleet,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IFleet,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.IFleet,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'fleet.name': request.fleet!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'fleet.name': request.fleet!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IFleet, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IFleet,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateFleet response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateFleet request %j', request);
-    return this.innerApiCalls.updateFleet(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.gkehub.v1.IFleet, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateFleet response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateFleet(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkehub.v1.IFleet,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateFleet response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateFleet()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.update_fleet.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_UpdateFleet_async
- */
-  async checkUpdateFleetProgress(name: string): Promise<LROperation<protos.google.cloud.gkehub.v1.Fleet, protos.google.cloud.gkehub.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateFleet()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.update_fleet.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_UpdateFleet_async
+   */
+  async checkUpdateFleetProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gkehub.v1.Fleet,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateFleet long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateFleet, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.gkehub.v1.Fleet, protos.google.cloud.gkehub.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateFleet,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gkehub.v1.Fleet,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >;
   }
-/**
- * Removes a Fleet. There must be no memberships remaining in the Fleet.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The Fleet resource name in the format
- *   `projects/* /locations/* /fleets/*`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.delete_fleet.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_DeleteFleet_async
- */
+  /**
+   * Removes a Fleet. There must be no memberships remaining in the Fleet.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The Fleet resource name in the format
+   *   `projects/* /locations/* /fleets/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.delete_fleet.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_DeleteFleet_async
+   */
   deleteFleet(
-      request?: protos.google.cloud.gkehub.v1.IDeleteFleetRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IDeleteFleetRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteFleet(
-      request: protos.google.cloud.gkehub.v1.IDeleteFleetRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IDeleteFleetRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteFleet(
-      request: protos.google.cloud.gkehub.v1.IDeleteFleetRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IDeleteFleetRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteFleet(
-      request?: protos.google.cloud.gkehub.v1.IDeleteFleetRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkehub.v1.IDeleteFleetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteFleet response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteFleet request %j', request);
-    return this.innerApiCalls.deleteFleet(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteFleet response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteFleet(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteFleet response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteFleet()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.delete_fleet.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_DeleteFleet_async
- */
-  async checkDeleteFleetProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkehub.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteFleet()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.delete_fleet.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_DeleteFleet_async
+   */
+  async checkDeleteFleetProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteFleet long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteFleet, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkehub.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteFleet,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >;
   }
-/**
- * Creates a fleet namespace.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the Namespace will be
- *   created. Specified in the format `projects/* /locations/* /scopes/*`.
- * @param {string} request.scopeNamespaceId
- *   Required. Client chosen ID for the Namespace. `namespace_id` must be a
- *   valid RFC 1123 compliant DNS label:
- *
- *     1. At most 63 characters in length
- *     2. It must consist of lower case alphanumeric characters or `-`
- *     3. It must start and end with an alphanumeric character
- *
- *   Which can be expressed as the regex: `[a-z0-9]([-a-z0-9]*[a-z0-9])?`,
- *   with a maximum length of 63 characters.
- * @param {google.cloud.gkehub.v1.Namespace} request.scopeNamespace
- *   Required. The fleet namespace to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.create_scope_namespace.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_CreateScopeNamespace_async
- */
+  /**
+   * Creates a fleet namespace.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the Namespace will be
+   *   created. Specified in the format `projects/* /locations/* /scopes/*`.
+   * @param {string} request.scopeNamespaceId
+   *   Required. Client chosen ID for the Namespace. `namespace_id` must be a
+   *   valid RFC 1123 compliant DNS label:
+   *
+   *     1. At most 63 characters in length
+   *     2. It must consist of lower case alphanumeric characters or `-`
+   *     3. It must start and end with an alphanumeric character
+   *
+   *   Which can be expressed as the regex: `[a-z0-9]([-a-z0-9]*[a-z0-9])?`,
+   *   with a maximum length of 63 characters.
+   * @param {google.cloud.gkehub.v1.Namespace} request.scopeNamespace
+   *   Required. The fleet namespace to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.create_scope_namespace.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_CreateScopeNamespace_async
+   */
   createScopeNamespace(
-      request?: protos.google.cloud.gkehub.v1.ICreateScopeNamespaceRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.INamespace, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.ICreateScopeNamespaceRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.INamespace,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createScopeNamespace(
-      request: protos.google.cloud.gkehub.v1.ICreateScopeNamespaceRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.INamespace, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.ICreateScopeNamespaceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.INamespace,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createScopeNamespace(
-      request: protos.google.cloud.gkehub.v1.ICreateScopeNamespaceRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.INamespace, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.ICreateScopeNamespaceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.INamespace,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createScopeNamespace(
-      request?: protos.google.cloud.gkehub.v1.ICreateScopeNamespaceRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.gkehub.v1.INamespace, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.INamespace, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.INamespace, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkehub.v1.ICreateScopeNamespaceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.INamespace,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.INamespace,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.INamespace,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.INamespace, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.INamespace,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createScopeNamespace response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createScopeNamespace request %j', request);
-    return this.innerApiCalls.createScopeNamespace(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.gkehub.v1.INamespace, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createScopeNamespace response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createScopeNamespace(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkehub.v1.INamespace,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createScopeNamespace response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createScopeNamespace()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.create_scope_namespace.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_CreateScopeNamespace_async
- */
-  async checkCreateScopeNamespaceProgress(name: string): Promise<LROperation<protos.google.cloud.gkehub.v1.Namespace, protos.google.cloud.gkehub.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createScopeNamespace()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.create_scope_namespace.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_CreateScopeNamespace_async
+   */
+  async checkCreateScopeNamespaceProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gkehub.v1.Namespace,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >
+  > {
     this._log.info('createScopeNamespace long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createScopeNamespace, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.gkehub.v1.Namespace, protos.google.cloud.gkehub.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createScopeNamespace,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gkehub.v1.Namespace,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >;
   }
-/**
- * Updates a fleet namespace.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.gkehub.v1.Namespace} request.scopeNamespace
- *   Required. A namespace with fields updated. The 'name' field in this
- *   namespace is used to identify the resource to update. Given 'updated'
- *   prefix to follow go/proto-best-practices-checkers#keyword_conflict
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. The fields to be updated.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.update_scope_namespace.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_UpdateScopeNamespace_async
- */
+  /**
+   * Updates a fleet namespace.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.gkehub.v1.Namespace} request.scopeNamespace
+   *   Required. A namespace with fields updated. The 'name' field in this
+   *   namespace is used to identify the resource to update. Given 'updated'
+   *   prefix to follow go/proto-best-practices-checkers#keyword_conflict
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The fields to be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.update_scope_namespace.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_UpdateScopeNamespace_async
+   */
   updateScopeNamespace(
-      request?: protos.google.cloud.gkehub.v1.IUpdateScopeNamespaceRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.INamespace, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IUpdateScopeNamespaceRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.INamespace,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateScopeNamespace(
-      request: protos.google.cloud.gkehub.v1.IUpdateScopeNamespaceRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.INamespace, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IUpdateScopeNamespaceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.INamespace,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateScopeNamespace(
-      request: protos.google.cloud.gkehub.v1.IUpdateScopeNamespaceRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.INamespace, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IUpdateScopeNamespaceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.INamespace,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateScopeNamespace(
-      request?: protos.google.cloud.gkehub.v1.IUpdateScopeNamespaceRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.gkehub.v1.INamespace, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.INamespace, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.INamespace, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkehub.v1.IUpdateScopeNamespaceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.INamespace,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.INamespace,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.INamespace,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'scope_namespace.name': request.scopeNamespace!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'scope_namespace.name': request.scopeNamespace!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.INamespace, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.INamespace,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateScopeNamespace response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateScopeNamespace request %j', request);
-    return this.innerApiCalls.updateScopeNamespace(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.gkehub.v1.INamespace, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateScopeNamespace response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateScopeNamespace(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkehub.v1.INamespace,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateScopeNamespace response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateScopeNamespace()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.update_scope_namespace.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_UpdateScopeNamespace_async
- */
-  async checkUpdateScopeNamespaceProgress(name: string): Promise<LROperation<protos.google.cloud.gkehub.v1.Namespace, protos.google.cloud.gkehub.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateScopeNamespace()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.update_scope_namespace.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_UpdateScopeNamespace_async
+   */
+  async checkUpdateScopeNamespaceProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gkehub.v1.Namespace,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateScopeNamespace long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateScopeNamespace, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.gkehub.v1.Namespace, protos.google.cloud.gkehub.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateScopeNamespace,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gkehub.v1.Namespace,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes a fleet namespace.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The Namespace resource name in the format
- *   `projects/* /locations/* /scopes/* /namespaces/*`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.delete_scope_namespace.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_DeleteScopeNamespace_async
- */
+  /**
+   * Deletes a fleet namespace.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The Namespace resource name in the format
+   *   `projects/* /locations/* /scopes/* /namespaces/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.delete_scope_namespace.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_DeleteScopeNamespace_async
+   */
   deleteScopeNamespace(
-      request?: protos.google.cloud.gkehub.v1.IDeleteScopeNamespaceRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IDeleteScopeNamespaceRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteScopeNamespace(
-      request: protos.google.cloud.gkehub.v1.IDeleteScopeNamespaceRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IDeleteScopeNamespaceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteScopeNamespace(
-      request: protos.google.cloud.gkehub.v1.IDeleteScopeNamespaceRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IDeleteScopeNamespaceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteScopeNamespace(
-      request?: protos.google.cloud.gkehub.v1.IDeleteScopeNamespaceRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkehub.v1.IDeleteScopeNamespaceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteScopeNamespace response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteScopeNamespace request %j', request);
-    return this.innerApiCalls.deleteScopeNamespace(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteScopeNamespace response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteScopeNamespace(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteScopeNamespace response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteScopeNamespace()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.delete_scope_namespace.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_DeleteScopeNamespace_async
- */
-  async checkDeleteScopeNamespaceProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkehub.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteScopeNamespace()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.delete_scope_namespace.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_DeleteScopeNamespace_async
+   */
+  async checkDeleteScopeNamespaceProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteScopeNamespace long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteScopeNamespace, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkehub.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteScopeNamespace,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >;
   }
-/**
- * Creates a Scope RBACRoleBinding.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the RBACRoleBinding will
- *   be created. Specified in the format `projects/* /locations/* /scopes/*`.
- * @param {string} request.rbacrolebindingId
- *   Required. Client chosen ID for the RBACRoleBinding. `rbacrolebinding_id`
- *   must be a valid RFC 1123 compliant DNS label:
- *
- *     1. At most 63 characters in length
- *     2. It must consist of lower case alphanumeric characters or `-`
- *     3. It must start and end with an alphanumeric character
- *
- *   Which can be expressed as the regex: `[a-z0-9]([-a-z0-9]*[a-z0-9])?`,
- *   with a maximum length of 63 characters.
- * @param {google.cloud.gkehub.v1.RBACRoleBinding} request.rbacrolebinding
- *   Required. The rbacrolebindings to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.create_scope_r_b_a_c_role_binding.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_CreateScopeRBACRoleBinding_async
- */
+  /**
+   * Creates a Scope RBACRoleBinding.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the RBACRoleBinding will
+   *   be created. Specified in the format `projects/* /locations/* /scopes/*`.
+   * @param {string} request.rbacrolebindingId
+   *   Required. Client chosen ID for the RBACRoleBinding. `rbacrolebinding_id`
+   *   must be a valid RFC 1123 compliant DNS label:
+   *
+   *     1. At most 63 characters in length
+   *     2. It must consist of lower case alphanumeric characters or `-`
+   *     3. It must start and end with an alphanumeric character
+   *
+   *   Which can be expressed as the regex: `[a-z0-9]([-a-z0-9]*[a-z0-9])?`,
+   *   with a maximum length of 63 characters.
+   * @param {google.cloud.gkehub.v1.RBACRoleBinding} request.rbacrolebinding
+   *   Required. The rbacrolebindings to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.create_scope_r_b_a_c_role_binding.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_CreateScopeRBACRoleBinding_async
+   */
   createScopeRBACRoleBinding(
-      request?: protos.google.cloud.gkehub.v1.ICreateScopeRBACRoleBindingRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.ICreateScopeRBACRoleBindingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createScopeRBACRoleBinding(
-      request: protos.google.cloud.gkehub.v1.ICreateScopeRBACRoleBindingRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.ICreateScopeRBACRoleBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createScopeRBACRoleBinding(
-      request: protos.google.cloud.gkehub.v1.ICreateScopeRBACRoleBindingRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.ICreateScopeRBACRoleBindingRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createScopeRBACRoleBinding(
-      request?: protos.google.cloud.gkehub.v1.ICreateScopeRBACRoleBindingRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkehub.v1.ICreateScopeRBACRoleBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createScopeRBACRoleBinding response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createScopeRBACRoleBinding request %j', request);
-    return this.innerApiCalls.createScopeRbacRoleBinding(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createScopeRBACRoleBinding response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createScopeRbacRoleBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createScopeRBACRoleBinding response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createScopeRBACRoleBinding()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.create_scope_r_b_a_c_role_binding.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_CreateScopeRBACRoleBinding_async
- */
-  async checkCreateScopeRBACRoleBindingProgress(name: string): Promise<LROperation<protos.google.cloud.gkehub.v1.RBACRoleBinding, protos.google.cloud.gkehub.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createScopeRBACRoleBinding()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.create_scope_r_b_a_c_role_binding.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_CreateScopeRBACRoleBinding_async
+   */
+  async checkCreateScopeRBACRoleBindingProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gkehub.v1.RBACRoleBinding,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >
+  > {
     this._log.info('createScopeRBACRoleBinding long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createScopeRBACRoleBinding, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.gkehub.v1.RBACRoleBinding, protos.google.cloud.gkehub.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createScopeRBACRoleBinding,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gkehub.v1.RBACRoleBinding,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >;
   }
-/**
- * Updates a Scope RBACRoleBinding.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.gkehub.v1.RBACRoleBinding} request.rbacrolebinding
- *   Required. A rbacrolebinding with fields updated. The 'name' field in this
- *   rbacrolebinding is used to identify the resource to update.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. The fields to be updated.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.update_scope_r_b_a_c_role_binding.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_UpdateScopeRBACRoleBinding_async
- */
+  /**
+   * Updates a Scope RBACRoleBinding.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.gkehub.v1.RBACRoleBinding} request.rbacrolebinding
+   *   Required. A rbacrolebinding with fields updated. The 'name' field in this
+   *   rbacrolebinding is used to identify the resource to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The fields to be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.update_scope_r_b_a_c_role_binding.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_UpdateScopeRBACRoleBinding_async
+   */
   updateScopeRBACRoleBinding(
-      request?: protos.google.cloud.gkehub.v1.IUpdateScopeRBACRoleBindingRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IUpdateScopeRBACRoleBindingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateScopeRBACRoleBinding(
-      request: protos.google.cloud.gkehub.v1.IUpdateScopeRBACRoleBindingRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IUpdateScopeRBACRoleBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateScopeRBACRoleBinding(
-      request: protos.google.cloud.gkehub.v1.IUpdateScopeRBACRoleBindingRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IUpdateScopeRBACRoleBindingRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateScopeRBACRoleBinding(
-      request?: protos.google.cloud.gkehub.v1.IUpdateScopeRBACRoleBindingRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkehub.v1.IUpdateScopeRBACRoleBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'rbacrolebinding.name': request.rbacrolebinding!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'rbacrolebinding.name': request.rbacrolebinding!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateScopeRBACRoleBinding response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateScopeRBACRoleBinding request %j', request);
-    return this.innerApiCalls.updateScopeRbacRoleBinding(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateScopeRBACRoleBinding response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateScopeRbacRoleBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateScopeRBACRoleBinding response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateScopeRBACRoleBinding()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.update_scope_r_b_a_c_role_binding.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_UpdateScopeRBACRoleBinding_async
- */
-  async checkUpdateScopeRBACRoleBindingProgress(name: string): Promise<LROperation<protos.google.cloud.gkehub.v1.RBACRoleBinding, protos.google.cloud.gkehub.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateScopeRBACRoleBinding()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.update_scope_r_b_a_c_role_binding.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_UpdateScopeRBACRoleBinding_async
+   */
+  async checkUpdateScopeRBACRoleBindingProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gkehub.v1.RBACRoleBinding,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateScopeRBACRoleBinding long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateScopeRBACRoleBinding, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.gkehub.v1.RBACRoleBinding, protos.google.cloud.gkehub.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateScopeRBACRoleBinding,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gkehub.v1.RBACRoleBinding,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes a Scope RBACRoleBinding.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The RBACRoleBinding resource name in the format
- *   `projects/* /locations/* /scopes/* /rbacrolebindings/*`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.delete_scope_r_b_a_c_role_binding.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_DeleteScopeRBACRoleBinding_async
- */
+  /**
+   * Deletes a Scope RBACRoleBinding.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The RBACRoleBinding resource name in the format
+   *   `projects/* /locations/* /scopes/* /rbacrolebindings/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.delete_scope_r_b_a_c_role_binding.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_DeleteScopeRBACRoleBinding_async
+   */
   deleteScopeRBACRoleBinding(
-      request?: protos.google.cloud.gkehub.v1.IDeleteScopeRBACRoleBindingRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IDeleteScopeRBACRoleBindingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteScopeRBACRoleBinding(
-      request: protos.google.cloud.gkehub.v1.IDeleteScopeRBACRoleBindingRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IDeleteScopeRBACRoleBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteScopeRBACRoleBinding(
-      request: protos.google.cloud.gkehub.v1.IDeleteScopeRBACRoleBindingRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IDeleteScopeRBACRoleBindingRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteScopeRBACRoleBinding(
-      request?: protos.google.cloud.gkehub.v1.IDeleteScopeRBACRoleBindingRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkehub.v1.IDeleteScopeRBACRoleBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteScopeRBACRoleBinding response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteScopeRBACRoleBinding request %j', request);
-    return this.innerApiCalls.deleteScopeRbacRoleBinding(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteScopeRBACRoleBinding response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteScopeRbacRoleBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteScopeRBACRoleBinding response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteScopeRBACRoleBinding()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.delete_scope_r_b_a_c_role_binding.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_DeleteScopeRBACRoleBinding_async
- */
-  async checkDeleteScopeRBACRoleBindingProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkehub.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteScopeRBACRoleBinding()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.delete_scope_r_b_a_c_role_binding.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_DeleteScopeRBACRoleBinding_async
+   */
+  async checkDeleteScopeRBACRoleBindingProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteScopeRBACRoleBinding long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteScopeRBACRoleBinding, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkehub.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteScopeRBACRoleBinding,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >;
   }
-/**
- * Creates a Scope.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the Scope will be
- *   created. Specified in the format `projects/* /locations/*`.
- * @param {string} request.scopeId
- *   Required. Client chosen ID for the Scope. `scope_id` must be a
- *   ????
- * @param {google.cloud.gkehub.v1.Scope} request.scope
- *   Required. The Scope to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.create_scope.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_CreateScope_async
- */
+  /**
+   * Creates a Scope.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the Scope will be
+   *   created. Specified in the format `projects/* /locations/*`.
+   * @param {string} request.scopeId
+   *   Required. Client chosen ID for the Scope. `scope_id` must be a
+   *   ????
+   * @param {google.cloud.gkehub.v1.Scope} request.scope
+   *   Required. The Scope to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.create_scope.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_CreateScope_async
+   */
   createScope(
-      request?: protos.google.cloud.gkehub.v1.ICreateScopeRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.IScope, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.ICreateScopeRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.IScope,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createScope(
-      request: protos.google.cloud.gkehub.v1.ICreateScopeRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IScope, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.ICreateScopeRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IScope,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createScope(
-      request: protos.google.cloud.gkehub.v1.ICreateScopeRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IScope, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.ICreateScopeRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IScope,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createScope(
-      request?: protos.google.cloud.gkehub.v1.ICreateScopeRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IScope, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IScope, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.IScope, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkehub.v1.ICreateScopeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IScope,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IScope,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.IScope,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IScope, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IScope,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createScope response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createScope request %j', request);
-    return this.innerApiCalls.createScope(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.gkehub.v1.IScope, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createScope response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createScope(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkehub.v1.IScope,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createScope response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createScope()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.create_scope.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_CreateScope_async
- */
-  async checkCreateScopeProgress(name: string): Promise<LROperation<protos.google.cloud.gkehub.v1.Scope, protos.google.cloud.gkehub.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createScope()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.create_scope.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_CreateScope_async
+   */
+  async checkCreateScopeProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gkehub.v1.Scope,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >
+  > {
     this._log.info('createScope long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createScope, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.gkehub.v1.Scope, protos.google.cloud.gkehub.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createScope,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gkehub.v1.Scope,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >;
   }
-/**
- * Updates a scopes.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.gkehub.v1.Scope} request.scope
- *   Required. A Scope with fields updated. The 'name' field in this
- *   namespace is used to identify the resource to update.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. The fields to be updated.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.update_scope.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_UpdateScope_async
- */
+  /**
+   * Updates a scopes.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.gkehub.v1.Scope} request.scope
+   *   Required. A Scope with fields updated. The 'name' field in this
+   *   namespace is used to identify the resource to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The fields to be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.update_scope.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_UpdateScope_async
+   */
   updateScope(
-      request?: protos.google.cloud.gkehub.v1.IUpdateScopeRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.IScope, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IUpdateScopeRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.IScope,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateScope(
-      request: protos.google.cloud.gkehub.v1.IUpdateScopeRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IScope, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IUpdateScopeRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IScope,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateScope(
-      request: protos.google.cloud.gkehub.v1.IUpdateScopeRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IScope, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IUpdateScopeRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IScope,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateScope(
-      request?: protos.google.cloud.gkehub.v1.IUpdateScopeRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IScope, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IScope, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.IScope, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkehub.v1.IUpdateScopeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IScope,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IScope,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.IScope,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'scope.name': request.scope!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'scope.name': request.scope!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IScope, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IScope,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateScope response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateScope request %j', request);
-    return this.innerApiCalls.updateScope(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.gkehub.v1.IScope, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateScope response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateScope(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkehub.v1.IScope,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateScope response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateScope()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.update_scope.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_UpdateScope_async
- */
-  async checkUpdateScopeProgress(name: string): Promise<LROperation<protos.google.cloud.gkehub.v1.Scope, protos.google.cloud.gkehub.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateScope()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.update_scope.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_UpdateScope_async
+   */
+  async checkUpdateScopeProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gkehub.v1.Scope,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateScope long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateScope, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.gkehub.v1.Scope, protos.google.cloud.gkehub.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateScope,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gkehub.v1.Scope,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes a Scope.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The Scope resource name in the format
- *   `projects/* /locations/* /scopes/*`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.delete_scope.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_DeleteScope_async
- */
+  /**
+   * Deletes a Scope.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The Scope resource name in the format
+   *   `projects/* /locations/* /scopes/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.delete_scope.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_DeleteScope_async
+   */
   deleteScope(
-      request?: protos.google.cloud.gkehub.v1.IDeleteScopeRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IDeleteScopeRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteScope(
-      request: protos.google.cloud.gkehub.v1.IDeleteScopeRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IDeleteScopeRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteScope(
-      request: protos.google.cloud.gkehub.v1.IDeleteScopeRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IDeleteScopeRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteScope(
-      request?: protos.google.cloud.gkehub.v1.IDeleteScopeRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkehub.v1.IDeleteScopeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteScope response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteScope request %j', request);
-    return this.innerApiCalls.deleteScope(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteScope response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteScope(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteScope response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteScope()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.delete_scope.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_DeleteScope_async
- */
-  async checkDeleteScopeProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkehub.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteScope()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.delete_scope.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_DeleteScope_async
+   */
+  async checkDeleteScopeProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteScope long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteScope, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkehub.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteScope,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >;
   }
-/**
- * Creates a MembershipBinding.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the MembershipBinding
- *   will be created. Specified in the format
- *   `projects/* /locations/* /memberships/*`.
- * @param {google.cloud.gkehub.v1.MembershipBinding} request.membershipBinding
- *   Required. The MembershipBinding to create.
- * @param {string} request.membershipBindingId
- *   Required. The ID to use for the MembershipBinding.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.create_membership_binding.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_CreateMembershipBinding_async
- */
+  /**
+   * Creates a MembershipBinding.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the MembershipBinding
+   *   will be created. Specified in the format
+   *   `projects/* /locations/* /memberships/*`.
+   * @param {google.cloud.gkehub.v1.MembershipBinding} request.membershipBinding
+   *   Required. The MembershipBinding to create.
+   * @param {string} request.membershipBindingId
+   *   Required. The ID to use for the MembershipBinding.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.create_membership_binding.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_CreateMembershipBinding_async
+   */
   createMembershipBinding(
-      request?: protos.google.cloud.gkehub.v1.ICreateMembershipBindingRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.IMembershipBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.ICreateMembershipBindingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.IMembershipBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createMembershipBinding(
-      request: protos.google.cloud.gkehub.v1.ICreateMembershipBindingRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IMembershipBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.ICreateMembershipBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IMembershipBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createMembershipBinding(
-      request: protos.google.cloud.gkehub.v1.ICreateMembershipBindingRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IMembershipBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.ICreateMembershipBindingRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IMembershipBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createMembershipBinding(
-      request?: protos.google.cloud.gkehub.v1.ICreateMembershipBindingRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IMembershipBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IMembershipBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.IMembershipBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkehub.v1.ICreateMembershipBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IMembershipBinding,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IMembershipBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.IMembershipBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IMembershipBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IMembershipBinding,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createMembershipBinding response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createMembershipBinding request %j', request);
-    return this.innerApiCalls.createMembershipBinding(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.gkehub.v1.IMembershipBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createMembershipBinding response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createMembershipBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkehub.v1.IMembershipBinding,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createMembershipBinding response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createMembershipBinding()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.create_membership_binding.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_CreateMembershipBinding_async
- */
-  async checkCreateMembershipBindingProgress(name: string): Promise<LROperation<protos.google.cloud.gkehub.v1.MembershipBinding, protos.google.cloud.gkehub.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createMembershipBinding()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.create_membership_binding.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_CreateMembershipBinding_async
+   */
+  async checkCreateMembershipBindingProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gkehub.v1.MembershipBinding,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >
+  > {
     this._log.info('createMembershipBinding long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createMembershipBinding, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.gkehub.v1.MembershipBinding, protos.google.cloud.gkehub.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createMembershipBinding,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gkehub.v1.MembershipBinding,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >;
   }
-/**
- * Updates a MembershipBinding.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.gkehub.v1.MembershipBinding} request.membershipBinding
- *   Required. The MembershipBinding object with fields updated.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. The fields to be updated.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.update_membership_binding.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_UpdateMembershipBinding_async
- */
+  /**
+   * Updates a MembershipBinding.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.gkehub.v1.MembershipBinding} request.membershipBinding
+   *   Required. The MembershipBinding object with fields updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The fields to be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.update_membership_binding.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_UpdateMembershipBinding_async
+   */
   updateMembershipBinding(
-      request?: protos.google.cloud.gkehub.v1.IUpdateMembershipBindingRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.IMembershipBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IUpdateMembershipBindingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.IMembershipBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateMembershipBinding(
-      request: protos.google.cloud.gkehub.v1.IUpdateMembershipBindingRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IMembershipBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IUpdateMembershipBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IMembershipBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateMembershipBinding(
-      request: protos.google.cloud.gkehub.v1.IUpdateMembershipBindingRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IMembershipBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IUpdateMembershipBindingRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IMembershipBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateMembershipBinding(
-      request?: protos.google.cloud.gkehub.v1.IUpdateMembershipBindingRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IMembershipBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IMembershipBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.IMembershipBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkehub.v1.IUpdateMembershipBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IMembershipBinding,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IMembershipBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.IMembershipBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'membership_binding.name': request.membershipBinding!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'membership_binding.name': request.membershipBinding!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IMembershipBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IMembershipBinding,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateMembershipBinding response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateMembershipBinding request %j', request);
-    return this.innerApiCalls.updateMembershipBinding(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.gkehub.v1.IMembershipBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateMembershipBinding response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateMembershipBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkehub.v1.IMembershipBinding,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateMembershipBinding response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateMembershipBinding()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.update_membership_binding.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_UpdateMembershipBinding_async
- */
-  async checkUpdateMembershipBindingProgress(name: string): Promise<LROperation<protos.google.cloud.gkehub.v1.MembershipBinding, protos.google.cloud.gkehub.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateMembershipBinding()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.update_membership_binding.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_UpdateMembershipBinding_async
+   */
+  async checkUpdateMembershipBindingProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gkehub.v1.MembershipBinding,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateMembershipBinding long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateMembershipBinding, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.gkehub.v1.MembershipBinding, protos.google.cloud.gkehub.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateMembershipBinding,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gkehub.v1.MembershipBinding,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes a MembershipBinding.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The MembershipBinding resource name in the format
- *   `projects/* /locations/* /memberships/* /bindings/*`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.delete_membership_binding.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_DeleteMembershipBinding_async
- */
+  /**
+   * Deletes a MembershipBinding.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The MembershipBinding resource name in the format
+   *   `projects/* /locations/* /memberships/* /bindings/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.delete_membership_binding.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_DeleteMembershipBinding_async
+   */
   deleteMembershipBinding(
-      request?: protos.google.cloud.gkehub.v1.IDeleteMembershipBindingRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IDeleteMembershipBindingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteMembershipBinding(
-      request: protos.google.cloud.gkehub.v1.IDeleteMembershipBindingRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IDeleteMembershipBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteMembershipBinding(
-      request: protos.google.cloud.gkehub.v1.IDeleteMembershipBindingRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IDeleteMembershipBindingRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteMembershipBinding(
-      request?: protos.google.cloud.gkehub.v1.IDeleteMembershipBindingRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkehub.v1.IDeleteMembershipBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteMembershipBinding response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteMembershipBinding request %j', request);
-    return this.innerApiCalls.deleteMembershipBinding(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteMembershipBinding response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteMembershipBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteMembershipBinding response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteMembershipBinding()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.delete_membership_binding.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_DeleteMembershipBinding_async
- */
-  async checkDeleteMembershipBindingProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkehub.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteMembershipBinding()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.delete_membership_binding.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_DeleteMembershipBinding_async
+   */
+  async checkDeleteMembershipBindingProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteMembershipBinding long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteMembershipBinding, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkehub.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteMembershipBinding,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >;
   }
-/**
- * Creates a Membership RBACRoleBinding.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the RBACRoleBinding will
- *   be created. Specified in the format `projects/* /locations/* /memberships/*`.
- * @param {string} request.rbacrolebindingId
- *   Required. Client chosen ID for the RBACRoleBinding. `rbacrolebinding_id`
- *   must be a valid RFC 1123 compliant DNS label:
- *
- *     1. At most 63 characters in length
- *     2. It must consist of lower case alphanumeric characters or `-`
- *     3. It must start and end with an alphanumeric character
- *
- *   Which can be expressed as the regex: `[a-z0-9]([-a-z0-9]*[a-z0-9])?`,
- *   with a maximum length of 63 characters.
- * @param {google.cloud.gkehub.v1.RBACRoleBinding} request.rbacrolebinding
- *   Required. The rbacrolebindings to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.create_membership_r_b_a_c_role_binding.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_CreateMembershipRBACRoleBinding_async
- */
+  /**
+   * Creates a Membership RBACRoleBinding.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the RBACRoleBinding will
+   *   be created. Specified in the format `projects/* /locations/* /memberships/*`.
+   * @param {string} request.rbacrolebindingId
+   *   Required. Client chosen ID for the RBACRoleBinding. `rbacrolebinding_id`
+   *   must be a valid RFC 1123 compliant DNS label:
+   *
+   *     1. At most 63 characters in length
+   *     2. It must consist of lower case alphanumeric characters or `-`
+   *     3. It must start and end with an alphanumeric character
+   *
+   *   Which can be expressed as the regex: `[a-z0-9]([-a-z0-9]*[a-z0-9])?`,
+   *   with a maximum length of 63 characters.
+   * @param {google.cloud.gkehub.v1.RBACRoleBinding} request.rbacrolebinding
+   *   Required. The rbacrolebindings to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.create_membership_r_b_a_c_role_binding.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_CreateMembershipRBACRoleBinding_async
+   */
   createMembershipRBACRoleBinding(
-      request?: protos.google.cloud.gkehub.v1.ICreateMembershipRBACRoleBindingRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.ICreateMembershipRBACRoleBindingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createMembershipRBACRoleBinding(
-      request: protos.google.cloud.gkehub.v1.ICreateMembershipRBACRoleBindingRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.ICreateMembershipRBACRoleBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createMembershipRBACRoleBinding(
-      request: protos.google.cloud.gkehub.v1.ICreateMembershipRBACRoleBindingRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.ICreateMembershipRBACRoleBindingRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createMembershipRBACRoleBinding(
-      request?: protos.google.cloud.gkehub.v1.ICreateMembershipRBACRoleBindingRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkehub.v1.ICreateMembershipRBACRoleBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createMembershipRBACRoleBinding response %j', rawResponse);
+          this._log.info(
+            'createMembershipRBACRoleBinding response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createMembershipRBACRoleBinding request %j', request);
-    return this.innerApiCalls.createMembershipRbacRoleBinding(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createMembershipRBACRoleBinding response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createMembershipRbacRoleBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createMembershipRBACRoleBinding response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createMembershipRBACRoleBinding()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.create_membership_r_b_a_c_role_binding.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_CreateMembershipRBACRoleBinding_async
- */
-  async checkCreateMembershipRBACRoleBindingProgress(name: string): Promise<LROperation<protos.google.cloud.gkehub.v1.RBACRoleBinding, protos.google.cloud.gkehub.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createMembershipRBACRoleBinding()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.create_membership_r_b_a_c_role_binding.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_CreateMembershipRBACRoleBinding_async
+   */
+  async checkCreateMembershipRBACRoleBindingProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gkehub.v1.RBACRoleBinding,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >
+  > {
     this._log.info('createMembershipRBACRoleBinding long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createMembershipRBACRoleBinding, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.gkehub.v1.RBACRoleBinding, protos.google.cloud.gkehub.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createMembershipRBACRoleBinding,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gkehub.v1.RBACRoleBinding,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >;
   }
-/**
- * Updates a Membership RBACRoleBinding.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.gkehub.v1.RBACRoleBinding} request.rbacrolebinding
- *   Required. A rbacrolebinding with fields updated. The 'name' field in this
- *   rbacrolebinding is used to identify the resource to update.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. The fields to be updated.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.update_membership_r_b_a_c_role_binding.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_UpdateMembershipRBACRoleBinding_async
- */
+  /**
+   * Updates a Membership RBACRoleBinding.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.gkehub.v1.RBACRoleBinding} request.rbacrolebinding
+   *   Required. A rbacrolebinding with fields updated. The 'name' field in this
+   *   rbacrolebinding is used to identify the resource to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The fields to be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.update_membership_r_b_a_c_role_binding.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_UpdateMembershipRBACRoleBinding_async
+   */
   updateMembershipRBACRoleBinding(
-      request?: protos.google.cloud.gkehub.v1.IUpdateMembershipRBACRoleBindingRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IUpdateMembershipRBACRoleBindingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateMembershipRBACRoleBinding(
-      request: protos.google.cloud.gkehub.v1.IUpdateMembershipRBACRoleBindingRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IUpdateMembershipRBACRoleBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateMembershipRBACRoleBinding(
-      request: protos.google.cloud.gkehub.v1.IUpdateMembershipRBACRoleBindingRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IUpdateMembershipRBACRoleBindingRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateMembershipRBACRoleBinding(
-      request?: protos.google.cloud.gkehub.v1.IUpdateMembershipRBACRoleBindingRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkehub.v1.IUpdateMembershipRBACRoleBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'rbacrolebinding.name': request.rbacrolebinding!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'rbacrolebinding.name': request.rbacrolebinding!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateMembershipRBACRoleBinding response %j', rawResponse);
+          this._log.info(
+            'updateMembershipRBACRoleBinding response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateMembershipRBACRoleBinding request %j', request);
-    return this.innerApiCalls.updateMembershipRbacRoleBinding(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.gkehub.v1.IRBACRoleBinding, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateMembershipRBACRoleBinding response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateMembershipRbacRoleBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkehub.v1.IRBACRoleBinding,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateMembershipRBACRoleBinding response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateMembershipRBACRoleBinding()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.update_membership_r_b_a_c_role_binding.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_UpdateMembershipRBACRoleBinding_async
- */
-  async checkUpdateMembershipRBACRoleBindingProgress(name: string): Promise<LROperation<protos.google.cloud.gkehub.v1.RBACRoleBinding, protos.google.cloud.gkehub.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateMembershipRBACRoleBinding()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.update_membership_r_b_a_c_role_binding.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_UpdateMembershipRBACRoleBinding_async
+   */
+  async checkUpdateMembershipRBACRoleBindingProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gkehub.v1.RBACRoleBinding,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateMembershipRBACRoleBinding long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateMembershipRBACRoleBinding, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.gkehub.v1.RBACRoleBinding, protos.google.cloud.gkehub.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateMembershipRBACRoleBinding,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gkehub.v1.RBACRoleBinding,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes a Membership RBACRoleBinding.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The RBACRoleBinding resource name in the format
- *   `projects/* /locations/* /memberships/* /rbacrolebindings/*`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.delete_membership_r_b_a_c_role_binding.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_DeleteMembershipRBACRoleBinding_async
- */
+  /**
+   * Deletes a Membership RBACRoleBinding.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The RBACRoleBinding resource name in the format
+   *   `projects/* /locations/* /memberships/* /rbacrolebindings/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.delete_membership_r_b_a_c_role_binding.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_DeleteMembershipRBACRoleBinding_async
+   */
   deleteMembershipRBACRoleBinding(
-      request?: protos.google.cloud.gkehub.v1.IDeleteMembershipRBACRoleBindingRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IDeleteMembershipRBACRoleBindingRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteMembershipRBACRoleBinding(
-      request: protos.google.cloud.gkehub.v1.IDeleteMembershipRBACRoleBindingRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IDeleteMembershipRBACRoleBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteMembershipRBACRoleBinding(
-      request: protos.google.cloud.gkehub.v1.IDeleteMembershipRBACRoleBindingRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkehub.v1.IDeleteMembershipRBACRoleBindingRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteMembershipRBACRoleBinding(
-      request?: protos.google.cloud.gkehub.v1.IDeleteMembershipRBACRoleBindingRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkehub.v1.IDeleteMembershipRBACRoleBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkehub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteMembershipRBACRoleBinding response %j', rawResponse);
+          this._log.info(
+            'deleteMembershipRBACRoleBinding response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteMembershipRBACRoleBinding request %j', request);
-    return this.innerApiCalls.deleteMembershipRbacRoleBinding(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkehub.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteMembershipRBACRoleBinding response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteMembershipRbacRoleBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkehub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteMembershipRBACRoleBinding response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteMembershipRBACRoleBinding()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.delete_membership_r_b_a_c_role_binding.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_DeleteMembershipRBACRoleBinding_async
- */
-  async checkDeleteMembershipRBACRoleBindingProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkehub.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteMembershipRBACRoleBinding()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.delete_membership_r_b_a_c_role_binding.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_DeleteMembershipRBACRoleBinding_async
+   */
+  async checkDeleteMembershipRBACRoleBindingProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteMembershipRBACRoleBinding long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteMembershipRBACRoleBinding, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkehub.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteMembershipRBACRoleBinding,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.gkehub.v1.OperationMetadata
+    >;
   }
- /**
- * Lists Memberships in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the Memberships will be
- *   listed. Specified in the format `projects/* /locations/*`.
- *   `projects/* /locations/-` list memberships in all the regions.
- * @param {number} [request.pageSize]
- *   Optional. When requesting a 'page' of resources, `page_size` specifies
- *   number of resources to return. If unspecified or set to 0, all resources
- *   will be returned.
- * @param {string} [request.pageToken]
- *   Optional. Token returned by previous call to `ListMemberships` which
- *   specifies the position in the list from where to continue listing the
- *   resources.
- * @param {string} [request.filter]
- *   Optional. Lists Memberships that match the filter expression, following the
- *   syntax outlined in https://google.aip.dev/160.
- *
- *   Examples:
- *
- *     - Name is `bar` in project `foo-proj` and location `global`:
- *
- *         name = "projects/foo-proj/locations/global/membership/bar"
- *
- *     - Memberships that have a label called `foo`:
- *
- *         labels.foo:*
- *
- *     - Memberships that have a label called `foo` whose value is `bar`:
- *
- *         labels.foo = bar
- *
- *     - Memberships in the CREATING state:
- *
- *         state = CREATING
- * @param {string} [request.orderBy]
- *   Optional. One or more fields to compare and use to sort the output.
- *   See https://google.aip.dev/132#ordering.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.gkehub.v1.Membership|Membership}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listMembershipsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists Memberships in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the Memberships will be
+   *   listed. Specified in the format `projects/* /locations/*`.
+   *   `projects/* /locations/-` list memberships in all the regions.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a 'page' of resources, `page_size` specifies
+   *   number of resources to return. If unspecified or set to 0, all resources
+   *   will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to `ListMemberships` which
+   *   specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {string} [request.filter]
+   *   Optional. Lists Memberships that match the filter expression, following the
+   *   syntax outlined in https://google.aip.dev/160.
+   *
+   *   Examples:
+   *
+   *     - Name is `bar` in project `foo-proj` and location `global`:
+   *
+   *         name = "projects/foo-proj/locations/global/membership/bar"
+   *
+   *     - Memberships that have a label called `foo`:
+   *
+   *         labels.foo:*
+   *
+   *     - Memberships that have a label called `foo` whose value is `bar`:
+   *
+   *         labels.foo = bar
+   *
+   *     - Memberships in the CREATING state:
+   *
+   *         state = CREATING
+   * @param {string} [request.orderBy]
+   *   Optional. One or more fields to compare and use to sort the output.
+   *   See https://google.aip.dev/132#ordering.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.gkehub.v1.Membership|Membership}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listMembershipsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMemberships(
-      request?: protos.google.cloud.gkehub.v1.IListMembershipsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IMembership[],
-        protos.google.cloud.gkehub.v1.IListMembershipsRequest|null,
-        protos.google.cloud.gkehub.v1.IListMembershipsResponse
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IListMembershipsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IMembership[],
+      protos.google.cloud.gkehub.v1.IListMembershipsRequest | null,
+      protos.google.cloud.gkehub.v1.IListMembershipsResponse,
+    ]
+  >;
   listMemberships(
-      request: protos.google.cloud.gkehub.v1.IListMembershipsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListMembershipsRequest,
-          protos.google.cloud.gkehub.v1.IListMembershipsResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IMembership>): void;
+    request: protos.google.cloud.gkehub.v1.IListMembershipsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListMembershipsRequest,
+      protos.google.cloud.gkehub.v1.IListMembershipsResponse | null | undefined,
+      protos.google.cloud.gkehub.v1.IMembership
+    >,
+  ): void;
   listMemberships(
-      request: protos.google.cloud.gkehub.v1.IListMembershipsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListMembershipsRequest,
-          protos.google.cloud.gkehub.v1.IListMembershipsResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IMembership>): void;
+    request: protos.google.cloud.gkehub.v1.IListMembershipsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListMembershipsRequest,
+      protos.google.cloud.gkehub.v1.IListMembershipsResponse | null | undefined,
+      protos.google.cloud.gkehub.v1.IMembership
+    >,
+  ): void;
   listMemberships(
-      request?: protos.google.cloud.gkehub.v1.IListMembershipsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.gkehub.v1.IListMembershipsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.gkehub.v1.IListMembershipsRequest,
-          protos.google.cloud.gkehub.v1.IListMembershipsResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IMembership>,
-      callback?: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListMembershipsRequest,
-          protos.google.cloud.gkehub.v1.IListMembershipsResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IMembership>):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IMembership[],
-        protos.google.cloud.gkehub.v1.IListMembershipsRequest|null,
-        protos.google.cloud.gkehub.v1.IListMembershipsResponse
-      ]>|void {
+          | protos.google.cloud.gkehub.v1.IListMembershipsResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkehub.v1.IMembership
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListMembershipsRequest,
+      protos.google.cloud.gkehub.v1.IListMembershipsResponse | null | undefined,
+      protos.google.cloud.gkehub.v1.IMembership
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IMembership[],
+      protos.google.cloud.gkehub.v1.IListMembershipsRequest | null,
+      protos.google.cloud.gkehub.v1.IListMembershipsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.gkehub.v1.IListMembershipsRequest,
-      protos.google.cloud.gkehub.v1.IListMembershipsResponse|null|undefined,
-      protos.google.cloud.gkehub.v1.IMembership>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gkehub.v1.IListMembershipsRequest,
+          | protos.google.cloud.gkehub.v1.IListMembershipsResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkehub.v1.IMembership
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listMemberships values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4521,261 +6733,290 @@ export class GkeHubClient {
     this._log.info('listMemberships request %j', request);
     return this.innerApiCalls
       .listMemberships(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.gkehub.v1.IMembership[],
-        protos.google.cloud.gkehub.v1.IListMembershipsRequest|null,
-        protos.google.cloud.gkehub.v1.IListMembershipsResponse
-      ]) => {
-        this._log.info('listMemberships values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gkehub.v1.IMembership[],
+          protos.google.cloud.gkehub.v1.IListMembershipsRequest | null,
+          protos.google.cloud.gkehub.v1.IListMembershipsResponse,
+        ]) => {
+          this._log.info('listMemberships values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listMemberships`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the Memberships will be
- *   listed. Specified in the format `projects/* /locations/*`.
- *   `projects/* /locations/-` list memberships in all the regions.
- * @param {number} [request.pageSize]
- *   Optional. When requesting a 'page' of resources, `page_size` specifies
- *   number of resources to return. If unspecified or set to 0, all resources
- *   will be returned.
- * @param {string} [request.pageToken]
- *   Optional. Token returned by previous call to `ListMemberships` which
- *   specifies the position in the list from where to continue listing the
- *   resources.
- * @param {string} [request.filter]
- *   Optional. Lists Memberships that match the filter expression, following the
- *   syntax outlined in https://google.aip.dev/160.
- *
- *   Examples:
- *
- *     - Name is `bar` in project `foo-proj` and location `global`:
- *
- *         name = "projects/foo-proj/locations/global/membership/bar"
- *
- *     - Memberships that have a label called `foo`:
- *
- *         labels.foo:*
- *
- *     - Memberships that have a label called `foo` whose value is `bar`:
- *
- *         labels.foo = bar
- *
- *     - Memberships in the CREATING state:
- *
- *         state = CREATING
- * @param {string} [request.orderBy]
- *   Optional. One or more fields to compare and use to sort the output.
- *   See https://google.aip.dev/132#ordering.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.gkehub.v1.Membership|Membership} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listMembershipsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listMemberships`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the Memberships will be
+   *   listed. Specified in the format `projects/* /locations/*`.
+   *   `projects/* /locations/-` list memberships in all the regions.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a 'page' of resources, `page_size` specifies
+   *   number of resources to return. If unspecified or set to 0, all resources
+   *   will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to `ListMemberships` which
+   *   specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {string} [request.filter]
+   *   Optional. Lists Memberships that match the filter expression, following the
+   *   syntax outlined in https://google.aip.dev/160.
+   *
+   *   Examples:
+   *
+   *     - Name is `bar` in project `foo-proj` and location `global`:
+   *
+   *         name = "projects/foo-proj/locations/global/membership/bar"
+   *
+   *     - Memberships that have a label called `foo`:
+   *
+   *         labels.foo:*
+   *
+   *     - Memberships that have a label called `foo` whose value is `bar`:
+   *
+   *         labels.foo = bar
+   *
+   *     - Memberships in the CREATING state:
+   *
+   *         state = CREATING
+   * @param {string} [request.orderBy]
+   *   Optional. One or more fields to compare and use to sort the output.
+   *   See https://google.aip.dev/132#ordering.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.gkehub.v1.Membership|Membership} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listMembershipsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMembershipsStream(
-      request?: protos.google.cloud.gkehub.v1.IListMembershipsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.gkehub.v1.IListMembershipsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listMemberships'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listMemberships stream %j', request);
     return this.descriptors.page.listMemberships.createStream(
       this.innerApiCalls.listMemberships as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listMemberships`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the Memberships will be
- *   listed. Specified in the format `projects/* /locations/*`.
- *   `projects/* /locations/-` list memberships in all the regions.
- * @param {number} [request.pageSize]
- *   Optional. When requesting a 'page' of resources, `page_size` specifies
- *   number of resources to return. If unspecified or set to 0, all resources
- *   will be returned.
- * @param {string} [request.pageToken]
- *   Optional. Token returned by previous call to `ListMemberships` which
- *   specifies the position in the list from where to continue listing the
- *   resources.
- * @param {string} [request.filter]
- *   Optional. Lists Memberships that match the filter expression, following the
- *   syntax outlined in https://google.aip.dev/160.
- *
- *   Examples:
- *
- *     - Name is `bar` in project `foo-proj` and location `global`:
- *
- *         name = "projects/foo-proj/locations/global/membership/bar"
- *
- *     - Memberships that have a label called `foo`:
- *
- *         labels.foo:*
- *
- *     - Memberships that have a label called `foo` whose value is `bar`:
- *
- *         labels.foo = bar
- *
- *     - Memberships in the CREATING state:
- *
- *         state = CREATING
- * @param {string} [request.orderBy]
- *   Optional. One or more fields to compare and use to sort the output.
- *   See https://google.aip.dev/132#ordering.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.gkehub.v1.Membership|Membership}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.list_memberships.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_ListMemberships_async
- */
+  /**
+   * Equivalent to `listMemberships`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the Memberships will be
+   *   listed. Specified in the format `projects/* /locations/*`.
+   *   `projects/* /locations/-` list memberships in all the regions.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a 'page' of resources, `page_size` specifies
+   *   number of resources to return. If unspecified or set to 0, all resources
+   *   will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to `ListMemberships` which
+   *   specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {string} [request.filter]
+   *   Optional. Lists Memberships that match the filter expression, following the
+   *   syntax outlined in https://google.aip.dev/160.
+   *
+   *   Examples:
+   *
+   *     - Name is `bar` in project `foo-proj` and location `global`:
+   *
+   *         name = "projects/foo-proj/locations/global/membership/bar"
+   *
+   *     - Memberships that have a label called `foo`:
+   *
+   *         labels.foo:*
+   *
+   *     - Memberships that have a label called `foo` whose value is `bar`:
+   *
+   *         labels.foo = bar
+   *
+   *     - Memberships in the CREATING state:
+   *
+   *         state = CREATING
+   * @param {string} [request.orderBy]
+   *   Optional. One or more fields to compare and use to sort the output.
+   *   See https://google.aip.dev/132#ordering.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.gkehub.v1.Membership|Membership}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.list_memberships.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_ListMemberships_async
+   */
   listMembershipsAsync(
-      request?: protos.google.cloud.gkehub.v1.IListMembershipsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.gkehub.v1.IMembership>{
+    request?: protos.google.cloud.gkehub.v1.IListMembershipsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.gkehub.v1.IMembership> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listMemberships'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listMemberships iterate %j', request);
     return this.descriptors.page.listMemberships.asyncIterate(
       this.innerApiCalls['listMemberships'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.gkehub.v1.IMembership>;
   }
- /**
- * Lists Memberships bound to a Scope. The response includes relevant
- * Memberships from all regions.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.scopeName
- *   Required. Name of the Scope, in the format
- *   `projects/* /locations/global/scopes/*`, to which the Memberships are bound.
- * @param {string} [request.filter]
- *   Optional. Lists Memberships that match the filter expression, following the
- *   syntax outlined in https://google.aip.dev/160. Currently, filtering
- *   can be done only based on Memberships's `name`, `labels`, `create_time`,
- *   `update_time`, and `unique_id`.
- * @param {number} [request.pageSize]
- *   Optional. When requesting a 'page' of resources, `page_size` specifies
- *   number of resources to return. If unspecified or set to 0, all resources
- *   will be returned. Pagination is currently not supported; therefore, setting
- *   this field does not have any impact for now.
- * @param {string} [request.pageToken]
- *   Optional. Token returned by previous call to `ListBoundMemberships` which
- *   specifies the position in the list from where to continue listing the
- *   resources.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.gkehub.v1.Membership|Membership}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listBoundMembershipsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists Memberships bound to a Scope. The response includes relevant
+   * Memberships from all regions.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.scopeName
+   *   Required. Name of the Scope, in the format
+   *   `projects/* /locations/global/scopes/*`, to which the Memberships are bound.
+   * @param {string} [request.filter]
+   *   Optional. Lists Memberships that match the filter expression, following the
+   *   syntax outlined in https://google.aip.dev/160. Currently, filtering
+   *   can be done only based on Memberships's `name`, `labels`, `create_time`,
+   *   `update_time`, and `unique_id`.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a 'page' of resources, `page_size` specifies
+   *   number of resources to return. If unspecified or set to 0, all resources
+   *   will be returned. Pagination is currently not supported; therefore, setting
+   *   this field does not have any impact for now.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to `ListBoundMemberships` which
+   *   specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.gkehub.v1.Membership|Membership}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listBoundMembershipsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listBoundMemberships(
-      request?: protos.google.cloud.gkehub.v1.IListBoundMembershipsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IMembership[],
-        protos.google.cloud.gkehub.v1.IListBoundMembershipsRequest|null,
-        protos.google.cloud.gkehub.v1.IListBoundMembershipsResponse
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IListBoundMembershipsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IMembership[],
+      protos.google.cloud.gkehub.v1.IListBoundMembershipsRequest | null,
+      protos.google.cloud.gkehub.v1.IListBoundMembershipsResponse,
+    ]
+  >;
   listBoundMemberships(
-      request: protos.google.cloud.gkehub.v1.IListBoundMembershipsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListBoundMembershipsRequest,
-          protos.google.cloud.gkehub.v1.IListBoundMembershipsResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IMembership>): void;
+    request: protos.google.cloud.gkehub.v1.IListBoundMembershipsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListBoundMembershipsRequest,
+      | protos.google.cloud.gkehub.v1.IListBoundMembershipsResponse
+      | null
+      | undefined,
+      protos.google.cloud.gkehub.v1.IMembership
+    >,
+  ): void;
   listBoundMemberships(
-      request: protos.google.cloud.gkehub.v1.IListBoundMembershipsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListBoundMembershipsRequest,
-          protos.google.cloud.gkehub.v1.IListBoundMembershipsResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IMembership>): void;
+    request: protos.google.cloud.gkehub.v1.IListBoundMembershipsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListBoundMembershipsRequest,
+      | protos.google.cloud.gkehub.v1.IListBoundMembershipsResponse
+      | null
+      | undefined,
+      protos.google.cloud.gkehub.v1.IMembership
+    >,
+  ): void;
   listBoundMemberships(
-      request?: protos.google.cloud.gkehub.v1.IListBoundMembershipsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.gkehub.v1.IListBoundMembershipsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.gkehub.v1.IListBoundMembershipsRequest,
-          protos.google.cloud.gkehub.v1.IListBoundMembershipsResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IMembership>,
-      callback?: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListBoundMembershipsRequest,
-          protos.google.cloud.gkehub.v1.IListBoundMembershipsResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IMembership>):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IMembership[],
-        protos.google.cloud.gkehub.v1.IListBoundMembershipsRequest|null,
-        protos.google.cloud.gkehub.v1.IListBoundMembershipsResponse
-      ]>|void {
+          | protos.google.cloud.gkehub.v1.IListBoundMembershipsResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkehub.v1.IMembership
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListBoundMembershipsRequest,
+      | protos.google.cloud.gkehub.v1.IListBoundMembershipsResponse
+      | null
+      | undefined,
+      protos.google.cloud.gkehub.v1.IMembership
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IMembership[],
+      protos.google.cloud.gkehub.v1.IListBoundMembershipsRequest | null,
+      protos.google.cloud.gkehub.v1.IListBoundMembershipsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'scope_name': request.scopeName ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        scope_name: request.scopeName ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.gkehub.v1.IListBoundMembershipsRequest,
-      protos.google.cloud.gkehub.v1.IListBoundMembershipsResponse|null|undefined,
-      protos.google.cloud.gkehub.v1.IMembership>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gkehub.v1.IListBoundMembershipsRequest,
+          | protos.google.cloud.gkehub.v1.IListBoundMembershipsResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkehub.v1.IMembership
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listBoundMemberships values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4784,241 +7025,264 @@ export class GkeHubClient {
     this._log.info('listBoundMemberships request %j', request);
     return this.innerApiCalls
       .listBoundMemberships(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.gkehub.v1.IMembership[],
-        protos.google.cloud.gkehub.v1.IListBoundMembershipsRequest|null,
-        protos.google.cloud.gkehub.v1.IListBoundMembershipsResponse
-      ]) => {
-        this._log.info('listBoundMemberships values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gkehub.v1.IMembership[],
+          protos.google.cloud.gkehub.v1.IListBoundMembershipsRequest | null,
+          protos.google.cloud.gkehub.v1.IListBoundMembershipsResponse,
+        ]) => {
+          this._log.info('listBoundMemberships values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listBoundMemberships`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.scopeName
- *   Required. Name of the Scope, in the format
- *   `projects/* /locations/global/scopes/*`, to which the Memberships are bound.
- * @param {string} [request.filter]
- *   Optional. Lists Memberships that match the filter expression, following the
- *   syntax outlined in https://google.aip.dev/160. Currently, filtering
- *   can be done only based on Memberships's `name`, `labels`, `create_time`,
- *   `update_time`, and `unique_id`.
- * @param {number} [request.pageSize]
- *   Optional. When requesting a 'page' of resources, `page_size` specifies
- *   number of resources to return. If unspecified or set to 0, all resources
- *   will be returned. Pagination is currently not supported; therefore, setting
- *   this field does not have any impact for now.
- * @param {string} [request.pageToken]
- *   Optional. Token returned by previous call to `ListBoundMemberships` which
- *   specifies the position in the list from where to continue listing the
- *   resources.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.gkehub.v1.Membership|Membership} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listBoundMembershipsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listBoundMemberships`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.scopeName
+   *   Required. Name of the Scope, in the format
+   *   `projects/* /locations/global/scopes/*`, to which the Memberships are bound.
+   * @param {string} [request.filter]
+   *   Optional. Lists Memberships that match the filter expression, following the
+   *   syntax outlined in https://google.aip.dev/160. Currently, filtering
+   *   can be done only based on Memberships's `name`, `labels`, `create_time`,
+   *   `update_time`, and `unique_id`.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a 'page' of resources, `page_size` specifies
+   *   number of resources to return. If unspecified or set to 0, all resources
+   *   will be returned. Pagination is currently not supported; therefore, setting
+   *   this field does not have any impact for now.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to `ListBoundMemberships` which
+   *   specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.gkehub.v1.Membership|Membership} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listBoundMembershipsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listBoundMembershipsStream(
-      request?: protos.google.cloud.gkehub.v1.IListBoundMembershipsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.gkehub.v1.IListBoundMembershipsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'scope_name': request.scopeName ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        scope_name: request.scopeName ?? '',
+      });
     const defaultCallSettings = this._defaults['listBoundMemberships'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listBoundMemberships stream %j', request);
     return this.descriptors.page.listBoundMemberships.createStream(
       this.innerApiCalls.listBoundMemberships as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listBoundMemberships`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.scopeName
- *   Required. Name of the Scope, in the format
- *   `projects/* /locations/global/scopes/*`, to which the Memberships are bound.
- * @param {string} [request.filter]
- *   Optional. Lists Memberships that match the filter expression, following the
- *   syntax outlined in https://google.aip.dev/160. Currently, filtering
- *   can be done only based on Memberships's `name`, `labels`, `create_time`,
- *   `update_time`, and `unique_id`.
- * @param {number} [request.pageSize]
- *   Optional. When requesting a 'page' of resources, `page_size` specifies
- *   number of resources to return. If unspecified or set to 0, all resources
- *   will be returned. Pagination is currently not supported; therefore, setting
- *   this field does not have any impact for now.
- * @param {string} [request.pageToken]
- *   Optional. Token returned by previous call to `ListBoundMemberships` which
- *   specifies the position in the list from where to continue listing the
- *   resources.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.gkehub.v1.Membership|Membership}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.list_bound_memberships.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_ListBoundMemberships_async
- */
+  /**
+   * Equivalent to `listBoundMemberships`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.scopeName
+   *   Required. Name of the Scope, in the format
+   *   `projects/* /locations/global/scopes/*`, to which the Memberships are bound.
+   * @param {string} [request.filter]
+   *   Optional. Lists Memberships that match the filter expression, following the
+   *   syntax outlined in https://google.aip.dev/160. Currently, filtering
+   *   can be done only based on Memberships's `name`, `labels`, `create_time`,
+   *   `update_time`, and `unique_id`.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a 'page' of resources, `page_size` specifies
+   *   number of resources to return. If unspecified or set to 0, all resources
+   *   will be returned. Pagination is currently not supported; therefore, setting
+   *   this field does not have any impact for now.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to `ListBoundMemberships` which
+   *   specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.gkehub.v1.Membership|Membership}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.list_bound_memberships.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_ListBoundMemberships_async
+   */
   listBoundMembershipsAsync(
-      request?: protos.google.cloud.gkehub.v1.IListBoundMembershipsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.gkehub.v1.IMembership>{
+    request?: protos.google.cloud.gkehub.v1.IListBoundMembershipsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.gkehub.v1.IMembership> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'scope_name': request.scopeName ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        scope_name: request.scopeName ?? '',
+      });
     const defaultCallSettings = this._defaults['listBoundMemberships'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listBoundMemberships iterate %j', request);
     return this.descriptors.page.listBoundMemberships.asyncIterate(
       this.innerApiCalls['listBoundMemberships'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.gkehub.v1.IMembership>;
   }
- /**
- * Lists Features in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the Features will be
- *   listed. Specified in the format `projects/* /locations/*`.
- * @param {number} request.pageSize
- *   When requesting a 'page' of resources, `page_size` specifies number of
- *   resources to return. If unspecified or set to 0, all resources will
- *   be returned.
- * @param {string} request.pageToken
- *   Token returned by previous call to `ListFeatures` which
- *   specifies the position in the list from where to continue listing the
- *   resources.
- * @param {string} request.filter
- *   Lists Features that match the filter expression, following the syntax
- *   outlined in https://google.aip.dev/160.
- *
- *   Examples:
- *
- *     - Feature with the name "servicemesh" in project "foo-proj":
- *
- *         name = "projects/foo-proj/locations/global/features/servicemesh"
- *
- *     - Features that have a label called `foo`:
- *
- *         labels.foo:*
- *
- *     - Features that have a label called `foo` whose value is `bar`:
- *
- *         labels.foo = bar
- * @param {string} request.orderBy
- *   One or more fields to compare and use to sort the output.
- *   See https://google.aip.dev/132#ordering.
- * @param {boolean} [request.returnPartialSuccess]
- *   Optional. If set to true, the response will return partial results when
- *   some regions are unreachable and the unreachable field in Feature proto
- *   will be populated. If set to false, the request will fail when some regions
- *   are unreachable.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.gkehub.v1.Feature|Feature}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listFeaturesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists Features in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the Features will be
+   *   listed. Specified in the format `projects/* /locations/*`.
+   * @param {number} request.pageSize
+   *   When requesting a 'page' of resources, `page_size` specifies number of
+   *   resources to return. If unspecified or set to 0, all resources will
+   *   be returned.
+   * @param {string} request.pageToken
+   *   Token returned by previous call to `ListFeatures` which
+   *   specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {string} request.filter
+   *   Lists Features that match the filter expression, following the syntax
+   *   outlined in https://google.aip.dev/160.
+   *
+   *   Examples:
+   *
+   *     - Feature with the name "servicemesh" in project "foo-proj":
+   *
+   *         name = "projects/foo-proj/locations/global/features/servicemesh"
+   *
+   *     - Features that have a label called `foo`:
+   *
+   *         labels.foo:*
+   *
+   *     - Features that have a label called `foo` whose value is `bar`:
+   *
+   *         labels.foo = bar
+   * @param {string} request.orderBy
+   *   One or more fields to compare and use to sort the output.
+   *   See https://google.aip.dev/132#ordering.
+   * @param {boolean} [request.returnPartialSuccess]
+   *   Optional. If set to true, the response will return partial results when
+   *   some regions are unreachable and the unreachable field in Feature proto
+   *   will be populated. If set to false, the request will fail when some regions
+   *   are unreachable.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.gkehub.v1.Feature|Feature}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listFeaturesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listFeatures(
-      request?: protos.google.cloud.gkehub.v1.IListFeaturesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IFeature[],
-        protos.google.cloud.gkehub.v1.IListFeaturesRequest|null,
-        protos.google.cloud.gkehub.v1.IListFeaturesResponse
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IListFeaturesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IFeature[],
+      protos.google.cloud.gkehub.v1.IListFeaturesRequest | null,
+      protos.google.cloud.gkehub.v1.IListFeaturesResponse,
+    ]
+  >;
   listFeatures(
-      request: protos.google.cloud.gkehub.v1.IListFeaturesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListFeaturesRequest,
-          protos.google.cloud.gkehub.v1.IListFeaturesResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IFeature>): void;
+    request: protos.google.cloud.gkehub.v1.IListFeaturesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListFeaturesRequest,
+      protos.google.cloud.gkehub.v1.IListFeaturesResponse | null | undefined,
+      protos.google.cloud.gkehub.v1.IFeature
+    >,
+  ): void;
   listFeatures(
-      request: protos.google.cloud.gkehub.v1.IListFeaturesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListFeaturesRequest,
-          protos.google.cloud.gkehub.v1.IListFeaturesResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IFeature>): void;
+    request: protos.google.cloud.gkehub.v1.IListFeaturesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListFeaturesRequest,
+      protos.google.cloud.gkehub.v1.IListFeaturesResponse | null | undefined,
+      protos.google.cloud.gkehub.v1.IFeature
+    >,
+  ): void;
   listFeatures(
-      request?: protos.google.cloud.gkehub.v1.IListFeaturesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.gkehub.v1.IListFeaturesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.gkehub.v1.IListFeaturesRequest,
-          protos.google.cloud.gkehub.v1.IListFeaturesResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IFeature>,
-      callback?: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListFeaturesRequest,
-          protos.google.cloud.gkehub.v1.IListFeaturesResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IFeature>):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IFeature[],
-        protos.google.cloud.gkehub.v1.IListFeaturesRequest|null,
-        protos.google.cloud.gkehub.v1.IListFeaturesResponse
-      ]>|void {
+          | protos.google.cloud.gkehub.v1.IListFeaturesResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkehub.v1.IFeature
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListFeaturesRequest,
+      protos.google.cloud.gkehub.v1.IListFeaturesResponse | null | undefined,
+      protos.google.cloud.gkehub.v1.IFeature
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IFeature[],
+      protos.google.cloud.gkehub.v1.IListFeaturesRequest | null,
+      protos.google.cloud.gkehub.v1.IListFeaturesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.gkehub.v1.IListFeaturesRequest,
-      protos.google.cloud.gkehub.v1.IListFeaturesResponse|null|undefined,
-      protos.google.cloud.gkehub.v1.IFeature>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gkehub.v1.IListFeaturesRequest,
+          | protos.google.cloud.gkehub.v1.IListFeaturesResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkehub.v1.IFeature
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listFeatures values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5027,257 +7291,276 @@ export class GkeHubClient {
     this._log.info('listFeatures request %j', request);
     return this.innerApiCalls
       .listFeatures(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.gkehub.v1.IFeature[],
-        protos.google.cloud.gkehub.v1.IListFeaturesRequest|null,
-        protos.google.cloud.gkehub.v1.IListFeaturesResponse
-      ]) => {
-        this._log.info('listFeatures values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gkehub.v1.IFeature[],
+          protos.google.cloud.gkehub.v1.IListFeaturesRequest | null,
+          protos.google.cloud.gkehub.v1.IListFeaturesResponse,
+        ]) => {
+          this._log.info('listFeatures values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listFeatures`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the Features will be
- *   listed. Specified in the format `projects/* /locations/*`.
- * @param {number} request.pageSize
- *   When requesting a 'page' of resources, `page_size` specifies number of
- *   resources to return. If unspecified or set to 0, all resources will
- *   be returned.
- * @param {string} request.pageToken
- *   Token returned by previous call to `ListFeatures` which
- *   specifies the position in the list from where to continue listing the
- *   resources.
- * @param {string} request.filter
- *   Lists Features that match the filter expression, following the syntax
- *   outlined in https://google.aip.dev/160.
- *
- *   Examples:
- *
- *     - Feature with the name "servicemesh" in project "foo-proj":
- *
- *         name = "projects/foo-proj/locations/global/features/servicemesh"
- *
- *     - Features that have a label called `foo`:
- *
- *         labels.foo:*
- *
- *     - Features that have a label called `foo` whose value is `bar`:
- *
- *         labels.foo = bar
- * @param {string} request.orderBy
- *   One or more fields to compare and use to sort the output.
- *   See https://google.aip.dev/132#ordering.
- * @param {boolean} [request.returnPartialSuccess]
- *   Optional. If set to true, the response will return partial results when
- *   some regions are unreachable and the unreachable field in Feature proto
- *   will be populated. If set to false, the request will fail when some regions
- *   are unreachable.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.gkehub.v1.Feature|Feature} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listFeaturesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listFeatures`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the Features will be
+   *   listed. Specified in the format `projects/* /locations/*`.
+   * @param {number} request.pageSize
+   *   When requesting a 'page' of resources, `page_size` specifies number of
+   *   resources to return. If unspecified or set to 0, all resources will
+   *   be returned.
+   * @param {string} request.pageToken
+   *   Token returned by previous call to `ListFeatures` which
+   *   specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {string} request.filter
+   *   Lists Features that match the filter expression, following the syntax
+   *   outlined in https://google.aip.dev/160.
+   *
+   *   Examples:
+   *
+   *     - Feature with the name "servicemesh" in project "foo-proj":
+   *
+   *         name = "projects/foo-proj/locations/global/features/servicemesh"
+   *
+   *     - Features that have a label called `foo`:
+   *
+   *         labels.foo:*
+   *
+   *     - Features that have a label called `foo` whose value is `bar`:
+   *
+   *         labels.foo = bar
+   * @param {string} request.orderBy
+   *   One or more fields to compare and use to sort the output.
+   *   See https://google.aip.dev/132#ordering.
+   * @param {boolean} [request.returnPartialSuccess]
+   *   Optional. If set to true, the response will return partial results when
+   *   some regions are unreachable and the unreachable field in Feature proto
+   *   will be populated. If set to false, the request will fail when some regions
+   *   are unreachable.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.gkehub.v1.Feature|Feature} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listFeaturesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listFeaturesStream(
-      request?: protos.google.cloud.gkehub.v1.IListFeaturesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.gkehub.v1.IListFeaturesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listFeatures'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listFeatures stream %j', request);
     return this.descriptors.page.listFeatures.createStream(
       this.innerApiCalls.listFeatures as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listFeatures`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the Features will be
- *   listed. Specified in the format `projects/* /locations/*`.
- * @param {number} request.pageSize
- *   When requesting a 'page' of resources, `page_size` specifies number of
- *   resources to return. If unspecified or set to 0, all resources will
- *   be returned.
- * @param {string} request.pageToken
- *   Token returned by previous call to `ListFeatures` which
- *   specifies the position in the list from where to continue listing the
- *   resources.
- * @param {string} request.filter
- *   Lists Features that match the filter expression, following the syntax
- *   outlined in https://google.aip.dev/160.
- *
- *   Examples:
- *
- *     - Feature with the name "servicemesh" in project "foo-proj":
- *
- *         name = "projects/foo-proj/locations/global/features/servicemesh"
- *
- *     - Features that have a label called `foo`:
- *
- *         labels.foo:*
- *
- *     - Features that have a label called `foo` whose value is `bar`:
- *
- *         labels.foo = bar
- * @param {string} request.orderBy
- *   One or more fields to compare and use to sort the output.
- *   See https://google.aip.dev/132#ordering.
- * @param {boolean} [request.returnPartialSuccess]
- *   Optional. If set to true, the response will return partial results when
- *   some regions are unreachable and the unreachable field in Feature proto
- *   will be populated. If set to false, the request will fail when some regions
- *   are unreachable.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.gkehub.v1.Feature|Feature}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.list_features.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_ListFeatures_async
- */
+  /**
+   * Equivalent to `listFeatures`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the Features will be
+   *   listed. Specified in the format `projects/* /locations/*`.
+   * @param {number} request.pageSize
+   *   When requesting a 'page' of resources, `page_size` specifies number of
+   *   resources to return. If unspecified or set to 0, all resources will
+   *   be returned.
+   * @param {string} request.pageToken
+   *   Token returned by previous call to `ListFeatures` which
+   *   specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {string} request.filter
+   *   Lists Features that match the filter expression, following the syntax
+   *   outlined in https://google.aip.dev/160.
+   *
+   *   Examples:
+   *
+   *     - Feature with the name "servicemesh" in project "foo-proj":
+   *
+   *         name = "projects/foo-proj/locations/global/features/servicemesh"
+   *
+   *     - Features that have a label called `foo`:
+   *
+   *         labels.foo:*
+   *
+   *     - Features that have a label called `foo` whose value is `bar`:
+   *
+   *         labels.foo = bar
+   * @param {string} request.orderBy
+   *   One or more fields to compare and use to sort the output.
+   *   See https://google.aip.dev/132#ordering.
+   * @param {boolean} [request.returnPartialSuccess]
+   *   Optional. If set to true, the response will return partial results when
+   *   some regions are unreachable and the unreachable field in Feature proto
+   *   will be populated. If set to false, the request will fail when some regions
+   *   are unreachable.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.gkehub.v1.Feature|Feature}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.list_features.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_ListFeatures_async
+   */
   listFeaturesAsync(
-      request?: protos.google.cloud.gkehub.v1.IListFeaturesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.gkehub.v1.IFeature>{
+    request?: protos.google.cloud.gkehub.v1.IListFeaturesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.gkehub.v1.IFeature> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listFeatures'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listFeatures iterate %j', request);
     return this.descriptors.page.listFeatures.asyncIterate(
       this.innerApiCalls['listFeatures'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.gkehub.v1.IFeature>;
   }
- /**
- * Returns all fleets within an organization or a project that the caller has
- * access to.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The organization or project to list for Fleets under, in the
- *   format `organizations/* /locations/*` or `projects/* /locations/*`.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListFleets` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListFleets` must match
- *   the call that provided the page token.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of fleets to return. The service may return
- *   fewer than this value. If unspecified, at most 200 fleets will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.gkehub.v1.Fleet|Fleet}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listFleetsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Returns all fleets within an organization or a project that the caller has
+   * access to.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The organization or project to list for Fleets under, in the
+   *   format `organizations/* /locations/*` or `projects/* /locations/*`.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListFleets` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListFleets` must match
+   *   the call that provided the page token.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of fleets to return. The service may return
+   *   fewer than this value. If unspecified, at most 200 fleets will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.gkehub.v1.Fleet|Fleet}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listFleetsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listFleets(
-      request?: protos.google.cloud.gkehub.v1.IListFleetsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IFleet[],
-        protos.google.cloud.gkehub.v1.IListFleetsRequest|null,
-        protos.google.cloud.gkehub.v1.IListFleetsResponse
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IListFleetsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IFleet[],
+      protos.google.cloud.gkehub.v1.IListFleetsRequest | null,
+      protos.google.cloud.gkehub.v1.IListFleetsResponse,
+    ]
+  >;
   listFleets(
-      request: protos.google.cloud.gkehub.v1.IListFleetsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListFleetsRequest,
-          protos.google.cloud.gkehub.v1.IListFleetsResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IFleet>): void;
+    request: protos.google.cloud.gkehub.v1.IListFleetsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListFleetsRequest,
+      protos.google.cloud.gkehub.v1.IListFleetsResponse | null | undefined,
+      protos.google.cloud.gkehub.v1.IFleet
+    >,
+  ): void;
   listFleets(
-      request: protos.google.cloud.gkehub.v1.IListFleetsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListFleetsRequest,
-          protos.google.cloud.gkehub.v1.IListFleetsResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IFleet>): void;
+    request: protos.google.cloud.gkehub.v1.IListFleetsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListFleetsRequest,
+      protos.google.cloud.gkehub.v1.IListFleetsResponse | null | undefined,
+      protos.google.cloud.gkehub.v1.IFleet
+    >,
+  ): void;
   listFleets(
-      request?: protos.google.cloud.gkehub.v1.IListFleetsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.gkehub.v1.IListFleetsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.gkehub.v1.IListFleetsRequest,
-          protos.google.cloud.gkehub.v1.IListFleetsResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IFleet>,
-      callback?: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListFleetsRequest,
-          protos.google.cloud.gkehub.v1.IListFleetsResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IFleet>):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IFleet[],
-        protos.google.cloud.gkehub.v1.IListFleetsRequest|null,
-        protos.google.cloud.gkehub.v1.IListFleetsResponse
-      ]>|void {
+          protos.google.cloud.gkehub.v1.IListFleetsResponse | null | undefined,
+          protos.google.cloud.gkehub.v1.IFleet
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListFleetsRequest,
+      protos.google.cloud.gkehub.v1.IListFleetsResponse | null | undefined,
+      protos.google.cloud.gkehub.v1.IFleet
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IFleet[],
+      protos.google.cloud.gkehub.v1.IListFleetsRequest | null,
+      protos.google.cloud.gkehub.v1.IListFleetsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.gkehub.v1.IListFleetsRequest,
-      protos.google.cloud.gkehub.v1.IListFleetsResponse|null|undefined,
-      protos.google.cloud.gkehub.v1.IFleet>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gkehub.v1.IListFleetsRequest,
+          protos.google.cloud.gkehub.v1.IListFleetsResponse | null | undefined,
+          protos.google.cloud.gkehub.v1.IFleet
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listFleets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5286,208 +7569,237 @@ export class GkeHubClient {
     this._log.info('listFleets request %j', request);
     return this.innerApiCalls
       .listFleets(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.gkehub.v1.IFleet[],
-        protos.google.cloud.gkehub.v1.IListFleetsRequest|null,
-        protos.google.cloud.gkehub.v1.IListFleetsResponse
-      ]) => {
-        this._log.info('listFleets values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gkehub.v1.IFleet[],
+          protos.google.cloud.gkehub.v1.IListFleetsRequest | null,
+          protos.google.cloud.gkehub.v1.IListFleetsResponse,
+        ]) => {
+          this._log.info('listFleets values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listFleets`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The organization or project to list for Fleets under, in the
- *   format `organizations/* /locations/*` or `projects/* /locations/*`.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListFleets` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListFleets` must match
- *   the call that provided the page token.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of fleets to return. The service may return
- *   fewer than this value. If unspecified, at most 200 fleets will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.gkehub.v1.Fleet|Fleet} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listFleetsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listFleets`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The organization or project to list for Fleets under, in the
+   *   format `organizations/* /locations/*` or `projects/* /locations/*`.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListFleets` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListFleets` must match
+   *   the call that provided the page token.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of fleets to return. The service may return
+   *   fewer than this value. If unspecified, at most 200 fleets will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.gkehub.v1.Fleet|Fleet} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listFleetsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listFleetsStream(
-      request?: protos.google.cloud.gkehub.v1.IListFleetsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.gkehub.v1.IListFleetsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listFleets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listFleets stream %j', request);
     return this.descriptors.page.listFleets.createStream(
       this.innerApiCalls.listFleets as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listFleets`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The organization or project to list for Fleets under, in the
- *   format `organizations/* /locations/*` or `projects/* /locations/*`.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListFleets` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListFleets` must match
- *   the call that provided the page token.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of fleets to return. The service may return
- *   fewer than this value. If unspecified, at most 200 fleets will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.gkehub.v1.Fleet|Fleet}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.list_fleets.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_ListFleets_async
- */
+  /**
+   * Equivalent to `listFleets`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The organization or project to list for Fleets under, in the
+   *   format `organizations/* /locations/*` or `projects/* /locations/*`.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListFleets` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListFleets` must match
+   *   the call that provided the page token.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of fleets to return. The service may return
+   *   fewer than this value. If unspecified, at most 200 fleets will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.gkehub.v1.Fleet|Fleet}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.list_fleets.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_ListFleets_async
+   */
   listFleetsAsync(
-      request?: protos.google.cloud.gkehub.v1.IListFleetsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.gkehub.v1.IFleet>{
+    request?: protos.google.cloud.gkehub.v1.IListFleetsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.gkehub.v1.IFleet> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listFleets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listFleets iterate %j', request);
     return this.descriptors.page.listFleets.asyncIterate(
       this.innerApiCalls['listFleets'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.gkehub.v1.IFleet>;
   }
- /**
- * Lists fleet namespaces.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the Features will be
- *   listed. Specified in the format `projects/* /locations/* /scopes/*`.
- * @param {number} [request.pageSize]
- *   Optional. When requesting a 'page' of resources, `page_size` specifies
- *   number of resources to return. If unspecified or set to 0, all resources
- *   will be returned.
- * @param {string} [request.pageToken]
- *   Optional. Token returned by previous call to `ListFeatures` which
- *   specifies the position in the list from where to continue listing the
- *   resources.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.gkehub.v1.Namespace|Namespace}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listScopeNamespacesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists fleet namespaces.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the Features will be
+   *   listed. Specified in the format `projects/* /locations/* /scopes/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a 'page' of resources, `page_size` specifies
+   *   number of resources to return. If unspecified or set to 0, all resources
+   *   will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to `ListFeatures` which
+   *   specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.gkehub.v1.Namespace|Namespace}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listScopeNamespacesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listScopeNamespaces(
-      request?: protos.google.cloud.gkehub.v1.IListScopeNamespacesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkehub.v1.INamespace[],
-        protos.google.cloud.gkehub.v1.IListScopeNamespacesRequest|null,
-        protos.google.cloud.gkehub.v1.IListScopeNamespacesResponse
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IListScopeNamespacesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.INamespace[],
+      protos.google.cloud.gkehub.v1.IListScopeNamespacesRequest | null,
+      protos.google.cloud.gkehub.v1.IListScopeNamespacesResponse,
+    ]
+  >;
   listScopeNamespaces(
-      request: protos.google.cloud.gkehub.v1.IListScopeNamespacesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListScopeNamespacesRequest,
-          protos.google.cloud.gkehub.v1.IListScopeNamespacesResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.INamespace>): void;
+    request: protos.google.cloud.gkehub.v1.IListScopeNamespacesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListScopeNamespacesRequest,
+      | protos.google.cloud.gkehub.v1.IListScopeNamespacesResponse
+      | null
+      | undefined,
+      protos.google.cloud.gkehub.v1.INamespace
+    >,
+  ): void;
   listScopeNamespaces(
-      request: protos.google.cloud.gkehub.v1.IListScopeNamespacesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListScopeNamespacesRequest,
-          protos.google.cloud.gkehub.v1.IListScopeNamespacesResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.INamespace>): void;
+    request: protos.google.cloud.gkehub.v1.IListScopeNamespacesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListScopeNamespacesRequest,
+      | protos.google.cloud.gkehub.v1.IListScopeNamespacesResponse
+      | null
+      | undefined,
+      protos.google.cloud.gkehub.v1.INamespace
+    >,
+  ): void;
   listScopeNamespaces(
-      request?: protos.google.cloud.gkehub.v1.IListScopeNamespacesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.gkehub.v1.IListScopeNamespacesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.gkehub.v1.IListScopeNamespacesRequest,
-          protos.google.cloud.gkehub.v1.IListScopeNamespacesResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.INamespace>,
-      callback?: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListScopeNamespacesRequest,
-          protos.google.cloud.gkehub.v1.IListScopeNamespacesResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.INamespace>):
-      Promise<[
-        protos.google.cloud.gkehub.v1.INamespace[],
-        protos.google.cloud.gkehub.v1.IListScopeNamespacesRequest|null,
-        protos.google.cloud.gkehub.v1.IListScopeNamespacesResponse
-      ]>|void {
+          | protos.google.cloud.gkehub.v1.IListScopeNamespacesResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkehub.v1.INamespace
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListScopeNamespacesRequest,
+      | protos.google.cloud.gkehub.v1.IListScopeNamespacesResponse
+      | null
+      | undefined,
+      protos.google.cloud.gkehub.v1.INamespace
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.INamespace[],
+      protos.google.cloud.gkehub.v1.IListScopeNamespacesRequest | null,
+      protos.google.cloud.gkehub.v1.IListScopeNamespacesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.gkehub.v1.IListScopeNamespacesRequest,
-      protos.google.cloud.gkehub.v1.IListScopeNamespacesResponse|null|undefined,
-      protos.google.cloud.gkehub.v1.INamespace>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gkehub.v1.IListScopeNamespacesRequest,
+          | protos.google.cloud.gkehub.v1.IListScopeNamespacesResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkehub.v1.INamespace
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listScopeNamespaces values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5496,204 +7808,233 @@ export class GkeHubClient {
     this._log.info('listScopeNamespaces request %j', request);
     return this.innerApiCalls
       .listScopeNamespaces(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.gkehub.v1.INamespace[],
-        protos.google.cloud.gkehub.v1.IListScopeNamespacesRequest|null,
-        protos.google.cloud.gkehub.v1.IListScopeNamespacesResponse
-      ]) => {
-        this._log.info('listScopeNamespaces values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gkehub.v1.INamespace[],
+          protos.google.cloud.gkehub.v1.IListScopeNamespacesRequest | null,
+          protos.google.cloud.gkehub.v1.IListScopeNamespacesResponse,
+        ]) => {
+          this._log.info('listScopeNamespaces values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listScopeNamespaces`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the Features will be
- *   listed. Specified in the format `projects/* /locations/* /scopes/*`.
- * @param {number} [request.pageSize]
- *   Optional. When requesting a 'page' of resources, `page_size` specifies
- *   number of resources to return. If unspecified or set to 0, all resources
- *   will be returned.
- * @param {string} [request.pageToken]
- *   Optional. Token returned by previous call to `ListFeatures` which
- *   specifies the position in the list from where to continue listing the
- *   resources.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.gkehub.v1.Namespace|Namespace} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listScopeNamespacesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listScopeNamespaces`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the Features will be
+   *   listed. Specified in the format `projects/* /locations/* /scopes/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a 'page' of resources, `page_size` specifies
+   *   number of resources to return. If unspecified or set to 0, all resources
+   *   will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to `ListFeatures` which
+   *   specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.gkehub.v1.Namespace|Namespace} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listScopeNamespacesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listScopeNamespacesStream(
-      request?: protos.google.cloud.gkehub.v1.IListScopeNamespacesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.gkehub.v1.IListScopeNamespacesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listScopeNamespaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listScopeNamespaces stream %j', request);
     return this.descriptors.page.listScopeNamespaces.createStream(
       this.innerApiCalls.listScopeNamespaces as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listScopeNamespaces`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the Features will be
- *   listed. Specified in the format `projects/* /locations/* /scopes/*`.
- * @param {number} [request.pageSize]
- *   Optional. When requesting a 'page' of resources, `page_size` specifies
- *   number of resources to return. If unspecified or set to 0, all resources
- *   will be returned.
- * @param {string} [request.pageToken]
- *   Optional. Token returned by previous call to `ListFeatures` which
- *   specifies the position in the list from where to continue listing the
- *   resources.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.gkehub.v1.Namespace|Namespace}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.list_scope_namespaces.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_ListScopeNamespaces_async
- */
+  /**
+   * Equivalent to `listScopeNamespaces`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the Features will be
+   *   listed. Specified in the format `projects/* /locations/* /scopes/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a 'page' of resources, `page_size` specifies
+   *   number of resources to return. If unspecified or set to 0, all resources
+   *   will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to `ListFeatures` which
+   *   specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.gkehub.v1.Namespace|Namespace}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.list_scope_namespaces.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_ListScopeNamespaces_async
+   */
   listScopeNamespacesAsync(
-      request?: protos.google.cloud.gkehub.v1.IListScopeNamespacesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.gkehub.v1.INamespace>{
+    request?: protos.google.cloud.gkehub.v1.IListScopeNamespacesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.gkehub.v1.INamespace> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listScopeNamespaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listScopeNamespaces iterate %j', request);
     return this.descriptors.page.listScopeNamespaces.asyncIterate(
       this.innerApiCalls['listScopeNamespaces'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.gkehub.v1.INamespace>;
   }
- /**
- * Lists all Scope RBACRoleBindings.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the Features will be
- *   listed. Specified in the format `projects/* /locations/* /scopes/*`.
- * @param {number} [request.pageSize]
- *   Optional. When requesting a 'page' of resources, `page_size` specifies
- *   number of resources to return. If unspecified or set to 0, all resources
- *   will be returned.
- * @param {string} [request.pageToken]
- *   Optional. Token returned by previous call to `ListScopeRBACRoleBindings`
- *   which specifies the position in the list from where to continue listing the
- *   resources.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.gkehub.v1.RBACRoleBinding|RBACRoleBinding}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listScopeRBACRoleBindingsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists all Scope RBACRoleBindings.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the Features will be
+   *   listed. Specified in the format `projects/* /locations/* /scopes/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a 'page' of resources, `page_size` specifies
+   *   number of resources to return. If unspecified or set to 0, all resources
+   *   will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to `ListScopeRBACRoleBindings`
+   *   which specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.gkehub.v1.RBACRoleBinding|RBACRoleBinding}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listScopeRBACRoleBindingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listScopeRBACRoleBindings(
-      request?: protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IRBACRoleBinding[],
-        protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest|null,
-        protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsResponse
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IRBACRoleBinding[],
+      protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest | null,
+      protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsResponse,
+    ]
+  >;
   listScopeRBACRoleBindings(
-      request: protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest,
-          protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IRBACRoleBinding>): void;
+    request: protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest,
+      | protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.gkehub.v1.IRBACRoleBinding
+    >,
+  ): void;
   listScopeRBACRoleBindings(
-      request: protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest,
-          protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IRBACRoleBinding>): void;
+    request: protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest,
+      | protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.gkehub.v1.IRBACRoleBinding
+    >,
+  ): void;
   listScopeRBACRoleBindings(
-      request?: protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest,
-          protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IRBACRoleBinding>,
-      callback?: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest,
-          protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IRBACRoleBinding>):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IRBACRoleBinding[],
-        protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest|null,
-        protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsResponse
-      ]>|void {
+          | protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkehub.v1.IRBACRoleBinding
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest,
+      | protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.gkehub.v1.IRBACRoleBinding
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IRBACRoleBinding[],
+      protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest | null,
+      protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest,
-      protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsResponse|null|undefined,
-      protos.google.cloud.gkehub.v1.IRBACRoleBinding>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest,
+          | protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkehub.v1.IRBACRoleBinding
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listScopeRBACRoleBindings values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5702,204 +8043,223 @@ export class GkeHubClient {
     this._log.info('listScopeRBACRoleBindings request %j', request);
     return this.innerApiCalls
       .listScopeRbacRoleBindings(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.gkehub.v1.IRBACRoleBinding[],
-        protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest|null,
-        protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsResponse
-      ]) => {
-        this._log.info('listScopeRBACRoleBindings values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gkehub.v1.IRBACRoleBinding[],
+          protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest | null,
+          protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsResponse,
+        ]) => {
+          this._log.info('listScopeRBACRoleBindings values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listScopeRBACRoleBindings`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the Features will be
- *   listed. Specified in the format `projects/* /locations/* /scopes/*`.
- * @param {number} [request.pageSize]
- *   Optional. When requesting a 'page' of resources, `page_size` specifies
- *   number of resources to return. If unspecified or set to 0, all resources
- *   will be returned.
- * @param {string} [request.pageToken]
- *   Optional. Token returned by previous call to `ListScopeRBACRoleBindings`
- *   which specifies the position in the list from where to continue listing the
- *   resources.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.gkehub.v1.RBACRoleBinding|RBACRoleBinding} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listScopeRBACRoleBindingsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listScopeRBACRoleBindings`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the Features will be
+   *   listed. Specified in the format `projects/* /locations/* /scopes/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a 'page' of resources, `page_size` specifies
+   *   number of resources to return. If unspecified or set to 0, all resources
+   *   will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to `ListScopeRBACRoleBindings`
+   *   which specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.gkehub.v1.RBACRoleBinding|RBACRoleBinding} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listScopeRBACRoleBindingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listScopeRBACRoleBindingsStream(
-      request?: protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listScopeRbacRoleBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listScopeRBACRoleBindings stream %j', request);
     return this.descriptors.page.listScopeRBACRoleBindings.createStream(
       this.innerApiCalls.listScopeRbacRoleBindings as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listScopeRBACRoleBindings`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the Features will be
- *   listed. Specified in the format `projects/* /locations/* /scopes/*`.
- * @param {number} [request.pageSize]
- *   Optional. When requesting a 'page' of resources, `page_size` specifies
- *   number of resources to return. If unspecified or set to 0, all resources
- *   will be returned.
- * @param {string} [request.pageToken]
- *   Optional. Token returned by previous call to `ListScopeRBACRoleBindings`
- *   which specifies the position in the list from where to continue listing the
- *   resources.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.gkehub.v1.RBACRoleBinding|RBACRoleBinding}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.list_scope_r_b_a_c_role_bindings.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_ListScopeRBACRoleBindings_async
- */
+  /**
+   * Equivalent to `listScopeRBACRoleBindings`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the Features will be
+   *   listed. Specified in the format `projects/* /locations/* /scopes/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a 'page' of resources, `page_size` specifies
+   *   number of resources to return. If unspecified or set to 0, all resources
+   *   will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to `ListScopeRBACRoleBindings`
+   *   which specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.gkehub.v1.RBACRoleBinding|RBACRoleBinding}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.list_scope_r_b_a_c_role_bindings.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_ListScopeRBACRoleBindings_async
+   */
   listScopeRBACRoleBindingsAsync(
-      request?: protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.gkehub.v1.IRBACRoleBinding>{
+    request?: protos.google.cloud.gkehub.v1.IListScopeRBACRoleBindingsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.gkehub.v1.IRBACRoleBinding> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listScopeRbacRoleBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listScopeRBACRoleBindings iterate %j', request);
     return this.descriptors.page.listScopeRBACRoleBindings.asyncIterate(
       this.innerApiCalls['listScopeRbacRoleBindings'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.gkehub.v1.IRBACRoleBinding>;
   }
- /**
- * Lists Scopes.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the Scope will be listed.
- *   Specified in the format `projects/* /locations/*`.
- * @param {number} [request.pageSize]
- *   Optional. When requesting a 'page' of resources, `page_size` specifies
- *   number of resources to return. If unspecified or set to 0, all resources
- *   will be returned.
- * @param {string} [request.pageToken]
- *   Optional. Token returned by previous call to `ListScopes` which
- *   specifies the position in the list from where to continue listing the
- *   resources.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.gkehub.v1.Scope|Scope}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listScopesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists Scopes.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the Scope will be listed.
+   *   Specified in the format `projects/* /locations/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a 'page' of resources, `page_size` specifies
+   *   number of resources to return. If unspecified or set to 0, all resources
+   *   will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to `ListScopes` which
+   *   specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.gkehub.v1.Scope|Scope}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listScopesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listScopes(
-      request?: protos.google.cloud.gkehub.v1.IListScopesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IScope[],
-        protos.google.cloud.gkehub.v1.IListScopesRequest|null,
-        protos.google.cloud.gkehub.v1.IListScopesResponse
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IListScopesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IScope[],
+      protos.google.cloud.gkehub.v1.IListScopesRequest | null,
+      protos.google.cloud.gkehub.v1.IListScopesResponse,
+    ]
+  >;
   listScopes(
-      request: protos.google.cloud.gkehub.v1.IListScopesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListScopesRequest,
-          protos.google.cloud.gkehub.v1.IListScopesResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IScope>): void;
+    request: protos.google.cloud.gkehub.v1.IListScopesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListScopesRequest,
+      protos.google.cloud.gkehub.v1.IListScopesResponse | null | undefined,
+      protos.google.cloud.gkehub.v1.IScope
+    >,
+  ): void;
   listScopes(
-      request: protos.google.cloud.gkehub.v1.IListScopesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListScopesRequest,
-          protos.google.cloud.gkehub.v1.IListScopesResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IScope>): void;
+    request: protos.google.cloud.gkehub.v1.IListScopesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListScopesRequest,
+      protos.google.cloud.gkehub.v1.IListScopesResponse | null | undefined,
+      protos.google.cloud.gkehub.v1.IScope
+    >,
+  ): void;
   listScopes(
-      request?: protos.google.cloud.gkehub.v1.IListScopesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.gkehub.v1.IListScopesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.gkehub.v1.IListScopesRequest,
-          protos.google.cloud.gkehub.v1.IListScopesResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IScope>,
-      callback?: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListScopesRequest,
-          protos.google.cloud.gkehub.v1.IListScopesResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IScope>):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IScope[],
-        protos.google.cloud.gkehub.v1.IListScopesRequest|null,
-        protos.google.cloud.gkehub.v1.IListScopesResponse
-      ]>|void {
+          protos.google.cloud.gkehub.v1.IListScopesResponse | null | undefined,
+          protos.google.cloud.gkehub.v1.IScope
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListScopesRequest,
+      protos.google.cloud.gkehub.v1.IListScopesResponse | null | undefined,
+      protos.google.cloud.gkehub.v1.IScope
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IScope[],
+      protos.google.cloud.gkehub.v1.IListScopesRequest | null,
+      protos.google.cloud.gkehub.v1.IListScopesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.gkehub.v1.IListScopesRequest,
-      protos.google.cloud.gkehub.v1.IListScopesResponse|null|undefined,
-      protos.google.cloud.gkehub.v1.IScope>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gkehub.v1.IListScopesRequest,
+          protos.google.cloud.gkehub.v1.IListScopesResponse | null | undefined,
+          protos.google.cloud.gkehub.v1.IScope
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listScopes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5908,204 +8268,233 @@ export class GkeHubClient {
     this._log.info('listScopes request %j', request);
     return this.innerApiCalls
       .listScopes(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.gkehub.v1.IScope[],
-        protos.google.cloud.gkehub.v1.IListScopesRequest|null,
-        protos.google.cloud.gkehub.v1.IListScopesResponse
-      ]) => {
-        this._log.info('listScopes values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gkehub.v1.IScope[],
+          protos.google.cloud.gkehub.v1.IListScopesRequest | null,
+          protos.google.cloud.gkehub.v1.IListScopesResponse,
+        ]) => {
+          this._log.info('listScopes values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listScopes`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the Scope will be listed.
- *   Specified in the format `projects/* /locations/*`.
- * @param {number} [request.pageSize]
- *   Optional. When requesting a 'page' of resources, `page_size` specifies
- *   number of resources to return. If unspecified or set to 0, all resources
- *   will be returned.
- * @param {string} [request.pageToken]
- *   Optional. Token returned by previous call to `ListScopes` which
- *   specifies the position in the list from where to continue listing the
- *   resources.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.gkehub.v1.Scope|Scope} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listScopesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listScopes`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the Scope will be listed.
+   *   Specified in the format `projects/* /locations/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a 'page' of resources, `page_size` specifies
+   *   number of resources to return. If unspecified or set to 0, all resources
+   *   will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to `ListScopes` which
+   *   specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.gkehub.v1.Scope|Scope} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listScopesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listScopesStream(
-      request?: protos.google.cloud.gkehub.v1.IListScopesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.gkehub.v1.IListScopesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listScopes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listScopes stream %j', request);
     return this.descriptors.page.listScopes.createStream(
       this.innerApiCalls.listScopes as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listScopes`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the Scope will be listed.
- *   Specified in the format `projects/* /locations/*`.
- * @param {number} [request.pageSize]
- *   Optional. When requesting a 'page' of resources, `page_size` specifies
- *   number of resources to return. If unspecified or set to 0, all resources
- *   will be returned.
- * @param {string} [request.pageToken]
- *   Optional. Token returned by previous call to `ListScopes` which
- *   specifies the position in the list from where to continue listing the
- *   resources.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.gkehub.v1.Scope|Scope}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.list_scopes.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_ListScopes_async
- */
+  /**
+   * Equivalent to `listScopes`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the Scope will be listed.
+   *   Specified in the format `projects/* /locations/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a 'page' of resources, `page_size` specifies
+   *   number of resources to return. If unspecified or set to 0, all resources
+   *   will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to `ListScopes` which
+   *   specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.gkehub.v1.Scope|Scope}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.list_scopes.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_ListScopes_async
+   */
   listScopesAsync(
-      request?: protos.google.cloud.gkehub.v1.IListScopesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.gkehub.v1.IScope>{
+    request?: protos.google.cloud.gkehub.v1.IListScopesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.gkehub.v1.IScope> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listScopes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listScopes iterate %j', request);
     return this.descriptors.page.listScopes.asyncIterate(
       this.innerApiCalls['listScopes'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.gkehub.v1.IScope>;
   }
- /**
- * Lists permitted Scopes.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the Scope will be listed.
- *   Specified in the format `projects/* /locations/*`.
- * @param {number} [request.pageSize]
- *   Optional. When requesting a 'page' of resources, `page_size` specifies
- *   number of resources to return. If unspecified or set to 0, all resources
- *   will be returned.
- * @param {string} [request.pageToken]
- *   Optional. Token returned by previous call to `ListPermittedScopes` which
- *   specifies the position in the list from where to continue listing the
- *   resources.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.gkehub.v1.Scope|Scope}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listPermittedScopesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists permitted Scopes.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the Scope will be listed.
+   *   Specified in the format `projects/* /locations/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a 'page' of resources, `page_size` specifies
+   *   number of resources to return. If unspecified or set to 0, all resources
+   *   will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to `ListPermittedScopes` which
+   *   specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.gkehub.v1.Scope|Scope}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listPermittedScopesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listPermittedScopes(
-      request?: protos.google.cloud.gkehub.v1.IListPermittedScopesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IScope[],
-        protos.google.cloud.gkehub.v1.IListPermittedScopesRequest|null,
-        protos.google.cloud.gkehub.v1.IListPermittedScopesResponse
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IListPermittedScopesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IScope[],
+      protos.google.cloud.gkehub.v1.IListPermittedScopesRequest | null,
+      protos.google.cloud.gkehub.v1.IListPermittedScopesResponse,
+    ]
+  >;
   listPermittedScopes(
-      request: protos.google.cloud.gkehub.v1.IListPermittedScopesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListPermittedScopesRequest,
-          protos.google.cloud.gkehub.v1.IListPermittedScopesResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IScope>): void;
+    request: protos.google.cloud.gkehub.v1.IListPermittedScopesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListPermittedScopesRequest,
+      | protos.google.cloud.gkehub.v1.IListPermittedScopesResponse
+      | null
+      | undefined,
+      protos.google.cloud.gkehub.v1.IScope
+    >,
+  ): void;
   listPermittedScopes(
-      request: protos.google.cloud.gkehub.v1.IListPermittedScopesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListPermittedScopesRequest,
-          protos.google.cloud.gkehub.v1.IListPermittedScopesResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IScope>): void;
+    request: protos.google.cloud.gkehub.v1.IListPermittedScopesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListPermittedScopesRequest,
+      | protos.google.cloud.gkehub.v1.IListPermittedScopesResponse
+      | null
+      | undefined,
+      protos.google.cloud.gkehub.v1.IScope
+    >,
+  ): void;
   listPermittedScopes(
-      request?: protos.google.cloud.gkehub.v1.IListPermittedScopesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.gkehub.v1.IListPermittedScopesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.gkehub.v1.IListPermittedScopesRequest,
-          protos.google.cloud.gkehub.v1.IListPermittedScopesResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IScope>,
-      callback?: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListPermittedScopesRequest,
-          protos.google.cloud.gkehub.v1.IListPermittedScopesResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IScope>):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IScope[],
-        protos.google.cloud.gkehub.v1.IListPermittedScopesRequest|null,
-        protos.google.cloud.gkehub.v1.IListPermittedScopesResponse
-      ]>|void {
+          | protos.google.cloud.gkehub.v1.IListPermittedScopesResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkehub.v1.IScope
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListPermittedScopesRequest,
+      | protos.google.cloud.gkehub.v1.IListPermittedScopesResponse
+      | null
+      | undefined,
+      protos.google.cloud.gkehub.v1.IScope
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IScope[],
+      protos.google.cloud.gkehub.v1.IListPermittedScopesRequest | null,
+      protos.google.cloud.gkehub.v1.IListPermittedScopesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.gkehub.v1.IListPermittedScopesRequest,
-      protos.google.cloud.gkehub.v1.IListPermittedScopesResponse|null|undefined,
-      protos.google.cloud.gkehub.v1.IScope>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gkehub.v1.IListPermittedScopesRequest,
+          | protos.google.cloud.gkehub.v1.IListPermittedScopesResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkehub.v1.IScope
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listPermittedScopes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6114,207 +8503,236 @@ export class GkeHubClient {
     this._log.info('listPermittedScopes request %j', request);
     return this.innerApiCalls
       .listPermittedScopes(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.gkehub.v1.IScope[],
-        protos.google.cloud.gkehub.v1.IListPermittedScopesRequest|null,
-        protos.google.cloud.gkehub.v1.IListPermittedScopesResponse
-      ]) => {
-        this._log.info('listPermittedScopes values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gkehub.v1.IScope[],
+          protos.google.cloud.gkehub.v1.IListPermittedScopesRequest | null,
+          protos.google.cloud.gkehub.v1.IListPermittedScopesResponse,
+        ]) => {
+          this._log.info('listPermittedScopes values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listPermittedScopes`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the Scope will be listed.
- *   Specified in the format `projects/* /locations/*`.
- * @param {number} [request.pageSize]
- *   Optional. When requesting a 'page' of resources, `page_size` specifies
- *   number of resources to return. If unspecified or set to 0, all resources
- *   will be returned.
- * @param {string} [request.pageToken]
- *   Optional. Token returned by previous call to `ListPermittedScopes` which
- *   specifies the position in the list from where to continue listing the
- *   resources.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.gkehub.v1.Scope|Scope} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listPermittedScopesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listPermittedScopes`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the Scope will be listed.
+   *   Specified in the format `projects/* /locations/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a 'page' of resources, `page_size` specifies
+   *   number of resources to return. If unspecified or set to 0, all resources
+   *   will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to `ListPermittedScopes` which
+   *   specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.gkehub.v1.Scope|Scope} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listPermittedScopesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listPermittedScopesStream(
-      request?: protos.google.cloud.gkehub.v1.IListPermittedScopesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.gkehub.v1.IListPermittedScopesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listPermittedScopes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listPermittedScopes stream %j', request);
     return this.descriptors.page.listPermittedScopes.createStream(
       this.innerApiCalls.listPermittedScopes as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listPermittedScopes`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the Scope will be listed.
- *   Specified in the format `projects/* /locations/*`.
- * @param {number} [request.pageSize]
- *   Optional. When requesting a 'page' of resources, `page_size` specifies
- *   number of resources to return. If unspecified or set to 0, all resources
- *   will be returned.
- * @param {string} [request.pageToken]
- *   Optional. Token returned by previous call to `ListPermittedScopes` which
- *   specifies the position in the list from where to continue listing the
- *   resources.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.gkehub.v1.Scope|Scope}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.list_permitted_scopes.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_ListPermittedScopes_async
- */
+  /**
+   * Equivalent to `listPermittedScopes`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the Scope will be listed.
+   *   Specified in the format `projects/* /locations/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a 'page' of resources, `page_size` specifies
+   *   number of resources to return. If unspecified or set to 0, all resources
+   *   will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to `ListPermittedScopes` which
+   *   specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.gkehub.v1.Scope|Scope}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.list_permitted_scopes.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_ListPermittedScopes_async
+   */
   listPermittedScopesAsync(
-      request?: protos.google.cloud.gkehub.v1.IListPermittedScopesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.gkehub.v1.IScope>{
+    request?: protos.google.cloud.gkehub.v1.IListPermittedScopesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.gkehub.v1.IScope> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listPermittedScopes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listPermittedScopes iterate %j', request);
     return this.descriptors.page.listPermittedScopes.asyncIterate(
       this.innerApiCalls['listPermittedScopes'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.gkehub.v1.IScope>;
   }
- /**
- * Lists MembershipBindings.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent Membership for which the MembershipBindings will be
- *   listed. Specified in the format `projects/* /locations/* /memberships/*`.
- * @param {number} [request.pageSize]
- *   Optional. When requesting a 'page' of resources, `page_size` specifies
- *   number of resources to return. If unspecified or set to 0, all resources
- *   will be returned.
- * @param {string} [request.pageToken]
- *   Optional. Token returned by previous call to `ListMembershipBindings` which
- *   specifies the position in the list from where to continue listing the
- *   resources.
- * @param {string} [request.filter]
- *   Optional. Lists MembershipBindings that match the filter expression,
- *   following the syntax outlined in https://google.aip.dev/160.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.gkehub.v1.MembershipBinding|MembershipBinding}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listMembershipBindingsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists MembershipBindings.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent Membership for which the MembershipBindings will be
+   *   listed. Specified in the format `projects/* /locations/* /memberships/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a 'page' of resources, `page_size` specifies
+   *   number of resources to return. If unspecified or set to 0, all resources
+   *   will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to `ListMembershipBindings` which
+   *   specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {string} [request.filter]
+   *   Optional. Lists MembershipBindings that match the filter expression,
+   *   following the syntax outlined in https://google.aip.dev/160.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.gkehub.v1.MembershipBinding|MembershipBinding}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listMembershipBindingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMembershipBindings(
-      request?: protos.google.cloud.gkehub.v1.IListMembershipBindingsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IMembershipBinding[],
-        protos.google.cloud.gkehub.v1.IListMembershipBindingsRequest|null,
-        protos.google.cloud.gkehub.v1.IListMembershipBindingsResponse
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IListMembershipBindingsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IMembershipBinding[],
+      protos.google.cloud.gkehub.v1.IListMembershipBindingsRequest | null,
+      protos.google.cloud.gkehub.v1.IListMembershipBindingsResponse,
+    ]
+  >;
   listMembershipBindings(
-      request: protos.google.cloud.gkehub.v1.IListMembershipBindingsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListMembershipBindingsRequest,
-          protos.google.cloud.gkehub.v1.IListMembershipBindingsResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IMembershipBinding>): void;
+    request: protos.google.cloud.gkehub.v1.IListMembershipBindingsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListMembershipBindingsRequest,
+      | protos.google.cloud.gkehub.v1.IListMembershipBindingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.gkehub.v1.IMembershipBinding
+    >,
+  ): void;
   listMembershipBindings(
-      request: protos.google.cloud.gkehub.v1.IListMembershipBindingsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListMembershipBindingsRequest,
-          protos.google.cloud.gkehub.v1.IListMembershipBindingsResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IMembershipBinding>): void;
+    request: protos.google.cloud.gkehub.v1.IListMembershipBindingsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListMembershipBindingsRequest,
+      | protos.google.cloud.gkehub.v1.IListMembershipBindingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.gkehub.v1.IMembershipBinding
+    >,
+  ): void;
   listMembershipBindings(
-      request?: protos.google.cloud.gkehub.v1.IListMembershipBindingsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.gkehub.v1.IListMembershipBindingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.gkehub.v1.IListMembershipBindingsRequest,
-          protos.google.cloud.gkehub.v1.IListMembershipBindingsResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IMembershipBinding>,
-      callback?: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListMembershipBindingsRequest,
-          protos.google.cloud.gkehub.v1.IListMembershipBindingsResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IMembershipBinding>):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IMembershipBinding[],
-        protos.google.cloud.gkehub.v1.IListMembershipBindingsRequest|null,
-        protos.google.cloud.gkehub.v1.IListMembershipBindingsResponse
-      ]>|void {
+          | protos.google.cloud.gkehub.v1.IListMembershipBindingsResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkehub.v1.IMembershipBinding
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListMembershipBindingsRequest,
+      | protos.google.cloud.gkehub.v1.IListMembershipBindingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.gkehub.v1.IMembershipBinding
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IMembershipBinding[],
+      protos.google.cloud.gkehub.v1.IListMembershipBindingsRequest | null,
+      protos.google.cloud.gkehub.v1.IListMembershipBindingsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.gkehub.v1.IListMembershipBindingsRequest,
-      protos.google.cloud.gkehub.v1.IListMembershipBindingsResponse|null|undefined,
-      protos.google.cloud.gkehub.v1.IMembershipBinding>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gkehub.v1.IListMembershipBindingsRequest,
+          | protos.google.cloud.gkehub.v1.IListMembershipBindingsResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkehub.v1.IMembershipBinding
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listMembershipBindings values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6323,210 +8741,239 @@ export class GkeHubClient {
     this._log.info('listMembershipBindings request %j', request);
     return this.innerApiCalls
       .listMembershipBindings(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.gkehub.v1.IMembershipBinding[],
-        protos.google.cloud.gkehub.v1.IListMembershipBindingsRequest|null,
-        protos.google.cloud.gkehub.v1.IListMembershipBindingsResponse
-      ]) => {
-        this._log.info('listMembershipBindings values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gkehub.v1.IMembershipBinding[],
+          protos.google.cloud.gkehub.v1.IListMembershipBindingsRequest | null,
+          protos.google.cloud.gkehub.v1.IListMembershipBindingsResponse,
+        ]) => {
+          this._log.info('listMembershipBindings values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listMembershipBindings`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent Membership for which the MembershipBindings will be
- *   listed. Specified in the format `projects/* /locations/* /memberships/*`.
- * @param {number} [request.pageSize]
- *   Optional. When requesting a 'page' of resources, `page_size` specifies
- *   number of resources to return. If unspecified or set to 0, all resources
- *   will be returned.
- * @param {string} [request.pageToken]
- *   Optional. Token returned by previous call to `ListMembershipBindings` which
- *   specifies the position in the list from where to continue listing the
- *   resources.
- * @param {string} [request.filter]
- *   Optional. Lists MembershipBindings that match the filter expression,
- *   following the syntax outlined in https://google.aip.dev/160.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.gkehub.v1.MembershipBinding|MembershipBinding} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listMembershipBindingsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listMembershipBindings`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent Membership for which the MembershipBindings will be
+   *   listed. Specified in the format `projects/* /locations/* /memberships/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a 'page' of resources, `page_size` specifies
+   *   number of resources to return. If unspecified or set to 0, all resources
+   *   will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to `ListMembershipBindings` which
+   *   specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {string} [request.filter]
+   *   Optional. Lists MembershipBindings that match the filter expression,
+   *   following the syntax outlined in https://google.aip.dev/160.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.gkehub.v1.MembershipBinding|MembershipBinding} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listMembershipBindingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMembershipBindingsStream(
-      request?: protos.google.cloud.gkehub.v1.IListMembershipBindingsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.gkehub.v1.IListMembershipBindingsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listMembershipBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listMembershipBindings stream %j', request);
     return this.descriptors.page.listMembershipBindings.createStream(
       this.innerApiCalls.listMembershipBindings as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listMembershipBindings`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent Membership for which the MembershipBindings will be
- *   listed. Specified in the format `projects/* /locations/* /memberships/*`.
- * @param {number} [request.pageSize]
- *   Optional. When requesting a 'page' of resources, `page_size` specifies
- *   number of resources to return. If unspecified or set to 0, all resources
- *   will be returned.
- * @param {string} [request.pageToken]
- *   Optional. Token returned by previous call to `ListMembershipBindings` which
- *   specifies the position in the list from where to continue listing the
- *   resources.
- * @param {string} [request.filter]
- *   Optional. Lists MembershipBindings that match the filter expression,
- *   following the syntax outlined in https://google.aip.dev/160.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.gkehub.v1.MembershipBinding|MembershipBinding}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.list_membership_bindings.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_ListMembershipBindings_async
- */
+  /**
+   * Equivalent to `listMembershipBindings`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent Membership for which the MembershipBindings will be
+   *   listed. Specified in the format `projects/* /locations/* /memberships/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a 'page' of resources, `page_size` specifies
+   *   number of resources to return. If unspecified or set to 0, all resources
+   *   will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to `ListMembershipBindings` which
+   *   specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {string} [request.filter]
+   *   Optional. Lists MembershipBindings that match the filter expression,
+   *   following the syntax outlined in https://google.aip.dev/160.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.gkehub.v1.MembershipBinding|MembershipBinding}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.list_membership_bindings.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_ListMembershipBindings_async
+   */
   listMembershipBindingsAsync(
-      request?: protos.google.cloud.gkehub.v1.IListMembershipBindingsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.gkehub.v1.IMembershipBinding>{
+    request?: protos.google.cloud.gkehub.v1.IListMembershipBindingsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.gkehub.v1.IMembershipBinding> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listMembershipBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listMembershipBindings iterate %j', request);
     return this.descriptors.page.listMembershipBindings.asyncIterate(
       this.innerApiCalls['listMembershipBindings'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.gkehub.v1.IMembershipBinding>;
   }
- /**
- * Lists all Membership RBACRoleBindings.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the Features will be
- *   listed. Specified in the format `projects/* /locations/* /memberships/*`.
- * @param {number} [request.pageSize]
- *   Optional. When requesting a 'page' of resources, `page_size` specifies
- *   number of resources to return. If unspecified or set to 0, all resources
- *   will be returned.
- * @param {string} [request.pageToken]
- *   Optional. Token returned by previous call to
- *   `ListMembershipRBACRoleBindings` which specifies the position in the list
- *   from where to continue listing the resources.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.gkehub.v1.RBACRoleBinding|RBACRoleBinding}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listMembershipRBACRoleBindingsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists all Membership RBACRoleBindings.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the Features will be
+   *   listed. Specified in the format `projects/* /locations/* /memberships/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a 'page' of resources, `page_size` specifies
+   *   number of resources to return. If unspecified or set to 0, all resources
+   *   will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to
+   *   `ListMembershipRBACRoleBindings` which specifies the position in the list
+   *   from where to continue listing the resources.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.gkehub.v1.RBACRoleBinding|RBACRoleBinding}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listMembershipRBACRoleBindingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMembershipRBACRoleBindings(
-      request?: protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IRBACRoleBinding[],
-        protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest|null,
-        protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsResponse
-      ]>;
+    request?: protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IRBACRoleBinding[],
+      protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest | null,
+      protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsResponse,
+    ]
+  >;
   listMembershipRBACRoleBindings(
-      request: protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest,
-          protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IRBACRoleBinding>): void;
+    request: protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest,
+      | protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.gkehub.v1.IRBACRoleBinding
+    >,
+  ): void;
   listMembershipRBACRoleBindings(
-      request: protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest,
-          protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IRBACRoleBinding>): void;
+    request: protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest,
+      | protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.gkehub.v1.IRBACRoleBinding
+    >,
+  ): void;
   listMembershipRBACRoleBindings(
-      request?: protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest,
-          protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IRBACRoleBinding>,
-      callback?: PaginationCallback<
-          protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest,
-          protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsResponse|null|undefined,
-          protos.google.cloud.gkehub.v1.IRBACRoleBinding>):
-      Promise<[
-        protos.google.cloud.gkehub.v1.IRBACRoleBinding[],
-        protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest|null,
-        protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsResponse
-      ]>|void {
+          | protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkehub.v1.IRBACRoleBinding
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest,
+      | protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.gkehub.v1.IRBACRoleBinding
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkehub.v1.IRBACRoleBinding[],
+      protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest | null,
+      protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest,
-      protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsResponse|null|undefined,
-      protos.google.cloud.gkehub.v1.IRBACRoleBinding>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest,
+          | protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkehub.v1.IRBACRoleBinding
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listMembershipRBACRoleBindings values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6535,116 +8982,122 @@ export class GkeHubClient {
     this._log.info('listMembershipRBACRoleBindings request %j', request);
     return this.innerApiCalls
       .listMembershipRbacRoleBindings(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.gkehub.v1.IRBACRoleBinding[],
-        protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest|null,
-        protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsResponse
-      ]) => {
-        this._log.info('listMembershipRBACRoleBindings values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gkehub.v1.IRBACRoleBinding[],
+          protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest | null,
+          protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsResponse,
+        ]) => {
+          this._log.info('listMembershipRBACRoleBindings values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listMembershipRBACRoleBindings`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the Features will be
- *   listed. Specified in the format `projects/* /locations/* /memberships/*`.
- * @param {number} [request.pageSize]
- *   Optional. When requesting a 'page' of resources, `page_size` specifies
- *   number of resources to return. If unspecified or set to 0, all resources
- *   will be returned.
- * @param {string} [request.pageToken]
- *   Optional. Token returned by previous call to
- *   `ListMembershipRBACRoleBindings` which specifies the position in the list
- *   from where to continue listing the resources.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.gkehub.v1.RBACRoleBinding|RBACRoleBinding} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listMembershipRBACRoleBindingsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listMembershipRBACRoleBindings`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the Features will be
+   *   listed. Specified in the format `projects/* /locations/* /memberships/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a 'page' of resources, `page_size` specifies
+   *   number of resources to return. If unspecified or set to 0, all resources
+   *   will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to
+   *   `ListMembershipRBACRoleBindings` which specifies the position in the list
+   *   from where to continue listing the resources.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.gkehub.v1.RBACRoleBinding|RBACRoleBinding} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listMembershipRBACRoleBindingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMembershipRBACRoleBindingsStream(
-      request?: protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
-    const defaultCallSettings = this._defaults['listMembershipRbacRoleBindings'];
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listMembershipRbacRoleBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listMembershipRBACRoleBindings stream %j', request);
     return this.descriptors.page.listMembershipRBACRoleBindings.createStream(
       this.innerApiCalls.listMembershipRbacRoleBindings as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listMembershipRBACRoleBindings`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent (project and location) where the Features will be
- *   listed. Specified in the format `projects/* /locations/* /memberships/*`.
- * @param {number} [request.pageSize]
- *   Optional. When requesting a 'page' of resources, `page_size` specifies
- *   number of resources to return. If unspecified or set to 0, all resources
- *   will be returned.
- * @param {string} [request.pageToken]
- *   Optional. Token returned by previous call to
- *   `ListMembershipRBACRoleBindings` which specifies the position in the list
- *   from where to continue listing the resources.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.gkehub.v1.RBACRoleBinding|RBACRoleBinding}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/gke_hub.list_membership_r_b_a_c_role_bindings.js</caption>
- * region_tag:gkehub_v1_generated_GkeHub_ListMembershipRBACRoleBindings_async
- */
+  /**
+   * Equivalent to `listMembershipRBACRoleBindings`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent (project and location) where the Features will be
+   *   listed. Specified in the format `projects/* /locations/* /memberships/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a 'page' of resources, `page_size` specifies
+   *   number of resources to return. If unspecified or set to 0, all resources
+   *   will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to
+   *   `ListMembershipRBACRoleBindings` which specifies the position in the list
+   *   from where to continue listing the resources.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.gkehub.v1.RBACRoleBinding|RBACRoleBinding}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/gke_hub.list_membership_r_b_a_c_role_bindings.js</caption>
+   * region_tag:gkehub_v1_generated_GkeHub_ListMembershipRBACRoleBindings_async
+   */
   listMembershipRBACRoleBindingsAsync(
-      request?: protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.gkehub.v1.IRBACRoleBinding>{
+    request?: protos.google.cloud.gkehub.v1.IListMembershipRBACRoleBindingsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.gkehub.v1.IRBACRoleBinding> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
-    const defaultCallSettings = this._defaults['listMembershipRbacRoleBindings'];
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listMembershipRbacRoleBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listMembershipRBACRoleBindings iterate %j', request);
     return this.descriptors.page.listMembershipRBACRoleBindings.asyncIterate(
       this.innerApiCalls['listMembershipRbacRoleBindings'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.gkehub.v1.IRBACRoleBinding>;
   }
   // --------------------
@@ -6659,7 +9112,7 @@ export class GkeHubClient {
    * @param {string} feature
    * @returns {string} Resource name string.
    */
-  featurePath(project:string,location:string,feature:string) {
+  featurePath(project: string, location: string, feature: string) {
     return this.pathTemplates.featurePathTemplate.render({
       project: project,
       location: location,
@@ -6707,7 +9160,7 @@ export class GkeHubClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -6744,7 +9197,7 @@ export class GkeHubClient {
    * @param {string} membership
    * @returns {string} Resource name string.
    */
-  membershipPath(project:string,location:string,membership:string) {
+  membershipPath(project: string, location: string, membership: string) {
     return this.pathTemplates.membershipPathTemplate.render({
       project: project,
       location: location,
@@ -6760,7 +9213,8 @@ export class GkeHubClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMembershipName(membershipName: string) {
-    return this.pathTemplates.membershipPathTemplate.match(membershipName).project;
+    return this.pathTemplates.membershipPathTemplate.match(membershipName)
+      .project;
   }
 
   /**
@@ -6771,7 +9225,8 @@ export class GkeHubClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMembershipName(membershipName: string) {
-    return this.pathTemplates.membershipPathTemplate.match(membershipName).location;
+    return this.pathTemplates.membershipPathTemplate.match(membershipName)
+      .location;
   }
 
   /**
@@ -6782,7 +9237,8 @@ export class GkeHubClient {
    * @returns {string} A string representing the membership.
    */
   matchMembershipFromMembershipName(membershipName: string) {
-    return this.pathTemplates.membershipPathTemplate.match(membershipName).membership;
+    return this.pathTemplates.membershipPathTemplate.match(membershipName)
+      .membership;
   }
 
   /**
@@ -6794,7 +9250,12 @@ export class GkeHubClient {
    * @param {string} membershipbinding
    * @returns {string} Resource name string.
    */
-  membershipBindingPath(project:string,location:string,membership:string,membershipbinding:string) {
+  membershipBindingPath(
+    project: string,
+    location: string,
+    membership: string,
+    membershipbinding: string,
+  ) {
     return this.pathTemplates.membershipBindingPathTemplate.render({
       project: project,
       location: location,
@@ -6811,7 +9272,9 @@ export class GkeHubClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMembershipBindingName(membershipBindingName: string) {
-    return this.pathTemplates.membershipBindingPathTemplate.match(membershipBindingName).project;
+    return this.pathTemplates.membershipBindingPathTemplate.match(
+      membershipBindingName,
+    ).project;
   }
 
   /**
@@ -6822,7 +9285,9 @@ export class GkeHubClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMembershipBindingName(membershipBindingName: string) {
-    return this.pathTemplates.membershipBindingPathTemplate.match(membershipBindingName).location;
+    return this.pathTemplates.membershipBindingPathTemplate.match(
+      membershipBindingName,
+    ).location;
   }
 
   /**
@@ -6833,7 +9298,9 @@ export class GkeHubClient {
    * @returns {string} A string representing the membership.
    */
   matchMembershipFromMembershipBindingName(membershipBindingName: string) {
-    return this.pathTemplates.membershipBindingPathTemplate.match(membershipBindingName).membership;
+    return this.pathTemplates.membershipBindingPathTemplate.match(
+      membershipBindingName,
+    ).membership;
   }
 
   /**
@@ -6843,8 +9310,12 @@ export class GkeHubClient {
    *   A fully-qualified path representing MembershipBinding resource.
    * @returns {string} A string representing the membershipbinding.
    */
-  matchMembershipbindingFromMembershipBindingName(membershipBindingName: string) {
-    return this.pathTemplates.membershipBindingPathTemplate.match(membershipBindingName).membershipbinding;
+  matchMembershipbindingFromMembershipBindingName(
+    membershipBindingName: string,
+  ) {
+    return this.pathTemplates.membershipBindingPathTemplate.match(
+      membershipBindingName,
+    ).membershipbinding;
   }
 
   /**
@@ -6856,7 +9327,12 @@ export class GkeHubClient {
    * @param {string} namespace
    * @returns {string} Resource name string.
    */
-  namespacePath(project:string,location:string,scope:string,namespace:string) {
+  namespacePath(
+    project: string,
+    location: string,
+    scope: string,
+    namespace: string,
+  ) {
     return this.pathTemplates.namespacePathTemplate.render({
       project: project,
       location: location,
@@ -6873,7 +9349,8 @@ export class GkeHubClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromNamespaceName(namespaceName: string) {
-    return this.pathTemplates.namespacePathTemplate.match(namespaceName).project;
+    return this.pathTemplates.namespacePathTemplate.match(namespaceName)
+      .project;
   }
 
   /**
@@ -6884,7 +9361,8 @@ export class GkeHubClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromNamespaceName(namespaceName: string) {
-    return this.pathTemplates.namespacePathTemplate.match(namespaceName).location;
+    return this.pathTemplates.namespacePathTemplate.match(namespaceName)
+      .location;
   }
 
   /**
@@ -6906,7 +9384,8 @@ export class GkeHubClient {
    * @returns {string} A string representing the namespace.
    */
   matchNamespaceFromNamespaceName(namespaceName: string) {
-    return this.pathTemplates.namespacePathTemplate.match(namespaceName).namespace;
+    return this.pathTemplates.namespacePathTemplate.match(namespaceName)
+      .namespace;
   }
 
   /**
@@ -6917,7 +9396,11 @@ export class GkeHubClient {
    * @param {string} fleet
    * @returns {string} Resource name string.
    */
-  organizationLocationFleetPath(organization:string,location:string,fleet:string) {
+  organizationLocationFleetPath(
+    organization: string,
+    location: string,
+    fleet: string,
+  ) {
     return this.pathTemplates.organizationLocationFleetPathTemplate.render({
       organization: organization,
       location: location,
@@ -6932,8 +9415,12 @@ export class GkeHubClient {
    *   A fully-qualified path representing organization_location_fleet resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationFleetName(organizationLocationFleetName: string) {
-    return this.pathTemplates.organizationLocationFleetPathTemplate.match(organizationLocationFleetName).organization;
+  matchOrganizationFromOrganizationLocationFleetName(
+    organizationLocationFleetName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFleetPathTemplate.match(
+      organizationLocationFleetName,
+    ).organization;
   }
 
   /**
@@ -6943,8 +9430,12 @@ export class GkeHubClient {
    *   A fully-qualified path representing organization_location_fleet resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationFleetName(organizationLocationFleetName: string) {
-    return this.pathTemplates.organizationLocationFleetPathTemplate.match(organizationLocationFleetName).location;
+  matchLocationFromOrganizationLocationFleetName(
+    organizationLocationFleetName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFleetPathTemplate.match(
+      organizationLocationFleetName,
+    ).location;
   }
 
   /**
@@ -6954,8 +9445,12 @@ export class GkeHubClient {
    *   A fully-qualified path representing organization_location_fleet resource.
    * @returns {string} A string representing the fleet.
    */
-  matchFleetFromOrganizationLocationFleetName(organizationLocationFleetName: string) {
-    return this.pathTemplates.organizationLocationFleetPathTemplate.match(organizationLocationFleetName).fleet;
+  matchFleetFromOrganizationLocationFleetName(
+    organizationLocationFleetName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFleetPathTemplate.match(
+      organizationLocationFleetName,
+    ).fleet;
   }
 
   /**
@@ -6964,7 +9459,7 @@ export class GkeHubClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -6989,7 +9484,7 @@ export class GkeHubClient {
    * @param {string} fleet
    * @returns {string} Resource name string.
    */
-  projectLocationFleetPath(project:string,location:string,fleet:string) {
+  projectLocationFleetPath(project: string, location: string, fleet: string) {
     return this.pathTemplates.projectLocationFleetPathTemplate.render({
       project: project,
       location: location,
@@ -7005,7 +9500,9 @@ export class GkeHubClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectLocationFleetName(projectLocationFleetName: string) {
-    return this.pathTemplates.projectLocationFleetPathTemplate.match(projectLocationFleetName).project;
+    return this.pathTemplates.projectLocationFleetPathTemplate.match(
+      projectLocationFleetName,
+    ).project;
   }
 
   /**
@@ -7016,7 +9513,9 @@ export class GkeHubClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProjectLocationFleetName(projectLocationFleetName: string) {
-    return this.pathTemplates.projectLocationFleetPathTemplate.match(projectLocationFleetName).location;
+    return this.pathTemplates.projectLocationFleetPathTemplate.match(
+      projectLocationFleetName,
+    ).location;
   }
 
   /**
@@ -7027,7 +9526,9 @@ export class GkeHubClient {
    * @returns {string} A string representing the fleet.
    */
   matchFleetFromProjectLocationFleetName(projectLocationFleetName: string) {
-    return this.pathTemplates.projectLocationFleetPathTemplate.match(projectLocationFleetName).fleet;
+    return this.pathTemplates.projectLocationFleetPathTemplate.match(
+      projectLocationFleetName,
+    ).fleet;
   }
 
   /**
@@ -7039,13 +9540,20 @@ export class GkeHubClient {
    * @param {string} rbacrolebinding
    * @returns {string} Resource name string.
    */
-  projectLocationMembershipRbacrolebindingPath(project:string,location:string,membership:string,rbacrolebinding:string) {
-    return this.pathTemplates.projectLocationMembershipRbacrolebindingPathTemplate.render({
-      project: project,
-      location: location,
-      membership: membership,
-      rbacrolebinding: rbacrolebinding,
-    });
+  projectLocationMembershipRbacrolebindingPath(
+    project: string,
+    location: string,
+    membership: string,
+    rbacrolebinding: string,
+  ) {
+    return this.pathTemplates.projectLocationMembershipRbacrolebindingPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        membership: membership,
+        rbacrolebinding: rbacrolebinding,
+      },
+    );
   }
 
   /**
@@ -7055,8 +9563,12 @@ export class GkeHubClient {
    *   A fully-qualified path representing project_location_membership_rbacrolebinding resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationMembershipRbacrolebindingName(projectLocationMembershipRbacrolebindingName: string) {
-    return this.pathTemplates.projectLocationMembershipRbacrolebindingPathTemplate.match(projectLocationMembershipRbacrolebindingName).project;
+  matchProjectFromProjectLocationMembershipRbacrolebindingName(
+    projectLocationMembershipRbacrolebindingName: string,
+  ) {
+    return this.pathTemplates.projectLocationMembershipRbacrolebindingPathTemplate.match(
+      projectLocationMembershipRbacrolebindingName,
+    ).project;
   }
 
   /**
@@ -7066,8 +9578,12 @@ export class GkeHubClient {
    *   A fully-qualified path representing project_location_membership_rbacrolebinding resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationMembershipRbacrolebindingName(projectLocationMembershipRbacrolebindingName: string) {
-    return this.pathTemplates.projectLocationMembershipRbacrolebindingPathTemplate.match(projectLocationMembershipRbacrolebindingName).location;
+  matchLocationFromProjectLocationMembershipRbacrolebindingName(
+    projectLocationMembershipRbacrolebindingName: string,
+  ) {
+    return this.pathTemplates.projectLocationMembershipRbacrolebindingPathTemplate.match(
+      projectLocationMembershipRbacrolebindingName,
+    ).location;
   }
 
   /**
@@ -7077,8 +9593,12 @@ export class GkeHubClient {
    *   A fully-qualified path representing project_location_membership_rbacrolebinding resource.
    * @returns {string} A string representing the membership.
    */
-  matchMembershipFromProjectLocationMembershipRbacrolebindingName(projectLocationMembershipRbacrolebindingName: string) {
-    return this.pathTemplates.projectLocationMembershipRbacrolebindingPathTemplate.match(projectLocationMembershipRbacrolebindingName).membership;
+  matchMembershipFromProjectLocationMembershipRbacrolebindingName(
+    projectLocationMembershipRbacrolebindingName: string,
+  ) {
+    return this.pathTemplates.projectLocationMembershipRbacrolebindingPathTemplate.match(
+      projectLocationMembershipRbacrolebindingName,
+    ).membership;
   }
 
   /**
@@ -7088,8 +9608,12 @@ export class GkeHubClient {
    *   A fully-qualified path representing project_location_membership_rbacrolebinding resource.
    * @returns {string} A string representing the rbacrolebinding.
    */
-  matchRbacrolebindingFromProjectLocationMembershipRbacrolebindingName(projectLocationMembershipRbacrolebindingName: string) {
-    return this.pathTemplates.projectLocationMembershipRbacrolebindingPathTemplate.match(projectLocationMembershipRbacrolebindingName).rbacrolebinding;
+  matchRbacrolebindingFromProjectLocationMembershipRbacrolebindingName(
+    projectLocationMembershipRbacrolebindingName: string,
+  ) {
+    return this.pathTemplates.projectLocationMembershipRbacrolebindingPathTemplate.match(
+      projectLocationMembershipRbacrolebindingName,
+    ).rbacrolebinding;
   }
 
   /**
@@ -7101,13 +9625,20 @@ export class GkeHubClient {
    * @param {string} rbacrolebinding
    * @returns {string} Resource name string.
    */
-  projectLocationScopeRbacrolebindingPath(project:string,location:string,scope:string,rbacrolebinding:string) {
-    return this.pathTemplates.projectLocationScopeRbacrolebindingPathTemplate.render({
-      project: project,
-      location: location,
-      scope: scope,
-      rbacrolebinding: rbacrolebinding,
-    });
+  projectLocationScopeRbacrolebindingPath(
+    project: string,
+    location: string,
+    scope: string,
+    rbacrolebinding: string,
+  ) {
+    return this.pathTemplates.projectLocationScopeRbacrolebindingPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        scope: scope,
+        rbacrolebinding: rbacrolebinding,
+      },
+    );
   }
 
   /**
@@ -7117,8 +9648,12 @@ export class GkeHubClient {
    *   A fully-qualified path representing project_location_scope_rbacrolebinding resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationScopeRbacrolebindingName(projectLocationScopeRbacrolebindingName: string) {
-    return this.pathTemplates.projectLocationScopeRbacrolebindingPathTemplate.match(projectLocationScopeRbacrolebindingName).project;
+  matchProjectFromProjectLocationScopeRbacrolebindingName(
+    projectLocationScopeRbacrolebindingName: string,
+  ) {
+    return this.pathTemplates.projectLocationScopeRbacrolebindingPathTemplate.match(
+      projectLocationScopeRbacrolebindingName,
+    ).project;
   }
 
   /**
@@ -7128,8 +9663,12 @@ export class GkeHubClient {
    *   A fully-qualified path representing project_location_scope_rbacrolebinding resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationScopeRbacrolebindingName(projectLocationScopeRbacrolebindingName: string) {
-    return this.pathTemplates.projectLocationScopeRbacrolebindingPathTemplate.match(projectLocationScopeRbacrolebindingName).location;
+  matchLocationFromProjectLocationScopeRbacrolebindingName(
+    projectLocationScopeRbacrolebindingName: string,
+  ) {
+    return this.pathTemplates.projectLocationScopeRbacrolebindingPathTemplate.match(
+      projectLocationScopeRbacrolebindingName,
+    ).location;
   }
 
   /**
@@ -7139,8 +9678,12 @@ export class GkeHubClient {
    *   A fully-qualified path representing project_location_scope_rbacrolebinding resource.
    * @returns {string} A string representing the scope.
    */
-  matchScopeFromProjectLocationScopeRbacrolebindingName(projectLocationScopeRbacrolebindingName: string) {
-    return this.pathTemplates.projectLocationScopeRbacrolebindingPathTemplate.match(projectLocationScopeRbacrolebindingName).scope;
+  matchScopeFromProjectLocationScopeRbacrolebindingName(
+    projectLocationScopeRbacrolebindingName: string,
+  ) {
+    return this.pathTemplates.projectLocationScopeRbacrolebindingPathTemplate.match(
+      projectLocationScopeRbacrolebindingName,
+    ).scope;
   }
 
   /**
@@ -7150,8 +9693,12 @@ export class GkeHubClient {
    *   A fully-qualified path representing project_location_scope_rbacrolebinding resource.
    * @returns {string} A string representing the rbacrolebinding.
    */
-  matchRbacrolebindingFromProjectLocationScopeRbacrolebindingName(projectLocationScopeRbacrolebindingName: string) {
-    return this.pathTemplates.projectLocationScopeRbacrolebindingPathTemplate.match(projectLocationScopeRbacrolebindingName).rbacrolebinding;
+  matchRbacrolebindingFromProjectLocationScopeRbacrolebindingName(
+    projectLocationScopeRbacrolebindingName: string,
+  ) {
+    return this.pathTemplates.projectLocationScopeRbacrolebindingPathTemplate.match(
+      projectLocationScopeRbacrolebindingName,
+    ).rbacrolebinding;
   }
 
   /**
@@ -7162,7 +9709,7 @@ export class GkeHubClient {
    * @param {string} scope
    * @returns {string} Resource name string.
    */
-  scopePath(project:string,location:string,scope:string) {
+  scopePath(project: string, location: string, scope: string) {
     return this.pathTemplates.scopePathTemplate.render({
       project: project,
       location: location,
@@ -7211,7 +9758,7 @@ export class GkeHubClient {
    */
   close(): Promise<void> {
     if (this.gkeHubStub && !this._terminated) {
-      return this.gkeHubStub.then(stub => {
+      return this.gkeHubStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

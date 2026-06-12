@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {VmwareEngineClient} from './vmware_engine_client';
+export { VmwareEngineClient } from './vmware_engine_client';
