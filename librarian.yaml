@@ -1284,7 +1284,6 @@ libraries:
     apis:
       - path: google/cloud/resourcemanager/v3
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v3
       nodejs_apis:
