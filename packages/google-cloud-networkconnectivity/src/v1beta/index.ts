@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {DataTransferServiceClient} from './data_transfer_service_client';
-export {HubServiceClient} from './hub_service_client';
-export {PolicyBasedRoutingServiceClient} from './policy_based_routing_service_client';
-export {TransportManagerClient} from './transport_manager_client';
+export { DataTransferServiceClient } from './data_transfer_service_client';
+export { HubServiceClient } from './hub_service_client';
+export { PolicyBasedRoutingServiceClient } from './policy_based_routing_service_client';
+export { TransportManagerClient } from './transport_manager_client';

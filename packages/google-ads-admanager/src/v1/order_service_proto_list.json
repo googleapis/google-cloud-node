@@ -7,6 +7,7 @@
   "../../protos/google/ads/admanager/v1/ad_unit_enums.proto",
   "../../protos/google/ads/admanager/v1/ad_unit_messages.proto",
   "../../protos/google/ads/admanager/v1/ad_unit_service.proto",
+  "../../protos/google/ads/admanager/v1/admanager_error.proto",
   "../../protos/google/ads/admanager/v1/application_enums.proto",
   "../../protos/google/ads/admanager/v1/application_messages.proto",
   "../../protos/google/ads/admanager/v1/application_service.proto",

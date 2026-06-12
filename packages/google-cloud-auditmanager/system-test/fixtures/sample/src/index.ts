@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AuditManagerClient} from '@google-cloud/auditmanager';
+import { AuditManagerClient } from '@google-cloud/auditmanager';
 
 // check that the client class type name can be used
 function doStuffWithAuditManagerClient(client: AuditManagerClient) {

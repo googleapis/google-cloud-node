@@ -58,9 +58,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
 | generate credentials | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkeconnect-gateway/samples/generated/v1/gateway_control.generate_credentials.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkeconnect-gateway/samples/generated/v1/snippet_metadata_google.cloud.gkeconnect.gateway.v1.json) |
 | generate credentials | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkeconnect-gateway/samples/generated/v1beta1/gateway_control.generate_credentials.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkeconnect-gateway/samples/generated/v1beta1/snippet_metadata_google.cloud.gkeconnect.gateway.v1beta1.json) |
 
 
 ## Supported Node.js Versions

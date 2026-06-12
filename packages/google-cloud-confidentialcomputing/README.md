@@ -62,10 +62,8 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | verify attestation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-confidentialcomputing/samples/generated/v1/confidential_computing.verify_attestation.js) |
 | verify confidential gke | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-confidentialcomputing/samples/generated/v1/confidential_computing.verify_confidential_gke.js) |
 | verify confidential space | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-confidentialcomputing/samples/generated/v1/confidential_computing.verify_confidential_space.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-confidentialcomputing/samples/generated/v1/snippet_metadata_google.cloud.confidentialcomputing.v1.json) |
 | create challenge | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-confidentialcomputing/samples/generated/v1alpha1/confidential_computing.create_challenge.js) |
 | verify attestation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-confidentialcomputing/samples/generated/v1alpha1/confidential_computing.verify_attestation.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-confidentialcomputing/samples/generated/v1alpha1/snippet_metadata_google.cloud.confidentialcomputing.v1alpha1.json) |
 
 
 ## Supported Node.js Versions

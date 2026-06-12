@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {AdvisoryNotificationsServiceClient} from './advisory_notifications_service_client';
+export { AdvisoryNotificationsServiceClient } from './advisory_notifications_service_client';

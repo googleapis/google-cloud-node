@@ -118,7 +118,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.createFolder = function createFolder(request, callback) {
-                            return this.rpcCall(createFolder, $root.google.storage.control.v2.CreateFolderRequest, $root.google.storage.control.v2.Folder, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, createFolder, $root.google.storage.control.v2.CreateFolderRequest, $root.google.storage.control.v2.Folder, request, callback);
                         }, "name", { value: "CreateFolder" });
     
                         /**
@@ -151,7 +151,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.deleteFolder = function deleteFolder(request, callback) {
-                            return this.rpcCall(deleteFolder, $root.google.storage.control.v2.DeleteFolderRequest, $root.google.protobuf.Empty, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, deleteFolder, $root.google.storage.control.v2.DeleteFolderRequest, $root.google.protobuf.Empty, request, callback);
                         }, "name", { value: "DeleteFolder" });
     
                         /**
@@ -184,7 +184,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.getFolder = function getFolder(request, callback) {
-                            return this.rpcCall(getFolder, $root.google.storage.control.v2.GetFolderRequest, $root.google.storage.control.v2.Folder, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, getFolder, $root.google.storage.control.v2.GetFolderRequest, $root.google.storage.control.v2.Folder, request, callback);
                         }, "name", { value: "GetFolder" });
     
                         /**
@@ -217,7 +217,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.listFolders = function listFolders(request, callback) {
-                            return this.rpcCall(listFolders, $root.google.storage.control.v2.ListFoldersRequest, $root.google.storage.control.v2.ListFoldersResponse, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, listFolders, $root.google.storage.control.v2.ListFoldersRequest, $root.google.storage.control.v2.ListFoldersResponse, request, callback);
                         }, "name", { value: "ListFolders" });
     
                         /**
@@ -250,7 +250,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.renameFolder = function renameFolder(request, callback) {
-                            return this.rpcCall(renameFolder, $root.google.storage.control.v2.RenameFolderRequest, $root.google.longrunning.Operation, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, renameFolder, $root.google.storage.control.v2.RenameFolderRequest, $root.google.longrunning.Operation, request, callback);
                         }, "name", { value: "RenameFolder" });
     
                         /**
@@ -283,7 +283,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.deleteFolderRecursive = function deleteFolderRecursive(request, callback) {
-                            return this.rpcCall(deleteFolderRecursive, $root.google.storage.control.v2.DeleteFolderRecursiveRequest, $root.google.longrunning.Operation, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, deleteFolderRecursive, $root.google.storage.control.v2.DeleteFolderRecursiveRequest, $root.google.longrunning.Operation, request, callback);
                         }, "name", { value: "DeleteFolderRecursive" });
     
                         /**
@@ -316,7 +316,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.getStorageLayout = function getStorageLayout(request, callback) {
-                            return this.rpcCall(getStorageLayout, $root.google.storage.control.v2.GetStorageLayoutRequest, $root.google.storage.control.v2.StorageLayout, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, getStorageLayout, $root.google.storage.control.v2.GetStorageLayoutRequest, $root.google.storage.control.v2.StorageLayout, request, callback);
                         }, "name", { value: "GetStorageLayout" });
     
                         /**
@@ -349,7 +349,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.createManagedFolder = function createManagedFolder(request, callback) {
-                            return this.rpcCall(createManagedFolder, $root.google.storage.control.v2.CreateManagedFolderRequest, $root.google.storage.control.v2.ManagedFolder, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, createManagedFolder, $root.google.storage.control.v2.CreateManagedFolderRequest, $root.google.storage.control.v2.ManagedFolder, request, callback);
                         }, "name", { value: "CreateManagedFolder" });
     
                         /**
@@ -382,7 +382,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.deleteManagedFolder = function deleteManagedFolder(request, callback) {
-                            return this.rpcCall(deleteManagedFolder, $root.google.storage.control.v2.DeleteManagedFolderRequest, $root.google.protobuf.Empty, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, deleteManagedFolder, $root.google.storage.control.v2.DeleteManagedFolderRequest, $root.google.protobuf.Empty, request, callback);
                         }, "name", { value: "DeleteManagedFolder" });
     
                         /**
@@ -415,7 +415,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.getManagedFolder = function getManagedFolder(request, callback) {
-                            return this.rpcCall(getManagedFolder, $root.google.storage.control.v2.GetManagedFolderRequest, $root.google.storage.control.v2.ManagedFolder, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, getManagedFolder, $root.google.storage.control.v2.GetManagedFolderRequest, $root.google.storage.control.v2.ManagedFolder, request, callback);
                         }, "name", { value: "GetManagedFolder" });
     
                         /**
@@ -448,7 +448,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.listManagedFolders = function listManagedFolders(request, callback) {
-                            return this.rpcCall(listManagedFolders, $root.google.storage.control.v2.ListManagedFoldersRequest, $root.google.storage.control.v2.ListManagedFoldersResponse, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, listManagedFolders, $root.google.storage.control.v2.ListManagedFoldersRequest, $root.google.storage.control.v2.ListManagedFoldersResponse, request, callback);
                         }, "name", { value: "ListManagedFolders" });
     
                         /**
@@ -481,7 +481,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.createAnywhereCache = function createAnywhereCache(request, callback) {
-                            return this.rpcCall(createAnywhereCache, $root.google.storage.control.v2.CreateAnywhereCacheRequest, $root.google.longrunning.Operation, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, createAnywhereCache, $root.google.storage.control.v2.CreateAnywhereCacheRequest, $root.google.longrunning.Operation, request, callback);
                         }, "name", { value: "CreateAnywhereCache" });
     
                         /**
@@ -514,7 +514,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.updateAnywhereCache = function updateAnywhereCache(request, callback) {
-                            return this.rpcCall(updateAnywhereCache, $root.google.storage.control.v2.UpdateAnywhereCacheRequest, $root.google.longrunning.Operation, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, updateAnywhereCache, $root.google.storage.control.v2.UpdateAnywhereCacheRequest, $root.google.longrunning.Operation, request, callback);
                         }, "name", { value: "UpdateAnywhereCache" });
     
                         /**
@@ -547,7 +547,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.disableAnywhereCache = function disableAnywhereCache(request, callback) {
-                            return this.rpcCall(disableAnywhereCache, $root.google.storage.control.v2.DisableAnywhereCacheRequest, $root.google.storage.control.v2.AnywhereCache, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, disableAnywhereCache, $root.google.storage.control.v2.DisableAnywhereCacheRequest, $root.google.storage.control.v2.AnywhereCache, request, callback);
                         }, "name", { value: "DisableAnywhereCache" });
     
                         /**
@@ -580,7 +580,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.pauseAnywhereCache = function pauseAnywhereCache(request, callback) {
-                            return this.rpcCall(pauseAnywhereCache, $root.google.storage.control.v2.PauseAnywhereCacheRequest, $root.google.storage.control.v2.AnywhereCache, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, pauseAnywhereCache, $root.google.storage.control.v2.PauseAnywhereCacheRequest, $root.google.storage.control.v2.AnywhereCache, request, callback);
                         }, "name", { value: "PauseAnywhereCache" });
     
                         /**
@@ -613,7 +613,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.resumeAnywhereCache = function resumeAnywhereCache(request, callback) {
-                            return this.rpcCall(resumeAnywhereCache, $root.google.storage.control.v2.ResumeAnywhereCacheRequest, $root.google.storage.control.v2.AnywhereCache, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, resumeAnywhereCache, $root.google.storage.control.v2.ResumeAnywhereCacheRequest, $root.google.storage.control.v2.AnywhereCache, request, callback);
                         }, "name", { value: "ResumeAnywhereCache" });
     
                         /**
@@ -646,7 +646,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.getAnywhereCache = function getAnywhereCache(request, callback) {
-                            return this.rpcCall(getAnywhereCache, $root.google.storage.control.v2.GetAnywhereCacheRequest, $root.google.storage.control.v2.AnywhereCache, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, getAnywhereCache, $root.google.storage.control.v2.GetAnywhereCacheRequest, $root.google.storage.control.v2.AnywhereCache, request, callback);
                         }, "name", { value: "GetAnywhereCache" });
     
                         /**
@@ -679,7 +679,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.listAnywhereCaches = function listAnywhereCaches(request, callback) {
-                            return this.rpcCall(listAnywhereCaches, $root.google.storage.control.v2.ListAnywhereCachesRequest, $root.google.storage.control.v2.ListAnywhereCachesResponse, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, listAnywhereCaches, $root.google.storage.control.v2.ListAnywhereCachesRequest, $root.google.storage.control.v2.ListAnywhereCachesResponse, request, callback);
                         }, "name", { value: "ListAnywhereCaches" });
     
                         /**
@@ -712,7 +712,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.getProjectIntelligenceConfig = function getProjectIntelligenceConfig(request, callback) {
-                            return this.rpcCall(getProjectIntelligenceConfig, $root.google.storage.control.v2.GetProjectIntelligenceConfigRequest, $root.google.storage.control.v2.IntelligenceConfig, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, getProjectIntelligenceConfig, $root.google.storage.control.v2.GetProjectIntelligenceConfigRequest, $root.google.storage.control.v2.IntelligenceConfig, request, callback);
                         }, "name", { value: "GetProjectIntelligenceConfig" });
     
                         /**
@@ -745,7 +745,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.updateProjectIntelligenceConfig = function updateProjectIntelligenceConfig(request, callback) {
-                            return this.rpcCall(updateProjectIntelligenceConfig, $root.google.storage.control.v2.UpdateProjectIntelligenceConfigRequest, $root.google.storage.control.v2.IntelligenceConfig, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, updateProjectIntelligenceConfig, $root.google.storage.control.v2.UpdateProjectIntelligenceConfigRequest, $root.google.storage.control.v2.IntelligenceConfig, request, callback);
                         }, "name", { value: "UpdateProjectIntelligenceConfig" });
     
                         /**
@@ -778,7 +778,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.getFolderIntelligenceConfig = function getFolderIntelligenceConfig(request, callback) {
-                            return this.rpcCall(getFolderIntelligenceConfig, $root.google.storage.control.v2.GetFolderIntelligenceConfigRequest, $root.google.storage.control.v2.IntelligenceConfig, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, getFolderIntelligenceConfig, $root.google.storage.control.v2.GetFolderIntelligenceConfigRequest, $root.google.storage.control.v2.IntelligenceConfig, request, callback);
                         }, "name", { value: "GetFolderIntelligenceConfig" });
     
                         /**
@@ -811,7 +811,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.updateFolderIntelligenceConfig = function updateFolderIntelligenceConfig(request, callback) {
-                            return this.rpcCall(updateFolderIntelligenceConfig, $root.google.storage.control.v2.UpdateFolderIntelligenceConfigRequest, $root.google.storage.control.v2.IntelligenceConfig, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, updateFolderIntelligenceConfig, $root.google.storage.control.v2.UpdateFolderIntelligenceConfigRequest, $root.google.storage.control.v2.IntelligenceConfig, request, callback);
                         }, "name", { value: "UpdateFolderIntelligenceConfig" });
     
                         /**
@@ -844,7 +844,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.getOrganizationIntelligenceConfig = function getOrganizationIntelligenceConfig(request, callback) {
-                            return this.rpcCall(getOrganizationIntelligenceConfig, $root.google.storage.control.v2.GetOrganizationIntelligenceConfigRequest, $root.google.storage.control.v2.IntelligenceConfig, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, getOrganizationIntelligenceConfig, $root.google.storage.control.v2.GetOrganizationIntelligenceConfigRequest, $root.google.storage.control.v2.IntelligenceConfig, request, callback);
                         }, "name", { value: "GetOrganizationIntelligenceConfig" });
     
                         /**
@@ -877,7 +877,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.updateOrganizationIntelligenceConfig = function updateOrganizationIntelligenceConfig(request, callback) {
-                            return this.rpcCall(updateOrganizationIntelligenceConfig, $root.google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest, $root.google.storage.control.v2.IntelligenceConfig, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, updateOrganizationIntelligenceConfig, $root.google.storage.control.v2.UpdateOrganizationIntelligenceConfigRequest, $root.google.storage.control.v2.IntelligenceConfig, request, callback);
                         }, "name", { value: "UpdateOrganizationIntelligenceConfig" });
     
                         /**
@@ -910,7 +910,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.getIamPolicy = function getIamPolicy(request, callback) {
-                            return this.rpcCall(getIamPolicy, $root.google.iam.v1.GetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, getIamPolicy, $root.google.iam.v1.GetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
                         }, "name", { value: "GetIamPolicy" });
     
                         /**
@@ -943,7 +943,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.setIamPolicy = function setIamPolicy(request, callback) {
-                            return this.rpcCall(setIamPolicy, $root.google.iam.v1.SetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, setIamPolicy, $root.google.iam.v1.SetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
                         }, "name", { value: "SetIamPolicy" });
     
                         /**
@@ -976,7 +976,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.testIamPermissions = function testIamPermissions(request, callback) {
-                            return this.rpcCall(testIamPermissions, $root.google.iam.v1.TestIamPermissionsRequest, $root.google.iam.v1.TestIamPermissionsResponse, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, testIamPermissions, $root.google.iam.v1.TestIamPermissionsRequest, $root.google.iam.v1.TestIamPermissionsResponse, request, callback);
                         }, "name", { value: "TestIamPermissions" });
     
                         /**
@@ -1009,7 +1009,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.getIntelligenceFinding = function getIntelligenceFinding(request, callback) {
-                            return this.rpcCall(getIntelligenceFinding, $root.google.storage.control.v2.GetIntelligenceFindingRequest, $root.google.storage.control.v2.IntelligenceFinding, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, getIntelligenceFinding, $root.google.storage.control.v2.GetIntelligenceFindingRequest, $root.google.storage.control.v2.IntelligenceFinding, request, callback);
                         }, "name", { value: "GetIntelligenceFinding" });
     
                         /**
@@ -1042,7 +1042,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.listIntelligenceFindings = function listIntelligenceFindings(request, callback) {
-                            return this.rpcCall(listIntelligenceFindings, $root.google.storage.control.v2.ListIntelligenceFindingsRequest, $root.google.storage.control.v2.ListIntelligenceFindingsResponse, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, listIntelligenceFindings, $root.google.storage.control.v2.ListIntelligenceFindingsRequest, $root.google.storage.control.v2.ListIntelligenceFindingsResponse, request, callback);
                         }, "name", { value: "ListIntelligenceFindings" });
     
                         /**
@@ -1075,7 +1075,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.summarizeIntelligenceFindings = function summarizeIntelligenceFindings(request, callback) {
-                            return this.rpcCall(summarizeIntelligenceFindings, $root.google.storage.control.v2.SummarizeIntelligenceFindingsRequest, $root.google.storage.control.v2.SummarizeIntelligenceFindingsResponse, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, summarizeIntelligenceFindings, $root.google.storage.control.v2.SummarizeIntelligenceFindingsRequest, $root.google.storage.control.v2.SummarizeIntelligenceFindingsResponse, request, callback);
                         }, "name", { value: "SummarizeIntelligenceFindings" });
     
                         /**
@@ -1108,7 +1108,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.getIntelligenceFindingRevision = function getIntelligenceFindingRevision(request, callback) {
-                            return this.rpcCall(getIntelligenceFindingRevision, $root.google.storage.control.v2.GetIntelligenceFindingRevisionRequest, $root.google.storage.control.v2.IntelligenceFindingRevision, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, getIntelligenceFindingRevision, $root.google.storage.control.v2.GetIntelligenceFindingRevisionRequest, $root.google.storage.control.v2.IntelligenceFindingRevision, request, callback);
                         }, "name", { value: "GetIntelligenceFindingRevision" });
     
                         /**
@@ -1141,7 +1141,7 @@
                          * @variation 1
                          */
                         Object.defineProperty(StorageControl.prototype.listIntelligenceFindingRevisions = function listIntelligenceFindingRevisions(request, callback) {
-                            return this.rpcCall(listIntelligenceFindingRevisions, $root.google.storage.control.v2.ListIntelligenceFindingRevisionsRequest, $root.google.storage.control.v2.ListIntelligenceFindingRevisionsResponse, request, callback);
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, listIntelligenceFindingRevisions, $root.google.storage.control.v2.ListIntelligenceFindingRevisionsRequest, $root.google.storage.control.v2.ListIntelligenceFindingRevisionsResponse, request, callback);
                         }, "name", { value: "ListIntelligenceFindingRevisions" });
     
                         /**
@@ -1302,7 +1302,7 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.operation != null && message.hasOwnProperty("operation"))
+                            if (message.operation != null && Object.hasOwnProperty.call(message, "operation"))
                                 if (!$util.isString(message.operation))
                                     return "operation: string expected";
                             return null;
@@ -1350,7 +1350,7 @@
                             var object = {};
                             if (options.defaults)
                                 object.operation = "";
-                            if (message.operation != null && message.hasOwnProperty("operation"))
+                            if (message.operation != null && Object.hasOwnProperty.call(message, "operation"))
                                 object.operation = message.operation;
                             return object;
                         };
@@ -1589,23 +1589,23 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
-                            if (message.metageneration != null && message.hasOwnProperty("metageneration"))
+                            if (message.metageneration != null && Object.hasOwnProperty.call(message, "metageneration"))
                                 if (!$util.isInteger(message.metageneration) && !(message.metageneration && $util.isInteger(message.metageneration.low) && $util.isInteger(message.metageneration.high)))
                                     return "metageneration: integer|Long expected";
-                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.createTime, long + 1);
                                 if (error)
                                     return "createTime." + error;
                             }
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.updateTime, long + 1);
                                 if (error)
                                     return "updateTime." + error;
                             }
-                            if (message.pendingRenameInfo != null && message.hasOwnProperty("pendingRenameInfo")) {
+                            if (message.pendingRenameInfo != null && Object.hasOwnProperty.call(message, "pendingRenameInfo")) {
                                 var error = $root.google.storage.control.v2.PendingRenameInfo.verify(message.pendingRenameInfo, long + 1);
                                 if (error)
                                     return "pendingRenameInfo." + error;
@@ -1688,20 +1688,20 @@
                                 object.updateTime = null;
                                 object.pendingRenameInfo = null;
                             }
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 object.name = message.name;
-                            if (message.metageneration != null && message.hasOwnProperty("metageneration"))
+                            if (message.metageneration != null && Object.hasOwnProperty.call(message, "metageneration"))
                                 if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                     object.metageneration = typeof message.metageneration === "number" ? BigInt(message.metageneration) : $util.Long.fromBits(message.metageneration.low >>> 0, message.metageneration.high >>> 0, false).toBigInt();
                                 else if (typeof message.metageneration === "number")
                                     object.metageneration = options.longs === String ? String(message.metageneration) : message.metageneration;
                                 else
                                     object.metageneration = options.longs === String ? $util.Long.prototype.toString.call(message.metageneration) : options.longs === Number ? new $util.LongBits(message.metageneration.low >>> 0, message.metageneration.high >>> 0).toNumber() : message.metageneration;
-                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options, q + 1);
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options, q + 1);
-                            if (message.pendingRenameInfo != null && message.hasOwnProperty("pendingRenameInfo"))
+                            if (message.pendingRenameInfo != null && Object.hasOwnProperty.call(message, "pendingRenameInfo"))
                                 object.pendingRenameInfo = $root.google.storage.control.v2.PendingRenameInfo.toObject(message.pendingRenameInfo, options, q + 1);
                             return object;
                         };
@@ -1941,20 +1941,20 @@
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
                             var properties = {};
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
-                            if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                            if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                                 properties._ifMetagenerationMatch = 1;
                                 if (!$util.isInteger(message.ifMetagenerationMatch) && !(message.ifMetagenerationMatch && $util.isInteger(message.ifMetagenerationMatch.low) && $util.isInteger(message.ifMetagenerationMatch.high)))
                                     return "ifMetagenerationMatch: integer|Long expected";
                             }
-                            if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                            if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                                 properties._ifMetagenerationNotMatch = 1;
                                 if (!$util.isInteger(message.ifMetagenerationNotMatch) && !(message.ifMetagenerationNotMatch && $util.isInteger(message.ifMetagenerationNotMatch.low) && $util.isInteger(message.ifMetagenerationNotMatch.high)))
                                     return "ifMetagenerationNotMatch: integer|Long expected";
                             }
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
                             return null;
@@ -2024,7 +2024,7 @@
                                 object.requestId = "";
                                 object.name = "";
                             }
-                            if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                            if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                                 if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                     object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
                                 else if (typeof message.ifMetagenerationMatch === "number")
@@ -2034,7 +2034,7 @@
                                 if (options.oneofs)
                                     object._ifMetagenerationMatch = "ifMetagenerationMatch";
                             }
-                            if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                            if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                                 if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                     object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
                                 else if (typeof message.ifMetagenerationNotMatch === "number")
@@ -2044,9 +2044,9 @@
                                 if (options.oneofs)
                                     object._ifMetagenerationNotMatch = "ifMetagenerationNotMatch";
                             }
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 object.requestId = message.requestId;
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 object.name = message.name;
                             return object;
                         };
@@ -2285,21 +2285,21 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
-                            if (message.folder != null && message.hasOwnProperty("folder")) {
+                            if (message.folder != null && Object.hasOwnProperty.call(message, "folder")) {
                                 var error = $root.google.storage.control.v2.Folder.verify(message.folder, long + 1);
                                 if (error)
                                     return "folder." + error;
                             }
-                            if (message.folderId != null && message.hasOwnProperty("folderId"))
+                            if (message.folderId != null && Object.hasOwnProperty.call(message, "folderId"))
                                 if (!$util.isString(message.folderId))
                                     return "folderId: string expected";
-                            if (message.recursive != null && message.hasOwnProperty("recursive"))
+                            if (message.recursive != null && Object.hasOwnProperty.call(message, "recursive"))
                                 if (typeof message.recursive !== "boolean")
                                     return "recursive: boolean expected";
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
                             return null;
@@ -2363,15 +2363,15 @@
                                 object.recursive = false;
                                 object.requestId = "";
                             }
-                            if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 object.parent = message.parent;
-                            if (message.folder != null && message.hasOwnProperty("folder"))
+                            if (message.folder != null && Object.hasOwnProperty.call(message, "folder"))
                                 object.folder = $root.google.storage.control.v2.Folder.toObject(message.folder, options, q + 1);
-                            if (message.folderId != null && message.hasOwnProperty("folderId"))
+                            if (message.folderId != null && Object.hasOwnProperty.call(message, "folderId"))
                                 object.folderId = message.folderId;
-                            if (message.recursive != null && message.hasOwnProperty("recursive"))
+                            if (message.recursive != null && Object.hasOwnProperty.call(message, "recursive"))
                                 object.recursive = message.recursive;
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 object.requestId = message.requestId;
                             return object;
                         };
@@ -2611,20 +2611,20 @@
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
                             var properties = {};
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
-                            if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                            if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                                 properties._ifMetagenerationMatch = 1;
                                 if (!$util.isInteger(message.ifMetagenerationMatch) && !(message.ifMetagenerationMatch && $util.isInteger(message.ifMetagenerationMatch.low) && $util.isInteger(message.ifMetagenerationMatch.high)))
                                     return "ifMetagenerationMatch: integer|Long expected";
                             }
-                            if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                            if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                                 properties._ifMetagenerationNotMatch = 1;
                                 if (!$util.isInteger(message.ifMetagenerationNotMatch) && !(message.ifMetagenerationNotMatch && $util.isInteger(message.ifMetagenerationNotMatch.low) && $util.isInteger(message.ifMetagenerationNotMatch.high)))
                                     return "ifMetagenerationNotMatch: integer|Long expected";
                             }
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
                             return null;
@@ -2694,7 +2694,7 @@
                                 object.requestId = "";
                                 object.name = "";
                             }
-                            if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                            if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                                 if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                     object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
                                 else if (typeof message.ifMetagenerationMatch === "number")
@@ -2704,7 +2704,7 @@
                                 if (options.oneofs)
                                     object._ifMetagenerationMatch = "ifMetagenerationMatch";
                             }
-                            if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                            if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                                 if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                     object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
                                 else if (typeof message.ifMetagenerationNotMatch === "number")
@@ -2714,9 +2714,9 @@
                                 if (options.oneofs)
                                     object._ifMetagenerationNotMatch = "ifMetagenerationNotMatch";
                             }
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 object.requestId = message.requestId;
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 object.name = message.name;
                             return object;
                         };
@@ -3000,28 +3000,28 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
-                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
                                 if (!$util.isInteger(message.pageSize))
                                     return "pageSize: integer expected";
-                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 if (!$util.isString(message.pageToken))
                                     return "pageToken: string expected";
-                            if (message.prefix != null && message.hasOwnProperty("prefix"))
+                            if (message.prefix != null && Object.hasOwnProperty.call(message, "prefix"))
                                 if (!$util.isString(message.prefix))
                                     return "prefix: string expected";
-                            if (message.delimiter != null && message.hasOwnProperty("delimiter"))
+                            if (message.delimiter != null && Object.hasOwnProperty.call(message, "delimiter"))
                                 if (!$util.isString(message.delimiter))
                                     return "delimiter: string expected";
-                            if (message.lexicographicStart != null && message.hasOwnProperty("lexicographicStart"))
+                            if (message.lexicographicStart != null && Object.hasOwnProperty.call(message, "lexicographicStart"))
                                 if (!$util.isString(message.lexicographicStart))
                                     return "lexicographicStart: string expected";
-                            if (message.lexicographicEnd != null && message.hasOwnProperty("lexicographicEnd"))
+                            if (message.lexicographicEnd != null && Object.hasOwnProperty.call(message, "lexicographicEnd"))
                                 if (!$util.isString(message.lexicographicEnd))
                                     return "lexicographicEnd: string expected";
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
                             return null;
@@ -3091,21 +3091,21 @@
                                 object.delimiter = "";
                                 object.requestId = "";
                             }
-                            if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 object.parent = message.parent;
-                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
                                 object.pageSize = message.pageSize;
-                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 object.pageToken = message.pageToken;
-                            if (message.prefix != null && message.hasOwnProperty("prefix"))
+                            if (message.prefix != null && Object.hasOwnProperty.call(message, "prefix"))
                                 object.prefix = message.prefix;
-                            if (message.lexicographicStart != null && message.hasOwnProperty("lexicographicStart"))
+                            if (message.lexicographicStart != null && Object.hasOwnProperty.call(message, "lexicographicStart"))
                                 object.lexicographicStart = message.lexicographicStart;
-                            if (message.lexicographicEnd != null && message.hasOwnProperty("lexicographicEnd"))
+                            if (message.lexicographicEnd != null && Object.hasOwnProperty.call(message, "lexicographicEnd"))
                                 object.lexicographicEnd = message.lexicographicEnd;
-                            if (message.delimiter != null && message.hasOwnProperty("delimiter"))
+                            if (message.delimiter != null && Object.hasOwnProperty.call(message, "delimiter"))
                                 object.delimiter = message.delimiter;
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 object.requestId = message.requestId;
                             return object;
                         };
@@ -3303,7 +3303,7 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.folders != null && message.hasOwnProperty("folders")) {
+                            if (message.folders != null && Object.hasOwnProperty.call(message, "folders")) {
                                 if (!Array.isArray(message.folders))
                                     return "folders: array expected";
                                 for (var i = 0; i < message.folders.length; ++i) {
@@ -3312,7 +3312,7 @@
                                         return "folders." + error;
                                 }
                             }
-                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                 if (!$util.isString(message.nextPageToken))
                                     return "nextPageToken: string expected";
                             return null;
@@ -3377,7 +3377,7 @@
                                 for (var j = 0; j < message.folders.length; ++j)
                                     object.folders[j] = $root.google.storage.control.v2.Folder.toObject(message.folders[j], options, q + 1);
                             }
-                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                 object.nextPageToken = message.nextPageToken;
                             return object;
                         };
@@ -3632,23 +3632,23 @@
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
                             var properties = {};
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
-                            if (message.destinationFolderId != null && message.hasOwnProperty("destinationFolderId"))
+                            if (message.destinationFolderId != null && Object.hasOwnProperty.call(message, "destinationFolderId"))
                                 if (!$util.isString(message.destinationFolderId))
                                     return "destinationFolderId: string expected";
-                            if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                            if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                                 properties._ifMetagenerationMatch = 1;
                                 if (!$util.isInteger(message.ifMetagenerationMatch) && !(message.ifMetagenerationMatch && $util.isInteger(message.ifMetagenerationMatch.low) && $util.isInteger(message.ifMetagenerationMatch.high)))
                                     return "ifMetagenerationMatch: integer|Long expected";
                             }
-                            if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                            if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                                 properties._ifMetagenerationNotMatch = 1;
                                 if (!$util.isInteger(message.ifMetagenerationNotMatch) && !(message.ifMetagenerationNotMatch && $util.isInteger(message.ifMetagenerationNotMatch.low) && $util.isInteger(message.ifMetagenerationNotMatch.high)))
                                     return "ifMetagenerationNotMatch: integer|Long expected";
                             }
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
                             return null;
@@ -3721,7 +3721,7 @@
                                 object.name = "";
                                 object.destinationFolderId = "";
                             }
-                            if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                            if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                                 if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                     object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
                                 else if (typeof message.ifMetagenerationMatch === "number")
@@ -3731,7 +3731,7 @@
                                 if (options.oneofs)
                                     object._ifMetagenerationMatch = "ifMetagenerationMatch";
                             }
-                            if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                            if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                                 if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                     object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
                                 else if (typeof message.ifMetagenerationNotMatch === "number")
@@ -3741,11 +3741,11 @@
                                 if (options.oneofs)
                                     object._ifMetagenerationNotMatch = "ifMetagenerationNotMatch";
                             }
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 object.requestId = message.requestId;
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 object.name = message.name;
-                            if (message.destinationFolderId != null && message.hasOwnProperty("destinationFolderId"))
+                            if (message.destinationFolderId != null && Object.hasOwnProperty.call(message, "destinationFolderId"))
                                 object.destinationFolderId = message.destinationFolderId;
                             return object;
                         };
@@ -3985,20 +3985,20 @@
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
                             var properties = {};
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
-                            if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                            if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                                 properties._ifMetagenerationMatch = 1;
                                 if (!$util.isInteger(message.ifMetagenerationMatch) && !(message.ifMetagenerationMatch && $util.isInteger(message.ifMetagenerationMatch.low) && $util.isInteger(message.ifMetagenerationMatch.high)))
                                     return "ifMetagenerationMatch: integer|Long expected";
                             }
-                            if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                            if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                                 properties._ifMetagenerationNotMatch = 1;
                                 if (!$util.isInteger(message.ifMetagenerationNotMatch) && !(message.ifMetagenerationNotMatch && $util.isInteger(message.ifMetagenerationNotMatch.low) && $util.isInteger(message.ifMetagenerationNotMatch.high)))
                                     return "ifMetagenerationNotMatch: integer|Long expected";
                             }
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
                             return null;
@@ -4068,9 +4068,9 @@
                                 object.name = "";
                                 object.requestId = "";
                             }
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 object.name = message.name;
-                            if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                            if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                                 if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                     object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
                                 else if (typeof message.ifMetagenerationMatch === "number")
@@ -4080,7 +4080,7 @@
                                 if (options.oneofs)
                                     object._ifMetagenerationMatch = "ifMetagenerationMatch";
                             }
-                            if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                            if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                                 if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                     object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
                                 else if (typeof message.ifMetagenerationNotMatch === "number")
@@ -4090,7 +4090,7 @@
                                 if (options.oneofs)
                                     object._ifMetagenerationNotMatch = "ifMetagenerationNotMatch";
                             }
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 object.requestId = message.requestId;
                             return object;
                         };
@@ -4344,28 +4344,28 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.createTime, long + 1);
                                 if (error)
                                     return "createTime." + error;
                             }
-                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.endTime, long + 1);
                                 if (error)
                                     return "endTime." + error;
                             }
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.updateTime, long + 1);
                                 if (error)
                                     return "updateTime." + error;
                             }
-                            if (message.type != null && message.hasOwnProperty("type"))
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                                 if (!$util.isString(message.type))
                                     return "type: string expected";
-                            if (message.requestedCancellation != null && message.hasOwnProperty("requestedCancellation"))
+                            if (message.requestedCancellation != null && Object.hasOwnProperty.call(message, "requestedCancellation"))
                                 if (typeof message.requestedCancellation !== "boolean")
                                     return "requestedCancellation: boolean expected";
-                            if (message.progressPercent != null && message.hasOwnProperty("progressPercent"))
+                            if (message.progressPercent != null && Object.hasOwnProperty.call(message, "progressPercent"))
                                 if (!$util.isInteger(message.progressPercent))
                                     return "progressPercent: integer expected";
                             return null;
@@ -4438,17 +4438,17 @@
                                 object.requestedCancellation = false;
                                 object.progressPercent = 0;
                             }
-                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options, q + 1);
-                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
                                 object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options, q + 1);
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options, q + 1);
-                            if (message.type != null && message.hasOwnProperty("type"))
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                                 object.type = message.type;
-                            if (message.requestedCancellation != null && message.hasOwnProperty("requestedCancellation"))
+                            if (message.requestedCancellation != null && Object.hasOwnProperty.call(message, "requestedCancellation"))
                                 object.requestedCancellation = message.requestedCancellation;
-                            if (message.progressPercent != null && message.hasOwnProperty("progressPercent"))
+                            if (message.progressPercent != null && Object.hasOwnProperty.call(message, "progressPercent"))
                                 object.progressPercent = message.progressPercent;
                             return object;
                         };
@@ -4657,15 +4657,15 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.commonMetadata != null && message.hasOwnProperty("commonMetadata")) {
+                            if (message.commonMetadata != null && Object.hasOwnProperty.call(message, "commonMetadata")) {
                                 var error = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.verify(message.commonMetadata, long + 1);
                                 if (error)
                                     return "commonMetadata." + error;
                             }
-                            if (message.sourceFolderId != null && message.hasOwnProperty("sourceFolderId"))
+                            if (message.sourceFolderId != null && Object.hasOwnProperty.call(message, "sourceFolderId"))
                                 if (!$util.isString(message.sourceFolderId))
                                     return "sourceFolderId: string expected";
-                            if (message.destinationFolderId != null && message.hasOwnProperty("destinationFolderId"))
+                            if (message.destinationFolderId != null && Object.hasOwnProperty.call(message, "destinationFolderId"))
                                 if (!$util.isString(message.destinationFolderId))
                                     return "destinationFolderId: string expected";
                             return null;
@@ -4723,11 +4723,11 @@
                                 object.sourceFolderId = "";
                                 object.destinationFolderId = "";
                             }
-                            if (message.commonMetadata != null && message.hasOwnProperty("commonMetadata"))
+                            if (message.commonMetadata != null && Object.hasOwnProperty.call(message, "commonMetadata"))
                                 object.commonMetadata = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.toObject(message.commonMetadata, options, q + 1);
-                            if (message.sourceFolderId != null && message.hasOwnProperty("sourceFolderId"))
+                            if (message.sourceFolderId != null && Object.hasOwnProperty.call(message, "sourceFolderId"))
                                 object.sourceFolderId = message.sourceFolderId;
-                            if (message.destinationFolderId != null && message.hasOwnProperty("destinationFolderId"))
+                            if (message.destinationFolderId != null && Object.hasOwnProperty.call(message, "destinationFolderId"))
                                 object.destinationFolderId = message.destinationFolderId;
                             return object;
                         };
@@ -4921,12 +4921,12 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.commonMetadata != null && message.hasOwnProperty("commonMetadata")) {
+                            if (message.commonMetadata != null && Object.hasOwnProperty.call(message, "commonMetadata")) {
                                 var error = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.verify(message.commonMetadata, long + 1);
                                 if (error)
                                     return "commonMetadata." + error;
                             }
-                            if (message.folderId != null && message.hasOwnProperty("folderId"))
+                            if (message.folderId != null && Object.hasOwnProperty.call(message, "folderId"))
                                 if (!$util.isString(message.folderId))
                                     return "folderId: string expected";
                             return null;
@@ -4981,9 +4981,9 @@
                                 object.commonMetadata = null;
                                 object.folderId = "";
                             }
-                            if (message.commonMetadata != null && message.hasOwnProperty("commonMetadata"))
+                            if (message.commonMetadata != null && Object.hasOwnProperty.call(message, "commonMetadata"))
                                 object.commonMetadata = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.toObject(message.commonMetadata, options, q + 1);
-                            if (message.folderId != null && message.hasOwnProperty("folderId"))
+                            if (message.folderId != null && Object.hasOwnProperty.call(message, "folderId"))
                                 object.folderId = message.folderId;
                             return object;
                         };
@@ -5222,21 +5222,21 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
-                            if (message.location != null && message.hasOwnProperty("location"))
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
                                 if (!$util.isString(message.location))
                                     return "location: string expected";
-                            if (message.locationType != null && message.hasOwnProperty("locationType"))
+                            if (message.locationType != null && Object.hasOwnProperty.call(message, "locationType"))
                                 if (!$util.isString(message.locationType))
                                     return "locationType: string expected";
-                            if (message.customPlacementConfig != null && message.hasOwnProperty("customPlacementConfig")) {
+                            if (message.customPlacementConfig != null && Object.hasOwnProperty.call(message, "customPlacementConfig")) {
                                 var error = $root.google.storage.control.v2.StorageLayout.CustomPlacementConfig.verify(message.customPlacementConfig, long + 1);
                                 if (error)
                                     return "customPlacementConfig." + error;
                             }
-                            if (message.hierarchicalNamespace != null && message.hasOwnProperty("hierarchicalNamespace")) {
+                            if (message.hierarchicalNamespace != null && Object.hasOwnProperty.call(message, "hierarchicalNamespace")) {
                                 var error = $root.google.storage.control.v2.StorageLayout.HierarchicalNamespace.verify(message.hierarchicalNamespace, long + 1);
                                 if (error)
                                     return "hierarchicalNamespace." + error;
@@ -5305,15 +5305,15 @@
                                 object.customPlacementConfig = null;
                                 object.hierarchicalNamespace = null;
                             }
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 object.name = message.name;
-                            if (message.location != null && message.hasOwnProperty("location"))
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
                                 object.location = message.location;
-                            if (message.locationType != null && message.hasOwnProperty("locationType"))
+                            if (message.locationType != null && Object.hasOwnProperty.call(message, "locationType"))
                                 object.locationType = message.locationType;
-                            if (message.customPlacementConfig != null && message.hasOwnProperty("customPlacementConfig"))
+                            if (message.customPlacementConfig != null && Object.hasOwnProperty.call(message, "customPlacementConfig"))
                                 object.customPlacementConfig = $root.google.storage.control.v2.StorageLayout.CustomPlacementConfig.toObject(message.customPlacementConfig, options, q + 1);
-                            if (message.hierarchicalNamespace != null && message.hasOwnProperty("hierarchicalNamespace"))
+                            if (message.hierarchicalNamespace != null && Object.hasOwnProperty.call(message, "hierarchicalNamespace"))
                                 object.hierarchicalNamespace = $root.google.storage.control.v2.StorageLayout.HierarchicalNamespace.toObject(message.hierarchicalNamespace, options, q + 1);
                             return object;
                         };
@@ -5493,7 +5493,7 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.dataLocations != null && message.hasOwnProperty("dataLocations")) {
+                                if (message.dataLocations != null && Object.hasOwnProperty.call(message, "dataLocations")) {
                                     if (!Array.isArray(message.dataLocations))
                                         return "dataLocations: array expected";
                                     for (var i = 0; i < message.dataLocations.length; ++i)
@@ -5732,7 +5732,7 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
                                     if (typeof message.enabled !== "boolean")
                                         return "enabled: boolean expected";
                                 return null;
@@ -5780,7 +5780,7 @@
                                 var object = {};
                                 if (options.defaults)
                                     object.enabled = false;
-                                if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
                                     object.enabled = message.enabled;
                                 return object;
                             };
@@ -5992,13 +5992,13 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
-                            if (message.prefix != null && message.hasOwnProperty("prefix"))
+                            if (message.prefix != null && Object.hasOwnProperty.call(message, "prefix"))
                                 if (!$util.isString(message.prefix))
                                     return "prefix: string expected";
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
                             return null;
@@ -6053,11 +6053,11 @@
                                 object.prefix = "";
                                 object.requestId = "";
                             }
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 object.name = message.name;
-                            if (message.prefix != null && message.hasOwnProperty("prefix"))
+                            if (message.prefix != null && Object.hasOwnProperty.call(message, "prefix"))
                                 object.prefix = message.prefix;
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 object.requestId = message.requestId;
                             return object;
                         };
@@ -6281,18 +6281,18 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
-                            if (message.metageneration != null && message.hasOwnProperty("metageneration"))
+                            if (message.metageneration != null && Object.hasOwnProperty.call(message, "metageneration"))
                                 if (!$util.isInteger(message.metageneration) && !(message.metageneration && $util.isInteger(message.metageneration.low) && $util.isInteger(message.metageneration.high)))
                                     return "metageneration: integer|Long expected";
-                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.createTime, long + 1);
                                 if (error)
                                     return "createTime." + error;
                             }
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.updateTime, long + 1);
                                 if (error)
                                     return "updateTime." + error;
@@ -6369,18 +6369,18 @@
                                 object.createTime = null;
                                 object.updateTime = null;
                             }
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 object.name = message.name;
-                            if (message.metageneration != null && message.hasOwnProperty("metageneration"))
+                            if (message.metageneration != null && Object.hasOwnProperty.call(message, "metageneration"))
                                 if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                     object.metageneration = typeof message.metageneration === "number" ? BigInt(message.metageneration) : $util.Long.fromBits(message.metageneration.low >>> 0, message.metageneration.high >>> 0, false).toBigInt();
                                 else if (typeof message.metageneration === "number")
                                     object.metageneration = options.longs === String ? String(message.metageneration) : message.metageneration;
                                 else
                                     object.metageneration = options.longs === String ? $util.Long.prototype.toString.call(message.metageneration) : options.longs === Number ? new $util.LongBits(message.metageneration.low >>> 0, message.metageneration.high >>> 0).toNumber() : message.metageneration;
-                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options, q + 1);
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options, q + 1);
                             return object;
                         };
@@ -6620,20 +6620,20 @@
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
                             var properties = {};
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
-                            if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                            if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                                 properties._ifMetagenerationMatch = 1;
                                 if (!$util.isInteger(message.ifMetagenerationMatch) && !(message.ifMetagenerationMatch && $util.isInteger(message.ifMetagenerationMatch.low) && $util.isInteger(message.ifMetagenerationMatch.high)))
                                     return "ifMetagenerationMatch: integer|Long expected";
                             }
-                            if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                            if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                                 properties._ifMetagenerationNotMatch = 1;
                                 if (!$util.isInteger(message.ifMetagenerationNotMatch) && !(message.ifMetagenerationNotMatch && $util.isInteger(message.ifMetagenerationNotMatch.low) && $util.isInteger(message.ifMetagenerationNotMatch.high)))
                                     return "ifMetagenerationNotMatch: integer|Long expected";
                             }
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
                             return null;
@@ -6703,7 +6703,7 @@
                                 object.requestId = "";
                                 object.name = "";
                             }
-                            if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                            if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                                 if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                     object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
                                 else if (typeof message.ifMetagenerationMatch === "number")
@@ -6713,7 +6713,7 @@
                                 if (options.oneofs)
                                     object._ifMetagenerationMatch = "ifMetagenerationMatch";
                             }
-                            if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                            if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                                 if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                     object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
                                 else if (typeof message.ifMetagenerationNotMatch === "number")
@@ -6723,9 +6723,9 @@
                                 if (options.oneofs)
                                     object._ifMetagenerationNotMatch = "ifMetagenerationNotMatch";
                             }
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 object.requestId = message.requestId;
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 object.name = message.name;
                             return object;
                         };
@@ -6949,18 +6949,18 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
-                            if (message.managedFolder != null && message.hasOwnProperty("managedFolder")) {
+                            if (message.managedFolder != null && Object.hasOwnProperty.call(message, "managedFolder")) {
                                 var error = $root.google.storage.control.v2.ManagedFolder.verify(message.managedFolder, long + 1);
                                 if (error)
                                     return "managedFolder." + error;
                             }
-                            if (message.managedFolderId != null && message.hasOwnProperty("managedFolderId"))
+                            if (message.managedFolderId != null && Object.hasOwnProperty.call(message, "managedFolderId"))
                                 if (!$util.isString(message.managedFolderId))
                                     return "managedFolderId: string expected";
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
                             return null;
@@ -7021,13 +7021,13 @@
                                 object.managedFolderId = "";
                                 object.requestId = "";
                             }
-                            if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 object.parent = message.parent;
-                            if (message.managedFolder != null && message.hasOwnProperty("managedFolder"))
+                            if (message.managedFolder != null && Object.hasOwnProperty.call(message, "managedFolder"))
                                 object.managedFolder = $root.google.storage.control.v2.ManagedFolder.toObject(message.managedFolder, options, q + 1);
-                            if (message.managedFolderId != null && message.hasOwnProperty("managedFolderId"))
+                            if (message.managedFolderId != null && Object.hasOwnProperty.call(message, "managedFolderId"))
                                 object.managedFolderId = message.managedFolderId;
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 object.requestId = message.requestId;
                             return object;
                         };
@@ -7282,23 +7282,23 @@
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
                             var properties = {};
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
-                            if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                            if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                                 properties._ifMetagenerationMatch = 1;
                                 if (!$util.isInteger(message.ifMetagenerationMatch) && !(message.ifMetagenerationMatch && $util.isInteger(message.ifMetagenerationMatch.low) && $util.isInteger(message.ifMetagenerationMatch.high)))
                                     return "ifMetagenerationMatch: integer|Long expected";
                             }
-                            if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                            if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                                 properties._ifMetagenerationNotMatch = 1;
                                 if (!$util.isInteger(message.ifMetagenerationNotMatch) && !(message.ifMetagenerationNotMatch && $util.isInteger(message.ifMetagenerationNotMatch.low) && $util.isInteger(message.ifMetagenerationNotMatch.high)))
                                     return "ifMetagenerationNotMatch: integer|Long expected";
                             }
-                            if (message.allowNonEmpty != null && message.hasOwnProperty("allowNonEmpty"))
+                            if (message.allowNonEmpty != null && Object.hasOwnProperty.call(message, "allowNonEmpty"))
                                 if (typeof message.allowNonEmpty !== "boolean")
                                     return "allowNonEmpty: boolean expected";
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
                             return null;
@@ -7371,7 +7371,7 @@
                                 object.requestId = "";
                                 object.name = "";
                             }
-                            if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                            if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                                 if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                     object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
                                 else if (typeof message.ifMetagenerationMatch === "number")
@@ -7381,7 +7381,7 @@
                                 if (options.oneofs)
                                     object._ifMetagenerationMatch = "ifMetagenerationMatch";
                             }
-                            if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                            if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                                 if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                     object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
                                 else if (typeof message.ifMetagenerationNotMatch === "number")
@@ -7391,11 +7391,11 @@
                                 if (options.oneofs)
                                     object._ifMetagenerationNotMatch = "ifMetagenerationNotMatch";
                             }
-                            if (message.allowNonEmpty != null && message.hasOwnProperty("allowNonEmpty"))
+                            if (message.allowNonEmpty != null && Object.hasOwnProperty.call(message, "allowNonEmpty"))
                                 object.allowNonEmpty = message.allowNonEmpty;
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 object.requestId = message.requestId;
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 object.name = message.name;
                             return object;
                         };
@@ -7634,19 +7634,19 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
-                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
                                 if (!$util.isInteger(message.pageSize))
                                     return "pageSize: integer expected";
-                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 if (!$util.isString(message.pageToken))
                                     return "pageToken: string expected";
-                            if (message.prefix != null && message.hasOwnProperty("prefix"))
+                            if (message.prefix != null && Object.hasOwnProperty.call(message, "prefix"))
                                 if (!$util.isString(message.prefix))
                                     return "prefix: string expected";
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
                             return null;
@@ -7707,15 +7707,15 @@
                                 object.prefix = "";
                                 object.requestId = "";
                             }
-                            if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 object.parent = message.parent;
-                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
                                 object.pageSize = message.pageSize;
-                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 object.pageToken = message.pageToken;
-                            if (message.prefix != null && message.hasOwnProperty("prefix"))
+                            if (message.prefix != null && Object.hasOwnProperty.call(message, "prefix"))
                                 object.prefix = message.prefix;
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 object.requestId = message.requestId;
                             return object;
                         };
@@ -7913,7 +7913,7 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.managedFolders != null && message.hasOwnProperty("managedFolders")) {
+                            if (message.managedFolders != null && Object.hasOwnProperty.call(message, "managedFolders")) {
                                 if (!Array.isArray(message.managedFolders))
                                     return "managedFolders: array expected";
                                 for (var i = 0; i < message.managedFolders.length; ++i) {
@@ -7922,7 +7922,7 @@
                                         return "managedFolders." + error;
                                 }
                             }
-                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                 if (!$util.isString(message.nextPageToken))
                                     return "nextPageToken: string expected";
                             return null;
@@ -7987,7 +7987,7 @@
                                 for (var j = 0; j < message.managedFolders.length; ++j)
                                     object.managedFolders[j] = $root.google.storage.control.v2.ManagedFolder.toObject(message.managedFolders[j], options, q + 1);
                             }
-                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                 object.nextPageToken = message.nextPageToken;
                             return object;
                         };
@@ -8254,22 +8254,22 @@
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
                             var properties = {};
-                            if (message.commonMetadata != null && message.hasOwnProperty("commonMetadata")) {
+                            if (message.commonMetadata != null && Object.hasOwnProperty.call(message, "commonMetadata")) {
                                 var error = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.verify(message.commonMetadata, long + 1);
                                 if (error)
                                     return "commonMetadata." + error;
                             }
-                            if (message.anywhereCacheId != null && message.hasOwnProperty("anywhereCacheId")) {
+                            if (message.anywhereCacheId != null && Object.hasOwnProperty.call(message, "anywhereCacheId")) {
                                 properties._anywhereCacheId = 1;
                                 if (!$util.isString(message.anywhereCacheId))
                                     return "anywhereCacheId: string expected";
                             }
-                            if (message.zone != null && message.hasOwnProperty("zone")) {
+                            if (message.zone != null && Object.hasOwnProperty.call(message, "zone")) {
                                 properties._zone = 1;
                                 if (!$util.isString(message.zone))
                                     return "zone: string expected";
                             }
-                            if (message.ttl != null && message.hasOwnProperty("ttl")) {
+                            if (message.ttl != null && Object.hasOwnProperty.call(message, "ttl")) {
                                 properties._ttl = 1;
                                 {
                                     var error = $root.google.protobuf.Duration.verify(message.ttl, long + 1);
@@ -8277,7 +8277,7 @@
                                         return "ttl." + error;
                                 }
                             }
-                            if (message.admissionPolicy != null && message.hasOwnProperty("admissionPolicy")) {
+                            if (message.admissionPolicy != null && Object.hasOwnProperty.call(message, "admissionPolicy")) {
                                 properties._admissionPolicy = 1;
                                 if (!$util.isString(message.admissionPolicy))
                                     return "admissionPolicy: string expected";
@@ -8341,24 +8341,24 @@
                             var object = {};
                             if (options.defaults)
                                 object.commonMetadata = null;
-                            if (message.commonMetadata != null && message.hasOwnProperty("commonMetadata"))
+                            if (message.commonMetadata != null && Object.hasOwnProperty.call(message, "commonMetadata"))
                                 object.commonMetadata = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.toObject(message.commonMetadata, options, q + 1);
-                            if (message.anywhereCacheId != null && message.hasOwnProperty("anywhereCacheId")) {
+                            if (message.anywhereCacheId != null && Object.hasOwnProperty.call(message, "anywhereCacheId")) {
                                 object.anywhereCacheId = message.anywhereCacheId;
                                 if (options.oneofs)
                                     object._anywhereCacheId = "anywhereCacheId";
                             }
-                            if (message.ttl != null && message.hasOwnProperty("ttl")) {
+                            if (message.ttl != null && Object.hasOwnProperty.call(message, "ttl")) {
                                 object.ttl = $root.google.protobuf.Duration.toObject(message.ttl, options, q + 1);
                                 if (options.oneofs)
                                     object._ttl = "ttl";
                             }
-                            if (message.admissionPolicy != null && message.hasOwnProperty("admissionPolicy")) {
+                            if (message.admissionPolicy != null && Object.hasOwnProperty.call(message, "admissionPolicy")) {
                                 object.admissionPolicy = message.admissionPolicy;
                                 if (options.oneofs)
                                     object._admissionPolicy = "admissionPolicy";
                             }
-                            if (message.zone != null && message.hasOwnProperty("zone")) {
+                            if (message.zone != null && Object.hasOwnProperty.call(message, "zone")) {
                                 object.zone = message.zone;
                                 if (options.oneofs)
                                     object._zone = "zone";
@@ -8628,22 +8628,22 @@
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
                             var properties = {};
-                            if (message.commonMetadata != null && message.hasOwnProperty("commonMetadata")) {
+                            if (message.commonMetadata != null && Object.hasOwnProperty.call(message, "commonMetadata")) {
                                 var error = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.verify(message.commonMetadata, long + 1);
                                 if (error)
                                     return "commonMetadata." + error;
                             }
-                            if (message.anywhereCacheId != null && message.hasOwnProperty("anywhereCacheId")) {
+                            if (message.anywhereCacheId != null && Object.hasOwnProperty.call(message, "anywhereCacheId")) {
                                 properties._anywhereCacheId = 1;
                                 if (!$util.isString(message.anywhereCacheId))
                                     return "anywhereCacheId: string expected";
                             }
-                            if (message.zone != null && message.hasOwnProperty("zone")) {
+                            if (message.zone != null && Object.hasOwnProperty.call(message, "zone")) {
                                 properties._zone = 1;
                                 if (!$util.isString(message.zone))
                                     return "zone: string expected";
                             }
-                            if (message.ttl != null && message.hasOwnProperty("ttl")) {
+                            if (message.ttl != null && Object.hasOwnProperty.call(message, "ttl")) {
                                 properties._ttl = 1;
                                 {
                                     var error = $root.google.protobuf.Duration.verify(message.ttl, long + 1);
@@ -8651,7 +8651,7 @@
                                         return "ttl." + error;
                                 }
                             }
-                            if (message.admissionPolicy != null && message.hasOwnProperty("admissionPolicy")) {
+                            if (message.admissionPolicy != null && Object.hasOwnProperty.call(message, "admissionPolicy")) {
                                 properties._admissionPolicy = 1;
                                 if (!$util.isString(message.admissionPolicy))
                                     return "admissionPolicy: string expected";
@@ -8715,24 +8715,24 @@
                             var object = {};
                             if (options.defaults)
                                 object.commonMetadata = null;
-                            if (message.commonMetadata != null && message.hasOwnProperty("commonMetadata"))
+                            if (message.commonMetadata != null && Object.hasOwnProperty.call(message, "commonMetadata"))
                                 object.commonMetadata = $root.google.storage.control.v2.CommonLongRunningOperationMetadata.toObject(message.commonMetadata, options, q + 1);
-                            if (message.anywhereCacheId != null && message.hasOwnProperty("anywhereCacheId")) {
+                            if (message.anywhereCacheId != null && Object.hasOwnProperty.call(message, "anywhereCacheId")) {
                                 object.anywhereCacheId = message.anywhereCacheId;
                                 if (options.oneofs)
                                     object._anywhereCacheId = "anywhereCacheId";
                             }
-                            if (message.ttl != null && message.hasOwnProperty("ttl")) {
+                            if (message.ttl != null && Object.hasOwnProperty.call(message, "ttl")) {
                                 object.ttl = $root.google.protobuf.Duration.toObject(message.ttl, options, q + 1);
                                 if (options.oneofs)
                                     object._ttl = "ttl";
                             }
-                            if (message.admissionPolicy != null && message.hasOwnProperty("admissionPolicy")) {
+                            if (message.admissionPolicy != null && Object.hasOwnProperty.call(message, "admissionPolicy")) {
                                 object.admissionPolicy = message.admissionPolicy;
                                 if (options.oneofs)
                                     object._admissionPolicy = "admissionPolicy";
                             }
-                            if (message.zone != null && message.hasOwnProperty("zone")) {
+                            if (message.zone != null && Object.hasOwnProperty.call(message, "zone")) {
                                 object.zone = message.zone;
                                 if (options.oneofs)
                                     object._zone = "zone";
@@ -9019,34 +9019,34 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
-                            if (message.zone != null && message.hasOwnProperty("zone"))
+                            if (message.zone != null && Object.hasOwnProperty.call(message, "zone"))
                                 if (!$util.isString(message.zone))
                                     return "zone: string expected";
-                            if (message.ttl != null && message.hasOwnProperty("ttl")) {
+                            if (message.ttl != null && Object.hasOwnProperty.call(message, "ttl")) {
                                 var error = $root.google.protobuf.Duration.verify(message.ttl, long + 1);
                                 if (error)
                                     return "ttl." + error;
                             }
-                            if (message.admissionPolicy != null && message.hasOwnProperty("admissionPolicy"))
+                            if (message.admissionPolicy != null && Object.hasOwnProperty.call(message, "admissionPolicy"))
                                 if (!$util.isString(message.admissionPolicy))
                                     return "admissionPolicy: string expected";
-                            if (message.state != null && message.hasOwnProperty("state"))
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                                 if (!$util.isString(message.state))
                                     return "state: string expected";
-                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.createTime, long + 1);
                                 if (error)
                                     return "createTime." + error;
                             }
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.updateTime, long + 1);
                                 if (error)
                                     return "updateTime." + error;
                             }
-                            if (message.pendingUpdate != null && message.hasOwnProperty("pendingUpdate"))
+                            if (message.pendingUpdate != null && Object.hasOwnProperty.call(message, "pendingUpdate"))
                                 if (typeof message.pendingUpdate !== "boolean")
                                     return "pendingUpdate: boolean expected";
                             return null;
@@ -9125,21 +9125,21 @@
                                 object.admissionPolicy = "";
                                 object.zone = "";
                             }
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 object.name = message.name;
-                            if (message.ttl != null && message.hasOwnProperty("ttl"))
+                            if (message.ttl != null && Object.hasOwnProperty.call(message, "ttl"))
                                 object.ttl = $root.google.protobuf.Duration.toObject(message.ttl, options, q + 1);
-                            if (message.state != null && message.hasOwnProperty("state"))
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                                 object.state = message.state;
-                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options, q + 1);
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options, q + 1);
-                            if (message.pendingUpdate != null && message.hasOwnProperty("pendingUpdate"))
+                            if (message.pendingUpdate != null && Object.hasOwnProperty.call(message, "pendingUpdate"))
                                 object.pendingUpdate = message.pendingUpdate;
-                            if (message.admissionPolicy != null && message.hasOwnProperty("admissionPolicy"))
+                            if (message.admissionPolicy != null && Object.hasOwnProperty.call(message, "admissionPolicy"))
                                 object.admissionPolicy = message.admissionPolicy;
-                            if (message.zone != null && message.hasOwnProperty("zone"))
+                            if (message.zone != null && Object.hasOwnProperty.call(message, "zone"))
                                 object.zone = message.zone;
                             return object;
                         };
@@ -9348,15 +9348,15 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
-                            if (message.anywhereCache != null && message.hasOwnProperty("anywhereCache")) {
+                            if (message.anywhereCache != null && Object.hasOwnProperty.call(message, "anywhereCache")) {
                                 var error = $root.google.storage.control.v2.AnywhereCache.verify(message.anywhereCache, long + 1);
                                 if (error)
                                     return "anywhereCache." + error;
                             }
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
                             return null;
@@ -9414,11 +9414,11 @@
                                 object.anywhereCache = null;
                                 object.requestId = "";
                             }
-                            if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 object.parent = message.parent;
-                            if (message.anywhereCache != null && message.hasOwnProperty("anywhereCache"))
+                            if (message.anywhereCache != null && Object.hasOwnProperty.call(message, "anywhereCache"))
                                 object.anywhereCache = $root.google.storage.control.v2.AnywhereCache.toObject(message.anywhereCache, options, q + 1);
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 object.requestId = message.requestId;
                             return object;
                         };
@@ -9627,17 +9627,17 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.anywhereCache != null && message.hasOwnProperty("anywhereCache")) {
+                            if (message.anywhereCache != null && Object.hasOwnProperty.call(message, "anywhereCache")) {
                                 var error = $root.google.storage.control.v2.AnywhereCache.verify(message.anywhereCache, long + 1);
                                 if (error)
                                     return "anywhereCache." + error;
                             }
-                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask")) {
                                 var error = $root.google.protobuf.FieldMask.verify(message.updateMask, long + 1);
                                 if (error)
                                     return "updateMask." + error;
                             }
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
                             return null;
@@ -9698,11 +9698,11 @@
                                 object.updateMask = null;
                                 object.requestId = "";
                             }
-                            if (message.anywhereCache != null && message.hasOwnProperty("anywhereCache"))
+                            if (message.anywhereCache != null && Object.hasOwnProperty.call(message, "anywhereCache"))
                                 object.anywhereCache = $root.google.storage.control.v2.AnywhereCache.toObject(message.anywhereCache, options, q + 1);
-                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
                                 object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options, q + 1);
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 object.requestId = message.requestId;
                             return object;
                         };
@@ -9896,10 +9896,10 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
                             return null;
@@ -9951,9 +9951,9 @@
                                 object.name = "";
                                 object.requestId = "";
                             }
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 object.name = message.name;
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 object.requestId = message.requestId;
                             return object;
                         };
@@ -10147,10 +10147,10 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
                             return null;
@@ -10202,9 +10202,9 @@
                                 object.name = "";
                                 object.requestId = "";
                             }
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 object.name = message.name;
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 object.requestId = message.requestId;
                             return object;
                         };
@@ -10398,10 +10398,10 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
                             return null;
@@ -10453,9 +10453,9 @@
                                 object.name = "";
                                 object.requestId = "";
                             }
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 object.name = message.name;
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 object.requestId = message.requestId;
                             return object;
                         };
@@ -10649,10 +10649,10 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
                             return null;
@@ -10704,9 +10704,9 @@
                                 object.name = "";
                                 object.requestId = "";
                             }
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 object.name = message.name;
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 object.requestId = message.requestId;
                             return object;
                         };
@@ -10930,16 +10930,16 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
-                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
                                 if (!$util.isInteger(message.pageSize))
                                     return "pageSize: integer expected";
-                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 if (!$util.isString(message.pageToken))
                                     return "pageToken: string expected";
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
                             return null;
@@ -10997,13 +10997,13 @@
                                 object.pageToken = "";
                                 object.requestId = "";
                             }
-                            if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 object.parent = message.parent;
-                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
                                 object.pageSize = message.pageSize;
-                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 object.pageToken = message.pageToken;
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 object.requestId = message.requestId;
                             return object;
                         };
@@ -11201,7 +11201,7 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.anywhereCaches != null && message.hasOwnProperty("anywhereCaches")) {
+                            if (message.anywhereCaches != null && Object.hasOwnProperty.call(message, "anywhereCaches")) {
                                 if (!Array.isArray(message.anywhereCaches))
                                     return "anywhereCaches: array expected";
                                 for (var i = 0; i < message.anywhereCaches.length; ++i) {
@@ -11210,7 +11210,7 @@
                                         return "anywhereCaches." + error;
                                 }
                             }
-                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                 if (!$util.isString(message.nextPageToken))
                                     return "nextPageToken: string expected";
                             return null;
@@ -11275,7 +11275,7 @@
                                 for (var j = 0; j < message.anywhereCaches.length; ++j)
                                     object.anywhereCaches[j] = $root.google.storage.control.v2.AnywhereCache.toObject(message.anywhereCaches[j], options, q + 1);
                             }
-                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                 object.nextPageToken = message.nextPageToken;
                             return object;
                         };
@@ -11529,10 +11529,10 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
-                            if (message.editionConfig != null && message.hasOwnProperty("editionConfig"))
+                            if (message.editionConfig != null && Object.hasOwnProperty.call(message, "editionConfig"))
                                 switch (message.editionConfig) {
                                 default:
                                     return "editionConfig: enum value expected";
@@ -11543,22 +11543,22 @@
                                 case 5:
                                     break;
                                 }
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.updateTime, long + 1);
                                 if (error)
                                     return "updateTime." + error;
                             }
-                            if (message.filter != null && message.hasOwnProperty("filter")) {
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter")) {
                                 var error = $root.google.storage.control.v2.IntelligenceConfig.Filter.verify(message.filter, long + 1);
                                 if (error)
                                     return "filter." + error;
                             }
-                            if (message.effectiveIntelligenceConfig != null && message.hasOwnProperty("effectiveIntelligenceConfig")) {
+                            if (message.effectiveIntelligenceConfig != null && Object.hasOwnProperty.call(message, "effectiveIntelligenceConfig")) {
                                 var error = $root.google.storage.control.v2.IntelligenceConfig.EffectiveIntelligenceConfig.verify(message.effectiveIntelligenceConfig, long + 1);
                                 if (error)
                                     return "effectiveIntelligenceConfig." + error;
                             }
-                            if (message.trialConfig != null && message.hasOwnProperty("trialConfig")) {
+                            if (message.trialConfig != null && Object.hasOwnProperty.call(message, "trialConfig")) {
                                 var error = $root.google.storage.control.v2.IntelligenceConfig.TrialConfig.verify(message.trialConfig, long + 1);
                                 if (error)
                                     return "trialConfig." + error;
@@ -11662,17 +11662,17 @@
                                 object.effectiveIntelligenceConfig = null;
                                 object.trialConfig = null;
                             }
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 object.name = message.name;
-                            if (message.editionConfig != null && message.hasOwnProperty("editionConfig"))
+                            if (message.editionConfig != null && Object.hasOwnProperty.call(message, "editionConfig"))
                                 object.editionConfig = options.enums === String ? $root.google.storage.control.v2.IntelligenceConfig.EditionConfig[message.editionConfig] === undefined ? message.editionConfig : $root.google.storage.control.v2.IntelligenceConfig.EditionConfig[message.editionConfig] : message.editionConfig;
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options, q + 1);
-                            if (message.filter != null && message.hasOwnProperty("filter"))
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
                                 object.filter = $root.google.storage.control.v2.IntelligenceConfig.Filter.toObject(message.filter, options, q + 1);
-                            if (message.effectiveIntelligenceConfig != null && message.hasOwnProperty("effectiveIntelligenceConfig"))
+                            if (message.effectiveIntelligenceConfig != null && Object.hasOwnProperty.call(message, "effectiveIntelligenceConfig"))
                                 object.effectiveIntelligenceConfig = $root.google.storage.control.v2.IntelligenceConfig.EffectiveIntelligenceConfig.toObject(message.effectiveIntelligenceConfig, options, q + 1);
-                            if (message.trialConfig != null && message.hasOwnProperty("trialConfig"))
+                            if (message.trialConfig != null && Object.hasOwnProperty.call(message, "trialConfig"))
                                 object.trialConfig = $root.google.storage.control.v2.IntelligenceConfig.TrialConfig.toObject(message.trialConfig, options, q + 1);
                             return object;
                         };
@@ -11939,7 +11939,7 @@
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
                                 var properties = {};
-                                if (message.includedCloudStorageLocations != null && message.hasOwnProperty("includedCloudStorageLocations")) {
+                                if (message.includedCloudStorageLocations != null && Object.hasOwnProperty.call(message, "includedCloudStorageLocations")) {
                                     properties.cloudStorageLocations = 1;
                                     {
                                         var error = $root.google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageLocations.verify(message.includedCloudStorageLocations, long + 1);
@@ -11947,7 +11947,7 @@
                                             return "includedCloudStorageLocations." + error;
                                     }
                                 }
-                                if (message.excludedCloudStorageLocations != null && message.hasOwnProperty("excludedCloudStorageLocations")) {
+                                if (message.excludedCloudStorageLocations != null && Object.hasOwnProperty.call(message, "excludedCloudStorageLocations")) {
                                     if (properties.cloudStorageLocations === 1)
                                         return "cloudStorageLocations: multiple values";
                                     properties.cloudStorageLocations = 1;
@@ -11957,7 +11957,7 @@
                                             return "excludedCloudStorageLocations." + error;
                                     }
                                 }
-                                if (message.includedCloudStorageBuckets != null && message.hasOwnProperty("includedCloudStorageBuckets")) {
+                                if (message.includedCloudStorageBuckets != null && Object.hasOwnProperty.call(message, "includedCloudStorageBuckets")) {
                                     properties.cloudStorageBuckets = 1;
                                     {
                                         var error = $root.google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageBuckets.verify(message.includedCloudStorageBuckets, long + 1);
@@ -11965,7 +11965,7 @@
                                             return "includedCloudStorageBuckets." + error;
                                     }
                                 }
-                                if (message.excludedCloudStorageBuckets != null && message.hasOwnProperty("excludedCloudStorageBuckets")) {
+                                if (message.excludedCloudStorageBuckets != null && Object.hasOwnProperty.call(message, "excludedCloudStorageBuckets")) {
                                     if (properties.cloudStorageBuckets === 1)
                                         return "cloudStorageBuckets: multiple values";
                                     properties.cloudStorageBuckets = 1;
@@ -12036,22 +12036,22 @@
                                 if (q > $util.recursionLimit)
                                     throw Error("max depth exceeded");
                                 var object = {};
-                                if (message.includedCloudStorageLocations != null && message.hasOwnProperty("includedCloudStorageLocations")) {
+                                if (message.includedCloudStorageLocations != null && Object.hasOwnProperty.call(message, "includedCloudStorageLocations")) {
                                     object.includedCloudStorageLocations = $root.google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageLocations.toObject(message.includedCloudStorageLocations, options, q + 1);
                                     if (options.oneofs)
                                         object.cloudStorageLocations = "includedCloudStorageLocations";
                                 }
-                                if (message.excludedCloudStorageLocations != null && message.hasOwnProperty("excludedCloudStorageLocations")) {
+                                if (message.excludedCloudStorageLocations != null && Object.hasOwnProperty.call(message, "excludedCloudStorageLocations")) {
                                     object.excludedCloudStorageLocations = $root.google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageLocations.toObject(message.excludedCloudStorageLocations, options, q + 1);
                                     if (options.oneofs)
                                         object.cloudStorageLocations = "excludedCloudStorageLocations";
                                 }
-                                if (message.includedCloudStorageBuckets != null && message.hasOwnProperty("includedCloudStorageBuckets")) {
+                                if (message.includedCloudStorageBuckets != null && Object.hasOwnProperty.call(message, "includedCloudStorageBuckets")) {
                                     object.includedCloudStorageBuckets = $root.google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageBuckets.toObject(message.includedCloudStorageBuckets, options, q + 1);
                                     if (options.oneofs)
                                         object.cloudStorageBuckets = "includedCloudStorageBuckets";
                                 }
-                                if (message.excludedCloudStorageBuckets != null && message.hasOwnProperty("excludedCloudStorageBuckets")) {
+                                if (message.excludedCloudStorageBuckets != null && Object.hasOwnProperty.call(message, "excludedCloudStorageBuckets")) {
                                     object.excludedCloudStorageBuckets = $root.google.storage.control.v2.IntelligenceConfig.Filter.CloudStorageBuckets.toObject(message.excludedCloudStorageBuckets, options, q + 1);
                                     if (options.oneofs)
                                         object.cloudStorageBuckets = "excludedCloudStorageBuckets";
@@ -12234,7 +12234,7 @@
                                         long = 0;
                                     if (long > $util.recursionLimit)
                                         return "maximum nesting depth exceeded";
-                                    if (message.locations != null && message.hasOwnProperty("locations")) {
+                                    if (message.locations != null && Object.hasOwnProperty.call(message, "locations")) {
                                         if (!Array.isArray(message.locations))
                                             return "locations: array expected";
                                         for (var i = 0; i < message.locations.length; ++i)
@@ -12477,7 +12477,7 @@
                                         long = 0;
                                     if (long > $util.recursionLimit)
                                         return "maximum nesting depth exceeded";
-                                    if (message.bucketIdRegexes != null && message.hasOwnProperty("bucketIdRegexes")) {
+                                    if (message.bucketIdRegexes != null && Object.hasOwnProperty.call(message, "bucketIdRegexes")) {
                                         if (!Array.isArray(message.bucketIdRegexes))
                                             return "bucketIdRegexes: array expected";
                                         for (var i = 0; i < message.bucketIdRegexes.length; ++i)
@@ -12734,7 +12734,7 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.effectiveEdition != null && message.hasOwnProperty("effectiveEdition"))
+                                if (message.effectiveEdition != null && Object.hasOwnProperty.call(message, "effectiveEdition"))
                                     switch (message.effectiveEdition) {
                                     default:
                                         return "effectiveEdition: enum value expected";
@@ -12743,7 +12743,7 @@
                                     case 2:
                                         break;
                                     }
-                                if (message.intelligenceConfig != null && message.hasOwnProperty("intelligenceConfig"))
+                                if (message.intelligenceConfig != null && Object.hasOwnProperty.call(message, "intelligenceConfig"))
                                     if (!$util.isString(message.intelligenceConfig))
                                         return "intelligenceConfig: string expected";
                                 return null;
@@ -12813,9 +12813,9 @@
                                     object.effectiveEdition = options.enums === String ? "EFFECTIVE_EDITION_UNSPECIFIED" : 0;
                                     object.intelligenceConfig = "";
                                 }
-                                if (message.effectiveEdition != null && message.hasOwnProperty("effectiveEdition"))
+                                if (message.effectiveEdition != null && Object.hasOwnProperty.call(message, "effectiveEdition"))
                                     object.effectiveEdition = options.enums === String ? $root.google.storage.control.v2.IntelligenceConfig.EffectiveIntelligenceConfig.EffectiveEdition[message.effectiveEdition] === undefined ? message.effectiveEdition : $root.google.storage.control.v2.IntelligenceConfig.EffectiveIntelligenceConfig.EffectiveEdition[message.effectiveEdition] : message.effectiveEdition;
-                                if (message.intelligenceConfig != null && message.hasOwnProperty("intelligenceConfig"))
+                                if (message.intelligenceConfig != null && Object.hasOwnProperty.call(message, "intelligenceConfig"))
                                     object.intelligenceConfig = message.intelligenceConfig;
                                 return object;
                             };
@@ -13010,7 +13010,7 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
+                                if (message.expireTime != null && Object.hasOwnProperty.call(message, "expireTime")) {
                                     var error = $root.google.protobuf.Timestamp.verify(message.expireTime, long + 1);
                                     if (error)
                                         return "expireTime." + error;
@@ -13063,7 +13063,7 @@
                                 var object = {};
                                 if (options.defaults)
                                     object.expireTime = null;
-                                if (message.expireTime != null && message.hasOwnProperty("expireTime"))
+                                if (message.expireTime != null && Object.hasOwnProperty.call(message, "expireTime"))
                                     object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options, q + 1);
                                 return object;
                             };
@@ -13275,17 +13275,17 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.intelligenceConfig != null && message.hasOwnProperty("intelligenceConfig")) {
+                            if (message.intelligenceConfig != null && Object.hasOwnProperty.call(message, "intelligenceConfig")) {
                                 var error = $root.google.storage.control.v2.IntelligenceConfig.verify(message.intelligenceConfig, long + 1);
                                 if (error)
                                     return "intelligenceConfig." + error;
                             }
-                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask")) {
                                 var error = $root.google.protobuf.FieldMask.verify(message.updateMask, long + 1);
                                 if (error)
                                     return "updateMask." + error;
                             }
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
                             return null;
@@ -13346,11 +13346,11 @@
                                 object.updateMask = null;
                                 object.requestId = "";
                             }
-                            if (message.intelligenceConfig != null && message.hasOwnProperty("intelligenceConfig"))
+                            if (message.intelligenceConfig != null && Object.hasOwnProperty.call(message, "intelligenceConfig"))
                                 object.intelligenceConfig = $root.google.storage.control.v2.IntelligenceConfig.toObject(message.intelligenceConfig, options, q + 1);
-                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
                                 object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options, q + 1);
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 object.requestId = message.requestId;
                             return object;
                         };
@@ -13559,17 +13559,17 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.intelligenceConfig != null && message.hasOwnProperty("intelligenceConfig")) {
+                            if (message.intelligenceConfig != null && Object.hasOwnProperty.call(message, "intelligenceConfig")) {
                                 var error = $root.google.storage.control.v2.IntelligenceConfig.verify(message.intelligenceConfig, long + 1);
                                 if (error)
                                     return "intelligenceConfig." + error;
                             }
-                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask")) {
                                 var error = $root.google.protobuf.FieldMask.verify(message.updateMask, long + 1);
                                 if (error)
                                     return "updateMask." + error;
                             }
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
                             return null;
@@ -13630,11 +13630,11 @@
                                 object.updateMask = null;
                                 object.requestId = "";
                             }
-                            if (message.intelligenceConfig != null && message.hasOwnProperty("intelligenceConfig"))
+                            if (message.intelligenceConfig != null && Object.hasOwnProperty.call(message, "intelligenceConfig"))
                                 object.intelligenceConfig = $root.google.storage.control.v2.IntelligenceConfig.toObject(message.intelligenceConfig, options, q + 1);
-                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
                                 object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options, q + 1);
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 object.requestId = message.requestId;
                             return object;
                         };
@@ -13843,17 +13843,17 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.intelligenceConfig != null && message.hasOwnProperty("intelligenceConfig")) {
+                            if (message.intelligenceConfig != null && Object.hasOwnProperty.call(message, "intelligenceConfig")) {
                                 var error = $root.google.storage.control.v2.IntelligenceConfig.verify(message.intelligenceConfig, long + 1);
                                 if (error)
                                     return "intelligenceConfig." + error;
                             }
-                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask")) {
                                 var error = $root.google.protobuf.FieldMask.verify(message.updateMask, long + 1);
                                 if (error)
                                     return "updateMask." + error;
                             }
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
                             return null;
@@ -13914,11 +13914,11 @@
                                 object.updateMask = null;
                                 object.requestId = "";
                             }
-                            if (message.intelligenceConfig != null && message.hasOwnProperty("intelligenceConfig"))
+                            if (message.intelligenceConfig != null && Object.hasOwnProperty.call(message, "intelligenceConfig"))
                                 object.intelligenceConfig = $root.google.storage.control.v2.IntelligenceConfig.toObject(message.intelligenceConfig, options, q + 1);
-                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
                                 object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options, q + 1);
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 object.requestId = message.requestId;
                             return object;
                         };
@@ -14097,7 +14097,7 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
                             return null;
@@ -14145,7 +14145,7 @@
                             var object = {};
                             if (options.defaults)
                                 object.name = "";
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 object.name = message.name;
                             return object;
                         };
@@ -14324,7 +14324,7 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
                             return null;
@@ -14372,7 +14372,7 @@
                             var object = {};
                             if (options.defaults)
                                 object.name = "";
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 object.name = message.name;
                             return object;
                         };
@@ -14551,7 +14551,7 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
                             return null;
@@ -14599,7 +14599,7 @@
                             var object = {};
                             if (options.defaults)
                                 object.name = "";
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 object.name = message.name;
                             return object;
                         };
@@ -14992,13 +14992,13 @@
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
                             var properties = {};
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
-                            if (message.description != null && message.hasOwnProperty("description"))
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
                                 if (!$util.isString(message.description))
                                     return "description: string expected";
-                            if (message.type != null && message.hasOwnProperty("type"))
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                                 switch (message.type) {
                                 default:
                                     return "type: enum value expected";
@@ -15009,7 +15009,7 @@
                                 case 4:
                                     break;
                                 }
-                            if (message.category != null && message.hasOwnProperty("category"))
+                            if (message.category != null && Object.hasOwnProperty.call(message, "category"))
                                 switch (message.category) {
                                 default:
                                     return "category: enum value expected";
@@ -15018,7 +15018,7 @@
                                 case 2:
                                     break;
                                 }
-                            if (message.severity != null && message.hasOwnProperty("severity"))
+                            if (message.severity != null && Object.hasOwnProperty.call(message, "severity"))
                                 switch (message.severity) {
                                 default:
                                     return "severity: enum value expected";
@@ -15026,32 +15026,32 @@
                                 case 1:
                                     break;
                                 }
-                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.createTime, long + 1);
                                 if (error)
                                     return "createTime." + error;
                             }
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.updateTime, long + 1);
                                 if (error)
                                     return "updateTime." + error;
                             }
-                            if (message.targetResource != null && message.hasOwnProperty("targetResource"))
+                            if (message.targetResource != null && Object.hasOwnProperty.call(message, "targetResource"))
                                 if (!$util.isString(message.targetResource))
                                     return "targetResource: string expected";
-                            if (message.associatedResources != null && message.hasOwnProperty("associatedResources")) {
+                            if (message.associatedResources != null && Object.hasOwnProperty.call(message, "associatedResources")) {
                                 if (!Array.isArray(message.associatedResources))
                                     return "associatedResources: array expected";
                                 for (var i = 0; i < message.associatedResources.length; ++i)
                                     if (!$util.isString(message.associatedResources[i]))
                                         return "associatedResources: string[] expected";
                             }
-                            if (message.observationPeriod != null && message.hasOwnProperty("observationPeriod")) {
+                            if (message.observationPeriod != null && Object.hasOwnProperty.call(message, "observationPeriod")) {
                                 var error = $root.google.type.Interval.verify(message.observationPeriod, long + 1);
                                 if (error)
                                     return "observationPeriod." + error;
                             }
-                            if (message.coldlineAndArchivalStorageOperationsSpike != null && message.hasOwnProperty("coldlineAndArchivalStorageOperationsSpike")) {
+                            if (message.coldlineAndArchivalStorageOperationsSpike != null && Object.hasOwnProperty.call(message, "coldlineAndArchivalStorageOperationsSpike")) {
                                 properties.intelligenceFindingDetails = 1;
                                 {
                                     var error = $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.verify(message.coldlineAndArchivalStorageOperationsSpike, long + 1);
@@ -15059,7 +15059,7 @@
                                         return "coldlineAndArchivalStorageOperationsSpike." + error;
                                 }
                             }
-                            if (message.throttledRequestsSpike != null && message.hasOwnProperty("throttledRequestsSpike")) {
+                            if (message.throttledRequestsSpike != null && Object.hasOwnProperty.call(message, "throttledRequestsSpike")) {
                                 if (properties.intelligenceFindingDetails === 1)
                                     return "intelligenceFindingDetails: multiple values";
                                 properties.intelligenceFindingDetails = 1;
@@ -15069,7 +15069,7 @@
                                         return "throttledRequestsSpike." + error;
                                 }
                             }
-                            if (message.crossRegionEgressSpike != null && message.hasOwnProperty("crossRegionEgressSpike")) {
+                            if (message.crossRegionEgressSpike != null && Object.hasOwnProperty.call(message, "crossRegionEgressSpike")) {
                                 if (properties.intelligenceFindingDetails === 1)
                                     return "intelligenceFindingDetails: multiple values";
                                 properties.intelligenceFindingDetails = 1;
@@ -15079,7 +15079,7 @@
                                         return "crossRegionEgressSpike." + error;
                                 }
                             }
-                            if (message.storageGrowthAboveTrend != null && message.hasOwnProperty("storageGrowthAboveTrend")) {
+                            if (message.storageGrowthAboveTrend != null && Object.hasOwnProperty.call(message, "storageGrowthAboveTrend")) {
                                 if (properties.intelligenceFindingDetails === 1)
                                     return "intelligenceFindingDetails: multiple values";
                                 properties.intelligenceFindingDetails = 1;
@@ -15255,45 +15255,45 @@
                                 object.targetResource = "";
                                 object.observationPeriod = null;
                             }
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 object.name = message.name;
-                            if (message.description != null && message.hasOwnProperty("description"))
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
                                 object.description = message.description;
-                            if (message.type != null && message.hasOwnProperty("type"))
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                                 object.type = options.enums === String ? $root.google.storage.control.v2.FindingType[message.type] === undefined ? message.type : $root.google.storage.control.v2.FindingType[message.type] : message.type;
-                            if (message.category != null && message.hasOwnProperty("category"))
+                            if (message.category != null && Object.hasOwnProperty.call(message, "category"))
                                 object.category = options.enums === String ? $root.google.storage.control.v2.FindingCategory[message.category] === undefined ? message.category : $root.google.storage.control.v2.FindingCategory[message.category] : message.category;
-                            if (message.severity != null && message.hasOwnProperty("severity"))
+                            if (message.severity != null && Object.hasOwnProperty.call(message, "severity"))
                                 object.severity = options.enums === String ? $root.google.storage.control.v2.FindingSeverity[message.severity] === undefined ? message.severity : $root.google.storage.control.v2.FindingSeverity[message.severity] : message.severity;
-                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options, q + 1);
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options, q + 1);
-                            if (message.targetResource != null && message.hasOwnProperty("targetResource"))
+                            if (message.targetResource != null && Object.hasOwnProperty.call(message, "targetResource"))
                                 object.targetResource = message.targetResource;
                             if (message.associatedResources && message.associatedResources.length) {
                                 object.associatedResources = [];
                                 for (var j = 0; j < message.associatedResources.length; ++j)
                                     object.associatedResources[j] = message.associatedResources[j];
                             }
-                            if (message.observationPeriod != null && message.hasOwnProperty("observationPeriod"))
+                            if (message.observationPeriod != null && Object.hasOwnProperty.call(message, "observationPeriod"))
                                 object.observationPeriod = $root.google.type.Interval.toObject(message.observationPeriod, options, q + 1);
-                            if (message.coldlineAndArchivalStorageOperationsSpike != null && message.hasOwnProperty("coldlineAndArchivalStorageOperationsSpike")) {
+                            if (message.coldlineAndArchivalStorageOperationsSpike != null && Object.hasOwnProperty.call(message, "coldlineAndArchivalStorageOperationsSpike")) {
                                 object.coldlineAndArchivalStorageOperationsSpike = $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.toObject(message.coldlineAndArchivalStorageOperationsSpike, options, q + 1);
                                 if (options.oneofs)
                                     object.intelligenceFindingDetails = "coldlineAndArchivalStorageOperationsSpike";
                             }
-                            if (message.throttledRequestsSpike != null && message.hasOwnProperty("throttledRequestsSpike")) {
+                            if (message.throttledRequestsSpike != null && Object.hasOwnProperty.call(message, "throttledRequestsSpike")) {
                                 object.throttledRequestsSpike = $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.toObject(message.throttledRequestsSpike, options, q + 1);
                                 if (options.oneofs)
                                     object.intelligenceFindingDetails = "throttledRequestsSpike";
                             }
-                            if (message.crossRegionEgressSpike != null && message.hasOwnProperty("crossRegionEgressSpike")) {
+                            if (message.crossRegionEgressSpike != null && Object.hasOwnProperty.call(message, "crossRegionEgressSpike")) {
                                 object.crossRegionEgressSpike = $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.toObject(message.crossRegionEgressSpike, options, q + 1);
                                 if (options.oneofs)
                                     object.intelligenceFindingDetails = "crossRegionEgressSpike";
                             }
-                            if (message.storageGrowthAboveTrend != null && message.hasOwnProperty("storageGrowthAboveTrend")) {
+                            if (message.storageGrowthAboveTrend != null && Object.hasOwnProperty.call(message, "storageGrowthAboveTrend")) {
                                 object.storageGrowthAboveTrend = $root.google.storage.control.v2.IntelligenceFinding.StorageGrowthAboveTrend.toObject(message.storageGrowthAboveTrend, options, q + 1);
                                 if (options.oneofs)
                                     object.intelligenceFindingDetails = "storageGrowthAboveTrend";
@@ -15506,13 +15506,13 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
                                     if (typeof message.percentageIncrease !== "number")
                                         return "percentageIncrease: number expected";
-                                if (message.totalOperationsCount != null && message.hasOwnProperty("totalOperationsCount"))
+                                if (message.totalOperationsCount != null && Object.hasOwnProperty.call(message, "totalOperationsCount"))
                                     if (!$util.isInteger(message.totalOperationsCount) && !(message.totalOperationsCount && $util.isInteger(message.totalOperationsCount.low) && $util.isInteger(message.totalOperationsCount.high)))
                                         return "totalOperationsCount: integer|Long expected";
-                                if (message.topBuckets != null && message.hasOwnProperty("topBuckets")) {
+                                if (message.topBuckets != null && Object.hasOwnProperty.call(message, "topBuckets")) {
                                     if (!Array.isArray(message.topBuckets))
                                         return "topBuckets: array expected";
                                     for (var i = 0; i < message.topBuckets.length; ++i) {
@@ -15593,9 +15593,9 @@
                                     } else
                                         object.totalOperationsCount = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                 }
-                                if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
                                     object.percentageIncrease = options.json && !isFinite(message.percentageIncrease) ? String(message.percentageIncrease) : message.percentageIncrease;
-                                if (message.totalOperationsCount != null && message.hasOwnProperty("totalOperationsCount"))
+                                if (message.totalOperationsCount != null && Object.hasOwnProperty.call(message, "totalOperationsCount"))
                                     if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                         object.totalOperationsCount = typeof message.totalOperationsCount === "number" ? BigInt(message.totalOperationsCount) : $util.Long.fromBits(message.totalOperationsCount.low >>> 0, message.totalOperationsCount.high >>> 0, false).toBigInt();
                                     else if (typeof message.totalOperationsCount === "number")
@@ -15856,16 +15856,16 @@
                                     if (long > $util.recursionLimit)
                                         return "maximum nesting depth exceeded";
                                     var properties = {};
-                                    if (message.bucket != null && message.hasOwnProperty("bucket"))
+                                    if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                                         if (!$util.isString(message.bucket))
                                             return "bucket: string expected";
-                                    if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                    if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
                                         if (typeof message.percentageIncrease !== "number")
                                             return "percentageIncrease: number expected";
-                                    if (message.totalOperationsCount != null && message.hasOwnProperty("totalOperationsCount"))
+                                    if (message.totalOperationsCount != null && Object.hasOwnProperty.call(message, "totalOperationsCount"))
                                         if (!$util.isInteger(message.totalOperationsCount) && !(message.totalOperationsCount && $util.isInteger(message.totalOperationsCount.low) && $util.isInteger(message.totalOperationsCount.high)))
                                             return "totalOperationsCount: integer|Long expected";
-                                    if (message.contribution != null && message.hasOwnProperty("contribution")) {
+                                    if (message.contribution != null && Object.hasOwnProperty.call(message, "contribution")) {
                                         properties.details = 1;
                                         {
                                             var error = $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.verify(message.contribution, long + 1);
@@ -15873,7 +15873,7 @@
                                                 return "contribution." + error;
                                         }
                                     }
-                                    if (message.error != null && message.hasOwnProperty("error")) {
+                                    if (message.error != null && Object.hasOwnProperty.call(message, "error")) {
                                         if (properties.details === 1)
                                             return "details: multiple values";
                                         properties.details = 1;
@@ -15956,23 +15956,23 @@
                                         } else
                                             object.totalOperationsCount = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                     }
-                                    if (message.bucket != null && message.hasOwnProperty("bucket"))
+                                    if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                                         object.bucket = message.bucket;
-                                    if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                    if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
                                         object.percentageIncrease = options.json && !isFinite(message.percentageIncrease) ? String(message.percentageIncrease) : message.percentageIncrease;
-                                    if (message.totalOperationsCount != null && message.hasOwnProperty("totalOperationsCount"))
+                                    if (message.totalOperationsCount != null && Object.hasOwnProperty.call(message, "totalOperationsCount"))
                                         if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                             object.totalOperationsCount = typeof message.totalOperationsCount === "number" ? BigInt(message.totalOperationsCount) : $util.Long.fromBits(message.totalOperationsCount.low >>> 0, message.totalOperationsCount.high >>> 0, false).toBigInt();
                                         else if (typeof message.totalOperationsCount === "number")
                                             object.totalOperationsCount = options.longs === String ? String(message.totalOperationsCount) : message.totalOperationsCount;
                                         else
                                             object.totalOperationsCount = options.longs === String ? $util.Long.prototype.toString.call(message.totalOperationsCount) : options.longs === Number ? new $util.LongBits(message.totalOperationsCount.low >>> 0, message.totalOperationsCount.high >>> 0).toNumber() : message.totalOperationsCount;
-                                    if (message.contribution != null && message.hasOwnProperty("contribution")) {
+                                    if (message.contribution != null && Object.hasOwnProperty.call(message, "contribution")) {
                                         object.contribution = $root.google.storage.control.v2.IntelligenceFinding.ColdlineAndArchivalStorageOperationsSpike.BucketContribution.Contribution.toObject(message.contribution, options, q + 1);
                                         if (options.oneofs)
                                             object.details = "contribution";
                                     }
-                                    if (message.error != null && message.hasOwnProperty("error")) {
+                                    if (message.error != null && Object.hasOwnProperty.call(message, "error")) {
                                         object.error = $root.google.rpc.Status.toObject(message.error, options, q + 1);
                                         if (options.oneofs)
                                             object.details = "error";
@@ -16155,7 +16155,7 @@
                                             long = 0;
                                         if (long > $util.recursionLimit)
                                             return "maximum nesting depth exceeded";
-                                        if (message.topPrefixes != null && message.hasOwnProperty("topPrefixes")) {
+                                        if (message.topPrefixes != null && Object.hasOwnProperty.call(message, "topPrefixes")) {
                                             if (!Array.isArray(message.topPrefixes))
                                                 return "topPrefixes: array expected";
                                             for (var i = 0; i < message.topPrefixes.length; ++i) {
@@ -16426,13 +16426,13 @@
                                                 long = 0;
                                             if (long > $util.recursionLimit)
                                                 return "maximum nesting depth exceeded";
-                                            if (message.prefix != null && message.hasOwnProperty("prefix"))
+                                            if (message.prefix != null && Object.hasOwnProperty.call(message, "prefix"))
                                                 if (!$util.isString(message.prefix))
                                                     return "prefix: string expected";
-                                            if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                            if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
                                                 if (typeof message.percentageIncrease !== "number")
                                                     return "percentageIncrease: number expected";
-                                            if (message.totalOperationsCount != null && message.hasOwnProperty("totalOperationsCount"))
+                                            if (message.totalOperationsCount != null && Object.hasOwnProperty.call(message, "totalOperationsCount"))
                                                 if (!$util.isInteger(message.totalOperationsCount) && !(message.totalOperationsCount && $util.isInteger(message.totalOperationsCount.low) && $util.isInteger(message.totalOperationsCount.high)))
                                                     return "totalOperationsCount: integer|Long expected";
                                             return null;
@@ -16498,11 +16498,11 @@
                                                 } else
                                                     object.totalOperationsCount = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                             }
-                                            if (message.prefix != null && message.hasOwnProperty("prefix"))
+                                            if (message.prefix != null && Object.hasOwnProperty.call(message, "prefix"))
                                                 object.prefix = message.prefix;
-                                            if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                            if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
                                                 object.percentageIncrease = options.json && !isFinite(message.percentageIncrease) ? String(message.percentageIncrease) : message.percentageIncrease;
-                                            if (message.totalOperationsCount != null && message.hasOwnProperty("totalOperationsCount"))
+                                            if (message.totalOperationsCount != null && Object.hasOwnProperty.call(message, "totalOperationsCount"))
                                                 if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                                     object.totalOperationsCount = typeof message.totalOperationsCount === "number" ? BigInt(message.totalOperationsCount) : $util.Long.fromBits(message.totalOperationsCount.low >>> 0, message.totalOperationsCount.high >>> 0, false).toBigInt();
                                                 else if (typeof message.totalOperationsCount === "number")
@@ -16729,13 +16729,13 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.totalEgressBytes != null && message.hasOwnProperty("totalEgressBytes"))
+                                if (message.totalEgressBytes != null && Object.hasOwnProperty.call(message, "totalEgressBytes"))
                                     if (!$util.isInteger(message.totalEgressBytes) && !(message.totalEgressBytes && $util.isInteger(message.totalEgressBytes.low) && $util.isInteger(message.totalEgressBytes.high)))
                                         return "totalEgressBytes: integer|Long expected";
-                                if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
                                     if (typeof message.percentageIncrease !== "number")
                                         return "percentageIncrease: number expected";
-                                if (message.topBuckets != null && message.hasOwnProperty("topBuckets")) {
+                                if (message.topBuckets != null && Object.hasOwnProperty.call(message, "topBuckets")) {
                                     if (!Array.isArray(message.topBuckets))
                                         return "topBuckets: array expected";
                                     for (var i = 0; i < message.topBuckets.length; ++i) {
@@ -16816,14 +16816,14 @@
                                         object.totalEgressBytes = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                     object.percentageIncrease = 0;
                                 }
-                                if (message.totalEgressBytes != null && message.hasOwnProperty("totalEgressBytes"))
+                                if (message.totalEgressBytes != null && Object.hasOwnProperty.call(message, "totalEgressBytes"))
                                     if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                         object.totalEgressBytes = typeof message.totalEgressBytes === "number" ? BigInt(message.totalEgressBytes) : $util.Long.fromBits(message.totalEgressBytes.low >>> 0, message.totalEgressBytes.high >>> 0, false).toBigInt();
                                     else if (typeof message.totalEgressBytes === "number")
                                         object.totalEgressBytes = options.longs === String ? String(message.totalEgressBytes) : message.totalEgressBytes;
                                     else
                                         object.totalEgressBytes = options.longs === String ? $util.Long.prototype.toString.call(message.totalEgressBytes) : options.longs === Number ? new $util.LongBits(message.totalEgressBytes.low >>> 0, message.totalEgressBytes.high >>> 0).toNumber() : message.totalEgressBytes;
-                                if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
                                     object.percentageIncrease = options.json && !isFinite(message.percentageIncrease) ? String(message.percentageIncrease) : message.percentageIncrease;
                                 if (message.topBuckets && message.topBuckets.length) {
                                     object.topBuckets = [];
@@ -17079,16 +17079,16 @@
                                     if (long > $util.recursionLimit)
                                         return "maximum nesting depth exceeded";
                                     var properties = {};
-                                    if (message.bucket != null && message.hasOwnProperty("bucket"))
+                                    if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                                         if (!$util.isString(message.bucket))
                                             return "bucket: string expected";
-                                    if (message.totalEgressBytes != null && message.hasOwnProperty("totalEgressBytes"))
+                                    if (message.totalEgressBytes != null && Object.hasOwnProperty.call(message, "totalEgressBytes"))
                                         if (!$util.isInteger(message.totalEgressBytes) && !(message.totalEgressBytes && $util.isInteger(message.totalEgressBytes.low) && $util.isInteger(message.totalEgressBytes.high)))
                                             return "totalEgressBytes: integer|Long expected";
-                                    if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                    if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
                                         if (typeof message.percentageIncrease !== "number")
                                             return "percentageIncrease: number expected";
-                                    if (message.contribution != null && message.hasOwnProperty("contribution")) {
+                                    if (message.contribution != null && Object.hasOwnProperty.call(message, "contribution")) {
                                         properties.details = 1;
                                         {
                                             var error = $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.verify(message.contribution, long + 1);
@@ -17096,7 +17096,7 @@
                                                 return "contribution." + error;
                                         }
                                     }
-                                    if (message.error != null && message.hasOwnProperty("error")) {
+                                    if (message.error != null && Object.hasOwnProperty.call(message, "error")) {
                                         if (properties.details === 1)
                                             return "details: multiple values";
                                         properties.details = 1;
@@ -17179,23 +17179,23 @@
                                             object.totalEgressBytes = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                         object.percentageIncrease = 0;
                                     }
-                                    if (message.bucket != null && message.hasOwnProperty("bucket"))
+                                    if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                                         object.bucket = message.bucket;
-                                    if (message.totalEgressBytes != null && message.hasOwnProperty("totalEgressBytes"))
+                                    if (message.totalEgressBytes != null && Object.hasOwnProperty.call(message, "totalEgressBytes"))
                                         if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                             object.totalEgressBytes = typeof message.totalEgressBytes === "number" ? BigInt(message.totalEgressBytes) : $util.Long.fromBits(message.totalEgressBytes.low >>> 0, message.totalEgressBytes.high >>> 0, false).toBigInt();
                                         else if (typeof message.totalEgressBytes === "number")
                                             object.totalEgressBytes = options.longs === String ? String(message.totalEgressBytes) : message.totalEgressBytes;
                                         else
                                             object.totalEgressBytes = options.longs === String ? $util.Long.prototype.toString.call(message.totalEgressBytes) : options.longs === Number ? new $util.LongBits(message.totalEgressBytes.low >>> 0, message.totalEgressBytes.high >>> 0).toNumber() : message.totalEgressBytes;
-                                    if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                    if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
                                         object.percentageIncrease = options.json && !isFinite(message.percentageIncrease) ? String(message.percentageIncrease) : message.percentageIncrease;
-                                    if (message.contribution != null && message.hasOwnProperty("contribution")) {
+                                    if (message.contribution != null && Object.hasOwnProperty.call(message, "contribution")) {
                                         object.contribution = $root.google.storage.control.v2.IntelligenceFinding.CrossRegionEgressSpike.BucketContribution.Contribution.toObject(message.contribution, options, q + 1);
                                         if (options.oneofs)
                                             object.details = "contribution";
                                     }
-                                    if (message.error != null && message.hasOwnProperty("error")) {
+                                    if (message.error != null && Object.hasOwnProperty.call(message, "error")) {
                                         object.error = $root.google.rpc.Status.toObject(message.error, options, q + 1);
                                         if (options.oneofs)
                                             object.details = "error";
@@ -17378,7 +17378,7 @@
                                             long = 0;
                                         if (long > $util.recursionLimit)
                                             return "maximum nesting depth exceeded";
-                                        if (message.topPrefixes != null && message.hasOwnProperty("topPrefixes")) {
+                                        if (message.topPrefixes != null && Object.hasOwnProperty.call(message, "topPrefixes")) {
                                             if (!Array.isArray(message.topPrefixes))
                                                 return "topPrefixes: array expected";
                                             for (var i = 0; i < message.topPrefixes.length; ++i) {
@@ -17649,13 +17649,13 @@
                                                 long = 0;
                                             if (long > $util.recursionLimit)
                                                 return "maximum nesting depth exceeded";
-                                            if (message.prefix != null && message.hasOwnProperty("prefix"))
+                                            if (message.prefix != null && Object.hasOwnProperty.call(message, "prefix"))
                                                 if (!$util.isString(message.prefix))
                                                     return "prefix: string expected";
-                                            if (message.totalEgressBytes != null && message.hasOwnProperty("totalEgressBytes"))
+                                            if (message.totalEgressBytes != null && Object.hasOwnProperty.call(message, "totalEgressBytes"))
                                                 if (!$util.isInteger(message.totalEgressBytes) && !(message.totalEgressBytes && $util.isInteger(message.totalEgressBytes.low) && $util.isInteger(message.totalEgressBytes.high)))
                                                     return "totalEgressBytes: integer|Long expected";
-                                            if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                            if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
                                                 if (typeof message.percentageIncrease !== "number")
                                                     return "percentageIncrease: number expected";
                                             return null;
@@ -17721,16 +17721,16 @@
                                                     object.totalEgressBytes = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                                 object.percentageIncrease = 0;
                                             }
-                                            if (message.prefix != null && message.hasOwnProperty("prefix"))
+                                            if (message.prefix != null && Object.hasOwnProperty.call(message, "prefix"))
                                                 object.prefix = message.prefix;
-                                            if (message.totalEgressBytes != null && message.hasOwnProperty("totalEgressBytes"))
+                                            if (message.totalEgressBytes != null && Object.hasOwnProperty.call(message, "totalEgressBytes"))
                                                 if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                                     object.totalEgressBytes = typeof message.totalEgressBytes === "number" ? BigInt(message.totalEgressBytes) : $util.Long.fromBits(message.totalEgressBytes.low >>> 0, message.totalEgressBytes.high >>> 0, false).toBigInt();
                                                 else if (typeof message.totalEgressBytes === "number")
                                                     object.totalEgressBytes = options.longs === String ? String(message.totalEgressBytes) : message.totalEgressBytes;
                                                 else
                                                     object.totalEgressBytes = options.longs === String ? $util.Long.prototype.toString.call(message.totalEgressBytes) : options.longs === Number ? new $util.LongBits(message.totalEgressBytes.low >>> 0, message.totalEgressBytes.high >>> 0).toNumber() : message.totalEgressBytes;
-                                            if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                            if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
                                                 object.percentageIncrease = options.json && !isFinite(message.percentageIncrease) ? String(message.percentageIncrease) : message.percentageIncrease;
                                             return object;
                                         };
@@ -17952,13 +17952,13 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.throttledRequests != null && message.hasOwnProperty("throttledRequests"))
+                                if (message.throttledRequests != null && Object.hasOwnProperty.call(message, "throttledRequests"))
                                     if (!$util.isInteger(message.throttledRequests) && !(message.throttledRequests && $util.isInteger(message.throttledRequests.low) && $util.isInteger(message.throttledRequests.high)))
                                         return "throttledRequests: integer|Long expected";
-                                if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
                                     if (typeof message.percentageIncrease !== "number")
                                         return "percentageIncrease: number expected";
-                                if (message.topBuckets != null && message.hasOwnProperty("topBuckets")) {
+                                if (message.topBuckets != null && Object.hasOwnProperty.call(message, "topBuckets")) {
                                     if (!Array.isArray(message.topBuckets))
                                         return "topBuckets: array expected";
                                     for (var i = 0; i < message.topBuckets.length; ++i) {
@@ -18039,14 +18039,14 @@
                                         object.throttledRequests = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                     object.percentageIncrease = 0;
                                 }
-                                if (message.throttledRequests != null && message.hasOwnProperty("throttledRequests"))
+                                if (message.throttledRequests != null && Object.hasOwnProperty.call(message, "throttledRequests"))
                                     if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                         object.throttledRequests = typeof message.throttledRequests === "number" ? BigInt(message.throttledRequests) : $util.Long.fromBits(message.throttledRequests.low >>> 0, message.throttledRequests.high >>> 0, false).toBigInt();
                                     else if (typeof message.throttledRequests === "number")
                                         object.throttledRequests = options.longs === String ? String(message.throttledRequests) : message.throttledRequests;
                                     else
                                         object.throttledRequests = options.longs === String ? $util.Long.prototype.toString.call(message.throttledRequests) : options.longs === Number ? new $util.LongBits(message.throttledRequests.low >>> 0, message.throttledRequests.high >>> 0).toNumber() : message.throttledRequests;
-                                if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
                                     object.percentageIncrease = options.json && !isFinite(message.percentageIncrease) ? String(message.percentageIncrease) : message.percentageIncrease;
                                 if (message.topBuckets && message.topBuckets.length) {
                                     object.topBuckets = [];
@@ -18302,16 +18302,16 @@
                                     if (long > $util.recursionLimit)
                                         return "maximum nesting depth exceeded";
                                     var properties = {};
-                                    if (message.bucket != null && message.hasOwnProperty("bucket"))
+                                    if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                                         if (!$util.isString(message.bucket))
                                             return "bucket: string expected";
-                                    if (message.throttledRequests != null && message.hasOwnProperty("throttledRequests"))
+                                    if (message.throttledRequests != null && Object.hasOwnProperty.call(message, "throttledRequests"))
                                         if (!$util.isInteger(message.throttledRequests) && !(message.throttledRequests && $util.isInteger(message.throttledRequests.low) && $util.isInteger(message.throttledRequests.high)))
                                             return "throttledRequests: integer|Long expected";
-                                    if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                    if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
                                         if (typeof message.percentageIncrease !== "number")
                                             return "percentageIncrease: number expected";
-                                    if (message.contribution != null && message.hasOwnProperty("contribution")) {
+                                    if (message.contribution != null && Object.hasOwnProperty.call(message, "contribution")) {
                                         properties.details = 1;
                                         {
                                             var error = $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.verify(message.contribution, long + 1);
@@ -18319,7 +18319,7 @@
                                                 return "contribution." + error;
                                         }
                                     }
-                                    if (message.error != null && message.hasOwnProperty("error")) {
+                                    if (message.error != null && Object.hasOwnProperty.call(message, "error")) {
                                         if (properties.details === 1)
                                             return "details: multiple values";
                                         properties.details = 1;
@@ -18402,23 +18402,23 @@
                                             object.throttledRequests = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                         object.percentageIncrease = 0;
                                     }
-                                    if (message.bucket != null && message.hasOwnProperty("bucket"))
+                                    if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                                         object.bucket = message.bucket;
-                                    if (message.throttledRequests != null && message.hasOwnProperty("throttledRequests"))
+                                    if (message.throttledRequests != null && Object.hasOwnProperty.call(message, "throttledRequests"))
                                         if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                             object.throttledRequests = typeof message.throttledRequests === "number" ? BigInt(message.throttledRequests) : $util.Long.fromBits(message.throttledRequests.low >>> 0, message.throttledRequests.high >>> 0, false).toBigInt();
                                         else if (typeof message.throttledRequests === "number")
                                             object.throttledRequests = options.longs === String ? String(message.throttledRequests) : message.throttledRequests;
                                         else
                                             object.throttledRequests = options.longs === String ? $util.Long.prototype.toString.call(message.throttledRequests) : options.longs === Number ? new $util.LongBits(message.throttledRequests.low >>> 0, message.throttledRequests.high >>> 0).toNumber() : message.throttledRequests;
-                                    if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                    if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
                                         object.percentageIncrease = options.json && !isFinite(message.percentageIncrease) ? String(message.percentageIncrease) : message.percentageIncrease;
-                                    if (message.contribution != null && message.hasOwnProperty("contribution")) {
+                                    if (message.contribution != null && Object.hasOwnProperty.call(message, "contribution")) {
                                         object.contribution = $root.google.storage.control.v2.IntelligenceFinding.ThrottledRequestSpike.BucketContribution.Contribution.toObject(message.contribution, options, q + 1);
                                         if (options.oneofs)
                                             object.details = "contribution";
                                     }
-                                    if (message.error != null && message.hasOwnProperty("error")) {
+                                    if (message.error != null && Object.hasOwnProperty.call(message, "error")) {
                                         object.error = $root.google.rpc.Status.toObject(message.error, options, q + 1);
                                         if (options.oneofs)
                                             object.details = "error";
@@ -18601,7 +18601,7 @@
                                             long = 0;
                                         if (long > $util.recursionLimit)
                                             return "maximum nesting depth exceeded";
-                                        if (message.topPrefixes != null && message.hasOwnProperty("topPrefixes")) {
+                                        if (message.topPrefixes != null && Object.hasOwnProperty.call(message, "topPrefixes")) {
                                             if (!Array.isArray(message.topPrefixes))
                                                 return "topPrefixes: array expected";
                                             for (var i = 0; i < message.topPrefixes.length; ++i) {
@@ -18872,13 +18872,13 @@
                                                 long = 0;
                                             if (long > $util.recursionLimit)
                                                 return "maximum nesting depth exceeded";
-                                            if (message.prefix != null && message.hasOwnProperty("prefix"))
+                                            if (message.prefix != null && Object.hasOwnProperty.call(message, "prefix"))
                                                 if (!$util.isString(message.prefix))
                                                     return "prefix: string expected";
-                                            if (message.throttledRequests != null && message.hasOwnProperty("throttledRequests"))
+                                            if (message.throttledRequests != null && Object.hasOwnProperty.call(message, "throttledRequests"))
                                                 if (!$util.isInteger(message.throttledRequests) && !(message.throttledRequests && $util.isInteger(message.throttledRequests.low) && $util.isInteger(message.throttledRequests.high)))
                                                     return "throttledRequests: integer|Long expected";
-                                            if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                            if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
                                                 if (typeof message.percentageIncrease !== "number")
                                                     return "percentageIncrease: number expected";
                                             return null;
@@ -18944,16 +18944,16 @@
                                                     object.throttledRequests = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                                 object.percentageIncrease = 0;
                                             }
-                                            if (message.prefix != null && message.hasOwnProperty("prefix"))
+                                            if (message.prefix != null && Object.hasOwnProperty.call(message, "prefix"))
                                                 object.prefix = message.prefix;
-                                            if (message.throttledRequests != null && message.hasOwnProperty("throttledRequests"))
+                                            if (message.throttledRequests != null && Object.hasOwnProperty.call(message, "throttledRequests"))
                                                 if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                                     object.throttledRequests = typeof message.throttledRequests === "number" ? BigInt(message.throttledRequests) : $util.Long.fromBits(message.throttledRequests.low >>> 0, message.throttledRequests.high >>> 0, false).toBigInt();
                                                 else if (typeof message.throttledRequests === "number")
                                                     object.throttledRequests = options.longs === String ? String(message.throttledRequests) : message.throttledRequests;
                                                 else
                                                     object.throttledRequests = options.longs === String ? $util.Long.prototype.toString.call(message.throttledRequests) : options.longs === Number ? new $util.LongBits(message.throttledRequests.low >>> 0, message.throttledRequests.high >>> 0).toNumber() : message.throttledRequests;
-                                            if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                            if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
                                                 object.percentageIncrease = options.json && !isFinite(message.percentageIncrease) ? String(message.percentageIncrease) : message.percentageIncrease;
                                             return object;
                                         };
@@ -19175,13 +19175,13 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.totalStorageGrowthBytes != null && message.hasOwnProperty("totalStorageGrowthBytes"))
+                                if (message.totalStorageGrowthBytes != null && Object.hasOwnProperty.call(message, "totalStorageGrowthBytes"))
                                     if (!$util.isInteger(message.totalStorageGrowthBytes) && !(message.totalStorageGrowthBytes && $util.isInteger(message.totalStorageGrowthBytes.low) && $util.isInteger(message.totalStorageGrowthBytes.high)))
                                         return "totalStorageGrowthBytes: integer|Long expected";
-                                if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
                                     if (typeof message.percentageIncrease !== "number")
                                         return "percentageIncrease: number expected";
-                                if (message.topBuckets != null && message.hasOwnProperty("topBuckets")) {
+                                if (message.topBuckets != null && Object.hasOwnProperty.call(message, "topBuckets")) {
                                     if (!Array.isArray(message.topBuckets))
                                         return "topBuckets: array expected";
                                     for (var i = 0; i < message.topBuckets.length; ++i) {
@@ -19262,14 +19262,14 @@
                                         object.totalStorageGrowthBytes = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                     object.percentageIncrease = 0;
                                 }
-                                if (message.totalStorageGrowthBytes != null && message.hasOwnProperty("totalStorageGrowthBytes"))
+                                if (message.totalStorageGrowthBytes != null && Object.hasOwnProperty.call(message, "totalStorageGrowthBytes"))
                                     if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                         object.totalStorageGrowthBytes = typeof message.totalStorageGrowthBytes === "number" ? BigInt(message.totalStorageGrowthBytes) : $util.Long.fromBits(message.totalStorageGrowthBytes.low >>> 0, message.totalStorageGrowthBytes.high >>> 0, false).toBigInt();
                                     else if (typeof message.totalStorageGrowthBytes === "number")
                                         object.totalStorageGrowthBytes = options.longs === String ? String(message.totalStorageGrowthBytes) : message.totalStorageGrowthBytes;
                                     else
                                         object.totalStorageGrowthBytes = options.longs === String ? $util.Long.prototype.toString.call(message.totalStorageGrowthBytes) : options.longs === Number ? new $util.LongBits(message.totalStorageGrowthBytes.low >>> 0, message.totalStorageGrowthBytes.high >>> 0).toNumber() : message.totalStorageGrowthBytes;
-                                if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
                                     object.percentageIncrease = options.json && !isFinite(message.percentageIncrease) ? String(message.percentageIncrease) : message.percentageIncrease;
                                 if (message.topBuckets && message.topBuckets.length) {
                                     object.topBuckets = [];
@@ -19510,16 +19510,16 @@
                                     if (long > $util.recursionLimit)
                                         return "maximum nesting depth exceeded";
                                     var properties = {};
-                                    if (message.bucket != null && message.hasOwnProperty("bucket"))
+                                    if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                                         if (!$util.isString(message.bucket))
                                             return "bucket: string expected";
-                                    if (message.totalStorageGrowthBytes != null && message.hasOwnProperty("totalStorageGrowthBytes"))
+                                    if (message.totalStorageGrowthBytes != null && Object.hasOwnProperty.call(message, "totalStorageGrowthBytes"))
                                         if (!$util.isInteger(message.totalStorageGrowthBytes) && !(message.totalStorageGrowthBytes && $util.isInteger(message.totalStorageGrowthBytes.low) && $util.isInteger(message.totalStorageGrowthBytes.high)))
                                             return "totalStorageGrowthBytes: integer|Long expected";
-                                    if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                    if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
                                         if (typeof message.percentageIncrease !== "number")
                                             return "percentageIncrease: number expected";
-                                    if (message.error != null && message.hasOwnProperty("error")) {
+                                    if (message.error != null && Object.hasOwnProperty.call(message, "error")) {
                                         properties.details = 1;
                                         {
                                             var error = $root.google.rpc.Status.verify(message.error, long + 1);
@@ -19595,18 +19595,18 @@
                                             object.totalStorageGrowthBytes = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                         object.percentageIncrease = 0;
                                     }
-                                    if (message.bucket != null && message.hasOwnProperty("bucket"))
+                                    if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                                         object.bucket = message.bucket;
-                                    if (message.totalStorageGrowthBytes != null && message.hasOwnProperty("totalStorageGrowthBytes"))
+                                    if (message.totalStorageGrowthBytes != null && Object.hasOwnProperty.call(message, "totalStorageGrowthBytes"))
                                         if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                             object.totalStorageGrowthBytes = typeof message.totalStorageGrowthBytes === "number" ? BigInt(message.totalStorageGrowthBytes) : $util.Long.fromBits(message.totalStorageGrowthBytes.low >>> 0, message.totalStorageGrowthBytes.high >>> 0, false).toBigInt();
                                         else if (typeof message.totalStorageGrowthBytes === "number")
                                             object.totalStorageGrowthBytes = options.longs === String ? String(message.totalStorageGrowthBytes) : message.totalStorageGrowthBytes;
                                         else
                                             object.totalStorageGrowthBytes = options.longs === String ? $util.Long.prototype.toString.call(message.totalStorageGrowthBytes) : options.longs === Number ? new $util.LongBits(message.totalStorageGrowthBytes.low >>> 0, message.totalStorageGrowthBytes.high >>> 0).toNumber() : message.totalStorageGrowthBytes;
-                                    if (message.percentageIncrease != null && message.hasOwnProperty("percentageIncrease"))
+                                    if (message.percentageIncrease != null && Object.hasOwnProperty.call(message, "percentageIncrease"))
                                         object.percentageIncrease = options.json && !isFinite(message.percentageIncrease) ? String(message.percentageIncrease) : message.percentageIncrease;
-                                    if (message.error != null && message.hasOwnProperty("error")) {
+                                    if (message.error != null && Object.hasOwnProperty.call(message, "error")) {
                                         object.error = $root.google.rpc.Status.toObject(message.error, options, q + 1);
                                         if (options.oneofs)
                                             object.details = "error";
@@ -19824,15 +19824,15 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
-                            if (message.snapshot != null && message.hasOwnProperty("snapshot")) {
+                            if (message.snapshot != null && Object.hasOwnProperty.call(message, "snapshot")) {
                                 var error = $root.google.storage.control.v2.IntelligenceFinding.verify(message.snapshot, long + 1);
                                 if (error)
                                     return "snapshot." + error;
                             }
-                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.createTime, long + 1);
                                 if (error)
                                     return "createTime." + error;
@@ -19895,11 +19895,11 @@
                                 object.snapshot = null;
                                 object.createTime = null;
                             }
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 object.name = message.name;
-                            if (message.snapshot != null && message.hasOwnProperty("snapshot"))
+                            if (message.snapshot != null && Object.hasOwnProperty.call(message, "snapshot"))
                                 object.snapshot = $root.google.storage.control.v2.IntelligenceFinding.toObject(message.snapshot, options, q + 1);
-                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options, q + 1);
                             return object;
                         };
@@ -20078,7 +20078,7 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
                             return null;
@@ -20126,7 +20126,7 @@
                             var object = {};
                             if (options.defaults)
                                 object.name = "";
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 object.name = message.name;
                             return object;
                         };
@@ -20350,16 +20350,16 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
-                            if (message.filter != null && message.hasOwnProperty("filter"))
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
                                 if (!$util.isString(message.filter))
                                     return "filter: string expected";
-                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
                                 if (!$util.isInteger(message.pageSize))
                                     return "pageSize: integer expected";
-                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 if (!$util.isString(message.pageToken))
                                     return "pageToken: string expected";
                             return null;
@@ -20417,13 +20417,13 @@
                                 object.pageSize = 0;
                                 object.pageToken = "";
                             }
-                            if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 object.parent = message.parent;
-                            if (message.filter != null && message.hasOwnProperty("filter"))
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
                                 object.filter = message.filter;
-                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
                                 object.pageSize = message.pageSize;
-                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 object.pageToken = message.pageToken;
                             return object;
                         };
@@ -20621,7 +20621,7 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.intelligenceFindings != null && message.hasOwnProperty("intelligenceFindings")) {
+                            if (message.intelligenceFindings != null && Object.hasOwnProperty.call(message, "intelligenceFindings")) {
                                 if (!Array.isArray(message.intelligenceFindings))
                                     return "intelligenceFindings: array expected";
                                 for (var i = 0; i < message.intelligenceFindings.length; ++i) {
@@ -20630,7 +20630,7 @@
                                         return "intelligenceFindings." + error;
                                 }
                             }
-                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                 if (!$util.isString(message.nextPageToken))
                                     return "nextPageToken: string expected";
                             return null;
@@ -20695,7 +20695,7 @@
                                 for (var j = 0; j < message.intelligenceFindings.length; ++j)
                                     object.intelligenceFindings[j] = $root.google.storage.control.v2.IntelligenceFinding.toObject(message.intelligenceFindings[j], options, q + 1);
                             }
-                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                 object.nextPageToken = message.nextPageToken;
                             return object;
                         };
@@ -20934,10 +20934,10 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
-                            if (message.resourceScope != null && message.hasOwnProperty("resourceScope"))
+                            if (message.resourceScope != null && Object.hasOwnProperty.call(message, "resourceScope"))
                                 switch (message.resourceScope) {
                                 default:
                                     return "resourceScope: enum value expected";
@@ -20946,13 +20946,13 @@
                                 case 2:
                                     break;
                                 }
-                            if (message.filter != null && message.hasOwnProperty("filter"))
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
                                 if (!$util.isString(message.filter))
                                     return "filter: string expected";
-                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
                                 if (!$util.isInteger(message.pageSize))
                                     return "pageSize: integer expected";
-                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 if (!$util.isString(message.pageToken))
                                     return "pageToken: string expected";
                             return null;
@@ -21031,15 +21031,15 @@
                                 object.pageSize = 0;
                                 object.pageToken = "";
                             }
-                            if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 object.parent = message.parent;
-                            if (message.resourceScope != null && message.hasOwnProperty("resourceScope"))
+                            if (message.resourceScope != null && Object.hasOwnProperty.call(message, "resourceScope"))
                                 object.resourceScope = options.enums === String ? $root.google.storage.control.v2.SummarizeIntelligenceFindingsRequest.ResourceScope[message.resourceScope] === undefined ? message.resourceScope : $root.google.storage.control.v2.SummarizeIntelligenceFindingsRequest.ResourceScope[message.resourceScope] : message.resourceScope;
-                            if (message.filter != null && message.hasOwnProperty("filter"))
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
                                 object.filter = message.filter;
-                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
                                 object.pageSize = message.pageSize;
-                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 object.pageToken = message.pageToken;
                             return object;
                         };
@@ -21253,7 +21253,7 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.findingSummaries != null && message.hasOwnProperty("findingSummaries")) {
+                            if (message.findingSummaries != null && Object.hasOwnProperty.call(message, "findingSummaries")) {
                                 if (!Array.isArray(message.findingSummaries))
                                     return "findingSummaries: array expected";
                                 for (var i = 0; i < message.findingSummaries.length; ++i) {
@@ -21262,7 +21262,7 @@
                                         return "findingSummaries." + error;
                                 }
                             }
-                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                 if (!$util.isString(message.nextPageToken))
                                     return "nextPageToken: string expected";
                             return null;
@@ -21327,7 +21327,7 @@
                                 for (var j = 0; j < message.findingSummaries.length; ++j)
                                     object.findingSummaries[j] = $root.google.storage.control.v2.FindingSummary.toObject(message.findingSummaries[j], options, q + 1);
                             }
-                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                 object.nextPageToken = message.nextPageToken;
                             return object;
                         };
@@ -21506,7 +21506,7 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
                             return null;
@@ -21554,7 +21554,7 @@
                             var object = {};
                             if (options.defaults)
                                 object.name = "";
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 object.name = message.name;
                             return object;
                         };
@@ -21763,13 +21763,13 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
-                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
                                 if (!$util.isInteger(message.pageSize))
                                     return "pageSize: integer expected";
-                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 if (!$util.isString(message.pageToken))
                                     return "pageToken: string expected";
                             return null;
@@ -21824,11 +21824,11 @@
                                 object.pageSize = 0;
                                 object.pageToken = "";
                             }
-                            if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 object.parent = message.parent;
-                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
                                 object.pageSize = message.pageSize;
-                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 object.pageToken = message.pageToken;
                             return object;
                         };
@@ -22026,7 +22026,7 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.intelligenceFindingRevisions != null && message.hasOwnProperty("intelligenceFindingRevisions")) {
+                            if (message.intelligenceFindingRevisions != null && Object.hasOwnProperty.call(message, "intelligenceFindingRevisions")) {
                                 if (!Array.isArray(message.intelligenceFindingRevisions))
                                     return "intelligenceFindingRevisions: array expected";
                                 for (var i = 0; i < message.intelligenceFindingRevisions.length; ++i) {
@@ -22035,7 +22035,7 @@
                                         return "intelligenceFindingRevisions." + error;
                                 }
                             }
-                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                 if (!$util.isString(message.nextPageToken))
                                     return "nextPageToken: string expected";
                             return null;
@@ -22100,7 +22100,7 @@
                                 for (var j = 0; j < message.intelligenceFindingRevisions.length; ++j)
                                     object.intelligenceFindingRevisions[j] = $root.google.storage.control.v2.IntelligenceFindingRevision.toObject(message.intelligenceFindingRevisions[j], options, q + 1);
                             }
-                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                 object.nextPageToken = message.nextPageToken;
                             return object;
                         };
@@ -22373,7 +22373,7 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.type != null && message.hasOwnProperty("type"))
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                                 switch (message.type) {
                                 default:
                                     return "type: enum value expected";
@@ -22384,7 +22384,7 @@
                                 case 4:
                                     break;
                                 }
-                            if (message.category != null && message.hasOwnProperty("category"))
+                            if (message.category != null && Object.hasOwnProperty.call(message, "category"))
                                 switch (message.category) {
                                 default:
                                     return "category: enum value expected";
@@ -22393,20 +22393,20 @@
                                 case 2:
                                     break;
                                 }
-                            if (message.targetResource != null && message.hasOwnProperty("targetResource"))
+                            if (message.targetResource != null && Object.hasOwnProperty.call(message, "targetResource"))
                                 if (!$util.isString(message.targetResource))
                                     return "targetResource: string expected";
-                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.createTime, long + 1);
                                 if (error)
                                     return "createTime." + error;
                             }
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.updateTime, long + 1);
                                 if (error)
                                     return "updateTime." + error;
                             }
-                            if (message.severity != null && message.hasOwnProperty("severity"))
+                            if (message.severity != null && Object.hasOwnProperty.call(message, "severity"))
                                 switch (message.severity) {
                                 default:
                                     return "severity: enum value expected";
@@ -22414,7 +22414,7 @@
                                 case 1:
                                     break;
                                 }
-                            if (message.summaryDetails != null && message.hasOwnProperty("summaryDetails")) {
+                            if (message.summaryDetails != null && Object.hasOwnProperty.call(message, "summaryDetails")) {
                                 if (!Array.isArray(message.summaryDetails))
                                     return "summaryDetails: array expected";
                                 for (var i = 0; i < message.summaryDetails.length; ++i) {
@@ -22560,17 +22560,17 @@
                                 object.updateTime = null;
                                 object.severity = options.enums === String ? "FINDING_SEVERITY_UNSPECIFIED" : 0;
                             }
-                            if (message.type != null && message.hasOwnProperty("type"))
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                                 object.type = options.enums === String ? $root.google.storage.control.v2.FindingType[message.type] === undefined ? message.type : $root.google.storage.control.v2.FindingType[message.type] : message.type;
-                            if (message.category != null && message.hasOwnProperty("category"))
+                            if (message.category != null && Object.hasOwnProperty.call(message, "category"))
                                 object.category = options.enums === String ? $root.google.storage.control.v2.FindingCategory[message.category] === undefined ? message.category : $root.google.storage.control.v2.FindingCategory[message.category] : message.category;
-                            if (message.targetResource != null && message.hasOwnProperty("targetResource"))
+                            if (message.targetResource != null && Object.hasOwnProperty.call(message, "targetResource"))
                                 object.targetResource = message.targetResource;
-                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options, q + 1);
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options, q + 1);
-                            if (message.severity != null && message.hasOwnProperty("severity"))
+                            if (message.severity != null && Object.hasOwnProperty.call(message, "severity"))
                                 object.severity = options.enums === String ? $root.google.storage.control.v2.FindingSeverity[message.severity] === undefined ? message.severity : $root.google.storage.control.v2.FindingSeverity[message.severity] : message.severity;
                             if (message.summaryDetails && message.summaryDetails.length) {
                                 object.summaryDetails = [];
@@ -22811,19 +22811,19 @@
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
                                 var properties = {};
-                                if (message.count != null && message.hasOwnProperty("count")) {
+                                if (message.count != null && Object.hasOwnProperty.call(message, "count")) {
                                     properties.magnitude = 1;
                                     if (!$util.isInteger(message.count) && !(message.count && $util.isInteger(message.count.low) && $util.isInteger(message.count.high)))
                                         return "count: integer|Long expected";
                                 }
-                                if (message.percentage != null && message.hasOwnProperty("percentage")) {
+                                if (message.percentage != null && Object.hasOwnProperty.call(message, "percentage")) {
                                     if (properties.magnitude === 1)
                                         return "magnitude: multiple values";
                                     properties.magnitude = 1;
                                     if (typeof message.percentage !== "number")
                                         return "percentage: number expected";
                                 }
-                                if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                                if (message.resourceType != null && Object.hasOwnProperty.call(message, "resourceType"))
                                     switch (message.resourceType) {
                                     default:
                                         return "resourceType: enum value expected";
@@ -22832,7 +22832,7 @@
                                     case 2:
                                         break;
                                     }
-                                if (message.description != null && message.hasOwnProperty("description"))
+                                if (message.description != null && Object.hasOwnProperty.call(message, "description"))
                                     if (!$util.isString(message.description))
                                         return "description: string expected";
                                 return null;
@@ -22913,7 +22913,7 @@
                                     object.resourceType = options.enums === String ? "RESOURCE_TYPE_UNSPECIFIED" : 0;
                                     object.description = "";
                                 }
-                                if (message.count != null && message.hasOwnProperty("count")) {
+                                if (message.count != null && Object.hasOwnProperty.call(message, "count")) {
                                     if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                         object.count = typeof message.count === "number" ? BigInt(message.count) : $util.Long.fromBits(message.count.low >>> 0, message.count.high >>> 0, false).toBigInt();
                                     else if (typeof message.count === "number")
@@ -22923,14 +22923,14 @@
                                     if (options.oneofs)
                                         object.magnitude = "count";
                                 }
-                                if (message.percentage != null && message.hasOwnProperty("percentage")) {
+                                if (message.percentage != null && Object.hasOwnProperty.call(message, "percentage")) {
                                     object.percentage = options.json && !isFinite(message.percentage) ? String(message.percentage) : message.percentage;
                                     if (options.oneofs)
                                         object.magnitude = "percentage";
                                 }
-                                if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                                if (message.resourceType != null && Object.hasOwnProperty.call(message, "resourceType"))
                                     object.resourceType = options.enums === String ? $root.google.storage.control.v2.FindingSummary.SummaryDetails.ResourceType[message.resourceType] === undefined ? message.resourceType : $root.google.storage.control.v2.FindingSummary.SummaryDetails.ResourceType[message.resourceType] : message.resourceType;
-                                if (message.description != null && message.hasOwnProperty("description"))
+                                if (message.description != null && Object.hasOwnProperty.call(message, "description"))
                                     object.description = message.description;
                                 return object;
                             };
@@ -23100,7 +23100,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.deleteBucket = function deleteBucket(request, callback) {
-                        return this.rpcCall(deleteBucket, $root.google.storage.v2.DeleteBucketRequest, $root.google.protobuf.Empty, request, callback);
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, deleteBucket, $root.google.storage.v2.DeleteBucketRequest, $root.google.protobuf.Empty, request, callback);
                     }, "name", { value: "DeleteBucket" });
     
                     /**
@@ -23133,7 +23133,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.getBucket = function getBucket(request, callback) {
-                        return this.rpcCall(getBucket, $root.google.storage.v2.GetBucketRequest, $root.google.storage.v2.Bucket, request, callback);
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, getBucket, $root.google.storage.v2.GetBucketRequest, $root.google.storage.v2.Bucket, request, callback);
                     }, "name", { value: "GetBucket" });
     
                     /**
@@ -23166,7 +23166,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.createBucket = function createBucket(request, callback) {
-                        return this.rpcCall(createBucket, $root.google.storage.v2.CreateBucketRequest, $root.google.storage.v2.Bucket, request, callback);
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, createBucket, $root.google.storage.v2.CreateBucketRequest, $root.google.storage.v2.Bucket, request, callback);
                     }, "name", { value: "CreateBucket" });
     
                     /**
@@ -23199,7 +23199,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.listBuckets = function listBuckets(request, callback) {
-                        return this.rpcCall(listBuckets, $root.google.storage.v2.ListBucketsRequest, $root.google.storage.v2.ListBucketsResponse, request, callback);
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, listBuckets, $root.google.storage.v2.ListBucketsRequest, $root.google.storage.v2.ListBucketsResponse, request, callback);
                     }, "name", { value: "ListBuckets" });
     
                     /**
@@ -23232,7 +23232,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.lockBucketRetentionPolicy = function lockBucketRetentionPolicy(request, callback) {
-                        return this.rpcCall(lockBucketRetentionPolicy, $root.google.storage.v2.LockBucketRetentionPolicyRequest, $root.google.storage.v2.Bucket, request, callback);
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, lockBucketRetentionPolicy, $root.google.storage.v2.LockBucketRetentionPolicyRequest, $root.google.storage.v2.Bucket, request, callback);
                     }, "name", { value: "LockBucketRetentionPolicy" });
     
                     /**
@@ -23265,7 +23265,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.getIamPolicy = function getIamPolicy(request, callback) {
-                        return this.rpcCall(getIamPolicy, $root.google.iam.v1.GetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, getIamPolicy, $root.google.iam.v1.GetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
                     }, "name", { value: "GetIamPolicy" });
     
                     /**
@@ -23298,7 +23298,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.setIamPolicy = function setIamPolicy(request, callback) {
-                        return this.rpcCall(setIamPolicy, $root.google.iam.v1.SetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, setIamPolicy, $root.google.iam.v1.SetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
                     }, "name", { value: "SetIamPolicy" });
     
                     /**
@@ -23331,7 +23331,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.testIamPermissions = function testIamPermissions(request, callback) {
-                        return this.rpcCall(testIamPermissions, $root.google.iam.v1.TestIamPermissionsRequest, $root.google.iam.v1.TestIamPermissionsResponse, request, callback);
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, testIamPermissions, $root.google.iam.v1.TestIamPermissionsRequest, $root.google.iam.v1.TestIamPermissionsResponse, request, callback);
                     }, "name", { value: "TestIamPermissions" });
     
                     /**
@@ -23364,7 +23364,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.updateBucket = function updateBucket(request, callback) {
-                        return this.rpcCall(updateBucket, $root.google.storage.v2.UpdateBucketRequest, $root.google.storage.v2.Bucket, request, callback);
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, updateBucket, $root.google.storage.v2.UpdateBucketRequest, $root.google.storage.v2.Bucket, request, callback);
                     }, "name", { value: "UpdateBucket" });
     
                     /**
@@ -23397,7 +23397,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.composeObject = function composeObject(request, callback) {
-                        return this.rpcCall(composeObject, $root.google.storage.v2.ComposeObjectRequest, $root.google.storage.v2.StorageObject, request, callback);
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, composeObject, $root.google.storage.v2.ComposeObjectRequest, $root.google.storage.v2.StorageObject, request, callback);
                     }, "name", { value: "ComposeObject" });
     
                     /**
@@ -23430,7 +23430,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.deleteObject = function deleteObject(request, callback) {
-                        return this.rpcCall(deleteObject, $root.google.storage.v2.DeleteObjectRequest, $root.google.protobuf.Empty, request, callback);
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, deleteObject, $root.google.storage.v2.DeleteObjectRequest, $root.google.protobuf.Empty, request, callback);
                     }, "name", { value: "DeleteObject" });
     
                     /**
@@ -23463,7 +23463,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.restoreObject = function restoreObject(request, callback) {
-                        return this.rpcCall(restoreObject, $root.google.storage.v2.RestoreObjectRequest, $root.google.storage.v2.StorageObject, request, callback);
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, restoreObject, $root.google.storage.v2.RestoreObjectRequest, $root.google.storage.v2.StorageObject, request, callback);
                     }, "name", { value: "RestoreObject" });
     
                     /**
@@ -23496,7 +23496,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.cancelResumableWrite = function cancelResumableWrite(request, callback) {
-                        return this.rpcCall(cancelResumableWrite, $root.google.storage.v2.CancelResumableWriteRequest, $root.google.storage.v2.CancelResumableWriteResponse, request, callback);
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, cancelResumableWrite, $root.google.storage.v2.CancelResumableWriteRequest, $root.google.storage.v2.CancelResumableWriteResponse, request, callback);
                     }, "name", { value: "CancelResumableWrite" });
     
                     /**
@@ -23529,7 +23529,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.getObject = function getObject(request, callback) {
-                        return this.rpcCall(getObject, $root.google.storage.v2.GetObjectRequest, $root.google.storage.v2.StorageObject, request, callback);
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, getObject, $root.google.storage.v2.GetObjectRequest, $root.google.storage.v2.StorageObject, request, callback);
                     }, "name", { value: "GetObject" });
     
                     /**
@@ -23562,7 +23562,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.readObject = function readObject(request, callback) {
-                        return this.rpcCall(readObject, $root.google.storage.v2.ReadObjectRequest, $root.google.storage.v2.ReadObjectResponse, request, callback);
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, readObject, $root.google.storage.v2.ReadObjectRequest, $root.google.storage.v2.ReadObjectResponse, request, callback);
                     }, "name", { value: "ReadObject" });
     
                     /**
@@ -23595,7 +23595,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.bidiReadObject = function bidiReadObject(request, callback) {
-                        return this.rpcCall(bidiReadObject, $root.google.storage.v2.BidiReadObjectRequest, $root.google.storage.v2.BidiReadObjectResponse, request, callback);
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, bidiReadObject, $root.google.storage.v2.BidiReadObjectRequest, $root.google.storage.v2.BidiReadObjectResponse, request, callback);
                     }, "name", { value: "BidiReadObject" });
     
                     /**
@@ -23628,7 +23628,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.updateObject = function updateObject(request, callback) {
-                        return this.rpcCall(updateObject, $root.google.storage.v2.UpdateObjectRequest, $root.google.storage.v2.StorageObject, request, callback);
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, updateObject, $root.google.storage.v2.UpdateObjectRequest, $root.google.storage.v2.StorageObject, request, callback);
                     }, "name", { value: "UpdateObject" });
     
                     /**
@@ -23661,7 +23661,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.writeObject = function writeObject(request, callback) {
-                        return this.rpcCall(writeObject, $root.google.storage.v2.WriteObjectRequest, $root.google.storage.v2.WriteObjectResponse, request, callback);
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, writeObject, $root.google.storage.v2.WriteObjectRequest, $root.google.storage.v2.WriteObjectResponse, request, callback);
                     }, "name", { value: "WriteObject" });
     
                     /**
@@ -23694,7 +23694,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.bidiWriteObject = function bidiWriteObject(request, callback) {
-                        return this.rpcCall(bidiWriteObject, $root.google.storage.v2.BidiWriteObjectRequest, $root.google.storage.v2.BidiWriteObjectResponse, request, callback);
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, bidiWriteObject, $root.google.storage.v2.BidiWriteObjectRequest, $root.google.storage.v2.BidiWriteObjectResponse, request, callback);
                     }, "name", { value: "BidiWriteObject" });
     
                     /**
@@ -23727,7 +23727,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.listObjects = function listObjects(request, callback) {
-                        return this.rpcCall(listObjects, $root.google.storage.v2.ListObjectsRequest, $root.google.storage.v2.ListObjectsResponse, request, callback);
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, listObjects, $root.google.storage.v2.ListObjectsRequest, $root.google.storage.v2.ListObjectsResponse, request, callback);
                     }, "name", { value: "ListObjects" });
     
                     /**
@@ -23760,7 +23760,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.rewriteObject = function rewriteObject(request, callback) {
-                        return this.rpcCall(rewriteObject, $root.google.storage.v2.RewriteObjectRequest, $root.google.storage.v2.RewriteResponse, request, callback);
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, rewriteObject, $root.google.storage.v2.RewriteObjectRequest, $root.google.storage.v2.RewriteResponse, request, callback);
                     }, "name", { value: "RewriteObject" });
     
                     /**
@@ -23793,7 +23793,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.startResumableWrite = function startResumableWrite(request, callback) {
-                        return this.rpcCall(startResumableWrite, $root.google.storage.v2.StartResumableWriteRequest, $root.google.storage.v2.StartResumableWriteResponse, request, callback);
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, startResumableWrite, $root.google.storage.v2.StartResumableWriteRequest, $root.google.storage.v2.StartResumableWriteResponse, request, callback);
                     }, "name", { value: "StartResumableWrite" });
     
                     /**
@@ -23826,7 +23826,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.queryWriteStatus = function queryWriteStatus(request, callback) {
-                        return this.rpcCall(queryWriteStatus, $root.google.storage.v2.QueryWriteStatusRequest, $root.google.storage.v2.QueryWriteStatusResponse, request, callback);
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, queryWriteStatus, $root.google.storage.v2.QueryWriteStatusRequest, $root.google.storage.v2.QueryWriteStatusResponse, request, callback);
                     }, "name", { value: "QueryWriteStatus" });
     
                     /**
@@ -23859,7 +23859,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(Storage.prototype.moveObject = function moveObject(request, callback) {
-                        return this.rpcCall(moveObject, $root.google.storage.v2.MoveObjectRequest, $root.google.storage.v2.StorageObject, request, callback);
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, moveObject, $root.google.storage.v2.MoveObjectRequest, $root.google.storage.v2.StorageObject, request, callback);
                     }, "name", { value: "MoveObject" });
     
                     /**
@@ -24066,15 +24066,15 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.name != null && message.hasOwnProperty("name"))
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                             properties._ifMetagenerationMatch = 1;
                             if (!$util.isInteger(message.ifMetagenerationMatch) && !(message.ifMetagenerationMatch && $util.isInteger(message.ifMetagenerationMatch.low) && $util.isInteger(message.ifMetagenerationMatch.high)))
                                 return "ifMetagenerationMatch: integer|Long expected";
                         }
-                        if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                        if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                             properties._ifMetagenerationNotMatch = 1;
                             if (!$util.isInteger(message.ifMetagenerationNotMatch) && !(message.ifMetagenerationNotMatch && $util.isInteger(message.ifMetagenerationNotMatch.low) && $util.isInteger(message.ifMetagenerationNotMatch.high)))
                                 return "ifMetagenerationNotMatch: integer|Long expected";
@@ -24142,9 +24142,9 @@
                         var object = {};
                         if (options.defaults)
                             object.name = "";
-                        if (message.name != null && message.hasOwnProperty("name"))
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             object.name = message.name;
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifMetagenerationMatch === "number")
@@ -24154,7 +24154,7 @@
                             if (options.oneofs)
                                 object._ifMetagenerationMatch = "ifMetagenerationMatch";
                         }
-                        if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                        if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifMetagenerationNotMatch === "number")
@@ -24408,20 +24408,20 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.name != null && message.hasOwnProperty("name"))
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                             properties._ifMetagenerationMatch = 1;
                             if (!$util.isInteger(message.ifMetagenerationMatch) && !(message.ifMetagenerationMatch && $util.isInteger(message.ifMetagenerationMatch.low) && $util.isInteger(message.ifMetagenerationMatch.high)))
                                 return "ifMetagenerationMatch: integer|Long expected";
                         }
-                        if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                        if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                             properties._ifMetagenerationNotMatch = 1;
                             if (!$util.isInteger(message.ifMetagenerationNotMatch) && !(message.ifMetagenerationNotMatch && $util.isInteger(message.ifMetagenerationNotMatch.low) && $util.isInteger(message.ifMetagenerationNotMatch.high)))
                                 return "ifMetagenerationNotMatch: integer|Long expected";
                         }
-                        if (message.readMask != null && message.hasOwnProperty("readMask")) {
+                        if (message.readMask != null && Object.hasOwnProperty.call(message, "readMask")) {
                             properties._readMask = 1;
                             {
                                 var error = $root.google.protobuf.FieldMask.verify(message.readMask, long + 1);
@@ -24497,9 +24497,9 @@
                         var object = {};
                         if (options.defaults)
                             object.name = "";
-                        if (message.name != null && message.hasOwnProperty("name"))
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             object.name = message.name;
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifMetagenerationMatch === "number")
@@ -24509,7 +24509,7 @@
                             if (options.oneofs)
                                 object._ifMetagenerationMatch = "ifMetagenerationMatch";
                         }
-                        if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                        if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifMetagenerationNotMatch === "number")
@@ -24519,7 +24519,7 @@
                             if (options.oneofs)
                                 object._ifMetagenerationNotMatch = "ifMetagenerationNotMatch";
                         }
-                        if (message.readMask != null && message.hasOwnProperty("readMask")) {
+                        if (message.readMask != null && Object.hasOwnProperty.call(message, "readMask")) {
                             object.readMask = $root.google.protobuf.FieldMask.toObject(message.readMask, options, q + 1);
                             if (options.oneofs)
                                 object._readMask = "readMask";
@@ -24776,24 +24776,24 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.parent != null && message.hasOwnProperty("parent"))
+                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                             if (!$util.isString(message.parent))
                                 return "parent: string expected";
-                        if (message.bucket != null && message.hasOwnProperty("bucket")) {
+                        if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket")) {
                             var error = $root.google.storage.v2.Bucket.verify(message.bucket, long + 1);
                             if (error)
                                 return "bucket." + error;
                         }
-                        if (message.bucketId != null && message.hasOwnProperty("bucketId"))
+                        if (message.bucketId != null && Object.hasOwnProperty.call(message, "bucketId"))
                             if (!$util.isString(message.bucketId))
                                 return "bucketId: string expected";
-                        if (message.predefinedAcl != null && message.hasOwnProperty("predefinedAcl"))
+                        if (message.predefinedAcl != null && Object.hasOwnProperty.call(message, "predefinedAcl"))
                             if (!$util.isString(message.predefinedAcl))
                                 return "predefinedAcl: string expected";
-                        if (message.predefinedDefaultObjectAcl != null && message.hasOwnProperty("predefinedDefaultObjectAcl"))
+                        if (message.predefinedDefaultObjectAcl != null && Object.hasOwnProperty.call(message, "predefinedDefaultObjectAcl"))
                             if (!$util.isString(message.predefinedDefaultObjectAcl))
                                 return "predefinedDefaultObjectAcl: string expected";
-                        if (message.enableObjectRetention != null && message.hasOwnProperty("enableObjectRetention"))
+                        if (message.enableObjectRetention != null && Object.hasOwnProperty.call(message, "enableObjectRetention"))
                             if (typeof message.enableObjectRetention !== "boolean")
                                 return "enableObjectRetention: boolean expected";
                         return null;
@@ -24860,17 +24860,17 @@
                             object.predefinedDefaultObjectAcl = "";
                             object.enableObjectRetention = false;
                         }
-                        if (message.parent != null && message.hasOwnProperty("parent"))
+                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                             object.parent = message.parent;
-                        if (message.bucket != null && message.hasOwnProperty("bucket"))
+                        if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                             object.bucket = $root.google.storage.v2.Bucket.toObject(message.bucket, options, q + 1);
-                        if (message.bucketId != null && message.hasOwnProperty("bucketId"))
+                        if (message.bucketId != null && Object.hasOwnProperty.call(message, "bucketId"))
                             object.bucketId = message.bucketId;
-                        if (message.predefinedAcl != null && message.hasOwnProperty("predefinedAcl"))
+                        if (message.predefinedAcl != null && Object.hasOwnProperty.call(message, "predefinedAcl"))
                             object.predefinedAcl = message.predefinedAcl;
-                        if (message.predefinedDefaultObjectAcl != null && message.hasOwnProperty("predefinedDefaultObjectAcl"))
+                        if (message.predefinedDefaultObjectAcl != null && Object.hasOwnProperty.call(message, "predefinedDefaultObjectAcl"))
                             object.predefinedDefaultObjectAcl = message.predefinedDefaultObjectAcl;
-                        if (message.enableObjectRetention != null && message.hasOwnProperty("enableObjectRetention"))
+                        if (message.enableObjectRetention != null && Object.hasOwnProperty.call(message, "enableObjectRetention"))
                             object.enableObjectRetention = message.enableObjectRetention;
                         return object;
                     };
@@ -25134,19 +25134,19 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.parent != null && message.hasOwnProperty("parent"))
+                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                             if (!$util.isString(message.parent))
                                 return "parent: string expected";
-                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                        if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
                             if (!$util.isInteger(message.pageSize))
                                 return "pageSize: integer expected";
-                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                        if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                             if (!$util.isString(message.pageToken))
                                 return "pageToken: string expected";
-                        if (message.prefix != null && message.hasOwnProperty("prefix"))
+                        if (message.prefix != null && Object.hasOwnProperty.call(message, "prefix"))
                             if (!$util.isString(message.prefix))
                                 return "prefix: string expected";
-                        if (message.readMask != null && message.hasOwnProperty("readMask")) {
+                        if (message.readMask != null && Object.hasOwnProperty.call(message, "readMask")) {
                             properties._readMask = 1;
                             {
                                 var error = $root.google.protobuf.FieldMask.verify(message.readMask, long + 1);
@@ -25154,7 +25154,7 @@
                                     return "readMask." + error;
                             }
                         }
-                        if (message.returnPartialSuccess != null && message.hasOwnProperty("returnPartialSuccess"))
+                        if (message.returnPartialSuccess != null && Object.hasOwnProperty.call(message, "returnPartialSuccess"))
                             if (typeof message.returnPartialSuccess !== "boolean")
                                 return "returnPartialSuccess: boolean expected";
                         return null;
@@ -25220,20 +25220,20 @@
                             object.prefix = "";
                             object.returnPartialSuccess = false;
                         }
-                        if (message.parent != null && message.hasOwnProperty("parent"))
+                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                             object.parent = message.parent;
-                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                        if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
                             object.pageSize = message.pageSize;
-                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                        if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                             object.pageToken = message.pageToken;
-                        if (message.prefix != null && message.hasOwnProperty("prefix"))
+                        if (message.prefix != null && Object.hasOwnProperty.call(message, "prefix"))
                             object.prefix = message.prefix;
-                        if (message.readMask != null && message.hasOwnProperty("readMask")) {
+                        if (message.readMask != null && Object.hasOwnProperty.call(message, "readMask")) {
                             object.readMask = $root.google.protobuf.FieldMask.toObject(message.readMask, options, q + 1);
                             if (options.oneofs)
                                 object._readMask = "readMask";
                         }
-                        if (message.returnPartialSuccess != null && message.hasOwnProperty("returnPartialSuccess"))
+                        if (message.returnPartialSuccess != null && Object.hasOwnProperty.call(message, "returnPartialSuccess"))
                             object.returnPartialSuccess = message.returnPartialSuccess;
                         return object;
                     };
@@ -25450,7 +25450,7 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.buckets != null && message.hasOwnProperty("buckets")) {
+                        if (message.buckets != null && Object.hasOwnProperty.call(message, "buckets")) {
                             if (!Array.isArray(message.buckets))
                                 return "buckets: array expected";
                             for (var i = 0; i < message.buckets.length; ++i) {
@@ -25459,10 +25459,10 @@
                                     return "buckets." + error;
                             }
                         }
-                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                        if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                             if (!$util.isString(message.nextPageToken))
                                 return "nextPageToken: string expected";
-                        if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                        if (message.unreachable != null && Object.hasOwnProperty.call(message, "unreachable")) {
                             if (!Array.isArray(message.unreachable))
                                 return "unreachable: array expected";
                             for (var i = 0; i < message.unreachable.length; ++i)
@@ -25540,7 +25540,7 @@
                             for (var j = 0; j < message.buckets.length; ++j)
                                 object.buckets[j] = $root.google.storage.v2.Bucket.toObject(message.buckets[j], options, q + 1);
                         }
-                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                        if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                             object.nextPageToken = message.nextPageToken;
                         if (message.unreachable && message.unreachable.length) {
                             object.unreachable = [];
@@ -25739,10 +25739,10 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.bucket != null && message.hasOwnProperty("bucket"))
+                        if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                             if (!$util.isString(message.bucket))
                                 return "bucket: string expected";
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch"))
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch"))
                             if (!$util.isInteger(message.ifMetagenerationMatch) && !(message.ifMetagenerationMatch && $util.isInteger(message.ifMetagenerationMatch.low) && $util.isInteger(message.ifMetagenerationMatch.high)))
                                 return "ifMetagenerationMatch: integer|Long expected";
                         return null;
@@ -25805,9 +25805,9 @@
                             } else
                                 object.ifMetagenerationMatch = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                         }
-                        if (message.bucket != null && message.hasOwnProperty("bucket"))
+                        if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                             object.bucket = message.bucket;
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch"))
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch"))
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifMetagenerationMatch === "number")
@@ -26082,28 +26082,28 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.bucket != null && message.hasOwnProperty("bucket")) {
+                        if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket")) {
                             var error = $root.google.storage.v2.Bucket.verify(message.bucket, long + 1);
                             if (error)
                                 return "bucket." + error;
                         }
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                             properties._ifMetagenerationMatch = 1;
                             if (!$util.isInteger(message.ifMetagenerationMatch) && !(message.ifMetagenerationMatch && $util.isInteger(message.ifMetagenerationMatch.low) && $util.isInteger(message.ifMetagenerationMatch.high)))
                                 return "ifMetagenerationMatch: integer|Long expected";
                         }
-                        if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                        if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                             properties._ifMetagenerationNotMatch = 1;
                             if (!$util.isInteger(message.ifMetagenerationNotMatch) && !(message.ifMetagenerationNotMatch && $util.isInteger(message.ifMetagenerationNotMatch.low) && $util.isInteger(message.ifMetagenerationNotMatch.high)))
                                 return "ifMetagenerationNotMatch: integer|Long expected";
                         }
-                        if (message.predefinedAcl != null && message.hasOwnProperty("predefinedAcl"))
+                        if (message.predefinedAcl != null && Object.hasOwnProperty.call(message, "predefinedAcl"))
                             if (!$util.isString(message.predefinedAcl))
                                 return "predefinedAcl: string expected";
-                        if (message.predefinedDefaultObjectAcl != null && message.hasOwnProperty("predefinedDefaultObjectAcl"))
+                        if (message.predefinedDefaultObjectAcl != null && Object.hasOwnProperty.call(message, "predefinedDefaultObjectAcl"))
                             if (!$util.isString(message.predefinedDefaultObjectAcl))
                                 return "predefinedDefaultObjectAcl: string expected";
-                        if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                        if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask")) {
                             var error = $root.google.protobuf.FieldMask.verify(message.updateMask, long + 1);
                             if (error)
                                 return "updateMask." + error;
@@ -26187,9 +26187,9 @@
                             object.predefinedAcl = "";
                             object.predefinedDefaultObjectAcl = "";
                         }
-                        if (message.bucket != null && message.hasOwnProperty("bucket"))
+                        if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                             object.bucket = $root.google.storage.v2.Bucket.toObject(message.bucket, options, q + 1);
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifMetagenerationMatch === "number")
@@ -26199,7 +26199,7 @@
                             if (options.oneofs)
                                 object._ifMetagenerationMatch = "ifMetagenerationMatch";
                         }
-                        if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                        if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifMetagenerationNotMatch === "number")
@@ -26209,11 +26209,11 @@
                             if (options.oneofs)
                                 object._ifMetagenerationNotMatch = "ifMetagenerationNotMatch";
                         }
-                        if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                        if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
                             object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options, q + 1);
-                        if (message.predefinedAcl != null && message.hasOwnProperty("predefinedAcl"))
+                        if (message.predefinedAcl != null && Object.hasOwnProperty.call(message, "predefinedAcl"))
                             object.predefinedAcl = message.predefinedAcl;
-                        if (message.predefinedDefaultObjectAcl != null && message.hasOwnProperty("predefinedDefaultObjectAcl"))
+                        if (message.predefinedDefaultObjectAcl != null && Object.hasOwnProperty.call(message, "predefinedDefaultObjectAcl"))
                             object.predefinedDefaultObjectAcl = message.predefinedDefaultObjectAcl;
                         return object;
                     };
@@ -26538,12 +26538,12 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.destination != null && message.hasOwnProperty("destination")) {
+                        if (message.destination != null && Object.hasOwnProperty.call(message, "destination")) {
                             var error = $root.google.storage.v2.StorageObject.verify(message.destination, long + 1);
                             if (error)
                                 return "destination." + error;
                         }
-                        if (message.sourceObjects != null && message.hasOwnProperty("sourceObjects")) {
+                        if (message.sourceObjects != null && Object.hasOwnProperty.call(message, "sourceObjects")) {
                             if (!Array.isArray(message.sourceObjects))
                                 return "sourceObjects: array expected";
                             for (var i = 0; i < message.sourceObjects.length; ++i) {
@@ -26552,33 +26552,33 @@
                                     return "sourceObjects." + error;
                             }
                         }
-                        if (message.destinationPredefinedAcl != null && message.hasOwnProperty("destinationPredefinedAcl"))
+                        if (message.destinationPredefinedAcl != null && Object.hasOwnProperty.call(message, "destinationPredefinedAcl"))
                             if (!$util.isString(message.destinationPredefinedAcl))
                                 return "destinationPredefinedAcl: string expected";
-                        if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
+                        if (message.ifGenerationMatch != null && Object.hasOwnProperty.call(message, "ifGenerationMatch")) {
                             properties._ifGenerationMatch = 1;
                             if (!$util.isInteger(message.ifGenerationMatch) && !(message.ifGenerationMatch && $util.isInteger(message.ifGenerationMatch.low) && $util.isInteger(message.ifGenerationMatch.high)))
                                 return "ifGenerationMatch: integer|Long expected";
                         }
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                             properties._ifMetagenerationMatch = 1;
                             if (!$util.isInteger(message.ifMetagenerationMatch) && !(message.ifMetagenerationMatch && $util.isInteger(message.ifMetagenerationMatch.low) && $util.isInteger(message.ifMetagenerationMatch.high)))
                                 return "ifMetagenerationMatch: integer|Long expected";
                         }
-                        if (message.kmsKey != null && message.hasOwnProperty("kmsKey"))
+                        if (message.kmsKey != null && Object.hasOwnProperty.call(message, "kmsKey"))
                             if (!$util.isString(message.kmsKey))
                                 return "kmsKey: string expected";
-                        if (message.commonObjectRequestParams != null && message.hasOwnProperty("commonObjectRequestParams")) {
+                        if (message.commonObjectRequestParams != null && Object.hasOwnProperty.call(message, "commonObjectRequestParams")) {
                             var error = $root.google.storage.v2.CommonObjectRequestParams.verify(message.commonObjectRequestParams, long + 1);
                             if (error)
                                 return "commonObjectRequestParams." + error;
                         }
-                        if (message.objectChecksums != null && message.hasOwnProperty("objectChecksums")) {
+                        if (message.objectChecksums != null && Object.hasOwnProperty.call(message, "objectChecksums")) {
                             var error = $root.google.storage.v2.ObjectChecksums.verify(message.objectChecksums, long + 1);
                             if (error)
                                 return "objectChecksums." + error;
                         }
-                        if (message.deleteSourceObjects != null && message.hasOwnProperty("deleteSourceObjects")) {
+                        if (message.deleteSourceObjects != null && Object.hasOwnProperty.call(message, "deleteSourceObjects")) {
                             properties._deleteSourceObjects = 1;
                             if (typeof message.deleteSourceObjects !== "boolean")
                                 return "deleteSourceObjects: boolean expected";
@@ -26682,14 +26682,14 @@
                             object.destinationPredefinedAcl = "";
                             object.objectChecksums = null;
                         }
-                        if (message.destination != null && message.hasOwnProperty("destination"))
+                        if (message.destination != null && Object.hasOwnProperty.call(message, "destination"))
                             object.destination = $root.google.storage.v2.StorageObject.toObject(message.destination, options, q + 1);
                         if (message.sourceObjects && message.sourceObjects.length) {
                             object.sourceObjects = [];
                             for (var j = 0; j < message.sourceObjects.length; ++j)
                                 object.sourceObjects[j] = $root.google.storage.v2.ComposeObjectRequest.SourceObject.toObject(message.sourceObjects[j], options, q + 1);
                         }
-                        if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
+                        if (message.ifGenerationMatch != null && Object.hasOwnProperty.call(message, "ifGenerationMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifGenerationMatch = typeof message.ifGenerationMatch === "number" ? BigInt(message.ifGenerationMatch) : $util.Long.fromBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifGenerationMatch === "number")
@@ -26699,7 +26699,7 @@
                             if (options.oneofs)
                                 object._ifGenerationMatch = "ifGenerationMatch";
                         }
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifMetagenerationMatch === "number")
@@ -26709,15 +26709,15 @@
                             if (options.oneofs)
                                 object._ifMetagenerationMatch = "ifMetagenerationMatch";
                         }
-                        if (message.kmsKey != null && message.hasOwnProperty("kmsKey"))
+                        if (message.kmsKey != null && Object.hasOwnProperty.call(message, "kmsKey"))
                             object.kmsKey = message.kmsKey;
-                        if (message.commonObjectRequestParams != null && message.hasOwnProperty("commonObjectRequestParams"))
+                        if (message.commonObjectRequestParams != null && Object.hasOwnProperty.call(message, "commonObjectRequestParams"))
                             object.commonObjectRequestParams = $root.google.storage.v2.CommonObjectRequestParams.toObject(message.commonObjectRequestParams, options, q + 1);
-                        if (message.destinationPredefinedAcl != null && message.hasOwnProperty("destinationPredefinedAcl"))
+                        if (message.destinationPredefinedAcl != null && Object.hasOwnProperty.call(message, "destinationPredefinedAcl"))
                             object.destinationPredefinedAcl = message.destinationPredefinedAcl;
-                        if (message.objectChecksums != null && message.hasOwnProperty("objectChecksums"))
+                        if (message.objectChecksums != null && Object.hasOwnProperty.call(message, "objectChecksums"))
                             object.objectChecksums = $root.google.storage.v2.ObjectChecksums.toObject(message.objectChecksums, options, q + 1);
-                        if (message.deleteSourceObjects != null && message.hasOwnProperty("deleteSourceObjects")) {
+                        if (message.deleteSourceObjects != null && Object.hasOwnProperty.call(message, "deleteSourceObjects")) {
                             object.deleteSourceObjects = message.deleteSourceObjects;
                             if (options.oneofs)
                                 object._deleteSourceObjects = "deleteSourceObjects";
@@ -26926,13 +26926,13 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
-                            if (message.generation != null && message.hasOwnProperty("generation"))
+                            if (message.generation != null && Object.hasOwnProperty.call(message, "generation"))
                                 if (!$util.isInteger(message.generation) && !(message.generation && $util.isInteger(message.generation.low) && $util.isInteger(message.generation.high)))
                                     return "generation: integer|Long expected";
-                            if (message.objectPreconditions != null && message.hasOwnProperty("objectPreconditions")) {
+                            if (message.objectPreconditions != null && Object.hasOwnProperty.call(message, "objectPreconditions")) {
                                 var error = $root.google.storage.v2.ComposeObjectRequest.SourceObject.ObjectPreconditions.verify(message.objectPreconditions, long + 1);
                                 if (error)
                                     return "objectPreconditions." + error;
@@ -27003,16 +27003,16 @@
                                     object.generation = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                 object.objectPreconditions = null;
                             }
-                            if (message.name != null && message.hasOwnProperty("name"))
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 object.name = message.name;
-                            if (message.generation != null && message.hasOwnProperty("generation"))
+                            if (message.generation != null && Object.hasOwnProperty.call(message, "generation"))
                                 if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                     object.generation = typeof message.generation === "number" ? BigInt(message.generation) : $util.Long.fromBits(message.generation.low >>> 0, message.generation.high >>> 0, false).toBigInt();
                                 else if (typeof message.generation === "number")
                                     object.generation = options.longs === String ? String(message.generation) : message.generation;
                                 else
                                     object.generation = options.longs === String ? $util.Long.prototype.toString.call(message.generation) : options.longs === Number ? new $util.LongBits(message.generation.low >>> 0, message.generation.high >>> 0).toNumber() : message.generation;
-                            if (message.objectPreconditions != null && message.hasOwnProperty("objectPreconditions"))
+                            if (message.objectPreconditions != null && Object.hasOwnProperty.call(message, "objectPreconditions"))
                                 object.objectPreconditions = $root.google.storage.v2.ComposeObjectRequest.SourceObject.ObjectPreconditions.toObject(message.objectPreconditions, options, q + 1);
                             return object;
                         };
@@ -27198,7 +27198,7 @@
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
                                 var properties = {};
-                                if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
+                                if (message.ifGenerationMatch != null && Object.hasOwnProperty.call(message, "ifGenerationMatch")) {
                                     properties._ifGenerationMatch = 1;
                                     if (!$util.isInteger(message.ifGenerationMatch) && !(message.ifGenerationMatch && $util.isInteger(message.ifGenerationMatch.low) && $util.isInteger(message.ifGenerationMatch.high)))
                                         return "ifGenerationMatch: integer|Long expected";
@@ -27253,7 +27253,7 @@
                                 if (q > $util.recursionLimit)
                                     throw Error("max depth exceeded");
                                 var object = {};
-                                if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
+                                if (message.ifGenerationMatch != null && Object.hasOwnProperty.call(message, "ifGenerationMatch")) {
                                     if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                         object.ifGenerationMatch = typeof message.ifGenerationMatch === "number" ? BigInt(message.ifGenerationMatch) : $util.Long.fromBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0, false).toBigInt();
                                     else if (typeof message.ifGenerationMatch === "number")
@@ -27579,36 +27579,36 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.bucket != null && message.hasOwnProperty("bucket"))
+                        if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                             if (!$util.isString(message.bucket))
                                 return "bucket: string expected";
-                        if (message.object != null && message.hasOwnProperty("object"))
+                        if (message.object != null && Object.hasOwnProperty.call(message, "object"))
                             if (!$util.isString(message.object))
                                 return "object: string expected";
-                        if (message.generation != null && message.hasOwnProperty("generation"))
+                        if (message.generation != null && Object.hasOwnProperty.call(message, "generation"))
                             if (!$util.isInteger(message.generation) && !(message.generation && $util.isInteger(message.generation.low) && $util.isInteger(message.generation.high)))
                                 return "generation: integer|Long expected";
-                        if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
+                        if (message.ifGenerationMatch != null && Object.hasOwnProperty.call(message, "ifGenerationMatch")) {
                             properties._ifGenerationMatch = 1;
                             if (!$util.isInteger(message.ifGenerationMatch) && !(message.ifGenerationMatch && $util.isInteger(message.ifGenerationMatch.low) && $util.isInteger(message.ifGenerationMatch.high)))
                                 return "ifGenerationMatch: integer|Long expected";
                         }
-                        if (message.ifGenerationNotMatch != null && message.hasOwnProperty("ifGenerationNotMatch")) {
+                        if (message.ifGenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifGenerationNotMatch")) {
                             properties._ifGenerationNotMatch = 1;
                             if (!$util.isInteger(message.ifGenerationNotMatch) && !(message.ifGenerationNotMatch && $util.isInteger(message.ifGenerationNotMatch.low) && $util.isInteger(message.ifGenerationNotMatch.high)))
                                 return "ifGenerationNotMatch: integer|Long expected";
                         }
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                             properties._ifMetagenerationMatch = 1;
                             if (!$util.isInteger(message.ifMetagenerationMatch) && !(message.ifMetagenerationMatch && $util.isInteger(message.ifMetagenerationMatch.low) && $util.isInteger(message.ifMetagenerationMatch.high)))
                                 return "ifMetagenerationMatch: integer|Long expected";
                         }
-                        if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                        if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                             properties._ifMetagenerationNotMatch = 1;
                             if (!$util.isInteger(message.ifMetagenerationNotMatch) && !(message.ifMetagenerationNotMatch && $util.isInteger(message.ifMetagenerationNotMatch.low) && $util.isInteger(message.ifMetagenerationNotMatch.high)))
                                 return "ifMetagenerationNotMatch: integer|Long expected";
                         }
-                        if (message.commonObjectRequestParams != null && message.hasOwnProperty("commonObjectRequestParams")) {
+                        if (message.commonObjectRequestParams != null && Object.hasOwnProperty.call(message, "commonObjectRequestParams")) {
                             var error = $root.google.storage.v2.CommonObjectRequestParams.verify(message.commonObjectRequestParams, long + 1);
                             if (error)
                                 return "commonObjectRequestParams." + error;
@@ -27718,18 +27718,18 @@
                                 object.generation = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             object.commonObjectRequestParams = null;
                         }
-                        if (message.bucket != null && message.hasOwnProperty("bucket"))
+                        if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                             object.bucket = message.bucket;
-                        if (message.object != null && message.hasOwnProperty("object"))
+                        if (message.object != null && Object.hasOwnProperty.call(message, "object"))
                             object.object = message.object;
-                        if (message.generation != null && message.hasOwnProperty("generation"))
+                        if (message.generation != null && Object.hasOwnProperty.call(message, "generation"))
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.generation = typeof message.generation === "number" ? BigInt(message.generation) : $util.Long.fromBits(message.generation.low >>> 0, message.generation.high >>> 0, false).toBigInt();
                             else if (typeof message.generation === "number")
                                 object.generation = options.longs === String ? String(message.generation) : message.generation;
                             else
                                 object.generation = options.longs === String ? $util.Long.prototype.toString.call(message.generation) : options.longs === Number ? new $util.LongBits(message.generation.low >>> 0, message.generation.high >>> 0).toNumber() : message.generation;
-                        if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
+                        if (message.ifGenerationMatch != null && Object.hasOwnProperty.call(message, "ifGenerationMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifGenerationMatch = typeof message.ifGenerationMatch === "number" ? BigInt(message.ifGenerationMatch) : $util.Long.fromBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifGenerationMatch === "number")
@@ -27739,7 +27739,7 @@
                             if (options.oneofs)
                                 object._ifGenerationMatch = "ifGenerationMatch";
                         }
-                        if (message.ifGenerationNotMatch != null && message.hasOwnProperty("ifGenerationNotMatch")) {
+                        if (message.ifGenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifGenerationNotMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifGenerationNotMatch = typeof message.ifGenerationNotMatch === "number" ? BigInt(message.ifGenerationNotMatch) : $util.Long.fromBits(message.ifGenerationNotMatch.low >>> 0, message.ifGenerationNotMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifGenerationNotMatch === "number")
@@ -27749,7 +27749,7 @@
                             if (options.oneofs)
                                 object._ifGenerationNotMatch = "ifGenerationNotMatch";
                         }
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifMetagenerationMatch === "number")
@@ -27759,7 +27759,7 @@
                             if (options.oneofs)
                                 object._ifMetagenerationMatch = "ifMetagenerationMatch";
                         }
-                        if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                        if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifMetagenerationNotMatch === "number")
@@ -27769,7 +27769,7 @@
                             if (options.oneofs)
                                 object._ifMetagenerationNotMatch = "ifMetagenerationNotMatch";
                         }
-                        if (message.commonObjectRequestParams != null && message.hasOwnProperty("commonObjectRequestParams"))
+                        if (message.commonObjectRequestParams != null && Object.hasOwnProperty.call(message, "commonObjectRequestParams"))
                             object.commonObjectRequestParams = $root.google.storage.v2.CommonObjectRequestParams.toObject(message.commonObjectRequestParams, options, q + 1);
                         return object;
                     };
@@ -28117,44 +28117,44 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.bucket != null && message.hasOwnProperty("bucket"))
+                        if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                             if (!$util.isString(message.bucket))
                                 return "bucket: string expected";
-                        if (message.object != null && message.hasOwnProperty("object"))
+                        if (message.object != null && Object.hasOwnProperty.call(message, "object"))
                             if (!$util.isString(message.object))
                                 return "object: string expected";
-                        if (message.generation != null && message.hasOwnProperty("generation"))
+                        if (message.generation != null && Object.hasOwnProperty.call(message, "generation"))
                             if (!$util.isInteger(message.generation) && !(message.generation && $util.isInteger(message.generation.low) && $util.isInteger(message.generation.high)))
                                 return "generation: integer|Long expected";
-                        if (message.restoreToken != null && message.hasOwnProperty("restoreToken"))
+                        if (message.restoreToken != null && Object.hasOwnProperty.call(message, "restoreToken"))
                             if (!$util.isString(message.restoreToken))
                                 return "restoreToken: string expected";
-                        if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
+                        if (message.ifGenerationMatch != null && Object.hasOwnProperty.call(message, "ifGenerationMatch")) {
                             properties._ifGenerationMatch = 1;
                             if (!$util.isInteger(message.ifGenerationMatch) && !(message.ifGenerationMatch && $util.isInteger(message.ifGenerationMatch.low) && $util.isInteger(message.ifGenerationMatch.high)))
                                 return "ifGenerationMatch: integer|Long expected";
                         }
-                        if (message.ifGenerationNotMatch != null && message.hasOwnProperty("ifGenerationNotMatch")) {
+                        if (message.ifGenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifGenerationNotMatch")) {
                             properties._ifGenerationNotMatch = 1;
                             if (!$util.isInteger(message.ifGenerationNotMatch) && !(message.ifGenerationNotMatch && $util.isInteger(message.ifGenerationNotMatch.low) && $util.isInteger(message.ifGenerationNotMatch.high)))
                                 return "ifGenerationNotMatch: integer|Long expected";
                         }
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                             properties._ifMetagenerationMatch = 1;
                             if (!$util.isInteger(message.ifMetagenerationMatch) && !(message.ifMetagenerationMatch && $util.isInteger(message.ifMetagenerationMatch.low) && $util.isInteger(message.ifMetagenerationMatch.high)))
                                 return "ifMetagenerationMatch: integer|Long expected";
                         }
-                        if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                        if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                             properties._ifMetagenerationNotMatch = 1;
                             if (!$util.isInteger(message.ifMetagenerationNotMatch) && !(message.ifMetagenerationNotMatch && $util.isInteger(message.ifMetagenerationNotMatch.low) && $util.isInteger(message.ifMetagenerationNotMatch.high)))
                                 return "ifMetagenerationNotMatch: integer|Long expected";
                         }
-                        if (message.copySourceAcl != null && message.hasOwnProperty("copySourceAcl")) {
+                        if (message.copySourceAcl != null && Object.hasOwnProperty.call(message, "copySourceAcl")) {
                             properties._copySourceAcl = 1;
                             if (typeof message.copySourceAcl !== "boolean")
                                 return "copySourceAcl: boolean expected";
                         }
-                        if (message.commonObjectRequestParams != null && message.hasOwnProperty("commonObjectRequestParams")) {
+                        if (message.commonObjectRequestParams != null && Object.hasOwnProperty.call(message, "commonObjectRequestParams")) {
                             var error = $root.google.storage.v2.CommonObjectRequestParams.verify(message.commonObjectRequestParams, long + 1);
                             if (error)
                                 return "commonObjectRequestParams." + error;
@@ -28269,18 +28269,18 @@
                             object.commonObjectRequestParams = null;
                             object.restoreToken = "";
                         }
-                        if (message.bucket != null && message.hasOwnProperty("bucket"))
+                        if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                             object.bucket = message.bucket;
-                        if (message.object != null && message.hasOwnProperty("object"))
+                        if (message.object != null && Object.hasOwnProperty.call(message, "object"))
                             object.object = message.object;
-                        if (message.generation != null && message.hasOwnProperty("generation"))
+                        if (message.generation != null && Object.hasOwnProperty.call(message, "generation"))
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.generation = typeof message.generation === "number" ? BigInt(message.generation) : $util.Long.fromBits(message.generation.low >>> 0, message.generation.high >>> 0, false).toBigInt();
                             else if (typeof message.generation === "number")
                                 object.generation = options.longs === String ? String(message.generation) : message.generation;
                             else
                                 object.generation = options.longs === String ? $util.Long.prototype.toString.call(message.generation) : options.longs === Number ? new $util.LongBits(message.generation.low >>> 0, message.generation.high >>> 0).toNumber() : message.generation;
-                        if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
+                        if (message.ifGenerationMatch != null && Object.hasOwnProperty.call(message, "ifGenerationMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifGenerationMatch = typeof message.ifGenerationMatch === "number" ? BigInt(message.ifGenerationMatch) : $util.Long.fromBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifGenerationMatch === "number")
@@ -28290,7 +28290,7 @@
                             if (options.oneofs)
                                 object._ifGenerationMatch = "ifGenerationMatch";
                         }
-                        if (message.ifGenerationNotMatch != null && message.hasOwnProperty("ifGenerationNotMatch")) {
+                        if (message.ifGenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifGenerationNotMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifGenerationNotMatch = typeof message.ifGenerationNotMatch === "number" ? BigInt(message.ifGenerationNotMatch) : $util.Long.fromBits(message.ifGenerationNotMatch.low >>> 0, message.ifGenerationNotMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifGenerationNotMatch === "number")
@@ -28300,7 +28300,7 @@
                             if (options.oneofs)
                                 object._ifGenerationNotMatch = "ifGenerationNotMatch";
                         }
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifMetagenerationMatch === "number")
@@ -28310,7 +28310,7 @@
                             if (options.oneofs)
                                 object._ifMetagenerationMatch = "ifMetagenerationMatch";
                         }
-                        if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                        if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifMetagenerationNotMatch === "number")
@@ -28320,14 +28320,14 @@
                             if (options.oneofs)
                                 object._ifMetagenerationNotMatch = "ifMetagenerationNotMatch";
                         }
-                        if (message.commonObjectRequestParams != null && message.hasOwnProperty("commonObjectRequestParams"))
+                        if (message.commonObjectRequestParams != null && Object.hasOwnProperty.call(message, "commonObjectRequestParams"))
                             object.commonObjectRequestParams = $root.google.storage.v2.CommonObjectRequestParams.toObject(message.commonObjectRequestParams, options, q + 1);
-                        if (message.copySourceAcl != null && message.hasOwnProperty("copySourceAcl")) {
+                        if (message.copySourceAcl != null && Object.hasOwnProperty.call(message, "copySourceAcl")) {
                             object.copySourceAcl = message.copySourceAcl;
                             if (options.oneofs)
                                 object._copySourceAcl = "copySourceAcl";
                         }
-                        if (message.restoreToken != null && message.hasOwnProperty("restoreToken"))
+                        if (message.restoreToken != null && Object.hasOwnProperty.call(message, "restoreToken"))
                             object.restoreToken = message.restoreToken;
                         return object;
                     };
@@ -28506,7 +28506,7 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.uploadId != null && message.hasOwnProperty("uploadId"))
+                        if (message.uploadId != null && Object.hasOwnProperty.call(message, "uploadId"))
                             if (!$util.isString(message.uploadId))
                                 return "uploadId: string expected";
                         return null;
@@ -28554,7 +28554,7 @@
                         var object = {};
                         if (options.defaults)
                             object.uploadId = "";
-                        if (message.uploadId != null && message.hasOwnProperty("uploadId"))
+                        if (message.uploadId != null && Object.hasOwnProperty.call(message, "uploadId"))
                             object.uploadId = message.uploadId;
                         return object;
                     };
@@ -28732,12 +28732,6 @@
                     CancelResumableWriteResponse.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.CancelResumableWriteResponse)
                             return object;
-                        if (!$util.isObject(object))
-                            throw TypeError(".google.storage.v2.CancelResumableWriteResponse: object expected");
-                        if (long === undefined)
-                            long = 0;
-                        if (long > $util.recursionLimit)
-                            throw Error("maximum nesting depth exceeded");
                         return new $root.google.storage.v2.CancelResumableWriteResponse();
                     };
     
@@ -29112,47 +29106,47 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.bucket != null && message.hasOwnProperty("bucket"))
+                        if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                             if (!$util.isString(message.bucket))
                                 return "bucket: string expected";
-                        if (message.object != null && message.hasOwnProperty("object"))
+                        if (message.object != null && Object.hasOwnProperty.call(message, "object"))
                             if (!$util.isString(message.object))
                                 return "object: string expected";
-                        if (message.generation != null && message.hasOwnProperty("generation"))
+                        if (message.generation != null && Object.hasOwnProperty.call(message, "generation"))
                             if (!$util.isInteger(message.generation) && !(message.generation && $util.isInteger(message.generation.low) && $util.isInteger(message.generation.high)))
                                 return "generation: integer|Long expected";
-                        if (message.readOffset != null && message.hasOwnProperty("readOffset"))
+                        if (message.readOffset != null && Object.hasOwnProperty.call(message, "readOffset"))
                             if (!$util.isInteger(message.readOffset) && !(message.readOffset && $util.isInteger(message.readOffset.low) && $util.isInteger(message.readOffset.high)))
                                 return "readOffset: integer|Long expected";
-                        if (message.readLimit != null && message.hasOwnProperty("readLimit"))
+                        if (message.readLimit != null && Object.hasOwnProperty.call(message, "readLimit"))
                             if (!$util.isInteger(message.readLimit) && !(message.readLimit && $util.isInteger(message.readLimit.low) && $util.isInteger(message.readLimit.high)))
                                 return "readLimit: integer|Long expected";
-                        if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
+                        if (message.ifGenerationMatch != null && Object.hasOwnProperty.call(message, "ifGenerationMatch")) {
                             properties._ifGenerationMatch = 1;
                             if (!$util.isInteger(message.ifGenerationMatch) && !(message.ifGenerationMatch && $util.isInteger(message.ifGenerationMatch.low) && $util.isInteger(message.ifGenerationMatch.high)))
                                 return "ifGenerationMatch: integer|Long expected";
                         }
-                        if (message.ifGenerationNotMatch != null && message.hasOwnProperty("ifGenerationNotMatch")) {
+                        if (message.ifGenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifGenerationNotMatch")) {
                             properties._ifGenerationNotMatch = 1;
                             if (!$util.isInteger(message.ifGenerationNotMatch) && !(message.ifGenerationNotMatch && $util.isInteger(message.ifGenerationNotMatch.low) && $util.isInteger(message.ifGenerationNotMatch.high)))
                                 return "ifGenerationNotMatch: integer|Long expected";
                         }
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                             properties._ifMetagenerationMatch = 1;
                             if (!$util.isInteger(message.ifMetagenerationMatch) && !(message.ifMetagenerationMatch && $util.isInteger(message.ifMetagenerationMatch.low) && $util.isInteger(message.ifMetagenerationMatch.high)))
                                 return "ifMetagenerationMatch: integer|Long expected";
                         }
-                        if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                        if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                             properties._ifMetagenerationNotMatch = 1;
                             if (!$util.isInteger(message.ifMetagenerationNotMatch) && !(message.ifMetagenerationNotMatch && $util.isInteger(message.ifMetagenerationNotMatch.low) && $util.isInteger(message.ifMetagenerationNotMatch.high)))
                                 return "ifMetagenerationNotMatch: integer|Long expected";
                         }
-                        if (message.commonObjectRequestParams != null && message.hasOwnProperty("commonObjectRequestParams")) {
+                        if (message.commonObjectRequestParams != null && Object.hasOwnProperty.call(message, "commonObjectRequestParams")) {
                             var error = $root.google.storage.v2.CommonObjectRequestParams.verify(message.commonObjectRequestParams, long + 1);
                             if (error)
                                 return "commonObjectRequestParams." + error;
                         }
-                        if (message.readMask != null && message.hasOwnProperty("readMask")) {
+                        if (message.readMask != null && Object.hasOwnProperty.call(message, "readMask")) {
                             properties._readMask = 1;
                             {
                                 var error = $root.google.protobuf.FieldMask.verify(message.readMask, long + 1);
@@ -29298,32 +29292,32 @@
                                 object.readLimit = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             object.commonObjectRequestParams = null;
                         }
-                        if (message.bucket != null && message.hasOwnProperty("bucket"))
+                        if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                             object.bucket = message.bucket;
-                        if (message.object != null && message.hasOwnProperty("object"))
+                        if (message.object != null && Object.hasOwnProperty.call(message, "object"))
                             object.object = message.object;
-                        if (message.generation != null && message.hasOwnProperty("generation"))
+                        if (message.generation != null && Object.hasOwnProperty.call(message, "generation"))
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.generation = typeof message.generation === "number" ? BigInt(message.generation) : $util.Long.fromBits(message.generation.low >>> 0, message.generation.high >>> 0, false).toBigInt();
                             else if (typeof message.generation === "number")
                                 object.generation = options.longs === String ? String(message.generation) : message.generation;
                             else
                                 object.generation = options.longs === String ? $util.Long.prototype.toString.call(message.generation) : options.longs === Number ? new $util.LongBits(message.generation.low >>> 0, message.generation.high >>> 0).toNumber() : message.generation;
-                        if (message.readOffset != null && message.hasOwnProperty("readOffset"))
+                        if (message.readOffset != null && Object.hasOwnProperty.call(message, "readOffset"))
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.readOffset = typeof message.readOffset === "number" ? BigInt(message.readOffset) : $util.Long.fromBits(message.readOffset.low >>> 0, message.readOffset.high >>> 0, false).toBigInt();
                             else if (typeof message.readOffset === "number")
                                 object.readOffset = options.longs === String ? String(message.readOffset) : message.readOffset;
                             else
                                 object.readOffset = options.longs === String ? $util.Long.prototype.toString.call(message.readOffset) : options.longs === Number ? new $util.LongBits(message.readOffset.low >>> 0, message.readOffset.high >>> 0).toNumber() : message.readOffset;
-                        if (message.readLimit != null && message.hasOwnProperty("readLimit"))
+                        if (message.readLimit != null && Object.hasOwnProperty.call(message, "readLimit"))
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.readLimit = typeof message.readLimit === "number" ? BigInt(message.readLimit) : $util.Long.fromBits(message.readLimit.low >>> 0, message.readLimit.high >>> 0, false).toBigInt();
                             else if (typeof message.readLimit === "number")
                                 object.readLimit = options.longs === String ? String(message.readLimit) : message.readLimit;
                             else
                                 object.readLimit = options.longs === String ? $util.Long.prototype.toString.call(message.readLimit) : options.longs === Number ? new $util.LongBits(message.readLimit.low >>> 0, message.readLimit.high >>> 0).toNumber() : message.readLimit;
-                        if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
+                        if (message.ifGenerationMatch != null && Object.hasOwnProperty.call(message, "ifGenerationMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifGenerationMatch = typeof message.ifGenerationMatch === "number" ? BigInt(message.ifGenerationMatch) : $util.Long.fromBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifGenerationMatch === "number")
@@ -29333,7 +29327,7 @@
                             if (options.oneofs)
                                 object._ifGenerationMatch = "ifGenerationMatch";
                         }
-                        if (message.ifGenerationNotMatch != null && message.hasOwnProperty("ifGenerationNotMatch")) {
+                        if (message.ifGenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifGenerationNotMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifGenerationNotMatch = typeof message.ifGenerationNotMatch === "number" ? BigInt(message.ifGenerationNotMatch) : $util.Long.fromBits(message.ifGenerationNotMatch.low >>> 0, message.ifGenerationNotMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifGenerationNotMatch === "number")
@@ -29343,7 +29337,7 @@
                             if (options.oneofs)
                                 object._ifGenerationNotMatch = "ifGenerationNotMatch";
                         }
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifMetagenerationMatch === "number")
@@ -29353,7 +29347,7 @@
                             if (options.oneofs)
                                 object._ifMetagenerationMatch = "ifMetagenerationMatch";
                         }
-                        if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                        if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifMetagenerationNotMatch === "number")
@@ -29363,9 +29357,9 @@
                             if (options.oneofs)
                                 object._ifMetagenerationNotMatch = "ifMetagenerationNotMatch";
                         }
-                        if (message.commonObjectRequestParams != null && message.hasOwnProperty("commonObjectRequestParams"))
+                        if (message.commonObjectRequestParams != null && Object.hasOwnProperty.call(message, "commonObjectRequestParams"))
                             object.commonObjectRequestParams = $root.google.storage.v2.CommonObjectRequestParams.toObject(message.commonObjectRequestParams, options, q + 1);
-                        if (message.readMask != null && message.hasOwnProperty("readMask")) {
+                        if (message.readMask != null && Object.hasOwnProperty.call(message, "readMask")) {
                             object.readMask = $root.google.protobuf.FieldMask.toObject(message.readMask, options, q + 1);
                             if (options.oneofs)
                                 object._readMask = "readMask";
@@ -29737,46 +29731,46 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.bucket != null && message.hasOwnProperty("bucket"))
+                        if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                             if (!$util.isString(message.bucket))
                                 return "bucket: string expected";
-                        if (message.object != null && message.hasOwnProperty("object"))
+                        if (message.object != null && Object.hasOwnProperty.call(message, "object"))
                             if (!$util.isString(message.object))
                                 return "object: string expected";
-                        if (message.generation != null && message.hasOwnProperty("generation"))
+                        if (message.generation != null && Object.hasOwnProperty.call(message, "generation"))
                             if (!$util.isInteger(message.generation) && !(message.generation && $util.isInteger(message.generation.low) && $util.isInteger(message.generation.high)))
                                 return "generation: integer|Long expected";
-                        if (message.softDeleted != null && message.hasOwnProperty("softDeleted")) {
+                        if (message.softDeleted != null && Object.hasOwnProperty.call(message, "softDeleted")) {
                             properties._softDeleted = 1;
                             if (typeof message.softDeleted !== "boolean")
                                 return "softDeleted: boolean expected";
                         }
-                        if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
+                        if (message.ifGenerationMatch != null && Object.hasOwnProperty.call(message, "ifGenerationMatch")) {
                             properties._ifGenerationMatch = 1;
                             if (!$util.isInteger(message.ifGenerationMatch) && !(message.ifGenerationMatch && $util.isInteger(message.ifGenerationMatch.low) && $util.isInteger(message.ifGenerationMatch.high)))
                                 return "ifGenerationMatch: integer|Long expected";
                         }
-                        if (message.ifGenerationNotMatch != null && message.hasOwnProperty("ifGenerationNotMatch")) {
+                        if (message.ifGenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifGenerationNotMatch")) {
                             properties._ifGenerationNotMatch = 1;
                             if (!$util.isInteger(message.ifGenerationNotMatch) && !(message.ifGenerationNotMatch && $util.isInteger(message.ifGenerationNotMatch.low) && $util.isInteger(message.ifGenerationNotMatch.high)))
                                 return "ifGenerationNotMatch: integer|Long expected";
                         }
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                             properties._ifMetagenerationMatch = 1;
                             if (!$util.isInteger(message.ifMetagenerationMatch) && !(message.ifMetagenerationMatch && $util.isInteger(message.ifMetagenerationMatch.low) && $util.isInteger(message.ifMetagenerationMatch.high)))
                                 return "ifMetagenerationMatch: integer|Long expected";
                         }
-                        if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                        if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                             properties._ifMetagenerationNotMatch = 1;
                             if (!$util.isInteger(message.ifMetagenerationNotMatch) && !(message.ifMetagenerationNotMatch && $util.isInteger(message.ifMetagenerationNotMatch.low) && $util.isInteger(message.ifMetagenerationNotMatch.high)))
                                 return "ifMetagenerationNotMatch: integer|Long expected";
                         }
-                        if (message.commonObjectRequestParams != null && message.hasOwnProperty("commonObjectRequestParams")) {
+                        if (message.commonObjectRequestParams != null && Object.hasOwnProperty.call(message, "commonObjectRequestParams")) {
                             var error = $root.google.storage.v2.CommonObjectRequestParams.verify(message.commonObjectRequestParams, long + 1);
                             if (error)
                                 return "commonObjectRequestParams." + error;
                         }
-                        if (message.readMask != null && message.hasOwnProperty("readMask")) {
+                        if (message.readMask != null && Object.hasOwnProperty.call(message, "readMask")) {
                             properties._readMask = 1;
                             {
                                 var error = $root.google.protobuf.FieldMask.verify(message.readMask, long + 1);
@@ -29784,7 +29778,7 @@
                                     return "readMask." + error;
                             }
                         }
-                        if (message.restoreToken != null && message.hasOwnProperty("restoreToken"))
+                        if (message.restoreToken != null && Object.hasOwnProperty.call(message, "restoreToken"))
                             if (!$util.isString(message.restoreToken))
                                 return "restoreToken: string expected";
                         return null;
@@ -29902,18 +29896,18 @@
                             object.commonObjectRequestParams = null;
                             object.restoreToken = "";
                         }
-                        if (message.bucket != null && message.hasOwnProperty("bucket"))
+                        if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                             object.bucket = message.bucket;
-                        if (message.object != null && message.hasOwnProperty("object"))
+                        if (message.object != null && Object.hasOwnProperty.call(message, "object"))
                             object.object = message.object;
-                        if (message.generation != null && message.hasOwnProperty("generation"))
+                        if (message.generation != null && Object.hasOwnProperty.call(message, "generation"))
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.generation = typeof message.generation === "number" ? BigInt(message.generation) : $util.Long.fromBits(message.generation.low >>> 0, message.generation.high >>> 0, false).toBigInt();
                             else if (typeof message.generation === "number")
                                 object.generation = options.longs === String ? String(message.generation) : message.generation;
                             else
                                 object.generation = options.longs === String ? $util.Long.prototype.toString.call(message.generation) : options.longs === Number ? new $util.LongBits(message.generation.low >>> 0, message.generation.high >>> 0).toNumber() : message.generation;
-                        if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
+                        if (message.ifGenerationMatch != null && Object.hasOwnProperty.call(message, "ifGenerationMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifGenerationMatch = typeof message.ifGenerationMatch === "number" ? BigInt(message.ifGenerationMatch) : $util.Long.fromBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifGenerationMatch === "number")
@@ -29923,7 +29917,7 @@
                             if (options.oneofs)
                                 object._ifGenerationMatch = "ifGenerationMatch";
                         }
-                        if (message.ifGenerationNotMatch != null && message.hasOwnProperty("ifGenerationNotMatch")) {
+                        if (message.ifGenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifGenerationNotMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifGenerationNotMatch = typeof message.ifGenerationNotMatch === "number" ? BigInt(message.ifGenerationNotMatch) : $util.Long.fromBits(message.ifGenerationNotMatch.low >>> 0, message.ifGenerationNotMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifGenerationNotMatch === "number")
@@ -29933,7 +29927,7 @@
                             if (options.oneofs)
                                 object._ifGenerationNotMatch = "ifGenerationNotMatch";
                         }
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifMetagenerationMatch === "number")
@@ -29943,7 +29937,7 @@
                             if (options.oneofs)
                                 object._ifMetagenerationMatch = "ifMetagenerationMatch";
                         }
-                        if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                        if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifMetagenerationNotMatch === "number")
@@ -29953,19 +29947,19 @@
                             if (options.oneofs)
                                 object._ifMetagenerationNotMatch = "ifMetagenerationNotMatch";
                         }
-                        if (message.commonObjectRequestParams != null && message.hasOwnProperty("commonObjectRequestParams"))
+                        if (message.commonObjectRequestParams != null && Object.hasOwnProperty.call(message, "commonObjectRequestParams"))
                             object.commonObjectRequestParams = $root.google.storage.v2.CommonObjectRequestParams.toObject(message.commonObjectRequestParams, options, q + 1);
-                        if (message.readMask != null && message.hasOwnProperty("readMask")) {
+                        if (message.readMask != null && Object.hasOwnProperty.call(message, "readMask")) {
                             object.readMask = $root.google.protobuf.FieldMask.toObject(message.readMask, options, q + 1);
                             if (options.oneofs)
                                 object._readMask = "readMask";
                         }
-                        if (message.softDeleted != null && message.hasOwnProperty("softDeleted")) {
+                        if (message.softDeleted != null && Object.hasOwnProperty.call(message, "softDeleted")) {
                             object.softDeleted = message.softDeleted;
                             if (options.oneofs)
                                 object._softDeleted = "softDeleted";
                         }
-                        if (message.restoreToken != null && message.hasOwnProperty("restoreToken"))
+                        if (message.restoreToken != null && Object.hasOwnProperty.call(message, "restoreToken"))
                             object.restoreToken = message.restoreToken;
                         return object;
                     };
@@ -30189,22 +30183,22 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.checksummedData != null && message.hasOwnProperty("checksummedData")) {
+                        if (message.checksummedData != null && Object.hasOwnProperty.call(message, "checksummedData")) {
                             var error = $root.google.storage.v2.ChecksummedData.verify(message.checksummedData, long + 1);
                             if (error)
                                 return "checksummedData." + error;
                         }
-                        if (message.objectChecksums != null && message.hasOwnProperty("objectChecksums")) {
+                        if (message.objectChecksums != null && Object.hasOwnProperty.call(message, "objectChecksums")) {
                             var error = $root.google.storage.v2.ObjectChecksums.verify(message.objectChecksums, long + 1);
                             if (error)
                                 return "objectChecksums." + error;
                         }
-                        if (message.contentRange != null && message.hasOwnProperty("contentRange")) {
+                        if (message.contentRange != null && Object.hasOwnProperty.call(message, "contentRange")) {
                             var error = $root.google.storage.v2.ContentRange.verify(message.contentRange, long + 1);
                             if (error)
                                 return "contentRange." + error;
                         }
-                        if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                        if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata")) {
                             var error = $root.google.storage.v2.StorageObject.verify(message.metadata, long + 1);
                             if (error)
                                 return "metadata." + error;
@@ -30276,13 +30270,13 @@
                             object.contentRange = null;
                             object.metadata = null;
                         }
-                        if (message.checksummedData != null && message.hasOwnProperty("checksummedData"))
+                        if (message.checksummedData != null && Object.hasOwnProperty.call(message, "checksummedData"))
                             object.checksummedData = $root.google.storage.v2.ChecksummedData.toObject(message.checksummedData, options, q + 1);
-                        if (message.objectChecksums != null && message.hasOwnProperty("objectChecksums"))
+                        if (message.objectChecksums != null && Object.hasOwnProperty.call(message, "objectChecksums"))
                             object.objectChecksums = $root.google.storage.v2.ObjectChecksums.toObject(message.objectChecksums, options, q + 1);
-                        if (message.contentRange != null && message.hasOwnProperty("contentRange"))
+                        if (message.contentRange != null && Object.hasOwnProperty.call(message, "contentRange"))
                             object.contentRange = $root.google.storage.v2.ContentRange.toObject(message.contentRange, options, q + 1);
-                        if (message.metadata != null && message.hasOwnProperty("metadata"))
+                        if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
                             object.metadata = $root.google.storage.v2.StorageObject.toObject(message.metadata, options, q + 1);
                         return object;
                     };
@@ -30657,41 +30651,41 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.bucket != null && message.hasOwnProperty("bucket"))
+                        if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                             if (!$util.isString(message.bucket))
                                 return "bucket: string expected";
-                        if (message.object != null && message.hasOwnProperty("object"))
+                        if (message.object != null && Object.hasOwnProperty.call(message, "object"))
                             if (!$util.isString(message.object))
                                 return "object: string expected";
-                        if (message.generation != null && message.hasOwnProperty("generation"))
+                        if (message.generation != null && Object.hasOwnProperty.call(message, "generation"))
                             if (!$util.isInteger(message.generation) && !(message.generation && $util.isInteger(message.generation.low) && $util.isInteger(message.generation.high)))
                                 return "generation: integer|Long expected";
-                        if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
+                        if (message.ifGenerationMatch != null && Object.hasOwnProperty.call(message, "ifGenerationMatch")) {
                             properties._ifGenerationMatch = 1;
                             if (!$util.isInteger(message.ifGenerationMatch) && !(message.ifGenerationMatch && $util.isInteger(message.ifGenerationMatch.low) && $util.isInteger(message.ifGenerationMatch.high)))
                                 return "ifGenerationMatch: integer|Long expected";
                         }
-                        if (message.ifGenerationNotMatch != null && message.hasOwnProperty("ifGenerationNotMatch")) {
+                        if (message.ifGenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifGenerationNotMatch")) {
                             properties._ifGenerationNotMatch = 1;
                             if (!$util.isInteger(message.ifGenerationNotMatch) && !(message.ifGenerationNotMatch && $util.isInteger(message.ifGenerationNotMatch.low) && $util.isInteger(message.ifGenerationNotMatch.high)))
                                 return "ifGenerationNotMatch: integer|Long expected";
                         }
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                             properties._ifMetagenerationMatch = 1;
                             if (!$util.isInteger(message.ifMetagenerationMatch) && !(message.ifMetagenerationMatch && $util.isInteger(message.ifMetagenerationMatch.low) && $util.isInteger(message.ifMetagenerationMatch.high)))
                                 return "ifMetagenerationMatch: integer|Long expected";
                         }
-                        if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                        if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                             properties._ifMetagenerationNotMatch = 1;
                             if (!$util.isInteger(message.ifMetagenerationNotMatch) && !(message.ifMetagenerationNotMatch && $util.isInteger(message.ifMetagenerationNotMatch.low) && $util.isInteger(message.ifMetagenerationNotMatch.high)))
                                 return "ifMetagenerationNotMatch: integer|Long expected";
                         }
-                        if (message.commonObjectRequestParams != null && message.hasOwnProperty("commonObjectRequestParams")) {
+                        if (message.commonObjectRequestParams != null && Object.hasOwnProperty.call(message, "commonObjectRequestParams")) {
                             var error = $root.google.storage.v2.CommonObjectRequestParams.verify(message.commonObjectRequestParams, long + 1);
                             if (error)
                                 return "commonObjectRequestParams." + error;
                         }
-                        if (message.readMask != null && message.hasOwnProperty("readMask")) {
+                        if (message.readMask != null && Object.hasOwnProperty.call(message, "readMask")) {
                             properties._readMask = 1;
                             {
                                 var error = $root.google.protobuf.FieldMask.verify(message.readMask, long + 1);
@@ -30699,7 +30693,7 @@
                                     return "readMask." + error;
                             }
                         }
-                        if (message.readHandle != null && message.hasOwnProperty("readHandle")) {
+                        if (message.readHandle != null && Object.hasOwnProperty.call(message, "readHandle")) {
                             properties._readHandle = 1;
                             {
                                 var error = $root.google.storage.v2.BidiReadHandle.verify(message.readHandle, long + 1);
@@ -30707,7 +30701,7 @@
                                     return "readHandle." + error;
                             }
                         }
-                        if (message.routingToken != null && message.hasOwnProperty("routingToken")) {
+                        if (message.routingToken != null && Object.hasOwnProperty.call(message, "routingToken")) {
                             properties._routingToken = 1;
                             if (!$util.isString(message.routingToken))
                                 return "routingToken: string expected";
@@ -30829,18 +30823,18 @@
                                 object.generation = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             object.commonObjectRequestParams = null;
                         }
-                        if (message.bucket != null && message.hasOwnProperty("bucket"))
+                        if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                             object.bucket = message.bucket;
-                        if (message.object != null && message.hasOwnProperty("object"))
+                        if (message.object != null && Object.hasOwnProperty.call(message, "object"))
                             object.object = message.object;
-                        if (message.generation != null && message.hasOwnProperty("generation"))
+                        if (message.generation != null && Object.hasOwnProperty.call(message, "generation"))
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.generation = typeof message.generation === "number" ? BigInt(message.generation) : $util.Long.fromBits(message.generation.low >>> 0, message.generation.high >>> 0, false).toBigInt();
                             else if (typeof message.generation === "number")
                                 object.generation = options.longs === String ? String(message.generation) : message.generation;
                             else
                                 object.generation = options.longs === String ? $util.Long.prototype.toString.call(message.generation) : options.longs === Number ? new $util.LongBits(message.generation.low >>> 0, message.generation.high >>> 0).toNumber() : message.generation;
-                        if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
+                        if (message.ifGenerationMatch != null && Object.hasOwnProperty.call(message, "ifGenerationMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifGenerationMatch = typeof message.ifGenerationMatch === "number" ? BigInt(message.ifGenerationMatch) : $util.Long.fromBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifGenerationMatch === "number")
@@ -30850,7 +30844,7 @@
                             if (options.oneofs)
                                 object._ifGenerationMatch = "ifGenerationMatch";
                         }
-                        if (message.ifGenerationNotMatch != null && message.hasOwnProperty("ifGenerationNotMatch")) {
+                        if (message.ifGenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifGenerationNotMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifGenerationNotMatch = typeof message.ifGenerationNotMatch === "number" ? BigInt(message.ifGenerationNotMatch) : $util.Long.fromBits(message.ifGenerationNotMatch.low >>> 0, message.ifGenerationNotMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifGenerationNotMatch === "number")
@@ -30860,7 +30854,7 @@
                             if (options.oneofs)
                                 object._ifGenerationNotMatch = "ifGenerationNotMatch";
                         }
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifMetagenerationMatch === "number")
@@ -30870,7 +30864,7 @@
                             if (options.oneofs)
                                 object._ifMetagenerationMatch = "ifMetagenerationMatch";
                         }
-                        if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                        if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifMetagenerationNotMatch === "number")
@@ -30880,19 +30874,19 @@
                             if (options.oneofs)
                                 object._ifMetagenerationNotMatch = "ifMetagenerationNotMatch";
                         }
-                        if (message.commonObjectRequestParams != null && message.hasOwnProperty("commonObjectRequestParams"))
+                        if (message.commonObjectRequestParams != null && Object.hasOwnProperty.call(message, "commonObjectRequestParams"))
                             object.commonObjectRequestParams = $root.google.storage.v2.CommonObjectRequestParams.toObject(message.commonObjectRequestParams, options, q + 1);
-                        if (message.readMask != null && message.hasOwnProperty("readMask")) {
+                        if (message.readMask != null && Object.hasOwnProperty.call(message, "readMask")) {
                             object.readMask = $root.google.protobuf.FieldMask.toObject(message.readMask, options, q + 1);
                             if (options.oneofs)
                                 object._readMask = "readMask";
                         }
-                        if (message.readHandle != null && message.hasOwnProperty("readHandle")) {
+                        if (message.readHandle != null && Object.hasOwnProperty.call(message, "readHandle")) {
                             object.readHandle = $root.google.storage.v2.BidiReadHandle.toObject(message.readHandle, options, q + 1);
                             if (options.oneofs)
                                 object._readHandle = "readHandle";
                         }
-                        if (message.routingToken != null && message.hasOwnProperty("routingToken")) {
+                        if (message.routingToken != null && Object.hasOwnProperty.call(message, "routingToken")) {
                             object.routingToken = message.routingToken;
                             if (options.oneofs)
                                 object._routingToken = "routingToken";
@@ -31093,12 +31087,12 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.readObjectSpec != null && message.hasOwnProperty("readObjectSpec")) {
+                        if (message.readObjectSpec != null && Object.hasOwnProperty.call(message, "readObjectSpec")) {
                             var error = $root.google.storage.v2.BidiReadObjectSpec.verify(message.readObjectSpec, long + 1);
                             if (error)
                                 return "readObjectSpec." + error;
                         }
-                        if (message.readRanges != null && message.hasOwnProperty("readRanges")) {
+                        if (message.readRanges != null && Object.hasOwnProperty.call(message, "readRanges")) {
                             if (!Array.isArray(message.readRanges))
                                 return "readRanges: array expected";
                             for (var i = 0; i < message.readRanges.length; ++i) {
@@ -31167,7 +31161,7 @@
                             object.readRanges = [];
                         if (options.defaults)
                             object.readObjectSpec = null;
-                        if (message.readObjectSpec != null && message.hasOwnProperty("readObjectSpec"))
+                        if (message.readObjectSpec != null && Object.hasOwnProperty.call(message, "readObjectSpec"))
                             object.readObjectSpec = $root.google.storage.v2.BidiReadObjectSpec.toObject(message.readObjectSpec, options, q + 1);
                         if (message.readRanges && message.readRanges.length) {
                             object.readRanges = [];
@@ -31385,7 +31379,7 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.objectDataRanges != null && message.hasOwnProperty("objectDataRanges")) {
+                        if (message.objectDataRanges != null && Object.hasOwnProperty.call(message, "objectDataRanges")) {
                             if (!Array.isArray(message.objectDataRanges))
                                 return "objectDataRanges: array expected";
                             for (var i = 0; i < message.objectDataRanges.length; ++i) {
@@ -31394,12 +31388,12 @@
                                     return "objectDataRanges." + error;
                             }
                         }
-                        if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                        if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata")) {
                             var error = $root.google.storage.v2.StorageObject.verify(message.metadata, long + 1);
                             if (error)
                                 return "metadata." + error;
                         }
-                        if (message.readHandle != null && message.hasOwnProperty("readHandle")) {
+                        if (message.readHandle != null && Object.hasOwnProperty.call(message, "readHandle")) {
                             var error = $root.google.storage.v2.BidiReadHandle.verify(message.readHandle, long + 1);
                             if (error)
                                 return "readHandle." + error;
@@ -31471,14 +31465,14 @@
                             object.metadata = null;
                             object.readHandle = null;
                         }
-                        if (message.metadata != null && message.hasOwnProperty("metadata"))
+                        if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
                             object.metadata = $root.google.storage.v2.StorageObject.toObject(message.metadata, options, q + 1);
                         if (message.objectDataRanges && message.objectDataRanges.length) {
                             object.objectDataRanges = [];
                             for (var j = 0; j < message.objectDataRanges.length; ++j)
                                 object.objectDataRanges[j] = $root.google.storage.v2.ObjectRangeData.toObject(message.objectDataRanges[j], options, q + 1);
                         }
-                        if (message.readHandle != null && message.hasOwnProperty("readHandle"))
+                        if (message.readHandle != null && Object.hasOwnProperty.call(message, "readHandle"))
                             object.readHandle = $root.google.storage.v2.BidiReadHandle.toObject(message.readHandle, options, q + 1);
                         return object;
                     };
@@ -31682,12 +31676,12 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.readHandle != null && message.hasOwnProperty("readHandle")) {
+                        if (message.readHandle != null && Object.hasOwnProperty.call(message, "readHandle")) {
                             var error = $root.google.storage.v2.BidiReadHandle.verify(message.readHandle, long + 1);
                             if (error)
                                 return "readHandle." + error;
                         }
-                        if (message.routingToken != null && message.hasOwnProperty("routingToken")) {
+                        if (message.routingToken != null && Object.hasOwnProperty.call(message, "routingToken")) {
                             properties._routingToken = 1;
                             if (!$util.isString(message.routingToken))
                                 return "routingToken: string expected";
@@ -31742,9 +31736,9 @@
                         var object = {};
                         if (options.defaults)
                             object.readHandle = null;
-                        if (message.readHandle != null && message.hasOwnProperty("readHandle"))
+                        if (message.readHandle != null && Object.hasOwnProperty.call(message, "readHandle"))
                             object.readHandle = $root.google.storage.v2.BidiReadHandle.toObject(message.readHandle, options, q + 1);
-                        if (message.routingToken != null && message.hasOwnProperty("routingToken")) {
+                        if (message.routingToken != null && Object.hasOwnProperty.call(message, "routingToken")) {
                             object.routingToken = message.routingToken;
                             if (options.oneofs)
                                 object._routingToken = "routingToken";
@@ -31978,12 +31972,12 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.routingToken != null && message.hasOwnProperty("routingToken")) {
+                        if (message.routingToken != null && Object.hasOwnProperty.call(message, "routingToken")) {
                             properties._routingToken = 1;
                             if (!$util.isString(message.routingToken))
                                 return "routingToken: string expected";
                         }
-                        if (message.writeHandle != null && message.hasOwnProperty("writeHandle")) {
+                        if (message.writeHandle != null && Object.hasOwnProperty.call(message, "writeHandle")) {
                             properties._writeHandle = 1;
                             {
                                 var error = $root.google.storage.v2.BidiWriteHandle.verify(message.writeHandle, long + 1);
@@ -31991,7 +31985,7 @@
                                     return "writeHandle." + error;
                             }
                         }
-                        if (message.generation != null && message.hasOwnProperty("generation")) {
+                        if (message.generation != null && Object.hasOwnProperty.call(message, "generation")) {
                             properties._generation = 1;
                             if (!$util.isInteger(message.generation) && !(message.generation && $util.isInteger(message.generation.low) && $util.isInteger(message.generation.high)))
                                 return "generation: integer|Long expected";
@@ -32053,17 +32047,17 @@
                         if (q > $util.recursionLimit)
                             throw Error("max depth exceeded");
                         var object = {};
-                        if (message.routingToken != null && message.hasOwnProperty("routingToken")) {
+                        if (message.routingToken != null && Object.hasOwnProperty.call(message, "routingToken")) {
                             object.routingToken = message.routingToken;
                             if (options.oneofs)
                                 object._routingToken = "routingToken";
                         }
-                        if (message.writeHandle != null && message.hasOwnProperty("writeHandle")) {
+                        if (message.writeHandle != null && Object.hasOwnProperty.call(message, "writeHandle")) {
                             object.writeHandle = $root.google.storage.v2.BidiWriteHandle.toObject(message.writeHandle, options, q + 1);
                             if (options.oneofs)
                                 object._writeHandle = "writeHandle";
                         }
-                        if (message.generation != null && message.hasOwnProperty("generation")) {
+                        if (message.generation != null && Object.hasOwnProperty.call(message, "generation")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.generation = typeof message.generation === "number" ? BigInt(message.generation) : $util.Long.fromBits(message.generation.low >>> 0, message.generation.high >>> 0, false).toBigInt();
                             else if (typeof message.generation === "number")
@@ -32254,7 +32248,7 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.readRangeErrors != null && message.hasOwnProperty("readRangeErrors")) {
+                        if (message.readRangeErrors != null && Object.hasOwnProperty.call(message, "readRangeErrors")) {
                             if (!Array.isArray(message.readRangeErrors))
                                 return "readRangeErrors: array expected";
                             for (var i = 0; i < message.readRangeErrors.length; ++i) {
@@ -32513,10 +32507,10 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.readId != null && message.hasOwnProperty("readId"))
+                        if (message.readId != null && Object.hasOwnProperty.call(message, "readId"))
                             if (!$util.isInteger(message.readId) && !(message.readId && $util.isInteger(message.readId.low) && $util.isInteger(message.readId.high)))
                                 return "readId: integer|Long expected";
-                        if (message.status != null && message.hasOwnProperty("status")) {
+                        if (message.status != null && Object.hasOwnProperty.call(message, "status")) {
                             var error = $root.google.rpc.Status.verify(message.status, long + 1);
                             if (error)
                                 return "status." + error;
@@ -32584,14 +32578,14 @@
                                 object.readId = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             object.status = null;
                         }
-                        if (message.readId != null && message.hasOwnProperty("readId"))
+                        if (message.readId != null && Object.hasOwnProperty.call(message, "readId"))
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.readId = typeof message.readId === "number" ? BigInt(message.readId) : $util.Long.fromBits(message.readId.low >>> 0, message.readId.high >>> 0, false).toBigInt();
                             else if (typeof message.readId === "number")
                                 object.readId = options.longs === String ? String(message.readId) : message.readId;
                             else
                                 object.readId = options.longs === String ? $util.Long.prototype.toString.call(message.readId) : options.longs === Number ? new $util.LongBits(message.readId.low >>> 0, message.readId.high >>> 0).toNumber() : message.readId;
-                        if (message.status != null && message.hasOwnProperty("status"))
+                        if (message.status != null && Object.hasOwnProperty.call(message, "status"))
                             object.status = $root.google.rpc.Status.toObject(message.status, options, q + 1);
                         return object;
                     };
@@ -32800,13 +32794,13 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.readOffset != null && message.hasOwnProperty("readOffset"))
+                        if (message.readOffset != null && Object.hasOwnProperty.call(message, "readOffset"))
                             if (!$util.isInteger(message.readOffset) && !(message.readOffset && $util.isInteger(message.readOffset.low) && $util.isInteger(message.readOffset.high)))
                                 return "readOffset: integer|Long expected";
-                        if (message.readLength != null && message.hasOwnProperty("readLength"))
+                        if (message.readLength != null && Object.hasOwnProperty.call(message, "readLength"))
                             if (!$util.isInteger(message.readLength) && !(message.readLength && $util.isInteger(message.readLength.low) && $util.isInteger(message.readLength.high)))
                                 return "readLength: integer|Long expected";
-                        if (message.readId != null && message.hasOwnProperty("readId"))
+                        if (message.readId != null && Object.hasOwnProperty.call(message, "readId"))
                             if (!$util.isInteger(message.readId) && !(message.readId && $util.isInteger(message.readId.low) && $util.isInteger(message.readId.high)))
                                 return "readId: integer|Long expected";
                         return null;
@@ -32894,21 +32888,21 @@
                             } else
                                 object.readId = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                         }
-                        if (message.readOffset != null && message.hasOwnProperty("readOffset"))
+                        if (message.readOffset != null && Object.hasOwnProperty.call(message, "readOffset"))
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.readOffset = typeof message.readOffset === "number" ? BigInt(message.readOffset) : $util.Long.fromBits(message.readOffset.low >>> 0, message.readOffset.high >>> 0, false).toBigInt();
                             else if (typeof message.readOffset === "number")
                                 object.readOffset = options.longs === String ? String(message.readOffset) : message.readOffset;
                             else
                                 object.readOffset = options.longs === String ? $util.Long.prototype.toString.call(message.readOffset) : options.longs === Number ? new $util.LongBits(message.readOffset.low >>> 0, message.readOffset.high >>> 0).toNumber() : message.readOffset;
-                        if (message.readLength != null && message.hasOwnProperty("readLength"))
+                        if (message.readLength != null && Object.hasOwnProperty.call(message, "readLength"))
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.readLength = typeof message.readLength === "number" ? BigInt(message.readLength) : $util.Long.fromBits(message.readLength.low >>> 0, message.readLength.high >>> 0, false).toBigInt();
                             else if (typeof message.readLength === "number")
                                 object.readLength = options.longs === String ? String(message.readLength) : message.readLength;
                             else
                                 object.readLength = options.longs === String ? $util.Long.prototype.toString.call(message.readLength) : options.longs === Number ? new $util.LongBits(message.readLength.low >>> 0, message.readLength.high >>> 0).toNumber() : message.readLength;
-                        if (message.readId != null && message.hasOwnProperty("readId"))
+                        if (message.readId != null && Object.hasOwnProperty.call(message, "readId"))
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.readId = typeof message.readId === "number" ? BigInt(message.readId) : $util.Long.fromBits(message.readId.low >>> 0, message.readId.high >>> 0, false).toBigInt();
                             else if (typeof message.readId === "number")
@@ -33122,17 +33116,17 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.checksummedData != null && message.hasOwnProperty("checksummedData")) {
+                        if (message.checksummedData != null && Object.hasOwnProperty.call(message, "checksummedData")) {
                             var error = $root.google.storage.v2.ChecksummedData.verify(message.checksummedData, long + 1);
                             if (error)
                                 return "checksummedData." + error;
                         }
-                        if (message.readRange != null && message.hasOwnProperty("readRange")) {
+                        if (message.readRange != null && Object.hasOwnProperty.call(message, "readRange")) {
                             var error = $root.google.storage.v2.ReadRange.verify(message.readRange, long + 1);
                             if (error)
                                 return "readRange." + error;
                         }
-                        if (message.rangeEnd != null && message.hasOwnProperty("rangeEnd"))
+                        if (message.rangeEnd != null && Object.hasOwnProperty.call(message, "rangeEnd"))
                             if (typeof message.rangeEnd !== "boolean")
                                 return "rangeEnd: boolean expected";
                         return null;
@@ -33193,11 +33187,11 @@
                             object.readRange = null;
                             object.rangeEnd = false;
                         }
-                        if (message.checksummedData != null && message.hasOwnProperty("checksummedData"))
+                        if (message.checksummedData != null && Object.hasOwnProperty.call(message, "checksummedData"))
                             object.checksummedData = $root.google.storage.v2.ChecksummedData.toObject(message.checksummedData, options, q + 1);
-                        if (message.readRange != null && message.hasOwnProperty("readRange"))
+                        if (message.readRange != null && Object.hasOwnProperty.call(message, "readRange"))
                             object.readRange = $root.google.storage.v2.ReadRange.toObject(message.readRange, options, q + 1);
-                        if (message.rangeEnd != null && message.hasOwnProperty("rangeEnd"))
+                        if (message.rangeEnd != null && Object.hasOwnProperty.call(message, "rangeEnd"))
                             object.rangeEnd = message.rangeEnd;
                         return object;
                     };
@@ -33376,7 +33370,7 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.handle != null && message.hasOwnProperty("handle"))
+                        if (message.handle != null && Object.hasOwnProperty.call(message, "handle"))
                             if (!(message.handle && typeof message.handle.length === "number" || $util.isString(message.handle)))
                                 return "handle: buffer expected";
                         return null;
@@ -33433,7 +33427,7 @@
                                 if (options.bytes !== Array)
                                     object.handle = $util.newBuffer(object.handle);
                             }
-                        if (message.handle != null && message.hasOwnProperty("handle"))
+                        if (message.handle != null && Object.hasOwnProperty.call(message, "handle"))
                             object.handle = options.bytes === String ? $util.base64.encode(message.handle, 0, message.handle.length) : options.bytes === Array ? Array.prototype.slice.call(message.handle) : message.handle;
                         return object;
                     };
@@ -33612,7 +33606,7 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.handle != null && message.hasOwnProperty("handle"))
+                        if (message.handle != null && Object.hasOwnProperty.call(message, "handle"))
                             if (!(message.handle && typeof message.handle.length === "number" || $util.isString(message.handle)))
                                 return "handle: buffer expected";
                         return null;
@@ -33669,7 +33663,7 @@
                                 if (options.bytes !== Array)
                                     object.handle = $util.newBuffer(object.handle);
                             }
-                        if (message.handle != null && message.hasOwnProperty("handle"))
+                        if (message.handle != null && Object.hasOwnProperty.call(message, "handle"))
                             object.handle = options.bytes === String ? $util.base64.encode(message.handle, 0, message.handle.length) : options.bytes === Array ? Array.prototype.slice.call(message.handle) : message.handle;
                         return object;
                     };
@@ -33993,40 +33987,40 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.resource != null && message.hasOwnProperty("resource")) {
+                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource")) {
                             var error = $root.google.storage.v2.StorageObject.verify(message.resource, long + 1);
                             if (error)
                                 return "resource." + error;
                         }
-                        if (message.predefinedAcl != null && message.hasOwnProperty("predefinedAcl"))
+                        if (message.predefinedAcl != null && Object.hasOwnProperty.call(message, "predefinedAcl"))
                             if (!$util.isString(message.predefinedAcl))
                                 return "predefinedAcl: string expected";
-                        if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
+                        if (message.ifGenerationMatch != null && Object.hasOwnProperty.call(message, "ifGenerationMatch")) {
                             properties._ifGenerationMatch = 1;
                             if (!$util.isInteger(message.ifGenerationMatch) && !(message.ifGenerationMatch && $util.isInteger(message.ifGenerationMatch.low) && $util.isInteger(message.ifGenerationMatch.high)))
                                 return "ifGenerationMatch: integer|Long expected";
                         }
-                        if (message.ifGenerationNotMatch != null && message.hasOwnProperty("ifGenerationNotMatch")) {
+                        if (message.ifGenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifGenerationNotMatch")) {
                             properties._ifGenerationNotMatch = 1;
                             if (!$util.isInteger(message.ifGenerationNotMatch) && !(message.ifGenerationNotMatch && $util.isInteger(message.ifGenerationNotMatch.low) && $util.isInteger(message.ifGenerationNotMatch.high)))
                                 return "ifGenerationNotMatch: integer|Long expected";
                         }
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                             properties._ifMetagenerationMatch = 1;
                             if (!$util.isInteger(message.ifMetagenerationMatch) && !(message.ifMetagenerationMatch && $util.isInteger(message.ifMetagenerationMatch.low) && $util.isInteger(message.ifMetagenerationMatch.high)))
                                 return "ifMetagenerationMatch: integer|Long expected";
                         }
-                        if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                        if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                             properties._ifMetagenerationNotMatch = 1;
                             if (!$util.isInteger(message.ifMetagenerationNotMatch) && !(message.ifMetagenerationNotMatch && $util.isInteger(message.ifMetagenerationNotMatch.low) && $util.isInteger(message.ifMetagenerationNotMatch.high)))
                                 return "ifMetagenerationNotMatch: integer|Long expected";
                         }
-                        if (message.objectSize != null && message.hasOwnProperty("objectSize")) {
+                        if (message.objectSize != null && Object.hasOwnProperty.call(message, "objectSize")) {
                             properties._objectSize = 1;
                             if (!$util.isInteger(message.objectSize) && !(message.objectSize && $util.isInteger(message.objectSize.low) && $util.isInteger(message.objectSize.high)))
                                 return "objectSize: integer|Long expected";
                         }
-                        if (message.appendable != null && message.hasOwnProperty("appendable")) {
+                        if (message.appendable != null && Object.hasOwnProperty.call(message, "appendable")) {
                             properties._appendable = 1;
                             if (typeof message.appendable !== "boolean")
                                 return "appendable: boolean expected";
@@ -34130,9 +34124,9 @@
                             object.resource = null;
                             object.predefinedAcl = "";
                         }
-                        if (message.resource != null && message.hasOwnProperty("resource"))
+                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
                             object.resource = $root.google.storage.v2.StorageObject.toObject(message.resource, options, q + 1);
-                        if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
+                        if (message.ifGenerationMatch != null && Object.hasOwnProperty.call(message, "ifGenerationMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifGenerationMatch = typeof message.ifGenerationMatch === "number" ? BigInt(message.ifGenerationMatch) : $util.Long.fromBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifGenerationMatch === "number")
@@ -34142,7 +34136,7 @@
                             if (options.oneofs)
                                 object._ifGenerationMatch = "ifGenerationMatch";
                         }
-                        if (message.ifGenerationNotMatch != null && message.hasOwnProperty("ifGenerationNotMatch")) {
+                        if (message.ifGenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifGenerationNotMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifGenerationNotMatch = typeof message.ifGenerationNotMatch === "number" ? BigInt(message.ifGenerationNotMatch) : $util.Long.fromBits(message.ifGenerationNotMatch.low >>> 0, message.ifGenerationNotMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifGenerationNotMatch === "number")
@@ -34152,7 +34146,7 @@
                             if (options.oneofs)
                                 object._ifGenerationNotMatch = "ifGenerationNotMatch";
                         }
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifMetagenerationMatch === "number")
@@ -34162,7 +34156,7 @@
                             if (options.oneofs)
                                 object._ifMetagenerationMatch = "ifMetagenerationMatch";
                         }
-                        if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                        if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifMetagenerationNotMatch === "number")
@@ -34172,9 +34166,9 @@
                             if (options.oneofs)
                                 object._ifMetagenerationNotMatch = "ifMetagenerationNotMatch";
                         }
-                        if (message.predefinedAcl != null && message.hasOwnProperty("predefinedAcl"))
+                        if (message.predefinedAcl != null && Object.hasOwnProperty.call(message, "predefinedAcl"))
                             object.predefinedAcl = message.predefinedAcl;
-                        if (message.objectSize != null && message.hasOwnProperty("objectSize")) {
+                        if (message.objectSize != null && Object.hasOwnProperty.call(message, "objectSize")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.objectSize = typeof message.objectSize === "number" ? BigInt(message.objectSize) : $util.Long.fromBits(message.objectSize.low >>> 0, message.objectSize.high >>> 0, false).toBigInt();
                             else if (typeof message.objectSize === "number")
@@ -34184,7 +34178,7 @@
                             if (options.oneofs)
                                 object._objectSize = "objectSize";
                         }
-                        if (message.appendable != null && message.hasOwnProperty("appendable")) {
+                        if (message.appendable != null && Object.hasOwnProperty.call(message, "appendable")) {
                             object.appendable = message.appendable;
                             if (options.oneofs)
                                 object._appendable = "appendable";
@@ -34482,12 +34476,12 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.uploadId != null && message.hasOwnProperty("uploadId")) {
+                        if (message.uploadId != null && Object.hasOwnProperty.call(message, "uploadId")) {
                             properties.firstMessage = 1;
                             if (!$util.isString(message.uploadId))
                                 return "uploadId: string expected";
                         }
-                        if (message.writeObjectSpec != null && message.hasOwnProperty("writeObjectSpec")) {
+                        if (message.writeObjectSpec != null && Object.hasOwnProperty.call(message, "writeObjectSpec")) {
                             if (properties.firstMessage === 1)
                                 return "firstMessage: multiple values";
                             properties.firstMessage = 1;
@@ -34497,10 +34491,10 @@
                                     return "writeObjectSpec." + error;
                             }
                         }
-                        if (message.writeOffset != null && message.hasOwnProperty("writeOffset"))
+                        if (message.writeOffset != null && Object.hasOwnProperty.call(message, "writeOffset"))
                             if (!$util.isInteger(message.writeOffset) && !(message.writeOffset && $util.isInteger(message.writeOffset.low) && $util.isInteger(message.writeOffset.high)))
                                 return "writeOffset: integer|Long expected";
-                        if (message.checksummedData != null && message.hasOwnProperty("checksummedData")) {
+                        if (message.checksummedData != null && Object.hasOwnProperty.call(message, "checksummedData")) {
                             properties.data = 1;
                             {
                                 var error = $root.google.storage.v2.ChecksummedData.verify(message.checksummedData, long + 1);
@@ -34508,15 +34502,15 @@
                                     return "checksummedData." + error;
                             }
                         }
-                        if (message.objectChecksums != null && message.hasOwnProperty("objectChecksums")) {
+                        if (message.objectChecksums != null && Object.hasOwnProperty.call(message, "objectChecksums")) {
                             var error = $root.google.storage.v2.ObjectChecksums.verify(message.objectChecksums, long + 1);
                             if (error)
                                 return "objectChecksums." + error;
                         }
-                        if (message.finishWrite != null && message.hasOwnProperty("finishWrite"))
+                        if (message.finishWrite != null && Object.hasOwnProperty.call(message, "finishWrite"))
                             if (typeof message.finishWrite !== "boolean")
                                 return "finishWrite: boolean expected";
-                        if (message.commonObjectRequestParams != null && message.hasOwnProperty("commonObjectRequestParams")) {
+                        if (message.commonObjectRequestParams != null && Object.hasOwnProperty.call(message, "commonObjectRequestParams")) {
                             var error = $root.google.storage.v2.CommonObjectRequestParams.verify(message.commonObjectRequestParams, long + 1);
                             if (error)
                                 return "commonObjectRequestParams." + error;
@@ -34605,33 +34599,33 @@
                             object.finishWrite = false;
                             object.commonObjectRequestParams = null;
                         }
-                        if (message.uploadId != null && message.hasOwnProperty("uploadId")) {
+                        if (message.uploadId != null && Object.hasOwnProperty.call(message, "uploadId")) {
                             object.uploadId = message.uploadId;
                             if (options.oneofs)
                                 object.firstMessage = "uploadId";
                         }
-                        if (message.writeObjectSpec != null && message.hasOwnProperty("writeObjectSpec")) {
+                        if (message.writeObjectSpec != null && Object.hasOwnProperty.call(message, "writeObjectSpec")) {
                             object.writeObjectSpec = $root.google.storage.v2.WriteObjectSpec.toObject(message.writeObjectSpec, options, q + 1);
                             if (options.oneofs)
                                 object.firstMessage = "writeObjectSpec";
                         }
-                        if (message.writeOffset != null && message.hasOwnProperty("writeOffset"))
+                        if (message.writeOffset != null && Object.hasOwnProperty.call(message, "writeOffset"))
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.writeOffset = typeof message.writeOffset === "number" ? BigInt(message.writeOffset) : $util.Long.fromBits(message.writeOffset.low >>> 0, message.writeOffset.high >>> 0, false).toBigInt();
                             else if (typeof message.writeOffset === "number")
                                 object.writeOffset = options.longs === String ? String(message.writeOffset) : message.writeOffset;
                             else
                                 object.writeOffset = options.longs === String ? $util.Long.prototype.toString.call(message.writeOffset) : options.longs === Number ? new $util.LongBits(message.writeOffset.low >>> 0, message.writeOffset.high >>> 0).toNumber() : message.writeOffset;
-                        if (message.checksummedData != null && message.hasOwnProperty("checksummedData")) {
+                        if (message.checksummedData != null && Object.hasOwnProperty.call(message, "checksummedData")) {
                             object.checksummedData = $root.google.storage.v2.ChecksummedData.toObject(message.checksummedData, options, q + 1);
                             if (options.oneofs)
                                 object.data = "checksummedData";
                         }
-                        if (message.objectChecksums != null && message.hasOwnProperty("objectChecksums"))
+                        if (message.objectChecksums != null && Object.hasOwnProperty.call(message, "objectChecksums"))
                             object.objectChecksums = $root.google.storage.v2.ObjectChecksums.toObject(message.objectChecksums, options, q + 1);
-                        if (message.finishWrite != null && message.hasOwnProperty("finishWrite"))
+                        if (message.finishWrite != null && Object.hasOwnProperty.call(message, "finishWrite"))
                             object.finishWrite = message.finishWrite;
-                        if (message.commonObjectRequestParams != null && message.hasOwnProperty("commonObjectRequestParams"))
+                        if (message.commonObjectRequestParams != null && Object.hasOwnProperty.call(message, "commonObjectRequestParams"))
                             object.commonObjectRequestParams = $root.google.storage.v2.CommonObjectRequestParams.toObject(message.commonObjectRequestParams, options, q + 1);
                         return object;
                     };
@@ -34855,12 +34849,12 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.persistedSize != null && message.hasOwnProperty("persistedSize")) {
+                        if (message.persistedSize != null && Object.hasOwnProperty.call(message, "persistedSize")) {
                             properties.writeStatus = 1;
                             if (!$util.isInteger(message.persistedSize) && !(message.persistedSize && $util.isInteger(message.persistedSize.low) && $util.isInteger(message.persistedSize.high)))
                                 return "persistedSize: integer|Long expected";
                         }
-                        if (message.resource != null && message.hasOwnProperty("resource")) {
+                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource")) {
                             if (properties.writeStatus === 1)
                                 return "writeStatus: multiple values";
                             properties.writeStatus = 1;
@@ -34870,7 +34864,7 @@
                                     return "resource." + error;
                             }
                         }
-                        if (message.persistedDataChecksums != null && message.hasOwnProperty("persistedDataChecksums")) {
+                        if (message.persistedDataChecksums != null && Object.hasOwnProperty.call(message, "persistedDataChecksums")) {
                             var error = $root.google.storage.v2.ObjectChecksums.verify(message.persistedDataChecksums, long + 1);
                             if (error)
                                 return "persistedDataChecksums." + error;
@@ -34937,7 +34931,7 @@
                         var object = {};
                         if (options.defaults)
                             object.persistedDataChecksums = null;
-                        if (message.persistedSize != null && message.hasOwnProperty("persistedSize")) {
+                        if (message.persistedSize != null && Object.hasOwnProperty.call(message, "persistedSize")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.persistedSize = typeof message.persistedSize === "number" ? BigInt(message.persistedSize) : $util.Long.fromBits(message.persistedSize.low >>> 0, message.persistedSize.high >>> 0, false).toBigInt();
                             else if (typeof message.persistedSize === "number")
@@ -34947,12 +34941,12 @@
                             if (options.oneofs)
                                 object.writeStatus = "persistedSize";
                         }
-                        if (message.resource != null && message.hasOwnProperty("resource")) {
+                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource")) {
                             object.resource = $root.google.storage.v2.StorageObject.toObject(message.resource, options, q + 1);
                             if (options.oneofs)
                                 object.writeStatus = "resource";
                         }
-                        if (message.persistedDataChecksums != null && message.hasOwnProperty("persistedDataChecksums"))
+                        if (message.persistedDataChecksums != null && Object.hasOwnProperty.call(message, "persistedDataChecksums"))
                             object.persistedDataChecksums = $root.google.storage.v2.ObjectChecksums.toObject(message.persistedDataChecksums, options, q + 1);
                         return object;
                     };
@@ -35249,31 +35243,31 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.bucket != null && message.hasOwnProperty("bucket"))
+                        if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                             if (!$util.isString(message.bucket))
                                 return "bucket: string expected";
-                        if (message.object != null && message.hasOwnProperty("object"))
+                        if (message.object != null && Object.hasOwnProperty.call(message, "object"))
                             if (!$util.isString(message.object))
                                 return "object: string expected";
-                        if (message.generation != null && message.hasOwnProperty("generation"))
+                        if (message.generation != null && Object.hasOwnProperty.call(message, "generation"))
                             if (!$util.isInteger(message.generation) && !(message.generation && $util.isInteger(message.generation.low) && $util.isInteger(message.generation.high)))
                                 return "generation: integer|Long expected";
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                             properties._ifMetagenerationMatch = 1;
                             if (!$util.isInteger(message.ifMetagenerationMatch) && !(message.ifMetagenerationMatch && $util.isInteger(message.ifMetagenerationMatch.low) && $util.isInteger(message.ifMetagenerationMatch.high)))
                                 return "ifMetagenerationMatch: integer|Long expected";
                         }
-                        if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                        if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                             properties._ifMetagenerationNotMatch = 1;
                             if (!$util.isInteger(message.ifMetagenerationNotMatch) && !(message.ifMetagenerationNotMatch && $util.isInteger(message.ifMetagenerationNotMatch.low) && $util.isInteger(message.ifMetagenerationNotMatch.high)))
                                 return "ifMetagenerationNotMatch: integer|Long expected";
                         }
-                        if (message.routingToken != null && message.hasOwnProperty("routingToken")) {
+                        if (message.routingToken != null && Object.hasOwnProperty.call(message, "routingToken")) {
                             properties._routingToken = 1;
                             if (!$util.isString(message.routingToken))
                                 return "routingToken: string expected";
                         }
-                        if (message.writeHandle != null && message.hasOwnProperty("writeHandle")) {
+                        if (message.writeHandle != null && Object.hasOwnProperty.call(message, "writeHandle")) {
                             properties._writeHandle = 1;
                             {
                                 var error = $root.google.storage.v2.BidiWriteHandle.verify(message.writeHandle, long + 1);
@@ -35369,18 +35363,18 @@
                             } else
                                 object.generation = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                         }
-                        if (message.bucket != null && message.hasOwnProperty("bucket"))
+                        if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                             object.bucket = message.bucket;
-                        if (message.object != null && message.hasOwnProperty("object"))
+                        if (message.object != null && Object.hasOwnProperty.call(message, "object"))
                             object.object = message.object;
-                        if (message.generation != null && message.hasOwnProperty("generation"))
+                        if (message.generation != null && Object.hasOwnProperty.call(message, "generation"))
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.generation = typeof message.generation === "number" ? BigInt(message.generation) : $util.Long.fromBits(message.generation.low >>> 0, message.generation.high >>> 0, false).toBigInt();
                             else if (typeof message.generation === "number")
                                 object.generation = options.longs === String ? String(message.generation) : message.generation;
                             else
                                 object.generation = options.longs === String ? $util.Long.prototype.toString.call(message.generation) : options.longs === Number ? new $util.LongBits(message.generation.low >>> 0, message.generation.high >>> 0).toNumber() : message.generation;
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifMetagenerationMatch === "number")
@@ -35390,7 +35384,7 @@
                             if (options.oneofs)
                                 object._ifMetagenerationMatch = "ifMetagenerationMatch";
                         }
-                        if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                        if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifMetagenerationNotMatch === "number")
@@ -35400,12 +35394,12 @@
                             if (options.oneofs)
                                 object._ifMetagenerationNotMatch = "ifMetagenerationNotMatch";
                         }
-                        if (message.routingToken != null && message.hasOwnProperty("routingToken")) {
+                        if (message.routingToken != null && Object.hasOwnProperty.call(message, "routingToken")) {
                             object.routingToken = message.routingToken;
                             if (options.oneofs)
                                 object._routingToken = "routingToken";
                         }
-                        if (message.writeHandle != null && message.hasOwnProperty("writeHandle")) {
+                        if (message.writeHandle != null && Object.hasOwnProperty.call(message, "writeHandle")) {
                             object.writeHandle = $root.google.storage.v2.BidiWriteHandle.toObject(message.writeHandle, options, q + 1);
                             if (options.oneofs)
                                 object._writeHandle = "writeHandle";
@@ -35748,12 +35742,12 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.uploadId != null && message.hasOwnProperty("uploadId")) {
+                        if (message.uploadId != null && Object.hasOwnProperty.call(message, "uploadId")) {
                             properties.firstMessage = 1;
                             if (!$util.isString(message.uploadId))
                                 return "uploadId: string expected";
                         }
-                        if (message.writeObjectSpec != null && message.hasOwnProperty("writeObjectSpec")) {
+                        if (message.writeObjectSpec != null && Object.hasOwnProperty.call(message, "writeObjectSpec")) {
                             if (properties.firstMessage === 1)
                                 return "firstMessage: multiple values";
                             properties.firstMessage = 1;
@@ -35763,7 +35757,7 @@
                                     return "writeObjectSpec." + error;
                             }
                         }
-                        if (message.appendObjectSpec != null && message.hasOwnProperty("appendObjectSpec")) {
+                        if (message.appendObjectSpec != null && Object.hasOwnProperty.call(message, "appendObjectSpec")) {
                             if (properties.firstMessage === 1)
                                 return "firstMessage: multiple values";
                             properties.firstMessage = 1;
@@ -35773,10 +35767,10 @@
                                     return "appendObjectSpec." + error;
                             }
                         }
-                        if (message.writeOffset != null && message.hasOwnProperty("writeOffset"))
+                        if (message.writeOffset != null && Object.hasOwnProperty.call(message, "writeOffset"))
                             if (!$util.isInteger(message.writeOffset) && !(message.writeOffset && $util.isInteger(message.writeOffset.low) && $util.isInteger(message.writeOffset.high)))
                                 return "writeOffset: integer|Long expected";
-                        if (message.checksummedData != null && message.hasOwnProperty("checksummedData")) {
+                        if (message.checksummedData != null && Object.hasOwnProperty.call(message, "checksummedData")) {
                             properties.data = 1;
                             {
                                 var error = $root.google.storage.v2.ChecksummedData.verify(message.checksummedData, long + 1);
@@ -35784,21 +35778,21 @@
                                     return "checksummedData." + error;
                             }
                         }
-                        if (message.objectChecksums != null && message.hasOwnProperty("objectChecksums")) {
+                        if (message.objectChecksums != null && Object.hasOwnProperty.call(message, "objectChecksums")) {
                             var error = $root.google.storage.v2.ObjectChecksums.verify(message.objectChecksums, long + 1);
                             if (error)
                                 return "objectChecksums." + error;
                         }
-                        if (message.stateLookup != null && message.hasOwnProperty("stateLookup"))
+                        if (message.stateLookup != null && Object.hasOwnProperty.call(message, "stateLookup"))
                             if (typeof message.stateLookup !== "boolean")
                                 return "stateLookup: boolean expected";
-                        if (message.flush != null && message.hasOwnProperty("flush"))
+                        if (message.flush != null && Object.hasOwnProperty.call(message, "flush"))
                             if (typeof message.flush !== "boolean")
                                 return "flush: boolean expected";
-                        if (message.finishWrite != null && message.hasOwnProperty("finishWrite"))
+                        if (message.finishWrite != null && Object.hasOwnProperty.call(message, "finishWrite"))
                             if (typeof message.finishWrite !== "boolean")
                                 return "finishWrite: boolean expected";
-                        if (message.commonObjectRequestParams != null && message.hasOwnProperty("commonObjectRequestParams")) {
+                        if (message.commonObjectRequestParams != null && Object.hasOwnProperty.call(message, "commonObjectRequestParams")) {
                             var error = $root.google.storage.v2.CommonObjectRequestParams.verify(message.commonObjectRequestParams, long + 1);
                             if (error)
                                 return "commonObjectRequestParams." + error;
@@ -35898,39 +35892,39 @@
                             object.finishWrite = false;
                             object.commonObjectRequestParams = null;
                         }
-                        if (message.uploadId != null && message.hasOwnProperty("uploadId")) {
+                        if (message.uploadId != null && Object.hasOwnProperty.call(message, "uploadId")) {
                             object.uploadId = message.uploadId;
                             if (options.oneofs)
                                 object.firstMessage = "uploadId";
                         }
-                        if (message.writeObjectSpec != null && message.hasOwnProperty("writeObjectSpec")) {
+                        if (message.writeObjectSpec != null && Object.hasOwnProperty.call(message, "writeObjectSpec")) {
                             object.writeObjectSpec = $root.google.storage.v2.WriteObjectSpec.toObject(message.writeObjectSpec, options, q + 1);
                             if (options.oneofs)
                                 object.firstMessage = "writeObjectSpec";
                         }
-                        if (message.writeOffset != null && message.hasOwnProperty("writeOffset"))
+                        if (message.writeOffset != null && Object.hasOwnProperty.call(message, "writeOffset"))
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.writeOffset = typeof message.writeOffset === "number" ? BigInt(message.writeOffset) : $util.Long.fromBits(message.writeOffset.low >>> 0, message.writeOffset.high >>> 0, false).toBigInt();
                             else if (typeof message.writeOffset === "number")
                                 object.writeOffset = options.longs === String ? String(message.writeOffset) : message.writeOffset;
                             else
                                 object.writeOffset = options.longs === String ? $util.Long.prototype.toString.call(message.writeOffset) : options.longs === Number ? new $util.LongBits(message.writeOffset.low >>> 0, message.writeOffset.high >>> 0).toNumber() : message.writeOffset;
-                        if (message.checksummedData != null && message.hasOwnProperty("checksummedData")) {
+                        if (message.checksummedData != null && Object.hasOwnProperty.call(message, "checksummedData")) {
                             object.checksummedData = $root.google.storage.v2.ChecksummedData.toObject(message.checksummedData, options, q + 1);
                             if (options.oneofs)
                                 object.data = "checksummedData";
                         }
-                        if (message.objectChecksums != null && message.hasOwnProperty("objectChecksums"))
+                        if (message.objectChecksums != null && Object.hasOwnProperty.call(message, "objectChecksums"))
                             object.objectChecksums = $root.google.storage.v2.ObjectChecksums.toObject(message.objectChecksums, options, q + 1);
-                        if (message.stateLookup != null && message.hasOwnProperty("stateLookup"))
+                        if (message.stateLookup != null && Object.hasOwnProperty.call(message, "stateLookup"))
                             object.stateLookup = message.stateLookup;
-                        if (message.flush != null && message.hasOwnProperty("flush"))
+                        if (message.flush != null && Object.hasOwnProperty.call(message, "flush"))
                             object.flush = message.flush;
-                        if (message.finishWrite != null && message.hasOwnProperty("finishWrite"))
+                        if (message.finishWrite != null && Object.hasOwnProperty.call(message, "finishWrite"))
                             object.finishWrite = message.finishWrite;
-                        if (message.commonObjectRequestParams != null && message.hasOwnProperty("commonObjectRequestParams"))
+                        if (message.commonObjectRequestParams != null && Object.hasOwnProperty.call(message, "commonObjectRequestParams"))
                             object.commonObjectRequestParams = $root.google.storage.v2.CommonObjectRequestParams.toObject(message.commonObjectRequestParams, options, q + 1);
-                        if (message.appendObjectSpec != null && message.hasOwnProperty("appendObjectSpec")) {
+                        if (message.appendObjectSpec != null && Object.hasOwnProperty.call(message, "appendObjectSpec")) {
                             object.appendObjectSpec = $root.google.storage.v2.AppendObjectSpec.toObject(message.appendObjectSpec, options, q + 1);
                             if (options.oneofs)
                                 object.firstMessage = "appendObjectSpec";
@@ -36178,12 +36172,12 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.persistedSize != null && message.hasOwnProperty("persistedSize")) {
+                        if (message.persistedSize != null && Object.hasOwnProperty.call(message, "persistedSize")) {
                             properties.writeStatus = 1;
                             if (!$util.isInteger(message.persistedSize) && !(message.persistedSize && $util.isInteger(message.persistedSize.low) && $util.isInteger(message.persistedSize.high)))
                                 return "persistedSize: integer|Long expected";
                         }
-                        if (message.resource != null && message.hasOwnProperty("resource")) {
+                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource")) {
                             if (properties.writeStatus === 1)
                                 return "writeStatus: multiple values";
                             properties.writeStatus = 1;
@@ -36193,12 +36187,12 @@
                                     return "resource." + error;
                             }
                         }
-                        if (message.persistedDataChecksums != null && message.hasOwnProperty("persistedDataChecksums")) {
+                        if (message.persistedDataChecksums != null && Object.hasOwnProperty.call(message, "persistedDataChecksums")) {
                             var error = $root.google.storage.v2.ObjectChecksums.verify(message.persistedDataChecksums, long + 1);
                             if (error)
                                 return "persistedDataChecksums." + error;
                         }
-                        if (message.writeHandle != null && message.hasOwnProperty("writeHandle")) {
+                        if (message.writeHandle != null && Object.hasOwnProperty.call(message, "writeHandle")) {
                             properties._writeHandle = 1;
                             {
                                 var error = $root.google.storage.v2.BidiWriteHandle.verify(message.writeHandle, long + 1);
@@ -36273,7 +36267,7 @@
                         var object = {};
                         if (options.defaults)
                             object.persistedDataChecksums = null;
-                        if (message.persistedSize != null && message.hasOwnProperty("persistedSize")) {
+                        if (message.persistedSize != null && Object.hasOwnProperty.call(message, "persistedSize")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.persistedSize = typeof message.persistedSize === "number" ? BigInt(message.persistedSize) : $util.Long.fromBits(message.persistedSize.low >>> 0, message.persistedSize.high >>> 0, false).toBigInt();
                             else if (typeof message.persistedSize === "number")
@@ -36283,17 +36277,17 @@
                             if (options.oneofs)
                                 object.writeStatus = "persistedSize";
                         }
-                        if (message.resource != null && message.hasOwnProperty("resource")) {
+                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource")) {
                             object.resource = $root.google.storage.v2.StorageObject.toObject(message.resource, options, q + 1);
                             if (options.oneofs)
                                 object.writeStatus = "resource";
                         }
-                        if (message.writeHandle != null && message.hasOwnProperty("writeHandle")) {
+                        if (message.writeHandle != null && Object.hasOwnProperty.call(message, "writeHandle")) {
                             object.writeHandle = $root.google.storage.v2.BidiWriteHandle.toObject(message.writeHandle, options, q + 1);
                             if (options.oneofs)
                                 object._writeHandle = "writeHandle";
                         }
-                        if (message.persistedDataChecksums != null && message.hasOwnProperty("persistedDataChecksums"))
+                        if (message.persistedDataChecksums != null && Object.hasOwnProperty.call(message, "persistedDataChecksums"))
                             object.persistedDataChecksums = $root.google.storage.v2.ObjectChecksums.toObject(message.persistedDataChecksums, options, q + 1);
                         return object;
                     };
@@ -36677,28 +36671,28 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.parent != null && message.hasOwnProperty("parent"))
+                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                             if (!$util.isString(message.parent))
                                 return "parent: string expected";
-                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                        if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
                             if (!$util.isInteger(message.pageSize))
                                 return "pageSize: integer expected";
-                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                        if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                             if (!$util.isString(message.pageToken))
                                 return "pageToken: string expected";
-                        if (message.delimiter != null && message.hasOwnProperty("delimiter"))
+                        if (message.delimiter != null && Object.hasOwnProperty.call(message, "delimiter"))
                             if (!$util.isString(message.delimiter))
                                 return "delimiter: string expected";
-                        if (message.includeTrailingDelimiter != null && message.hasOwnProperty("includeTrailingDelimiter"))
+                        if (message.includeTrailingDelimiter != null && Object.hasOwnProperty.call(message, "includeTrailingDelimiter"))
                             if (typeof message.includeTrailingDelimiter !== "boolean")
                                 return "includeTrailingDelimiter: boolean expected";
-                        if (message.prefix != null && message.hasOwnProperty("prefix"))
+                        if (message.prefix != null && Object.hasOwnProperty.call(message, "prefix"))
                             if (!$util.isString(message.prefix))
                                 return "prefix: string expected";
-                        if (message.versions != null && message.hasOwnProperty("versions"))
+                        if (message.versions != null && Object.hasOwnProperty.call(message, "versions"))
                             if (typeof message.versions !== "boolean")
                                 return "versions: boolean expected";
-                        if (message.readMask != null && message.hasOwnProperty("readMask")) {
+                        if (message.readMask != null && Object.hasOwnProperty.call(message, "readMask")) {
                             properties._readMask = 1;
                             {
                                 var error = $root.google.protobuf.FieldMask.verify(message.readMask, long + 1);
@@ -36706,22 +36700,22 @@
                                     return "readMask." + error;
                             }
                         }
-                        if (message.lexicographicStart != null && message.hasOwnProperty("lexicographicStart"))
+                        if (message.lexicographicStart != null && Object.hasOwnProperty.call(message, "lexicographicStart"))
                             if (!$util.isString(message.lexicographicStart))
                                 return "lexicographicStart: string expected";
-                        if (message.lexicographicEnd != null && message.hasOwnProperty("lexicographicEnd"))
+                        if (message.lexicographicEnd != null && Object.hasOwnProperty.call(message, "lexicographicEnd"))
                             if (!$util.isString(message.lexicographicEnd))
                                 return "lexicographicEnd: string expected";
-                        if (message.softDeleted != null && message.hasOwnProperty("softDeleted"))
+                        if (message.softDeleted != null && Object.hasOwnProperty.call(message, "softDeleted"))
                             if (typeof message.softDeleted !== "boolean")
                                 return "softDeleted: boolean expected";
-                        if (message.includeFoldersAsPrefixes != null && message.hasOwnProperty("includeFoldersAsPrefixes"))
+                        if (message.includeFoldersAsPrefixes != null && Object.hasOwnProperty.call(message, "includeFoldersAsPrefixes"))
                             if (typeof message.includeFoldersAsPrefixes !== "boolean")
                                 return "includeFoldersAsPrefixes: boolean expected";
-                        if (message.matchGlob != null && message.hasOwnProperty("matchGlob"))
+                        if (message.matchGlob != null && Object.hasOwnProperty.call(message, "matchGlob"))
                             if (!$util.isString(message.matchGlob))
                                 return "matchGlob: string expected";
-                        if (message.filter != null && message.hasOwnProperty("filter"))
+                        if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
                             if (!$util.isString(message.filter))
                                 return "filter: string expected";
                         return null;
@@ -36811,36 +36805,36 @@
                             object.matchGlob = "";
                             object.filter = "";
                         }
-                        if (message.parent != null && message.hasOwnProperty("parent"))
+                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                             object.parent = message.parent;
-                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                        if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
                             object.pageSize = message.pageSize;
-                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                        if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                             object.pageToken = message.pageToken;
-                        if (message.delimiter != null && message.hasOwnProperty("delimiter"))
+                        if (message.delimiter != null && Object.hasOwnProperty.call(message, "delimiter"))
                             object.delimiter = message.delimiter;
-                        if (message.includeTrailingDelimiter != null && message.hasOwnProperty("includeTrailingDelimiter"))
+                        if (message.includeTrailingDelimiter != null && Object.hasOwnProperty.call(message, "includeTrailingDelimiter"))
                             object.includeTrailingDelimiter = message.includeTrailingDelimiter;
-                        if (message.prefix != null && message.hasOwnProperty("prefix"))
+                        if (message.prefix != null && Object.hasOwnProperty.call(message, "prefix"))
                             object.prefix = message.prefix;
-                        if (message.versions != null && message.hasOwnProperty("versions"))
+                        if (message.versions != null && Object.hasOwnProperty.call(message, "versions"))
                             object.versions = message.versions;
-                        if (message.readMask != null && message.hasOwnProperty("readMask")) {
+                        if (message.readMask != null && Object.hasOwnProperty.call(message, "readMask")) {
                             object.readMask = $root.google.protobuf.FieldMask.toObject(message.readMask, options, q + 1);
                             if (options.oneofs)
                                 object._readMask = "readMask";
                         }
-                        if (message.lexicographicStart != null && message.hasOwnProperty("lexicographicStart"))
+                        if (message.lexicographicStart != null && Object.hasOwnProperty.call(message, "lexicographicStart"))
                             object.lexicographicStart = message.lexicographicStart;
-                        if (message.lexicographicEnd != null && message.hasOwnProperty("lexicographicEnd"))
+                        if (message.lexicographicEnd != null && Object.hasOwnProperty.call(message, "lexicographicEnd"))
                             object.lexicographicEnd = message.lexicographicEnd;
-                        if (message.softDeleted != null && message.hasOwnProperty("softDeleted"))
+                        if (message.softDeleted != null && Object.hasOwnProperty.call(message, "softDeleted"))
                             object.softDeleted = message.softDeleted;
-                        if (message.includeFoldersAsPrefixes != null && message.hasOwnProperty("includeFoldersAsPrefixes"))
+                        if (message.includeFoldersAsPrefixes != null && Object.hasOwnProperty.call(message, "includeFoldersAsPrefixes"))
                             object.includeFoldersAsPrefixes = message.includeFoldersAsPrefixes;
-                        if (message.matchGlob != null && message.hasOwnProperty("matchGlob"))
+                        if (message.matchGlob != null && Object.hasOwnProperty.call(message, "matchGlob"))
                             object.matchGlob = message.matchGlob;
-                        if (message.filter != null && message.hasOwnProperty("filter"))
+                        if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
                             object.filter = message.filter;
                         return object;
                     };
@@ -37034,10 +37028,10 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.uploadId != null && message.hasOwnProperty("uploadId"))
+                        if (message.uploadId != null && Object.hasOwnProperty.call(message, "uploadId"))
                             if (!$util.isString(message.uploadId))
                                 return "uploadId: string expected";
-                        if (message.commonObjectRequestParams != null && message.hasOwnProperty("commonObjectRequestParams")) {
+                        if (message.commonObjectRequestParams != null && Object.hasOwnProperty.call(message, "commonObjectRequestParams")) {
                             var error = $root.google.storage.v2.CommonObjectRequestParams.verify(message.commonObjectRequestParams, long + 1);
                             if (error)
                                 return "commonObjectRequestParams." + error;
@@ -37094,9 +37088,9 @@
                             object.uploadId = "";
                             object.commonObjectRequestParams = null;
                         }
-                        if (message.uploadId != null && message.hasOwnProperty("uploadId"))
+                        if (message.uploadId != null && Object.hasOwnProperty.call(message, "uploadId"))
                             object.uploadId = message.uploadId;
-                        if (message.commonObjectRequestParams != null && message.hasOwnProperty("commonObjectRequestParams"))
+                        if (message.commonObjectRequestParams != null && Object.hasOwnProperty.call(message, "commonObjectRequestParams"))
                             object.commonObjectRequestParams = $root.google.storage.v2.CommonObjectRequestParams.toObject(message.commonObjectRequestParams, options, q + 1);
                         return object;
                     };
@@ -37320,12 +37314,12 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.persistedSize != null && message.hasOwnProperty("persistedSize")) {
+                        if (message.persistedSize != null && Object.hasOwnProperty.call(message, "persistedSize")) {
                             properties.writeStatus = 1;
                             if (!$util.isInteger(message.persistedSize) && !(message.persistedSize && $util.isInteger(message.persistedSize.low) && $util.isInteger(message.persistedSize.high)))
                                 return "persistedSize: integer|Long expected";
                         }
-                        if (message.resource != null && message.hasOwnProperty("resource")) {
+                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource")) {
                             if (properties.writeStatus === 1)
                                 return "writeStatus: multiple values";
                             properties.writeStatus = 1;
@@ -37335,7 +37329,7 @@
                                     return "resource." + error;
                             }
                         }
-                        if (message.persistedDataChecksums != null && message.hasOwnProperty("persistedDataChecksums")) {
+                        if (message.persistedDataChecksums != null && Object.hasOwnProperty.call(message, "persistedDataChecksums")) {
                             var error = $root.google.storage.v2.ObjectChecksums.verify(message.persistedDataChecksums, long + 1);
                             if (error)
                                 return "persistedDataChecksums." + error;
@@ -37402,7 +37396,7 @@
                         var object = {};
                         if (options.defaults)
                             object.persistedDataChecksums = null;
-                        if (message.persistedSize != null && message.hasOwnProperty("persistedSize")) {
+                        if (message.persistedSize != null && Object.hasOwnProperty.call(message, "persistedSize")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.persistedSize = typeof message.persistedSize === "number" ? BigInt(message.persistedSize) : $util.Long.fromBits(message.persistedSize.low >>> 0, message.persistedSize.high >>> 0, false).toBigInt();
                             else if (typeof message.persistedSize === "number")
@@ -37412,12 +37406,12 @@
                             if (options.oneofs)
                                 object.writeStatus = "persistedSize";
                         }
-                        if (message.resource != null && message.hasOwnProperty("resource")) {
+                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource")) {
                             object.resource = $root.google.storage.v2.StorageObject.toObject(message.resource, options, q + 1);
                             if (options.oneofs)
                                 object.writeStatus = "resource";
                         }
-                        if (message.persistedDataChecksums != null && message.hasOwnProperty("persistedDataChecksums"))
+                        if (message.persistedDataChecksums != null && Object.hasOwnProperty.call(message, "persistedDataChecksums"))
                             object.persistedDataChecksums = $root.google.storage.v2.ObjectChecksums.toObject(message.persistedDataChecksums, options, q + 1);
                         return object;
                     };
@@ -37978,93 +37972,93 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.destinationName != null && message.hasOwnProperty("destinationName"))
+                        if (message.destinationName != null && Object.hasOwnProperty.call(message, "destinationName"))
                             if (!$util.isString(message.destinationName))
                                 return "destinationName: string expected";
-                        if (message.destinationBucket != null && message.hasOwnProperty("destinationBucket"))
+                        if (message.destinationBucket != null && Object.hasOwnProperty.call(message, "destinationBucket"))
                             if (!$util.isString(message.destinationBucket))
                                 return "destinationBucket: string expected";
-                        if (message.destinationKmsKey != null && message.hasOwnProperty("destinationKmsKey"))
+                        if (message.destinationKmsKey != null && Object.hasOwnProperty.call(message, "destinationKmsKey"))
                             if (!$util.isString(message.destinationKmsKey))
                                 return "destinationKmsKey: string expected";
-                        if (message.destination != null && message.hasOwnProperty("destination")) {
+                        if (message.destination != null && Object.hasOwnProperty.call(message, "destination")) {
                             var error = $root.google.storage.v2.StorageObject.verify(message.destination, long + 1);
                             if (error)
                                 return "destination." + error;
                         }
-                        if (message.sourceBucket != null && message.hasOwnProperty("sourceBucket"))
+                        if (message.sourceBucket != null && Object.hasOwnProperty.call(message, "sourceBucket"))
                             if (!$util.isString(message.sourceBucket))
                                 return "sourceBucket: string expected";
-                        if (message.sourceObject != null && message.hasOwnProperty("sourceObject"))
+                        if (message.sourceObject != null && Object.hasOwnProperty.call(message, "sourceObject"))
                             if (!$util.isString(message.sourceObject))
                                 return "sourceObject: string expected";
-                        if (message.sourceGeneration != null && message.hasOwnProperty("sourceGeneration"))
+                        if (message.sourceGeneration != null && Object.hasOwnProperty.call(message, "sourceGeneration"))
                             if (!$util.isInteger(message.sourceGeneration) && !(message.sourceGeneration && $util.isInteger(message.sourceGeneration.low) && $util.isInteger(message.sourceGeneration.high)))
                                 return "sourceGeneration: integer|Long expected";
-                        if (message.rewriteToken != null && message.hasOwnProperty("rewriteToken"))
+                        if (message.rewriteToken != null && Object.hasOwnProperty.call(message, "rewriteToken"))
                             if (!$util.isString(message.rewriteToken))
                                 return "rewriteToken: string expected";
-                        if (message.destinationPredefinedAcl != null && message.hasOwnProperty("destinationPredefinedAcl"))
+                        if (message.destinationPredefinedAcl != null && Object.hasOwnProperty.call(message, "destinationPredefinedAcl"))
                             if (!$util.isString(message.destinationPredefinedAcl))
                                 return "destinationPredefinedAcl: string expected";
-                        if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
+                        if (message.ifGenerationMatch != null && Object.hasOwnProperty.call(message, "ifGenerationMatch")) {
                             properties._ifGenerationMatch = 1;
                             if (!$util.isInteger(message.ifGenerationMatch) && !(message.ifGenerationMatch && $util.isInteger(message.ifGenerationMatch.low) && $util.isInteger(message.ifGenerationMatch.high)))
                                 return "ifGenerationMatch: integer|Long expected";
                         }
-                        if (message.ifGenerationNotMatch != null && message.hasOwnProperty("ifGenerationNotMatch")) {
+                        if (message.ifGenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifGenerationNotMatch")) {
                             properties._ifGenerationNotMatch = 1;
                             if (!$util.isInteger(message.ifGenerationNotMatch) && !(message.ifGenerationNotMatch && $util.isInteger(message.ifGenerationNotMatch.low) && $util.isInteger(message.ifGenerationNotMatch.high)))
                                 return "ifGenerationNotMatch: integer|Long expected";
                         }
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                             properties._ifMetagenerationMatch = 1;
                             if (!$util.isInteger(message.ifMetagenerationMatch) && !(message.ifMetagenerationMatch && $util.isInteger(message.ifMetagenerationMatch.low) && $util.isInteger(message.ifMetagenerationMatch.high)))
                                 return "ifMetagenerationMatch: integer|Long expected";
                         }
-                        if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                        if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                             properties._ifMetagenerationNotMatch = 1;
                             if (!$util.isInteger(message.ifMetagenerationNotMatch) && !(message.ifMetagenerationNotMatch && $util.isInteger(message.ifMetagenerationNotMatch.low) && $util.isInteger(message.ifMetagenerationNotMatch.high)))
                                 return "ifMetagenerationNotMatch: integer|Long expected";
                         }
-                        if (message.ifSourceGenerationMatch != null && message.hasOwnProperty("ifSourceGenerationMatch")) {
+                        if (message.ifSourceGenerationMatch != null && Object.hasOwnProperty.call(message, "ifSourceGenerationMatch")) {
                             properties._ifSourceGenerationMatch = 1;
                             if (!$util.isInteger(message.ifSourceGenerationMatch) && !(message.ifSourceGenerationMatch && $util.isInteger(message.ifSourceGenerationMatch.low) && $util.isInteger(message.ifSourceGenerationMatch.high)))
                                 return "ifSourceGenerationMatch: integer|Long expected";
                         }
-                        if (message.ifSourceGenerationNotMatch != null && message.hasOwnProperty("ifSourceGenerationNotMatch")) {
+                        if (message.ifSourceGenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifSourceGenerationNotMatch")) {
                             properties._ifSourceGenerationNotMatch = 1;
                             if (!$util.isInteger(message.ifSourceGenerationNotMatch) && !(message.ifSourceGenerationNotMatch && $util.isInteger(message.ifSourceGenerationNotMatch.low) && $util.isInteger(message.ifSourceGenerationNotMatch.high)))
                                 return "ifSourceGenerationNotMatch: integer|Long expected";
                         }
-                        if (message.ifSourceMetagenerationMatch != null && message.hasOwnProperty("ifSourceMetagenerationMatch")) {
+                        if (message.ifSourceMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifSourceMetagenerationMatch")) {
                             properties._ifSourceMetagenerationMatch = 1;
                             if (!$util.isInteger(message.ifSourceMetagenerationMatch) && !(message.ifSourceMetagenerationMatch && $util.isInteger(message.ifSourceMetagenerationMatch.low) && $util.isInteger(message.ifSourceMetagenerationMatch.high)))
                                 return "ifSourceMetagenerationMatch: integer|Long expected";
                         }
-                        if (message.ifSourceMetagenerationNotMatch != null && message.hasOwnProperty("ifSourceMetagenerationNotMatch")) {
+                        if (message.ifSourceMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifSourceMetagenerationNotMatch")) {
                             properties._ifSourceMetagenerationNotMatch = 1;
                             if (!$util.isInteger(message.ifSourceMetagenerationNotMatch) && !(message.ifSourceMetagenerationNotMatch && $util.isInteger(message.ifSourceMetagenerationNotMatch.low) && $util.isInteger(message.ifSourceMetagenerationNotMatch.high)))
                                 return "ifSourceMetagenerationNotMatch: integer|Long expected";
                         }
-                        if (message.maxBytesRewrittenPerCall != null && message.hasOwnProperty("maxBytesRewrittenPerCall"))
+                        if (message.maxBytesRewrittenPerCall != null && Object.hasOwnProperty.call(message, "maxBytesRewrittenPerCall"))
                             if (!$util.isInteger(message.maxBytesRewrittenPerCall) && !(message.maxBytesRewrittenPerCall && $util.isInteger(message.maxBytesRewrittenPerCall.low) && $util.isInteger(message.maxBytesRewrittenPerCall.high)))
                                 return "maxBytesRewrittenPerCall: integer|Long expected";
-                        if (message.copySourceEncryptionAlgorithm != null && message.hasOwnProperty("copySourceEncryptionAlgorithm"))
+                        if (message.copySourceEncryptionAlgorithm != null && Object.hasOwnProperty.call(message, "copySourceEncryptionAlgorithm"))
                             if (!$util.isString(message.copySourceEncryptionAlgorithm))
                                 return "copySourceEncryptionAlgorithm: string expected";
-                        if (message.copySourceEncryptionKeyBytes != null && message.hasOwnProperty("copySourceEncryptionKeyBytes"))
+                        if (message.copySourceEncryptionKeyBytes != null && Object.hasOwnProperty.call(message, "copySourceEncryptionKeyBytes"))
                             if (!(message.copySourceEncryptionKeyBytes && typeof message.copySourceEncryptionKeyBytes.length === "number" || $util.isString(message.copySourceEncryptionKeyBytes)))
                                 return "copySourceEncryptionKeyBytes: buffer expected";
-                        if (message.copySourceEncryptionKeySha256Bytes != null && message.hasOwnProperty("copySourceEncryptionKeySha256Bytes"))
+                        if (message.copySourceEncryptionKeySha256Bytes != null && Object.hasOwnProperty.call(message, "copySourceEncryptionKeySha256Bytes"))
                             if (!(message.copySourceEncryptionKeySha256Bytes && typeof message.copySourceEncryptionKeySha256Bytes.length === "number" || $util.isString(message.copySourceEncryptionKeySha256Bytes)))
                                 return "copySourceEncryptionKeySha256Bytes: buffer expected";
-                        if (message.commonObjectRequestParams != null && message.hasOwnProperty("commonObjectRequestParams")) {
+                        if (message.commonObjectRequestParams != null && Object.hasOwnProperty.call(message, "commonObjectRequestParams")) {
                             var error = $root.google.storage.v2.CommonObjectRequestParams.verify(message.commonObjectRequestParams, long + 1);
                             if (error)
                                 return "commonObjectRequestParams." + error;
                         }
-                        if (message.objectChecksums != null && message.hasOwnProperty("objectChecksums")) {
+                        if (message.objectChecksums != null && Object.hasOwnProperty.call(message, "objectChecksums")) {
                             var error = $root.google.storage.v2.ObjectChecksums.verify(message.objectChecksums, long + 1);
                             if (error)
                                 return "objectChecksums." + error;
@@ -38278,22 +38272,22 @@
                             object.destinationPredefinedAcl = "";
                             object.objectChecksums = null;
                         }
-                        if (message.destination != null && message.hasOwnProperty("destination"))
+                        if (message.destination != null && Object.hasOwnProperty.call(message, "destination"))
                             object.destination = $root.google.storage.v2.StorageObject.toObject(message.destination, options, q + 1);
-                        if (message.sourceBucket != null && message.hasOwnProperty("sourceBucket"))
+                        if (message.sourceBucket != null && Object.hasOwnProperty.call(message, "sourceBucket"))
                             object.sourceBucket = message.sourceBucket;
-                        if (message.sourceObject != null && message.hasOwnProperty("sourceObject"))
+                        if (message.sourceObject != null && Object.hasOwnProperty.call(message, "sourceObject"))
                             object.sourceObject = message.sourceObject;
-                        if (message.sourceGeneration != null && message.hasOwnProperty("sourceGeneration"))
+                        if (message.sourceGeneration != null && Object.hasOwnProperty.call(message, "sourceGeneration"))
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.sourceGeneration = typeof message.sourceGeneration === "number" ? BigInt(message.sourceGeneration) : $util.Long.fromBits(message.sourceGeneration.low >>> 0, message.sourceGeneration.high >>> 0, false).toBigInt();
                             else if (typeof message.sourceGeneration === "number")
                                 object.sourceGeneration = options.longs === String ? String(message.sourceGeneration) : message.sourceGeneration;
                             else
                                 object.sourceGeneration = options.longs === String ? $util.Long.prototype.toString.call(message.sourceGeneration) : options.longs === Number ? new $util.LongBits(message.sourceGeneration.low >>> 0, message.sourceGeneration.high >>> 0).toNumber() : message.sourceGeneration;
-                        if (message.rewriteToken != null && message.hasOwnProperty("rewriteToken"))
+                        if (message.rewriteToken != null && Object.hasOwnProperty.call(message, "rewriteToken"))
                             object.rewriteToken = message.rewriteToken;
-                        if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
+                        if (message.ifGenerationMatch != null && Object.hasOwnProperty.call(message, "ifGenerationMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifGenerationMatch = typeof message.ifGenerationMatch === "number" ? BigInt(message.ifGenerationMatch) : $util.Long.fromBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifGenerationMatch === "number")
@@ -38303,7 +38297,7 @@
                             if (options.oneofs)
                                 object._ifGenerationMatch = "ifGenerationMatch";
                         }
-                        if (message.ifGenerationNotMatch != null && message.hasOwnProperty("ifGenerationNotMatch")) {
+                        if (message.ifGenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifGenerationNotMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifGenerationNotMatch = typeof message.ifGenerationNotMatch === "number" ? BigInt(message.ifGenerationNotMatch) : $util.Long.fromBits(message.ifGenerationNotMatch.low >>> 0, message.ifGenerationNotMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifGenerationNotMatch === "number")
@@ -38313,7 +38307,7 @@
                             if (options.oneofs)
                                 object._ifGenerationNotMatch = "ifGenerationNotMatch";
                         }
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifMetagenerationMatch === "number")
@@ -38323,7 +38317,7 @@
                             if (options.oneofs)
                                 object._ifMetagenerationMatch = "ifMetagenerationMatch";
                         }
-                        if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                        if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifMetagenerationNotMatch === "number")
@@ -38333,7 +38327,7 @@
                             if (options.oneofs)
                                 object._ifMetagenerationNotMatch = "ifMetagenerationNotMatch";
                         }
-                        if (message.ifSourceGenerationMatch != null && message.hasOwnProperty("ifSourceGenerationMatch")) {
+                        if (message.ifSourceGenerationMatch != null && Object.hasOwnProperty.call(message, "ifSourceGenerationMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifSourceGenerationMatch = typeof message.ifSourceGenerationMatch === "number" ? BigInt(message.ifSourceGenerationMatch) : $util.Long.fromBits(message.ifSourceGenerationMatch.low >>> 0, message.ifSourceGenerationMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifSourceGenerationMatch === "number")
@@ -38343,7 +38337,7 @@
                             if (options.oneofs)
                                 object._ifSourceGenerationMatch = "ifSourceGenerationMatch";
                         }
-                        if (message.ifSourceGenerationNotMatch != null && message.hasOwnProperty("ifSourceGenerationNotMatch")) {
+                        if (message.ifSourceGenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifSourceGenerationNotMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifSourceGenerationNotMatch = typeof message.ifSourceGenerationNotMatch === "number" ? BigInt(message.ifSourceGenerationNotMatch) : $util.Long.fromBits(message.ifSourceGenerationNotMatch.low >>> 0, message.ifSourceGenerationNotMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifSourceGenerationNotMatch === "number")
@@ -38353,7 +38347,7 @@
                             if (options.oneofs)
                                 object._ifSourceGenerationNotMatch = "ifSourceGenerationNotMatch";
                         }
-                        if (message.ifSourceMetagenerationMatch != null && message.hasOwnProperty("ifSourceMetagenerationMatch")) {
+                        if (message.ifSourceMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifSourceMetagenerationMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifSourceMetagenerationMatch = typeof message.ifSourceMetagenerationMatch === "number" ? BigInt(message.ifSourceMetagenerationMatch) : $util.Long.fromBits(message.ifSourceMetagenerationMatch.low >>> 0, message.ifSourceMetagenerationMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifSourceMetagenerationMatch === "number")
@@ -38363,7 +38357,7 @@
                             if (options.oneofs)
                                 object._ifSourceMetagenerationMatch = "ifSourceMetagenerationMatch";
                         }
-                        if (message.ifSourceMetagenerationNotMatch != null && message.hasOwnProperty("ifSourceMetagenerationNotMatch")) {
+                        if (message.ifSourceMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifSourceMetagenerationNotMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifSourceMetagenerationNotMatch = typeof message.ifSourceMetagenerationNotMatch === "number" ? BigInt(message.ifSourceMetagenerationNotMatch) : $util.Long.fromBits(message.ifSourceMetagenerationNotMatch.low >>> 0, message.ifSourceMetagenerationNotMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifSourceMetagenerationNotMatch === "number")
@@ -38373,30 +38367,30 @@
                             if (options.oneofs)
                                 object._ifSourceMetagenerationNotMatch = "ifSourceMetagenerationNotMatch";
                         }
-                        if (message.maxBytesRewrittenPerCall != null && message.hasOwnProperty("maxBytesRewrittenPerCall"))
+                        if (message.maxBytesRewrittenPerCall != null && Object.hasOwnProperty.call(message, "maxBytesRewrittenPerCall"))
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.maxBytesRewrittenPerCall = typeof message.maxBytesRewrittenPerCall === "number" ? BigInt(message.maxBytesRewrittenPerCall) : $util.Long.fromBits(message.maxBytesRewrittenPerCall.low >>> 0, message.maxBytesRewrittenPerCall.high >>> 0, false).toBigInt();
                             else if (typeof message.maxBytesRewrittenPerCall === "number")
                                 object.maxBytesRewrittenPerCall = options.longs === String ? String(message.maxBytesRewrittenPerCall) : message.maxBytesRewrittenPerCall;
                             else
                                 object.maxBytesRewrittenPerCall = options.longs === String ? $util.Long.prototype.toString.call(message.maxBytesRewrittenPerCall) : options.longs === Number ? new $util.LongBits(message.maxBytesRewrittenPerCall.low >>> 0, message.maxBytesRewrittenPerCall.high >>> 0).toNumber() : message.maxBytesRewrittenPerCall;
-                        if (message.copySourceEncryptionAlgorithm != null && message.hasOwnProperty("copySourceEncryptionAlgorithm"))
+                        if (message.copySourceEncryptionAlgorithm != null && Object.hasOwnProperty.call(message, "copySourceEncryptionAlgorithm"))
                             object.copySourceEncryptionAlgorithm = message.copySourceEncryptionAlgorithm;
-                        if (message.commonObjectRequestParams != null && message.hasOwnProperty("commonObjectRequestParams"))
+                        if (message.commonObjectRequestParams != null && Object.hasOwnProperty.call(message, "commonObjectRequestParams"))
                             object.commonObjectRequestParams = $root.google.storage.v2.CommonObjectRequestParams.toObject(message.commonObjectRequestParams, options, q + 1);
-                        if (message.copySourceEncryptionKeyBytes != null && message.hasOwnProperty("copySourceEncryptionKeyBytes"))
+                        if (message.copySourceEncryptionKeyBytes != null && Object.hasOwnProperty.call(message, "copySourceEncryptionKeyBytes"))
                             object.copySourceEncryptionKeyBytes = options.bytes === String ? $util.base64.encode(message.copySourceEncryptionKeyBytes, 0, message.copySourceEncryptionKeyBytes.length) : options.bytes === Array ? Array.prototype.slice.call(message.copySourceEncryptionKeyBytes) : message.copySourceEncryptionKeyBytes;
-                        if (message.copySourceEncryptionKeySha256Bytes != null && message.hasOwnProperty("copySourceEncryptionKeySha256Bytes"))
+                        if (message.copySourceEncryptionKeySha256Bytes != null && Object.hasOwnProperty.call(message, "copySourceEncryptionKeySha256Bytes"))
                             object.copySourceEncryptionKeySha256Bytes = options.bytes === String ? $util.base64.encode(message.copySourceEncryptionKeySha256Bytes, 0, message.copySourceEncryptionKeySha256Bytes.length) : options.bytes === Array ? Array.prototype.slice.call(message.copySourceEncryptionKeySha256Bytes) : message.copySourceEncryptionKeySha256Bytes;
-                        if (message.destinationName != null && message.hasOwnProperty("destinationName"))
+                        if (message.destinationName != null && Object.hasOwnProperty.call(message, "destinationName"))
                             object.destinationName = message.destinationName;
-                        if (message.destinationBucket != null && message.hasOwnProperty("destinationBucket"))
+                        if (message.destinationBucket != null && Object.hasOwnProperty.call(message, "destinationBucket"))
                             object.destinationBucket = message.destinationBucket;
-                        if (message.destinationKmsKey != null && message.hasOwnProperty("destinationKmsKey"))
+                        if (message.destinationKmsKey != null && Object.hasOwnProperty.call(message, "destinationKmsKey"))
                             object.destinationKmsKey = message.destinationKmsKey;
-                        if (message.destinationPredefinedAcl != null && message.hasOwnProperty("destinationPredefinedAcl"))
+                        if (message.destinationPredefinedAcl != null && Object.hasOwnProperty.call(message, "destinationPredefinedAcl"))
                             object.destinationPredefinedAcl = message.destinationPredefinedAcl;
-                        if (message.objectChecksums != null && message.hasOwnProperty("objectChecksums"))
+                        if (message.objectChecksums != null && Object.hasOwnProperty.call(message, "objectChecksums"))
                             object.objectChecksums = $root.google.storage.v2.ObjectChecksums.toObject(message.objectChecksums, options, q + 1);
                         return object;
                     };
@@ -38635,19 +38629,19 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.totalBytesRewritten != null && message.hasOwnProperty("totalBytesRewritten"))
+                        if (message.totalBytesRewritten != null && Object.hasOwnProperty.call(message, "totalBytesRewritten"))
                             if (!$util.isInteger(message.totalBytesRewritten) && !(message.totalBytesRewritten && $util.isInteger(message.totalBytesRewritten.low) && $util.isInteger(message.totalBytesRewritten.high)))
                                 return "totalBytesRewritten: integer|Long expected";
-                        if (message.objectSize != null && message.hasOwnProperty("objectSize"))
+                        if (message.objectSize != null && Object.hasOwnProperty.call(message, "objectSize"))
                             if (!$util.isInteger(message.objectSize) && !(message.objectSize && $util.isInteger(message.objectSize.low) && $util.isInteger(message.objectSize.high)))
                                 return "objectSize: integer|Long expected";
-                        if (message.done != null && message.hasOwnProperty("done"))
+                        if (message.done != null && Object.hasOwnProperty.call(message, "done"))
                             if (typeof message.done !== "boolean")
                                 return "done: boolean expected";
-                        if (message.rewriteToken != null && message.hasOwnProperty("rewriteToken"))
+                        if (message.rewriteToken != null && Object.hasOwnProperty.call(message, "rewriteToken"))
                             if (!$util.isString(message.rewriteToken))
                                 return "rewriteToken: string expected";
-                        if (message.resource != null && message.hasOwnProperty("resource")) {
+                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource")) {
                             var error = $root.google.storage.v2.StorageObject.verify(message.resource, long + 1);
                             if (error)
                                 return "resource." + error;
@@ -38735,25 +38729,25 @@
                             object.rewriteToken = "";
                             object.resource = null;
                         }
-                        if (message.totalBytesRewritten != null && message.hasOwnProperty("totalBytesRewritten"))
+                        if (message.totalBytesRewritten != null && Object.hasOwnProperty.call(message, "totalBytesRewritten"))
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.totalBytesRewritten = typeof message.totalBytesRewritten === "number" ? BigInt(message.totalBytesRewritten) : $util.Long.fromBits(message.totalBytesRewritten.low >>> 0, message.totalBytesRewritten.high >>> 0, false).toBigInt();
                             else if (typeof message.totalBytesRewritten === "number")
                                 object.totalBytesRewritten = options.longs === String ? String(message.totalBytesRewritten) : message.totalBytesRewritten;
                             else
                                 object.totalBytesRewritten = options.longs === String ? $util.Long.prototype.toString.call(message.totalBytesRewritten) : options.longs === Number ? new $util.LongBits(message.totalBytesRewritten.low >>> 0, message.totalBytesRewritten.high >>> 0).toNumber() : message.totalBytesRewritten;
-                        if (message.objectSize != null && message.hasOwnProperty("objectSize"))
+                        if (message.objectSize != null && Object.hasOwnProperty.call(message, "objectSize"))
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.objectSize = typeof message.objectSize === "number" ? BigInt(message.objectSize) : $util.Long.fromBits(message.objectSize.low >>> 0, message.objectSize.high >>> 0, false).toBigInt();
                             else if (typeof message.objectSize === "number")
                                 object.objectSize = options.longs === String ? String(message.objectSize) : message.objectSize;
                             else
                                 object.objectSize = options.longs === String ? $util.Long.prototype.toString.call(message.objectSize) : options.longs === Number ? new $util.LongBits(message.objectSize.low >>> 0, message.objectSize.high >>> 0).toNumber() : message.objectSize;
-                        if (message.done != null && message.hasOwnProperty("done"))
+                        if (message.done != null && Object.hasOwnProperty.call(message, "done"))
                             object.done = message.done;
-                        if (message.rewriteToken != null && message.hasOwnProperty("rewriteToken"))
+                        if (message.rewriteToken != null && Object.hasOwnProperty.call(message, "rewriteToken"))
                             object.rewriteToken = message.rewriteToken;
-                        if (message.resource != null && message.hasOwnProperty("resource"))
+                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
                             object.resource = $root.google.storage.v2.StorageObject.toObject(message.resource, options, q + 1);
                         return object;
                     };
@@ -39134,51 +39128,51 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.bucket != null && message.hasOwnProperty("bucket"))
+                        if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                             if (!$util.isString(message.bucket))
                                 return "bucket: string expected";
-                        if (message.sourceObject != null && message.hasOwnProperty("sourceObject"))
+                        if (message.sourceObject != null && Object.hasOwnProperty.call(message, "sourceObject"))
                             if (!$util.isString(message.sourceObject))
                                 return "sourceObject: string expected";
-                        if (message.destinationObject != null && message.hasOwnProperty("destinationObject"))
+                        if (message.destinationObject != null && Object.hasOwnProperty.call(message, "destinationObject"))
                             if (!$util.isString(message.destinationObject))
                                 return "destinationObject: string expected";
-                        if (message.ifSourceGenerationMatch != null && message.hasOwnProperty("ifSourceGenerationMatch")) {
+                        if (message.ifSourceGenerationMatch != null && Object.hasOwnProperty.call(message, "ifSourceGenerationMatch")) {
                             properties._ifSourceGenerationMatch = 1;
                             if (!$util.isInteger(message.ifSourceGenerationMatch) && !(message.ifSourceGenerationMatch && $util.isInteger(message.ifSourceGenerationMatch.low) && $util.isInteger(message.ifSourceGenerationMatch.high)))
                                 return "ifSourceGenerationMatch: integer|Long expected";
                         }
-                        if (message.ifSourceGenerationNotMatch != null && message.hasOwnProperty("ifSourceGenerationNotMatch")) {
+                        if (message.ifSourceGenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifSourceGenerationNotMatch")) {
                             properties._ifSourceGenerationNotMatch = 1;
                             if (!$util.isInteger(message.ifSourceGenerationNotMatch) && !(message.ifSourceGenerationNotMatch && $util.isInteger(message.ifSourceGenerationNotMatch.low) && $util.isInteger(message.ifSourceGenerationNotMatch.high)))
                                 return "ifSourceGenerationNotMatch: integer|Long expected";
                         }
-                        if (message.ifSourceMetagenerationMatch != null && message.hasOwnProperty("ifSourceMetagenerationMatch")) {
+                        if (message.ifSourceMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifSourceMetagenerationMatch")) {
                             properties._ifSourceMetagenerationMatch = 1;
                             if (!$util.isInteger(message.ifSourceMetagenerationMatch) && !(message.ifSourceMetagenerationMatch && $util.isInteger(message.ifSourceMetagenerationMatch.low) && $util.isInteger(message.ifSourceMetagenerationMatch.high)))
                                 return "ifSourceMetagenerationMatch: integer|Long expected";
                         }
-                        if (message.ifSourceMetagenerationNotMatch != null && message.hasOwnProperty("ifSourceMetagenerationNotMatch")) {
+                        if (message.ifSourceMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifSourceMetagenerationNotMatch")) {
                             properties._ifSourceMetagenerationNotMatch = 1;
                             if (!$util.isInteger(message.ifSourceMetagenerationNotMatch) && !(message.ifSourceMetagenerationNotMatch && $util.isInteger(message.ifSourceMetagenerationNotMatch.low) && $util.isInteger(message.ifSourceMetagenerationNotMatch.high)))
                                 return "ifSourceMetagenerationNotMatch: integer|Long expected";
                         }
-                        if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
+                        if (message.ifGenerationMatch != null && Object.hasOwnProperty.call(message, "ifGenerationMatch")) {
                             properties._ifGenerationMatch = 1;
                             if (!$util.isInteger(message.ifGenerationMatch) && !(message.ifGenerationMatch && $util.isInteger(message.ifGenerationMatch.low) && $util.isInteger(message.ifGenerationMatch.high)))
                                 return "ifGenerationMatch: integer|Long expected";
                         }
-                        if (message.ifGenerationNotMatch != null && message.hasOwnProperty("ifGenerationNotMatch")) {
+                        if (message.ifGenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifGenerationNotMatch")) {
                             properties._ifGenerationNotMatch = 1;
                             if (!$util.isInteger(message.ifGenerationNotMatch) && !(message.ifGenerationNotMatch && $util.isInteger(message.ifGenerationNotMatch.low) && $util.isInteger(message.ifGenerationNotMatch.high)))
                                 return "ifGenerationNotMatch: integer|Long expected";
                         }
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                             properties._ifMetagenerationMatch = 1;
                             if (!$util.isInteger(message.ifMetagenerationMatch) && !(message.ifMetagenerationMatch && $util.isInteger(message.ifMetagenerationMatch.low) && $util.isInteger(message.ifMetagenerationMatch.high)))
                                 return "ifMetagenerationMatch: integer|Long expected";
                         }
-                        if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                        if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                             properties._ifMetagenerationNotMatch = 1;
                             if (!$util.isInteger(message.ifMetagenerationNotMatch) && !(message.ifMetagenerationNotMatch && $util.isInteger(message.ifMetagenerationNotMatch.low) && $util.isInteger(message.ifMetagenerationNotMatch.high)))
                                 return "ifMetagenerationNotMatch: integer|Long expected";
@@ -39307,13 +39301,13 @@
                             object.sourceObject = "";
                             object.destinationObject = "";
                         }
-                        if (message.bucket != null && message.hasOwnProperty("bucket"))
+                        if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                             object.bucket = message.bucket;
-                        if (message.sourceObject != null && message.hasOwnProperty("sourceObject"))
+                        if (message.sourceObject != null && Object.hasOwnProperty.call(message, "sourceObject"))
                             object.sourceObject = message.sourceObject;
-                        if (message.destinationObject != null && message.hasOwnProperty("destinationObject"))
+                        if (message.destinationObject != null && Object.hasOwnProperty.call(message, "destinationObject"))
                             object.destinationObject = message.destinationObject;
-                        if (message.ifSourceGenerationMatch != null && message.hasOwnProperty("ifSourceGenerationMatch")) {
+                        if (message.ifSourceGenerationMatch != null && Object.hasOwnProperty.call(message, "ifSourceGenerationMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifSourceGenerationMatch = typeof message.ifSourceGenerationMatch === "number" ? BigInt(message.ifSourceGenerationMatch) : $util.Long.fromBits(message.ifSourceGenerationMatch.low >>> 0, message.ifSourceGenerationMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifSourceGenerationMatch === "number")
@@ -39323,7 +39317,7 @@
                             if (options.oneofs)
                                 object._ifSourceGenerationMatch = "ifSourceGenerationMatch";
                         }
-                        if (message.ifSourceGenerationNotMatch != null && message.hasOwnProperty("ifSourceGenerationNotMatch")) {
+                        if (message.ifSourceGenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifSourceGenerationNotMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifSourceGenerationNotMatch = typeof message.ifSourceGenerationNotMatch === "number" ? BigInt(message.ifSourceGenerationNotMatch) : $util.Long.fromBits(message.ifSourceGenerationNotMatch.low >>> 0, message.ifSourceGenerationNotMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifSourceGenerationNotMatch === "number")
@@ -39333,7 +39327,7 @@
                             if (options.oneofs)
                                 object._ifSourceGenerationNotMatch = "ifSourceGenerationNotMatch";
                         }
-                        if (message.ifSourceMetagenerationMatch != null && message.hasOwnProperty("ifSourceMetagenerationMatch")) {
+                        if (message.ifSourceMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifSourceMetagenerationMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifSourceMetagenerationMatch = typeof message.ifSourceMetagenerationMatch === "number" ? BigInt(message.ifSourceMetagenerationMatch) : $util.Long.fromBits(message.ifSourceMetagenerationMatch.low >>> 0, message.ifSourceMetagenerationMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifSourceMetagenerationMatch === "number")
@@ -39343,7 +39337,7 @@
                             if (options.oneofs)
                                 object._ifSourceMetagenerationMatch = "ifSourceMetagenerationMatch";
                         }
-                        if (message.ifSourceMetagenerationNotMatch != null && message.hasOwnProperty("ifSourceMetagenerationNotMatch")) {
+                        if (message.ifSourceMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifSourceMetagenerationNotMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifSourceMetagenerationNotMatch = typeof message.ifSourceMetagenerationNotMatch === "number" ? BigInt(message.ifSourceMetagenerationNotMatch) : $util.Long.fromBits(message.ifSourceMetagenerationNotMatch.low >>> 0, message.ifSourceMetagenerationNotMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifSourceMetagenerationNotMatch === "number")
@@ -39353,7 +39347,7 @@
                             if (options.oneofs)
                                 object._ifSourceMetagenerationNotMatch = "ifSourceMetagenerationNotMatch";
                         }
-                        if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
+                        if (message.ifGenerationMatch != null && Object.hasOwnProperty.call(message, "ifGenerationMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifGenerationMatch = typeof message.ifGenerationMatch === "number" ? BigInt(message.ifGenerationMatch) : $util.Long.fromBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifGenerationMatch === "number")
@@ -39363,7 +39357,7 @@
                             if (options.oneofs)
                                 object._ifGenerationMatch = "ifGenerationMatch";
                         }
-                        if (message.ifGenerationNotMatch != null && message.hasOwnProperty("ifGenerationNotMatch")) {
+                        if (message.ifGenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifGenerationNotMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifGenerationNotMatch = typeof message.ifGenerationNotMatch === "number" ? BigInt(message.ifGenerationNotMatch) : $util.Long.fromBits(message.ifGenerationNotMatch.low >>> 0, message.ifGenerationNotMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifGenerationNotMatch === "number")
@@ -39373,7 +39367,7 @@
                             if (options.oneofs)
                                 object._ifGenerationNotMatch = "ifGenerationNotMatch";
                         }
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifMetagenerationMatch === "number")
@@ -39383,7 +39377,7 @@
                             if (options.oneofs)
                                 object._ifMetagenerationMatch = "ifMetagenerationMatch";
                         }
-                        if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                        if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifMetagenerationNotMatch === "number")
@@ -39600,17 +39594,17 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.writeObjectSpec != null && message.hasOwnProperty("writeObjectSpec")) {
+                        if (message.writeObjectSpec != null && Object.hasOwnProperty.call(message, "writeObjectSpec")) {
                             var error = $root.google.storage.v2.WriteObjectSpec.verify(message.writeObjectSpec, long + 1);
                             if (error)
                                 return "writeObjectSpec." + error;
                         }
-                        if (message.commonObjectRequestParams != null && message.hasOwnProperty("commonObjectRequestParams")) {
+                        if (message.commonObjectRequestParams != null && Object.hasOwnProperty.call(message, "commonObjectRequestParams")) {
                             var error = $root.google.storage.v2.CommonObjectRequestParams.verify(message.commonObjectRequestParams, long + 1);
                             if (error)
                                 return "commonObjectRequestParams." + error;
                         }
-                        if (message.objectChecksums != null && message.hasOwnProperty("objectChecksums")) {
+                        if (message.objectChecksums != null && Object.hasOwnProperty.call(message, "objectChecksums")) {
                             var error = $root.google.storage.v2.ObjectChecksums.verify(message.objectChecksums, long + 1);
                             if (error)
                                 return "objectChecksums." + error;
@@ -39676,11 +39670,11 @@
                             object.commonObjectRequestParams = null;
                             object.objectChecksums = null;
                         }
-                        if (message.writeObjectSpec != null && message.hasOwnProperty("writeObjectSpec"))
+                        if (message.writeObjectSpec != null && Object.hasOwnProperty.call(message, "writeObjectSpec"))
                             object.writeObjectSpec = $root.google.storage.v2.WriteObjectSpec.toObject(message.writeObjectSpec, options, q + 1);
-                        if (message.commonObjectRequestParams != null && message.hasOwnProperty("commonObjectRequestParams"))
+                        if (message.commonObjectRequestParams != null && Object.hasOwnProperty.call(message, "commonObjectRequestParams"))
                             object.commonObjectRequestParams = $root.google.storage.v2.CommonObjectRequestParams.toObject(message.commonObjectRequestParams, options, q + 1);
-                        if (message.objectChecksums != null && message.hasOwnProperty("objectChecksums"))
+                        if (message.objectChecksums != null && Object.hasOwnProperty.call(message, "objectChecksums"))
                             object.objectChecksums = $root.google.storage.v2.ObjectChecksums.toObject(message.objectChecksums, options, q + 1);
                         return object;
                     };
@@ -39859,7 +39853,7 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.uploadId != null && message.hasOwnProperty("uploadId"))
+                        if (message.uploadId != null && Object.hasOwnProperty.call(message, "uploadId"))
                             if (!$util.isString(message.uploadId))
                                 return "uploadId: string expected";
                         return null;
@@ -39907,7 +39901,7 @@
                         var object = {};
                         if (options.defaults)
                             object.uploadId = "";
-                        if (message.uploadId != null && message.hasOwnProperty("uploadId"))
+                        if (message.uploadId != null && Object.hasOwnProperty.call(message, "uploadId"))
                             object.uploadId = message.uploadId;
                         return object;
                     };
@@ -40234,45 +40228,45 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.object != null && message.hasOwnProperty("object")) {
+                        if (message.object != null && Object.hasOwnProperty.call(message, "object")) {
                             var error = $root.google.storage.v2.StorageObject.verify(message.object, long + 1);
                             if (error)
                                 return "object." + error;
                         }
-                        if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
+                        if (message.ifGenerationMatch != null && Object.hasOwnProperty.call(message, "ifGenerationMatch")) {
                             properties._ifGenerationMatch = 1;
                             if (!$util.isInteger(message.ifGenerationMatch) && !(message.ifGenerationMatch && $util.isInteger(message.ifGenerationMatch.low) && $util.isInteger(message.ifGenerationMatch.high)))
                                 return "ifGenerationMatch: integer|Long expected";
                         }
-                        if (message.ifGenerationNotMatch != null && message.hasOwnProperty("ifGenerationNotMatch")) {
+                        if (message.ifGenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifGenerationNotMatch")) {
                             properties._ifGenerationNotMatch = 1;
                             if (!$util.isInteger(message.ifGenerationNotMatch) && !(message.ifGenerationNotMatch && $util.isInteger(message.ifGenerationNotMatch.low) && $util.isInteger(message.ifGenerationNotMatch.high)))
                                 return "ifGenerationNotMatch: integer|Long expected";
                         }
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                             properties._ifMetagenerationMatch = 1;
                             if (!$util.isInteger(message.ifMetagenerationMatch) && !(message.ifMetagenerationMatch && $util.isInteger(message.ifMetagenerationMatch.low) && $util.isInteger(message.ifMetagenerationMatch.high)))
                                 return "ifMetagenerationMatch: integer|Long expected";
                         }
-                        if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                        if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                             properties._ifMetagenerationNotMatch = 1;
                             if (!$util.isInteger(message.ifMetagenerationNotMatch) && !(message.ifMetagenerationNotMatch && $util.isInteger(message.ifMetagenerationNotMatch.low) && $util.isInteger(message.ifMetagenerationNotMatch.high)))
                                 return "ifMetagenerationNotMatch: integer|Long expected";
                         }
-                        if (message.predefinedAcl != null && message.hasOwnProperty("predefinedAcl"))
+                        if (message.predefinedAcl != null && Object.hasOwnProperty.call(message, "predefinedAcl"))
                             if (!$util.isString(message.predefinedAcl))
                                 return "predefinedAcl: string expected";
-                        if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                        if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask")) {
                             var error = $root.google.protobuf.FieldMask.verify(message.updateMask, long + 1);
                             if (error)
                                 return "updateMask." + error;
                         }
-                        if (message.commonObjectRequestParams != null && message.hasOwnProperty("commonObjectRequestParams")) {
+                        if (message.commonObjectRequestParams != null && Object.hasOwnProperty.call(message, "commonObjectRequestParams")) {
                             var error = $root.google.storage.v2.CommonObjectRequestParams.verify(message.commonObjectRequestParams, long + 1);
                             if (error)
                                 return "commonObjectRequestParams." + error;
                         }
-                        if (message.overrideUnlockedRetention != null && message.hasOwnProperty("overrideUnlockedRetention"))
+                        if (message.overrideUnlockedRetention != null && Object.hasOwnProperty.call(message, "overrideUnlockedRetention"))
                             if (typeof message.overrideUnlockedRetention !== "boolean")
                                 return "overrideUnlockedRetention: boolean expected";
                         return null;
@@ -40378,9 +40372,9 @@
                             object.predefinedAcl = "";
                             object.overrideUnlockedRetention = false;
                         }
-                        if (message.object != null && message.hasOwnProperty("object"))
+                        if (message.object != null && Object.hasOwnProperty.call(message, "object"))
                             object.object = $root.google.storage.v2.StorageObject.toObject(message.object, options, q + 1);
-                        if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
+                        if (message.ifGenerationMatch != null && Object.hasOwnProperty.call(message, "ifGenerationMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifGenerationMatch = typeof message.ifGenerationMatch === "number" ? BigInt(message.ifGenerationMatch) : $util.Long.fromBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifGenerationMatch === "number")
@@ -40390,7 +40384,7 @@
                             if (options.oneofs)
                                 object._ifGenerationMatch = "ifGenerationMatch";
                         }
-                        if (message.ifGenerationNotMatch != null && message.hasOwnProperty("ifGenerationNotMatch")) {
+                        if (message.ifGenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifGenerationNotMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifGenerationNotMatch = typeof message.ifGenerationNotMatch === "number" ? BigInt(message.ifGenerationNotMatch) : $util.Long.fromBits(message.ifGenerationNotMatch.low >>> 0, message.ifGenerationNotMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifGenerationNotMatch === "number")
@@ -40400,7 +40394,7 @@
                             if (options.oneofs)
                                 object._ifGenerationNotMatch = "ifGenerationNotMatch";
                         }
-                        if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
+                        if (message.ifMetagenerationMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifMetagenerationMatch === "number")
@@ -40410,7 +40404,7 @@
                             if (options.oneofs)
                                 object._ifMetagenerationMatch = "ifMetagenerationMatch";
                         }
-                        if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
+                        if (message.ifMetagenerationNotMatch != null && Object.hasOwnProperty.call(message, "ifMetagenerationNotMatch")) {
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
                             else if (typeof message.ifMetagenerationNotMatch === "number")
@@ -40420,13 +40414,13 @@
                             if (options.oneofs)
                                 object._ifMetagenerationNotMatch = "ifMetagenerationNotMatch";
                         }
-                        if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                        if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
                             object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options, q + 1);
-                        if (message.commonObjectRequestParams != null && message.hasOwnProperty("commonObjectRequestParams"))
+                        if (message.commonObjectRequestParams != null && Object.hasOwnProperty.call(message, "commonObjectRequestParams"))
                             object.commonObjectRequestParams = $root.google.storage.v2.CommonObjectRequestParams.toObject(message.commonObjectRequestParams, options, q + 1);
-                        if (message.predefinedAcl != null && message.hasOwnProperty("predefinedAcl"))
+                        if (message.predefinedAcl != null && Object.hasOwnProperty.call(message, "predefinedAcl"))
                             object.predefinedAcl = message.predefinedAcl;
-                        if (message.overrideUnlockedRetention != null && message.hasOwnProperty("overrideUnlockedRetention"))
+                        if (message.overrideUnlockedRetention != null && Object.hasOwnProperty.call(message, "overrideUnlockedRetention"))
                             object.overrideUnlockedRetention = message.overrideUnlockedRetention;
                         return object;
                     };
@@ -40635,13 +40629,13 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.encryptionAlgorithm != null && message.hasOwnProperty("encryptionAlgorithm"))
+                        if (message.encryptionAlgorithm != null && Object.hasOwnProperty.call(message, "encryptionAlgorithm"))
                             if (!$util.isString(message.encryptionAlgorithm))
                                 return "encryptionAlgorithm: string expected";
-                        if (message.encryptionKeyBytes != null && message.hasOwnProperty("encryptionKeyBytes"))
+                        if (message.encryptionKeyBytes != null && Object.hasOwnProperty.call(message, "encryptionKeyBytes"))
                             if (!(message.encryptionKeyBytes && typeof message.encryptionKeyBytes.length === "number" || $util.isString(message.encryptionKeyBytes)))
                                 return "encryptionKeyBytes: buffer expected";
-                        if (message.encryptionKeySha256Bytes != null && message.hasOwnProperty("encryptionKeySha256Bytes"))
+                        if (message.encryptionKeySha256Bytes != null && Object.hasOwnProperty.call(message, "encryptionKeySha256Bytes"))
                             if (!(message.encryptionKeySha256Bytes && typeof message.encryptionKeySha256Bytes.length === "number" || $util.isString(message.encryptionKeySha256Bytes)))
                                 return "encryptionKeySha256Bytes: buffer expected";
                         return null;
@@ -40714,11 +40708,11 @@
                                     object.encryptionKeySha256Bytes = $util.newBuffer(object.encryptionKeySha256Bytes);
                             }
                         }
-                        if (message.encryptionAlgorithm != null && message.hasOwnProperty("encryptionAlgorithm"))
+                        if (message.encryptionAlgorithm != null && Object.hasOwnProperty.call(message, "encryptionAlgorithm"))
                             object.encryptionAlgorithm = message.encryptionAlgorithm;
-                        if (message.encryptionKeyBytes != null && message.hasOwnProperty("encryptionKeyBytes"))
+                        if (message.encryptionKeyBytes != null && Object.hasOwnProperty.call(message, "encryptionKeyBytes"))
                             object.encryptionKeyBytes = options.bytes === String ? $util.base64.encode(message.encryptionKeyBytes, 0, message.encryptionKeyBytes.length) : options.bytes === Array ? Array.prototype.slice.call(message.encryptionKeyBytes) : message.encryptionKeyBytes;
-                        if (message.encryptionKeySha256Bytes != null && message.hasOwnProperty("encryptionKeySha256Bytes"))
+                        if (message.encryptionKeySha256Bytes != null && Object.hasOwnProperty.call(message, "encryptionKeySha256Bytes"))
                             object.encryptionKeySha256Bytes = options.bytes === String ? $util.base64.encode(message.encryptionKeySha256Bytes, 0, message.encryptionKeySha256Bytes.length) : options.bytes === Array ? Array.prototype.slice.call(message.encryptionKeySha256Bytes) : message.encryptionKeySha256Bytes;
                         return object;
                     };
@@ -40896,12 +40890,6 @@
                     ServiceConstants.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.storage.v2.ServiceConstants)
                             return object;
-                        if (!$util.isObject(object))
-                            throw TypeError(".google.storage.v2.ServiceConstants: object expected");
-                        if (long === undefined)
-                            long = 0;
-                        if (long > $util.recursionLimit)
-                            throw Error("maximum nesting depth exceeded");
                         return new $root.google.storage.v2.ServiceConstants();
                     };
     
@@ -41648,34 +41636,34 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.name != null && message.hasOwnProperty("name"))
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
-                        if (message.bucketId != null && message.hasOwnProperty("bucketId"))
+                        if (message.bucketId != null && Object.hasOwnProperty.call(message, "bucketId"))
                             if (!$util.isString(message.bucketId))
                                 return "bucketId: string expected";
-                        if (message.etag != null && message.hasOwnProperty("etag"))
+                        if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                             if (!$util.isString(message.etag))
                                 return "etag: string expected";
-                        if (message.project != null && message.hasOwnProperty("project"))
+                        if (message.project != null && Object.hasOwnProperty.call(message, "project"))
                             if (!$util.isString(message.project))
                                 return "project: string expected";
-                        if (message.metageneration != null && message.hasOwnProperty("metageneration"))
+                        if (message.metageneration != null && Object.hasOwnProperty.call(message, "metageneration"))
                             if (!$util.isInteger(message.metageneration) && !(message.metageneration && $util.isInteger(message.metageneration.low) && $util.isInteger(message.metageneration.high)))
                                 return "metageneration: integer|Long expected";
-                        if (message.location != null && message.hasOwnProperty("location"))
+                        if (message.location != null && Object.hasOwnProperty.call(message, "location"))
                             if (!$util.isString(message.location))
                                 return "location: string expected";
-                        if (message.locationType != null && message.hasOwnProperty("locationType"))
+                        if (message.locationType != null && Object.hasOwnProperty.call(message, "locationType"))
                             if (!$util.isString(message.locationType))
                                 return "locationType: string expected";
-                        if (message.storageClass != null && message.hasOwnProperty("storageClass"))
+                        if (message.storageClass != null && Object.hasOwnProperty.call(message, "storageClass"))
                             if (!$util.isString(message.storageClass))
                                 return "storageClass: string expected";
-                        if (message.rpo != null && message.hasOwnProperty("rpo"))
+                        if (message.rpo != null && Object.hasOwnProperty.call(message, "rpo"))
                             if (!$util.isString(message.rpo))
                                 return "rpo: string expected";
-                        if (message.acl != null && message.hasOwnProperty("acl")) {
+                        if (message.acl != null && Object.hasOwnProperty.call(message, "acl")) {
                             if (!Array.isArray(message.acl))
                                 return "acl: array expected";
                             for (var i = 0; i < message.acl.length; ++i) {
@@ -41684,7 +41672,7 @@
                                     return "acl." + error;
                             }
                         }
-                        if (message.defaultObjectAcl != null && message.hasOwnProperty("defaultObjectAcl")) {
+                        if (message.defaultObjectAcl != null && Object.hasOwnProperty.call(message, "defaultObjectAcl")) {
                             if (!Array.isArray(message.defaultObjectAcl))
                                 return "defaultObjectAcl: array expected";
                             for (var i = 0; i < message.defaultObjectAcl.length; ++i) {
@@ -41693,17 +41681,17 @@
                                     return "defaultObjectAcl." + error;
                             }
                         }
-                        if (message.lifecycle != null && message.hasOwnProperty("lifecycle")) {
+                        if (message.lifecycle != null && Object.hasOwnProperty.call(message, "lifecycle")) {
                             var error = $root.google.storage.v2.Bucket.Lifecycle.verify(message.lifecycle, long + 1);
                             if (error)
                                 return "lifecycle." + error;
                         }
-                        if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                        if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime")) {
                             var error = $root.google.protobuf.Timestamp.verify(message.createTime, long + 1);
                             if (error)
                                 return "createTime." + error;
                         }
-                        if (message.cors != null && message.hasOwnProperty("cors")) {
+                        if (message.cors != null && Object.hasOwnProperty.call(message, "cors")) {
                             if (!Array.isArray(message.cors))
                                 return "cors: array expected";
                             for (var i = 0; i < message.cors.length; ++i) {
@@ -41712,15 +41700,15 @@
                                     return "cors." + error;
                             }
                         }
-                        if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                        if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime")) {
                             var error = $root.google.protobuf.Timestamp.verify(message.updateTime, long + 1);
                             if (error)
                                 return "updateTime." + error;
                         }
-                        if (message.defaultEventBasedHold != null && message.hasOwnProperty("defaultEventBasedHold"))
+                        if (message.defaultEventBasedHold != null && Object.hasOwnProperty.call(message, "defaultEventBasedHold"))
                             if (typeof message.defaultEventBasedHold !== "boolean")
                                 return "defaultEventBasedHold: boolean expected";
-                        if (message.labels != null && message.hasOwnProperty("labels")) {
+                        if (message.labels != null && Object.hasOwnProperty.call(message, "labels")) {
                             if (!$util.isObject(message.labels))
                                 return "labels: object expected";
                             var key = Object.keys(message.labels);
@@ -41728,75 +41716,75 @@
                                 if (!$util.isString(message.labels[key[i]]))
                                     return "labels: string{k:string} expected";
                         }
-                        if (message.website != null && message.hasOwnProperty("website")) {
+                        if (message.website != null && Object.hasOwnProperty.call(message, "website")) {
                             var error = $root.google.storage.v2.Bucket.Website.verify(message.website, long + 1);
                             if (error)
                                 return "website." + error;
                         }
-                        if (message.versioning != null && message.hasOwnProperty("versioning")) {
+                        if (message.versioning != null && Object.hasOwnProperty.call(message, "versioning")) {
                             var error = $root.google.storage.v2.Bucket.Versioning.verify(message.versioning, long + 1);
                             if (error)
                                 return "versioning." + error;
                         }
-                        if (message.logging != null && message.hasOwnProperty("logging")) {
+                        if (message.logging != null && Object.hasOwnProperty.call(message, "logging")) {
                             var error = $root.google.storage.v2.Bucket.Logging.verify(message.logging, long + 1);
                             if (error)
                                 return "logging." + error;
                         }
-                        if (message.owner != null && message.hasOwnProperty("owner")) {
+                        if (message.owner != null && Object.hasOwnProperty.call(message, "owner")) {
                             var error = $root.google.storage.v2.Owner.verify(message.owner, long + 1);
                             if (error)
                                 return "owner." + error;
                         }
-                        if (message.encryption != null && message.hasOwnProperty("encryption")) {
+                        if (message.encryption != null && Object.hasOwnProperty.call(message, "encryption")) {
                             var error = $root.google.storage.v2.Bucket.Encryption.verify(message.encryption, long + 1);
                             if (error)
                                 return "encryption." + error;
                         }
-                        if (message.billing != null && message.hasOwnProperty("billing")) {
+                        if (message.billing != null && Object.hasOwnProperty.call(message, "billing")) {
                             var error = $root.google.storage.v2.Bucket.Billing.verify(message.billing, long + 1);
                             if (error)
                                 return "billing." + error;
                         }
-                        if (message.retentionPolicy != null && message.hasOwnProperty("retentionPolicy")) {
+                        if (message.retentionPolicy != null && Object.hasOwnProperty.call(message, "retentionPolicy")) {
                             var error = $root.google.storage.v2.Bucket.RetentionPolicy.verify(message.retentionPolicy, long + 1);
                             if (error)
                                 return "retentionPolicy." + error;
                         }
-                        if (message.iamConfig != null && message.hasOwnProperty("iamConfig")) {
+                        if (message.iamConfig != null && Object.hasOwnProperty.call(message, "iamConfig")) {
                             var error = $root.google.storage.v2.Bucket.IamConfig.verify(message.iamConfig, long + 1);
                             if (error)
                                 return "iamConfig." + error;
                         }
-                        if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
+                        if (message.satisfiesPzs != null && Object.hasOwnProperty.call(message, "satisfiesPzs"))
                             if (typeof message.satisfiesPzs !== "boolean")
                                 return "satisfiesPzs: boolean expected";
-                        if (message.customPlacementConfig != null && message.hasOwnProperty("customPlacementConfig")) {
+                        if (message.customPlacementConfig != null && Object.hasOwnProperty.call(message, "customPlacementConfig")) {
                             var error = $root.google.storage.v2.Bucket.CustomPlacementConfig.verify(message.customPlacementConfig, long + 1);
                             if (error)
                                 return "customPlacementConfig." + error;
                         }
-                        if (message.autoclass != null && message.hasOwnProperty("autoclass")) {
+                        if (message.autoclass != null && Object.hasOwnProperty.call(message, "autoclass")) {
                             var error = $root.google.storage.v2.Bucket.Autoclass.verify(message.autoclass, long + 1);
                             if (error)
                                 return "autoclass." + error;
                         }
-                        if (message.hierarchicalNamespace != null && message.hasOwnProperty("hierarchicalNamespace")) {
+                        if (message.hierarchicalNamespace != null && Object.hasOwnProperty.call(message, "hierarchicalNamespace")) {
                             var error = $root.google.storage.v2.Bucket.HierarchicalNamespace.verify(message.hierarchicalNamespace, long + 1);
                             if (error)
                                 return "hierarchicalNamespace." + error;
                         }
-                        if (message.softDeletePolicy != null && message.hasOwnProperty("softDeletePolicy")) {
+                        if (message.softDeletePolicy != null && Object.hasOwnProperty.call(message, "softDeletePolicy")) {
                             var error = $root.google.storage.v2.Bucket.SoftDeletePolicy.verify(message.softDeletePolicy, long + 1);
                             if (error)
                                 return "softDeletePolicy." + error;
                         }
-                        if (message.objectRetention != null && message.hasOwnProperty("objectRetention")) {
+                        if (message.objectRetention != null && Object.hasOwnProperty.call(message, "objectRetention")) {
                             var error = $root.google.storage.v2.Bucket.ObjectRetention.verify(message.objectRetention, long + 1);
                             if (error)
                                 return "objectRetention." + error;
                         }
-                        if (message.ipFilter != null && message.hasOwnProperty("ipFilter")) {
+                        if (message.ipFilter != null && Object.hasOwnProperty.call(message, "ipFilter")) {
                             properties._ipFilter = 1;
                             {
                                 var error = $root.google.storage.v2.Bucket.IpFilter.verify(message.ipFilter, long + 1);
@@ -42039,24 +42027,24 @@
                             object.hierarchicalNamespace = null;
                             object.objectRetention = null;
                         }
-                        if (message.name != null && message.hasOwnProperty("name"))
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             object.name = message.name;
-                        if (message.bucketId != null && message.hasOwnProperty("bucketId"))
+                        if (message.bucketId != null && Object.hasOwnProperty.call(message, "bucketId"))
                             object.bucketId = message.bucketId;
-                        if (message.project != null && message.hasOwnProperty("project"))
+                        if (message.project != null && Object.hasOwnProperty.call(message, "project"))
                             object.project = message.project;
-                        if (message.metageneration != null && message.hasOwnProperty("metageneration"))
+                        if (message.metageneration != null && Object.hasOwnProperty.call(message, "metageneration"))
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.metageneration = typeof message.metageneration === "number" ? BigInt(message.metageneration) : $util.Long.fromBits(message.metageneration.low >>> 0, message.metageneration.high >>> 0, false).toBigInt();
                             else if (typeof message.metageneration === "number")
                                 object.metageneration = options.longs === String ? String(message.metageneration) : message.metageneration;
                             else
                                 object.metageneration = options.longs === String ? $util.Long.prototype.toString.call(message.metageneration) : options.longs === Number ? new $util.LongBits(message.metageneration.low >>> 0, message.metageneration.high >>> 0).toNumber() : message.metageneration;
-                        if (message.location != null && message.hasOwnProperty("location"))
+                        if (message.location != null && Object.hasOwnProperty.call(message, "location"))
                             object.location = message.location;
-                        if (message.locationType != null && message.hasOwnProperty("locationType"))
+                        if (message.locationType != null && Object.hasOwnProperty.call(message, "locationType"))
                             object.locationType = message.locationType;
-                        if (message.storageClass != null && message.hasOwnProperty("storageClass"))
+                        if (message.storageClass != null && Object.hasOwnProperty.call(message, "storageClass"))
                             object.storageClass = message.storageClass;
                         if (message.acl && message.acl.length) {
                             object.acl = [];
@@ -42068,18 +42056,18 @@
                             for (var j = 0; j < message.defaultObjectAcl.length; ++j)
                                 object.defaultObjectAcl[j] = $root.google.storage.v2.ObjectAccessControl.toObject(message.defaultObjectAcl[j], options, q + 1);
                         }
-                        if (message.lifecycle != null && message.hasOwnProperty("lifecycle"))
+                        if (message.lifecycle != null && Object.hasOwnProperty.call(message, "lifecycle"))
                             object.lifecycle = $root.google.storage.v2.Bucket.Lifecycle.toObject(message.lifecycle, options, q + 1);
-                        if (message.createTime != null && message.hasOwnProperty("createTime"))
+                        if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
                             object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options, q + 1);
                         if (message.cors && message.cors.length) {
                             object.cors = [];
                             for (var j = 0; j < message.cors.length; ++j)
                                 object.cors[j] = $root.google.storage.v2.Bucket.Cors.toObject(message.cors[j], options, q + 1);
                         }
-                        if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                        if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
                             object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options, q + 1);
-                        if (message.defaultEventBasedHold != null && message.hasOwnProperty("defaultEventBasedHold"))
+                        if (message.defaultEventBasedHold != null && Object.hasOwnProperty.call(message, "defaultEventBasedHold"))
                             object.defaultEventBasedHold = message.defaultEventBasedHold;
                         var keys2;
                         if (message.labels && (keys2 = Object.keys(message.labels)).length) {
@@ -42090,39 +42078,39 @@
                                 object.labels[keys2[j]] = message.labels[keys2[j]];
                             }
                         }
-                        if (message.website != null && message.hasOwnProperty("website"))
+                        if (message.website != null && Object.hasOwnProperty.call(message, "website"))
                             object.website = $root.google.storage.v2.Bucket.Website.toObject(message.website, options, q + 1);
-                        if (message.versioning != null && message.hasOwnProperty("versioning"))
+                        if (message.versioning != null && Object.hasOwnProperty.call(message, "versioning"))
                             object.versioning = $root.google.storage.v2.Bucket.Versioning.toObject(message.versioning, options, q + 1);
-                        if (message.logging != null && message.hasOwnProperty("logging"))
+                        if (message.logging != null && Object.hasOwnProperty.call(message, "logging"))
                             object.logging = $root.google.storage.v2.Bucket.Logging.toObject(message.logging, options, q + 1);
-                        if (message.owner != null && message.hasOwnProperty("owner"))
+                        if (message.owner != null && Object.hasOwnProperty.call(message, "owner"))
                             object.owner = $root.google.storage.v2.Owner.toObject(message.owner, options, q + 1);
-                        if (message.encryption != null && message.hasOwnProperty("encryption"))
+                        if (message.encryption != null && Object.hasOwnProperty.call(message, "encryption"))
                             object.encryption = $root.google.storage.v2.Bucket.Encryption.toObject(message.encryption, options, q + 1);
-                        if (message.billing != null && message.hasOwnProperty("billing"))
+                        if (message.billing != null && Object.hasOwnProperty.call(message, "billing"))
                             object.billing = $root.google.storage.v2.Bucket.Billing.toObject(message.billing, options, q + 1);
-                        if (message.retentionPolicy != null && message.hasOwnProperty("retentionPolicy"))
+                        if (message.retentionPolicy != null && Object.hasOwnProperty.call(message, "retentionPolicy"))
                             object.retentionPolicy = $root.google.storage.v2.Bucket.RetentionPolicy.toObject(message.retentionPolicy, options, q + 1);
-                        if (message.iamConfig != null && message.hasOwnProperty("iamConfig"))
+                        if (message.iamConfig != null && Object.hasOwnProperty.call(message, "iamConfig"))
                             object.iamConfig = $root.google.storage.v2.Bucket.IamConfig.toObject(message.iamConfig, options, q + 1);
-                        if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
+                        if (message.satisfiesPzs != null && Object.hasOwnProperty.call(message, "satisfiesPzs"))
                             object.satisfiesPzs = message.satisfiesPzs;
-                        if (message.customPlacementConfig != null && message.hasOwnProperty("customPlacementConfig"))
+                        if (message.customPlacementConfig != null && Object.hasOwnProperty.call(message, "customPlacementConfig"))
                             object.customPlacementConfig = $root.google.storage.v2.Bucket.CustomPlacementConfig.toObject(message.customPlacementConfig, options, q + 1);
-                        if (message.rpo != null && message.hasOwnProperty("rpo"))
+                        if (message.rpo != null && Object.hasOwnProperty.call(message, "rpo"))
                             object.rpo = message.rpo;
-                        if (message.autoclass != null && message.hasOwnProperty("autoclass"))
+                        if (message.autoclass != null && Object.hasOwnProperty.call(message, "autoclass"))
                             object.autoclass = $root.google.storage.v2.Bucket.Autoclass.toObject(message.autoclass, options, q + 1);
-                        if (message.etag != null && message.hasOwnProperty("etag"))
+                        if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                             object.etag = message.etag;
-                        if (message.softDeletePolicy != null && message.hasOwnProperty("softDeletePolicy"))
+                        if (message.softDeletePolicy != null && Object.hasOwnProperty.call(message, "softDeletePolicy"))
                             object.softDeletePolicy = $root.google.storage.v2.Bucket.SoftDeletePolicy.toObject(message.softDeletePolicy, options, q + 1);
-                        if (message.hierarchicalNamespace != null && message.hasOwnProperty("hierarchicalNamespace"))
+                        if (message.hierarchicalNamespace != null && Object.hasOwnProperty.call(message, "hierarchicalNamespace"))
                             object.hierarchicalNamespace = $root.google.storage.v2.Bucket.HierarchicalNamespace.toObject(message.hierarchicalNamespace, options, q + 1);
-                        if (message.objectRetention != null && message.hasOwnProperty("objectRetention"))
+                        if (message.objectRetention != null && Object.hasOwnProperty.call(message, "objectRetention"))
                             object.objectRetention = $root.google.storage.v2.Bucket.ObjectRetention.toObject(message.objectRetention, options, q + 1);
-                        if (message.ipFilter != null && message.hasOwnProperty("ipFilter")) {
+                        if (message.ipFilter != null && Object.hasOwnProperty.call(message, "ipFilter")) {
                             object.ipFilter = $root.google.storage.v2.Bucket.IpFilter.toObject(message.ipFilter, options, q + 1);
                             if (options.oneofs)
                                 object._ipFilter = "ipFilter";
@@ -42301,7 +42289,7 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.requesterPays != null && message.hasOwnProperty("requesterPays"))
+                            if (message.requesterPays != null && Object.hasOwnProperty.call(message, "requesterPays"))
                                 if (typeof message.requesterPays !== "boolean")
                                     return "requesterPays: boolean expected";
                             return null;
@@ -42349,7 +42337,7 @@
                             var object = {};
                             if (options.defaults)
                                 object.requesterPays = false;
-                            if (message.requesterPays != null && message.hasOwnProperty("requesterPays"))
+                            if (message.requesterPays != null && Object.hasOwnProperty.call(message, "requesterPays"))
                                 object.requesterPays = message.requesterPays;
                             return object;
                         };
@@ -42585,28 +42573,28 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.origin != null && message.hasOwnProperty("origin")) {
+                            if (message.origin != null && Object.hasOwnProperty.call(message, "origin")) {
                                 if (!Array.isArray(message.origin))
                                     return "origin: array expected";
                                 for (var i = 0; i < message.origin.length; ++i)
                                     if (!$util.isString(message.origin[i]))
                                         return "origin: string[] expected";
                             }
-                            if (message.method != null && message.hasOwnProperty("method")) {
+                            if (message.method != null && Object.hasOwnProperty.call(message, "method")) {
                                 if (!Array.isArray(message.method))
                                     return "method: array expected";
                                 for (var i = 0; i < message.method.length; ++i)
                                     if (!$util.isString(message.method[i]))
                                         return "method: string[] expected";
                             }
-                            if (message.responseHeader != null && message.hasOwnProperty("responseHeader")) {
+                            if (message.responseHeader != null && Object.hasOwnProperty.call(message, "responseHeader")) {
                                 if (!Array.isArray(message.responseHeader))
                                     return "responseHeader: array expected";
                                 for (var i = 0; i < message.responseHeader.length; ++i)
                                     if (!$util.isString(message.responseHeader[i]))
                                         return "responseHeader: string[] expected";
                             }
-                            if (message.maxAgeSeconds != null && message.hasOwnProperty("maxAgeSeconds"))
+                            if (message.maxAgeSeconds != null && Object.hasOwnProperty.call(message, "maxAgeSeconds"))
                                 if (!$util.isInteger(message.maxAgeSeconds))
                                     return "maxAgeSeconds: integer expected";
                             return null;
@@ -42695,7 +42683,7 @@
                                 for (var j = 0; j < message.responseHeader.length; ++j)
                                     object.responseHeader[j] = message.responseHeader[j];
                             }
-                            if (message.maxAgeSeconds != null && message.hasOwnProperty("maxAgeSeconds"))
+                            if (message.maxAgeSeconds != null && Object.hasOwnProperty.call(message, "maxAgeSeconds"))
                                 object.maxAgeSeconds = message.maxAgeSeconds;
                             return object;
                         };
@@ -42941,10 +42929,10 @@
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
                             var properties = {};
-                            if (message.defaultKmsKey != null && message.hasOwnProperty("defaultKmsKey"))
+                            if (message.defaultKmsKey != null && Object.hasOwnProperty.call(message, "defaultKmsKey"))
                                 if (!$util.isString(message.defaultKmsKey))
                                     return "defaultKmsKey: string expected";
-                            if (message.googleManagedEncryptionEnforcementConfig != null && message.hasOwnProperty("googleManagedEncryptionEnforcementConfig")) {
+                            if (message.googleManagedEncryptionEnforcementConfig != null && Object.hasOwnProperty.call(message, "googleManagedEncryptionEnforcementConfig")) {
                                 properties._googleManagedEncryptionEnforcementConfig = 1;
                                 {
                                     var error = $root.google.storage.v2.Bucket.Encryption.GoogleManagedEncryptionEnforcementConfig.verify(message.googleManagedEncryptionEnforcementConfig, long + 1);
@@ -42952,7 +42940,7 @@
                                         return "googleManagedEncryptionEnforcementConfig." + error;
                                 }
                             }
-                            if (message.customerManagedEncryptionEnforcementConfig != null && message.hasOwnProperty("customerManagedEncryptionEnforcementConfig")) {
+                            if (message.customerManagedEncryptionEnforcementConfig != null && Object.hasOwnProperty.call(message, "customerManagedEncryptionEnforcementConfig")) {
                                 properties._customerManagedEncryptionEnforcementConfig = 1;
                                 {
                                     var error = $root.google.storage.v2.Bucket.Encryption.CustomerManagedEncryptionEnforcementConfig.verify(message.customerManagedEncryptionEnforcementConfig, long + 1);
@@ -42960,7 +42948,7 @@
                                         return "customerManagedEncryptionEnforcementConfig." + error;
                                 }
                             }
-                            if (message.customerSuppliedEncryptionEnforcementConfig != null && message.hasOwnProperty("customerSuppliedEncryptionEnforcementConfig")) {
+                            if (message.customerSuppliedEncryptionEnforcementConfig != null && Object.hasOwnProperty.call(message, "customerSuppliedEncryptionEnforcementConfig")) {
                                 properties._customerSuppliedEncryptionEnforcementConfig = 1;
                                 {
                                     var error = $root.google.storage.v2.Bucket.Encryption.CustomerSuppliedEncryptionEnforcementConfig.verify(message.customerSuppliedEncryptionEnforcementConfig, long + 1);
@@ -43028,19 +43016,19 @@
                             var object = {};
                             if (options.defaults)
                                 object.defaultKmsKey = "";
-                            if (message.defaultKmsKey != null && message.hasOwnProperty("defaultKmsKey"))
+                            if (message.defaultKmsKey != null && Object.hasOwnProperty.call(message, "defaultKmsKey"))
                                 object.defaultKmsKey = message.defaultKmsKey;
-                            if (message.googleManagedEncryptionEnforcementConfig != null && message.hasOwnProperty("googleManagedEncryptionEnforcementConfig")) {
+                            if (message.googleManagedEncryptionEnforcementConfig != null && Object.hasOwnProperty.call(message, "googleManagedEncryptionEnforcementConfig")) {
                                 object.googleManagedEncryptionEnforcementConfig = $root.google.storage.v2.Bucket.Encryption.GoogleManagedEncryptionEnforcementConfig.toObject(message.googleManagedEncryptionEnforcementConfig, options, q + 1);
                                 if (options.oneofs)
                                     object._googleManagedEncryptionEnforcementConfig = "googleManagedEncryptionEnforcementConfig";
                             }
-                            if (message.customerManagedEncryptionEnforcementConfig != null && message.hasOwnProperty("customerManagedEncryptionEnforcementConfig")) {
+                            if (message.customerManagedEncryptionEnforcementConfig != null && Object.hasOwnProperty.call(message, "customerManagedEncryptionEnforcementConfig")) {
                                 object.customerManagedEncryptionEnforcementConfig = $root.google.storage.v2.Bucket.Encryption.CustomerManagedEncryptionEnforcementConfig.toObject(message.customerManagedEncryptionEnforcementConfig, options, q + 1);
                                 if (options.oneofs)
                                     object._customerManagedEncryptionEnforcementConfig = "customerManagedEncryptionEnforcementConfig";
                             }
-                            if (message.customerSuppliedEncryptionEnforcementConfig != null && message.hasOwnProperty("customerSuppliedEncryptionEnforcementConfig")) {
+                            if (message.customerSuppliedEncryptionEnforcementConfig != null && Object.hasOwnProperty.call(message, "customerSuppliedEncryptionEnforcementConfig")) {
                                 object.customerSuppliedEncryptionEnforcementConfig = $root.google.storage.v2.Bucket.Encryption.CustomerSuppliedEncryptionEnforcementConfig.toObject(message.customerSuppliedEncryptionEnforcementConfig, options, q + 1);
                                 if (options.oneofs)
                                     object._customerSuppliedEncryptionEnforcementConfig = "customerSuppliedEncryptionEnforcementConfig";
@@ -43250,12 +43238,12 @@
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
                                 var properties = {};
-                                if (message.restrictionMode != null && message.hasOwnProperty("restrictionMode")) {
+                                if (message.restrictionMode != null && Object.hasOwnProperty.call(message, "restrictionMode")) {
                                     properties._restrictionMode = 1;
                                     if (!$util.isString(message.restrictionMode))
                                         return "restrictionMode: string expected";
                                 }
-                                if (message.effectiveTime != null && message.hasOwnProperty("effectiveTime")) {
+                                if (message.effectiveTime != null && Object.hasOwnProperty.call(message, "effectiveTime")) {
                                     properties._effectiveTime = 1;
                                     {
                                         var error = $root.google.protobuf.Timestamp.verify(message.effectiveTime, long + 1);
@@ -43311,12 +43299,12 @@
                                 if (q > $util.recursionLimit)
                                     throw Error("max depth exceeded");
                                 var object = {};
-                                if (message.effectiveTime != null && message.hasOwnProperty("effectiveTime")) {
+                                if (message.effectiveTime != null && Object.hasOwnProperty.call(message, "effectiveTime")) {
                                     object.effectiveTime = $root.google.protobuf.Timestamp.toObject(message.effectiveTime, options, q + 1);
                                     if (options.oneofs)
                                         object._effectiveTime = "effectiveTime";
                                 }
-                                if (message.restrictionMode != null && message.hasOwnProperty("restrictionMode")) {
+                                if (message.restrictionMode != null && Object.hasOwnProperty.call(message, "restrictionMode")) {
                                     object.restrictionMode = message.restrictionMode;
                                     if (options.oneofs)
                                         object._restrictionMode = "restrictionMode";
@@ -43529,12 +43517,12 @@
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
                                 var properties = {};
-                                if (message.restrictionMode != null && message.hasOwnProperty("restrictionMode")) {
+                                if (message.restrictionMode != null && Object.hasOwnProperty.call(message, "restrictionMode")) {
                                     properties._restrictionMode = 1;
                                     if (!$util.isString(message.restrictionMode))
                                         return "restrictionMode: string expected";
                                 }
-                                if (message.effectiveTime != null && message.hasOwnProperty("effectiveTime")) {
+                                if (message.effectiveTime != null && Object.hasOwnProperty.call(message, "effectiveTime")) {
                                     properties._effectiveTime = 1;
                                     {
                                         var error = $root.google.protobuf.Timestamp.verify(message.effectiveTime, long + 1);
@@ -43590,12 +43578,12 @@
                                 if (q > $util.recursionLimit)
                                     throw Error("max depth exceeded");
                                 var object = {};
-                                if (message.effectiveTime != null && message.hasOwnProperty("effectiveTime")) {
+                                if (message.effectiveTime != null && Object.hasOwnProperty.call(message, "effectiveTime")) {
                                     object.effectiveTime = $root.google.protobuf.Timestamp.toObject(message.effectiveTime, options, q + 1);
                                     if (options.oneofs)
                                         object._effectiveTime = "effectiveTime";
                                 }
-                                if (message.restrictionMode != null && message.hasOwnProperty("restrictionMode")) {
+                                if (message.restrictionMode != null && Object.hasOwnProperty.call(message, "restrictionMode")) {
                                     object.restrictionMode = message.restrictionMode;
                                     if (options.oneofs)
                                         object._restrictionMode = "restrictionMode";
@@ -43808,12 +43796,12 @@
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
                                 var properties = {};
-                                if (message.restrictionMode != null && message.hasOwnProperty("restrictionMode")) {
+                                if (message.restrictionMode != null && Object.hasOwnProperty.call(message, "restrictionMode")) {
                                     properties._restrictionMode = 1;
                                     if (!$util.isString(message.restrictionMode))
                                         return "restrictionMode: string expected";
                                 }
-                                if (message.effectiveTime != null && message.hasOwnProperty("effectiveTime")) {
+                                if (message.effectiveTime != null && Object.hasOwnProperty.call(message, "effectiveTime")) {
                                     properties._effectiveTime = 1;
                                     {
                                         var error = $root.google.protobuf.Timestamp.verify(message.effectiveTime, long + 1);
@@ -43869,12 +43857,12 @@
                                 if (q > $util.recursionLimit)
                                     throw Error("max depth exceeded");
                                 var object = {};
-                                if (message.effectiveTime != null && message.hasOwnProperty("effectiveTime")) {
+                                if (message.effectiveTime != null && Object.hasOwnProperty.call(message, "effectiveTime")) {
                                     object.effectiveTime = $root.google.protobuf.Timestamp.toObject(message.effectiveTime, options, q + 1);
                                     if (options.oneofs)
                                         object._effectiveTime = "effectiveTime";
                                 }
-                                if (message.restrictionMode != null && message.hasOwnProperty("restrictionMode")) {
+                                if (message.restrictionMode != null && Object.hasOwnProperty.call(message, "restrictionMode")) {
                                     object.restrictionMode = message.restrictionMode;
                                     if (options.oneofs)
                                         object._restrictionMode = "restrictionMode";
@@ -44074,12 +44062,12 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.uniformBucketLevelAccess != null && message.hasOwnProperty("uniformBucketLevelAccess")) {
+                            if (message.uniformBucketLevelAccess != null && Object.hasOwnProperty.call(message, "uniformBucketLevelAccess")) {
                                 var error = $root.google.storage.v2.Bucket.IamConfig.UniformBucketLevelAccess.verify(message.uniformBucketLevelAccess, long + 1);
                                 if (error)
                                     return "uniformBucketLevelAccess." + error;
                             }
-                            if (message.publicAccessPrevention != null && message.hasOwnProperty("publicAccessPrevention"))
+                            if (message.publicAccessPrevention != null && Object.hasOwnProperty.call(message, "publicAccessPrevention"))
                                 if (!$util.isString(message.publicAccessPrevention))
                                     return "publicAccessPrevention: string expected";
                             return null;
@@ -44134,9 +44122,9 @@
                                 object.uniformBucketLevelAccess = null;
                                 object.publicAccessPrevention = "";
                             }
-                            if (message.uniformBucketLevelAccess != null && message.hasOwnProperty("uniformBucketLevelAccess"))
+                            if (message.uniformBucketLevelAccess != null && Object.hasOwnProperty.call(message, "uniformBucketLevelAccess"))
                                 object.uniformBucketLevelAccess = $root.google.storage.v2.Bucket.IamConfig.UniformBucketLevelAccess.toObject(message.uniformBucketLevelAccess, options, q + 1);
-                            if (message.publicAccessPrevention != null && message.hasOwnProperty("publicAccessPrevention"))
+                            if (message.publicAccessPrevention != null && Object.hasOwnProperty.call(message, "publicAccessPrevention"))
                                 object.publicAccessPrevention = message.publicAccessPrevention;
                             return object;
                         };
@@ -44327,10 +44315,10 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
                                     if (typeof message.enabled !== "boolean")
                                         return "enabled: boolean expected";
-                                if (message.lockTime != null && message.hasOwnProperty("lockTime")) {
+                                if (message.lockTime != null && Object.hasOwnProperty.call(message, "lockTime")) {
                                     var error = $root.google.protobuf.Timestamp.verify(message.lockTime, long + 1);
                                     if (error)
                                         return "lockTime." + error;
@@ -44387,9 +44375,9 @@
                                     object.enabled = false;
                                     object.lockTime = null;
                                 }
-                                if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
                                     object.enabled = message.enabled;
-                                if (message.lockTime != null && message.hasOwnProperty("lockTime"))
+                                if (message.lockTime != null && Object.hasOwnProperty.call(message, "lockTime"))
                                     object.lockTime = $root.google.protobuf.Timestamp.toObject(message.lockTime, options, q + 1);
                                 return object;
                             };
@@ -44575,7 +44563,7 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.rule != null && message.hasOwnProperty("rule")) {
+                            if (message.rule != null && Object.hasOwnProperty.call(message, "rule")) {
                                 if (!Array.isArray(message.rule))
                                     return "rule: array expected";
                                 for (var i = 0; i < message.rule.length; ++i) {
@@ -44831,12 +44819,12 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.action != null && message.hasOwnProperty("action")) {
+                                if (message.action != null && Object.hasOwnProperty.call(message, "action")) {
                                     var error = $root.google.storage.v2.Bucket.Lifecycle.Rule.Action.verify(message.action, long + 1);
                                     if (error)
                                         return "action." + error;
                                 }
-                                if (message.condition != null && message.hasOwnProperty("condition")) {
+                                if (message.condition != null && Object.hasOwnProperty.call(message, "condition")) {
                                     var error = $root.google.storage.v2.Bucket.Lifecycle.Rule.Condition.verify(message.condition, long + 1);
                                     if (error)
                                         return "condition." + error;
@@ -44896,9 +44884,9 @@
                                     object.action = null;
                                     object.condition = null;
                                 }
-                                if (message.action != null && message.hasOwnProperty("action"))
+                                if (message.action != null && Object.hasOwnProperty.call(message, "action"))
                                     object.action = $root.google.storage.v2.Bucket.Lifecycle.Rule.Action.toObject(message.action, options, q + 1);
-                                if (message.condition != null && message.hasOwnProperty("condition"))
+                                if (message.condition != null && Object.hasOwnProperty.call(message, "condition"))
                                     object.condition = $root.google.storage.v2.Bucket.Lifecycle.Rule.Condition.toObject(message.condition, options, q + 1);
                                 return object;
                             };
@@ -45089,10 +45077,10 @@
                                         long = 0;
                                     if (long > $util.recursionLimit)
                                         return "maximum nesting depth exceeded";
-                                    if (message.type != null && message.hasOwnProperty("type"))
+                                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                                         if (!$util.isString(message.type))
                                             return "type: string expected";
-                                    if (message.storageClass != null && message.hasOwnProperty("storageClass"))
+                                    if (message.storageClass != null && Object.hasOwnProperty.call(message, "storageClass"))
                                         if (!$util.isString(message.storageClass))
                                             return "storageClass: string expected";
                                     return null;
@@ -45144,9 +45132,9 @@
                                         object.type = "";
                                         object.storageClass = "";
                                     }
-                                    if (message.type != null && message.hasOwnProperty("type"))
+                                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                                         object.type = message.type;
-                                    if (message.storageClass != null && message.hasOwnProperty("storageClass"))
+                                    if (message.storageClass != null && Object.hasOwnProperty.call(message, "storageClass"))
                                         object.storageClass = message.storageClass;
                                     return object;
                                 };
@@ -45521,61 +45509,61 @@
                                     if (long > $util.recursionLimit)
                                         return "maximum nesting depth exceeded";
                                     var properties = {};
-                                    if (message.ageDays != null && message.hasOwnProperty("ageDays")) {
+                                    if (message.ageDays != null && Object.hasOwnProperty.call(message, "ageDays")) {
                                         properties._ageDays = 1;
                                         if (!$util.isInteger(message.ageDays))
                                             return "ageDays: integer expected";
                                     }
-                                    if (message.createdBefore != null && message.hasOwnProperty("createdBefore")) {
+                                    if (message.createdBefore != null && Object.hasOwnProperty.call(message, "createdBefore")) {
                                         var error = $root.google.type.Date.verify(message.createdBefore, long + 1);
                                         if (error)
                                             return "createdBefore." + error;
                                     }
-                                    if (message.isLive != null && message.hasOwnProperty("isLive")) {
+                                    if (message.isLive != null && Object.hasOwnProperty.call(message, "isLive")) {
                                         properties._isLive = 1;
                                         if (typeof message.isLive !== "boolean")
                                             return "isLive: boolean expected";
                                     }
-                                    if (message.numNewerVersions != null && message.hasOwnProperty("numNewerVersions")) {
+                                    if (message.numNewerVersions != null && Object.hasOwnProperty.call(message, "numNewerVersions")) {
                                         properties._numNewerVersions = 1;
                                         if (!$util.isInteger(message.numNewerVersions))
                                             return "numNewerVersions: integer expected";
                                     }
-                                    if (message.matchesStorageClass != null && message.hasOwnProperty("matchesStorageClass")) {
+                                    if (message.matchesStorageClass != null && Object.hasOwnProperty.call(message, "matchesStorageClass")) {
                                         if (!Array.isArray(message.matchesStorageClass))
                                             return "matchesStorageClass: array expected";
                                         for (var i = 0; i < message.matchesStorageClass.length; ++i)
                                             if (!$util.isString(message.matchesStorageClass[i]))
                                                 return "matchesStorageClass: string[] expected";
                                     }
-                                    if (message.daysSinceCustomTime != null && message.hasOwnProperty("daysSinceCustomTime")) {
+                                    if (message.daysSinceCustomTime != null && Object.hasOwnProperty.call(message, "daysSinceCustomTime")) {
                                         properties._daysSinceCustomTime = 1;
                                         if (!$util.isInteger(message.daysSinceCustomTime))
                                             return "daysSinceCustomTime: integer expected";
                                     }
-                                    if (message.customTimeBefore != null && message.hasOwnProperty("customTimeBefore")) {
+                                    if (message.customTimeBefore != null && Object.hasOwnProperty.call(message, "customTimeBefore")) {
                                         var error = $root.google.type.Date.verify(message.customTimeBefore, long + 1);
                                         if (error)
                                             return "customTimeBefore." + error;
                                     }
-                                    if (message.daysSinceNoncurrentTime != null && message.hasOwnProperty("daysSinceNoncurrentTime")) {
+                                    if (message.daysSinceNoncurrentTime != null && Object.hasOwnProperty.call(message, "daysSinceNoncurrentTime")) {
                                         properties._daysSinceNoncurrentTime = 1;
                                         if (!$util.isInteger(message.daysSinceNoncurrentTime))
                                             return "daysSinceNoncurrentTime: integer expected";
                                     }
-                                    if (message.noncurrentTimeBefore != null && message.hasOwnProperty("noncurrentTimeBefore")) {
+                                    if (message.noncurrentTimeBefore != null && Object.hasOwnProperty.call(message, "noncurrentTimeBefore")) {
                                         var error = $root.google.type.Date.verify(message.noncurrentTimeBefore, long + 1);
                                         if (error)
                                             return "noncurrentTimeBefore." + error;
                                     }
-                                    if (message.matchesPrefix != null && message.hasOwnProperty("matchesPrefix")) {
+                                    if (message.matchesPrefix != null && Object.hasOwnProperty.call(message, "matchesPrefix")) {
                                         if (!Array.isArray(message.matchesPrefix))
                                             return "matchesPrefix: array expected";
                                         for (var i = 0; i < message.matchesPrefix.length; ++i)
                                             if (!$util.isString(message.matchesPrefix[i]))
                                                 return "matchesPrefix: string[] expected";
                                     }
-                                    if (message.matchesSuffix != null && message.hasOwnProperty("matchesSuffix")) {
+                                    if (message.matchesSuffix != null && Object.hasOwnProperty.call(message, "matchesSuffix")) {
                                         if (!Array.isArray(message.matchesSuffix))
                                             return "matchesSuffix: array expected";
                                         for (var i = 0; i < message.matchesSuffix.length; ++i)
@@ -45679,19 +45667,19 @@
                                         object.customTimeBefore = null;
                                         object.noncurrentTimeBefore = null;
                                     }
-                                    if (message.ageDays != null && message.hasOwnProperty("ageDays")) {
+                                    if (message.ageDays != null && Object.hasOwnProperty.call(message, "ageDays")) {
                                         object.ageDays = message.ageDays;
                                         if (options.oneofs)
                                             object._ageDays = "ageDays";
                                     }
-                                    if (message.createdBefore != null && message.hasOwnProperty("createdBefore"))
+                                    if (message.createdBefore != null && Object.hasOwnProperty.call(message, "createdBefore"))
                                         object.createdBefore = $root.google.type.Date.toObject(message.createdBefore, options, q + 1);
-                                    if (message.isLive != null && message.hasOwnProperty("isLive")) {
+                                    if (message.isLive != null && Object.hasOwnProperty.call(message, "isLive")) {
                                         object.isLive = message.isLive;
                                         if (options.oneofs)
                                             object._isLive = "isLive";
                                     }
-                                    if (message.numNewerVersions != null && message.hasOwnProperty("numNewerVersions")) {
+                                    if (message.numNewerVersions != null && Object.hasOwnProperty.call(message, "numNewerVersions")) {
                                         object.numNewerVersions = message.numNewerVersions;
                                         if (options.oneofs)
                                             object._numNewerVersions = "numNewerVersions";
@@ -45701,19 +45689,19 @@
                                         for (var j = 0; j < message.matchesStorageClass.length; ++j)
                                             object.matchesStorageClass[j] = message.matchesStorageClass[j];
                                     }
-                                    if (message.daysSinceCustomTime != null && message.hasOwnProperty("daysSinceCustomTime")) {
+                                    if (message.daysSinceCustomTime != null && Object.hasOwnProperty.call(message, "daysSinceCustomTime")) {
                                         object.daysSinceCustomTime = message.daysSinceCustomTime;
                                         if (options.oneofs)
                                             object._daysSinceCustomTime = "daysSinceCustomTime";
                                     }
-                                    if (message.customTimeBefore != null && message.hasOwnProperty("customTimeBefore"))
+                                    if (message.customTimeBefore != null && Object.hasOwnProperty.call(message, "customTimeBefore"))
                                         object.customTimeBefore = $root.google.type.Date.toObject(message.customTimeBefore, options, q + 1);
-                                    if (message.daysSinceNoncurrentTime != null && message.hasOwnProperty("daysSinceNoncurrentTime")) {
+                                    if (message.daysSinceNoncurrentTime != null && Object.hasOwnProperty.call(message, "daysSinceNoncurrentTime")) {
                                         object.daysSinceNoncurrentTime = message.daysSinceNoncurrentTime;
                                         if (options.oneofs)
                                             object._daysSinceNoncurrentTime = "daysSinceNoncurrentTime";
                                     }
-                                    if (message.noncurrentTimeBefore != null && message.hasOwnProperty("noncurrentTimeBefore"))
+                                    if (message.noncurrentTimeBefore != null && Object.hasOwnProperty.call(message, "noncurrentTimeBefore"))
                                         object.noncurrentTimeBefore = $root.google.type.Date.toObject(message.noncurrentTimeBefore, options, q + 1);
                                     if (message.matchesPrefix && message.matchesPrefix.length) {
                                         object.matchesPrefix = [];
@@ -45923,10 +45911,10 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.logBucket != null && message.hasOwnProperty("logBucket"))
+                            if (message.logBucket != null && Object.hasOwnProperty.call(message, "logBucket"))
                                 if (!$util.isString(message.logBucket))
                                     return "logBucket: string expected";
-                            if (message.logObjectPrefix != null && message.hasOwnProperty("logObjectPrefix"))
+                            if (message.logObjectPrefix != null && Object.hasOwnProperty.call(message, "logObjectPrefix"))
                                 if (!$util.isString(message.logObjectPrefix))
                                     return "logObjectPrefix: string expected";
                             return null;
@@ -45978,9 +45966,9 @@
                                 object.logBucket = "";
                                 object.logObjectPrefix = "";
                             }
-                            if (message.logBucket != null && message.hasOwnProperty("logBucket"))
+                            if (message.logBucket != null && Object.hasOwnProperty.call(message, "logBucket"))
                                 object.logBucket = message.logBucket;
-                            if (message.logObjectPrefix != null && message.hasOwnProperty("logObjectPrefix"))
+                            if (message.logObjectPrefix != null && Object.hasOwnProperty.call(message, "logObjectPrefix"))
                                 object.logObjectPrefix = message.logObjectPrefix;
                             return object;
                         };
@@ -46159,7 +46147,7 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
                                 if (typeof message.enabled !== "boolean")
                                     return "enabled: boolean expected";
                             return null;
@@ -46207,7 +46195,7 @@
                             var object = {};
                             if (options.defaults)
                                 object.enabled = false;
-                            if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
                                 object.enabled = message.enabled;
                             return object;
                         };
@@ -46416,15 +46404,15 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.effectiveTime != null && message.hasOwnProperty("effectiveTime")) {
+                            if (message.effectiveTime != null && Object.hasOwnProperty.call(message, "effectiveTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.effectiveTime, long + 1);
                                 if (error)
                                     return "effectiveTime." + error;
                             }
-                            if (message.isLocked != null && message.hasOwnProperty("isLocked"))
+                            if (message.isLocked != null && Object.hasOwnProperty.call(message, "isLocked"))
                                 if (typeof message.isLocked !== "boolean")
                                     return "isLocked: boolean expected";
-                            if (message.retentionDuration != null && message.hasOwnProperty("retentionDuration")) {
+                            if (message.retentionDuration != null && Object.hasOwnProperty.call(message, "retentionDuration")) {
                                 var error = $root.google.protobuf.Duration.verify(message.retentionDuration, long + 1);
                                 if (error)
                                     return "retentionDuration." + error;
@@ -46487,11 +46475,11 @@
                                 object.isLocked = false;
                                 object.retentionDuration = null;
                             }
-                            if (message.effectiveTime != null && message.hasOwnProperty("effectiveTime"))
+                            if (message.effectiveTime != null && Object.hasOwnProperty.call(message, "effectiveTime"))
                                 object.effectiveTime = $root.google.protobuf.Timestamp.toObject(message.effectiveTime, options, q + 1);
-                            if (message.isLocked != null && message.hasOwnProperty("isLocked"))
+                            if (message.isLocked != null && Object.hasOwnProperty.call(message, "isLocked"))
                                 object.isLocked = message.isLocked;
-                            if (message.retentionDuration != null && message.hasOwnProperty("retentionDuration"))
+                            if (message.retentionDuration != null && Object.hasOwnProperty.call(message, "retentionDuration"))
                                 object.retentionDuration = $root.google.protobuf.Duration.toObject(message.retentionDuration, options, q + 1);
                             return object;
                         };
@@ -46701,7 +46689,7 @@
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
                             var properties = {};
-                            if (message.retentionDuration != null && message.hasOwnProperty("retentionDuration")) {
+                            if (message.retentionDuration != null && Object.hasOwnProperty.call(message, "retentionDuration")) {
                                 properties._retentionDuration = 1;
                                 {
                                     var error = $root.google.protobuf.Duration.verify(message.retentionDuration, long + 1);
@@ -46709,7 +46697,7 @@
                                         return "retentionDuration." + error;
                                 }
                             }
-                            if (message.effectiveTime != null && message.hasOwnProperty("effectiveTime")) {
+                            if (message.effectiveTime != null && Object.hasOwnProperty.call(message, "effectiveTime")) {
                                 properties._effectiveTime = 1;
                                 {
                                     var error = $root.google.protobuf.Timestamp.verify(message.effectiveTime, long + 1);
@@ -46768,12 +46756,12 @@
                             if (q > $util.recursionLimit)
                                 throw Error("max depth exceeded");
                             var object = {};
-                            if (message.retentionDuration != null && message.hasOwnProperty("retentionDuration")) {
+                            if (message.retentionDuration != null && Object.hasOwnProperty.call(message, "retentionDuration")) {
                                 object.retentionDuration = $root.google.protobuf.Duration.toObject(message.retentionDuration, options, q + 1);
                                 if (options.oneofs)
                                     object._retentionDuration = "retentionDuration";
                             }
-                            if (message.effectiveTime != null && message.hasOwnProperty("effectiveTime")) {
+                            if (message.effectiveTime != null && Object.hasOwnProperty.call(message, "effectiveTime")) {
                                 object.effectiveTime = $root.google.protobuf.Timestamp.toObject(message.effectiveTime, options, q + 1);
                                 if (options.oneofs)
                                     object._effectiveTime = "effectiveTime";
@@ -46955,7 +46943,7 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
                                 if (typeof message.enabled !== "boolean")
                                     return "enabled: boolean expected";
                             return null;
@@ -47003,7 +46991,7 @@
                             var object = {};
                             if (options.defaults)
                                 object.enabled = false;
-                            if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
                                 object.enabled = message.enabled;
                             return object;
                         };
@@ -47197,10 +47185,10 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.mainPageSuffix != null && message.hasOwnProperty("mainPageSuffix"))
+                            if (message.mainPageSuffix != null && Object.hasOwnProperty.call(message, "mainPageSuffix"))
                                 if (!$util.isString(message.mainPageSuffix))
                                     return "mainPageSuffix: string expected";
-                            if (message.notFoundPage != null && message.hasOwnProperty("notFoundPage"))
+                            if (message.notFoundPage != null && Object.hasOwnProperty.call(message, "notFoundPage"))
                                 if (!$util.isString(message.notFoundPage))
                                     return "notFoundPage: string expected";
                             return null;
@@ -47252,9 +47240,9 @@
                                 object.mainPageSuffix = "";
                                 object.notFoundPage = "";
                             }
-                            if (message.mainPageSuffix != null && message.hasOwnProperty("mainPageSuffix"))
+                            if (message.mainPageSuffix != null && Object.hasOwnProperty.call(message, "mainPageSuffix"))
                                 object.mainPageSuffix = message.mainPageSuffix;
-                            if (message.notFoundPage != null && message.hasOwnProperty("notFoundPage"))
+                            if (message.notFoundPage != null && Object.hasOwnProperty.call(message, "notFoundPage"))
                                 object.notFoundPage = message.notFoundPage;
                             return object;
                         };
@@ -47437,7 +47425,7 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.dataLocations != null && message.hasOwnProperty("dataLocations")) {
+                            if (message.dataLocations != null && Object.hasOwnProperty.call(message, "dataLocations")) {
                                 if (!Array.isArray(message.dataLocations))
                                     return "dataLocations: array expected";
                                 for (var i = 0; i < message.dataLocations.length; ++i)
@@ -47737,20 +47725,20 @@
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
                             var properties = {};
-                            if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
                                 if (typeof message.enabled !== "boolean")
                                     return "enabled: boolean expected";
-                            if (message.toggleTime != null && message.hasOwnProperty("toggleTime")) {
+                            if (message.toggleTime != null && Object.hasOwnProperty.call(message, "toggleTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.toggleTime, long + 1);
                                 if (error)
                                     return "toggleTime." + error;
                             }
-                            if (message.terminalStorageClass != null && message.hasOwnProperty("terminalStorageClass")) {
+                            if (message.terminalStorageClass != null && Object.hasOwnProperty.call(message, "terminalStorageClass")) {
                                 properties._terminalStorageClass = 1;
                                 if (!$util.isString(message.terminalStorageClass))
                                     return "terminalStorageClass: string expected";
                             }
-                            if (message.terminalStorageClassUpdateTime != null && message.hasOwnProperty("terminalStorageClassUpdateTime")) {
+                            if (message.terminalStorageClassUpdateTime != null && Object.hasOwnProperty.call(message, "terminalStorageClassUpdateTime")) {
                                 properties._terminalStorageClassUpdateTime = 1;
                                 {
                                     var error = $root.google.protobuf.Timestamp.verify(message.terminalStorageClassUpdateTime, long + 1);
@@ -47817,16 +47805,16 @@
                                 object.enabled = false;
                                 object.toggleTime = null;
                             }
-                            if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
                                 object.enabled = message.enabled;
-                            if (message.toggleTime != null && message.hasOwnProperty("toggleTime"))
+                            if (message.toggleTime != null && Object.hasOwnProperty.call(message, "toggleTime"))
                                 object.toggleTime = $root.google.protobuf.Timestamp.toObject(message.toggleTime, options, q + 1);
-                            if (message.terminalStorageClass != null && message.hasOwnProperty("terminalStorageClass")) {
+                            if (message.terminalStorageClass != null && Object.hasOwnProperty.call(message, "terminalStorageClass")) {
                                 object.terminalStorageClass = message.terminalStorageClass;
                                 if (options.oneofs)
                                     object._terminalStorageClass = "terminalStorageClass";
                             }
-                            if (message.terminalStorageClassUpdateTime != null && message.hasOwnProperty("terminalStorageClassUpdateTime")) {
+                            if (message.terminalStorageClassUpdateTime != null && Object.hasOwnProperty.call(message, "terminalStorageClassUpdateTime")) {
                                 object.terminalStorageClassUpdateTime = $root.google.protobuf.Timestamp.toObject(message.terminalStorageClassUpdateTime, options, q + 1);
                                 if (options.oneofs)
                                     object._terminalStorageClassUpdateTime = "terminalStorageClassUpdateTime";
@@ -48094,12 +48082,12 @@
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
                             var properties = {};
-                            if (message.mode != null && message.hasOwnProperty("mode")) {
+                            if (message.mode != null && Object.hasOwnProperty.call(message, "mode")) {
                                 properties._mode = 1;
                                 if (!$util.isString(message.mode))
                                     return "mode: string expected";
                             }
-                            if (message.publicNetworkSource != null && message.hasOwnProperty("publicNetworkSource")) {
+                            if (message.publicNetworkSource != null && Object.hasOwnProperty.call(message, "publicNetworkSource")) {
                                 properties._publicNetworkSource = 1;
                                 {
                                     var error = $root.google.storage.v2.Bucket.IpFilter.PublicNetworkSource.verify(message.publicNetworkSource, long + 1);
@@ -48107,7 +48095,7 @@
                                         return "publicNetworkSource." + error;
                                 }
                             }
-                            if (message.vpcNetworkSources != null && message.hasOwnProperty("vpcNetworkSources")) {
+                            if (message.vpcNetworkSources != null && Object.hasOwnProperty.call(message, "vpcNetworkSources")) {
                                 if (!Array.isArray(message.vpcNetworkSources))
                                     return "vpcNetworkSources: array expected";
                                 for (var i = 0; i < message.vpcNetworkSources.length; ++i) {
@@ -48116,10 +48104,10 @@
                                         return "vpcNetworkSources." + error;
                                 }
                             }
-                            if (message.allowCrossOrgVpcs != null && message.hasOwnProperty("allowCrossOrgVpcs"))
+                            if (message.allowCrossOrgVpcs != null && Object.hasOwnProperty.call(message, "allowCrossOrgVpcs"))
                                 if (typeof message.allowCrossOrgVpcs !== "boolean")
                                     return "allowCrossOrgVpcs: boolean expected";
-                            if (message.allowAllServiceAgentAccess != null && message.hasOwnProperty("allowAllServiceAgentAccess")) {
+                            if (message.allowAllServiceAgentAccess != null && Object.hasOwnProperty.call(message, "allowAllServiceAgentAccess")) {
                                 properties._allowAllServiceAgentAccess = 1;
                                 if (typeof message.allowAllServiceAgentAccess !== "boolean")
                                     return "allowAllServiceAgentAccess: boolean expected";
@@ -48190,12 +48178,12 @@
                                 object.vpcNetworkSources = [];
                             if (options.defaults)
                                 object.allowCrossOrgVpcs = false;
-                            if (message.mode != null && message.hasOwnProperty("mode")) {
+                            if (message.mode != null && Object.hasOwnProperty.call(message, "mode")) {
                                 object.mode = message.mode;
                                 if (options.oneofs)
                                     object._mode = "mode";
                             }
-                            if (message.publicNetworkSource != null && message.hasOwnProperty("publicNetworkSource")) {
+                            if (message.publicNetworkSource != null && Object.hasOwnProperty.call(message, "publicNetworkSource")) {
                                 object.publicNetworkSource = $root.google.storage.v2.Bucket.IpFilter.PublicNetworkSource.toObject(message.publicNetworkSource, options, q + 1);
                                 if (options.oneofs)
                                     object._publicNetworkSource = "publicNetworkSource";
@@ -48205,9 +48193,9 @@
                                 for (var j = 0; j < message.vpcNetworkSources.length; ++j)
                                     object.vpcNetworkSources[j] = $root.google.storage.v2.Bucket.IpFilter.VpcNetworkSource.toObject(message.vpcNetworkSources[j], options, q + 1);
                             }
-                            if (message.allowCrossOrgVpcs != null && message.hasOwnProperty("allowCrossOrgVpcs"))
+                            if (message.allowCrossOrgVpcs != null && Object.hasOwnProperty.call(message, "allowCrossOrgVpcs"))
                                 object.allowCrossOrgVpcs = message.allowCrossOrgVpcs;
-                            if (message.allowAllServiceAgentAccess != null && message.hasOwnProperty("allowAllServiceAgentAccess")) {
+                            if (message.allowAllServiceAgentAccess != null && Object.hasOwnProperty.call(message, "allowAllServiceAgentAccess")) {
                                 object.allowAllServiceAgentAccess = message.allowAllServiceAgentAccess;
                                 if (options.oneofs)
                                     object._allowAllServiceAgentAccess = "allowAllServiceAgentAccess";
@@ -48390,7 +48378,7 @@
                                     long = 0;
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
-                                if (message.allowedIpCidrRanges != null && message.hasOwnProperty("allowedIpCidrRanges")) {
+                                if (message.allowedIpCidrRanges != null && Object.hasOwnProperty.call(message, "allowedIpCidrRanges")) {
                                     if (!Array.isArray(message.allowedIpCidrRanges))
                                         return "allowedIpCidrRanges: array expected";
                                     for (var i = 0; i < message.allowedIpCidrRanges.length; ++i)
@@ -48658,12 +48646,12 @@
                                 if (long > $util.recursionLimit)
                                     return "maximum nesting depth exceeded";
                                 var properties = {};
-                                if (message.network != null && message.hasOwnProperty("network")) {
+                                if (message.network != null && Object.hasOwnProperty.call(message, "network")) {
                                     properties._network = 1;
                                     if (!$util.isString(message.network))
                                         return "network: string expected";
                                 }
-                                if (message.allowedIpCidrRanges != null && message.hasOwnProperty("allowedIpCidrRanges")) {
+                                if (message.allowedIpCidrRanges != null && Object.hasOwnProperty.call(message, "allowedIpCidrRanges")) {
                                     if (!Array.isArray(message.allowedIpCidrRanges))
                                         return "allowedIpCidrRanges: array expected";
                                     for (var i = 0; i < message.allowedIpCidrRanges.length; ++i)
@@ -48722,7 +48710,7 @@
                                 var object = {};
                                 if (options.arrays || options.defaults)
                                     object.allowedIpCidrRanges = [];
-                                if (message.network != null && message.hasOwnProperty("network")) {
+                                if (message.network != null && Object.hasOwnProperty.call(message, "network")) {
                                     object.network = message.network;
                                     if (options.oneofs)
                                         object._network = "network";
@@ -48912,7 +48900,7 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
                                 if (typeof message.enabled !== "boolean")
                                     return "enabled: boolean expected";
                             return null;
@@ -48960,7 +48948,7 @@
                             var object = {};
                             if (options.defaults)
                                 object.enabled = false;
-                            if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
                                 object.enabled = message.enabled;
                             return object;
                         };
@@ -49262,31 +49250,31 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.role != null && message.hasOwnProperty("role"))
+                        if (message.role != null && Object.hasOwnProperty.call(message, "role"))
                             if (!$util.isString(message.role))
                                 return "role: string expected";
-                        if (message.id != null && message.hasOwnProperty("id"))
+                        if (message.id != null && Object.hasOwnProperty.call(message, "id"))
                             if (!$util.isString(message.id))
                                 return "id: string expected";
-                        if (message.entity != null && message.hasOwnProperty("entity"))
+                        if (message.entity != null && Object.hasOwnProperty.call(message, "entity"))
                             if (!$util.isString(message.entity))
                                 return "entity: string expected";
-                        if (message.entityAlt != null && message.hasOwnProperty("entityAlt"))
+                        if (message.entityAlt != null && Object.hasOwnProperty.call(message, "entityAlt"))
                             if (!$util.isString(message.entityAlt))
                                 return "entityAlt: string expected";
-                        if (message.entityId != null && message.hasOwnProperty("entityId"))
+                        if (message.entityId != null && Object.hasOwnProperty.call(message, "entityId"))
                             if (!$util.isString(message.entityId))
                                 return "entityId: string expected";
-                        if (message.etag != null && message.hasOwnProperty("etag"))
+                        if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                             if (!$util.isString(message.etag))
                                 return "etag: string expected";
-                        if (message.email != null && message.hasOwnProperty("email"))
+                        if (message.email != null && Object.hasOwnProperty.call(message, "email"))
                             if (!$util.isString(message.email))
                                 return "email: string expected";
-                        if (message.domain != null && message.hasOwnProperty("domain"))
+                        if (message.domain != null && Object.hasOwnProperty.call(message, "domain"))
                             if (!$util.isString(message.domain))
                                 return "domain: string expected";
-                        if (message.projectTeam != null && message.hasOwnProperty("projectTeam")) {
+                        if (message.projectTeam != null && Object.hasOwnProperty.call(message, "projectTeam")) {
                             var error = $root.google.storage.v2.ProjectTeam.verify(message.projectTeam, long + 1);
                             if (error)
                                 return "projectTeam." + error;
@@ -49364,23 +49352,23 @@
                             object.etag = "";
                             object.entityAlt = "";
                         }
-                        if (message.role != null && message.hasOwnProperty("role"))
+                        if (message.role != null && Object.hasOwnProperty.call(message, "role"))
                             object.role = message.role;
-                        if (message.id != null && message.hasOwnProperty("id"))
+                        if (message.id != null && Object.hasOwnProperty.call(message, "id"))
                             object.id = message.id;
-                        if (message.entity != null && message.hasOwnProperty("entity"))
+                        if (message.entity != null && Object.hasOwnProperty.call(message, "entity"))
                             object.entity = message.entity;
-                        if (message.entityId != null && message.hasOwnProperty("entityId"))
+                        if (message.entityId != null && Object.hasOwnProperty.call(message, "entityId"))
                             object.entityId = message.entityId;
-                        if (message.email != null && message.hasOwnProperty("email"))
+                        if (message.email != null && Object.hasOwnProperty.call(message, "email"))
                             object.email = message.email;
-                        if (message.domain != null && message.hasOwnProperty("domain"))
+                        if (message.domain != null && Object.hasOwnProperty.call(message, "domain"))
                             object.domain = message.domain;
-                        if (message.projectTeam != null && message.hasOwnProperty("projectTeam"))
+                        if (message.projectTeam != null && Object.hasOwnProperty.call(message, "projectTeam"))
                             object.projectTeam = $root.google.storage.v2.ProjectTeam.toObject(message.projectTeam, options, q + 1);
-                        if (message.etag != null && message.hasOwnProperty("etag"))
+                        if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                             object.etag = message.etag;
-                        if (message.entityAlt != null && message.hasOwnProperty("entityAlt"))
+                        if (message.entityAlt != null && Object.hasOwnProperty.call(message, "entityAlt"))
                             object.entityAlt = message.entityAlt;
                         return object;
                     };
@@ -49584,10 +49572,10 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.content != null && message.hasOwnProperty("content"))
+                        if (message.content != null && Object.hasOwnProperty.call(message, "content"))
                             if (!(message.content && typeof message.content.length === "number" || $util.isString(message.content)))
                                 return "content: buffer expected";
-                        if (message.crc32c != null && message.hasOwnProperty("crc32c")) {
+                        if (message.crc32c != null && Object.hasOwnProperty.call(message, "crc32c")) {
                             properties._crc32c = 1;
                             if (!$util.isInteger(message.crc32c))
                                 return "crc32c: integer expected";
@@ -49648,9 +49636,9 @@
                                 if (options.bytes !== Array)
                                     object.content = $util.newBuffer(object.content);
                             }
-                        if (message.content != null && message.hasOwnProperty("content"))
+                        if (message.content != null && Object.hasOwnProperty.call(message, "content"))
                             object.content = options.bytes === String ? $util.base64.encode(message.content, 0, message.content.length) : options.bytes === Array ? Array.prototype.slice.call(message.content) : message.content;
-                        if (message.crc32c != null && message.hasOwnProperty("crc32c")) {
+                        if (message.crc32c != null && Object.hasOwnProperty.call(message, "crc32c")) {
                             object.crc32c = message.crc32c;
                             if (options.oneofs)
                                 object._crc32c = "crc32c";
@@ -49857,12 +49845,12 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.crc32c != null && message.hasOwnProperty("crc32c")) {
+                        if (message.crc32c != null && Object.hasOwnProperty.call(message, "crc32c")) {
                             properties._crc32c = 1;
                             if (!$util.isInteger(message.crc32c))
                                 return "crc32c: integer expected";
                         }
-                        if (message.md5Hash != null && message.hasOwnProperty("md5Hash"))
+                        if (message.md5Hash != null && Object.hasOwnProperty.call(message, "md5Hash"))
                             if (!(message.md5Hash && typeof message.md5Hash.length === "number" || $util.isString(message.md5Hash)))
                                 return "md5Hash: buffer expected";
                         return null;
@@ -49921,12 +49909,12 @@
                                 if (options.bytes !== Array)
                                     object.md5Hash = $util.newBuffer(object.md5Hash);
                             }
-                        if (message.crc32c != null && message.hasOwnProperty("crc32c")) {
+                        if (message.crc32c != null && Object.hasOwnProperty.call(message, "crc32c")) {
                             object.crc32c = message.crc32c;
                             if (options.oneofs)
                                 object._crc32c = "crc32c";
                         }
-                        if (message.md5Hash != null && message.hasOwnProperty("md5Hash"))
+                        if (message.md5Hash != null && Object.hasOwnProperty.call(message, "md5Hash"))
                             object.md5Hash = options.bytes === String ? $util.base64.encode(message.md5Hash, 0, message.md5Hash.length) : options.bytes === Array ? Array.prototype.slice.call(message.md5Hash) : message.md5Hash;
                         return object;
                     };
@@ -50135,15 +50123,15 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.value != null && message.hasOwnProperty("value"))
+                        if (message.value != null && Object.hasOwnProperty.call(message, "value"))
                             if (!$util.isString(message.value))
                                 return "value: string expected";
-                        if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                        if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime")) {
                             var error = $root.google.protobuf.Timestamp.verify(message.createTime, long + 1);
                             if (error)
                                 return "createTime." + error;
                         }
-                        if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                        if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime")) {
                             var error = $root.google.protobuf.Timestamp.verify(message.updateTime, long + 1);
                             if (error)
                                 return "updateTime." + error;
@@ -50206,11 +50194,11 @@
                             object.createTime = null;
                             object.updateTime = null;
                         }
-                        if (message.value != null && message.hasOwnProperty("value"))
+                        if (message.value != null && Object.hasOwnProperty.call(message, "value"))
                             object.value = message.value;
-                        if (message.createTime != null && message.hasOwnProperty("createTime"))
+                        if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
                             object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options, q + 1);
-                        if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                        if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
                             object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options, q + 1);
                         return object;
                     };
@@ -50414,7 +50402,7 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.custom != null && message.hasOwnProperty("custom")) {
+                        if (message.custom != null && Object.hasOwnProperty.call(message, "custom")) {
                             if (!$util.isObject(message.custom))
                                 return "custom: object expected";
                             var key = Object.keys(message.custom);
@@ -50680,10 +50668,10 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.encryptionAlgorithm != null && message.hasOwnProperty("encryptionAlgorithm"))
+                        if (message.encryptionAlgorithm != null && Object.hasOwnProperty.call(message, "encryptionAlgorithm"))
                             if (!$util.isString(message.encryptionAlgorithm))
                                 return "encryptionAlgorithm: string expected";
-                        if (message.keySha256Bytes != null && message.hasOwnProperty("keySha256Bytes"))
+                        if (message.keySha256Bytes != null && Object.hasOwnProperty.call(message, "keySha256Bytes"))
                             if (!(message.keySha256Bytes && typeof message.keySha256Bytes.length === "number" || $util.isString(message.keySha256Bytes)))
                                 return "keySha256Bytes: buffer expected";
                         return null;
@@ -50744,9 +50732,9 @@
                                     object.keySha256Bytes = $util.newBuffer(object.keySha256Bytes);
                             }
                         }
-                        if (message.encryptionAlgorithm != null && message.hasOwnProperty("encryptionAlgorithm"))
+                        if (message.encryptionAlgorithm != null && Object.hasOwnProperty.call(message, "encryptionAlgorithm"))
                             object.encryptionAlgorithm = message.encryptionAlgorithm;
-                        if (message.keySha256Bytes != null && message.hasOwnProperty("keySha256Bytes"))
+                        if (message.keySha256Bytes != null && Object.hasOwnProperty.call(message, "keySha256Bytes"))
                             object.keySha256Bytes = options.bytes === String ? $util.base64.encode(message.keySha256Bytes, 0, message.keySha256Bytes.length) : options.bytes === Array ? Array.prototype.slice.call(message.keySha256Bytes) : message.keySha256Bytes;
                         return object;
                     };
@@ -51460,42 +51448,42 @@
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
                         var properties = {};
-                        if (message.name != null && message.hasOwnProperty("name"))
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
-                        if (message.bucket != null && message.hasOwnProperty("bucket"))
+                        if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                             if (!$util.isString(message.bucket))
                                 return "bucket: string expected";
-                        if (message.etag != null && message.hasOwnProperty("etag"))
+                        if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                             if (!$util.isString(message.etag))
                                 return "etag: string expected";
-                        if (message.generation != null && message.hasOwnProperty("generation"))
+                        if (message.generation != null && Object.hasOwnProperty.call(message, "generation"))
                             if (!$util.isInteger(message.generation) && !(message.generation && $util.isInteger(message.generation.low) && $util.isInteger(message.generation.high)))
                                 return "generation: integer|Long expected";
-                        if (message.restoreToken != null && message.hasOwnProperty("restoreToken")) {
+                        if (message.restoreToken != null && Object.hasOwnProperty.call(message, "restoreToken")) {
                             properties._restoreToken = 1;
                             if (!$util.isString(message.restoreToken))
                                 return "restoreToken: string expected";
                         }
-                        if (message.metageneration != null && message.hasOwnProperty("metageneration"))
+                        if (message.metageneration != null && Object.hasOwnProperty.call(message, "metageneration"))
                             if (!$util.isInteger(message.metageneration) && !(message.metageneration && $util.isInteger(message.metageneration.low) && $util.isInteger(message.metageneration.high)))
                                 return "metageneration: integer|Long expected";
-                        if (message.storageClass != null && message.hasOwnProperty("storageClass"))
+                        if (message.storageClass != null && Object.hasOwnProperty.call(message, "storageClass"))
                             if (!$util.isString(message.storageClass))
                                 return "storageClass: string expected";
-                        if (message.size != null && message.hasOwnProperty("size"))
+                        if (message.size != null && Object.hasOwnProperty.call(message, "size"))
                             if (!$util.isInteger(message.size) && !(message.size && $util.isInteger(message.size.low) && $util.isInteger(message.size.high)))
                                 return "size: integer|Long expected";
-                        if (message.contentEncoding != null && message.hasOwnProperty("contentEncoding"))
+                        if (message.contentEncoding != null && Object.hasOwnProperty.call(message, "contentEncoding"))
                             if (!$util.isString(message.contentEncoding))
                                 return "contentEncoding: string expected";
-                        if (message.contentDisposition != null && message.hasOwnProperty("contentDisposition"))
+                        if (message.contentDisposition != null && Object.hasOwnProperty.call(message, "contentDisposition"))
                             if (!$util.isString(message.contentDisposition))
                                 return "contentDisposition: string expected";
-                        if (message.cacheControl != null && message.hasOwnProperty("cacheControl"))
+                        if (message.cacheControl != null && Object.hasOwnProperty.call(message, "cacheControl"))
                             if (!$util.isString(message.cacheControl))
                                 return "cacheControl: string expected";
-                        if (message.acl != null && message.hasOwnProperty("acl")) {
+                        if (message.acl != null && Object.hasOwnProperty.call(message, "acl")) {
                             if (!Array.isArray(message.acl))
                                 return "acl: array expected";
                             for (var i = 0; i < message.acl.length; ++i) {
@@ -51504,57 +51492,57 @@
                                     return "acl." + error;
                             }
                         }
-                        if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage"))
+                        if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
                             if (!$util.isString(message.contentLanguage))
                                 return "contentLanguage: string expected";
-                        if (message.deleteTime != null && message.hasOwnProperty("deleteTime")) {
+                        if (message.deleteTime != null && Object.hasOwnProperty.call(message, "deleteTime")) {
                             var error = $root.google.protobuf.Timestamp.verify(message.deleteTime, long + 1);
                             if (error)
                                 return "deleteTime." + error;
                         }
-                        if (message.finalizeTime != null && message.hasOwnProperty("finalizeTime")) {
+                        if (message.finalizeTime != null && Object.hasOwnProperty.call(message, "finalizeTime")) {
                             var error = $root.google.protobuf.Timestamp.verify(message.finalizeTime, long + 1);
                             if (error)
                                 return "finalizeTime." + error;
                         }
-                        if (message.contentType != null && message.hasOwnProperty("contentType"))
+                        if (message.contentType != null && Object.hasOwnProperty.call(message, "contentType"))
                             if (!$util.isString(message.contentType))
                                 return "contentType: string expected";
-                        if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                        if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime")) {
                             var error = $root.google.protobuf.Timestamp.verify(message.createTime, long + 1);
                             if (error)
                                 return "createTime." + error;
                         }
-                        if (message.componentCount != null && message.hasOwnProperty("componentCount"))
+                        if (message.componentCount != null && Object.hasOwnProperty.call(message, "componentCount"))
                             if (!$util.isInteger(message.componentCount))
                                 return "componentCount: integer expected";
-                        if (message.checksums != null && message.hasOwnProperty("checksums")) {
+                        if (message.checksums != null && Object.hasOwnProperty.call(message, "checksums")) {
                             var error = $root.google.storage.v2.ObjectChecksums.verify(message.checksums, long + 1);
                             if (error)
                                 return "checksums." + error;
                         }
-                        if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                        if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime")) {
                             var error = $root.google.protobuf.Timestamp.verify(message.updateTime, long + 1);
                             if (error)
                                 return "updateTime." + error;
                         }
-                        if (message.kmsKey != null && message.hasOwnProperty("kmsKey"))
+                        if (message.kmsKey != null && Object.hasOwnProperty.call(message, "kmsKey"))
                             if (!$util.isString(message.kmsKey))
                                 return "kmsKey: string expected";
-                        if (message.updateStorageClassTime != null && message.hasOwnProperty("updateStorageClassTime")) {
+                        if (message.updateStorageClassTime != null && Object.hasOwnProperty.call(message, "updateStorageClassTime")) {
                             var error = $root.google.protobuf.Timestamp.verify(message.updateStorageClassTime, long + 1);
                             if (error)
                                 return "updateStorageClassTime." + error;
                         }
-                        if (message.temporaryHold != null && message.hasOwnProperty("temporaryHold"))
+                        if (message.temporaryHold != null && Object.hasOwnProperty.call(message, "temporaryHold"))
                             if (typeof message.temporaryHold !== "boolean")
                                 return "temporaryHold: boolean expected";
-                        if (message.retentionExpireTime != null && message.hasOwnProperty("retentionExpireTime")) {
+                        if (message.retentionExpireTime != null && Object.hasOwnProperty.call(message, "retentionExpireTime")) {
                             var error = $root.google.protobuf.Timestamp.verify(message.retentionExpireTime, long + 1);
                             if (error)
                                 return "retentionExpireTime." + error;
                         }
-                        if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                        if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata")) {
                             if (!$util.isObject(message.metadata))
                                 return "metadata: object expected";
                             var key = Object.keys(message.metadata);
@@ -51562,32 +51550,32 @@
                                 if (!$util.isString(message.metadata[key[i]]))
                                     return "metadata: string{k:string} expected";
                         }
-                        if (message.contexts != null && message.hasOwnProperty("contexts")) {
+                        if (message.contexts != null && Object.hasOwnProperty.call(message, "contexts")) {
                             var error = $root.google.storage.v2.ObjectContexts.verify(message.contexts, long + 1);
                             if (error)
                                 return "contexts." + error;
                         }
-                        if (message.eventBasedHold != null && message.hasOwnProperty("eventBasedHold")) {
+                        if (message.eventBasedHold != null && Object.hasOwnProperty.call(message, "eventBasedHold")) {
                             properties._eventBasedHold = 1;
                             if (typeof message.eventBasedHold !== "boolean")
                                 return "eventBasedHold: boolean expected";
                         }
-                        if (message.owner != null && message.hasOwnProperty("owner")) {
+                        if (message.owner != null && Object.hasOwnProperty.call(message, "owner")) {
                             var error = $root.google.storage.v2.Owner.verify(message.owner, long + 1);
                             if (error)
                                 return "owner." + error;
                         }
-                        if (message.customerEncryption != null && message.hasOwnProperty("customerEncryption")) {
+                        if (message.customerEncryption != null && Object.hasOwnProperty.call(message, "customerEncryption")) {
                             var error = $root.google.storage.v2.CustomerEncryption.verify(message.customerEncryption, long + 1);
                             if (error)
                                 return "customerEncryption." + error;
                         }
-                        if (message.customTime != null && message.hasOwnProperty("customTime")) {
+                        if (message.customTime != null && Object.hasOwnProperty.call(message, "customTime")) {
                             var error = $root.google.protobuf.Timestamp.verify(message.customTime, long + 1);
                             if (error)
                                 return "customTime." + error;
                         }
-                        if (message.softDeleteTime != null && message.hasOwnProperty("softDeleteTime")) {
+                        if (message.softDeleteTime != null && Object.hasOwnProperty.call(message, "softDeleteTime")) {
                             properties._softDeleteTime = 1;
                             {
                                 var error = $root.google.protobuf.Timestamp.verify(message.softDeleteTime, long + 1);
@@ -51595,7 +51583,7 @@
                                     return "softDeleteTime." + error;
                             }
                         }
-                        if (message.hardDeleteTime != null && message.hasOwnProperty("hardDeleteTime")) {
+                        if (message.hardDeleteTime != null && Object.hasOwnProperty.call(message, "hardDeleteTime")) {
                             properties._hardDeleteTime = 1;
                             {
                                 var error = $root.google.protobuf.Timestamp.verify(message.hardDeleteTime, long + 1);
@@ -51603,7 +51591,7 @@
                                     return "hardDeleteTime." + error;
                             }
                         }
-                        if (message.retention != null && message.hasOwnProperty("retention")) {
+                        if (message.retention != null && Object.hasOwnProperty.call(message, "retention")) {
                             var error = $root.google.storage.v2.StorageObject.Retention.verify(message.retention, long + 1);
                             if (error)
                                 return "retention." + error;
@@ -51839,65 +51827,65 @@
                             object.finalizeTime = null;
                             object.contexts = null;
                         }
-                        if (message.name != null && message.hasOwnProperty("name"))
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             object.name = message.name;
-                        if (message.bucket != null && message.hasOwnProperty("bucket"))
+                        if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
                             object.bucket = message.bucket;
-                        if (message.generation != null && message.hasOwnProperty("generation"))
+                        if (message.generation != null && Object.hasOwnProperty.call(message, "generation"))
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.generation = typeof message.generation === "number" ? BigInt(message.generation) : $util.Long.fromBits(message.generation.low >>> 0, message.generation.high >>> 0, false).toBigInt();
                             else if (typeof message.generation === "number")
                                 object.generation = options.longs === String ? String(message.generation) : message.generation;
                             else
                                 object.generation = options.longs === String ? $util.Long.prototype.toString.call(message.generation) : options.longs === Number ? new $util.LongBits(message.generation.low >>> 0, message.generation.high >>> 0).toNumber() : message.generation;
-                        if (message.metageneration != null && message.hasOwnProperty("metageneration"))
+                        if (message.metageneration != null && Object.hasOwnProperty.call(message, "metageneration"))
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.metageneration = typeof message.metageneration === "number" ? BigInt(message.metageneration) : $util.Long.fromBits(message.metageneration.low >>> 0, message.metageneration.high >>> 0, false).toBigInt();
                             else if (typeof message.metageneration === "number")
                                 object.metageneration = options.longs === String ? String(message.metageneration) : message.metageneration;
                             else
                                 object.metageneration = options.longs === String ? $util.Long.prototype.toString.call(message.metageneration) : options.longs === Number ? new $util.LongBits(message.metageneration.low >>> 0, message.metageneration.high >>> 0).toNumber() : message.metageneration;
-                        if (message.storageClass != null && message.hasOwnProperty("storageClass"))
+                        if (message.storageClass != null && Object.hasOwnProperty.call(message, "storageClass"))
                             object.storageClass = message.storageClass;
-                        if (message.size != null && message.hasOwnProperty("size"))
+                        if (message.size != null && Object.hasOwnProperty.call(message, "size"))
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.size = typeof message.size === "number" ? BigInt(message.size) : $util.Long.fromBits(message.size.low >>> 0, message.size.high >>> 0, false).toBigInt();
                             else if (typeof message.size === "number")
                                 object.size = options.longs === String ? String(message.size) : message.size;
                             else
                                 object.size = options.longs === String ? $util.Long.prototype.toString.call(message.size) : options.longs === Number ? new $util.LongBits(message.size.low >>> 0, message.size.high >>> 0).toNumber() : message.size;
-                        if (message.contentEncoding != null && message.hasOwnProperty("contentEncoding"))
+                        if (message.contentEncoding != null && Object.hasOwnProperty.call(message, "contentEncoding"))
                             object.contentEncoding = message.contentEncoding;
-                        if (message.contentDisposition != null && message.hasOwnProperty("contentDisposition"))
+                        if (message.contentDisposition != null && Object.hasOwnProperty.call(message, "contentDisposition"))
                             object.contentDisposition = message.contentDisposition;
-                        if (message.cacheControl != null && message.hasOwnProperty("cacheControl"))
+                        if (message.cacheControl != null && Object.hasOwnProperty.call(message, "cacheControl"))
                             object.cacheControl = message.cacheControl;
                         if (message.acl && message.acl.length) {
                             object.acl = [];
                             for (var j = 0; j < message.acl.length; ++j)
                                 object.acl[j] = $root.google.storage.v2.ObjectAccessControl.toObject(message.acl[j], options, q + 1);
                         }
-                        if (message.contentLanguage != null && message.hasOwnProperty("contentLanguage"))
+                        if (message.contentLanguage != null && Object.hasOwnProperty.call(message, "contentLanguage"))
                             object.contentLanguage = message.contentLanguage;
-                        if (message.deleteTime != null && message.hasOwnProperty("deleteTime"))
+                        if (message.deleteTime != null && Object.hasOwnProperty.call(message, "deleteTime"))
                             object.deleteTime = $root.google.protobuf.Timestamp.toObject(message.deleteTime, options, q + 1);
-                        if (message.contentType != null && message.hasOwnProperty("contentType"))
+                        if (message.contentType != null && Object.hasOwnProperty.call(message, "contentType"))
                             object.contentType = message.contentType;
-                        if (message.createTime != null && message.hasOwnProperty("createTime"))
+                        if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
                             object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options, q + 1);
-                        if (message.componentCount != null && message.hasOwnProperty("componentCount"))
+                        if (message.componentCount != null && Object.hasOwnProperty.call(message, "componentCount"))
                             object.componentCount = message.componentCount;
-                        if (message.checksums != null && message.hasOwnProperty("checksums"))
+                        if (message.checksums != null && Object.hasOwnProperty.call(message, "checksums"))
                             object.checksums = $root.google.storage.v2.ObjectChecksums.toObject(message.checksums, options, q + 1);
-                        if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                        if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
                             object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options, q + 1);
-                        if (message.kmsKey != null && message.hasOwnProperty("kmsKey"))
+                        if (message.kmsKey != null && Object.hasOwnProperty.call(message, "kmsKey"))
                             object.kmsKey = message.kmsKey;
-                        if (message.updateStorageClassTime != null && message.hasOwnProperty("updateStorageClassTime"))
+                        if (message.updateStorageClassTime != null && Object.hasOwnProperty.call(message, "updateStorageClassTime"))
                             object.updateStorageClassTime = $root.google.protobuf.Timestamp.toObject(message.updateStorageClassTime, options, q + 1);
-                        if (message.temporaryHold != null && message.hasOwnProperty("temporaryHold"))
+                        if (message.temporaryHold != null && Object.hasOwnProperty.call(message, "temporaryHold"))
                             object.temporaryHold = message.temporaryHold;
-                        if (message.retentionExpireTime != null && message.hasOwnProperty("retentionExpireTime"))
+                        if (message.retentionExpireTime != null && Object.hasOwnProperty.call(message, "retentionExpireTime"))
                             object.retentionExpireTime = $root.google.protobuf.Timestamp.toObject(message.retentionExpireTime, options, q + 1);
                         var keys2;
                         if (message.metadata && (keys2 = Object.keys(message.metadata)).length) {
@@ -51908,39 +51896,39 @@
                                 object.metadata[keys2[j]] = message.metadata[keys2[j]];
                             }
                         }
-                        if (message.eventBasedHold != null && message.hasOwnProperty("eventBasedHold")) {
+                        if (message.eventBasedHold != null && Object.hasOwnProperty.call(message, "eventBasedHold")) {
                             object.eventBasedHold = message.eventBasedHold;
                             if (options.oneofs)
                                 object._eventBasedHold = "eventBasedHold";
                         }
-                        if (message.owner != null && message.hasOwnProperty("owner"))
+                        if (message.owner != null && Object.hasOwnProperty.call(message, "owner"))
                             object.owner = $root.google.storage.v2.Owner.toObject(message.owner, options, q + 1);
-                        if (message.customerEncryption != null && message.hasOwnProperty("customerEncryption"))
+                        if (message.customerEncryption != null && Object.hasOwnProperty.call(message, "customerEncryption"))
                             object.customerEncryption = $root.google.storage.v2.CustomerEncryption.toObject(message.customerEncryption, options, q + 1);
-                        if (message.customTime != null && message.hasOwnProperty("customTime"))
+                        if (message.customTime != null && Object.hasOwnProperty.call(message, "customTime"))
                             object.customTime = $root.google.protobuf.Timestamp.toObject(message.customTime, options, q + 1);
-                        if (message.etag != null && message.hasOwnProperty("etag"))
+                        if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                             object.etag = message.etag;
-                        if (message.softDeleteTime != null && message.hasOwnProperty("softDeleteTime")) {
+                        if (message.softDeleteTime != null && Object.hasOwnProperty.call(message, "softDeleteTime")) {
                             object.softDeleteTime = $root.google.protobuf.Timestamp.toObject(message.softDeleteTime, options, q + 1);
                             if (options.oneofs)
                                 object._softDeleteTime = "softDeleteTime";
                         }
-                        if (message.hardDeleteTime != null && message.hasOwnProperty("hardDeleteTime")) {
+                        if (message.hardDeleteTime != null && Object.hasOwnProperty.call(message, "hardDeleteTime")) {
                             object.hardDeleteTime = $root.google.protobuf.Timestamp.toObject(message.hardDeleteTime, options, q + 1);
                             if (options.oneofs)
                                 object._hardDeleteTime = "hardDeleteTime";
                         }
-                        if (message.retention != null && message.hasOwnProperty("retention"))
+                        if (message.retention != null && Object.hasOwnProperty.call(message, "retention"))
                             object.retention = $root.google.storage.v2.StorageObject.Retention.toObject(message.retention, options, q + 1);
-                        if (message.restoreToken != null && message.hasOwnProperty("restoreToken")) {
+                        if (message.restoreToken != null && Object.hasOwnProperty.call(message, "restoreToken")) {
                             object.restoreToken = message.restoreToken;
                             if (options.oneofs)
                                 object._restoreToken = "restoreToken";
                         }
-                        if (message.finalizeTime != null && message.hasOwnProperty("finalizeTime"))
+                        if (message.finalizeTime != null && Object.hasOwnProperty.call(message, "finalizeTime"))
                             object.finalizeTime = $root.google.protobuf.Timestamp.toObject(message.finalizeTime, options, q + 1);
-                        if (message.contexts != null && message.hasOwnProperty("contexts"))
+                        if (message.contexts != null && Object.hasOwnProperty.call(message, "contexts"))
                             object.contexts = $root.google.storage.v2.ObjectContexts.toObject(message.contexts, options, q + 1);
                         return object;
                     };
@@ -52131,7 +52119,7 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            if (message.mode != null && message.hasOwnProperty("mode"))
+                            if (message.mode != null && Object.hasOwnProperty.call(message, "mode"))
                                 switch (message.mode) {
                                 default:
                                     return "mode: enum value expected";
@@ -52140,7 +52128,7 @@
                                 case 2:
                                     break;
                                 }
-                            if (message.retainUntilTime != null && message.hasOwnProperty("retainUntilTime")) {
+                            if (message.retainUntilTime != null && Object.hasOwnProperty.call(message, "retainUntilTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.retainUntilTime, long + 1);
                                 if (error)
                                     return "retainUntilTime." + error;
@@ -52215,9 +52203,9 @@
                                 object.mode = options.enums === String ? "MODE_UNSPECIFIED" : 0;
                                 object.retainUntilTime = null;
                             }
-                            if (message.mode != null && message.hasOwnProperty("mode"))
+                            if (message.mode != null && Object.hasOwnProperty.call(message, "mode"))
                                 object.mode = options.enums === String ? $root.google.storage.v2.StorageObject.Retention.Mode[message.mode] === undefined ? message.mode : $root.google.storage.v2.StorageObject.Retention.Mode[message.mode] : message.mode;
-                            if (message.retainUntilTime != null && message.hasOwnProperty("retainUntilTime"))
+                            if (message.retainUntilTime != null && Object.hasOwnProperty.call(message, "retainUntilTime"))
                                 object.retainUntilTime = $root.google.protobuf.Timestamp.toObject(message.retainUntilTime, options, q + 1);
                             return object;
                         };
@@ -52535,31 +52523,31 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.role != null && message.hasOwnProperty("role"))
+                        if (message.role != null && Object.hasOwnProperty.call(message, "role"))
                             if (!$util.isString(message.role))
                                 return "role: string expected";
-                        if (message.id != null && message.hasOwnProperty("id"))
+                        if (message.id != null && Object.hasOwnProperty.call(message, "id"))
                             if (!$util.isString(message.id))
                                 return "id: string expected";
-                        if (message.entity != null && message.hasOwnProperty("entity"))
+                        if (message.entity != null && Object.hasOwnProperty.call(message, "entity"))
                             if (!$util.isString(message.entity))
                                 return "entity: string expected";
-                        if (message.entityAlt != null && message.hasOwnProperty("entityAlt"))
+                        if (message.entityAlt != null && Object.hasOwnProperty.call(message, "entityAlt"))
                             if (!$util.isString(message.entityAlt))
                                 return "entityAlt: string expected";
-                        if (message.entityId != null && message.hasOwnProperty("entityId"))
+                        if (message.entityId != null && Object.hasOwnProperty.call(message, "entityId"))
                             if (!$util.isString(message.entityId))
                                 return "entityId: string expected";
-                        if (message.etag != null && message.hasOwnProperty("etag"))
+                        if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                             if (!$util.isString(message.etag))
                                 return "etag: string expected";
-                        if (message.email != null && message.hasOwnProperty("email"))
+                        if (message.email != null && Object.hasOwnProperty.call(message, "email"))
                             if (!$util.isString(message.email))
                                 return "email: string expected";
-                        if (message.domain != null && message.hasOwnProperty("domain"))
+                        if (message.domain != null && Object.hasOwnProperty.call(message, "domain"))
                             if (!$util.isString(message.domain))
                                 return "domain: string expected";
-                        if (message.projectTeam != null && message.hasOwnProperty("projectTeam")) {
+                        if (message.projectTeam != null && Object.hasOwnProperty.call(message, "projectTeam")) {
                             var error = $root.google.storage.v2.ProjectTeam.verify(message.projectTeam, long + 1);
                             if (error)
                                 return "projectTeam." + error;
@@ -52637,23 +52625,23 @@
                             object.etag = "";
                             object.entityAlt = "";
                         }
-                        if (message.role != null && message.hasOwnProperty("role"))
+                        if (message.role != null && Object.hasOwnProperty.call(message, "role"))
                             object.role = message.role;
-                        if (message.id != null && message.hasOwnProperty("id"))
+                        if (message.id != null && Object.hasOwnProperty.call(message, "id"))
                             object.id = message.id;
-                        if (message.entity != null && message.hasOwnProperty("entity"))
+                        if (message.entity != null && Object.hasOwnProperty.call(message, "entity"))
                             object.entity = message.entity;
-                        if (message.entityId != null && message.hasOwnProperty("entityId"))
+                        if (message.entityId != null && Object.hasOwnProperty.call(message, "entityId"))
                             object.entityId = message.entityId;
-                        if (message.email != null && message.hasOwnProperty("email"))
+                        if (message.email != null && Object.hasOwnProperty.call(message, "email"))
                             object.email = message.email;
-                        if (message.domain != null && message.hasOwnProperty("domain"))
+                        if (message.domain != null && Object.hasOwnProperty.call(message, "domain"))
                             object.domain = message.domain;
-                        if (message.projectTeam != null && message.hasOwnProperty("projectTeam"))
+                        if (message.projectTeam != null && Object.hasOwnProperty.call(message, "projectTeam"))
                             object.projectTeam = $root.google.storage.v2.ProjectTeam.toObject(message.projectTeam, options, q + 1);
-                        if (message.etag != null && message.hasOwnProperty("etag"))
+                        if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                             object.etag = message.etag;
-                        if (message.entityAlt != null && message.hasOwnProperty("entityAlt"))
+                        if (message.entityAlt != null && Object.hasOwnProperty.call(message, "entityAlt"))
                             object.entityAlt = message.entityAlt;
                         return object;
                     };
@@ -52870,7 +52858,7 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.objects != null && message.hasOwnProperty("objects")) {
+                        if (message.objects != null && Object.hasOwnProperty.call(message, "objects")) {
                             if (!Array.isArray(message.objects))
                                 return "objects: array expected";
                             for (var i = 0; i < message.objects.length; ++i) {
@@ -52879,14 +52867,14 @@
                                     return "objects." + error;
                             }
                         }
-                        if (message.prefixes != null && message.hasOwnProperty("prefixes")) {
+                        if (message.prefixes != null && Object.hasOwnProperty.call(message, "prefixes")) {
                             if (!Array.isArray(message.prefixes))
                                 return "prefixes: array expected";
                             for (var i = 0; i < message.prefixes.length; ++i)
                                 if (!$util.isString(message.prefixes[i]))
                                     return "prefixes: string[] expected";
                         }
-                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                        if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                             if (!$util.isString(message.nextPageToken))
                                 return "nextPageToken: string expected";
                         return null;
@@ -52965,7 +52953,7 @@
                             for (var j = 0; j < message.prefixes.length; ++j)
                                 object.prefixes[j] = message.prefixes[j];
                         }
-                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                        if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                             object.nextPageToken = message.nextPageToken;
                         return object;
                     };
@@ -53159,10 +53147,10 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.projectNumber != null && message.hasOwnProperty("projectNumber"))
+                        if (message.projectNumber != null && Object.hasOwnProperty.call(message, "projectNumber"))
                             if (!$util.isString(message.projectNumber))
                                 return "projectNumber: string expected";
-                        if (message.team != null && message.hasOwnProperty("team"))
+                        if (message.team != null && Object.hasOwnProperty.call(message, "team"))
                             if (!$util.isString(message.team))
                                 return "team: string expected";
                         return null;
@@ -53214,9 +53202,9 @@
                             object.projectNumber = "";
                             object.team = "";
                         }
-                        if (message.projectNumber != null && message.hasOwnProperty("projectNumber"))
+                        if (message.projectNumber != null && Object.hasOwnProperty.call(message, "projectNumber"))
                             object.projectNumber = message.projectNumber;
-                        if (message.team != null && message.hasOwnProperty("team"))
+                        if (message.team != null && Object.hasOwnProperty.call(message, "team"))
                             object.team = message.team;
                         return object;
                     };
@@ -53410,10 +53398,10 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.entity != null && message.hasOwnProperty("entity"))
+                        if (message.entity != null && Object.hasOwnProperty.call(message, "entity"))
                             if (!$util.isString(message.entity))
                                 return "entity: string expected";
-                        if (message.entityId != null && message.hasOwnProperty("entityId"))
+                        if (message.entityId != null && Object.hasOwnProperty.call(message, "entityId"))
                             if (!$util.isString(message.entityId))
                                 return "entityId: string expected";
                         return null;
@@ -53465,9 +53453,9 @@
                             object.entity = "";
                             object.entityId = "";
                         }
-                        if (message.entity != null && message.hasOwnProperty("entity"))
+                        if (message.entity != null && Object.hasOwnProperty.call(message, "entity"))
                             object.entity = message.entity;
-                        if (message.entityId != null && message.hasOwnProperty("entityId"))
+                        if (message.entityId != null && Object.hasOwnProperty.call(message, "entityId"))
                             object.entityId = message.entityId;
                         return object;
                     };
@@ -53676,13 +53664,13 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.start != null && message.hasOwnProperty("start"))
+                        if (message.start != null && Object.hasOwnProperty.call(message, "start"))
                             if (!$util.isInteger(message.start) && !(message.start && $util.isInteger(message.start.low) && $util.isInteger(message.start.high)))
                                 return "start: integer|Long expected";
-                        if (message.end != null && message.hasOwnProperty("end"))
+                        if (message.end != null && Object.hasOwnProperty.call(message, "end"))
                             if (!$util.isInteger(message.end) && !(message.end && $util.isInteger(message.end.low) && $util.isInteger(message.end.high)))
                                 return "end: integer|Long expected";
-                        if (message.completeLength != null && message.hasOwnProperty("completeLength"))
+                        if (message.completeLength != null && Object.hasOwnProperty.call(message, "completeLength"))
                             if (!$util.isInteger(message.completeLength) && !(message.completeLength && $util.isInteger(message.completeLength.low) && $util.isInteger(message.completeLength.high)))
                                 return "completeLength: integer|Long expected";
                         return null;
@@ -53770,21 +53758,21 @@
                             } else
                                 object.completeLength = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                         }
-                        if (message.start != null && message.hasOwnProperty("start"))
+                        if (message.start != null && Object.hasOwnProperty.call(message, "start"))
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.start = typeof message.start === "number" ? BigInt(message.start) : $util.Long.fromBits(message.start.low >>> 0, message.start.high >>> 0, false).toBigInt();
                             else if (typeof message.start === "number")
                                 object.start = options.longs === String ? String(message.start) : message.start;
                             else
                                 object.start = options.longs === String ? $util.Long.prototype.toString.call(message.start) : options.longs === Number ? new $util.LongBits(message.start.low >>> 0, message.start.high >>> 0).toNumber() : message.start;
-                        if (message.end != null && message.hasOwnProperty("end"))
+                        if (message.end != null && Object.hasOwnProperty.call(message, "end"))
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.end = typeof message.end === "number" ? BigInt(message.end) : $util.Long.fromBits(message.end.low >>> 0, message.end.high >>> 0, false).toBigInt();
                             else if (typeof message.end === "number")
                                 object.end = options.longs === String ? String(message.end) : message.end;
                             else
                                 object.end = options.longs === String ? $util.Long.prototype.toString.call(message.end) : options.longs === Number ? new $util.LongBits(message.end.low >>> 0, message.end.high >>> 0).toNumber() : message.end;
-                        if (message.completeLength != null && message.hasOwnProperty("completeLength"))
+                        if (message.completeLength != null && Object.hasOwnProperty.call(message, "completeLength"))
                             if (typeof BigInt !== "undefined" && options.longs === BigInt)
                                 object.completeLength = typeof message.completeLength === "number" ? BigInt(message.completeLength) : $util.Long.fromBits(message.completeLength.low >>> 0, message.completeLength.high >>> 0, false).toBigInt();
                             else if (typeof message.completeLength === "number")
@@ -54002,7 +53990,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.rules != null && message.hasOwnProperty("rules")) {
+                    if (message.rules != null && Object.hasOwnProperty.call(message, "rules")) {
                         if (!Array.isArray(message.rules))
                             return "rules: array expected";
                         for (var i = 0; i < message.rules.length; ++i) {
@@ -54011,7 +53999,7 @@
                                 return "rules." + error;
                         }
                     }
-                    if (message.fullyDecodeReservedExpansion != null && message.hasOwnProperty("fullyDecodeReservedExpansion"))
+                    if (message.fullyDecodeReservedExpansion != null && Object.hasOwnProperty.call(message, "fullyDecodeReservedExpansion"))
                         if (typeof message.fullyDecodeReservedExpansion !== "boolean")
                             return "fullyDecodeReservedExpansion: boolean expected";
                     return null;
@@ -54076,7 +54064,7 @@
                         for (var j = 0; j < message.rules.length; ++j)
                             object.rules[j] = $root.google.api.HttpRule.toObject(message.rules[j], options, q + 1);
                     }
-                    if (message.fullyDecodeReservedExpansion != null && message.hasOwnProperty("fullyDecodeReservedExpansion"))
+                    if (message.fullyDecodeReservedExpansion != null && Object.hasOwnProperty.call(message, "fullyDecodeReservedExpansion"))
                         object.fullyDecodeReservedExpansion = message.fullyDecodeReservedExpansion;
                     return object;
                 };
@@ -54409,43 +54397,43 @@
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
                     var properties = {};
-                    if (message.selector != null && message.hasOwnProperty("selector"))
+                    if (message.selector != null && Object.hasOwnProperty.call(message, "selector"))
                         if (!$util.isString(message.selector))
                             return "selector: string expected";
-                    if (message.get != null && message.hasOwnProperty("get")) {
+                    if (message.get != null && Object.hasOwnProperty.call(message, "get")) {
                         properties.pattern = 1;
                         if (!$util.isString(message.get))
                             return "get: string expected";
                     }
-                    if (message.put != null && message.hasOwnProperty("put")) {
+                    if (message.put != null && Object.hasOwnProperty.call(message, "put")) {
                         if (properties.pattern === 1)
                             return "pattern: multiple values";
                         properties.pattern = 1;
                         if (!$util.isString(message.put))
                             return "put: string expected";
                     }
-                    if (message.post != null && message.hasOwnProperty("post")) {
+                    if (message.post != null && Object.hasOwnProperty.call(message, "post")) {
                         if (properties.pattern === 1)
                             return "pattern: multiple values";
                         properties.pattern = 1;
                         if (!$util.isString(message.post))
                             return "post: string expected";
                     }
-                    if (message["delete"] != null && message.hasOwnProperty("delete")) {
+                    if (message["delete"] != null && Object.hasOwnProperty.call(message, "delete")) {
                         if (properties.pattern === 1)
                             return "pattern: multiple values";
                         properties.pattern = 1;
                         if (!$util.isString(message["delete"]))
                             return "delete: string expected";
                     }
-                    if (message.patch != null && message.hasOwnProperty("patch")) {
+                    if (message.patch != null && Object.hasOwnProperty.call(message, "patch")) {
                         if (properties.pattern === 1)
                             return "pattern: multiple values";
                         properties.pattern = 1;
                         if (!$util.isString(message.patch))
                             return "patch: string expected";
                     }
-                    if (message.custom != null && message.hasOwnProperty("custom")) {
+                    if (message.custom != null && Object.hasOwnProperty.call(message, "custom")) {
                         if (properties.pattern === 1)
                             return "pattern: multiple values";
                         properties.pattern = 1;
@@ -54455,13 +54443,13 @@
                                 return "custom." + error;
                         }
                     }
-                    if (message.body != null && message.hasOwnProperty("body"))
+                    if (message.body != null && Object.hasOwnProperty.call(message, "body"))
                         if (!$util.isString(message.body))
                             return "body: string expected";
-                    if (message.responseBody != null && message.hasOwnProperty("responseBody"))
+                    if (message.responseBody != null && Object.hasOwnProperty.call(message, "responseBody"))
                         if (!$util.isString(message.responseBody))
                             return "responseBody: string expected";
-                    if (message.additionalBindings != null && message.hasOwnProperty("additionalBindings")) {
+                    if (message.additionalBindings != null && Object.hasOwnProperty.call(message, "additionalBindings")) {
                         if (!Array.isArray(message.additionalBindings))
                             return "additionalBindings: array expected";
                         for (var i = 0; i < message.additionalBindings.length; ++i) {
@@ -54549,36 +54537,36 @@
                         object.body = "";
                         object.responseBody = "";
                     }
-                    if (message.selector != null && message.hasOwnProperty("selector"))
+                    if (message.selector != null && Object.hasOwnProperty.call(message, "selector"))
                         object.selector = message.selector;
-                    if (message.get != null && message.hasOwnProperty("get")) {
+                    if (message.get != null && Object.hasOwnProperty.call(message, "get")) {
                         object.get = message.get;
                         if (options.oneofs)
                             object.pattern = "get";
                     }
-                    if (message.put != null && message.hasOwnProperty("put")) {
+                    if (message.put != null && Object.hasOwnProperty.call(message, "put")) {
                         object.put = message.put;
                         if (options.oneofs)
                             object.pattern = "put";
                     }
-                    if (message.post != null && message.hasOwnProperty("post")) {
+                    if (message.post != null && Object.hasOwnProperty.call(message, "post")) {
                         object.post = message.post;
                         if (options.oneofs)
                             object.pattern = "post";
                     }
-                    if (message["delete"] != null && message.hasOwnProperty("delete")) {
+                    if (message["delete"] != null && Object.hasOwnProperty.call(message, "delete")) {
                         object["delete"] = message["delete"];
                         if (options.oneofs)
                             object.pattern = "delete";
                     }
-                    if (message.patch != null && message.hasOwnProperty("patch")) {
+                    if (message.patch != null && Object.hasOwnProperty.call(message, "patch")) {
                         object.patch = message.patch;
                         if (options.oneofs)
                             object.pattern = "patch";
                     }
-                    if (message.body != null && message.hasOwnProperty("body"))
+                    if (message.body != null && Object.hasOwnProperty.call(message, "body"))
                         object.body = message.body;
-                    if (message.custom != null && message.hasOwnProperty("custom")) {
+                    if (message.custom != null && Object.hasOwnProperty.call(message, "custom")) {
                         object.custom = $root.google.api.CustomHttpPattern.toObject(message.custom, options, q + 1);
                         if (options.oneofs)
                             object.pattern = "custom";
@@ -54588,7 +54576,7 @@
                         for (var j = 0; j < message.additionalBindings.length; ++j)
                             object.additionalBindings[j] = $root.google.api.HttpRule.toObject(message.additionalBindings[j], options, q + 1);
                     }
-                    if (message.responseBody != null && message.hasOwnProperty("responseBody"))
+                    if (message.responseBody != null && Object.hasOwnProperty.call(message, "responseBody"))
                         object.responseBody = message.responseBody;
                     return object;
                 };
@@ -54782,10 +54770,10 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.kind != null && message.hasOwnProperty("kind"))
+                    if (message.kind != null && Object.hasOwnProperty.call(message, "kind"))
                         if (!$util.isString(message.kind))
                             return "kind: string expected";
-                    if (message.path != null && message.hasOwnProperty("path"))
+                    if (message.path != null && Object.hasOwnProperty.call(message, "path"))
                         if (!$util.isString(message.path))
                             return "path: string expected";
                     return null;
@@ -54837,9 +54825,9 @@
                         object.kind = "";
                         object.path = "";
                     }
-                    if (message.kind != null && message.hasOwnProperty("kind"))
+                    if (message.kind != null && Object.hasOwnProperty.call(message, "kind"))
                         object.kind = message.kind;
-                    if (message.path != null && message.hasOwnProperty("path"))
+                    if (message.path != null && Object.hasOwnProperty.call(message, "path"))
                         object.path = message.path;
                     return object;
                 };
@@ -55060,10 +55048,10 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
+                    if (message.referenceDocsUri != null && Object.hasOwnProperty.call(message, "referenceDocsUri"))
                         if (!$util.isString(message.referenceDocsUri))
                             return "referenceDocsUri: string expected";
-                    if (message.destinations != null && message.hasOwnProperty("destinations")) {
+                    if (message.destinations != null && Object.hasOwnProperty.call(message, "destinations")) {
                         if (!Array.isArray(message.destinations))
                             return "destinations: array expected";
                         for (var i = 0; i < message.destinations.length; ++i)
@@ -55076,7 +55064,7 @@
                                 break;
                             }
                     }
-                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration")) {
+                    if (message.selectiveGapicGeneration != null && Object.hasOwnProperty.call(message, "selectiveGapicGeneration")) {
                         var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration, long + 1);
                         if (error)
                             return "selectiveGapicGeneration." + error;
@@ -55160,14 +55148,14 @@
                         object.referenceDocsUri = "";
                         object.selectiveGapicGeneration = null;
                     }
-                    if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
+                    if (message.referenceDocsUri != null && Object.hasOwnProperty.call(message, "referenceDocsUri"))
                         object.referenceDocsUri = message.referenceDocsUri;
                     if (message.destinations && message.destinations.length) {
                         object.destinations = [];
                         for (var j = 0; j < message.destinations.length; ++j)
                             object.destinations[j] = options.enums === String ? $root.google.api.ClientLibraryDestination[message.destinations[j]] === undefined ? message.destinations[j] : $root.google.api.ClientLibraryDestination[message.destinations[j]] : message.destinations[j];
                     }
-                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration"))
+                    if (message.selectiveGapicGeneration != null && Object.hasOwnProperty.call(message, "selectiveGapicGeneration"))
                         object.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.toObject(message.selectiveGapicGeneration, options, q + 1);
                     return object;
                 };
@@ -55496,10 +55484,10 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.version != null && message.hasOwnProperty("version"))
+                    if (message.version != null && Object.hasOwnProperty.call(message, "version"))
                         if (!$util.isString(message.version))
                             return "version: string expected";
-                    if (message.launchStage != null && message.hasOwnProperty("launchStage"))
+                    if (message.launchStage != null && Object.hasOwnProperty.call(message, "launchStage"))
                         switch (message.launchStage) {
                         default:
                             return "launchStage: enum value expected";
@@ -55513,45 +55501,45 @@
                         case 5:
                             break;
                         }
-                    if (message.restNumericEnums != null && message.hasOwnProperty("restNumericEnums"))
+                    if (message.restNumericEnums != null && Object.hasOwnProperty.call(message, "restNumericEnums"))
                         if (typeof message.restNumericEnums !== "boolean")
                             return "restNumericEnums: boolean expected";
-                    if (message.javaSettings != null && message.hasOwnProperty("javaSettings")) {
+                    if (message.javaSettings != null && Object.hasOwnProperty.call(message, "javaSettings")) {
                         var error = $root.google.api.JavaSettings.verify(message.javaSettings, long + 1);
                         if (error)
                             return "javaSettings." + error;
                     }
-                    if (message.cppSettings != null && message.hasOwnProperty("cppSettings")) {
+                    if (message.cppSettings != null && Object.hasOwnProperty.call(message, "cppSettings")) {
                         var error = $root.google.api.CppSettings.verify(message.cppSettings, long + 1);
                         if (error)
                             return "cppSettings." + error;
                     }
-                    if (message.phpSettings != null && message.hasOwnProperty("phpSettings")) {
+                    if (message.phpSettings != null && Object.hasOwnProperty.call(message, "phpSettings")) {
                         var error = $root.google.api.PhpSettings.verify(message.phpSettings, long + 1);
                         if (error)
                             return "phpSettings." + error;
                     }
-                    if (message.pythonSettings != null && message.hasOwnProperty("pythonSettings")) {
+                    if (message.pythonSettings != null && Object.hasOwnProperty.call(message, "pythonSettings")) {
                         var error = $root.google.api.PythonSettings.verify(message.pythonSettings, long + 1);
                         if (error)
                             return "pythonSettings." + error;
                     }
-                    if (message.nodeSettings != null && message.hasOwnProperty("nodeSettings")) {
+                    if (message.nodeSettings != null && Object.hasOwnProperty.call(message, "nodeSettings")) {
                         var error = $root.google.api.NodeSettings.verify(message.nodeSettings, long + 1);
                         if (error)
                             return "nodeSettings." + error;
                     }
-                    if (message.dotnetSettings != null && message.hasOwnProperty("dotnetSettings")) {
+                    if (message.dotnetSettings != null && Object.hasOwnProperty.call(message, "dotnetSettings")) {
                         var error = $root.google.api.DotnetSettings.verify(message.dotnetSettings, long + 1);
                         if (error)
                             return "dotnetSettings." + error;
                     }
-                    if (message.rubySettings != null && message.hasOwnProperty("rubySettings")) {
+                    if (message.rubySettings != null && Object.hasOwnProperty.call(message, "rubySettings")) {
                         var error = $root.google.api.RubySettings.verify(message.rubySettings, long + 1);
                         if (error)
                             return "rubySettings." + error;
                     }
-                    if (message.goSettings != null && message.hasOwnProperty("goSettings")) {
+                    if (message.goSettings != null && Object.hasOwnProperty.call(message, "goSettings")) {
                         var error = $root.google.api.GoSettings.verify(message.goSettings, long + 1);
                         if (error)
                             return "goSettings." + error;
@@ -55694,27 +55682,27 @@
                         object.rubySettings = null;
                         object.goSettings = null;
                     }
-                    if (message.version != null && message.hasOwnProperty("version"))
+                    if (message.version != null && Object.hasOwnProperty.call(message, "version"))
                         object.version = message.version;
-                    if (message.launchStage != null && message.hasOwnProperty("launchStage"))
+                    if (message.launchStage != null && Object.hasOwnProperty.call(message, "launchStage"))
                         object.launchStage = options.enums === String ? $root.google.api.LaunchStage[message.launchStage] === undefined ? message.launchStage : $root.google.api.LaunchStage[message.launchStage] : message.launchStage;
-                    if (message.restNumericEnums != null && message.hasOwnProperty("restNumericEnums"))
+                    if (message.restNumericEnums != null && Object.hasOwnProperty.call(message, "restNumericEnums"))
                         object.restNumericEnums = message.restNumericEnums;
-                    if (message.javaSettings != null && message.hasOwnProperty("javaSettings"))
+                    if (message.javaSettings != null && Object.hasOwnProperty.call(message, "javaSettings"))
                         object.javaSettings = $root.google.api.JavaSettings.toObject(message.javaSettings, options, q + 1);
-                    if (message.cppSettings != null && message.hasOwnProperty("cppSettings"))
+                    if (message.cppSettings != null && Object.hasOwnProperty.call(message, "cppSettings"))
                         object.cppSettings = $root.google.api.CppSettings.toObject(message.cppSettings, options, q + 1);
-                    if (message.phpSettings != null && message.hasOwnProperty("phpSettings"))
+                    if (message.phpSettings != null && Object.hasOwnProperty.call(message, "phpSettings"))
                         object.phpSettings = $root.google.api.PhpSettings.toObject(message.phpSettings, options, q + 1);
-                    if (message.pythonSettings != null && message.hasOwnProperty("pythonSettings"))
+                    if (message.pythonSettings != null && Object.hasOwnProperty.call(message, "pythonSettings"))
                         object.pythonSettings = $root.google.api.PythonSettings.toObject(message.pythonSettings, options, q + 1);
-                    if (message.nodeSettings != null && message.hasOwnProperty("nodeSettings"))
+                    if (message.nodeSettings != null && Object.hasOwnProperty.call(message, "nodeSettings"))
                         object.nodeSettings = $root.google.api.NodeSettings.toObject(message.nodeSettings, options, q + 1);
-                    if (message.dotnetSettings != null && message.hasOwnProperty("dotnetSettings"))
+                    if (message.dotnetSettings != null && Object.hasOwnProperty.call(message, "dotnetSettings"))
                         object.dotnetSettings = $root.google.api.DotnetSettings.toObject(message.dotnetSettings, options, q + 1);
-                    if (message.rubySettings != null && message.hasOwnProperty("rubySettings"))
+                    if (message.rubySettings != null && Object.hasOwnProperty.call(message, "rubySettings"))
                         object.rubySettings = $root.google.api.RubySettings.toObject(message.rubySettings, options, q + 1);
-                    if (message.goSettings != null && message.hasOwnProperty("goSettings"))
+                    if (message.goSettings != null && Object.hasOwnProperty.call(message, "goSettings"))
                         object.goSettings = $root.google.api.GoSettings.toObject(message.goSettings, options, q + 1);
                     return object;
                 };
@@ -56055,7 +56043,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.methodSettings != null && message.hasOwnProperty("methodSettings")) {
+                    if (message.methodSettings != null && Object.hasOwnProperty.call(message, "methodSettings")) {
                         if (!Array.isArray(message.methodSettings))
                             return "methodSettings: array expected";
                         for (var i = 0; i < message.methodSettings.length; ++i) {
@@ -56064,29 +56052,29 @@
                                 return "methodSettings." + error;
                         }
                     }
-                    if (message.newIssueUri != null && message.hasOwnProperty("newIssueUri"))
+                    if (message.newIssueUri != null && Object.hasOwnProperty.call(message, "newIssueUri"))
                         if (!$util.isString(message.newIssueUri))
                             return "newIssueUri: string expected";
-                    if (message.documentationUri != null && message.hasOwnProperty("documentationUri"))
+                    if (message.documentationUri != null && Object.hasOwnProperty.call(message, "documentationUri"))
                         if (!$util.isString(message.documentationUri))
                             return "documentationUri: string expected";
-                    if (message.apiShortName != null && message.hasOwnProperty("apiShortName"))
+                    if (message.apiShortName != null && Object.hasOwnProperty.call(message, "apiShortName"))
                         if (!$util.isString(message.apiShortName))
                             return "apiShortName: string expected";
-                    if (message.githubLabel != null && message.hasOwnProperty("githubLabel"))
+                    if (message.githubLabel != null && Object.hasOwnProperty.call(message, "githubLabel"))
                         if (!$util.isString(message.githubLabel))
                             return "githubLabel: string expected";
-                    if (message.codeownerGithubTeams != null && message.hasOwnProperty("codeownerGithubTeams")) {
+                    if (message.codeownerGithubTeams != null && Object.hasOwnProperty.call(message, "codeownerGithubTeams")) {
                         if (!Array.isArray(message.codeownerGithubTeams))
                             return "codeownerGithubTeams: array expected";
                         for (var i = 0; i < message.codeownerGithubTeams.length; ++i)
                             if (!$util.isString(message.codeownerGithubTeams[i]))
                                 return "codeownerGithubTeams: string[] expected";
                     }
-                    if (message.docTagPrefix != null && message.hasOwnProperty("docTagPrefix"))
+                    if (message.docTagPrefix != null && Object.hasOwnProperty.call(message, "docTagPrefix"))
                         if (!$util.isString(message.docTagPrefix))
                             return "docTagPrefix: string expected";
-                    if (message.organization != null && message.hasOwnProperty("organization"))
+                    if (message.organization != null && Object.hasOwnProperty.call(message, "organization"))
                         switch (message.organization) {
                         default:
                             return "organization: enum value expected";
@@ -56100,7 +56088,7 @@
                         case 7:
                             break;
                         }
-                    if (message.librarySettings != null && message.hasOwnProperty("librarySettings")) {
+                    if (message.librarySettings != null && Object.hasOwnProperty.call(message, "librarySettings")) {
                         if (!Array.isArray(message.librarySettings))
                             return "librarySettings: array expected";
                         for (var i = 0; i < message.librarySettings.length; ++i) {
@@ -56109,10 +56097,10 @@
                                 return "librarySettings." + error;
                         }
                     }
-                    if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
+                    if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
                         if (!$util.isString(message.protoReferenceDocumentationUri))
                             return "protoReferenceDocumentationUri: string expected";
-                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                    if (message.restReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "restReferenceDocumentationUri"))
                         if (!$util.isString(message.restReferenceDocumentationUri))
                             return "restReferenceDocumentationUri: string expected";
                     return null;
@@ -56257,31 +56245,31 @@
                         for (var j = 0; j < message.methodSettings.length; ++j)
                             object.methodSettings[j] = $root.google.api.MethodSettings.toObject(message.methodSettings[j], options, q + 1);
                     }
-                    if (message.newIssueUri != null && message.hasOwnProperty("newIssueUri"))
+                    if (message.newIssueUri != null && Object.hasOwnProperty.call(message, "newIssueUri"))
                         object.newIssueUri = message.newIssueUri;
-                    if (message.documentationUri != null && message.hasOwnProperty("documentationUri"))
+                    if (message.documentationUri != null && Object.hasOwnProperty.call(message, "documentationUri"))
                         object.documentationUri = message.documentationUri;
-                    if (message.apiShortName != null && message.hasOwnProperty("apiShortName"))
+                    if (message.apiShortName != null && Object.hasOwnProperty.call(message, "apiShortName"))
                         object.apiShortName = message.apiShortName;
-                    if (message.githubLabel != null && message.hasOwnProperty("githubLabel"))
+                    if (message.githubLabel != null && Object.hasOwnProperty.call(message, "githubLabel"))
                         object.githubLabel = message.githubLabel;
                     if (message.codeownerGithubTeams && message.codeownerGithubTeams.length) {
                         object.codeownerGithubTeams = [];
                         for (var j = 0; j < message.codeownerGithubTeams.length; ++j)
                             object.codeownerGithubTeams[j] = message.codeownerGithubTeams[j];
                     }
-                    if (message.docTagPrefix != null && message.hasOwnProperty("docTagPrefix"))
+                    if (message.docTagPrefix != null && Object.hasOwnProperty.call(message, "docTagPrefix"))
                         object.docTagPrefix = message.docTagPrefix;
-                    if (message.organization != null && message.hasOwnProperty("organization"))
+                    if (message.organization != null && Object.hasOwnProperty.call(message, "organization"))
                         object.organization = options.enums === String ? $root.google.api.ClientLibraryOrganization[message.organization] === undefined ? message.organization : $root.google.api.ClientLibraryOrganization[message.organization] : message.organization;
                     if (message.librarySettings && message.librarySettings.length) {
                         object.librarySettings = [];
                         for (var j = 0; j < message.librarySettings.length; ++j)
                             object.librarySettings[j] = $root.google.api.ClientLibrarySettings.toObject(message.librarySettings[j], options, q + 1);
                     }
-                    if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
+                    if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
                         object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
-                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                    if (message.restReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "restReferenceDocumentationUri"))
                         object.restReferenceDocumentationUri = message.restReferenceDocumentationUri;
                     return object;
                 };
@@ -56513,10 +56501,10 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.libraryPackage != null && message.hasOwnProperty("libraryPackage"))
+                    if (message.libraryPackage != null && Object.hasOwnProperty.call(message, "libraryPackage"))
                         if (!$util.isString(message.libraryPackage))
                             return "libraryPackage: string expected";
-                    if (message.serviceClassNames != null && message.hasOwnProperty("serviceClassNames")) {
+                    if (message.serviceClassNames != null && Object.hasOwnProperty.call(message, "serviceClassNames")) {
                         if (!$util.isObject(message.serviceClassNames))
                             return "serviceClassNames: object expected";
                         var key = Object.keys(message.serviceClassNames);
@@ -56524,7 +56512,7 @@
                             if (!$util.isString(message.serviceClassNames[key[i]]))
                                 return "serviceClassNames: string{k:string} expected";
                     }
-                    if (message.common != null && message.hasOwnProperty("common")) {
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common")) {
                         var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
@@ -56593,7 +56581,7 @@
                         object.libraryPackage = "";
                         object.common = null;
                     }
-                    if (message.libraryPackage != null && message.hasOwnProperty("libraryPackage"))
+                    if (message.libraryPackage != null && Object.hasOwnProperty.call(message, "libraryPackage"))
                         object.libraryPackage = message.libraryPackage;
                     var keys2;
                     if (message.serviceClassNames && (keys2 = Object.keys(message.serviceClassNames)).length) {
@@ -56604,7 +56592,7 @@
                             object.serviceClassNames[keys2[j]] = message.serviceClassNames[keys2[j]];
                         }
                     }
-                    if (message.common != null && message.hasOwnProperty("common"))
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options, q + 1);
                     return object;
                 };
@@ -56783,7 +56771,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.common != null && message.hasOwnProperty("common")) {
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common")) {
                         var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
@@ -56836,7 +56824,7 @@
                     var object = {};
                     if (options.defaults)
                         object.common = null;
-                    if (message.common != null && message.hasOwnProperty("common"))
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options, q + 1);
                     return object;
                 };
@@ -57015,7 +57003,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.common != null && message.hasOwnProperty("common")) {
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common")) {
                         var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
@@ -57068,7 +57056,7 @@
                     var object = {};
                     if (options.defaults)
                         object.common = null;
-                    if (message.common != null && message.hasOwnProperty("common"))
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options, q + 1);
                     return object;
                 };
@@ -57262,12 +57250,12 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.common != null && message.hasOwnProperty("common")) {
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common")) {
                         var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
-                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures")) {
+                    if (message.experimentalFeatures != null && Object.hasOwnProperty.call(message, "experimentalFeatures")) {
                         var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures, long + 1);
                         if (error)
                             return "experimentalFeatures." + error;
@@ -57327,9 +57315,9 @@
                         object.common = null;
                         object.experimentalFeatures = null;
                     }
-                    if (message.common != null && message.hasOwnProperty("common"))
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options, q + 1);
-                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures"))
+                    if (message.experimentalFeatures != null && Object.hasOwnProperty.call(message, "experimentalFeatures"))
                         object.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.toObject(message.experimentalFeatures, options, q + 1);
                     return object;
                 };
@@ -57535,13 +57523,13 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                        if (message.restAsyncIoEnabled != null && Object.hasOwnProperty.call(message, "restAsyncIoEnabled"))
                             if (typeof message.restAsyncIoEnabled !== "boolean")
                                 return "restAsyncIoEnabled: boolean expected";
-                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                        if (message.protobufPythonicTypesEnabled != null && Object.hasOwnProperty.call(message, "protobufPythonicTypesEnabled"))
                             if (typeof message.protobufPythonicTypesEnabled !== "boolean")
                                 return "protobufPythonicTypesEnabled: boolean expected";
-                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                        if (message.unversionedPackageDisabled != null && Object.hasOwnProperty.call(message, "unversionedPackageDisabled"))
                             if (typeof message.unversionedPackageDisabled !== "boolean")
                                 return "unversionedPackageDisabled: boolean expected";
                         return null;
@@ -57596,11 +57584,11 @@
                             object.protobufPythonicTypesEnabled = false;
                             object.unversionedPackageDisabled = false;
                         }
-                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                        if (message.restAsyncIoEnabled != null && Object.hasOwnProperty.call(message, "restAsyncIoEnabled"))
                             object.restAsyncIoEnabled = message.restAsyncIoEnabled;
-                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                        if (message.protobufPythonicTypesEnabled != null && Object.hasOwnProperty.call(message, "protobufPythonicTypesEnabled"))
                             object.protobufPythonicTypesEnabled = message.protobufPythonicTypesEnabled;
-                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                        if (message.unversionedPackageDisabled != null && Object.hasOwnProperty.call(message, "unversionedPackageDisabled"))
                             object.unversionedPackageDisabled = message.unversionedPackageDisabled;
                         return object;
                     };
@@ -57782,7 +57770,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.common != null && message.hasOwnProperty("common")) {
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common")) {
                         var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
@@ -57835,7 +57823,7 @@
                     var object = {};
                     if (options.defaults)
                         object.common = null;
-                    if (message.common != null && message.hasOwnProperty("common"))
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options, q + 1);
                     return object;
                 };
@@ -58147,12 +58135,12 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.common != null && message.hasOwnProperty("common")) {
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common")) {
                         var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
-                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
+                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices")) {
                         if (!$util.isObject(message.renamedServices))
                             return "renamedServices: object expected";
                         var key = Object.keys(message.renamedServices);
@@ -58160,7 +58148,7 @@
                             if (!$util.isString(message.renamedServices[key[i]]))
                                 return "renamedServices: string{k:string} expected";
                     }
-                    if (message.renamedResources != null && message.hasOwnProperty("renamedResources")) {
+                    if (message.renamedResources != null && Object.hasOwnProperty.call(message, "renamedResources")) {
                         if (!$util.isObject(message.renamedResources))
                             return "renamedResources: object expected";
                         var key = Object.keys(message.renamedResources);
@@ -58168,21 +58156,21 @@
                             if (!$util.isString(message.renamedResources[key[i]]))
                                 return "renamedResources: string{k:string} expected";
                     }
-                    if (message.ignoredResources != null && message.hasOwnProperty("ignoredResources")) {
+                    if (message.ignoredResources != null && Object.hasOwnProperty.call(message, "ignoredResources")) {
                         if (!Array.isArray(message.ignoredResources))
                             return "ignoredResources: array expected";
                         for (var i = 0; i < message.ignoredResources.length; ++i)
                             if (!$util.isString(message.ignoredResources[i]))
                                 return "ignoredResources: string[] expected";
                     }
-                    if (message.forcedNamespaceAliases != null && message.hasOwnProperty("forcedNamespaceAliases")) {
+                    if (message.forcedNamespaceAliases != null && Object.hasOwnProperty.call(message, "forcedNamespaceAliases")) {
                         if (!Array.isArray(message.forcedNamespaceAliases))
                             return "forcedNamespaceAliases: array expected";
                         for (var i = 0; i < message.forcedNamespaceAliases.length; ++i)
                             if (!$util.isString(message.forcedNamespaceAliases[i]))
                                 return "forcedNamespaceAliases: string[] expected";
                     }
-                    if (message.handwrittenSignatures != null && message.hasOwnProperty("handwrittenSignatures")) {
+                    if (message.handwrittenSignatures != null && Object.hasOwnProperty.call(message, "handwrittenSignatures")) {
                         if (!Array.isArray(message.handwrittenSignatures))
                             return "handwrittenSignatures: array expected";
                         for (var i = 0; i < message.handwrittenSignatures.length; ++i)
@@ -58287,7 +58275,7 @@
                     }
                     if (options.defaults)
                         object.common = null;
-                    if (message.common != null && message.hasOwnProperty("common"))
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options, q + 1);
                     var keys2;
                     if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
@@ -58498,7 +58486,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.common != null && message.hasOwnProperty("common")) {
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common")) {
                         var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
@@ -58551,7 +58539,7 @@
                     var object = {};
                     if (options.defaults)
                         object.common = null;
-                    if (message.common != null && message.hasOwnProperty("common"))
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options, q + 1);
                     return object;
                 };
@@ -58768,12 +58756,12 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.common != null && message.hasOwnProperty("common")) {
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common")) {
                         var error = $root.google.api.CommonLanguageSettings.verify(message.common, long + 1);
                         if (error)
                             return "common." + error;
                     }
-                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
+                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices")) {
                         if (!$util.isObject(message.renamedServices))
                             return "renamedServices: object expected";
                         var key = Object.keys(message.renamedServices);
@@ -58841,7 +58829,7 @@
                         object.renamedServices = {};
                     if (options.defaults)
                         object.common = null;
-                    if (message.common != null && message.hasOwnProperty("common"))
+                    if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options, q + 1);
                     var keys2;
                     if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
@@ -59063,15 +59051,15 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.selector != null && message.hasOwnProperty("selector"))
+                    if (message.selector != null && Object.hasOwnProperty.call(message, "selector"))
                         if (!$util.isString(message.selector))
                             return "selector: string expected";
-                    if (message.longRunning != null && message.hasOwnProperty("longRunning")) {
+                    if (message.longRunning != null && Object.hasOwnProperty.call(message, "longRunning")) {
                         var error = $root.google.api.MethodSettings.LongRunning.verify(message.longRunning, long + 1);
                         if (error)
                             return "longRunning." + error;
                     }
-                    if (message.autoPopulatedFields != null && message.hasOwnProperty("autoPopulatedFields")) {
+                    if (message.autoPopulatedFields != null && Object.hasOwnProperty.call(message, "autoPopulatedFields")) {
                         if (!Array.isArray(message.autoPopulatedFields))
                             return "autoPopulatedFields: array expected";
                         for (var i = 0; i < message.autoPopulatedFields.length; ++i)
@@ -59139,9 +59127,9 @@
                         object.selector = "";
                         object.longRunning = null;
                     }
-                    if (message.selector != null && message.hasOwnProperty("selector"))
+                    if (message.selector != null && Object.hasOwnProperty.call(message, "selector"))
                         object.selector = message.selector;
-                    if (message.longRunning != null && message.hasOwnProperty("longRunning"))
+                    if (message.longRunning != null && Object.hasOwnProperty.call(message, "longRunning"))
                         object.longRunning = $root.google.api.MethodSettings.LongRunning.toObject(message.longRunning, options, q + 1);
                     if (message.autoPopulatedFields && message.autoPopulatedFields.length) {
                         object.autoPopulatedFields = [];
@@ -59367,20 +59355,20 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.initialPollDelay != null && message.hasOwnProperty("initialPollDelay")) {
+                        if (message.initialPollDelay != null && Object.hasOwnProperty.call(message, "initialPollDelay")) {
                             var error = $root.google.protobuf.Duration.verify(message.initialPollDelay, long + 1);
                             if (error)
                                 return "initialPollDelay." + error;
                         }
-                        if (message.pollDelayMultiplier != null && message.hasOwnProperty("pollDelayMultiplier"))
+                        if (message.pollDelayMultiplier != null && Object.hasOwnProperty.call(message, "pollDelayMultiplier"))
                             if (typeof message.pollDelayMultiplier !== "number")
                                 return "pollDelayMultiplier: number expected";
-                        if (message.maxPollDelay != null && message.hasOwnProperty("maxPollDelay")) {
+                        if (message.maxPollDelay != null && Object.hasOwnProperty.call(message, "maxPollDelay")) {
                             var error = $root.google.protobuf.Duration.verify(message.maxPollDelay, long + 1);
                             if (error)
                                 return "maxPollDelay." + error;
                         }
-                        if (message.totalPollTimeout != null && message.hasOwnProperty("totalPollTimeout")) {
+                        if (message.totalPollTimeout != null && Object.hasOwnProperty.call(message, "totalPollTimeout")) {
                             var error = $root.google.protobuf.Duration.verify(message.totalPollTimeout, long + 1);
                             if (error)
                                 return "totalPollTimeout." + error;
@@ -59449,13 +59437,13 @@
                             object.maxPollDelay = null;
                             object.totalPollTimeout = null;
                         }
-                        if (message.initialPollDelay != null && message.hasOwnProperty("initialPollDelay"))
+                        if (message.initialPollDelay != null && Object.hasOwnProperty.call(message, "initialPollDelay"))
                             object.initialPollDelay = $root.google.protobuf.Duration.toObject(message.initialPollDelay, options, q + 1);
-                        if (message.pollDelayMultiplier != null && message.hasOwnProperty("pollDelayMultiplier"))
+                        if (message.pollDelayMultiplier != null && Object.hasOwnProperty.call(message, "pollDelayMultiplier"))
                             object.pollDelayMultiplier = options.json && !isFinite(message.pollDelayMultiplier) ? String(message.pollDelayMultiplier) : message.pollDelayMultiplier;
-                        if (message.maxPollDelay != null && message.hasOwnProperty("maxPollDelay"))
+                        if (message.maxPollDelay != null && Object.hasOwnProperty.call(message, "maxPollDelay"))
                             object.maxPollDelay = $root.google.protobuf.Duration.toObject(message.maxPollDelay, options, q + 1);
-                        if (message.totalPollTimeout != null && message.hasOwnProperty("totalPollTimeout"))
+                        if (message.totalPollTimeout != null && Object.hasOwnProperty.call(message, "totalPollTimeout"))
                             object.totalPollTimeout = $root.google.protobuf.Duration.toObject(message.totalPollTimeout, options, q + 1);
                         return object;
                     };
@@ -59698,14 +59686,14 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.methods != null && message.hasOwnProperty("methods")) {
+                    if (message.methods != null && Object.hasOwnProperty.call(message, "methods")) {
                         if (!Array.isArray(message.methods))
                             return "methods: array expected";
                         for (var i = 0; i < message.methods.length; ++i)
                             if (!$util.isString(message.methods[i]))
                                 return "methods: string[] expected";
                     }
-                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                    if (message.generateOmittedAsInternal != null && Object.hasOwnProperty.call(message, "generateOmittedAsInternal"))
                         if (typeof message.generateOmittedAsInternal !== "boolean")
                             return "generateOmittedAsInternal: boolean expected";
                     return null;
@@ -59767,7 +59755,7 @@
                         for (var j = 0; j < message.methods.length; ++j)
                             object.methods[j] = message.methods[j];
                     }
-                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                    if (message.generateOmittedAsInternal != null && Object.hasOwnProperty.call(message, "generateOmittedAsInternal"))
                         object.generateOmittedAsInternal = message.generateOmittedAsInternal;
                     return object;
                 };
@@ -60019,7 +60007,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.format != null && message.hasOwnProperty("format"))
+                    if (message.format != null && Object.hasOwnProperty.call(message, "format"))
                         switch (message.format) {
                         default:
                             return "format: enum value expected";
@@ -60030,7 +60018,7 @@
                         case 4:
                             break;
                         }
-                    if (message.referencedTypes != null && message.hasOwnProperty("referencedTypes")) {
+                    if (message.referencedTypes != null && Object.hasOwnProperty.call(message, "referencedTypes")) {
                         if (!Array.isArray(message.referencedTypes))
                             return "referencedTypes: array expected";
                         for (var i = 0; i < message.referencedTypes.length; ++i) {
@@ -60122,7 +60110,7 @@
                         object.referencedTypes = [];
                     if (options.defaults)
                         object.format = options.enums === String ? "FORMAT_UNSPECIFIED" : 0;
-                    if (message.format != null && message.hasOwnProperty("format"))
+                    if (message.format != null && Object.hasOwnProperty.call(message, "format"))
                         object.format = options.enums === String ? $root.google.api.FieldInfo.Format[message.format] === undefined ? message.format : $root.google.api.FieldInfo.Format[message.format] : message.format;
                     if (message.referencedTypes && message.referencedTypes.length) {
                         object.referencedTypes = [];
@@ -60326,7 +60314,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.typeName != null && message.hasOwnProperty("typeName"))
+                    if (message.typeName != null && Object.hasOwnProperty.call(message, "typeName"))
                         if (!$util.isString(message.typeName))
                             return "typeName: string expected";
                     return null;
@@ -60374,7 +60362,7 @@
                     var object = {};
                     if (options.defaults)
                         object.typeName = "";
-                    if (message.typeName != null && message.hasOwnProperty("typeName"))
+                    if (message.typeName != null && Object.hasOwnProperty.call(message, "typeName"))
                         object.typeName = message.typeName;
                     return object;
                 };
@@ -60659,20 +60647,20 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.type != null && message.hasOwnProperty("type"))
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                         if (!$util.isString(message.type))
                             return "type: string expected";
-                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
+                    if (message.pattern != null && Object.hasOwnProperty.call(message, "pattern")) {
                         if (!Array.isArray(message.pattern))
                             return "pattern: array expected";
                         for (var i = 0; i < message.pattern.length; ++i)
                             if (!$util.isString(message.pattern[i]))
                                 return "pattern: string[] expected";
                     }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
                         if (!$util.isString(message.nameField))
                             return "nameField: string expected";
-                    if (message.history != null && message.hasOwnProperty("history"))
+                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
                         switch (message.history) {
                         default:
                             return "history: enum value expected";
@@ -60681,13 +60669,13 @@
                         case 2:
                             break;
                         }
-                    if (message.plural != null && message.hasOwnProperty("plural"))
+                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
                         if (!$util.isString(message.plural))
                             return "plural: string expected";
-                    if (message.singular != null && message.hasOwnProperty("singular"))
+                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
                         if (!$util.isString(message.singular))
                             return "singular: string expected";
-                    if (message.style != null && message.hasOwnProperty("style")) {
+                    if (message.style != null && Object.hasOwnProperty.call(message, "style")) {
                         if (!Array.isArray(message.style))
                             return "style: array expected";
                         for (var i = 0; i < message.style.length; ++i)
@@ -60807,20 +60795,20 @@
                         object.plural = "";
                         object.singular = "";
                     }
-                    if (message.type != null && message.hasOwnProperty("type"))
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                         object.type = message.type;
                     if (message.pattern && message.pattern.length) {
                         object.pattern = [];
                         for (var j = 0; j < message.pattern.length; ++j)
                             object.pattern[j] = message.pattern[j];
                     }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
                         object.nameField = message.nameField;
-                    if (message.history != null && message.hasOwnProperty("history"))
+                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
                         object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
-                    if (message.plural != null && message.hasOwnProperty("plural"))
+                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
                         object.plural = message.plural;
-                    if (message.singular != null && message.hasOwnProperty("singular"))
+                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
                         object.singular = message.singular;
                     if (message.style && message.style.length) {
                         object.style = [];
@@ -61049,10 +61037,10 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.type != null && message.hasOwnProperty("type"))
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                         if (!$util.isString(message.type))
                             return "type: string expected";
-                    if (message.childType != null && message.hasOwnProperty("childType"))
+                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
                         if (!$util.isString(message.childType))
                             return "childType: string expected";
                     return null;
@@ -61104,9 +61092,9 @@
                         object.type = "";
                         object.childType = "";
                     }
-                    if (message.type != null && message.hasOwnProperty("type"))
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                         object.type = message.type;
-                    if (message.childType != null && message.hasOwnProperty("childType"))
+                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
                         object.childType = message.childType;
                     return object;
                 };
@@ -61289,7 +61277,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.routingParameters != null && message.hasOwnProperty("routingParameters")) {
+                    if (message.routingParameters != null && Object.hasOwnProperty.call(message, "routingParameters")) {
                         if (!Array.isArray(message.routingParameters))
                             return "routingParameters: array expected";
                         for (var i = 0; i < message.routingParameters.length; ++i) {
@@ -61548,10 +61536,10 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.field != null && message.hasOwnProperty("field"))
+                    if (message.field != null && Object.hasOwnProperty.call(message, "field"))
                         if (!$util.isString(message.field))
                             return "field: string expected";
-                    if (message.pathTemplate != null && message.hasOwnProperty("pathTemplate"))
+                    if (message.pathTemplate != null && Object.hasOwnProperty.call(message, "pathTemplate"))
                         if (!$util.isString(message.pathTemplate))
                             return "pathTemplate: string expected";
                     return null;
@@ -61603,9 +61591,9 @@
                         object.field = "";
                         object.pathTemplate = "";
                     }
-                    if (message.field != null && message.hasOwnProperty("field"))
+                    if (message.field != null && Object.hasOwnProperty.call(message, "field"))
                         object.field = message.field;
-                    if (message.pathTemplate != null && message.hasOwnProperty("pathTemplate"))
+                    if (message.pathTemplate != null && Object.hasOwnProperty.call(message, "pathTemplate"))
                         object.pathTemplate = message.pathTemplate;
                     return object;
                 };
@@ -61800,7 +61788,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.file != null && message.hasOwnProperty("file")) {
+                    if (message.file != null && Object.hasOwnProperty.call(message, "file")) {
                         if (!Array.isArray(message.file))
                             return "file: array expected";
                         for (var i = 0; i < message.file.length; ++i) {
@@ -62315,41 +62303,41 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
-                    if (message["package"] != null && message.hasOwnProperty("package"))
+                    if (message["package"] != null && Object.hasOwnProperty.call(message, "package"))
                         if (!$util.isString(message["package"]))
                             return "package: string expected";
-                    if (message.dependency != null && message.hasOwnProperty("dependency")) {
+                    if (message.dependency != null && Object.hasOwnProperty.call(message, "dependency")) {
                         if (!Array.isArray(message.dependency))
                             return "dependency: array expected";
                         for (var i = 0; i < message.dependency.length; ++i)
                             if (!$util.isString(message.dependency[i]))
                                 return "dependency: string[] expected";
                     }
-                    if (message.publicDependency != null && message.hasOwnProperty("publicDependency")) {
+                    if (message.publicDependency != null && Object.hasOwnProperty.call(message, "publicDependency")) {
                         if (!Array.isArray(message.publicDependency))
                             return "publicDependency: array expected";
                         for (var i = 0; i < message.publicDependency.length; ++i)
                             if (!$util.isInteger(message.publicDependency[i]))
                                 return "publicDependency: integer[] expected";
                     }
-                    if (message.weakDependency != null && message.hasOwnProperty("weakDependency")) {
+                    if (message.weakDependency != null && Object.hasOwnProperty.call(message, "weakDependency")) {
                         if (!Array.isArray(message.weakDependency))
                             return "weakDependency: array expected";
                         for (var i = 0; i < message.weakDependency.length; ++i)
                             if (!$util.isInteger(message.weakDependency[i]))
                                 return "weakDependency: integer[] expected";
                     }
-                    if (message.optionDependency != null && message.hasOwnProperty("optionDependency")) {
+                    if (message.optionDependency != null && Object.hasOwnProperty.call(message, "optionDependency")) {
                         if (!Array.isArray(message.optionDependency))
                             return "optionDependency: array expected";
                         for (var i = 0; i < message.optionDependency.length; ++i)
                             if (!$util.isString(message.optionDependency[i]))
                                 return "optionDependency: string[] expected";
                     }
-                    if (message.messageType != null && message.hasOwnProperty("messageType")) {
+                    if (message.messageType != null && Object.hasOwnProperty.call(message, "messageType")) {
                         if (!Array.isArray(message.messageType))
                             return "messageType: array expected";
                         for (var i = 0; i < message.messageType.length; ++i) {
@@ -62358,7 +62346,7 @@
                                 return "messageType." + error;
                         }
                     }
-                    if (message.enumType != null && message.hasOwnProperty("enumType")) {
+                    if (message.enumType != null && Object.hasOwnProperty.call(message, "enumType")) {
                         if (!Array.isArray(message.enumType))
                             return "enumType: array expected";
                         for (var i = 0; i < message.enumType.length; ++i) {
@@ -62367,7 +62355,7 @@
                                 return "enumType." + error;
                         }
                     }
-                    if (message.service != null && message.hasOwnProperty("service")) {
+                    if (message.service != null && Object.hasOwnProperty.call(message, "service")) {
                         if (!Array.isArray(message.service))
                             return "service: array expected";
                         for (var i = 0; i < message.service.length; ++i) {
@@ -62376,7 +62364,7 @@
                                 return "service." + error;
                         }
                     }
-                    if (message.extension != null && message.hasOwnProperty("extension")) {
+                    if (message.extension != null && Object.hasOwnProperty.call(message, "extension")) {
                         if (!Array.isArray(message.extension))
                             return "extension: array expected";
                         for (var i = 0; i < message.extension.length; ++i) {
@@ -62385,20 +62373,20 @@
                                 return "extension." + error;
                         }
                     }
-                    if (message.options != null && message.hasOwnProperty("options")) {
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options")) {
                         var error = $root.google.protobuf.FileOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
-                    if (message.sourceCodeInfo != null && message.hasOwnProperty("sourceCodeInfo")) {
+                    if (message.sourceCodeInfo != null && Object.hasOwnProperty.call(message, "sourceCodeInfo")) {
                         var error = $root.google.protobuf.SourceCodeInfo.verify(message.sourceCodeInfo, long + 1);
                         if (error)
                             return "sourceCodeInfo." + error;
                     }
-                    if (message.syntax != null && message.hasOwnProperty("syntax"))
+                    if (message.syntax != null && Object.hasOwnProperty.call(message, "syntax"))
                         if (!$util.isString(message.syntax))
                             return "syntax: string expected";
-                    if (message.edition != null && message.hasOwnProperty("edition"))
+                    if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                         switch (message.edition) {
                         default:
                             return "edition: enum value expected";
@@ -62615,9 +62603,9 @@
                         object.syntax = "";
                         object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
                     }
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         object.name = message.name;
-                    if (message["package"] != null && message.hasOwnProperty("package"))
+                    if (message["package"] != null && Object.hasOwnProperty.call(message, "package"))
                         object["package"] = message["package"];
                     if (message.dependency && message.dependency.length) {
                         object.dependency = [];
@@ -62644,9 +62632,9 @@
                         for (var j = 0; j < message.extension.length; ++j)
                             object.extension[j] = $root.google.protobuf.FieldDescriptorProto.toObject(message.extension[j], options, q + 1);
                     }
-                    if (message.options != null && message.hasOwnProperty("options"))
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
                         object.options = $root.google.protobuf.FileOptions.toObject(message.options, options, q + 1);
-                    if (message.sourceCodeInfo != null && message.hasOwnProperty("sourceCodeInfo"))
+                    if (message.sourceCodeInfo != null && Object.hasOwnProperty.call(message, "sourceCodeInfo"))
                         object.sourceCodeInfo = $root.google.protobuf.SourceCodeInfo.toObject(message.sourceCodeInfo, options, q + 1);
                     if (message.publicDependency && message.publicDependency.length) {
                         object.publicDependency = [];
@@ -62658,9 +62646,9 @@
                         for (var j = 0; j < message.weakDependency.length; ++j)
                             object.weakDependency[j] = message.weakDependency[j];
                     }
-                    if (message.syntax != null && message.hasOwnProperty("syntax"))
+                    if (message.syntax != null && Object.hasOwnProperty.call(message, "syntax"))
                         object.syntax = message.syntax;
-                    if (message.edition != null && message.hasOwnProperty("edition"))
+                    if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                         object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
                     if (message.optionDependency && message.optionDependency.length) {
                         object.optionDependency = [];
@@ -63026,10 +63014,10 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
-                    if (message.field != null && message.hasOwnProperty("field")) {
+                    if (message.field != null && Object.hasOwnProperty.call(message, "field")) {
                         if (!Array.isArray(message.field))
                             return "field: array expected";
                         for (var i = 0; i < message.field.length; ++i) {
@@ -63038,7 +63026,7 @@
                                 return "field." + error;
                         }
                     }
-                    if (message.extension != null && message.hasOwnProperty("extension")) {
+                    if (message.extension != null && Object.hasOwnProperty.call(message, "extension")) {
                         if (!Array.isArray(message.extension))
                             return "extension: array expected";
                         for (var i = 0; i < message.extension.length; ++i) {
@@ -63047,7 +63035,7 @@
                                 return "extension." + error;
                         }
                     }
-                    if (message.nestedType != null && message.hasOwnProperty("nestedType")) {
+                    if (message.nestedType != null && Object.hasOwnProperty.call(message, "nestedType")) {
                         if (!Array.isArray(message.nestedType))
                             return "nestedType: array expected";
                         for (var i = 0; i < message.nestedType.length; ++i) {
@@ -63056,7 +63044,7 @@
                                 return "nestedType." + error;
                         }
                     }
-                    if (message.enumType != null && message.hasOwnProperty("enumType")) {
+                    if (message.enumType != null && Object.hasOwnProperty.call(message, "enumType")) {
                         if (!Array.isArray(message.enumType))
                             return "enumType: array expected";
                         for (var i = 0; i < message.enumType.length; ++i) {
@@ -63065,7 +63053,7 @@
                                 return "enumType." + error;
                         }
                     }
-                    if (message.extensionRange != null && message.hasOwnProperty("extensionRange")) {
+                    if (message.extensionRange != null && Object.hasOwnProperty.call(message, "extensionRange")) {
                         if (!Array.isArray(message.extensionRange))
                             return "extensionRange: array expected";
                         for (var i = 0; i < message.extensionRange.length; ++i) {
@@ -63074,7 +63062,7 @@
                                 return "extensionRange." + error;
                         }
                     }
-                    if (message.oneofDecl != null && message.hasOwnProperty("oneofDecl")) {
+                    if (message.oneofDecl != null && Object.hasOwnProperty.call(message, "oneofDecl")) {
                         if (!Array.isArray(message.oneofDecl))
                             return "oneofDecl: array expected";
                         for (var i = 0; i < message.oneofDecl.length; ++i) {
@@ -63083,12 +63071,12 @@
                                 return "oneofDecl." + error;
                         }
                     }
-                    if (message.options != null && message.hasOwnProperty("options")) {
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options")) {
                         var error = $root.google.protobuf.MessageOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
-                    if (message.reservedRange != null && message.hasOwnProperty("reservedRange")) {
+                    if (message.reservedRange != null && Object.hasOwnProperty.call(message, "reservedRange")) {
                         if (!Array.isArray(message.reservedRange))
                             return "reservedRange: array expected";
                         for (var i = 0; i < message.reservedRange.length; ++i) {
@@ -63097,14 +63085,14 @@
                                 return "reservedRange." + error;
                         }
                     }
-                    if (message.reservedName != null && message.hasOwnProperty("reservedName")) {
+                    if (message.reservedName != null && Object.hasOwnProperty.call(message, "reservedName")) {
                         if (!Array.isArray(message.reservedName))
                             return "reservedName: array expected";
                         for (var i = 0; i < message.reservedName.length; ++i)
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
                         switch (message.visibility) {
                         default:
                             return "visibility: enum value expected";
@@ -63273,7 +63261,7 @@
                         object.options = null;
                         object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         object.name = message.name;
                     if (message.field && message.field.length) {
                         object.field = [];
@@ -63300,7 +63288,7 @@
                         for (var j = 0; j < message.extension.length; ++j)
                             object.extension[j] = $root.google.protobuf.FieldDescriptorProto.toObject(message.extension[j], options, q + 1);
                     }
-                    if (message.options != null && message.hasOwnProperty("options"))
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
                         object.options = $root.google.protobuf.MessageOptions.toObject(message.options, options, q + 1);
                     if (message.oneofDecl && message.oneofDecl.length) {
                         object.oneofDecl = [];
@@ -63317,7 +63305,7 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
                         object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
@@ -63523,13 +63511,13 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.start != null && message.hasOwnProperty("start"))
+                        if (message.start != null && Object.hasOwnProperty.call(message, "start"))
                             if (!$util.isInteger(message.start))
                                 return "start: integer expected";
-                        if (message.end != null && message.hasOwnProperty("end"))
+                        if (message.end != null && Object.hasOwnProperty.call(message, "end"))
                             if (!$util.isInteger(message.end))
                                 return "end: integer expected";
-                        if (message.options != null && message.hasOwnProperty("options")) {
+                        if (message.options != null && Object.hasOwnProperty.call(message, "options")) {
                             var error = $root.google.protobuf.ExtensionRangeOptions.verify(message.options, long + 1);
                             if (error)
                                 return "options." + error;
@@ -63589,11 +63577,11 @@
                             object.end = 0;
                             object.options = null;
                         }
-                        if (message.start != null && message.hasOwnProperty("start"))
+                        if (message.start != null && Object.hasOwnProperty.call(message, "start"))
                             object.start = message.start;
-                        if (message.end != null && message.hasOwnProperty("end"))
+                        if (message.end != null && Object.hasOwnProperty.call(message, "end"))
                             object.end = message.end;
-                        if (message.options != null && message.hasOwnProperty("options"))
+                        if (message.options != null && Object.hasOwnProperty.call(message, "options"))
                             object.options = $root.google.protobuf.ExtensionRangeOptions.toObject(message.options, options, q + 1);
                         return object;
                     };
@@ -63787,10 +63775,10 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.start != null && message.hasOwnProperty("start"))
+                        if (message.start != null && Object.hasOwnProperty.call(message, "start"))
                             if (!$util.isInteger(message.start))
                                 return "start: integer expected";
-                        if (message.end != null && message.hasOwnProperty("end"))
+                        if (message.end != null && Object.hasOwnProperty.call(message, "end"))
                             if (!$util.isInteger(message.end))
                                 return "end: integer expected";
                         return null;
@@ -63842,9 +63830,9 @@
                             object.start = 0;
                             object.end = 0;
                         }
-                        if (message.start != null && message.hasOwnProperty("start"))
+                        if (message.start != null && Object.hasOwnProperty.call(message, "start"))
                             object.start = message.start;
-                        if (message.end != null && message.hasOwnProperty("end"))
+                        if (message.end != null && Object.hasOwnProperty.call(message, "end"))
                             object.end = message.end;
                         return object;
                     };
@@ -64079,7 +64067,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
+                    if (message.uninterpretedOption != null && Object.hasOwnProperty.call(message, "uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
@@ -64088,7 +64076,7 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
-                    if (message.declaration != null && message.hasOwnProperty("declaration")) {
+                    if (message.declaration != null && Object.hasOwnProperty.call(message, "declaration")) {
                         if (!Array.isArray(message.declaration))
                             return "declaration: array expected";
                         for (var i = 0; i < message.declaration.length; ++i) {
@@ -64097,12 +64085,12 @@
                                 return "declaration." + error;
                         }
                     }
-                    if (message.features != null && message.hasOwnProperty("features")) {
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features")) {
                         var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
-                    if (message.verification != null && message.hasOwnProperty("verification"))
+                    if (message.verification != null && Object.hasOwnProperty.call(message, "verification"))
                         switch (message.verification) {
                         default:
                             return "verification: enum value expected";
@@ -64205,9 +64193,9 @@
                         for (var j = 0; j < message.declaration.length; ++j)
                             object.declaration[j] = $root.google.protobuf.ExtensionRangeOptions.Declaration.toObject(message.declaration[j], options, q + 1);
                     }
-                    if (message.verification != null && message.hasOwnProperty("verification"))
+                    if (message.verification != null && Object.hasOwnProperty.call(message, "verification"))
                         object.verification = options.enums === String ? $root.google.protobuf.ExtensionRangeOptions.VerificationState[message.verification] === undefined ? message.verification : $root.google.protobuf.ExtensionRangeOptions.VerificationState[message.verification] : message.verification;
-                    if (message.features != null && message.hasOwnProperty("features"))
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options, q + 1);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
@@ -64448,19 +64436,19 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.number != null && message.hasOwnProperty("number"))
+                        if (message.number != null && Object.hasOwnProperty.call(message, "number"))
                             if (!$util.isInteger(message.number))
                                 return "number: integer expected";
-                        if (message.fullName != null && message.hasOwnProperty("fullName"))
+                        if (message.fullName != null && Object.hasOwnProperty.call(message, "fullName"))
                             if (!$util.isString(message.fullName))
                                 return "fullName: string expected";
-                        if (message.type != null && message.hasOwnProperty("type"))
+                        if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                             if (!$util.isString(message.type))
                                 return "type: string expected";
-                        if (message.reserved != null && message.hasOwnProperty("reserved"))
+                        if (message.reserved != null && Object.hasOwnProperty.call(message, "reserved"))
                             if (typeof message.reserved !== "boolean")
                                 return "reserved: boolean expected";
-                        if (message.repeated != null && message.hasOwnProperty("repeated"))
+                        if (message.repeated != null && Object.hasOwnProperty.call(message, "repeated"))
                             if (typeof message.repeated !== "boolean")
                                 return "repeated: boolean expected";
                         return null;
@@ -64521,15 +64509,15 @@
                             object.reserved = false;
                             object.repeated = false;
                         }
-                        if (message.number != null && message.hasOwnProperty("number"))
+                        if (message.number != null && Object.hasOwnProperty.call(message, "number"))
                             object.number = message.number;
-                        if (message.fullName != null && message.hasOwnProperty("fullName"))
+                        if (message.fullName != null && Object.hasOwnProperty.call(message, "fullName"))
                             object.fullName = message.fullName;
-                        if (message.type != null && message.hasOwnProperty("type"))
+                        if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                             object.type = message.type;
-                        if (message.reserved != null && message.hasOwnProperty("reserved"))
+                        if (message.reserved != null && Object.hasOwnProperty.call(message, "reserved"))
                             object.reserved = message.reserved;
-                        if (message.repeated != null && message.hasOwnProperty("repeated"))
+                        if (message.repeated != null && Object.hasOwnProperty.call(message, "repeated"))
                             object.repeated = message.repeated;
                         return object;
                     };
@@ -64875,13 +64863,13 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
-                    if (message.number != null && message.hasOwnProperty("number"))
+                    if (message.number != null && Object.hasOwnProperty.call(message, "number"))
                         if (!$util.isInteger(message.number))
                             return "number: integer expected";
-                    if (message.label != null && message.hasOwnProperty("label"))
+                    if (message.label != null && Object.hasOwnProperty.call(message, "label"))
                         switch (message.label) {
                         default:
                             return "label: enum value expected";
@@ -64890,7 +64878,7 @@
                         case 2:
                             break;
                         }
-                    if (message.type != null && message.hasOwnProperty("type"))
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                         switch (message.type) {
                         default:
                             return "type: enum value expected";
@@ -64914,27 +64902,27 @@
                         case 18:
                             break;
                         }
-                    if (message.typeName != null && message.hasOwnProperty("typeName"))
+                    if (message.typeName != null && Object.hasOwnProperty.call(message, "typeName"))
                         if (!$util.isString(message.typeName))
                             return "typeName: string expected";
-                    if (message.extendee != null && message.hasOwnProperty("extendee"))
+                    if (message.extendee != null && Object.hasOwnProperty.call(message, "extendee"))
                         if (!$util.isString(message.extendee))
                             return "extendee: string expected";
-                    if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
+                    if (message.defaultValue != null && Object.hasOwnProperty.call(message, "defaultValue"))
                         if (!$util.isString(message.defaultValue))
                             return "defaultValue: string expected";
-                    if (message.oneofIndex != null && message.hasOwnProperty("oneofIndex"))
+                    if (message.oneofIndex != null && Object.hasOwnProperty.call(message, "oneofIndex"))
                         if (!$util.isInteger(message.oneofIndex))
                             return "oneofIndex: integer expected";
-                    if (message.jsonName != null && message.hasOwnProperty("jsonName"))
+                    if (message.jsonName != null && Object.hasOwnProperty.call(message, "jsonName"))
                         if (!$util.isString(message.jsonName))
                             return "jsonName: string expected";
-                    if (message.options != null && message.hasOwnProperty("options")) {
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options")) {
                         var error = $root.google.protobuf.FieldOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
-                    if (message.proto3Optional != null && message.hasOwnProperty("proto3Optional"))
+                    if (message.proto3Optional != null && Object.hasOwnProperty.call(message, "proto3Optional"))
                         if (typeof message.proto3Optional !== "boolean")
                             return "proto3Optional: boolean expected";
                     return null;
@@ -65112,27 +65100,27 @@
                         object.jsonName = "";
                         object.proto3Optional = false;
                     }
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         object.name = message.name;
-                    if (message.extendee != null && message.hasOwnProperty("extendee"))
+                    if (message.extendee != null && Object.hasOwnProperty.call(message, "extendee"))
                         object.extendee = message.extendee;
-                    if (message.number != null && message.hasOwnProperty("number"))
+                    if (message.number != null && Object.hasOwnProperty.call(message, "number"))
                         object.number = message.number;
-                    if (message.label != null && message.hasOwnProperty("label"))
+                    if (message.label != null && Object.hasOwnProperty.call(message, "label"))
                         object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
-                    if (message.type != null && message.hasOwnProperty("type"))
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                         object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
-                    if (message.typeName != null && message.hasOwnProperty("typeName"))
+                    if (message.typeName != null && Object.hasOwnProperty.call(message, "typeName"))
                         object.typeName = message.typeName;
-                    if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
+                    if (message.defaultValue != null && Object.hasOwnProperty.call(message, "defaultValue"))
                         object.defaultValue = message.defaultValue;
-                    if (message.options != null && message.hasOwnProperty("options"))
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
                         object.options = $root.google.protobuf.FieldOptions.toObject(message.options, options, q + 1);
-                    if (message.oneofIndex != null && message.hasOwnProperty("oneofIndex"))
+                    if (message.oneofIndex != null && Object.hasOwnProperty.call(message, "oneofIndex"))
                         object.oneofIndex = message.oneofIndex;
-                    if (message.jsonName != null && message.hasOwnProperty("jsonName"))
+                    if (message.jsonName != null && Object.hasOwnProperty.call(message, "jsonName"))
                         object.jsonName = message.jsonName;
-                    if (message.proto3Optional != null && message.hasOwnProperty("proto3Optional"))
+                    if (message.proto3Optional != null && Object.hasOwnProperty.call(message, "proto3Optional"))
                         object.proto3Optional = message.proto3Optional;
                     return object;
                 };
@@ -65388,10 +65376,10 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
-                    if (message.options != null && message.hasOwnProperty("options")) {
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options")) {
                         var error = $root.google.protobuf.OneofOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
@@ -65448,9 +65436,9 @@
                         object.name = "";
                         object.options = null;
                     }
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         object.name = message.name;
-                    if (message.options != null && message.hasOwnProperty("options"))
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
                         object.options = $root.google.protobuf.OneofOptions.toObject(message.options, options, q + 1);
                     return object;
                 };
@@ -65716,10 +65704,10 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
-                    if (message.value != null && message.hasOwnProperty("value")) {
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value")) {
                         if (!Array.isArray(message.value))
                             return "value: array expected";
                         for (var i = 0; i < message.value.length; ++i) {
@@ -65728,12 +65716,12 @@
                                 return "value." + error;
                         }
                     }
-                    if (message.options != null && message.hasOwnProperty("options")) {
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options")) {
                         var error = $root.google.protobuf.EnumOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
-                    if (message.reservedRange != null && message.hasOwnProperty("reservedRange")) {
+                    if (message.reservedRange != null && Object.hasOwnProperty.call(message, "reservedRange")) {
                         if (!Array.isArray(message.reservedRange))
                             return "reservedRange: array expected";
                         for (var i = 0; i < message.reservedRange.length; ++i) {
@@ -65742,14 +65730,14 @@
                                 return "reservedRange." + error;
                         }
                     }
-                    if (message.reservedName != null && message.hasOwnProperty("reservedName")) {
+                    if (message.reservedName != null && Object.hasOwnProperty.call(message, "reservedName")) {
                         if (!Array.isArray(message.reservedName))
                             return "reservedName: array expected";
                         for (var i = 0; i < message.reservedName.length; ++i)
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
                         switch (message.visibility) {
                         default:
                             return "visibility: enum value expected";
@@ -65863,14 +65851,14 @@
                         object.options = null;
                         object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         object.name = message.name;
                     if (message.value && message.value.length) {
                         object.value = [];
                         for (var j = 0; j < message.value.length; ++j)
                             object.value[j] = $root.google.protobuf.EnumValueDescriptorProto.toObject(message.value[j], options, q + 1);
                     }
-                    if (message.options != null && message.hasOwnProperty("options"))
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
                         object.options = $root.google.protobuf.EnumOptions.toObject(message.options, options, q + 1);
                     if (message.reservedRange && message.reservedRange.length) {
                         object.reservedRange = [];
@@ -65882,7 +65870,7 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
                         object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
@@ -66073,10 +66061,10 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.start != null && message.hasOwnProperty("start"))
+                        if (message.start != null && Object.hasOwnProperty.call(message, "start"))
                             if (!$util.isInteger(message.start))
                                 return "start: integer expected";
-                        if (message.end != null && message.hasOwnProperty("end"))
+                        if (message.end != null && Object.hasOwnProperty.call(message, "end"))
                             if (!$util.isInteger(message.end))
                                 return "end: integer expected";
                         return null;
@@ -66128,9 +66116,9 @@
                             object.start = 0;
                             object.end = 0;
                         }
-                        if (message.start != null && message.hasOwnProperty("start"))
+                        if (message.start != null && Object.hasOwnProperty.call(message, "start"))
                             object.start = message.start;
-                        if (message.end != null && message.hasOwnProperty("end"))
+                        if (message.end != null && Object.hasOwnProperty.call(message, "end"))
                             object.end = message.end;
                         return object;
                     };
@@ -66342,13 +66330,13 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
-                    if (message.number != null && message.hasOwnProperty("number"))
+                    if (message.number != null && Object.hasOwnProperty.call(message, "number"))
                         if (!$util.isInteger(message.number))
                             return "number: integer expected";
-                    if (message.options != null && message.hasOwnProperty("options")) {
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options")) {
                         var error = $root.google.protobuf.EnumValueOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
@@ -66408,11 +66396,11 @@
                         object.number = 0;
                         object.options = null;
                     }
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         object.name = message.name;
-                    if (message.number != null && message.hasOwnProperty("number"))
+                    if (message.number != null && Object.hasOwnProperty.call(message, "number"))
                         object.number = message.number;
-                    if (message.options != null && message.hasOwnProperty("options"))
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
                         object.options = $root.google.protobuf.EnumValueOptions.toObject(message.options, options, q + 1);
                     return object;
                 };
@@ -66625,10 +66613,10 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
-                    if (message.method != null && message.hasOwnProperty("method")) {
+                    if (message.method != null && Object.hasOwnProperty.call(message, "method")) {
                         if (!Array.isArray(message.method))
                             return "method: array expected";
                         for (var i = 0; i < message.method.length; ++i) {
@@ -66637,7 +66625,7 @@
                                 return "method." + error;
                         }
                     }
-                    if (message.options != null && message.hasOwnProperty("options")) {
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options")) {
                         var error = $root.google.protobuf.ServiceOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
@@ -66706,14 +66694,14 @@
                         object.name = "";
                         object.options = null;
                     }
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         object.name = message.name;
                     if (message.method && message.method.length) {
                         object.method = [];
                         for (var j = 0; j < message.method.length; ++j)
                             object.method[j] = $root.google.protobuf.MethodDescriptorProto.toObject(message.method[j], options, q + 1);
                     }
-                    if (message.options != null && message.hasOwnProperty("options"))
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
                         object.options = $root.google.protobuf.ServiceOptions.toObject(message.options, options, q + 1);
                     return object;
                 };
@@ -66967,24 +66955,24 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
-                    if (message.inputType != null && message.hasOwnProperty("inputType"))
+                    if (message.inputType != null && Object.hasOwnProperty.call(message, "inputType"))
                         if (!$util.isString(message.inputType))
                             return "inputType: string expected";
-                    if (message.outputType != null && message.hasOwnProperty("outputType"))
+                    if (message.outputType != null && Object.hasOwnProperty.call(message, "outputType"))
                         if (!$util.isString(message.outputType))
                             return "outputType: string expected";
-                    if (message.options != null && message.hasOwnProperty("options")) {
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options")) {
                         var error = $root.google.protobuf.MethodOptions.verify(message.options, long + 1);
                         if (error)
                             return "options." + error;
                     }
-                    if (message.clientStreaming != null && message.hasOwnProperty("clientStreaming"))
+                    if (message.clientStreaming != null && Object.hasOwnProperty.call(message, "clientStreaming"))
                         if (typeof message.clientStreaming !== "boolean")
                             return "clientStreaming: boolean expected";
-                    if (message.serverStreaming != null && message.hasOwnProperty("serverStreaming"))
+                    if (message.serverStreaming != null && Object.hasOwnProperty.call(message, "serverStreaming"))
                         if (typeof message.serverStreaming !== "boolean")
                             return "serverStreaming: boolean expected";
                     return null;
@@ -67051,17 +67039,17 @@
                         object.clientStreaming = false;
                         object.serverStreaming = false;
                     }
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         object.name = message.name;
-                    if (message.inputType != null && message.hasOwnProperty("inputType"))
+                    if (message.inputType != null && Object.hasOwnProperty.call(message, "inputType"))
                         object.inputType = message.inputType;
-                    if (message.outputType != null && message.hasOwnProperty("outputType"))
+                    if (message.outputType != null && Object.hasOwnProperty.call(message, "outputType"))
                         object.outputType = message.outputType;
-                    if (message.options != null && message.hasOwnProperty("options"))
+                    if (message.options != null && Object.hasOwnProperty.call(message, "options"))
                         object.options = $root.google.protobuf.MethodOptions.toObject(message.options, options, q + 1);
-                    if (message.clientStreaming != null && message.hasOwnProperty("clientStreaming"))
+                    if (message.clientStreaming != null && Object.hasOwnProperty.call(message, "clientStreaming"))
                         object.clientStreaming = message.clientStreaming;
-                    if (message.serverStreaming != null && message.hasOwnProperty("serverStreaming"))
+                    if (message.serverStreaming != null && Object.hasOwnProperty.call(message, "serverStreaming"))
                         object.serverStreaming = message.serverStreaming;
                     return object;
                 };
@@ -67563,22 +67551,22 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.javaPackage != null && message.hasOwnProperty("javaPackage"))
+                    if (message.javaPackage != null && Object.hasOwnProperty.call(message, "javaPackage"))
                         if (!$util.isString(message.javaPackage))
                             return "javaPackage: string expected";
-                    if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
+                    if (message.javaOuterClassname != null && Object.hasOwnProperty.call(message, "javaOuterClassname"))
                         if (!$util.isString(message.javaOuterClassname))
                             return "javaOuterClassname: string expected";
-                    if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
+                    if (message.javaMultipleFiles != null && Object.hasOwnProperty.call(message, "javaMultipleFiles"))
                         if (typeof message.javaMultipleFiles !== "boolean")
                             return "javaMultipleFiles: boolean expected";
-                    if (message.javaGenerateEqualsAndHash != null && message.hasOwnProperty("javaGenerateEqualsAndHash"))
+                    if (message.javaGenerateEqualsAndHash != null && Object.hasOwnProperty.call(message, "javaGenerateEqualsAndHash"))
                         if (typeof message.javaGenerateEqualsAndHash !== "boolean")
                             return "javaGenerateEqualsAndHash: boolean expected";
-                    if (message.javaStringCheckUtf8 != null && message.hasOwnProperty("javaStringCheckUtf8"))
+                    if (message.javaStringCheckUtf8 != null && Object.hasOwnProperty.call(message, "javaStringCheckUtf8"))
                         if (typeof message.javaStringCheckUtf8 !== "boolean")
                             return "javaStringCheckUtf8: boolean expected";
-                    if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
+                    if (message.optimizeFor != null && Object.hasOwnProperty.call(message, "optimizeFor"))
                         switch (message.optimizeFor) {
                         default:
                             return "optimizeFor: enum value expected";
@@ -67587,51 +67575,51 @@
                         case 3:
                             break;
                         }
-                    if (message.goPackage != null && message.hasOwnProperty("goPackage"))
+                    if (message.goPackage != null && Object.hasOwnProperty.call(message, "goPackage"))
                         if (!$util.isString(message.goPackage))
                             return "goPackage: string expected";
-                    if (message.ccGenericServices != null && message.hasOwnProperty("ccGenericServices"))
+                    if (message.ccGenericServices != null && Object.hasOwnProperty.call(message, "ccGenericServices"))
                         if (typeof message.ccGenericServices !== "boolean")
                             return "ccGenericServices: boolean expected";
-                    if (message.javaGenericServices != null && message.hasOwnProperty("javaGenericServices"))
+                    if (message.javaGenericServices != null && Object.hasOwnProperty.call(message, "javaGenericServices"))
                         if (typeof message.javaGenericServices !== "boolean")
                             return "javaGenericServices: boolean expected";
-                    if (message.pyGenericServices != null && message.hasOwnProperty("pyGenericServices"))
+                    if (message.pyGenericServices != null && Object.hasOwnProperty.call(message, "pyGenericServices"))
                         if (typeof message.pyGenericServices !== "boolean")
                             return "pyGenericServices: boolean expected";
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
-                    if (message.ccEnableArenas != null && message.hasOwnProperty("ccEnableArenas"))
+                    if (message.ccEnableArenas != null && Object.hasOwnProperty.call(message, "ccEnableArenas"))
                         if (typeof message.ccEnableArenas !== "boolean")
                             return "ccEnableArenas: boolean expected";
-                    if (message.objcClassPrefix != null && message.hasOwnProperty("objcClassPrefix"))
+                    if (message.objcClassPrefix != null && Object.hasOwnProperty.call(message, "objcClassPrefix"))
                         if (!$util.isString(message.objcClassPrefix))
                             return "objcClassPrefix: string expected";
-                    if (message.csharpNamespace != null && message.hasOwnProperty("csharpNamespace"))
+                    if (message.csharpNamespace != null && Object.hasOwnProperty.call(message, "csharpNamespace"))
                         if (!$util.isString(message.csharpNamespace))
                             return "csharpNamespace: string expected";
-                    if (message.swiftPrefix != null && message.hasOwnProperty("swiftPrefix"))
+                    if (message.swiftPrefix != null && Object.hasOwnProperty.call(message, "swiftPrefix"))
                         if (!$util.isString(message.swiftPrefix))
                             return "swiftPrefix: string expected";
-                    if (message.phpClassPrefix != null && message.hasOwnProperty("phpClassPrefix"))
+                    if (message.phpClassPrefix != null && Object.hasOwnProperty.call(message, "phpClassPrefix"))
                         if (!$util.isString(message.phpClassPrefix))
                             return "phpClassPrefix: string expected";
-                    if (message.phpNamespace != null && message.hasOwnProperty("phpNamespace"))
+                    if (message.phpNamespace != null && Object.hasOwnProperty.call(message, "phpNamespace"))
                         if (!$util.isString(message.phpNamespace))
                             return "phpNamespace: string expected";
-                    if (message.phpMetadataNamespace != null && message.hasOwnProperty("phpMetadataNamespace"))
+                    if (message.phpMetadataNamespace != null && Object.hasOwnProperty.call(message, "phpMetadataNamespace"))
                         if (!$util.isString(message.phpMetadataNamespace))
                             return "phpMetadataNamespace: string expected";
-                    if (message.rubyPackage != null && message.hasOwnProperty("rubyPackage"))
+                    if (message.rubyPackage != null && Object.hasOwnProperty.call(message, "rubyPackage"))
                         if (!$util.isString(message.rubyPackage))
                             return "rubyPackage: string expected";
-                    if (message.features != null && message.hasOwnProperty("features")) {
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features")) {
                         var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
-                    if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
+                    if (message.uninterpretedOption != null && Object.hasOwnProperty.call(message, "uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
@@ -67640,7 +67628,7 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
-                    if (message[".google.api.resourceDefinition"] != null && message.hasOwnProperty(".google.api.resourceDefinition")) {
+                    if (message[".google.api.resourceDefinition"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceDefinition")) {
                         if (!Array.isArray(message[".google.api.resourceDefinition"]))
                             return ".google.api.resourceDefinition: array expected";
                         for (var i = 0; i < message[".google.api.resourceDefinition"].length; ++i) {
@@ -67797,45 +67785,45 @@
                         object.rubyPackage = "";
                         object.features = null;
                     }
-                    if (message.javaPackage != null && message.hasOwnProperty("javaPackage"))
+                    if (message.javaPackage != null && Object.hasOwnProperty.call(message, "javaPackage"))
                         object.javaPackage = message.javaPackage;
-                    if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
+                    if (message.javaOuterClassname != null && Object.hasOwnProperty.call(message, "javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
-                    if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
+                    if (message.optimizeFor != null && Object.hasOwnProperty.call(message, "optimizeFor"))
                         object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
-                    if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
+                    if (message.javaMultipleFiles != null && Object.hasOwnProperty.call(message, "javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
-                    if (message.goPackage != null && message.hasOwnProperty("goPackage"))
+                    if (message.goPackage != null && Object.hasOwnProperty.call(message, "goPackage"))
                         object.goPackage = message.goPackage;
-                    if (message.ccGenericServices != null && message.hasOwnProperty("ccGenericServices"))
+                    if (message.ccGenericServices != null && Object.hasOwnProperty.call(message, "ccGenericServices"))
                         object.ccGenericServices = message.ccGenericServices;
-                    if (message.javaGenericServices != null && message.hasOwnProperty("javaGenericServices"))
+                    if (message.javaGenericServices != null && Object.hasOwnProperty.call(message, "javaGenericServices"))
                         object.javaGenericServices = message.javaGenericServices;
-                    if (message.pyGenericServices != null && message.hasOwnProperty("pyGenericServices"))
+                    if (message.pyGenericServices != null && Object.hasOwnProperty.call(message, "pyGenericServices"))
                         object.pyGenericServices = message.pyGenericServices;
-                    if (message.javaGenerateEqualsAndHash != null && message.hasOwnProperty("javaGenerateEqualsAndHash"))
+                    if (message.javaGenerateEqualsAndHash != null && Object.hasOwnProperty.call(message, "javaGenerateEqualsAndHash"))
                         object.javaGenerateEqualsAndHash = message.javaGenerateEqualsAndHash;
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         object.deprecated = message.deprecated;
-                    if (message.javaStringCheckUtf8 != null && message.hasOwnProperty("javaStringCheckUtf8"))
+                    if (message.javaStringCheckUtf8 != null && Object.hasOwnProperty.call(message, "javaStringCheckUtf8"))
                         object.javaStringCheckUtf8 = message.javaStringCheckUtf8;
-                    if (message.ccEnableArenas != null && message.hasOwnProperty("ccEnableArenas"))
+                    if (message.ccEnableArenas != null && Object.hasOwnProperty.call(message, "ccEnableArenas"))
                         object.ccEnableArenas = message.ccEnableArenas;
-                    if (message.objcClassPrefix != null && message.hasOwnProperty("objcClassPrefix"))
+                    if (message.objcClassPrefix != null && Object.hasOwnProperty.call(message, "objcClassPrefix"))
                         object.objcClassPrefix = message.objcClassPrefix;
-                    if (message.csharpNamespace != null && message.hasOwnProperty("csharpNamespace"))
+                    if (message.csharpNamespace != null && Object.hasOwnProperty.call(message, "csharpNamespace"))
                         object.csharpNamespace = message.csharpNamespace;
-                    if (message.swiftPrefix != null && message.hasOwnProperty("swiftPrefix"))
+                    if (message.swiftPrefix != null && Object.hasOwnProperty.call(message, "swiftPrefix"))
                         object.swiftPrefix = message.swiftPrefix;
-                    if (message.phpClassPrefix != null && message.hasOwnProperty("phpClassPrefix"))
+                    if (message.phpClassPrefix != null && Object.hasOwnProperty.call(message, "phpClassPrefix"))
                         object.phpClassPrefix = message.phpClassPrefix;
-                    if (message.phpNamespace != null && message.hasOwnProperty("phpNamespace"))
+                    if (message.phpNamespace != null && Object.hasOwnProperty.call(message, "phpNamespace"))
                         object.phpNamespace = message.phpNamespace;
-                    if (message.phpMetadataNamespace != null && message.hasOwnProperty("phpMetadataNamespace"))
+                    if (message.phpMetadataNamespace != null && Object.hasOwnProperty.call(message, "phpMetadataNamespace"))
                         object.phpMetadataNamespace = message.phpMetadataNamespace;
-                    if (message.rubyPackage != null && message.hasOwnProperty("rubyPackage"))
+                    if (message.rubyPackage != null && Object.hasOwnProperty.call(message, "rubyPackage"))
                         object.rubyPackage = message.rubyPackage;
-                    if (message.features != null && message.hasOwnProperty("features"))
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options, q + 1);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
@@ -68149,27 +68137,27 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.messageSetWireFormat != null && message.hasOwnProperty("messageSetWireFormat"))
+                    if (message.messageSetWireFormat != null && Object.hasOwnProperty.call(message, "messageSetWireFormat"))
                         if (typeof message.messageSetWireFormat !== "boolean")
                             return "messageSetWireFormat: boolean expected";
-                    if (message.noStandardDescriptorAccessor != null && message.hasOwnProperty("noStandardDescriptorAccessor"))
+                    if (message.noStandardDescriptorAccessor != null && Object.hasOwnProperty.call(message, "noStandardDescriptorAccessor"))
                         if (typeof message.noStandardDescriptorAccessor !== "boolean")
                             return "noStandardDescriptorAccessor: boolean expected";
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
-                    if (message.mapEntry != null && message.hasOwnProperty("mapEntry"))
+                    if (message.mapEntry != null && Object.hasOwnProperty.call(message, "mapEntry"))
                         if (typeof message.mapEntry !== "boolean")
                             return "mapEntry: boolean expected";
-                    if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
+                    if (message.deprecatedLegacyJsonFieldConflicts != null && Object.hasOwnProperty.call(message, "deprecatedLegacyJsonFieldConflicts"))
                         if (typeof message.deprecatedLegacyJsonFieldConflicts !== "boolean")
                             return "deprecatedLegacyJsonFieldConflicts: boolean expected";
-                    if (message.features != null && message.hasOwnProperty("features")) {
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features")) {
                         var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
-                    if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
+                    if (message.uninterpretedOption != null && Object.hasOwnProperty.call(message, "uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
@@ -68178,7 +68166,7 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
-                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource")) {
+                    if (message[".google.api.resource"] != null && Object.hasOwnProperty.call(message, ".google.api.resource")) {
                         var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resource"], long + 1);
                         if (error)
                             return ".google.api.resource." + error;
@@ -68265,24 +68253,24 @@
                         object.features = null;
                         object[".google.api.resource"] = null;
                     }
-                    if (message.messageSetWireFormat != null && message.hasOwnProperty("messageSetWireFormat"))
+                    if (message.messageSetWireFormat != null && Object.hasOwnProperty.call(message, "messageSetWireFormat"))
                         object.messageSetWireFormat = message.messageSetWireFormat;
-                    if (message.noStandardDescriptorAccessor != null && message.hasOwnProperty("noStandardDescriptorAccessor"))
+                    if (message.noStandardDescriptorAccessor != null && Object.hasOwnProperty.call(message, "noStandardDescriptorAccessor"))
                         object.noStandardDescriptorAccessor = message.noStandardDescriptorAccessor;
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         object.deprecated = message.deprecated;
-                    if (message.mapEntry != null && message.hasOwnProperty("mapEntry"))
+                    if (message.mapEntry != null && Object.hasOwnProperty.call(message, "mapEntry"))
                         object.mapEntry = message.mapEntry;
-                    if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
+                    if (message.deprecatedLegacyJsonFieldConflicts != null && Object.hasOwnProperty.call(message, "deprecatedLegacyJsonFieldConflicts"))
                         object.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts;
-                    if (message.features != null && message.hasOwnProperty("features"))
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options, q + 1);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options, q + 1);
                     }
-                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource"))
+                    if (message[".google.api.resource"] != null && Object.hasOwnProperty.call(message, ".google.api.resource"))
                         object[".google.api.resource"] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resource"], options, q + 1);
                     return object;
                 };
@@ -68727,7 +68715,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.ctype != null && message.hasOwnProperty("ctype"))
+                    if (message.ctype != null && Object.hasOwnProperty.call(message, "ctype"))
                         switch (message.ctype) {
                         default:
                             return "ctype: enum value expected";
@@ -68736,10 +68724,10 @@
                         case 2:
                             break;
                         }
-                    if (message.packed != null && message.hasOwnProperty("packed"))
+                    if (message.packed != null && Object.hasOwnProperty.call(message, "packed"))
                         if (typeof message.packed !== "boolean")
                             return "packed: boolean expected";
-                    if (message.jstype != null && message.hasOwnProperty("jstype"))
+                    if (message.jstype != null && Object.hasOwnProperty.call(message, "jstype"))
                         switch (message.jstype) {
                         default:
                             return "jstype: enum value expected";
@@ -68748,22 +68736,22 @@
                         case 2:
                             break;
                         }
-                    if (message.lazy != null && message.hasOwnProperty("lazy"))
+                    if (message.lazy != null && Object.hasOwnProperty.call(message, "lazy"))
                         if (typeof message.lazy !== "boolean")
                             return "lazy: boolean expected";
-                    if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
+                    if (message.unverifiedLazy != null && Object.hasOwnProperty.call(message, "unverifiedLazy"))
                         if (typeof message.unverifiedLazy !== "boolean")
                             return "unverifiedLazy: boolean expected";
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
-                    if (message.weak != null && message.hasOwnProperty("weak"))
+                    if (message.weak != null && Object.hasOwnProperty.call(message, "weak"))
                         if (typeof message.weak !== "boolean")
                             return "weak: boolean expected";
-                    if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
+                    if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         if (typeof message.debugRedact !== "boolean")
                             return "debugRedact: boolean expected";
-                    if (message.retention != null && message.hasOwnProperty("retention"))
+                    if (message.retention != null && Object.hasOwnProperty.call(message, "retention"))
                         switch (message.retention) {
                         default:
                             return "retention: enum value expected";
@@ -68772,7 +68760,7 @@
                         case 2:
                             break;
                         }
-                    if (message.targets != null && message.hasOwnProperty("targets")) {
+                    if (message.targets != null && Object.hasOwnProperty.call(message, "targets")) {
                         if (!Array.isArray(message.targets))
                             return "targets: array expected";
                         for (var i = 0; i < message.targets.length; ++i)
@@ -68792,7 +68780,7 @@
                                 break;
                             }
                     }
-                    if (message.editionDefaults != null && message.hasOwnProperty("editionDefaults")) {
+                    if (message.editionDefaults != null && Object.hasOwnProperty.call(message, "editionDefaults")) {
                         if (!Array.isArray(message.editionDefaults))
                             return "editionDefaults: array expected";
                         for (var i = 0; i < message.editionDefaults.length; ++i) {
@@ -68801,17 +68789,17 @@
                                 return "editionDefaults." + error;
                         }
                     }
-                    if (message.features != null && message.hasOwnProperty("features")) {
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features")) {
                         var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport")) {
                         var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport, long + 1);
                         if (error)
                             return "featureSupport." + error;
                     }
-                    if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
+                    if (message.uninterpretedOption != null && Object.hasOwnProperty.call(message, "uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
@@ -68820,7 +68808,7 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
-                    if (message[".google.api.fieldBehavior"] != null && message.hasOwnProperty(".google.api.fieldBehavior")) {
+                    if (message[".google.api.fieldBehavior"] != null && Object.hasOwnProperty.call(message, ".google.api.fieldBehavior")) {
                         if (!Array.isArray(message[".google.api.fieldBehavior"]))
                             return ".google.api.fieldBehavior: array expected";
                         for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
@@ -68839,12 +68827,12 @@
                                 break;
                             }
                     }
-                    if (message[".google.api.fieldInfo"] != null && message.hasOwnProperty(".google.api.fieldInfo")) {
+                    if (message[".google.api.fieldInfo"] != null && Object.hasOwnProperty.call(message, ".google.api.fieldInfo")) {
                         var error = $root.google.api.FieldInfo.verify(message[".google.api.fieldInfo"], long + 1);
                         if (error)
                             return ".google.api.fieldInfo." + error;
                     }
-                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
+                    if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference")) {
                         var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"], long + 1);
                         if (error)
                             return ".google.api.resourceReference." + error;
@@ -69125,23 +69113,23 @@
                         object[".google.api.resourceReference"] = null;
                         object[".google.api.fieldInfo"] = null;
                     }
-                    if (message.ctype != null && message.hasOwnProperty("ctype"))
+                    if (message.ctype != null && Object.hasOwnProperty.call(message, "ctype"))
                         object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
-                    if (message.packed != null && message.hasOwnProperty("packed"))
+                    if (message.packed != null && Object.hasOwnProperty.call(message, "packed"))
                         object.packed = message.packed;
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         object.deprecated = message.deprecated;
-                    if (message.lazy != null && message.hasOwnProperty("lazy"))
+                    if (message.lazy != null && Object.hasOwnProperty.call(message, "lazy"))
                         object.lazy = message.lazy;
-                    if (message.jstype != null && message.hasOwnProperty("jstype"))
+                    if (message.jstype != null && Object.hasOwnProperty.call(message, "jstype"))
                         object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
-                    if (message.weak != null && message.hasOwnProperty("weak"))
+                    if (message.weak != null && Object.hasOwnProperty.call(message, "weak"))
                         object.weak = message.weak;
-                    if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
+                    if (message.unverifiedLazy != null && Object.hasOwnProperty.call(message, "unverifiedLazy"))
                         object.unverifiedLazy = message.unverifiedLazy;
-                    if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
+                    if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         object.debugRedact = message.debugRedact;
-                    if (message.retention != null && message.hasOwnProperty("retention"))
+                    if (message.retention != null && Object.hasOwnProperty.call(message, "retention"))
                         object.retention = options.enums === String ? $root.google.protobuf.FieldOptions.OptionRetention[message.retention] === undefined ? message.retention : $root.google.protobuf.FieldOptions.OptionRetention[message.retention] : message.retention;
                     if (message.targets && message.targets.length) {
                         object.targets = [];
@@ -69153,9 +69141,9 @@
                         for (var j = 0; j < message.editionDefaults.length; ++j)
                             object.editionDefaults[j] = $root.google.protobuf.FieldOptions.EditionDefault.toObject(message.editionDefaults[j], options, q + 1);
                     }
-                    if (message.features != null && message.hasOwnProperty("features"))
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options, q + 1);
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
                         object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options, q + 1);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
@@ -69167,9 +69155,9 @@
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
                             object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
-                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
+                    if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options, q + 1);
-                    if (message[".google.api.fieldInfo"] != null && message.hasOwnProperty(".google.api.fieldInfo"))
+                    if (message[".google.api.fieldInfo"] != null && Object.hasOwnProperty.call(message, ".google.api.fieldInfo"))
                         object[".google.api.fieldInfo"] = $root.google.api.FieldInfo.toObject(message[".google.api.fieldInfo"], options, q + 1);
                     return object;
                 };
@@ -69438,7 +69426,7 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.edition != null && message.hasOwnProperty("edition"))
+                        if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             switch (message.edition) {
                             default:
                                 return "edition: enum value expected";
@@ -69456,7 +69444,7 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.value != null && message.hasOwnProperty("value"))
+                        if (message.value != null && Object.hasOwnProperty.call(message, "value"))
                             if (!$util.isString(message.value))
                                 return "value: string expected";
                         return null;
@@ -69562,9 +69550,9 @@
                             object.value = "";
                             object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
                         }
-                        if (message.value != null && message.hasOwnProperty("value"))
+                        if (message.value != null && Object.hasOwnProperty.call(message, "value"))
                             object.value = message.value;
-                        if (message.edition != null && message.hasOwnProperty("edition"))
+                        if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
                         return object;
                     };
@@ -69788,7 +69776,7 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                        if (message.editionIntroduced != null && Object.hasOwnProperty.call(message, "editionIntroduced"))
                             switch (message.editionIntroduced) {
                             default:
                                 return "editionIntroduced: enum value expected";
@@ -69806,7 +69794,7 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                        if (message.editionDeprecated != null && Object.hasOwnProperty.call(message, "editionDeprecated"))
                             switch (message.editionDeprecated) {
                             default:
                                 return "editionDeprecated: enum value expected";
@@ -69824,10 +69812,10 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                        if (message.deprecationWarning != null && Object.hasOwnProperty.call(message, "deprecationWarning"))
                             if (!$util.isString(message.deprecationWarning))
                                 return "deprecationWarning: string expected";
-                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                        if (message.editionRemoved != null && Object.hasOwnProperty.call(message, "editionRemoved"))
                             switch (message.editionRemoved) {
                             default:
                                 return "editionRemoved: enum value expected";
@@ -70062,13 +70050,13 @@
                             object.deprecationWarning = "";
                             object.editionRemoved = options.enums === String ? "EDITION_UNKNOWN" : 0;
                         }
-                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                        if (message.editionIntroduced != null && Object.hasOwnProperty.call(message, "editionIntroduced"))
                             object.editionIntroduced = options.enums === String ? $root.google.protobuf.Edition[message.editionIntroduced] === undefined ? message.editionIntroduced : $root.google.protobuf.Edition[message.editionIntroduced] : message.editionIntroduced;
-                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                        if (message.editionDeprecated != null && Object.hasOwnProperty.call(message, "editionDeprecated"))
                             object.editionDeprecated = options.enums === String ? $root.google.protobuf.Edition[message.editionDeprecated] === undefined ? message.editionDeprecated : $root.google.protobuf.Edition[message.editionDeprecated] : message.editionDeprecated;
-                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                        if (message.deprecationWarning != null && Object.hasOwnProperty.call(message, "deprecationWarning"))
                             object.deprecationWarning = message.deprecationWarning;
-                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                        if (message.editionRemoved != null && Object.hasOwnProperty.call(message, "editionRemoved"))
                             object.editionRemoved = options.enums === String ? $root.google.protobuf.Edition[message.editionRemoved] === undefined ? message.editionRemoved : $root.google.protobuf.Edition[message.editionRemoved] : message.editionRemoved;
                         return object;
                     };
@@ -70269,12 +70257,12 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.features != null && message.hasOwnProperty("features")) {
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features")) {
                         var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
-                    if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
+                    if (message.uninterpretedOption != null && Object.hasOwnProperty.call(message, "uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
@@ -70343,7 +70331,7 @@
                         object.uninterpretedOption = [];
                     if (options.defaults)
                         object.features = null;
-                    if (message.features != null && message.hasOwnProperty("features"))
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options, q + 1);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
@@ -70591,21 +70579,21 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.allowAlias != null && message.hasOwnProperty("allowAlias"))
+                    if (message.allowAlias != null && Object.hasOwnProperty.call(message, "allowAlias"))
                         if (typeof message.allowAlias !== "boolean")
                             return "allowAlias: boolean expected";
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
-                    if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
+                    if (message.deprecatedLegacyJsonFieldConflicts != null && Object.hasOwnProperty.call(message, "deprecatedLegacyJsonFieldConflicts"))
                         if (typeof message.deprecatedLegacyJsonFieldConflicts !== "boolean")
                             return "deprecatedLegacyJsonFieldConflicts: boolean expected";
-                    if (message.features != null && message.hasOwnProperty("features")) {
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features")) {
                         var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
-                    if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
+                    if (message.uninterpretedOption != null && Object.hasOwnProperty.call(message, "uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
@@ -70684,13 +70672,13 @@
                         object.deprecatedLegacyJsonFieldConflicts = false;
                         object.features = null;
                     }
-                    if (message.allowAlias != null && message.hasOwnProperty("allowAlias"))
+                    if (message.allowAlias != null && Object.hasOwnProperty.call(message, "allowAlias"))
                         object.allowAlias = message.allowAlias;
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         object.deprecated = message.deprecated;
-                    if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
+                    if (message.deprecatedLegacyJsonFieldConflicts != null && Object.hasOwnProperty.call(message, "deprecatedLegacyJsonFieldConflicts"))
                         object.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts;
-                    if (message.features != null && message.hasOwnProperty("features"))
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options, q + 1);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
@@ -70938,23 +70926,23 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
-                    if (message.features != null && message.hasOwnProperty("features")) {
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features")) {
                         var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
-                    if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
+                    if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         if (typeof message.debugRedact !== "boolean")
                             return "debugRedact: boolean expected";
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport")) {
                         var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport, long + 1);
                         if (error)
                             return "featureSupport." + error;
                     }
-                    if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
+                    if (message.uninterpretedOption != null && Object.hasOwnProperty.call(message, "uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
@@ -71036,13 +71024,13 @@
                         object.debugRedact = false;
                         object.featureSupport = null;
                     }
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         object.deprecated = message.deprecated;
-                    if (message.features != null && message.hasOwnProperty("features"))
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options, q + 1);
-                    if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
+                    if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         object.debugRedact = message.debugRedact;
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
                         object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options, q + 1);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
@@ -71305,15 +71293,15 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.features != null && message.hasOwnProperty("features")) {
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features")) {
                         var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
-                    if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
+                    if (message.uninterpretedOption != null && Object.hasOwnProperty.call(message, "uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
@@ -71322,13 +71310,13 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
-                    if (message[".google.api.defaultHost"] != null && message.hasOwnProperty(".google.api.defaultHost"))
+                    if (message[".google.api.defaultHost"] != null && Object.hasOwnProperty.call(message, ".google.api.defaultHost"))
                         if (!$util.isString(message[".google.api.defaultHost"]))
                             return ".google.api.defaultHost: string expected";
-                    if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
+                    if (message[".google.api.oauthScopes"] != null && Object.hasOwnProperty.call(message, ".google.api.oauthScopes"))
                         if (!$util.isString(message[".google.api.oauthScopes"]))
                             return ".google.api.oauthScopes: string expected";
-                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                    if (message[".google.api.apiVersion"] != null && Object.hasOwnProperty.call(message, ".google.api.apiVersion"))
                         if (!$util.isString(message[".google.api.apiVersion"]))
                             return ".google.api.apiVersion: string expected";
                     return null;
@@ -71404,20 +71392,20 @@
                         object[".google.api.oauthScopes"] = "";
                         object[".google.api.apiVersion"] = "";
                     }
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         object.deprecated = message.deprecated;
-                    if (message.features != null && message.hasOwnProperty("features"))
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options, q + 1);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options, q + 1);
                     }
-                    if (message[".google.api.defaultHost"] != null && message.hasOwnProperty(".google.api.defaultHost"))
+                    if (message[".google.api.defaultHost"] != null && Object.hasOwnProperty.call(message, ".google.api.defaultHost"))
                         object[".google.api.defaultHost"] = message[".google.api.defaultHost"];
-                    if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
+                    if (message[".google.api.oauthScopes"] != null && Object.hasOwnProperty.call(message, ".google.api.oauthScopes"))
                         object[".google.api.oauthScopes"] = message[".google.api.oauthScopes"];
-                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                    if (message[".google.api.apiVersion"] != null && Object.hasOwnProperty.call(message, ".google.api.apiVersion"))
                         object[".google.api.apiVersion"] = message[".google.api.apiVersion"];
                     return object;
                 };
@@ -71709,10 +71697,10 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
-                    if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
+                    if (message.idempotencyLevel != null && Object.hasOwnProperty.call(message, "idempotencyLevel"))
                         switch (message.idempotencyLevel) {
                         default:
                             return "idempotencyLevel: enum value expected";
@@ -71721,12 +71709,12 @@
                         case 2:
                             break;
                         }
-                    if (message.features != null && message.hasOwnProperty("features")) {
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features")) {
                         var error = $root.google.protobuf.FeatureSet.verify(message.features, long + 1);
                         if (error)
                             return "features." + error;
                     }
-                    if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
+                    if (message.uninterpretedOption != null && Object.hasOwnProperty.call(message, "uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
                         for (var i = 0; i < message.uninterpretedOption.length; ++i) {
@@ -71735,24 +71723,24 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
-                    if (message[".google.api.http"] != null && message.hasOwnProperty(".google.api.http")) {
+                    if (message[".google.api.http"] != null && Object.hasOwnProperty.call(message, ".google.api.http")) {
                         var error = $root.google.api.HttpRule.verify(message[".google.api.http"], long + 1);
                         if (error)
                             return ".google.api.http." + error;
                     }
-                    if (message[".google.api.methodSignature"] != null && message.hasOwnProperty(".google.api.methodSignature")) {
+                    if (message[".google.api.methodSignature"] != null && Object.hasOwnProperty.call(message, ".google.api.methodSignature")) {
                         if (!Array.isArray(message[".google.api.methodSignature"]))
                             return ".google.api.methodSignature: array expected";
                         for (var i = 0; i < message[".google.api.methodSignature"].length; ++i)
                             if (!$util.isString(message[".google.api.methodSignature"][i]))
                                 return ".google.api.methodSignature: string[] expected";
                     }
-                    if (message[".google.api.routing"] != null && message.hasOwnProperty(".google.api.routing")) {
+                    if (message[".google.api.routing"] != null && Object.hasOwnProperty.call(message, ".google.api.routing")) {
                         var error = $root.google.api.RoutingRule.verify(message[".google.api.routing"], long + 1);
                         if (error)
                             return ".google.api.routing." + error;
                     }
-                    if (message[".google.longrunning.operationInfo"] != null && message.hasOwnProperty(".google.longrunning.operationInfo")) {
+                    if (message[".google.longrunning.operationInfo"] != null && Object.hasOwnProperty.call(message, ".google.longrunning.operationInfo")) {
                         var error = $root.google.longrunning.OperationInfo.verify(message[".google.longrunning.operationInfo"], long + 1);
                         if (error)
                             return ".google.longrunning.operationInfo." + error;
@@ -71869,27 +71857,27 @@
                         object[".google.api.http"] = null;
                         object[".google.api.routing"] = null;
                     }
-                    if (message.deprecated != null && message.hasOwnProperty("deprecated"))
+                    if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         object.deprecated = message.deprecated;
-                    if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
+                    if (message.idempotencyLevel != null && Object.hasOwnProperty.call(message, "idempotencyLevel"))
                         object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
-                    if (message.features != null && message.hasOwnProperty("features"))
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options, q + 1);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options, q + 1);
                     }
-                    if (message[".google.longrunning.operationInfo"] != null && message.hasOwnProperty(".google.longrunning.operationInfo"))
+                    if (message[".google.longrunning.operationInfo"] != null && Object.hasOwnProperty.call(message, ".google.longrunning.operationInfo"))
                         object[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.toObject(message[".google.longrunning.operationInfo"], options, q + 1);
                     if (message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length) {
                         object[".google.api.methodSignature"] = [];
                         for (var j = 0; j < message[".google.api.methodSignature"].length; ++j)
                             object[".google.api.methodSignature"][j] = message[".google.api.methodSignature"][j];
                     }
-                    if (message[".google.api.http"] != null && message.hasOwnProperty(".google.api.http"))
+                    if (message[".google.api.http"] != null && Object.hasOwnProperty.call(message, ".google.api.http"))
                         object[".google.api.http"] = $root.google.api.HttpRule.toObject(message[".google.api.http"], options, q + 1);
-                    if (message[".google.api.routing"] != null && message.hasOwnProperty(".google.api.routing"))
+                    if (message[".google.api.routing"] != null && Object.hasOwnProperty.call(message, ".google.api.routing"))
                         object[".google.api.routing"] = $root.google.api.RoutingRule.toObject(message[".google.api.routing"], options, q + 1);
                     return object;
                 };
@@ -72178,7 +72166,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.name != null && message.hasOwnProperty("name")) {
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name")) {
                         if (!Array.isArray(message.name))
                             return "name: array expected";
                         for (var i = 0; i < message.name.length; ++i) {
@@ -72187,22 +72175,22 @@
                                 return "name." + error;
                         }
                     }
-                    if (message.identifierValue != null && message.hasOwnProperty("identifierValue"))
+                    if (message.identifierValue != null && Object.hasOwnProperty.call(message, "identifierValue"))
                         if (!$util.isString(message.identifierValue))
                             return "identifierValue: string expected";
-                    if (message.positiveIntValue != null && message.hasOwnProperty("positiveIntValue"))
+                    if (message.positiveIntValue != null && Object.hasOwnProperty.call(message, "positiveIntValue"))
                         if (!$util.isInteger(message.positiveIntValue) && !(message.positiveIntValue && $util.isInteger(message.positiveIntValue.low) && $util.isInteger(message.positiveIntValue.high)))
                             return "positiveIntValue: integer|Long expected";
-                    if (message.negativeIntValue != null && message.hasOwnProperty("negativeIntValue"))
+                    if (message.negativeIntValue != null && Object.hasOwnProperty.call(message, "negativeIntValue"))
                         if (!$util.isInteger(message.negativeIntValue) && !(message.negativeIntValue && $util.isInteger(message.negativeIntValue.low) && $util.isInteger(message.negativeIntValue.high)))
                             return "negativeIntValue: integer|Long expected";
-                    if (message.doubleValue != null && message.hasOwnProperty("doubleValue"))
+                    if (message.doubleValue != null && Object.hasOwnProperty.call(message, "doubleValue"))
                         if (typeof message.doubleValue !== "number")
                             return "doubleValue: number expected";
-                    if (message.stringValue != null && message.hasOwnProperty("stringValue"))
+                    if (message.stringValue != null && Object.hasOwnProperty.call(message, "stringValue"))
                         if (!(message.stringValue && typeof message.stringValue.length === "number" || $util.isString(message.stringValue)))
                             return "stringValue: buffer expected";
-                    if (message.aggregateValue != null && message.hasOwnProperty("aggregateValue"))
+                    if (message.aggregateValue != null && Object.hasOwnProperty.call(message, "aggregateValue"))
                         if (!$util.isString(message.aggregateValue))
                             return "aggregateValue: string expected";
                     return null;
@@ -72314,27 +72302,27 @@
                         for (var j = 0; j < message.name.length; ++j)
                             object.name[j] = $root.google.protobuf.UninterpretedOption.NamePart.toObject(message.name[j], options, q + 1);
                     }
-                    if (message.identifierValue != null && message.hasOwnProperty("identifierValue"))
+                    if (message.identifierValue != null && Object.hasOwnProperty.call(message, "identifierValue"))
                         object.identifierValue = message.identifierValue;
-                    if (message.positiveIntValue != null && message.hasOwnProperty("positiveIntValue"))
+                    if (message.positiveIntValue != null && Object.hasOwnProperty.call(message, "positiveIntValue"))
                         if (typeof BigInt !== "undefined" && options.longs === BigInt)
                             object.positiveIntValue = typeof message.positiveIntValue === "number" ? BigInt(message.positiveIntValue) : $util.Long.fromBits(message.positiveIntValue.low >>> 0, message.positiveIntValue.high >>> 0, true).toBigInt();
                         else if (typeof message.positiveIntValue === "number")
                             object.positiveIntValue = options.longs === String ? String(message.positiveIntValue) : message.positiveIntValue;
                         else
                             object.positiveIntValue = options.longs === String ? $util.Long.prototype.toString.call(message.positiveIntValue) : options.longs === Number ? new $util.LongBits(message.positiveIntValue.low >>> 0, message.positiveIntValue.high >>> 0).toNumber(true) : message.positiveIntValue;
-                    if (message.negativeIntValue != null && message.hasOwnProperty("negativeIntValue"))
+                    if (message.negativeIntValue != null && Object.hasOwnProperty.call(message, "negativeIntValue"))
                         if (typeof BigInt !== "undefined" && options.longs === BigInt)
                             object.negativeIntValue = typeof message.negativeIntValue === "number" ? BigInt(message.negativeIntValue) : $util.Long.fromBits(message.negativeIntValue.low >>> 0, message.negativeIntValue.high >>> 0, false).toBigInt();
                         else if (typeof message.negativeIntValue === "number")
                             object.negativeIntValue = options.longs === String ? String(message.negativeIntValue) : message.negativeIntValue;
                         else
                             object.negativeIntValue = options.longs === String ? $util.Long.prototype.toString.call(message.negativeIntValue) : options.longs === Number ? new $util.LongBits(message.negativeIntValue.low >>> 0, message.negativeIntValue.high >>> 0).toNumber() : message.negativeIntValue;
-                    if (message.doubleValue != null && message.hasOwnProperty("doubleValue"))
+                    if (message.doubleValue != null && Object.hasOwnProperty.call(message, "doubleValue"))
                         object.doubleValue = options.json && !isFinite(message.doubleValue) ? String(message.doubleValue) : message.doubleValue;
-                    if (message.stringValue != null && message.hasOwnProperty("stringValue"))
+                    if (message.stringValue != null && Object.hasOwnProperty.call(message, "stringValue"))
                         object.stringValue = options.bytes === String ? $util.base64.encode(message.stringValue, 0, message.stringValue.length) : options.bytes === Array ? Array.prototype.slice.call(message.stringValue) : message.stringValue;
-                    if (message.aggregateValue != null && message.hasOwnProperty("aggregateValue"))
+                    if (message.aggregateValue != null && Object.hasOwnProperty.call(message, "aggregateValue"))
                         object.aggregateValue = message.aggregateValue;
                     return object;
                 };
@@ -72489,9 +72477,9 @@
                                 break;
                             }
                         }
-                        if (!message.hasOwnProperty("namePart"))
+                        if (!Object.hasOwnProperty.call(message, "namePart"))
                             throw $util.ProtocolError("missing required 'namePart'", { instance: message });
-                        if (!message.hasOwnProperty("isExtension"))
+                        if (!Object.hasOwnProperty.call(message, "isExtension"))
                             throw $util.ProtocolError("missing required 'isExtension'", { instance: message });
                         return message;
                     };
@@ -72580,9 +72568,9 @@
                             object.namePart = "";
                             object.isExtension = false;
                         }
-                        if (message.namePart != null && message.hasOwnProperty("namePart"))
+                        if (message.namePart != null && Object.hasOwnProperty.call(message, "namePart"))
                             object.namePart = message.namePart;
-                        if (message.isExtension != null && message.hasOwnProperty("isExtension"))
+                        if (message.isExtension != null && Object.hasOwnProperty.call(message, "isExtension"))
                             object.isExtension = message.isExtension;
                         return object;
                     };
@@ -72869,7 +72857,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
+                    if (message.fieldPresence != null && Object.hasOwnProperty.call(message, "fieldPresence"))
                         switch (message.fieldPresence) {
                         default:
                             return "fieldPresence: enum value expected";
@@ -72879,7 +72867,7 @@
                         case 3:
                             break;
                         }
-                    if (message.enumType != null && message.hasOwnProperty("enumType"))
+                    if (message.enumType != null && Object.hasOwnProperty.call(message, "enumType"))
                         switch (message.enumType) {
                         default:
                             return "enumType: enum value expected";
@@ -72888,7 +72876,7 @@
                         case 2:
                             break;
                         }
-                    if (message.repeatedFieldEncoding != null && message.hasOwnProperty("repeatedFieldEncoding"))
+                    if (message.repeatedFieldEncoding != null && Object.hasOwnProperty.call(message, "repeatedFieldEncoding"))
                         switch (message.repeatedFieldEncoding) {
                         default:
                             return "repeatedFieldEncoding: enum value expected";
@@ -72897,7 +72885,7 @@
                         case 2:
                             break;
                         }
-                    if (message.utf8Validation != null && message.hasOwnProperty("utf8Validation"))
+                    if (message.utf8Validation != null && Object.hasOwnProperty.call(message, "utf8Validation"))
                         switch (message.utf8Validation) {
                         default:
                             return "utf8Validation: enum value expected";
@@ -72906,7 +72894,7 @@
                         case 3:
                             break;
                         }
-                    if (message.messageEncoding != null && message.hasOwnProperty("messageEncoding"))
+                    if (message.messageEncoding != null && Object.hasOwnProperty.call(message, "messageEncoding"))
                         switch (message.messageEncoding) {
                         default:
                             return "messageEncoding: enum value expected";
@@ -72915,7 +72903,7 @@
                         case 2:
                             break;
                         }
-                    if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
+                    if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
                         switch (message.jsonFormat) {
                         default:
                             return "jsonFormat: enum value expected";
@@ -72924,7 +72912,7 @@
                         case 2:
                             break;
                         }
-                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                    if (message.enforceNamingStyle != null && Object.hasOwnProperty.call(message, "enforceNamingStyle"))
                         switch (message.enforceNamingStyle) {
                         default:
                             return "enforceNamingStyle: enum value expected";
@@ -72933,7 +72921,7 @@
                         case 2:
                             break;
                         }
-                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                    if (message.defaultSymbolVisibility != null && Object.hasOwnProperty.call(message, "defaultSymbolVisibility"))
                         switch (message.defaultSymbolVisibility) {
                         default:
                             return "defaultSymbolVisibility: enum value expected";
@@ -73167,21 +73155,21 @@
                         object.enforceNamingStyle = options.enums === String ? "ENFORCE_NAMING_STYLE_UNKNOWN" : 0;
                         object.defaultSymbolVisibility = options.enums === String ? "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN" : 0;
                     }
-                    if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
+                    if (message.fieldPresence != null && Object.hasOwnProperty.call(message, "fieldPresence"))
                         object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
-                    if (message.enumType != null && message.hasOwnProperty("enumType"))
+                    if (message.enumType != null && Object.hasOwnProperty.call(message, "enumType"))
                         object.enumType = options.enums === String ? $root.google.protobuf.FeatureSet.EnumType[message.enumType] === undefined ? message.enumType : $root.google.protobuf.FeatureSet.EnumType[message.enumType] : message.enumType;
-                    if (message.repeatedFieldEncoding != null && message.hasOwnProperty("repeatedFieldEncoding"))
+                    if (message.repeatedFieldEncoding != null && Object.hasOwnProperty.call(message, "repeatedFieldEncoding"))
                         object.repeatedFieldEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.RepeatedFieldEncoding[message.repeatedFieldEncoding] === undefined ? message.repeatedFieldEncoding : $root.google.protobuf.FeatureSet.RepeatedFieldEncoding[message.repeatedFieldEncoding] : message.repeatedFieldEncoding;
-                    if (message.utf8Validation != null && message.hasOwnProperty("utf8Validation"))
+                    if (message.utf8Validation != null && Object.hasOwnProperty.call(message, "utf8Validation"))
                         object.utf8Validation = options.enums === String ? $root.google.protobuf.FeatureSet.Utf8Validation[message.utf8Validation] === undefined ? message.utf8Validation : $root.google.protobuf.FeatureSet.Utf8Validation[message.utf8Validation] : message.utf8Validation;
-                    if (message.messageEncoding != null && message.hasOwnProperty("messageEncoding"))
+                    if (message.messageEncoding != null && Object.hasOwnProperty.call(message, "messageEncoding"))
                         object.messageEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] === undefined ? message.messageEncoding : $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] : message.messageEncoding;
-                    if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
+                    if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
                         object.jsonFormat = options.enums === String ? $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] === undefined ? message.jsonFormat : $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] : message.jsonFormat;
-                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                    if (message.enforceNamingStyle != null && Object.hasOwnProperty.call(message, "enforceNamingStyle"))
                         object.enforceNamingStyle = options.enums === String ? $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] === undefined ? message.enforceNamingStyle : $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] : message.enforceNamingStyle;
-                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                    if (message.defaultSymbolVisibility != null && Object.hasOwnProperty.call(message, "defaultSymbolVisibility"))
                         object.defaultSymbolVisibility = options.enums === String ? $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] === undefined ? message.defaultSymbolVisibility : $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] : message.defaultSymbolVisibility;
                     return object;
                 };
@@ -73470,12 +73458,6 @@
                     VisibilityFeature.fromObject = function fromObject(object, long) {
                         if (object instanceof $root.google.protobuf.FeatureSet.VisibilityFeature)
                             return object;
-                        if (!$util.isObject(object))
-                            throw TypeError(".google.protobuf.FeatureSet.VisibilityFeature: object expected");
-                        if (long === undefined)
-                            long = 0;
-                        if (long > $util.recursionLimit)
-                            throw Error("maximum nesting depth exceeded");
                         return new $root.google.protobuf.FeatureSet.VisibilityFeature();
                     };
     
@@ -73723,7 +73705,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.defaults != null && message.hasOwnProperty("defaults")) {
+                    if (message.defaults != null && Object.hasOwnProperty.call(message, "defaults")) {
                         if (!Array.isArray(message.defaults))
                             return "defaults: array expected";
                         for (var i = 0; i < message.defaults.length; ++i) {
@@ -73732,7 +73714,7 @@
                                 return "defaults." + error;
                         }
                     }
-                    if (message.minimumEdition != null && message.hasOwnProperty("minimumEdition"))
+                    if (message.minimumEdition != null && Object.hasOwnProperty.call(message, "minimumEdition"))
                         switch (message.minimumEdition) {
                         default:
                             return "minimumEdition: enum value expected";
@@ -73750,7 +73732,7 @@
                         case 2147483647:
                             break;
                         }
-                    if (message.maximumEdition != null && message.hasOwnProperty("maximumEdition"))
+                    if (message.maximumEdition != null && Object.hasOwnProperty.call(message, "maximumEdition"))
                         switch (message.maximumEdition) {
                         default:
                             return "maximumEdition: enum value expected";
@@ -73942,9 +73924,9 @@
                         for (var j = 0; j < message.defaults.length; ++j)
                             object.defaults[j] = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.toObject(message.defaults[j], options, q + 1);
                     }
-                    if (message.minimumEdition != null && message.hasOwnProperty("minimumEdition"))
+                    if (message.minimumEdition != null && Object.hasOwnProperty.call(message, "minimumEdition"))
                         object.minimumEdition = options.enums === String ? $root.google.protobuf.Edition[message.minimumEdition] === undefined ? message.minimumEdition : $root.google.protobuf.Edition[message.minimumEdition] : message.minimumEdition;
-                    if (message.maximumEdition != null && message.hasOwnProperty("maximumEdition"))
+                    if (message.maximumEdition != null && Object.hasOwnProperty.call(message, "maximumEdition"))
                         object.maximumEdition = options.enums === String ? $root.google.protobuf.Edition[message.maximumEdition] === undefined ? message.maximumEdition : $root.google.protobuf.Edition[message.maximumEdition] : message.maximumEdition;
                     return object;
                 };
@@ -74150,7 +74132,7 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.edition != null && message.hasOwnProperty("edition"))
+                        if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             switch (message.edition) {
                             default:
                                 return "edition: enum value expected";
@@ -74168,12 +74150,12 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures")) {
+                        if (message.overridableFeatures != null && Object.hasOwnProperty.call(message, "overridableFeatures")) {
                             var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures, long + 1);
                             if (error)
                                 return "overridableFeatures." + error;
                         }
-                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures")) {
+                        if (message.fixedFeatures != null && Object.hasOwnProperty.call(message, "fixedFeatures")) {
                             var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures, long + 1);
                             if (error)
                                 return "fixedFeatures." + error;
@@ -74290,11 +74272,11 @@
                             object.overridableFeatures = null;
                             object.fixedFeatures = null;
                         }
-                        if (message.edition != null && message.hasOwnProperty("edition"))
+                        if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
-                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures"))
+                        if (message.overridableFeatures != null && Object.hasOwnProperty.call(message, "overridableFeatures"))
                             object.overridableFeatures = $root.google.protobuf.FeatureSet.toObject(message.overridableFeatures, options, q + 1);
-                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures"))
+                        if (message.fixedFeatures != null && Object.hasOwnProperty.call(message, "fixedFeatures"))
                             object.fixedFeatures = $root.google.protobuf.FeatureSet.toObject(message.fixedFeatures, options, q + 1);
                         return object;
                     };
@@ -74480,7 +74462,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.location != null && message.hasOwnProperty("location")) {
+                    if (message.location != null && Object.hasOwnProperty.call(message, "location")) {
                         if (!Array.isArray(message.location))
                             return "location: array expected";
                         for (var i = 0; i < message.location.length; ++i) {
@@ -74809,27 +74791,27 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.path != null && message.hasOwnProperty("path")) {
+                        if (message.path != null && Object.hasOwnProperty.call(message, "path")) {
                             if (!Array.isArray(message.path))
                                 return "path: array expected";
                             for (var i = 0; i < message.path.length; ++i)
                                 if (!$util.isInteger(message.path[i]))
                                     return "path: integer[] expected";
                         }
-                        if (message.span != null && message.hasOwnProperty("span")) {
+                        if (message.span != null && Object.hasOwnProperty.call(message, "span")) {
                             if (!Array.isArray(message.span))
                                 return "span: array expected";
                             for (var i = 0; i < message.span.length; ++i)
                                 if (!$util.isInteger(message.span[i]))
                                     return "span: integer[] expected";
                         }
-                        if (message.leadingComments != null && message.hasOwnProperty("leadingComments"))
+                        if (message.leadingComments != null && Object.hasOwnProperty.call(message, "leadingComments"))
                             if (!$util.isString(message.leadingComments))
                                 return "leadingComments: string expected";
-                        if (message.trailingComments != null && message.hasOwnProperty("trailingComments"))
+                        if (message.trailingComments != null && Object.hasOwnProperty.call(message, "trailingComments"))
                             if (!$util.isString(message.trailingComments))
                                 return "trailingComments: string expected";
-                        if (message.leadingDetachedComments != null && message.hasOwnProperty("leadingDetachedComments")) {
+                        if (message.leadingDetachedComments != null && Object.hasOwnProperty.call(message, "leadingDetachedComments")) {
                             if (!Array.isArray(message.leadingDetachedComments))
                                 return "leadingDetachedComments: array expected";
                             for (var i = 0; i < message.leadingDetachedComments.length; ++i)
@@ -74921,9 +74903,9 @@
                             for (var j = 0; j < message.span.length; ++j)
                                 object.span[j] = message.span[j];
                         }
-                        if (message.leadingComments != null && message.hasOwnProperty("leadingComments"))
+                        if (message.leadingComments != null && Object.hasOwnProperty.call(message, "leadingComments"))
                             object.leadingComments = message.leadingComments;
-                        if (message.trailingComments != null && message.hasOwnProperty("trailingComments"))
+                        if (message.trailingComments != null && Object.hasOwnProperty.call(message, "trailingComments"))
                             object.trailingComments = message.trailingComments;
                         if (message.leadingDetachedComments && message.leadingDetachedComments.length) {
                             object.leadingDetachedComments = [];
@@ -75114,7 +75096,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.annotation != null && message.hasOwnProperty("annotation")) {
+                    if (message.annotation != null && Object.hasOwnProperty.call(message, "annotation")) {
                         if (!Array.isArray(message.annotation))
                             return "annotation: array expected";
                         for (var i = 0; i < message.annotation.length; ++i) {
@@ -75427,23 +75409,23 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.path != null && message.hasOwnProperty("path")) {
+                        if (message.path != null && Object.hasOwnProperty.call(message, "path")) {
                             if (!Array.isArray(message.path))
                                 return "path: array expected";
                             for (var i = 0; i < message.path.length; ++i)
                                 if (!$util.isInteger(message.path[i]))
                                     return "path: integer[] expected";
                         }
-                        if (message.sourceFile != null && message.hasOwnProperty("sourceFile"))
+                        if (message.sourceFile != null && Object.hasOwnProperty.call(message, "sourceFile"))
                             if (!$util.isString(message.sourceFile))
                                 return "sourceFile: string expected";
-                        if (message.begin != null && message.hasOwnProperty("begin"))
+                        if (message.begin != null && Object.hasOwnProperty.call(message, "begin"))
                             if (!$util.isInteger(message.begin))
                                 return "begin: integer expected";
-                        if (message.end != null && message.hasOwnProperty("end"))
+                        if (message.end != null && Object.hasOwnProperty.call(message, "end"))
                             if (!$util.isInteger(message.end))
                                 return "end: integer expected";
-                        if (message.semantic != null && message.hasOwnProperty("semantic"))
+                        if (message.semantic != null && Object.hasOwnProperty.call(message, "semantic"))
                             switch (message.semantic) {
                             default:
                                 return "semantic: enum value expected";
@@ -75539,13 +75521,13 @@
                             for (var j = 0; j < message.path.length; ++j)
                                 object.path[j] = message.path[j];
                         }
-                        if (message.sourceFile != null && message.hasOwnProperty("sourceFile"))
+                        if (message.sourceFile != null && Object.hasOwnProperty.call(message, "sourceFile"))
                             object.sourceFile = message.sourceFile;
-                        if (message.begin != null && message.hasOwnProperty("begin"))
+                        if (message.begin != null && Object.hasOwnProperty.call(message, "begin"))
                             object.begin = message.begin;
-                        if (message.end != null && message.hasOwnProperty("end"))
+                        if (message.end != null && Object.hasOwnProperty.call(message, "end"))
                             object.end = message.end;
-                        if (message.semantic != null && message.hasOwnProperty("semantic"))
+                        if (message.semantic != null && Object.hasOwnProperty.call(message, "semantic"))
                             object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
@@ -75774,10 +75756,10 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
                         if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
                             return "seconds: integer|Long expected";
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
                         if (!$util.isInteger(message.nanos))
                             return "nanos: integer expected";
                     return null;
@@ -75840,14 +75822,14 @@
                             object.seconds = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                         object.nanos = 0;
                     }
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
                         if (typeof BigInt !== "undefined" && options.longs === BigInt)
                             object.seconds = typeof message.seconds === "number" ? BigInt(message.seconds) : $util.Long.fromBits(message.seconds.low >>> 0, message.seconds.high >>> 0, false).toBigInt();
                         else if (typeof message.seconds === "number")
                             object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
                         else
                             object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
                         object.nanos = message.nanos;
                     return object;
                 };
@@ -76030,7 +76012,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.paths != null && message.hasOwnProperty("paths")) {
+                    if (message.paths != null && Object.hasOwnProperty.call(message, "paths")) {
                         if (!Array.isArray(message.paths))
                             return "paths: array expected";
                         for (var i = 0; i < message.paths.length; ++i)
@@ -76284,10 +76266,10 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
                         if (!$util.isString(message.type_url))
                             return "type_url: string expected";
-                    if (message.value != null && message.hasOwnProperty("value"))
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
                         if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
                             return "value: buffer expected";
                     return null;
@@ -76348,9 +76330,9 @@
                                 object.value = $util.newBuffer(object.value);
                         }
                     }
-                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
                         object.type_url = message.type_url;
-                    if (message.value != null && message.hasOwnProperty("value"))
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
                         object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
                     return object;
                 };
@@ -76528,12 +76510,6 @@
                 Empty.fromObject = function fromObject(object, long) {
                     if (object instanceof $root.google.protobuf.Empty)
                         return object;
-                    if (!$util.isObject(object))
-                        throw TypeError(".google.protobuf.Empty: object expected");
-                    if (long === undefined)
-                        long = 0;
-                    if (long > $util.recursionLimit)
-                        throw Error("maximum nesting depth exceeded");
                     return new $root.google.protobuf.Empty();
                 };
     
@@ -76739,10 +76715,10 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
                         if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
                             return "seconds: integer|Long expected";
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
                         if (!$util.isInteger(message.nanos))
                             return "nanos: integer expected";
                     return null;
@@ -76805,14 +76781,14 @@
                             object.seconds = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                         object.nanos = 0;
                     }
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
                         if (typeof BigInt !== "undefined" && options.longs === BigInt)
                             object.seconds = typeof message.seconds === "number" ? BigInt(message.seconds) : $util.Long.fromBits(message.seconds.low >>> 0, message.seconds.high >>> 0, false).toBigInt();
                         else if (typeof message.seconds === "number")
                             object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
                         else
                             object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
                         object.nanos = message.nanos;
                     return object;
                 };
@@ -76919,7 +76895,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(IAMPolicy.prototype.setIamPolicy = function setIamPolicy(request, callback) {
-                        return this.rpcCall(setIamPolicy, $root.google.iam.v1.SetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, setIamPolicy, $root.google.iam.v1.SetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
                     }, "name", { value: "SetIamPolicy" });
     
                     /**
@@ -76952,7 +76928,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(IAMPolicy.prototype.getIamPolicy = function getIamPolicy(request, callback) {
-                        return this.rpcCall(getIamPolicy, $root.google.iam.v1.GetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, getIamPolicy, $root.google.iam.v1.GetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
                     }, "name", { value: "GetIamPolicy" });
     
                     /**
@@ -76985,7 +76961,7 @@
                      * @variation 1
                      */
                     Object.defineProperty(IAMPolicy.prototype.testIamPermissions = function testIamPermissions(request, callback) {
-                        return this.rpcCall(testIamPermissions, $root.google.iam.v1.TestIamPermissionsRequest, $root.google.iam.v1.TestIamPermissionsResponse, request, callback);
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, testIamPermissions, $root.google.iam.v1.TestIamPermissionsRequest, $root.google.iam.v1.TestIamPermissionsResponse, request, callback);
                     }, "name", { value: "TestIamPermissions" });
     
                     /**
@@ -77176,15 +77152,15 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.resource != null && message.hasOwnProperty("resource"))
+                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
                             if (!$util.isString(message.resource))
                                 return "resource: string expected";
-                        if (message.policy != null && message.hasOwnProperty("policy")) {
+                        if (message.policy != null && Object.hasOwnProperty.call(message, "policy")) {
                             var error = $root.google.iam.v1.Policy.verify(message.policy, long + 1);
                             if (error)
                                 return "policy." + error;
                         }
-                        if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                        if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask")) {
                             var error = $root.google.protobuf.FieldMask.verify(message.updateMask, long + 1);
                             if (error)
                                 return "updateMask." + error;
@@ -77247,11 +77223,11 @@
                             object.policy = null;
                             object.updateMask = null;
                         }
-                        if (message.resource != null && message.hasOwnProperty("resource"))
+                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
                             object.resource = message.resource;
-                        if (message.policy != null && message.hasOwnProperty("policy"))
+                        if (message.policy != null && Object.hasOwnProperty.call(message, "policy"))
                             object.policy = $root.google.iam.v1.Policy.toObject(message.policy, options, q + 1);
-                        if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                        if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
                             object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options, q + 1);
                         return object;
                     };
@@ -77445,10 +77421,10 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.resource != null && message.hasOwnProperty("resource"))
+                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
                             if (!$util.isString(message.resource))
                                 return "resource: string expected";
-                        if (message.options != null && message.hasOwnProperty("options")) {
+                        if (message.options != null && Object.hasOwnProperty.call(message, "options")) {
                             var error = $root.google.iam.v1.GetPolicyOptions.verify(message.options, long + 1);
                             if (error)
                                 return "options." + error;
@@ -77505,9 +77481,9 @@
                             object.resource = "";
                             object.options = null;
                         }
-                        if (message.resource != null && message.hasOwnProperty("resource"))
+                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
                             object.resource = message.resource;
-                        if (message.options != null && message.hasOwnProperty("options"))
+                        if (message.options != null && Object.hasOwnProperty.call(message, "options"))
                             object.options = $root.google.iam.v1.GetPolicyOptions.toObject(message.options, options, q + 1);
                         return object;
                     };
@@ -77705,10 +77681,10 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.resource != null && message.hasOwnProperty("resource"))
+                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
                             if (!$util.isString(message.resource))
                                 return "resource: string expected";
-                        if (message.permissions != null && message.hasOwnProperty("permissions")) {
+                        if (message.permissions != null && Object.hasOwnProperty.call(message, "permissions")) {
                             if (!Array.isArray(message.permissions))
                                 return "permissions: array expected";
                             for (var i = 0; i < message.permissions.length; ++i)
@@ -77769,7 +77745,7 @@
                             object.permissions = [];
                         if (options.defaults)
                             object.resource = "";
-                        if (message.resource != null && message.hasOwnProperty("resource"))
+                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
                             object.resource = message.resource;
                         if (message.permissions && message.permissions.length) {
                             object.permissions = [];
@@ -77957,7 +77933,7 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.permissions != null && message.hasOwnProperty("permissions")) {
+                        if (message.permissions != null && Object.hasOwnProperty.call(message, "permissions")) {
                             if (!Array.isArray(message.permissions))
                                 return "permissions: array expected";
                             for (var i = 0; i < message.permissions.length; ++i)
@@ -78196,7 +78172,7 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.requestedPolicyVersion != null && message.hasOwnProperty("requestedPolicyVersion"))
+                        if (message.requestedPolicyVersion != null && Object.hasOwnProperty.call(message, "requestedPolicyVersion"))
                             if (!$util.isInteger(message.requestedPolicyVersion))
                                 return "requestedPolicyVersion: integer expected";
                         return null;
@@ -78244,7 +78220,7 @@
                         var object = {};
                         if (options.defaults)
                             object.requestedPolicyVersion = 0;
-                        if (message.requestedPolicyVersion != null && message.hasOwnProperty("requestedPolicyVersion"))
+                        if (message.requestedPolicyVersion != null && Object.hasOwnProperty.call(message, "requestedPolicyVersion"))
                             object.requestedPolicyVersion = message.requestedPolicyVersion;
                         return object;
                     };
@@ -78476,10 +78452,10 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.version != null && message.hasOwnProperty("version"))
+                        if (message.version != null && Object.hasOwnProperty.call(message, "version"))
                             if (!$util.isInteger(message.version))
                                 return "version: integer expected";
-                        if (message.bindings != null && message.hasOwnProperty("bindings")) {
+                        if (message.bindings != null && Object.hasOwnProperty.call(message, "bindings")) {
                             if (!Array.isArray(message.bindings))
                                 return "bindings: array expected";
                             for (var i = 0; i < message.bindings.length; ++i) {
@@ -78488,7 +78464,7 @@
                                     return "bindings." + error;
                             }
                         }
-                        if (message.auditConfigs != null && message.hasOwnProperty("auditConfigs")) {
+                        if (message.auditConfigs != null && Object.hasOwnProperty.call(message, "auditConfigs")) {
                             if (!Array.isArray(message.auditConfigs))
                                 return "auditConfigs: array expected";
                             for (var i = 0; i < message.auditConfigs.length; ++i) {
@@ -78497,7 +78473,7 @@
                                     return "auditConfigs." + error;
                             }
                         }
-                        if (message.etag != null && message.hasOwnProperty("etag"))
+                        if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                             if (!(message.etag && typeof message.etag.length === "number" || $util.isString(message.etag)))
                                 return "etag: buffer expected";
                         return null;
@@ -78582,9 +78558,9 @@
                                     object.etag = $util.newBuffer(object.etag);
                             }
                         }
-                        if (message.version != null && message.hasOwnProperty("version"))
+                        if (message.version != null && Object.hasOwnProperty.call(message, "version"))
                             object.version = message.version;
-                        if (message.etag != null && message.hasOwnProperty("etag"))
+                        if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                             object.etag = options.bytes === String ? $util.base64.encode(message.etag, 0, message.etag.length) : options.bytes === Array ? Array.prototype.slice.call(message.etag) : message.etag;
                         if (message.bindings && message.bindings.length) {
                             object.bindings = [];
@@ -78807,17 +78783,17 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.role != null && message.hasOwnProperty("role"))
+                        if (message.role != null && Object.hasOwnProperty.call(message, "role"))
                             if (!$util.isString(message.role))
                                 return "role: string expected";
-                        if (message.members != null && message.hasOwnProperty("members")) {
+                        if (message.members != null && Object.hasOwnProperty.call(message, "members")) {
                             if (!Array.isArray(message.members))
                                 return "members: array expected";
                             for (var i = 0; i < message.members.length; ++i)
                                 if (!$util.isString(message.members[i]))
                                     return "members: string[] expected";
                         }
-                        if (message.condition != null && message.hasOwnProperty("condition")) {
+                        if (message.condition != null && Object.hasOwnProperty.call(message, "condition")) {
                             var error = $root.google.type.Expr.verify(message.condition, long + 1);
                             if (error)
                                 return "condition." + error;
@@ -78883,14 +78859,14 @@
                             object.role = "";
                             object.condition = null;
                         }
-                        if (message.role != null && message.hasOwnProperty("role"))
+                        if (message.role != null && Object.hasOwnProperty.call(message, "role"))
                             object.role = message.role;
                         if (message.members && message.members.length) {
                             object.members = [];
                             for (var j = 0; j < message.members.length; ++j)
                                 object.members[j] = message.members[j];
                         }
-                        if (message.condition != null && message.hasOwnProperty("condition"))
+                        if (message.condition != null && Object.hasOwnProperty.call(message, "condition"))
                             object.condition = $root.google.type.Expr.toObject(message.condition, options, q + 1);
                         return object;
                     };
@@ -79088,10 +79064,10 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.service != null && message.hasOwnProperty("service"))
+                        if (message.service != null && Object.hasOwnProperty.call(message, "service"))
                             if (!$util.isString(message.service))
                                 return "service: string expected";
-                        if (message.auditLogConfigs != null && message.hasOwnProperty("auditLogConfigs")) {
+                        if (message.auditLogConfigs != null && Object.hasOwnProperty.call(message, "auditLogConfigs")) {
                             if (!Array.isArray(message.auditLogConfigs))
                                 return "auditLogConfigs: array expected";
                             for (var i = 0; i < message.auditLogConfigs.length; ++i) {
@@ -79157,7 +79133,7 @@
                             object.auditLogConfigs = [];
                         if (options.defaults)
                             object.service = "";
-                        if (message.service != null && message.hasOwnProperty("service"))
+                        if (message.service != null && Object.hasOwnProperty.call(message, "service"))
                             object.service = message.service;
                         if (message.auditLogConfigs && message.auditLogConfigs.length) {
                             object.auditLogConfigs = [];
@@ -79360,7 +79336,7 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.logType != null && message.hasOwnProperty("logType"))
+                        if (message.logType != null && Object.hasOwnProperty.call(message, "logType"))
                             switch (message.logType) {
                             default:
                                 return "logType: enum value expected";
@@ -79370,7 +79346,7 @@
                             case 3:
                                 break;
                             }
-                        if (message.exemptedMembers != null && message.hasOwnProperty("exemptedMembers")) {
+                        if (message.exemptedMembers != null && Object.hasOwnProperty.call(message, "exemptedMembers")) {
                             if (!Array.isArray(message.exemptedMembers))
                                 return "exemptedMembers: array expected";
                             for (var i = 0; i < message.exemptedMembers.length; ++i)
@@ -79453,7 +79429,7 @@
                             object.exemptedMembers = [];
                         if (options.defaults)
                             object.logType = options.enums === String ? "LOG_TYPE_UNSPECIFIED" : 0;
-                        if (message.logType != null && message.hasOwnProperty("logType"))
+                        if (message.logType != null && Object.hasOwnProperty.call(message, "logType"))
                             object.logType = options.enums === String ? $root.google.iam.v1.AuditLogConfig.LogType[message.logType] === undefined ? message.logType : $root.google.iam.v1.AuditLogConfig.LogType[message.logType] : message.logType;
                         if (message.exemptedMembers && message.exemptedMembers.length) {
                             object.exemptedMembers = [];
@@ -79678,7 +79654,7 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.bindingDeltas != null && message.hasOwnProperty("bindingDeltas")) {
+                        if (message.bindingDeltas != null && Object.hasOwnProperty.call(message, "bindingDeltas")) {
                             if (!Array.isArray(message.bindingDeltas))
                                 return "bindingDeltas: array expected";
                             for (var i = 0; i < message.bindingDeltas.length; ++i) {
@@ -79687,7 +79663,7 @@
                                     return "bindingDeltas." + error;
                             }
                         }
-                        if (message.auditConfigDeltas != null && message.hasOwnProperty("auditConfigDeltas")) {
+                        if (message.auditConfigDeltas != null && Object.hasOwnProperty.call(message, "auditConfigDeltas")) {
                             if (!Array.isArray(message.auditConfigDeltas))
                                 return "auditConfigDeltas: array expected";
                             for (var i = 0; i < message.auditConfigDeltas.length; ++i) {
@@ -79993,7 +79969,7 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.action != null && message.hasOwnProperty("action"))
+                        if (message.action != null && Object.hasOwnProperty.call(message, "action"))
                             switch (message.action) {
                             default:
                                 return "action: enum value expected";
@@ -80002,13 +79978,13 @@
                             case 2:
                                 break;
                             }
-                        if (message.role != null && message.hasOwnProperty("role"))
+                        if (message.role != null && Object.hasOwnProperty.call(message, "role"))
                             if (!$util.isString(message.role))
                                 return "role: string expected";
-                        if (message.member != null && message.hasOwnProperty("member"))
+                        if (message.member != null && Object.hasOwnProperty.call(message, "member"))
                             if (!$util.isString(message.member))
                                 return "member: string expected";
-                        if (message.condition != null && message.hasOwnProperty("condition")) {
+                        if (message.condition != null && Object.hasOwnProperty.call(message, "condition")) {
                             var error = $root.google.type.Expr.verify(message.condition, long + 1);
                             if (error)
                                 return "condition." + error;
@@ -80089,13 +80065,13 @@
                             object.member = "";
                             object.condition = null;
                         }
-                        if (message.action != null && message.hasOwnProperty("action"))
+                        if (message.action != null && Object.hasOwnProperty.call(message, "action"))
                             object.action = options.enums === String ? $root.google.iam.v1.BindingDelta.Action[message.action] === undefined ? message.action : $root.google.iam.v1.BindingDelta.Action[message.action] : message.action;
-                        if (message.role != null && message.hasOwnProperty("role"))
+                        if (message.role != null && Object.hasOwnProperty.call(message, "role"))
                             object.role = message.role;
-                        if (message.member != null && message.hasOwnProperty("member"))
+                        if (message.member != null && Object.hasOwnProperty.call(message, "member"))
                             object.member = message.member;
-                        if (message.condition != null && message.hasOwnProperty("condition"))
+                        if (message.condition != null && Object.hasOwnProperty.call(message, "condition"))
                             object.condition = $root.google.type.Expr.toObject(message.condition, options, q + 1);
                         return object;
                     };
@@ -80335,7 +80311,7 @@
                             long = 0;
                         if (long > $util.recursionLimit)
                             return "maximum nesting depth exceeded";
-                        if (message.action != null && message.hasOwnProperty("action"))
+                        if (message.action != null && Object.hasOwnProperty.call(message, "action"))
                             switch (message.action) {
                             default:
                                 return "action: enum value expected";
@@ -80344,13 +80320,13 @@
                             case 2:
                                 break;
                             }
-                        if (message.service != null && message.hasOwnProperty("service"))
+                        if (message.service != null && Object.hasOwnProperty.call(message, "service"))
                             if (!$util.isString(message.service))
                                 return "service: string expected";
-                        if (message.exemptedMember != null && message.hasOwnProperty("exemptedMember"))
+                        if (message.exemptedMember != null && Object.hasOwnProperty.call(message, "exemptedMember"))
                             if (!$util.isString(message.exemptedMember))
                                 return "exemptedMember: string expected";
-                        if (message.logType != null && message.hasOwnProperty("logType"))
+                        if (message.logType != null && Object.hasOwnProperty.call(message, "logType"))
                             if (!$util.isString(message.logType))
                                 return "logType: string expected";
                         return null;
@@ -80426,13 +80402,13 @@
                             object.exemptedMember = "";
                             object.logType = "";
                         }
-                        if (message.action != null && message.hasOwnProperty("action"))
+                        if (message.action != null && Object.hasOwnProperty.call(message, "action"))
                             object.action = options.enums === String ? $root.google.iam.v1.AuditConfigDelta.Action[message.action] === undefined ? message.action : $root.google.iam.v1.AuditConfigDelta.Action[message.action] : message.action;
-                        if (message.service != null && message.hasOwnProperty("service"))
+                        if (message.service != null && Object.hasOwnProperty.call(message, "service"))
                             object.service = message.service;
-                        if (message.exemptedMember != null && message.hasOwnProperty("exemptedMember"))
+                        if (message.exemptedMember != null && Object.hasOwnProperty.call(message, "exemptedMember"))
                             object.exemptedMember = message.exemptedMember;
-                        if (message.logType != null && message.hasOwnProperty("logType"))
+                        if (message.logType != null && Object.hasOwnProperty.call(message, "logType"))
                             object.logType = message.logType;
                         return object;
                     };
@@ -80687,16 +80663,16 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.expression != null && message.hasOwnProperty("expression"))
+                    if (message.expression != null && Object.hasOwnProperty.call(message, "expression"))
                         if (!$util.isString(message.expression))
                             return "expression: string expected";
-                    if (message.title != null && message.hasOwnProperty("title"))
+                    if (message.title != null && Object.hasOwnProperty.call(message, "title"))
                         if (!$util.isString(message.title))
                             return "title: string expected";
-                    if (message.description != null && message.hasOwnProperty("description"))
+                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
                         if (!$util.isString(message.description))
                             return "description: string expected";
-                    if (message.location != null && message.hasOwnProperty("location"))
+                    if (message.location != null && Object.hasOwnProperty.call(message, "location"))
                         if (!$util.isString(message.location))
                             return "location: string expected";
                     return null;
@@ -80754,13 +80730,13 @@
                         object.description = "";
                         object.location = "";
                     }
-                    if (message.expression != null && message.hasOwnProperty("expression"))
+                    if (message.expression != null && Object.hasOwnProperty.call(message, "expression"))
                         object.expression = message.expression;
-                    if (message.title != null && message.hasOwnProperty("title"))
+                    if (message.title != null && Object.hasOwnProperty.call(message, "title"))
                         object.title = message.title;
-                    if (message.description != null && message.hasOwnProperty("description"))
+                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
                         object.description = message.description;
-                    if (message.location != null && message.hasOwnProperty("location"))
+                    if (message.location != null && Object.hasOwnProperty.call(message, "location"))
                         object.location = message.location;
                     return object;
                 };
@@ -80954,12 +80930,12 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                    if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime")) {
                         var error = $root.google.protobuf.Timestamp.verify(message.startTime, long + 1);
                         if (error)
                             return "startTime." + error;
                     }
-                    if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                    if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime")) {
                         var error = $root.google.protobuf.Timestamp.verify(message.endTime, long + 1);
                         if (error)
                             return "endTime." + error;
@@ -81019,9 +80995,9 @@
                         object.startTime = null;
                         object.endTime = null;
                     }
-                    if (message.startTime != null && message.hasOwnProperty("startTime"))
+                    if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
                         object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options, q + 1);
-                    if (message.endTime != null && message.hasOwnProperty("endTime"))
+                    if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
                         object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options, q + 1);
                     return object;
                 };
@@ -81230,13 +81206,13 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.year != null && message.hasOwnProperty("year"))
+                    if (message.year != null && Object.hasOwnProperty.call(message, "year"))
                         if (!$util.isInteger(message.year))
                             return "year: integer expected";
-                    if (message.month != null && message.hasOwnProperty("month"))
+                    if (message.month != null && Object.hasOwnProperty.call(message, "month"))
                         if (!$util.isInteger(message.month))
                             return "month: integer expected";
-                    if (message.day != null && message.hasOwnProperty("day"))
+                    if (message.day != null && Object.hasOwnProperty.call(message, "day"))
                         if (!$util.isInteger(message.day))
                             return "day: integer expected";
                     return null;
@@ -81291,11 +81267,11 @@
                         object.month = 0;
                         object.day = 0;
                     }
-                    if (message.year != null && message.hasOwnProperty("year"))
+                    if (message.year != null && Object.hasOwnProperty.call(message, "year"))
                         object.year = message.year;
-                    if (message.month != null && message.hasOwnProperty("month"))
+                    if (message.month != null && Object.hasOwnProperty.call(message, "month"))
                         object.month = message.month;
-                    if (message.day != null && message.hasOwnProperty("day"))
+                    if (message.day != null && Object.hasOwnProperty.call(message, "day"))
                         object.day = message.day;
                     return object;
                 };
@@ -81393,7 +81369,7 @@
                  * @variation 1
                  */
                 Object.defineProperty(Operations.prototype.listOperations = function listOperations(request, callback) {
-                    return this.rpcCall(listOperations, $root.google.longrunning.ListOperationsRequest, $root.google.longrunning.ListOperationsResponse, request, callback);
+                    return $protobuf.rpc.Service.prototype.rpcCall.call(this, listOperations, $root.google.longrunning.ListOperationsRequest, $root.google.longrunning.ListOperationsResponse, request, callback);
                 }, "name", { value: "ListOperations" });
     
                 /**
@@ -81426,7 +81402,7 @@
                  * @variation 1
                  */
                 Object.defineProperty(Operations.prototype.getOperation = function getOperation(request, callback) {
-                    return this.rpcCall(getOperation, $root.google.longrunning.GetOperationRequest, $root.google.longrunning.Operation, request, callback);
+                    return $protobuf.rpc.Service.prototype.rpcCall.call(this, getOperation, $root.google.longrunning.GetOperationRequest, $root.google.longrunning.Operation, request, callback);
                 }, "name", { value: "GetOperation" });
     
                 /**
@@ -81459,7 +81435,7 @@
                  * @variation 1
                  */
                 Object.defineProperty(Operations.prototype.deleteOperation = function deleteOperation(request, callback) {
-                    return this.rpcCall(deleteOperation, $root.google.longrunning.DeleteOperationRequest, $root.google.protobuf.Empty, request, callback);
+                    return $protobuf.rpc.Service.prototype.rpcCall.call(this, deleteOperation, $root.google.longrunning.DeleteOperationRequest, $root.google.protobuf.Empty, request, callback);
                 }, "name", { value: "DeleteOperation" });
     
                 /**
@@ -81492,7 +81468,7 @@
                  * @variation 1
                  */
                 Object.defineProperty(Operations.prototype.cancelOperation = function cancelOperation(request, callback) {
-                    return this.rpcCall(cancelOperation, $root.google.longrunning.CancelOperationRequest, $root.google.protobuf.Empty, request, callback);
+                    return $protobuf.rpc.Service.prototype.rpcCall.call(this, cancelOperation, $root.google.longrunning.CancelOperationRequest, $root.google.protobuf.Empty, request, callback);
                 }, "name", { value: "CancelOperation" });
     
                 /**
@@ -81525,7 +81501,7 @@
                  * @variation 1
                  */
                 Object.defineProperty(Operations.prototype.waitOperation = function waitOperation(request, callback) {
-                    return this.rpcCall(waitOperation, $root.google.longrunning.WaitOperationRequest, $root.google.longrunning.Operation, request, callback);
+                    return $protobuf.rpc.Service.prototype.rpcCall.call(this, waitOperation, $root.google.longrunning.WaitOperationRequest, $root.google.longrunning.Operation, request, callback);
                 }, "name", { value: "WaitOperation" });
     
                 /**
@@ -81761,18 +81737,18 @@
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
                     var properties = {};
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
-                    if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                    if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata")) {
                         var error = $root.google.protobuf.Any.verify(message.metadata, long + 1);
                         if (error)
                             return "metadata." + error;
                     }
-                    if (message.done != null && message.hasOwnProperty("done"))
+                    if (message.done != null && Object.hasOwnProperty.call(message, "done"))
                         if (typeof message.done !== "boolean")
                             return "done: boolean expected";
-                    if (message.error != null && message.hasOwnProperty("error")) {
+                    if (message.error != null && Object.hasOwnProperty.call(message, "error")) {
                         properties.result = 1;
                         {
                             var error = $root.google.rpc.Status.verify(message.error, long + 1);
@@ -81780,7 +81756,7 @@
                                 return "error." + error;
                         }
                     }
-                    if (message.response != null && message.hasOwnProperty("response")) {
+                    if (message.response != null && Object.hasOwnProperty.call(message, "response")) {
                         if (properties.result === 1)
                             return "result: multiple values";
                         properties.result = 1;
@@ -81855,18 +81831,18 @@
                         object.metadata = null;
                         object.done = false;
                     }
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         object.name = message.name;
-                    if (message.metadata != null && message.hasOwnProperty("metadata"))
+                    if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
                         object.metadata = $root.google.protobuf.Any.toObject(message.metadata, options, q + 1);
-                    if (message.done != null && message.hasOwnProperty("done"))
+                    if (message.done != null && Object.hasOwnProperty.call(message, "done"))
                         object.done = message.done;
-                    if (message.error != null && message.hasOwnProperty("error")) {
+                    if (message.error != null && Object.hasOwnProperty.call(message, "error")) {
                         object.error = $root.google.rpc.Status.toObject(message.error, options, q + 1);
                         if (options.oneofs)
                             object.result = "error";
                     }
-                    if (message.response != null && message.hasOwnProperty("response")) {
+                    if (message.response != null && Object.hasOwnProperty.call(message, "response")) {
                         object.response = $root.google.protobuf.Any.toObject(message.response, options, q + 1);
                         if (options.oneofs)
                             object.result = "response";
@@ -82048,7 +82024,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
                     return null;
@@ -82096,7 +82072,7 @@
                     var object = {};
                     if (options.defaults)
                         object.name = "";
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         object.name = message.name;
                     return object;
                 };
@@ -82320,16 +82296,16 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
-                    if (message.filter != null && message.hasOwnProperty("filter"))
+                    if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
                         if (!$util.isString(message.filter))
                             return "filter: string expected";
-                    if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                    if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
                         if (!$util.isInteger(message.pageSize))
                             return "pageSize: integer expected";
-                    if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                    if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                         if (!$util.isString(message.pageToken))
                             return "pageToken: string expected";
                     return null;
@@ -82387,13 +82363,13 @@
                         object.pageToken = "";
                         object.name = "";
                     }
-                    if (message.filter != null && message.hasOwnProperty("filter"))
+                    if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
                         object.filter = message.filter;
-                    if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                    if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
                         object.pageSize = message.pageSize;
-                    if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                    if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                         object.pageToken = message.pageToken;
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         object.name = message.name;
                     return object;
                 };
@@ -82591,7 +82567,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.operations != null && message.hasOwnProperty("operations")) {
+                    if (message.operations != null && Object.hasOwnProperty.call(message, "operations")) {
                         if (!Array.isArray(message.operations))
                             return "operations: array expected";
                         for (var i = 0; i < message.operations.length; ++i) {
@@ -82600,7 +82576,7 @@
                                 return "operations." + error;
                         }
                     }
-                    if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                    if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                         if (!$util.isString(message.nextPageToken))
                             return "nextPageToken: string expected";
                     return null;
@@ -82665,7 +82641,7 @@
                         for (var j = 0; j < message.operations.length; ++j)
                             object.operations[j] = $root.google.longrunning.Operation.toObject(message.operations[j], options, q + 1);
                     }
-                    if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                    if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                         object.nextPageToken = message.nextPageToken;
                     return object;
                 };
@@ -82844,7 +82820,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
                     return null;
@@ -82892,7 +82868,7 @@
                     var object = {};
                     if (options.defaults)
                         object.name = "";
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         object.name = message.name;
                     return object;
                 };
@@ -83071,7 +83047,7 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
                     return null;
@@ -83119,7 +83095,7 @@
                     var object = {};
                     if (options.defaults)
                         object.name = "";
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         object.name = message.name;
                     return object;
                 };
@@ -83313,10 +83289,10 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         if (!$util.isString(message.name))
                             return "name: string expected";
-                    if (message.timeout != null && message.hasOwnProperty("timeout")) {
+                    if (message.timeout != null && Object.hasOwnProperty.call(message, "timeout")) {
                         var error = $root.google.protobuf.Duration.verify(message.timeout, long + 1);
                         if (error)
                             return "timeout." + error;
@@ -83373,9 +83349,9 @@
                         object.name = "";
                         object.timeout = null;
                     }
-                    if (message.name != null && message.hasOwnProperty("name"))
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         object.name = message.name;
-                    if (message.timeout != null && message.hasOwnProperty("timeout"))
+                    if (message.timeout != null && Object.hasOwnProperty.call(message, "timeout"))
                         object.timeout = $root.google.protobuf.Duration.toObject(message.timeout, options, q + 1);
                     return object;
                 };
@@ -83569,10 +83545,10 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.responseType != null && message.hasOwnProperty("responseType"))
+                    if (message.responseType != null && Object.hasOwnProperty.call(message, "responseType"))
                         if (!$util.isString(message.responseType))
                             return "responseType: string expected";
-                    if (message.metadataType != null && message.hasOwnProperty("metadataType"))
+                    if (message.metadataType != null && Object.hasOwnProperty.call(message, "metadataType"))
                         if (!$util.isString(message.metadataType))
                             return "metadataType: string expected";
                     return null;
@@ -83624,9 +83600,9 @@
                         object.responseType = "";
                         object.metadataType = "";
                     }
-                    if (message.responseType != null && message.hasOwnProperty("responseType"))
+                    if (message.responseType != null && Object.hasOwnProperty.call(message, "responseType"))
                         object.responseType = message.responseType;
-                    if (message.metadataType != null && message.hasOwnProperty("metadataType"))
+                    if (message.metadataType != null && Object.hasOwnProperty.call(message, "metadataType"))
                         object.metadataType = message.metadataType;
                     return object;
                 };
@@ -83851,13 +83827,13 @@
                         long = 0;
                     if (long > $util.recursionLimit)
                         return "maximum nesting depth exceeded";
-                    if (message.code != null && message.hasOwnProperty("code"))
+                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
                         if (!$util.isInteger(message.code))
                             return "code: integer expected";
-                    if (message.message != null && message.hasOwnProperty("message"))
+                    if (message.message != null && Object.hasOwnProperty.call(message, "message"))
                         if (!$util.isString(message.message))
                             return "message: string expected";
-                    if (message.details != null && message.hasOwnProperty("details")) {
+                    if (message.details != null && Object.hasOwnProperty.call(message, "details")) {
                         if (!Array.isArray(message.details))
                             return "details: array expected";
                         for (var i = 0; i < message.details.length; ++i) {
@@ -83927,9 +83903,9 @@
                         object.code = 0;
                         object.message = "";
                     }
-                    if (message.code != null && message.hasOwnProperty("code"))
+                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
                         object.code = message.code;
-                    if (message.message != null && message.hasOwnProperty("message"))
+                    if (message.message != null && Object.hasOwnProperty.call(message, "message"))
                         object.message = message.message;
                     if (message.details && message.details.length) {
                         object.details = [];
