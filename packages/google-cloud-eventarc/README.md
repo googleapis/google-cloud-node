@@ -97,7 +97,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update message bus | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.update_message_bus.js) |
 | update pipeline | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.update_pipeline.js) |
 | update trigger | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.update_trigger.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/snippet_metadata_google.cloud.eventarc.v1.json) |
 
 
 ## Supported Node.js Versions

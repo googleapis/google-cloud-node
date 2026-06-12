@@ -1,17 +1,16 @@
 {
-  "name": "developerconnect",
-  "name_pretty": "Developer Connect API",
-  "product_documentation": "https://cloud.google.com/developer-connect/docs/overview",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/developerconnect/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/developerconnect",
-  "api_id": "developerconnect.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "developerconnect"
+    "api_description": "Connect third-party source code management to Google",
+    "api_id": "developerconnect.googleapis.com",
+    "api_shortname": "developerconnect",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/developerconnect/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/developerconnect",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1446966&template=1822025",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "developerconnect",
+    "name_pretty": "Developer Connect",
+    "product_documentation": "https://cloud.google.com/developer-connect/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

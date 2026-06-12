@@ -81,12 +81,9 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | remove product from product set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.remove_product_from_product_set.js) |
 | update product | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.update_product.js) |
 | update product set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/product_search.update_product_set.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1/snippet_metadata_google.cloud.vision.v1.json) |
 | batch annotate images | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p1beta1/image_annotator.batch_annotate_images.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p1beta1/snippet_metadata_google.cloud.vision.v1p1beta1.json) |
 | async batch annotate files | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p2beta1/image_annotator.async_batch_annotate_files.js) |
 | batch annotate images | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p2beta1/image_annotator.batch_annotate_images.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p2beta1/snippet_metadata_google.cloud.vision.v1p2beta1.json) |
 | async batch annotate files | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/image_annotator.async_batch_annotate_files.js) |
 | batch annotate images | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/image_annotator.batch_annotate_images.js) |
 | add product to product set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.add_product_to_product_set.js) |
@@ -107,7 +104,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | remove product from product set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.remove_product_from_product_set.js) |
 | update product | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.update_product.js) |
 | update product set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/product_search.update_product_set.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p3beta1/snippet_metadata_google.cloud.vision.v1p3beta1.json) |
 | async batch annotate files | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/image_annotator.async_batch_annotate_files.js) |
 | async batch annotate images | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/image_annotator.async_batch_annotate_images.js) |
 | batch annotate files | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/image_annotator.batch_annotate_files.js) |
@@ -131,7 +127,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | remove product from product set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.remove_product_from_product_set.js) |
 | update product | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.update_product.js) |
 | update product set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/product_search.update_product_set.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples/generated/v1p4beta1/snippet_metadata_google.cloud.vision.v1p4beta1.json) |
 
 
 ## Supported Node.js Versions
@@ -165,7 +160,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -175,7 +170,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
