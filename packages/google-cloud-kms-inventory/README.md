@@ -60,7 +60,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list crypto keys | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms-inventory/samples/generated/v1/key_dashboard_service.list_crypto_keys.js) |
 | get protected resources summary | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms-inventory/samples/generated/v1/key_tracking_service.get_protected_resources_summary.js) |
 | search protected resources | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms-inventory/samples/generated/v1/key_tracking_service.search_protected_resources.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms-inventory/samples/generated/v1/snippet_metadata_google.cloud.kms.inventory.v1.json) |
 
 
 ## Supported Node.js Versions
@@ -94,7 +93,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms-inventory/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -104,7 +103,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms-inventory/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.api.servicecontrol.v2",
-  "libraryPackage": "@google-cloud/servicecontrol",
+  "libraryPackage": "@google-cloud/service-control",
   "services": {
     "ServiceController": {
       "clients": {

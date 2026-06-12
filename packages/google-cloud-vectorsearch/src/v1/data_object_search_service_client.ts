@@ -18,11 +18,20 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +53,7 @@ export class DataObjectSearchServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('vectorsearch');
@@ -57,10 +66,10 @@ export class DataObjectSearchServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  dataObjectSearchServiceStub?: Promise<{[name: string]: Function}>;
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  dataObjectSearchServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of DataObjectSearchServiceClient.
@@ -101,21 +110,43 @@ export class DataObjectSearchServiceClient {
    *     const client = new DataObjectSearchServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof DataObjectSearchServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    const staticMembers = this
+      .constructor as typeof DataObjectSearchServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'vectorsearch.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -140,7 +171,7 @@ export class DataObjectSearchServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -154,15 +185,11 @@ export class DataObjectSearchServiceClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -184,13 +211,13 @@ export class DataObjectSearchServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       collectionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/collections/{collection}'
+        'projects/{project}/locations/{location}/collections/{collection}',
       ),
       dataObjectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/collections/{collection}/dataObjects/{dataObject}'
+        'projects/{project}/locations/{location}/collections/{collection}/dataObjects/{dataObject}',
       ),
       indexPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/collections/{collection}/indexes/{index}'
+        'projects/{project}/locations/{location}/collections/{collection}/indexes/{index}',
       ),
     };
 
@@ -198,16 +225,25 @@ export class DataObjectSearchServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      searchDataObjects:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'results'),
-      queryDataObjects:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'dataObjects')
+      searchDataObjects: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'results',
+      ),
+      queryDataObjects: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'dataObjects',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.vectorsearch.v1.DataObjectSearchService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.vectorsearch.v1.DataObjectSearchService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -238,37 +274,46 @@ export class DataObjectSearchServiceClient {
     // Put together the "service stub" for
     // google.cloud.vectorsearch.v1.DataObjectSearchService.
     this.dataObjectSearchServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.vectorsearch.v1.DataObjectSearchService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.vectorsearch.v1.DataObjectSearchService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.vectorsearch.v1.DataObjectSearchService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.vectorsearch.v1
+            .DataObjectSearchService,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const dataObjectSearchServiceStubMethods =
-        ['searchDataObjects', 'queryDataObjects', 'aggregateDataObjects', 'batchSearchDataObjects'];
+    const dataObjectSearchServiceStubMethods = [
+      'searchDataObjects',
+      'queryDataObjects',
+      'aggregateDataObjects',
+      'batchSearchDataObjects',
+    ];
     for (const methodName of dataObjectSearchServiceStubMethods) {
       const callPromise = this.dataObjectSearchServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -283,8 +328,14 @@ export class DataObjectSearchServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'vectorsearch.googleapis.com';
   }
@@ -295,8 +346,14 @@ export class DataObjectSearchServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'vectorsearch.googleapis.com';
   }
@@ -327,9 +384,7 @@ export class DataObjectSearchServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -338,8 +393,9 @@ export class DataObjectSearchServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -350,301 +406,424 @@ export class DataObjectSearchServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Aggregates data objects.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Collection for which to query.
- *   Format: `projects/{project}/locations/{location}/collections/{collection}`
- * @param {google.protobuf.Struct} [request.filter]
- *   Optional. A JSON filter expression, e.g. {"genre": {"$eq": "sci-fi"}},
- *   represented as a google.protobuf.Struct.
- * @param {google.cloud.vectorsearch.v1.AggregationMethod} request.aggregate
- *   Required. The aggregation method to apply to the query.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.vectorsearch.v1.AggregateDataObjectsResponse|AggregateDataObjectsResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/data_object_search_service.aggregate_data_objects.js</caption>
- * region_tag:vectorsearch_v1_generated_DataObjectSearchService_AggregateDataObjects_async
- */
+  /**
+   * Aggregates data objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Collection for which to query.
+   *   Format: `projects/{project}/locations/{location}/collections/{collection}`
+   * @param {google.protobuf.Struct} [request.filter]
+   *   Optional. A JSON filter expression, e.g. {"genre": {"$eq": "sci-fi"}},
+   *   represented as a google.protobuf.Struct.
+   * @param {google.cloud.vectorsearch.v1.AggregationMethod} request.aggregate
+   *   Required. The aggregation method to apply to the query.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.vectorsearch.v1.AggregateDataObjectsResponse|AggregateDataObjectsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_object_search_service.aggregate_data_objects.js</caption>
+   * region_tag:vectorsearch_v1_generated_DataObjectSearchService_AggregateDataObjects_async
+   */
   aggregateDataObjects(
-      request?: protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsResponse,
-        protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsResponse,
+      (
+        | protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   aggregateDataObjects(
-      request: protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsResponse,
-          protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsResponse,
+      | protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   aggregateDataObjects(
-      request: protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest,
-      callback: Callback<
-          protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsResponse,
-          protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest,
+    callback: Callback<
+      protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsResponse,
+      | protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   aggregateDataObjects(
-      request?: protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsResponse,
-          protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsResponse,
-          protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsResponse,
-        protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsResponse,
+      | protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsResponse,
+      (
+        | protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('aggregateDataObjects request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsResponse,
-        protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsResponse,
+          | protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('aggregateDataObjects response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.aggregateDataObjects(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsResponse,
-        protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('aggregateDataObjects response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .aggregateDataObjects(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsResponse,
+          (
+            | protos.google.cloud.vectorsearch.v1.IAggregateDataObjectsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('aggregateDataObjects response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Batch searches data objects.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Collection for which to search.
- *   Format: `projects/{project}/locations/{location}/collections/{collection}`
- * @param {number[]} request.searches
- *   Required. A list of search requests to execute in parallel.
- * @param {google.cloud.vectorsearch.v1.BatchSearchDataObjectsRequest.CombineResultsOptions} [request.combine]
- *   Optional. Options for combining the results of the batch search operations.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.vectorsearch.v1.BatchSearchDataObjectsResponse|BatchSearchDataObjectsResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/data_object_search_service.batch_search_data_objects.js</caption>
- * region_tag:vectorsearch_v1_generated_DataObjectSearchService_BatchSearchDataObjects_async
- */
+  /**
+   * Batch searches data objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Collection for which to search.
+   *   Format: `projects/{project}/locations/{location}/collections/{collection}`
+   * @param {number[]} request.searches
+   *   Required. A list of search requests to execute in parallel.
+   * @param {google.cloud.vectorsearch.v1.BatchSearchDataObjectsRequest.CombineResultsOptions} [request.combine]
+   *   Optional. Options for combining the results of the batch search operations.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.vectorsearch.v1.BatchSearchDataObjectsResponse|BatchSearchDataObjectsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_object_search_service.batch_search_data_objects.js</caption>
+   * region_tag:vectorsearch_v1_generated_DataObjectSearchService_BatchSearchDataObjects_async
+   */
   batchSearchDataObjects(
-      request?: protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsResponse,
-        protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsResponse,
+      (
+        | protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   batchSearchDataObjects(
-      request: protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsResponse,
-          protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsResponse,
+      | protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchSearchDataObjects(
-      request: protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest,
-      callback: Callback<
-          protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsResponse,
-          protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest,
+    callback: Callback<
+      protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsResponse,
+      | protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchSearchDataObjects(
-      request?: protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsResponse,
-          protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsResponse,
-          protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsResponse,
-        protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsResponse,
+      | protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsResponse,
+      (
+        | protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('batchSearchDataObjects request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsResponse,
-        protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsResponse,
+          | protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('batchSearchDataObjects response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.batchSearchDataObjects(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsResponse,
-        protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('batchSearchDataObjects response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .batchSearchDataObjects(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsResponse,
+          (
+            | protos.google.cloud.vectorsearch.v1.IBatchSearchDataObjectsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchSearchDataObjects response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * Searches data objects.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.vectorsearch.v1.VectorSearch} request.vectorSearch
- *   A vector search operation.
- * @param {google.cloud.vectorsearch.v1.SemanticSearch} request.semanticSearch
- *   A semantic search operation.
- * @param {google.cloud.vectorsearch.v1.TextSearch} [request.textSearch]
- *   Optional. A text search operation.
- * @param {string} request.parent
- *   Required. The resource name of the Collection for which to search.
- *   Format: `projects/{project}/locations/{location}/collections/{collection}`
- * @param {number} [request.pageSize]
- *   Optional. The standard list page size. Only supported for KNN. If not set,
- *   up to search_type.top_k results will be returned. The maximum value is
- *   1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. The standard list page token.
- *   Typically obtained via
- *   {@link protos.google.cloud.vectorsearch.v1.SearchDataObjectsResponse.next_page_token|SearchDataObjectsResponse.next_page_token}
- *   of the previous
- *   {@link protos.google.cloud.vectorsearch.v1.DataObjectSearchService.SearchDataObjects|DataObjectSearchService.SearchDataObjects}
- *   call.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.vectorsearch.v1.SearchResult|SearchResult}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `searchDataObjectsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Searches data objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.vectorsearch.v1.VectorSearch} request.vectorSearch
+   *   A vector search operation.
+   * @param {google.cloud.vectorsearch.v1.SemanticSearch} request.semanticSearch
+   *   A semantic search operation.
+   * @param {google.cloud.vectorsearch.v1.TextSearch} [request.textSearch]
+   *   Optional. A text search operation.
+   * @param {string} request.parent
+   *   Required. The resource name of the Collection for which to search.
+   *   Format: `projects/{project}/locations/{location}/collections/{collection}`
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size. Only supported for KNN. If not set,
+   *   up to search_type.top_k results will be returned. The maximum value is
+   *   1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.vectorsearch.v1.SearchDataObjectsResponse.next_page_token|SearchDataObjectsResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.vectorsearch.v1.DataObjectSearchService.SearchDataObjects|DataObjectSearchService.SearchDataObjects}
+   *   call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.vectorsearch.v1.SearchResult|SearchResult}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `searchDataObjectsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   searchDataObjects(
-      request?: protos.google.cloud.vectorsearch.v1.ISearchDataObjectsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.vectorsearch.v1.ISearchResult[],
-        protos.google.cloud.vectorsearch.v1.ISearchDataObjectsRequest|null,
-        protos.google.cloud.vectorsearch.v1.ISearchDataObjectsResponse
-      ]>;
+    request?: protos.google.cloud.vectorsearch.v1.ISearchDataObjectsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.vectorsearch.v1.ISearchResult[],
+      protos.google.cloud.vectorsearch.v1.ISearchDataObjectsRequest | null,
+      protos.google.cloud.vectorsearch.v1.ISearchDataObjectsResponse,
+    ]
+  >;
   searchDataObjects(
-      request: protos.google.cloud.vectorsearch.v1.ISearchDataObjectsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.vectorsearch.v1.ISearchDataObjectsRequest,
-          protos.google.cloud.vectorsearch.v1.ISearchDataObjectsResponse|null|undefined,
-          protos.google.cloud.vectorsearch.v1.ISearchResult>): void;
+    request: protos.google.cloud.vectorsearch.v1.ISearchDataObjectsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.vectorsearch.v1.ISearchDataObjectsRequest,
+      | protos.google.cloud.vectorsearch.v1.ISearchDataObjectsResponse
+      | null
+      | undefined,
+      protos.google.cloud.vectorsearch.v1.ISearchResult
+    >,
+  ): void;
   searchDataObjects(
-      request: protos.google.cloud.vectorsearch.v1.ISearchDataObjectsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.vectorsearch.v1.ISearchDataObjectsRequest,
-          protos.google.cloud.vectorsearch.v1.ISearchDataObjectsResponse|null|undefined,
-          protos.google.cloud.vectorsearch.v1.ISearchResult>): void;
+    request: protos.google.cloud.vectorsearch.v1.ISearchDataObjectsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.vectorsearch.v1.ISearchDataObjectsRequest,
+      | protos.google.cloud.vectorsearch.v1.ISearchDataObjectsResponse
+      | null
+      | undefined,
+      protos.google.cloud.vectorsearch.v1.ISearchResult
+    >,
+  ): void;
   searchDataObjects(
-      request?: protos.google.cloud.vectorsearch.v1.ISearchDataObjectsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.vectorsearch.v1.ISearchDataObjectsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.vectorsearch.v1.ISearchDataObjectsRequest,
-          protos.google.cloud.vectorsearch.v1.ISearchDataObjectsResponse|null|undefined,
-          protos.google.cloud.vectorsearch.v1.ISearchResult>,
-      callback?: PaginationCallback<
-          protos.google.cloud.vectorsearch.v1.ISearchDataObjectsRequest,
-          protos.google.cloud.vectorsearch.v1.ISearchDataObjectsResponse|null|undefined,
-          protos.google.cloud.vectorsearch.v1.ISearchResult>):
-      Promise<[
-        protos.google.cloud.vectorsearch.v1.ISearchResult[],
-        protos.google.cloud.vectorsearch.v1.ISearchDataObjectsRequest|null,
-        protos.google.cloud.vectorsearch.v1.ISearchDataObjectsResponse
-      ]>|void {
+          | protos.google.cloud.vectorsearch.v1.ISearchDataObjectsResponse
+          | null
+          | undefined,
+          protos.google.cloud.vectorsearch.v1.ISearchResult
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.vectorsearch.v1.ISearchDataObjectsRequest,
+      | protos.google.cloud.vectorsearch.v1.ISearchDataObjectsResponse
+      | null
+      | undefined,
+      protos.google.cloud.vectorsearch.v1.ISearchResult
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.vectorsearch.v1.ISearchResult[],
+      protos.google.cloud.vectorsearch.v1.ISearchDataObjectsRequest | null,
+      protos.google.cloud.vectorsearch.v1.ISearchDataObjectsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.vectorsearch.v1.ISearchDataObjectsRequest,
-      protos.google.cloud.vectorsearch.v1.ISearchDataObjectsResponse|null|undefined,
-      protos.google.cloud.vectorsearch.v1.ISearchResult>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.vectorsearch.v1.ISearchDataObjectsRequest,
+          | protos.google.cloud.vectorsearch.v1.ISearchDataObjectsResponse
+          | null
+          | undefined,
+          protos.google.cloud.vectorsearch.v1.ISearchResult
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('searchDataObjects values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -653,229 +832,258 @@ export class DataObjectSearchServiceClient {
     this._log.info('searchDataObjects request %j', request);
     return this.innerApiCalls
       .searchDataObjects(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.vectorsearch.v1.ISearchResult[],
-        protos.google.cloud.vectorsearch.v1.ISearchDataObjectsRequest|null,
-        protos.google.cloud.vectorsearch.v1.ISearchDataObjectsResponse
-      ]) => {
-        this._log.info('searchDataObjects values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.vectorsearch.v1.ISearchResult[],
+          protos.google.cloud.vectorsearch.v1.ISearchDataObjectsRequest | null,
+          protos.google.cloud.vectorsearch.v1.ISearchDataObjectsResponse,
+        ]) => {
+          this._log.info('searchDataObjects values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `searchDataObjects`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.vectorsearch.v1.VectorSearch} request.vectorSearch
- *   A vector search operation.
- * @param {google.cloud.vectorsearch.v1.SemanticSearch} request.semanticSearch
- *   A semantic search operation.
- * @param {google.cloud.vectorsearch.v1.TextSearch} [request.textSearch]
- *   Optional. A text search operation.
- * @param {string} request.parent
- *   Required. The resource name of the Collection for which to search.
- *   Format: `projects/{project}/locations/{location}/collections/{collection}`
- * @param {number} [request.pageSize]
- *   Optional. The standard list page size. Only supported for KNN. If not set,
- *   up to search_type.top_k results will be returned. The maximum value is
- *   1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. The standard list page token.
- *   Typically obtained via
- *   {@link protos.google.cloud.vectorsearch.v1.SearchDataObjectsResponse.next_page_token|SearchDataObjectsResponse.next_page_token}
- *   of the previous
- *   {@link protos.google.cloud.vectorsearch.v1.DataObjectSearchService.SearchDataObjects|DataObjectSearchService.SearchDataObjects}
- *   call.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.vectorsearch.v1.SearchResult|SearchResult} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `searchDataObjectsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `searchDataObjects`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.vectorsearch.v1.VectorSearch} request.vectorSearch
+   *   A vector search operation.
+   * @param {google.cloud.vectorsearch.v1.SemanticSearch} request.semanticSearch
+   *   A semantic search operation.
+   * @param {google.cloud.vectorsearch.v1.TextSearch} [request.textSearch]
+   *   Optional. A text search operation.
+   * @param {string} request.parent
+   *   Required. The resource name of the Collection for which to search.
+   *   Format: `projects/{project}/locations/{location}/collections/{collection}`
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size. Only supported for KNN. If not set,
+   *   up to search_type.top_k results will be returned. The maximum value is
+   *   1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.vectorsearch.v1.SearchDataObjectsResponse.next_page_token|SearchDataObjectsResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.vectorsearch.v1.DataObjectSearchService.SearchDataObjects|DataObjectSearchService.SearchDataObjects}
+   *   call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.vectorsearch.v1.SearchResult|SearchResult} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `searchDataObjectsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   searchDataObjectsStream(
-      request?: protos.google.cloud.vectorsearch.v1.ISearchDataObjectsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.vectorsearch.v1.ISearchDataObjectsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['searchDataObjects'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('searchDataObjects stream %j', request);
     return this.descriptors.page.searchDataObjects.createStream(
       this.innerApiCalls.searchDataObjects as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `searchDataObjects`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.vectorsearch.v1.VectorSearch} request.vectorSearch
- *   A vector search operation.
- * @param {google.cloud.vectorsearch.v1.SemanticSearch} request.semanticSearch
- *   A semantic search operation.
- * @param {google.cloud.vectorsearch.v1.TextSearch} [request.textSearch]
- *   Optional. A text search operation.
- * @param {string} request.parent
- *   Required. The resource name of the Collection for which to search.
- *   Format: `projects/{project}/locations/{location}/collections/{collection}`
- * @param {number} [request.pageSize]
- *   Optional. The standard list page size. Only supported for KNN. If not set,
- *   up to search_type.top_k results will be returned. The maximum value is
- *   1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. The standard list page token.
- *   Typically obtained via
- *   {@link protos.google.cloud.vectorsearch.v1.SearchDataObjectsResponse.next_page_token|SearchDataObjectsResponse.next_page_token}
- *   of the previous
- *   {@link protos.google.cloud.vectorsearch.v1.DataObjectSearchService.SearchDataObjects|DataObjectSearchService.SearchDataObjects}
- *   call.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.vectorsearch.v1.SearchResult|SearchResult}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/data_object_search_service.search_data_objects.js</caption>
- * region_tag:vectorsearch_v1_generated_DataObjectSearchService_SearchDataObjects_async
- */
+  /**
+   * Equivalent to `searchDataObjects`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.vectorsearch.v1.VectorSearch} request.vectorSearch
+   *   A vector search operation.
+   * @param {google.cloud.vectorsearch.v1.SemanticSearch} request.semanticSearch
+   *   A semantic search operation.
+   * @param {google.cloud.vectorsearch.v1.TextSearch} [request.textSearch]
+   *   Optional. A text search operation.
+   * @param {string} request.parent
+   *   Required. The resource name of the Collection for which to search.
+   *   Format: `projects/{project}/locations/{location}/collections/{collection}`
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size. Only supported for KNN. If not set,
+   *   up to search_type.top_k results will be returned. The maximum value is
+   *   1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.vectorsearch.v1.SearchDataObjectsResponse.next_page_token|SearchDataObjectsResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.vectorsearch.v1.DataObjectSearchService.SearchDataObjects|DataObjectSearchService.SearchDataObjects}
+   *   call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.vectorsearch.v1.SearchResult|SearchResult}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_object_search_service.search_data_objects.js</caption>
+   * region_tag:vectorsearch_v1_generated_DataObjectSearchService_SearchDataObjects_async
+   */
   searchDataObjectsAsync(
-      request?: protos.google.cloud.vectorsearch.v1.ISearchDataObjectsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.vectorsearch.v1.ISearchResult>{
+    request?: protos.google.cloud.vectorsearch.v1.ISearchDataObjectsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.vectorsearch.v1.ISearchResult> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['searchDataObjects'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('searchDataObjects iterate %j', request);
     return this.descriptors.page.searchDataObjects.asyncIterate(
       this.innerApiCalls['searchDataObjects'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.vectorsearch.v1.ISearchResult>;
   }
- /**
- * Queries data objects.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Collection for which to query.
- *   Format: `projects/{project}/locations/{location}/collections/{collection}`
- * @param {google.protobuf.Struct} [request.filter]
- *   Optional. A JSON filter expression, e.g. {"genre": {"$eq": "sci-fi"}},
- *   represented as a google.protobuf.Struct.
- * @param {google.cloud.vectorsearch.v1.OutputFields} [request.outputFields]
- *   Optional. Mask specifying which fields to return.
- * @param {number} [request.pageSize]
- *   Optional. The standard list page size. Default is 100.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. The standard list page token.
- *   Typically obtained via
- *   {@link protos.google.cloud.vectorsearch.v1.QueryDataObjectsResponse.next_page_token|QueryDataObjectsResponse.next_page_token}
- *   of the previous
- *   {@link protos.google.cloud.vectorsearch.v1.DataObjectSearchService.QueryDataObjects|DataObjectSearchService.QueryDataObjects}
- *   call.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.vectorsearch.v1.DataObject|DataObject}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `queryDataObjectsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Queries data objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Collection for which to query.
+   *   Format: `projects/{project}/locations/{location}/collections/{collection}`
+   * @param {google.protobuf.Struct} [request.filter]
+   *   Optional. A JSON filter expression, e.g. {"genre": {"$eq": "sci-fi"}},
+   *   represented as a google.protobuf.Struct.
+   * @param {google.cloud.vectorsearch.v1.OutputFields} [request.outputFields]
+   *   Optional. Mask specifying which fields to return.
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size. Default is 100.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.vectorsearch.v1.QueryDataObjectsResponse.next_page_token|QueryDataObjectsResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.vectorsearch.v1.DataObjectSearchService.QueryDataObjects|DataObjectSearchService.QueryDataObjects}
+   *   call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.vectorsearch.v1.DataObject|DataObject}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `queryDataObjectsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   queryDataObjects(
-      request?: protos.google.cloud.vectorsearch.v1.IQueryDataObjectsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.vectorsearch.v1.IDataObject[],
-        protos.google.cloud.vectorsearch.v1.IQueryDataObjectsRequest|null,
-        protos.google.cloud.vectorsearch.v1.IQueryDataObjectsResponse
-      ]>;
+    request?: protos.google.cloud.vectorsearch.v1.IQueryDataObjectsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.vectorsearch.v1.IDataObject[],
+      protos.google.cloud.vectorsearch.v1.IQueryDataObjectsRequest | null,
+      protos.google.cloud.vectorsearch.v1.IQueryDataObjectsResponse,
+    ]
+  >;
   queryDataObjects(
-      request: protos.google.cloud.vectorsearch.v1.IQueryDataObjectsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.vectorsearch.v1.IQueryDataObjectsRequest,
-          protos.google.cloud.vectorsearch.v1.IQueryDataObjectsResponse|null|undefined,
-          protos.google.cloud.vectorsearch.v1.IDataObject>): void;
+    request: protos.google.cloud.vectorsearch.v1.IQueryDataObjectsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.vectorsearch.v1.IQueryDataObjectsRequest,
+      | protos.google.cloud.vectorsearch.v1.IQueryDataObjectsResponse
+      | null
+      | undefined,
+      protos.google.cloud.vectorsearch.v1.IDataObject
+    >,
+  ): void;
   queryDataObjects(
-      request: protos.google.cloud.vectorsearch.v1.IQueryDataObjectsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.vectorsearch.v1.IQueryDataObjectsRequest,
-          protos.google.cloud.vectorsearch.v1.IQueryDataObjectsResponse|null|undefined,
-          protos.google.cloud.vectorsearch.v1.IDataObject>): void;
+    request: protos.google.cloud.vectorsearch.v1.IQueryDataObjectsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.vectorsearch.v1.IQueryDataObjectsRequest,
+      | protos.google.cloud.vectorsearch.v1.IQueryDataObjectsResponse
+      | null
+      | undefined,
+      protos.google.cloud.vectorsearch.v1.IDataObject
+    >,
+  ): void;
   queryDataObjects(
-      request?: protos.google.cloud.vectorsearch.v1.IQueryDataObjectsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.vectorsearch.v1.IQueryDataObjectsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.vectorsearch.v1.IQueryDataObjectsRequest,
-          protos.google.cloud.vectorsearch.v1.IQueryDataObjectsResponse|null|undefined,
-          protos.google.cloud.vectorsearch.v1.IDataObject>,
-      callback?: PaginationCallback<
-          protos.google.cloud.vectorsearch.v1.IQueryDataObjectsRequest,
-          protos.google.cloud.vectorsearch.v1.IQueryDataObjectsResponse|null|undefined,
-          protos.google.cloud.vectorsearch.v1.IDataObject>):
-      Promise<[
-        protos.google.cloud.vectorsearch.v1.IDataObject[],
-        protos.google.cloud.vectorsearch.v1.IQueryDataObjectsRequest|null,
-        protos.google.cloud.vectorsearch.v1.IQueryDataObjectsResponse
-      ]>|void {
+          | protos.google.cloud.vectorsearch.v1.IQueryDataObjectsResponse
+          | null
+          | undefined,
+          protos.google.cloud.vectorsearch.v1.IDataObject
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.vectorsearch.v1.IQueryDataObjectsRequest,
+      | protos.google.cloud.vectorsearch.v1.IQueryDataObjectsResponse
+      | null
+      | undefined,
+      protos.google.cloud.vectorsearch.v1.IDataObject
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.vectorsearch.v1.IDataObject[],
+      protos.google.cloud.vectorsearch.v1.IQueryDataObjectsRequest | null,
+      protos.google.cloud.vectorsearch.v1.IQueryDataObjectsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.vectorsearch.v1.IQueryDataObjectsRequest,
-      protos.google.cloud.vectorsearch.v1.IQueryDataObjectsResponse|null|undefined,
-      protos.google.cloud.vectorsearch.v1.IDataObject>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.vectorsearch.v1.IQueryDataObjectsRequest,
+          | protos.google.cloud.vectorsearch.v1.IQueryDataObjectsResponse
+          | null
+          | undefined,
+          protos.google.cloud.vectorsearch.v1.IDataObject
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('queryDataObjects values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -884,133 +1092,138 @@ export class DataObjectSearchServiceClient {
     this._log.info('queryDataObjects request %j', request);
     return this.innerApiCalls
       .queryDataObjects(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.vectorsearch.v1.IDataObject[],
-        protos.google.cloud.vectorsearch.v1.IQueryDataObjectsRequest|null,
-        protos.google.cloud.vectorsearch.v1.IQueryDataObjectsResponse
-      ]) => {
-        this._log.info('queryDataObjects values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.vectorsearch.v1.IDataObject[],
+          protos.google.cloud.vectorsearch.v1.IQueryDataObjectsRequest | null,
+          protos.google.cloud.vectorsearch.v1.IQueryDataObjectsResponse,
+        ]) => {
+          this._log.info('queryDataObjects values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `queryDataObjects`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Collection for which to query.
- *   Format: `projects/{project}/locations/{location}/collections/{collection}`
- * @param {google.protobuf.Struct} [request.filter]
- *   Optional. A JSON filter expression, e.g. {"genre": {"$eq": "sci-fi"}},
- *   represented as a google.protobuf.Struct.
- * @param {google.cloud.vectorsearch.v1.OutputFields} [request.outputFields]
- *   Optional. Mask specifying which fields to return.
- * @param {number} [request.pageSize]
- *   Optional. The standard list page size. Default is 100.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. The standard list page token.
- *   Typically obtained via
- *   {@link protos.google.cloud.vectorsearch.v1.QueryDataObjectsResponse.next_page_token|QueryDataObjectsResponse.next_page_token}
- *   of the previous
- *   {@link protos.google.cloud.vectorsearch.v1.DataObjectSearchService.QueryDataObjects|DataObjectSearchService.QueryDataObjects}
- *   call.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.vectorsearch.v1.DataObject|DataObject} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `queryDataObjectsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `queryDataObjects`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Collection for which to query.
+   *   Format: `projects/{project}/locations/{location}/collections/{collection}`
+   * @param {google.protobuf.Struct} [request.filter]
+   *   Optional. A JSON filter expression, e.g. {"genre": {"$eq": "sci-fi"}},
+   *   represented as a google.protobuf.Struct.
+   * @param {google.cloud.vectorsearch.v1.OutputFields} [request.outputFields]
+   *   Optional. Mask specifying which fields to return.
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size. Default is 100.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.vectorsearch.v1.QueryDataObjectsResponse.next_page_token|QueryDataObjectsResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.vectorsearch.v1.DataObjectSearchService.QueryDataObjects|DataObjectSearchService.QueryDataObjects}
+   *   call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.vectorsearch.v1.DataObject|DataObject} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `queryDataObjectsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   queryDataObjectsStream(
-      request?: protos.google.cloud.vectorsearch.v1.IQueryDataObjectsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.vectorsearch.v1.IQueryDataObjectsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['queryDataObjects'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('queryDataObjects stream %j', request);
     return this.descriptors.page.queryDataObjects.createStream(
       this.innerApiCalls.queryDataObjects as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `queryDataObjects`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Collection for which to query.
- *   Format: `projects/{project}/locations/{location}/collections/{collection}`
- * @param {google.protobuf.Struct} [request.filter]
- *   Optional. A JSON filter expression, e.g. {"genre": {"$eq": "sci-fi"}},
- *   represented as a google.protobuf.Struct.
- * @param {google.cloud.vectorsearch.v1.OutputFields} [request.outputFields]
- *   Optional. Mask specifying which fields to return.
- * @param {number} [request.pageSize]
- *   Optional. The standard list page size. Default is 100.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. The standard list page token.
- *   Typically obtained via
- *   {@link protos.google.cloud.vectorsearch.v1.QueryDataObjectsResponse.next_page_token|QueryDataObjectsResponse.next_page_token}
- *   of the previous
- *   {@link protos.google.cloud.vectorsearch.v1.DataObjectSearchService.QueryDataObjects|DataObjectSearchService.QueryDataObjects}
- *   call.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.vectorsearch.v1.DataObject|DataObject}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/data_object_search_service.query_data_objects.js</caption>
- * region_tag:vectorsearch_v1_generated_DataObjectSearchService_QueryDataObjects_async
- */
+  /**
+   * Equivalent to `queryDataObjects`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Collection for which to query.
+   *   Format: `projects/{project}/locations/{location}/collections/{collection}`
+   * @param {google.protobuf.Struct} [request.filter]
+   *   Optional. A JSON filter expression, e.g. {"genre": {"$eq": "sci-fi"}},
+   *   represented as a google.protobuf.Struct.
+   * @param {google.cloud.vectorsearch.v1.OutputFields} [request.outputFields]
+   *   Optional. Mask specifying which fields to return.
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size. Default is 100.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.vectorsearch.v1.QueryDataObjectsResponse.next_page_token|QueryDataObjectsResponse.next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.vectorsearch.v1.DataObjectSearchService.QueryDataObjects|DataObjectSearchService.QueryDataObjects}
+   *   call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.vectorsearch.v1.DataObject|DataObject}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_object_search_service.query_data_objects.js</caption>
+   * region_tag:vectorsearch_v1_generated_DataObjectSearchService_QueryDataObjects_async
+   */
   queryDataObjectsAsync(
-      request?: protos.google.cloud.vectorsearch.v1.IQueryDataObjectsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.vectorsearch.v1.IDataObject>{
+    request?: protos.google.cloud.vectorsearch.v1.IQueryDataObjectsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.vectorsearch.v1.IDataObject> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['queryDataObjects'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('queryDataObjects iterate %j', request);
     return this.descriptors.page.queryDataObjects.asyncIterate(
       this.innerApiCalls['queryDataObjects'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.vectorsearch.v1.IDataObject>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1045,12 +1258,11 @@ export class DataObjectSearchServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1083,7 +1295,7 @@ export class DataObjectSearchServiceClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
@@ -1100,7 +1312,7 @@ export class DataObjectSearchServiceClient {
    * @param {string} collection
    * @returns {string} Resource name string.
    */
-  collectionPath(project:string,location:string,collection:string) {
+  collectionPath(project: string, location: string, collection: string) {
     return this.pathTemplates.collectionPathTemplate.render({
       project: project,
       location: location,
@@ -1116,7 +1328,8 @@ export class DataObjectSearchServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCollectionName(collectionName: string) {
-    return this.pathTemplates.collectionPathTemplate.match(collectionName).project;
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .project;
   }
 
   /**
@@ -1127,7 +1340,8 @@ export class DataObjectSearchServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCollectionName(collectionName: string) {
-    return this.pathTemplates.collectionPathTemplate.match(collectionName).location;
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .location;
   }
 
   /**
@@ -1138,7 +1352,8 @@ export class DataObjectSearchServiceClient {
    * @returns {string} A string representing the collection.
    */
   matchCollectionFromCollectionName(collectionName: string) {
-    return this.pathTemplates.collectionPathTemplate.match(collectionName).collection;
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .collection;
   }
 
   /**
@@ -1150,7 +1365,12 @@ export class DataObjectSearchServiceClient {
    * @param {string} dataObject
    * @returns {string} Resource name string.
    */
-  dataObjectPath(project:string,location:string,collection:string,dataObject:string) {
+  dataObjectPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataObject: string,
+  ) {
     return this.pathTemplates.dataObjectPathTemplate.render({
       project: project,
       location: location,
@@ -1167,7 +1387,8 @@ export class DataObjectSearchServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataObjectName(dataObjectName: string) {
-    return this.pathTemplates.dataObjectPathTemplate.match(dataObjectName).project;
+    return this.pathTemplates.dataObjectPathTemplate.match(dataObjectName)
+      .project;
   }
 
   /**
@@ -1178,7 +1399,8 @@ export class DataObjectSearchServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataObjectName(dataObjectName: string) {
-    return this.pathTemplates.dataObjectPathTemplate.match(dataObjectName).location;
+    return this.pathTemplates.dataObjectPathTemplate.match(dataObjectName)
+      .location;
   }
 
   /**
@@ -1189,7 +1411,8 @@ export class DataObjectSearchServiceClient {
    * @returns {string} A string representing the collection.
    */
   matchCollectionFromDataObjectName(dataObjectName: string) {
-    return this.pathTemplates.dataObjectPathTemplate.match(dataObjectName).collection;
+    return this.pathTemplates.dataObjectPathTemplate.match(dataObjectName)
+      .collection;
   }
 
   /**
@@ -1200,7 +1423,8 @@ export class DataObjectSearchServiceClient {
    * @returns {string} A string representing the dataObject.
    */
   matchDataObjectFromDataObjectName(dataObjectName: string) {
-    return this.pathTemplates.dataObjectPathTemplate.match(dataObjectName).dataObject;
+    return this.pathTemplates.dataObjectPathTemplate.match(dataObjectName)
+      .dataObject;
   }
 
   /**
@@ -1212,7 +1436,12 @@ export class DataObjectSearchServiceClient {
    * @param {string} index
    * @returns {string} Resource name string.
    */
-  indexPath(project:string,location:string,collection:string,index:string) {
+  indexPath(
+    project: string,
+    location: string,
+    collection: string,
+    index: string,
+  ) {
     return this.pathTemplates.indexPathTemplate.render({
       project: project,
       location: location,
@@ -1273,11 +1502,13 @@ export class DataObjectSearchServiceClient {
    */
   close(): Promise<void> {
     if (this.dataObjectSearchServiceStub && !this._terminated) {
-      return this.dataObjectSearchServiceStub.then(stub => {
+      return this.dataObjectSearchServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
       });
     }
     return Promise.resolve();

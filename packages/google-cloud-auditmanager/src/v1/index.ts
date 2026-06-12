@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {AuditManagerClient} from './audit_manager_client';
+export { AuditManagerClient } from './audit_manager_client';

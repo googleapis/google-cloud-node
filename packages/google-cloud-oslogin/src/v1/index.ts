@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {OsLoginServiceClient} from './os_login_service_client';
+export { OsLoginServiceClient } from './os_login_service_client';

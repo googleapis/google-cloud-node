@@ -16,5 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {EnvironmentsClient} from './environments_client';
-export {ImageVersionsClient} from './image_versions_client';
+export { EnvironmentsClient } from './environments_client';
+export { ImageVersionsClient } from './image_versions_client';
