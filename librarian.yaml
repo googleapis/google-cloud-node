@@ -1650,7 +1650,6 @@ libraries:
       - path: google/cloud/websecurityscanner/v1beta
       - path: google/cloud/websecurityscanner/v1alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta
       package_name: '@google-cloud/web-security-scanner'
