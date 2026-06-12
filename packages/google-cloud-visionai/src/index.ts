@@ -17,6 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
+import * as v1alpha1 from './v1alpha1';
 
 const AppPlatformClient = v1.AppPlatformClient;
 type AppPlatformClient = v1.AppPlatformClient;
@@ -31,7 +32,7 @@ type StreamsServiceClient = v1.StreamsServiceClient;
 const WarehouseClient = v1.WarehouseClient;
 type WarehouseClient = v1.WarehouseClient;
 
-export {v1, AppPlatformClient, HealthCheckServiceClient, LiveVideoAnalyticsClient, StreamingServiceClient, StreamsServiceClient, WarehouseClient};
-export default {v1, AppPlatformClient, HealthCheckServiceClient, LiveVideoAnalyticsClient, StreamingServiceClient, StreamsServiceClient, WarehouseClient};
+export {v1, v1alpha1, AppPlatformClient, HealthCheckServiceClient, LiveVideoAnalyticsClient, StreamingServiceClient, StreamsServiceClient, WarehouseClient};
+export default {v1, v1alpha1, AppPlatformClient, HealthCheckServiceClient, LiveVideoAnalyticsClient, StreamingServiceClient, StreamsServiceClient, WarehouseClient};
 import * as protos from '../protos/protos';
 export {protos};

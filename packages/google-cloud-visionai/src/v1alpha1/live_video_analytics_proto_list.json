@@ -1,0 +1,13 @@
+[
+  "../../protos/google/cloud/visionai/v1alpha1/annotations.proto",
+  "../../protos/google/cloud/visionai/v1alpha1/common.proto",
+  "../../protos/google/cloud/visionai/v1alpha1/lva.proto",
+  "../../protos/google/cloud/visionai/v1alpha1/lva_resources.proto",
+  "../../protos/google/cloud/visionai/v1alpha1/lva_service.proto",
+  "../../protos/google/cloud/visionai/v1alpha1/platform.proto",
+  "../../protos/google/cloud/visionai/v1alpha1/streaming_resources.proto",
+  "../../protos/google/cloud/visionai/v1alpha1/streaming_service.proto",
+  "../../protos/google/cloud/visionai/v1alpha1/streams_resources.proto",
+  "../../protos/google/cloud/visionai/v1alpha1/streams_service.proto",
+  "../../protos/google/cloud/visionai/v1alpha1/warehouse.proto"
+]
