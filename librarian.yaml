@@ -1270,7 +1270,6 @@ libraries:
       - path: google/cloud/redis/cluster/v1
       - path: google/cloud/redis/cluster/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/redis/latest
@@ -1292,7 +1291,6 @@ libraries:
       - path: google/cloud/retail/v2beta
       - path: google/cloud/retail/v2alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v2beta
       mixins: google.longrunning.Operations;google.cloud.location.Locations
@@ -1301,7 +1299,6 @@ libraries:
     apis:
       - path: google/cloud/run/v2
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v2
   - name: google-cloud-saasplatform-saasservicemgmt
@@ -1318,7 +1315,6 @@ libraries:
       - path: google/cloud/scheduler/v1
       - path: google/cloud/scheduler/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       main_service: scheduler
@@ -1328,7 +1324,6 @@ libraries:
       - path: google/cloud/secretmanager/v1
       - path: google/cloud/secretmanager/v1beta2
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/secret-manager'
@@ -1337,7 +1332,6 @@ libraries:
     apis:
       - path: google/cloud/securesourcemanager/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-security-privateca
@@ -1346,7 +1340,6 @@ libraries:
       - path: google/cloud/security/privateca/v1
       - path: google/cloud/security/privateca/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/security-private-ca'
@@ -1357,7 +1350,6 @@ libraries:
       - path: google/cloud/security/publicca/v1beta1
       - path: google/cloud/security/publicca/v1alpha1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta1
       package_name: '@google-cloud/publicca'
@@ -1377,7 +1369,6 @@ libraries:
     apis:
       - path: google/cloud/securitycentermanagement/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-servicedirectory
@@ -1386,7 +1377,6 @@ libraries:
       - path: google/cloud/servicedirectory/v1
       - path: google/cloud/servicedirectory/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       dependencies:
