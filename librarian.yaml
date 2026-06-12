@@ -299,7 +299,6 @@ libraries:
       - path: google/cloud/automl/v1
       - path: google/cloud/automl/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       main_service: automl
