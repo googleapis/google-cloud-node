@@ -76,7 +76,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | search links | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.search_links.js) |
 | update process | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.update_process.js) |
 | update run | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.update_run.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/generated/v1/snippet_metadata_google.cloud.datacatalog.lineage.v1.json) |
 
 
 ## Supported Node.js Versions
