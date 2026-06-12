@@ -1305,7 +1305,6 @@ libraries:
     apis:
       - path: google/cloud/run/v2
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v2
   - name: google-cloud-saasplatform-saasservicemgmt
