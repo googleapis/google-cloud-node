@@ -209,7 +209,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list security profiles | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/security_profile_group_service.list_security_profiles.js) |
 | update security profile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/security_profile_group_service.update_security_profile.js) |
 | update security profile group | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/security_profile_group_service.update_security_profile_group.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1/snippet_metadata_google.cloud.networksecurity.v1.json) |
 | create dns threat detector | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1alpha1/dns_threat_detector_service.create_dns_threat_detector.js) |
 | delete dns threat detector | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1alpha1/dns_threat_detector_service.delete_dns_threat_detector.js) |
 | get dns threat detector | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1alpha1/dns_threat_detector_service.get_dns_threat_detector.js) |
@@ -339,7 +338,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list partner s s e realms | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1alpha1/s_s_e_realm_service.list_partner_s_s_e_realms.js) |
 | list s a c attachments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1alpha1/s_s_e_realm_service.list_s_a_c_attachments.js) |
 | list s a c realms | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1alpha1/s_s_e_realm_service.list_s_a_c_realms.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1alpha1/snippet_metadata_google.cloud.networksecurity.v1alpha1.json) |
 | create dns threat detector | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1beta1/dns_threat_detector_service.create_dns_threat_detector.js) |
 | delete dns threat detector | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1beta1/dns_threat_detector_service.delete_dns_threat_detector.js) |
 | get dns threat detector | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1beta1/dns_threat_detector_service.get_dns_threat_detector.js) |
@@ -360,7 +358,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update authorization policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.update_authorization_policy.js) |
 | update client tls policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.update_client_tls_policy.js) |
 | update server tls policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1beta1/network_security.update_server_tls_policy.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networksecurity/samples/generated/v1beta1/snippet_metadata_google.cloud.networksecurity.v1beta1.json) |
 
 
 ## Supported Node.js Versions

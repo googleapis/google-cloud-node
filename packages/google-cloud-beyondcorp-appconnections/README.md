@@ -64,7 +64,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list app connections | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appconnections/samples/generated/v1/app_connections_service.list_app_connections.js) |
 | resolve app connections | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appconnections/samples/generated/v1/app_connections_service.resolve_app_connections.js) |
 | update app connection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appconnections/samples/generated/v1/app_connections_service.update_app_connection.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appconnections/samples/generated/v1/snippet_metadata_google.cloud.beyondcorp.appconnections.v1.json) |
 
 
 ## Supported Node.js Versions

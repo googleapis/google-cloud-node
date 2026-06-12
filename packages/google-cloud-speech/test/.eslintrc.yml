@@ -1,3 +1,0 @@
----
-rules:
-  node/no-unpublished-require: off

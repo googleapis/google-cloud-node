@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {PhishingProtectionServiceV1Beta1Client} from './phishing_protection_service_v1_beta1_client';
+export { PhishingProtectionServiceV1Beta1Client } from './phishing_protection_service_v1_beta1_client';

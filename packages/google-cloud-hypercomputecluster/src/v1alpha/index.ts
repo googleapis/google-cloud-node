@@ -16,5 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {HypercomputeClusterClient} from './hypercompute_cluster_client';
-export {MachineLearningRunsClient} from './machine_learning_runs_client';
+export { HypercomputeClusterClient } from './hypercompute_cluster_client';
+export { MachineLearningRunsClient } from './machine_learning_runs_client';
