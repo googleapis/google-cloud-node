@@ -665,7 +665,6 @@ libraries:
     apis:
       - path: google/cloud/dataplex/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       mixins: google.cloud.location.Locations;google.longrunning.Operations
