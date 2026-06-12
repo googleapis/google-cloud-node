@@ -1604,7 +1604,6 @@ libraries:
       - path: google/cloud/websecurityscanner/v1beta
       - path: google/cloud/websecurityscanner/v1alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta
       package_name: '@google-cloud/web-security-scanner'
@@ -1622,7 +1621,6 @@ libraries:
     apis:
       - path: google/cloud/workloadmanager/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-workstations
@@ -1647,7 +1645,6 @@ libraries:
     apis:
       - path: google/dataflow/v1beta3
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta3
       package_name: '@google-cloud/dataflow'
