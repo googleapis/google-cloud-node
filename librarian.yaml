@@ -110,7 +110,6 @@ libraries:
       - path: google/api/servicecontrol/v2
       - path: google/api/servicecontrol/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/service-control'
