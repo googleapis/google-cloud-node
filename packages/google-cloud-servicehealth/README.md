@@ -64,7 +64,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list events | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-servicehealth/samples/generated/v1/service_health.list_events.js) |
 | list organization events | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-servicehealth/samples/generated/v1/service_health.list_organization_events.js) |
 | list organization impacts | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-servicehealth/samples/generated/v1/service_health.list_organization_impacts.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-servicehealth/samples/generated/v1/snippet_metadata_google.cloud.servicehealth.v1.json) |
 
 
 ## Supported Node.js Versions
@@ -98,7 +97,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-servicehealth/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -108,7 +107,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-servicehealth/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
