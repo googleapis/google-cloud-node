@@ -1297,7 +1297,6 @@ libraries:
       - path: google/cloud/retail/v2beta
       - path: google/cloud/retail/v2alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v2beta
       mixins: google.longrunning.Operations;google.cloud.location.Locations
