@@ -1,16 +1,15 @@
 {
+    "api_description": "Transfers data from external data sources to a Google Cloud Storage bucket\nor between Google Cloud Storage buckets.",
     "api_id": "storagetransfer.googleapis.com",
     "api_shortname": "storagetransfer",
-    "client_documentation": "https://googleapis.dev/nodejs/storagetransfer/latest/index.html",
+    "client_documentation": "https://googleapis.dev/nodejs/storagetransfer/latest/",
     "default_version": "v1",
     "distribution_name": "@google-cloud/storage-transfer",
-    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
     "language": "nodejs",
     "library_type": "GAPIC_AUTO",
     "name": "storagetransfer",
-    "name_pretty": "Storage Transfer Service",
-    "product_documentation": "https://cloud.google.com/storage-transfer/",
+    "name_pretty": "Storage Transfer",
+    "product_documentation": "https://cloud.google.com/storage-transfer/docs",
     "release_level": "stable",
-    "repo": "googleapis/google-cloud-node",
-    "requires_billing": true
+    "repo": "googleapis/google-cloud-node"
 }
