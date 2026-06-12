@@ -1691,7 +1691,6 @@ libraries:
     apis:
       - path: google/dataflow/v1beta3
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta3
       package_name: '@google-cloud/dataflow'
