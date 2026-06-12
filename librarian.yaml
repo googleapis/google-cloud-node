@@ -404,9 +404,9 @@ libraries:
     version: 5.1.3
     apis:
       - path: google/cloud/bigquery/datatransfer/v1
+    copyright_year: "2026"
     keep:
       - smoke-test/data_transfer_service_smoke_test.js
-    copyright_year: "2026"
     nodejs:
       default_version: v1
       package_name: '@google-cloud/bigquery-data-transfer'
