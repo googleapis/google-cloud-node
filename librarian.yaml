@@ -721,7 +721,6 @@ libraries:
       - path: google/cloud/dialogflow/v2
       - path: google/cloud/dialogflow/v2beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v2
       main_service: dialogflow
