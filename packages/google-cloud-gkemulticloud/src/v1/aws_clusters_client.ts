@@ -18,11 +18,20 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -46,7 +55,7 @@ export class AwsClustersClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('gkemulticloud');
@@ -59,10 +68,10 @@ export class AwsClustersClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  awsClustersStub?: Promise<{[name: string]: Function}>;
+  awsClustersStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of AwsClustersClient.
@@ -103,21 +112,42 @@ export class AwsClustersClient {
    *     const client = new AwsClustersClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof AwsClustersClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'gkemulticloud.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
@@ -139,7 +169,7 @@ export class AwsClustersClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -153,10 +183,7 @@ export class AwsClustersClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -178,37 +205,37 @@ export class AwsClustersClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       attachedClusterPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/attachedClusters/{attached_cluster}'
+        'projects/{project}/locations/{location}/attachedClusters/{attached_cluster}',
       ),
       attachedServerConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/attachedServerConfig'
+        'projects/{project}/locations/{location}/attachedServerConfig',
       ),
       awsClusterPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/awsClusters/{aws_cluster}'
+        'projects/{project}/locations/{location}/awsClusters/{aws_cluster}',
       ),
       awsNodePoolPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/awsClusters/{aws_cluster}/awsNodePools/{aws_node_pool}'
+        'projects/{project}/locations/{location}/awsClusters/{aws_cluster}/awsNodePools/{aws_node_pool}',
       ),
       awsServerConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/awsServerConfig'
+        'projects/{project}/locations/{location}/awsServerConfig',
       ),
       azureClientPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/azureClients/{azure_client}'
+        'projects/{project}/locations/{location}/azureClients/{azure_client}',
       ),
       azureClusterPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/azureClusters/{azure_cluster}'
+        'projects/{project}/locations/{location}/azureClusters/{azure_cluster}',
       ),
       azureNodePoolPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/azureClusters/{azure_cluster}/azureNodePools/{azure_node_pool}'
+        'projects/{project}/locations/{location}/azureClusters/{azure_cluster}/azureNodePools/{azure_node_pool}',
       ),
       azureServerConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/azureServerConfig'
+        'projects/{project}/locations/{location}/azureServerConfig',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
     };
 
@@ -216,10 +243,16 @@ export class AwsClustersClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listAwsClusters:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'awsClusters'),
-      listAwsNodePools:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'awsNodePools')
+      listAwsClusters: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'awsClusters',
+      ),
+      listAwsNodePools: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'awsNodePools',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -228,77 +261,125 @@ export class AwsClustersClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
+          body: '*',
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1/{name=projects/*/locations/*}/operations',
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createAwsClusterResponse = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.AwsCluster') as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.AwsCluster',
+    ) as gax.protobuf.Type;
     const createAwsClusterMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateAwsClusterResponse = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.AwsCluster') as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.AwsCluster',
+    ) as gax.protobuf.Type;
     const updateAwsClusterMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteAwsClusterResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteAwsClusterMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createAwsNodePoolResponse = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.AwsNodePool') as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.AwsNodePool',
+    ) as gax.protobuf.Type;
     const createAwsNodePoolMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateAwsNodePoolResponse = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.AwsNodePool') as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.AwsNodePool',
+    ) as gax.protobuf.Type;
     const updateAwsNodePoolMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const rollbackAwsNodePoolUpdateResponse = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.AwsNodePool') as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.AwsNodePool',
+    ) as gax.protobuf.Type;
     const rollbackAwsNodePoolUpdateMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteAwsNodePoolResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteAwsNodePoolMetadata = protoFilesRoot.lookup(
-      '.google.cloud.gkemulticloud.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.gkemulticloud.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createAwsCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createAwsClusterResponse.decode.bind(createAwsClusterResponse),
-        createAwsClusterMetadata.decode.bind(createAwsClusterMetadata)),
+        createAwsClusterMetadata.decode.bind(createAwsClusterMetadata),
+      ),
       updateAwsCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateAwsClusterResponse.decode.bind(updateAwsClusterResponse),
-        updateAwsClusterMetadata.decode.bind(updateAwsClusterMetadata)),
+        updateAwsClusterMetadata.decode.bind(updateAwsClusterMetadata),
+      ),
       deleteAwsCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteAwsClusterResponse.decode.bind(deleteAwsClusterResponse),
-        deleteAwsClusterMetadata.decode.bind(deleteAwsClusterMetadata)),
+        deleteAwsClusterMetadata.decode.bind(deleteAwsClusterMetadata),
+      ),
       createAwsNodePool: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createAwsNodePoolResponse.decode.bind(createAwsNodePoolResponse),
-        createAwsNodePoolMetadata.decode.bind(createAwsNodePoolMetadata)),
+        createAwsNodePoolMetadata.decode.bind(createAwsNodePoolMetadata),
+      ),
       updateAwsNodePool: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateAwsNodePoolResponse.decode.bind(updateAwsNodePoolResponse),
-        updateAwsNodePoolMetadata.decode.bind(updateAwsNodePoolMetadata)),
+        updateAwsNodePoolMetadata.decode.bind(updateAwsNodePoolMetadata),
+      ),
       rollbackAwsNodePoolUpdate: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        rollbackAwsNodePoolUpdateResponse.decode.bind(rollbackAwsNodePoolUpdateResponse),
-        rollbackAwsNodePoolUpdateMetadata.decode.bind(rollbackAwsNodePoolUpdateMetadata)),
+        rollbackAwsNodePoolUpdateResponse.decode.bind(
+          rollbackAwsNodePoolUpdateResponse,
+        ),
+        rollbackAwsNodePoolUpdateMetadata.decode.bind(
+          rollbackAwsNodePoolUpdateMetadata,
+        ),
+      ),
       deleteAwsNodePool: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteAwsNodePoolResponse.decode.bind(deleteAwsNodePoolResponse),
-        deleteAwsNodePoolMetadata.decode.bind(deleteAwsNodePoolMetadata))
+        deleteAwsNodePoolMetadata.decode.bind(deleteAwsNodePoolMetadata),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.gkemulticloud.v1.AwsClusters', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.gkemulticloud.v1.AwsClusters',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -323,35 +404,61 @@ export class AwsClustersClient {
   initialize() {
     // If the client stub promise is already initialized, return immediately.
     if (this.awsClustersStub) {
-      this.warn('DEP$AwsClusters', 'AwsClusters is deprecated and may be removed in a future version.', 'DeprecationWarning');
+      this.warn(
+        'DEP$AwsClusters',
+        'AwsClusters is deprecated and may be removed in a future version.',
+        'DeprecationWarning',
+      );
       return this.awsClustersStub;
     }
 
     // Put together the "service stub" for
     // google.cloud.gkemulticloud.v1.AwsClusters.
     this.awsClustersStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.gkemulticloud.v1.AwsClusters') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.gkemulticloud.v1.AwsClusters',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.gkemulticloud.v1.AwsClusters,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const awsClustersStubMethods =
-        ['createAwsCluster', 'updateAwsCluster', 'getAwsCluster', 'listAwsClusters', 'deleteAwsCluster', 'generateAwsClusterAgentToken', 'generateAwsAccessToken', 'createAwsNodePool', 'updateAwsNodePool', 'rollbackAwsNodePoolUpdate', 'getAwsNodePool', 'listAwsNodePools', 'deleteAwsNodePool', 'getAwsOpenIdConfig', 'getAwsJsonWebKeys', 'getAwsServerConfig'];
+    const awsClustersStubMethods = [
+      'createAwsCluster',
+      'updateAwsCluster',
+      'getAwsCluster',
+      'listAwsClusters',
+      'deleteAwsCluster',
+      'generateAwsClusterAgentToken',
+      'generateAwsAccessToken',
+      'createAwsNodePool',
+      'updateAwsNodePool',
+      'rollbackAwsNodePoolUpdate',
+      'getAwsNodePool',
+      'listAwsNodePools',
+      'deleteAwsNodePool',
+      'getAwsOpenIdConfig',
+      'getAwsJsonWebKeys',
+      'getAwsServerConfig',
+    ];
     for (const methodName of awsClustersStubMethods) {
       const callPromise = this.awsClustersStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -361,12 +468,16 @@ export class AwsClustersClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
     }
-    this.warn('DEP$AwsClusters', 'AwsClusters is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    this.warn(
+      'DEP$AwsClusters',
+      'AwsClusters is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
 
     return this.awsClustersStub;
   }
@@ -377,8 +488,14 @@ export class AwsClustersClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'gkemulticloud.googleapis.com';
   }
@@ -389,8 +506,14 @@ export class AwsClustersClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'gkemulticloud.googleapis.com';
   }
@@ -421,9 +544,7 @@ export class AwsClustersClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -432,8 +553,9 @@ export class AwsClustersClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -444,1833 +566,2711 @@ export class AwsClustersClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Describes a specific {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}
- * resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource to
- *   describe.
- *
- *   `AwsCluster` names are formatted as
- *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
- *
- *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
- *   for more details on Google Cloud Platform resource names.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/aws_clusters.get_aws_cluster.js</caption>
- * region_tag:gkemulticloud_v1_generated_AwsClusters_GetAwsCluster_async
- * @deprecated GetAwsCluster is deprecated and may be removed in a future version.
- */
+  /**
+   * Describes a specific {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}
+   * resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource to
+   *   describe.
+   *
+   *   `AwsCluster` names are formatted as
+   *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
+   *
+   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+   *   for more details on Google Cloud Platform resource names.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/aws_clusters.get_aws_cluster.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AwsClusters_GetAwsCluster_async
+   * @deprecated GetAwsCluster is deprecated and may be removed in a future version.
+   */
   getAwsCluster(
-      request?: protos.google.cloud.gkemulticloud.v1.IGetAwsClusterRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkemulticloud.v1.IAwsCluster,
-        protos.google.cloud.gkemulticloud.v1.IGetAwsClusterRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkemulticloud.v1.IGetAwsClusterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IAwsCluster,
+      protos.google.cloud.gkemulticloud.v1.IGetAwsClusterRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getAwsCluster(
-      request: protos.google.cloud.gkemulticloud.v1.IGetAwsClusterRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.gkemulticloud.v1.IAwsCluster,
-          protos.google.cloud.gkemulticloud.v1.IGetAwsClusterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IGetAwsClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IAwsCluster,
+      | protos.google.cloud.gkemulticloud.v1.IGetAwsClusterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAwsCluster(
-      request: protos.google.cloud.gkemulticloud.v1.IGetAwsClusterRequest,
-      callback: Callback<
-          protos.google.cloud.gkemulticloud.v1.IAwsCluster,
-          protos.google.cloud.gkemulticloud.v1.IGetAwsClusterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IGetAwsClusterRequest,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IAwsCluster,
+      | protos.google.cloud.gkemulticloud.v1.IGetAwsClusterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAwsCluster(
-      request?: protos.google.cloud.gkemulticloud.v1.IGetAwsClusterRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.gkemulticloud.v1.IGetAwsClusterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.gkemulticloud.v1.IAwsCluster,
-          protos.google.cloud.gkemulticloud.v1.IGetAwsClusterRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.gkemulticloud.v1.IAwsCluster,
-          protos.google.cloud.gkemulticloud.v1.IGetAwsClusterRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.gkemulticloud.v1.IAwsCluster,
-        protos.google.cloud.gkemulticloud.v1.IGetAwsClusterRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.gkemulticloud.v1.IGetAwsClusterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.gkemulticloud.v1.IAwsCluster,
+      | protos.google.cloud.gkemulticloud.v1.IGetAwsClusterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IAwsCluster,
+      protos.google.cloud.gkemulticloud.v1.IGetAwsClusterRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    this.warn('DEP$AwsClusters-$GetAwsCluster','GetAwsCluster is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    this.warn(
+      'DEP$AwsClusters-$GetAwsCluster',
+      'GetAwsCluster is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('getAwsCluster request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.gkemulticloud.v1.IAwsCluster,
-        protos.google.cloud.gkemulticloud.v1.IGetAwsClusterRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IAwsCluster,
+          | protos.google.cloud.gkemulticloud.v1.IGetAwsClusterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAwsCluster response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getAwsCluster(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.gkemulticloud.v1.IAwsCluster,
-        protos.google.cloud.gkemulticloud.v1.IGetAwsClusterRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getAwsCluster response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getAwsCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IAwsCluster,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGetAwsClusterRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAwsCluster response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Generates an access token for a cluster agent.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.awsCluster
- *   Required.
- * @param {string} request.subjectToken
- *   Required.
- * @param {string} request.subjectTokenType
- *   Required.
- * @param {string} request.version
- *   Required.
- * @param {string} [request.nodePoolId]
- *   Optional.
- * @param {string} [request.grantType]
- *   Optional.
- * @param {string} [request.audience]
- *   Optional.
- * @param {string} [request.scope]
- *   Optional.
- * @param {string} [request.requestedTokenType]
- *   Optional.
- * @param {string} [request.options]
- *   Optional.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.GenerateAwsClusterAgentTokenResponse|GenerateAwsClusterAgentTokenResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/aws_clusters.generate_aws_cluster_agent_token.js</caption>
- * region_tag:gkemulticloud_v1_generated_AwsClusters_GenerateAwsClusterAgentToken_async
- * @deprecated GenerateAwsClusterAgentToken is deprecated and may be removed in a future version.
- */
+  /**
+   * Generates an access token for a cluster agent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.awsCluster
+   *   Required.
+   * @param {string} request.subjectToken
+   *   Required.
+   * @param {string} request.subjectTokenType
+   *   Required.
+   * @param {string} request.version
+   *   Required.
+   * @param {string} [request.nodePoolId]
+   *   Optional.
+   * @param {string} [request.grantType]
+   *   Optional.
+   * @param {string} [request.audience]
+   *   Optional.
+   * @param {string} [request.scope]
+   *   Optional.
+   * @param {string} [request.requestedTokenType]
+   *   Optional.
+   * @param {string} [request.options]
+   *   Optional.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.GenerateAwsClusterAgentTokenResponse|GenerateAwsClusterAgentTokenResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/aws_clusters.generate_aws_cluster_agent_token.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AwsClusters_GenerateAwsClusterAgentToken_async
+   * @deprecated GenerateAwsClusterAgentToken is deprecated and may be removed in a future version.
+   */
   generateAwsClusterAgentToken(
-      request?: protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenResponse,
-        protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenResponse,
+      (
+        | protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   generateAwsClusterAgentToken(
-      request: protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenResponse,
-          protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenResponse,
+      | protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   generateAwsClusterAgentToken(
-      request: protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenRequest,
-      callback: Callback<
-          protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenResponse,
-          protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenRequest,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenResponse,
+      | protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   generateAwsClusterAgentToken(
-      request?: protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenResponse,
-          protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenResponse,
-          protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenResponse,
-        protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenResponse,
+      | protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenResponse,
+      (
+        | protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'aws_cluster': request.awsCluster ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        aws_cluster: request.awsCluster ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    this.warn('DEP$AwsClusters-$GenerateAwsClusterAgentToken','GenerateAwsClusterAgentToken is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    this.warn(
+      'DEP$AwsClusters-$GenerateAwsClusterAgentToken',
+      'GenerateAwsClusterAgentToken is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('generateAwsClusterAgentToken request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenResponse,
-        protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenResponse,
+          | protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('generateAwsClusterAgentToken response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.generateAwsClusterAgentToken(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenResponse,
-        protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('generateAwsClusterAgentToken response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .generateAwsClusterAgentToken(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenResponse,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGenerateAwsClusterAgentTokenRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('generateAwsClusterAgentToken response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Generates a short-lived access token to authenticate to a given
- * {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.awsCluster
- *   Required. The name of the
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource to
- *   authenticate to.
- *
- *   `AwsCluster` names are formatted as
- *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
- *
- *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
- *   for more details on Google Cloud resource names.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.GenerateAwsAccessTokenResponse|GenerateAwsAccessTokenResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/aws_clusters.generate_aws_access_token.js</caption>
- * region_tag:gkemulticloud_v1_generated_AwsClusters_GenerateAwsAccessToken_async
- * @deprecated GenerateAwsAccessToken is deprecated and may be removed in a future version.
- */
+  /**
+   * Generates a short-lived access token to authenticate to a given
+   * {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.awsCluster
+   *   Required. The name of the
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource to
+   *   authenticate to.
+   *
+   *   `AwsCluster` names are formatted as
+   *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
+   *
+   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+   *   for more details on Google Cloud resource names.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.GenerateAwsAccessTokenResponse|GenerateAwsAccessTokenResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/aws_clusters.generate_aws_access_token.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AwsClusters_GenerateAwsAccessToken_async
+   * @deprecated GenerateAwsAccessToken is deprecated and may be removed in a future version.
+   */
   generateAwsAccessToken(
-      request?: protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenResponse,
-        protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenResponse,
+      (
+        | protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   generateAwsAccessToken(
-      request: protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenResponse,
-          protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenResponse,
+      | protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   generateAwsAccessToken(
-      request: protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenRequest,
-      callback: Callback<
-          protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenResponse,
-          protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenRequest,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenResponse,
+      | protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   generateAwsAccessToken(
-      request?: protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenResponse,
-          protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenResponse,
-          protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenResponse,
-        protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenResponse,
+      | protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenResponse,
+      (
+        | protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'aws_cluster': request.awsCluster ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        aws_cluster: request.awsCluster ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    this.warn('DEP$AwsClusters-$GenerateAwsAccessToken','GenerateAwsAccessToken is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    this.warn(
+      'DEP$AwsClusters-$GenerateAwsAccessToken',
+      'GenerateAwsAccessToken is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('generateAwsAccessToken request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenResponse,
-        protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenResponse,
+          | protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('generateAwsAccessToken response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.generateAwsAccessToken(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenResponse,
-        protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('generateAwsAccessToken response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .generateAwsAccessToken(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenResponse,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGenerateAwsAccessTokenRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('generateAwsAccessToken response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Describes a specific
- * {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resource to
- *   describe.
- *
- *   `AwsNodePool` names are formatted as
- *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>/awsNodePools/<node-pool-id>`.
- *
- *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
- *   for more details on Google Cloud resource names.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/aws_clusters.get_aws_node_pool.js</caption>
- * region_tag:gkemulticloud_v1_generated_AwsClusters_GetAwsNodePool_async
- * @deprecated GetAwsNodePool is deprecated and may be removed in a future version.
- */
+  /**
+   * Describes a specific
+   * {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resource to
+   *   describe.
+   *
+   *   `AwsNodePool` names are formatted as
+   *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>/awsNodePools/<node-pool-id>`.
+   *
+   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+   *   for more details on Google Cloud resource names.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/aws_clusters.get_aws_node_pool.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AwsClusters_GetAwsNodePool_async
+   * @deprecated GetAwsNodePool is deprecated and may be removed in a future version.
+   */
   getAwsNodePool(
-      request?: protos.google.cloud.gkemulticloud.v1.IGetAwsNodePoolRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
-        protos.google.cloud.gkemulticloud.v1.IGetAwsNodePoolRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkemulticloud.v1.IGetAwsNodePoolRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+      protos.google.cloud.gkemulticloud.v1.IGetAwsNodePoolRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getAwsNodePool(
-      request: protos.google.cloud.gkemulticloud.v1.IGetAwsNodePoolRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
-          protos.google.cloud.gkemulticloud.v1.IGetAwsNodePoolRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IGetAwsNodePoolRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+      | protos.google.cloud.gkemulticloud.v1.IGetAwsNodePoolRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAwsNodePool(
-      request: protos.google.cloud.gkemulticloud.v1.IGetAwsNodePoolRequest,
-      callback: Callback<
-          protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
-          protos.google.cloud.gkemulticloud.v1.IGetAwsNodePoolRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IGetAwsNodePoolRequest,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+      | protos.google.cloud.gkemulticloud.v1.IGetAwsNodePoolRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAwsNodePool(
-      request?: protos.google.cloud.gkemulticloud.v1.IGetAwsNodePoolRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.gkemulticloud.v1.IGetAwsNodePoolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
-          protos.google.cloud.gkemulticloud.v1.IGetAwsNodePoolRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
-          protos.google.cloud.gkemulticloud.v1.IGetAwsNodePoolRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
-        protos.google.cloud.gkemulticloud.v1.IGetAwsNodePoolRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.gkemulticloud.v1.IGetAwsNodePoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+      | protos.google.cloud.gkemulticloud.v1.IGetAwsNodePoolRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+      protos.google.cloud.gkemulticloud.v1.IGetAwsNodePoolRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    this.warn('DEP$AwsClusters-$GetAwsNodePool','GetAwsNodePool is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    this.warn(
+      'DEP$AwsClusters-$GetAwsNodePool',
+      'GetAwsNodePool is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('getAwsNodePool request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
-        protos.google.cloud.gkemulticloud.v1.IGetAwsNodePoolRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+          | protos.google.cloud.gkemulticloud.v1.IGetAwsNodePoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAwsNodePool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getAwsNodePool(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
-        protos.google.cloud.gkemulticloud.v1.IGetAwsNodePoolRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getAwsNodePool response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getAwsNodePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGetAwsNodePoolRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAwsNodePool response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets the OIDC discovery document for the cluster.
- * See the
- * [OpenID Connect Discovery 1.0
- * specification](https://openid.net/specs/openid-connect-discovery-1_0.html)
- * for details.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.awsCluster
- *   Required. The AwsCluster, which owns the OIDC discovery document.
- *   Format:
- *   projects/{project}/locations/{location}/awsClusters/{cluster}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AwsOpenIdConfig|AwsOpenIdConfig}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/aws_clusters.get_aws_open_id_config.js</caption>
- * region_tag:gkemulticloud_v1_generated_AwsClusters_GetAwsOpenIdConfig_async
- * @deprecated GetAwsOpenIdConfig is deprecated and may be removed in a future version.
- */
+  /**
+   * Gets the OIDC discovery document for the cluster.
+   * See the
+   * [OpenID Connect Discovery 1.0
+   * specification](https://openid.net/specs/openid-connect-discovery-1_0.html)
+   * for details.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.awsCluster
+   *   Required. The AwsCluster, which owns the OIDC discovery document.
+   *   Format:
+   *   projects/{project}/locations/{location}/awsClusters/{cluster}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AwsOpenIdConfig|AwsOpenIdConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/aws_clusters.get_aws_open_id_config.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AwsClusters_GetAwsOpenIdConfig_async
+   * @deprecated GetAwsOpenIdConfig is deprecated and may be removed in a future version.
+   */
   getAwsOpenIdConfig(
-      request?: protos.google.cloud.gkemulticloud.v1.IGetAwsOpenIdConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkemulticloud.v1.IAwsOpenIdConfig,
-        protos.google.cloud.gkemulticloud.v1.IGetAwsOpenIdConfigRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkemulticloud.v1.IGetAwsOpenIdConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IAwsOpenIdConfig,
+      (
+        | protos.google.cloud.gkemulticloud.v1.IGetAwsOpenIdConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getAwsOpenIdConfig(
-      request: protos.google.cloud.gkemulticloud.v1.IGetAwsOpenIdConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.gkemulticloud.v1.IAwsOpenIdConfig,
-          protos.google.cloud.gkemulticloud.v1.IGetAwsOpenIdConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IGetAwsOpenIdConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IAwsOpenIdConfig,
+      | protos.google.cloud.gkemulticloud.v1.IGetAwsOpenIdConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAwsOpenIdConfig(
-      request: protos.google.cloud.gkemulticloud.v1.IGetAwsOpenIdConfigRequest,
-      callback: Callback<
-          protos.google.cloud.gkemulticloud.v1.IAwsOpenIdConfig,
-          protos.google.cloud.gkemulticloud.v1.IGetAwsOpenIdConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IGetAwsOpenIdConfigRequest,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IAwsOpenIdConfig,
+      | protos.google.cloud.gkemulticloud.v1.IGetAwsOpenIdConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAwsOpenIdConfig(
-      request?: protos.google.cloud.gkemulticloud.v1.IGetAwsOpenIdConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.gkemulticloud.v1.IGetAwsOpenIdConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.gkemulticloud.v1.IAwsOpenIdConfig,
-          protos.google.cloud.gkemulticloud.v1.IGetAwsOpenIdConfigRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.gkemulticloud.v1.IAwsOpenIdConfig,
-          protos.google.cloud.gkemulticloud.v1.IGetAwsOpenIdConfigRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.gkemulticloud.v1.IAwsOpenIdConfig,
-        protos.google.cloud.gkemulticloud.v1.IGetAwsOpenIdConfigRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.gkemulticloud.v1.IGetAwsOpenIdConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.gkemulticloud.v1.IAwsOpenIdConfig,
+      | protos.google.cloud.gkemulticloud.v1.IGetAwsOpenIdConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IAwsOpenIdConfig,
+      (
+        | protos.google.cloud.gkemulticloud.v1.IGetAwsOpenIdConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'aws_cluster': request.awsCluster ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        aws_cluster: request.awsCluster ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    this.warn('DEP$AwsClusters-$GetAwsOpenIdConfig','GetAwsOpenIdConfig is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    this.warn(
+      'DEP$AwsClusters-$GetAwsOpenIdConfig',
+      'GetAwsOpenIdConfig is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('getAwsOpenIdConfig request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.gkemulticloud.v1.IAwsOpenIdConfig,
-        protos.google.cloud.gkemulticloud.v1.IGetAwsOpenIdConfigRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IAwsOpenIdConfig,
+          | protos.google.cloud.gkemulticloud.v1.IGetAwsOpenIdConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAwsOpenIdConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getAwsOpenIdConfig(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.gkemulticloud.v1.IAwsOpenIdConfig,
-        protos.google.cloud.gkemulticloud.v1.IGetAwsOpenIdConfigRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getAwsOpenIdConfig response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getAwsOpenIdConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IAwsOpenIdConfig,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGetAwsOpenIdConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAwsOpenIdConfig response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets the public component of the cluster signing keys in
- * JSON Web Key format.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.awsCluster
- *   Required. The AwsCluster, which owns the JsonWebKeys.
- *   Format:
- *   projects/{project}/locations/{location}/awsClusters/{cluster}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AwsJsonWebKeys|AwsJsonWebKeys}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/aws_clusters.get_aws_json_web_keys.js</caption>
- * region_tag:gkemulticloud_v1_generated_AwsClusters_GetAwsJsonWebKeys_async
- * @deprecated GetAwsJsonWebKeys is deprecated and may be removed in a future version.
- */
+  /**
+   * Gets the public component of the cluster signing keys in
+   * JSON Web Key format.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.awsCluster
+   *   Required. The AwsCluster, which owns the JsonWebKeys.
+   *   Format:
+   *   projects/{project}/locations/{location}/awsClusters/{cluster}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AwsJsonWebKeys|AwsJsonWebKeys}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/aws_clusters.get_aws_json_web_keys.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AwsClusters_GetAwsJsonWebKeys_async
+   * @deprecated GetAwsJsonWebKeys is deprecated and may be removed in a future version.
+   */
   getAwsJsonWebKeys(
-      request?: protos.google.cloud.gkemulticloud.v1.IGetAwsJsonWebKeysRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkemulticloud.v1.IAwsJsonWebKeys,
-        protos.google.cloud.gkemulticloud.v1.IGetAwsJsonWebKeysRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkemulticloud.v1.IGetAwsJsonWebKeysRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IAwsJsonWebKeys,
+      (
+        | protos.google.cloud.gkemulticloud.v1.IGetAwsJsonWebKeysRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getAwsJsonWebKeys(
-      request: protos.google.cloud.gkemulticloud.v1.IGetAwsJsonWebKeysRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.gkemulticloud.v1.IAwsJsonWebKeys,
-          protos.google.cloud.gkemulticloud.v1.IGetAwsJsonWebKeysRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IGetAwsJsonWebKeysRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IAwsJsonWebKeys,
+      | protos.google.cloud.gkemulticloud.v1.IGetAwsJsonWebKeysRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAwsJsonWebKeys(
-      request: protos.google.cloud.gkemulticloud.v1.IGetAwsJsonWebKeysRequest,
-      callback: Callback<
-          protos.google.cloud.gkemulticloud.v1.IAwsJsonWebKeys,
-          protos.google.cloud.gkemulticloud.v1.IGetAwsJsonWebKeysRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IGetAwsJsonWebKeysRequest,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IAwsJsonWebKeys,
+      | protos.google.cloud.gkemulticloud.v1.IGetAwsJsonWebKeysRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAwsJsonWebKeys(
-      request?: protos.google.cloud.gkemulticloud.v1.IGetAwsJsonWebKeysRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.gkemulticloud.v1.IGetAwsJsonWebKeysRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.gkemulticloud.v1.IAwsJsonWebKeys,
-          protos.google.cloud.gkemulticloud.v1.IGetAwsJsonWebKeysRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.gkemulticloud.v1.IAwsJsonWebKeys,
-          protos.google.cloud.gkemulticloud.v1.IGetAwsJsonWebKeysRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.gkemulticloud.v1.IAwsJsonWebKeys,
-        protos.google.cloud.gkemulticloud.v1.IGetAwsJsonWebKeysRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.gkemulticloud.v1.IGetAwsJsonWebKeysRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.gkemulticloud.v1.IAwsJsonWebKeys,
+      | protos.google.cloud.gkemulticloud.v1.IGetAwsJsonWebKeysRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IAwsJsonWebKeys,
+      (
+        | protos.google.cloud.gkemulticloud.v1.IGetAwsJsonWebKeysRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'aws_cluster': request.awsCluster ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        aws_cluster: request.awsCluster ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    this.warn('DEP$AwsClusters-$GetAwsJsonWebKeys','GetAwsJsonWebKeys is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    this.warn(
+      'DEP$AwsClusters-$GetAwsJsonWebKeys',
+      'GetAwsJsonWebKeys is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('getAwsJsonWebKeys request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.gkemulticloud.v1.IAwsJsonWebKeys,
-        protos.google.cloud.gkemulticloud.v1.IGetAwsJsonWebKeysRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IAwsJsonWebKeys,
+          | protos.google.cloud.gkemulticloud.v1.IGetAwsJsonWebKeysRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAwsJsonWebKeys response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getAwsJsonWebKeys(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.gkemulticloud.v1.IAwsJsonWebKeys,
-        protos.google.cloud.gkemulticloud.v1.IGetAwsJsonWebKeysRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getAwsJsonWebKeys response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getAwsJsonWebKeys(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IAwsJsonWebKeys,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGetAwsJsonWebKeysRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAwsJsonWebKeys response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Returns information, such as supported AWS regions and Kubernetes
- * versions, on a given Google Cloud location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsServerConfig|AwsServerConfig} resource
- *   to describe.
- *
- *   `AwsServerConfig` names are formatted as
- *   `projects/<project-id>/locations/<region>/awsServerConfig`.
- *
- *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
- *   for more details on Google Cloud resource names.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AwsServerConfig|AwsServerConfig}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/aws_clusters.get_aws_server_config.js</caption>
- * region_tag:gkemulticloud_v1_generated_AwsClusters_GetAwsServerConfig_async
- * @deprecated GetAwsServerConfig is deprecated and may be removed in a future version.
- */
+  /**
+   * Returns information, such as supported AWS regions and Kubernetes
+   * versions, on a given Google Cloud location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsServerConfig|AwsServerConfig} resource
+   *   to describe.
+   *
+   *   `AwsServerConfig` names are formatted as
+   *   `projects/<project-id>/locations/<region>/awsServerConfig`.
+   *
+   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+   *   for more details on Google Cloud resource names.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkemulticloud.v1.AwsServerConfig|AwsServerConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/aws_clusters.get_aws_server_config.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AwsClusters_GetAwsServerConfig_async
+   * @deprecated GetAwsServerConfig is deprecated and may be removed in a future version.
+   */
   getAwsServerConfig(
-      request?: protos.google.cloud.gkemulticloud.v1.IGetAwsServerConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkemulticloud.v1.IAwsServerConfig,
-        protos.google.cloud.gkemulticloud.v1.IGetAwsServerConfigRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkemulticloud.v1.IGetAwsServerConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IAwsServerConfig,
+      (
+        | protos.google.cloud.gkemulticloud.v1.IGetAwsServerConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getAwsServerConfig(
-      request: protos.google.cloud.gkemulticloud.v1.IGetAwsServerConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.gkemulticloud.v1.IAwsServerConfig,
-          protos.google.cloud.gkemulticloud.v1.IGetAwsServerConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IGetAwsServerConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IAwsServerConfig,
+      | protos.google.cloud.gkemulticloud.v1.IGetAwsServerConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAwsServerConfig(
-      request: protos.google.cloud.gkemulticloud.v1.IGetAwsServerConfigRequest,
-      callback: Callback<
-          protos.google.cloud.gkemulticloud.v1.IAwsServerConfig,
-          protos.google.cloud.gkemulticloud.v1.IGetAwsServerConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IGetAwsServerConfigRequest,
+    callback: Callback<
+      protos.google.cloud.gkemulticloud.v1.IAwsServerConfig,
+      | protos.google.cloud.gkemulticloud.v1.IGetAwsServerConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAwsServerConfig(
-      request?: protos.google.cloud.gkemulticloud.v1.IGetAwsServerConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.gkemulticloud.v1.IGetAwsServerConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.gkemulticloud.v1.IAwsServerConfig,
-          protos.google.cloud.gkemulticloud.v1.IGetAwsServerConfigRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.gkemulticloud.v1.IAwsServerConfig,
-          protos.google.cloud.gkemulticloud.v1.IGetAwsServerConfigRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.gkemulticloud.v1.IAwsServerConfig,
-        protos.google.cloud.gkemulticloud.v1.IGetAwsServerConfigRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.gkemulticloud.v1.IGetAwsServerConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.gkemulticloud.v1.IAwsServerConfig,
+      | protos.google.cloud.gkemulticloud.v1.IGetAwsServerConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IAwsServerConfig,
+      (
+        | protos.google.cloud.gkemulticloud.v1.IGetAwsServerConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    this.warn('DEP$AwsClusters-$GetAwsServerConfig','GetAwsServerConfig is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    this.warn(
+      'DEP$AwsClusters-$GetAwsServerConfig',
+      'GetAwsServerConfig is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('getAwsServerConfig request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.gkemulticloud.v1.IAwsServerConfig,
-        protos.google.cloud.gkemulticloud.v1.IGetAwsServerConfigRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkemulticloud.v1.IAwsServerConfig,
+          | protos.google.cloud.gkemulticloud.v1.IGetAwsServerConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAwsServerConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getAwsServerConfig(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.gkemulticloud.v1.IAwsServerConfig,
-        protos.google.cloud.gkemulticloud.v1.IGetAwsServerConfigRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getAwsServerConfig response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getAwsServerConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkemulticloud.v1.IAwsServerConfig,
+          (
+            | protos.google.cloud.gkemulticloud.v1.IGetAwsServerConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAwsServerConfig response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Creates a new {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}
- * resource on a given Google Cloud Platform project and region.
- *
- * If successful, the response contains a newly created
- * {@link protos.google.longrunning.Operation|Operation} resource that can be
- * described to track the status of the operation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent location where this
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource will be
- *   created.
- *
- *   Location names are formatted as `projects/<project-id>/locations/<region>`.
- *
- *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
- *   for more details on Google Cloud resource names.
- * @param {google.cloud.gkemulticloud.v1.AwsCluster} request.awsCluster
- *   Required. The specification of the
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} to create.
- * @param {string} request.awsClusterId
- *   Required. A client provided ID the resource. Must be unique within the
- *   parent resource.
- *
- *   The provided ID will be part of the
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource name
- *   formatted as
- *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
- *
- *   Valid characters are `/{@link protos.0-9|a-z}-/`. Cannot be longer than 63 characters.
- * @param {boolean} request.validateOnly
- *   If set, only validate the request, but do not actually create the cluster.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/aws_clusters.create_aws_cluster.js</caption>
- * region_tag:gkemulticloud_v1_generated_AwsClusters_CreateAwsCluster_async
- * @deprecated CreateAwsCluster is deprecated and may be removed in a future version.
- */
+  /**
+   * Creates a new {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}
+   * resource on a given Google Cloud Platform project and region.
+   *
+   * If successful, the response contains a newly created
+   * {@link protos.google.longrunning.Operation|Operation} resource that can be
+   * described to track the status of the operation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent location where this
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource will be
+   *   created.
+   *
+   *   Location names are formatted as `projects/<project-id>/locations/<region>`.
+   *
+   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+   *   for more details on Google Cloud resource names.
+   * @param {google.cloud.gkemulticloud.v1.AwsCluster} request.awsCluster
+   *   Required. The specification of the
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} to create.
+   * @param {string} request.awsClusterId
+   *   Required. A client provided ID the resource. Must be unique within the
+   *   parent resource.
+   *
+   *   The provided ID will be part of the
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource name
+   *   formatted as
+   *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
+   *
+   *   Valid characters are `/{@link protos.0-9|a-z}-/`. Cannot be longer than 63 characters.
+   * @param {boolean} request.validateOnly
+   *   If set, only validate the request, but do not actually create the cluster.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/aws_clusters.create_aws_cluster.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AwsClusters_CreateAwsCluster_async
+   * @deprecated CreateAwsCluster is deprecated and may be removed in a future version.
+   */
   createAwsCluster(
-      request?: protos.google.cloud.gkemulticloud.v1.ICreateAwsClusterRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.gkemulticloud.v1.IAwsCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkemulticloud.v1.ICreateAwsClusterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAwsCluster,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createAwsCluster(
-      request: protos.google.cloud.gkemulticloud.v1.ICreateAwsClusterRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAwsCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.ICreateAwsClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAwsCluster,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createAwsCluster(
-      request: protos.google.cloud.gkemulticloud.v1.ICreateAwsClusterRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAwsCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.ICreateAwsClusterRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAwsCluster,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createAwsCluster(
-      request?: protos.google.cloud.gkemulticloud.v1.ICreateAwsClusterRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAwsCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAwsCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.gkemulticloud.v1.IAwsCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkemulticloud.v1.ICreateAwsClusterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAwsCluster,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAwsCluster,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAwsCluster,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    this.warn('DEP$AwsClusters-$CreateAwsCluster','CreateAwsCluster is deprecated and may be removed in a future version.', 'DeprecationWarning');
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAwsCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    this.warn(
+      'DEP$AwsClusters-$CreateAwsCluster',
+      'CreateAwsCluster is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAwsCluster,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createAwsCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createAwsCluster request %j', request);
-    return this.innerApiCalls.createAwsCluster(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.gkemulticloud.v1.IAwsCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createAwsCluster response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createAwsCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAwsCluster,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAwsCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createAwsCluster()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/aws_clusters.create_aws_cluster.js</caption>
- * region_tag:gkemulticloud_v1_generated_AwsClusters_CreateAwsCluster_async
- * @deprecated CreateAwsCluster is deprecated and may be removed in a future version.
- */
-  async checkCreateAwsClusterProgress(name: string): Promise<LROperation<protos.google.cloud.gkemulticloud.v1.AwsCluster, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
-    this.warn('DEP$AwsClusters-$checkCreateAwsClusterProgress','checkCreateAwsClusterProgress is deprecated and may be removed in a future version.', 'DeprecationWarning');
+  /**
+   * Check the status of the long running operation returned by `createAwsCluster()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/aws_clusters.create_aws_cluster.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AwsClusters_CreateAwsCluster_async
+   * @deprecated CreateAwsCluster is deprecated and may be removed in a future version.
+   */
+  async checkCreateAwsClusterProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gkemulticloud.v1.AwsCluster,
+      protos.google.cloud.gkemulticloud.v1.OperationMetadata
+    >
+  > {
+    this.warn(
+      'DEP$AwsClusters-$checkCreateAwsClusterProgress',
+      'checkCreateAwsClusterProgress is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('createAwsCluster long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createAwsCluster, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.gkemulticloud.v1.AwsCluster, protos.google.cloud.gkemulticloud.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createAwsCluster,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gkemulticloud.v1.AwsCluster,
+      protos.google.cloud.gkemulticloud.v1.OperationMetadata
+    >;
   }
-/**
- * Updates an {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.gkemulticloud.v1.AwsCluster} request.awsCluster
- *   Required. The {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}
- *   resource to update.
- * @param {boolean} request.validateOnly
- *   If set, only validate the request, but do not actually update the cluster.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. Mask of fields to update. At least one path must be supplied in
- *   this field. The elements of the repeated paths field can only include these
- *   fields from {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}:
- *
- *    *   `description`.
- *    *   `annotations`.
- *    *   `control_plane.version`.
- *    *   `authorization.admin_users`.
- *    *   `authorization.admin_groups`.
- *    *   `binary_authorization.evaluation_mode`.
- *    *   `control_plane.aws_services_authentication.role_arn`.
- *    *   `control_plane.aws_services_authentication.role_session_name`.
- *    *   `control_plane.config_encryption.kms_key_arn`.
- *    *   `control_plane.instance_type`.
- *    *   `control_plane.security_group_ids`.
- *    *   `control_plane.proxy_config`.
- *    *   `control_plane.proxy_config.secret_arn`.
- *    *   `control_plane.proxy_config.secret_version`.
- *    *   `control_plane.root_volume.size_gib`.
- *    *   `control_plane.root_volume.volume_type`.
- *    *   `control_plane.root_volume.iops`.
- *    *   `control_plane.root_volume.throughput`.
- *    *   `control_plane.root_volume.kms_key_arn`.
- *    *   `control_plane.ssh_config`.
- *    *   `control_plane.ssh_config.ec2_key_pair`.
- *    *   `control_plane.instance_placement.tenancy`.
- *    *   `control_plane.iam_instance_profile`.
- *    *   `logging_config.component_config.enable_components`.
- *    *   `control_plane.tags`.
- *    *   `monitoring_config.managed_prometheus_config.enabled`.
- *    *   `networking.per_node_pool_sg_rules_disabled`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/aws_clusters.update_aws_cluster.js</caption>
- * region_tag:gkemulticloud_v1_generated_AwsClusters_UpdateAwsCluster_async
- * @deprecated UpdateAwsCluster is deprecated and may be removed in a future version.
- */
+  /**
+   * Updates an {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.gkemulticloud.v1.AwsCluster} request.awsCluster
+   *   Required. The {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}
+   *   resource to update.
+   * @param {boolean} request.validateOnly
+   *   If set, only validate the request, but do not actually update the cluster.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Mask of fields to update. At least one path must be supplied in
+   *   this field. The elements of the repeated paths field can only include these
+   *   fields from {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}:
+   *
+   *    *   `description`.
+   *    *   `annotations`.
+   *    *   `control_plane.version`.
+   *    *   `authorization.admin_users`.
+   *    *   `authorization.admin_groups`.
+   *    *   `binary_authorization.evaluation_mode`.
+   *    *   `control_plane.aws_services_authentication.role_arn`.
+   *    *   `control_plane.aws_services_authentication.role_session_name`.
+   *    *   `control_plane.config_encryption.kms_key_arn`.
+   *    *   `control_plane.instance_type`.
+   *    *   `control_plane.security_group_ids`.
+   *    *   `control_plane.proxy_config`.
+   *    *   `control_plane.proxy_config.secret_arn`.
+   *    *   `control_plane.proxy_config.secret_version`.
+   *    *   `control_plane.root_volume.size_gib`.
+   *    *   `control_plane.root_volume.volume_type`.
+   *    *   `control_plane.root_volume.iops`.
+   *    *   `control_plane.root_volume.throughput`.
+   *    *   `control_plane.root_volume.kms_key_arn`.
+   *    *   `control_plane.ssh_config`.
+   *    *   `control_plane.ssh_config.ec2_key_pair`.
+   *    *   `control_plane.instance_placement.tenancy`.
+   *    *   `control_plane.iam_instance_profile`.
+   *    *   `logging_config.component_config.enable_components`.
+   *    *   `control_plane.tags`.
+   *    *   `monitoring_config.managed_prometheus_config.enabled`.
+   *    *   `networking.per_node_pool_sg_rules_disabled`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/aws_clusters.update_aws_cluster.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AwsClusters_UpdateAwsCluster_async
+   * @deprecated UpdateAwsCluster is deprecated and may be removed in a future version.
+   */
   updateAwsCluster(
-      request?: protos.google.cloud.gkemulticloud.v1.IUpdateAwsClusterRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.gkemulticloud.v1.IAwsCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkemulticloud.v1.IUpdateAwsClusterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAwsCluster,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateAwsCluster(
-      request: protos.google.cloud.gkemulticloud.v1.IUpdateAwsClusterRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAwsCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IUpdateAwsClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAwsCluster,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateAwsCluster(
-      request: protos.google.cloud.gkemulticloud.v1.IUpdateAwsClusterRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAwsCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IUpdateAwsClusterRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAwsCluster,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateAwsCluster(
-      request?: protos.google.cloud.gkemulticloud.v1.IUpdateAwsClusterRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAwsCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAwsCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.gkemulticloud.v1.IAwsCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkemulticloud.v1.IUpdateAwsClusterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAwsCluster,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAwsCluster,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAwsCluster,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'aws_cluster.name': request.awsCluster!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'aws_cluster.name': request.awsCluster!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    this.warn('DEP$AwsClusters-$UpdateAwsCluster','UpdateAwsCluster is deprecated and may be removed in a future version.', 'DeprecationWarning');
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAwsCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    this.warn(
+      'DEP$AwsClusters-$UpdateAwsCluster',
+      'UpdateAwsCluster is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAwsCluster,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateAwsCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateAwsCluster request %j', request);
-    return this.innerApiCalls.updateAwsCluster(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.gkemulticloud.v1.IAwsCluster, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateAwsCluster response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateAwsCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAwsCluster,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAwsCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateAwsCluster()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/aws_clusters.update_aws_cluster.js</caption>
- * region_tag:gkemulticloud_v1_generated_AwsClusters_UpdateAwsCluster_async
- * @deprecated UpdateAwsCluster is deprecated and may be removed in a future version.
- */
-  async checkUpdateAwsClusterProgress(name: string): Promise<LROperation<protos.google.cloud.gkemulticloud.v1.AwsCluster, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
-    this.warn('DEP$AwsClusters-$checkUpdateAwsClusterProgress','checkUpdateAwsClusterProgress is deprecated and may be removed in a future version.', 'DeprecationWarning');
+  /**
+   * Check the status of the long running operation returned by `updateAwsCluster()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/aws_clusters.update_aws_cluster.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AwsClusters_UpdateAwsCluster_async
+   * @deprecated UpdateAwsCluster is deprecated and may be removed in a future version.
+   */
+  async checkUpdateAwsClusterProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gkemulticloud.v1.AwsCluster,
+      protos.google.cloud.gkemulticloud.v1.OperationMetadata
+    >
+  > {
+    this.warn(
+      'DEP$AwsClusters-$checkUpdateAwsClusterProgress',
+      'checkUpdateAwsClusterProgress is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('updateAwsCluster long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateAwsCluster, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.gkemulticloud.v1.AwsCluster, protos.google.cloud.gkemulticloud.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateAwsCluster,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gkemulticloud.v1.AwsCluster,
+      protos.google.cloud.gkemulticloud.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes a specific {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}
- * resource.
- *
- * Fails if the cluster has one or more associated
- * {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resources.
- *
- * If successful, the response contains a newly created
- * {@link protos.google.longrunning.Operation|Operation} resource that can be
- * described to track the status of the operation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name the
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} to delete.
- *
- *   `AwsCluster` names are formatted as
- *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
- *
- *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
- *   for more details on Google Cloud Platform resource names.
- * @param {boolean} request.validateOnly
- *   If set, only validate the request, but do not actually delete the resource.
- * @param {boolean} request.allowMissing
- *   If set to true, and the
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource is not
- *   found, the request will succeed but no action will be taken on the server
- *   and a completed {@link protos.google.longrunning.Operation|Operation} will be returned.
- *
- *   Useful for idempotent deletion.
- * @param {boolean} [request.ignoreErrors]
- *   Optional. If set to true, the deletion of
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource will
- *   succeed even if errors occur during deleting in cluster resources. Using
- *   this parameter may result in orphaned resources in the cluster.
- * @param {string} request.etag
- *   The current etag of the
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}.
- *
- *   Allows clients to perform deletions through optimistic concurrency control.
- *
- *   If the provided etag does not match the current etag of the cluster,
- *   the request will fail and an ABORTED error will be returned.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/aws_clusters.delete_aws_cluster.js</caption>
- * region_tag:gkemulticloud_v1_generated_AwsClusters_DeleteAwsCluster_async
- * @deprecated DeleteAwsCluster is deprecated and may be removed in a future version.
- */
+  /**
+   * Deletes a specific {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}
+   * resource.
+   *
+   * Fails if the cluster has one or more associated
+   * {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resources.
+   *
+   * If successful, the response contains a newly created
+   * {@link protos.google.longrunning.Operation|Operation} resource that can be
+   * described to track the status of the operation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name the
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} to delete.
+   *
+   *   `AwsCluster` names are formatted as
+   *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
+   *
+   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+   *   for more details on Google Cloud Platform resource names.
+   * @param {boolean} request.validateOnly
+   *   If set, only validate the request, but do not actually delete the resource.
+   * @param {boolean} request.allowMissing
+   *   If set to true, and the
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource is not
+   *   found, the request will succeed but no action will be taken on the server
+   *   and a completed {@link protos.google.longrunning.Operation|Operation} will be returned.
+   *
+   *   Useful for idempotent deletion.
+   * @param {boolean} [request.ignoreErrors]
+   *   Optional. If set to true, the deletion of
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resource will
+   *   succeed even if errors occur during deleting in cluster resources. Using
+   *   this parameter may result in orphaned resources in the cluster.
+   * @param {string} request.etag
+   *   The current etag of the
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}.
+   *
+   *   Allows clients to perform deletions through optimistic concurrency control.
+   *
+   *   If the provided etag does not match the current etag of the cluster,
+   *   the request will fail and an ABORTED error will be returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/aws_clusters.delete_aws_cluster.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AwsClusters_DeleteAwsCluster_async
+   * @deprecated DeleteAwsCluster is deprecated and may be removed in a future version.
+   */
   deleteAwsCluster(
-      request?: protos.google.cloud.gkemulticloud.v1.IDeleteAwsClusterRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkemulticloud.v1.IDeleteAwsClusterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteAwsCluster(
-      request: protos.google.cloud.gkemulticloud.v1.IDeleteAwsClusterRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IDeleteAwsClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteAwsCluster(
-      request: protos.google.cloud.gkemulticloud.v1.IDeleteAwsClusterRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IDeleteAwsClusterRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteAwsCluster(
-      request?: protos.google.cloud.gkemulticloud.v1.IDeleteAwsClusterRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkemulticloud.v1.IDeleteAwsClusterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    this.warn('DEP$AwsClusters-$DeleteAwsCluster','DeleteAwsCluster is deprecated and may be removed in a future version.', 'DeprecationWarning');
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    this.warn(
+      'DEP$AwsClusters-$DeleteAwsCluster',
+      'DeleteAwsCluster is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteAwsCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteAwsCluster request %j', request);
-    return this.innerApiCalls.deleteAwsCluster(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteAwsCluster response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteAwsCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAwsCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteAwsCluster()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/aws_clusters.delete_aws_cluster.js</caption>
- * region_tag:gkemulticloud_v1_generated_AwsClusters_DeleteAwsCluster_async
- * @deprecated DeleteAwsCluster is deprecated and may be removed in a future version.
- */
-  async checkDeleteAwsClusterProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
-    this.warn('DEP$AwsClusters-$checkDeleteAwsClusterProgress','checkDeleteAwsClusterProgress is deprecated and may be removed in a future version.', 'DeprecationWarning');
+  /**
+   * Check the status of the long running operation returned by `deleteAwsCluster()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/aws_clusters.delete_aws_cluster.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AwsClusters_DeleteAwsCluster_async
+   * @deprecated DeleteAwsCluster is deprecated and may be removed in a future version.
+   */
+  async checkDeleteAwsClusterProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.gkemulticloud.v1.OperationMetadata
+    >
+  > {
+    this.warn(
+      'DEP$AwsClusters-$checkDeleteAwsClusterProgress',
+      'checkDeleteAwsClusterProgress is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('deleteAwsCluster long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteAwsCluster, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkemulticloud.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteAwsCluster,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.gkemulticloud.v1.OperationMetadata
+    >;
   }
-/**
- * Creates a new {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool},
- * attached to a given {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}.
- *
- * If successful, the response contains a newly created
- * {@link protos.google.longrunning.Operation|Operation} resource that can be
- * described to track the status of the operation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}
- *   resource where this node pool will be created.
- *
- *   `AwsCluster` names are formatted as
- *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
- *
- *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
- *   for more details on Google Cloud resource names.
- * @param {google.cloud.gkemulticloud.v1.AwsNodePool} request.awsNodePool
- *   Required. The specification of the
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} to create.
- * @param {string} request.awsNodePoolId
- *   Required. A client provided ID the resource. Must be unique within the
- *   parent resource.
- *
- *   The provided ID will be part of the
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resource name
- *   formatted as
- *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>/awsNodePools/<node-pool-id>`.
- *
- *   Valid characters are `/{@link protos.0-9|a-z}-/`. Cannot be longer than 63 characters.
- * @param {boolean} request.validateOnly
- *   If set, only validate the request, but do not actually create the node
- *   pool.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/aws_clusters.create_aws_node_pool.js</caption>
- * region_tag:gkemulticloud_v1_generated_AwsClusters_CreateAwsNodePool_async
- * @deprecated CreateAwsNodePool is deprecated and may be removed in a future version.
- */
+  /**
+   * Creates a new {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool},
+   * attached to a given {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}.
+   *
+   * If successful, the response contains a newly created
+   * {@link protos.google.longrunning.Operation|Operation} resource that can be
+   * described to track the status of the operation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}
+   *   resource where this node pool will be created.
+   *
+   *   `AwsCluster` names are formatted as
+   *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
+   *
+   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+   *   for more details on Google Cloud resource names.
+   * @param {google.cloud.gkemulticloud.v1.AwsNodePool} request.awsNodePool
+   *   Required. The specification of the
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} to create.
+   * @param {string} request.awsNodePoolId
+   *   Required. A client provided ID the resource. Must be unique within the
+   *   parent resource.
+   *
+   *   The provided ID will be part of the
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resource name
+   *   formatted as
+   *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>/awsNodePools/<node-pool-id>`.
+   *
+   *   Valid characters are `/{@link protos.0-9|a-z}-/`. Cannot be longer than 63 characters.
+   * @param {boolean} request.validateOnly
+   *   If set, only validate the request, but do not actually create the node
+   *   pool.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/aws_clusters.create_aws_node_pool.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AwsClusters_CreateAwsNodePool_async
+   * @deprecated CreateAwsNodePool is deprecated and may be removed in a future version.
+   */
   createAwsNodePool(
-      request?: protos.google.cloud.gkemulticloud.v1.ICreateAwsNodePoolRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkemulticloud.v1.ICreateAwsNodePoolRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createAwsNodePool(
-      request: protos.google.cloud.gkemulticloud.v1.ICreateAwsNodePoolRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.ICreateAwsNodePoolRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createAwsNodePool(
-      request: protos.google.cloud.gkemulticloud.v1.ICreateAwsNodePoolRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.ICreateAwsNodePoolRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createAwsNodePool(
-      request?: protos.google.cloud.gkemulticloud.v1.ICreateAwsNodePoolRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkemulticloud.v1.ICreateAwsNodePoolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    this.warn('DEP$AwsClusters-$CreateAwsNodePool','CreateAwsNodePool is deprecated and may be removed in a future version.', 'DeprecationWarning');
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    this.warn(
+      'DEP$AwsClusters-$CreateAwsNodePool',
+      'CreateAwsNodePool is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createAwsNodePool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createAwsNodePool request %j', request);
-    return this.innerApiCalls.createAwsNodePool(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createAwsNodePool response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createAwsNodePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAwsNodePool response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createAwsNodePool()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/aws_clusters.create_aws_node_pool.js</caption>
- * region_tag:gkemulticloud_v1_generated_AwsClusters_CreateAwsNodePool_async
- * @deprecated CreateAwsNodePool is deprecated and may be removed in a future version.
- */
-  async checkCreateAwsNodePoolProgress(name: string): Promise<LROperation<protos.google.cloud.gkemulticloud.v1.AwsNodePool, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
-    this.warn('DEP$AwsClusters-$checkCreateAwsNodePoolProgress','checkCreateAwsNodePoolProgress is deprecated and may be removed in a future version.', 'DeprecationWarning');
+  /**
+   * Check the status of the long running operation returned by `createAwsNodePool()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/aws_clusters.create_aws_node_pool.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AwsClusters_CreateAwsNodePool_async
+   * @deprecated CreateAwsNodePool is deprecated and may be removed in a future version.
+   */
+  async checkCreateAwsNodePoolProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gkemulticloud.v1.AwsNodePool,
+      protos.google.cloud.gkemulticloud.v1.OperationMetadata
+    >
+  > {
+    this.warn(
+      'DEP$AwsClusters-$checkCreateAwsNodePoolProgress',
+      'checkCreateAwsNodePoolProgress is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('createAwsNodePool long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createAwsNodePool, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.gkemulticloud.v1.AwsNodePool, protos.google.cloud.gkemulticloud.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createAwsNodePool,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gkemulticloud.v1.AwsNodePool,
+      protos.google.cloud.gkemulticloud.v1.OperationMetadata
+    >;
   }
-/**
- * Updates an {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.gkemulticloud.v1.AwsNodePool} request.awsNodePool
- *   Required. The {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}
- *   resource to update.
- * @param {boolean} request.validateOnly
- *   If set, only validate the request, but don't actually update the node pool.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. Mask of fields to update. At least one path must be supplied in
- *   this field. The elements of the repeated paths field can only include these
- *   fields from {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}:
- *
- *    *   `annotations`.
- *    *   `version`.
- *    *   `autoscaling.min_node_count`.
- *    *   `autoscaling.max_node_count`.
- *    *   `config.config_encryption.kms_key_arn`.
- *    *   `config.security_group_ids`.
- *    *   `config.root_volume.iops`.
- *    *   `config.root_volume.throughput`.
- *    *   `config.root_volume.kms_key_arn`.
- *    *   `config.root_volume.volume_type`.
- *    *   `config.root_volume.size_gib`.
- *    *   `config.proxy_config`.
- *    *   `config.proxy_config.secret_arn`.
- *    *   `config.proxy_config.secret_version`.
- *    *   `config.ssh_config`.
- *    *   `config.ssh_config.ec2_key_pair`.
- *    *   `config.instance_placement.tenancy`.
- *    *   `config.iam_instance_profile`.
- *    *   `config.labels`.
- *    *   `config.tags`.
- *    *   `config.autoscaling_metrics_collection`.
- *    *   `config.autoscaling_metrics_collection.granularity`.
- *    *   `config.autoscaling_metrics_collection.metrics`.
- *    *   `config.instance_type`.
- *    *   `management.auto_repair`.
- *    *   `management`.
- *    *   `update_settings`.
- *    *   `update_settings.surge_settings`.
- *    *   `update_settings.surge_settings.max_surge`.
- *    *   `update_settings.surge_settings.max_unavailable`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/aws_clusters.update_aws_node_pool.js</caption>
- * region_tag:gkemulticloud_v1_generated_AwsClusters_UpdateAwsNodePool_async
- * @deprecated UpdateAwsNodePool is deprecated and may be removed in a future version.
- */
+  /**
+   * Updates an {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.gkemulticloud.v1.AwsNodePool} request.awsNodePool
+   *   Required. The {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}
+   *   resource to update.
+   * @param {boolean} request.validateOnly
+   *   If set, only validate the request, but don't actually update the node pool.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Mask of fields to update. At least one path must be supplied in
+   *   this field. The elements of the repeated paths field can only include these
+   *   fields from {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}:
+   *
+   *    *   `annotations`.
+   *    *   `version`.
+   *    *   `autoscaling.min_node_count`.
+   *    *   `autoscaling.max_node_count`.
+   *    *   `config.config_encryption.kms_key_arn`.
+   *    *   `config.security_group_ids`.
+   *    *   `config.root_volume.iops`.
+   *    *   `config.root_volume.throughput`.
+   *    *   `config.root_volume.kms_key_arn`.
+   *    *   `config.root_volume.volume_type`.
+   *    *   `config.root_volume.size_gib`.
+   *    *   `config.proxy_config`.
+   *    *   `config.proxy_config.secret_arn`.
+   *    *   `config.proxy_config.secret_version`.
+   *    *   `config.ssh_config`.
+   *    *   `config.ssh_config.ec2_key_pair`.
+   *    *   `config.instance_placement.tenancy`.
+   *    *   `config.iam_instance_profile`.
+   *    *   `config.labels`.
+   *    *   `config.tags`.
+   *    *   `config.autoscaling_metrics_collection`.
+   *    *   `config.autoscaling_metrics_collection.granularity`.
+   *    *   `config.autoscaling_metrics_collection.metrics`.
+   *    *   `config.instance_type`.
+   *    *   `management.auto_repair`.
+   *    *   `management`.
+   *    *   `update_settings`.
+   *    *   `update_settings.surge_settings`.
+   *    *   `update_settings.surge_settings.max_surge`.
+   *    *   `update_settings.surge_settings.max_unavailable`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/aws_clusters.update_aws_node_pool.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AwsClusters_UpdateAwsNodePool_async
+   * @deprecated UpdateAwsNodePool is deprecated and may be removed in a future version.
+   */
   updateAwsNodePool(
-      request?: protos.google.cloud.gkemulticloud.v1.IUpdateAwsNodePoolRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkemulticloud.v1.IUpdateAwsNodePoolRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateAwsNodePool(
-      request: protos.google.cloud.gkemulticloud.v1.IUpdateAwsNodePoolRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IUpdateAwsNodePoolRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateAwsNodePool(
-      request: protos.google.cloud.gkemulticloud.v1.IUpdateAwsNodePoolRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IUpdateAwsNodePoolRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateAwsNodePool(
-      request?: protos.google.cloud.gkemulticloud.v1.IUpdateAwsNodePoolRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkemulticloud.v1.IUpdateAwsNodePoolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'aws_node_pool.name': request.awsNodePool!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'aws_node_pool.name': request.awsNodePool!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    this.warn('DEP$AwsClusters-$UpdateAwsNodePool','UpdateAwsNodePool is deprecated and may be removed in a future version.', 'DeprecationWarning');
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    this.warn(
+      'DEP$AwsClusters-$UpdateAwsNodePool',
+      'UpdateAwsNodePool is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateAwsNodePool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateAwsNodePool request %j', request);
-    return this.innerApiCalls.updateAwsNodePool(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateAwsNodePool response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateAwsNodePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAwsNodePool response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateAwsNodePool()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/aws_clusters.update_aws_node_pool.js</caption>
- * region_tag:gkemulticloud_v1_generated_AwsClusters_UpdateAwsNodePool_async
- * @deprecated UpdateAwsNodePool is deprecated and may be removed in a future version.
- */
-  async checkUpdateAwsNodePoolProgress(name: string): Promise<LROperation<protos.google.cloud.gkemulticloud.v1.AwsNodePool, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
-    this.warn('DEP$AwsClusters-$checkUpdateAwsNodePoolProgress','checkUpdateAwsNodePoolProgress is deprecated and may be removed in a future version.', 'DeprecationWarning');
+  /**
+   * Check the status of the long running operation returned by `updateAwsNodePool()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/aws_clusters.update_aws_node_pool.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AwsClusters_UpdateAwsNodePool_async
+   * @deprecated UpdateAwsNodePool is deprecated and may be removed in a future version.
+   */
+  async checkUpdateAwsNodePoolProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gkemulticloud.v1.AwsNodePool,
+      protos.google.cloud.gkemulticloud.v1.OperationMetadata
+    >
+  > {
+    this.warn(
+      'DEP$AwsClusters-$checkUpdateAwsNodePoolProgress',
+      'checkUpdateAwsNodePoolProgress is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('updateAwsNodePool long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateAwsNodePool, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.gkemulticloud.v1.AwsNodePool, protos.google.cloud.gkemulticloud.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateAwsNodePool,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gkemulticloud.v1.AwsNodePool,
+      protos.google.cloud.gkemulticloud.v1.OperationMetadata
+    >;
   }
-/**
- * Rolls back a previously aborted or failed
- * {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} update request.
- * Makes no changes if the last update request successfully finished.
- * If an update request is in progress, you cannot rollback the update.
- * You must first cancel or let it finish unsuccessfully before you can
- * rollback.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resource to
- *   rollback.
- *
- *   `AwsNodePool` names are formatted as
- *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>/awsNodePools/<node-pool-id>`.
- *
- *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
- *   for more details on Google Cloud resource names.
- * @param {boolean} [request.respectPdb]
- *   Optional. Option for rollback to ignore the PodDisruptionBudget when
- *   draining the node pool nodes. Default value is false.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/aws_clusters.rollback_aws_node_pool_update.js</caption>
- * region_tag:gkemulticloud_v1_generated_AwsClusters_RollbackAwsNodePoolUpdate_async
- * @deprecated RollbackAwsNodePoolUpdate is deprecated and may be removed in a future version.
- */
+  /**
+   * Rolls back a previously aborted or failed
+   * {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} update request.
+   * Makes no changes if the last update request successfully finished.
+   * If an update request is in progress, you cannot rollback the update.
+   * You must first cancel or let it finish unsuccessfully before you can
+   * rollback.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resource to
+   *   rollback.
+   *
+   *   `AwsNodePool` names are formatted as
+   *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>/awsNodePools/<node-pool-id>`.
+   *
+   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+   *   for more details on Google Cloud resource names.
+   * @param {boolean} [request.respectPdb]
+   *   Optional. Option for rollback to ignore the PodDisruptionBudget when
+   *   draining the node pool nodes. Default value is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/aws_clusters.rollback_aws_node_pool_update.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AwsClusters_RollbackAwsNodePoolUpdate_async
+   * @deprecated RollbackAwsNodePoolUpdate is deprecated and may be removed in a future version.
+   */
   rollbackAwsNodePoolUpdate(
-      request?: protos.google.cloud.gkemulticloud.v1.IRollbackAwsNodePoolUpdateRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkemulticloud.v1.IRollbackAwsNodePoolUpdateRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   rollbackAwsNodePoolUpdate(
-      request: protos.google.cloud.gkemulticloud.v1.IRollbackAwsNodePoolUpdateRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IRollbackAwsNodePoolUpdateRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   rollbackAwsNodePoolUpdate(
-      request: protos.google.cloud.gkemulticloud.v1.IRollbackAwsNodePoolUpdateRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IRollbackAwsNodePoolUpdateRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   rollbackAwsNodePoolUpdate(
-      request?: protos.google.cloud.gkemulticloud.v1.IRollbackAwsNodePoolUpdateRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkemulticloud.v1.IRollbackAwsNodePoolUpdateRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    this.warn('DEP$AwsClusters-$RollbackAwsNodePoolUpdate','RollbackAwsNodePoolUpdate is deprecated and may be removed in a future version.', 'DeprecationWarning');
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    this.warn(
+      'DEP$AwsClusters-$RollbackAwsNodePoolUpdate',
+      'RollbackAwsNodePoolUpdate is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('rollbackAwsNodePoolUpdate response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('rollbackAwsNodePoolUpdate request %j', request);
-    return this.innerApiCalls.rollbackAwsNodePoolUpdate(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.gkemulticloud.v1.IAwsNodePool, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('rollbackAwsNodePoolUpdate response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .rollbackAwsNodePoolUpdate(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkemulticloud.v1.IAwsNodePool,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('rollbackAwsNodePoolUpdate response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `rollbackAwsNodePoolUpdate()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/aws_clusters.rollback_aws_node_pool_update.js</caption>
- * region_tag:gkemulticloud_v1_generated_AwsClusters_RollbackAwsNodePoolUpdate_async
- * @deprecated RollbackAwsNodePoolUpdate is deprecated and may be removed in a future version.
- */
-  async checkRollbackAwsNodePoolUpdateProgress(name: string): Promise<LROperation<protos.google.cloud.gkemulticloud.v1.AwsNodePool, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
-    this.warn('DEP$AwsClusters-$checkRollbackAwsNodePoolUpdateProgress','checkRollbackAwsNodePoolUpdateProgress is deprecated and may be removed in a future version.', 'DeprecationWarning');
+  /**
+   * Check the status of the long running operation returned by `rollbackAwsNodePoolUpdate()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/aws_clusters.rollback_aws_node_pool_update.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AwsClusters_RollbackAwsNodePoolUpdate_async
+   * @deprecated RollbackAwsNodePoolUpdate is deprecated and may be removed in a future version.
+   */
+  async checkRollbackAwsNodePoolUpdateProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.gkemulticloud.v1.AwsNodePool,
+      protos.google.cloud.gkemulticloud.v1.OperationMetadata
+    >
+  > {
+    this.warn(
+      'DEP$AwsClusters-$checkRollbackAwsNodePoolUpdateProgress',
+      'checkRollbackAwsNodePoolUpdateProgress is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('rollbackAwsNodePoolUpdate long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.rollbackAwsNodePoolUpdate, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.gkemulticloud.v1.AwsNodePool, protos.google.cloud.gkemulticloud.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.rollbackAwsNodePoolUpdate,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.gkemulticloud.v1.AwsNodePool,
+      protos.google.cloud.gkemulticloud.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes a specific {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}
- * resource.
- *
- * If successful, the response contains a newly created
- * {@link protos.google.longrunning.Operation|Operation} resource that can be
- * described to track the status of the operation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name the
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} to delete.
- *
- *   `AwsNodePool` names are formatted as
- *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>/awsNodePools/<node-pool-id>`.
- *
- *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
- *   for more details on Google Cloud resource names.
- * @param {boolean} request.validateOnly
- *   If set, only validate the request, but do not actually delete the node
- *   pool.
- * @param {boolean} request.allowMissing
- *   If set to true, and the
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resource is not
- *   found, the request will succeed but no action will be taken on the server
- *   and a completed {@link protos.google.longrunning.Operation|Operation} will be returned.
- *
- *   Useful for idempotent deletion.
- * @param {boolean} [request.ignoreErrors]
- *   Optional. If set to true, the deletion of
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resource will
- *   succeed even if errors occur during deleting in node pool resources. Using
- *   this parameter may result in orphaned resources in the node pool.
- * @param {string} request.etag
- *   The current ETag of the
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}.
- *
- *   Allows clients to perform deletions through optimistic concurrency control.
- *
- *   If the provided ETag does not match the current etag of the node pool,
- *   the request will fail and an ABORTED error will be returned.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/aws_clusters.delete_aws_node_pool.js</caption>
- * region_tag:gkemulticloud_v1_generated_AwsClusters_DeleteAwsNodePool_async
- * @deprecated DeleteAwsNodePool is deprecated and may be removed in a future version.
- */
+  /**
+   * Deletes a specific {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}
+   * resource.
+   *
+   * If successful, the response contains a newly created
+   * {@link protos.google.longrunning.Operation|Operation} resource that can be
+   * described to track the status of the operation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name the
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} to delete.
+   *
+   *   `AwsNodePool` names are formatted as
+   *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>/awsNodePools/<node-pool-id>`.
+   *
+   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+   *   for more details on Google Cloud resource names.
+   * @param {boolean} request.validateOnly
+   *   If set, only validate the request, but do not actually delete the node
+   *   pool.
+   * @param {boolean} request.allowMissing
+   *   If set to true, and the
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resource is not
+   *   found, the request will succeed but no action will be taken on the server
+   *   and a completed {@link protos.google.longrunning.Operation|Operation} will be returned.
+   *
+   *   Useful for idempotent deletion.
+   * @param {boolean} [request.ignoreErrors]
+   *   Optional. If set to true, the deletion of
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resource will
+   *   succeed even if errors occur during deleting in node pool resources. Using
+   *   this parameter may result in orphaned resources in the node pool.
+   * @param {string} request.etag
+   *   The current ETag of the
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}.
+   *
+   *   Allows clients to perform deletions through optimistic concurrency control.
+   *
+   *   If the provided ETag does not match the current etag of the node pool,
+   *   the request will fail and an ABORTED error will be returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/aws_clusters.delete_aws_node_pool.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AwsClusters_DeleteAwsNodePool_async
+   * @deprecated DeleteAwsNodePool is deprecated and may be removed in a future version.
+   */
   deleteAwsNodePool(
-      request?: protos.google.cloud.gkemulticloud.v1.IDeleteAwsNodePoolRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.gkemulticloud.v1.IDeleteAwsNodePoolRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteAwsNodePool(
-      request: protos.google.cloud.gkemulticloud.v1.IDeleteAwsNodePoolRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IDeleteAwsNodePoolRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteAwsNodePool(
-      request: protos.google.cloud.gkemulticloud.v1.IDeleteAwsNodePoolRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IDeleteAwsNodePoolRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteAwsNodePool(
-      request?: protos.google.cloud.gkemulticloud.v1.IDeleteAwsNodePoolRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.gkemulticloud.v1.IDeleteAwsNodePoolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    this.warn('DEP$AwsClusters-$DeleteAwsNodePool','DeleteAwsNodePool is deprecated and may be removed in a future version.', 'DeprecationWarning');
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    this.warn(
+      'DEP$AwsClusters-$DeleteAwsNodePool',
+      'DeleteAwsNodePool is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteAwsNodePool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteAwsNodePool request %j', request);
-    return this.innerApiCalls.deleteAwsNodePool(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.gkemulticloud.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteAwsNodePool response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteAwsNodePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkemulticloud.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAwsNodePool response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteAwsNodePool()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/aws_clusters.delete_aws_node_pool.js</caption>
- * region_tag:gkemulticloud_v1_generated_AwsClusters_DeleteAwsNodePool_async
- * @deprecated DeleteAwsNodePool is deprecated and may be removed in a future version.
- */
-  async checkDeleteAwsNodePoolProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkemulticloud.v1.OperationMetadata>>{
-    this.warn('DEP$AwsClusters-$checkDeleteAwsNodePoolProgress','checkDeleteAwsNodePoolProgress is deprecated and may be removed in a future version.', 'DeprecationWarning');
+  /**
+   * Check the status of the long running operation returned by `deleteAwsNodePool()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/aws_clusters.delete_aws_node_pool.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AwsClusters_DeleteAwsNodePool_async
+   * @deprecated DeleteAwsNodePool is deprecated and may be removed in a future version.
+   */
+  async checkDeleteAwsNodePoolProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.gkemulticloud.v1.OperationMetadata
+    >
+  > {
+    this.warn(
+      'DEP$AwsClusters-$checkDeleteAwsNodePoolProgress',
+      'checkDeleteAwsNodePoolProgress is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('deleteAwsNodePool long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteAwsNodePool, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.gkemulticloud.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteAwsNodePool,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.gkemulticloud.v1.OperationMetadata
+    >;
   }
- /**
- * Lists all {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resources
- * on a given Google Cloud project and region.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent location which owns this collection of
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resources.
- *
- *   Location names are formatted as `projects/<project-id>/locations/<region>`.
- *
- *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
- *   for more details on Google Cloud Platform resource names.
- * @param {number} request.pageSize
- *   The maximum number of items to return.
- *
- *   If not specified, a default value of 50 will be used by the service.
- *   Regardless of the pageSize value, the response can include a partial list
- *   and a caller should only rely on response's
- *   {@link protos.google.cloud.gkemulticloud.v1.ListAwsClustersResponse.next_page_token|nextPageToken}
- *   to determine if there are more instances left to be queried.
- * @param {string} request.pageToken
- *   The `nextPageToken` value returned from a previous
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsClusters.ListAwsClusters|awsClusters.list}
- *   request, if any.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listAwsClustersAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @deprecated ListAwsClusters is deprecated and may be removed in a future version.
- */
+  /**
+   * Lists all {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resources
+   * on a given Google Cloud project and region.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent location which owns this collection of
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resources.
+   *
+   *   Location names are formatted as `projects/<project-id>/locations/<region>`.
+   *
+   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+   *   for more details on Google Cloud Platform resource names.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return.
+   *
+   *   If not specified, a default value of 50 will be used by the service.
+   *   Regardless of the pageSize value, the response can include a partial list
+   *   and a caller should only rely on response's
+   *   {@link protos.google.cloud.gkemulticloud.v1.ListAwsClustersResponse.next_page_token|nextPageToken}
+   *   to determine if there are more instances left to be queried.
+   * @param {string} request.pageToken
+   *   The `nextPageToken` value returned from a previous
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsClusters.ListAwsClusters|awsClusters.list}
+   *   request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAwsClustersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @deprecated ListAwsClusters is deprecated and may be removed in a future version.
+   */
   listAwsClusters(
-      request?: protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkemulticloud.v1.IAwsCluster[],
-        protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest|null,
-        protos.google.cloud.gkemulticloud.v1.IListAwsClustersResponse
-      ]>;
+    request?: protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IAwsCluster[],
+      protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest | null,
+      protos.google.cloud.gkemulticloud.v1.IListAwsClustersResponse,
+    ]
+  >;
   listAwsClusters(
-      request: protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest,
-          protos.google.cloud.gkemulticloud.v1.IListAwsClustersResponse|null|undefined,
-          protos.google.cloud.gkemulticloud.v1.IAwsCluster>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest,
+      | protos.google.cloud.gkemulticloud.v1.IListAwsClustersResponse
+      | null
+      | undefined,
+      protos.google.cloud.gkemulticloud.v1.IAwsCluster
+    >,
+  ): void;
   listAwsClusters(
-      request: protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest,
-          protos.google.cloud.gkemulticloud.v1.IListAwsClustersResponse|null|undefined,
-          protos.google.cloud.gkemulticloud.v1.IAwsCluster>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest,
+      | protos.google.cloud.gkemulticloud.v1.IListAwsClustersResponse
+      | null
+      | undefined,
+      protos.google.cloud.gkemulticloud.v1.IAwsCluster
+    >,
+  ): void;
   listAwsClusters(
-      request?: protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest,
-          protos.google.cloud.gkemulticloud.v1.IListAwsClustersResponse|null|undefined,
-          protos.google.cloud.gkemulticloud.v1.IAwsCluster>,
-      callback?: PaginationCallback<
-          protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest,
-          protos.google.cloud.gkemulticloud.v1.IListAwsClustersResponse|null|undefined,
-          protos.google.cloud.gkemulticloud.v1.IAwsCluster>):
-      Promise<[
-        protos.google.cloud.gkemulticloud.v1.IAwsCluster[],
-        protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest|null,
-        protos.google.cloud.gkemulticloud.v1.IListAwsClustersResponse
-      ]>|void {
+          | protos.google.cloud.gkemulticloud.v1.IListAwsClustersResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkemulticloud.v1.IAwsCluster
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest,
+      | protos.google.cloud.gkemulticloud.v1.IListAwsClustersResponse
+      | null
+      | undefined,
+      protos.google.cloud.gkemulticloud.v1.IAwsCluster
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IAwsCluster[],
+      protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest | null,
+      protos.google.cloud.gkemulticloud.v1.IListAwsClustersResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    this.warn('DEP$AwsClusters-$ListAwsClusters','ListAwsClusters is deprecated and may be removed in a future version.', 'DeprecationWarning');
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest,
-      protos.google.cloud.gkemulticloud.v1.IListAwsClustersResponse|null|undefined,
-      protos.google.cloud.gkemulticloud.v1.IAwsCluster>|undefined = callback
+    this.warn(
+      'DEP$AwsClusters-$ListAwsClusters',
+      'ListAwsClusters is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest,
+          | protos.google.cloud.gkemulticloud.v1.IListAwsClustersResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkemulticloud.v1.IAwsCluster
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAwsClusters values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2279,240 +3279,281 @@ export class AwsClustersClient {
     this._log.info('listAwsClusters request %j', request);
     return this.innerApiCalls
       .listAwsClusters(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.gkemulticloud.v1.IAwsCluster[],
-        protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest|null,
-        protos.google.cloud.gkemulticloud.v1.IListAwsClustersResponse
-      ]) => {
-        this._log.info('listAwsClusters values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gkemulticloud.v1.IAwsCluster[],
+          protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest | null,
+          protos.google.cloud.gkemulticloud.v1.IListAwsClustersResponse,
+        ]) => {
+          this._log.info('listAwsClusters values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listAwsClusters`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent location which owns this collection of
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resources.
- *
- *   Location names are formatted as `projects/<project-id>/locations/<region>`.
- *
- *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
- *   for more details on Google Cloud Platform resource names.
- * @param {number} request.pageSize
- *   The maximum number of items to return.
- *
- *   If not specified, a default value of 50 will be used by the service.
- *   Regardless of the pageSize value, the response can include a partial list
- *   and a caller should only rely on response's
- *   {@link protos.google.cloud.gkemulticloud.v1.ListAwsClustersResponse.next_page_token|nextPageToken}
- *   to determine if there are more instances left to be queried.
- * @param {string} request.pageToken
- *   The `nextPageToken` value returned from a previous
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsClusters.ListAwsClusters|awsClusters.list}
- *   request, if any.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listAwsClustersAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @deprecated ListAwsClusters is deprecated and may be removed in a future version.
- */
+  /**
+   * Equivalent to `listAwsClusters`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent location which owns this collection of
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resources.
+   *
+   *   Location names are formatted as `projects/<project-id>/locations/<region>`.
+   *
+   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+   *   for more details on Google Cloud Platform resource names.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return.
+   *
+   *   If not specified, a default value of 50 will be used by the service.
+   *   Regardless of the pageSize value, the response can include a partial list
+   *   and a caller should only rely on response's
+   *   {@link protos.google.cloud.gkemulticloud.v1.ListAwsClustersResponse.next_page_token|nextPageToken}
+   *   to determine if there are more instances left to be queried.
+   * @param {string} request.pageToken
+   *   The `nextPageToken` value returned from a previous
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsClusters.ListAwsClusters|awsClusters.list}
+   *   request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAwsClustersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @deprecated ListAwsClusters is deprecated and may be removed in a future version.
+   */
   listAwsClustersStream(
-      request?: protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listAwsClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
-    this.warn('DEP$AwsClusters-$ListAwsClusters','ListAwsClusters is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this.warn(
+      'DEP$AwsClusters-$ListAwsClusters',
+      'ListAwsClusters is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('listAwsClusters stream %j', request);
     return this.descriptors.page.listAwsClusters.createStream(
       this.innerApiCalls.listAwsClusters as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listAwsClusters`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent location which owns this collection of
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resources.
- *
- *   Location names are formatted as `projects/<project-id>/locations/<region>`.
- *
- *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
- *   for more details on Google Cloud Platform resource names.
- * @param {number} request.pageSize
- *   The maximum number of items to return.
- *
- *   If not specified, a default value of 50 will be used by the service.
- *   Regardless of the pageSize value, the response can include a partial list
- *   and a caller should only rely on response's
- *   {@link protos.google.cloud.gkemulticloud.v1.ListAwsClustersResponse.next_page_token|nextPageToken}
- *   to determine if there are more instances left to be queried.
- * @param {string} request.pageToken
- *   The `nextPageToken` value returned from a previous
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsClusters.ListAwsClusters|awsClusters.list}
- *   request, if any.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/aws_clusters.list_aws_clusters.js</caption>
- * region_tag:gkemulticloud_v1_generated_AwsClusters_ListAwsClusters_async
- * @deprecated ListAwsClusters is deprecated and may be removed in a future version.
- */
+  /**
+   * Equivalent to `listAwsClusters`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent location which owns this collection of
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster} resources.
+   *
+   *   Location names are formatted as `projects/<project-id>/locations/<region>`.
+   *
+   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+   *   for more details on Google Cloud Platform resource names.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return.
+   *
+   *   If not specified, a default value of 50 will be used by the service.
+   *   Regardless of the pageSize value, the response can include a partial list
+   *   and a caller should only rely on response's
+   *   {@link protos.google.cloud.gkemulticloud.v1.ListAwsClustersResponse.next_page_token|nextPageToken}
+   *   to determine if there are more instances left to be queried.
+   * @param {string} request.pageToken
+   *   The `nextPageToken` value returned from a previous
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsClusters.ListAwsClusters|awsClusters.list}
+   *   request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/aws_clusters.list_aws_clusters.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AwsClusters_ListAwsClusters_async
+   * @deprecated ListAwsClusters is deprecated and may be removed in a future version.
+   */
   listAwsClustersAsync(
-      request?: protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.gkemulticloud.v1.IAwsCluster>{
+    request?: protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.gkemulticloud.v1.IAwsCluster> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listAwsClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
-    this.warn('DEP$AwsClusters-$ListAwsClusters','ListAwsClusters is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this.warn(
+      'DEP$AwsClusters-$ListAwsClusters',
+      'ListAwsClusters is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('listAwsClusters iterate %j', request);
     return this.descriptors.page.listAwsClusters.asyncIterate(
       this.innerApiCalls['listAwsClusters'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.gkemulticloud.v1.IAwsCluster>;
   }
- /**
- * Lists all {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}
- * resources on a given
- * {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent `AwsCluster` which owns this collection of
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resources.
- *
- *   `AwsCluster` names are formatted as
- *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
- *
- *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
- *   for more details on Google Cloud resource names.
- * @param {number} request.pageSize
- *   The maximum number of items to return.
- *
- *   If not specified, a default value of 50 will be used by the service.
- *   Regardless of the pageSize value, the response can include a partial list
- *   and a caller should only rely on response's
- *   {@link protos.google.cloud.gkemulticloud.v1.ListAwsNodePoolsResponse.next_page_token|nextPageToken}
- *   to determine if there are more instances left to be queried.
- * @param {string} request.pageToken
- *   The `nextPageToken` value returned from a previous
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsClusters.ListAwsNodePools|awsNodePools.list}
- *   request, if any.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listAwsNodePoolsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @deprecated ListAwsNodePools is deprecated and may be removed in a future version.
- */
+  /**
+   * Lists all {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}
+   * resources on a given
+   * {@link protos.google.cloud.gkemulticloud.v1.AwsCluster|AwsCluster}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent `AwsCluster` which owns this collection of
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resources.
+   *
+   *   `AwsCluster` names are formatted as
+   *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
+   *
+   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+   *   for more details on Google Cloud resource names.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return.
+   *
+   *   If not specified, a default value of 50 will be used by the service.
+   *   Regardless of the pageSize value, the response can include a partial list
+   *   and a caller should only rely on response's
+   *   {@link protos.google.cloud.gkemulticloud.v1.ListAwsNodePoolsResponse.next_page_token|nextPageToken}
+   *   to determine if there are more instances left to be queried.
+   * @param {string} request.pageToken
+   *   The `nextPageToken` value returned from a previous
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsClusters.ListAwsNodePools|awsNodePools.list}
+   *   request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAwsNodePoolsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @deprecated ListAwsNodePools is deprecated and may be removed in a future version.
+   */
   listAwsNodePools(
-      request?: protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.gkemulticloud.v1.IAwsNodePool[],
-        protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest|null,
-        protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsResponse
-      ]>;
+    request?: protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IAwsNodePool[],
+      protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest | null,
+      protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsResponse,
+    ]
+  >;
   listAwsNodePools(
-      request: protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest,
-          protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsResponse|null|undefined,
-          protos.google.cloud.gkemulticloud.v1.IAwsNodePool>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest,
+      | protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsResponse
+      | null
+      | undefined,
+      protos.google.cloud.gkemulticloud.v1.IAwsNodePool
+    >,
+  ): void;
   listAwsNodePools(
-      request: protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest,
-          protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsResponse|null|undefined,
-          protos.google.cloud.gkemulticloud.v1.IAwsNodePool>): void;
+    request: protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest,
+      | protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsResponse
+      | null
+      | undefined,
+      protos.google.cloud.gkemulticloud.v1.IAwsNodePool
+    >,
+  ): void;
   listAwsNodePools(
-      request?: protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest,
-          protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsResponse|null|undefined,
-          protos.google.cloud.gkemulticloud.v1.IAwsNodePool>,
-      callback?: PaginationCallback<
-          protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest,
-          protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsResponse|null|undefined,
-          protos.google.cloud.gkemulticloud.v1.IAwsNodePool>):
-      Promise<[
-        protos.google.cloud.gkemulticloud.v1.IAwsNodePool[],
-        protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest|null,
-        protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsResponse
-      ]>|void {
+          | protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkemulticloud.v1.IAwsNodePool
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest,
+      | protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsResponse
+      | null
+      | undefined,
+      protos.google.cloud.gkemulticloud.v1.IAwsNodePool
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.gkemulticloud.v1.IAwsNodePool[],
+      protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest | null,
+      protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    this.warn('DEP$AwsClusters-$ListAwsNodePools','ListAwsNodePools is deprecated and may be removed in a future version.', 'DeprecationWarning');
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest,
-      protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsResponse|null|undefined,
-      protos.google.cloud.gkemulticloud.v1.IAwsNodePool>|undefined = callback
+    this.warn(
+      'DEP$AwsClusters-$ListAwsNodePools',
+      'ListAwsNodePools is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest,
+          | protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkemulticloud.v1.IAwsNodePool
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAwsNodePools values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2521,143 +3562,155 @@ export class AwsClustersClient {
     this._log.info('listAwsNodePools request %j', request);
     return this.innerApiCalls
       .listAwsNodePools(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.gkemulticloud.v1.IAwsNodePool[],
-        protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest|null,
-        protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsResponse
-      ]) => {
-        this._log.info('listAwsNodePools values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gkemulticloud.v1.IAwsNodePool[],
+          protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest | null,
+          protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsResponse,
+        ]) => {
+          this._log.info('listAwsNodePools values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listAwsNodePools`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent `AwsCluster` which owns this collection of
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resources.
- *
- *   `AwsCluster` names are formatted as
- *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
- *
- *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
- *   for more details on Google Cloud resource names.
- * @param {number} request.pageSize
- *   The maximum number of items to return.
- *
- *   If not specified, a default value of 50 will be used by the service.
- *   Regardless of the pageSize value, the response can include a partial list
- *   and a caller should only rely on response's
- *   {@link protos.google.cloud.gkemulticloud.v1.ListAwsNodePoolsResponse.next_page_token|nextPageToken}
- *   to determine if there are more instances left to be queried.
- * @param {string} request.pageToken
- *   The `nextPageToken` value returned from a previous
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsClusters.ListAwsNodePools|awsNodePools.list}
- *   request, if any.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listAwsNodePoolsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @deprecated ListAwsNodePools is deprecated and may be removed in a future version.
- */
+  /**
+   * Equivalent to `listAwsNodePools`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent `AwsCluster` which owns this collection of
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resources.
+   *
+   *   `AwsCluster` names are formatted as
+   *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
+   *
+   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+   *   for more details on Google Cloud resource names.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return.
+   *
+   *   If not specified, a default value of 50 will be used by the service.
+   *   Regardless of the pageSize value, the response can include a partial list
+   *   and a caller should only rely on response's
+   *   {@link protos.google.cloud.gkemulticloud.v1.ListAwsNodePoolsResponse.next_page_token|nextPageToken}
+   *   to determine if there are more instances left to be queried.
+   * @param {string} request.pageToken
+   *   The `nextPageToken` value returned from a previous
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsClusters.ListAwsNodePools|awsNodePools.list}
+   *   request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAwsNodePoolsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @deprecated ListAwsNodePools is deprecated and may be removed in a future version.
+   */
   listAwsNodePoolsStream(
-      request?: protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listAwsNodePools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
-    this.warn('DEP$AwsClusters-$ListAwsNodePools','ListAwsNodePools is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this.warn(
+      'DEP$AwsClusters-$ListAwsNodePools',
+      'ListAwsNodePools is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('listAwsNodePools stream %j', request);
     return this.descriptors.page.listAwsNodePools.createStream(
       this.innerApiCalls.listAwsNodePools as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listAwsNodePools`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent `AwsCluster` which owns this collection of
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resources.
- *
- *   `AwsCluster` names are formatted as
- *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
- *
- *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
- *   for more details on Google Cloud resource names.
- * @param {number} request.pageSize
- *   The maximum number of items to return.
- *
- *   If not specified, a default value of 50 will be used by the service.
- *   Regardless of the pageSize value, the response can include a partial list
- *   and a caller should only rely on response's
- *   {@link protos.google.cloud.gkemulticloud.v1.ListAwsNodePoolsResponse.next_page_token|nextPageToken}
- *   to determine if there are more instances left to be queried.
- * @param {string} request.pageToken
- *   The `nextPageToken` value returned from a previous
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsClusters.ListAwsNodePools|awsNodePools.list}
- *   request, if any.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/aws_clusters.list_aws_node_pools.js</caption>
- * region_tag:gkemulticloud_v1_generated_AwsClusters_ListAwsNodePools_async
- * @deprecated ListAwsNodePools is deprecated and may be removed in a future version.
- */
+  /**
+   * Equivalent to `listAwsNodePools`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent `AwsCluster` which owns this collection of
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool} resources.
+   *
+   *   `AwsCluster` names are formatted as
+   *   `projects/<project-id>/locations/<region>/awsClusters/<cluster-id>`.
+   *
+   *   See [Resource Names](https://cloud.google.com/apis/design/resource_names)
+   *   for more details on Google Cloud resource names.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return.
+   *
+   *   If not specified, a default value of 50 will be used by the service.
+   *   Regardless of the pageSize value, the response can include a partial list
+   *   and a caller should only rely on response's
+   *   {@link protos.google.cloud.gkemulticloud.v1.ListAwsNodePoolsResponse.next_page_token|nextPageToken}
+   *   to determine if there are more instances left to be queried.
+   * @param {string} request.pageToken
+   *   The `nextPageToken` value returned from a previous
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsClusters.ListAwsNodePools|awsNodePools.list}
+   *   request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.gkemulticloud.v1.AwsNodePool|AwsNodePool}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/aws_clusters.list_aws_node_pools.js</caption>
+   * region_tag:gkemulticloud_v1_generated_AwsClusters_ListAwsNodePools_async
+   * @deprecated ListAwsNodePools is deprecated and may be removed in a future version.
+   */
   listAwsNodePoolsAsync(
-      request?: protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.gkemulticloud.v1.IAwsNodePool>{
+    request?: protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.gkemulticloud.v1.IAwsNodePool> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listAwsNodePools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
-    this.warn('DEP$AwsClusters-$ListAwsNodePools','ListAwsNodePools is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this.warn(
+      'DEP$AwsClusters-$ListAwsNodePools',
+      'ListAwsNodePools is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('listAwsNodePools iterate %j', request);
     return this.descriptors.page.listAwsNodePools.asyncIterate(
       this.innerApiCalls['listAwsNodePools'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.gkemulticloud.v1.IAwsNodePool>;
   }
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -2700,22 +3753,22 @@ export class AwsClustersClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -2750,15 +3803,15 @@ export class AwsClustersClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -2792,7 +3845,7 @@ export class AwsClustersClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -2805,25 +3858,24 @@ export class AwsClustersClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -2862,22 +3914,22 @@ export class AwsClustersClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -2893,7 +3945,11 @@ export class AwsClustersClient {
    * @param {string} attached_cluster
    * @returns {string} Resource name string.
    */
-  attachedClusterPath(project:string,location:string,attachedCluster:string) {
+  attachedClusterPath(
+    project: string,
+    location: string,
+    attachedCluster: string,
+  ) {
     return this.pathTemplates.attachedClusterPathTemplate.render({
       project: project,
       location: location,
@@ -2909,7 +3965,9 @@ export class AwsClustersClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAttachedClusterName(attachedClusterName: string) {
-    return this.pathTemplates.attachedClusterPathTemplate.match(attachedClusterName).project;
+    return this.pathTemplates.attachedClusterPathTemplate.match(
+      attachedClusterName,
+    ).project;
   }
 
   /**
@@ -2920,7 +3978,9 @@ export class AwsClustersClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAttachedClusterName(attachedClusterName: string) {
-    return this.pathTemplates.attachedClusterPathTemplate.match(attachedClusterName).location;
+    return this.pathTemplates.attachedClusterPathTemplate.match(
+      attachedClusterName,
+    ).location;
   }
 
   /**
@@ -2931,7 +3991,9 @@ export class AwsClustersClient {
    * @returns {string} A string representing the attached_cluster.
    */
   matchAttachedClusterFromAttachedClusterName(attachedClusterName: string) {
-    return this.pathTemplates.attachedClusterPathTemplate.match(attachedClusterName).attached_cluster;
+    return this.pathTemplates.attachedClusterPathTemplate.match(
+      attachedClusterName,
+    ).attached_cluster;
   }
 
   /**
@@ -2941,7 +4003,7 @@ export class AwsClustersClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  attachedServerConfigPath(project:string,location:string) {
+  attachedServerConfigPath(project: string, location: string) {
     return this.pathTemplates.attachedServerConfigPathTemplate.render({
       project: project,
       location: location,
@@ -2956,7 +4018,9 @@ export class AwsClustersClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAttachedServerConfigName(attachedServerConfigName: string) {
-    return this.pathTemplates.attachedServerConfigPathTemplate.match(attachedServerConfigName).project;
+    return this.pathTemplates.attachedServerConfigPathTemplate.match(
+      attachedServerConfigName,
+    ).project;
   }
 
   /**
@@ -2967,7 +4031,9 @@ export class AwsClustersClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAttachedServerConfigName(attachedServerConfigName: string) {
-    return this.pathTemplates.attachedServerConfigPathTemplate.match(attachedServerConfigName).location;
+    return this.pathTemplates.attachedServerConfigPathTemplate.match(
+      attachedServerConfigName,
+    ).location;
   }
 
   /**
@@ -2978,7 +4044,7 @@ export class AwsClustersClient {
    * @param {string} aws_cluster
    * @returns {string} Resource name string.
    */
-  awsClusterPath(project:string,location:string,awsCluster:string) {
+  awsClusterPath(project: string, location: string, awsCluster: string) {
     return this.pathTemplates.awsClusterPathTemplate.render({
       project: project,
       location: location,
@@ -2994,7 +4060,8 @@ export class AwsClustersClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAwsClusterName(awsClusterName: string) {
-    return this.pathTemplates.awsClusterPathTemplate.match(awsClusterName).project;
+    return this.pathTemplates.awsClusterPathTemplate.match(awsClusterName)
+      .project;
   }
 
   /**
@@ -3005,7 +4072,8 @@ export class AwsClustersClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAwsClusterName(awsClusterName: string) {
-    return this.pathTemplates.awsClusterPathTemplate.match(awsClusterName).location;
+    return this.pathTemplates.awsClusterPathTemplate.match(awsClusterName)
+      .location;
   }
 
   /**
@@ -3016,7 +4084,8 @@ export class AwsClustersClient {
    * @returns {string} A string representing the aws_cluster.
    */
   matchAwsClusterFromAwsClusterName(awsClusterName: string) {
-    return this.pathTemplates.awsClusterPathTemplate.match(awsClusterName).aws_cluster;
+    return this.pathTemplates.awsClusterPathTemplate.match(awsClusterName)
+      .aws_cluster;
   }
 
   /**
@@ -3028,7 +4097,12 @@ export class AwsClustersClient {
    * @param {string} aws_node_pool
    * @returns {string} Resource name string.
    */
-  awsNodePoolPath(project:string,location:string,awsCluster:string,awsNodePool:string) {
+  awsNodePoolPath(
+    project: string,
+    location: string,
+    awsCluster: string,
+    awsNodePool: string,
+  ) {
     return this.pathTemplates.awsNodePoolPathTemplate.render({
       project: project,
       location: location,
@@ -3045,7 +4119,8 @@ export class AwsClustersClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAwsNodePoolName(awsNodePoolName: string) {
-    return this.pathTemplates.awsNodePoolPathTemplate.match(awsNodePoolName).project;
+    return this.pathTemplates.awsNodePoolPathTemplate.match(awsNodePoolName)
+      .project;
   }
 
   /**
@@ -3056,7 +4131,8 @@ export class AwsClustersClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAwsNodePoolName(awsNodePoolName: string) {
-    return this.pathTemplates.awsNodePoolPathTemplate.match(awsNodePoolName).location;
+    return this.pathTemplates.awsNodePoolPathTemplate.match(awsNodePoolName)
+      .location;
   }
 
   /**
@@ -3067,7 +4143,8 @@ export class AwsClustersClient {
    * @returns {string} A string representing the aws_cluster.
    */
   matchAwsClusterFromAwsNodePoolName(awsNodePoolName: string) {
-    return this.pathTemplates.awsNodePoolPathTemplate.match(awsNodePoolName).aws_cluster;
+    return this.pathTemplates.awsNodePoolPathTemplate.match(awsNodePoolName)
+      .aws_cluster;
   }
 
   /**
@@ -3078,7 +4155,8 @@ export class AwsClustersClient {
    * @returns {string} A string representing the aws_node_pool.
    */
   matchAwsNodePoolFromAwsNodePoolName(awsNodePoolName: string) {
-    return this.pathTemplates.awsNodePoolPathTemplate.match(awsNodePoolName).aws_node_pool;
+    return this.pathTemplates.awsNodePoolPathTemplate.match(awsNodePoolName)
+      .aws_node_pool;
   }
 
   /**
@@ -3088,7 +4166,7 @@ export class AwsClustersClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  awsServerConfigPath(project:string,location:string) {
+  awsServerConfigPath(project: string, location: string) {
     return this.pathTemplates.awsServerConfigPathTemplate.render({
       project: project,
       location: location,
@@ -3103,7 +4181,9 @@ export class AwsClustersClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAwsServerConfigName(awsServerConfigName: string) {
-    return this.pathTemplates.awsServerConfigPathTemplate.match(awsServerConfigName).project;
+    return this.pathTemplates.awsServerConfigPathTemplate.match(
+      awsServerConfigName,
+    ).project;
   }
 
   /**
@@ -3114,7 +4194,9 @@ export class AwsClustersClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAwsServerConfigName(awsServerConfigName: string) {
-    return this.pathTemplates.awsServerConfigPathTemplate.match(awsServerConfigName).location;
+    return this.pathTemplates.awsServerConfigPathTemplate.match(
+      awsServerConfigName,
+    ).location;
   }
 
   /**
@@ -3125,7 +4207,7 @@ export class AwsClustersClient {
    * @param {string} azure_client
    * @returns {string} Resource name string.
    */
-  azureClientPath(project:string,location:string,azureClient:string) {
+  azureClientPath(project: string, location: string, azureClient: string) {
     return this.pathTemplates.azureClientPathTemplate.render({
       project: project,
       location: location,
@@ -3141,7 +4223,8 @@ export class AwsClustersClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAzureClientName(azureClientName: string) {
-    return this.pathTemplates.azureClientPathTemplate.match(azureClientName).project;
+    return this.pathTemplates.azureClientPathTemplate.match(azureClientName)
+      .project;
   }
 
   /**
@@ -3152,7 +4235,8 @@ export class AwsClustersClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAzureClientName(azureClientName: string) {
-    return this.pathTemplates.azureClientPathTemplate.match(azureClientName).location;
+    return this.pathTemplates.azureClientPathTemplate.match(azureClientName)
+      .location;
   }
 
   /**
@@ -3163,7 +4247,8 @@ export class AwsClustersClient {
    * @returns {string} A string representing the azure_client.
    */
   matchAzureClientFromAzureClientName(azureClientName: string) {
-    return this.pathTemplates.azureClientPathTemplate.match(azureClientName).azure_client;
+    return this.pathTemplates.azureClientPathTemplate.match(azureClientName)
+      .azure_client;
   }
 
   /**
@@ -3174,7 +4259,7 @@ export class AwsClustersClient {
    * @param {string} azure_cluster
    * @returns {string} Resource name string.
    */
-  azureClusterPath(project:string,location:string,azureCluster:string) {
+  azureClusterPath(project: string, location: string, azureCluster: string) {
     return this.pathTemplates.azureClusterPathTemplate.render({
       project: project,
       location: location,
@@ -3190,7 +4275,8 @@ export class AwsClustersClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAzureClusterName(azureClusterName: string) {
-    return this.pathTemplates.azureClusterPathTemplate.match(azureClusterName).project;
+    return this.pathTemplates.azureClusterPathTemplate.match(azureClusterName)
+      .project;
   }
 
   /**
@@ -3201,7 +4287,8 @@ export class AwsClustersClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAzureClusterName(azureClusterName: string) {
-    return this.pathTemplates.azureClusterPathTemplate.match(azureClusterName).location;
+    return this.pathTemplates.azureClusterPathTemplate.match(azureClusterName)
+      .location;
   }
 
   /**
@@ -3212,7 +4299,8 @@ export class AwsClustersClient {
    * @returns {string} A string representing the azure_cluster.
    */
   matchAzureClusterFromAzureClusterName(azureClusterName: string) {
-    return this.pathTemplates.azureClusterPathTemplate.match(azureClusterName).azure_cluster;
+    return this.pathTemplates.azureClusterPathTemplate.match(azureClusterName)
+      .azure_cluster;
   }
 
   /**
@@ -3224,7 +4312,12 @@ export class AwsClustersClient {
    * @param {string} azure_node_pool
    * @returns {string} Resource name string.
    */
-  azureNodePoolPath(project:string,location:string,azureCluster:string,azureNodePool:string) {
+  azureNodePoolPath(
+    project: string,
+    location: string,
+    azureCluster: string,
+    azureNodePool: string,
+  ) {
     return this.pathTemplates.azureNodePoolPathTemplate.render({
       project: project,
       location: location,
@@ -3241,7 +4334,8 @@ export class AwsClustersClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAzureNodePoolName(azureNodePoolName: string) {
-    return this.pathTemplates.azureNodePoolPathTemplate.match(azureNodePoolName).project;
+    return this.pathTemplates.azureNodePoolPathTemplate.match(azureNodePoolName)
+      .project;
   }
 
   /**
@@ -3252,7 +4346,8 @@ export class AwsClustersClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAzureNodePoolName(azureNodePoolName: string) {
-    return this.pathTemplates.azureNodePoolPathTemplate.match(azureNodePoolName).location;
+    return this.pathTemplates.azureNodePoolPathTemplate.match(azureNodePoolName)
+      .location;
   }
 
   /**
@@ -3263,7 +4358,8 @@ export class AwsClustersClient {
    * @returns {string} A string representing the azure_cluster.
    */
   matchAzureClusterFromAzureNodePoolName(azureNodePoolName: string) {
-    return this.pathTemplates.azureNodePoolPathTemplate.match(azureNodePoolName).azure_cluster;
+    return this.pathTemplates.azureNodePoolPathTemplate.match(azureNodePoolName)
+      .azure_cluster;
   }
 
   /**
@@ -3274,7 +4370,8 @@ export class AwsClustersClient {
    * @returns {string} A string representing the azure_node_pool.
    */
   matchAzureNodePoolFromAzureNodePoolName(azureNodePoolName: string) {
-    return this.pathTemplates.azureNodePoolPathTemplate.match(azureNodePoolName).azure_node_pool;
+    return this.pathTemplates.azureNodePoolPathTemplate.match(azureNodePoolName)
+      .azure_node_pool;
   }
 
   /**
@@ -3284,7 +4381,7 @@ export class AwsClustersClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  azureServerConfigPath(project:string,location:string) {
+  azureServerConfigPath(project: string, location: string) {
     return this.pathTemplates.azureServerConfigPathTemplate.render({
       project: project,
       location: location,
@@ -3299,7 +4396,9 @@ export class AwsClustersClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAzureServerConfigName(azureServerConfigName: string) {
-    return this.pathTemplates.azureServerConfigPathTemplate.match(azureServerConfigName).project;
+    return this.pathTemplates.azureServerConfigPathTemplate.match(
+      azureServerConfigName,
+    ).project;
   }
 
   /**
@@ -3310,7 +4409,9 @@ export class AwsClustersClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAzureServerConfigName(azureServerConfigName: string) {
-    return this.pathTemplates.azureServerConfigPathTemplate.match(azureServerConfigName).location;
+    return this.pathTemplates.azureServerConfigPathTemplate.match(
+      azureServerConfigName,
+    ).location;
   }
 
   /**
@@ -3320,7 +4421,7 @@ export class AwsClustersClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -3355,7 +4456,7 @@ export class AwsClustersClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -3380,7 +4481,7 @@ export class AwsClustersClient {
    */
   close(): Promise<void> {
     if (this.awsClustersStub && !this._terminated) {
-      return this.awsClustersStub.then(stub => {
+      return this.awsClustersStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

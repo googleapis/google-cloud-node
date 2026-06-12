@@ -16,5 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {CloudQuotasClient} from './cloud_quotas_client';
-export {QuotaAdjusterSettingsManagerClient} from './quota_adjuster_settings_manager_client';
+export { CloudQuotasClient } from './cloud_quotas_client';
+export { QuotaAdjusterSettingsManagerClient } from './quota_adjuster_settings_manager_client';
