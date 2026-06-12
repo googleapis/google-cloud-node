@@ -579,7 +579,6 @@ libraries:
       - path: google/cloud/configdelivery/v1beta
       - path: google/cloud/configdelivery/v1alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-connectors
@@ -587,7 +586,6 @@ libraries:
     apis:
       - path: google/cloud/connectors/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-contactcenterinsights
@@ -595,7 +593,6 @@ libraries:
     apis:
       - path: google/cloud/contactcenterinsights/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/contact-center-insights'
@@ -612,7 +609,6 @@ libraries:
     apis:
       - path: google/cloud/databasecenter/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta
   - name: google-cloud-datacatalog
@@ -621,7 +617,6 @@ libraries:
       - path: google/cloud/datacatalog/v1
       - path: google/cloud/datacatalog/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       main_service: DataCatalog
@@ -631,7 +626,6 @@ libraries:
     apis:
       - path: google/cloud/datacatalog/lineage/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/lineage'
@@ -640,7 +634,6 @@ libraries:
     apis:
       - path: google/cloud/datacatalog/lineage/configmanagement/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/configmanagement'
@@ -650,7 +643,6 @@ libraries:
       - path: google/cloud/dataform/v1
       - path: google/cloud/dataform/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta1
   - name: google-cloud-datafusion
@@ -659,7 +651,6 @@ libraries:
       - path: google/cloud/datafusion/v1
       - path: google/cloud/datafusion/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/data-fusion'
@@ -668,7 +659,6 @@ libraries:
     apis:
       - path: google/cloud/datalabeling/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta1
       main_service: datalabeling
@@ -696,7 +686,6 @@ libraries:
     apis:
       - path: google/cloud/dataqna/v1alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1alpha
       package_name: '@google-cloud/data-qna'
@@ -706,7 +695,6 @@ libraries:
       - path: google/cloud/datastream/v1
       - path: google/cloud/datastream/v1alpha1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-deploy
@@ -714,7 +702,6 @@ libraries:
     apis:
       - path: google/cloud/deploy/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-developerconnect
@@ -722,7 +709,6 @@ libraries:
     apis:
       - path: google/cloud/developerconnect/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-devicestreaming
@@ -730,7 +716,6 @@ libraries:
     apis:
       - path: google/cloud/devicestreaming/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-dialogflow
