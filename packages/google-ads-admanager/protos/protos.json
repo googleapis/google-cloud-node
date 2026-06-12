@@ -1849,6 +1849,35 @@
                     "BatchArchiveAdUnitsResponse": {
                       "fields": {}
                     },
+                    "AdManagerError": {
+                      "fields": {
+                        "errorCode": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "message": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "fieldPath": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "trigger": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "stackTrace": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "details": {
+                          "rule": "repeated",
+                          "type": "google.protobuf.Any",
+                          "id": 6
+                        }
+                      }
+                    },
                     "ApplicationStoreEnum": {
                       "fields": {},
                       "nested": {

@@ -63,13 +63,11 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get notification subscription health metrics | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-notifications/samples/generated/v1/notifications_api_service.get_notification_subscription_health_metrics.js) |
 | list notification subscriptions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-notifications/samples/generated/v1/notifications_api_service.list_notification_subscriptions.js) |
 | update notification subscription | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-notifications/samples/generated/v1/notifications_api_service.update_notification_subscription.js) |
-| shopping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-notifications/samples/generated/v1/snippet_metadata_google.shopping.merchant.notifications.v1.json) |
 | create notification subscription | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.create_notification_subscription.js) |
 | delete notification subscription | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.delete_notification_subscription.js) |
 | get notification subscription | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.get_notification_subscription.js) |
 | list notification subscriptions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.list_notification_subscriptions.js) |
 | update notification subscription | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-notifications/samples/generated/v1beta/notifications_api_service.update_notification_subscription.js) |
-| shopping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-notifications/samples/generated/v1beta/snippet_metadata_google.shopping.merchant.notifications.v1beta.json) |
 
 
 ## Supported Node.js Versions

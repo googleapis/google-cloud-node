@@ -16,5 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {OrgPolicyViolationsPreviewServiceClient} from './org_policy_violations_preview_service_client';
-export {SimulatorClient} from './simulator_client';
+export { OrgPolicyViolationsPreviewServiceClient } from './org_policy_violations_preview_service_client';
+export { SimulatorClient } from './simulator_client';

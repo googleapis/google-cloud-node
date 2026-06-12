@@ -16,8 +16,8 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {CrossNetworkAutomationServiceClient} from './cross_network_automation_service_client';
-export {DataTransferServiceClient} from './data_transfer_service_client';
-export {HubServiceClient} from './hub_service_client';
-export {InternalRangeServiceClient} from './internal_range_service_client';
-export {PolicyBasedRoutingServiceClient} from './policy_based_routing_service_client';
+export { CrossNetworkAutomationServiceClient } from './cross_network_automation_service_client';
+export { DataTransferServiceClient } from './data_transfer_service_client';
+export { HubServiceClient } from './hub_service_client';
+export { InternalRangeServiceClient } from './internal_range_service_client';
+export { PolicyBasedRoutingServiceClient } from './policy_based_routing_service_client';
