@@ -976,6 +976,8 @@ libraries:
     version: 5.2.3
     apis:
       - path: google/cloud/iot/v1
+    keep:
+      - smoke-test/device_manager_smoke_test.js
     copyright_year: "2026"
     nodejs:
       default_version: v1
