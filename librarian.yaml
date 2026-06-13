@@ -437,6 +437,8 @@ libraries:
     apis:
       - path: google/cloud/billing/budgets/v1
       - path: google/cloud/billing/budgets/v1beta1
+    keep:
+      - system-test/system.js
     copyright_year: "2026"
     nodejs:
       default_version: v1
