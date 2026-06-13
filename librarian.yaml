@@ -1592,6 +1592,9 @@ libraries:
     apis:
       - path: google/cloud/webrisk/v1
       - path: google/cloud/webrisk/v1beta1
+    keep:
+      - system-test/header.ts
+      - system-test/test.ts
     copyright_year: "2026"
     nodejs:
       default_version: v1
