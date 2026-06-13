@@ -21,114 +21,142 @@
       },
       "methods": {
         "AbandonInstances": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "AdoptInstances": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ApplyUpdatesToInstances": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "CreateInstances": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "Delete": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "DeleteInstances": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "DeletePerInstanceConfigs": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "Get": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "Insert": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "List": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "ListErrors": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "ListManagedInstances": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ListPerInstanceConfigs": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "Patch": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "PatchPerInstanceConfigs": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "RecreateInstances": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "Resize": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ResizeAdvanced": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ResumeInstances": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "SetAutoHealingPolicies": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "SetInstanceTemplate": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "SetTargetPools": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "StartInstances": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "StopInstances": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "SuspendInstances": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "TestIamPermissions": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "Update": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "UpdatePerInstanceConfigs": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }
