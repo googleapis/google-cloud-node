@@ -57,7 +57,7 @@ export class OsConfigServiceClient {
   private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
-  private _log = logging.log('osconfig');
+  private _log = logging.log('os-config');
 
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
