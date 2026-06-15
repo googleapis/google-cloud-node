@@ -77,7 +77,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update endpoint | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-servicedirectory/samples/generated/v1/registration_service.update_endpoint.js) |
 | update namespace | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-servicedirectory/samples/generated/v1/registration_service.update_namespace.js) |
 | update service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-servicedirectory/samples/generated/v1/registration_service.update_service.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-servicedirectory/samples/generated/v1/snippet_metadata_google.cloud.servicedirectory.v1.json) |
 | resolve service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-servicedirectory/samples/generated/v1beta1/lookup_service.resolve_service.js) |
 | create endpoint | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-servicedirectory/samples/generated/v1beta1/registration_service.create_endpoint.js) |
 | create namespace | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-servicedirectory/samples/generated/v1beta1/registration_service.create_namespace.js) |
@@ -97,7 +96,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update endpoint | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-servicedirectory/samples/generated/v1beta1/registration_service.update_endpoint.js) |
 | update namespace | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-servicedirectory/samples/generated/v1beta1/registration_service.update_namespace.js) |
 | update service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-servicedirectory/samples/generated/v1beta1/registration_service.update_service.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-servicedirectory/samples/generated/v1beta1/snippet_metadata_google.cloud.servicedirectory.v1beta1.json) |
 
 
 ## Supported Node.js Versions
@@ -131,7 +129,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-servicedirectory/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -141,7 +139,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-servicedirectory/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
