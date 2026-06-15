@@ -39,7 +39,7 @@ function main(bucket, ifMetagenerationMatch) {
   // const ifMetagenerationMatch = 1234
 
   // Imports the Storage library
-  const {StorageControlClient} = require('@google-cloud/storage-control');
+  const {StorageClient} = require('@google-cloud/storage-control').v2;
 
   // Instantiates a client
   const storageControlClient = new StorageControlClient();
