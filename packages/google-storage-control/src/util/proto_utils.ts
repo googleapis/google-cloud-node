@@ -32,6 +32,10 @@ export const replacements: Replacement[] = [
     replacement: 'StorageObject',
   },
   {
+    pattern: /\ban StorageObject\b/g,
+    replacement: 'a StorageObject',
+  },
+  {
     pattern: /\bIObject\b/g,
     replacement: 'IStorageObject',
   },
