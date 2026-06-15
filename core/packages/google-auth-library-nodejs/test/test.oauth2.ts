@@ -1026,6 +1026,28 @@ describe('oauth2', () => {
       assert.strictEqual('abc123', client.credentials.access_token);
     });
 
+    it('should throw an error after retries are exhausted on transient errors', async () => {
+      // Mock 4 failures (1 initial + 3 retries)
+      const scopes = [
+        nock(baseUrl, {
+          reqheaders: {
+            'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          },
+        })
+          .post('/token')
+          .times(4)
+          .reply(500, 'Internal Server Error'),
+      ];
+      client.credentials = {refresh_token: 'refresh-token-placeholder'};
+
+      await assert.rejects(
+        client.request({url: 'http://example.com'}),
+        /Internal Server Error/
+      );
+
+      scopes.forEach(s => s.done());
+    });
+
     it('should have a custom ReAuth error message', async () => {
       // We have custom handling for make it easier for customers to resolve ReAuth errors
       const reAuthErrorBody = {
