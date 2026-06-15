@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {ServiceHealthClient} from './service_health_client';
+export { ServiceHealthClient } from './service_health_client';

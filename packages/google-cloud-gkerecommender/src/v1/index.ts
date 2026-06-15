@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {GkeInferenceQuickstartClient} from './gke_inference_quickstart_client';
+export { GkeInferenceQuickstartClient } from './gke_inference_quickstart_client';

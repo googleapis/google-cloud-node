@@ -1,16 +1,15 @@
 {
+    "api_description": "The Managed Service for Microsoft Active Directory API is used for managing\na highly available, hardened service running Microsoft Active Directory\n(AD).",
     "api_id": "managedidentities.googleapis.com",
     "api_shortname": "managedidentities",
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/managed-identities/latest",
     "default_version": "v1beta1",
     "distribution_name": "@google-cloud/managed-identities",
-    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
     "language": "nodejs",
     "library_type": "GAPIC_AUTO",
     "name": "managedidentities",
     "name_pretty": "Managed Service for Microsoft Active Directory",
-    "product_documentation": "https://cloud.google.com/managed-microsoft-ad/",
+    "product_documentation": "https://cloud.google.com/managed-microsoft-ad/docs",
     "release_level": "stable",
-    "repo": "googleapis/google-cloud-node",
-    "requires_billing": true
+    "repo": "googleapis/google-cloud-node"
 }

@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {ImageAnnotatorClient} from './image_annotator_client';
+export { ImageAnnotatorClient } from './image_annotator_client';

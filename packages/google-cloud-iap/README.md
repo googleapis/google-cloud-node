@@ -77,11 +77,9 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list brands | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_o_auth_service.list_brands.js) |
 | list identity aware proxy clients | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_o_auth_service.list_identity_aware_proxy_clients.js) |
 | reset identity aware proxy client secret | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1/identity_aware_proxy_o_auth_service.reset_identity_aware_proxy_client_secret.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1/snippet_metadata_google.cloud.iap.v1.json) |
 | get iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1beta1/identity_aware_proxy_admin_v1_beta1.get_iam_policy.js) |
 | set iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1beta1/identity_aware_proxy_admin_v1_beta1.set_iam_policy.js) |
 | test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1beta1/identity_aware_proxy_admin_v1_beta1.test_iam_permissions.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/generated/v1beta1/snippet_metadata_google.cloud.iap.v1beta1.json) |
 
 
 ## Supported Node.js Versions
@@ -115,7 +113,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -125,7 +123,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

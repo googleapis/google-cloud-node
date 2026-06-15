@@ -5802,6 +5802,133 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an AdManagerError. */
+                interface IAdManagerError {
+
+                    /** AdManagerError errorCode */
+                    errorCode?: (string|null);
+
+                    /** AdManagerError message */
+                    message?: (string|null);
+
+                    /** AdManagerError fieldPath */
+                    fieldPath?: (string|null);
+
+                    /** AdManagerError trigger */
+                    trigger?: (string|null);
+
+                    /** AdManagerError stackTrace */
+                    stackTrace?: (string|null);
+
+                    /** AdManagerError details */
+                    details?: (google.protobuf.IAny[]|null);
+                }
+
+                /** Represents an AdManagerError. */
+                class AdManagerError implements IAdManagerError {
+
+                    /**
+                     * Constructs a new AdManagerError.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.admanager.v1.IAdManagerError);
+
+                    /** AdManagerError errorCode. */
+                    public errorCode: string;
+
+                    /** AdManagerError message. */
+                    public message: string;
+
+                    /** AdManagerError fieldPath. */
+                    public fieldPath: string;
+
+                    /** AdManagerError trigger. */
+                    public trigger: string;
+
+                    /** AdManagerError stackTrace. */
+                    public stackTrace: string;
+
+                    /** AdManagerError details. */
+                    public details: google.protobuf.IAny[];
+
+                    /**
+                     * Creates a new AdManagerError instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AdManagerError instance
+                     */
+                    public static create(properties?: google.ads.admanager.v1.IAdManagerError): google.ads.admanager.v1.AdManagerError;
+
+                    /**
+                     * Encodes the specified AdManagerError message. Does not implicitly {@link google.ads.admanager.v1.AdManagerError.verify|verify} messages.
+                     * @param message AdManagerError message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.admanager.v1.IAdManagerError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AdManagerError message, length delimited. Does not implicitly {@link google.ads.admanager.v1.AdManagerError.verify|verify} messages.
+                     * @param message AdManagerError message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.admanager.v1.IAdManagerError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AdManagerError message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AdManagerError
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.admanager.v1.AdManagerError;
+
+                    /**
+                     * Decodes an AdManagerError message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AdManagerError
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.admanager.v1.AdManagerError;
+
+                    /**
+                     * Verifies an AdManagerError message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AdManagerError message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AdManagerError
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.admanager.v1.AdManagerError;
+
+                    /**
+                     * Creates a plain object from an AdManagerError message. Also converts values to other types if specified.
+                     * @param message AdManagerError
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.admanager.v1.AdManagerError, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AdManagerError to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AdManagerError
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an ApplicationStoreEnum. */
                 interface IApplicationStoreEnum {
                 }
