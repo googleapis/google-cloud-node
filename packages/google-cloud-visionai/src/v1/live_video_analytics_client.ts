@@ -18,11 +18,24 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, IamClient, IamProtos, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+  IamClient,
+  IamProtos,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -45,7 +58,7 @@ export class LiveVideoAnalyticsClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('visionai');
@@ -58,12 +71,12 @@ export class LiveVideoAnalyticsClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  liveVideoAnalyticsStub?: Promise<{[name: string]: Function}>;
+  liveVideoAnalyticsStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of LiveVideoAnalyticsClient.
@@ -104,21 +117,42 @@ export class LiveVideoAnalyticsClient {
    *     const client = new LiveVideoAnalyticsClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof LiveVideoAnalyticsClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'warehouse-visionai.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -143,7 +177,7 @@ export class LiveVideoAnalyticsClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -156,18 +190,14 @@ export class LiveVideoAnalyticsClient {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
-  
+
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -189,70 +219,70 @@ export class LiveVideoAnalyticsClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       analysisPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/clusters/{cluster}/analyses/{analysis}'
+        'projects/{project}/locations/{location}/clusters/{cluster}/analyses/{analysis}',
       ),
       annotationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project_number}/locations/{location}/corpora/{corpus}/assets/{asset}/annotations/{annotation}'
+        'projects/{project_number}/locations/{location}/corpora/{corpus}/assets/{asset}/annotations/{annotation}',
       ),
       applicationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/applications/{application}'
+        'projects/{project}/locations/{location}/applications/{application}',
       ),
       assetPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project_number}/locations/{location}/corpora/{corpus}/assets/{asset}'
+        'projects/{project_number}/locations/{location}/corpora/{corpus}/assets/{asset}',
       ),
       channelPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/clusters/{cluster}/channels/{channel}'
+        'projects/{project}/locations/{location}/clusters/{cluster}/channels/{channel}',
       ),
       clusterPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/clusters/{cluster}'
+        'projects/{project}/locations/{location}/clusters/{cluster}',
       ),
       collectionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project_number}/locations/{location}/corpora/{corpus}/collections/{collection}'
+        'projects/{project_number}/locations/{location}/corpora/{corpus}/collections/{collection}',
       ),
       corpusPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project_number}/locations/{location}/corpora/{corpus}'
+        'projects/{project_number}/locations/{location}/corpora/{corpus}',
       ),
       dataSchemaPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project_number}/locations/{location}/corpora/{corpus}/dataSchemas/{data_schema}'
+        'projects/{project_number}/locations/{location}/corpora/{corpus}/dataSchemas/{data_schema}',
       ),
       draftPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/applications/{application}/drafts/{draft}'
+        'projects/{project}/locations/{location}/applications/{application}/drafts/{draft}',
       ),
       eventPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/clusters/{cluster}/events/{event}'
+        'projects/{project}/locations/{location}/clusters/{cluster}/events/{event}',
       ),
       indexPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project_number}/locations/{location}/corpora/{corpus}/indexes/{index}'
+        'projects/{project_number}/locations/{location}/corpora/{corpus}/indexes/{index}',
       ),
       indexEndpointPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}'
+        'projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}',
       ),
       instancePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/applications/{application}/instances/{instance}'
+        'projects/{project}/locations/{location}/applications/{application}/instances/{instance}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       operatorPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/operators/{operator}'
+        'projects/{project}/locations/{location}/operators/{operator}',
       ),
       processPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/clusters/{cluster}/processes/{process}'
+        'projects/{project}/locations/{location}/clusters/{cluster}/processes/{process}',
       ),
       processorPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/processors/{processor}'
+        'projects/{project}/locations/{location}/processors/{processor}',
       ),
       searchConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project_number}/locations/{location}/corpora/{corpus}/searchConfigs/{search_config}'
+        'projects/{project_number}/locations/{location}/corpora/{corpus}/searchConfigs/{search_config}',
       ),
       searchHypernymPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project_number}/locations/{location}/corpora/{corpus}/searchHypernyms/{search_hypernym}'
+        'projects/{project_number}/locations/{location}/corpora/{corpus}/searchHypernyms/{search_hypernym}',
       ),
       seriesPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/clusters/{cluster}/series/{series}'
+        'projects/{project}/locations/{location}/clusters/{cluster}/series/{series}',
       ),
       streamPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/clusters/{cluster}/streams/{stream}'
+        'projects/{project}/locations/{location}/clusters/{cluster}/streams/{stream}',
       ),
     };
 
@@ -260,14 +290,26 @@ export class LiveVideoAnalyticsClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listPublicOperators:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'operators'),
-      listOperators:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'operators'),
-      listAnalyses:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'analyses'),
-      listProcesses:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'processes')
+      listPublicOperators: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'operators',
+      ),
+      listOperators: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'operators',
+      ),
+      listAnalyses: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'analyses',
+      ),
+      listProcesses: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'processes',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -276,102 +318,181 @@ export class LiveVideoAnalyticsClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/v1/{name=projects/*/locations/*/warehouseOperations/*}',},{get: '/v1/{name=projects/*/locations/*/corpora/*/assets/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/corpora/*/collections/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/corpora/*/imageIndexes/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/corpora/*/indexes/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/corpora/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v1/{name=projects/*/locations/*}',
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v1/{name=projects/*}/locations',
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
+          body: '*',
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            { get: '/v1/{name=projects/*/locations/*/warehouseOperations/*}' },
+            {
+              get: '/v1/{name=projects/*/locations/*/corpora/*/assets/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/corpora/*/collections/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/corpora/*/imageIndexes/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/corpora/*/indexes/*/operations/*}',
+            },
+            { get: '/v1/{name=projects/*/locations/*/corpora/*/operations/*}' },
+            {
+              get: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1/{name=projects/*/locations/*}/operations',
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createOperatorResponse = protoFilesRoot.lookup(
-      '.google.cloud.visionai.v1.Operator') as gax.protobuf.Type;
+      '.google.cloud.visionai.v1.Operator',
+    ) as gax.protobuf.Type;
     const createOperatorMetadata = protoFilesRoot.lookup(
-      '.google.cloud.visionai.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.visionai.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateOperatorResponse = protoFilesRoot.lookup(
-      '.google.cloud.visionai.v1.Operator') as gax.protobuf.Type;
+      '.google.cloud.visionai.v1.Operator',
+    ) as gax.protobuf.Type;
     const updateOperatorMetadata = protoFilesRoot.lookup(
-      '.google.cloud.visionai.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.visionai.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteOperatorResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteOperatorMetadata = protoFilesRoot.lookup(
-      '.google.cloud.visionai.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.visionai.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createAnalysisResponse = protoFilesRoot.lookup(
-      '.google.cloud.visionai.v1.Analysis') as gax.protobuf.Type;
+      '.google.cloud.visionai.v1.Analysis',
+    ) as gax.protobuf.Type;
     const createAnalysisMetadata = protoFilesRoot.lookup(
-      '.google.cloud.visionai.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.visionai.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateAnalysisResponse = protoFilesRoot.lookup(
-      '.google.cloud.visionai.v1.Analysis') as gax.protobuf.Type;
+      '.google.cloud.visionai.v1.Analysis',
+    ) as gax.protobuf.Type;
     const updateAnalysisMetadata = protoFilesRoot.lookup(
-      '.google.cloud.visionai.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.visionai.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteAnalysisResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteAnalysisMetadata = protoFilesRoot.lookup(
-      '.google.cloud.visionai.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.visionai.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createProcessResponse = protoFilesRoot.lookup(
-      '.google.cloud.visionai.v1.Process') as gax.protobuf.Type;
+      '.google.cloud.visionai.v1.Process',
+    ) as gax.protobuf.Type;
     const createProcessMetadata = protoFilesRoot.lookup(
-      '.google.cloud.visionai.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.visionai.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateProcessResponse = protoFilesRoot.lookup(
-      '.google.cloud.visionai.v1.Process') as gax.protobuf.Type;
+      '.google.cloud.visionai.v1.Process',
+    ) as gax.protobuf.Type;
     const updateProcessMetadata = protoFilesRoot.lookup(
-      '.google.cloud.visionai.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.visionai.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteProcessResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteProcessMetadata = protoFilesRoot.lookup(
-      '.google.cloud.visionai.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.visionai.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const batchRunProcessResponse = protoFilesRoot.lookup(
-      '.google.cloud.visionai.v1.BatchRunProcessResponse') as gax.protobuf.Type;
+      '.google.cloud.visionai.v1.BatchRunProcessResponse',
+    ) as gax.protobuf.Type;
     const batchRunProcessMetadata = protoFilesRoot.lookup(
-      '.google.cloud.visionai.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.visionai.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createOperator: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createOperatorResponse.decode.bind(createOperatorResponse),
-        createOperatorMetadata.decode.bind(createOperatorMetadata)),
+        createOperatorMetadata.decode.bind(createOperatorMetadata),
+      ),
       updateOperator: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateOperatorResponse.decode.bind(updateOperatorResponse),
-        updateOperatorMetadata.decode.bind(updateOperatorMetadata)),
+        updateOperatorMetadata.decode.bind(updateOperatorMetadata),
+      ),
       deleteOperator: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteOperatorResponse.decode.bind(deleteOperatorResponse),
-        deleteOperatorMetadata.decode.bind(deleteOperatorMetadata)),
+        deleteOperatorMetadata.decode.bind(deleteOperatorMetadata),
+      ),
       createAnalysis: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createAnalysisResponse.decode.bind(createAnalysisResponse),
-        createAnalysisMetadata.decode.bind(createAnalysisMetadata)),
+        createAnalysisMetadata.decode.bind(createAnalysisMetadata),
+      ),
       updateAnalysis: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateAnalysisResponse.decode.bind(updateAnalysisResponse),
-        updateAnalysisMetadata.decode.bind(updateAnalysisMetadata)),
+        updateAnalysisMetadata.decode.bind(updateAnalysisMetadata),
+      ),
       deleteAnalysis: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteAnalysisResponse.decode.bind(deleteAnalysisResponse),
-        deleteAnalysisMetadata.decode.bind(deleteAnalysisMetadata)),
+        deleteAnalysisMetadata.decode.bind(deleteAnalysisMetadata),
+      ),
       createProcess: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createProcessResponse.decode.bind(createProcessResponse),
-        createProcessMetadata.decode.bind(createProcessMetadata)),
+        createProcessMetadata.decode.bind(createProcessMetadata),
+      ),
       updateProcess: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateProcessResponse.decode.bind(updateProcessResponse),
-        updateProcessMetadata.decode.bind(updateProcessMetadata)),
+        updateProcessMetadata.decode.bind(updateProcessMetadata),
+      ),
       deleteProcess: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteProcessResponse.decode.bind(deleteProcessResponse),
-        deleteProcessMetadata.decode.bind(deleteProcessMetadata)),
+        deleteProcessMetadata.decode.bind(deleteProcessMetadata),
+      ),
       batchRunProcess: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         batchRunProcessResponse.decode.bind(batchRunProcessResponse),
-        batchRunProcessMetadata.decode.bind(batchRunProcessMetadata))
+        batchRunProcessMetadata.decode.bind(batchRunProcessMetadata),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.visionai.v1.LiveVideoAnalytics', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.visionai.v1.LiveVideoAnalytics',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -402,28 +523,52 @@ export class LiveVideoAnalyticsClient {
     // Put together the "service stub" for
     // google.cloud.visionai.v1.LiveVideoAnalytics.
     this.liveVideoAnalyticsStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.visionai.v1.LiveVideoAnalytics') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.visionai.v1.LiveVideoAnalytics',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.visionai.v1.LiveVideoAnalytics,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const liveVideoAnalyticsStubMethods =
-        ['listPublicOperators', 'resolveOperatorInfo', 'listOperators', 'getOperator', 'createOperator', 'updateOperator', 'deleteOperator', 'listAnalyses', 'getAnalysis', 'createAnalysis', 'updateAnalysis', 'deleteAnalysis', 'listProcesses', 'getProcess', 'createProcess', 'updateProcess', 'deleteProcess', 'batchRunProcess'];
+    const liveVideoAnalyticsStubMethods = [
+      'listPublicOperators',
+      'resolveOperatorInfo',
+      'listOperators',
+      'getOperator',
+      'createOperator',
+      'updateOperator',
+      'deleteOperator',
+      'listAnalyses',
+      'getAnalysis',
+      'createAnalysis',
+      'updateAnalysis',
+      'deleteAnalysis',
+      'listProcesses',
+      'getProcess',
+      'createProcess',
+      'updateProcess',
+      'deleteProcess',
+      'batchRunProcess',
+    ];
     for (const methodName of liveVideoAnalyticsStubMethods) {
       const callPromise = this.liveVideoAnalyticsStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -433,7 +578,7 @@ export class LiveVideoAnalyticsClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -448,8 +593,14 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'warehouse-visionai.googleapis.com';
   }
@@ -460,8 +611,14 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'warehouse-visionai.googleapis.com';
   }
@@ -492,9 +649,7 @@ export class LiveVideoAnalyticsClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -503,8 +658,9 @@ export class LiveVideoAnalyticsClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -515,1704 +671,2490 @@ export class LiveVideoAnalyticsClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * ResolveOperatorInfo returns the operator information based on the request.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ResolveOperatorInfoRequest.
- * @param {number[]} request.queries
- *   Required. The operator queries.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.visionai.v1.ResolveOperatorInfoResponse|ResolveOperatorInfoResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/live_video_analytics.resolve_operator_info.js</caption>
- * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_ResolveOperatorInfo_async
- */
+  /**
+   * ResolveOperatorInfo returns the operator information based on the request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ResolveOperatorInfoRequest.
+   * @param {number[]} request.queries
+   *   Required. The operator queries.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.visionai.v1.ResolveOperatorInfoResponse|ResolveOperatorInfoResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/live_video_analytics.resolve_operator_info.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_ResolveOperatorInfo_async
+   */
   resolveOperatorInfo(
-      request?: protos.google.cloud.visionai.v1.IResolveOperatorInfoRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.visionai.v1.IResolveOperatorInfoResponse,
-        protos.google.cloud.visionai.v1.IResolveOperatorInfoRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.visionai.v1.IResolveOperatorInfoRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.visionai.v1.IResolveOperatorInfoResponse,
+      protos.google.cloud.visionai.v1.IResolveOperatorInfoRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   resolveOperatorInfo(
-      request: protos.google.cloud.visionai.v1.IResolveOperatorInfoRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.visionai.v1.IResolveOperatorInfoResponse,
-          protos.google.cloud.visionai.v1.IResolveOperatorInfoRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.IResolveOperatorInfoRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.visionai.v1.IResolveOperatorInfoResponse,
+      | protos.google.cloud.visionai.v1.IResolveOperatorInfoRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   resolveOperatorInfo(
-      request: protos.google.cloud.visionai.v1.IResolveOperatorInfoRequest,
-      callback: Callback<
-          protos.google.cloud.visionai.v1.IResolveOperatorInfoResponse,
-          protos.google.cloud.visionai.v1.IResolveOperatorInfoRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.IResolveOperatorInfoRequest,
+    callback: Callback<
+      protos.google.cloud.visionai.v1.IResolveOperatorInfoResponse,
+      | protos.google.cloud.visionai.v1.IResolveOperatorInfoRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   resolveOperatorInfo(
-      request?: protos.google.cloud.visionai.v1.IResolveOperatorInfoRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.visionai.v1.IResolveOperatorInfoRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.visionai.v1.IResolveOperatorInfoResponse,
-          protos.google.cloud.visionai.v1.IResolveOperatorInfoRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.visionai.v1.IResolveOperatorInfoResponse,
-          protos.google.cloud.visionai.v1.IResolveOperatorInfoRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.visionai.v1.IResolveOperatorInfoResponse,
-        protos.google.cloud.visionai.v1.IResolveOperatorInfoRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.visionai.v1.IResolveOperatorInfoRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.visionai.v1.IResolveOperatorInfoResponse,
+      | protos.google.cloud.visionai.v1.IResolveOperatorInfoRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.visionai.v1.IResolveOperatorInfoResponse,
+      protos.google.cloud.visionai.v1.IResolveOperatorInfoRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('resolveOperatorInfo request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.visionai.v1.IResolveOperatorInfoResponse,
-        protos.google.cloud.visionai.v1.IResolveOperatorInfoRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.visionai.v1.IResolveOperatorInfoResponse,
+          | protos.google.cloud.visionai.v1.IResolveOperatorInfoRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('resolveOperatorInfo response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.resolveOperatorInfo(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.visionai.v1.IResolveOperatorInfoResponse,
-        protos.google.cloud.visionai.v1.IResolveOperatorInfoRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('resolveOperatorInfo response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .resolveOperatorInfo(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.visionai.v1.IResolveOperatorInfoResponse,
+          (
+            | protos.google.cloud.visionai.v1.IResolveOperatorInfoRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('resolveOperatorInfo response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details of a single Operator.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.visionai.v1.Operator|Operator}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/live_video_analytics.get_operator.js</caption>
- * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_GetOperator_async
- */
+  /**
+   * Gets details of a single Operator.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.visionai.v1.Operator|Operator}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/live_video_analytics.get_operator.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_GetOperator_async
+   */
   getOperator(
-      request?: protos.google.cloud.visionai.v1.IGetOperatorRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.visionai.v1.IOperator,
-        protos.google.cloud.visionai.v1.IGetOperatorRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.visionai.v1.IGetOperatorRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.visionai.v1.IOperator,
+      protos.google.cloud.visionai.v1.IGetOperatorRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getOperator(
-      request: protos.google.cloud.visionai.v1.IGetOperatorRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.visionai.v1.IOperator,
-          protos.google.cloud.visionai.v1.IGetOperatorRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.IGetOperatorRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.visionai.v1.IOperator,
+      protos.google.cloud.visionai.v1.IGetOperatorRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getOperator(
-      request: protos.google.cloud.visionai.v1.IGetOperatorRequest,
-      callback: Callback<
-          protos.google.cloud.visionai.v1.IOperator,
-          protos.google.cloud.visionai.v1.IGetOperatorRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.IGetOperatorRequest,
+    callback: Callback<
+      protos.google.cloud.visionai.v1.IOperator,
+      protos.google.cloud.visionai.v1.IGetOperatorRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getOperator(
-      request?: protos.google.cloud.visionai.v1.IGetOperatorRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.visionai.v1.IGetOperatorRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.visionai.v1.IOperator,
-          protos.google.cloud.visionai.v1.IGetOperatorRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.visionai.v1.IOperator,
-          protos.google.cloud.visionai.v1.IGetOperatorRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.visionai.v1.IOperator,
-        protos.google.cloud.visionai.v1.IGetOperatorRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.visionai.v1.IGetOperatorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.visionai.v1.IOperator,
+      protos.google.cloud.visionai.v1.IGetOperatorRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.visionai.v1.IOperator,
+      protos.google.cloud.visionai.v1.IGetOperatorRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getOperator request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.visionai.v1.IOperator,
-        protos.google.cloud.visionai.v1.IGetOperatorRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.visionai.v1.IOperator,
+          | protos.google.cloud.visionai.v1.IGetOperatorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getOperator response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getOperator(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.visionai.v1.IOperator,
-        protos.google.cloud.visionai.v1.IGetOperatorRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getOperator response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getOperator(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.visionai.v1.IOperator,
+          protos.google.cloud.visionai.v1.IGetOperatorRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getOperator response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details of a single Analysis.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.visionai.v1.Analysis|Analysis}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/live_video_analytics.get_analysis.js</caption>
- * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_GetAnalysis_async
- */
+  /**
+   * Gets details of a single Analysis.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.visionai.v1.Analysis|Analysis}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/live_video_analytics.get_analysis.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_GetAnalysis_async
+   */
   getAnalysis(
-      request?: protos.google.cloud.visionai.v1.IGetAnalysisRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.visionai.v1.IAnalysis,
-        protos.google.cloud.visionai.v1.IGetAnalysisRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.visionai.v1.IGetAnalysisRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.visionai.v1.IAnalysis,
+      protos.google.cloud.visionai.v1.IGetAnalysisRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getAnalysis(
-      request: protos.google.cloud.visionai.v1.IGetAnalysisRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.visionai.v1.IAnalysis,
-          protos.google.cloud.visionai.v1.IGetAnalysisRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.IGetAnalysisRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.visionai.v1.IAnalysis,
+      protos.google.cloud.visionai.v1.IGetAnalysisRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAnalysis(
-      request: protos.google.cloud.visionai.v1.IGetAnalysisRequest,
-      callback: Callback<
-          protos.google.cloud.visionai.v1.IAnalysis,
-          protos.google.cloud.visionai.v1.IGetAnalysisRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.IGetAnalysisRequest,
+    callback: Callback<
+      protos.google.cloud.visionai.v1.IAnalysis,
+      protos.google.cloud.visionai.v1.IGetAnalysisRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAnalysis(
-      request?: protos.google.cloud.visionai.v1.IGetAnalysisRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.visionai.v1.IGetAnalysisRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.visionai.v1.IAnalysis,
-          protos.google.cloud.visionai.v1.IGetAnalysisRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.visionai.v1.IAnalysis,
-          protos.google.cloud.visionai.v1.IGetAnalysisRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.visionai.v1.IAnalysis,
-        protos.google.cloud.visionai.v1.IGetAnalysisRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.visionai.v1.IGetAnalysisRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.visionai.v1.IAnalysis,
+      protos.google.cloud.visionai.v1.IGetAnalysisRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.visionai.v1.IAnalysis,
+      protos.google.cloud.visionai.v1.IGetAnalysisRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getAnalysis request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.visionai.v1.IAnalysis,
-        protos.google.cloud.visionai.v1.IGetAnalysisRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.visionai.v1.IAnalysis,
+          | protos.google.cloud.visionai.v1.IGetAnalysisRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAnalysis response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getAnalysis(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.visionai.v1.IAnalysis,
-        protos.google.cloud.visionai.v1.IGetAnalysisRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getAnalysis response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getAnalysis(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.visionai.v1.IAnalysis,
+          protos.google.cloud.visionai.v1.IGetAnalysisRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getAnalysis response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details of a single Process.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.visionai.v1.Process|Process}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/live_video_analytics.get_process.js</caption>
- * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_GetProcess_async
- */
+  /**
+   * Gets details of a single Process.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.visionai.v1.Process|Process}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/live_video_analytics.get_process.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_GetProcess_async
+   */
   getProcess(
-      request?: protos.google.cloud.visionai.v1.IGetProcessRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.visionai.v1.IProcess,
-        protos.google.cloud.visionai.v1.IGetProcessRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.visionai.v1.IGetProcessRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.visionai.v1.IProcess,
+      protos.google.cloud.visionai.v1.IGetProcessRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getProcess(
-      request: protos.google.cloud.visionai.v1.IGetProcessRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.visionai.v1.IProcess,
-          protos.google.cloud.visionai.v1.IGetProcessRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.IGetProcessRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.visionai.v1.IProcess,
+      protos.google.cloud.visionai.v1.IGetProcessRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getProcess(
-      request: protos.google.cloud.visionai.v1.IGetProcessRequest,
-      callback: Callback<
-          protos.google.cloud.visionai.v1.IProcess,
-          protos.google.cloud.visionai.v1.IGetProcessRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.IGetProcessRequest,
+    callback: Callback<
+      protos.google.cloud.visionai.v1.IProcess,
+      protos.google.cloud.visionai.v1.IGetProcessRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getProcess(
-      request?: protos.google.cloud.visionai.v1.IGetProcessRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.visionai.v1.IGetProcessRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.visionai.v1.IProcess,
-          protos.google.cloud.visionai.v1.IGetProcessRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.visionai.v1.IProcess,
-          protos.google.cloud.visionai.v1.IGetProcessRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.visionai.v1.IProcess,
-        protos.google.cloud.visionai.v1.IGetProcessRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.visionai.v1.IGetProcessRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.visionai.v1.IProcess,
+      protos.google.cloud.visionai.v1.IGetProcessRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.visionai.v1.IProcess,
+      protos.google.cloud.visionai.v1.IGetProcessRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getProcess request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.visionai.v1.IProcess,
-        protos.google.cloud.visionai.v1.IGetProcessRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.visionai.v1.IProcess,
+          protos.google.cloud.visionai.v1.IGetProcessRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getProcess response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getProcess(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.visionai.v1.IProcess,
-        protos.google.cloud.visionai.v1.IGetProcessRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getProcess response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getProcess(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.visionai.v1.IProcess,
+          protos.google.cloud.visionai.v1.IGetProcessRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getProcess response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Creates a new Operator in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Value for parent.
- * @param {string} request.operatorId
- *   Required. Id of the requesting object.
- * @param {google.cloud.visionai.v1.Operator} request.operator
- *   Required. The resource being created.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request ID,
- *   the server can check if original operation with the same request ID was
- *   received, and if so, will ignore the second request. This prevents clients
- *   from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/live_video_analytics.create_operator.js</caption>
- * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_CreateOperator_async
- */
+  /**
+   * Creates a new Operator in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Value for parent.
+   * @param {string} request.operatorId
+   *   Required. Id of the requesting object.
+   * @param {google.cloud.visionai.v1.Operator} request.operator
+   *   Required. The resource being created.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/live_video_analytics.create_operator.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_CreateOperator_async
+   */
   createOperator(
-      request?: protos.google.cloud.visionai.v1.ICreateOperatorRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.visionai.v1.IOperator, protos.google.cloud.visionai.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.visionai.v1.ICreateOperatorRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.visionai.v1.IOperator,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createOperator(
-      request: protos.google.cloud.visionai.v1.ICreateOperatorRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.visionai.v1.IOperator, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.ICreateOperatorRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.visionai.v1.IOperator,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createOperator(
-      request: protos.google.cloud.visionai.v1.ICreateOperatorRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.visionai.v1.IOperator, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.ICreateOperatorRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.visionai.v1.IOperator,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createOperator(
-      request?: protos.google.cloud.visionai.v1.ICreateOperatorRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.visionai.v1.IOperator, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.visionai.v1.IOperator, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.visionai.v1.IOperator, protos.google.cloud.visionai.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.visionai.v1.ICreateOperatorRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.visionai.v1.IOperator,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.visionai.v1.IOperator,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.visionai.v1.IOperator,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.visionai.v1.IOperator, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.visionai.v1.IOperator,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createOperator response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createOperator request %j', request);
-    return this.innerApiCalls.createOperator(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.visionai.v1.IOperator, protos.google.cloud.visionai.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createOperator response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createOperator(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.visionai.v1.IOperator,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createOperator response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createOperator()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/live_video_analytics.create_operator.js</caption>
- * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_CreateOperator_async
- */
-  async checkCreateOperatorProgress(name: string): Promise<LROperation<protos.google.cloud.visionai.v1.Operator, protos.google.cloud.visionai.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createOperator()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/live_video_analytics.create_operator.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_CreateOperator_async
+   */
+  async checkCreateOperatorProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.visionai.v1.Operator,
+      protos.google.cloud.visionai.v1.OperationMetadata
+    >
+  > {
     this._log.info('createOperator long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createOperator, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.visionai.v1.Operator, protos.google.cloud.visionai.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createOperator,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.visionai.v1.Operator,
+      protos.google.cloud.visionai.v1.OperationMetadata
+    >;
   }
-/**
- * Updates the parameters of a single Operator.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. Field mask is used to specify the fields to be overwritten in the
- *   Operator resource by the update.
- *   The fields specified in the update_mask are relative to the resource, not
- *   the full request. A field will be overwritten if it is in the mask. If the
- *   user does not provide a mask then all fields will be overwritten.
- * @param {google.cloud.visionai.v1.Operator} request.operator
- *   Required. The resource being updated
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request ID,
- *   the server can check if original operation with the same request ID was
- *   received, and if so, will ignore the second request. This prevents clients
- *   from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/live_video_analytics.update_operator.js</caption>
- * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_UpdateOperator_async
- */
+  /**
+   * Updates the parameters of a single Operator.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Field mask is used to specify the fields to be overwritten in the
+   *   Operator resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten.
+   * @param {google.cloud.visionai.v1.Operator} request.operator
+   *   Required. The resource being updated
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/live_video_analytics.update_operator.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_UpdateOperator_async
+   */
   updateOperator(
-      request?: protos.google.cloud.visionai.v1.IUpdateOperatorRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.visionai.v1.IOperator, protos.google.cloud.visionai.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.visionai.v1.IUpdateOperatorRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.visionai.v1.IOperator,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateOperator(
-      request: protos.google.cloud.visionai.v1.IUpdateOperatorRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.visionai.v1.IOperator, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.IUpdateOperatorRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.visionai.v1.IOperator,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateOperator(
-      request: protos.google.cloud.visionai.v1.IUpdateOperatorRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.visionai.v1.IOperator, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.IUpdateOperatorRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.visionai.v1.IOperator,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateOperator(
-      request?: protos.google.cloud.visionai.v1.IUpdateOperatorRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.visionai.v1.IOperator, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.visionai.v1.IOperator, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.visionai.v1.IOperator, protos.google.cloud.visionai.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.visionai.v1.IUpdateOperatorRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.visionai.v1.IOperator,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.visionai.v1.IOperator,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.visionai.v1.IOperator,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'operator.name': request.operator!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'operator.name': request.operator!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.visionai.v1.IOperator, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.visionai.v1.IOperator,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateOperator response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateOperator request %j', request);
-    return this.innerApiCalls.updateOperator(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.visionai.v1.IOperator, protos.google.cloud.visionai.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateOperator response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateOperator(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.visionai.v1.IOperator,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateOperator response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateOperator()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/live_video_analytics.update_operator.js</caption>
- * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_UpdateOperator_async
- */
-  async checkUpdateOperatorProgress(name: string): Promise<LROperation<protos.google.cloud.visionai.v1.Operator, protos.google.cloud.visionai.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateOperator()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/live_video_analytics.update_operator.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_UpdateOperator_async
+   */
+  async checkUpdateOperatorProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.visionai.v1.Operator,
+      protos.google.cloud.visionai.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateOperator long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateOperator, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.visionai.v1.Operator, protos.google.cloud.visionai.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateOperator,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.visionai.v1.Operator,
+      protos.google.cloud.visionai.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes a single Operator.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes after the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request ID,
- *   the server can check if original operation with the same request ID was
- *   received, and if so, will ignore the second request. This prevents clients
- *   from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/live_video_analytics.delete_operator.js</caption>
- * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_DeleteOperator_async
- */
+  /**
+   * Deletes a single Operator.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/live_video_analytics.delete_operator.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_DeleteOperator_async
+   */
   deleteOperator(
-      request?: protos.google.cloud.visionai.v1.IDeleteOperatorRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.visionai.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.visionai.v1.IDeleteOperatorRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteOperator(
-      request: protos.google.cloud.visionai.v1.IDeleteOperatorRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.IDeleteOperatorRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteOperator(
-      request: protos.google.cloud.visionai.v1.IDeleteOperatorRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.IDeleteOperatorRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteOperator(
-      request?: protos.google.cloud.visionai.v1.IDeleteOperatorRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.visionai.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.visionai.v1.IDeleteOperatorRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteOperator response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteOperator request %j', request);
-    return this.innerApiCalls.deleteOperator(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.visionai.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteOperator response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteOperator(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteOperator response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteOperator()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/live_video_analytics.delete_operator.js</caption>
- * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_DeleteOperator_async
- */
-  async checkDeleteOperatorProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.visionai.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteOperator()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/live_video_analytics.delete_operator.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_DeleteOperator_async
+   */
+  async checkDeleteOperatorProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.visionai.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteOperator long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteOperator, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.visionai.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteOperator,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.visionai.v1.OperationMetadata
+    >;
   }
-/**
- * Creates a new Analysis in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Value for parent.
- * @param {string} request.analysisId
- *   Required. Id of the requesting object.
- * @param {google.cloud.visionai.v1.Analysis} request.analysis
- *   Required. The resource being created.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request ID,
- *   the server can check if original operation with the same request ID was
- *   received, and if so, will ignore the second request. This prevents clients
- *   from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/live_video_analytics.create_analysis.js</caption>
- * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_CreateAnalysis_async
- */
+  /**
+   * Creates a new Analysis in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Value for parent.
+   * @param {string} request.analysisId
+   *   Required. Id of the requesting object.
+   * @param {google.cloud.visionai.v1.Analysis} request.analysis
+   *   Required. The resource being created.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/live_video_analytics.create_analysis.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_CreateAnalysis_async
+   */
   createAnalysis(
-      request?: protos.google.cloud.visionai.v1.ICreateAnalysisRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.visionai.v1.IAnalysis, protos.google.cloud.visionai.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.visionai.v1.ICreateAnalysisRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.visionai.v1.IAnalysis,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createAnalysis(
-      request: protos.google.cloud.visionai.v1.ICreateAnalysisRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.visionai.v1.IAnalysis, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.ICreateAnalysisRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.visionai.v1.IAnalysis,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createAnalysis(
-      request: protos.google.cloud.visionai.v1.ICreateAnalysisRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.visionai.v1.IAnalysis, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.ICreateAnalysisRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.visionai.v1.IAnalysis,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createAnalysis(
-      request?: protos.google.cloud.visionai.v1.ICreateAnalysisRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.visionai.v1.IAnalysis, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.visionai.v1.IAnalysis, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.visionai.v1.IAnalysis, protos.google.cloud.visionai.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.visionai.v1.ICreateAnalysisRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.visionai.v1.IAnalysis,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.visionai.v1.IAnalysis,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.visionai.v1.IAnalysis,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.visionai.v1.IAnalysis, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.visionai.v1.IAnalysis,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createAnalysis response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createAnalysis request %j', request);
-    return this.innerApiCalls.createAnalysis(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.visionai.v1.IAnalysis, protos.google.cloud.visionai.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createAnalysis response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createAnalysis(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.visionai.v1.IAnalysis,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAnalysis response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createAnalysis()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/live_video_analytics.create_analysis.js</caption>
- * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_CreateAnalysis_async
- */
-  async checkCreateAnalysisProgress(name: string): Promise<LROperation<protos.google.cloud.visionai.v1.Analysis, protos.google.cloud.visionai.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createAnalysis()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/live_video_analytics.create_analysis.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_CreateAnalysis_async
+   */
+  async checkCreateAnalysisProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.visionai.v1.Analysis,
+      protos.google.cloud.visionai.v1.OperationMetadata
+    >
+  > {
     this._log.info('createAnalysis long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createAnalysis, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.visionai.v1.Analysis, protos.google.cloud.visionai.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createAnalysis,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.visionai.v1.Analysis,
+      protos.google.cloud.visionai.v1.OperationMetadata
+    >;
   }
-/**
- * Updates the parameters of a single Analysis.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. Field mask is used to specify the fields to be overwritten in the
- *   Analysis resource by the update.
- *   The fields specified in the update_mask are relative to the resource, not
- *   the full request. A field will be overwritten if it is in the mask. If the
- *   user does not provide a mask then all fields will be overwritten.
- * @param {google.cloud.visionai.v1.Analysis} request.analysis
- *   Required. The resource being updated.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request ID,
- *   the server can check if original operation with the same request ID was
- *   received, and if so, will ignore the second request. This prevents clients
- *   from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/live_video_analytics.update_analysis.js</caption>
- * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_UpdateAnalysis_async
- */
+  /**
+   * Updates the parameters of a single Analysis.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Field mask is used to specify the fields to be overwritten in the
+   *   Analysis resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten.
+   * @param {google.cloud.visionai.v1.Analysis} request.analysis
+   *   Required. The resource being updated.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/live_video_analytics.update_analysis.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_UpdateAnalysis_async
+   */
   updateAnalysis(
-      request?: protos.google.cloud.visionai.v1.IUpdateAnalysisRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.visionai.v1.IAnalysis, protos.google.cloud.visionai.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.visionai.v1.IUpdateAnalysisRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.visionai.v1.IAnalysis,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateAnalysis(
-      request: protos.google.cloud.visionai.v1.IUpdateAnalysisRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.visionai.v1.IAnalysis, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.IUpdateAnalysisRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.visionai.v1.IAnalysis,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateAnalysis(
-      request: protos.google.cloud.visionai.v1.IUpdateAnalysisRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.visionai.v1.IAnalysis, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.IUpdateAnalysisRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.visionai.v1.IAnalysis,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateAnalysis(
-      request?: protos.google.cloud.visionai.v1.IUpdateAnalysisRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.visionai.v1.IAnalysis, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.visionai.v1.IAnalysis, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.visionai.v1.IAnalysis, protos.google.cloud.visionai.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.visionai.v1.IUpdateAnalysisRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.visionai.v1.IAnalysis,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.visionai.v1.IAnalysis,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.visionai.v1.IAnalysis,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'analysis.name': request.analysis!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'analysis.name': request.analysis!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.visionai.v1.IAnalysis, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.visionai.v1.IAnalysis,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateAnalysis response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateAnalysis request %j', request);
-    return this.innerApiCalls.updateAnalysis(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.visionai.v1.IAnalysis, protos.google.cloud.visionai.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateAnalysis response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateAnalysis(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.visionai.v1.IAnalysis,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAnalysis response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateAnalysis()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/live_video_analytics.update_analysis.js</caption>
- * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_UpdateAnalysis_async
- */
-  async checkUpdateAnalysisProgress(name: string): Promise<LROperation<protos.google.cloud.visionai.v1.Analysis, protos.google.cloud.visionai.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateAnalysis()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/live_video_analytics.update_analysis.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_UpdateAnalysis_async
+   */
+  async checkUpdateAnalysisProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.visionai.v1.Analysis,
+      protos.google.cloud.visionai.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateAnalysis long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateAnalysis, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.visionai.v1.Analysis, protos.google.cloud.visionai.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateAnalysis,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.visionai.v1.Analysis,
+      protos.google.cloud.visionai.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes a single Analysis.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes after the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request ID,
- *   the server can check if original operation with the same request ID was
- *   received, and if so, will ignore the second request. This prevents clients
- *   from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/live_video_analytics.delete_analysis.js</caption>
- * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_DeleteAnalysis_async
- */
+  /**
+   * Deletes a single Analysis.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/live_video_analytics.delete_analysis.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_DeleteAnalysis_async
+   */
   deleteAnalysis(
-      request?: protos.google.cloud.visionai.v1.IDeleteAnalysisRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.visionai.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.visionai.v1.IDeleteAnalysisRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteAnalysis(
-      request: protos.google.cloud.visionai.v1.IDeleteAnalysisRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.IDeleteAnalysisRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteAnalysis(
-      request: protos.google.cloud.visionai.v1.IDeleteAnalysisRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.IDeleteAnalysisRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteAnalysis(
-      request?: protos.google.cloud.visionai.v1.IDeleteAnalysisRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.visionai.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.visionai.v1.IDeleteAnalysisRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteAnalysis response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteAnalysis request %j', request);
-    return this.innerApiCalls.deleteAnalysis(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.visionai.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteAnalysis response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteAnalysis(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAnalysis response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteAnalysis()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/live_video_analytics.delete_analysis.js</caption>
- * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_DeleteAnalysis_async
- */
-  async checkDeleteAnalysisProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.visionai.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteAnalysis()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/live_video_analytics.delete_analysis.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_DeleteAnalysis_async
+   */
+  async checkDeleteAnalysisProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.visionai.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteAnalysis long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteAnalysis, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.visionai.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteAnalysis,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.visionai.v1.OperationMetadata
+    >;
   }
-/**
- * Creates a new Process in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Value for parent.
- * @param {string} request.processId
- *   Required. Id of the requesting object.
- * @param {google.cloud.visionai.v1.Process} request.process
- *   Required. The resource being created.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request ID,
- *   the server can check if original operation with the same request ID was
- *   received, and if so, will ignore the second request. This prevents clients
- *   from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/live_video_analytics.create_process.js</caption>
- * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_CreateProcess_async
- */
+  /**
+   * Creates a new Process in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Value for parent.
+   * @param {string} request.processId
+   *   Required. Id of the requesting object.
+   * @param {google.cloud.visionai.v1.Process} request.process
+   *   Required. The resource being created.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/live_video_analytics.create_process.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_CreateProcess_async
+   */
   createProcess(
-      request?: protos.google.cloud.visionai.v1.ICreateProcessRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.visionai.v1.IProcess, protos.google.cloud.visionai.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.visionai.v1.ICreateProcessRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.visionai.v1.IProcess,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createProcess(
-      request: protos.google.cloud.visionai.v1.ICreateProcessRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.visionai.v1.IProcess, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.ICreateProcessRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.visionai.v1.IProcess,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createProcess(
-      request: protos.google.cloud.visionai.v1.ICreateProcessRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.visionai.v1.IProcess, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.ICreateProcessRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.visionai.v1.IProcess,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createProcess(
-      request?: protos.google.cloud.visionai.v1.ICreateProcessRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.visionai.v1.IProcess, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.visionai.v1.IProcess, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.visionai.v1.IProcess, protos.google.cloud.visionai.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.visionai.v1.ICreateProcessRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.visionai.v1.IProcess,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.visionai.v1.IProcess,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.visionai.v1.IProcess,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.visionai.v1.IProcess, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.visionai.v1.IProcess,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createProcess response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createProcess request %j', request);
-    return this.innerApiCalls.createProcess(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.visionai.v1.IProcess, protos.google.cloud.visionai.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createProcess response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createProcess(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.visionai.v1.IProcess,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createProcess response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createProcess()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/live_video_analytics.create_process.js</caption>
- * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_CreateProcess_async
- */
-  async checkCreateProcessProgress(name: string): Promise<LROperation<protos.google.cloud.visionai.v1.Process, protos.google.cloud.visionai.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createProcess()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/live_video_analytics.create_process.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_CreateProcess_async
+   */
+  async checkCreateProcessProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.visionai.v1.Process,
+      protos.google.cloud.visionai.v1.OperationMetadata
+    >
+  > {
     this._log.info('createProcess long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createProcess, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.visionai.v1.Process, protos.google.cloud.visionai.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createProcess,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.visionai.v1.Process,
+      protos.google.cloud.visionai.v1.OperationMetadata
+    >;
   }
-/**
- * Updates the parameters of a single Process.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. Field mask is used to specify the fields to be overwritten in the
- *   Process resource by the update.
- *   The fields specified in the update_mask are relative to the resource, not
- *   the full request. A field will be overwritten if it is in the mask. If the
- *   user does not provide a mask then all fields will be overwritten.
- * @param {google.cloud.visionai.v1.Process} request.process
- *   Required. The resource being updated.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request ID,
- *   the server can check if original operation with the same request ID was
- *   received, and if so, will ignore the second request. This prevents clients
- *   from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/live_video_analytics.update_process.js</caption>
- * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_UpdateProcess_async
- */
+  /**
+   * Updates the parameters of a single Process.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Field mask is used to specify the fields to be overwritten in the
+   *   Process resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten.
+   * @param {google.cloud.visionai.v1.Process} request.process
+   *   Required. The resource being updated.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/live_video_analytics.update_process.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_UpdateProcess_async
+   */
   updateProcess(
-      request?: protos.google.cloud.visionai.v1.IUpdateProcessRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.visionai.v1.IProcess, protos.google.cloud.visionai.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.visionai.v1.IUpdateProcessRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.visionai.v1.IProcess,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateProcess(
-      request: protos.google.cloud.visionai.v1.IUpdateProcessRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.visionai.v1.IProcess, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.IUpdateProcessRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.visionai.v1.IProcess,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateProcess(
-      request: protos.google.cloud.visionai.v1.IUpdateProcessRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.visionai.v1.IProcess, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.IUpdateProcessRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.visionai.v1.IProcess,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateProcess(
-      request?: protos.google.cloud.visionai.v1.IUpdateProcessRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.visionai.v1.IProcess, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.visionai.v1.IProcess, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.visionai.v1.IProcess, protos.google.cloud.visionai.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.visionai.v1.IUpdateProcessRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.visionai.v1.IProcess,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.visionai.v1.IProcess,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.visionai.v1.IProcess,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'process.name': request.process!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'process.name': request.process!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.visionai.v1.IProcess, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.visionai.v1.IProcess,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateProcess response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateProcess request %j', request);
-    return this.innerApiCalls.updateProcess(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.visionai.v1.IProcess, protos.google.cloud.visionai.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateProcess response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateProcess(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.visionai.v1.IProcess,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateProcess response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateProcess()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/live_video_analytics.update_process.js</caption>
- * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_UpdateProcess_async
- */
-  async checkUpdateProcessProgress(name: string): Promise<LROperation<protos.google.cloud.visionai.v1.Process, protos.google.cloud.visionai.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateProcess()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/live_video_analytics.update_process.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_UpdateProcess_async
+   */
+  async checkUpdateProcessProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.visionai.v1.Process,
+      protos.google.cloud.visionai.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateProcess long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateProcess, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.visionai.v1.Process, protos.google.cloud.visionai.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateProcess,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.visionai.v1.Process,
+      protos.google.cloud.visionai.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes a single Process.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes after the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request ID,
- *   the server can check if original operation with the same request ID was
- *   received, and if so, will ignore the second request. This prevents clients
- *   from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/live_video_analytics.delete_process.js</caption>
- * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_DeleteProcess_async
- */
+  /**
+   * Deletes a single Process.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/live_video_analytics.delete_process.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_DeleteProcess_async
+   */
   deleteProcess(
-      request?: protos.google.cloud.visionai.v1.IDeleteProcessRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.visionai.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.visionai.v1.IDeleteProcessRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteProcess(
-      request: protos.google.cloud.visionai.v1.IDeleteProcessRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.IDeleteProcessRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteProcess(
-      request: protos.google.cloud.visionai.v1.IDeleteProcessRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.IDeleteProcessRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteProcess(
-      request?: protos.google.cloud.visionai.v1.IDeleteProcessRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.visionai.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.visionai.v1.IDeleteProcessRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteProcess response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteProcess request %j', request);
-    return this.innerApiCalls.deleteProcess(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.visionai.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteProcess response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteProcess(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteProcess response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteProcess()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/live_video_analytics.delete_process.js</caption>
- * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_DeleteProcess_async
- */
-  async checkDeleteProcessProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.visionai.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteProcess()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/live_video_analytics.delete_process.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_DeleteProcess_async
+   */
+  async checkDeleteProcessProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.visionai.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteProcess long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteProcess, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.visionai.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteProcess,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.visionai.v1.OperationMetadata
+    >;
   }
-/**
- * Run all of the processes to "completion". Max time for each process is
- * the LRO time limit.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource shared by all processes being created.
- * @param {number[]} request.requests
- *   Required. The create process requests.
- * @param {google.cloud.visionai.v1.BatchRunProcessRequest.BatchRunProcessOptions} [request.options]
- *   Optional. Options for batch processes.
- * @param {string} request.batchId
- *   Output only. The batch ID.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/live_video_analytics.batch_run_process.js</caption>
- * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_BatchRunProcess_async
- */
+  /**
+   * Run all of the processes to "completion". Max time for each process is
+   * the LRO time limit.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource shared by all processes being created.
+   * @param {number[]} request.requests
+   *   Required. The create process requests.
+   * @param {google.cloud.visionai.v1.BatchRunProcessRequest.BatchRunProcessOptions} [request.options]
+   *   Optional. Options for batch processes.
+   * @param {string} request.batchId
+   *   Output only. The batch ID.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/live_video_analytics.batch_run_process.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_BatchRunProcess_async
+   */
   batchRunProcess(
-      request?: protos.google.cloud.visionai.v1.IBatchRunProcessRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.visionai.v1.IBatchRunProcessResponse, protos.google.cloud.visionai.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.visionai.v1.IBatchRunProcessRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.visionai.v1.IBatchRunProcessResponse,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   batchRunProcess(
-      request: protos.google.cloud.visionai.v1.IBatchRunProcessRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.visionai.v1.IBatchRunProcessResponse, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.IBatchRunProcessRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.visionai.v1.IBatchRunProcessResponse,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchRunProcess(
-      request: protos.google.cloud.visionai.v1.IBatchRunProcessRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.visionai.v1.IBatchRunProcessResponse, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.visionai.v1.IBatchRunProcessRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.visionai.v1.IBatchRunProcessResponse,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchRunProcess(
-      request?: protos.google.cloud.visionai.v1.IBatchRunProcessRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.visionai.v1.IBatchRunProcessResponse, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.visionai.v1.IBatchRunProcessResponse, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.visionai.v1.IBatchRunProcessResponse, protos.google.cloud.visionai.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.visionai.v1.IBatchRunProcessRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.visionai.v1.IBatchRunProcessResponse,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.visionai.v1.IBatchRunProcessResponse,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.visionai.v1.IBatchRunProcessResponse,
+        protos.google.cloud.visionai.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.visionai.v1.IBatchRunProcessResponse, protos.google.cloud.visionai.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.visionai.v1.IBatchRunProcessResponse,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('batchRunProcess response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('batchRunProcess request %j', request);
-    return this.innerApiCalls.batchRunProcess(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.visionai.v1.IBatchRunProcessResponse, protos.google.cloud.visionai.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('batchRunProcess response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .batchRunProcess(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.visionai.v1.IBatchRunProcessResponse,
+            protos.google.cloud.visionai.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchRunProcess response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `batchRunProcess()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/live_video_analytics.batch_run_process.js</caption>
- * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_BatchRunProcess_async
- */
-  async checkBatchRunProcessProgress(name: string): Promise<LROperation<protos.google.cloud.visionai.v1.BatchRunProcessResponse, protos.google.cloud.visionai.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `batchRunProcess()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/live_video_analytics.batch_run_process.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_BatchRunProcess_async
+   */
+  async checkBatchRunProcessProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.visionai.v1.BatchRunProcessResponse,
+      protos.google.cloud.visionai.v1.OperationMetadata
+    >
+  > {
     this._log.info('batchRunProcess long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.batchRunProcess, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.visionai.v1.BatchRunProcessResponse, protos.google.cloud.visionai.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.batchRunProcess,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.visionai.v1.BatchRunProcessResponse,
+      protos.google.cloud.visionai.v1.OperationMetadata
+    >;
   }
- /**
- * ListPublicOperators returns all the operators in public registry.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListPublicOperatorsRequest.
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filtering results.
- * @param {string} request.orderBy
- *   Hint for how to order the results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.visionai.v1.Operator|Operator}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listPublicOperatorsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * ListPublicOperators returns all the operators in public registry.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListPublicOperatorsRequest.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   * @param {string} request.filter
+   *   Filtering results.
+   * @param {string} request.orderBy
+   *   Hint for how to order the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.visionai.v1.Operator|Operator}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listPublicOperatorsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listPublicOperators(
-      request?: protos.google.cloud.visionai.v1.IListPublicOperatorsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.visionai.v1.IOperator[],
-        protos.google.cloud.visionai.v1.IListPublicOperatorsRequest|null,
-        protos.google.cloud.visionai.v1.IListPublicOperatorsResponse
-      ]>;
+    request?: protos.google.cloud.visionai.v1.IListPublicOperatorsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.visionai.v1.IOperator[],
+      protos.google.cloud.visionai.v1.IListPublicOperatorsRequest | null,
+      protos.google.cloud.visionai.v1.IListPublicOperatorsResponse,
+    ]
+  >;
   listPublicOperators(
-      request: protos.google.cloud.visionai.v1.IListPublicOperatorsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.visionai.v1.IListPublicOperatorsRequest,
-          protos.google.cloud.visionai.v1.IListPublicOperatorsResponse|null|undefined,
-          protos.google.cloud.visionai.v1.IOperator>): void;
+    request: protos.google.cloud.visionai.v1.IListPublicOperatorsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.visionai.v1.IListPublicOperatorsRequest,
+      | protos.google.cloud.visionai.v1.IListPublicOperatorsResponse
+      | null
+      | undefined,
+      protos.google.cloud.visionai.v1.IOperator
+    >,
+  ): void;
   listPublicOperators(
-      request: protos.google.cloud.visionai.v1.IListPublicOperatorsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.visionai.v1.IListPublicOperatorsRequest,
-          protos.google.cloud.visionai.v1.IListPublicOperatorsResponse|null|undefined,
-          protos.google.cloud.visionai.v1.IOperator>): void;
+    request: protos.google.cloud.visionai.v1.IListPublicOperatorsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.visionai.v1.IListPublicOperatorsRequest,
+      | protos.google.cloud.visionai.v1.IListPublicOperatorsResponse
+      | null
+      | undefined,
+      protos.google.cloud.visionai.v1.IOperator
+    >,
+  ): void;
   listPublicOperators(
-      request?: protos.google.cloud.visionai.v1.IListPublicOperatorsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.visionai.v1.IListPublicOperatorsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.visionai.v1.IListPublicOperatorsRequest,
-          protos.google.cloud.visionai.v1.IListPublicOperatorsResponse|null|undefined,
-          protos.google.cloud.visionai.v1.IOperator>,
-      callback?: PaginationCallback<
-          protos.google.cloud.visionai.v1.IListPublicOperatorsRequest,
-          protos.google.cloud.visionai.v1.IListPublicOperatorsResponse|null|undefined,
-          protos.google.cloud.visionai.v1.IOperator>):
-      Promise<[
-        protos.google.cloud.visionai.v1.IOperator[],
-        protos.google.cloud.visionai.v1.IListPublicOperatorsRequest|null,
-        protos.google.cloud.visionai.v1.IListPublicOperatorsResponse
-      ]>|void {
+          | protos.google.cloud.visionai.v1.IListPublicOperatorsResponse
+          | null
+          | undefined,
+          protos.google.cloud.visionai.v1.IOperator
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.visionai.v1.IListPublicOperatorsRequest,
+      | protos.google.cloud.visionai.v1.IListPublicOperatorsResponse
+      | null
+      | undefined,
+      protos.google.cloud.visionai.v1.IOperator
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.visionai.v1.IOperator[],
+      protos.google.cloud.visionai.v1.IListPublicOperatorsRequest | null,
+      protos.google.cloud.visionai.v1.IListPublicOperatorsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.visionai.v1.IListPublicOperatorsRequest,
-      protos.google.cloud.visionai.v1.IListPublicOperatorsResponse|null|undefined,
-      protos.google.cloud.visionai.v1.IOperator>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.visionai.v1.IListPublicOperatorsRequest,
+          | protos.google.cloud.visionai.v1.IListPublicOperatorsResponse
+          | null
+          | undefined,
+          protos.google.cloud.visionai.v1.IOperator
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listPublicOperators values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2221,204 +3163,227 @@ export class LiveVideoAnalyticsClient {
     this._log.info('listPublicOperators request %j', request);
     return this.innerApiCalls
       .listPublicOperators(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.visionai.v1.IOperator[],
-        protos.google.cloud.visionai.v1.IListPublicOperatorsRequest|null,
-        protos.google.cloud.visionai.v1.IListPublicOperatorsResponse
-      ]) => {
-        this._log.info('listPublicOperators values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.visionai.v1.IOperator[],
+          protos.google.cloud.visionai.v1.IListPublicOperatorsRequest | null,
+          protos.google.cloud.visionai.v1.IListPublicOperatorsResponse,
+        ]) => {
+          this._log.info('listPublicOperators values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listPublicOperators`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListPublicOperatorsRequest.
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filtering results.
- * @param {string} request.orderBy
- *   Hint for how to order the results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.visionai.v1.Operator|Operator} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listPublicOperatorsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listPublicOperators`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListPublicOperatorsRequest.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   * @param {string} request.filter
+   *   Filtering results.
+   * @param {string} request.orderBy
+   *   Hint for how to order the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.visionai.v1.Operator|Operator} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listPublicOperatorsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listPublicOperatorsStream(
-      request?: protos.google.cloud.visionai.v1.IListPublicOperatorsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.visionai.v1.IListPublicOperatorsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listPublicOperators'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listPublicOperators stream %j', request);
     return this.descriptors.page.listPublicOperators.createStream(
       this.innerApiCalls.listPublicOperators as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listPublicOperators`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListPublicOperatorsRequest.
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filtering results.
- * @param {string} request.orderBy
- *   Hint for how to order the results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.visionai.v1.Operator|Operator}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/live_video_analytics.list_public_operators.js</caption>
- * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_ListPublicOperators_async
- */
+  /**
+   * Equivalent to `listPublicOperators`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListPublicOperatorsRequest.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   * @param {string} request.filter
+   *   Filtering results.
+   * @param {string} request.orderBy
+   *   Hint for how to order the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.visionai.v1.Operator|Operator}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/live_video_analytics.list_public_operators.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_ListPublicOperators_async
+   */
   listPublicOperatorsAsync(
-      request?: protos.google.cloud.visionai.v1.IListPublicOperatorsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.visionai.v1.IOperator>{
+    request?: protos.google.cloud.visionai.v1.IListPublicOperatorsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.visionai.v1.IOperator> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listPublicOperators'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listPublicOperators iterate %j', request);
     return this.descriptors.page.listPublicOperators.asyncIterate(
       this.innerApiCalls['listPublicOperators'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.visionai.v1.IOperator>;
   }
- /**
- * Lists Operators in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListOperatorsRequest.
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filtering results.
- * @param {string} request.orderBy
- *   Hint for how to order the results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.visionai.v1.Operator|Operator}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listOperatorsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists Operators in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListOperatorsRequest.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   * @param {string} request.filter
+   *   Filtering results.
+   * @param {string} request.orderBy
+   *   Hint for how to order the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.visionai.v1.Operator|Operator}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listOperatorsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listOperators(
-      request?: protos.google.cloud.visionai.v1.IListOperatorsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.visionai.v1.IOperator[],
-        protos.google.cloud.visionai.v1.IListOperatorsRequest|null,
-        protos.google.cloud.visionai.v1.IListOperatorsResponse
-      ]>;
+    request?: protos.google.cloud.visionai.v1.IListOperatorsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.visionai.v1.IOperator[],
+      protos.google.cloud.visionai.v1.IListOperatorsRequest | null,
+      protos.google.cloud.visionai.v1.IListOperatorsResponse,
+    ]
+  >;
   listOperators(
-      request: protos.google.cloud.visionai.v1.IListOperatorsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.visionai.v1.IListOperatorsRequest,
-          protos.google.cloud.visionai.v1.IListOperatorsResponse|null|undefined,
-          protos.google.cloud.visionai.v1.IOperator>): void;
+    request: protos.google.cloud.visionai.v1.IListOperatorsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.visionai.v1.IListOperatorsRequest,
+      protos.google.cloud.visionai.v1.IListOperatorsResponse | null | undefined,
+      protos.google.cloud.visionai.v1.IOperator
+    >,
+  ): void;
   listOperators(
-      request: protos.google.cloud.visionai.v1.IListOperatorsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.visionai.v1.IListOperatorsRequest,
-          protos.google.cloud.visionai.v1.IListOperatorsResponse|null|undefined,
-          protos.google.cloud.visionai.v1.IOperator>): void;
+    request: protos.google.cloud.visionai.v1.IListOperatorsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.visionai.v1.IListOperatorsRequest,
+      protos.google.cloud.visionai.v1.IListOperatorsResponse | null | undefined,
+      protos.google.cloud.visionai.v1.IOperator
+    >,
+  ): void;
   listOperators(
-      request?: protos.google.cloud.visionai.v1.IListOperatorsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.visionai.v1.IListOperatorsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.visionai.v1.IListOperatorsRequest,
-          protos.google.cloud.visionai.v1.IListOperatorsResponse|null|undefined,
-          protos.google.cloud.visionai.v1.IOperator>,
-      callback?: PaginationCallback<
-          protos.google.cloud.visionai.v1.IListOperatorsRequest,
-          protos.google.cloud.visionai.v1.IListOperatorsResponse|null|undefined,
-          protos.google.cloud.visionai.v1.IOperator>):
-      Promise<[
-        protos.google.cloud.visionai.v1.IOperator[],
-        protos.google.cloud.visionai.v1.IListOperatorsRequest|null,
-        protos.google.cloud.visionai.v1.IListOperatorsResponse
-      ]>|void {
+          | protos.google.cloud.visionai.v1.IListOperatorsResponse
+          | null
+          | undefined,
+          protos.google.cloud.visionai.v1.IOperator
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.visionai.v1.IListOperatorsRequest,
+      protos.google.cloud.visionai.v1.IListOperatorsResponse | null | undefined,
+      protos.google.cloud.visionai.v1.IOperator
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.visionai.v1.IOperator[],
+      protos.google.cloud.visionai.v1.IListOperatorsRequest | null,
+      protos.google.cloud.visionai.v1.IListOperatorsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.visionai.v1.IListOperatorsRequest,
-      protos.google.cloud.visionai.v1.IListOperatorsResponse|null|undefined,
-      protos.google.cloud.visionai.v1.IOperator>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.visionai.v1.IListOperatorsRequest,
+          | protos.google.cloud.visionai.v1.IListOperatorsResponse
+          | null
+          | undefined,
+          protos.google.cloud.visionai.v1.IOperator
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listOperators values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2427,204 +3392,227 @@ export class LiveVideoAnalyticsClient {
     this._log.info('listOperators request %j', request);
     return this.innerApiCalls
       .listOperators(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.visionai.v1.IOperator[],
-        protos.google.cloud.visionai.v1.IListOperatorsRequest|null,
-        protos.google.cloud.visionai.v1.IListOperatorsResponse
-      ]) => {
-        this._log.info('listOperators values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.visionai.v1.IOperator[],
+          protos.google.cloud.visionai.v1.IListOperatorsRequest | null,
+          protos.google.cloud.visionai.v1.IListOperatorsResponse,
+        ]) => {
+          this._log.info('listOperators values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listOperators`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListOperatorsRequest.
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filtering results.
- * @param {string} request.orderBy
- *   Hint for how to order the results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.visionai.v1.Operator|Operator} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listOperatorsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listOperators`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListOperatorsRequest.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   * @param {string} request.filter
+   *   Filtering results.
+   * @param {string} request.orderBy
+   *   Hint for how to order the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.visionai.v1.Operator|Operator} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listOperatorsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listOperatorsStream(
-      request?: protos.google.cloud.visionai.v1.IListOperatorsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.visionai.v1.IListOperatorsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listOperators'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listOperators stream %j', request);
     return this.descriptors.page.listOperators.createStream(
       this.innerApiCalls.listOperators as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listOperators`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListOperatorsRequest.
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filtering results.
- * @param {string} request.orderBy
- *   Hint for how to order the results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.visionai.v1.Operator|Operator}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/live_video_analytics.list_operators.js</caption>
- * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_ListOperators_async
- */
+  /**
+   * Equivalent to `listOperators`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListOperatorsRequest.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   * @param {string} request.filter
+   *   Filtering results.
+   * @param {string} request.orderBy
+   *   Hint for how to order the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.visionai.v1.Operator|Operator}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/live_video_analytics.list_operators.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_ListOperators_async
+   */
   listOperatorsAsync(
-      request?: protos.google.cloud.visionai.v1.IListOperatorsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.visionai.v1.IOperator>{
+    request?: protos.google.cloud.visionai.v1.IListOperatorsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.visionai.v1.IOperator> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listOperators'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listOperators iterate %j', request);
     return this.descriptors.page.listOperators.asyncIterate(
       this.innerApiCalls['listOperators'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.visionai.v1.IOperator>;
   }
- /**
- * Lists Analyses in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListAnalysesRequest
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filtering results
- * @param {string} request.orderBy
- *   Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.visionai.v1.Analysis|Analysis}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listAnalysesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists Analyses in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListAnalysesRequest
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   * @param {string} request.filter
+   *   Filtering results
+   * @param {string} request.orderBy
+   *   Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.visionai.v1.Analysis|Analysis}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAnalysesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listAnalyses(
-      request?: protos.google.cloud.visionai.v1.IListAnalysesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.visionai.v1.IAnalysis[],
-        protos.google.cloud.visionai.v1.IListAnalysesRequest|null,
-        protos.google.cloud.visionai.v1.IListAnalysesResponse
-      ]>;
+    request?: protos.google.cloud.visionai.v1.IListAnalysesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.visionai.v1.IAnalysis[],
+      protos.google.cloud.visionai.v1.IListAnalysesRequest | null,
+      protos.google.cloud.visionai.v1.IListAnalysesResponse,
+    ]
+  >;
   listAnalyses(
-      request: protos.google.cloud.visionai.v1.IListAnalysesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.visionai.v1.IListAnalysesRequest,
-          protos.google.cloud.visionai.v1.IListAnalysesResponse|null|undefined,
-          protos.google.cloud.visionai.v1.IAnalysis>): void;
+    request: protos.google.cloud.visionai.v1.IListAnalysesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.visionai.v1.IListAnalysesRequest,
+      protos.google.cloud.visionai.v1.IListAnalysesResponse | null | undefined,
+      protos.google.cloud.visionai.v1.IAnalysis
+    >,
+  ): void;
   listAnalyses(
-      request: protos.google.cloud.visionai.v1.IListAnalysesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.visionai.v1.IListAnalysesRequest,
-          protos.google.cloud.visionai.v1.IListAnalysesResponse|null|undefined,
-          protos.google.cloud.visionai.v1.IAnalysis>): void;
+    request: protos.google.cloud.visionai.v1.IListAnalysesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.visionai.v1.IListAnalysesRequest,
+      protos.google.cloud.visionai.v1.IListAnalysesResponse | null | undefined,
+      protos.google.cloud.visionai.v1.IAnalysis
+    >,
+  ): void;
   listAnalyses(
-      request?: protos.google.cloud.visionai.v1.IListAnalysesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.visionai.v1.IListAnalysesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.visionai.v1.IListAnalysesRequest,
-          protos.google.cloud.visionai.v1.IListAnalysesResponse|null|undefined,
-          protos.google.cloud.visionai.v1.IAnalysis>,
-      callback?: PaginationCallback<
-          protos.google.cloud.visionai.v1.IListAnalysesRequest,
-          protos.google.cloud.visionai.v1.IListAnalysesResponse|null|undefined,
-          protos.google.cloud.visionai.v1.IAnalysis>):
-      Promise<[
-        protos.google.cloud.visionai.v1.IAnalysis[],
-        protos.google.cloud.visionai.v1.IListAnalysesRequest|null,
-        protos.google.cloud.visionai.v1.IListAnalysesResponse
-      ]>|void {
+          | protos.google.cloud.visionai.v1.IListAnalysesResponse
+          | null
+          | undefined,
+          protos.google.cloud.visionai.v1.IAnalysis
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.visionai.v1.IListAnalysesRequest,
+      protos.google.cloud.visionai.v1.IListAnalysesResponse | null | undefined,
+      protos.google.cloud.visionai.v1.IAnalysis
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.visionai.v1.IAnalysis[],
+      protos.google.cloud.visionai.v1.IListAnalysesRequest | null,
+      protos.google.cloud.visionai.v1.IListAnalysesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.visionai.v1.IListAnalysesRequest,
-      protos.google.cloud.visionai.v1.IListAnalysesResponse|null|undefined,
-      protos.google.cloud.visionai.v1.IAnalysis>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.visionai.v1.IListAnalysesRequest,
+          | protos.google.cloud.visionai.v1.IListAnalysesResponse
+          | null
+          | undefined,
+          protos.google.cloud.visionai.v1.IAnalysis
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAnalyses values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2633,204 +3621,227 @@ export class LiveVideoAnalyticsClient {
     this._log.info('listAnalyses request %j', request);
     return this.innerApiCalls
       .listAnalyses(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.visionai.v1.IAnalysis[],
-        protos.google.cloud.visionai.v1.IListAnalysesRequest|null,
-        protos.google.cloud.visionai.v1.IListAnalysesResponse
-      ]) => {
-        this._log.info('listAnalyses values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.visionai.v1.IAnalysis[],
+          protos.google.cloud.visionai.v1.IListAnalysesRequest | null,
+          protos.google.cloud.visionai.v1.IListAnalysesResponse,
+        ]) => {
+          this._log.info('listAnalyses values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listAnalyses`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListAnalysesRequest
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filtering results
- * @param {string} request.orderBy
- *   Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.visionai.v1.Analysis|Analysis} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listAnalysesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listAnalyses`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListAnalysesRequest
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   * @param {string} request.filter
+   *   Filtering results
+   * @param {string} request.orderBy
+   *   Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.visionai.v1.Analysis|Analysis} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAnalysesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listAnalysesStream(
-      request?: protos.google.cloud.visionai.v1.IListAnalysesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.visionai.v1.IListAnalysesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listAnalyses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listAnalyses stream %j', request);
     return this.descriptors.page.listAnalyses.createStream(
       this.innerApiCalls.listAnalyses as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listAnalyses`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListAnalysesRequest
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filtering results
- * @param {string} request.orderBy
- *   Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.visionai.v1.Analysis|Analysis}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/live_video_analytics.list_analyses.js</caption>
- * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_ListAnalyses_async
- */
+  /**
+   * Equivalent to `listAnalyses`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListAnalysesRequest
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   * @param {string} request.filter
+   *   Filtering results
+   * @param {string} request.orderBy
+   *   Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.visionai.v1.Analysis|Analysis}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/live_video_analytics.list_analyses.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_ListAnalyses_async
+   */
   listAnalysesAsync(
-      request?: protos.google.cloud.visionai.v1.IListAnalysesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.visionai.v1.IAnalysis>{
+    request?: protos.google.cloud.visionai.v1.IListAnalysesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.visionai.v1.IAnalysis> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listAnalyses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listAnalyses iterate %j', request);
     return this.descriptors.page.listAnalyses.asyncIterate(
       this.innerApiCalls['listAnalyses'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.visionai.v1.IAnalysis>;
   }
- /**
- * Lists Processes in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListProcessesRequest.
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filtering results
- * @param {string} request.orderBy
- *   Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.visionai.v1.Process|Process}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listProcessesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists Processes in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListProcessesRequest.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   * @param {string} request.filter
+   *   Filtering results
+   * @param {string} request.orderBy
+   *   Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.visionai.v1.Process|Process}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listProcessesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listProcesses(
-      request?: protos.google.cloud.visionai.v1.IListProcessesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.visionai.v1.IProcess[],
-        protos.google.cloud.visionai.v1.IListProcessesRequest|null,
-        protos.google.cloud.visionai.v1.IListProcessesResponse
-      ]>;
+    request?: protos.google.cloud.visionai.v1.IListProcessesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.visionai.v1.IProcess[],
+      protos.google.cloud.visionai.v1.IListProcessesRequest | null,
+      protos.google.cloud.visionai.v1.IListProcessesResponse,
+    ]
+  >;
   listProcesses(
-      request: protos.google.cloud.visionai.v1.IListProcessesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.visionai.v1.IListProcessesRequest,
-          protos.google.cloud.visionai.v1.IListProcessesResponse|null|undefined,
-          protos.google.cloud.visionai.v1.IProcess>): void;
+    request: protos.google.cloud.visionai.v1.IListProcessesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.visionai.v1.IListProcessesRequest,
+      protos.google.cloud.visionai.v1.IListProcessesResponse | null | undefined,
+      protos.google.cloud.visionai.v1.IProcess
+    >,
+  ): void;
   listProcesses(
-      request: protos.google.cloud.visionai.v1.IListProcessesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.visionai.v1.IListProcessesRequest,
-          protos.google.cloud.visionai.v1.IListProcessesResponse|null|undefined,
-          protos.google.cloud.visionai.v1.IProcess>): void;
+    request: protos.google.cloud.visionai.v1.IListProcessesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.visionai.v1.IListProcessesRequest,
+      protos.google.cloud.visionai.v1.IListProcessesResponse | null | undefined,
+      protos.google.cloud.visionai.v1.IProcess
+    >,
+  ): void;
   listProcesses(
-      request?: protos.google.cloud.visionai.v1.IListProcessesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.visionai.v1.IListProcessesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.visionai.v1.IListProcessesRequest,
-          protos.google.cloud.visionai.v1.IListProcessesResponse|null|undefined,
-          protos.google.cloud.visionai.v1.IProcess>,
-      callback?: PaginationCallback<
-          protos.google.cloud.visionai.v1.IListProcessesRequest,
-          protos.google.cloud.visionai.v1.IListProcessesResponse|null|undefined,
-          protos.google.cloud.visionai.v1.IProcess>):
-      Promise<[
-        protos.google.cloud.visionai.v1.IProcess[],
-        protos.google.cloud.visionai.v1.IListProcessesRequest|null,
-        protos.google.cloud.visionai.v1.IListProcessesResponse
-      ]>|void {
+          | protos.google.cloud.visionai.v1.IListProcessesResponse
+          | null
+          | undefined,
+          protos.google.cloud.visionai.v1.IProcess
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.visionai.v1.IListProcessesRequest,
+      protos.google.cloud.visionai.v1.IListProcessesResponse | null | undefined,
+      protos.google.cloud.visionai.v1.IProcess
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.visionai.v1.IProcess[],
+      protos.google.cloud.visionai.v1.IListProcessesRequest | null,
+      protos.google.cloud.visionai.v1.IListProcessesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.visionai.v1.IListProcessesRequest,
-      protos.google.cloud.visionai.v1.IListProcessesResponse|null|undefined,
-      protos.google.cloud.visionai.v1.IProcess>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.visionai.v1.IListProcessesRequest,
+          | protos.google.cloud.visionai.v1.IListProcessesResponse
+          | null
+          | undefined,
+          protos.google.cloud.visionai.v1.IProcess
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listProcesses values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2839,143 +3850,147 @@ export class LiveVideoAnalyticsClient {
     this._log.info('listProcesses request %j', request);
     return this.innerApiCalls
       .listProcesses(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.visionai.v1.IProcess[],
-        protos.google.cloud.visionai.v1.IListProcessesRequest|null,
-        protos.google.cloud.visionai.v1.IListProcessesResponse
-      ]) => {
-        this._log.info('listProcesses values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.visionai.v1.IProcess[],
+          protos.google.cloud.visionai.v1.IListProcessesRequest | null,
+          protos.google.cloud.visionai.v1.IListProcessesResponse,
+        ]) => {
+          this._log.info('listProcesses values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listProcesses`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListProcessesRequest.
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filtering results
- * @param {string} request.orderBy
- *   Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.visionai.v1.Process|Process} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listProcessesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listProcesses`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListProcessesRequest.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   * @param {string} request.filter
+   *   Filtering results
+   * @param {string} request.orderBy
+   *   Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.visionai.v1.Process|Process} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listProcessesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listProcessesStream(
-      request?: protos.google.cloud.visionai.v1.IListProcessesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.visionai.v1.IListProcessesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listProcesses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listProcesses stream %j', request);
     return this.descriptors.page.listProcesses.createStream(
       this.innerApiCalls.listProcesses as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listProcesses`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListProcessesRequest.
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filtering results
- * @param {string} request.orderBy
- *   Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.visionai.v1.Process|Process}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/live_video_analytics.list_processes.js</caption>
- * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_ListProcesses_async
- */
+  /**
+   * Equivalent to `listProcesses`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListProcessesRequest.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   * @param {string} request.filter
+   *   Filtering results
+   * @param {string} request.orderBy
+   *   Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.visionai.v1.Process|Process}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/live_video_analytics.list_processes.js</caption>
+   * region_tag:warehouse-visionai_v1_generated_LiveVideoAnalytics_ListProcesses_async
+   */
   listProcessesAsync(
-      request?: protos.google.cloud.visionai.v1.IListProcessesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.visionai.v1.IProcess>{
+    request?: protos.google.cloud.visionai.v1.IListProcessesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.visionai.v1.IProcess> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listProcesses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listProcesses iterate %j', request);
     return this.descriptors.page.listProcesses.asyncIterate(
       this.innerApiCalls['listProcesses'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.visionai.v1.IProcess>;
   }
-/**
- * Gets the access control policy for a resource. Returns an empty policy
- * if the resource exists and does not have a policy set.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {Object} [request.options]
- *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
- *   `GetIamPolicy`. This field is only used by Cloud IAM.
- *
- *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+  /**
+   * Gets the access control policy for a resource. Returns an empty policy
+   * if the resource exists and does not have a policy set.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {Object} [request.options]
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   *
+   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -2989,40 +4004,40 @@ export class LiveVideoAnalyticsClient {
       IamProtos.google.iam.v1.Policy,
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.Policy]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
-/**
- * Returns permissions that a caller has on the specified resource. If the
- * resource does not exist, this will return an empty set of
- * permissions, not a NOT_FOUND error.
- *
- * Note: This operation is designed to be used for building
- * permission-aware UIs and command-line tools, not for authorization
- * checking. This operation may "fail open" without warning.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -3036,41 +4051,41 @@ export class LiveVideoAnalyticsClient {
       IamProtos.google.iam.v1.Policy,
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.Policy]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
-/**
- * Returns permissions that a caller has on the specified resource. If the
- * resource does not exist, this will return an empty set of
- * permissions, not a NOT_FOUND error.
- *
- * Note: This operation is designed to be used for building
- * permission-aware UIs and command-line tools, not for authorization
- * checking. This operation may "fail open" without warning.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- *
- */
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   */
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -3084,12 +4099,12 @@ export class LiveVideoAnalyticsClient {
       IamProtos.google.iam.v1.TestIamPermissionsResponse,
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
-/**
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -3124,12 +4139,11 @@ export class LiveVideoAnalyticsClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -3162,12 +4176,12 @@ export class LiveVideoAnalyticsClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -3210,22 +4224,22 @@ export class LiveVideoAnalyticsClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -3260,15 +4274,15 @@ export class LiveVideoAnalyticsClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -3302,7 +4316,7 @@ export class LiveVideoAnalyticsClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -3315,25 +4329,24 @@ export class LiveVideoAnalyticsClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -3372,22 +4385,22 @@ export class LiveVideoAnalyticsClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -3404,7 +4417,12 @@ export class LiveVideoAnalyticsClient {
    * @param {string} analysis
    * @returns {string} Resource name string.
    */
-  analysisPath(project:string,location:string,cluster:string,analysis:string) {
+  analysisPath(
+    project: string,
+    location: string,
+    cluster: string,
+    analysis: string,
+  ) {
     return this.pathTemplates.analysisPathTemplate.render({
       project: project,
       location: location,
@@ -3467,7 +4485,13 @@ export class LiveVideoAnalyticsClient {
    * @param {string} annotation
    * @returns {string} Resource name string.
    */
-  annotationPath(projectNumber:string,location:string,corpus:string,asset:string,annotation:string) {
+  annotationPath(
+    projectNumber: string,
+    location: string,
+    corpus: string,
+    asset: string,
+    annotation: string,
+  ) {
     return this.pathTemplates.annotationPathTemplate.render({
       project_number: projectNumber,
       location: location,
@@ -3485,7 +4509,8 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the project_number.
    */
   matchProjectNumberFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName).project_number;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName)
+      .project_number;
   }
 
   /**
@@ -3496,7 +4521,8 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName).location;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName)
+      .location;
   }
 
   /**
@@ -3507,7 +4533,8 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the corpus.
    */
   matchCorpusFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName).corpus;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName)
+      .corpus;
   }
 
   /**
@@ -3518,7 +4545,8 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the asset.
    */
   matchAssetFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName).asset;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName)
+      .asset;
   }
 
   /**
@@ -3529,7 +4557,8 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the annotation.
    */
   matchAnnotationFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName).annotation;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName)
+      .annotation;
   }
 
   /**
@@ -3540,7 +4569,7 @@ export class LiveVideoAnalyticsClient {
    * @param {string} application
    * @returns {string} Resource name string.
    */
-  applicationPath(project:string,location:string,application:string) {
+  applicationPath(project: string, location: string, application: string) {
     return this.pathTemplates.applicationPathTemplate.render({
       project: project,
       location: location,
@@ -3556,7 +4585,8 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromApplicationName(applicationName: string) {
-    return this.pathTemplates.applicationPathTemplate.match(applicationName).project;
+    return this.pathTemplates.applicationPathTemplate.match(applicationName)
+      .project;
   }
 
   /**
@@ -3567,7 +4597,8 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromApplicationName(applicationName: string) {
-    return this.pathTemplates.applicationPathTemplate.match(applicationName).location;
+    return this.pathTemplates.applicationPathTemplate.match(applicationName)
+      .location;
   }
 
   /**
@@ -3578,7 +4609,8 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the application.
    */
   matchApplicationFromApplicationName(applicationName: string) {
-    return this.pathTemplates.applicationPathTemplate.match(applicationName).application;
+    return this.pathTemplates.applicationPathTemplate.match(applicationName)
+      .application;
   }
 
   /**
@@ -3590,7 +4622,12 @@ export class LiveVideoAnalyticsClient {
    * @param {string} asset
    * @returns {string} Resource name string.
    */
-  assetPath(projectNumber:string,location:string,corpus:string,asset:string) {
+  assetPath(
+    projectNumber: string,
+    location: string,
+    corpus: string,
+    asset: string,
+  ) {
     return this.pathTemplates.assetPathTemplate.render({
       project_number: projectNumber,
       location: location,
@@ -3652,7 +4689,12 @@ export class LiveVideoAnalyticsClient {
    * @param {string} channel
    * @returns {string} Resource name string.
    */
-  channelPath(project:string,location:string,cluster:string,channel:string) {
+  channelPath(
+    project: string,
+    location: string,
+    cluster: string,
+    channel: string,
+  ) {
     return this.pathTemplates.channelPathTemplate.render({
       project: project,
       location: location,
@@ -3713,7 +4755,7 @@ export class LiveVideoAnalyticsClient {
    * @param {string} cluster
    * @returns {string} Resource name string.
    */
-  clusterPath(project:string,location:string,cluster:string) {
+  clusterPath(project: string, location: string, cluster: string) {
     return this.pathTemplates.clusterPathTemplate.render({
       project: project,
       location: location,
@@ -3763,7 +4805,12 @@ export class LiveVideoAnalyticsClient {
    * @param {string} collection
    * @returns {string} Resource name string.
    */
-  collectionPath(projectNumber:string,location:string,corpus:string,collection:string) {
+  collectionPath(
+    projectNumber: string,
+    location: string,
+    corpus: string,
+    collection: string,
+  ) {
     return this.pathTemplates.collectionPathTemplate.render({
       project_number: projectNumber,
       location: location,
@@ -3780,7 +4827,8 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the project_number.
    */
   matchProjectNumberFromCollectionName(collectionName: string) {
-    return this.pathTemplates.collectionPathTemplate.match(collectionName).project_number;
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .project_number;
   }
 
   /**
@@ -3791,7 +4839,8 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCollectionName(collectionName: string) {
-    return this.pathTemplates.collectionPathTemplate.match(collectionName).location;
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .location;
   }
 
   /**
@@ -3802,7 +4851,8 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the corpus.
    */
   matchCorpusFromCollectionName(collectionName: string) {
-    return this.pathTemplates.collectionPathTemplate.match(collectionName).corpus;
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .corpus;
   }
 
   /**
@@ -3813,7 +4863,8 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the collection.
    */
   matchCollectionFromCollectionName(collectionName: string) {
-    return this.pathTemplates.collectionPathTemplate.match(collectionName).collection;
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .collection;
   }
 
   /**
@@ -3824,7 +4875,7 @@ export class LiveVideoAnalyticsClient {
    * @param {string} corpus
    * @returns {string} Resource name string.
    */
-  corpusPath(projectNumber:string,location:string,corpus:string) {
+  corpusPath(projectNumber: string, location: string, corpus: string) {
     return this.pathTemplates.corpusPathTemplate.render({
       project_number: projectNumber,
       location: location,
@@ -3840,7 +4891,8 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the project_number.
    */
   matchProjectNumberFromCorpusName(corpusName: string) {
-    return this.pathTemplates.corpusPathTemplate.match(corpusName).project_number;
+    return this.pathTemplates.corpusPathTemplate.match(corpusName)
+      .project_number;
   }
 
   /**
@@ -3874,7 +4926,12 @@ export class LiveVideoAnalyticsClient {
    * @param {string} data_schema
    * @returns {string} Resource name string.
    */
-  dataSchemaPath(projectNumber:string,location:string,corpus:string,dataSchema:string) {
+  dataSchemaPath(
+    projectNumber: string,
+    location: string,
+    corpus: string,
+    dataSchema: string,
+  ) {
     return this.pathTemplates.dataSchemaPathTemplate.render({
       project_number: projectNumber,
       location: location,
@@ -3891,7 +4948,8 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the project_number.
    */
   matchProjectNumberFromDataSchemaName(dataSchemaName: string) {
-    return this.pathTemplates.dataSchemaPathTemplate.match(dataSchemaName).project_number;
+    return this.pathTemplates.dataSchemaPathTemplate.match(dataSchemaName)
+      .project_number;
   }
 
   /**
@@ -3902,7 +4960,8 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataSchemaName(dataSchemaName: string) {
-    return this.pathTemplates.dataSchemaPathTemplate.match(dataSchemaName).location;
+    return this.pathTemplates.dataSchemaPathTemplate.match(dataSchemaName)
+      .location;
   }
 
   /**
@@ -3913,7 +4972,8 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the corpus.
    */
   matchCorpusFromDataSchemaName(dataSchemaName: string) {
-    return this.pathTemplates.dataSchemaPathTemplate.match(dataSchemaName).corpus;
+    return this.pathTemplates.dataSchemaPathTemplate.match(dataSchemaName)
+      .corpus;
   }
 
   /**
@@ -3924,7 +4984,8 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the data_schema.
    */
   matchDataSchemaFromDataSchemaName(dataSchemaName: string) {
-    return this.pathTemplates.dataSchemaPathTemplate.match(dataSchemaName).data_schema;
+    return this.pathTemplates.dataSchemaPathTemplate.match(dataSchemaName)
+      .data_schema;
   }
 
   /**
@@ -3936,7 +4997,12 @@ export class LiveVideoAnalyticsClient {
    * @param {string} draft
    * @returns {string} Resource name string.
    */
-  draftPath(project:string,location:string,application:string,draft:string) {
+  draftPath(
+    project: string,
+    location: string,
+    application: string,
+    draft: string,
+  ) {
     return this.pathTemplates.draftPathTemplate.render({
       project: project,
       location: location,
@@ -3998,7 +5064,7 @@ export class LiveVideoAnalyticsClient {
    * @param {string} event
    * @returns {string} Resource name string.
    */
-  eventPath(project:string,location:string,cluster:string,event:string) {
+  eventPath(project: string, location: string, cluster: string, event: string) {
     return this.pathTemplates.eventPathTemplate.render({
       project: project,
       location: location,
@@ -4060,7 +5126,12 @@ export class LiveVideoAnalyticsClient {
    * @param {string} index
    * @returns {string} Resource name string.
    */
-  indexPath(projectNumber:string,location:string,corpus:string,index:string) {
+  indexPath(
+    projectNumber: string,
+    location: string,
+    corpus: string,
+    index: string,
+  ) {
     return this.pathTemplates.indexPathTemplate.render({
       project_number: projectNumber,
       location: location,
@@ -4121,7 +5192,7 @@ export class LiveVideoAnalyticsClient {
    * @param {string} index_endpoint
    * @returns {string} Resource name string.
    */
-  indexEndpointPath(project:string,location:string,indexEndpoint:string) {
+  indexEndpointPath(project: string, location: string, indexEndpoint: string) {
     return this.pathTemplates.indexEndpointPathTemplate.render({
       project: project,
       location: location,
@@ -4137,7 +5208,8 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromIndexEndpointName(indexEndpointName: string) {
-    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName).project;
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .project;
   }
 
   /**
@@ -4148,7 +5220,8 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromIndexEndpointName(indexEndpointName: string) {
-    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName).location;
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .location;
   }
 
   /**
@@ -4159,7 +5232,8 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the index_endpoint.
    */
   matchIndexEndpointFromIndexEndpointName(indexEndpointName: string) {
-    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName).index_endpoint;
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .index_endpoint;
   }
 
   /**
@@ -4171,7 +5245,12 @@ export class LiveVideoAnalyticsClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  instancePath(project:string,location:string,application:string,instance:string) {
+  instancePath(
+    project: string,
+    location: string,
+    application: string,
+    instance: string,
+  ) {
     return this.pathTemplates.instancePathTemplate.render({
       project: project,
       location: location,
@@ -4210,7 +5289,8 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the application.
    */
   matchApplicationFromInstanceName(instanceName: string) {
-    return this.pathTemplates.instancePathTemplate.match(instanceName).application;
+    return this.pathTemplates.instancePathTemplate.match(instanceName)
+      .application;
   }
 
   /**
@@ -4231,7 +5311,7 @@ export class LiveVideoAnalyticsClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -4268,7 +5348,7 @@ export class LiveVideoAnalyticsClient {
    * @param {string} operator
    * @returns {string} Resource name string.
    */
-  operatorPath(project:string,location:string,operator:string) {
+  operatorPath(project: string, location: string, operator: string) {
     return this.pathTemplates.operatorPathTemplate.render({
       project: project,
       location: location,
@@ -4318,7 +5398,12 @@ export class LiveVideoAnalyticsClient {
    * @param {string} process
    * @returns {string} Resource name string.
    */
-  processPath(project:string,location:string,cluster:string,process:string) {
+  processPath(
+    project: string,
+    location: string,
+    cluster: string,
+    process: string,
+  ) {
     return this.pathTemplates.processPathTemplate.render({
       project: project,
       location: location,
@@ -4379,7 +5464,7 @@ export class LiveVideoAnalyticsClient {
    * @param {string} processor
    * @returns {string} Resource name string.
    */
-  processorPath(project:string,location:string,processor:string) {
+  processorPath(project: string, location: string, processor: string) {
     return this.pathTemplates.processorPathTemplate.render({
       project: project,
       location: location,
@@ -4395,7 +5480,8 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProcessorName(processorName: string) {
-    return this.pathTemplates.processorPathTemplate.match(processorName).project;
+    return this.pathTemplates.processorPathTemplate.match(processorName)
+      .project;
   }
 
   /**
@@ -4406,7 +5492,8 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProcessorName(processorName: string) {
-    return this.pathTemplates.processorPathTemplate.match(processorName).location;
+    return this.pathTemplates.processorPathTemplate.match(processorName)
+      .location;
   }
 
   /**
@@ -4417,7 +5504,8 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the processor.
    */
   matchProcessorFromProcessorName(processorName: string) {
-    return this.pathTemplates.processorPathTemplate.match(processorName).processor;
+    return this.pathTemplates.processorPathTemplate.match(processorName)
+      .processor;
   }
 
   /**
@@ -4429,7 +5517,12 @@ export class LiveVideoAnalyticsClient {
    * @param {string} search_config
    * @returns {string} Resource name string.
    */
-  searchConfigPath(projectNumber:string,location:string,corpus:string,searchConfig:string) {
+  searchConfigPath(
+    projectNumber: string,
+    location: string,
+    corpus: string,
+    searchConfig: string,
+  ) {
     return this.pathTemplates.searchConfigPathTemplate.render({
       project_number: projectNumber,
       location: location,
@@ -4446,7 +5539,8 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the project_number.
    */
   matchProjectNumberFromSearchConfigName(searchConfigName: string) {
-    return this.pathTemplates.searchConfigPathTemplate.match(searchConfigName).project_number;
+    return this.pathTemplates.searchConfigPathTemplate.match(searchConfigName)
+      .project_number;
   }
 
   /**
@@ -4457,7 +5551,8 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSearchConfigName(searchConfigName: string) {
-    return this.pathTemplates.searchConfigPathTemplate.match(searchConfigName).location;
+    return this.pathTemplates.searchConfigPathTemplate.match(searchConfigName)
+      .location;
   }
 
   /**
@@ -4468,7 +5563,8 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the corpus.
    */
   matchCorpusFromSearchConfigName(searchConfigName: string) {
-    return this.pathTemplates.searchConfigPathTemplate.match(searchConfigName).corpus;
+    return this.pathTemplates.searchConfigPathTemplate.match(searchConfigName)
+      .corpus;
   }
 
   /**
@@ -4479,7 +5575,8 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the search_config.
    */
   matchSearchConfigFromSearchConfigName(searchConfigName: string) {
-    return this.pathTemplates.searchConfigPathTemplate.match(searchConfigName).search_config;
+    return this.pathTemplates.searchConfigPathTemplate.match(searchConfigName)
+      .search_config;
   }
 
   /**
@@ -4491,7 +5588,12 @@ export class LiveVideoAnalyticsClient {
    * @param {string} search_hypernym
    * @returns {string} Resource name string.
    */
-  searchHypernymPath(projectNumber:string,location:string,corpus:string,searchHypernym:string) {
+  searchHypernymPath(
+    projectNumber: string,
+    location: string,
+    corpus: string,
+    searchHypernym: string,
+  ) {
     return this.pathTemplates.searchHypernymPathTemplate.render({
       project_number: projectNumber,
       location: location,
@@ -4508,7 +5610,9 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the project_number.
    */
   matchProjectNumberFromSearchHypernymName(searchHypernymName: string) {
-    return this.pathTemplates.searchHypernymPathTemplate.match(searchHypernymName).project_number;
+    return this.pathTemplates.searchHypernymPathTemplate.match(
+      searchHypernymName,
+    ).project_number;
   }
 
   /**
@@ -4519,7 +5623,9 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSearchHypernymName(searchHypernymName: string) {
-    return this.pathTemplates.searchHypernymPathTemplate.match(searchHypernymName).location;
+    return this.pathTemplates.searchHypernymPathTemplate.match(
+      searchHypernymName,
+    ).location;
   }
 
   /**
@@ -4530,7 +5636,9 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the corpus.
    */
   matchCorpusFromSearchHypernymName(searchHypernymName: string) {
-    return this.pathTemplates.searchHypernymPathTemplate.match(searchHypernymName).corpus;
+    return this.pathTemplates.searchHypernymPathTemplate.match(
+      searchHypernymName,
+    ).corpus;
   }
 
   /**
@@ -4541,7 +5649,9 @@ export class LiveVideoAnalyticsClient {
    * @returns {string} A string representing the search_hypernym.
    */
   matchSearchHypernymFromSearchHypernymName(searchHypernymName: string) {
-    return this.pathTemplates.searchHypernymPathTemplate.match(searchHypernymName).search_hypernym;
+    return this.pathTemplates.searchHypernymPathTemplate.match(
+      searchHypernymName,
+    ).search_hypernym;
   }
 
   /**
@@ -4553,7 +5663,12 @@ export class LiveVideoAnalyticsClient {
    * @param {string} series
    * @returns {string} Resource name string.
    */
-  seriesPath(project:string,location:string,cluster:string,series:string) {
+  seriesPath(
+    project: string,
+    location: string,
+    cluster: string,
+    series: string,
+  ) {
     return this.pathTemplates.seriesPathTemplate.render({
       project: project,
       location: location,
@@ -4615,7 +5730,12 @@ export class LiveVideoAnalyticsClient {
    * @param {string} stream
    * @returns {string} Resource name string.
    */
-  streamPath(project:string,location:string,cluster:string,stream:string) {
+  streamPath(
+    project: string,
+    location: string,
+    cluster: string,
+    stream: string,
+  ) {
     return this.pathTemplates.streamPathTemplate.render({
       project: project,
       location: location,
@@ -4676,12 +5796,16 @@ export class LiveVideoAnalyticsClient {
    */
   close(): Promise<void> {
     if (this.liveVideoAnalyticsStub && !this._terminated) {
-      return this.liveVideoAnalyticsStub.then(stub => {
+      return this.liveVideoAnalyticsStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch(err => {throw err});
-        this.locationsClient.close().catch(err => {throw err});
+        this.iamClient.close().catch((err) => {
+          throw err;
+        });
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

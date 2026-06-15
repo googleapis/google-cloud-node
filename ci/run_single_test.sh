@@ -18,7 +18,7 @@ set -e
 
 export REGION_ID='uc'
 export PROJECT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}")/..)
-export NODE_OPTIONS=--max_old_space_size=4096
+export NODE_OPTIONS=--max_old_space_size=6144
 
 if [ -z "${BUILD_TYPE}" ]; then
     echo "missing BUILD_TYPE env var"
@@ -40,8 +40,8 @@ if [ ${BUILD_TYPE} != "presubmit" ]; then
 fi
 
 # Install dependencies
-echo "pnpm install --ignore-scripts --engine-strict --prod; pnpm install"
-pnpm install --ignore-scripts --engine-strict --prod; pnpm install
+echo "pnpm install --ignore-scripts --engine-strict --prod --pnpmfile \"${PROJECT_ROOT}/.pnpmfile.cjs\"; pnpm install --pnpmfile \"${PROJECT_ROOT}/.pnpmfile.cjs\""
+pnpm install --ignore-scripts --engine-strict --prod --pnpmfile "${PROJECT_ROOT}/.pnpmfile.cjs"; pnpm install --pnpmfile "${PROJECT_ROOT}/.pnpmfile.cjs"
 
 
 retval=0

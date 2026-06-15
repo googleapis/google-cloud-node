@@ -58,7 +58,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1/snippet_metadata_google.cloud.websecurityscanner.v1.json) |
 | create scan config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.create_scan_config.js) |
 | delete scan config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.delete_scan_config.js) |
 | get finding | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.get_finding.js) |
@@ -72,7 +71,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | start scan run | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.start_scan_run.js) |
 | stop scan run | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.stop_scan_run.js) |
 | update scan config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1/web_security_scanner.update_scan_config.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/snippet_metadata_google.cloud.websecurityscanner.v1alpha.json) |
 | create scan config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.create_scan_config.js) |
 | delete scan config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.delete_scan_config.js) |
 | get finding | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.get_finding.js) |
@@ -86,7 +84,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | start scan run | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.start_scan_run.js) |
 | stop scan run | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.stop_scan_run.js) |
 | update scan config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1alpha/web_security_scanner.update_scan_config.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1beta/snippet_metadata_google.cloud.websecurityscanner.v1beta.json) |
 | create scan config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.create_scan_config.js) |
 | delete scan config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.delete_scan_config.js) |
 | get finding | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/samples/generated/v1beta/web_security_scanner.get_finding.js) |
@@ -133,7 +130,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -143,7 +140,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-websecurityscanner/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

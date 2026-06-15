@@ -16,11 +16,11 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {ApplicationsClient} from './applications_client';
-export {AuthorizedCertificatesClient} from './authorized_certificates_client';
-export {AuthorizedDomainsClient} from './authorized_domains_client';
-export {DomainMappingsClient} from './domain_mappings_client';
-export {FirewallClient} from './firewall_client';
-export {InstancesClient} from './instances_client';
-export {ServicesClient} from './services_client';
-export {VersionsClient} from './versions_client';
+export { ApplicationsClient } from './applications_client';
+export { AuthorizedCertificatesClient } from './authorized_certificates_client';
+export { AuthorizedDomainsClient } from './authorized_domains_client';
+export { DomainMappingsClient } from './domain_mappings_client';
+export { FirewallClient } from './firewall_client';
+export { InstancesClient } from './instances_client';
+export { ServicesClient } from './services_client';
+export { VersionsClient } from './versions_client';

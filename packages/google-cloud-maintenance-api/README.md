@@ -60,11 +60,9 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get resource maintenance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-maintenance-api/samples/generated/v1/maintenance.get_resource_maintenance.js) |
 | list resource maintenances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-maintenance-api/samples/generated/v1/maintenance.list_resource_maintenances.js) |
 | summarize maintenances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-maintenance-api/samples/generated/v1/maintenance.summarize_maintenances.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-maintenance-api/samples/generated/v1/snippet_metadata_google.cloud.maintenance.api.v1.json) |
 | get resource maintenance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-maintenance-api/samples/generated/v1beta/maintenance.get_resource_maintenance.js) |
 | list resource maintenances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-maintenance-api/samples/generated/v1beta/maintenance.list_resource_maintenances.js) |
 | summarize maintenances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-maintenance-api/samples/generated/v1beta/maintenance.summarize_maintenances.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-maintenance-api/samples/generated/v1beta/snippet_metadata_google.cloud.maintenance.api.v1beta.json) |
 
 
 ## Supported Node.js Versions
@@ -98,7 +96,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-maintenance-api/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -108,7 +106,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-maintenance-api/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

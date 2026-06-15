@@ -18,8 +18,7 @@
     "precompile": "gts clean",
     "system-test": "echo 'no system-test'",
     "samples-test": "echo 'no samples'",
-    "docs": "echo no docs needed",
-    "docs-test": "echo no docs tests"
+    "docs": "echo no docs needed"
   },
   "bin": {
     "compileProtos": "./build/src/compileProtos.js",
