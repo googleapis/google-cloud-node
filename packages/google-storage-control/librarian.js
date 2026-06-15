@@ -38,5 +38,11 @@ try {
   }
 } catch (error) {
   console.error(error);
+  if (error.stdout) {
+    console.error('Child Process Stdout:\n', error.stdout.toString());
+  }
+  if (error.stderr) {
+    console.error('Child Process Stderr:\n', error.stderr.toString());
+  }
   process.exitCode = 1;
 }
