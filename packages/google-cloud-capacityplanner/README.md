@@ -1,24 +1,22 @@
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
-[//]: # "To regenerate it, use `python -m synthtool`."
+[//]: # "The comments you see below are used to generate those parts of the template in later states."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Capacity Planner API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-capacityplanner)
+# [Capacity Planner API: Nodejs Client][homepage]
 
-[![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+[//]: # "releaseLevel"
+
 [![npm version](https://img.shields.io/npm/v/@google-cloud/capacityplanner.svg)](https://www.npmjs.org/package/@google-cloud/capacityplanner)
-
-
-
 
 Capacity Planner API client for Node.js
 
+[//]: # "partials.introduction"
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-capacityplanner/CHANGELOG.md).
+[the CHANGELOG][homepage_changelog].
 
-* [Capacity Planner API Node.js Client API Reference][client-docs]
-* [Capacity Planner API Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node/packages/google-cloud-capacityplanner](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-capacityplanner)
+* [Capacity Planner API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/capacityplanner/latest)
+* [Capacity Planner API Documentation](https://cloud.google.com/capacity-planner/docs)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -27,18 +25,15 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
-
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
 
-* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
 ## Quickstart
-
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
@@ -46,36 +41,19 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 1.  [Enable the Capacity Planner API API][enable_api].
 1.  [Set up authentication][auth] so you can access the
     API from your local workstation.
-
 ### Installing the client library
 
 ```bash
 npm install @google-cloud/capacityplanner
 ```
 
-
-
+[//]: # "partials.body"
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-capacityplanner/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`][homepage_samples] directory. Each sample's `README.md` has instructions for running its sample.
 
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| Capacity_planning_service.get_capacity_plan | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-capacityplanner/samples/generated/v1beta/capacity_planning_service.get_capacity_plan.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-capacityplanner/samples/generated/v1beta/capacity_planning_service.get_capacity_plan.js,packages/google-cloud-capacityplanner/samples/README.md) |
-| Capacity_planning_service.query_capacity_plan_insights | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-capacityplanner/samples/generated/v1beta/capacity_planning_service.query_capacity_plan_insights.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-capacityplanner/samples/generated/v1beta/capacity_planning_service.query_capacity_plan_insights.js,packages/google-cloud-capacityplanner/samples/README.md) |
-| Capacity_planning_service.query_capacity_plans | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-capacityplanner/samples/generated/v1beta/capacity_planning_service.query_capacity_plans.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-capacityplanner/samples/generated/v1beta/capacity_planning_service.query_capacity_plans.js,packages/google-cloud-capacityplanner/samples/README.md) |
-| Usage_service.export_forecasts | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-capacityplanner/samples/generated/v1beta/usage_service.export_forecasts.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-capacityplanner/samples/generated/v1beta/usage_service.export_forecasts.js,packages/google-cloud-capacityplanner/samples/README.md) |
-| Usage_service.export_reservations_usage | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-capacityplanner/samples/generated/v1beta/usage_service.export_reservations_usage.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-capacityplanner/samples/generated/v1beta/usage_service.export_reservations_usage.js,packages/google-cloud-capacityplanner/samples/README.md) |
-| Usage_service.export_usage_histories | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-capacityplanner/samples/generated/v1beta/usage_service.export_usage_histories.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-capacityplanner/samples/generated/v1beta/usage_service.export_usage_histories.js,packages/google-cloud-capacityplanner/samples/README.md) |
-| Usage_service.query_forecasts | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-capacityplanner/samples/generated/v1beta/usage_service.query_forecasts.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-capacityplanner/samples/generated/v1beta/usage_service.query_forecasts.js,packages/google-cloud-capacityplanner/samples/README.md) |
-| Usage_service.query_reservations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-capacityplanner/samples/generated/v1beta/usage_service.query_reservations.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-capacityplanner/samples/generated/v1beta/usage_service.query_reservations.js,packages/google-cloud-capacityplanner/samples/README.md) |
-| Usage_service.query_usage_histories | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-capacityplanner/samples/generated/v1beta/usage_service.query_usage_histories.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-capacityplanner/samples/generated/v1beta/usage_service.query_usage_histories.js,packages/google-cloud-capacityplanner/samples/README.md) |
-
-
-
-The [Capacity Planner API Node.js Client API Reference][client-docs] documentation
-also contains samples.
+[//]: # "samples"
 
 ## Supported Node.js Versions
 
@@ -102,17 +80,6 @@ for versions compatible with Node.js 8.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-
-
-
-
-
-
-This library is considered to be in **preview**. This means it is still a
-work-in-progress and under active development. Any release is subject to
-backwards-incompatible changes at any time.
-
-
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 [launch_stages]: https://cloud.google.com/terms/launch-stages
@@ -121,11 +88,9 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
-Please note that this `README.md`, the `samples/README.md`,
+Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
-are generated from a central template. To edit one of these files, make an edit
-to its templates in
-[directory](https://github.com/googleapis/synthtool).
+are generated from a central template.
 
 ## License
 
@@ -133,13 +98,11 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/capacityplanner/latest
-[product-docs]: https://cloud.google.com/capacity-planner/docs
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=capacityplanner.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
-
-
-[//]: # "partials.introduction"
+[homepage_samples]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-capacityplanner/samples
+[homepage_changelog]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-capacityplanner/CHANGELOG.md
+[homepage]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-capacityplanner
