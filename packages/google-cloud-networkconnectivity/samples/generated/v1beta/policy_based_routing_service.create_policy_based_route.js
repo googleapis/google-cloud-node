@@ -63,7 +63,7 @@ function main(parent, policyBasedRouteId, policyBasedRoute) {
   // const requestId = 'abc123'
 
   // Imports the Networkconnectivity library
-  const {PolicyBasedRoutingServiceClient} = require('@google-cloud/networkconnectivity').v1beta;
+  const {PolicyBasedRoutingServiceClient} = require('@google-cloud/network-connectivity').v1beta;
 
   // Instantiates a client
   const networkconnectivityClient = new PolicyBasedRoutingServiceClient();

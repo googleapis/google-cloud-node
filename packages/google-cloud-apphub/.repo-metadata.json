@@ -1,17 +1,16 @@
 {
-  "name": "apphub",
-  "name_pretty": "App Hub API",
-  "product_documentation": "https://cloud.google.com/app-hub/docs/overview",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/apphub/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/apphub",
-  "api_id": "apphub.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "apphub"
+    "api_description": "App Hub acts as the foundational data model and central registry for your applications on Google Cloud.",
+    "api_id": "apphub.googleapis.com",
+    "api_shortname": "apphub",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/apphub/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/apphub",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1509913",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "apphub",
+    "name_pretty": "App Hub",
+    "product_documentation": "https://cloud.google.com/app-hub/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

@@ -18,11 +18,16 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +49,7 @@ export class IdentityAwareProxyAdminV1Beta1Client {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('iap');
@@ -57,8 +62,8 @@ export class IdentityAwareProxyAdminV1Beta1Client {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  identityAwareProxyAdminV1Beta1Stub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  identityAwareProxyAdminV1Beta1Stub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of IdentityAwareProxyAdminV1Beta1Client.
@@ -99,21 +104,43 @@ export class IdentityAwareProxyAdminV1Beta1Client {
    *     const client = new IdentityAwareProxyAdminV1Beta1Client({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof IdentityAwareProxyAdminV1Beta1Client;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    const staticMembers = this
+      .constructor as typeof IdentityAwareProxyAdminV1Beta1Client;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'iap.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -138,7 +165,7 @@ export class IdentityAwareProxyAdminV1Beta1Client {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -152,10 +179,7 @@ export class IdentityAwareProxyAdminV1Beta1Client {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -174,8 +198,11 @@ export class IdentityAwareProxyAdminV1Beta1Client {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -206,36 +233,45 @@ export class IdentityAwareProxyAdminV1Beta1Client {
     // Put together the "service stub" for
     // google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1.
     this.identityAwareProxyAdminV1Beta1Stub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.iap.v1beta1.IdentityAwareProxyAdminV1Beta1',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.iap.v1beta1
+            .IdentityAwareProxyAdminV1Beta1,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const identityAwareProxyAdminV1Beta1StubMethods =
-        ['setIamPolicy', 'getIamPolicy', 'testIamPermissions'];
+    const identityAwareProxyAdminV1Beta1StubMethods = [
+      'setIamPolicy',
+      'getIamPolicy',
+      'testIamPermissions',
+    ];
     for (const methodName of identityAwareProxyAdminV1Beta1StubMethods) {
       const callPromise = this.identityAwareProxyAdminV1Beta1Stub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -250,8 +286,14 @@ export class IdentityAwareProxyAdminV1Beta1Client {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'iap.googleapis.com';
   }
@@ -262,8 +304,14 @@ export class IdentityAwareProxyAdminV1Beta1Client {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'iap.googleapis.com';
   }
@@ -294,9 +342,7 @@ export class IdentityAwareProxyAdminV1Beta1Client {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -305,8 +351,9 @@ export class IdentityAwareProxyAdminV1Beta1Client {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -317,322 +364,411 @@ export class IdentityAwareProxyAdminV1Beta1Client {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Sets the access control policy for an Identity-Aware Proxy protected
- * resource. Replaces any existing policy.
- * More information about managing access via IAP can be found at:
- * https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy is being specified.
- *   See the operation documentation for the appropriate value for this field.
- * @param {google.iam.v1.Policy} request.policy
- *   REQUIRED: The complete policy to be applied to the `resource`. The size of
- *   the policy is limited to a few 10s of KB. An empty policy is a
- *   valid policy but certain Cloud Platform services (such as Projects)
- *   might reject them.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
- *   the fields in the mask will be modified. If no mask is provided, the
- *   following default mask is used:
- *
- *   `paths: "bindings, etag"`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/identity_aware_proxy_admin_v1_beta1.set_iam_policy.js</caption>
- * region_tag:iap_v1beta1_generated_IdentityAwareProxyAdminV1Beta1_SetIamPolicy_async
- */
+  /**
+   * Sets the access control policy for an Identity-Aware Proxy protected
+   * resource. Replaces any existing policy.
+   * More information about managing access via IAP can be found at:
+   * https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being specified.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.Policy} request.policy
+   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+   *   the policy is limited to a few 10s of KB. An empty policy is a
+   *   valid policy but certain Cloud Platform services (such as Projects)
+   *   might reject them.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+   *   the fields in the mask will be modified. If no mask is provided, the
+   *   following default mask is used:
+   *
+   *   `paths: "bindings, etag"`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/identity_aware_proxy_admin_v1_beta1.set_iam_policy.js</caption>
+   * region_tag:iap_v1beta1_generated_IdentityAwareProxyAdminV1Beta1_SetIamPolicy_async
+   */
   setIamPolicy(
-      request?: protos.google.iam.v1.ISetIamPolicyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.iam.v1.IPolicy,
-        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.iam.v1.ISetIamPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   setIamPolicy(
-      request: protos.google.iam.v1.ISetIamPolicyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   setIamPolicy(
-      request: protos.google.iam.v1.ISetIamPolicyRequest,
-      callback: Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   setIamPolicy(
-      request?: protos.google.iam.v1.ISetIamPolicyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.iam.v1.ISetIamPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.iam.v1.IPolicy,
-        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'resource': request.resource ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        resource: request.resource ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('setIamPolicy request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.iam.v1.IPolicy,
-        protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.setIamPolicy(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.iam.v1.IPolicy,
-        protos.google.iam.v1.ISetIamPolicyRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('setIamPolicy response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .setIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets the access control policy for an Identity-Aware Proxy protected
- * resource.
- * More information about managing access via IAP can be found at:
- * https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {google.iam.v1.GetPolicyOptions} request.options
- *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
- *   `GetIamPolicy`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/identity_aware_proxy_admin_v1_beta1.get_iam_policy.js</caption>
- * region_tag:iap_v1beta1_generated_IdentityAwareProxyAdminV1Beta1_GetIamPolicy_async
- */
+  /**
+   * Gets the access control policy for an Identity-Aware Proxy protected
+   * resource.
+   * More information about managing access via IAP can be found at:
+   * https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.GetPolicyOptions} request.options
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/identity_aware_proxy_admin_v1_beta1.get_iam_policy.js</caption>
+   * region_tag:iap_v1beta1_generated_IdentityAwareProxyAdminV1Beta1_GetIamPolicy_async
+   */
   getIamPolicy(
-      request?: protos.google.iam.v1.IGetIamPolicyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.iam.v1.IPolicy,
-        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.iam.v1.IGetIamPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getIamPolicy(
-      request: protos.google.iam.v1.IGetIamPolicyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getIamPolicy(
-      request: protos.google.iam.v1.IGetIamPolicyRequest,
-      callback: Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getIamPolicy(
-      request?: protos.google.iam.v1.IGetIamPolicyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.iam.v1.IGetIamPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.iam.v1.IPolicy,
-        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'resource': request.resource ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        resource: request.resource ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getIamPolicy request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.iam.v1.IPolicy,
-        protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getIamPolicy(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.iam.v1.IPolicy,
-        protos.google.iam.v1.IGetIamPolicyRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getIamPolicy response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Returns permissions that a caller has on the Identity-Aware Proxy protected
- * resource. If the resource does not exist or the caller does not have
- * Identity-Aware Proxy permissions a [google.rpc.Code.PERMISSION_DENIED]
- * will be returned.
- * More information about managing access via IAP can be found at:
- * https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see
- *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/identity_aware_proxy_admin_v1_beta1.test_iam_permissions.js</caption>
- * region_tag:iap_v1beta1_generated_IdentityAwareProxyAdminV1Beta1_TestIamPermissions_async
- */
+  /**
+   * Returns permissions that a caller has on the Identity-Aware Proxy protected
+   * resource. If the resource does not exist or the caller does not have
+   * Identity-Aware Proxy permissions a [google.rpc.Code.PERMISSION_DENIED]
+   * will be returned.
+   * More information about managing access via IAP can be found at:
+   * https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see
+   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/identity_aware_proxy_admin_v1_beta1.test_iam_permissions.js</caption>
+   * region_tag:iap_v1beta1_generated_IdentityAwareProxyAdminV1Beta1_TestIamPermissions_async
+   */
   testIamPermissions(
-      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.iam.v1.ITestIamPermissionsResponse,
-        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   testIamPermissions(
-      request: protos.google.iam.v1.ITestIamPermissionsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   testIamPermissions(
-      request: protos.google.iam.v1.ITestIamPermissionsRequest,
-      callback: Callback<
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
+    callback: Callback<
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   testIamPermissions(
-      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.iam.v1.ITestIamPermissionsResponse,
-        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'resource': request.resource ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        resource: request.resource ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('testIamPermissions request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.iam.v1.ITestIamPermissionsResponse,
-        protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('testIamPermissions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.testIamPermissions(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.iam.v1.ITestIamPermissionsResponse,
-        protos.google.iam.v1.ITestIamPermissionsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('testIamPermissions response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .testIamPermissions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('testIamPermissions response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-
 
   /**
    * Terminate the gRPC channel and close the client.
@@ -642,7 +778,7 @@ export class IdentityAwareProxyAdminV1Beta1Client {
    */
   close(): Promise<void> {
     if (this.identityAwareProxyAdminV1Beta1Stub && !this._terminated) {
-      return this.identityAwareProxyAdminV1Beta1Stub.then(stub => {
+      return this.identityAwareProxyAdminV1Beta1Stub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

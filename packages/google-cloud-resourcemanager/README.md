@@ -96,7 +96,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/projects.test_iam_permissions.js) |
 | undelete project | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/projects.undelete_project.js) |
 | update project | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/projects.update_project.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/snippet_metadata_google.cloud.resourcemanager.v3.json) |
 | create tag binding | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_bindings.create_tag_binding.js) |
 | delete tag binding | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_bindings.delete_tag_binding.js) |
 | list effective tags | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_bindings.list_effective_tags.js) |

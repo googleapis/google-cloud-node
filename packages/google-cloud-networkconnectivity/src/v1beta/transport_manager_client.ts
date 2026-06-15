@@ -60,7 +60,7 @@ export class TransportManagerClient {
   private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
-  private _log = logging.log('networkconnectivity');
+  private _log = logging.log('network-connectivity');
 
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
