@@ -1399,7 +1399,10 @@ libraries:
       - path: google/cloud/speech/v1
       - path: google/cloud/speech/v1p1beta1
     copyright_year: "2026"
-    skip_generate: true
+    keep:
+      - src/helpers.ts
+      - src/index.ts
+      - test/helpers.test.ts
     nodejs:
       default_version: v1
       dependencies:
