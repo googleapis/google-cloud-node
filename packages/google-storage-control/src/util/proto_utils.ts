@@ -32,6 +32,10 @@ export const replacements: Replacement[] = [
     pattern: /\bObject\b/g,
     replacement: 'StorageObject',
   },
+  {
+    pattern: /\bobject\b/g,
+    replacement: 'StorageObject',
+  },
 ];
 
 /**
