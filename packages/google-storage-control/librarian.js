@@ -20,10 +20,10 @@ const packageRoot = __dirname;
 const utilDir = path.join(packageRoot, 'src', 'util');
 
 try {
-  execSync('npm install', {cwd: packageRoot, stdio: 'inherit'});
+  execSync('npm install --ignore-scripts --cache=/tmp/npm-cache --no-audit --no-fund', {cwd: packageRoot, stdio: 'inherit'});
 
   const tscPath = path.join(packageRoot, 'node_modules', '.bin', 'tsc');
-  execSync(`${tscPath} src/util/storage_control_utils.ts`, {
+  execSync(`${tscPath} src/util/storage_control_utils.ts --target es2022 --module commonjs --moduleResolution node --skipLibCheck`, {
     cwd: packageRoot,
     stdio: 'inherit',
   });
