@@ -75,7 +75,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | search jobs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4/job_service.search_jobs.js) |
 | search jobs for alert | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4/job_service.search_jobs_for_alert.js) |
 | update job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4/job_service.update_job.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4/snippet_metadata_google.cloud.talent.v4.json) |
 | create tenant | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4/tenant_service.create_tenant.js) |
 | delete tenant | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4/tenant_service.delete_tenant.js) |
 | get tenant | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4/tenant_service.get_tenant.js) |
@@ -98,7 +97,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | search jobs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4beta1/job_service.search_jobs.js) |
 | search jobs for alert | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4beta1/job_service.search_jobs_for_alert.js) |
 | update job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4beta1/job_service.update_job.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4beta1/snippet_metadata_google.cloud.talent.v4beta1.json) |
 | create tenant | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4beta1/tenant_service.create_tenant.js) |
 | delete tenant | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4beta1/tenant_service.delete_tenant.js) |
 | get tenant | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/samples/generated/v4beta1/tenant_service.get_tenant.js) |
@@ -137,7 +135,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -147,7 +145,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-talent/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
