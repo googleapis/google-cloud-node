@@ -278,6 +278,7 @@ export function isError(value: any): boolean {
   );
 }
 
+// Check UUID REGEX
 const UUID_REGEX =
   /^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$/i;
 
@@ -287,7 +288,12 @@ const UUID_REGEX =
  * @returns {Boolean} `true` if the value is a UUID, otherwise `false`.
  */
 export function isUuid(value: any): boolean {
-  return typeof value === 'string' && UUID_REGEX.test(value);
+  return (
+    typeof value === 'string' &&
+    /^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$/i.test(
+      value,
+    )
+  );
 }
 
 const PROJECT_ID_TOKEN = '{{projectId}}';
