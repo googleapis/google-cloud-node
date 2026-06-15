@@ -1,16 +1,15 @@
 {
+    "api_description": "The Media Translation API provides enterprise-quality translation from/to various media types.",
     "api_id": "mediatranslation.googleapis.com",
     "api_shortname": "mediatranslation",
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/media-translation/latest",
     "default_version": "v1beta1",
     "distribution_name": "@google-cloud/media-translation",
-    "issue_tracker": "https://issuetracker.google.com/savedsearches/559749",
     "language": "nodejs",
     "library_type": "GAPIC_AUTO",
     "name": "mediatranslation",
-    "name_pretty": "Cloud Media Translation",
-    "product_documentation": "https://cloud.google.com/translate/media/docs/",
-    "release_level": "stable",
-    "repo": "googleapis/google-cloud-node",
-    "requires_billing": true
+    "name_pretty": "Media Translation",
+    "product_documentation": "https://cloud.google.com/media-translation/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
