@@ -25,7 +25,7 @@ try {
   const tscPath = path.join(packageRoot, 'node_modules', '.bin', 'tsc');
   execSync(`${tscPath} src/util/storage_control_utils.ts --target es2022 --module commonjs --moduleResolution node --skipLibCheck`, {
     cwd: packageRoot,
-    stdio: 'inherit',
+    stdio: 'pipe',
   });
 
   execSync('node storage_control_utils.js', {cwd: utilDir, stdio: 'inherit'});
