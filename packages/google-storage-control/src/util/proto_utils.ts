@@ -19,6 +19,7 @@ export const filesToUpdate: string[] = [
   'protos/google/storage/v2/storage.proto',
   'protos/protos.d.ts',
   'protos/protos.js',
+  'protos/protos.json',
 ];
 
 export interface Replacement {
@@ -30,6 +31,22 @@ export const replacements: Replacement[] = [
   {
     pattern: /\bObject\b/g,
     replacement: 'StorageObject',
+  },
+  {
+    pattern: /\bgoogle\.storage\.v2\.object\b/g,
+    replacement: 'google.storage.v2.StorageObject',
+  },
+  {
+    pattern: /\bgoogle\.storage\.v2\.Iobject\b/g,
+    replacement: 'google.storage.v2.IStorageObject',
+  },
+  {
+    pattern: /\bgoogle\.storage\.v2\.Object\b/g,
+    replacement: 'google.storage.v2.StorageObject',
+  },
+  {
+    pattern: /\bgoogle\.storage\.v2\.IObject\b/g,
+    replacement: 'google.storage.v2.IStorageObject',
   },
 ];
 
