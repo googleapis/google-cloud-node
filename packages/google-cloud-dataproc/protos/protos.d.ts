@@ -13497,6 +13497,12 @@ export namespace google {
 
                     /** YarnApplication trackingUrl */
                     trackingUrl?: (string|null);
+
+                    /** YarnApplication vcoreSeconds */
+                    vcoreSeconds?: (number|Long|string|null);
+
+                    /** YarnApplication memoryMbSeconds */
+                    memoryMbSeconds?: (number|Long|string|null);
                 }
 
                 /** Represents a YarnApplication. */
@@ -13519,6 +13525,12 @@ export namespace google {
 
                     /** YarnApplication trackingUrl. */
                     public trackingUrl: string;
+
+                    /** YarnApplication vcoreSeconds. */
+                    public vcoreSeconds: (number|Long|string);
+
+                    /** YarnApplication memoryMbSeconds. */
+                    public memoryMbSeconds: (number|Long|string);
 
                     /**
                      * Creates a new YarnApplication instance using the specified properties.

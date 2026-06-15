@@ -68,7 +68,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list phrase set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1/adaptation.list_phrase_set.js) |
 | update custom class | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1/adaptation.update_custom_class.js) |
 | update phrase set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1/adaptation.update_phrase_set.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1/snippet_metadata_google.cloud.speech.v1.json) |
 | long running recognize | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1/speech.long_running_recognize.js) |
 | recognize | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1/speech.recognize.js) |
 | streaming recognize | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1/speech.streaming_recognize.js) |
@@ -82,11 +81,9 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list phrase set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.list_phrase_set.js) |
 | update custom class | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.update_custom_class.js) |
 | update phrase set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1p1beta1/adaptation.update_phrase_set.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1p1beta1/snippet_metadata_google.cloud.speech.v1p1beta1.json) |
 | long running recognize | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1p1beta1/speech.long_running_recognize.js) |
 | recognize | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1p1beta1/speech.recognize.js) |
 | streaming recognize | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v1p1beta1/speech.streaming_recognize.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v2/snippet_metadata_google.cloud.speech.v2.json) |
 | batch recognize | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v2/speech.batch_recognize.js) |
 | create custom class | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v2/speech.create_custom_class.js) |
 | create phrase set | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/samples/generated/v2/speech.create_phrase_set.js) |
@@ -143,7 +140,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -153,7 +150,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-speech/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
