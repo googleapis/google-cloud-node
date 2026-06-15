@@ -46,6 +46,13 @@ function main(parent) {
    *  Token to provide to skip to a particular spot in the list.
    */
   // const pageToken = 'abc123'
+  /**
+   *  If set, the request will return all reachable Occurrences
+   *  and report all unreachable regions in the `unreachable` field in
+   *  the response.
+   *  Only applicable for requests in the global region.
+   */
+  // const returnPartialSuccess = true
 
   // Imports the Grafeas library
   const {GrafeasClient} = require('@google-cloud/grafeas').v1;
