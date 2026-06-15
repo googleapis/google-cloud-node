@@ -2008,7 +2008,6 @@ libraries:
     version: 0.10.0
     apis:
       - path: google/storage/control/v2
-      - path: google/storage/v2
     copyright_year: "2026"
     keep:
       - src/util/ast_utils.ts
