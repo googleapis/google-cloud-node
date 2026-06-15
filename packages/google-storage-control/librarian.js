@@ -23,9 +23,9 @@ try {
   execSync('npm install --ignore-scripts --cache=/tmp/npm-cache --no-audit --no-fund', {cwd: packageRoot, stdio: 'inherit'});
 
   const tscPath = path.join(packageRoot, 'node_modules', '.bin', 'tsc');
-  execSync(`${tscPath} src/util/storage_control_utils.ts --target es2022 --module commonjs --moduleResolution node --skipLibCheck`, {
+  execSync(`${tscPath} src/util/storage_control_utils.ts`, {
     cwd: packageRoot,
-    stdio: 'pipe',
+    stdio: 'inherit',
   });
 
   execSync('node storage_control_utils.js', {cwd: utilDir, stdio: 'inherit'});
