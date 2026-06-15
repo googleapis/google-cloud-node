@@ -2009,6 +2009,8 @@ libraries:
     apis:
       - path: google/storage/control/v2
     copyright_year: "2026"
+    keep:
+      - src/util
     nodejs:
       default_version: v2
       package_name: '@google-cloud/storage-control'
