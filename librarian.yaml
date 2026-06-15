@@ -2008,6 +2008,7 @@ libraries:
     version: 0.10.0
     apis:
       - path: google/storage/control/v2
+      - path: google/storage/v2
     copyright_year: "2026"
     keep:
       - src/util/ast_utils.ts
@@ -2016,6 +2017,7 @@ libraries:
       - src/util/samples_and_doc_fix_utils.ts
       - src/util/storage_control_utils.ts
       - src/util/uber_client_builder.ts
+      - test/storage_control_compatibility.ts
     nodejs:
       default_version: v2
       package_name: '@google-cloud/storage-control'
