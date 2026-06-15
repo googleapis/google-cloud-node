@@ -32,30 +32,6 @@ export const replacements: Replacement[] = [
     pattern: /\bObject\b/g,
     replacement: 'StorageObject',
   },
-  {
-    pattern: /\bgoogle\.storage\.v2\.object\b/g,
-    replacement: 'google.storage.v2.StorageObject',
-  },
-  {
-    pattern: /\bgoogle\.storage\.v2\.Iobject\b/g,
-    replacement: 'google.storage.v2.IStorageObject',
-  },
-  {
-    pattern: /\bgoogle\.storage\.v2\.Object\b/g,
-    replacement: 'google.storage.v2.StorageObject',
-  },
-  {
-    pattern: /\bgoogle\.storage\.v2\.IObject\b/g,
-    replacement: 'google.storage.v2.IStorageObject',
-  },
-  {
-    pattern: /\bIObject\b/g,
-    replacement: 'IStorageObject',
-  },
-  {
-    pattern: /\bIobject\b/g,
-    replacement: 'IStorageObject',
-  },
 ];
 
 /**
