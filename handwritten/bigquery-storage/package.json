@@ -37,10 +37,10 @@
     "google-auth-library": "^10.0.0",
     "google-gax": "^5.0.0",
     "long": "^5.2.0",
-    "protobufjs": "^7.5.5"
+    "protobufjs": "^7.6.4"
   },
   "peerDependencies": {
-    "protobufjs": "~7.5.5"
+    "protobufjs": "~7.6.4"
   },
   "devDependencies": {
     "@google-cloud/bigquery": "^8.0.0",
