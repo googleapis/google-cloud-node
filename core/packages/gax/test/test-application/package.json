@@ -26,7 +26,7 @@
   "dependencies": {
     "@grpc/grpc-js": "~1.6.0",
     "google-gax": "file:./google-gax.tgz",
-    "protobufjs": "^7.0.0",
+    "protobufjs": "^7.6.4",
     "pumpify": "^2.0.1",
     "showcase-echo-client": "./showcase-echo-client.tgz",
     "showcase-server": "./showcase-server.tgz"

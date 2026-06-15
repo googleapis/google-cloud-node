@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@google-cloud/eventarc-publishing": "^4.2.2",
-    "protobufjs": "^7.0.0"
+    "protobufjs": "^7.6.4"
   },
   "devDependencies": {
     "c8": "^10.0.0",
