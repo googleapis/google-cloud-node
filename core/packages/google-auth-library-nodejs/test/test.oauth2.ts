@@ -1124,6 +1124,7 @@ describe('oauth2', () => {
       // Verify the credentials were not wiped/cleared
       assert.strictEqual(client.credentials.access_token, 'initial-access-token');
       assert.strictEqual(client.credentials.refresh_token, 'refresh-token-placeholder');
+      assert.strictEqual(client.credentials.expiry_date, expiryDate);
 
       scopes.forEach(s => s.done());
     });
