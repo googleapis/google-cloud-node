@@ -48,6 +48,14 @@ export const replacements: Replacement[] = [
     pattern: /\bgoogle\.storage\.v2\.IObject\b/g,
     replacement: 'google.storage.v2.IStorageObject',
   },
+  {
+    pattern: /\bIObject\b/g,
+    replacement: 'IStorageObject',
+  },
+  {
+    pattern: /\bIobject\b/g,
+    replacement: 'IStorageObject',
+  },
 ];
 
 /**
