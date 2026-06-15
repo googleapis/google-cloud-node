@@ -68,7 +68,7 @@ function main(parent, bucketId) {
   // const enableObjectRetention = true
 
   // Imports the Storage library
-  const {StorageClient} = require('@google-cloud/storage-control').v2;
+  const {StorageControlClient} = require('@google-cloud/storage-control');
 
   // Instantiates a client
   const storageControlClient = new StorageControlClient();
