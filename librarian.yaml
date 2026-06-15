@@ -1489,6 +1489,7 @@ libraries:
       - path: google/cloud/translate/v3
       - path: google/cloud/translate/v3beta1
     copyright_year: "2026"
+    skip_generate: true
     nodejs:
       default_version: v3
       dependencies:
