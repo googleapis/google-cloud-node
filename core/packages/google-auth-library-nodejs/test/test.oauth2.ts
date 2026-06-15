@@ -1096,12 +1096,13 @@ describe('oauth2', () => {
         clientId: CLIENT_ID,
         clientSecret: CLIENT_SECRET,
         redirectUri: REDIRECT_URI,
-        eagerRefreshThresholdMillis: 5000,
+        eagerRefreshThresholdMillis: 100000,
       });
+      const expiryDate = Date.now() + 50000;
       client.credentials = {
         access_token: 'initial-access-token',
         refresh_token: 'refresh-token-placeholder',
-        expiry_date: new Date().getTime() + 3000,
+        expiry_date: expiryDate,
       };
 
       const scopes = [
