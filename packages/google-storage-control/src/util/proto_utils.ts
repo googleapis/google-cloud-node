@@ -28,20 +28,19 @@ export interface Replacement {
 
 export const replacements: Replacement[] = [
   {
-    pattern: /\bObject\b/g,
-    replacement: 'StorageObject',
+    // Rename Object and IObject to StorageObject and IStorageObject (Global, skipped for protos.js)
+    pattern: /\b(I)?Object\b/g,
+    replacement: '$1StorageObject',
   },
   {
-    pattern: /\ban StorageObject\b/g,
-    replacement: 'a StorageObject',
+    // Correct articles: "an StorageObject" -> "a StorageObject" (Global, skipped for protos.js)
+    pattern: /\b([Aa])n StorageObject\b/g,
+    replacement: '$1 StorageObject',
   },
   {
-    pattern: /\bIObject\b/g,
-    replacement: 'IStorageObject',
-  },
-  {
-    pattern: /\bgoogle\.storage\.v2\.object\b/g,
-    replacement: 'google.storage.v2.StorageObject',
+    // Rename namespace-prefixed object/Iobject/Object/IObject references (Safe for all files)
+    pattern: /\b((\$root\.)?google\.storage\.v2\.)(I)?[Oo]bject\b/g,
+    replacement: '$1$3StorageObject',
   },
 ];
 
@@ -59,6 +58,14 @@ export function cleanObjectReferences(
     const fullPath = path.join(__dirname, '..', '..', filePath);
     if (fs.existsSync(fullPath)) {
       replacements.forEach(({pattern, replacement}) => {
+        // Skip global Object and article replacements for protos.js to avoid corrupting native JS methods
+        if (
+          filePath.endsWith('protos.js') &&
+          (pattern.toString() === '/\\b(I)?Object\\b/g' ||
+            pattern.toString() === '/\\b([Aa])n StorageObject\\b/g')
+        ) {
+          return;
+        }
         try {
           const data = fs.readFileSync(fullPath, 'utf8');
           const result = data.replace(pattern, replacement);
