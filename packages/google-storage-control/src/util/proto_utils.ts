@@ -19,6 +19,7 @@ export const filesToUpdate: string[] = [
   'protos/google/storage/v2/storage.proto',
   'protos/protos.d.ts',
   'protos/protos.js',
+  'protos/protos.json',
 ];
 
 export interface Replacement {
