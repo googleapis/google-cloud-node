@@ -95,3 +95,4 @@ export {StorageClient} from './storage_client';
     console.error(`Error writing to file ${fullPath}:`, err);
   }
 }
+
