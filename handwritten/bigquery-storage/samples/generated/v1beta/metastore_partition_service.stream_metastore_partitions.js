@@ -51,7 +51,7 @@ function main(parent) {
   // const skipExistingPartitions = true
 
   // Imports the Storage library
-  const {MetastorePartitionServiceClient} = require('@google-cloud/storage').v1beta;
+  const {MetastorePartitionServiceClient} = require('@google-cloud/bigquery-storage').v1beta;
 
   // Instantiates a client
   const storageClient = new MetastorePartitionServiceClient();

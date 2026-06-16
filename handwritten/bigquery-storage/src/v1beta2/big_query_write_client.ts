@@ -60,7 +60,7 @@ export class BigQueryWriteClient {
   private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
-  private _log = logging.log('storage');
+  private _log = logging.log('bigquery-storage');
 
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {

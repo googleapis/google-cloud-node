@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.cloud.bigquery.storage.v1alpha",
-  "libraryPackage": "@google-cloud/storage",
+  "libraryPackage": "@google-cloud/bigquery-storage",
   "services": {
     "MetastorePartitionService": {
       "clients": {

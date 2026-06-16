@@ -49,7 +49,7 @@ function main(parent, readSession) {
   // const maxStreamCount = 1234
 
   // Imports the Storage library
-  const {BigQueryReadClient} = require('storage').v1beta2;
+  const {BigQueryReadClient} = require('@google-cloud/bigquery-storage').v1beta2;
 
   // Instantiates a client
   const storageClient = new BigQueryReadClient();

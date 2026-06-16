@@ -54,7 +54,7 @@ function main(writeStream) {
   // const traceId = 'abc123'
 
   // Imports the Storage library
-  const {BigQueryWriteClient} = require('storage').v1beta2;
+  const {BigQueryWriteClient} = require('@google-cloud/bigquery-storage').v1beta2;
 
   // Instantiates a client
   const storageClient = new BigQueryWriteClient();

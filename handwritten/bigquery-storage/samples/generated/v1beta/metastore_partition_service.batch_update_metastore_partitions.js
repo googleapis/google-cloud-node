@@ -48,7 +48,7 @@ function main(parent, requests) {
   // const traceId = 'abc123'
 
   // Imports the Storage library
-  const {MetastorePartitionServiceClient} = require('@google-cloud/storage').v1beta;
+  const {MetastorePartitionServiceClient} = require('@google-cloud/bigquery-storage').v1beta;
 
   // Instantiates a client
   const storageClient = new MetastorePartitionServiceClient();
