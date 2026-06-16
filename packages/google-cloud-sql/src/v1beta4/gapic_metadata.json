@@ -137,6 +137,11 @@
                 "getConnectSettings"
               ]
             },
+            "ResolveConnectSettings": {
+              "methods": [
+                "resolveConnectSettings"
+              ]
+            },
             "GenerateEphemeralCert": {
               "methods": [
                 "generateEphemeralCert"
@@ -150,6 +155,11 @@
             "GetConnectSettings": {
               "methods": [
                 "getConnectSettings"
+              ]
+            },
+            "ResolveConnectSettings": {
+              "methods": [
+                "resolveConnectSettings"
               ]
             },
             "GenerateEphemeralCert": {
@@ -232,6 +242,24 @@
               ]
             }
           }
+        }
+      }
+    },
+    "SqlDataService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SqlDataServiceClient",
+          "rpcs": {
+            "StreamSqlData": {
+              "methods": [
+                "streamSqlData"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SqlDataServiceClient",
+          "rpcs": {}
         }
       }
     },

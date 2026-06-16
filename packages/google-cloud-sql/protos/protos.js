@@ -85768,6 +85768,8 @@
                          * @interface ISqlInstancesPatchRequest
                          * @property {string|null} [instance] SqlInstancesPatchRequest instance
                          * @property {string|null} [project] SqlInstancesPatchRequest project
+                         * @property {boolean|null} [reconcilePscNetworking] SqlInstancesPatchRequest reconcilePscNetworking
+                         * @property {boolean|null} [reconcilePscNetworkingForce] SqlInstancesPatchRequest reconcilePscNetworkingForce
                          * @property {google.cloud.sql.v1beta4.IDatabaseInstance|null} [body] SqlInstancesPatchRequest body
                          */
     
@@ -85803,12 +85805,43 @@
                         SqlInstancesPatchRequest.prototype.project = "";
     
                         /**
+                         * SqlInstancesPatchRequest reconcilePscNetworking.
+                         * @member {boolean|null|undefined} reconcilePscNetworking
+                         * @memberof google.cloud.sql.v1beta4.SqlInstancesPatchRequest
+                         * @instance
+                         */
+                        SqlInstancesPatchRequest.prototype.reconcilePscNetworking = null;
+    
+                        /**
+                         * SqlInstancesPatchRequest reconcilePscNetworkingForce.
+                         * @member {boolean|null|undefined} reconcilePscNetworkingForce
+                         * @memberof google.cloud.sql.v1beta4.SqlInstancesPatchRequest
+                         * @instance
+                         */
+                        SqlInstancesPatchRequest.prototype.reconcilePscNetworkingForce = null;
+    
+                        /**
                          * SqlInstancesPatchRequest body.
                          * @member {google.cloud.sql.v1beta4.IDatabaseInstance|null|undefined} body
                          * @memberof google.cloud.sql.v1beta4.SqlInstancesPatchRequest
                          * @instance
                          */
                         SqlInstancesPatchRequest.prototype.body = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(SqlInstancesPatchRequest.prototype, "_reconcilePscNetworking", {
+                            get: $util.oneOfGetter($oneOfFields = ["reconcilePscNetworking"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(SqlInstancesPatchRequest.prototype, "_reconcilePscNetworkingForce", {
+                            get: $util.oneOfGetter($oneOfFields = ["reconcilePscNetworkingForce"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new SqlInstancesPatchRequest instance using the specified properties.
@@ -85838,6 +85871,10 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.instance);
                             if (message.project != null && Object.hasOwnProperty.call(message, "project"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.project);
+                            if (message.reconcilePscNetworking != null && Object.hasOwnProperty.call(message, "reconcilePscNetworking"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.reconcilePscNetworking);
+                            if (message.reconcilePscNetworkingForce != null && Object.hasOwnProperty.call(message, "reconcilePscNetworkingForce"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.reconcilePscNetworkingForce);
                             if (message.body != null && Object.hasOwnProperty.call(message, "body"))
                                 $root.google.cloud.sql.v1beta4.DatabaseInstance.encode(message.body, writer.uint32(/* id 100, wireType 2 =*/802).fork()).ldelim();
                             return writer;
@@ -85888,6 +85925,14 @@
                                         message.project = reader.string();
                                         break;
                                     }
+                                case 4: {
+                                        message.reconcilePscNetworking = reader.bool();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.reconcilePscNetworkingForce = reader.bool();
+                                        break;
+                                    }
                                 case 100: {
                                         message.body = $root.google.cloud.sql.v1beta4.DatabaseInstance.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
@@ -85931,12 +85976,23 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
+                            var properties = {};
                             if (message.instance != null && message.hasOwnProperty("instance"))
                                 if (!$util.isString(message.instance))
                                     return "instance: string expected";
                             if (message.project != null && message.hasOwnProperty("project"))
                                 if (!$util.isString(message.project))
                                     return "project: string expected";
+                            if (message.reconcilePscNetworking != null && message.hasOwnProperty("reconcilePscNetworking")) {
+                                properties._reconcilePscNetworking = 1;
+                                if (typeof message.reconcilePscNetworking !== "boolean")
+                                    return "reconcilePscNetworking: boolean expected";
+                            }
+                            if (message.reconcilePscNetworkingForce != null && message.hasOwnProperty("reconcilePscNetworkingForce")) {
+                                properties._reconcilePscNetworkingForce = 1;
+                                if (typeof message.reconcilePscNetworkingForce !== "boolean")
+                                    return "reconcilePscNetworkingForce: boolean expected";
+                            }
                             if (message.body != null && message.hasOwnProperty("body")) {
                                 var error = $root.google.cloud.sql.v1beta4.DatabaseInstance.verify(message.body, long + 1);
                                 if (error)
@@ -85965,6 +86021,10 @@
                                 message.instance = String(object.instance);
                             if (object.project != null)
                                 message.project = String(object.project);
+                            if (object.reconcilePscNetworking != null)
+                                message.reconcilePscNetworking = Boolean(object.reconcilePscNetworking);
+                            if (object.reconcilePscNetworkingForce != null)
+                                message.reconcilePscNetworkingForce = Boolean(object.reconcilePscNetworkingForce);
                             if (object.body != null) {
                                 if (typeof object.body !== "object")
                                     throw TypeError(".google.cloud.sql.v1beta4.SqlInstancesPatchRequest.body: object expected");
@@ -85995,6 +86055,16 @@
                                 object.instance = message.instance;
                             if (message.project != null && message.hasOwnProperty("project"))
                                 object.project = message.project;
+                            if (message.reconcilePscNetworking != null && message.hasOwnProperty("reconcilePscNetworking")) {
+                                object.reconcilePscNetworking = message.reconcilePscNetworking;
+                                if (options.oneofs)
+                                    object._reconcilePscNetworking = "reconcilePscNetworking";
+                            }
+                            if (message.reconcilePscNetworkingForce != null && message.hasOwnProperty("reconcilePscNetworkingForce")) {
+                                object.reconcilePscNetworkingForce = message.reconcilePscNetworkingForce;
+                                if (options.oneofs)
+                                    object._reconcilePscNetworkingForce = "reconcilePscNetworkingForce";
+                            }
                             if (message.body != null && message.hasOwnProperty("body"))
                                 object.body = $root.google.cloud.sql.v1beta4.DatabaseInstance.toObject(message.body, options);
                             return object;
@@ -101042,6 +101112,8 @@
                                 case 272:
                                 case 408:
                                 case 557:
+                                case 684:
+                                case 781:
                                 case 26:
                                 case 27:
                                 case 28:
@@ -101050,6 +101122,9 @@
                                 case 200:
                                 case 201:
                                 case 202:
+                                case 549:
+                                case 550:
+                                case 551:
                                     break;
                                 }
                             if (message.diskEncryptionConfiguration != null && message.hasOwnProperty("diskEncryptionConfiguration")) {
@@ -101389,6 +101464,14 @@
                             case 557:
                                 message.databaseVersion = 557;
                                 break;
+                            case "POSTGRES_19":
+                            case 684:
+                                message.databaseVersion = 684;
+                                break;
+                            case "POSTGRES_20":
+                            case 781:
+                                message.databaseVersion = 781;
+                                break;
                             case "SQLSERVER_2019_STANDARD":
                             case 26:
                                 message.databaseVersion = 26;
@@ -101420,6 +101503,18 @@
                             case "SQLSERVER_2022_WEB":
                             case 202:
                                 message.databaseVersion = 202;
+                                break;
+                            case "SQLSERVER_2025_STANDARD":
+                            case 549:
+                                message.databaseVersion = 549;
+                                break;
+                            case "SQLSERVER_2025_ENTERPRISE":
+                            case 550:
+                                message.databaseVersion = 550;
+                                break;
+                            case "SQLSERVER_2025_EXPRESS":
+                            case 551:
+                                message.databaseVersion = 551;
                                 break;
                             }
                             if (object.diskEncryptionConfiguration != null) {
@@ -102205,6 +102300,8 @@
                                 case 272:
                                 case 408:
                                 case 557:
+                                case 684:
+                                case 781:
                                 case 26:
                                 case 27:
                                 case 28:
@@ -102213,6 +102310,9 @@
                                 case 200:
                                 case 201:
                                 case 202:
+                                case 549:
+                                case 550:
+                                case 551:
                                     break;
                                 }
                             if (message.maxChargeableBytes != null && message.hasOwnProperty("maxChargeableBytes")) {
@@ -102563,6 +102663,14 @@
                             case 557:
                                 message.databaseVersion = 557;
                                 break;
+                            case "POSTGRES_19":
+                            case 684:
+                                message.databaseVersion = 684;
+                                break;
+                            case "POSTGRES_20":
+                            case 781:
+                                message.databaseVersion = 781;
+                                break;
                             case "SQLSERVER_2019_STANDARD":
                             case 26:
                                 message.databaseVersion = 26;
@@ -102594,6 +102702,18 @@
                             case "SQLSERVER_2022_WEB":
                             case 202:
                                 message.databaseVersion = 202;
+                                break;
+                            case "SQLSERVER_2025_STANDARD":
+                            case 549:
+                                message.databaseVersion = 549;
+                                break;
+                            case "SQLSERVER_2025_ENTERPRISE":
+                            case 550:
+                                message.databaseVersion = 550;
+                                break;
+                            case "SQLSERVER_2025_EXPRESS":
+                            case 551:
+                                message.databaseVersion = 551;
                                 break;
                             }
                             if (object.maxChargeableBytes != null)
@@ -106713,6 +106833,8 @@
                                 case 272:
                                 case 408:
                                 case 557:
+                                case 684:
+                                case 781:
                                 case 26:
                                 case 27:
                                 case 28:
@@ -106721,6 +106843,9 @@
                                 case 200:
                                 case 201:
                                 case 202:
+                                case 549:
+                                case 550:
+                                case 551:
                                     break;
                                 }
                             if (message.settings != null && message.hasOwnProperty("settings")) {
@@ -106825,6 +106950,7 @@
                                     case 3:
                                     case 4:
                                     case 5:
+                                    case 8:
                                         break;
                                     }
                             }
@@ -107244,6 +107370,14 @@
                             case 557:
                                 message.databaseVersion = 557;
                                 break;
+                            case "POSTGRES_19":
+                            case 684:
+                                message.databaseVersion = 684;
+                                break;
+                            case "POSTGRES_20":
+                            case 781:
+                                message.databaseVersion = 781;
+                                break;
                             case "SQLSERVER_2019_STANDARD":
                             case 26:
                                 message.databaseVersion = 26;
@@ -107275,6 +107409,18 @@
                             case "SQLSERVER_2022_WEB":
                             case 202:
                                 message.databaseVersion = 202;
+                                break;
+                            case "SQLSERVER_2025_STANDARD":
+                            case 549:
+                                message.databaseVersion = 549;
+                                break;
+                            case "SQLSERVER_2025_ENTERPRISE":
+                            case 550:
+                                message.databaseVersion = 550;
+                                break;
+                            case "SQLSERVER_2025_EXPRESS":
+                            case 551:
+                                message.databaseVersion = 551;
                                 break;
                             }
                             if (object.settings != null) {
@@ -107423,6 +107569,10 @@
                                     case "KMS_KEY_ISSUE":
                                     case 5:
                                         message.suspensionReason[i] = 5;
+                                        break;
+                                    case "PROJECT_ABUSE":
+                                    case 8:
+                                        message.suspensionReason[i] = 8;
                                         break;
                                     }
                             }
@@ -115132,6 +115282,8 @@
                                     case 272:
                                     case 408:
                                     case 557:
+                                    case 684:
+                                    case 781:
                                     case 26:
                                     case 27:
                                     case 28:
@@ -115140,6 +115292,9 @@
                                     case 200:
                                     case 201:
                                     case 202:
+                                    case 549:
+                                    case 550:
+                                    case 551:
                                         break;
                                     }
                             }
@@ -115448,6 +115603,14 @@
                                     case 557:
                                         message.appliesTo[i] = 557;
                                         break;
+                                    case "POSTGRES_19":
+                                    case 684:
+                                        message.appliesTo[i] = 684;
+                                        break;
+                                    case "POSTGRES_20":
+                                    case 781:
+                                        message.appliesTo[i] = 781;
+                                        break;
                                     case "SQLSERVER_2019_STANDARD":
                                     case 26:
                                         message.appliesTo[i] = 26;
@@ -115479,6 +115642,18 @@
                                     case "SQLSERVER_2022_WEB":
                                     case 202:
                                         message.appliesTo[i] = 202;
+                                        break;
+                                    case "SQLSERVER_2025_STANDARD":
+                                    case 549:
+                                        message.appliesTo[i] = 549;
+                                        break;
+                                    case "SQLSERVER_2025_ENTERPRISE":
+                                    case 550:
+                                        message.appliesTo[i] = 550;
+                                        break;
+                                    case "SQLSERVER_2025_EXPRESS":
+                                    case 551:
+                                        message.appliesTo[i] = 551;
                                         break;
                                     }
                             }
@@ -122750,6 +122925,9 @@
                          * @property {string|null} [allocatedIpRange] PointInTimeRestoreContext allocatedIpRange
                          * @property {string|null} [preferredZone] PointInTimeRestoreContext preferredZone
                          * @property {string|null} [preferredSecondaryZone] PointInTimeRestoreContext preferredSecondaryZone
+                         * @property {google.cloud.sql.v1beta4.IDatabaseInstance|null} [targetInstanceSettings] PointInTimeRestoreContext targetInstanceSettings
+                         * @property {Array.<string>|null} [targetInstanceClearSettingsFieldNames] PointInTimeRestoreContext targetInstanceClearSettingsFieldNames
+                         * @property {string|null} [region] PointInTimeRestoreContext region
                          */
     
                         /**
@@ -122761,6 +122939,7 @@
                          * @param {google.cloud.sql.v1beta4.IPointInTimeRestoreContext=} [properties] Properties to set
                          */
                         function PointInTimeRestoreContext(properties) {
+                            this.targetInstanceClearSettingsFieldNames = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null && keys[i] !== "__proto__")
@@ -122823,6 +123002,30 @@
                          */
                         PointInTimeRestoreContext.prototype.preferredSecondaryZone = null;
     
+                        /**
+                         * PointInTimeRestoreContext targetInstanceSettings.
+                         * @member {google.cloud.sql.v1beta4.IDatabaseInstance|null|undefined} targetInstanceSettings
+                         * @memberof google.cloud.sql.v1beta4.PointInTimeRestoreContext
+                         * @instance
+                         */
+                        PointInTimeRestoreContext.prototype.targetInstanceSettings = null;
+    
+                        /**
+                         * PointInTimeRestoreContext targetInstanceClearSettingsFieldNames.
+                         * @member {Array.<string>} targetInstanceClearSettingsFieldNames
+                         * @memberof google.cloud.sql.v1beta4.PointInTimeRestoreContext
+                         * @instance
+                         */
+                        PointInTimeRestoreContext.prototype.targetInstanceClearSettingsFieldNames = $util.emptyArray;
+    
+                        /**
+                         * PointInTimeRestoreContext region.
+                         * @member {string|null|undefined} region
+                         * @memberof google.cloud.sql.v1beta4.PointInTimeRestoreContext
+                         * @instance
+                         */
+                        PointInTimeRestoreContext.prototype.region = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -122859,6 +123062,12 @@
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(PointInTimeRestoreContext.prototype, "_preferredSecondaryZone", {
                             get: $util.oneOfGetter($oneOfFields = ["preferredSecondaryZone"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(PointInTimeRestoreContext.prototype, "_region", {
+                            get: $util.oneOfGetter($oneOfFields = ["region"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -122900,6 +123109,13 @@
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.preferredZone);
                             if (message.preferredSecondaryZone != null && Object.hasOwnProperty.call(message, "preferredSecondaryZone"))
                                 writer.uint32(/* id 9, wireType 2 =*/74).string(message.preferredSecondaryZone);
+                            if (message.targetInstanceSettings != null && Object.hasOwnProperty.call(message, "targetInstanceSettings"))
+                                $root.google.cloud.sql.v1beta4.DatabaseInstance.encode(message.targetInstanceSettings, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.targetInstanceClearSettingsFieldNames != null && message.targetInstanceClearSettingsFieldNames.length)
+                                for (var i = 0; i < message.targetInstanceClearSettingsFieldNames.length; ++i)
+                                    writer.uint32(/* id 12, wireType 2 =*/98).string(message.targetInstanceClearSettingsFieldNames[i]);
+                            if (message.region != null && Object.hasOwnProperty.call(message, "region"))
+                                writer.uint32(/* id 13, wireType 2 =*/106).string(message.region);
                             return writer;
                         };
     
@@ -122966,6 +123182,20 @@
                                     }
                                 case 9: {
                                         message.preferredSecondaryZone = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.targetInstanceSettings = $root.google.cloud.sql.v1beta4.DatabaseInstance.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 12: {
+                                        if (!(message.targetInstanceClearSettingsFieldNames && message.targetInstanceClearSettingsFieldNames.length))
+                                            message.targetInstanceClearSettingsFieldNames = [];
+                                        message.targetInstanceClearSettingsFieldNames.push(reader.string());
+                                        break;
+                                    }
+                                case 13: {
+                                        message.region = reader.string();
                                         break;
                                     }
                                 default:
@@ -123043,6 +123273,23 @@
                                 if (!$util.isString(message.preferredSecondaryZone))
                                     return "preferredSecondaryZone: string expected";
                             }
+                            if (message.targetInstanceSettings != null && message.hasOwnProperty("targetInstanceSettings")) {
+                                var error = $root.google.cloud.sql.v1beta4.DatabaseInstance.verify(message.targetInstanceSettings, long + 1);
+                                if (error)
+                                    return "targetInstanceSettings." + error;
+                            }
+                            if (message.targetInstanceClearSettingsFieldNames != null && message.hasOwnProperty("targetInstanceClearSettingsFieldNames")) {
+                                if (!Array.isArray(message.targetInstanceClearSettingsFieldNames))
+                                    return "targetInstanceClearSettingsFieldNames: array expected";
+                                for (var i = 0; i < message.targetInstanceClearSettingsFieldNames.length; ++i)
+                                    if (!$util.isString(message.targetInstanceClearSettingsFieldNames[i]))
+                                        return "targetInstanceClearSettingsFieldNames: string[] expected";
+                            }
+                            if (message.region != null && message.hasOwnProperty("region")) {
+                                properties._region = 1;
+                                if (!$util.isString(message.region))
+                                    return "region: string expected";
+                            }
                             return null;
                         };
     
@@ -123079,6 +123326,20 @@
                                 message.preferredZone = String(object.preferredZone);
                             if (object.preferredSecondaryZone != null)
                                 message.preferredSecondaryZone = String(object.preferredSecondaryZone);
+                            if (object.targetInstanceSettings != null) {
+                                if (typeof object.targetInstanceSettings !== "object")
+                                    throw TypeError(".google.cloud.sql.v1beta4.PointInTimeRestoreContext.targetInstanceSettings: object expected");
+                                message.targetInstanceSettings = $root.google.cloud.sql.v1beta4.DatabaseInstance.fromObject(object.targetInstanceSettings, long + 1);
+                            }
+                            if (object.targetInstanceClearSettingsFieldNames) {
+                                if (!Array.isArray(object.targetInstanceClearSettingsFieldNames))
+                                    throw TypeError(".google.cloud.sql.v1beta4.PointInTimeRestoreContext.targetInstanceClearSettingsFieldNames: array expected");
+                                message.targetInstanceClearSettingsFieldNames = [];
+                                for (var i = 0; i < object.targetInstanceClearSettingsFieldNames.length; ++i)
+                                    message.targetInstanceClearSettingsFieldNames[i] = String(object.targetInstanceClearSettingsFieldNames[i]);
+                            }
+                            if (object.region != null)
+                                message.region = String(object.region);
                             return message;
                         };
     
@@ -123095,8 +123356,12 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.arrays || options.defaults)
+                                object.targetInstanceClearSettingsFieldNames = [];
+                            if (options.defaults) {
                                 object.pointInTime = null;
+                                object.targetInstanceSettings = null;
+                            }
                             if (message.datasource != null && message.hasOwnProperty("datasource")) {
                                 object.datasource = message.datasource;
                                 if (options.oneofs)
@@ -123128,6 +123393,18 @@
                                 object.preferredSecondaryZone = message.preferredSecondaryZone;
                                 if (options.oneofs)
                                     object._preferredSecondaryZone = "preferredSecondaryZone";
+                            }
+                            if (message.targetInstanceSettings != null && message.hasOwnProperty("targetInstanceSettings"))
+                                object.targetInstanceSettings = $root.google.cloud.sql.v1beta4.DatabaseInstance.toObject(message.targetInstanceSettings, options);
+                            if (message.targetInstanceClearSettingsFieldNames && message.targetInstanceClearSettingsFieldNames.length) {
+                                object.targetInstanceClearSettingsFieldNames = [];
+                                for (var j = 0; j < message.targetInstanceClearSettingsFieldNames.length; ++j)
+                                    object.targetInstanceClearSettingsFieldNames[j] = message.targetInstanceClearSettingsFieldNames[j];
+                            }
+                            if (message.region != null && message.hasOwnProperty("region")) {
+                                object.region = message.region;
+                                if (options.oneofs)
+                                    object._region = "region";
                             }
                             return object;
                         };
@@ -123964,6 +124241,8 @@
                                 case 272:
                                 case 408:
                                 case 557:
+                                case 684:
+                                case 781:
                                 case 26:
                                 case 27:
                                 case 28:
@@ -123972,6 +124251,9 @@
                                 case 200:
                                 case 201:
                                 case 202:
+                                case 549:
+                                case 550:
+                                case 551:
                                     break;
                                 }
                             if (message.preCheckResponse != null && message.hasOwnProperty("preCheckResponse")) {
@@ -124184,6 +124466,14 @@
                             case 557:
                                 message.targetDatabaseVersion = 557;
                                 break;
+                            case "POSTGRES_19":
+                            case 684:
+                                message.targetDatabaseVersion = 684;
+                                break;
+                            case "POSTGRES_20":
+                            case 781:
+                                message.targetDatabaseVersion = 781;
+                                break;
                             case "SQLSERVER_2019_STANDARD":
                             case 26:
                                 message.targetDatabaseVersion = 26;
@@ -124215,6 +124505,18 @@
                             case "SQLSERVER_2022_WEB":
                             case 202:
                                 message.targetDatabaseVersion = 202;
+                                break;
+                            case "SQLSERVER_2025_STANDARD":
+                            case 549:
+                                message.targetDatabaseVersion = 549;
+                                break;
+                            case "SQLSERVER_2025_ENTERPRISE":
+                            case 550:
+                                message.targetDatabaseVersion = 550;
+                                break;
+                            case "SQLSERVER_2025_EXPRESS":
+                            case 551:
+                                message.targetDatabaseVersion = 551;
                                 break;
                             }
                             if (object.preCheckResponse) {
@@ -126292,6 +126594,9 @@
                          * @property {Array.<string>|null} [allowedConsumerProjects] PscConfig allowedConsumerProjects
                          * @property {Array.<google.cloud.sql.v1beta4.IPscAutoConnectionConfig>|null} [pscAutoConnections] PscConfig pscAutoConnections
                          * @property {string|null} [networkAttachmentUri] PscConfig networkAttachmentUri
+                         * @property {boolean|null} [pscAutoDnsEnabled] PscConfig pscAutoDnsEnabled
+                         * @property {boolean|null} [pscWriteEndpointDnsEnabled] PscConfig pscWriteEndpointDnsEnabled
+                         * @property {boolean|null} [pscAutoConnectionPolicyEnabled] PscConfig pscAutoConnectionPolicyEnabled
                          */
     
                         /**
@@ -126343,12 +126648,54 @@
                          */
                         PscConfig.prototype.networkAttachmentUri = "";
     
+                        /**
+                         * PscConfig pscAutoDnsEnabled.
+                         * @member {boolean|null|undefined} pscAutoDnsEnabled
+                         * @memberof google.cloud.sql.v1beta4.PscConfig
+                         * @instance
+                         */
+                        PscConfig.prototype.pscAutoDnsEnabled = null;
+    
+                        /**
+                         * PscConfig pscWriteEndpointDnsEnabled.
+                         * @member {boolean|null|undefined} pscWriteEndpointDnsEnabled
+                         * @memberof google.cloud.sql.v1beta4.PscConfig
+                         * @instance
+                         */
+                        PscConfig.prototype.pscWriteEndpointDnsEnabled = null;
+    
+                        /**
+                         * PscConfig pscAutoConnectionPolicyEnabled.
+                         * @member {boolean|null|undefined} pscAutoConnectionPolicyEnabled
+                         * @memberof google.cloud.sql.v1beta4.PscConfig
+                         * @instance
+                         */
+                        PscConfig.prototype.pscAutoConnectionPolicyEnabled = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(PscConfig.prototype, "_pscEnabled", {
                             get: $util.oneOfGetter($oneOfFields = ["pscEnabled"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(PscConfig.prototype, "_pscAutoDnsEnabled", {
+                            get: $util.oneOfGetter($oneOfFields = ["pscAutoDnsEnabled"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(PscConfig.prototype, "_pscWriteEndpointDnsEnabled", {
+                            get: $util.oneOfGetter($oneOfFields = ["pscWriteEndpointDnsEnabled"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(PscConfig.prototype, "_pscAutoConnectionPolicyEnabled", {
+                            get: $util.oneOfGetter($oneOfFields = ["pscAutoConnectionPolicyEnabled"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -126386,6 +126733,12 @@
                                     $root.google.cloud.sql.v1beta4.PscAutoConnectionConfig.encode(message.pscAutoConnections[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.networkAttachmentUri != null && Object.hasOwnProperty.call(message, "networkAttachmentUri"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.networkAttachmentUri);
+                            if (message.pscAutoDnsEnabled != null && Object.hasOwnProperty.call(message, "pscAutoDnsEnabled"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.pscAutoDnsEnabled);
+                            if (message.pscWriteEndpointDnsEnabled != null && Object.hasOwnProperty.call(message, "pscWriteEndpointDnsEnabled"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.pscWriteEndpointDnsEnabled);
+                            if (message.pscAutoConnectionPolicyEnabled != null && Object.hasOwnProperty.call(message, "pscAutoConnectionPolicyEnabled"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.pscAutoConnectionPolicyEnabled);
                             return writer;
                         };
     
@@ -126444,6 +126797,18 @@
                                     }
                                 case 4: {
                                         message.networkAttachmentUri = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.pscAutoDnsEnabled = reader.bool();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.pscWriteEndpointDnsEnabled = reader.bool();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.pscAutoConnectionPolicyEnabled = reader.bool();
                                         break;
                                     }
                                 default:
@@ -126510,6 +126875,21 @@
                             if (message.networkAttachmentUri != null && message.hasOwnProperty("networkAttachmentUri"))
                                 if (!$util.isString(message.networkAttachmentUri))
                                     return "networkAttachmentUri: string expected";
+                            if (message.pscAutoDnsEnabled != null && message.hasOwnProperty("pscAutoDnsEnabled")) {
+                                properties._pscAutoDnsEnabled = 1;
+                                if (typeof message.pscAutoDnsEnabled !== "boolean")
+                                    return "pscAutoDnsEnabled: boolean expected";
+                            }
+                            if (message.pscWriteEndpointDnsEnabled != null && message.hasOwnProperty("pscWriteEndpointDnsEnabled")) {
+                                properties._pscWriteEndpointDnsEnabled = 1;
+                                if (typeof message.pscWriteEndpointDnsEnabled !== "boolean")
+                                    return "pscWriteEndpointDnsEnabled: boolean expected";
+                            }
+                            if (message.pscAutoConnectionPolicyEnabled != null && message.hasOwnProperty("pscAutoConnectionPolicyEnabled")) {
+                                properties._pscAutoConnectionPolicyEnabled = 1;
+                                if (typeof message.pscAutoConnectionPolicyEnabled !== "boolean")
+                                    return "pscAutoConnectionPolicyEnabled: boolean expected";
+                            }
                             return null;
                         };
     
@@ -126550,6 +126930,12 @@
                             }
                             if (object.networkAttachmentUri != null)
                                 message.networkAttachmentUri = String(object.networkAttachmentUri);
+                            if (object.pscAutoDnsEnabled != null)
+                                message.pscAutoDnsEnabled = Boolean(object.pscAutoDnsEnabled);
+                            if (object.pscWriteEndpointDnsEnabled != null)
+                                message.pscWriteEndpointDnsEnabled = Boolean(object.pscWriteEndpointDnsEnabled);
+                            if (object.pscAutoConnectionPolicyEnabled != null)
+                                message.pscAutoConnectionPolicyEnabled = Boolean(object.pscAutoConnectionPolicyEnabled);
                             return message;
                         };
     
@@ -126589,6 +126975,21 @@
                             }
                             if (message.networkAttachmentUri != null && message.hasOwnProperty("networkAttachmentUri"))
                                 object.networkAttachmentUri = message.networkAttachmentUri;
+                            if (message.pscAutoDnsEnabled != null && message.hasOwnProperty("pscAutoDnsEnabled")) {
+                                object.pscAutoDnsEnabled = message.pscAutoDnsEnabled;
+                                if (options.oneofs)
+                                    object._pscAutoDnsEnabled = "pscAutoDnsEnabled";
+                            }
+                            if (message.pscWriteEndpointDnsEnabled != null && message.hasOwnProperty("pscWriteEndpointDnsEnabled")) {
+                                object.pscWriteEndpointDnsEnabled = message.pscWriteEndpointDnsEnabled;
+                                if (options.oneofs)
+                                    object._pscWriteEndpointDnsEnabled = "pscWriteEndpointDnsEnabled";
+                            }
+                            if (message.pscAutoConnectionPolicyEnabled != null && message.hasOwnProperty("pscAutoConnectionPolicyEnabled")) {
+                                object.pscAutoConnectionPolicyEnabled = message.pscAutoConnectionPolicyEnabled;
+                                if (options.oneofs)
+                                    object._pscAutoConnectionPolicyEnabled = "pscAutoConnectionPolicyEnabled";
+                            }
                             return object;
                         };
     
@@ -126621,6 +127022,24 @@
                         return PscConfig;
                     })();
     
+                    /**
+                     * AutoDnsStatus enum.
+                     * @name google.cloud.sql.v1beta4.AutoDnsStatus
+                     * @enum {number}
+                     * @property {number} AUTO_DNS_STATUS_UNSPECIFIED=0 AUTO_DNS_STATUS_UNSPECIFIED value
+                     * @property {number} AUTO_DNS_OK=1 AUTO_DNS_OK value
+                     * @property {number} AUTO_DNS_FAILED=2 AUTO_DNS_FAILED value
+                     * @property {number} AUTO_DNS_UNKNOWN=3 AUTO_DNS_UNKNOWN value
+                     */
+                    v1beta4.AutoDnsStatus = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "AUTO_DNS_STATUS_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "AUTO_DNS_OK"] = 1;
+                        values[valuesById[2] = "AUTO_DNS_FAILED"] = 2;
+                        values[valuesById[3] = "AUTO_DNS_UNKNOWN"] = 3;
+                        return values;
+                    })();
+    
                     v1beta4.PscAutoConnectionConfig = (function() {
     
                         /**
@@ -126632,6 +127051,10 @@
                          * @property {string|null} [ipAddress] PscAutoConnectionConfig ipAddress
                          * @property {string|null} [status] PscAutoConnectionConfig status
                          * @property {string|null} [consumerNetworkStatus] PscAutoConnectionConfig consumerNetworkStatus
+                         * @property {string|null} [serviceConnectionPolicy] PscAutoConnectionConfig serviceConnectionPolicy
+                         * @property {string|null} [serviceConnectionPolicyCreationResult] PscAutoConnectionConfig serviceConnectionPolicyCreationResult
+                         * @property {google.cloud.sql.v1beta4.AutoDnsStatus|null} [instanceAutoDnsStatus] PscAutoConnectionConfig instanceAutoDnsStatus
+                         * @property {google.cloud.sql.v1beta4.AutoDnsStatus|null} [writeEndpointAutoDnsStatus] PscAutoConnectionConfig writeEndpointAutoDnsStatus
                          */
     
                         /**
@@ -126689,6 +127112,38 @@
                          */
                         PscAutoConnectionConfig.prototype.consumerNetworkStatus = null;
     
+                        /**
+                         * PscAutoConnectionConfig serviceConnectionPolicy.
+                         * @member {string|null|undefined} serviceConnectionPolicy
+                         * @memberof google.cloud.sql.v1beta4.PscAutoConnectionConfig
+                         * @instance
+                         */
+                        PscAutoConnectionConfig.prototype.serviceConnectionPolicy = null;
+    
+                        /**
+                         * PscAutoConnectionConfig serviceConnectionPolicyCreationResult.
+                         * @member {string|null|undefined} serviceConnectionPolicyCreationResult
+                         * @memberof google.cloud.sql.v1beta4.PscAutoConnectionConfig
+                         * @instance
+                         */
+                        PscAutoConnectionConfig.prototype.serviceConnectionPolicyCreationResult = null;
+    
+                        /**
+                         * PscAutoConnectionConfig instanceAutoDnsStatus.
+                         * @member {google.cloud.sql.v1beta4.AutoDnsStatus|null|undefined} instanceAutoDnsStatus
+                         * @memberof google.cloud.sql.v1beta4.PscAutoConnectionConfig
+                         * @instance
+                         */
+                        PscAutoConnectionConfig.prototype.instanceAutoDnsStatus = null;
+    
+                        /**
+                         * PscAutoConnectionConfig writeEndpointAutoDnsStatus.
+                         * @member {google.cloud.sql.v1beta4.AutoDnsStatus|null|undefined} writeEndpointAutoDnsStatus
+                         * @memberof google.cloud.sql.v1beta4.PscAutoConnectionConfig
+                         * @instance
+                         */
+                        PscAutoConnectionConfig.prototype.writeEndpointAutoDnsStatus = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -126707,6 +127162,30 @@
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(PscAutoConnectionConfig.prototype, "_consumerNetworkStatus", {
                             get: $util.oneOfGetter($oneOfFields = ["consumerNetworkStatus"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(PscAutoConnectionConfig.prototype, "_serviceConnectionPolicy", {
+                            get: $util.oneOfGetter($oneOfFields = ["serviceConnectionPolicy"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(PscAutoConnectionConfig.prototype, "_serviceConnectionPolicyCreationResult", {
+                            get: $util.oneOfGetter($oneOfFields = ["serviceConnectionPolicyCreationResult"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(PscAutoConnectionConfig.prototype, "_instanceAutoDnsStatus", {
+                            get: $util.oneOfGetter($oneOfFields = ["instanceAutoDnsStatus"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(PscAutoConnectionConfig.prototype, "_writeEndpointAutoDnsStatus", {
+                            get: $util.oneOfGetter($oneOfFields = ["writeEndpointAutoDnsStatus"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -126744,6 +127223,14 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.status);
                             if (message.consumerNetworkStatus != null && Object.hasOwnProperty.call(message, "consumerNetworkStatus"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.consumerNetworkStatus);
+                            if (message.serviceConnectionPolicy != null && Object.hasOwnProperty.call(message, "serviceConnectionPolicy"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.serviceConnectionPolicy);
+                            if (message.serviceConnectionPolicyCreationResult != null && Object.hasOwnProperty.call(message, "serviceConnectionPolicyCreationResult"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.serviceConnectionPolicyCreationResult);
+                            if (message.instanceAutoDnsStatus != null && Object.hasOwnProperty.call(message, "instanceAutoDnsStatus"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.instanceAutoDnsStatus);
+                            if (message.writeEndpointAutoDnsStatus != null && Object.hasOwnProperty.call(message, "writeEndpointAutoDnsStatus"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.writeEndpointAutoDnsStatus);
                             return writer;
                         };
     
@@ -126802,6 +127289,22 @@
                                     }
                                 case 5: {
                                         message.consumerNetworkStatus = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.serviceConnectionPolicy = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.serviceConnectionPolicyCreationResult = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.instanceAutoDnsStatus = reader.int32();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.writeEndpointAutoDnsStatus = reader.int32();
                                         break;
                                     }
                                 default:
@@ -126865,6 +127368,40 @@
                                 if (!$util.isString(message.consumerNetworkStatus))
                                     return "consumerNetworkStatus: string expected";
                             }
+                            if (message.serviceConnectionPolicy != null && message.hasOwnProperty("serviceConnectionPolicy")) {
+                                properties._serviceConnectionPolicy = 1;
+                                if (!$util.isString(message.serviceConnectionPolicy))
+                                    return "serviceConnectionPolicy: string expected";
+                            }
+                            if (message.serviceConnectionPolicyCreationResult != null && message.hasOwnProperty("serviceConnectionPolicyCreationResult")) {
+                                properties._serviceConnectionPolicyCreationResult = 1;
+                                if (!$util.isString(message.serviceConnectionPolicyCreationResult))
+                                    return "serviceConnectionPolicyCreationResult: string expected";
+                            }
+                            if (message.instanceAutoDnsStatus != null && message.hasOwnProperty("instanceAutoDnsStatus")) {
+                                properties._instanceAutoDnsStatus = 1;
+                                switch (message.instanceAutoDnsStatus) {
+                                default:
+                                    return "instanceAutoDnsStatus: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            }
+                            if (message.writeEndpointAutoDnsStatus != null && message.hasOwnProperty("writeEndpointAutoDnsStatus")) {
+                                properties._writeEndpointAutoDnsStatus = 1;
+                                switch (message.writeEndpointAutoDnsStatus) {
+                                default:
+                                    return "writeEndpointAutoDnsStatus: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            }
                             return null;
                         };
     
@@ -126894,6 +127431,58 @@
                                 message.status = String(object.status);
                             if (object.consumerNetworkStatus != null)
                                 message.consumerNetworkStatus = String(object.consumerNetworkStatus);
+                            if (object.serviceConnectionPolicy != null)
+                                message.serviceConnectionPolicy = String(object.serviceConnectionPolicy);
+                            if (object.serviceConnectionPolicyCreationResult != null)
+                                message.serviceConnectionPolicyCreationResult = String(object.serviceConnectionPolicyCreationResult);
+                            switch (object.instanceAutoDnsStatus) {
+                            default:
+                                if (typeof object.instanceAutoDnsStatus === "number") {
+                                    message.instanceAutoDnsStatus = object.instanceAutoDnsStatus;
+                                    break;
+                                }
+                                break;
+                            case "AUTO_DNS_STATUS_UNSPECIFIED":
+                            case 0:
+                                message.instanceAutoDnsStatus = 0;
+                                break;
+                            case "AUTO_DNS_OK":
+                            case 1:
+                                message.instanceAutoDnsStatus = 1;
+                                break;
+                            case "AUTO_DNS_FAILED":
+                            case 2:
+                                message.instanceAutoDnsStatus = 2;
+                                break;
+                            case "AUTO_DNS_UNKNOWN":
+                            case 3:
+                                message.instanceAutoDnsStatus = 3;
+                                break;
+                            }
+                            switch (object.writeEndpointAutoDnsStatus) {
+                            default:
+                                if (typeof object.writeEndpointAutoDnsStatus === "number") {
+                                    message.writeEndpointAutoDnsStatus = object.writeEndpointAutoDnsStatus;
+                                    break;
+                                }
+                                break;
+                            case "AUTO_DNS_STATUS_UNSPECIFIED":
+                            case 0:
+                                message.writeEndpointAutoDnsStatus = 0;
+                                break;
+                            case "AUTO_DNS_OK":
+                            case 1:
+                                message.writeEndpointAutoDnsStatus = 1;
+                                break;
+                            case "AUTO_DNS_FAILED":
+                            case 2:
+                                message.writeEndpointAutoDnsStatus = 2;
+                                break;
+                            case "AUTO_DNS_UNKNOWN":
+                            case 3:
+                                message.writeEndpointAutoDnsStatus = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -126932,6 +127521,26 @@
                                 object.consumerNetworkStatus = message.consumerNetworkStatus;
                                 if (options.oneofs)
                                     object._consumerNetworkStatus = "consumerNetworkStatus";
+                            }
+                            if (message.serviceConnectionPolicy != null && message.hasOwnProperty("serviceConnectionPolicy")) {
+                                object.serviceConnectionPolicy = message.serviceConnectionPolicy;
+                                if (options.oneofs)
+                                    object._serviceConnectionPolicy = "serviceConnectionPolicy";
+                            }
+                            if (message.serviceConnectionPolicyCreationResult != null && message.hasOwnProperty("serviceConnectionPolicyCreationResult")) {
+                                object.serviceConnectionPolicyCreationResult = message.serviceConnectionPolicyCreationResult;
+                                if (options.oneofs)
+                                    object._serviceConnectionPolicyCreationResult = "serviceConnectionPolicyCreationResult";
+                            }
+                            if (message.instanceAutoDnsStatus != null && message.hasOwnProperty("instanceAutoDnsStatus")) {
+                                object.instanceAutoDnsStatus = options.enums === String ? $root.google.cloud.sql.v1beta4.AutoDnsStatus[message.instanceAutoDnsStatus] === undefined ? message.instanceAutoDnsStatus : $root.google.cloud.sql.v1beta4.AutoDnsStatus[message.instanceAutoDnsStatus] : message.instanceAutoDnsStatus;
+                                if (options.oneofs)
+                                    object._instanceAutoDnsStatus = "instanceAutoDnsStatus";
+                            }
+                            if (message.writeEndpointAutoDnsStatus != null && message.hasOwnProperty("writeEndpointAutoDnsStatus")) {
+                                object.writeEndpointAutoDnsStatus = options.enums === String ? $root.google.cloud.sql.v1beta4.AutoDnsStatus[message.writeEndpointAutoDnsStatus] === undefined ? message.writeEndpointAutoDnsStatus : $root.google.cloud.sql.v1beta4.AutoDnsStatus[message.writeEndpointAutoDnsStatus] : message.writeEndpointAutoDnsStatus;
+                                if (options.oneofs)
+                                    object._writeEndpointAutoDnsStatus = "writeEndpointAutoDnsStatus";
                             }
                             return object;
                         };
@@ -130992,6 +131601,9 @@
                                 case 51:
                                 case 52:
                                 case 53:
+                                case 54:
+                                case 58:
+                                case 59:
                                     break;
                                 }
                             if (message.importContext != null && message.hasOwnProperty("importContext")) {
@@ -131325,6 +131937,18 @@
                             case 53:
                                 message.operationType = 53;
                                 break;
+                            case "PRE_CHECK_MAJOR_VERSION_UPGRADE":
+                            case 54:
+                                message.operationType = 54;
+                                break;
+                            case "SETUP_MIGRATION":
+                            case 58:
+                                message.operationType = 58;
+                                break;
+                            case "AGENT_SEND_MESSAGE":
+                            case 59:
+                                message.operationType = 59;
+                                break;
                             }
                             if (object.importContext != null) {
                                 if (typeof object.importContext !== "object")
@@ -131527,6 +132151,9 @@
                          * @property {number} ENHANCED_BACKUP=51 ENHANCED_BACKUP value
                          * @property {number} REPAIR_READ_POOL=52 REPAIR_READ_POOL value
                          * @property {number} CREATE_READ_POOL=53 CREATE_READ_POOL value
+                         * @property {number} PRE_CHECK_MAJOR_VERSION_UPGRADE=54 PRE_CHECK_MAJOR_VERSION_UPGRADE value
+                         * @property {number} SETUP_MIGRATION=58 SETUP_MIGRATION value
+                         * @property {number} AGENT_SEND_MESSAGE=59 AGENT_SEND_MESSAGE value
                          */
                         Operation.SqlOperationType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -131582,6 +132209,9 @@
                             values[valuesById[51] = "ENHANCED_BACKUP"] = 51;
                             values[valuesById[52] = "REPAIR_READ_POOL"] = 52;
                             values[valuesById[53] = "CREATE_READ_POOL"] = 53;
+                            values[valuesById[54] = "PRE_CHECK_MAJOR_VERSION_UPGRADE"] = 54;
+                            values[valuesById[58] = "SETUP_MIGRATION"] = 58;
+                            values[valuesById[59] = "AGENT_SEND_MESSAGE"] = 59;
                             return values;
                         })();
     
@@ -134690,6 +135320,7 @@
                          * @property {google.cloud.sql.v1beta4.IConnectionPoolConfig|null} [connectionPoolConfig] Settings connectionPoolConfig
                          * @property {google.cloud.sql.v1beta4.IFinalBackupConfig|null} [finalBackupConfig] Settings finalBackupConfig
                          * @property {google.cloud.sql.v1beta4.IReadPoolAutoScaleConfig|null} [readPoolAutoScaleConfig] Settings readPoolAutoScaleConfig
+                         * @property {google.protobuf.IBoolValue|null} [acceleratedReplicaMode] Settings acceleratedReplicaMode
                          * @property {boolean|null} [autoUpgradeEnabled] Settings autoUpgradeEnabled
                          * @property {google.cloud.sql.v1beta4.ISqlServerEntraIdConfig|null} [entraidConfig] Settings entraidConfig
                          * @property {google.cloud.sql.v1beta4.Settings.DataApiAccess|null} [dataApiAccess] Settings dataApiAccess
@@ -135044,6 +135675,14 @@
                         Settings.prototype.readPoolAutoScaleConfig = null;
     
                         /**
+                         * Settings acceleratedReplicaMode.
+                         * @member {google.protobuf.IBoolValue|null|undefined} acceleratedReplicaMode
+                         * @memberof google.cloud.sql.v1beta4.Settings
+                         * @instance
+                         */
+                        Settings.prototype.acceleratedReplicaMode = null;
+    
+                        /**
                          * Settings autoUpgradeEnabled.
                          * @member {boolean|null|undefined} autoUpgradeEnabled
                          * @memberof google.cloud.sql.v1beta4.Settings
@@ -135230,6 +135869,8 @@
                                 $root.google.cloud.sql.v1beta4.FinalBackupConfig.encode(message.finalBackupConfig, writer.uint32(/* id 47, wireType 2 =*/378).fork()).ldelim();
                             if (message.readPoolAutoScaleConfig != null && Object.hasOwnProperty.call(message, "readPoolAutoScaleConfig"))
                                 $root.google.cloud.sql.v1beta4.ReadPoolAutoScaleConfig.encode(message.readPoolAutoScaleConfig, writer.uint32(/* id 48, wireType 2 =*/386).fork()).ldelim();
+                            if (message.acceleratedReplicaMode != null && Object.hasOwnProperty.call(message, "acceleratedReplicaMode"))
+                                $root.google.protobuf.BoolValue.encode(message.acceleratedReplicaMode, writer.uint32(/* id 49, wireType 2 =*/394).fork()).ldelim();
                             if (message.autoUpgradeEnabled != null && Object.hasOwnProperty.call(message, "autoUpgradeEnabled"))
                                 writer.uint32(/* id 50, wireType 0 =*/400).bool(message.autoUpgradeEnabled);
                             if (message.entraidConfig != null && Object.hasOwnProperty.call(message, "entraidConfig"))
@@ -135469,6 +136110,10 @@
                                         message.readPoolAutoScaleConfig = $root.google.cloud.sql.v1beta4.ReadPoolAutoScaleConfig.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
+                                case 49: {
+                                        message.acceleratedReplicaMode = $root.google.protobuf.BoolValue.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
                                 case 50: {
                                         message.autoUpgradeEnabled = reader.bool();
                                         break;
@@ -135692,6 +136337,7 @@
                                 case 0:
                                 case 2:
                                 case 3:
+                                case 5:
                                     break;
                                 }
                             if (message.connectorEnforcement != null && message.hasOwnProperty("connectorEnforcement"))
@@ -135774,6 +136420,11 @@
                                     if (error)
                                         return "readPoolAutoScaleConfig." + error;
                                 }
+                            }
+                            if (message.acceleratedReplicaMode != null && message.hasOwnProperty("acceleratedReplicaMode")) {
+                                var error = $root.google.protobuf.BoolValue.verify(message.acceleratedReplicaMode, long + 1);
+                                if (error)
+                                    return "acceleratedReplicaMode." + error;
                             }
                             if (message.autoUpgradeEnabled != null && message.hasOwnProperty("autoUpgradeEnabled")) {
                                 properties._autoUpgradeEnabled = 1;
@@ -136064,6 +136715,10 @@
                             case 3:
                                 message.edition = 3;
                                 break;
+                            case "DEVELOPER":
+                            case 5:
+                                message.edition = 5;
+                                break;
                             }
                             switch (object.connectorEnforcement) {
                             default:
@@ -136155,6 +136810,11 @@
                                     throw TypeError(".google.cloud.sql.v1beta4.Settings.readPoolAutoScaleConfig: object expected");
                                 message.readPoolAutoScaleConfig = $root.google.cloud.sql.v1beta4.ReadPoolAutoScaleConfig.fromObject(object.readPoolAutoScaleConfig, long + 1);
                             }
+                            if (object.acceleratedReplicaMode != null) {
+                                if (typeof object.acceleratedReplicaMode !== "object")
+                                    throw TypeError(".google.cloud.sql.v1beta4.Settings.acceleratedReplicaMode: object expected");
+                                message.acceleratedReplicaMode = $root.google.protobuf.BoolValue.fromObject(object.acceleratedReplicaMode, long + 1);
+                            }
                             if (object.autoUpgradeEnabled != null)
                                 message.autoUpgradeEnabled = Boolean(object.autoUpgradeEnabled);
                             if (object.entraidConfig != null) {
@@ -136243,6 +136903,7 @@
                                 object.enableGoogleMlIntegration = null;
                                 object.enableDataplexIntegration = null;
                                 object.retainBackupsOnDelete = null;
+                                object.acceleratedReplicaMode = null;
                                 object.entraidConfig = null;
                                 object.performanceCaptureConfig = null;
                             }
@@ -136365,6 +137026,8 @@
                                 if (options.oneofs)
                                     object._readPoolAutoScaleConfig = "readPoolAutoScaleConfig";
                             }
+                            if (message.acceleratedReplicaMode != null && message.hasOwnProperty("acceleratedReplicaMode"))
+                                object.acceleratedReplicaMode = $root.google.protobuf.BoolValue.toObject(message.acceleratedReplicaMode, options);
                             if (message.autoUpgradeEnabled != null && message.hasOwnProperty("autoUpgradeEnabled")) {
                                 object.autoUpgradeEnabled = message.autoUpgradeEnabled;
                                 if (options.oneofs)
@@ -136433,12 +137096,14 @@
                          * @property {number} EDITION_UNSPECIFIED=0 EDITION_UNSPECIFIED value
                          * @property {number} ENTERPRISE=2 ENTERPRISE value
                          * @property {number} ENTERPRISE_PLUS=3 ENTERPRISE_PLUS value
+                         * @property {number} DEVELOPER=5 DEVELOPER value
                          */
                         Settings.Edition = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "EDITION_UNSPECIFIED"] = 0;
                             values[valuesById[2] = "ENTERPRISE"] = 2;
                             values[valuesById[3] = "ENTERPRISE_PLUS"] = 3;
+                            values[valuesById[5] = "DEVELOPER"] = 5;
                             return values;
                         })();
     
@@ -136489,6 +137154,14 @@
                          * @property {number|null} [runningThreadsThreshold] PerformanceCaptureConfig runningThreadsThreshold
                          * @property {number|null} [secondsBehindSourceThreshold] PerformanceCaptureConfig secondsBehindSourceThreshold
                          * @property {number|null} [transactionDurationThreshold] PerformanceCaptureConfig transactionDurationThreshold
+                         * @property {number|null} [cpuUtilizationThresholdPercent] PerformanceCaptureConfig cpuUtilizationThresholdPercent
+                         * @property {number|null} [memoryUsageThresholdPercent] PerformanceCaptureConfig memoryUsageThresholdPercent
+                         * @property {number|null} [transactionLockWaitThresholdCount] PerformanceCaptureConfig transactionLockWaitThresholdCount
+                         * @property {number|null} [semaphoreWaitThresholdCount] PerformanceCaptureConfig semaphoreWaitThresholdCount
+                         * @property {number|null} [historyListLengthThresholdCount] PerformanceCaptureConfig historyListLengthThresholdCount
+                         * @property {number|null} [transactionKillThresholdSeconds] PerformanceCaptureConfig transactionKillThresholdSeconds
+                         * @property {Array.<string>|null} [transactionKillExcludedUserHosts] PerformanceCaptureConfig transactionKillExcludedUserHosts
+                         * @property {google.cloud.sql.v1beta4.PerformanceCaptureConfig.TransactionKillType|null} [transactionKillType] PerformanceCaptureConfig transactionKillType
                          */
     
                         /**
@@ -136500,6 +137173,7 @@
                          * @param {google.cloud.sql.v1beta4.IPerformanceCaptureConfig=} [properties] Properties to set
                          */
                         function PerformanceCaptureConfig(properties) {
+                            this.transactionKillExcludedUserHosts = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null && keys[i] !== "__proto__")
@@ -136554,6 +137228,70 @@
                          */
                         PerformanceCaptureConfig.prototype.transactionDurationThreshold = null;
     
+                        /**
+                         * PerformanceCaptureConfig cpuUtilizationThresholdPercent.
+                         * @member {number|null|undefined} cpuUtilizationThresholdPercent
+                         * @memberof google.cloud.sql.v1beta4.PerformanceCaptureConfig
+                         * @instance
+                         */
+                        PerformanceCaptureConfig.prototype.cpuUtilizationThresholdPercent = null;
+    
+                        /**
+                         * PerformanceCaptureConfig memoryUsageThresholdPercent.
+                         * @member {number|null|undefined} memoryUsageThresholdPercent
+                         * @memberof google.cloud.sql.v1beta4.PerformanceCaptureConfig
+                         * @instance
+                         */
+                        PerformanceCaptureConfig.prototype.memoryUsageThresholdPercent = null;
+    
+                        /**
+                         * PerformanceCaptureConfig transactionLockWaitThresholdCount.
+                         * @member {number|null|undefined} transactionLockWaitThresholdCount
+                         * @memberof google.cloud.sql.v1beta4.PerformanceCaptureConfig
+                         * @instance
+                         */
+                        PerformanceCaptureConfig.prototype.transactionLockWaitThresholdCount = null;
+    
+                        /**
+                         * PerformanceCaptureConfig semaphoreWaitThresholdCount.
+                         * @member {number|null|undefined} semaphoreWaitThresholdCount
+                         * @memberof google.cloud.sql.v1beta4.PerformanceCaptureConfig
+                         * @instance
+                         */
+                        PerformanceCaptureConfig.prototype.semaphoreWaitThresholdCount = null;
+    
+                        /**
+                         * PerformanceCaptureConfig historyListLengthThresholdCount.
+                         * @member {number|null|undefined} historyListLengthThresholdCount
+                         * @memberof google.cloud.sql.v1beta4.PerformanceCaptureConfig
+                         * @instance
+                         */
+                        PerformanceCaptureConfig.prototype.historyListLengthThresholdCount = null;
+    
+                        /**
+                         * PerformanceCaptureConfig transactionKillThresholdSeconds.
+                         * @member {number|null|undefined} transactionKillThresholdSeconds
+                         * @memberof google.cloud.sql.v1beta4.PerformanceCaptureConfig
+                         * @instance
+                         */
+                        PerformanceCaptureConfig.prototype.transactionKillThresholdSeconds = null;
+    
+                        /**
+                         * PerformanceCaptureConfig transactionKillExcludedUserHosts.
+                         * @member {Array.<string>} transactionKillExcludedUserHosts
+                         * @memberof google.cloud.sql.v1beta4.PerformanceCaptureConfig
+                         * @instance
+                         */
+                        PerformanceCaptureConfig.prototype.transactionKillExcludedUserHosts = $util.emptyArray;
+    
+                        /**
+                         * PerformanceCaptureConfig transactionKillType.
+                         * @member {google.cloud.sql.v1beta4.PerformanceCaptureConfig.TransactionKillType|null|undefined} transactionKillType
+                         * @memberof google.cloud.sql.v1beta4.PerformanceCaptureConfig
+                         * @instance
+                         */
+                        PerformanceCaptureConfig.prototype.transactionKillType = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -136593,6 +137331,48 @@
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(PerformanceCaptureConfig.prototype, "_cpuUtilizationThresholdPercent", {
+                            get: $util.oneOfGetter($oneOfFields = ["cpuUtilizationThresholdPercent"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(PerformanceCaptureConfig.prototype, "_memoryUsageThresholdPercent", {
+                            get: $util.oneOfGetter($oneOfFields = ["memoryUsageThresholdPercent"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(PerformanceCaptureConfig.prototype, "_transactionLockWaitThresholdCount", {
+                            get: $util.oneOfGetter($oneOfFields = ["transactionLockWaitThresholdCount"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(PerformanceCaptureConfig.prototype, "_semaphoreWaitThresholdCount", {
+                            get: $util.oneOfGetter($oneOfFields = ["semaphoreWaitThresholdCount"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(PerformanceCaptureConfig.prototype, "_historyListLengthThresholdCount", {
+                            get: $util.oneOfGetter($oneOfFields = ["historyListLengthThresholdCount"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(PerformanceCaptureConfig.prototype, "_transactionKillThresholdSeconds", {
+                            get: $util.oneOfGetter($oneOfFields = ["transactionKillThresholdSeconds"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(PerformanceCaptureConfig.prototype, "_transactionKillType", {
+                            get: $util.oneOfGetter($oneOfFields = ["transactionKillType"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
                         /**
                          * Creates a new PerformanceCaptureConfig instance using the specified properties.
                          * @function create
@@ -136629,6 +137409,23 @@
                                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.secondsBehindSourceThreshold);
                             if (message.transactionDurationThreshold != null && Object.hasOwnProperty.call(message, "transactionDurationThreshold"))
                                 writer.uint32(/* id 8, wireType 0 =*/64).int32(message.transactionDurationThreshold);
+                            if (message.cpuUtilizationThresholdPercent != null && Object.hasOwnProperty.call(message, "cpuUtilizationThresholdPercent"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.cpuUtilizationThresholdPercent);
+                            if (message.memoryUsageThresholdPercent != null && Object.hasOwnProperty.call(message, "memoryUsageThresholdPercent"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.memoryUsageThresholdPercent);
+                            if (message.transactionLockWaitThresholdCount != null && Object.hasOwnProperty.call(message, "transactionLockWaitThresholdCount"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.transactionLockWaitThresholdCount);
+                            if (message.semaphoreWaitThresholdCount != null && Object.hasOwnProperty.call(message, "semaphoreWaitThresholdCount"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).int32(message.semaphoreWaitThresholdCount);
+                            if (message.historyListLengthThresholdCount != null && Object.hasOwnProperty.call(message, "historyListLengthThresholdCount"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).int32(message.historyListLengthThresholdCount);
+                            if (message.transactionKillThresholdSeconds != null && Object.hasOwnProperty.call(message, "transactionKillThresholdSeconds"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).int32(message.transactionKillThresholdSeconds);
+                            if (message.transactionKillExcludedUserHosts != null && message.transactionKillExcludedUserHosts.length)
+                                for (var i = 0; i < message.transactionKillExcludedUserHosts.length; ++i)
+                                    writer.uint32(/* id 16, wireType 2 =*/130).string(message.transactionKillExcludedUserHosts[i]);
+                            if (message.transactionKillType != null && Object.hasOwnProperty.call(message, "transactionKillType"))
+                                writer.uint32(/* id 17, wireType 0 =*/136).int32(message.transactionKillType);
                             return writer;
                         };
     
@@ -136691,6 +137488,40 @@
                                     }
                                 case 8: {
                                         message.transactionDurationThreshold = reader.int32();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.cpuUtilizationThresholdPercent = reader.int32();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.memoryUsageThresholdPercent = reader.int32();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.transactionLockWaitThresholdCount = reader.int32();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.semaphoreWaitThresholdCount = reader.int32();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.historyListLengthThresholdCount = reader.int32();
+                                        break;
+                                    }
+                                case 14: {
+                                        message.transactionKillThresholdSeconds = reader.int32();
+                                        break;
+                                    }
+                                case 16: {
+                                        if (!(message.transactionKillExcludedUserHosts && message.transactionKillExcludedUserHosts.length))
+                                            message.transactionKillExcludedUserHosts = [];
+                                        message.transactionKillExcludedUserHosts.push(reader.string());
+                                        break;
+                                    }
+                                case 17: {
+                                        message.transactionKillType = reader.int32();
                                         break;
                                     }
                                 default:
@@ -136763,6 +137594,54 @@
                                 if (!$util.isInteger(message.transactionDurationThreshold))
                                     return "transactionDurationThreshold: integer expected";
                             }
+                            if (message.cpuUtilizationThresholdPercent != null && message.hasOwnProperty("cpuUtilizationThresholdPercent")) {
+                                properties._cpuUtilizationThresholdPercent = 1;
+                                if (!$util.isInteger(message.cpuUtilizationThresholdPercent))
+                                    return "cpuUtilizationThresholdPercent: integer expected";
+                            }
+                            if (message.memoryUsageThresholdPercent != null && message.hasOwnProperty("memoryUsageThresholdPercent")) {
+                                properties._memoryUsageThresholdPercent = 1;
+                                if (!$util.isInteger(message.memoryUsageThresholdPercent))
+                                    return "memoryUsageThresholdPercent: integer expected";
+                            }
+                            if (message.transactionLockWaitThresholdCount != null && message.hasOwnProperty("transactionLockWaitThresholdCount")) {
+                                properties._transactionLockWaitThresholdCount = 1;
+                                if (!$util.isInteger(message.transactionLockWaitThresholdCount))
+                                    return "transactionLockWaitThresholdCount: integer expected";
+                            }
+                            if (message.semaphoreWaitThresholdCount != null && message.hasOwnProperty("semaphoreWaitThresholdCount")) {
+                                properties._semaphoreWaitThresholdCount = 1;
+                                if (!$util.isInteger(message.semaphoreWaitThresholdCount))
+                                    return "semaphoreWaitThresholdCount: integer expected";
+                            }
+                            if (message.historyListLengthThresholdCount != null && message.hasOwnProperty("historyListLengthThresholdCount")) {
+                                properties._historyListLengthThresholdCount = 1;
+                                if (!$util.isInteger(message.historyListLengthThresholdCount))
+                                    return "historyListLengthThresholdCount: integer expected";
+                            }
+                            if (message.transactionKillThresholdSeconds != null && message.hasOwnProperty("transactionKillThresholdSeconds")) {
+                                properties._transactionKillThresholdSeconds = 1;
+                                if (!$util.isInteger(message.transactionKillThresholdSeconds))
+                                    return "transactionKillThresholdSeconds: integer expected";
+                            }
+                            if (message.transactionKillExcludedUserHosts != null && message.hasOwnProperty("transactionKillExcludedUserHosts")) {
+                                if (!Array.isArray(message.transactionKillExcludedUserHosts))
+                                    return "transactionKillExcludedUserHosts: array expected";
+                                for (var i = 0; i < message.transactionKillExcludedUserHosts.length; ++i)
+                                    if (!$util.isString(message.transactionKillExcludedUserHosts[i]))
+                                        return "transactionKillExcludedUserHosts: string[] expected";
+                            }
+                            if (message.transactionKillType != null && message.hasOwnProperty("transactionKillType")) {
+                                properties._transactionKillType = 1;
+                                switch (message.transactionKillType) {
+                                default:
+                                    return "transactionKillType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            }
                             return null;
                         };
     
@@ -136794,6 +137673,45 @@
                                 message.secondsBehindSourceThreshold = object.secondsBehindSourceThreshold | 0;
                             if (object.transactionDurationThreshold != null)
                                 message.transactionDurationThreshold = object.transactionDurationThreshold | 0;
+                            if (object.cpuUtilizationThresholdPercent != null)
+                                message.cpuUtilizationThresholdPercent = object.cpuUtilizationThresholdPercent | 0;
+                            if (object.memoryUsageThresholdPercent != null)
+                                message.memoryUsageThresholdPercent = object.memoryUsageThresholdPercent | 0;
+                            if (object.transactionLockWaitThresholdCount != null)
+                                message.transactionLockWaitThresholdCount = object.transactionLockWaitThresholdCount | 0;
+                            if (object.semaphoreWaitThresholdCount != null)
+                                message.semaphoreWaitThresholdCount = object.semaphoreWaitThresholdCount | 0;
+                            if (object.historyListLengthThresholdCount != null)
+                                message.historyListLengthThresholdCount = object.historyListLengthThresholdCount | 0;
+                            if (object.transactionKillThresholdSeconds != null)
+                                message.transactionKillThresholdSeconds = object.transactionKillThresholdSeconds | 0;
+                            if (object.transactionKillExcludedUserHosts) {
+                                if (!Array.isArray(object.transactionKillExcludedUserHosts))
+                                    throw TypeError(".google.cloud.sql.v1beta4.PerformanceCaptureConfig.transactionKillExcludedUserHosts: array expected");
+                                message.transactionKillExcludedUserHosts = [];
+                                for (var i = 0; i < object.transactionKillExcludedUserHosts.length; ++i)
+                                    message.transactionKillExcludedUserHosts[i] = String(object.transactionKillExcludedUserHosts[i]);
+                            }
+                            switch (object.transactionKillType) {
+                            default:
+                                if (typeof object.transactionKillType === "number") {
+                                    message.transactionKillType = object.transactionKillType;
+                                    break;
+                                }
+                                break;
+                            case "TRANSACTION_KILL_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.transactionKillType = 0;
+                                break;
+                            case "READ_ONLY_TRANSACTIONS":
+                            case 1:
+                                message.transactionKillType = 1;
+                                break;
+                            case "ALL_TRANSACTIONS":
+                            case 2:
+                                message.transactionKillType = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -136810,6 +137728,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.transactionKillExcludedUserHosts = [];
                             if (message.enabled != null && message.hasOwnProperty("enabled")) {
                                 object.enabled = message.enabled;
                                 if (options.oneofs)
@@ -136840,6 +137760,46 @@
                                 if (options.oneofs)
                                     object._transactionDurationThreshold = "transactionDurationThreshold";
                             }
+                            if (message.cpuUtilizationThresholdPercent != null && message.hasOwnProperty("cpuUtilizationThresholdPercent")) {
+                                object.cpuUtilizationThresholdPercent = message.cpuUtilizationThresholdPercent;
+                                if (options.oneofs)
+                                    object._cpuUtilizationThresholdPercent = "cpuUtilizationThresholdPercent";
+                            }
+                            if (message.memoryUsageThresholdPercent != null && message.hasOwnProperty("memoryUsageThresholdPercent")) {
+                                object.memoryUsageThresholdPercent = message.memoryUsageThresholdPercent;
+                                if (options.oneofs)
+                                    object._memoryUsageThresholdPercent = "memoryUsageThresholdPercent";
+                            }
+                            if (message.transactionLockWaitThresholdCount != null && message.hasOwnProperty("transactionLockWaitThresholdCount")) {
+                                object.transactionLockWaitThresholdCount = message.transactionLockWaitThresholdCount;
+                                if (options.oneofs)
+                                    object._transactionLockWaitThresholdCount = "transactionLockWaitThresholdCount";
+                            }
+                            if (message.semaphoreWaitThresholdCount != null && message.hasOwnProperty("semaphoreWaitThresholdCount")) {
+                                object.semaphoreWaitThresholdCount = message.semaphoreWaitThresholdCount;
+                                if (options.oneofs)
+                                    object._semaphoreWaitThresholdCount = "semaphoreWaitThresholdCount";
+                            }
+                            if (message.historyListLengthThresholdCount != null && message.hasOwnProperty("historyListLengthThresholdCount")) {
+                                object.historyListLengthThresholdCount = message.historyListLengthThresholdCount;
+                                if (options.oneofs)
+                                    object._historyListLengthThresholdCount = "historyListLengthThresholdCount";
+                            }
+                            if (message.transactionKillThresholdSeconds != null && message.hasOwnProperty("transactionKillThresholdSeconds")) {
+                                object.transactionKillThresholdSeconds = message.transactionKillThresholdSeconds;
+                                if (options.oneofs)
+                                    object._transactionKillThresholdSeconds = "transactionKillThresholdSeconds";
+                            }
+                            if (message.transactionKillExcludedUserHosts && message.transactionKillExcludedUserHosts.length) {
+                                object.transactionKillExcludedUserHosts = [];
+                                for (var j = 0; j < message.transactionKillExcludedUserHosts.length; ++j)
+                                    object.transactionKillExcludedUserHosts[j] = message.transactionKillExcludedUserHosts[j];
+                            }
+                            if (message.transactionKillType != null && message.hasOwnProperty("transactionKillType")) {
+                                object.transactionKillType = options.enums === String ? $root.google.cloud.sql.v1beta4.PerformanceCaptureConfig.TransactionKillType[message.transactionKillType] === undefined ? message.transactionKillType : $root.google.cloud.sql.v1beta4.PerformanceCaptureConfig.TransactionKillType[message.transactionKillType] : message.transactionKillType;
+                                if (options.oneofs)
+                                    object._transactionKillType = "transactionKillType";
+                            }
                             return object;
                         };
     
@@ -136868,6 +137828,22 @@
                             }
                             return typeUrlPrefix + "/google.cloud.sql.v1beta4.PerformanceCaptureConfig";
                         };
+    
+                        /**
+                         * TransactionKillType enum.
+                         * @name google.cloud.sql.v1beta4.PerformanceCaptureConfig.TransactionKillType
+                         * @enum {number}
+                         * @property {number} TRANSACTION_KILL_TYPE_UNSPECIFIED=0 TRANSACTION_KILL_TYPE_UNSPECIFIED value
+                         * @property {number} READ_ONLY_TRANSACTIONS=1 READ_ONLY_TRANSACTIONS value
+                         * @property {number} ALL_TRANSACTIONS=2 ALL_TRANSACTIONS value
+                         */
+                        PerformanceCaptureConfig.TransactionKillType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TRANSACTION_KILL_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "READ_ONLY_TRANSACTIONS"] = 1;
+                            values[valuesById[2] = "ALL_TRANSACTIONS"] = 2;
+                            return values;
+                        })();
     
                         return PerformanceCaptureConfig;
                     })();
@@ -141902,6 +142878,8 @@
                      * @property {number} POSTGRES_16=272 POSTGRES_16 value
                      * @property {number} POSTGRES_17=408 POSTGRES_17 value
                      * @property {number} POSTGRES_18=557 POSTGRES_18 value
+                     * @property {number} POSTGRES_19=684 POSTGRES_19 value
+                     * @property {number} POSTGRES_20=781 POSTGRES_20 value
                      * @property {number} SQLSERVER_2019_STANDARD=26 SQLSERVER_2019_STANDARD value
                      * @property {number} SQLSERVER_2019_ENTERPRISE=27 SQLSERVER_2019_ENTERPRISE value
                      * @property {number} SQLSERVER_2019_EXPRESS=28 SQLSERVER_2019_EXPRESS value
@@ -141910,6 +142888,9 @@
                      * @property {number} SQLSERVER_2022_ENTERPRISE=200 SQLSERVER_2022_ENTERPRISE value
                      * @property {number} SQLSERVER_2022_EXPRESS=201 SQLSERVER_2022_EXPRESS value
                      * @property {number} SQLSERVER_2022_WEB=202 SQLSERVER_2022_WEB value
+                     * @property {number} SQLSERVER_2025_STANDARD=549 SQLSERVER_2025_STANDARD value
+                     * @property {number} SQLSERVER_2025_ENTERPRISE=550 SQLSERVER_2025_ENTERPRISE value
+                     * @property {number} SQLSERVER_2025_EXPRESS=551 SQLSERVER_2025_EXPRESS value
                      */
                     v1beta4.SqlDatabaseVersion = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -141956,6 +142937,8 @@
                         values[valuesById[272] = "POSTGRES_16"] = 272;
                         values[valuesById[408] = "POSTGRES_17"] = 408;
                         values[valuesById[557] = "POSTGRES_18"] = 557;
+                        values[valuesById[684] = "POSTGRES_19"] = 684;
+                        values[valuesById[781] = "POSTGRES_20"] = 781;
                         values[valuesById[26] = "SQLSERVER_2019_STANDARD"] = 26;
                         values[valuesById[27] = "SQLSERVER_2019_ENTERPRISE"] = 27;
                         values[valuesById[28] = "SQLSERVER_2019_EXPRESS"] = 28;
@@ -141964,6 +142947,9 @@
                         values[valuesById[200] = "SQLSERVER_2022_ENTERPRISE"] = 200;
                         values[valuesById[201] = "SQLSERVER_2022_EXPRESS"] = 201;
                         values[valuesById[202] = "SQLSERVER_2022_WEB"] = 202;
+                        values[valuesById[549] = "SQLSERVER_2025_STANDARD"] = 549;
+                        values[valuesById[550] = "SQLSERVER_2025_ENTERPRISE"] = 550;
+                        values[valuesById[551] = "SQLSERVER_2025_EXPRESS"] = 551;
                         return values;
                     })();
     
@@ -141976,6 +142962,7 @@
                      * @property {number} LEGAL_ISSUE=3 LEGAL_ISSUE value
                      * @property {number} OPERATIONAL_ISSUE=4 OPERATIONAL_ISSUE value
                      * @property {number} KMS_KEY_ISSUE=5 KMS_KEY_ISSUE value
+                     * @property {number} PROJECT_ABUSE=8 PROJECT_ABUSE value
                      */
                     v1beta4.SqlSuspensionReason = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -141984,6 +142971,7 @@
                         values[valuesById[3] = "LEGAL_ISSUE"] = 3;
                         values[valuesById[4] = "OPERATIONAL_ISSUE"] = 4;
                         values[valuesById[5] = "KMS_KEY_ISSUE"] = 5;
+                        values[valuesById[8] = "PROJECT_ABUSE"] = 8;
                         return values;
                     })();
     
@@ -142516,6 +143504,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.sql.v1beta4.SqlConnectService|resolveConnectSettings}.
+                         * @memberof google.cloud.sql.v1beta4.SqlConnectService
+                         * @typedef ResolveConnectSettingsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.sql.v1beta4.ConnectSettings} [response] ConnectSettings
+                         */
+    
+                        /**
+                         * Calls ResolveConnectSettings.
+                         * @function resolveConnectSettings
+                         * @memberof google.cloud.sql.v1beta4.SqlConnectService
+                         * @instance
+                         * @param {google.cloud.sql.v1beta4.IResolveConnectSettingsRequest} request ResolveConnectSettingsRequest message or plain object
+                         * @param {google.cloud.sql.v1beta4.SqlConnectService.ResolveConnectSettingsCallback} callback Node-style callback called with the error, if any, and ConnectSettings
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SqlConnectService.prototype.resolveConnectSettings = function resolveConnectSettings(request, callback) {
+                            return this.rpcCall(resolveConnectSettings, $root.google.cloud.sql.v1beta4.ResolveConnectSettingsRequest, $root.google.cloud.sql.v1beta4.ConnectSettings, request, callback);
+                        }, "name", { value: "ResolveConnectSettings" });
+    
+                        /**
+                         * Calls ResolveConnectSettings.
+                         * @function resolveConnectSettings
+                         * @memberof google.cloud.sql.v1beta4.SqlConnectService
+                         * @instance
+                         * @param {google.cloud.sql.v1beta4.IResolveConnectSettingsRequest} request ResolveConnectSettingsRequest message or plain object
+                         * @returns {Promise<google.cloud.sql.v1beta4.ConnectSettings>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.sql.v1beta4.SqlConnectService|generateEphemeralCert}.
                          * @memberof google.cloud.sql.v1beta4.SqlConnectService
                          * @typedef GenerateEphemeralCertCallback
@@ -142820,6 +143841,247 @@
                         return GetConnectSettingsRequest;
                     })();
     
+                    v1beta4.ResolveConnectSettingsRequest = (function() {
+    
+                        /**
+                         * Properties of a ResolveConnectSettingsRequest.
+                         * @memberof google.cloud.sql.v1beta4
+                         * @interface IResolveConnectSettingsRequest
+                         * @property {string|null} [dnsName] ResolveConnectSettingsRequest dnsName
+                         * @property {string|null} [location] ResolveConnectSettingsRequest location
+                         */
+    
+                        /**
+                         * Constructs a new ResolveConnectSettingsRequest.
+                         * @memberof google.cloud.sql.v1beta4
+                         * @classdesc Represents a ResolveConnectSettingsRequest.
+                         * @implements IResolveConnectSettingsRequest
+                         * @constructor
+                         * @param {google.cloud.sql.v1beta4.IResolveConnectSettingsRequest=} [properties] Properties to set
+                         */
+                        function ResolveConnectSettingsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ResolveConnectSettingsRequest dnsName.
+                         * @member {string} dnsName
+                         * @memberof google.cloud.sql.v1beta4.ResolveConnectSettingsRequest
+                         * @instance
+                         */
+                        ResolveConnectSettingsRequest.prototype.dnsName = "";
+    
+                        /**
+                         * ResolveConnectSettingsRequest location.
+                         * @member {string} location
+                         * @memberof google.cloud.sql.v1beta4.ResolveConnectSettingsRequest
+                         * @instance
+                         */
+                        ResolveConnectSettingsRequest.prototype.location = "";
+    
+                        /**
+                         * Creates a new ResolveConnectSettingsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.sql.v1beta4.ResolveConnectSettingsRequest
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.IResolveConnectSettingsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.sql.v1beta4.ResolveConnectSettingsRequest} ResolveConnectSettingsRequest instance
+                         */
+                        ResolveConnectSettingsRequest.create = function create(properties) {
+                            return new ResolveConnectSettingsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ResolveConnectSettingsRequest message. Does not implicitly {@link google.cloud.sql.v1beta4.ResolveConnectSettingsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.sql.v1beta4.ResolveConnectSettingsRequest
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.IResolveConnectSettingsRequest} message ResolveConnectSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResolveConnectSettingsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dnsName != null && Object.hasOwnProperty.call(message, "dnsName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.dnsName);
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.location);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ResolveConnectSettingsRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.ResolveConnectSettingsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.sql.v1beta4.ResolveConnectSettingsRequest
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.IResolveConnectSettingsRequest} message ResolveConnectSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResolveConnectSettingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ResolveConnectSettingsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.sql.v1beta4.ResolveConnectSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.sql.v1beta4.ResolveConnectSettingsRequest} ResolveConnectSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResolveConnectSettingsRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.sql.v1beta4.ResolveConnectSettingsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.dnsName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.location = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ResolveConnectSettingsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.sql.v1beta4.ResolveConnectSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.sql.v1beta4.ResolveConnectSettingsRequest} ResolveConnectSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResolveConnectSettingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ResolveConnectSettingsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.sql.v1beta4.ResolveConnectSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ResolveConnectSettingsRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.dnsName != null && message.hasOwnProperty("dnsName"))
+                                if (!$util.isString(message.dnsName))
+                                    return "dnsName: string expected";
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                if (!$util.isString(message.location))
+                                    return "location: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ResolveConnectSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.sql.v1beta4.ResolveConnectSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.sql.v1beta4.ResolveConnectSettingsRequest} ResolveConnectSettingsRequest
+                         */
+                        ResolveConnectSettingsRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.sql.v1beta4.ResolveConnectSettingsRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.sql.v1beta4.ResolveConnectSettingsRequest();
+                            if (object.dnsName != null)
+                                message.dnsName = String(object.dnsName);
+                            if (object.location != null)
+                                message.location = String(object.location);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ResolveConnectSettingsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.sql.v1beta4.ResolveConnectSettingsRequest
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.ResolveConnectSettingsRequest} message ResolveConnectSettingsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ResolveConnectSettingsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.dnsName = "";
+                                object.location = "";
+                            }
+                            if (message.dnsName != null && message.hasOwnProperty("dnsName"))
+                                object.dnsName = message.dnsName;
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                object.location = message.location;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ResolveConnectSettingsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.sql.v1beta4.ResolveConnectSettingsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ResolveConnectSettingsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ResolveConnectSettingsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.sql.v1beta4.ResolveConnectSettingsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ResolveConnectSettingsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.sql.v1beta4.ResolveConnectSettingsRequest";
+                        };
+    
+                        return ResolveConnectSettingsRequest;
+                    })();
+    
                     v1beta4.ConnectSettings = (function() {
     
                         /**
@@ -142840,6 +144102,7 @@
                          * @property {number|null} [nodeCount] ConnectSettings nodeCount
                          * @property {Array.<google.cloud.sql.v1beta4.ConnectSettings.IConnectPoolNodeConfig>|null} [nodes] ConnectSettings nodes
                          * @property {Array.<google.cloud.sql.v1beta4.ConnectSettings.MdxProtocolSupport>|null} [mdxProtocolSupport] ConnectSettings mdxProtocolSupport
+                         * @property {string|null} [connectionName] ConnectSettings connectionName
                          */
     
                         /**
@@ -142974,6 +144237,14 @@
                          */
                         ConnectSettings.prototype.mdxProtocolSupport = $util.emptyArray;
     
+                        /**
+                         * ConnectSettings connectionName.
+                         * @member {string} connectionName
+                         * @memberof google.cloud.sql.v1beta4.ConnectSettings
+                         * @instance
+                         */
+                        ConnectSettings.prototype.connectionName = "";
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -143038,6 +144309,8 @@
                                     writer.int32(message.mdxProtocolSupport[i]);
                                 writer.ldelim();
                             }
+                            if (message.connectionName != null && Object.hasOwnProperty.call(message, "connectionName"))
+                                writer.uint32(/* id 40, wireType 2 =*/322).string(message.connectionName);
                             if (message.nodeCount != null && Object.hasOwnProperty.call(message, "nodeCount"))
                                 writer.uint32(/* id 63, wireType 0 =*/504).int32(message.nodeCount);
                             if (message.nodes != null && message.nodes.length)
@@ -143154,6 +144427,10 @@
                                             message.mdxProtocolSupport.push(reader.int32());
                                         break;
                                     }
+                                case 40: {
+                                        message.connectionName = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
@@ -143261,6 +144538,8 @@
                                 case 272:
                                 case 408:
                                 case 557:
+                                case 684:
+                                case 781:
                                 case 26:
                                 case 27:
                                 case 28:
@@ -143269,6 +144548,9 @@
                                 case 200:
                                 case 201:
                                 case 202:
+                                case 549:
+                                case 550:
+                                case 551:
                                     break;
                                 }
                             if (message.backendType != null && message.hasOwnProperty("backendType"))
@@ -143339,6 +144621,9 @@
                                         break;
                                     }
                             }
+                            if (message.connectionName != null && message.hasOwnProperty("connectionName"))
+                                if (!$util.isString(message.connectionName))
+                                    return "connectionName: string expected";
                             return null;
                         };
     
@@ -143556,6 +144841,14 @@
                             case 557:
                                 message.databaseVersion = 557;
                                 break;
+                            case "POSTGRES_19":
+                            case 684:
+                                message.databaseVersion = 684;
+                                break;
+                            case "POSTGRES_20":
+                            case 781:
+                                message.databaseVersion = 781;
+                                break;
                             case "SQLSERVER_2019_STANDARD":
                             case 26:
                                 message.databaseVersion = 26;
@@ -143587,6 +144880,18 @@
                             case "SQLSERVER_2022_WEB":
                             case 202:
                                 message.databaseVersion = 202;
+                                break;
+                            case "SQLSERVER_2025_STANDARD":
+                            case 549:
+                                message.databaseVersion = 549;
+                                break;
+                            case "SQLSERVER_2025_ENTERPRISE":
+                            case 550:
+                                message.databaseVersion = 550;
+                                break;
+                            case "SQLSERVER_2025_EXPRESS":
+                            case 551:
+                                message.databaseVersion = 551;
                                 break;
                             }
                             switch (object.backendType) {
@@ -143691,6 +144996,8 @@
                                         break;
                                     }
                             }
+                            if (object.connectionName != null)
+                                message.connectionName = String(object.connectionName);
                             return message;
                         };
     
@@ -143723,6 +145030,7 @@
                                 object.pscEnabled = false;
                                 object.dnsName = "";
                                 object.serverCaMode = options.enums === String ? "CA_MODE_UNSPECIFIED" : 0;
+                                object.connectionName = "";
                             }
                             if (message.kind != null && message.hasOwnProperty("kind"))
                                 object.kind = message.kind;
@@ -143760,6 +145068,8 @@
                                 for (var j = 0; j < message.mdxProtocolSupport.length; ++j)
                                     object.mdxProtocolSupport[j] = options.enums === String ? $root.google.cloud.sql.v1beta4.ConnectSettings.MdxProtocolSupport[message.mdxProtocolSupport[j]] === undefined ? message.mdxProtocolSupport[j] : $root.google.cloud.sql.v1beta4.ConnectSettings.MdxProtocolSupport[message.mdxProtocolSupport[j]] : message.mdxProtocolSupport[j];
                             }
+                            if (message.connectionName != null && message.hasOwnProperty("connectionName"))
+                                object.connectionName = message.connectionName;
                             if (message.nodeCount != null && message.hasOwnProperty("nodeCount")) {
                                 object.nodeCount = message.nodeCount;
                                 if (options.oneofs)
@@ -144750,6 +146060,2332 @@
                         };
     
                         return GenerateEphemeralCertResponse;
+                    })();
+    
+                    v1beta4.SqlDataService = (function() {
+    
+                        /**
+                         * Constructs a new SqlDataService service.
+                         * @memberof google.cloud.sql.v1beta4
+                         * @classdesc Represents a SqlDataService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function SqlDataService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (SqlDataService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = SqlDataService;
+    
+                        /**
+                         * Creates new SqlDataService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.sql.v1beta4.SqlDataService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {SqlDataService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        SqlDataService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.sql.v1beta4.SqlDataService|streamSqlData}.
+                         * @memberof google.cloud.sql.v1beta4.SqlDataService
+                         * @typedef StreamSqlDataCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.sql.v1beta4.StreamSqlDataResponse} [response] StreamSqlDataResponse
+                         */
+    
+                        /**
+                         * Calls StreamSqlData.
+                         * @function streamSqlData
+                         * @memberof google.cloud.sql.v1beta4.SqlDataService
+                         * @instance
+                         * @param {google.cloud.sql.v1beta4.IStreamSqlDataRequest} request StreamSqlDataRequest message or plain object
+                         * @param {google.cloud.sql.v1beta4.SqlDataService.StreamSqlDataCallback} callback Node-style callback called with the error, if any, and StreamSqlDataResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SqlDataService.prototype.streamSqlData = function streamSqlData(request, callback) {
+                            return this.rpcCall(streamSqlData, $root.google.cloud.sql.v1beta4.StreamSqlDataRequest, $root.google.cloud.sql.v1beta4.StreamSqlDataResponse, request, callback);
+                        }, "name", { value: "StreamSqlData" });
+    
+                        /**
+                         * Calls StreamSqlData.
+                         * @function streamSqlData
+                         * @memberof google.cloud.sql.v1beta4.SqlDataService
+                         * @instance
+                         * @param {google.cloud.sql.v1beta4.IStreamSqlDataRequest} request StreamSqlDataRequest message or plain object
+                         * @returns {Promise<google.cloud.sql.v1beta4.StreamSqlDataResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        return SqlDataService;
+                    })();
+    
+                    v1beta4.StreamSqlDataRequest = (function() {
+    
+                        /**
+                         * Properties of a StreamSqlDataRequest.
+                         * @memberof google.cloud.sql.v1beta4
+                         * @interface IStreamSqlDataRequest
+                         * @property {google.cloud.sql.v1beta4.IAck|null} [ack] StreamSqlDataRequest ack
+                         * @property {google.cloud.sql.v1beta4.IStartSession|null} [startSession] StreamSqlDataRequest startSession
+                         * @property {google.cloud.sql.v1beta4.IContinueSession|null} [continueSession] StreamSqlDataRequest continueSession
+                         * @property {google.cloud.sql.v1beta4.IDataPacket|null} [data] StreamSqlDataRequest data
+                         * @property {google.cloud.sql.v1beta4.ITerminateSession|null} [terminateSession] StreamSqlDataRequest terminateSession
+                         * @property {string|null} [instanceId] StreamSqlDataRequest instanceId
+                         */
+    
+                        /**
+                         * Constructs a new StreamSqlDataRequest.
+                         * @memberof google.cloud.sql.v1beta4
+                         * @classdesc Represents a StreamSqlDataRequest.
+                         * @implements IStreamSqlDataRequest
+                         * @constructor
+                         * @param {google.cloud.sql.v1beta4.IStreamSqlDataRequest=} [properties] Properties to set
+                         */
+                        function StreamSqlDataRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * StreamSqlDataRequest ack.
+                         * @member {google.cloud.sql.v1beta4.IAck|null|undefined} ack
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataRequest
+                         * @instance
+                         */
+                        StreamSqlDataRequest.prototype.ack = null;
+    
+                        /**
+                         * StreamSqlDataRequest startSession.
+                         * @member {google.cloud.sql.v1beta4.IStartSession|null|undefined} startSession
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataRequest
+                         * @instance
+                         */
+                        StreamSqlDataRequest.prototype.startSession = null;
+    
+                        /**
+                         * StreamSqlDataRequest continueSession.
+                         * @member {google.cloud.sql.v1beta4.IContinueSession|null|undefined} continueSession
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataRequest
+                         * @instance
+                         */
+                        StreamSqlDataRequest.prototype.continueSession = null;
+    
+                        /**
+                         * StreamSqlDataRequest data.
+                         * @member {google.cloud.sql.v1beta4.IDataPacket|null|undefined} data
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataRequest
+                         * @instance
+                         */
+                        StreamSqlDataRequest.prototype.data = null;
+    
+                        /**
+                         * StreamSqlDataRequest terminateSession.
+                         * @member {google.cloud.sql.v1beta4.ITerminateSession|null|undefined} terminateSession
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataRequest
+                         * @instance
+                         */
+                        StreamSqlDataRequest.prototype.terminateSession = null;
+    
+                        /**
+                         * StreamSqlDataRequest instanceId.
+                         * @member {string} instanceId
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataRequest
+                         * @instance
+                         */
+                        StreamSqlDataRequest.prototype.instanceId = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * StreamSqlDataRequest message.
+                         * @member {"startSession"|"continueSession"|"data"|"terminateSession"|undefined} message
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataRequest
+                         * @instance
+                         */
+                        Object.defineProperty(StreamSqlDataRequest.prototype, "message", {
+                            get: $util.oneOfGetter($oneOfFields = ["startSession", "continueSession", "data", "terminateSession"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new StreamSqlDataRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataRequest
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.IStreamSqlDataRequest=} [properties] Properties to set
+                         * @returns {google.cloud.sql.v1beta4.StreamSqlDataRequest} StreamSqlDataRequest instance
+                         */
+                        StreamSqlDataRequest.create = function create(properties) {
+                            return new StreamSqlDataRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified StreamSqlDataRequest message. Does not implicitly {@link google.cloud.sql.v1beta4.StreamSqlDataRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataRequest
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.IStreamSqlDataRequest} message StreamSqlDataRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StreamSqlDataRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.ack != null && Object.hasOwnProperty.call(message, "ack"))
+                                $root.google.cloud.sql.v1beta4.Ack.encode(message.ack, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.startSession != null && Object.hasOwnProperty.call(message, "startSession"))
+                                $root.google.cloud.sql.v1beta4.StartSession.encode(message.startSession, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.continueSession != null && Object.hasOwnProperty.call(message, "continueSession"))
+                                $root.google.cloud.sql.v1beta4.ContinueSession.encode(message.continueSession, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.data != null && Object.hasOwnProperty.call(message, "data"))
+                                $root.google.cloud.sql.v1beta4.DataPacket.encode(message.data, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.terminateSession != null && Object.hasOwnProperty.call(message, "terminateSession"))
+                                $root.google.cloud.sql.v1beta4.TerminateSession.encode(message.terminateSession, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.instanceId != null && Object.hasOwnProperty.call(message, "instanceId"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.instanceId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified StreamSqlDataRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.StreamSqlDataRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataRequest
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.IStreamSqlDataRequest} message StreamSqlDataRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StreamSqlDataRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a StreamSqlDataRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.sql.v1beta4.StreamSqlDataRequest} StreamSqlDataRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StreamSqlDataRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.sql.v1beta4.StreamSqlDataRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 4: {
+                                        message.ack = $root.google.cloud.sql.v1beta4.Ack.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 5: {
+                                        message.startSession = $root.google.cloud.sql.v1beta4.StartSession.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 6: {
+                                        message.continueSession = $root.google.cloud.sql.v1beta4.ContinueSession.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 7: {
+                                        message.data = $root.google.cloud.sql.v1beta4.DataPacket.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 8: {
+                                        message.terminateSession = $root.google.cloud.sql.v1beta4.TerminateSession.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 9: {
+                                        message.instanceId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a StreamSqlDataRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.sql.v1beta4.StreamSqlDataRequest} StreamSqlDataRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StreamSqlDataRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a StreamSqlDataRequest message.
+                         * @function verify
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        StreamSqlDataRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            var properties = {};
+                            if (message.ack != null && message.hasOwnProperty("ack")) {
+                                var error = $root.google.cloud.sql.v1beta4.Ack.verify(message.ack, long + 1);
+                                if (error)
+                                    return "ack." + error;
+                            }
+                            if (message.startSession != null && message.hasOwnProperty("startSession")) {
+                                properties.message = 1;
+                                {
+                                    var error = $root.google.cloud.sql.v1beta4.StartSession.verify(message.startSession, long + 1);
+                                    if (error)
+                                        return "startSession." + error;
+                                }
+                            }
+                            if (message.continueSession != null && message.hasOwnProperty("continueSession")) {
+                                if (properties.message === 1)
+                                    return "message: multiple values";
+                                properties.message = 1;
+                                {
+                                    var error = $root.google.cloud.sql.v1beta4.ContinueSession.verify(message.continueSession, long + 1);
+                                    if (error)
+                                        return "continueSession." + error;
+                                }
+                            }
+                            if (message.data != null && message.hasOwnProperty("data")) {
+                                if (properties.message === 1)
+                                    return "message: multiple values";
+                                properties.message = 1;
+                                {
+                                    var error = $root.google.cloud.sql.v1beta4.DataPacket.verify(message.data, long + 1);
+                                    if (error)
+                                        return "data." + error;
+                                }
+                            }
+                            if (message.terminateSession != null && message.hasOwnProperty("terminateSession")) {
+                                if (properties.message === 1)
+                                    return "message: multiple values";
+                                properties.message = 1;
+                                {
+                                    var error = $root.google.cloud.sql.v1beta4.TerminateSession.verify(message.terminateSession, long + 1);
+                                    if (error)
+                                        return "terminateSession." + error;
+                                }
+                            }
+                            if (message.instanceId != null && message.hasOwnProperty("instanceId"))
+                                if (!$util.isString(message.instanceId))
+                                    return "instanceId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a StreamSqlDataRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.sql.v1beta4.StreamSqlDataRequest} StreamSqlDataRequest
+                         */
+                        StreamSqlDataRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.sql.v1beta4.StreamSqlDataRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.sql.v1beta4.StreamSqlDataRequest();
+                            if (object.ack != null) {
+                                if (typeof object.ack !== "object")
+                                    throw TypeError(".google.cloud.sql.v1beta4.StreamSqlDataRequest.ack: object expected");
+                                message.ack = $root.google.cloud.sql.v1beta4.Ack.fromObject(object.ack, long + 1);
+                            }
+                            if (object.startSession != null) {
+                                if (typeof object.startSession !== "object")
+                                    throw TypeError(".google.cloud.sql.v1beta4.StreamSqlDataRequest.startSession: object expected");
+                                message.startSession = $root.google.cloud.sql.v1beta4.StartSession.fromObject(object.startSession, long + 1);
+                            }
+                            if (object.continueSession != null) {
+                                if (typeof object.continueSession !== "object")
+                                    throw TypeError(".google.cloud.sql.v1beta4.StreamSqlDataRequest.continueSession: object expected");
+                                message.continueSession = $root.google.cloud.sql.v1beta4.ContinueSession.fromObject(object.continueSession, long + 1);
+                            }
+                            if (object.data != null) {
+                                if (typeof object.data !== "object")
+                                    throw TypeError(".google.cloud.sql.v1beta4.StreamSqlDataRequest.data: object expected");
+                                message.data = $root.google.cloud.sql.v1beta4.DataPacket.fromObject(object.data, long + 1);
+                            }
+                            if (object.terminateSession != null) {
+                                if (typeof object.terminateSession !== "object")
+                                    throw TypeError(".google.cloud.sql.v1beta4.StreamSqlDataRequest.terminateSession: object expected");
+                                message.terminateSession = $root.google.cloud.sql.v1beta4.TerminateSession.fromObject(object.terminateSession, long + 1);
+                            }
+                            if (object.instanceId != null)
+                                message.instanceId = String(object.instanceId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a StreamSqlDataRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataRequest
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.StreamSqlDataRequest} message StreamSqlDataRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        StreamSqlDataRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.ack = null;
+                                object.instanceId = "";
+                            }
+                            if (message.ack != null && message.hasOwnProperty("ack"))
+                                object.ack = $root.google.cloud.sql.v1beta4.Ack.toObject(message.ack, options);
+                            if (message.startSession != null && message.hasOwnProperty("startSession")) {
+                                object.startSession = $root.google.cloud.sql.v1beta4.StartSession.toObject(message.startSession, options);
+                                if (options.oneofs)
+                                    object.message = "startSession";
+                            }
+                            if (message.continueSession != null && message.hasOwnProperty("continueSession")) {
+                                object.continueSession = $root.google.cloud.sql.v1beta4.ContinueSession.toObject(message.continueSession, options);
+                                if (options.oneofs)
+                                    object.message = "continueSession";
+                            }
+                            if (message.data != null && message.hasOwnProperty("data")) {
+                                object.data = $root.google.cloud.sql.v1beta4.DataPacket.toObject(message.data, options);
+                                if (options.oneofs)
+                                    object.message = "data";
+                            }
+                            if (message.terminateSession != null && message.hasOwnProperty("terminateSession")) {
+                                object.terminateSession = $root.google.cloud.sql.v1beta4.TerminateSession.toObject(message.terminateSession, options);
+                                if (options.oneofs)
+                                    object.message = "terminateSession";
+                            }
+                            if (message.instanceId != null && message.hasOwnProperty("instanceId"))
+                                object.instanceId = message.instanceId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this StreamSqlDataRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        StreamSqlDataRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for StreamSqlDataRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        StreamSqlDataRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.sql.v1beta4.StreamSqlDataRequest";
+                        };
+    
+                        return StreamSqlDataRequest;
+                    })();
+    
+                    v1beta4.StartSession = (function() {
+    
+                        /**
+                         * Properties of a StartSession.
+                         * @memberof google.cloud.sql.v1beta4
+                         * @interface IStartSession
+                         * @property {string|null} [locationId] StartSession locationId
+                         * @property {string|null} [instanceId] StartSession instanceId
+                         * @property {string|null} [sessionId] StartSession sessionId
+                         */
+    
+                        /**
+                         * Constructs a new StartSession.
+                         * @memberof google.cloud.sql.v1beta4
+                         * @classdesc Represents a StartSession.
+                         * @implements IStartSession
+                         * @constructor
+                         * @param {google.cloud.sql.v1beta4.IStartSession=} [properties] Properties to set
+                         */
+                        function StartSession(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * StartSession locationId.
+                         * @member {string} locationId
+                         * @memberof google.cloud.sql.v1beta4.StartSession
+                         * @instance
+                         */
+                        StartSession.prototype.locationId = "";
+    
+                        /**
+                         * StartSession instanceId.
+                         * @member {string} instanceId
+                         * @memberof google.cloud.sql.v1beta4.StartSession
+                         * @instance
+                         */
+                        StartSession.prototype.instanceId = "";
+    
+                        /**
+                         * StartSession sessionId.
+                         * @member {string} sessionId
+                         * @memberof google.cloud.sql.v1beta4.StartSession
+                         * @instance
+                         */
+                        StartSession.prototype.sessionId = "";
+    
+                        /**
+                         * Creates a new StartSession instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.sql.v1beta4.StartSession
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.IStartSession=} [properties] Properties to set
+                         * @returns {google.cloud.sql.v1beta4.StartSession} StartSession instance
+                         */
+                        StartSession.create = function create(properties) {
+                            return new StartSession(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified StartSession message. Does not implicitly {@link google.cloud.sql.v1beta4.StartSession.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.sql.v1beta4.StartSession
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.IStartSession} message StartSession message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StartSession.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.locationId != null && Object.hasOwnProperty.call(message, "locationId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.locationId);
+                            if (message.instanceId != null && Object.hasOwnProperty.call(message, "instanceId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.instanceId);
+                            if (message.sessionId != null && Object.hasOwnProperty.call(message, "sessionId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.sessionId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified StartSession message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.StartSession.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.sql.v1beta4.StartSession
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.IStartSession} message StartSession message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StartSession.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a StartSession message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.sql.v1beta4.StartSession
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.sql.v1beta4.StartSession} StartSession
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StartSession.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.sql.v1beta4.StartSession();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.locationId = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.instanceId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.sessionId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a StartSession message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.sql.v1beta4.StartSession
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.sql.v1beta4.StartSession} StartSession
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StartSession.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a StartSession message.
+                         * @function verify
+                         * @memberof google.cloud.sql.v1beta4.StartSession
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        StartSession.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                if (!$util.isString(message.locationId))
+                                    return "locationId: string expected";
+                            if (message.instanceId != null && message.hasOwnProperty("instanceId"))
+                                if (!$util.isString(message.instanceId))
+                                    return "instanceId: string expected";
+                            if (message.sessionId != null && message.hasOwnProperty("sessionId"))
+                                if (!$util.isString(message.sessionId))
+                                    return "sessionId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a StartSession message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.sql.v1beta4.StartSession
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.sql.v1beta4.StartSession} StartSession
+                         */
+                        StartSession.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.sql.v1beta4.StartSession)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.sql.v1beta4.StartSession();
+                            if (object.locationId != null)
+                                message.locationId = String(object.locationId);
+                            if (object.instanceId != null)
+                                message.instanceId = String(object.instanceId);
+                            if (object.sessionId != null)
+                                message.sessionId = String(object.sessionId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a StartSession message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.sql.v1beta4.StartSession
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.StartSession} message StartSession
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        StartSession.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.locationId = "";
+                                object.instanceId = "";
+                                object.sessionId = "";
+                            }
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                object.locationId = message.locationId;
+                            if (message.instanceId != null && message.hasOwnProperty("instanceId"))
+                                object.instanceId = message.instanceId;
+                            if (message.sessionId != null && message.hasOwnProperty("sessionId"))
+                                object.sessionId = message.sessionId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this StartSession to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.sql.v1beta4.StartSession
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        StartSession.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for StartSession
+                         * @function getTypeUrl
+                         * @memberof google.cloud.sql.v1beta4.StartSession
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        StartSession.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.sql.v1beta4.StartSession";
+                        };
+    
+                        return StartSession;
+                    })();
+    
+                    v1beta4.ContinueSession = (function() {
+    
+                        /**
+                         * Properties of a ContinueSession.
+                         * @memberof google.cloud.sql.v1beta4
+                         * @interface IContinueSession
+                         * @property {string|null} [locationId] ContinueSession locationId
+                         * @property {string|null} [instanceId] ContinueSession instanceId
+                         * @property {string|null} [sessionId] ContinueSession sessionId
+                         */
+    
+                        /**
+                         * Constructs a new ContinueSession.
+                         * @memberof google.cloud.sql.v1beta4
+                         * @classdesc Represents a ContinueSession.
+                         * @implements IContinueSession
+                         * @constructor
+                         * @param {google.cloud.sql.v1beta4.IContinueSession=} [properties] Properties to set
+                         */
+                        function ContinueSession(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ContinueSession locationId.
+                         * @member {string} locationId
+                         * @memberof google.cloud.sql.v1beta4.ContinueSession
+                         * @instance
+                         */
+                        ContinueSession.prototype.locationId = "";
+    
+                        /**
+                         * ContinueSession instanceId.
+                         * @member {string} instanceId
+                         * @memberof google.cloud.sql.v1beta4.ContinueSession
+                         * @instance
+                         */
+                        ContinueSession.prototype.instanceId = "";
+    
+                        /**
+                         * ContinueSession sessionId.
+                         * @member {string} sessionId
+                         * @memberof google.cloud.sql.v1beta4.ContinueSession
+                         * @instance
+                         */
+                        ContinueSession.prototype.sessionId = "";
+    
+                        /**
+                         * Creates a new ContinueSession instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.sql.v1beta4.ContinueSession
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.IContinueSession=} [properties] Properties to set
+                         * @returns {google.cloud.sql.v1beta4.ContinueSession} ContinueSession instance
+                         */
+                        ContinueSession.create = function create(properties) {
+                            return new ContinueSession(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ContinueSession message. Does not implicitly {@link google.cloud.sql.v1beta4.ContinueSession.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.sql.v1beta4.ContinueSession
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.IContinueSession} message ContinueSession message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ContinueSession.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.locationId != null && Object.hasOwnProperty.call(message, "locationId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.locationId);
+                            if (message.instanceId != null && Object.hasOwnProperty.call(message, "instanceId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.instanceId);
+                            if (message.sessionId != null && Object.hasOwnProperty.call(message, "sessionId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.sessionId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ContinueSession message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.ContinueSession.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.sql.v1beta4.ContinueSession
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.IContinueSession} message ContinueSession message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ContinueSession.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ContinueSession message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.sql.v1beta4.ContinueSession
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.sql.v1beta4.ContinueSession} ContinueSession
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ContinueSession.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.sql.v1beta4.ContinueSession();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.locationId = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.instanceId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.sessionId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ContinueSession message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.sql.v1beta4.ContinueSession
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.sql.v1beta4.ContinueSession} ContinueSession
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ContinueSession.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ContinueSession message.
+                         * @function verify
+                         * @memberof google.cloud.sql.v1beta4.ContinueSession
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ContinueSession.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                if (!$util.isString(message.locationId))
+                                    return "locationId: string expected";
+                            if (message.instanceId != null && message.hasOwnProperty("instanceId"))
+                                if (!$util.isString(message.instanceId))
+                                    return "instanceId: string expected";
+                            if (message.sessionId != null && message.hasOwnProperty("sessionId"))
+                                if (!$util.isString(message.sessionId))
+                                    return "sessionId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ContinueSession message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.sql.v1beta4.ContinueSession
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.sql.v1beta4.ContinueSession} ContinueSession
+                         */
+                        ContinueSession.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.sql.v1beta4.ContinueSession)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.sql.v1beta4.ContinueSession();
+                            if (object.locationId != null)
+                                message.locationId = String(object.locationId);
+                            if (object.instanceId != null)
+                                message.instanceId = String(object.instanceId);
+                            if (object.sessionId != null)
+                                message.sessionId = String(object.sessionId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ContinueSession message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.sql.v1beta4.ContinueSession
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.ContinueSession} message ContinueSession
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ContinueSession.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.locationId = "";
+                                object.instanceId = "";
+                                object.sessionId = "";
+                            }
+                            if (message.locationId != null && message.hasOwnProperty("locationId"))
+                                object.locationId = message.locationId;
+                            if (message.instanceId != null && message.hasOwnProperty("instanceId"))
+                                object.instanceId = message.instanceId;
+                            if (message.sessionId != null && message.hasOwnProperty("sessionId"))
+                                object.sessionId = message.sessionId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ContinueSession to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.sql.v1beta4.ContinueSession
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ContinueSession.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ContinueSession
+                         * @function getTypeUrl
+                         * @memberof google.cloud.sql.v1beta4.ContinueSession
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ContinueSession.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.sql.v1beta4.ContinueSession";
+                        };
+    
+                        return ContinueSession;
+                    })();
+    
+                    v1beta4.StreamSqlDataResponse = (function() {
+    
+                        /**
+                         * Properties of a StreamSqlDataResponse.
+                         * @memberof google.cloud.sql.v1beta4
+                         * @interface IStreamSqlDataResponse
+                         * @property {google.cloud.sql.v1beta4.IAck|null} [ack] StreamSqlDataResponse ack
+                         * @property {google.cloud.sql.v1beta4.ISessionMetadata|null} [sessionMetadata] StreamSqlDataResponse sessionMetadata
+                         * @property {google.cloud.sql.v1beta4.IDataPacket|null} [data] StreamSqlDataResponse data
+                         * @property {google.cloud.sql.v1beta4.ITerminateSession|null} [terminateSession] StreamSqlDataResponse terminateSession
+                         */
+    
+                        /**
+                         * Constructs a new StreamSqlDataResponse.
+                         * @memberof google.cloud.sql.v1beta4
+                         * @classdesc Represents a StreamSqlDataResponse.
+                         * @implements IStreamSqlDataResponse
+                         * @constructor
+                         * @param {google.cloud.sql.v1beta4.IStreamSqlDataResponse=} [properties] Properties to set
+                         */
+                        function StreamSqlDataResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * StreamSqlDataResponse ack.
+                         * @member {google.cloud.sql.v1beta4.IAck|null|undefined} ack
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataResponse
+                         * @instance
+                         */
+                        StreamSqlDataResponse.prototype.ack = null;
+    
+                        /**
+                         * StreamSqlDataResponse sessionMetadata.
+                         * @member {google.cloud.sql.v1beta4.ISessionMetadata|null|undefined} sessionMetadata
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataResponse
+                         * @instance
+                         */
+                        StreamSqlDataResponse.prototype.sessionMetadata = null;
+    
+                        /**
+                         * StreamSqlDataResponse data.
+                         * @member {google.cloud.sql.v1beta4.IDataPacket|null|undefined} data
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataResponse
+                         * @instance
+                         */
+                        StreamSqlDataResponse.prototype.data = null;
+    
+                        /**
+                         * StreamSqlDataResponse terminateSession.
+                         * @member {google.cloud.sql.v1beta4.ITerminateSession|null|undefined} terminateSession
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataResponse
+                         * @instance
+                         */
+                        StreamSqlDataResponse.prototype.terminateSession = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * StreamSqlDataResponse message.
+                         * @member {"sessionMetadata"|"data"|"terminateSession"|undefined} message
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataResponse
+                         * @instance
+                         */
+                        Object.defineProperty(StreamSqlDataResponse.prototype, "message", {
+                            get: $util.oneOfGetter($oneOfFields = ["sessionMetadata", "data", "terminateSession"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new StreamSqlDataResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataResponse
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.IStreamSqlDataResponse=} [properties] Properties to set
+                         * @returns {google.cloud.sql.v1beta4.StreamSqlDataResponse} StreamSqlDataResponse instance
+                         */
+                        StreamSqlDataResponse.create = function create(properties) {
+                            return new StreamSqlDataResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified StreamSqlDataResponse message. Does not implicitly {@link google.cloud.sql.v1beta4.StreamSqlDataResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataResponse
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.IStreamSqlDataResponse} message StreamSqlDataResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StreamSqlDataResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.ack != null && Object.hasOwnProperty.call(message, "ack"))
+                                $root.google.cloud.sql.v1beta4.Ack.encode(message.ack, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.sessionMetadata != null && Object.hasOwnProperty.call(message, "sessionMetadata"))
+                                $root.google.cloud.sql.v1beta4.SessionMetadata.encode(message.sessionMetadata, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.data != null && Object.hasOwnProperty.call(message, "data"))
+                                $root.google.cloud.sql.v1beta4.DataPacket.encode(message.data, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.terminateSession != null && Object.hasOwnProperty.call(message, "terminateSession"))
+                                $root.google.cloud.sql.v1beta4.TerminateSession.encode(message.terminateSession, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified StreamSqlDataResponse message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.StreamSqlDataResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataResponse
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.IStreamSqlDataResponse} message StreamSqlDataResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StreamSqlDataResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a StreamSqlDataResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.sql.v1beta4.StreamSqlDataResponse} StreamSqlDataResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StreamSqlDataResponse.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.sql.v1beta4.StreamSqlDataResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        message.ack = $root.google.cloud.sql.v1beta4.Ack.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 3: {
+                                        message.sessionMetadata = $root.google.cloud.sql.v1beta4.SessionMetadata.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 4: {
+                                        message.data = $root.google.cloud.sql.v1beta4.DataPacket.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 5: {
+                                        message.terminateSession = $root.google.cloud.sql.v1beta4.TerminateSession.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a StreamSqlDataResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.sql.v1beta4.StreamSqlDataResponse} StreamSqlDataResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StreamSqlDataResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a StreamSqlDataResponse message.
+                         * @function verify
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        StreamSqlDataResponse.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            var properties = {};
+                            if (message.ack != null && message.hasOwnProperty("ack")) {
+                                var error = $root.google.cloud.sql.v1beta4.Ack.verify(message.ack, long + 1);
+                                if (error)
+                                    return "ack." + error;
+                            }
+                            if (message.sessionMetadata != null && message.hasOwnProperty("sessionMetadata")) {
+                                properties.message = 1;
+                                {
+                                    var error = $root.google.cloud.sql.v1beta4.SessionMetadata.verify(message.sessionMetadata, long + 1);
+                                    if (error)
+                                        return "sessionMetadata." + error;
+                                }
+                            }
+                            if (message.data != null && message.hasOwnProperty("data")) {
+                                if (properties.message === 1)
+                                    return "message: multiple values";
+                                properties.message = 1;
+                                {
+                                    var error = $root.google.cloud.sql.v1beta4.DataPacket.verify(message.data, long + 1);
+                                    if (error)
+                                        return "data." + error;
+                                }
+                            }
+                            if (message.terminateSession != null && message.hasOwnProperty("terminateSession")) {
+                                if (properties.message === 1)
+                                    return "message: multiple values";
+                                properties.message = 1;
+                                {
+                                    var error = $root.google.cloud.sql.v1beta4.TerminateSession.verify(message.terminateSession, long + 1);
+                                    if (error)
+                                        return "terminateSession." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a StreamSqlDataResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.sql.v1beta4.StreamSqlDataResponse} StreamSqlDataResponse
+                         */
+                        StreamSqlDataResponse.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.sql.v1beta4.StreamSqlDataResponse)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.sql.v1beta4.StreamSqlDataResponse();
+                            if (object.ack != null) {
+                                if (typeof object.ack !== "object")
+                                    throw TypeError(".google.cloud.sql.v1beta4.StreamSqlDataResponse.ack: object expected");
+                                message.ack = $root.google.cloud.sql.v1beta4.Ack.fromObject(object.ack, long + 1);
+                            }
+                            if (object.sessionMetadata != null) {
+                                if (typeof object.sessionMetadata !== "object")
+                                    throw TypeError(".google.cloud.sql.v1beta4.StreamSqlDataResponse.sessionMetadata: object expected");
+                                message.sessionMetadata = $root.google.cloud.sql.v1beta4.SessionMetadata.fromObject(object.sessionMetadata, long + 1);
+                            }
+                            if (object.data != null) {
+                                if (typeof object.data !== "object")
+                                    throw TypeError(".google.cloud.sql.v1beta4.StreamSqlDataResponse.data: object expected");
+                                message.data = $root.google.cloud.sql.v1beta4.DataPacket.fromObject(object.data, long + 1);
+                            }
+                            if (object.terminateSession != null) {
+                                if (typeof object.terminateSession !== "object")
+                                    throw TypeError(".google.cloud.sql.v1beta4.StreamSqlDataResponse.terminateSession: object expected");
+                                message.terminateSession = $root.google.cloud.sql.v1beta4.TerminateSession.fromObject(object.terminateSession, long + 1);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a StreamSqlDataResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataResponse
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.StreamSqlDataResponse} message StreamSqlDataResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        StreamSqlDataResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.ack = null;
+                            if (message.ack != null && message.hasOwnProperty("ack"))
+                                object.ack = $root.google.cloud.sql.v1beta4.Ack.toObject(message.ack, options);
+                            if (message.sessionMetadata != null && message.hasOwnProperty("sessionMetadata")) {
+                                object.sessionMetadata = $root.google.cloud.sql.v1beta4.SessionMetadata.toObject(message.sessionMetadata, options);
+                                if (options.oneofs)
+                                    object.message = "sessionMetadata";
+                            }
+                            if (message.data != null && message.hasOwnProperty("data")) {
+                                object.data = $root.google.cloud.sql.v1beta4.DataPacket.toObject(message.data, options);
+                                if (options.oneofs)
+                                    object.message = "data";
+                            }
+                            if (message.terminateSession != null && message.hasOwnProperty("terminateSession")) {
+                                object.terminateSession = $root.google.cloud.sql.v1beta4.TerminateSession.toObject(message.terminateSession, options);
+                                if (options.oneofs)
+                                    object.message = "terminateSession";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this StreamSqlDataResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        StreamSqlDataResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for StreamSqlDataResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.sql.v1beta4.StreamSqlDataResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        StreamSqlDataResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.sql.v1beta4.StreamSqlDataResponse";
+                        };
+    
+                        return StreamSqlDataResponse;
+                    })();
+    
+                    v1beta4.SessionMetadata = (function() {
+    
+                        /**
+                         * Properties of a SessionMetadata.
+                         * @memberof google.cloud.sql.v1beta4
+                         * @interface ISessionMetadata
+                         * @property {Array.<google.cloud.sql.v1beta4.SqlDataFeature>|null} [supportedFeatures] SessionMetadata supportedFeatures
+                         */
+    
+                        /**
+                         * Constructs a new SessionMetadata.
+                         * @memberof google.cloud.sql.v1beta4
+                         * @classdesc Represents a SessionMetadata.
+                         * @implements ISessionMetadata
+                         * @constructor
+                         * @param {google.cloud.sql.v1beta4.ISessionMetadata=} [properties] Properties to set
+                         */
+                        function SessionMetadata(properties) {
+                            this.supportedFeatures = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SessionMetadata supportedFeatures.
+                         * @member {Array.<google.cloud.sql.v1beta4.SqlDataFeature>} supportedFeatures
+                         * @memberof google.cloud.sql.v1beta4.SessionMetadata
+                         * @instance
+                         */
+                        SessionMetadata.prototype.supportedFeatures = $util.emptyArray;
+    
+                        /**
+                         * Creates a new SessionMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.sql.v1beta4.SessionMetadata
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.ISessionMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.sql.v1beta4.SessionMetadata} SessionMetadata instance
+                         */
+                        SessionMetadata.create = function create(properties) {
+                            return new SessionMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SessionMetadata message. Does not implicitly {@link google.cloud.sql.v1beta4.SessionMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.sql.v1beta4.SessionMetadata
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.ISessionMetadata} message SessionMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SessionMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.supportedFeatures != null && message.supportedFeatures.length) {
+                                writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                                for (var i = 0; i < message.supportedFeatures.length; ++i)
+                                    writer.int32(message.supportedFeatures[i]);
+                                writer.ldelim();
+                            }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SessionMetadata message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.SessionMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.sql.v1beta4.SessionMetadata
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.ISessionMetadata} message SessionMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SessionMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SessionMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.sql.v1beta4.SessionMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.sql.v1beta4.SessionMetadata} SessionMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SessionMetadata.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.sql.v1beta4.SessionMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.supportedFeatures && message.supportedFeatures.length))
+                                            message.supportedFeatures = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.supportedFeatures.push(reader.int32());
+                                        } else
+                                            message.supportedFeatures.push(reader.int32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SessionMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.sql.v1beta4.SessionMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.sql.v1beta4.SessionMetadata} SessionMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SessionMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SessionMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.sql.v1beta4.SessionMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SessionMetadata.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.supportedFeatures != null && message.hasOwnProperty("supportedFeatures")) {
+                                if (!Array.isArray(message.supportedFeatures))
+                                    return "supportedFeatures: array expected";
+                                for (var i = 0; i < message.supportedFeatures.length; ++i)
+                                    switch (message.supportedFeatures[i]) {
+                                    default:
+                                        return "supportedFeatures: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SessionMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.sql.v1beta4.SessionMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.sql.v1beta4.SessionMetadata} SessionMetadata
+                         */
+                        SessionMetadata.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.sql.v1beta4.SessionMetadata)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.sql.v1beta4.SessionMetadata();
+                            if (object.supportedFeatures) {
+                                if (!Array.isArray(object.supportedFeatures))
+                                    throw TypeError(".google.cloud.sql.v1beta4.SessionMetadata.supportedFeatures: array expected");
+                                message.supportedFeatures = [];
+                                for (var i = 0; i < object.supportedFeatures.length; ++i)
+                                    switch (object.supportedFeatures[i]) {
+                                    default:
+                                        if (typeof object.supportedFeatures[i] === "number") {
+                                            message.supportedFeatures[i] = object.supportedFeatures[i];
+                                            break;
+                                        }
+                                    case "SQL_DATA_FEATURE_UNSPECIFIED":
+                                    case 0:
+                                        message.supportedFeatures[i] = 0;
+                                        break;
+                                    case "SQL_DATA_FEATURE_RECONNECT":
+                                    case 1:
+                                        message.supportedFeatures[i] = 1;
+                                        break;
+                                    }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SessionMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.sql.v1beta4.SessionMetadata
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.SessionMetadata} message SessionMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SessionMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.supportedFeatures = [];
+                            if (message.supportedFeatures && message.supportedFeatures.length) {
+                                object.supportedFeatures = [];
+                                for (var j = 0; j < message.supportedFeatures.length; ++j)
+                                    object.supportedFeatures[j] = options.enums === String ? $root.google.cloud.sql.v1beta4.SqlDataFeature[message.supportedFeatures[j]] === undefined ? message.supportedFeatures[j] : $root.google.cloud.sql.v1beta4.SqlDataFeature[message.supportedFeatures[j]] : message.supportedFeatures[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SessionMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.sql.v1beta4.SessionMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SessionMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SessionMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.sql.v1beta4.SessionMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SessionMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.sql.v1beta4.SessionMetadata";
+                        };
+    
+                        return SessionMetadata;
+                    })();
+    
+                    v1beta4.DataPacket = (function() {
+    
+                        /**
+                         * Properties of a DataPacket.
+                         * @memberof google.cloud.sql.v1beta4
+                         * @interface IDataPacket
+                         * @property {number|Long|null} [firstByteOffset] DataPacket firstByteOffset
+                         * @property {Uint8Array|null} [data] DataPacket data
+                         */
+    
+                        /**
+                         * Constructs a new DataPacket.
+                         * @memberof google.cloud.sql.v1beta4
+                         * @classdesc Represents a DataPacket.
+                         * @implements IDataPacket
+                         * @constructor
+                         * @param {google.cloud.sql.v1beta4.IDataPacket=} [properties] Properties to set
+                         */
+                        function DataPacket(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DataPacket firstByteOffset.
+                         * @member {number|Long} firstByteOffset
+                         * @memberof google.cloud.sql.v1beta4.DataPacket
+                         * @instance
+                         */
+                        DataPacket.prototype.firstByteOffset = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * DataPacket data.
+                         * @member {Uint8Array} data
+                         * @memberof google.cloud.sql.v1beta4.DataPacket
+                         * @instance
+                         */
+                        DataPacket.prototype.data = $util.newBuffer([]);
+    
+                        /**
+                         * Creates a new DataPacket instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.sql.v1beta4.DataPacket
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.IDataPacket=} [properties] Properties to set
+                         * @returns {google.cloud.sql.v1beta4.DataPacket} DataPacket instance
+                         */
+                        DataPacket.create = function create(properties) {
+                            return new DataPacket(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DataPacket message. Does not implicitly {@link google.cloud.sql.v1beta4.DataPacket.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.sql.v1beta4.DataPacket
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.IDataPacket} message DataPacket message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataPacket.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.firstByteOffset != null && Object.hasOwnProperty.call(message, "firstByteOffset"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.firstByteOffset);
+                            if (message.data != null && Object.hasOwnProperty.call(message, "data"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.data);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DataPacket message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.DataPacket.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.sql.v1beta4.DataPacket
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.IDataPacket} message DataPacket message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataPacket.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DataPacket message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.sql.v1beta4.DataPacket
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.sql.v1beta4.DataPacket} DataPacket
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataPacket.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.sql.v1beta4.DataPacket();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.firstByteOffset = reader.int64();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.data = reader.bytes();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DataPacket message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.sql.v1beta4.DataPacket
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.sql.v1beta4.DataPacket} DataPacket
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataPacket.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DataPacket message.
+                         * @function verify
+                         * @memberof google.cloud.sql.v1beta4.DataPacket
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DataPacket.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.firstByteOffset != null && message.hasOwnProperty("firstByteOffset"))
+                                if (!$util.isInteger(message.firstByteOffset) && !(message.firstByteOffset && $util.isInteger(message.firstByteOffset.low) && $util.isInteger(message.firstByteOffset.high)))
+                                    return "firstByteOffset: integer|Long expected";
+                            if (message.data != null && message.hasOwnProperty("data"))
+                                if (!(message.data && typeof message.data.length === "number" || $util.isString(message.data)))
+                                    return "data: buffer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DataPacket message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.sql.v1beta4.DataPacket
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.sql.v1beta4.DataPacket} DataPacket
+                         */
+                        DataPacket.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.sql.v1beta4.DataPacket)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.sql.v1beta4.DataPacket();
+                            if (object.firstByteOffset != null)
+                                if ($util.Long)
+                                    (message.firstByteOffset = $util.Long.fromValue(object.firstByteOffset)).unsigned = false;
+                                else if (typeof object.firstByteOffset === "string")
+                                    message.firstByteOffset = parseInt(object.firstByteOffset, 10);
+                                else if (typeof object.firstByteOffset === "number")
+                                    message.firstByteOffset = object.firstByteOffset;
+                                else if (typeof object.firstByteOffset === "object")
+                                    message.firstByteOffset = new $util.LongBits(object.firstByteOffset.low >>> 0, object.firstByteOffset.high >>> 0).toNumber();
+                            if (object.data != null)
+                                if (typeof object.data === "string")
+                                    $util.base64.decode(object.data, message.data = $util.newBuffer($util.base64.length(object.data)), 0);
+                                else if (object.data.length >= 0)
+                                    message.data = object.data;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DataPacket message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.sql.v1beta4.DataPacket
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.DataPacket} message DataPacket
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DataPacket.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.firstByteOffset = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.firstByteOffset = options.longs === String ? "0" : 0;
+                                if (options.bytes === String)
+                                    object.data = "";
+                                else {
+                                    object.data = [];
+                                    if (options.bytes !== Array)
+                                        object.data = $util.newBuffer(object.data);
+                                }
+                            }
+                            if (message.firstByteOffset != null && message.hasOwnProperty("firstByteOffset"))
+                                if (typeof message.firstByteOffset === "number")
+                                    object.firstByteOffset = options.longs === String ? String(message.firstByteOffset) : message.firstByteOffset;
+                                else
+                                    object.firstByteOffset = options.longs === String ? $util.Long.prototype.toString.call(message.firstByteOffset) : options.longs === Number ? new $util.LongBits(message.firstByteOffset.low >>> 0, message.firstByteOffset.high >>> 0).toNumber() : message.firstByteOffset;
+                            if (message.data != null && message.hasOwnProperty("data"))
+                                object.data = options.bytes === String ? $util.base64.encode(message.data, 0, message.data.length) : options.bytes === Array ? Array.prototype.slice.call(message.data) : message.data;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DataPacket to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.sql.v1beta4.DataPacket
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DataPacket.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DataPacket
+                         * @function getTypeUrl
+                         * @memberof google.cloud.sql.v1beta4.DataPacket
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DataPacket.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.sql.v1beta4.DataPacket";
+                        };
+    
+                        return DataPacket;
+                    })();
+    
+                    v1beta4.Ack = (function() {
+    
+                        /**
+                         * Properties of an Ack.
+                         * @memberof google.cloud.sql.v1beta4
+                         * @interface IAck
+                         * @property {number|Long|null} [receivedOffset] Ack receivedOffset
+                         */
+    
+                        /**
+                         * Constructs a new Ack.
+                         * @memberof google.cloud.sql.v1beta4
+                         * @classdesc Represents an Ack.
+                         * @implements IAck
+                         * @constructor
+                         * @param {google.cloud.sql.v1beta4.IAck=} [properties] Properties to set
+                         */
+                        function Ack(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Ack receivedOffset.
+                         * @member {number|Long} receivedOffset
+                         * @memberof google.cloud.sql.v1beta4.Ack
+                         * @instance
+                         */
+                        Ack.prototype.receivedOffset = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Creates a new Ack instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.sql.v1beta4.Ack
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.IAck=} [properties] Properties to set
+                         * @returns {google.cloud.sql.v1beta4.Ack} Ack instance
+                         */
+                        Ack.create = function create(properties) {
+                            return new Ack(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Ack message. Does not implicitly {@link google.cloud.sql.v1beta4.Ack.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.sql.v1beta4.Ack
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.IAck} message Ack message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Ack.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.receivedOffset != null && Object.hasOwnProperty.call(message, "receivedOffset"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.receivedOffset);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Ack message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.Ack.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.sql.v1beta4.Ack
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.IAck} message Ack message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Ack.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an Ack message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.sql.v1beta4.Ack
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.sql.v1beta4.Ack} Ack
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Ack.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.sql.v1beta4.Ack();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.receivedOffset = reader.int64();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an Ack message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.sql.v1beta4.Ack
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.sql.v1beta4.Ack} Ack
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Ack.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an Ack message.
+                         * @function verify
+                         * @memberof google.cloud.sql.v1beta4.Ack
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Ack.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.receivedOffset != null && message.hasOwnProperty("receivedOffset"))
+                                if (!$util.isInteger(message.receivedOffset) && !(message.receivedOffset && $util.isInteger(message.receivedOffset.low) && $util.isInteger(message.receivedOffset.high)))
+                                    return "receivedOffset: integer|Long expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an Ack message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.sql.v1beta4.Ack
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.sql.v1beta4.Ack} Ack
+                         */
+                        Ack.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.sql.v1beta4.Ack)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.sql.v1beta4.Ack();
+                            if (object.receivedOffset != null)
+                                if ($util.Long)
+                                    (message.receivedOffset = $util.Long.fromValue(object.receivedOffset)).unsigned = false;
+                                else if (typeof object.receivedOffset === "string")
+                                    message.receivedOffset = parseInt(object.receivedOffset, 10);
+                                else if (typeof object.receivedOffset === "number")
+                                    message.receivedOffset = object.receivedOffset;
+                                else if (typeof object.receivedOffset === "object")
+                                    message.receivedOffset = new $util.LongBits(object.receivedOffset.low >>> 0, object.receivedOffset.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an Ack message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.sql.v1beta4.Ack
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.Ack} message Ack
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Ack.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.receivedOffset = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.receivedOffset = options.longs === String ? "0" : 0;
+                            if (message.receivedOffset != null && message.hasOwnProperty("receivedOffset"))
+                                if (typeof message.receivedOffset === "number")
+                                    object.receivedOffset = options.longs === String ? String(message.receivedOffset) : message.receivedOffset;
+                                else
+                                    object.receivedOffset = options.longs === String ? $util.Long.prototype.toString.call(message.receivedOffset) : options.longs === Number ? new $util.LongBits(message.receivedOffset.low >>> 0, message.receivedOffset.high >>> 0).toNumber() : message.receivedOffset;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Ack to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.sql.v1beta4.Ack
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Ack.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Ack
+                         * @function getTypeUrl
+                         * @memberof google.cloud.sql.v1beta4.Ack
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Ack.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.sql.v1beta4.Ack";
+                        };
+    
+                        return Ack;
+                    })();
+    
+                    v1beta4.TerminateSession = (function() {
+    
+                        /**
+                         * Properties of a TerminateSession.
+                         * @memberof google.cloud.sql.v1beta4
+                         * @interface ITerminateSession
+                         * @property {google.rpc.IStatus|null} [status] TerminateSession status
+                         */
+    
+                        /**
+                         * Constructs a new TerminateSession.
+                         * @memberof google.cloud.sql.v1beta4
+                         * @classdesc Represents a TerminateSession.
+                         * @implements ITerminateSession
+                         * @constructor
+                         * @param {google.cloud.sql.v1beta4.ITerminateSession=} [properties] Properties to set
+                         */
+                        function TerminateSession(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TerminateSession status.
+                         * @member {google.rpc.IStatus|null|undefined} status
+                         * @memberof google.cloud.sql.v1beta4.TerminateSession
+                         * @instance
+                         */
+                        TerminateSession.prototype.status = null;
+    
+                        /**
+                         * Creates a new TerminateSession instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.sql.v1beta4.TerminateSession
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.ITerminateSession=} [properties] Properties to set
+                         * @returns {google.cloud.sql.v1beta4.TerminateSession} TerminateSession instance
+                         */
+                        TerminateSession.create = function create(properties) {
+                            return new TerminateSession(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TerminateSession message. Does not implicitly {@link google.cloud.sql.v1beta4.TerminateSession.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.sql.v1beta4.TerminateSession
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.ITerminateSession} message TerminateSession message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TerminateSession.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.status != null && Object.hasOwnProperty.call(message, "status"))
+                                $root.google.rpc.Status.encode(message.status, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TerminateSession message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.TerminateSession.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.sql.v1beta4.TerminateSession
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.ITerminateSession} message TerminateSession message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TerminateSession.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TerminateSession message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.sql.v1beta4.TerminateSession
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.sql.v1beta4.TerminateSession} TerminateSession
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TerminateSession.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.sql.v1beta4.TerminateSession();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.status = $root.google.rpc.Status.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TerminateSession message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.sql.v1beta4.TerminateSession
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.sql.v1beta4.TerminateSession} TerminateSession
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TerminateSession.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TerminateSession message.
+                         * @function verify
+                         * @memberof google.cloud.sql.v1beta4.TerminateSession
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TerminateSession.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.status != null && message.hasOwnProperty("status")) {
+                                var error = $root.google.rpc.Status.verify(message.status, long + 1);
+                                if (error)
+                                    return "status." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TerminateSession message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.sql.v1beta4.TerminateSession
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.sql.v1beta4.TerminateSession} TerminateSession
+                         */
+                        TerminateSession.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.sql.v1beta4.TerminateSession)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.sql.v1beta4.TerminateSession();
+                            if (object.status != null) {
+                                if (typeof object.status !== "object")
+                                    throw TypeError(".google.cloud.sql.v1beta4.TerminateSession.status: object expected");
+                                message.status = $root.google.rpc.Status.fromObject(object.status, long + 1);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TerminateSession message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.sql.v1beta4.TerminateSession
+                         * @static
+                         * @param {google.cloud.sql.v1beta4.TerminateSession} message TerminateSession
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TerminateSession.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.status = null;
+                            if (message.status != null && message.hasOwnProperty("status"))
+                                object.status = $root.google.rpc.Status.toObject(message.status, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TerminateSession to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.sql.v1beta4.TerminateSession
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TerminateSession.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TerminateSession
+                         * @function getTypeUrl
+                         * @memberof google.cloud.sql.v1beta4.TerminateSession
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TerminateSession.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.sql.v1beta4.TerminateSession";
+                        };
+    
+                        return TerminateSession;
+                    })();
+    
+                    /**
+                     * SqlDataFeature enum.
+                     * @name google.cloud.sql.v1beta4.SqlDataFeature
+                     * @enum {number}
+                     * @property {number} SQL_DATA_FEATURE_UNSPECIFIED=0 SQL_DATA_FEATURE_UNSPECIFIED value
+                     * @property {number} SQL_DATA_FEATURE_RECONNECT=1 SQL_DATA_FEATURE_RECONNECT value
+                     */
+                    v1beta4.SqlDataFeature = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "SQL_DATA_FEATURE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "SQL_DATA_FEATURE_RECONNECT"] = 1;
+                        return values;
                     })();
     
                     v1beta4.SqlIamPoliciesService = (function() {
@@ -148329,6 +151965,7 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                 case 7:
                                     break;
                                 }
@@ -148441,6 +152078,10 @@
                             case "CLOUD_IAM_GROUP_SERVICE_ACCOUNT":
                             case 5:
                                 message.type = 5;
+                                break;
+                            case "CLOUD_IAM_WORKFORCE_IDENTITY":
+                            case 6:
+                                message.type = 6;
                                 break;
                             case "ENTRAID_USER":
                             case 7:
@@ -148619,6 +152260,7 @@
                          * @property {number} CLOUD_IAM_GROUP=3 CLOUD_IAM_GROUP value
                          * @property {number} CLOUD_IAM_GROUP_USER=4 CLOUD_IAM_GROUP_USER value
                          * @property {number} CLOUD_IAM_GROUP_SERVICE_ACCOUNT=5 CLOUD_IAM_GROUP_SERVICE_ACCOUNT value
+                         * @property {number} CLOUD_IAM_WORKFORCE_IDENTITY=6 CLOUD_IAM_WORKFORCE_IDENTITY value
                          * @property {number} ENTRAID_USER=7 ENTRAID_USER value
                          */
                         User.SqlUserType = (function() {
@@ -148629,6 +152271,7 @@
                             values[valuesById[3] = "CLOUD_IAM_GROUP"] = 3;
                             values[valuesById[4] = "CLOUD_IAM_GROUP_USER"] = 4;
                             values[valuesById[5] = "CLOUD_IAM_GROUP_SERVICE_ACCOUNT"] = 5;
+                            values[valuesById[6] = "CLOUD_IAM_WORKFORCE_IDENTITY"] = 6;
                             values[valuesById[7] = "ENTRAID_USER"] = 7;
                             return values;
                         })();

@@ -34,7 +34,7 @@ function main() {
    */
   // const instance = 'abc123'
   /**
-   *  Project ID of the source as well as the clone Cloud SQL instance.
+   *  Project ID of the source Cloud SQL instance.
    */
   // const project = 'my-project'
   /**

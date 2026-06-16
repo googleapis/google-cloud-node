@@ -886,7 +886,7 @@ export class SqlInstancesServiceClient {
    *   The ID of the Cloud SQL instance to be cloned (source). This does not
    *   include the project ID.
    * @param {string} request.project
-   *   Project ID of the source as well as the clone Cloud SQL instance.
+   *   Project ID of the source Cloud SQL instance.
    * @param {google.cloud.sql.v1beta4.InstancesCloneRequest} request.body
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2918,6 +2918,12 @@ export class SqlInstancesServiceClient {
    *   Cloud SQL instance ID. This does not include the project ID.
    * @param {string} request.project
    *   Project ID of the project that contains the instance.
+   * @param {boolean} [request.reconcilePscNetworking]
+   *   Optional. Set PSC config to the same value as the existing config to
+   *   reconcile the PSC networking.
+   * @param {boolean} [request.reconcilePscNetworkingForce]
+   *   Optional. Set PSC config to the same value as the existing config and force
+   *   reconcile the PSC networking.
    * @param {google.cloud.sql.v1beta4.DatabaseInstance} request.body
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
