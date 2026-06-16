@@ -753,7 +753,6 @@ libraries:
       - path: google/cloud/domains/v1beta1
       - path: google/cloud/domains/v1alpha2
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-edgecontainer
