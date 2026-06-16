@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [6.6.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v6.5.1...dataproc-v6.6.0) (2026-06-16)
+
+
+### Features
+
+* Regenerated google-cloud-dataproc ([#8604](https://github.com/googleapis/google-cloud-node/issues/8604)) ([3b7367a](https://github.com/googleapis/google-cloud-node/commit/3b7367a24115ccf43bd46646f257cee6e787c07c))
+
 ## [6.5.1](https://github.com/googleapis/google-cloud-node/compare/dataproc-v6.5.0...dataproc-v6.5.1) (2026-06-01)
 
 
