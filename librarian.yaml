@@ -21,12 +21,10 @@ sources:
 default:
   keep:
     - librarian.js
-    - package.json
     - samples/package.json
     - samples/quickstart.js
     - samples/test/quickstart.js
     - samples/README.md
-    - README.md
     - CHANGELOG.md
     - .readme-partials.yaml
   output: packages
@@ -418,6 +416,17 @@ libraries:
     version: 4.4.1
     apis:
       - path: google/cloud/bigquery/reservation/v1
+    copyright_year: "2026"
+    nodejs:
+      default_version: v1
+  - name: google-cloud-bigquery-storage
+    output: handwritten/bigquery-storage
+    apis:
+      - path: google/cloud/bigquery/storage/v1
+      - path: google/cloud/bigquery/storage/v1alpha
+      - path: google/cloud/bigquery/storage/v1beta
+      - path: google/cloud/bigquery/storage/v1beta1
+      - path: google/cloud/bigquery/storage/v1beta2
     copyright_year: "2026"
     nodejs:
       default_version: v1
