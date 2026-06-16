@@ -1,6 +1,14 @@
 # Changelog
 
 
+## [5.1.2](https://github.com/googleapis/google-cloud-node/compare/bigquery-storage-v5.1.1...bigquery-storage-v5.1.2) (2026-06-16)
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+* **deps:** Update dependency protobufjs to v7.5.5 [security] ([#8071](https://github.com/googleapis/google-cloud-node/issues/8071)) ([ea623da](https://github.com/googleapis/google-cloud-node/commit/ea623da20f374cfa480fb9fdb7758afd0a993a8e))
+
 ## [5.1.1](https://github.com/googleapis/google-cloud-node/compare/bigquery-storage-v5.1.0...bigquery-storage-v5.1.1) (2026-05-13)
 
 
