@@ -1,6 +1,6 @@
 {
   "interfaces": {
-    "google.cloud.workflows.executions.v1.Executions": {
+    "google.cloud.workflows.v1beta.Workflows": {
       "retry_codes": {
         "non_idempotent": [],
         "idempotent": [
@@ -20,19 +20,23 @@
         }
       },
       "methods": {
-        "ListExecutions": {
+        "ListWorkflows": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
-        "CreateExecution": {
+        "GetWorkflow": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
-        "GetExecution": {
+        "CreateWorkflow": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
-        "CancelExecution": {
+        "DeleteWorkflow": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateWorkflow": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }
