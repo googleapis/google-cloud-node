@@ -1395,7 +1395,17 @@ libraries:
       - path: google/cloud/speech/v1
       - path: google/cloud/speech/v1p1beta1
     copyright_year: "2026"
-    skip_generate: true
+    keep:
+      - src/helpers.ts
+      - src/index.ts
+      - system-test/fixtures/streamingRecognize/input.wav
+      - system-test/speech_system_test.js
+      - system-test/speech_system_test_v1.js
+      - system-test/speech_system_test_v1p1beta1.js
+      - system-test/speech_typescript_system_test.ts
+      - system-test/speech_typescript_system_test_v1.ts
+      - system-test/speech_typescript_system_test_v1p1beta1.ts
+      - test/helpers.test.ts
     nodejs:
       default_version: v1
       dependencies:
