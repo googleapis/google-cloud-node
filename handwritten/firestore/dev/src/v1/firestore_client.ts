@@ -319,12 +319,14 @@ export class FirestoreClient {
     const clientOpts: ClientOptions = Object.assign({}, this._opts);
 
     // Inject @grpc/grpc-js arguments
-    // TODO(dlarocque): verify that users can override the flow control window size.
-    clientOpts.grpcOptions = Object.assign({}, clientOpts.grpcOptions, {
-      'grpc.max_receive_message_length': 17 * 1024 * 1024, // 17MB
-      'grpc.max_send_message_length': 17 * 1024 * 1024, // 17MB
-      'grpc-node.flow_control_window': 1024 * 1024, // 1MB
-    });
+    clientOpts.grpcOptions = Object.assign(
+      {
+        'grpc.max_receive_message_length': 17 * 1024 * 1024, // 17MB
+        'grpc.max_send_message_length': 17 * 1024 * 1024, // 17MB
+        'grpc-node.flow_control_window': 256 * 1024, // 256KB
+      },
+      clientOpts.grpcOptions,
+    );
 
     // Pass the updated options into the stub creator
     this.firestoreStub = this._gaxGrpc.createStub(
