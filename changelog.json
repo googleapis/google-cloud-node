@@ -4,6 +4,33 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "ea623da20f374cfa480fb9fdb7758afd0a993a8e",
+          "message": "Update dependency protobufjs to v7.5.5 [security]",
+          "issues": [
+            "8071"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "5.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-storage",
+      "id": "74883ea7-b13f-4282-9b14-46d047d4e432",
+      "createTime": "2026-06-16T00:07:06.414Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "d56eb080b89bf58bd8235f4843f3801ecd1ae8be",
           "message": "Add space to readme",
@@ -80093,5 +80120,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-06-08T17:51:13.237Z"
+  "updateTime": "2026-06-16T00:07:06.414Z"
 }
