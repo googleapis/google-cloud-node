@@ -3509,7 +3509,7 @@ describe('Bucket', () => {
     });
 
     describe('ipFilter', () => {
-      it('should enable and set ipFilter', done => {
+      it('should enable ipFilter', done => {
         const metadata = {
           ipFilter: {
             mode: 'Enabled',
@@ -3575,17 +3575,63 @@ describe('Bucket', () => {
         });
       });
 
-      it('should delete and clear ipFilter', done => {
-        const metadata = {
-          ipFilter: null,
+      it('should clear allowedIpCidrRanges', done => {
+        const initialIpFilter = {
+          mode: 'Disabled',
+          publicNetworkSource: {
+            allowedIpCidrRanges: ['203.0.113.0/24'],
+          },
         };
 
-        bucket.setMetadata = (metadata_: BucketMetadata) => {
-          assert.strictEqual(metadata_.ipFilter, null);
-          done();
+        const updatedIpFilter = {
+          mode: 'Disabled',
+          publicNetworkSource: {
+            allowedIpCidrRanges: undefined,
+          },
+          allowAllServiceAgentAccess: false,
         };
 
-        bucket.setMetadata(metadata, assert.ifError);
+        bucket.getMetadata = () => {
+          return Promise.resolve([{ipFilter: initialIpFilter}]);
+        };
+
+        bucket.setMetadata = (metadata: any) => {
+          assert.deepStrictEqual(metadata.ipFilter.publicNetworkSource.allowedIpCidrRanges, []);
+          
+          return Promise.resolve([{ipFilter: updatedIpFilter}]);
+        };
+
+        bucket.getMetadata()
+          .then((data: any) => {
+            const [getMeta] = data;
+            assert.strictEqual(getMeta.ipFilter?.mode, 'Disabled');
+            assert.deepStrictEqual(
+              getMeta.ipFilter?.publicNetworkSource?.allowedIpCidrRanges,
+              ['203.0.113.0/24']
+            );
+
+            const metadataUpdate = {
+              ipFilter: {
+                mode: 'Disabled',
+                publicNetworkSource: {
+                  allowedIpCidrRanges: [],
+                },
+                allowAllServiceAgentAccess: false,
+              },
+            };
+
+            return bucket.setMetadata(metadataUpdate);
+          })
+          .then((data: any) => {
+            const [meta] = data;
+            assert.strictEqual(meta.ipFilter?.mode, 'Disabled');
+            assert.strictEqual(meta.ipFilter?.publicNetworkSource?.allowedIpCidrRanges, undefined);
+            assert.strictEqual(meta.ipFilter?.allowAllServiceAgentAccess, false);
+            done();
+          })
+          .catch((err: any) => {
+            done(err);
+          });
       });
     });
   });
