@@ -1,0 +1,16 @@
+{
+    "api_description": "Execute workflows created with Workflows API.",
+    "api_id": "workflowexecutions.googleapis.com",
+    "api_shortname": "workflowexecutions",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/workflows-executions/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/workflows-executions",
+    "issue_tracker": "https://issuetracker.google.com/savedsearches/559729",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "workflowexecutions",
+    "name_pretty": "Workflow Executions",
+    "product_documentation": "https://cloud.google.com/workflows/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
+}
