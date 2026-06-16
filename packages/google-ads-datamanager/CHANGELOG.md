@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/datamanager-v0.3.0...datamanager-v0.4.0) (2026-06-16)
+
+
+### Features
+
+* [datamanager] add encrypted_user_id.proto and the EncryptedUserId resource ([#8378](https://github.com/googleapis/google-cloud-node/issues/8378)) ([f5b12cf](https://github.com/googleapis/google-cloud-node/commit/f5b12cf10d9974c87e651e1182a5804030af8cdc))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/datamanager-v0.2.1...datamanager-v0.3.0) (2026-06-01)
 
 

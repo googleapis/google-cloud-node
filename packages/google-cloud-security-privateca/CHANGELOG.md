@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.2.0](https://github.com/googleapis/google-cloud-node/compare/security-private-ca-v7.1.0...security-private-ca-v7.2.0) (2026-06-16)
+
+
+### Features
+
+* Local OwlBot generation batch 2 ([#8613](https://github.com/googleapis/google-cloud-node/issues/8613)) ([243fb1a](https://github.com/googleapis/google-cloud-node/commit/243fb1a66876934bd68ca96e420937ae8adeb77d))
+
 ## [7.1.0](https://github.com/googleapis/google-cloud-node/compare/security-private-ca-v7.0.2...security-private-ca-v7.1.0) (2026-06-01)
 
 
