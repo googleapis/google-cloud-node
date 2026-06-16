@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/storagebatchoperations-v0.4.0...storagebatchoperations-v0.5.0) (2026-06-16)
+
+
+### Features
+
+* Local OwlBot generation batch 4 ([#8615](https://github.com/googleapis/google-cloud-node/issues/8615)) ([f629251](https://github.com/googleapis/google-cloud-node/commit/f629251e27e51aa06003b4846a497d5a7c411cc2))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/storagebatchoperations-v0.3.0...storagebatchoperations-v0.4.0) (2026-05-01)
 
 

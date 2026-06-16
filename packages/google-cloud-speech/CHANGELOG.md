@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [7.4.0](https://github.com/googleapis/google-cloud-node/compare/speech-v7.3.2...speech-v7.4.0) (2026-06-16)
+
+
+### Features
+
+* Local OwlBot generation batch 4 ([#8615](https://github.com/googleapis/google-cloud-node/issues/8615)) ([f629251](https://github.com/googleapis/google-cloud-node/commit/f629251e27e51aa06003b4846a497d5a7c411cc2))
+
 ## [7.3.2](https://github.com/googleapis/google-cloud-node/compare/speech-v7.3.1...speech-v7.3.2) (2026-06-01)
 
 
