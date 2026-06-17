@@ -192,6 +192,10 @@ libraries:
       nodejs_apis:
         - omit_common_resources: true
           path: google/cloud/advisorynotifications/v1
+  - name: google-cloud-agentregistry
+    apis:
+      - path: google/cloud/agentregistry/v1
+    copyright_year: "2026"
   - name: google-cloud-aiplatform
     version: 6.8.1
     apis:
