@@ -1498,6 +1498,46 @@ describe('codec', () => {
       assert.ok(isNaN(decoded.getTime()));
     });
 
+    it('should decode TIMESTAMP and fallback when sub-seconds contain non-digits after 9th decimal', () => {
+      const malformedTimestampStr = '2021-05-11T16:46:04.872345678abcZ';
+      const decoded = codec.decode(malformedTimestampStr, {
+        code: google.spanner.v1.TypeCode.TIMESTAMP,
+      });
+
+      assert.ok(decoded instanceof PreciseDate);
+      assert.ok(isNaN(decoded.getTime()));
+    });
+
+    it('should decode TIMESTAMP and fallback when no dot and extra characters exist', () => {
+      const malformedTimestampStr = '2021-05-11T16:46:04abcZ';
+      const decoded = codec.decode(malformedTimestampStr, {
+        code: google.spanner.v1.TypeCode.TIMESTAMP,
+      });
+
+      assert.ok(decoded instanceof PreciseDate);
+      assert.ok(isNaN(decoded.getTime()));
+    });
+
+    it('should decode TIMESTAMP and fallback when month/day out of range causes silent rollover', () => {
+      const malformedTimestampStr = '2021-13-11T16:46:04Z';
+      const decoded = codec.decode(malformedTimestampStr, {
+        code: google.spanner.v1.TypeCode.TIMESTAMP,
+      });
+
+      assert.ok(decoded instanceof PreciseDate);
+      assert.ok(isNaN(decoded.getTime()));
+    });
+
+    it('should decode TIMESTAMP and fallback when February 30 causes silent rollover, yielding same output as native PreciseDate', () => {
+      const rolloverTimestampStr = '2021-02-30T16:46:04.123456789Z';
+      const decoded = codec.decode(rolloverTimestampStr, {
+        code: google.spanner.v1.TypeCode.TIMESTAMP,
+      });
+      const expected = new PreciseDate(rolloverTimestampStr);
+
+      assert.deepStrictEqual(decoded, expected);
+    });
+
     it('should decode INTERVAL', () => {
       const value = 'P1Y2M-45DT67H12M6.789045638S';
       const expected = codec.Interval.fromISO8601(value);

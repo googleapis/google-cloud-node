@@ -898,19 +898,18 @@ export function getDecoder(
     return val => val;
   }
 
+  let decoder: (val: any) => any;
+
   switch (type.code) {
     case spannerClient.spanner.v1.TypeCode.BYTES:
     case 'BYTES':
-      return val =>
-        val === null || val === undefined ? null : Buffer.from(val, 'base64');
+      decoder = val => Buffer.from(val, 'base64');
+      break;
 
     case spannerClient.spanner.v1.TypeCode.PROTO:
     case 'PROTO':
       if (jsonMode) {
-        return val => {
-          if (val === null || val === undefined) {
-            return null;
-          }
+        decoder = val => {
           const decoded = Buffer.from(val, 'base64');
           if (columnMetadata) {
             return (columnMetadata as any)['toObject'](
@@ -920,10 +919,7 @@ export function getDecoder(
           return decoded.toString();
         };
       } else {
-        return val => {
-          if (val === null || val === undefined) {
-            return null;
-          }
+        decoder = val => {
           const decoded = Buffer.from(val, 'base64');
           return new ProtoMessage({
             value: decoded,
@@ -932,14 +928,12 @@ export function getDecoder(
           });
         };
       }
+      break;
 
     case spannerClient.spanner.v1.TypeCode.ENUM:
     case 'ENUM':
       if (jsonMode) {
-        return val => {
-          if (val === null || val === undefined) {
-            return null;
-          }
+        decoder = val => {
           let enumVal: string;
           if (DIGITS_REGEX.test(val.toString())) {
             enumVal = val.toString();
@@ -969,33 +963,24 @@ export function getDecoder(
           return enumVal;
         };
       } else {
-        return val =>
-          val === null || val === undefined
-            ? null
-            : new ProtoEnum({
-                value: val,
-                fullName: type.protoTypeFqn!,
-                enumObject: columnMetadata as object,
-              });
+        decoder = val =>
+          new ProtoEnum({
+            value: val,
+            fullName: type.protoTypeFqn!,
+            enumObject: columnMetadata as object,
+          });
       }
+      break;
 
     case spannerClient.spanner.v1.TypeCode.FLOAT32:
     case 'FLOAT32':
-      return val =>
-        val === null || val === undefined
-          ? null
-          : wrapNumbers
-            ? new Float32(val)
-            : Number(val);
+      decoder = wrapNumbers ? val => new Float32(val) : val => Number(val);
+      break;
 
     case spannerClient.spanner.v1.TypeCode.FLOAT64:
     case 'FLOAT64':
-      return val =>
-        val === null || val === undefined
-          ? null
-          : wrapNumbers
-            ? new Float(val)
-            : Number(val);
+      decoder = wrapNumbers ? val => new Float(val) : val => Number(val);
+      break;
 
     case spannerClient.spanner.v1.TypeCode.INT64:
     case 'INT64':
@@ -1004,34 +989,27 @@ export function getDecoder(
           spannerClient.spanner.v1.TypeAnnotationCode.PG_OID ||
         type.typeAnnotation === 'PG_OID'
       ) {
-        return val => {
-          if (val === null || val === undefined) {
-            return null;
-          }
-          if (wrapNumbers) {
-            return new PGOid(val);
-          }
-          const num = Number(val);
-          if (!Number.isSafeInteger(num)) {
-            throw new GoogleError(`PG.OID ${val} is out of bounds.`);
-          }
-          return num;
-        };
+        decoder = wrapNumbers
+          ? val => new PGOid(val)
+          : val => {
+              const num = Number(val);
+              if (!Number.isSafeInteger(num)) {
+                throw new GoogleError(`PG.OID ${val} is out of bounds.`);
+              }
+              return num;
+            };
       } else {
-        return val => {
-          if (val === null || val === undefined) {
-            return null;
-          }
-          if (wrapNumbers) {
-            return new Int(val);
-          }
-          const num = Number(val);
-          if (!Number.isSafeInteger(num)) {
-            throw new GoogleError(`Integer ${val} is out of bounds.`);
-          }
-          return num;
-        };
+        decoder = wrapNumbers
+          ? val => new Int(val)
+          : val => {
+              const num = Number(val);
+              if (!Number.isSafeInteger(num)) {
+                throw new GoogleError(`Integer ${val} is out of bounds.`);
+              }
+              return num;
+            };
       }
+      break;
 
     case spannerClient.spanner.v1.TypeCode.NUMERIC:
     case 'NUMERIC':
@@ -1040,22 +1018,21 @@ export function getDecoder(
           spannerClient.spanner.v1.TypeAnnotationCode.PG_NUMERIC ||
         type.typeAnnotation === 'PG_NUMERIC'
       ) {
-        return val =>
-          val === null || val === undefined ? null : new PGNumeric(val);
+        decoder = val => new PGNumeric(val);
       } else {
-        return val =>
-          val === null || val === undefined ? null : new Numeric(val);
+        decoder = val => new Numeric(val);
       }
+      break;
 
     case spannerClient.spanner.v1.TypeCode.TIMESTAMP:
     case 'TIMESTAMP':
-      return val =>
-        val === null || val === undefined ? null : parsePreciseDate(val);
+      decoder = val => parsePreciseDate(val);
+      break;
 
     case spannerClient.spanner.v1.TypeCode.DATE:
     case 'DATE':
-      return val =>
-        val === null || val === undefined ? null : new SpannerDate(val);
+      decoder = val => new SpannerDate(val);
+      break;
 
     case spannerClient.spanner.v1.TypeCode.JSON:
     case 'JSON':
@@ -1064,17 +1041,16 @@ export function getDecoder(
           spannerClient.spanner.v1.TypeAnnotationCode.PG_JSONB ||
         type.typeAnnotation === 'PG_JSONB'
       ) {
-        return val =>
-          val === null || val === undefined ? null : new PGJsonb(val);
+        decoder = val => new PGJsonb(val);
       } else {
-        return val =>
-          val === null || val === undefined ? null : JSON.parse(val);
+        decoder = val => JSON.parse(val);
       }
+      break;
 
     case spannerClient.spanner.v1.TypeCode.INTERVAL:
     case 'INTERVAL':
-      return val =>
-        val === null || val === undefined ? null : Interval.fromISO8601(val);
+      decoder = val => Interval.fromISO8601(val);
+      break;
 
     case spannerClient.spanner.v1.TypeCode.ARRAY:
     case 'ARRAY': {
@@ -1083,8 +1059,8 @@ export function getDecoder(
         columnMetadata,
         options,
       );
-      return val =>
-        val === null || val === undefined ? null : val.map(elementDecoder);
+      decoder = val => val.map(elementDecoder);
+      break;
     }
 
     case spannerClient.spanner.v1.TypeCode.STRUCT:
@@ -1122,10 +1098,7 @@ export function getDecoder(
       }
 
       if (wrapStructs) {
-        return val => {
-          if (val === null || val === undefined) {
-            return null;
-          }
+        decoder = val => {
           const isArr = Array.isArray(val);
           const structFields = fieldDecoders.map(
             ({name, decodedName, decoder, index}) => {
@@ -1144,10 +1117,7 @@ export function getDecoder(
           return Struct.fromArray(structFields as Field[]);
         };
       } else {
-        return val => {
-          if (val === null || val === undefined) {
-            return null;
-          }
+        decoder = val => {
           const isArr = Array.isArray(val);
           const structObj: Json = {};
           const len = fieldDecoders.length;
@@ -1166,11 +1136,15 @@ export function getDecoder(
           return structObj;
         };
       }
+      break;
     }
 
     default:
-      return val => val;
+      decoder = val => val;
+      break;
   }
+
+  return val => (val === null || val === undefined ? null : decoder(val));
 }
 
 /**
@@ -1238,22 +1212,22 @@ function parsePreciseDate(isoString: string): PreciseDate {
 
     const dotIndex = isoString.indexOf('.', 19);
     if (dotIndex !== -1) {
+      if (dotIndex !== 19) {
+        return new PreciseDate(isoString);
+      }
       const subSecondsStr = isoString.substring(
         dotIndex + 1,
         isoString.length - 1,
       );
+      if (!DIGITS_REGEX.test(subSecondsStr)) {
+        return new PreciseDate(isoString);
+      }
       const padded = subSecondsStr.padEnd(9, '0');
       milliseconds = Number(padded.substring(0, 3));
       microseconds = Number(padded.substring(3, 6));
       nanoseconds = Number(padded.substring(6, 9));
-
-      if (
-        Number.isNaN(milliseconds) ||
-        Number.isNaN(microseconds) ||
-        Number.isNaN(nanoseconds)
-      ) {
-        return new PreciseDate(isoString);
-      }
+    } else if (isoString.length !== 20) {
+      return new PreciseDate(isoString);
     }
 
     const utcMillis = Date.UTC(
@@ -1265,6 +1239,18 @@ function parsePreciseDate(isoString: string): PreciseDate {
       seconds,
       milliseconds,
     );
+
+    const dateCheck = new Date(utcMillis);
+    if (
+      dateCheck.getUTCFullYear() !== year ||
+      dateCheck.getUTCMonth() !== month ||
+      dateCheck.getUTCDate() !== day ||
+      dateCheck.getUTCHours() !== hours ||
+      dateCheck.getUTCMinutes() !== minutes ||
+      dateCheck.getUTCSeconds() !== seconds
+    ) {
+      return new PreciseDate(isoString);
+    }
 
     const preciseDate = new PreciseDate(utcMillis);
     preciseDate.setMicroseconds(microseconds);
