@@ -599,6 +599,24 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "11.2.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/logging",
+      "id": "25bab115-ea4f-4ff2-a7e0-5aa0384c1b95",
+      "createTime": "2026-06-16T00:07:06.794Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "d56eb080b89bf58bd8235f4843f3801ecd1ae8be",
           "message": "Add space to readme",
