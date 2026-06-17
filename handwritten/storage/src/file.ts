@@ -2192,11 +2192,35 @@ class File extends ServiceObject<File, FileMetadata> {
     });
 
     writeStream.once('writing', () => {
+      const onPrePipelineError = (error: Error) => {
+        pipelineCallback(error);
+      };
+      fileWriteStream.once('error', onPrePipelineError);
+
       if (options.resumable === false) {
         this.startSimpleUpload_(fileWriteStream, options);
       } else {
         this.startResumableUpload_(fileWriteStream, options);
       }
+
+      if (
+        fileWriteStream.destroyed ||
+        writeStream.destroyed ||
+        emitStream.destroyed
+      ) {
+        // Destroying an upload stream can queue its terminal error before
+        // close, so keep the temporary listener until teardown completes.
+        fileWriteStream.once('close', () => {
+          fileWriteStream.removeListener('error', onPrePipelineError);
+        });
+        if (!fileWriteStream.destroyed) {
+          fileWriteStream.destroy();
+        }
+        emitStream.destroy();
+        return;
+      }
+
+      fileWriteStream.removeListener('error', onPrePipelineError);
 
       // remove temporary noop listener as we now create a pipeline that handles the errors
       emitStream.removeListener('error', noop);

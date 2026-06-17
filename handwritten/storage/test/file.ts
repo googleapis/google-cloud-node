@@ -2149,6 +2149,27 @@ describe('File', () => {
       writable.write('data');
     });
 
+    it('should clean up if the returned stream is destroyed during upload startup', done => {
+      const writable = file.createWriteStream();
+      let fileWriteStream: duplexify.Duplexify | undefined;
+
+      file.startResumableUpload_ = (stream: duplexify.Duplexify) => {
+        fileWriteStream = stream;
+        writable.destroy();
+      };
+
+      writable.on('close', () => {
+        setImmediate(() => {
+          assert(fileWriteStream);
+          assert.strictEqual(fileWriteStream.destroyed, true);
+          assert.strictEqual(fileWriteStream.listenerCount('error'), 0);
+          done();
+        });
+      });
+
+      writable.write('data');
+    });
+
     it('should alias contentType to metadata object', done => {
       const contentType = 'text/html';
       const writable = file.createWriteStream({contentType});
