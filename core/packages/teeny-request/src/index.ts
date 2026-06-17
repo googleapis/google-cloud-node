@@ -276,13 +276,19 @@ function teenyRequest(
     const requestStream = streamEvents(new PassThrough());
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let responseStream: any;
+    const pipeResponseStream = () => {
+      if (requestStream.destroyed) {
+        responseStream.destroy();
+        return;
+      }
+
+      pipeline(responseStream, requestStream, () => {});
+    };
     requestStream.once('reading', () => {
       if (responseStream) {
-        pipeline(responseStream, requestStream, () => {});
+        pipeResponseStream();
       } else {
-        requestStream.once('response', () => {
-          pipeline(responseStream, requestStream, () => {});
-        });
+        requestStream.once('response', pipeResponseStream);
       }
     });
     options.compress = false;

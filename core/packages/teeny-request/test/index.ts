@@ -275,6 +275,23 @@ describe('teeny', () => {
       });
   });
 
+  it('should discard the response if the request stream is destroyed before piping', async () => {
+    const scope = mockJson();
+    const stream = teenyRequest({uri});
+    const responseClosed = new Promise<void>((resolve, reject) => {
+      stream.once('error', reject);
+      stream.once('response', response => {
+        response.body.once('error', reject);
+        response.body.once('close', resolve);
+        stream.destroy();
+      });
+    });
+
+    stream.resume();
+    await responseClosed;
+    scope.done();
+  });
+
   it('should not pipe response stream to user unless they ask for it', async () => {
     const scope = mockJson();
     const stream = teenyRequest({uri}).on('error', err => {
