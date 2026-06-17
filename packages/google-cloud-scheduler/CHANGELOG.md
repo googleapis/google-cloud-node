@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/scheduler-v5.3.2...scheduler-v5.4.0) (2026-06-16)
+
+
+### Features
+
+* Local OwlBot generation batch 2 ([#8613](https://github.com/googleapis/google-cloud-node/issues/8613)) ([243fb1a](https://github.com/googleapis/google-cloud-node/commit/243fb1a66876934bd68ca96e420937ae8adeb77d))
+
 ## [5.3.2](https://github.com/googleapis/google-cloud-node/compare/scheduler-v5.3.1...scheduler-v5.3.2) (2026-05-01)
 
 
