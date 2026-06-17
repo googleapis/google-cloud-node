@@ -13,7 +13,7 @@
     "test": "c8 mocha --timeout 600000 test/*.js"
   },
   "dependencies": {
-    "@google-cloud/recommender": "^7.2.2"
+    "@google-cloud/recommender": "^7.3.0"
   },
   "devDependencies": {
     "c8": "^10.0.0",
