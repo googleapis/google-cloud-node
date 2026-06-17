@@ -5503,6 +5503,70 @@ describe('v1.DepServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('agentGateway', async () => {
+      const fakePath = '/rendered/path/agentGateway';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        agent_gateway: 'agentGatewayValue',
+      };
+      const client = new depserviceModule.v1.DepServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.agentGatewayPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.agentGatewayPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('agentGatewayPath', () => {
+        const result = client.agentGatewayPath(
+          'projectValue',
+          'locationValue',
+          'agentGatewayValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.agentGatewayPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromAgentGatewayName', () => {
+        const result = client.matchProjectFromAgentGatewayName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.agentGatewayPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromAgentGatewayName', () => {
+        const result = client.matchLocationFromAgentGatewayName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.agentGatewayPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAgentGatewayFromAgentGatewayName', () => {
+        const result = client.matchAgentGatewayFromAgentGatewayName(fakePath);
+        assert.strictEqual(result, 'agentGatewayValue');
+        assert(
+          (client.pathTemplates.agentGatewayPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('authzExtension', async () => {
       const fakePath = '/rendered/path/authzExtension';
       const expectedParameters = {

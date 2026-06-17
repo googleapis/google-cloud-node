@@ -217,6 +217,9 @@ export class DepServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      agentGatewayPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agentGateways/{agent_gateway}',
+      ),
       authzExtensionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/authzExtensions/{authz_extension}',
       ),
@@ -5016,6 +5019,58 @@ export class DepServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified agentGateway resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent_gateway
+   * @returns {string} Resource name string.
+   */
+  agentGatewayPath(project: string, location: string, agentGateway: string) {
+    return this.pathTemplates.agentGatewayPathTemplate.render({
+      project: project,
+      location: location,
+      agent_gateway: agentGateway,
+    });
+  }
+
+  /**
+   * Parse the project from AgentGateway resource.
+   *
+   * @param {string} agentGatewayName
+   *   A fully-qualified path representing AgentGateway resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAgentGatewayName(agentGatewayName: string) {
+    return this.pathTemplates.agentGatewayPathTemplate.match(agentGatewayName)
+      .project;
+  }
+
+  /**
+   * Parse the location from AgentGateway resource.
+   *
+   * @param {string} agentGatewayName
+   *   A fully-qualified path representing AgentGateway resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAgentGatewayName(agentGatewayName: string) {
+    return this.pathTemplates.agentGatewayPathTemplate.match(agentGatewayName)
+      .location;
+  }
+
+  /**
+   * Parse the agent_gateway from AgentGateway resource.
+   *
+   * @param {string} agentGatewayName
+   *   A fully-qualified path representing AgentGateway resource.
+   * @returns {string} A string representing the agent_gateway.
+   */
+  matchAgentGatewayFromAgentGatewayName(agentGatewayName: string) {
+    return this.pathTemplates.agentGatewayPathTemplate.match(agentGatewayName)
+      .agent_gateway;
+  }
 
   /**
    * Return a fully-qualified authzExtension resource name string.
