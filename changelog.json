@@ -4,6 +4,24 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "6.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/paginator",
+      "id": "c63f3e55-1fb5-48c1-9bf9-3519c570fa7f",
+      "createTime": "2026-06-16T00:07:06.206Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "6f9710c504c5272dfb59a77c7da98235ed9cf3ff",
           "message": "Add initial files for google.maps.mapmanagement.v2beta",
