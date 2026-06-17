@@ -1567,9 +1567,7 @@ libraries:
     version: 0.1.1
     apis:
       - path: google/cloud/visionai/v1
-      - path: google/cloud/visionai/v1alpha1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-vmmigration
