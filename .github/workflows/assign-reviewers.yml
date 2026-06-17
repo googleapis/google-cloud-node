@@ -37,21 +37,24 @@ jobs:
             if (isGoogler) {
               console.log(`${author} is a trusted bot. Treating as Googler.`);
             } else {
-              // 1. Check if the author is a member of the 'googlers' organization
-              try {
-                const res = await github.rest.orgs.checkMembershipForUser({
-                  org: 'googlers',
-                  username: author,
-                });
-                if (res.status === 204) {
-                  isGoogler = true;
-                  console.log(`${author} is a member of 'googlers' organization.`);
-                }
-              } catch (error) {
-                if (error.status === 404) {
-                  console.log(`${author} is NOT a member of 'googlers' organization.`);
-                } else {
-                  console.warn(`Could not check membership in 'googlers' organization: Status ${error.status}. Proceeding as non-member.`);
+              const orgs = ['googlers', 'GoogleCloudPlatform', 'googleapis'];
+              for (const org of orgs) {
+                try {
+                  const res = await github.rest.orgs.checkMembershipForUser({
+                    org: org,
+                    username: author,
+                  });
+                  if (res.status === 204) {
+                    isGoogler = true;
+                    console.log(`${author} is a member of '${org}' organization.`);
+                    break;
+                  }
+                } catch (error) {
+                  if (error.status === 404) {
+                    console.log(`${author} is NOT a member of '${org}' organization.`);
+                  } else {
+                    console.warn(`Could not check membership in '${org}' organization: Status ${error.status}.`);
+                  }
                 }
               }
             }
