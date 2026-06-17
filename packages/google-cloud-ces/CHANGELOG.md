@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/googleapis/google-cloud-node/compare/ces-v0.4.0...ces-v0.4.1) (2026-06-16)
+
+
+### Bug Fixes
+
+* **php:** Remove abandoned deps ([602338b](https://github.com/googleapis/google-cloud-node/commit/602338ba5a448a7fe8b5a8c60dcb68adad39e20e))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/ces-v0.3.0...ces-v0.4.0) (2026-05-01)
 
 
