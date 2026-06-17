@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [9.4.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v9.3.2...security-center-v9.4.0) (2026-06-16)
+
+
+### Features
+
+* Local OwlBot generation batch 3 ([#8614](https://github.com/googleapis/google-cloud-node/issues/8614)) ([fae15ec](https://github.com/googleapis/google-cloud-node/commit/fae15ecca725f8e978341156e2c99c623ce74fcc))
+
 ## [9.3.2](https://github.com/googleapis/google-cloud-node/compare/security-center-v9.3.1...security-center-v9.3.2) (2026-06-01)
 
 
