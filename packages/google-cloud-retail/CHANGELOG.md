@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/retail-v4.3.1...retail-v4.4.0) (2026-06-16)
+
+
+### Features
+
+* Local OwlBot generation batch 1 ([#8612](https://github.com/googleapis/google-cloud-node/issues/8612)) ([b4d5da7](https://github.com/googleapis/google-cloud-node/commit/b4d5da72a41c4d961eaeee7b7633c7885ecb9166))
+
 ## [4.3.1](https://github.com/googleapis/google-cloud-node/compare/retail-v4.3.0...retail-v4.3.1) (2026-05-01)
 
 

@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/redis-v5.2.2...redis-v5.3.0) (2026-06-16)
+
+
+### Features
+
+* Local OwlBot generation batch 1 ([#8612](https://github.com/googleapis/google-cloud-node/issues/8612)) ([b4d5da7](https://github.com/googleapis/google-cloud-node/commit/b4d5da72a41c4d961eaeee7b7633c7885ecb9166))
+
 ## [5.2.2](https://github.com/googleapis/google-cloud-node/compare/redis-v5.2.1...redis-v5.2.2) (2026-05-01)
 
 
