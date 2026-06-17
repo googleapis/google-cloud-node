@@ -264,6 +264,29 @@ export class OracleDatabaseClient {
       giVersionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/giVersions/{gi_version}',
       ),
+      goldengateConnectionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/goldengateConnections/{goldengate_connection}',
+      ),
+      goldengateConnectionAssignmentPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/goldengateConnectionAssignments/{goldengate_connection_assignment}',
+        ),
+      goldengateConnectionTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/goldengateConnectionTypes/{goldengate_connection_type}',
+      ),
+      goldengateDeploymentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/goldengateDeployments/{goldengate_deployment}',
+      ),
+      goldengateDeploymentEnvironmentPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/goldengateDeploymentEnvironments/{goldengate_deployment_environment}',
+        ),
+      goldengateDeploymentTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/goldengateDeploymentTypes/{goldengate_deployment_type}',
+      ),
+      goldengateDeploymentVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/goldengateDeploymentVersions/{goldengate_deployment_version}',
+      ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}',
       ),
@@ -396,6 +419,36 @@ export class OracleDatabaseClient {
         'nextPageToken',
         'dbSystems',
       ),
+      listGoldengateDeployments: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'goldengateDeployments',
+      ),
+      listGoldengateConnections: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'goldengateConnections',
+      ),
+      listGoldengateDeploymentVersions: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'goldengateDeploymentVersions',
+      ),
+      listGoldengateDeploymentTypes: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'goldengateDeploymentTypes',
+      ),
+      listGoldengateDeploymentEnvironments: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'goldengateDeploymentEnvironments',
+      ),
+      listGoldengateConnectionTypes: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'goldengateConnectionTypes',
+      ),
       listDbVersions: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -405,6 +458,11 @@ export class OracleDatabaseClient {
         'pageToken',
         'nextPageToken',
         'databaseCharacterSets',
+      ),
+      listGoldengateConnectionAssignments: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'goldengateConnectionAssignments',
       ),
     };
 
@@ -599,6 +657,54 @@ export class OracleDatabaseClient {
     const deleteDbSystemMetadata = protoFilesRoot.lookup(
       '.google.cloud.oracledatabase.v1.OperationMetadata',
     ) as gax.protobuf.Type;
+    const createGoldengateDeploymentResponse = protoFilesRoot.lookup(
+      '.google.cloud.oracledatabase.v1.GoldengateDeployment',
+    ) as gax.protobuf.Type;
+    const createGoldengateDeploymentMetadata = protoFilesRoot.lookup(
+      '.google.cloud.oracledatabase.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const deleteGoldengateDeploymentResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
+    const deleteGoldengateDeploymentMetadata = protoFilesRoot.lookup(
+      '.google.cloud.oracledatabase.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const stopGoldengateDeploymentResponse = protoFilesRoot.lookup(
+      '.google.cloud.oracledatabase.v1.GoldengateDeployment',
+    ) as gax.protobuf.Type;
+    const stopGoldengateDeploymentMetadata = protoFilesRoot.lookup(
+      '.google.cloud.oracledatabase.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const startGoldengateDeploymentResponse = protoFilesRoot.lookup(
+      '.google.cloud.oracledatabase.v1.GoldengateDeployment',
+    ) as gax.protobuf.Type;
+    const startGoldengateDeploymentMetadata = protoFilesRoot.lookup(
+      '.google.cloud.oracledatabase.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const createGoldengateConnectionResponse = protoFilesRoot.lookup(
+      '.google.cloud.oracledatabase.v1.GoldengateConnection',
+    ) as gax.protobuf.Type;
+    const createGoldengateConnectionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.oracledatabase.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const deleteGoldengateConnectionResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
+    const deleteGoldengateConnectionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.oracledatabase.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const createGoldengateConnectionAssignmentResponse = protoFilesRoot.lookup(
+      '.google.cloud.oracledatabase.v1.GoldengateConnectionAssignment',
+    ) as gax.protobuf.Type;
+    const createGoldengateConnectionAssignmentMetadata = protoFilesRoot.lookup(
+      '.google.cloud.oracledatabase.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const deleteGoldengateConnectionAssignmentResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
+    const deleteGoldengateConnectionAssignmentMetadata = protoFilesRoot.lookup(
+      '.google.cloud.oracledatabase.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createCloudExadataInfrastructure:
@@ -785,6 +891,80 @@ export class OracleDatabaseClient {
         deleteDbSystemResponse.decode.bind(deleteDbSystemResponse),
         deleteDbSystemMetadata.decode.bind(deleteDbSystemMetadata),
       ),
+      createGoldengateDeployment: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createGoldengateDeploymentResponse.decode.bind(
+          createGoldengateDeploymentResponse,
+        ),
+        createGoldengateDeploymentMetadata.decode.bind(
+          createGoldengateDeploymentMetadata,
+        ),
+      ),
+      deleteGoldengateDeployment: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteGoldengateDeploymentResponse.decode.bind(
+          deleteGoldengateDeploymentResponse,
+        ),
+        deleteGoldengateDeploymentMetadata.decode.bind(
+          deleteGoldengateDeploymentMetadata,
+        ),
+      ),
+      stopGoldengateDeployment: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        stopGoldengateDeploymentResponse.decode.bind(
+          stopGoldengateDeploymentResponse,
+        ),
+        stopGoldengateDeploymentMetadata.decode.bind(
+          stopGoldengateDeploymentMetadata,
+        ),
+      ),
+      startGoldengateDeployment: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        startGoldengateDeploymentResponse.decode.bind(
+          startGoldengateDeploymentResponse,
+        ),
+        startGoldengateDeploymentMetadata.decode.bind(
+          startGoldengateDeploymentMetadata,
+        ),
+      ),
+      createGoldengateConnection: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createGoldengateConnectionResponse.decode.bind(
+          createGoldengateConnectionResponse,
+        ),
+        createGoldengateConnectionMetadata.decode.bind(
+          createGoldengateConnectionMetadata,
+        ),
+      ),
+      deleteGoldengateConnection: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteGoldengateConnectionResponse.decode.bind(
+          deleteGoldengateConnectionResponse,
+        ),
+        deleteGoldengateConnectionMetadata.decode.bind(
+          deleteGoldengateConnectionMetadata,
+        ),
+      ),
+      createGoldengateConnectionAssignment:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          createGoldengateConnectionAssignmentResponse.decode.bind(
+            createGoldengateConnectionAssignmentResponse,
+          ),
+          createGoldengateConnectionAssignmentMetadata.decode.bind(
+            createGoldengateConnectionAssignmentMetadata,
+          ),
+        ),
+      deleteGoldengateConnectionAssignment:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          deleteGoldengateConnectionAssignmentResponse.decode.bind(
+            deleteGoldengateConnectionAssignmentResponse,
+          ),
+          deleteGoldengateConnectionAssignmentMetadata.decode.bind(
+            deleteGoldengateConnectionAssignmentMetadata,
+          ),
+        ),
     };
 
     // Put together the default options sent with requests.
@@ -893,8 +1073,27 @@ export class OracleDatabaseClient {
       'getDbSystem',
       'createDbSystem',
       'deleteDbSystem',
+      'listGoldengateDeployments',
+      'getGoldengateDeployment',
+      'createGoldengateDeployment',
+      'deleteGoldengateDeployment',
+      'stopGoldengateDeployment',
+      'startGoldengateDeployment',
+      'listGoldengateConnections',
+      'getGoldengateConnection',
+      'createGoldengateConnection',
+      'deleteGoldengateConnection',
+      'listGoldengateDeploymentVersions',
+      'listGoldengateDeploymentTypes',
+      'listGoldengateDeploymentEnvironments',
+      'listGoldengateConnectionTypes',
       'listDbVersions',
       'listDatabaseCharacterSets',
+      'listGoldengateConnectionAssignments',
+      'getGoldengateConnectionAssignment',
+      'createGoldengateConnectionAssignment',
+      'deleteGoldengateConnectionAssignment',
+      'testGoldengateConnectionAssignment',
     ];
     for (const methodName of oracleDatabaseStubMethods) {
       const callPromise = this.oracleDatabaseStub.then(
@@ -2563,6 +2762,598 @@ export class OracleDatabaseClient {
           {} | undefined,
         ]) => {
           this._log.info('getDbSystem response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Gets details of a single GoldengateDeployment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the GoldengateDeployment in the following format:
+   *   projects/{project}/locations/{location}/goldengateDeployments/{goldengate_deployment}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.oracledatabase.v1.GoldengateDeployment|GoldengateDeployment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.get_goldengate_deployment.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_GetGoldengateDeployment_async
+   */
+  getGoldengateDeployment(
+    request?: protos.google.cloud.oracledatabase.v1.IGetGoldengateDeploymentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+      (
+        | protos.google.cloud.oracledatabase.v1.IGetGoldengateDeploymentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getGoldengateDeployment(
+    request: protos.google.cloud.oracledatabase.v1.IGetGoldengateDeploymentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+      | protos.google.cloud.oracledatabase.v1.IGetGoldengateDeploymentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getGoldengateDeployment(
+    request: protos.google.cloud.oracledatabase.v1.IGetGoldengateDeploymentRequest,
+    callback: Callback<
+      protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+      | protos.google.cloud.oracledatabase.v1.IGetGoldengateDeploymentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getGoldengateDeployment(
+    request?: protos.google.cloud.oracledatabase.v1.IGetGoldengateDeploymentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+          | protos.google.cloud.oracledatabase.v1.IGetGoldengateDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+      | protos.google.cloud.oracledatabase.v1.IGetGoldengateDeploymentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+      (
+        | protos.google.cloud.oracledatabase.v1.IGetGoldengateDeploymentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('getGoldengateDeployment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+          | protos.google.cloud.oracledatabase.v1.IGetGoldengateDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getGoldengateDeployment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getGoldengateDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+          (
+            | protos.google.cloud.oracledatabase.v1.IGetGoldengateDeploymentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getGoldengateDeployment response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Gets details of a single GoldengateConnection.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the GoldengateConnection in the following format:
+   *   projects/{project}/locations/{location}/goldengateConnections/{goldengate_connection}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.oracledatabase.v1.GoldengateConnection|GoldengateConnection}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.get_goldengate_connection.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_GetGoldengateConnection_async
+   */
+  getGoldengateConnection(
+    request?: protos.google.cloud.oracledatabase.v1.IGetGoldengateConnectionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.IGoldengateConnection,
+      (
+        | protos.google.cloud.oracledatabase.v1.IGetGoldengateConnectionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getGoldengateConnection(
+    request: protos.google.cloud.oracledatabase.v1.IGetGoldengateConnectionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.oracledatabase.v1.IGoldengateConnection,
+      | protos.google.cloud.oracledatabase.v1.IGetGoldengateConnectionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getGoldengateConnection(
+    request: protos.google.cloud.oracledatabase.v1.IGetGoldengateConnectionRequest,
+    callback: Callback<
+      protos.google.cloud.oracledatabase.v1.IGoldengateConnection,
+      | protos.google.cloud.oracledatabase.v1.IGetGoldengateConnectionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getGoldengateConnection(
+    request?: protos.google.cloud.oracledatabase.v1.IGetGoldengateConnectionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.oracledatabase.v1.IGoldengateConnection,
+          | protos.google.cloud.oracledatabase.v1.IGetGoldengateConnectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.oracledatabase.v1.IGoldengateConnection,
+      | protos.google.cloud.oracledatabase.v1.IGetGoldengateConnectionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.IGoldengateConnection,
+      (
+        | protos.google.cloud.oracledatabase.v1.IGetGoldengateConnectionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('getGoldengateConnection request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.oracledatabase.v1.IGoldengateConnection,
+          | protos.google.cloud.oracledatabase.v1.IGetGoldengateConnectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getGoldengateConnection response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getGoldengateConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.oracledatabase.v1.IGoldengateConnection,
+          (
+            | protos.google.cloud.oracledatabase.v1.IGetGoldengateConnectionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getGoldengateConnection response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Gets details of a single GoldengateConnectionAssignment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the GoldengateConnectionAssignment to retrieve.
+   *   Format:
+   *   projects/{project}/locations/{location}/goldengateConnectionAssignments/{goldengate_connection_assignment}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.oracledatabase.v1.GoldengateConnectionAssignment|GoldengateConnectionAssignment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.get_goldengate_connection_assignment.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_GetGoldengateConnectionAssignment_async
+   */
+  getGoldengateConnectionAssignment(
+    request?: protos.google.cloud.oracledatabase.v1.IGetGoldengateConnectionAssignmentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment,
+      (
+        | protos.google.cloud.oracledatabase.v1.IGetGoldengateConnectionAssignmentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getGoldengateConnectionAssignment(
+    request: protos.google.cloud.oracledatabase.v1.IGetGoldengateConnectionAssignmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment,
+      | protos.google.cloud.oracledatabase.v1.IGetGoldengateConnectionAssignmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getGoldengateConnectionAssignment(
+    request: protos.google.cloud.oracledatabase.v1.IGetGoldengateConnectionAssignmentRequest,
+    callback: Callback<
+      protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment,
+      | protos.google.cloud.oracledatabase.v1.IGetGoldengateConnectionAssignmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getGoldengateConnectionAssignment(
+    request?: protos.google.cloud.oracledatabase.v1.IGetGoldengateConnectionAssignmentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment,
+          | protos.google.cloud.oracledatabase.v1.IGetGoldengateConnectionAssignmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment,
+      | protos.google.cloud.oracledatabase.v1.IGetGoldengateConnectionAssignmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment,
+      (
+        | protos.google.cloud.oracledatabase.v1.IGetGoldengateConnectionAssignmentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('getGoldengateConnectionAssignment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment,
+          | protos.google.cloud.oracledatabase.v1.IGetGoldengateConnectionAssignmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'getGoldengateConnectionAssignment response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getGoldengateConnectionAssignment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment,
+          (
+            | protos.google.cloud.oracledatabase.v1.IGetGoldengateConnectionAssignmentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getGoldengateConnectionAssignment response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Tests a single GoldengateConnectionAssignment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the connection assignment for which to test connection.
+   *   projects/{project}/locations/{region}/goldengateConnectionAssignments/{goldengate_connection_assignment}
+   * @param {google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentRequest.TestType} [request.type]
+   *   Optional. The type of the test of the assigned connection.
+   *   The only type actually supported is DEFAULT.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentResponse|TestGoldengateConnectionAssignmentResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.test_goldengate_connection_assignment.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_TestGoldengateConnectionAssignment_async
+   */
+  testGoldengateConnectionAssignment(
+    request?: protos.google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentResponse,
+      (
+        | protos.google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  testGoldengateConnectionAssignment(
+    request: protos.google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentResponse,
+      | protos.google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  testGoldengateConnectionAssignment(
+    request: protos.google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentRequest,
+    callback: Callback<
+      protos.google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentResponse,
+      | protos.google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  testGoldengateConnectionAssignment(
+    request?: protos.google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentResponse,
+          | protos.google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentResponse,
+      | protos.google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentResponse,
+      (
+        | protos.google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('testGoldengateConnectionAssignment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentResponse,
+          | protos.google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'testGoldengateConnectionAssignment response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .testGoldengateConnectionAssignment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentResponse,
+          (
+            | protos.google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'testGoldengateConnectionAssignment response %j',
+            response,
+          );
           return [response, options, rawResponse];
         },
       )
@@ -4575,8 +5366,9 @@ export class OracleDatabaseClient {
    * @param {string} request.name
    *   Required. The name of the Autonomous Database in the following format:
    *   projects/{project}/locations/{location}/autonomousDatabases/{autonomous_database}.
-   * @param {string} request.peerAutonomousDatabase
-   *   Required. The peer database name to switch over to.
+   * @param {string} [request.peerAutonomousDatabase]
+   *   Optional. The peer database name to switch over to. Required for
+   *   cross-region standby, and must be omitted for in-region Data Guard.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4754,8 +5546,9 @@ export class OracleDatabaseClient {
    * @param {string} request.name
    *   Required. The name of the Autonomous Database in the following format:
    *   projects/{project}/locations/{location}/autonomousDatabases/{autonomous_database}.
-   * @param {string} request.peerAutonomousDatabase
-   *   Required. The peer database name to fail over to.
+   * @param {string} [request.peerAutonomousDatabase]
+   *   Optional. The peer database name to fail over to. Required for cross-region
+   *   standby, and must be omitted for in-region Data Guard.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -7134,6 +7927,1472 @@ export class OracleDatabaseClient {
     const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.deleteDbSystem,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Creates a new GoldengateDeployment in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The value for parent of the GoldengateDeployment in the following
+   *   format: projects/{project}/locations/{location}.
+   * @param {string} request.goldengateDeploymentId
+   *   Required. The ID of the GoldengateDeployment to create. This value is
+   *   restricted to (^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$) and must be a maximum of
+   *   63 characters in length. The value must start with a letter and end with a
+   *   letter or a number.
+   * @param {google.cloud.oracledatabase.v1.GoldengateDeployment} request.goldengateDeployment
+   *   Required. The resource being created.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.create_goldengate_deployment.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_CreateGoldengateDeployment_async
+   */
+  createGoldengateDeployment(
+    request?: protos.google.cloud.oracledatabase.v1.ICreateGoldengateDeploymentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createGoldengateDeployment(
+    request: protos.google.cloud.oracledatabase.v1.ICreateGoldengateDeploymentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createGoldengateDeployment(
+    request: protos.google.cloud.oracledatabase.v1.ICreateGoldengateDeploymentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createGoldengateDeployment(
+    request?: protos.google.cloud.oracledatabase.v1.ICreateGoldengateDeploymentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createGoldengateDeployment response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createGoldengateDeployment request %j', request);
+    return this.innerApiCalls
+      .createGoldengateDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createGoldengateDeployment response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `createGoldengateDeployment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.create_goldengate_deployment.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_CreateGoldengateDeployment_async
+   */
+  async checkCreateGoldengateDeploymentProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.oracledatabase.v1.GoldengateDeployment,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >
+  > {
+    this._log.info('createGoldengateDeployment long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createGoldengateDeployment,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.oracledatabase.v1.GoldengateDeployment,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes a single GoldengateDeployment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the GoldengateDeployment in the following format:
+   *   projects/{project}/locations/{location}/goldengateDeployments/{goldengate_deployment}.
+   * @param {string} [request.requestId]
+   *   Optional. An optional ID to identify the request. This value is used to
+   *   identify duplicate requests. If you make a request with the same request ID
+   *   and the original request is still in progress or completed, the server
+   *   ignores the second request. This prevents clients from
+   *   accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.delete_goldengate_deployment.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_DeleteGoldengateDeployment_async
+   */
+  deleteGoldengateDeployment(
+    request?: protos.google.cloud.oracledatabase.v1.IDeleteGoldengateDeploymentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteGoldengateDeployment(
+    request: protos.google.cloud.oracledatabase.v1.IDeleteGoldengateDeploymentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteGoldengateDeployment(
+    request: protos.google.cloud.oracledatabase.v1.IDeleteGoldengateDeploymentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteGoldengateDeployment(
+    request?: protos.google.cloud.oracledatabase.v1.IDeleteGoldengateDeploymentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteGoldengateDeployment response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteGoldengateDeployment request %j', request);
+    return this.innerApiCalls
+      .deleteGoldengateDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteGoldengateDeployment response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteGoldengateDeployment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.delete_goldengate_deployment.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_DeleteGoldengateDeployment_async
+   */
+  async checkDeleteGoldengateDeploymentProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >
+  > {
+    this._log.info('deleteGoldengateDeployment long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteGoldengateDeployment,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Stops a single GoldengateDeployment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Goldengate Deployment in the following format:
+   *   projects/{project}/locations/{location}/goldengateDeployments/{goldengate_deployment}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.stop_goldengate_deployment.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_StopGoldengateDeployment_async
+   */
+  stopGoldengateDeployment(
+    request?: protos.google.cloud.oracledatabase.v1.IStopGoldengateDeploymentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  stopGoldengateDeployment(
+    request: protos.google.cloud.oracledatabase.v1.IStopGoldengateDeploymentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  stopGoldengateDeployment(
+    request: protos.google.cloud.oracledatabase.v1.IStopGoldengateDeploymentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  stopGoldengateDeployment(
+    request?: protos.google.cloud.oracledatabase.v1.IStopGoldengateDeploymentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('stopGoldengateDeployment response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('stopGoldengateDeployment request %j', request);
+    return this.innerApiCalls
+      .stopGoldengateDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('stopGoldengateDeployment response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `stopGoldengateDeployment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.stop_goldengate_deployment.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_StopGoldengateDeployment_async
+   */
+  async checkStopGoldengateDeploymentProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.oracledatabase.v1.GoldengateDeployment,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >
+  > {
+    this._log.info('stopGoldengateDeployment long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.stopGoldengateDeployment,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.oracledatabase.v1.GoldengateDeployment,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Starts a single GoldengateDeployment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Goldengate Deployment in the following format:
+   *   projects/{project}/locations/{location}/goldengateDeployments/{goldengate_deployment}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.start_goldengate_deployment.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_StartGoldengateDeployment_async
+   */
+  startGoldengateDeployment(
+    request?: protos.google.cloud.oracledatabase.v1.IStartGoldengateDeploymentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  startGoldengateDeployment(
+    request: protos.google.cloud.oracledatabase.v1.IStartGoldengateDeploymentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  startGoldengateDeployment(
+    request: protos.google.cloud.oracledatabase.v1.IStartGoldengateDeploymentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  startGoldengateDeployment(
+    request?: protos.google.cloud.oracledatabase.v1.IStartGoldengateDeploymentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('startGoldengateDeployment response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('startGoldengateDeployment request %j', request);
+    return this.innerApiCalls
+      .startGoldengateDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('startGoldengateDeployment response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `startGoldengateDeployment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.start_goldengate_deployment.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_StartGoldengateDeployment_async
+   */
+  async checkStartGoldengateDeploymentProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.oracledatabase.v1.GoldengateDeployment,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >
+  > {
+    this._log.info('startGoldengateDeployment long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.startGoldengateDeployment,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.oracledatabase.v1.GoldengateDeployment,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Creates a new GoldengateConnection in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The value for parent of the GoldengateConnection in the following
+   *   format: projects/{project}/locations/{location}.
+   * @param {string} request.goldengateConnectionId
+   *   Required. The ID of the GoldengateConnection to create. This value is
+   *   restricted to (^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$) and must be a maximum of
+   *   63 characters in length. The value must start with a letter and end with a
+   *   letter or a number.
+   * @param {google.cloud.oracledatabase.v1.GoldengateConnection} request.goldengateConnection
+   *   Required. The resource being created.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.create_goldengate_connection.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_CreateGoldengateConnection_async
+   */
+  createGoldengateConnection(
+    request?: protos.google.cloud.oracledatabase.v1.ICreateGoldengateConnectionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateConnection,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createGoldengateConnection(
+    request: protos.google.cloud.oracledatabase.v1.ICreateGoldengateConnectionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateConnection,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createGoldengateConnection(
+    request: protos.google.cloud.oracledatabase.v1.ICreateGoldengateConnectionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateConnection,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createGoldengateConnection(
+    request?: protos.google.cloud.oracledatabase.v1.ICreateGoldengateConnectionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IGoldengateConnection,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateConnection,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateConnection,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IGoldengateConnection,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createGoldengateConnection response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createGoldengateConnection request %j', request);
+    return this.innerApiCalls
+      .createGoldengateConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IGoldengateConnection,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createGoldengateConnection response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `createGoldengateConnection()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.create_goldengate_connection.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_CreateGoldengateConnection_async
+   */
+  async checkCreateGoldengateConnectionProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.oracledatabase.v1.GoldengateConnection,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >
+  > {
+    this._log.info('createGoldengateConnection long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createGoldengateConnection,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.oracledatabase.v1.GoldengateConnection,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes a single GoldengateConnection.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the GoldengateConnection in the following format:
+   *   projects/{project}/locations/{location}/goldengateConnections/{goldengate_connection}.
+   * @param {string} [request.requestId]
+   *   Optional. An optional ID to identify the request. This value is used to
+   *   identify duplicate requests. If you make a request with the same request ID
+   *   and the original request is still in progress or completed, the server
+   *   ignores the second request. This prevents clients from
+   *   accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.delete_goldengate_connection.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_DeleteGoldengateConnection_async
+   */
+  deleteGoldengateConnection(
+    request?: protos.google.cloud.oracledatabase.v1.IDeleteGoldengateConnectionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteGoldengateConnection(
+    request: protos.google.cloud.oracledatabase.v1.IDeleteGoldengateConnectionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteGoldengateConnection(
+    request: protos.google.cloud.oracledatabase.v1.IDeleteGoldengateConnectionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteGoldengateConnection(
+    request?: protos.google.cloud.oracledatabase.v1.IDeleteGoldengateConnectionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteGoldengateConnection response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteGoldengateConnection request %j', request);
+    return this.innerApiCalls
+      .deleteGoldengateConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteGoldengateConnection response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteGoldengateConnection()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.delete_goldengate_connection.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_DeleteGoldengateConnection_async
+   */
+  async checkDeleteGoldengateConnectionProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >
+  > {
+    this._log.info('deleteGoldengateConnection long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteGoldengateConnection,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Creates a new GoldengateConnectionAssignment in a given project and
+   * location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this GoldengateConnectionAssignment
+   *   will be created. Format: projects/{project}/locations/{location}
+   * @param {string} request.goldengateConnectionAssignmentId
+   *   Required. The ID of the GoldengateConnectionAssignment to create.
+   * @param {google.cloud.oracledatabase.v1.GoldengateConnectionAssignment} request.goldengateConnectionAssignment
+   *   Required. The GoldengateConnectionAssignment to create.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.create_goldengate_connection_assignment.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_CreateGoldengateConnectionAssignment_async
+   */
+  createGoldengateConnectionAssignment(
+    request?: protos.google.cloud.oracledatabase.v1.ICreateGoldengateConnectionAssignmentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createGoldengateConnectionAssignment(
+    request: protos.google.cloud.oracledatabase.v1.ICreateGoldengateConnectionAssignmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createGoldengateConnectionAssignment(
+    request: protos.google.cloud.oracledatabase.v1.ICreateGoldengateConnectionAssignmentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createGoldengateConnectionAssignment(
+    request?: protos.google.cloud.oracledatabase.v1.ICreateGoldengateConnectionAssignmentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'createGoldengateConnectionAssignment response %j',
+            rawResponse,
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createGoldengateConnectionAssignment request %j', request);
+    return this.innerApiCalls
+      .createGoldengateConnectionAssignment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createGoldengateConnectionAssignment response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `createGoldengateConnectionAssignment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.create_goldengate_connection_assignment.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_CreateGoldengateConnectionAssignment_async
+   */
+  async checkCreateGoldengateConnectionAssignmentProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.oracledatabase.v1.GoldengateConnectionAssignment,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >
+  > {
+    this._log.info('createGoldengateConnectionAssignment long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createGoldengateConnectionAssignment,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.oracledatabase.v1.GoldengateConnectionAssignment,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes a single GoldengateConnectionAssignment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the GoldengateConnectionAssignment to delete.
+   *   Format:
+   *   projects/{project}/locations/{location}/goldengateConnectionAssignments/{goldengate_connection_assignment}
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.delete_goldengate_connection_assignment.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_DeleteGoldengateConnectionAssignment_async
+   */
+  deleteGoldengateConnectionAssignment(
+    request?: protos.google.cloud.oracledatabase.v1.IDeleteGoldengateConnectionAssignmentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteGoldengateConnectionAssignment(
+    request: protos.google.cloud.oracledatabase.v1.IDeleteGoldengateConnectionAssignmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteGoldengateConnectionAssignment(
+    request: protos.google.cloud.oracledatabase.v1.IDeleteGoldengateConnectionAssignmentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteGoldengateConnectionAssignment(
+    request?: protos.google.cloud.oracledatabase.v1.IDeleteGoldengateConnectionAssignmentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'deleteGoldengateConnectionAssignment response %j',
+            rawResponse,
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteGoldengateConnectionAssignment request %j', request);
+    return this.innerApiCalls
+      .deleteGoldengateConnectionAssignment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteGoldengateConnectionAssignment response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteGoldengateConnectionAssignment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.delete_goldengate_connection_assignment.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_DeleteGoldengateConnectionAssignment_async
+   */
+  async checkDeleteGoldengateConnectionAssignmentProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >
+  > {
+    this._log.info('deleteGoldengateConnectionAssignment long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteGoldengateConnectionAssignment,
       this._gaxModule.createDefaultBackoffSettings(),
     );
     return decodeOperation as LROperation<
@@ -11981,6 +14240,1471 @@ export class OracleDatabaseClient {
     ) as AsyncIterable<protos.google.cloud.oracledatabase.v1.IDbSystem>;
   }
   /**
+   * Lists all the GoldengateDeployments for the given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent value for GoldengateDeployments in the following
+   *   format: projects/{project}/locations/{location}.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   *   If unspecified, at most 50 GoldengateDeployments will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous ListGoldengateDeployments
+   *   call. Provide this to retrieve the subsequent page.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request.
+   * @param {string} [request.orderBy]
+   *   Optional. An expression for ordering the results of the request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.GoldengateDeployment|GoldengateDeployment}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listGoldengateDeploymentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listGoldengateDeployments(
+    request?: protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.IGoldengateDeployment[],
+      protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentsRequest | null,
+      protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentsResponse,
+    ]
+  >;
+  listGoldengateDeployments(
+    request: protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentsRequest,
+      | protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.oracledatabase.v1.IGoldengateDeployment
+    >,
+  ): void;
+  listGoldengateDeployments(
+    request: protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentsRequest,
+      | protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.oracledatabase.v1.IGoldengateDeployment
+    >,
+  ): void;
+  listGoldengateDeployments(
+    request?: protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentsRequest,
+          | protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.oracledatabase.v1.IGoldengateDeployment
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentsRequest,
+      | protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.oracledatabase.v1.IGoldengateDeployment
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.IGoldengateDeployment[],
+      protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentsRequest | null,
+      protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentsRequest,
+          | protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.oracledatabase.v1.IGoldengateDeployment
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listGoldengateDeployments values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listGoldengateDeployments request %j', request);
+    return this.innerApiCalls
+      .listGoldengateDeployments(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.oracledatabase.v1.IGoldengateDeployment[],
+          protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentsRequest | null,
+          protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentsResponse,
+        ]) => {
+          this._log.info('listGoldengateDeployments values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listGoldengateDeployments`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent value for GoldengateDeployments in the following
+   *   format: projects/{project}/locations/{location}.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   *   If unspecified, at most 50 GoldengateDeployments will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous ListGoldengateDeployments
+   *   call. Provide this to retrieve the subsequent page.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request.
+   * @param {string} [request.orderBy]
+   *   Optional. An expression for ordering the results of the request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.GoldengateDeployment|GoldengateDeployment} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listGoldengateDeploymentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listGoldengateDeploymentsStream(
+    request?: protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentsRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listGoldengateDeployments'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listGoldengateDeployments stream %j', request);
+    return this.descriptors.page.listGoldengateDeployments.createStream(
+      this.innerApiCalls.listGoldengateDeployments as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listGoldengateDeployments`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent value for GoldengateDeployments in the following
+   *   format: projects/{project}/locations/{location}.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   *   If unspecified, at most 50 GoldengateDeployments will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous ListGoldengateDeployments
+   *   call. Provide this to retrieve the subsequent page.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request.
+   * @param {string} [request.orderBy]
+   *   Optional. An expression for ordering the results of the request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.oracledatabase.v1.GoldengateDeployment|GoldengateDeployment}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.list_goldengate_deployments.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_ListGoldengateDeployments_async
+   */
+  listGoldengateDeploymentsAsync(
+    request?: protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.oracledatabase.v1.IGoldengateDeployment> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listGoldengateDeployments'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listGoldengateDeployments iterate %j', request);
+    return this.descriptors.page.listGoldengateDeployments.asyncIterate(
+      this.innerApiCalls['listGoldengateDeployments'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.oracledatabase.v1.IGoldengateDeployment>;
+  }
+  /**
+   * Lists all the GoldengateConnections for the given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent value for GoldengateConnections in the following
+   *   format: projects/{project}/locations/{location}.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   *   If unspecified, at most 50 GoldengateConnections will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous ListGoldengateConnections
+   *   call. Provide this to retrieve the subsequent page.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request.
+   * @param {string} [request.orderBy]
+   *   Optional. An expression for ordering the results of the request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.GoldengateConnection|GoldengateConnection}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listGoldengateConnectionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listGoldengateConnections(
+    request?: protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.IGoldengateConnection[],
+      protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionsRequest | null,
+      protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionsResponse,
+    ]
+  >;
+  listGoldengateConnections(
+    request: protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionsRequest,
+      | protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.oracledatabase.v1.IGoldengateConnection
+    >,
+  ): void;
+  listGoldengateConnections(
+    request: protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionsRequest,
+      | protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.oracledatabase.v1.IGoldengateConnection
+    >,
+  ): void;
+  listGoldengateConnections(
+    request?: protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionsRequest,
+          | protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.oracledatabase.v1.IGoldengateConnection
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionsRequest,
+      | protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.oracledatabase.v1.IGoldengateConnection
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.IGoldengateConnection[],
+      protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionsRequest | null,
+      protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionsRequest,
+          | protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.oracledatabase.v1.IGoldengateConnection
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listGoldengateConnections values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listGoldengateConnections request %j', request);
+    return this.innerApiCalls
+      .listGoldengateConnections(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.oracledatabase.v1.IGoldengateConnection[],
+          protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionsRequest | null,
+          protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionsResponse,
+        ]) => {
+          this._log.info('listGoldengateConnections values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listGoldengateConnections`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent value for GoldengateConnections in the following
+   *   format: projects/{project}/locations/{location}.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   *   If unspecified, at most 50 GoldengateConnections will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous ListGoldengateConnections
+   *   call. Provide this to retrieve the subsequent page.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request.
+   * @param {string} [request.orderBy]
+   *   Optional. An expression for ordering the results of the request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.GoldengateConnection|GoldengateConnection} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listGoldengateConnectionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listGoldengateConnectionsStream(
+    request?: protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionsRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listGoldengateConnections'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listGoldengateConnections stream %j', request);
+    return this.descriptors.page.listGoldengateConnections.createStream(
+      this.innerApiCalls.listGoldengateConnections as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listGoldengateConnections`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent value for GoldengateConnections in the following
+   *   format: projects/{project}/locations/{location}.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   *   If unspecified, at most 50 GoldengateConnections will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous ListGoldengateConnections
+   *   call. Provide this to retrieve the subsequent page.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request.
+   * @param {string} [request.orderBy]
+   *   Optional. An expression for ordering the results of the request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.oracledatabase.v1.GoldengateConnection|GoldengateConnection}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.list_goldengate_connections.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_ListGoldengateConnections_async
+   */
+  listGoldengateConnectionsAsync(
+    request?: protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.oracledatabase.v1.IGoldengateConnection> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listGoldengateConnections'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listGoldengateConnections iterate %j', request);
+    return this.descriptors.page.listGoldengateConnections.asyncIterate(
+      this.innerApiCalls['listGoldengateConnections'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.oracledatabase.v1.IGoldengateConnection>;
+  }
+  /**
+   * Lists GoldengateDeploymentVersions in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListGoldengateDeploymentVersionsRequest
+   *   Format: projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. Either
+   *   the deployment_id and deployment_type fields must be specified in the
+   *   format: `deployment_id="id"` or `deployment_type="DATABASE_ORACLE"`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.GoldengateDeploymentVersion|GoldengateDeploymentVersion}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listGoldengateDeploymentVersionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listGoldengateDeploymentVersions(
+    request?: protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentVersion[],
+      protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsRequest | null,
+      protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsResponse,
+    ]
+  >;
+  listGoldengateDeploymentVersions(
+    request: protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsRequest,
+      | protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentVersion
+    >,
+  ): void;
+  listGoldengateDeploymentVersions(
+    request: protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsRequest,
+      | protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentVersion
+    >,
+  ): void;
+  listGoldengateDeploymentVersions(
+    request?: protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsRequest,
+          | protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentVersion
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsRequest,
+      | protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentVersion
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentVersion[],
+      protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsRequest | null,
+      protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsRequest,
+          | protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentVersion
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listGoldengateDeploymentVersions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listGoldengateDeploymentVersions request %j', request);
+    return this.innerApiCalls
+      .listGoldengateDeploymentVersions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentVersion[],
+          protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsRequest | null,
+          protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsResponse,
+        ]) => {
+          this._log.info(
+            'listGoldengateDeploymentVersions values %j',
+            response,
+          );
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listGoldengateDeploymentVersions`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListGoldengateDeploymentVersionsRequest
+   *   Format: projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. Either
+   *   the deployment_id and deployment_type fields must be specified in the
+   *   format: `deployment_id="id"` or `deployment_type="DATABASE_ORACLE"`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.GoldengateDeploymentVersion|GoldengateDeploymentVersion} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listGoldengateDeploymentVersionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listGoldengateDeploymentVersionsStream(
+    request?: protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listGoldengateDeploymentVersions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listGoldengateDeploymentVersions stream %j', request);
+    return this.descriptors.page.listGoldengateDeploymentVersions.createStream(
+      this.innerApiCalls.listGoldengateDeploymentVersions as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listGoldengateDeploymentVersions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListGoldengateDeploymentVersionsRequest
+   *   Format: projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. Either
+   *   the deployment_id and deployment_type fields must be specified in the
+   *   format: `deployment_id="id"` or `deployment_type="DATABASE_ORACLE"`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.oracledatabase.v1.GoldengateDeploymentVersion|GoldengateDeploymentVersion}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.list_goldengate_deployment_versions.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_ListGoldengateDeploymentVersions_async
+   */
+  listGoldengateDeploymentVersionsAsync(
+    request?: protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentVersion> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listGoldengateDeploymentVersions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listGoldengateDeploymentVersions iterate %j', request);
+    return this.descriptors.page.listGoldengateDeploymentVersions.asyncIterate(
+      this.innerApiCalls['listGoldengateDeploymentVersions'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentVersion>;
+  }
+  /**
+   * Lists GoldenGateDeploymentTypes in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource.
+   *   Format: projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. Either
+   *   the deployment_type and ogg_version fields must be specified in the format:
+   *   `deployment_type="DATABASE_ORACLE"` or `ogg_version="version"`.
+   *   Allowed values for deployment_type are: `DATABASE_ORACLE`, `BIGDATA`,
+   *   `DATABASE_MICROSOFT_SQLSERVER`, `DATABASE_MYSQL`, `DATABASE_POSTGRESQL`,
+   *   `DATABASE_DB2ZOS`, `DATABASE_DB2I`, `GGSA`, `DATA_TRANSFORMS`.
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.GoldengateDeploymentType|GoldengateDeploymentType}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listGoldengateDeploymentTypesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listGoldengateDeploymentTypes(
+    request?: protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentType[],
+      protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesRequest | null,
+      protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesResponse,
+    ]
+  >;
+  listGoldengateDeploymentTypes(
+    request: protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesRequest,
+      | protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesResponse
+      | null
+      | undefined,
+      protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentType
+    >,
+  ): void;
+  listGoldengateDeploymentTypes(
+    request: protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesRequest,
+      | protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesResponse
+      | null
+      | undefined,
+      protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentType
+    >,
+  ): void;
+  listGoldengateDeploymentTypes(
+    request?: protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesRequest,
+          | protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesResponse
+          | null
+          | undefined,
+          protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentType
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesRequest,
+      | protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesResponse
+      | null
+      | undefined,
+      protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentType
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentType[],
+      protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesRequest | null,
+      protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesRequest,
+          | protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesResponse
+          | null
+          | undefined,
+          protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentType
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listGoldengateDeploymentTypes values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listGoldengateDeploymentTypes request %j', request);
+    return this.innerApiCalls
+      .listGoldengateDeploymentTypes(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentType[],
+          protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesRequest | null,
+          protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesResponse,
+        ]) => {
+          this._log.info('listGoldengateDeploymentTypes values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listGoldengateDeploymentTypes`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource.
+   *   Format: projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. Either
+   *   the deployment_type and ogg_version fields must be specified in the format:
+   *   `deployment_type="DATABASE_ORACLE"` or `ogg_version="version"`.
+   *   Allowed values for deployment_type are: `DATABASE_ORACLE`, `BIGDATA`,
+   *   `DATABASE_MICROSOFT_SQLSERVER`, `DATABASE_MYSQL`, `DATABASE_POSTGRESQL`,
+   *   `DATABASE_DB2ZOS`, `DATABASE_DB2I`, `GGSA`, `DATA_TRANSFORMS`.
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.GoldengateDeploymentType|GoldengateDeploymentType} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listGoldengateDeploymentTypesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listGoldengateDeploymentTypesStream(
+    request?: protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listGoldengateDeploymentTypes'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listGoldengateDeploymentTypes stream %j', request);
+    return this.descriptors.page.listGoldengateDeploymentTypes.createStream(
+      this.innerApiCalls.listGoldengateDeploymentTypes as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listGoldengateDeploymentTypes`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource.
+   *   Format: projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. Either
+   *   the deployment_type and ogg_version fields must be specified in the format:
+   *   `deployment_type="DATABASE_ORACLE"` or `ogg_version="version"`.
+   *   Allowed values for deployment_type are: `DATABASE_ORACLE`, `BIGDATA`,
+   *   `DATABASE_MICROSOFT_SQLSERVER`, `DATABASE_MYSQL`, `DATABASE_POSTGRESQL`,
+   *   `DATABASE_DB2ZOS`, `DATABASE_DB2I`, `GGSA`, `DATA_TRANSFORMS`.
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.oracledatabase.v1.GoldengateDeploymentType|GoldengateDeploymentType}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.list_goldengate_deployment_types.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_ListGoldengateDeploymentTypes_async
+   */
+  listGoldengateDeploymentTypesAsync(
+    request?: protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentType> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listGoldengateDeploymentTypes'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listGoldengateDeploymentTypes iterate %j', request);
+    return this.descriptors.page.listGoldengateDeploymentTypes.asyncIterate(
+      this.innerApiCalls['listGoldengateDeploymentTypes'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentType>;
+  }
+  /**
+   * Lists GoldengateDeploymentEnvironments in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of
+   *   GoldengateDeploymentEnvironments. Format:
+   *   projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   *   If unspecified, at most 50 deployment environments will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment|GoldengateDeploymentEnvironment}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listGoldengateDeploymentEnvironmentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listGoldengateDeploymentEnvironments(
+    request?: protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentEnvironment[],
+      protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsRequest | null,
+      protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsResponse,
+    ]
+  >;
+  listGoldengateDeploymentEnvironments(
+    request: protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsRequest,
+      | protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentEnvironment
+    >,
+  ): void;
+  listGoldengateDeploymentEnvironments(
+    request: protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsRequest,
+      | protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentEnvironment
+    >,
+  ): void;
+  listGoldengateDeploymentEnvironments(
+    request?: protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsRequest,
+          | protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentEnvironment
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsRequest,
+      | protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentEnvironment
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentEnvironment[],
+      protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsRequest | null,
+      protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsRequest,
+          | protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentEnvironment
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info(
+            'listGoldengateDeploymentEnvironments values %j',
+            values,
+          );
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listGoldengateDeploymentEnvironments request %j', request);
+    return this.innerApiCalls
+      .listGoldengateDeploymentEnvironments(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentEnvironment[],
+          protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsRequest | null,
+          protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsResponse,
+        ]) => {
+          this._log.info(
+            'listGoldengateDeploymentEnvironments values %j',
+            response,
+          );
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listGoldengateDeploymentEnvironments`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of
+   *   GoldengateDeploymentEnvironments. Format:
+   *   projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   *   If unspecified, at most 50 deployment environments will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment|GoldengateDeploymentEnvironment} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listGoldengateDeploymentEnvironmentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listGoldengateDeploymentEnvironmentsStream(
+    request?: protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listGoldengateDeploymentEnvironments'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listGoldengateDeploymentEnvironments stream %j', request);
+    return this.descriptors.page.listGoldengateDeploymentEnvironments.createStream(
+      this.innerApiCalls.listGoldengateDeploymentEnvironments as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listGoldengateDeploymentEnvironments`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of
+   *   GoldengateDeploymentEnvironments. Format:
+   *   projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   *   If unspecified, at most 50 deployment environments will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment|GoldengateDeploymentEnvironment}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.list_goldengate_deployment_environments.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_ListGoldengateDeploymentEnvironments_async
+   */
+  listGoldengateDeploymentEnvironmentsAsync(
+    request?: protos.google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentEnvironment> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listGoldengateDeploymentEnvironments'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listGoldengateDeploymentEnvironments iterate %j', request);
+    return this.descriptors.page.listGoldengateDeploymentEnvironments.asyncIterate(
+      this.innerApiCalls['listGoldengateDeploymentEnvironments'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentEnvironment>;
+  }
+  /**
+   * Lists GoldengateConnectionTypes in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListGoldengateConnectionTypesRequest
+   *   Format: projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. The
+   *   connection_type field must be specified in the format:
+   *   `connection_type="ORACLE"`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.GoldengateConnectionType|GoldengateConnectionType}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listGoldengateConnectionTypesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listGoldengateConnectionTypes(
+    request?: protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.IGoldengateConnectionType[],
+      protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesRequest | null,
+      protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesResponse,
+    ]
+  >;
+  listGoldengateConnectionTypes(
+    request: protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesRequest,
+      | protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesResponse
+      | null
+      | undefined,
+      protos.google.cloud.oracledatabase.v1.IGoldengateConnectionType
+    >,
+  ): void;
+  listGoldengateConnectionTypes(
+    request: protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesRequest,
+      | protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesResponse
+      | null
+      | undefined,
+      protos.google.cloud.oracledatabase.v1.IGoldengateConnectionType
+    >,
+  ): void;
+  listGoldengateConnectionTypes(
+    request?: protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesRequest,
+          | protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesResponse
+          | null
+          | undefined,
+          protos.google.cloud.oracledatabase.v1.IGoldengateConnectionType
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesRequest,
+      | protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesResponse
+      | null
+      | undefined,
+      protos.google.cloud.oracledatabase.v1.IGoldengateConnectionType
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.IGoldengateConnectionType[],
+      protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesRequest | null,
+      protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesRequest,
+          | protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesResponse
+          | null
+          | undefined,
+          protos.google.cloud.oracledatabase.v1.IGoldengateConnectionType
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listGoldengateConnectionTypes values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listGoldengateConnectionTypes request %j', request);
+    return this.innerApiCalls
+      .listGoldengateConnectionTypes(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.oracledatabase.v1.IGoldengateConnectionType[],
+          protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesRequest | null,
+          protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesResponse,
+        ]) => {
+          this._log.info('listGoldengateConnectionTypes values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listGoldengateConnectionTypes`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListGoldengateConnectionTypesRequest
+   *   Format: projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. The
+   *   connection_type field must be specified in the format:
+   *   `connection_type="ORACLE"`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.GoldengateConnectionType|GoldengateConnectionType} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listGoldengateConnectionTypesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listGoldengateConnectionTypesStream(
+    request?: protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listGoldengateConnectionTypes'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listGoldengateConnectionTypes stream %j', request);
+    return this.descriptors.page.listGoldengateConnectionTypes.createStream(
+      this.innerApiCalls.listGoldengateConnectionTypes as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listGoldengateConnectionTypes`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListGoldengateConnectionTypesRequest
+   *   Format: projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request. The
+   *   connection_type field must be specified in the format:
+   *   `connection_type="ORACLE"`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.oracledatabase.v1.GoldengateConnectionType|GoldengateConnectionType}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.list_goldengate_connection_types.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_ListGoldengateConnectionTypes_async
+   */
+  listGoldengateConnectionTypesAsync(
+    request?: protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.oracledatabase.v1.IGoldengateConnectionType> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listGoldengateConnectionTypes'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listGoldengateConnectionTypes iterate %j', request);
+    return this.descriptors.page.listGoldengateConnectionTypes.asyncIterate(
+      this.innerApiCalls['listGoldengateConnectionTypes'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.oracledatabase.v1.IGoldengateConnectionType>;
+  }
+  /**
    * List DbVersions for the given project and location.
    *
    * @param {Object} request
@@ -12494,6 +16218,282 @@ export class OracleDatabaseClient {
       request as {},
       callSettings,
     ) as AsyncIterable<protos.google.cloud.oracledatabase.v1.IDatabaseCharacterSet>;
+  }
+  /**
+   * Lists GoldengateConnectionAssignments in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent value for the GoldengateConnectionAssignments.
+   *   Format: projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of GoldengateConnectionAssignments to return.
+   *   The service may return fewer than this value. If unspecified, at most 50
+   *   GoldengateConnectionAssignments will be returned. The maximum value is
+   *   1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListGoldengateConnectionAssignments` call. Provide this to retrieve the
+   *   subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListGoldengateConnectionAssignments` must match the call that provided
+   *   the page token.
+   * @param {string} [request.filter]
+   *   Optional. A filter expression that filters GoldengateConnectionAssignments
+   *   listed in the response.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "DESC" after a field name for descending.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.GoldengateConnectionAssignment|GoldengateConnectionAssignment}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listGoldengateConnectionAssignmentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listGoldengateConnectionAssignments(
+    request?: protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment[],
+      protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsRequest | null,
+      protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsResponse,
+    ]
+  >;
+  listGoldengateConnectionAssignments(
+    request: protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsRequest,
+      | protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment
+    >,
+  ): void;
+  listGoldengateConnectionAssignments(
+    request: protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsRequest,
+      | protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment
+    >,
+  ): void;
+  listGoldengateConnectionAssignments(
+    request?: protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsRequest,
+          | protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsRequest,
+      | protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment[],
+      protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsRequest | null,
+      protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsRequest,
+          | protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info(
+            'listGoldengateConnectionAssignments values %j',
+            values,
+          );
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listGoldengateConnectionAssignments request %j', request);
+    return this.innerApiCalls
+      .listGoldengateConnectionAssignments(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment[],
+          protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsRequest | null,
+          protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsResponse,
+        ]) => {
+          this._log.info(
+            'listGoldengateConnectionAssignments values %j',
+            response,
+          );
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listGoldengateConnectionAssignments`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent value for the GoldengateConnectionAssignments.
+   *   Format: projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of GoldengateConnectionAssignments to return.
+   *   The service may return fewer than this value. If unspecified, at most 50
+   *   GoldengateConnectionAssignments will be returned. The maximum value is
+   *   1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListGoldengateConnectionAssignments` call. Provide this to retrieve the
+   *   subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListGoldengateConnectionAssignments` must match the call that provided
+   *   the page token.
+   * @param {string} [request.filter]
+   *   Optional. A filter expression that filters GoldengateConnectionAssignments
+   *   listed in the response.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "DESC" after a field name for descending.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.GoldengateConnectionAssignment|GoldengateConnectionAssignment} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listGoldengateConnectionAssignmentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listGoldengateConnectionAssignmentsStream(
+    request?: protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listGoldengateConnectionAssignments'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listGoldengateConnectionAssignments stream %j', request);
+    return this.descriptors.page.listGoldengateConnectionAssignments.createStream(
+      this.innerApiCalls.listGoldengateConnectionAssignments as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listGoldengateConnectionAssignments`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent value for the GoldengateConnectionAssignments.
+   *   Format: projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of GoldengateConnectionAssignments to return.
+   *   The service may return fewer than this value. If unspecified, at most 50
+   *   GoldengateConnectionAssignments will be returned. The maximum value is
+   *   1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous
+   *   `ListGoldengateConnectionAssignments` call. Provide this to retrieve the
+   *   subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListGoldengateConnectionAssignments` must match the call that provided
+   *   the page token.
+   * @param {string} [request.filter]
+   *   Optional. A filter expression that filters GoldengateConnectionAssignments
+   *   listed in the response.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "DESC" after a field name for descending.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.oracledatabase.v1.GoldengateConnectionAssignment|GoldengateConnectionAssignment}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.list_goldengate_connection_assignments.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_ListGoldengateConnectionAssignments_async
+   */
+  listGoldengateConnectionAssignmentsAsync(
+    request?: protos.google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listGoldengateConnectionAssignments'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listGoldengateConnectionAssignments iterate %j', request);
+    return this.descriptors.page.listGoldengateConnectionAssignments.asyncIterate(
+      this.innerApiCalls['listGoldengateConnectionAssignments'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment>;
   }
 
   /**
@@ -13802,6 +17802,457 @@ export class OracleDatabaseClient {
   matchGiVersionFromGiVersionName(giVersionName: string) {
     return this.pathTemplates.giVersionPathTemplate.match(giVersionName)
       .gi_version;
+  }
+
+  /**
+   * Return a fully-qualified goldengateConnection resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} goldengate_connection
+   * @returns {string} Resource name string.
+   */
+  goldengateConnectionPath(
+    project: string,
+    location: string,
+    goldengateConnection: string,
+  ) {
+    return this.pathTemplates.goldengateConnectionPathTemplate.render({
+      project: project,
+      location: location,
+      goldengate_connection: goldengateConnection,
+    });
+  }
+
+  /**
+   * Parse the project from GoldengateConnection resource.
+   *
+   * @param {string} goldengateConnectionName
+   *   A fully-qualified path representing GoldengateConnection resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGoldengateConnectionName(goldengateConnectionName: string) {
+    return this.pathTemplates.goldengateConnectionPathTemplate.match(
+      goldengateConnectionName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from GoldengateConnection resource.
+   *
+   * @param {string} goldengateConnectionName
+   *   A fully-qualified path representing GoldengateConnection resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGoldengateConnectionName(goldengateConnectionName: string) {
+    return this.pathTemplates.goldengateConnectionPathTemplate.match(
+      goldengateConnectionName,
+    ).location;
+  }
+
+  /**
+   * Parse the goldengate_connection from GoldengateConnection resource.
+   *
+   * @param {string} goldengateConnectionName
+   *   A fully-qualified path representing GoldengateConnection resource.
+   * @returns {string} A string representing the goldengate_connection.
+   */
+  matchGoldengateConnectionFromGoldengateConnectionName(
+    goldengateConnectionName: string,
+  ) {
+    return this.pathTemplates.goldengateConnectionPathTemplate.match(
+      goldengateConnectionName,
+    ).goldengate_connection;
+  }
+
+  /**
+   * Return a fully-qualified goldengateConnectionAssignment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} goldengate_connection_assignment
+   * @returns {string} Resource name string.
+   */
+  goldengateConnectionAssignmentPath(
+    project: string,
+    location: string,
+    goldengateConnectionAssignment: string,
+  ) {
+    return this.pathTemplates.goldengateConnectionAssignmentPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        goldengate_connection_assignment: goldengateConnectionAssignment,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from GoldengateConnectionAssignment resource.
+   *
+   * @param {string} goldengateConnectionAssignmentName
+   *   A fully-qualified path representing GoldengateConnectionAssignment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGoldengateConnectionAssignmentName(
+    goldengateConnectionAssignmentName: string,
+  ) {
+    return this.pathTemplates.goldengateConnectionAssignmentPathTemplate.match(
+      goldengateConnectionAssignmentName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from GoldengateConnectionAssignment resource.
+   *
+   * @param {string} goldengateConnectionAssignmentName
+   *   A fully-qualified path representing GoldengateConnectionAssignment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGoldengateConnectionAssignmentName(
+    goldengateConnectionAssignmentName: string,
+  ) {
+    return this.pathTemplates.goldengateConnectionAssignmentPathTemplate.match(
+      goldengateConnectionAssignmentName,
+    ).location;
+  }
+
+  /**
+   * Parse the goldengate_connection_assignment from GoldengateConnectionAssignment resource.
+   *
+   * @param {string} goldengateConnectionAssignmentName
+   *   A fully-qualified path representing GoldengateConnectionAssignment resource.
+   * @returns {string} A string representing the goldengate_connection_assignment.
+   */
+  matchGoldengateConnectionAssignmentFromGoldengateConnectionAssignmentName(
+    goldengateConnectionAssignmentName: string,
+  ) {
+    return this.pathTemplates.goldengateConnectionAssignmentPathTemplate.match(
+      goldengateConnectionAssignmentName,
+    ).goldengate_connection_assignment;
+  }
+
+  /**
+   * Return a fully-qualified goldengateConnectionType resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} goldengate_connection_type
+   * @returns {string} Resource name string.
+   */
+  goldengateConnectionTypePath(
+    project: string,
+    location: string,
+    goldengateConnectionType: string,
+  ) {
+    return this.pathTemplates.goldengateConnectionTypePathTemplate.render({
+      project: project,
+      location: location,
+      goldengate_connection_type: goldengateConnectionType,
+    });
+  }
+
+  /**
+   * Parse the project from GoldengateConnectionType resource.
+   *
+   * @param {string} goldengateConnectionTypeName
+   *   A fully-qualified path representing GoldengateConnectionType resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGoldengateConnectionTypeName(
+    goldengateConnectionTypeName: string,
+  ) {
+    return this.pathTemplates.goldengateConnectionTypePathTemplate.match(
+      goldengateConnectionTypeName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from GoldengateConnectionType resource.
+   *
+   * @param {string} goldengateConnectionTypeName
+   *   A fully-qualified path representing GoldengateConnectionType resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGoldengateConnectionTypeName(
+    goldengateConnectionTypeName: string,
+  ) {
+    return this.pathTemplates.goldengateConnectionTypePathTemplate.match(
+      goldengateConnectionTypeName,
+    ).location;
+  }
+
+  /**
+   * Parse the goldengate_connection_type from GoldengateConnectionType resource.
+   *
+   * @param {string} goldengateConnectionTypeName
+   *   A fully-qualified path representing GoldengateConnectionType resource.
+   * @returns {string} A string representing the goldengate_connection_type.
+   */
+  matchGoldengateConnectionTypeFromGoldengateConnectionTypeName(
+    goldengateConnectionTypeName: string,
+  ) {
+    return this.pathTemplates.goldengateConnectionTypePathTemplate.match(
+      goldengateConnectionTypeName,
+    ).goldengate_connection_type;
+  }
+
+  /**
+   * Return a fully-qualified goldengateDeployment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} goldengate_deployment
+   * @returns {string} Resource name string.
+   */
+  goldengateDeploymentPath(
+    project: string,
+    location: string,
+    goldengateDeployment: string,
+  ) {
+    return this.pathTemplates.goldengateDeploymentPathTemplate.render({
+      project: project,
+      location: location,
+      goldengate_deployment: goldengateDeployment,
+    });
+  }
+
+  /**
+   * Parse the project from GoldengateDeployment resource.
+   *
+   * @param {string} goldengateDeploymentName
+   *   A fully-qualified path representing GoldengateDeployment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGoldengateDeploymentName(goldengateDeploymentName: string) {
+    return this.pathTemplates.goldengateDeploymentPathTemplate.match(
+      goldengateDeploymentName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from GoldengateDeployment resource.
+   *
+   * @param {string} goldengateDeploymentName
+   *   A fully-qualified path representing GoldengateDeployment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGoldengateDeploymentName(goldengateDeploymentName: string) {
+    return this.pathTemplates.goldengateDeploymentPathTemplate.match(
+      goldengateDeploymentName,
+    ).location;
+  }
+
+  /**
+   * Parse the goldengate_deployment from GoldengateDeployment resource.
+   *
+   * @param {string} goldengateDeploymentName
+   *   A fully-qualified path representing GoldengateDeployment resource.
+   * @returns {string} A string representing the goldengate_deployment.
+   */
+  matchGoldengateDeploymentFromGoldengateDeploymentName(
+    goldengateDeploymentName: string,
+  ) {
+    return this.pathTemplates.goldengateDeploymentPathTemplate.match(
+      goldengateDeploymentName,
+    ).goldengate_deployment;
+  }
+
+  /**
+   * Return a fully-qualified goldengateDeploymentEnvironment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} goldengate_deployment_environment
+   * @returns {string} Resource name string.
+   */
+  goldengateDeploymentEnvironmentPath(
+    project: string,
+    location: string,
+    goldengateDeploymentEnvironment: string,
+  ) {
+    return this.pathTemplates.goldengateDeploymentEnvironmentPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        goldengate_deployment_environment: goldengateDeploymentEnvironment,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from GoldengateDeploymentEnvironment resource.
+   *
+   * @param {string} goldengateDeploymentEnvironmentName
+   *   A fully-qualified path representing GoldengateDeploymentEnvironment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGoldengateDeploymentEnvironmentName(
+    goldengateDeploymentEnvironmentName: string,
+  ) {
+    return this.pathTemplates.goldengateDeploymentEnvironmentPathTemplate.match(
+      goldengateDeploymentEnvironmentName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from GoldengateDeploymentEnvironment resource.
+   *
+   * @param {string} goldengateDeploymentEnvironmentName
+   *   A fully-qualified path representing GoldengateDeploymentEnvironment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGoldengateDeploymentEnvironmentName(
+    goldengateDeploymentEnvironmentName: string,
+  ) {
+    return this.pathTemplates.goldengateDeploymentEnvironmentPathTemplate.match(
+      goldengateDeploymentEnvironmentName,
+    ).location;
+  }
+
+  /**
+   * Parse the goldengate_deployment_environment from GoldengateDeploymentEnvironment resource.
+   *
+   * @param {string} goldengateDeploymentEnvironmentName
+   *   A fully-qualified path representing GoldengateDeploymentEnvironment resource.
+   * @returns {string} A string representing the goldengate_deployment_environment.
+   */
+  matchGoldengateDeploymentEnvironmentFromGoldengateDeploymentEnvironmentName(
+    goldengateDeploymentEnvironmentName: string,
+  ) {
+    return this.pathTemplates.goldengateDeploymentEnvironmentPathTemplate.match(
+      goldengateDeploymentEnvironmentName,
+    ).goldengate_deployment_environment;
+  }
+
+  /**
+   * Return a fully-qualified goldengateDeploymentType resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} goldengate_deployment_type
+   * @returns {string} Resource name string.
+   */
+  goldengateDeploymentTypePath(
+    project: string,
+    location: string,
+    goldengateDeploymentType: string,
+  ) {
+    return this.pathTemplates.goldengateDeploymentTypePathTemplate.render({
+      project: project,
+      location: location,
+      goldengate_deployment_type: goldengateDeploymentType,
+    });
+  }
+
+  /**
+   * Parse the project from GoldengateDeploymentType resource.
+   *
+   * @param {string} goldengateDeploymentTypeName
+   *   A fully-qualified path representing GoldengateDeploymentType resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGoldengateDeploymentTypeName(
+    goldengateDeploymentTypeName: string,
+  ) {
+    return this.pathTemplates.goldengateDeploymentTypePathTemplate.match(
+      goldengateDeploymentTypeName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from GoldengateDeploymentType resource.
+   *
+   * @param {string} goldengateDeploymentTypeName
+   *   A fully-qualified path representing GoldengateDeploymentType resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGoldengateDeploymentTypeName(
+    goldengateDeploymentTypeName: string,
+  ) {
+    return this.pathTemplates.goldengateDeploymentTypePathTemplate.match(
+      goldengateDeploymentTypeName,
+    ).location;
+  }
+
+  /**
+   * Parse the goldengate_deployment_type from GoldengateDeploymentType resource.
+   *
+   * @param {string} goldengateDeploymentTypeName
+   *   A fully-qualified path representing GoldengateDeploymentType resource.
+   * @returns {string} A string representing the goldengate_deployment_type.
+   */
+  matchGoldengateDeploymentTypeFromGoldengateDeploymentTypeName(
+    goldengateDeploymentTypeName: string,
+  ) {
+    return this.pathTemplates.goldengateDeploymentTypePathTemplate.match(
+      goldengateDeploymentTypeName,
+    ).goldengate_deployment_type;
+  }
+
+  /**
+   * Return a fully-qualified goldengateDeploymentVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} goldengate_deployment_version
+   * @returns {string} Resource name string.
+   */
+  goldengateDeploymentVersionPath(
+    project: string,
+    location: string,
+    goldengateDeploymentVersion: string,
+  ) {
+    return this.pathTemplates.goldengateDeploymentVersionPathTemplate.render({
+      project: project,
+      location: location,
+      goldengate_deployment_version: goldengateDeploymentVersion,
+    });
+  }
+
+  /**
+   * Parse the project from GoldengateDeploymentVersion resource.
+   *
+   * @param {string} goldengateDeploymentVersionName
+   *   A fully-qualified path representing GoldengateDeploymentVersion resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGoldengateDeploymentVersionName(
+    goldengateDeploymentVersionName: string,
+  ) {
+    return this.pathTemplates.goldengateDeploymentVersionPathTemplate.match(
+      goldengateDeploymentVersionName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from GoldengateDeploymentVersion resource.
+   *
+   * @param {string} goldengateDeploymentVersionName
+   *   A fully-qualified path representing GoldengateDeploymentVersion resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGoldengateDeploymentVersionName(
+    goldengateDeploymentVersionName: string,
+  ) {
+    return this.pathTemplates.goldengateDeploymentVersionPathTemplate.match(
+      goldengateDeploymentVersionName,
+    ).location;
+  }
+
+  /**
+   * Parse the goldengate_deployment_version from GoldengateDeploymentVersion resource.
+   *
+   * @param {string} goldengateDeploymentVersionName
+   *   A fully-qualified path representing GoldengateDeploymentVersion resource.
+   * @returns {string} A string representing the goldengate_deployment_version.
+   */
+  matchGoldengateDeploymentVersionFromGoldengateDeploymentVersionName(
+    goldengateDeploymentVersionName: string,
+  ) {
+    return this.pathTemplates.goldengateDeploymentVersionPathTemplate.match(
+      goldengateDeploymentVersionName,
+    ).goldengate_deployment_version;
   }
 
   /**

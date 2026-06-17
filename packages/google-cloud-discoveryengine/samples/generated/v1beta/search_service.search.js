@@ -49,6 +49,24 @@ function main(servingConfig) {
    */
   // const query = 'abc123'
   /**
+   *  Optional. The categories associated with a category page. Must be set for
+   *  category navigation queries to achieve good search quality. The format
+   *  should be the same as
+   *  PageInfo.page_category google.cloud.discoveryengine.v1beta.PageInfo.page_category.
+   *  This field is the equivalent of the query for browse (navigation) queries.
+   *  It's used by the browse model when the query is empty.
+   *  If the field is empty, it will not be used by the browse model.
+   *  If the field contains more than one element, only the first element will
+   *  be used.
+   *  To represent full path of a category, use '>' character to separate
+   *  different hierarchies. If '>' is part of the category name, replace it with
+   *  other character(s).
+   *  For example, `Graphics Cards > RTX>4090 > Founders Edition` where "RTX >
+   *  4090" represents one level, can be rewritten as `Graphics Cards > RTX_4090
+   *  > Founders Edition`
+   */
+  // const pageCategories = ['abc','def']
+  /**
    *  Raw image query.
    */
   // const imageQuery = {}
@@ -80,6 +98,7 @@ function main(servingConfig) {
    *  page_token google.cloud.discoveryengine.v1beta.SearchRequest.page_token 
    *  is unset.
    *  If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   *  A large offset may be capped to a reasonable threshold.
    */
   // const offset = 1234
   /**
@@ -89,12 +108,22 @@ function main(servingConfig) {
    */
   // const oneBoxPageSize = 1234
   /**
-   *  Specs defining dataStores to filter on in a search call and configurations
-   *  for those dataStores. This is only considered for engines with multiple
-   *  dataStores use case. For single dataStore within an engine, they should
-   *  use the specs at the top level.
+   *  Specifications that define the specific
+   *  DataStore google.cloud.discoveryengine.v1beta.DataStore s to be searched,
+   *  along with configurations for those data stores. This is only considered
+   *  for Engine google.cloud.discoveryengine.v1beta.Engine s with multiple
+   *  data stores. For engines with a single data store, the specs directly under
+   *  SearchRequest google.cloud.discoveryengine.v1beta.SearchRequest  should
+   *  be used.
    */
   // const dataStoreSpecs = [1,2,3,4]
+  /**
+   *  Optional. The maximum number of results to retrieve from each data store.
+   *  If not specified, it will use the
+   *  SearchRequest.DataStoreSpec.num_results google.cloud.discoveryengine.v1beta.SearchRequest.DataStoreSpec.num_results 
+   *  if provided, otherwise there is no limit.
+   */
+  // const numResultsPerDataStore = 1234
   /**
    *  The filter syntax consists of an expression language for constructing a
    *  predicate from one or more fields of the documents being filtered. Filter
@@ -139,7 +168,7 @@ function main(servingConfig) {
   // const orderBy = 'abc123'
   /**
    *  Information about the end user.
-   *  Highly recommended for analytics.
+   *  Highly recommended for analytics and personalization.
    *  UserInfo.user_agent google.cloud.discoveryengine.v1beta.UserInfo.user_agent 
    *  is used to deduce `device_type` for analytics.
    */
@@ -196,10 +225,10 @@ function main(servingConfig) {
    */
   // const spellCorrectionSpec = {}
   /**
-   *  A unique identifier for tracking visitors. For example, this could be
-   *  implemented with an HTTP cookie, which should be able to uniquely identify
-   *  a visitor on a single device. This unique identifier should not change if
-   *  the visitor logs in or out of the website.
+   *  Optional. A unique identifier for tracking visitors. For example, this
+   *  could be implemented with an HTTP cookie, which should be able to uniquely
+   *  identify a visitor on a single device. This unique identifier should not
+   *  change if the visitor logs in or out of the website.
    *  This field should NOT have a fixed value such as `unknown_visitor`.
    *  This should be the same identifier as
    *  UserEvent.user_pseudo_id google.cloud.discoveryengine.v1beta.UserEvent.user_pseudo_id 
@@ -226,8 +255,8 @@ function main(servingConfig) {
    */
   // const embeddingSpec = {}
   /**
-   *  The ranking expression controls the customized ranking on retrieval
-   *  documents. This overrides
+   *  Optional. The ranking expression controls the customized ranking on
+   *  retrieval documents. This overrides
    *  ServingConfig.ranking_expression google.cloud.discoveryengine.v1beta.ServingConfig.ranking_expression.
    *  The syntax and supported features depend on the
    *  `ranking_expression_backend` value. If `ranking_expression_backend` is not
@@ -302,10 +331,19 @@ function main(servingConfig) {
    *    Google model to determine the keyword-based overlap between the query and
    *    the document.
    *    * `base_rank`: the default rank of the result
+   *    * `media_actor_match`: whether the media actor matches the query
+   *    * `media_director_match`: whether the media director matches the query
+   *    * `media_genre_match`: whether the media genre matches the query
+   *    * `media_language_match`: whether the media language matches the query
+   *    * `media_title_match`: whether the media title matches the query
+   *    * `media_prefix_similarity_rank`: prefix similarity rank for media
+   *    results
+   *    * `media_semantic_similarity_rank`: semantic similarity rank for media
+   *    results
    */
   // const rankingExpression = 'abc123'
   /**
-   *  The backend to use for the ranking expression evaluation.
+   *  Optional. The backend to use for the ranking expression evaluation.
    */
   // const rankingExpressionBackend = {}
   /**
@@ -332,6 +370,10 @@ function main(servingConfig) {
    */
   // const userLabels = [1,2,3,4]
   /**
+   *  Optional. Config for natural language query understanding capabilities,
+   *  such as extracting structured field filters from the query. Refer to this
+   *  documentation (https://cloud.google.com/generative-ai-app-builder/docs/natural-language-queries)
+   *  for more information.
    *  If `naturalLanguageQueryUnderstandingSpec` is not specified, no additional
    *  natural language query understanding will be done.
    */
@@ -342,6 +384,23 @@ function main(servingConfig) {
    *  vertical.
    */
   // const searchAsYouTypeSpec = {}
+  /**
+   *  Optional. Config for display feature, like match highlighting on search
+   *  results.
+   */
+  // const displaySpec = {}
+  /**
+   *  Optional. Crowding specifications for improving result diversity.
+   *  If multiple CrowdingSpecs are specified, crowding will be evaluated on
+   *  each unique combination of the `field` values, and max_count will be the
+   *  maximum value of `max_count` across all CrowdingSpecs.
+   *  For example, if the first CrowdingSpec has `field` = "color" and
+   *  `max_count` = 3, and the second CrowdingSpec has `field` = "size" and
+   *  `max_count` = 2, then after 3 documents that share the same color AND size
+   *  have been returned, subsequent ones should be
+   *  removed or demoted.
+   */
+  // const crowdingSpecs = [1,2,3,4]
   /**
    *  The session resource name. Optional.
    *  Session allows users to do multi-turn /search API calls or coordination
@@ -356,9 +415,6 @@ function main(servingConfig) {
    *    Call /answer API with the session ID generated in the first call.
    *    Here, the answer generation happens in the context of the search
    *    results from the first search call.
-   *  Multi-turn Search feature is currently at private GA stage. Please use
-   *  v1alpha or v1beta version instead before we launch this feature to public
-   *  GA. Or ask for allowlisting through Google Support team.
    */
   // const session = 'abc123'
   /**
@@ -367,12 +423,23 @@ function main(servingConfig) {
    */
   // const sessionSpec = {}
   /**
-   *  The relevance threshold of the search results.
-   *  Default to Google defined threshold, leveraging a balance of
+   *  The global relevance threshold of the search results.
+   *  Defaults to Google defined threshold, leveraging a balance of
    *  precision and recall to deliver both highly accurate results and
    *  comprehensive coverage of relevant information.
+   *  If more granular relevance filtering is required, use the
+   *  `relevance_filter_spec` instead.
+   *  This feature is not supported for healthcare search.
    */
   // const relevanceThreshold = {}
+  /**
+   *  Optional. The granular relevance filtering specification.
+   *  If not specified, the global `relevance_threshold` will be used for all
+   *  sub-searches. If specified, this overrides the global
+   *  `relevance_threshold` to use thresholds on a per sub-search basis.
+   *  This feature is currently supported only for custom and site search.
+   */
+  // const relevanceFilterSpec = {}
   /**
    *  The specification for personalization.
    *  Notice that if both
@@ -385,6 +452,29 @@ function main(servingConfig) {
    *  ServingConfig.personalization_spec google.cloud.discoveryengine.v1beta.ServingConfig.personalization_spec.
    */
   // const personalizationSpec = {}
+  /**
+   *  Optional. The specification for returning the relevance score.
+   */
+  // const relevanceScoreSpec = {}
+  /**
+   *  Optional. SearchAddonSpec is used to disable add-ons for search as per new
+   *  repricing model.
+   *  This field is only supported for search requests.
+   */
+  // const searchAddonSpec = {}
+  /**
+   *  Optional. Optional configuration for the Custom Ranking feature.
+   */
+  // const customRankingParams = {}
+  /**
+   *  Optional. The entity for customers that may run multiple different
+   *  entities, domains, sites or regions, for example, "Google US", "Google
+   *  Ads", "Waymo", "google.com", "youtube.com", etc. If this is set, it should
+   *  be exactly matched with
+   *  UserEvent.entity google.cloud.discoveryengine.v1beta.UserEvent.entity  to
+   *  get search results boosted by entity.
+   */
+  // const entity = 'abc123'
 
   // Imports the Discoveryengine library
   const {SearchServiceClient} = require('@google-cloud/discoveryengine').v1beta;

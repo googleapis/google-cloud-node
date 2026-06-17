@@ -709,6 +709,11 @@
                 "updateReferenceList"
               ]
             },
+            "VerifyReferenceList": {
+              "methods": [
+                "verifyReferenceList"
+              ]
+            },
             "ListReferenceLists": {
               "methods": [
                 "listReferenceLists",
@@ -734,6 +739,11 @@
             "UpdateReferenceList": {
               "methods": [
                 "updateReferenceList"
+              ]
+            },
+            "VerifyReferenceList": {
+              "methods": [
+                "verifyReferenceList"
               ]
             },
             "ListReferenceLists": {
@@ -770,6 +780,11 @@
             "DeleteRule": {
               "methods": [
                 "deleteRule"
+              ]
+            },
+            "VerifyRuleText": {
+              "methods": [
+                "verifyRuleText"
               ]
             },
             "GetRetrohunt": {
@@ -843,6 +858,11 @@
             "DeleteRule": {
               "methods": [
                 "deleteRule"
+              ]
+            },
+            "VerifyRuleText": {
+              "methods": [
+                "verifyRuleText"
               ]
             },
             "GetRetrohunt": {
