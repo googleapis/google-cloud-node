@@ -1574,6 +1574,17 @@ class File extends ServiceObject<File, FileMetadata> {
 
     const shouldRunValidation = !rangeRequest && (crc32c || md5);
 
+    const cleanupRequest = () => {
+      if (request?.agent) {
+        request.agent.destroy();
+      }
+    };
+
+    const cleanupRawResponse = (rawResponseStream: Readable) => {
+      rawResponseStream.destroy();
+      cleanupRequest();
+    };
+
     if (rangeRequest) {
       if (
         typeof options.validation === 'string' ||
@@ -1590,9 +1601,7 @@ class File extends ServiceObject<File, FileMetadata> {
       if (err) {
         // There is an issue with node-fetch 2.x that if the stream errors the underlying socket connection is not closed.
         // This causes a memory leak, so cleanup the sockets manually here by destroying the agent.
-        if (request?.agent) {
-          request.agent.destroy();
-        }
+        cleanupRequest();
         throughStream.destroy(err);
       }
     };
@@ -1622,6 +1631,11 @@ class File extends ServiceObject<File, FileMetadata> {
       }
 
       request = (rawResponseStream as r.Response).request;
+      if (throughStream.destroyed) {
+        cleanupRawResponse(rawResponseStream as Readable);
+        return;
+      }
+
       const headers = (rawResponseStream as ResponseBody).toJSON().headers;
       const isCompressed = headers['content-encoding'] === 'gzip';
       const hashes: {crc32c?: string; md5?: string} = {};

@@ -1165,6 +1165,49 @@ describe('File', () => {
         file.createReadStream().resume();
       });
 
+      it('should clean up if the returned stream is destroyed before the response is piped', done => {
+        const rawResponseStream = new PassThrough();
+        const agentDestroy = sinon.spy();
+        Object.assign(rawResponseStream, {
+          request: {
+            agent: {
+              destroy: agentDestroy,
+            },
+          },
+          toJSON() {
+            return {headers: {}};
+          },
+        });
+
+        handleRespOverride = (
+          _err: Error,
+          _res: {},
+          _body: {},
+          callback: Function
+        ) => {
+          callback(null, null, rawResponseStream);
+        };
+
+        file.requestStream = () => {
+          const requestStream = new PassThrough();
+          setImmediate(() => {
+            requestStream.emit('response', rawResponseStream);
+          });
+          return requestStream;
+        };
+
+        const readStream = file.createReadStream({validation: false});
+        readStream.once('response', () => {
+          readStream.destroy();
+        });
+        readStream.once('close', () => {
+          assert.strictEqual(rawResponseStream.destroyed, true);
+          assert.strictEqual(agentDestroy.calledOnce, true);
+          done();
+        });
+        readStream.resume();
+      });
+
       describe('errors', () => {
         const ERROR = new Error('Error.');
 
