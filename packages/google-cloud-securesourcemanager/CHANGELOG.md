@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/securesourcemanager-v0.9.1...securesourcemanager-v0.10.0) (2026-06-16)
+
+
+### Features
+
+* Local OwlBot generation batch 2 ([#8613](https://github.com/googleapis/google-cloud-node/issues/8613)) ([243fb1a](https://github.com/googleapis/google-cloud-node/commit/243fb1a66876934bd68ca96e420937ae8adeb77d))
+
 ## [0.9.1](https://github.com/googleapis/google-cloud-node/compare/securesourcemanager-v0.9.0...securesourcemanager-v0.9.1) (2026-05-01)
 
 
