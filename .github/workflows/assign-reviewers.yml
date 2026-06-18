@@ -91,16 +91,25 @@ jobs:
               }
             }
 
+            let assigned = false;
             if (assignedTeams.size > 0) {
               const teamReviewers = Array.from(assignedTeams);
               console.log(`PR contains changes matching specific routes. Requesting review from: ${teamReviewers.join(', ')}`);
-              await github.rest.pulls.requestReviewers({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                pull_number: context.payload.pull_request.number,
-                team_reviewers: teamReviewers,
-              });
-            } else {
+              try {
+                await github.rest.pulls.requestReviewers({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: context.payload.pull_request.number,
+                  team_reviewers: teamReviewers,
+                });
+                assigned = true;
+              } catch (err) {
+                console.error(`Failed to assign route-specific team reviewers (${teamReviewers.join(', ')}):`, err.message || err);
+                console.log("Falling back to default team members.");
+              }
+            }
+
+            if (!assigned) {
               console.log("Fetching .github/CODEOWNERS to identify default reviewers...");
               let defaultReviewers = [];
               try {
