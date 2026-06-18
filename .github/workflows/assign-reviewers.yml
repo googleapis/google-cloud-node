@@ -117,6 +117,7 @@ jobs:
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   path: '.github/CODEOWNERS',
+                  ref: context.payload.pull_request.head.sha,
                 });
                 const content = Buffer.from(codeownersData.content, 'base64').toString('utf-8');
                 const lines = content.split('\n');
