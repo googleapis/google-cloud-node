@@ -34,11 +34,11 @@ function main(parent, userEvent) {
    *  DataStore google.cloud.discoveryengine.v1beta.DataStore  level, the
    *  format is:
    *  `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
-   *  If the write user event action is applied in Location   level, for
-   *  example, the event with
-   *  Document google.cloud.discoveryengine.v1beta.Document  across multiple
-   *  DataStore google.cloud.discoveryengine.v1beta.DataStore, the format is:
-   *  `projects/{project}/locations/{location}`.
+   *  If the write user event action is applied in
+   *  Location google.cloud.location.Location  level, for example, the event
+   *  with Document google.cloud.discoveryengine.v1beta.Document  across
+   *  multiple DataStore google.cloud.discoveryengine.v1beta.DataStore, the
+   *  format is: `projects/{project}/locations/{location}`.
    */
   // const parent = 'abc123'
   /**

@@ -19204,6 +19204,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public updateReferenceList(request: google.cloud.chronicle.v1.IUpdateReferenceListRequest): Promise<google.cloud.chronicle.v1.ReferenceList>;
+
+                    /**
+                     * Calls VerifyReferenceList.
+                     * @param request VerifyReferenceListRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and VerifyReferenceListResponse
+                     */
+                    public verifyReferenceList(request: google.cloud.chronicle.v1.IVerifyReferenceListRequest, callback: google.cloud.chronicle.v1.ReferenceListService.VerifyReferenceListCallback): void;
+
+                    /**
+                     * Calls VerifyReferenceList.
+                     * @param request VerifyReferenceListRequest message or plain object
+                     * @returns Promise
+                     */
+                    public verifyReferenceList(request: google.cloud.chronicle.v1.IVerifyReferenceListRequest): Promise<google.cloud.chronicle.v1.VerifyReferenceListResponse>;
                 }
 
                 namespace ReferenceListService {
@@ -19235,6 +19249,13 @@ export namespace google {
                      * @param [response] ReferenceList
                      */
                     type UpdateReferenceListCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.ReferenceList) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.ReferenceListService|verifyReferenceList}.
+                     * @param error Error, if any
+                     * @param [response] VerifyReferenceListResponse
+                     */
+                    type VerifyReferenceListCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.VerifyReferenceListResponse) => void;
                 }
 
                 /** ReferenceListSyntaxType enum. */
@@ -19979,6 +20000,218 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a VerifyReferenceListRequest. */
+                interface IVerifyReferenceListRequest {
+
+                    /** VerifyReferenceListRequest instance */
+                    instance?: (string|null);
+
+                    /** VerifyReferenceListRequest syntaxType */
+                    syntaxType?: (google.cloud.chronicle.v1.ReferenceListSyntaxType|keyof typeof google.cloud.chronicle.v1.ReferenceListSyntaxType|null);
+
+                    /** VerifyReferenceListRequest entries */
+                    entries?: (google.cloud.chronicle.v1.IReferenceListEntry[]|null);
+                }
+
+                /** Represents a VerifyReferenceListRequest. */
+                class VerifyReferenceListRequest implements IVerifyReferenceListRequest {
+
+                    /**
+                     * Constructs a new VerifyReferenceListRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IVerifyReferenceListRequest);
+
+                    /** VerifyReferenceListRequest instance. */
+                    public instance: string;
+
+                    /** VerifyReferenceListRequest syntaxType. */
+                    public syntaxType: (google.cloud.chronicle.v1.ReferenceListSyntaxType|keyof typeof google.cloud.chronicle.v1.ReferenceListSyntaxType);
+
+                    /** VerifyReferenceListRequest entries. */
+                    public entries: google.cloud.chronicle.v1.IReferenceListEntry[];
+
+                    /**
+                     * Creates a new VerifyReferenceListRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VerifyReferenceListRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IVerifyReferenceListRequest): google.cloud.chronicle.v1.VerifyReferenceListRequest;
+
+                    /**
+                     * Encodes the specified VerifyReferenceListRequest message. Does not implicitly {@link google.cloud.chronicle.v1.VerifyReferenceListRequest.verify|verify} messages.
+                     * @param message VerifyReferenceListRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IVerifyReferenceListRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VerifyReferenceListRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.VerifyReferenceListRequest.verify|verify} messages.
+                     * @param message VerifyReferenceListRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IVerifyReferenceListRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VerifyReferenceListRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VerifyReferenceListRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.VerifyReferenceListRequest;
+
+                    /**
+                     * Decodes a VerifyReferenceListRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VerifyReferenceListRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.VerifyReferenceListRequest;
+
+                    /**
+                     * Verifies a VerifyReferenceListRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VerifyReferenceListRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VerifyReferenceListRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.VerifyReferenceListRequest;
+
+                    /**
+                     * Creates a plain object from a VerifyReferenceListRequest message. Also converts values to other types if specified.
+                     * @param message VerifyReferenceListRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.VerifyReferenceListRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VerifyReferenceListRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VerifyReferenceListRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VerifyReferenceListResponse. */
+                interface IVerifyReferenceListResponse {
+
+                    /** VerifyReferenceListResponse success */
+                    success?: (boolean|null);
+
+                    /** VerifyReferenceListResponse errors */
+                    errors?: (google.cloud.chronicle.v1.IReferenceListError[]|null);
+                }
+
+                /** Represents a VerifyReferenceListResponse. */
+                class VerifyReferenceListResponse implements IVerifyReferenceListResponse {
+
+                    /**
+                     * Constructs a new VerifyReferenceListResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IVerifyReferenceListResponse);
+
+                    /** VerifyReferenceListResponse success. */
+                    public success: boolean;
+
+                    /** VerifyReferenceListResponse errors. */
+                    public errors: google.cloud.chronicle.v1.IReferenceListError[];
+
+                    /**
+                     * Creates a new VerifyReferenceListResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VerifyReferenceListResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IVerifyReferenceListResponse): google.cloud.chronicle.v1.VerifyReferenceListResponse;
+
+                    /**
+                     * Encodes the specified VerifyReferenceListResponse message. Does not implicitly {@link google.cloud.chronicle.v1.VerifyReferenceListResponse.verify|verify} messages.
+                     * @param message VerifyReferenceListResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IVerifyReferenceListResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VerifyReferenceListResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.VerifyReferenceListResponse.verify|verify} messages.
+                     * @param message VerifyReferenceListResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IVerifyReferenceListResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VerifyReferenceListResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VerifyReferenceListResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.VerifyReferenceListResponse;
+
+                    /**
+                     * Decodes a VerifyReferenceListResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VerifyReferenceListResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.VerifyReferenceListResponse;
+
+                    /**
+                     * Verifies a VerifyReferenceListResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VerifyReferenceListResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VerifyReferenceListResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.VerifyReferenceListResponse;
+
+                    /**
+                     * Creates a plain object from a VerifyReferenceListResponse message. Also converts values to other types if specified.
+                     * @param message VerifyReferenceListResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.VerifyReferenceListResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VerifyReferenceListResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VerifyReferenceListResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a ReferenceList. */
                 interface IReferenceList {
 
@@ -20221,6 +20454,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ReferenceListError. */
+                interface IReferenceListError {
+
+                    /** ReferenceListError lineNumber */
+                    lineNumber?: (number|null);
+
+                    /** ReferenceListError errorMessage */
+                    errorMessage?: (string|null);
+                }
+
+                /** Represents a ReferenceListError. */
+                class ReferenceListError implements IReferenceListError {
+
+                    /**
+                     * Constructs a new ReferenceListError.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IReferenceListError);
+
+                    /** ReferenceListError lineNumber. */
+                    public lineNumber: number;
+
+                    /** ReferenceListError errorMessage. */
+                    public errorMessage: string;
+
+                    /**
+                     * Creates a new ReferenceListError instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReferenceListError instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IReferenceListError): google.cloud.chronicle.v1.ReferenceListError;
+
+                    /**
+                     * Encodes the specified ReferenceListError message. Does not implicitly {@link google.cloud.chronicle.v1.ReferenceListError.verify|verify} messages.
+                     * @param message ReferenceListError message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IReferenceListError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReferenceListError message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ReferenceListError.verify|verify} messages.
+                     * @param message ReferenceListError message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IReferenceListError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReferenceListError message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReferenceListError
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ReferenceListError;
+
+                    /**
+                     * Decodes a ReferenceListError message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReferenceListError
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ReferenceListError;
+
+                    /**
+                     * Verifies a ReferenceListError message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReferenceListError message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReferenceListError
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ReferenceListError;
+
+                    /**
+                     * Creates a plain object from a ReferenceListError message. Also converts values to other types if specified.
+                     * @param message ReferenceListError
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ReferenceListError, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReferenceListError to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReferenceListError
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents a RuleService */
                 class RuleService extends $protobuf.rpc.Service {
 
@@ -20310,6 +20646,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteRule(request: google.cloud.chronicle.v1.IDeleteRuleRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls VerifyRuleText.
+                     * @param request VerifyRuleTextRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and VerifyRuleTextResponse
+                     */
+                    public verifyRuleText(request: google.cloud.chronicle.v1.IVerifyRuleTextRequest, callback: google.cloud.chronicle.v1.RuleService.VerifyRuleTextCallback): void;
+
+                    /**
+                     * Calls VerifyRuleText.
+                     * @param request VerifyRuleTextRequest message or plain object
+                     * @returns Promise
+                     */
+                    public verifyRuleText(request: google.cloud.chronicle.v1.IVerifyRuleTextRequest): Promise<google.cloud.chronicle.v1.VerifyRuleTextResponse>;
 
                     /**
                      * Calls ListRuleRevisions.
@@ -20446,6 +20796,13 @@ export namespace google {
                      * @param [response] Empty
                      */
                     type DeleteRuleCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.RuleService|verifyRuleText}.
+                     * @param error Error, if any
+                     * @param [response] VerifyRuleTextResponse
+                     */
+                    type VerifyRuleTextCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.VerifyRuleTextResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.chronicle.v1.RuleService|listRuleRevisions}.
@@ -21654,6 +22011,212 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DeleteRuleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VerifyRuleTextRequest. */
+                interface IVerifyRuleTextRequest {
+
+                    /** VerifyRuleTextRequest instance */
+                    instance?: (string|null);
+
+                    /** VerifyRuleTextRequest ruleText */
+                    ruleText?: (string|null);
+                }
+
+                /** Represents a VerifyRuleTextRequest. */
+                class VerifyRuleTextRequest implements IVerifyRuleTextRequest {
+
+                    /**
+                     * Constructs a new VerifyRuleTextRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IVerifyRuleTextRequest);
+
+                    /** VerifyRuleTextRequest instance. */
+                    public instance: string;
+
+                    /** VerifyRuleTextRequest ruleText. */
+                    public ruleText: string;
+
+                    /**
+                     * Creates a new VerifyRuleTextRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VerifyRuleTextRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IVerifyRuleTextRequest): google.cloud.chronicle.v1.VerifyRuleTextRequest;
+
+                    /**
+                     * Encodes the specified VerifyRuleTextRequest message. Does not implicitly {@link google.cloud.chronicle.v1.VerifyRuleTextRequest.verify|verify} messages.
+                     * @param message VerifyRuleTextRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IVerifyRuleTextRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VerifyRuleTextRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.VerifyRuleTextRequest.verify|verify} messages.
+                     * @param message VerifyRuleTextRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IVerifyRuleTextRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VerifyRuleTextRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VerifyRuleTextRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.VerifyRuleTextRequest;
+
+                    /**
+                     * Decodes a VerifyRuleTextRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VerifyRuleTextRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.VerifyRuleTextRequest;
+
+                    /**
+                     * Verifies a VerifyRuleTextRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VerifyRuleTextRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VerifyRuleTextRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.VerifyRuleTextRequest;
+
+                    /**
+                     * Creates a plain object from a VerifyRuleTextRequest message. Also converts values to other types if specified.
+                     * @param message VerifyRuleTextRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.VerifyRuleTextRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VerifyRuleTextRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VerifyRuleTextRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VerifyRuleTextResponse. */
+                interface IVerifyRuleTextResponse {
+
+                    /** VerifyRuleTextResponse success */
+                    success?: (boolean|null);
+
+                    /** VerifyRuleTextResponse compilationDiagnostics */
+                    compilationDiagnostics?: (google.cloud.chronicle.v1.ICompilationDiagnostic[]|null);
+                }
+
+                /** Represents a VerifyRuleTextResponse. */
+                class VerifyRuleTextResponse implements IVerifyRuleTextResponse {
+
+                    /**
+                     * Constructs a new VerifyRuleTextResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IVerifyRuleTextResponse);
+
+                    /** VerifyRuleTextResponse success. */
+                    public success: boolean;
+
+                    /** VerifyRuleTextResponse compilationDiagnostics. */
+                    public compilationDiagnostics: google.cloud.chronicle.v1.ICompilationDiagnostic[];
+
+                    /**
+                     * Creates a new VerifyRuleTextResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VerifyRuleTextResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IVerifyRuleTextResponse): google.cloud.chronicle.v1.VerifyRuleTextResponse;
+
+                    /**
+                     * Encodes the specified VerifyRuleTextResponse message. Does not implicitly {@link google.cloud.chronicle.v1.VerifyRuleTextResponse.verify|verify} messages.
+                     * @param message VerifyRuleTextResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IVerifyRuleTextResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VerifyRuleTextResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.VerifyRuleTextResponse.verify|verify} messages.
+                     * @param message VerifyRuleTextResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IVerifyRuleTextResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VerifyRuleTextResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VerifyRuleTextResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.VerifyRuleTextResponse;
+
+                    /**
+                     * Decodes a VerifyRuleTextResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VerifyRuleTextResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.VerifyRuleTextResponse;
+
+                    /**
+                     * Verifies a VerifyRuleTextResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VerifyRuleTextResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VerifyRuleTextResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.VerifyRuleTextResponse;
+
+                    /**
+                     * Creates a plain object from a VerifyRuleTextResponse message. Also converts values to other types if specified.
+                     * @param message VerifyRuleTextResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.VerifyRuleTextResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VerifyRuleTextResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VerifyRuleTextResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

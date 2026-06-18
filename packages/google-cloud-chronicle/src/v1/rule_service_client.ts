@@ -391,6 +391,7 @@ export class RuleServiceClient {
       'listRules',
       'updateRule',
       'deleteRule',
+      'verifyRuleText',
       'listRuleRevisions',
       'createRetrohunt',
       'getRetrohunt',
@@ -493,7 +494,11 @@ export class RuleServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/chronicle',
+      'https://www.googleapis.com/auth/chronicle.readonly',
+      'https://www.googleapis.com/auth/cloud-platform',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -1028,6 +1033,144 @@ export class RuleServiceClient {
           {} | undefined,
         ]) => {
           this._log.info('deleteRule response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Verifies the given rule text.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.instance
+   *   Required. The name of the parent resource, which is the SecOps instance
+   *   associated with the request. Format:
+   *   `projects/{project}/locations/{location}/instances/{instance}`
+   * @param {string} request.ruleText
+   *   Required. The rule text to verify as a UTF-8 string.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.VerifyRuleTextResponse|VerifyRuleTextResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/rule_service.verify_rule_text.js</caption>
+   * region_tag:chronicle_v1_generated_RuleService_VerifyRuleText_async
+   */
+  verifyRuleText(
+    request?: protos.google.cloud.chronicle.v1.IVerifyRuleTextRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.IVerifyRuleTextResponse,
+      protos.google.cloud.chronicle.v1.IVerifyRuleTextRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  verifyRuleText(
+    request: protos.google.cloud.chronicle.v1.IVerifyRuleTextRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.IVerifyRuleTextResponse,
+      | protos.google.cloud.chronicle.v1.IVerifyRuleTextRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  verifyRuleText(
+    request: protos.google.cloud.chronicle.v1.IVerifyRuleTextRequest,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.IVerifyRuleTextResponse,
+      | protos.google.cloud.chronicle.v1.IVerifyRuleTextRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  verifyRuleText(
+    request?: protos.google.cloud.chronicle.v1.IVerifyRuleTextRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.chronicle.v1.IVerifyRuleTextResponse,
+          | protos.google.cloud.chronicle.v1.IVerifyRuleTextRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.chronicle.v1.IVerifyRuleTextResponse,
+      | protos.google.cloud.chronicle.v1.IVerifyRuleTextRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.IVerifyRuleTextResponse,
+      protos.google.cloud.chronicle.v1.IVerifyRuleTextRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        instance: request.instance ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('verifyRuleText request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.chronicle.v1.IVerifyRuleTextResponse,
+          | protos.google.cloud.chronicle.v1.IVerifyRuleTextRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('verifyRuleText response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .verifyRuleText(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.chronicle.v1.IVerifyRuleTextResponse,
+          protos.google.cloud.chronicle.v1.IVerifyRuleTextRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('verifyRuleText response %j', response);
           return [response, options, rawResponse];
         },
       )
