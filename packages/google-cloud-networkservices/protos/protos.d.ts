@@ -26,6 +26,1548 @@ export namespace google {
             /** Namespace v1. */
             namespace v1 {
 
+                /** Properties of an AgentGateway. */
+                interface IAgentGateway {
+
+                    /** AgentGateway googleManaged */
+                    googleManaged?: (google.cloud.networkservices.v1.AgentGateway.IGoogleManaged|null);
+
+                    /** AgentGateway selfManaged */
+                    selfManaged?: (google.cloud.networkservices.v1.AgentGateway.ISelfManaged|null);
+
+                    /** AgentGateway name */
+                    name?: (string|null);
+
+                    /** AgentGateway createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AgentGateway updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AgentGateway labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** AgentGateway description */
+                    description?: (string|null);
+
+                    /** AgentGateway etag */
+                    etag?: (string|null);
+
+                    /** AgentGateway protocols */
+                    protocols?: (google.cloud.networkservices.v1.AgentGateway.Protocol[]|null);
+
+                    /** AgentGateway registries */
+                    registries?: (string[]|null);
+
+                    /** AgentGateway networkConfig */
+                    networkConfig?: (google.cloud.networkservices.v1.AgentGateway.INetworkConfig|null);
+
+                    /** AgentGateway agentGatewayCard */
+                    agentGatewayCard?: (google.cloud.networkservices.v1.AgentGateway.IAgentGatewayOutputCard|null);
+                }
+
+                /** Represents an AgentGateway. */
+                class AgentGateway implements IAgentGateway {
+
+                    /**
+                     * Constructs a new AgentGateway.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IAgentGateway);
+
+                    /** AgentGateway googleManaged. */
+                    public googleManaged?: (google.cloud.networkservices.v1.AgentGateway.IGoogleManaged|null);
+
+                    /** AgentGateway selfManaged. */
+                    public selfManaged?: (google.cloud.networkservices.v1.AgentGateway.ISelfManaged|null);
+
+                    /** AgentGateway name. */
+                    public name: string;
+
+                    /** AgentGateway createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AgentGateway updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AgentGateway labels. */
+                    public labels: { [k: string]: string };
+
+                    /** AgentGateway description. */
+                    public description: string;
+
+                    /** AgentGateway etag. */
+                    public etag: string;
+
+                    /** AgentGateway protocols. */
+                    public protocols: google.cloud.networkservices.v1.AgentGateway.Protocol[];
+
+                    /** AgentGateway registries. */
+                    public registries: string[];
+
+                    /** AgentGateway networkConfig. */
+                    public networkConfig?: (google.cloud.networkservices.v1.AgentGateway.INetworkConfig|null);
+
+                    /** AgentGateway agentGatewayCard. */
+                    public agentGatewayCard?: (google.cloud.networkservices.v1.AgentGateway.IAgentGatewayOutputCard|null);
+
+                    /** AgentGateway deploymentMode. */
+                    public deploymentMode?: ("googleManaged"|"selfManaged");
+
+                    /**
+                     * Creates a new AgentGateway instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AgentGateway instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IAgentGateway): google.cloud.networkservices.v1.AgentGateway;
+
+                    /**
+                     * Encodes the specified AgentGateway message. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.verify|verify} messages.
+                     * @param message AgentGateway message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IAgentGateway, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AgentGateway message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.verify|verify} messages.
+                     * @param message AgentGateway message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IAgentGateway, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AgentGateway message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AgentGateway
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.AgentGateway;
+
+                    /**
+                     * Decodes an AgentGateway message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AgentGateway
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.AgentGateway;
+
+                    /**
+                     * Verifies an AgentGateway message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AgentGateway message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AgentGateway
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.AgentGateway;
+
+                    /**
+                     * Creates a plain object from an AgentGateway message. Also converts values to other types if specified.
+                     * @param message AgentGateway
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.AgentGateway, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AgentGateway to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AgentGateway
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AgentGateway {
+
+                    /** Properties of a GoogleManaged. */
+                    interface IGoogleManaged {
+
+                        /** GoogleManaged governedAccessPath */
+                        governedAccessPath?: (google.cloud.networkservices.v1.AgentGateway.GoogleManaged.GovernedAccessPath|keyof typeof google.cloud.networkservices.v1.AgentGateway.GoogleManaged.GovernedAccessPath|null);
+                    }
+
+                    /** Represents a GoogleManaged. */
+                    class GoogleManaged implements IGoogleManaged {
+
+                        /**
+                         * Constructs a new GoogleManaged.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkservices.v1.AgentGateway.IGoogleManaged);
+
+                        /** GoogleManaged governedAccessPath. */
+                        public governedAccessPath: (google.cloud.networkservices.v1.AgentGateway.GoogleManaged.GovernedAccessPath|keyof typeof google.cloud.networkservices.v1.AgentGateway.GoogleManaged.GovernedAccessPath);
+
+                        /**
+                         * Creates a new GoogleManaged instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GoogleManaged instance
+                         */
+                        public static create(properties?: google.cloud.networkservices.v1.AgentGateway.IGoogleManaged): google.cloud.networkservices.v1.AgentGateway.GoogleManaged;
+
+                        /**
+                         * Encodes the specified GoogleManaged message. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.GoogleManaged.verify|verify} messages.
+                         * @param message GoogleManaged message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkservices.v1.AgentGateway.IGoogleManaged, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GoogleManaged message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.GoogleManaged.verify|verify} messages.
+                         * @param message GoogleManaged message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkservices.v1.AgentGateway.IGoogleManaged, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GoogleManaged message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GoogleManaged
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.AgentGateway.GoogleManaged;
+
+                        /**
+                         * Decodes a GoogleManaged message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GoogleManaged
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.AgentGateway.GoogleManaged;
+
+                        /**
+                         * Verifies a GoogleManaged message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GoogleManaged message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GoogleManaged
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.AgentGateway.GoogleManaged;
+
+                        /**
+                         * Creates a plain object from a GoogleManaged message. Also converts values to other types if specified.
+                         * @param message GoogleManaged
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkservices.v1.AgentGateway.GoogleManaged, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GoogleManaged to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GoogleManaged
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace GoogleManaged {
+
+                        /** GovernedAccessPath enum. */
+                        enum GovernedAccessPath {
+                            GOVERNED_ACCESS_PATH_UNSPECIFIED = 0,
+                            AGENT_TO_ANYWHERE = 1,
+                            CLIENT_TO_AGENT = 2
+                        }
+                    }
+
+                    /** Properties of a SelfManaged. */
+                    interface ISelfManaged {
+
+                        /** SelfManaged resourceUri */
+                        resourceUri?: (string|null);
+                    }
+
+                    /** Represents a SelfManaged. */
+                    class SelfManaged implements ISelfManaged {
+
+                        /**
+                         * Constructs a new SelfManaged.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkservices.v1.AgentGateway.ISelfManaged);
+
+                        /** SelfManaged resourceUri. */
+                        public resourceUri: string;
+
+                        /**
+                         * Creates a new SelfManaged instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SelfManaged instance
+                         */
+                        public static create(properties?: google.cloud.networkservices.v1.AgentGateway.ISelfManaged): google.cloud.networkservices.v1.AgentGateway.SelfManaged;
+
+                        /**
+                         * Encodes the specified SelfManaged message. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.SelfManaged.verify|verify} messages.
+                         * @param message SelfManaged message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkservices.v1.AgentGateway.ISelfManaged, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SelfManaged message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.SelfManaged.verify|verify} messages.
+                         * @param message SelfManaged message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkservices.v1.AgentGateway.ISelfManaged, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SelfManaged message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SelfManaged
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.AgentGateway.SelfManaged;
+
+                        /**
+                         * Decodes a SelfManaged message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SelfManaged
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.AgentGateway.SelfManaged;
+
+                        /**
+                         * Verifies a SelfManaged message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SelfManaged message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SelfManaged
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.AgentGateway.SelfManaged;
+
+                        /**
+                         * Creates a plain object from a SelfManaged message. Also converts values to other types if specified.
+                         * @param message SelfManaged
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkservices.v1.AgentGateway.SelfManaged, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SelfManaged to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SelfManaged
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a NetworkConfig. */
+                    interface INetworkConfig {
+
+                        /** NetworkConfig egress */
+                        egress?: (google.cloud.networkservices.v1.AgentGateway.NetworkConfig.IEgress|null);
+
+                        /** NetworkConfig dnsPeeringConfig */
+                        dnsPeeringConfig?: (google.cloud.networkservices.v1.AgentGateway.NetworkConfig.IDnsPeeringConfig|null);
+                    }
+
+                    /** Represents a NetworkConfig. */
+                    class NetworkConfig implements INetworkConfig {
+
+                        /**
+                         * Constructs a new NetworkConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkservices.v1.AgentGateway.INetworkConfig);
+
+                        /** NetworkConfig egress. */
+                        public egress?: (google.cloud.networkservices.v1.AgentGateway.NetworkConfig.IEgress|null);
+
+                        /** NetworkConfig dnsPeeringConfig. */
+                        public dnsPeeringConfig?: (google.cloud.networkservices.v1.AgentGateway.NetworkConfig.IDnsPeeringConfig|null);
+
+                        /**
+                         * Creates a new NetworkConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns NetworkConfig instance
+                         */
+                        public static create(properties?: google.cloud.networkservices.v1.AgentGateway.INetworkConfig): google.cloud.networkservices.v1.AgentGateway.NetworkConfig;
+
+                        /**
+                         * Encodes the specified NetworkConfig message. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.NetworkConfig.verify|verify} messages.
+                         * @param message NetworkConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkservices.v1.AgentGateway.INetworkConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified NetworkConfig message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.NetworkConfig.verify|verify} messages.
+                         * @param message NetworkConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkservices.v1.AgentGateway.INetworkConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a NetworkConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns NetworkConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.AgentGateway.NetworkConfig;
+
+                        /**
+                         * Decodes a NetworkConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns NetworkConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.AgentGateway.NetworkConfig;
+
+                        /**
+                         * Verifies a NetworkConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a NetworkConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns NetworkConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.AgentGateway.NetworkConfig;
+
+                        /**
+                         * Creates a plain object from a NetworkConfig message. Also converts values to other types if specified.
+                         * @param message NetworkConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkservices.v1.AgentGateway.NetworkConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this NetworkConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for NetworkConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace NetworkConfig {
+
+                        /** Properties of an Egress. */
+                        interface IEgress {
+
+                            /** Egress networkAttachment */
+                            networkAttachment?: (string|null);
+
+                            /** Egress trustConfig */
+                            trustConfig?: (google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.ITrustConfig|null);
+                        }
+
+                        /** Represents an Egress. */
+                        class Egress implements IEgress {
+
+                            /**
+                             * Constructs a new Egress.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.networkservices.v1.AgentGateway.NetworkConfig.IEgress);
+
+                            /** Egress networkAttachment. */
+                            public networkAttachment: string;
+
+                            /** Egress trustConfig. */
+                            public trustConfig?: (google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.ITrustConfig|null);
+
+                            /**
+                             * Creates a new Egress instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Egress instance
+                             */
+                            public static create(properties?: google.cloud.networkservices.v1.AgentGateway.NetworkConfig.IEgress): google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress;
+
+                            /**
+                             * Encodes the specified Egress message. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.verify|verify} messages.
+                             * @param message Egress message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.networkservices.v1.AgentGateway.NetworkConfig.IEgress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Egress message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.verify|verify} messages.
+                             * @param message Egress message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.networkservices.v1.AgentGateway.NetworkConfig.IEgress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an Egress message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Egress
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress;
+
+                            /**
+                             * Decodes an Egress message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Egress
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress;
+
+                            /**
+                             * Verifies an Egress message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an Egress message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Egress
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress;
+
+                            /**
+                             * Creates a plain object from an Egress message. Also converts values to other types if specified.
+                             * @param message Egress
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Egress to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Egress
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace Egress {
+
+                            /** Properties of a TrustConfig. */
+                            interface ITrustConfig {
+
+                                /** TrustConfig pemCertificates */
+                                pemCertificates?: (string[]|null);
+                            }
+
+                            /** Represents a TrustConfig. */
+                            class TrustConfig implements ITrustConfig {
+
+                                /**
+                                 * Constructs a new TrustConfig.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.ITrustConfig);
+
+                                /** TrustConfig pemCertificates. */
+                                public pemCertificates: string[];
+
+                                /**
+                                 * Creates a new TrustConfig instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns TrustConfig instance
+                                 */
+                                public static create(properties?: google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.ITrustConfig): google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig;
+
+                                /**
+                                 * Encodes the specified TrustConfig message. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig.verify|verify} messages.
+                                 * @param message TrustConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.ITrustConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified TrustConfig message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig.verify|verify} messages.
+                                 * @param message TrustConfig message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.ITrustConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a TrustConfig message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns TrustConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig;
+
+                                /**
+                                 * Decodes a TrustConfig message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns TrustConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig;
+
+                                /**
+                                 * Verifies a TrustConfig message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a TrustConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns TrustConfig
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig;
+
+                                /**
+                                 * Creates a plain object from a TrustConfig message. Also converts values to other types if specified.
+                                 * @param message TrustConfig
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this TrustConfig to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for TrustConfig
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+
+                        /** Properties of a DnsPeeringConfig. */
+                        interface IDnsPeeringConfig {
+
+                            /** DnsPeeringConfig domains */
+                            domains?: (string[]|null);
+
+                            /** DnsPeeringConfig targetProject */
+                            targetProject?: (string|null);
+
+                            /** DnsPeeringConfig targetNetwork */
+                            targetNetwork?: (string|null);
+                        }
+
+                        /** Represents a DnsPeeringConfig. */
+                        class DnsPeeringConfig implements IDnsPeeringConfig {
+
+                            /**
+                             * Constructs a new DnsPeeringConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.networkservices.v1.AgentGateway.NetworkConfig.IDnsPeeringConfig);
+
+                            /** DnsPeeringConfig domains. */
+                            public domains: string[];
+
+                            /** DnsPeeringConfig targetProject. */
+                            public targetProject: string;
+
+                            /** DnsPeeringConfig targetNetwork. */
+                            public targetNetwork: string;
+
+                            /**
+                             * Creates a new DnsPeeringConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DnsPeeringConfig instance
+                             */
+                            public static create(properties?: google.cloud.networkservices.v1.AgentGateway.NetworkConfig.IDnsPeeringConfig): google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig;
+
+                            /**
+                             * Encodes the specified DnsPeeringConfig message. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig.verify|verify} messages.
+                             * @param message DnsPeeringConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.networkservices.v1.AgentGateway.NetworkConfig.IDnsPeeringConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DnsPeeringConfig message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig.verify|verify} messages.
+                             * @param message DnsPeeringConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.networkservices.v1.AgentGateway.NetworkConfig.IDnsPeeringConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DnsPeeringConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DnsPeeringConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig;
+
+                            /**
+                             * Decodes a DnsPeeringConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DnsPeeringConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig;
+
+                            /**
+                             * Verifies a DnsPeeringConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DnsPeeringConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DnsPeeringConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig;
+
+                            /**
+                             * Creates a plain object from a DnsPeeringConfig message. Also converts values to other types if specified.
+                             * @param message DnsPeeringConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DnsPeeringConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DnsPeeringConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of an AgentGatewayOutputCard. */
+                    interface IAgentGatewayOutputCard {
+
+                        /** AgentGatewayOutputCard mtlsEndpoint */
+                        mtlsEndpoint?: (string|null);
+
+                        /** AgentGatewayOutputCard rootCertificates */
+                        rootCertificates?: (string[]|null);
+
+                        /** AgentGatewayOutputCard serviceExtensionsServiceAccount */
+                        serviceExtensionsServiceAccount?: (string|null);
+                    }
+
+                    /** Represents an AgentGatewayOutputCard. */
+                    class AgentGatewayOutputCard implements IAgentGatewayOutputCard {
+
+                        /**
+                         * Constructs a new AgentGatewayOutputCard.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkservices.v1.AgentGateway.IAgentGatewayOutputCard);
+
+                        /** AgentGatewayOutputCard mtlsEndpoint. */
+                        public mtlsEndpoint: string;
+
+                        /** AgentGatewayOutputCard rootCertificates. */
+                        public rootCertificates: string[];
+
+                        /** AgentGatewayOutputCard serviceExtensionsServiceAccount. */
+                        public serviceExtensionsServiceAccount: string;
+
+                        /**
+                         * Creates a new AgentGatewayOutputCard instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AgentGatewayOutputCard instance
+                         */
+                        public static create(properties?: google.cloud.networkservices.v1.AgentGateway.IAgentGatewayOutputCard): google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard;
+
+                        /**
+                         * Encodes the specified AgentGatewayOutputCard message. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard.verify|verify} messages.
+                         * @param message AgentGatewayOutputCard message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkservices.v1.AgentGateway.IAgentGatewayOutputCard, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AgentGatewayOutputCard message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard.verify|verify} messages.
+                         * @param message AgentGatewayOutputCard message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkservices.v1.AgentGateway.IAgentGatewayOutputCard, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AgentGatewayOutputCard message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AgentGatewayOutputCard
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard;
+
+                        /**
+                         * Decodes an AgentGatewayOutputCard message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AgentGatewayOutputCard
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard;
+
+                        /**
+                         * Verifies an AgentGatewayOutputCard message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AgentGatewayOutputCard message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AgentGatewayOutputCard
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard;
+
+                        /**
+                         * Creates a plain object from an AgentGatewayOutputCard message. Also converts values to other types if specified.
+                         * @param message AgentGatewayOutputCard
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AgentGatewayOutputCard to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AgentGatewayOutputCard
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Protocol enum. */
+                    enum Protocol {
+                        PROTOCOL_UNSPECIFIED = 0,
+                        MCP = 1
+                    }
+                }
+
+                /** Properties of a ListAgentGatewaysRequest. */
+                interface IListAgentGatewaysRequest {
+
+                    /** ListAgentGatewaysRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAgentGatewaysRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAgentGatewaysRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListAgentGatewaysRequest returnPartialSuccess */
+                    returnPartialSuccess?: (boolean|null);
+                }
+
+                /** Represents a ListAgentGatewaysRequest. */
+                class ListAgentGatewaysRequest implements IListAgentGatewaysRequest {
+
+                    /**
+                     * Constructs a new ListAgentGatewaysRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IListAgentGatewaysRequest);
+
+                    /** ListAgentGatewaysRequest parent. */
+                    public parent: string;
+
+                    /** ListAgentGatewaysRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAgentGatewaysRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListAgentGatewaysRequest returnPartialSuccess. */
+                    public returnPartialSuccess: boolean;
+
+                    /**
+                     * Creates a new ListAgentGatewaysRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAgentGatewaysRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IListAgentGatewaysRequest): google.cloud.networkservices.v1.ListAgentGatewaysRequest;
+
+                    /**
+                     * Encodes the specified ListAgentGatewaysRequest message. Does not implicitly {@link google.cloud.networkservices.v1.ListAgentGatewaysRequest.verify|verify} messages.
+                     * @param message ListAgentGatewaysRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IListAgentGatewaysRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAgentGatewaysRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListAgentGatewaysRequest.verify|verify} messages.
+                     * @param message ListAgentGatewaysRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IListAgentGatewaysRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAgentGatewaysRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAgentGatewaysRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.ListAgentGatewaysRequest;
+
+                    /**
+                     * Decodes a ListAgentGatewaysRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAgentGatewaysRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.ListAgentGatewaysRequest;
+
+                    /**
+                     * Verifies a ListAgentGatewaysRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAgentGatewaysRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAgentGatewaysRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.ListAgentGatewaysRequest;
+
+                    /**
+                     * Creates a plain object from a ListAgentGatewaysRequest message. Also converts values to other types if specified.
+                     * @param message ListAgentGatewaysRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.ListAgentGatewaysRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAgentGatewaysRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAgentGatewaysRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAgentGatewaysResponse. */
+                interface IListAgentGatewaysResponse {
+
+                    /** ListAgentGatewaysResponse agentGateways */
+                    agentGateways?: (google.cloud.networkservices.v1.IAgentGateway[]|null);
+
+                    /** ListAgentGatewaysResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListAgentGatewaysResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListAgentGatewaysResponse. */
+                class ListAgentGatewaysResponse implements IListAgentGatewaysResponse {
+
+                    /**
+                     * Constructs a new ListAgentGatewaysResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IListAgentGatewaysResponse);
+
+                    /** ListAgentGatewaysResponse agentGateways. */
+                    public agentGateways: google.cloud.networkservices.v1.IAgentGateway[];
+
+                    /** ListAgentGatewaysResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListAgentGatewaysResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListAgentGatewaysResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAgentGatewaysResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IListAgentGatewaysResponse): google.cloud.networkservices.v1.ListAgentGatewaysResponse;
+
+                    /**
+                     * Encodes the specified ListAgentGatewaysResponse message. Does not implicitly {@link google.cloud.networkservices.v1.ListAgentGatewaysResponse.verify|verify} messages.
+                     * @param message ListAgentGatewaysResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IListAgentGatewaysResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAgentGatewaysResponse message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListAgentGatewaysResponse.verify|verify} messages.
+                     * @param message ListAgentGatewaysResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IListAgentGatewaysResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAgentGatewaysResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAgentGatewaysResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.ListAgentGatewaysResponse;
+
+                    /**
+                     * Decodes a ListAgentGatewaysResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAgentGatewaysResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.ListAgentGatewaysResponse;
+
+                    /**
+                     * Verifies a ListAgentGatewaysResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAgentGatewaysResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAgentGatewaysResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.ListAgentGatewaysResponse;
+
+                    /**
+                     * Creates a plain object from a ListAgentGatewaysResponse message. Also converts values to other types if specified.
+                     * @param message ListAgentGatewaysResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.ListAgentGatewaysResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAgentGatewaysResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAgentGatewaysResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetAgentGatewayRequest. */
+                interface IGetAgentGatewayRequest {
+
+                    /** GetAgentGatewayRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetAgentGatewayRequest. */
+                class GetAgentGatewayRequest implements IGetAgentGatewayRequest {
+
+                    /**
+                     * Constructs a new GetAgentGatewayRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IGetAgentGatewayRequest);
+
+                    /** GetAgentGatewayRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetAgentGatewayRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAgentGatewayRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IGetAgentGatewayRequest): google.cloud.networkservices.v1.GetAgentGatewayRequest;
+
+                    /**
+                     * Encodes the specified GetAgentGatewayRequest message. Does not implicitly {@link google.cloud.networkservices.v1.GetAgentGatewayRequest.verify|verify} messages.
+                     * @param message GetAgentGatewayRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IGetAgentGatewayRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAgentGatewayRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.GetAgentGatewayRequest.verify|verify} messages.
+                     * @param message GetAgentGatewayRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IGetAgentGatewayRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAgentGatewayRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAgentGatewayRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.GetAgentGatewayRequest;
+
+                    /**
+                     * Decodes a GetAgentGatewayRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAgentGatewayRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.GetAgentGatewayRequest;
+
+                    /**
+                     * Verifies a GetAgentGatewayRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAgentGatewayRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAgentGatewayRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.GetAgentGatewayRequest;
+
+                    /**
+                     * Creates a plain object from a GetAgentGatewayRequest message. Also converts values to other types if specified.
+                     * @param message GetAgentGatewayRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.GetAgentGatewayRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAgentGatewayRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetAgentGatewayRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateAgentGatewayRequest. */
+                interface ICreateAgentGatewayRequest {
+
+                    /** CreateAgentGatewayRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateAgentGatewayRequest agentGatewayId */
+                    agentGatewayId?: (string|null);
+
+                    /** CreateAgentGatewayRequest agentGateway */
+                    agentGateway?: (google.cloud.networkservices.v1.IAgentGateway|null);
+                }
+
+                /** Represents a CreateAgentGatewayRequest. */
+                class CreateAgentGatewayRequest implements ICreateAgentGatewayRequest {
+
+                    /**
+                     * Constructs a new CreateAgentGatewayRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.ICreateAgentGatewayRequest);
+
+                    /** CreateAgentGatewayRequest parent. */
+                    public parent: string;
+
+                    /** CreateAgentGatewayRequest agentGatewayId. */
+                    public agentGatewayId: string;
+
+                    /** CreateAgentGatewayRequest agentGateway. */
+                    public agentGateway?: (google.cloud.networkservices.v1.IAgentGateway|null);
+
+                    /**
+                     * Creates a new CreateAgentGatewayRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateAgentGatewayRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.ICreateAgentGatewayRequest): google.cloud.networkservices.v1.CreateAgentGatewayRequest;
+
+                    /**
+                     * Encodes the specified CreateAgentGatewayRequest message. Does not implicitly {@link google.cloud.networkservices.v1.CreateAgentGatewayRequest.verify|verify} messages.
+                     * @param message CreateAgentGatewayRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.ICreateAgentGatewayRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateAgentGatewayRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.CreateAgentGatewayRequest.verify|verify} messages.
+                     * @param message CreateAgentGatewayRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.ICreateAgentGatewayRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateAgentGatewayRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateAgentGatewayRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.CreateAgentGatewayRequest;
+
+                    /**
+                     * Decodes a CreateAgentGatewayRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateAgentGatewayRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.CreateAgentGatewayRequest;
+
+                    /**
+                     * Verifies a CreateAgentGatewayRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateAgentGatewayRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateAgentGatewayRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.CreateAgentGatewayRequest;
+
+                    /**
+                     * Creates a plain object from a CreateAgentGatewayRequest message. Also converts values to other types if specified.
+                     * @param message CreateAgentGatewayRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.CreateAgentGatewayRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateAgentGatewayRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateAgentGatewayRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateAgentGatewayRequest. */
+                interface IUpdateAgentGatewayRequest {
+
+                    /** UpdateAgentGatewayRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateAgentGatewayRequest agentGateway */
+                    agentGateway?: (google.cloud.networkservices.v1.IAgentGateway|null);
+                }
+
+                /** Represents an UpdateAgentGatewayRequest. */
+                class UpdateAgentGatewayRequest implements IUpdateAgentGatewayRequest {
+
+                    /**
+                     * Constructs a new UpdateAgentGatewayRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IUpdateAgentGatewayRequest);
+
+                    /** UpdateAgentGatewayRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateAgentGatewayRequest agentGateway. */
+                    public agentGateway?: (google.cloud.networkservices.v1.IAgentGateway|null);
+
+                    /**
+                     * Creates a new UpdateAgentGatewayRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateAgentGatewayRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IUpdateAgentGatewayRequest): google.cloud.networkservices.v1.UpdateAgentGatewayRequest;
+
+                    /**
+                     * Encodes the specified UpdateAgentGatewayRequest message. Does not implicitly {@link google.cloud.networkservices.v1.UpdateAgentGatewayRequest.verify|verify} messages.
+                     * @param message UpdateAgentGatewayRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IUpdateAgentGatewayRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateAgentGatewayRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.UpdateAgentGatewayRequest.verify|verify} messages.
+                     * @param message UpdateAgentGatewayRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IUpdateAgentGatewayRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateAgentGatewayRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateAgentGatewayRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.UpdateAgentGatewayRequest;
+
+                    /**
+                     * Decodes an UpdateAgentGatewayRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateAgentGatewayRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.UpdateAgentGatewayRequest;
+
+                    /**
+                     * Verifies an UpdateAgentGatewayRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateAgentGatewayRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateAgentGatewayRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.UpdateAgentGatewayRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateAgentGatewayRequest message. Also converts values to other types if specified.
+                     * @param message UpdateAgentGatewayRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.UpdateAgentGatewayRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateAgentGatewayRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateAgentGatewayRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteAgentGatewayRequest. */
+                interface IDeleteAgentGatewayRequest {
+
+                    /** DeleteAgentGatewayRequest name */
+                    name?: (string|null);
+
+                    /** DeleteAgentGatewayRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a DeleteAgentGatewayRequest. */
+                class DeleteAgentGatewayRequest implements IDeleteAgentGatewayRequest {
+
+                    /**
+                     * Constructs a new DeleteAgentGatewayRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkservices.v1.IDeleteAgentGatewayRequest);
+
+                    /** DeleteAgentGatewayRequest name. */
+                    public name: string;
+
+                    /** DeleteAgentGatewayRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new DeleteAgentGatewayRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteAgentGatewayRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkservices.v1.IDeleteAgentGatewayRequest): google.cloud.networkservices.v1.DeleteAgentGatewayRequest;
+
+                    /**
+                     * Encodes the specified DeleteAgentGatewayRequest message. Does not implicitly {@link google.cloud.networkservices.v1.DeleteAgentGatewayRequest.verify|verify} messages.
+                     * @param message DeleteAgentGatewayRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkservices.v1.IDeleteAgentGatewayRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteAgentGatewayRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.DeleteAgentGatewayRequest.verify|verify} messages.
+                     * @param message DeleteAgentGatewayRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkservices.v1.IDeleteAgentGatewayRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteAgentGatewayRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteAgentGatewayRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkservices.v1.DeleteAgentGatewayRequest;
+
+                    /**
+                     * Decodes a DeleteAgentGatewayRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteAgentGatewayRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkservices.v1.DeleteAgentGatewayRequest;
+
+                    /**
+                     * Verifies a DeleteAgentGatewayRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteAgentGatewayRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteAgentGatewayRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkservices.v1.DeleteAgentGatewayRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteAgentGatewayRequest message. Also converts values to other types if specified.
+                     * @param message DeleteAgentGatewayRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkservices.v1.DeleteAgentGatewayRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteAgentGatewayRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteAgentGatewayRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** EnvoyHeaders enum. */
                 enum EnvoyHeaders {
                     ENVOY_HEADERS_UNSPECIFIED = 0,
@@ -1047,7 +2589,15 @@ export namespace google {
                 /** WireFormat enum. */
                 enum WireFormat {
                     WIRE_FORMAT_UNSPECIFIED = 0,
-                    EXT_PROC_GRPC = 1
+                    EXT_PROC_GRPC = 1,
+                    EXT_AUTHZ_GRPC = 3
+                }
+
+                /** BodySendMode enum. */
+                enum BodySendMode {
+                    BODY_SEND_MODE_UNSPECIFIED = 0,
+                    BODY_SEND_MODE_STREAMED = 1,
+                    BODY_SEND_MODE_FULL_DUPLEX_STREAMED = 2
                 }
 
                 /** Properties of an ExtensionChain. */
@@ -1282,8 +2832,20 @@ export namespace google {
                         /** Extension forwardHeaders */
                         forwardHeaders?: (string[]|null);
 
+                        /** Extension forwardAttributes */
+                        forwardAttributes?: (string[]|null);
+
                         /** Extension metadata */
                         metadata?: (google.protobuf.IStruct|null);
+
+                        /** Extension requestBodySendMode */
+                        requestBodySendMode?: (google.cloud.networkservices.v1.BodySendMode|keyof typeof google.cloud.networkservices.v1.BodySendMode|null);
+
+                        /** Extension responseBodySendMode */
+                        responseBodySendMode?: (google.cloud.networkservices.v1.BodySendMode|keyof typeof google.cloud.networkservices.v1.BodySendMode|null);
+
+                        /** Extension observabilityMode */
+                        observabilityMode?: (boolean|null);
                     }
 
                     /** Represents an Extension. */
@@ -1316,8 +2878,20 @@ export namespace google {
                         /** Extension forwardHeaders. */
                         public forwardHeaders: string[];
 
+                        /** Extension forwardAttributes. */
+                        public forwardAttributes: string[];
+
                         /** Extension metadata. */
                         public metadata?: (google.protobuf.IStruct|null);
+
+                        /** Extension requestBodySendMode. */
+                        public requestBodySendMode: (google.cloud.networkservices.v1.BodySendMode|keyof typeof google.cloud.networkservices.v1.BodySendMode);
+
+                        /** Extension responseBodySendMode. */
+                        public responseBodySendMode: (google.cloud.networkservices.v1.BodySendMode|keyof typeof google.cloud.networkservices.v1.BodySendMode);
+
+                        /** Extension observabilityMode. */
+                        public observabilityMode: boolean;
 
                         /**
                          * Creates a new Extension instance using the specified properties.
@@ -3828,6 +5402,9 @@ export namespace google {
                     /** AuthzExtension forwardHeaders */
                     forwardHeaders?: (string[]|null);
 
+                    /** AuthzExtension forwardAttributes */
+                    forwardAttributes?: (string[]|null);
+
                     /** AuthzExtension wireFormat */
                     wireFormat?: (google.cloud.networkservices.v1.WireFormat|keyof typeof google.cloud.networkservices.v1.WireFormat|null);
                 }
@@ -3876,6 +5453,9 @@ export namespace google {
 
                     /** AuthzExtension forwardHeaders. */
                     public forwardHeaders: string[];
+
+                    /** AuthzExtension forwardAttributes. */
+                    public forwardAttributes: string[];
 
                     /** AuthzExtension wireFormat. */
                     public wireFormat: (google.cloud.networkservices.v1.WireFormat|keyof typeof google.cloud.networkservices.v1.WireFormat);
@@ -7267,6 +8847,9 @@ export namespace google {
                     /** Gateway ports */
                     ports?: (number[]|null);
 
+                    /** Gateway allPorts */
+                    allPorts?: (boolean|null);
+
                     /** Gateway scope */
                     scope?: (string|null);
 
@@ -7293,6 +8876,9 @@ export namespace google {
 
                     /** Gateway routingMode */
                     routingMode?: (google.cloud.networkservices.v1.Gateway.RoutingMode|keyof typeof google.cloud.networkservices.v1.Gateway.RoutingMode|null);
+
+                    /** Gateway allowGlobalAccess */
+                    allowGlobalAccess?: (boolean|null);
                 }
 
                 /** Represents a Gateway. */
@@ -7331,6 +8917,9 @@ export namespace google {
                     /** Gateway ports. */
                     public ports: number[];
 
+                    /** Gateway allPorts. */
+                    public allPorts: boolean;
+
                     /** Gateway scope. */
                     public scope: string;
 
@@ -7357,6 +8946,9 @@ export namespace google {
 
                     /** Gateway routingMode. */
                     public routingMode: (google.cloud.networkservices.v1.Gateway.RoutingMode|keyof typeof google.cloud.networkservices.v1.Gateway.RoutingMode);
+
+                    /** Gateway allowGlobalAccess. */
+                    public allowGlobalAccess: boolean;
 
                     /**
                      * Creates a new Gateway instance using the specified properties.
@@ -12343,6 +13935,9 @@ export namespace google {
 
                     /** ListHttpRoutesRequest returnPartialSuccess */
                     returnPartialSuccess?: (boolean|null);
+
+                    /** ListHttpRoutesRequest filter */
+                    filter?: (string|null);
                 }
 
                 /** Represents a ListHttpRoutesRequest. */
@@ -12365,6 +13960,9 @@ export namespace google {
 
                     /** ListHttpRoutesRequest returnPartialSuccess. */
                     public returnPartialSuccess: boolean;
+
+                    /** ListHttpRoutesRequest filter. */
+                    public filter: string;
 
                     /**
                      * Creates a new ListHttpRoutesRequest instance using the specified properties.
@@ -12661,6 +14259,9 @@ export namespace google {
 
                     /** CreateHttpRouteRequest httpRoute */
                     httpRoute?: (google.cloud.networkservices.v1.IHttpRoute|null);
+
+                    /** CreateHttpRouteRequest requestId */
+                    requestId?: (string|null);
                 }
 
                 /** Represents a CreateHttpRouteRequest. */
@@ -12680,6 +14281,9 @@ export namespace google {
 
                     /** CreateHttpRouteRequest httpRoute. */
                     public httpRoute?: (google.cloud.networkservices.v1.IHttpRoute|null);
+
+                    /** CreateHttpRouteRequest requestId. */
+                    public requestId: string;
 
                     /**
                      * Creates a new CreateHttpRouteRequest instance using the specified properties.
@@ -14559,6 +16163,76 @@ export namespace google {
                      * @returns Promise
                      */
                     public listMeshRouteViews(request: google.cloud.networkservices.v1.IListMeshRouteViewsRequest): Promise<google.cloud.networkservices.v1.ListMeshRouteViewsResponse>;
+
+                    /**
+                     * Calls ListAgentGateways.
+                     * @param request ListAgentGatewaysRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAgentGatewaysResponse
+                     */
+                    public listAgentGateways(request: google.cloud.networkservices.v1.IListAgentGatewaysRequest, callback: google.cloud.networkservices.v1.NetworkServices.ListAgentGatewaysCallback): void;
+
+                    /**
+                     * Calls ListAgentGateways.
+                     * @param request ListAgentGatewaysRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAgentGateways(request: google.cloud.networkservices.v1.IListAgentGatewaysRequest): Promise<google.cloud.networkservices.v1.ListAgentGatewaysResponse>;
+
+                    /**
+                     * Calls GetAgentGateway.
+                     * @param request GetAgentGatewayRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AgentGateway
+                     */
+                    public getAgentGateway(request: google.cloud.networkservices.v1.IGetAgentGatewayRequest, callback: google.cloud.networkservices.v1.NetworkServices.GetAgentGatewayCallback): void;
+
+                    /**
+                     * Calls GetAgentGateway.
+                     * @param request GetAgentGatewayRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAgentGateway(request: google.cloud.networkservices.v1.IGetAgentGatewayRequest): Promise<google.cloud.networkservices.v1.AgentGateway>;
+
+                    /**
+                     * Calls CreateAgentGateway.
+                     * @param request CreateAgentGatewayRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createAgentGateway(request: google.cloud.networkservices.v1.ICreateAgentGatewayRequest, callback: google.cloud.networkservices.v1.NetworkServices.CreateAgentGatewayCallback): void;
+
+                    /**
+                     * Calls CreateAgentGateway.
+                     * @param request CreateAgentGatewayRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createAgentGateway(request: google.cloud.networkservices.v1.ICreateAgentGatewayRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateAgentGateway.
+                     * @param request UpdateAgentGatewayRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateAgentGateway(request: google.cloud.networkservices.v1.IUpdateAgentGatewayRequest, callback: google.cloud.networkservices.v1.NetworkServices.UpdateAgentGatewayCallback): void;
+
+                    /**
+                     * Calls UpdateAgentGateway.
+                     * @param request UpdateAgentGatewayRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateAgentGateway(request: google.cloud.networkservices.v1.IUpdateAgentGatewayRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteAgentGateway.
+                     * @param request DeleteAgentGatewayRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteAgentGateway(request: google.cloud.networkservices.v1.IDeleteAgentGatewayRequest, callback: google.cloud.networkservices.v1.NetworkServices.DeleteAgentGatewayCallback): void;
+
+                    /**
+                     * Calls DeleteAgentGateway.
+                     * @param request DeleteAgentGatewayRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteAgentGateway(request: google.cloud.networkservices.v1.IDeleteAgentGatewayRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace NetworkServices {
@@ -14968,6 +16642,41 @@ export namespace google {
                      * @param [response] ListMeshRouteViewsResponse
                      */
                     type ListMeshRouteViewsCallback = (error: (Error|null), response?: google.cloud.networkservices.v1.ListMeshRouteViewsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|listAgentGateways}.
+                     * @param error Error, if any
+                     * @param [response] ListAgentGatewaysResponse
+                     */
+                    type ListAgentGatewaysCallback = (error: (Error|null), response?: google.cloud.networkservices.v1.ListAgentGatewaysResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|getAgentGateway}.
+                     * @param error Error, if any
+                     * @param [response] AgentGateway
+                     */
+                    type GetAgentGatewayCallback = (error: (Error|null), response?: google.cloud.networkservices.v1.AgentGateway) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|createAgentGateway}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateAgentGatewayCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|updateAgentGateway}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateAgentGatewayCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|deleteAgentGateway}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteAgentGatewayCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of a GatewayRouteView. */
@@ -18913,6 +20622,9 @@ export namespace google {
                     /** TlsRoute gateways */
                     gateways?: (string[]|null);
 
+                    /** TlsRoute targetProxies */
+                    targetProxies?: (string[]|null);
+
                     /** TlsRoute labels */
                     labels?: ({ [k: string]: string }|null);
                 }
@@ -18949,6 +20661,9 @@ export namespace google {
 
                     /** TlsRoute gateways. */
                     public gateways: string[];
+
+                    /** TlsRoute targetProxies. */
+                    public targetProxies: string[];
 
                     /** TlsRoute labels. */
                     public labels: { [k: string]: string };
@@ -23742,6 +25457,258 @@ export namespace google {
             IDENTIFIER = 8
         }
 
+        /** Properties of a ResourceDescriptor. */
+        interface IResourceDescriptor {
+
+            /** ResourceDescriptor type */
+            type?: (string|null);
+
+            /** ResourceDescriptor pattern */
+            pattern?: (string[]|null);
+
+            /** ResourceDescriptor nameField */
+            nameField?: (string|null);
+
+            /** ResourceDescriptor history */
+            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
+
+            /** ResourceDescriptor plural */
+            plural?: (string|null);
+
+            /** ResourceDescriptor singular */
+            singular?: (string|null);
+
+            /** ResourceDescriptor style */
+            style?: (google.api.ResourceDescriptor.Style[]|null);
+        }
+
+        /** Represents a ResourceDescriptor. */
+        class ResourceDescriptor implements IResourceDescriptor {
+
+            /**
+             * Constructs a new ResourceDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceDescriptor);
+
+            /** ResourceDescriptor type. */
+            public type: string;
+
+            /** ResourceDescriptor pattern. */
+            public pattern: string[];
+
+            /** ResourceDescriptor nameField. */
+            public nameField: string;
+
+            /** ResourceDescriptor history. */
+            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
+
+            /** ResourceDescriptor plural. */
+            public plural: string;
+
+            /** ResourceDescriptor singular. */
+            public singular: string;
+
+            /** ResourceDescriptor style. */
+            public style: google.api.ResourceDescriptor.Style[];
+
+            /**
+             * Creates a new ResourceDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceDescriptor instance
+             */
+            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
+
+            /**
+             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
+
+            /**
+             * Verifies a ResourceDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
+
+            /**
+             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+             * @param message ResourceDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ResourceDescriptor
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace ResourceDescriptor {
+
+            /** History enum. */
+            enum History {
+                HISTORY_UNSPECIFIED = 0,
+                ORIGINALLY_SINGLE_PATTERN = 1,
+                FUTURE_MULTI_PATTERN = 2
+            }
+
+            /** Style enum. */
+            enum Style {
+                STYLE_UNSPECIFIED = 0,
+                DECLARATIVE_FRIENDLY = 1
+            }
+        }
+
+        /** Properties of a ResourceReference. */
+        interface IResourceReference {
+
+            /** ResourceReference type */
+            type?: (string|null);
+
+            /** ResourceReference childType */
+            childType?: (string|null);
+        }
+
+        /** Represents a ResourceReference. */
+        class ResourceReference implements IResourceReference {
+
+            /**
+             * Constructs a new ResourceReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceReference);
+
+            /** ResourceReference type. */
+            public type: string;
+
+            /** ResourceReference childType. */
+            public childType: string;
+
+            /**
+             * Creates a new ResourceReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceReference instance
+             */
+            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
+
+            /**
+             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
+
+            /**
+             * Verifies a ResourceReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
+
+            /**
+             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+             * @param message ResourceReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ResourceReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of a Http. */
         interface IHttp {
 
@@ -26039,258 +28006,6 @@ export namespace google {
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
-
-        /** Properties of a ResourceDescriptor. */
-        interface IResourceDescriptor {
-
-            /** ResourceDescriptor type */
-            type?: (string|null);
-
-            /** ResourceDescriptor pattern */
-            pattern?: (string[]|null);
-
-            /** ResourceDescriptor nameField */
-            nameField?: (string|null);
-
-            /** ResourceDescriptor history */
-            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
-
-            /** ResourceDescriptor plural */
-            plural?: (string|null);
-
-            /** ResourceDescriptor singular */
-            singular?: (string|null);
-
-            /** ResourceDescriptor style */
-            style?: (google.api.ResourceDescriptor.Style[]|null);
-        }
-
-        /** Represents a ResourceDescriptor. */
-        class ResourceDescriptor implements IResourceDescriptor {
-
-            /**
-             * Constructs a new ResourceDescriptor.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceDescriptor);
-
-            /** ResourceDescriptor type. */
-            public type: string;
-
-            /** ResourceDescriptor pattern. */
-            public pattern: string[];
-
-            /** ResourceDescriptor nameField. */
-            public nameField: string;
-
-            /** ResourceDescriptor history. */
-            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
-
-            /** ResourceDescriptor plural. */
-            public plural: string;
-
-            /** ResourceDescriptor singular. */
-            public singular: string;
-
-            /** ResourceDescriptor style. */
-            public style: google.api.ResourceDescriptor.Style[];
-
-            /**
-             * Creates a new ResourceDescriptor instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceDescriptor instance
-             */
-            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
-
-            /**
-             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
-
-            /**
-             * Verifies a ResourceDescriptor message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceDescriptor
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
-
-            /**
-             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-             * @param message ResourceDescriptor
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceDescriptor to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for ResourceDescriptor
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace ResourceDescriptor {
-
-            /** History enum. */
-            enum History {
-                HISTORY_UNSPECIFIED = 0,
-                ORIGINALLY_SINGLE_PATTERN = 1,
-                FUTURE_MULTI_PATTERN = 2
-            }
-
-            /** Style enum. */
-            enum Style {
-                STYLE_UNSPECIFIED = 0,
-                DECLARATIVE_FRIENDLY = 1
-            }
-        }
-
-        /** Properties of a ResourceReference. */
-        interface IResourceReference {
-
-            /** ResourceReference type */
-            type?: (string|null);
-
-            /** ResourceReference childType */
-            childType?: (string|null);
-        }
-
-        /** Represents a ResourceReference. */
-        class ResourceReference implements IResourceReference {
-
-            /**
-             * Constructs a new ResourceReference.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceReference);
-
-            /** ResourceReference type. */
-            public type: string;
-
-            /** ResourceReference childType. */
-            public childType: string;
-
-            /**
-             * Creates a new ResourceReference instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceReference instance
-             */
-            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
-
-            /**
-             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
-
-            /**
-             * Verifies a ResourceReference message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceReference
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
-
-            /**
-             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-             * @param message ResourceReference
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceReference to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for ResourceReference
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
     }
 
     /** Namespace protobuf. */
@@ -28485,11 +30200,11 @@ export namespace google {
             /** FieldOptions .google.api.fieldBehavior */
             ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
 
-            /** FieldOptions .google.api.fieldInfo */
-            ".google.api.fieldInfo"?: (google.api.IFieldInfo|null);
-
             /** FieldOptions .google.api.resourceReference */
             ".google.api.resourceReference"?: (google.api.IResourceReference|null);
+
+            /** FieldOptions .google.api.fieldInfo */
+            ".google.api.fieldInfo"?: (google.api.IFieldInfo|null);
         }
 
         /** Represents a FieldOptions. */
@@ -30688,6 +32403,103 @@ export namespace google {
             VISIBILITY_EXPORT = 2
         }
 
+        /** Properties of a FieldMask. */
+        interface IFieldMask {
+
+            /** FieldMask paths */
+            paths?: (string[]|null);
+        }
+
+        /** Represents a FieldMask. */
+        class FieldMask implements IFieldMask {
+
+            /**
+             * Constructs a new FieldMask.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFieldMask);
+
+            /** FieldMask paths. */
+            public paths: string[];
+
+            /**
+             * Creates a new FieldMask instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldMask instance
+             */
+            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
+
+            /**
+             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
+
+            /**
+             * Verifies a FieldMask message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldMask
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
+
+            /**
+             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+             * @param message FieldMask
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldMask to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldMask
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of a Timestamp. */
         interface ITimestamp {
 
@@ -31082,103 +32894,6 @@ export namespace google {
 
             /**
              * Gets the default type url for Empty
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a FieldMask. */
-        interface IFieldMask {
-
-            /** FieldMask paths */
-            paths?: (string[]|null);
-        }
-
-        /** Represents a FieldMask. */
-        class FieldMask implements IFieldMask {
-
-            /**
-             * Constructs a new FieldMask.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IFieldMask);
-
-            /** FieldMask paths. */
-            public paths: string[];
-
-            /**
-             * Creates a new FieldMask instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns FieldMask instance
-             */
-            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
-
-            /**
-             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-             * @param message FieldMask message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-             * @param message FieldMask message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a FieldMask message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns FieldMask
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
-
-            /**
-             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns FieldMask
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
-
-            /**
-             * Verifies a FieldMask message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns FieldMask
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
-
-            /**
-             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
-             * @param message FieldMask
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this FieldMask to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for FieldMask
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
