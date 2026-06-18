@@ -192,6 +192,10 @@ libraries:
       nodejs_apis:
         - omit_common_resources: true
           path: google/cloud/advisorynotifications/v1
+  - name: google-cloud-agentregistry
+    apis:
+      - path: google/cloud/agentregistry/v1
+    copyright_year: "2026"
   - name: google-cloud-aiplatform
     version: 6.8.1
     apis:
@@ -669,7 +673,6 @@ libraries:
     apis:
       - path: google/cloud/dataproc/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       main_service: dataproc
@@ -1860,7 +1863,6 @@ libraries:
     apis:
       - path: google/monitoring/dashboard/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/monitoring-dashboards'
@@ -2013,9 +2015,17 @@ libraries:
   - name: google-storage-control
     version: 0.10.0
     apis:
+      - path: google/storage/v2
       - path: google/storage/control/v2
     copyright_year: "2026"
-    skip_generate: true
+    keep:
+      - src/util/ast_utils.ts
+      - src/util/index_fix_utils.ts
+      - src/util/proto_utils.ts
+      - src/util/samples_and_doc_fix_utils.ts
+      - src/util/storage_control_utils.ts
+      - src/util/uber_client_builder.ts
+      - test/storage_control_compatibility.ts
     nodejs:
       default_version: v2
       package_name: '@google-cloud/storage-control'

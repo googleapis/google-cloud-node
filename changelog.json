@@ -4,6 +4,39 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "75f148ca83618193c884e139ff8ed76e28854d2d",
+          "message": "Port GDCH credentials support to Node.js Auth SDK",
+          "issues": [
+            "8301"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "10.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-auth-library",
+      "id": "6a306654-ec88-4349-9e08-6183c563dae9",
+      "createTime": "2026-06-18T00:26:09.772Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "c1a03fe604662091be283055c7d34052c64d6334",
           "message": "Change the copyright year for files in the packages folder",
@@ -80741,5 +80774,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-06-18T00:26:09.228Z"
+  "updateTime": "2026-06-18T00:26:09.772Z"
 }
