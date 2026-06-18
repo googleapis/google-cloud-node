@@ -16,8 +16,8 @@ version: v0.20.0
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
-    commit: 05c4b6d37258ab81054529451cdf804f2918441f
-    sha256: 4ddc45ca7bfc92cc723162ca9f6721c34c5c56003f2b0f6254350bf769593839
+    commit: 4c284f1366a46993646dc9267cba257acbab6f45
+    sha256: 449ecc0edd76de7d592cf7f5c2a98070bef11af2593f8b64428e71b11211857e
 default:
   keep:
     - librarian.js
@@ -1567,9 +1567,7 @@ libraries:
     version: 0.1.1
     apis:
       - path: google/cloud/visionai/v1
-      - path: google/cloud/visionai/v1alpha1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-vmmigration

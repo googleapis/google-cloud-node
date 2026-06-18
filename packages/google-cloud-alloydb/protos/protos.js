@@ -771,6 +771,7 @@
                      * @property {number} POSTGRES_15=3 POSTGRES_15 value
                      * @property {number} POSTGRES_16=4 POSTGRES_16 value
                      * @property {number} POSTGRES_17=5 POSTGRES_17 value
+                     * @property {number} POSTGRES_18=6 POSTGRES_18 value
                      */
                     v1.DatabaseVersion = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -780,6 +781,7 @@
                         values[valuesById[3] = "POSTGRES_15"] = 3;
                         values[valuesById[4] = "POSTGRES_16"] = 4;
                         values[valuesById[5] = "POSTGRES_17"] = 5;
+                        values[valuesById[6] = "POSTGRES_18"] = 6;
                         return values;
                     })();
     
@@ -6516,6 +6518,7 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.networkConfig != null && message.hasOwnProperty("networkConfig")) {
@@ -6793,6 +6796,10 @@
                             case "POSTGRES_17":
                             case 5:
                                 message.databaseVersion = 5;
+                                break;
+                            case "POSTGRES_18":
+                            case 6:
+                                message.databaseVersion = 6;
                                 break;
                             }
                             if (object.networkConfig != null) {
@@ -14423,6 +14430,7 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.tags != null && message.hasOwnProperty("tags")) {
@@ -14621,6 +14629,10 @@
                             case "POSTGRES_17":
                             case 5:
                                 message.databaseVersion = 5;
+                                break;
+                            case "POSTGRES_18":
+                            case 6:
+                                message.databaseVersion = 6;
                                 break;
                             }
                             if (object.tags) {
@@ -15457,6 +15469,7 @@
                                     case 3:
                                     case 4:
                                     case 5:
+                                    case 6:
                                         break;
                                     }
                             }
@@ -15576,6 +15589,10 @@
                                     case "POSTGRES_17":
                                     case 5:
                                         message.supportedDbVersions[i] = 5;
+                                        break;
+                                    case "POSTGRES_18":
+                                    case 6:
+                                        message.supportedDbVersions[i] = 6;
                                         break;
                                     }
                             }
@@ -22793,6 +22810,7 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
@@ -22855,6 +22873,10 @@
                             case "POSTGRES_17":
                             case 5:
                                 message.version = 5;
+                                break;
+                            case "POSTGRES_18":
+                            case 6:
+                                message.version = 6;
                                 break;
                             }
                             if (object.requestId != null)
@@ -24224,6 +24246,7 @@
                                     case 3:
                                     case 4:
                                     case 5:
+                                    case 6:
                                         break;
                                     }
                                 if (message.stageInfo != null && message.hasOwnProperty("stageInfo")) {
@@ -24355,6 +24378,10 @@
                                 case "POSTGRES_17":
                                 case 5:
                                     message.databaseVersion = 5;
+                                    break;
+                                case "POSTGRES_18":
+                                case 6:
+                                    message.databaseVersion = 6;
                                     break;
                                 }
                                 if (object.stageInfo) {
@@ -34985,6 +35012,7 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.targetVersion != null && message.hasOwnProperty("targetVersion"))
@@ -34997,6 +35025,7 @@
                                 case 3:
                                 case 4:
                                 case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.stages != null && message.hasOwnProperty("stages")) {
@@ -35100,6 +35129,10 @@
                             case 5:
                                 message.sourceVersion = 5;
                                 break;
+                            case "POSTGRES_18":
+                            case 6:
+                                message.sourceVersion = 6;
+                                break;
                             }
                             switch (object.targetVersion) {
                             default:
@@ -35131,6 +35164,10 @@
                             case "POSTGRES_17":
                             case 5:
                                 message.targetVersion = 5;
+                                break;
+                            case "POSTGRES_18":
+                            case 6:
+                                message.targetVersion = 6;
                                 break;
                             }
                             if (object.stages) {
