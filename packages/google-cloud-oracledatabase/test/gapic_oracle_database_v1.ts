@@ -1838,6 +1838,564 @@ describe('v1.OracleDatabaseClient', () => {
     });
   });
 
+  describe('getGoldengateDeployment', () => {
+    it('invokes getGoldengateDeployment without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.GetGoldengateDeploymentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.GetGoldengateDeploymentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.GoldengateDeployment(),
+      );
+      client.innerApiCalls.getGoldengateDeployment =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getGoldengateDeployment(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getGoldengateDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGoldengateDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getGoldengateDeployment without error using callback', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.GetGoldengateDeploymentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.GetGoldengateDeploymentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.GoldengateDeployment(),
+      );
+      client.innerApiCalls.getGoldengateDeployment =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getGoldengateDeployment(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.oracledatabase.v1.IGoldengateDeployment | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getGoldengateDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGoldengateDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getGoldengateDeployment with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.GetGoldengateDeploymentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.GetGoldengateDeploymentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getGoldengateDeployment = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.getGoldengateDeployment(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.getGoldengateDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGoldengateDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getGoldengateDeployment with closed client', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.GetGoldengateDeploymentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.GetGoldengateDeploymentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.getGoldengateDeployment(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('getGoldengateConnection', () => {
+    it('invokes getGoldengateConnection without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.GetGoldengateConnectionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.GetGoldengateConnectionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.GoldengateConnection(),
+      );
+      client.innerApiCalls.getGoldengateConnection =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getGoldengateConnection(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getGoldengateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGoldengateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getGoldengateConnection without error using callback', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.GetGoldengateConnectionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.GetGoldengateConnectionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.GoldengateConnection(),
+      );
+      client.innerApiCalls.getGoldengateConnection =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getGoldengateConnection(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.oracledatabase.v1.IGoldengateConnection | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getGoldengateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGoldengateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getGoldengateConnection with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.GetGoldengateConnectionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.GetGoldengateConnectionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getGoldengateConnection = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.getGoldengateConnection(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.getGoldengateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGoldengateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getGoldengateConnection with closed client', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.GetGoldengateConnectionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.GetGoldengateConnectionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.getGoldengateConnection(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('getGoldengateConnectionAssignment', () => {
+    it('invokes getGoldengateConnectionAssignment without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.GetGoldengateConnectionAssignmentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.GetGoldengateConnectionAssignmentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.GoldengateConnectionAssignment(),
+      );
+      client.innerApiCalls.getGoldengateConnectionAssignment =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.getGoldengateConnectionAssignment(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getGoldengateConnectionAssignment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGoldengateConnectionAssignment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getGoldengateConnectionAssignment without error using callback', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.GetGoldengateConnectionAssignmentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.GetGoldengateConnectionAssignmentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.GoldengateConnectionAssignment(),
+      );
+      client.innerApiCalls.getGoldengateConnectionAssignment =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getGoldengateConnectionAssignment(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getGoldengateConnectionAssignment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGoldengateConnectionAssignment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getGoldengateConnectionAssignment with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.GetGoldengateConnectionAssignmentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.GetGoldengateConnectionAssignmentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getGoldengateConnectionAssignment = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.getGoldengateConnectionAssignment(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.getGoldengateConnectionAssignment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGoldengateConnectionAssignment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getGoldengateConnectionAssignment with closed client', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.GetGoldengateConnectionAssignmentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.GetGoldengateConnectionAssignmentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.getGoldengateConnectionAssignment(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('testGoldengateConnectionAssignment', () => {
+    it('invokes testGoldengateConnectionAssignment without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentResponse(),
+      );
+      client.innerApiCalls.testGoldengateConnectionAssignment =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.testGoldengateConnectionAssignment(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.testGoldengateConnectionAssignment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testGoldengateConnectionAssignment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes testGoldengateConnectionAssignment without error using callback', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentResponse(),
+      );
+      client.innerApiCalls.testGoldengateConnectionAssignment =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.testGoldengateConnectionAssignment(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.testGoldengateConnectionAssignment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testGoldengateConnectionAssignment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes testGoldengateConnectionAssignment with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.testGoldengateConnectionAssignment = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.testGoldengateConnectionAssignment(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.testGoldengateConnectionAssignment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testGoldengateConnectionAssignment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes testGoldengateConnectionAssignment with closed client', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.testGoldengateConnectionAssignment(request),
+        expectedError,
+      );
+    });
+  });
+
   describe('createCloudExadataInfrastructure', () => {
     it('invokes createCloudExadataInfrastructure without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
@@ -6736,6 +7294,1584 @@ describe('v1.OracleDatabaseClient', () => {
       );
       await assert.rejects(
         client.checkDeleteDbSystemProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('createGoldengateDeployment', () => {
+    it('invokes createGoldengateDeployment without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.CreateGoldengateDeploymentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.CreateGoldengateDeploymentRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createGoldengateDeployment =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createGoldengateDeployment(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createGoldengateDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGoldengateDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createGoldengateDeployment without error using callback', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.CreateGoldengateDeploymentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.CreateGoldengateDeploymentRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createGoldengateDeployment =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createGoldengateDeployment(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+              protos.google.cloud.oracledatabase.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createGoldengateDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGoldengateDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createGoldengateDeployment with call error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.CreateGoldengateDeploymentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.CreateGoldengateDeploymentRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createGoldengateDeployment = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.createGoldengateDeployment(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.createGoldengateDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGoldengateDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createGoldengateDeployment with LRO error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.CreateGoldengateDeploymentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.CreateGoldengateDeploymentRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createGoldengateDeployment = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.createGoldengateDeployment(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createGoldengateDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGoldengateDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateGoldengateDeploymentProgress without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkCreateGoldengateDeploymentProgress(
+          expectedResponse.name,
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateGoldengateDeploymentProgress with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkCreateGoldengateDeploymentProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteGoldengateDeployment', () => {
+    it('invokes deleteGoldengateDeployment without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.DeleteGoldengateDeploymentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.DeleteGoldengateDeploymentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteGoldengateDeployment =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteGoldengateDeployment(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteGoldengateDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGoldengateDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteGoldengateDeployment without error using callback', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.DeleteGoldengateDeploymentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.DeleteGoldengateDeploymentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteGoldengateDeployment =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteGoldengateDeployment(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.oracledatabase.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteGoldengateDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGoldengateDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteGoldengateDeployment with call error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.DeleteGoldengateDeploymentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.DeleteGoldengateDeploymentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteGoldengateDeployment = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.deleteGoldengateDeployment(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteGoldengateDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGoldengateDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteGoldengateDeployment with LRO error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.DeleteGoldengateDeploymentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.DeleteGoldengateDeploymentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteGoldengateDeployment = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.deleteGoldengateDeployment(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteGoldengateDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGoldengateDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteGoldengateDeploymentProgress without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkDeleteGoldengateDeploymentProgress(
+          expectedResponse.name,
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteGoldengateDeploymentProgress with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkDeleteGoldengateDeploymentProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('stopGoldengateDeployment', () => {
+    it('invokes stopGoldengateDeployment without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.StopGoldengateDeploymentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.StopGoldengateDeploymentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.stopGoldengateDeployment =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.stopGoldengateDeployment(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.stopGoldengateDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.stopGoldengateDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes stopGoldengateDeployment without error using callback', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.StopGoldengateDeploymentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.StopGoldengateDeploymentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.stopGoldengateDeployment =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.stopGoldengateDeployment(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+              protos.google.cloud.oracledatabase.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.stopGoldengateDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.stopGoldengateDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes stopGoldengateDeployment with call error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.StopGoldengateDeploymentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.StopGoldengateDeploymentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.stopGoldengateDeployment = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.stopGoldengateDeployment(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.stopGoldengateDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.stopGoldengateDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes stopGoldengateDeployment with LRO error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.StopGoldengateDeploymentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.StopGoldengateDeploymentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.stopGoldengateDeployment = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.stopGoldengateDeployment(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.stopGoldengateDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.stopGoldengateDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkStopGoldengateDeploymentProgress without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkStopGoldengateDeploymentProgress(
+          expectedResponse.name,
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkStopGoldengateDeploymentProgress with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkStopGoldengateDeploymentProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('startGoldengateDeployment', () => {
+    it('invokes startGoldengateDeployment without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.StartGoldengateDeploymentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.StartGoldengateDeploymentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.startGoldengateDeployment =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.startGoldengateDeployment(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.startGoldengateDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startGoldengateDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes startGoldengateDeployment without error using callback', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.StartGoldengateDeploymentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.StartGoldengateDeploymentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.startGoldengateDeployment =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.startGoldengateDeployment(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+              protos.google.cloud.oracledatabase.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateDeployment,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.startGoldengateDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startGoldengateDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes startGoldengateDeployment with call error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.StartGoldengateDeploymentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.StartGoldengateDeploymentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.startGoldengateDeployment = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.startGoldengateDeployment(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.startGoldengateDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startGoldengateDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes startGoldengateDeployment with LRO error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.StartGoldengateDeploymentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.StartGoldengateDeploymentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.startGoldengateDeployment = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.startGoldengateDeployment(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.startGoldengateDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startGoldengateDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkStartGoldengateDeploymentProgress without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkStartGoldengateDeploymentProgress(
+          expectedResponse.name,
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkStartGoldengateDeploymentProgress with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkStartGoldengateDeploymentProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('createGoldengateConnection', () => {
+    it('invokes createGoldengateConnection without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.CreateGoldengateConnectionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.CreateGoldengateConnectionRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createGoldengateConnection =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createGoldengateConnection(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createGoldengateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGoldengateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createGoldengateConnection without error using callback', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.CreateGoldengateConnectionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.CreateGoldengateConnectionRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createGoldengateConnection =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createGoldengateConnection(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.oracledatabase.v1.IGoldengateConnection,
+              protos.google.cloud.oracledatabase.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateConnection,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createGoldengateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGoldengateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createGoldengateConnection with call error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.CreateGoldengateConnectionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.CreateGoldengateConnectionRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createGoldengateConnection = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.createGoldengateConnection(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.createGoldengateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGoldengateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createGoldengateConnection with LRO error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.CreateGoldengateConnectionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.CreateGoldengateConnectionRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createGoldengateConnection = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.createGoldengateConnection(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createGoldengateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGoldengateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateGoldengateConnectionProgress without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkCreateGoldengateConnectionProgress(
+          expectedResponse.name,
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateGoldengateConnectionProgress with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkCreateGoldengateConnectionProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteGoldengateConnection', () => {
+    it('invokes deleteGoldengateConnection without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.DeleteGoldengateConnectionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.DeleteGoldengateConnectionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteGoldengateConnection =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteGoldengateConnection(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteGoldengateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGoldengateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteGoldengateConnection without error using callback', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.DeleteGoldengateConnectionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.DeleteGoldengateConnectionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteGoldengateConnection =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteGoldengateConnection(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.oracledatabase.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteGoldengateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGoldengateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteGoldengateConnection with call error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.DeleteGoldengateConnectionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.DeleteGoldengateConnectionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteGoldengateConnection = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.deleteGoldengateConnection(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteGoldengateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGoldengateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteGoldengateConnection with LRO error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.DeleteGoldengateConnectionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.DeleteGoldengateConnectionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteGoldengateConnection = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.deleteGoldengateConnection(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteGoldengateConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGoldengateConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteGoldengateConnectionProgress without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkDeleteGoldengateConnectionProgress(
+          expectedResponse.name,
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteGoldengateConnectionProgress with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkDeleteGoldengateConnectionProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('createGoldengateConnectionAssignment', () => {
+    it('invokes createGoldengateConnectionAssignment without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.CreateGoldengateConnectionAssignmentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.CreateGoldengateConnectionAssignmentRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createGoldengateConnectionAssignment =
+        stubLongRunningCall(expectedResponse);
+      const [operation] =
+        await client.createGoldengateConnectionAssignment(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createGoldengateConnectionAssignment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGoldengateConnectionAssignment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createGoldengateConnectionAssignment without error using callback', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.CreateGoldengateConnectionAssignmentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.CreateGoldengateConnectionAssignmentRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createGoldengateConnectionAssignment =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createGoldengateConnectionAssignment(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment,
+              protos.google.cloud.oracledatabase.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createGoldengateConnectionAssignment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGoldengateConnectionAssignment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createGoldengateConnectionAssignment with call error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.CreateGoldengateConnectionAssignmentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.CreateGoldengateConnectionAssignmentRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createGoldengateConnectionAssignment =
+        stubLongRunningCall(undefined, expectedError);
+      await assert.rejects(
+        client.createGoldengateConnectionAssignment(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.createGoldengateConnectionAssignment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGoldengateConnectionAssignment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createGoldengateConnectionAssignment with LRO error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.CreateGoldengateConnectionAssignmentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.CreateGoldengateConnectionAssignmentRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createGoldengateConnectionAssignment =
+        stubLongRunningCall(undefined, undefined, expectedError);
+      const [operation] =
+        await client.createGoldengateConnectionAssignment(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createGoldengateConnectionAssignment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGoldengateConnectionAssignment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateGoldengateConnectionAssignmentProgress without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkCreateGoldengateConnectionAssignmentProgress(
+          expectedResponse.name,
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateGoldengateConnectionAssignmentProgress with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkCreateGoldengateConnectionAssignmentProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteGoldengateConnectionAssignment', () => {
+    it('invokes deleteGoldengateConnectionAssignment without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.DeleteGoldengateConnectionAssignmentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.DeleteGoldengateConnectionAssignmentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteGoldengateConnectionAssignment =
+        stubLongRunningCall(expectedResponse);
+      const [operation] =
+        await client.deleteGoldengateConnectionAssignment(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteGoldengateConnectionAssignment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGoldengateConnectionAssignment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteGoldengateConnectionAssignment without error using callback', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.DeleteGoldengateConnectionAssignmentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.DeleteGoldengateConnectionAssignmentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteGoldengateConnectionAssignment =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteGoldengateConnectionAssignment(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.oracledatabase.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteGoldengateConnectionAssignment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGoldengateConnectionAssignment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteGoldengateConnectionAssignment with call error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.DeleteGoldengateConnectionAssignmentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.DeleteGoldengateConnectionAssignmentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteGoldengateConnectionAssignment =
+        stubLongRunningCall(undefined, expectedError);
+      await assert.rejects(
+        client.deleteGoldengateConnectionAssignment(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteGoldengateConnectionAssignment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGoldengateConnectionAssignment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteGoldengateConnectionAssignment with LRO error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.DeleteGoldengateConnectionAssignmentRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.DeleteGoldengateConnectionAssignmentRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteGoldengateConnectionAssignment =
+        stubLongRunningCall(undefined, undefined, expectedError);
+      const [operation] =
+        await client.deleteGoldengateConnectionAssignment(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteGoldengateConnectionAssignment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGoldengateConnectionAssignment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteGoldengateConnectionAssignmentProgress without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkDeleteGoldengateConnectionAssignmentProgress(
+          expectedResponse.name,
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteGoldengateConnectionAssignmentProgress with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkDeleteGoldengateConnectionAssignmentProgress(''),
         expectedError,
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -13587,6 +15723,2185 @@ describe('v1.OracleDatabaseClient', () => {
     });
   });
 
+  describe('listGoldengateDeployments', () => {
+    it('invokes listGoldengateDeployments without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateDeploymentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateDeploymentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeployment(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeployment(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeployment(),
+        ),
+      ];
+      client.innerApiCalls.listGoldengateDeployments =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listGoldengateDeployments(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listGoldengateDeployments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGoldengateDeployments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listGoldengateDeployments without error using callback', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateDeploymentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateDeploymentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeployment(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeployment(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeployment(),
+        ),
+      ];
+      client.innerApiCalls.listGoldengateDeployments =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listGoldengateDeployments(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.oracledatabase.v1.IGoldengateDeployment[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listGoldengateDeployments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGoldengateDeployments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listGoldengateDeployments with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateDeploymentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateDeploymentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listGoldengateDeployments = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.listGoldengateDeployments(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.listGoldengateDeployments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGoldengateDeployments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listGoldengateDeploymentsStream without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateDeploymentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateDeploymentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeployment(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeployment(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeployment(),
+        ),
+      ];
+      client.descriptors.page.listGoldengateDeployments.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listGoldengateDeploymentsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.oracledatabase.v1.GoldengateDeployment[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.oracledatabase.v1.GoldengateDeployment,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listGoldengateDeployments
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listGoldengateDeployments, request),
+      );
+      assert(
+        (
+          client.descriptors.page.listGoldengateDeployments
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listGoldengateDeploymentsStream with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateDeploymentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateDeploymentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listGoldengateDeployments.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listGoldengateDeploymentsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.oracledatabase.v1.GoldengateDeployment[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.oracledatabase.v1.GoldengateDeployment,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listGoldengateDeployments
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listGoldengateDeployments, request),
+      );
+      assert(
+        (
+          client.descriptors.page.listGoldengateDeployments
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listGoldengateDeployments without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateDeploymentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateDeploymentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeployment(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeployment(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeployment(),
+        ),
+      ];
+      client.descriptors.page.listGoldengateDeployments.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.oracledatabase.v1.IGoldengateDeployment[] =
+        [];
+      const iterable = client.listGoldengateDeploymentsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listGoldengateDeployments
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listGoldengateDeployments
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listGoldengateDeployments with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateDeploymentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateDeploymentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listGoldengateDeployments.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listGoldengateDeploymentsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.oracledatabase.v1.IGoldengateDeployment[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listGoldengateDeployments
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listGoldengateDeployments
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
+  describe('listGoldengateConnections', () => {
+    it('invokes listGoldengateConnections without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateConnectionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateConnectionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnection(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnection(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnection(),
+        ),
+      ];
+      client.innerApiCalls.listGoldengateConnections =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listGoldengateConnections(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listGoldengateConnections as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGoldengateConnections as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listGoldengateConnections without error using callback', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateConnectionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateConnectionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnection(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnection(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnection(),
+        ),
+      ];
+      client.innerApiCalls.listGoldengateConnections =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listGoldengateConnections(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.oracledatabase.v1.IGoldengateConnection[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listGoldengateConnections as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGoldengateConnections as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listGoldengateConnections with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateConnectionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateConnectionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listGoldengateConnections = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.listGoldengateConnections(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.listGoldengateConnections as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGoldengateConnections as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listGoldengateConnectionsStream without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateConnectionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateConnectionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnection(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnection(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnection(),
+        ),
+      ];
+      client.descriptors.page.listGoldengateConnections.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listGoldengateConnectionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.oracledatabase.v1.GoldengateConnection[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.oracledatabase.v1.GoldengateConnection,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listGoldengateConnections
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listGoldengateConnections, request),
+      );
+      assert(
+        (
+          client.descriptors.page.listGoldengateConnections
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listGoldengateConnectionsStream with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateConnectionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateConnectionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listGoldengateConnections.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listGoldengateConnectionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.oracledatabase.v1.GoldengateConnection[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.oracledatabase.v1.GoldengateConnection,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listGoldengateConnections
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listGoldengateConnections, request),
+      );
+      assert(
+        (
+          client.descriptors.page.listGoldengateConnections
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listGoldengateConnections without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateConnectionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateConnectionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnection(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnection(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnection(),
+        ),
+      ];
+      client.descriptors.page.listGoldengateConnections.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.oracledatabase.v1.IGoldengateConnection[] =
+        [];
+      const iterable = client.listGoldengateConnectionsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listGoldengateConnections
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listGoldengateConnections
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listGoldengateConnections with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateConnectionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateConnectionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listGoldengateConnections.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listGoldengateConnectionsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.oracledatabase.v1.IGoldengateConnection[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listGoldengateConnections
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listGoldengateConnections
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
+  describe('listGoldengateDeploymentVersions', () => {
+    it('invokes listGoldengateDeploymentVersions without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentVersion(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentVersion(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentVersion(),
+        ),
+      ];
+      client.innerApiCalls.listGoldengateDeploymentVersions =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listGoldengateDeploymentVersions(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listGoldengateDeploymentVersions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGoldengateDeploymentVersions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listGoldengateDeploymentVersions without error using callback', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentVersion(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentVersion(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentVersion(),
+        ),
+      ];
+      client.innerApiCalls.listGoldengateDeploymentVersions =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listGoldengateDeploymentVersions(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentVersion[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listGoldengateDeploymentVersions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGoldengateDeploymentVersions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listGoldengateDeploymentVersions with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listGoldengateDeploymentVersions = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.listGoldengateDeploymentVersions(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.listGoldengateDeploymentVersions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGoldengateDeploymentVersions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listGoldengateDeploymentVersionsStream without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentVersion(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentVersion(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentVersion(),
+        ),
+      ];
+      client.descriptors.page.listGoldengateDeploymentVersions.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listGoldengateDeploymentVersionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.oracledatabase.v1.GoldengateDeploymentVersion[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.oracledatabase.v1.GoldengateDeploymentVersion,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listGoldengateDeploymentVersions
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listGoldengateDeploymentVersions,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.listGoldengateDeploymentVersions
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listGoldengateDeploymentVersionsStream with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listGoldengateDeploymentVersions.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listGoldengateDeploymentVersionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.oracledatabase.v1.GoldengateDeploymentVersion[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.oracledatabase.v1.GoldengateDeploymentVersion,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listGoldengateDeploymentVersions
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listGoldengateDeploymentVersions,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.listGoldengateDeploymentVersions
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listGoldengateDeploymentVersions without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentVersion(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentVersion(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentVersion(),
+        ),
+      ];
+      client.descriptors.page.listGoldengateDeploymentVersions.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentVersion[] =
+        [];
+      const iterable = client.listGoldengateDeploymentVersionsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listGoldengateDeploymentVersions
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listGoldengateDeploymentVersions
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listGoldengateDeploymentVersions with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listGoldengateDeploymentVersions.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listGoldengateDeploymentVersionsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentVersion[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listGoldengateDeploymentVersions
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listGoldengateDeploymentVersions
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
+  describe('listGoldengateDeploymentTypes', () => {
+    it('invokes listGoldengateDeploymentTypes without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentType(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentType(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentType(),
+        ),
+      ];
+      client.innerApiCalls.listGoldengateDeploymentTypes =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listGoldengateDeploymentTypes(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listGoldengateDeploymentTypes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGoldengateDeploymentTypes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listGoldengateDeploymentTypes without error using callback', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentType(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentType(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentType(),
+        ),
+      ];
+      client.innerApiCalls.listGoldengateDeploymentTypes =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listGoldengateDeploymentTypes(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentType[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listGoldengateDeploymentTypes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGoldengateDeploymentTypes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listGoldengateDeploymentTypes with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listGoldengateDeploymentTypes = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.listGoldengateDeploymentTypes(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.listGoldengateDeploymentTypes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGoldengateDeploymentTypes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listGoldengateDeploymentTypesStream without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentType(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentType(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentType(),
+        ),
+      ];
+      client.descriptors.page.listGoldengateDeploymentTypes.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listGoldengateDeploymentTypesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.oracledatabase.v1.GoldengateDeploymentType[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.oracledatabase.v1.GoldengateDeploymentType,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listGoldengateDeploymentTypes
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listGoldengateDeploymentTypes,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.listGoldengateDeploymentTypes
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listGoldengateDeploymentTypesStream with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listGoldengateDeploymentTypes.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listGoldengateDeploymentTypesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.oracledatabase.v1.GoldengateDeploymentType[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.oracledatabase.v1.GoldengateDeploymentType,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listGoldengateDeploymentTypes
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listGoldengateDeploymentTypes,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.listGoldengateDeploymentTypes
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listGoldengateDeploymentTypes without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentType(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentType(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentType(),
+        ),
+      ];
+      client.descriptors.page.listGoldengateDeploymentTypes.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentType[] =
+        [];
+      const iterable = client.listGoldengateDeploymentTypesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listGoldengateDeploymentTypes
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listGoldengateDeploymentTypes
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listGoldengateDeploymentTypes with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listGoldengateDeploymentTypes.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listGoldengateDeploymentTypesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentType[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listGoldengateDeploymentTypes
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listGoldengateDeploymentTypes
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
+  describe('listGoldengateDeploymentEnvironments', () => {
+    it('invokes listGoldengateDeploymentEnvironments without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment(),
+        ),
+      ];
+      client.innerApiCalls.listGoldengateDeploymentEnvironments =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.listGoldengateDeploymentEnvironments(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listGoldengateDeploymentEnvironments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGoldengateDeploymentEnvironments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listGoldengateDeploymentEnvironments without error using callback', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment(),
+        ),
+      ];
+      client.innerApiCalls.listGoldengateDeploymentEnvironments =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listGoldengateDeploymentEnvironments(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentEnvironment[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listGoldengateDeploymentEnvironments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGoldengateDeploymentEnvironments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listGoldengateDeploymentEnvironments with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listGoldengateDeploymentEnvironments =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.listGoldengateDeploymentEnvironments(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.listGoldengateDeploymentEnvironments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGoldengateDeploymentEnvironments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listGoldengateDeploymentEnvironmentsStream without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment(),
+        ),
+      ];
+      client.descriptors.page.listGoldengateDeploymentEnvironments.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listGoldengateDeploymentEnvironmentsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listGoldengateDeploymentEnvironments
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listGoldengateDeploymentEnvironments,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.listGoldengateDeploymentEnvironments
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listGoldengateDeploymentEnvironmentsStream with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listGoldengateDeploymentEnvironments.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listGoldengateDeploymentEnvironmentsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listGoldengateDeploymentEnvironments
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listGoldengateDeploymentEnvironments,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.listGoldengateDeploymentEnvironments
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listGoldengateDeploymentEnvironments without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment(),
+        ),
+      ];
+      client.descriptors.page.listGoldengateDeploymentEnvironments.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentEnvironment[] =
+        [];
+      const iterable =
+        client.listGoldengateDeploymentEnvironmentsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listGoldengateDeploymentEnvironments
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listGoldengateDeploymentEnvironments
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listGoldengateDeploymentEnvironments with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listGoldengateDeploymentEnvironments.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable =
+        client.listGoldengateDeploymentEnvironmentsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.oracledatabase.v1.IGoldengateDeploymentEnvironment[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listGoldengateDeploymentEnvironments
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listGoldengateDeploymentEnvironments
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
+  describe('listGoldengateConnectionTypes', () => {
+    it('invokes listGoldengateConnectionTypes without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnectionType(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnectionType(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnectionType(),
+        ),
+      ];
+      client.innerApiCalls.listGoldengateConnectionTypes =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listGoldengateConnectionTypes(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listGoldengateConnectionTypes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGoldengateConnectionTypes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listGoldengateConnectionTypes without error using callback', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnectionType(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnectionType(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnectionType(),
+        ),
+      ];
+      client.innerApiCalls.listGoldengateConnectionTypes =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listGoldengateConnectionTypes(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.oracledatabase.v1.IGoldengateConnectionType[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listGoldengateConnectionTypes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGoldengateConnectionTypes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listGoldengateConnectionTypes with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listGoldengateConnectionTypes = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.listGoldengateConnectionTypes(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.listGoldengateConnectionTypes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGoldengateConnectionTypes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listGoldengateConnectionTypesStream without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnectionType(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnectionType(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnectionType(),
+        ),
+      ];
+      client.descriptors.page.listGoldengateConnectionTypes.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listGoldengateConnectionTypesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.oracledatabase.v1.GoldengateConnectionType[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.oracledatabase.v1.GoldengateConnectionType,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listGoldengateConnectionTypes
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listGoldengateConnectionTypes,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.listGoldengateConnectionTypes
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listGoldengateConnectionTypesStream with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listGoldengateConnectionTypes.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listGoldengateConnectionTypesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.oracledatabase.v1.GoldengateConnectionType[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.oracledatabase.v1.GoldengateConnectionType,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listGoldengateConnectionTypes
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listGoldengateConnectionTypes,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.listGoldengateConnectionTypes
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listGoldengateConnectionTypes without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnectionType(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnectionType(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnectionType(),
+        ),
+      ];
+      client.descriptors.page.listGoldengateConnectionTypes.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.oracledatabase.v1.IGoldengateConnectionType[] =
+        [];
+      const iterable = client.listGoldengateConnectionTypesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listGoldengateConnectionTypes
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listGoldengateConnectionTypes
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listGoldengateConnectionTypes with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listGoldengateConnectionTypes.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listGoldengateConnectionTypesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.oracledatabase.v1.IGoldengateConnectionType[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listGoldengateConnectionTypes
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listGoldengateConnectionTypes
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
   describe('listDbVersions', () => {
     it('invokes listDbVersions without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
@@ -14262,6 +18577,372 @@ describe('v1.OracleDatabaseClient', () => {
       assert(
         (
           client.descriptors.page.listDatabaseCharacterSets
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
+  describe('listGoldengateConnectionAssignments', () => {
+    it('invokes listGoldengateConnectionAssignments without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnectionAssignment(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnectionAssignment(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnectionAssignment(),
+        ),
+      ];
+      client.innerApiCalls.listGoldengateConnectionAssignments =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.listGoldengateConnectionAssignments(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listGoldengateConnectionAssignments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGoldengateConnectionAssignments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listGoldengateConnectionAssignments without error using callback', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnectionAssignment(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnectionAssignment(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnectionAssignment(),
+        ),
+      ];
+      client.innerApiCalls.listGoldengateConnectionAssignments =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listGoldengateConnectionAssignments(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listGoldengateConnectionAssignments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGoldengateConnectionAssignments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listGoldengateConnectionAssignments with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listGoldengateConnectionAssignments = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.listGoldengateConnectionAssignments(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.listGoldengateConnectionAssignments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGoldengateConnectionAssignments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listGoldengateConnectionAssignmentsStream without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnectionAssignment(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnectionAssignment(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnectionAssignment(),
+        ),
+      ];
+      client.descriptors.page.listGoldengateConnectionAssignments.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listGoldengateConnectionAssignmentsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.oracledatabase.v1.GoldengateConnectionAssignment[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.oracledatabase.v1.GoldengateConnectionAssignment,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listGoldengateConnectionAssignments
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listGoldengateConnectionAssignments,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.listGoldengateConnectionAssignments
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listGoldengateConnectionAssignmentsStream with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listGoldengateConnectionAssignments.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listGoldengateConnectionAssignmentsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.oracledatabase.v1.GoldengateConnectionAssignment[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.oracledatabase.v1.GoldengateConnectionAssignment,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listGoldengateConnectionAssignments
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listGoldengateConnectionAssignments,
+            request,
+          ),
+      );
+      assert(
+        (
+          client.descriptors.page.listGoldengateConnectionAssignments
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listGoldengateConnectionAssignments without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnectionAssignment(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnectionAssignment(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.GoldengateConnectionAssignment(),
+        ),
+      ];
+      client.descriptors.page.listGoldengateConnectionAssignments.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment[] =
+        [];
+      const iterable = client.listGoldengateConnectionAssignmentsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listGoldengateConnectionAssignments
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listGoldengateConnectionAssignments
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listGoldengateConnectionAssignments with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listGoldengateConnectionAssignments.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listGoldengateConnectionAssignmentsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listGoldengateConnectionAssignments
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listGoldengateConnectionAssignments
             .asyncIterate as SinonStub
         )
           .getCall(0)
@@ -16011,6 +20692,569 @@ describe('v1.OracleDatabaseClient', () => {
         assert.strictEqual(result, 'giVersionValue');
         assert(
           (client.pathTemplates.giVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('goldengateConnection', async () => {
+      const fakePath = '/rendered/path/goldengateConnection';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        goldengate_connection: 'goldengateConnectionValue',
+      };
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.goldengateConnectionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.goldengateConnectionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('goldengateConnectionPath', () => {
+        const result = client.goldengateConnectionPath(
+          'projectValue',
+          'locationValue',
+          'goldengateConnectionValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.goldengateConnectionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromGoldengateConnectionName', () => {
+        const result =
+          client.matchProjectFromGoldengateConnectionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.goldengateConnectionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromGoldengateConnectionName', () => {
+        const result =
+          client.matchLocationFromGoldengateConnectionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.goldengateConnectionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchGoldengateConnectionFromGoldengateConnectionName', () => {
+        const result =
+          client.matchGoldengateConnectionFromGoldengateConnectionName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'goldengateConnectionValue');
+        assert(
+          (
+            client.pathTemplates.goldengateConnectionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('goldengateConnectionAssignment', async () => {
+      const fakePath = '/rendered/path/goldengateConnectionAssignment';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        goldengate_connection_assignment: 'goldengateConnectionAssignmentValue',
+      };
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.goldengateConnectionAssignmentPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.goldengateConnectionAssignmentPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('goldengateConnectionAssignmentPath', () => {
+        const result = client.goldengateConnectionAssignmentPath(
+          'projectValue',
+          'locationValue',
+          'goldengateConnectionAssignmentValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.goldengateConnectionAssignmentPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromGoldengateConnectionAssignmentName', () => {
+        const result =
+          client.matchProjectFromGoldengateConnectionAssignmentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.goldengateConnectionAssignmentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromGoldengateConnectionAssignmentName', () => {
+        const result =
+          client.matchLocationFromGoldengateConnectionAssignmentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.goldengateConnectionAssignmentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchGoldengateConnectionAssignmentFromGoldengateConnectionAssignmentName', () => {
+        const result =
+          client.matchGoldengateConnectionAssignmentFromGoldengateConnectionAssignmentName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'goldengateConnectionAssignmentValue');
+        assert(
+          (
+            client.pathTemplates.goldengateConnectionAssignmentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('goldengateConnectionType', async () => {
+      const fakePath = '/rendered/path/goldengateConnectionType';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        goldengate_connection_type: 'goldengateConnectionTypeValue',
+      };
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.goldengateConnectionTypePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.goldengateConnectionTypePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('goldengateConnectionTypePath', () => {
+        const result = client.goldengateConnectionTypePath(
+          'projectValue',
+          'locationValue',
+          'goldengateConnectionTypeValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.goldengateConnectionTypePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromGoldengateConnectionTypeName', () => {
+        const result =
+          client.matchProjectFromGoldengateConnectionTypeName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.goldengateConnectionTypePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromGoldengateConnectionTypeName', () => {
+        const result =
+          client.matchLocationFromGoldengateConnectionTypeName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.goldengateConnectionTypePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchGoldengateConnectionTypeFromGoldengateConnectionTypeName', () => {
+        const result =
+          client.matchGoldengateConnectionTypeFromGoldengateConnectionTypeName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'goldengateConnectionTypeValue');
+        assert(
+          (
+            client.pathTemplates.goldengateConnectionTypePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('goldengateDeployment', async () => {
+      const fakePath = '/rendered/path/goldengateDeployment';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        goldengate_deployment: 'goldengateDeploymentValue',
+      };
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.goldengateDeploymentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.goldengateDeploymentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('goldengateDeploymentPath', () => {
+        const result = client.goldengateDeploymentPath(
+          'projectValue',
+          'locationValue',
+          'goldengateDeploymentValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.goldengateDeploymentPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromGoldengateDeploymentName', () => {
+        const result =
+          client.matchProjectFromGoldengateDeploymentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.goldengateDeploymentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromGoldengateDeploymentName', () => {
+        const result =
+          client.matchLocationFromGoldengateDeploymentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.goldengateDeploymentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchGoldengateDeploymentFromGoldengateDeploymentName', () => {
+        const result =
+          client.matchGoldengateDeploymentFromGoldengateDeploymentName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'goldengateDeploymentValue');
+        assert(
+          (
+            client.pathTemplates.goldengateDeploymentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('goldengateDeploymentEnvironment', async () => {
+      const fakePath = '/rendered/path/goldengateDeploymentEnvironment';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        goldengate_deployment_environment:
+          'goldengateDeploymentEnvironmentValue',
+      };
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.goldengateDeploymentEnvironmentPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.goldengateDeploymentEnvironmentPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('goldengateDeploymentEnvironmentPath', () => {
+        const result = client.goldengateDeploymentEnvironmentPath(
+          'projectValue',
+          'locationValue',
+          'goldengateDeploymentEnvironmentValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.goldengateDeploymentEnvironmentPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromGoldengateDeploymentEnvironmentName', () => {
+        const result =
+          client.matchProjectFromGoldengateDeploymentEnvironmentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.goldengateDeploymentEnvironmentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromGoldengateDeploymentEnvironmentName', () => {
+        const result =
+          client.matchLocationFromGoldengateDeploymentEnvironmentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.goldengateDeploymentEnvironmentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchGoldengateDeploymentEnvironmentFromGoldengateDeploymentEnvironmentName', () => {
+        const result =
+          client.matchGoldengateDeploymentEnvironmentFromGoldengateDeploymentEnvironmentName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'goldengateDeploymentEnvironmentValue');
+        assert(
+          (
+            client.pathTemplates.goldengateDeploymentEnvironmentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('goldengateDeploymentType', async () => {
+      const fakePath = '/rendered/path/goldengateDeploymentType';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        goldengate_deployment_type: 'goldengateDeploymentTypeValue',
+      };
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.goldengateDeploymentTypePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.goldengateDeploymentTypePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('goldengateDeploymentTypePath', () => {
+        const result = client.goldengateDeploymentTypePath(
+          'projectValue',
+          'locationValue',
+          'goldengateDeploymentTypeValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.goldengateDeploymentTypePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromGoldengateDeploymentTypeName', () => {
+        const result =
+          client.matchProjectFromGoldengateDeploymentTypeName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.goldengateDeploymentTypePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromGoldengateDeploymentTypeName', () => {
+        const result =
+          client.matchLocationFromGoldengateDeploymentTypeName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.goldengateDeploymentTypePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchGoldengateDeploymentTypeFromGoldengateDeploymentTypeName', () => {
+        const result =
+          client.matchGoldengateDeploymentTypeFromGoldengateDeploymentTypeName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'goldengateDeploymentTypeValue');
+        assert(
+          (
+            client.pathTemplates.goldengateDeploymentTypePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('goldengateDeploymentVersion', async () => {
+      const fakePath = '/rendered/path/goldengateDeploymentVersion';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        goldengate_deployment_version: 'goldengateDeploymentVersionValue',
+      };
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.goldengateDeploymentVersionPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.goldengateDeploymentVersionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('goldengateDeploymentVersionPath', () => {
+        const result = client.goldengateDeploymentVersionPath(
+          'projectValue',
+          'locationValue',
+          'goldengateDeploymentVersionValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.goldengateDeploymentVersionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromGoldengateDeploymentVersionName', () => {
+        const result =
+          client.matchProjectFromGoldengateDeploymentVersionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.goldengateDeploymentVersionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromGoldengateDeploymentVersionName', () => {
+        const result =
+          client.matchLocationFromGoldengateDeploymentVersionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.goldengateDeploymentVersionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchGoldengateDeploymentVersionFromGoldengateDeploymentVersionName', () => {
+        const result =
+          client.matchGoldengateDeploymentVersionFromGoldengateDeploymentVersionName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'goldengateDeploymentVersionValue');
+        assert(
+          (
+            client.pathTemplates.goldengateDeploymentVersionPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath),
         );

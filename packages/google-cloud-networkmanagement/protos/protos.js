@@ -29582,6 +29582,7 @@
                          * @property {string|null} [redisInstance] Endpoint redisInstance
                          * @property {string|null} [redisCluster] Endpoint redisCluster
                          * @property {string|null} [gkePod] Endpoint gkePod
+                         * @property {string|null} [dmsPrivateConnection] Endpoint dmsPrivateConnection
                          * @property {google.cloud.networkmanagement.v1beta1.Endpoint.ICloudFunctionEndpoint|null} [cloudFunction] Endpoint cloudFunction
                          * @property {google.cloud.networkmanagement.v1beta1.Endpoint.IAppEngineVersionEndpoint|null} [appEngineVersion] Endpoint appEngineVersion
                          * @property {google.cloud.networkmanagement.v1beta1.Endpoint.ICloudRunRevisionEndpoint|null} [cloudRunRevision] Endpoint cloudRunRevision
@@ -29709,6 +29710,14 @@
                          * @instance
                          */
                         Endpoint.prototype.gkePod = "";
+    
+                        /**
+                         * Endpoint dmsPrivateConnection.
+                         * @member {string} dmsPrivateConnection
+                         * @memberof google.cloud.networkmanagement.v1beta1.Endpoint
+                         * @instance
+                         */
+                        Endpoint.prototype.dmsPrivateConnection = "";
     
                         /**
                          * Endpoint cloudFunction.
@@ -29849,6 +29858,8 @@
                                 writer.uint32(/* id 19, wireType 2 =*/154).string(message.fqdn);
                             if (message.gkePod != null && Object.hasOwnProperty.call(message, "gkePod"))
                                 writer.uint32(/* id 21, wireType 2 =*/170).string(message.gkePod);
+                            if (message.dmsPrivateConnection != null && Object.hasOwnProperty.call(message, "dmsPrivateConnection"))
+                                writer.uint32(/* id 22, wireType 2 =*/178).string(message.dmsPrivateConnection);
                             if (message.cloudRunJob != null && Object.hasOwnProperty.call(message, "cloudRunJob"))
                                 writer.uint32(/* id 24, wireType 2 =*/194).string(message.cloudRunJob);
                             return writer;
@@ -29941,6 +29952,10 @@
                                     }
                                 case 21: {
                                         message.gkePod = reader.string();
+                                        break;
+                                    }
+                                case 22: {
+                                        message.dmsPrivateConnection = reader.string();
                                         break;
                                     }
                                 case 10: {
@@ -30078,6 +30093,9 @@
                             if (message.gkePod != null && message.hasOwnProperty("gkePod"))
                                 if (!$util.isString(message.gkePod))
                                     return "gkePod: string expected";
+                            if (message.dmsPrivateConnection != null && message.hasOwnProperty("dmsPrivateConnection"))
+                                if (!$util.isString(message.dmsPrivateConnection))
+                                    return "dmsPrivateConnection: string expected";
                             if (message.cloudFunction != null && message.hasOwnProperty("cloudFunction")) {
                                 var error = $root.google.cloud.networkmanagement.v1beta1.Endpoint.CloudFunctionEndpoint.verify(message.cloudFunction, long + 1);
                                 if (error)
@@ -30233,6 +30251,8 @@
                                 message.redisCluster = String(object.redisCluster);
                             if (object.gkePod != null)
                                 message.gkePod = String(object.gkePod);
+                            if (object.dmsPrivateConnection != null)
+                                message.dmsPrivateConnection = String(object.dmsPrivateConnection);
                             if (object.cloudFunction != null) {
                                 if (typeof object.cloudFunction !== "object")
                                     throw TypeError(".google.cloud.networkmanagement.v1beta1.Endpoint.cloudFunction: object expected");
@@ -30311,6 +30331,7 @@
                                 object.redisCluster = "";
                                 object.fqdn = "";
                                 object.gkePod = "";
+                                object.dmsPrivateConnection = "";
                                 object.cloudRunJob = "";
                             }
                             if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
@@ -30360,6 +30381,8 @@
                                 object.fqdn = message.fqdn;
                             if (message.gkePod != null && message.hasOwnProperty("gkePod"))
                                 object.gkePod = message.gkePod;
+                            if (message.dmsPrivateConnection != null && message.hasOwnProperty("dmsPrivateConnection"))
+                                object.dmsPrivateConnection = message.dmsPrivateConnection;
                             if (message.cloudRunJob != null && message.hasOwnProperty("cloudRunJob"))
                                 object.cloudRunJob = message.cloudRunJob;
                             return object;
@@ -33494,6 +33517,7 @@
                          * @property {google.cloud.networkmanagement.v1beta1.IStorageBucketInfo|null} [storageBucket] Step storageBucket
                          * @property {google.cloud.networkmanagement.v1beta1.IServerlessNegInfo|null} [serverlessNeg] Step serverlessNeg
                          * @property {google.cloud.networkmanagement.v1beta1.INgfwPacketInspectionInfo|null} [ngfwPacketInspection] Step ngfwPacketInspection
+                         * @property {google.cloud.networkmanagement.v1beta1.IPrivateConnectionInfo|null} [dmsPrivateConnection] Step dmsPrivateConnection
                          */
     
                         /**
@@ -33839,17 +33863,25 @@
                          */
                         Step.prototype.ngfwPacketInspection = null;
     
+                        /**
+                         * Step dmsPrivateConnection.
+                         * @member {google.cloud.networkmanagement.v1beta1.IPrivateConnectionInfo|null|undefined} dmsPrivateConnection
+                         * @memberof google.cloud.networkmanagement.v1beta1.Step
+                         * @instance
+                         */
+                        Step.prototype.dmsPrivateConnection = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * Step stepInfo.
-                         * @member {"instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"hybridSubnet"|"vpnGateway"|"vpnTunnel"|"interconnectAttachment"|"vpcConnector"|"directVpcEgressConnection"|"serverlessExternalConnection"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"gkePod"|"ipMasqueradingSkipped"|"gkeNetworkPolicy"|"gkeNetworkPolicySkipped"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"cloudRunJob"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg"|"ngfwPacketInspection"|undefined} stepInfo
+                         * @member {"instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"hybridSubnet"|"vpnGateway"|"vpnTunnel"|"interconnectAttachment"|"vpcConnector"|"directVpcEgressConnection"|"serverlessExternalConnection"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"gkePod"|"ipMasqueradingSkipped"|"gkeNetworkPolicy"|"gkeNetworkPolicySkipped"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"cloudRunJob"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg"|"ngfwPacketInspection"|"dmsPrivateConnection"|undefined} stepInfo
                          * @memberof google.cloud.networkmanagement.v1beta1.Step
                          * @instance
                          */
                         Object.defineProperty(Step.prototype, "stepInfo", {
-                            get: $util.oneOfGetter($oneOfFields = ["instance", "firewall", "route", "endpoint", "googleService", "forwardingRule", "hybridSubnet", "vpnGateway", "vpnTunnel", "interconnectAttachment", "vpcConnector", "directVpcEgressConnection", "serverlessExternalConnection", "deliver", "forward", "abort", "drop", "loadBalancer", "network", "gkeMaster", "gkePod", "ipMasqueradingSkipped", "gkeNetworkPolicy", "gkeNetworkPolicySkipped", "cloudSqlInstance", "redisInstance", "redisCluster", "cloudFunction", "appEngineVersion", "cloudRunRevision", "cloudRunJob", "nat", "proxyConnection", "loadBalancerBackendInfo", "storageBucket", "serverlessNeg", "ngfwPacketInspection"]),
+                            get: $util.oneOfGetter($oneOfFields = ["instance", "firewall", "route", "endpoint", "googleService", "forwardingRule", "hybridSubnet", "vpnGateway", "vpnTunnel", "interconnectAttachment", "vpcConnector", "directVpcEgressConnection", "serverlessExternalConnection", "deliver", "forward", "abort", "drop", "loadBalancer", "network", "gkeMaster", "gkePod", "ipMasqueradingSkipped", "gkeNetworkPolicy", "gkeNetworkPolicySkipped", "cloudSqlInstance", "redisInstance", "redisCluster", "cloudFunction", "appEngineVersion", "cloudRunRevision", "cloudRunJob", "nat", "proxyConnection", "loadBalancerBackendInfo", "storageBucket", "serverlessNeg", "ngfwPacketInspection", "dmsPrivateConnection"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -33957,6 +33989,8 @@
                                 $root.google.cloud.networkmanagement.v1beta1.GkeNetworkPolicySkippedInfo.encode(message.gkeNetworkPolicySkipped, writer.uint32(/* id 40, wireType 2 =*/322).fork()).ldelim();
                             if (message.ngfwPacketInspection != null && Object.hasOwnProperty.call(message, "ngfwPacketInspection"))
                                 $root.google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo.encode(message.ngfwPacketInspection, writer.uint32(/* id 42, wireType 2 =*/338).fork()).ldelim();
+                            if (message.dmsPrivateConnection != null && Object.hasOwnProperty.call(message, "dmsPrivateConnection"))
+                                $root.google.cloud.networkmanagement.v1beta1.PrivateConnectionInfo.encode(message.dmsPrivateConnection, writer.uint32(/* id 43, wireType 2 =*/346).fork()).ldelim();
                             if (message.cloudRunJob != null && Object.hasOwnProperty.call(message, "cloudRunJob"))
                                 $root.google.cloud.networkmanagement.v1beta1.CloudRunJobInfo.encode(message.cloudRunJob, writer.uint32(/* id 45, wireType 2 =*/362).fork()).ldelim();
                             return writer;
@@ -34163,6 +34197,10 @@
                                         message.ngfwPacketInspection = $root.google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
+                                case 43: {
+                                        message.dmsPrivateConnection = $root.google.cloud.networkmanagement.v1beta1.PrivateConnectionInfo.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
@@ -34227,6 +34265,7 @@
                                 case 29:
                                 case 30:
                                 case 31:
+                                case 48:
                                 case 4:
                                 case 5:
                                 case 6:
@@ -34633,6 +34672,16 @@
                                         return "ngfwPacketInspection." + error;
                                 }
                             }
+                            if (message.dmsPrivateConnection != null && message.hasOwnProperty("dmsPrivateConnection")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1beta1.PrivateConnectionInfo.verify(message.dmsPrivateConnection, long + 1);
+                                    if (error)
+                                        return "dmsPrivateConnection." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -34728,6 +34777,10 @@
                             case "START_FROM_SERVERLESS_NEG":
                             case 31:
                                 message.state = 31;
+                                break;
+                            case "START_FROM_DMS_PRIVATE_CONNECTION":
+                            case 48:
+                                message.state = 48;
                                 break;
                             case "APPLY_INGRESS_FIREWALL_RULE":
                             case 4:
@@ -35039,6 +35092,11 @@
                                     throw TypeError(".google.cloud.networkmanagement.v1beta1.Step.ngfwPacketInspection: object expected");
                                 message.ngfwPacketInspection = $root.google.cloud.networkmanagement.v1beta1.NgfwPacketInspectionInfo.fromObject(object.ngfwPacketInspection, long + 1);
                             }
+                            if (object.dmsPrivateConnection != null) {
+                                if (typeof object.dmsPrivateConnection !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.Step.dmsPrivateConnection: object expected");
+                                message.dmsPrivateConnection = $root.google.cloud.networkmanagement.v1beta1.PrivateConnectionInfo.fromObject(object.dmsPrivateConnection, long + 1);
+                            }
                             return message;
                         };
     
@@ -35249,6 +35307,11 @@
                                 if (options.oneofs)
                                     object.stepInfo = "ngfwPacketInspection";
                             }
+                            if (message.dmsPrivateConnection != null && message.hasOwnProperty("dmsPrivateConnection")) {
+                                object.dmsPrivateConnection = $root.google.cloud.networkmanagement.v1beta1.PrivateConnectionInfo.toObject(message.dmsPrivateConnection, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "dmsPrivateConnection";
+                            }
                             if (message.cloudRunJob != null && message.hasOwnProperty("cloudRunJob")) {
                                 object.cloudRunJob = $root.google.cloud.networkmanagement.v1beta1.CloudRunJobInfo.toObject(message.cloudRunJob, options);
                                 if (options.oneofs)
@@ -35304,6 +35367,7 @@
                          * @property {number} START_FROM_STORAGE_BUCKET=29 START_FROM_STORAGE_BUCKET value
                          * @property {number} START_FROM_PSC_PUBLISHED_SERVICE=30 START_FROM_PSC_PUBLISHED_SERVICE value
                          * @property {number} START_FROM_SERVERLESS_NEG=31 START_FROM_SERVERLESS_NEG value
+                         * @property {number} START_FROM_DMS_PRIVATE_CONNECTION=48 START_FROM_DMS_PRIVATE_CONNECTION value
                          * @property {number} APPLY_INGRESS_FIREWALL_RULE=4 APPLY_INGRESS_FIREWALL_RULE value
                          * @property {number} APPLY_EGRESS_FIREWALL_RULE=5 APPLY_EGRESS_FIREWALL_RULE value
                          * @property {number} APPLY_ROUTE=6 APPLY_ROUTE value
@@ -35354,6 +35418,7 @@
                             values[valuesById[29] = "START_FROM_STORAGE_BUCKET"] = 29;
                             values[valuesById[30] = "START_FROM_PSC_PUBLISHED_SERVICE"] = 30;
                             values[valuesById[31] = "START_FROM_SERVERLESS_NEG"] = 31;
+                            values[valuesById[48] = "START_FROM_DMS_PRIVATE_CONNECTION"] = 48;
                             values[valuesById[4] = "APPLY_INGRESS_FIREWALL_RULE"] = 4;
                             values[valuesById[5] = "APPLY_EGRESS_FIREWALL_RULE"] = 5;
                             values[valuesById[6] = "APPLY_ROUTE"] = 6;
@@ -41635,6 +41700,7 @@
                                 case 17:
                                 case 19:
                                 case 20:
+                                case 21:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -41767,6 +41833,10 @@
                             case 20:
                                 message.target = 20;
                                 break;
+                            case "DMS_PRIVATE_CONNECTION":
+                            case 21:
+                                message.target = 21;
+                                break;
                             }
                             if (object.resourceUri != null)
                                 message.resourceUri = String(object.resourceUri);
@@ -41897,6 +41967,7 @@
                          * @property {number} REDIS_CLUSTER=17 REDIS_CLUSTER value
                          * @property {number} GKE_POD=19 GKE_POD value
                          * @property {number} CLOUD_RUN_JOB=20 CLOUD_RUN_JOB value
+                         * @property {number} DMS_PRIVATE_CONNECTION=21 DMS_PRIVATE_CONNECTION value
                          */
                         DeliverInfo.Target = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -41920,6 +41991,7 @@
                             values[valuesById[17] = "REDIS_CLUSTER"] = 17;
                             values[valuesById[19] = "GKE_POD"] = 19;
                             values[valuesById[20] = "CLOUD_RUN_JOB"] = 20;
+                            values[valuesById[21] = "DMS_PRIVATE_CONNECTION"] = 21;
                             return values;
                         })();
     
@@ -43213,6 +43285,7 @@
                                 case 17:
                                 case 18:
                                 case 19:
+                                case 114:
                                 case 20:
                                 case 38:
                                 case 36:
@@ -43280,6 +43353,7 @@
                                 case 106:
                                 case 108:
                                 case 110:
+                                case 111:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
@@ -43481,6 +43555,10 @@
                             case "DROPPED_INSIDE_CLOUD_SQL_SERVICE":
                             case 19:
                                 message.cause = 19;
+                                break;
+                            case "DROPPED_INSIDE_DMS_PRIVATE_CONNECTION":
+                            case 114:
+                                message.cause = 114;
                                 break;
                             case "GOOGLE_MANAGED_SERVICE_NO_PEERING":
                             case 20:
@@ -43750,6 +43828,10 @@
                             case 110:
                                 message.cause = 110;
                                 break;
+                            case "PRIVATE_CONNECTION_NO_RUNNING_INSTANCE":
+                            case 111:
+                                message.cause = 111;
+                                break;
                             }
                             if (object.resourceUri != null)
                                 message.resourceUri = String(object.resourceUri);
@@ -43874,6 +43956,7 @@
                          * @property {number} CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS=17 CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS value
                          * @property {number} DROPPED_INSIDE_GKE_SERVICE=18 DROPPED_INSIDE_GKE_SERVICE value
                          * @property {number} DROPPED_INSIDE_CLOUD_SQL_SERVICE=19 DROPPED_INSIDE_CLOUD_SQL_SERVICE value
+                         * @property {number} DROPPED_INSIDE_DMS_PRIVATE_CONNECTION=114 DROPPED_INSIDE_DMS_PRIVATE_CONNECTION value
                          * @property {number} GOOGLE_MANAGED_SERVICE_NO_PEERING=20 GOOGLE_MANAGED_SERVICE_NO_PEERING value
                          * @property {number} GOOGLE_MANAGED_SERVICE_NO_PSC_ENDPOINT=38 GOOGLE_MANAGED_SERVICE_NO_PSC_ENDPOINT value
                          * @property {number} GKE_PSC_ENDPOINT_MISSING=36 GKE_PSC_ENDPOINT_MISSING value
@@ -43941,6 +44024,7 @@
                          * @property {number} HYBRID_SUBNET_NO_ROUTE=106 HYBRID_SUBNET_NO_ROUTE value
                          * @property {number} GKE_NETWORK_POLICY=108 GKE_NETWORK_POLICY value
                          * @property {number} NO_VALID_ROUTE_FROM_GOOGLE_MANAGED_NETWORK_TO_DESTINATION=110 NO_VALID_ROUTE_FROM_GOOGLE_MANAGED_NETWORK_TO_DESTINATION value
+                         * @property {number} PRIVATE_CONNECTION_NO_RUNNING_INSTANCE=111 PRIVATE_CONNECTION_NO_RUNNING_INSTANCE value
                          */
                         DropInfo.Cause = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -43983,6 +44067,7 @@
                             values[valuesById[17] = "CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS"] = 17;
                             values[valuesById[18] = "DROPPED_INSIDE_GKE_SERVICE"] = 18;
                             values[valuesById[19] = "DROPPED_INSIDE_CLOUD_SQL_SERVICE"] = 19;
+                            values[valuesById[114] = "DROPPED_INSIDE_DMS_PRIVATE_CONNECTION"] = 114;
                             values[valuesById[20] = "GOOGLE_MANAGED_SERVICE_NO_PEERING"] = 20;
                             values[valuesById[38] = "GOOGLE_MANAGED_SERVICE_NO_PSC_ENDPOINT"] = 38;
                             values[valuesById[36] = "GKE_PSC_ENDPOINT_MISSING"] = 36;
@@ -44050,6 +44135,7 @@
                             values[valuesById[106] = "HYBRID_SUBNET_NO_ROUTE"] = 106;
                             values[valuesById[108] = "GKE_NETWORK_POLICY"] = 108;
                             values[valuesById[110] = "NO_VALID_ROUTE_FROM_GOOGLE_MANAGED_NETWORK_TO_DESTINATION"] = 110;
+                            values[valuesById[111] = "PRIVATE_CONNECTION_NO_RUNNING_INSTANCE"] = 111;
                             return values;
                         })();
     
@@ -50687,6 +50773,223 @@
                         };
     
                         return NgfwPacketInspectionInfo;
+                    })();
+    
+                    v1beta1.PrivateConnectionInfo = (function() {
+    
+                        /**
+                         * Properties of a PrivateConnectionInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @interface IPrivateConnectionInfo
+                         * @property {string|null} [uri] PrivateConnectionInfo uri
+                         */
+    
+                        /**
+                         * Constructs a new PrivateConnectionInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents a PrivateConnectionInfo.
+                         * @implements IPrivateConnectionInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1beta1.IPrivateConnectionInfo=} [properties] Properties to set
+                         */
+                        function PrivateConnectionInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PrivateConnectionInfo uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.networkmanagement.v1beta1.PrivateConnectionInfo
+                         * @instance
+                         */
+                        PrivateConnectionInfo.prototype.uri = "";
+    
+                        /**
+                         * Creates a new PrivateConnectionInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.PrivateConnectionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IPrivateConnectionInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1beta1.PrivateConnectionInfo} PrivateConnectionInfo instance
+                         */
+                        PrivateConnectionInfo.create = function create(properties) {
+                            return new PrivateConnectionInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PrivateConnectionInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.PrivateConnectionInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1beta1.PrivateConnectionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IPrivateConnectionInfo} message PrivateConnectionInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PrivateConnectionInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PrivateConnectionInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.PrivateConnectionInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.PrivateConnectionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IPrivateConnectionInfo} message PrivateConnectionInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PrivateConnectionInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PrivateConnectionInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1beta1.PrivateConnectionInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1beta1.PrivateConnectionInfo} PrivateConnectionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PrivateConnectionInfo.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.PrivateConnectionInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PrivateConnectionInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.PrivateConnectionInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1beta1.PrivateConnectionInfo} PrivateConnectionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PrivateConnectionInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PrivateConnectionInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1beta1.PrivateConnectionInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PrivateConnectionInfo.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PrivateConnectionInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.PrivateConnectionInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1beta1.PrivateConnectionInfo} PrivateConnectionInfo
+                         */
+                        PrivateConnectionInfo.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1beta1.PrivateConnectionInfo)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.networkmanagement.v1beta1.PrivateConnectionInfo();
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PrivateConnectionInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.PrivateConnectionInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.PrivateConnectionInfo} message PrivateConnectionInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PrivateConnectionInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.uri = "";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PrivateConnectionInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1beta1.PrivateConnectionInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PrivateConnectionInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PrivateConnectionInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1beta1.PrivateConnectionInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PrivateConnectionInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.PrivateConnectionInfo";
+                        };
+    
+                        return PrivateConnectionInfo;
                     })();
     
                     v1beta1.ReachabilityService = (function() {

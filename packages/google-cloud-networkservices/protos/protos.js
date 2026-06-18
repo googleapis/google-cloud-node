@@ -66,6 +66,3986 @@
                      */
                     var v1 = {};
     
+                    v1.AgentGateway = (function() {
+    
+                        /**
+                         * Properties of an AgentGateway.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IAgentGateway
+                         * @property {google.cloud.networkservices.v1.AgentGateway.IGoogleManaged|null} [googleManaged] AgentGateway googleManaged
+                         * @property {google.cloud.networkservices.v1.AgentGateway.ISelfManaged|null} [selfManaged] AgentGateway selfManaged
+                         * @property {string|null} [name] AgentGateway name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] AgentGateway createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] AgentGateway updateTime
+                         * @property {Object.<string,string>|null} [labels] AgentGateway labels
+                         * @property {string|null} [description] AgentGateway description
+                         * @property {string|null} [etag] AgentGateway etag
+                         * @property {Array.<google.cloud.networkservices.v1.AgentGateway.Protocol>|null} [protocols] AgentGateway protocols
+                         * @property {Array.<string>|null} [registries] AgentGateway registries
+                         * @property {google.cloud.networkservices.v1.AgentGateway.INetworkConfig|null} [networkConfig] AgentGateway networkConfig
+                         * @property {google.cloud.networkservices.v1.AgentGateway.IAgentGatewayOutputCard|null} [agentGatewayCard] AgentGateway agentGatewayCard
+                         */
+    
+                        /**
+                         * Constructs a new AgentGateway.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents an AgentGateway.
+                         * @implements IAgentGateway
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IAgentGateway=} [properties] Properties to set
+                         */
+                        function AgentGateway(properties) {
+                            this.labels = {};
+                            this.protocols = [];
+                            this.registries = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AgentGateway googleManaged.
+                         * @member {google.cloud.networkservices.v1.AgentGateway.IGoogleManaged|null|undefined} googleManaged
+                         * @memberof google.cloud.networkservices.v1.AgentGateway
+                         * @instance
+                         */
+                        AgentGateway.prototype.googleManaged = null;
+    
+                        /**
+                         * AgentGateway selfManaged.
+                         * @member {google.cloud.networkservices.v1.AgentGateway.ISelfManaged|null|undefined} selfManaged
+                         * @memberof google.cloud.networkservices.v1.AgentGateway
+                         * @instance
+                         */
+                        AgentGateway.prototype.selfManaged = null;
+    
+                        /**
+                         * AgentGateway name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkservices.v1.AgentGateway
+                         * @instance
+                         */
+                        AgentGateway.prototype.name = "";
+    
+                        /**
+                         * AgentGateway createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.networkservices.v1.AgentGateway
+                         * @instance
+                         */
+                        AgentGateway.prototype.createTime = null;
+    
+                        /**
+                         * AgentGateway updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.networkservices.v1.AgentGateway
+                         * @instance
+                         */
+                        AgentGateway.prototype.updateTime = null;
+    
+                        /**
+                         * AgentGateway labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.networkservices.v1.AgentGateway
+                         * @instance
+                         */
+                        AgentGateway.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * AgentGateway description.
+                         * @member {string} description
+                         * @memberof google.cloud.networkservices.v1.AgentGateway
+                         * @instance
+                         */
+                        AgentGateway.prototype.description = "";
+    
+                        /**
+                         * AgentGateway etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.networkservices.v1.AgentGateway
+                         * @instance
+                         */
+                        AgentGateway.prototype.etag = "";
+    
+                        /**
+                         * AgentGateway protocols.
+                         * @member {Array.<google.cloud.networkservices.v1.AgentGateway.Protocol>} protocols
+                         * @memberof google.cloud.networkservices.v1.AgentGateway
+                         * @instance
+                         */
+                        AgentGateway.prototype.protocols = $util.emptyArray;
+    
+                        /**
+                         * AgentGateway registries.
+                         * @member {Array.<string>} registries
+                         * @memberof google.cloud.networkservices.v1.AgentGateway
+                         * @instance
+                         */
+                        AgentGateway.prototype.registries = $util.emptyArray;
+    
+                        /**
+                         * AgentGateway networkConfig.
+                         * @member {google.cloud.networkservices.v1.AgentGateway.INetworkConfig|null|undefined} networkConfig
+                         * @memberof google.cloud.networkservices.v1.AgentGateway
+                         * @instance
+                         */
+                        AgentGateway.prototype.networkConfig = null;
+    
+                        /**
+                         * AgentGateway agentGatewayCard.
+                         * @member {google.cloud.networkservices.v1.AgentGateway.IAgentGatewayOutputCard|null|undefined} agentGatewayCard
+                         * @memberof google.cloud.networkservices.v1.AgentGateway
+                         * @instance
+                         */
+                        AgentGateway.prototype.agentGatewayCard = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * AgentGateway deploymentMode.
+                         * @member {"googleManaged"|"selfManaged"|undefined} deploymentMode
+                         * @memberof google.cloud.networkservices.v1.AgentGateway
+                         * @instance
+                         */
+                        Object.defineProperty(AgentGateway.prototype, "deploymentMode", {
+                            get: $util.oneOfGetter($oneOfFields = ["googleManaged", "selfManaged"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new AgentGateway instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.AgentGateway
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IAgentGateway=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.AgentGateway} AgentGateway instance
+                         */
+                        AgentGateway.create = function create(properties) {
+                            return new AgentGateway(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AgentGateway message. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.AgentGateway
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IAgentGateway} message AgentGateway message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AgentGateway.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.description);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.etag);
+                            if (message.googleManaged != null && Object.hasOwnProperty.call(message, "googleManaged"))
+                                $root.google.cloud.networkservices.v1.AgentGateway.GoogleManaged.encode(message.googleManaged, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.selfManaged != null && Object.hasOwnProperty.call(message, "selfManaged"))
+                                $root.google.cloud.networkservices.v1.AgentGateway.SelfManaged.encode(message.selfManaged, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.networkConfig != null && Object.hasOwnProperty.call(message, "networkConfig"))
+                                $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig.encode(message.networkConfig, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.agentGatewayCard != null && Object.hasOwnProperty.call(message, "agentGatewayCard"))
+                                $root.google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard.encode(message.agentGatewayCard, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.protocols != null && message.protocols.length) {
+                                writer.uint32(/* id 12, wireType 2 =*/98).fork();
+                                for (var i = 0; i < message.protocols.length; ++i)
+                                    writer.int32(message.protocols[i]);
+                                writer.ldelim();
+                            }
+                            if (message.registries != null && message.registries.length)
+                                for (var i = 0; i < message.registries.length; ++i)
+                                    writer.uint32(/* id 13, wireType 2 =*/106).string(message.registries[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AgentGateway message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.AgentGateway
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IAgentGateway} message AgentGateway message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AgentGateway.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AgentGateway message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.AgentGateway
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.AgentGateway} AgentGateway
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AgentGateway.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.AgentGateway(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 8: {
+                                        message.googleManaged = $root.google.cloud.networkservices.v1.AgentGateway.GoogleManaged.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 9: {
+                                        message.selfManaged = $root.google.cloud.networkservices.v1.AgentGateway.SelfManaged.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 4: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7, long);
+                                                break;
+                                            }
+                                        }
+                                        if (key === "__proto__")
+                                            $util.makeProp(message.labels, key);
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 5: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                case 12: {
+                                        if (!(message.protocols && message.protocols.length))
+                                            message.protocols = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.protocols.push(reader.int32());
+                                        } else
+                                            message.protocols.push(reader.int32());
+                                        break;
+                                    }
+                                case 13: {
+                                        if (!(message.registries && message.registries.length))
+                                            message.registries = [];
+                                        message.registries.push(reader.string());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.networkConfig = $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 11: {
+                                        message.agentGatewayCard = $root.google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AgentGateway message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.AgentGateway
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.AgentGateway} AgentGateway
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AgentGateway.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AgentGateway message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.AgentGateway
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AgentGateway.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            var properties = {};
+                            if (message.googleManaged != null && message.hasOwnProperty("googleManaged")) {
+                                properties.deploymentMode = 1;
+                                {
+                                    var error = $root.google.cloud.networkservices.v1.AgentGateway.GoogleManaged.verify(message.googleManaged, long + 1);
+                                    if (error)
+                                        return "googleManaged." + error;
+                                }
+                            }
+                            if (message.selfManaged != null && message.hasOwnProperty("selfManaged")) {
+                                if (properties.deploymentMode === 1)
+                                    return "deploymentMode: multiple values";
+                                properties.deploymentMode = 1;
+                                {
+                                    var error = $root.google.cloud.networkservices.v1.AgentGateway.SelfManaged.verify(message.selfManaged, long + 1);
+                                    if (error)
+                                        return "selfManaged." + error;
+                                }
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime, long + 1);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime, long + 1);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            if (message.protocols != null && message.hasOwnProperty("protocols")) {
+                                if (!Array.isArray(message.protocols))
+                                    return "protocols: array expected";
+                                for (var i = 0; i < message.protocols.length; ++i)
+                                    switch (message.protocols[i]) {
+                                    default:
+                                        return "protocols: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                            }
+                            if (message.registries != null && message.hasOwnProperty("registries")) {
+                                if (!Array.isArray(message.registries))
+                                    return "registries: array expected";
+                                for (var i = 0; i < message.registries.length; ++i)
+                                    if (!$util.isString(message.registries[i]))
+                                        return "registries: string[] expected";
+                            }
+                            if (message.networkConfig != null && message.hasOwnProperty("networkConfig")) {
+                                var error = $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig.verify(message.networkConfig, long + 1);
+                                if (error)
+                                    return "networkConfig." + error;
+                            }
+                            if (message.agentGatewayCard != null && message.hasOwnProperty("agentGatewayCard")) {
+                                var error = $root.google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard.verify(message.agentGatewayCard, long + 1);
+                                if (error)
+                                    return "agentGatewayCard." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AgentGateway message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.AgentGateway
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.AgentGateway} AgentGateway
+                         */
+                        AgentGateway.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.AgentGateway)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.networkservices.v1.AgentGateway();
+                            if (object.googleManaged != null) {
+                                if (typeof object.googleManaged !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.AgentGateway.googleManaged: object expected");
+                                message.googleManaged = $root.google.cloud.networkservices.v1.AgentGateway.GoogleManaged.fromObject(object.googleManaged, long + 1);
+                            }
+                            if (object.selfManaged != null) {
+                                if (typeof object.selfManaged !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.AgentGateway.selfManaged: object expected");
+                                message.selfManaged = $root.google.cloud.networkservices.v1.AgentGateway.SelfManaged.fromObject(object.selfManaged, long + 1);
+                            }
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.AgentGateway.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime, long + 1);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.AgentGateway.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime, long + 1);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.AgentGateway.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i) {
+                                    if (keys[i] === "__proto__")
+                                        $util.makeProp(message.labels, keys[i]);
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                                }
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            if (object.protocols) {
+                                if (!Array.isArray(object.protocols))
+                                    throw TypeError(".google.cloud.networkservices.v1.AgentGateway.protocols: array expected");
+                                message.protocols = [];
+                                for (var i = 0; i < object.protocols.length; ++i)
+                                    switch (object.protocols[i]) {
+                                    default:
+                                        if (typeof object.protocols[i] === "number") {
+                                            message.protocols[i] = object.protocols[i];
+                                            break;
+                                        }
+                                    case "PROTOCOL_UNSPECIFIED":
+                                    case 0:
+                                        message.protocols[i] = 0;
+                                        break;
+                                    case "MCP":
+                                    case 1:
+                                        message.protocols[i] = 1;
+                                        break;
+                                    }
+                            }
+                            if (object.registries) {
+                                if (!Array.isArray(object.registries))
+                                    throw TypeError(".google.cloud.networkservices.v1.AgentGateway.registries: array expected");
+                                message.registries = [];
+                                for (var i = 0; i < object.registries.length; ++i)
+                                    message.registries[i] = String(object.registries[i]);
+                            }
+                            if (object.networkConfig != null) {
+                                if (typeof object.networkConfig !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.AgentGateway.networkConfig: object expected");
+                                message.networkConfig = $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig.fromObject(object.networkConfig, long + 1);
+                            }
+                            if (object.agentGatewayCard != null) {
+                                if (typeof object.agentGatewayCard !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.AgentGateway.agentGatewayCard: object expected");
+                                message.agentGatewayCard = $root.google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard.fromObject(object.agentGatewayCard, long + 1);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AgentGateway message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.AgentGateway
+                         * @static
+                         * @param {google.cloud.networkservices.v1.AgentGateway} message AgentGateway
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AgentGateway.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.protocols = [];
+                                object.registries = [];
+                            }
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.description = "";
+                                object.etag = "";
+                                object.networkConfig = null;
+                                object.agentGatewayCard = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j) {
+                                    if (keys2[j] === "__proto__")
+                                        $util.makeProp(object.labels, keys2[j]);
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                                }
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            if (message.googleManaged != null && message.hasOwnProperty("googleManaged")) {
+                                object.googleManaged = $root.google.cloud.networkservices.v1.AgentGateway.GoogleManaged.toObject(message.googleManaged, options);
+                                if (options.oneofs)
+                                    object.deploymentMode = "googleManaged";
+                            }
+                            if (message.selfManaged != null && message.hasOwnProperty("selfManaged")) {
+                                object.selfManaged = $root.google.cloud.networkservices.v1.AgentGateway.SelfManaged.toObject(message.selfManaged, options);
+                                if (options.oneofs)
+                                    object.deploymentMode = "selfManaged";
+                            }
+                            if (message.networkConfig != null && message.hasOwnProperty("networkConfig"))
+                                object.networkConfig = $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig.toObject(message.networkConfig, options);
+                            if (message.agentGatewayCard != null && message.hasOwnProperty("agentGatewayCard"))
+                                object.agentGatewayCard = $root.google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard.toObject(message.agentGatewayCard, options);
+                            if (message.protocols && message.protocols.length) {
+                                object.protocols = [];
+                                for (var j = 0; j < message.protocols.length; ++j)
+                                    object.protocols[j] = options.enums === String ? $root.google.cloud.networkservices.v1.AgentGateway.Protocol[message.protocols[j]] === undefined ? message.protocols[j] : $root.google.cloud.networkservices.v1.AgentGateway.Protocol[message.protocols[j]] : message.protocols[j];
+                            }
+                            if (message.registries && message.registries.length) {
+                                object.registries = [];
+                                for (var j = 0; j < message.registries.length; ++j)
+                                    object.registries[j] = message.registries[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AgentGateway to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.AgentGateway
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AgentGateway.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AgentGateway
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.AgentGateway
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AgentGateway.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.AgentGateway";
+                        };
+    
+                        AgentGateway.GoogleManaged = (function() {
+    
+                            /**
+                             * Properties of a GoogleManaged.
+                             * @memberof google.cloud.networkservices.v1.AgentGateway
+                             * @interface IGoogleManaged
+                             * @property {google.cloud.networkservices.v1.AgentGateway.GoogleManaged.GovernedAccessPath|null} [governedAccessPath] GoogleManaged governedAccessPath
+                             */
+    
+                            /**
+                             * Constructs a new GoogleManaged.
+                             * @memberof google.cloud.networkservices.v1.AgentGateway
+                             * @classdesc Represents a GoogleManaged.
+                             * @implements IGoogleManaged
+                             * @constructor
+                             * @param {google.cloud.networkservices.v1.AgentGateway.IGoogleManaged=} [properties] Properties to set
+                             */
+                            function GoogleManaged(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GoogleManaged governedAccessPath.
+                             * @member {google.cloud.networkservices.v1.AgentGateway.GoogleManaged.GovernedAccessPath} governedAccessPath
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.GoogleManaged
+                             * @instance
+                             */
+                            GoogleManaged.prototype.governedAccessPath = 0;
+    
+                            /**
+                             * Creates a new GoogleManaged instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.GoogleManaged
+                             * @static
+                             * @param {google.cloud.networkservices.v1.AgentGateway.IGoogleManaged=} [properties] Properties to set
+                             * @returns {google.cloud.networkservices.v1.AgentGateway.GoogleManaged} GoogleManaged instance
+                             */
+                            GoogleManaged.create = function create(properties) {
+                                return new GoogleManaged(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GoogleManaged message. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.GoogleManaged.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.GoogleManaged
+                             * @static
+                             * @param {google.cloud.networkservices.v1.AgentGateway.IGoogleManaged} message GoogleManaged message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GoogleManaged.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.governedAccessPath != null && Object.hasOwnProperty.call(message, "governedAccessPath"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.governedAccessPath);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GoogleManaged message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.GoogleManaged.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.GoogleManaged
+                             * @static
+                             * @param {google.cloud.networkservices.v1.AgentGateway.IGoogleManaged} message GoogleManaged message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GoogleManaged.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GoogleManaged message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.GoogleManaged
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkservices.v1.AgentGateway.GoogleManaged} GoogleManaged
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GoogleManaged.decode = function decode(reader, length, error, long) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.AgentGateway.GoogleManaged();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.governedAccessPath = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7, long);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GoogleManaged message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.GoogleManaged
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkservices.v1.AgentGateway.GoogleManaged} GoogleManaged
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GoogleManaged.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GoogleManaged message.
+                             * @function verify
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.GoogleManaged
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GoogleManaged.verify = function verify(message, long) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
+                                if (message.governedAccessPath != null && message.hasOwnProperty("governedAccessPath"))
+                                    switch (message.governedAccessPath) {
+                                    default:
+                                        return "governedAccessPath: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GoogleManaged message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.GoogleManaged
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkservices.v1.AgentGateway.GoogleManaged} GoogleManaged
+                             */
+                            GoogleManaged.fromObject = function fromObject(object, long) {
+                                if (object instanceof $root.google.cloud.networkservices.v1.AgentGateway.GoogleManaged)
+                                    return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var message = new $root.google.cloud.networkservices.v1.AgentGateway.GoogleManaged();
+                                switch (object.governedAccessPath) {
+                                default:
+                                    if (typeof object.governedAccessPath === "number") {
+                                        message.governedAccessPath = object.governedAccessPath;
+                                        break;
+                                    }
+                                    break;
+                                case "GOVERNED_ACCESS_PATH_UNSPECIFIED":
+                                case 0:
+                                    message.governedAccessPath = 0;
+                                    break;
+                                case "AGENT_TO_ANYWHERE":
+                                case 1:
+                                    message.governedAccessPath = 1;
+                                    break;
+                                case "CLIENT_TO_AGENT":
+                                case 2:
+                                    message.governedAccessPath = 2;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GoogleManaged message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.GoogleManaged
+                             * @static
+                             * @param {google.cloud.networkservices.v1.AgentGateway.GoogleManaged} message GoogleManaged
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GoogleManaged.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.governedAccessPath = options.enums === String ? "GOVERNED_ACCESS_PATH_UNSPECIFIED" : 0;
+                                if (message.governedAccessPath != null && message.hasOwnProperty("governedAccessPath"))
+                                    object.governedAccessPath = options.enums === String ? $root.google.cloud.networkservices.v1.AgentGateway.GoogleManaged.GovernedAccessPath[message.governedAccessPath] === undefined ? message.governedAccessPath : $root.google.cloud.networkservices.v1.AgentGateway.GoogleManaged.GovernedAccessPath[message.governedAccessPath] : message.governedAccessPath;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GoogleManaged to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.GoogleManaged
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GoogleManaged.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GoogleManaged
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.GoogleManaged
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GoogleManaged.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkservices.v1.AgentGateway.GoogleManaged";
+                            };
+    
+                            /**
+                             * GovernedAccessPath enum.
+                             * @name google.cloud.networkservices.v1.AgentGateway.GoogleManaged.GovernedAccessPath
+                             * @enum {number}
+                             * @property {number} GOVERNED_ACCESS_PATH_UNSPECIFIED=0 GOVERNED_ACCESS_PATH_UNSPECIFIED value
+                             * @property {number} AGENT_TO_ANYWHERE=1 AGENT_TO_ANYWHERE value
+                             * @property {number} CLIENT_TO_AGENT=2 CLIENT_TO_AGENT value
+                             */
+                            GoogleManaged.GovernedAccessPath = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "GOVERNED_ACCESS_PATH_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "AGENT_TO_ANYWHERE"] = 1;
+                                values[valuesById[2] = "CLIENT_TO_AGENT"] = 2;
+                                return values;
+                            })();
+    
+                            return GoogleManaged;
+                        })();
+    
+                        AgentGateway.SelfManaged = (function() {
+    
+                            /**
+                             * Properties of a SelfManaged.
+                             * @memberof google.cloud.networkservices.v1.AgentGateway
+                             * @interface ISelfManaged
+                             * @property {string|null} [resourceUri] SelfManaged resourceUri
+                             */
+    
+                            /**
+                             * Constructs a new SelfManaged.
+                             * @memberof google.cloud.networkservices.v1.AgentGateway
+                             * @classdesc Represents a SelfManaged.
+                             * @implements ISelfManaged
+                             * @constructor
+                             * @param {google.cloud.networkservices.v1.AgentGateway.ISelfManaged=} [properties] Properties to set
+                             */
+                            function SelfManaged(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SelfManaged resourceUri.
+                             * @member {string} resourceUri
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.SelfManaged
+                             * @instance
+                             */
+                            SelfManaged.prototype.resourceUri = "";
+    
+                            /**
+                             * Creates a new SelfManaged instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.SelfManaged
+                             * @static
+                             * @param {google.cloud.networkservices.v1.AgentGateway.ISelfManaged=} [properties] Properties to set
+                             * @returns {google.cloud.networkservices.v1.AgentGateway.SelfManaged} SelfManaged instance
+                             */
+                            SelfManaged.create = function create(properties) {
+                                return new SelfManaged(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SelfManaged message. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.SelfManaged.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.SelfManaged
+                             * @static
+                             * @param {google.cloud.networkservices.v1.AgentGateway.ISelfManaged} message SelfManaged message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SelfManaged.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.resourceUri != null && Object.hasOwnProperty.call(message, "resourceUri"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.resourceUri);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SelfManaged message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.SelfManaged.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.SelfManaged
+                             * @static
+                             * @param {google.cloud.networkservices.v1.AgentGateway.ISelfManaged} message SelfManaged message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SelfManaged.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SelfManaged message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.SelfManaged
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkservices.v1.AgentGateway.SelfManaged} SelfManaged
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SelfManaged.decode = function decode(reader, length, error, long) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.AgentGateway.SelfManaged();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.resourceUri = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7, long);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SelfManaged message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.SelfManaged
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkservices.v1.AgentGateway.SelfManaged} SelfManaged
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SelfManaged.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SelfManaged message.
+                             * @function verify
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.SelfManaged
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SelfManaged.verify = function verify(message, long) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
+                                if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
+                                    if (!$util.isString(message.resourceUri))
+                                        return "resourceUri: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SelfManaged message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.SelfManaged
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkservices.v1.AgentGateway.SelfManaged} SelfManaged
+                             */
+                            SelfManaged.fromObject = function fromObject(object, long) {
+                                if (object instanceof $root.google.cloud.networkservices.v1.AgentGateway.SelfManaged)
+                                    return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var message = new $root.google.cloud.networkservices.v1.AgentGateway.SelfManaged();
+                                if (object.resourceUri != null)
+                                    message.resourceUri = String(object.resourceUri);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SelfManaged message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.SelfManaged
+                             * @static
+                             * @param {google.cloud.networkservices.v1.AgentGateway.SelfManaged} message SelfManaged
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SelfManaged.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.resourceUri = "";
+                                if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
+                                    object.resourceUri = message.resourceUri;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SelfManaged to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.SelfManaged
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SelfManaged.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SelfManaged
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.SelfManaged
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SelfManaged.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkservices.v1.AgentGateway.SelfManaged";
+                            };
+    
+                            return SelfManaged;
+                        })();
+    
+                        AgentGateway.NetworkConfig = (function() {
+    
+                            /**
+                             * Properties of a NetworkConfig.
+                             * @memberof google.cloud.networkservices.v1.AgentGateway
+                             * @interface INetworkConfig
+                             * @property {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.IEgress|null} [egress] NetworkConfig egress
+                             * @property {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.IDnsPeeringConfig|null} [dnsPeeringConfig] NetworkConfig dnsPeeringConfig
+                             */
+    
+                            /**
+                             * Constructs a new NetworkConfig.
+                             * @memberof google.cloud.networkservices.v1.AgentGateway
+                             * @classdesc Represents a NetworkConfig.
+                             * @implements INetworkConfig
+                             * @constructor
+                             * @param {google.cloud.networkservices.v1.AgentGateway.INetworkConfig=} [properties] Properties to set
+                             */
+                            function NetworkConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * NetworkConfig egress.
+                             * @member {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.IEgress|null|undefined} egress
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig
+                             * @instance
+                             */
+                            NetworkConfig.prototype.egress = null;
+    
+                            /**
+                             * NetworkConfig dnsPeeringConfig.
+                             * @member {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.IDnsPeeringConfig|null|undefined} dnsPeeringConfig
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig
+                             * @instance
+                             */
+                            NetworkConfig.prototype.dnsPeeringConfig = null;
+    
+                            /**
+                             * Creates a new NetworkConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig
+                             * @static
+                             * @param {google.cloud.networkservices.v1.AgentGateway.INetworkConfig=} [properties] Properties to set
+                             * @returns {google.cloud.networkservices.v1.AgentGateway.NetworkConfig} NetworkConfig instance
+                             */
+                            NetworkConfig.create = function create(properties) {
+                                return new NetworkConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified NetworkConfig message. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.NetworkConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig
+                             * @static
+                             * @param {google.cloud.networkservices.v1.AgentGateway.INetworkConfig} message NetworkConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NetworkConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.egress != null && Object.hasOwnProperty.call(message, "egress"))
+                                    $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.encode(message.egress, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.dnsPeeringConfig != null && Object.hasOwnProperty.call(message, "dnsPeeringConfig"))
+                                    $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig.encode(message.dnsPeeringConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified NetworkConfig message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.NetworkConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig
+                             * @static
+                             * @param {google.cloud.networkservices.v1.AgentGateway.INetworkConfig} message NetworkConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            NetworkConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a NetworkConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkservices.v1.AgentGateway.NetworkConfig} NetworkConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NetworkConfig.decode = function decode(reader, length, error, long) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.egress = $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.decode(reader, reader.uint32(), undefined, long + 1);
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.dnsPeeringConfig = $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig.decode(reader, reader.uint32(), undefined, long + 1);
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7, long);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a NetworkConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkservices.v1.AgentGateway.NetworkConfig} NetworkConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            NetworkConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a NetworkConfig message.
+                             * @function verify
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            NetworkConfig.verify = function verify(message, long) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
+                                if (message.egress != null && message.hasOwnProperty("egress")) {
+                                    var error = $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.verify(message.egress, long + 1);
+                                    if (error)
+                                        return "egress." + error;
+                                }
+                                if (message.dnsPeeringConfig != null && message.hasOwnProperty("dnsPeeringConfig")) {
+                                    var error = $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig.verify(message.dnsPeeringConfig, long + 1);
+                                    if (error)
+                                        return "dnsPeeringConfig." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a NetworkConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkservices.v1.AgentGateway.NetworkConfig} NetworkConfig
+                             */
+                            NetworkConfig.fromObject = function fromObject(object, long) {
+                                if (object instanceof $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig)
+                                    return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var message = new $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig();
+                                if (object.egress != null) {
+                                    if (typeof object.egress !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.AgentGateway.NetworkConfig.egress: object expected");
+                                    message.egress = $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.fromObject(object.egress, long + 1);
+                                }
+                                if (object.dnsPeeringConfig != null) {
+                                    if (typeof object.dnsPeeringConfig !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.AgentGateway.NetworkConfig.dnsPeeringConfig: object expected");
+                                    message.dnsPeeringConfig = $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig.fromObject(object.dnsPeeringConfig, long + 1);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a NetworkConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig
+                             * @static
+                             * @param {google.cloud.networkservices.v1.AgentGateway.NetworkConfig} message NetworkConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            NetworkConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.egress = null;
+                                    object.dnsPeeringConfig = null;
+                                }
+                                if (message.egress != null && message.hasOwnProperty("egress"))
+                                    object.egress = $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.toObject(message.egress, options);
+                                if (message.dnsPeeringConfig != null && message.hasOwnProperty("dnsPeeringConfig"))
+                                    object.dnsPeeringConfig = $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig.toObject(message.dnsPeeringConfig, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this NetworkConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            NetworkConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for NetworkConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            NetworkConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkservices.v1.AgentGateway.NetworkConfig";
+                            };
+    
+                            NetworkConfig.Egress = (function() {
+    
+                                /**
+                                 * Properties of an Egress.
+                                 * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig
+                                 * @interface IEgress
+                                 * @property {string|null} [networkAttachment] Egress networkAttachment
+                                 * @property {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.ITrustConfig|null} [trustConfig] Egress trustConfig
+                                 */
+    
+                                /**
+                                 * Constructs a new Egress.
+                                 * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig
+                                 * @classdesc Represents an Egress.
+                                 * @implements IEgress
+                                 * @constructor
+                                 * @param {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.IEgress=} [properties] Properties to set
+                                 */
+                                function Egress(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Egress networkAttachment.
+                                 * @member {string} networkAttachment
+                                 * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress
+                                 * @instance
+                                 */
+                                Egress.prototype.networkAttachment = "";
+    
+                                /**
+                                 * Egress trustConfig.
+                                 * @member {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.ITrustConfig|null|undefined} trustConfig
+                                 * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress
+                                 * @instance
+                                 */
+                                Egress.prototype.trustConfig = null;
+    
+                                /**
+                                 * Creates a new Egress instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress
+                                 * @static
+                                 * @param {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.IEgress=} [properties] Properties to set
+                                 * @returns {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress} Egress instance
+                                 */
+                                Egress.create = function create(properties) {
+                                    return new Egress(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Egress message. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress
+                                 * @static
+                                 * @param {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.IEgress} message Egress message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Egress.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.networkAttachment != null && Object.hasOwnProperty.call(message, "networkAttachment"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.networkAttachment);
+                                    if (message.trustConfig != null && Object.hasOwnProperty.call(message, "trustConfig"))
+                                        $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig.encode(message.trustConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Egress message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress
+                                 * @static
+                                 * @param {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.IEgress} message Egress message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Egress.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an Egress message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress} Egress
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Egress.decode = function decode(reader, length, error, long) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.networkAttachment = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.trustConfig = $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig.decode(reader, reader.uint32(), undefined, long + 1);
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7, long);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an Egress message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress} Egress
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Egress.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an Egress message.
+                                 * @function verify
+                                 * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Egress.verify = function verify(message, long) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
+                                    if (message.networkAttachment != null && message.hasOwnProperty("networkAttachment"))
+                                        if (!$util.isString(message.networkAttachment))
+                                            return "networkAttachment: string expected";
+                                    if (message.trustConfig != null && message.hasOwnProperty("trustConfig")) {
+                                        var error = $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig.verify(message.trustConfig, long + 1);
+                                        if (error)
+                                            return "trustConfig." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an Egress message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress} Egress
+                                 */
+                                Egress.fromObject = function fromObject(object, long) {
+                                    if (object instanceof $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress)
+                                        return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var message = new $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress();
+                                    if (object.networkAttachment != null)
+                                        message.networkAttachment = String(object.networkAttachment);
+                                    if (object.trustConfig != null) {
+                                        if (typeof object.trustConfig !== "object")
+                                            throw TypeError(".google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.trustConfig: object expected");
+                                        message.trustConfig = $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig.fromObject(object.trustConfig, long + 1);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an Egress message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress
+                                 * @static
+                                 * @param {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress} message Egress
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Egress.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.networkAttachment = "";
+                                        object.trustConfig = null;
+                                    }
+                                    if (message.networkAttachment != null && message.hasOwnProperty("networkAttachment"))
+                                        object.networkAttachment = message.networkAttachment;
+                                    if (message.trustConfig != null && message.hasOwnProperty("trustConfig"))
+                                        object.trustConfig = $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig.toObject(message.trustConfig, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Egress to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Egress.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Egress
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Egress.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress";
+                                };
+    
+                                Egress.TrustConfig = (function() {
+    
+                                    /**
+                                     * Properties of a TrustConfig.
+                                     * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress
+                                     * @interface ITrustConfig
+                                     * @property {Array.<string>|null} [pemCertificates] TrustConfig pemCertificates
+                                     */
+    
+                                    /**
+                                     * Constructs a new TrustConfig.
+                                     * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress
+                                     * @classdesc Represents a TrustConfig.
+                                     * @implements ITrustConfig
+                                     * @constructor
+                                     * @param {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.ITrustConfig=} [properties] Properties to set
+                                     */
+                                    function TrustConfig(properties) {
+                                        this.pemCertificates = [];
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * TrustConfig pemCertificates.
+                                     * @member {Array.<string>} pemCertificates
+                                     * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig
+                                     * @instance
+                                     */
+                                    TrustConfig.prototype.pemCertificates = $util.emptyArray;
+    
+                                    /**
+                                     * Creates a new TrustConfig instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig
+                                     * @static
+                                     * @param {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.ITrustConfig=} [properties] Properties to set
+                                     * @returns {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig} TrustConfig instance
+                                     */
+                                    TrustConfig.create = function create(properties) {
+                                        return new TrustConfig(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified TrustConfig message. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig
+                                     * @static
+                                     * @param {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.ITrustConfig} message TrustConfig message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    TrustConfig.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.pemCertificates != null && message.pemCertificates.length)
+                                            for (var i = 0; i < message.pemCertificates.length; ++i)
+                                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.pemCertificates[i]);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified TrustConfig message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig
+                                     * @static
+                                     * @param {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.ITrustConfig} message TrustConfig message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    TrustConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a TrustConfig message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig} TrustConfig
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    TrustConfig.decode = function decode(reader, length, error, long) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        if (long === undefined)
+                                            long = 0;
+                                        if (long > $Reader.recursionLimit)
+                                            throw Error("maximum nesting depth exceeded");
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    if (!(message.pemCertificates && message.pemCertificates.length))
+                                                        message.pemCertificates = [];
+                                                    message.pemCertificates.push(reader.string());
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7, long);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a TrustConfig message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig} TrustConfig
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    TrustConfig.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a TrustConfig message.
+                                     * @function verify
+                                     * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    TrustConfig.verify = function verify(message, long) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (long === undefined)
+                                            long = 0;
+                                        if (long > $util.recursionLimit)
+                                            return "maximum nesting depth exceeded";
+                                        if (message.pemCertificates != null && message.hasOwnProperty("pemCertificates")) {
+                                            if (!Array.isArray(message.pemCertificates))
+                                                return "pemCertificates: array expected";
+                                            for (var i = 0; i < message.pemCertificates.length; ++i)
+                                                if (!$util.isString(message.pemCertificates[i]))
+                                                    return "pemCertificates: string[] expected";
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a TrustConfig message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig} TrustConfig
+                                     */
+                                    TrustConfig.fromObject = function fromObject(object, long) {
+                                        if (object instanceof $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig)
+                                            return object;
+                                        if (long === undefined)
+                                            long = 0;
+                                        if (long > $util.recursionLimit)
+                                            throw Error("maximum nesting depth exceeded");
+                                        var message = new $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig();
+                                        if (object.pemCertificates) {
+                                            if (!Array.isArray(object.pemCertificates))
+                                                throw TypeError(".google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig.pemCertificates: array expected");
+                                            message.pemCertificates = [];
+                                            for (var i = 0; i < object.pemCertificates.length; ++i)
+                                                message.pemCertificates[i] = String(object.pemCertificates[i]);
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a TrustConfig message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig
+                                     * @static
+                                     * @param {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig} message TrustConfig
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    TrustConfig.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.arrays || options.defaults)
+                                            object.pemCertificates = [];
+                                        if (message.pemCertificates && message.pemCertificates.length) {
+                                            object.pemCertificates = [];
+                                            for (var j = 0; j < message.pemCertificates.length; ++j)
+                                                object.pemCertificates[j] = message.pemCertificates[j];
+                                        }
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this TrustConfig to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    TrustConfig.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for TrustConfig
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    TrustConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig";
+                                    };
+    
+                                    return TrustConfig;
+                                })();
+    
+                                return Egress;
+                            })();
+    
+                            NetworkConfig.DnsPeeringConfig = (function() {
+    
+                                /**
+                                 * Properties of a DnsPeeringConfig.
+                                 * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig
+                                 * @interface IDnsPeeringConfig
+                                 * @property {Array.<string>|null} [domains] DnsPeeringConfig domains
+                                 * @property {string|null} [targetProject] DnsPeeringConfig targetProject
+                                 * @property {string|null} [targetNetwork] DnsPeeringConfig targetNetwork
+                                 */
+    
+                                /**
+                                 * Constructs a new DnsPeeringConfig.
+                                 * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig
+                                 * @classdesc Represents a DnsPeeringConfig.
+                                 * @implements IDnsPeeringConfig
+                                 * @constructor
+                                 * @param {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.IDnsPeeringConfig=} [properties] Properties to set
+                                 */
+                                function DnsPeeringConfig(properties) {
+                                    this.domains = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * DnsPeeringConfig domains.
+                                 * @member {Array.<string>} domains
+                                 * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig
+                                 * @instance
+                                 */
+                                DnsPeeringConfig.prototype.domains = $util.emptyArray;
+    
+                                /**
+                                 * DnsPeeringConfig targetProject.
+                                 * @member {string} targetProject
+                                 * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig
+                                 * @instance
+                                 */
+                                DnsPeeringConfig.prototype.targetProject = "";
+    
+                                /**
+                                 * DnsPeeringConfig targetNetwork.
+                                 * @member {string} targetNetwork
+                                 * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig
+                                 * @instance
+                                 */
+                                DnsPeeringConfig.prototype.targetNetwork = "";
+    
+                                /**
+                                 * Creates a new DnsPeeringConfig instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig
+                                 * @static
+                                 * @param {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.IDnsPeeringConfig=} [properties] Properties to set
+                                 * @returns {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig} DnsPeeringConfig instance
+                                 */
+                                DnsPeeringConfig.create = function create(properties) {
+                                    return new DnsPeeringConfig(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified DnsPeeringConfig message. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig
+                                 * @static
+                                 * @param {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.IDnsPeeringConfig} message DnsPeeringConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                DnsPeeringConfig.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.domains != null && message.domains.length)
+                                        for (var i = 0; i < message.domains.length; ++i)
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.domains[i]);
+                                    if (message.targetProject != null && Object.hasOwnProperty.call(message, "targetProject"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.targetProject);
+                                    if (message.targetNetwork != null && Object.hasOwnProperty.call(message, "targetNetwork"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.targetNetwork);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified DnsPeeringConfig message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig
+                                 * @static
+                                 * @param {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.IDnsPeeringConfig} message DnsPeeringConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                DnsPeeringConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a DnsPeeringConfig message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig} DnsPeeringConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                DnsPeeringConfig.decode = function decode(reader, length, error, long) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $Reader.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                if (!(message.domains && message.domains.length))
+                                                    message.domains = [];
+                                                message.domains.push(reader.string());
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.targetProject = reader.string();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.targetNetwork = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7, long);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a DnsPeeringConfig message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig} DnsPeeringConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                DnsPeeringConfig.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a DnsPeeringConfig message.
+                                 * @function verify
+                                 * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                DnsPeeringConfig.verify = function verify(message, long) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        return "maximum nesting depth exceeded";
+                                    if (message.domains != null && message.hasOwnProperty("domains")) {
+                                        if (!Array.isArray(message.domains))
+                                            return "domains: array expected";
+                                        for (var i = 0; i < message.domains.length; ++i)
+                                            if (!$util.isString(message.domains[i]))
+                                                return "domains: string[] expected";
+                                    }
+                                    if (message.targetProject != null && message.hasOwnProperty("targetProject"))
+                                        if (!$util.isString(message.targetProject))
+                                            return "targetProject: string expected";
+                                    if (message.targetNetwork != null && message.hasOwnProperty("targetNetwork"))
+                                        if (!$util.isString(message.targetNetwork))
+                                            return "targetNetwork: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a DnsPeeringConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig} DnsPeeringConfig
+                                 */
+                                DnsPeeringConfig.fromObject = function fromObject(object, long) {
+                                    if (object instanceof $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig)
+                                        return object;
+                                    if (long === undefined)
+                                        long = 0;
+                                    if (long > $util.recursionLimit)
+                                        throw Error("maximum nesting depth exceeded");
+                                    var message = new $root.google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig();
+                                    if (object.domains) {
+                                        if (!Array.isArray(object.domains))
+                                            throw TypeError(".google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig.domains: array expected");
+                                        message.domains = [];
+                                        for (var i = 0; i < object.domains.length; ++i)
+                                            message.domains[i] = String(object.domains[i]);
+                                    }
+                                    if (object.targetProject != null)
+                                        message.targetProject = String(object.targetProject);
+                                    if (object.targetNetwork != null)
+                                        message.targetNetwork = String(object.targetNetwork);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a DnsPeeringConfig message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig
+                                 * @static
+                                 * @param {google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig} message DnsPeeringConfig
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                DnsPeeringConfig.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.domains = [];
+                                    if (options.defaults) {
+                                        object.targetProject = "";
+                                        object.targetNetwork = "";
+                                    }
+                                    if (message.domains && message.domains.length) {
+                                        object.domains = [];
+                                        for (var j = 0; j < message.domains.length; ++j)
+                                            object.domains[j] = message.domains[j];
+                                    }
+                                    if (message.targetProject != null && message.hasOwnProperty("targetProject"))
+                                        object.targetProject = message.targetProject;
+                                    if (message.targetNetwork != null && message.hasOwnProperty("targetNetwork"))
+                                        object.targetNetwork = message.targetNetwork;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this DnsPeeringConfig to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                DnsPeeringConfig.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for DnsPeeringConfig
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                DnsPeeringConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig";
+                                };
+    
+                                return DnsPeeringConfig;
+                            })();
+    
+                            return NetworkConfig;
+                        })();
+    
+                        AgentGateway.AgentGatewayOutputCard = (function() {
+    
+                            /**
+                             * Properties of an AgentGatewayOutputCard.
+                             * @memberof google.cloud.networkservices.v1.AgentGateway
+                             * @interface IAgentGatewayOutputCard
+                             * @property {string|null} [mtlsEndpoint] AgentGatewayOutputCard mtlsEndpoint
+                             * @property {Array.<string>|null} [rootCertificates] AgentGatewayOutputCard rootCertificates
+                             * @property {string|null} [serviceExtensionsServiceAccount] AgentGatewayOutputCard serviceExtensionsServiceAccount
+                             */
+    
+                            /**
+                             * Constructs a new AgentGatewayOutputCard.
+                             * @memberof google.cloud.networkservices.v1.AgentGateway
+                             * @classdesc Represents an AgentGatewayOutputCard.
+                             * @implements IAgentGatewayOutputCard
+                             * @constructor
+                             * @param {google.cloud.networkservices.v1.AgentGateway.IAgentGatewayOutputCard=} [properties] Properties to set
+                             */
+                            function AgentGatewayOutputCard(properties) {
+                                this.rootCertificates = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AgentGatewayOutputCard mtlsEndpoint.
+                             * @member {string} mtlsEndpoint
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard
+                             * @instance
+                             */
+                            AgentGatewayOutputCard.prototype.mtlsEndpoint = "";
+    
+                            /**
+                             * AgentGatewayOutputCard rootCertificates.
+                             * @member {Array.<string>} rootCertificates
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard
+                             * @instance
+                             */
+                            AgentGatewayOutputCard.prototype.rootCertificates = $util.emptyArray;
+    
+                            /**
+                             * AgentGatewayOutputCard serviceExtensionsServiceAccount.
+                             * @member {string} serviceExtensionsServiceAccount
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard
+                             * @instance
+                             */
+                            AgentGatewayOutputCard.prototype.serviceExtensionsServiceAccount = "";
+    
+                            /**
+                             * Creates a new AgentGatewayOutputCard instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard
+                             * @static
+                             * @param {google.cloud.networkservices.v1.AgentGateway.IAgentGatewayOutputCard=} [properties] Properties to set
+                             * @returns {google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard} AgentGatewayOutputCard instance
+                             */
+                            AgentGatewayOutputCard.create = function create(properties) {
+                                return new AgentGatewayOutputCard(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AgentGatewayOutputCard message. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard
+                             * @static
+                             * @param {google.cloud.networkservices.v1.AgentGateway.IAgentGatewayOutputCard} message AgentGatewayOutputCard message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AgentGatewayOutputCard.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.mtlsEndpoint != null && Object.hasOwnProperty.call(message, "mtlsEndpoint"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.mtlsEndpoint);
+                                if (message.serviceExtensionsServiceAccount != null && Object.hasOwnProperty.call(message, "serviceExtensionsServiceAccount"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.serviceExtensionsServiceAccount);
+                                if (message.rootCertificates != null && message.rootCertificates.length)
+                                    for (var i = 0; i < message.rootCertificates.length; ++i)
+                                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.rootCertificates[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AgentGatewayOutputCard message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard
+                             * @static
+                             * @param {google.cloud.networkservices.v1.AgentGateway.IAgentGatewayOutputCard} message AgentGatewayOutputCard message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AgentGatewayOutputCard.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AgentGatewayOutputCard message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard} AgentGatewayOutputCard
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AgentGatewayOutputCard.decode = function decode(reader, length, error, long) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.mtlsEndpoint = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            if (!(message.rootCertificates && message.rootCertificates.length))
+                                                message.rootCertificates = [];
+                                            message.rootCertificates.push(reader.string());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.serviceExtensionsServiceAccount = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7, long);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AgentGatewayOutputCard message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard} AgentGatewayOutputCard
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AgentGatewayOutputCard.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AgentGatewayOutputCard message.
+                             * @function verify
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AgentGatewayOutputCard.verify = function verify(message, long) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
+                                if (message.mtlsEndpoint != null && message.hasOwnProperty("mtlsEndpoint"))
+                                    if (!$util.isString(message.mtlsEndpoint))
+                                        return "mtlsEndpoint: string expected";
+                                if (message.rootCertificates != null && message.hasOwnProperty("rootCertificates")) {
+                                    if (!Array.isArray(message.rootCertificates))
+                                        return "rootCertificates: array expected";
+                                    for (var i = 0; i < message.rootCertificates.length; ++i)
+                                        if (!$util.isString(message.rootCertificates[i]))
+                                            return "rootCertificates: string[] expected";
+                                }
+                                if (message.serviceExtensionsServiceAccount != null && message.hasOwnProperty("serviceExtensionsServiceAccount"))
+                                    if (!$util.isString(message.serviceExtensionsServiceAccount))
+                                        return "serviceExtensionsServiceAccount: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AgentGatewayOutputCard message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard} AgentGatewayOutputCard
+                             */
+                            AgentGatewayOutputCard.fromObject = function fromObject(object, long) {
+                                if (object instanceof $root.google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard)
+                                    return object;
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var message = new $root.google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard();
+                                if (object.mtlsEndpoint != null)
+                                    message.mtlsEndpoint = String(object.mtlsEndpoint);
+                                if (object.rootCertificates) {
+                                    if (!Array.isArray(object.rootCertificates))
+                                        throw TypeError(".google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard.rootCertificates: array expected");
+                                    message.rootCertificates = [];
+                                    for (var i = 0; i < object.rootCertificates.length; ++i)
+                                        message.rootCertificates[i] = String(object.rootCertificates[i]);
+                                }
+                                if (object.serviceExtensionsServiceAccount != null)
+                                    message.serviceExtensionsServiceAccount = String(object.serviceExtensionsServiceAccount);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AgentGatewayOutputCard message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard
+                             * @static
+                             * @param {google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard} message AgentGatewayOutputCard
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AgentGatewayOutputCard.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.rootCertificates = [];
+                                if (options.defaults) {
+                                    object.mtlsEndpoint = "";
+                                    object.serviceExtensionsServiceAccount = "";
+                                }
+                                if (message.mtlsEndpoint != null && message.hasOwnProperty("mtlsEndpoint"))
+                                    object.mtlsEndpoint = message.mtlsEndpoint;
+                                if (message.serviceExtensionsServiceAccount != null && message.hasOwnProperty("serviceExtensionsServiceAccount"))
+                                    object.serviceExtensionsServiceAccount = message.serviceExtensionsServiceAccount;
+                                if (message.rootCertificates && message.rootCertificates.length) {
+                                    object.rootCertificates = [];
+                                    for (var j = 0; j < message.rootCertificates.length; ++j)
+                                        object.rootCertificates[j] = message.rootCertificates[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AgentGatewayOutputCard to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AgentGatewayOutputCard.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AgentGatewayOutputCard
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AgentGatewayOutputCard.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard";
+                            };
+    
+                            return AgentGatewayOutputCard;
+                        })();
+    
+                        /**
+                         * Protocol enum.
+                         * @name google.cloud.networkservices.v1.AgentGateway.Protocol
+                         * @enum {number}
+                         * @property {number} PROTOCOL_UNSPECIFIED=0 PROTOCOL_UNSPECIFIED value
+                         * @property {number} MCP=1 MCP value
+                         */
+                        AgentGateway.Protocol = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PROTOCOL_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "MCP"] = 1;
+                            return values;
+                        })();
+    
+                        return AgentGateway;
+                    })();
+    
+                    v1.ListAgentGatewaysRequest = (function() {
+    
+                        /**
+                         * Properties of a ListAgentGatewaysRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IListAgentGatewaysRequest
+                         * @property {string|null} [parent] ListAgentGatewaysRequest parent
+                         * @property {number|null} [pageSize] ListAgentGatewaysRequest pageSize
+                         * @property {string|null} [pageToken] ListAgentGatewaysRequest pageToken
+                         * @property {boolean|null} [returnPartialSuccess] ListAgentGatewaysRequest returnPartialSuccess
+                         */
+    
+                        /**
+                         * Constructs a new ListAgentGatewaysRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a ListAgentGatewaysRequest.
+                         * @implements IListAgentGatewaysRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IListAgentGatewaysRequest=} [properties] Properties to set
+                         */
+                        function ListAgentGatewaysRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAgentGatewaysRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkservices.v1.ListAgentGatewaysRequest
+                         * @instance
+                         */
+                        ListAgentGatewaysRequest.prototype.parent = "";
+    
+                        /**
+                         * ListAgentGatewaysRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networkservices.v1.ListAgentGatewaysRequest
+                         * @instance
+                         */
+                        ListAgentGatewaysRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListAgentGatewaysRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networkservices.v1.ListAgentGatewaysRequest
+                         * @instance
+                         */
+                        ListAgentGatewaysRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListAgentGatewaysRequest returnPartialSuccess.
+                         * @member {boolean} returnPartialSuccess
+                         * @memberof google.cloud.networkservices.v1.ListAgentGatewaysRequest
+                         * @instance
+                         */
+                        ListAgentGatewaysRequest.prototype.returnPartialSuccess = false;
+    
+                        /**
+                         * Creates a new ListAgentGatewaysRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.ListAgentGatewaysRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListAgentGatewaysRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.ListAgentGatewaysRequest} ListAgentGatewaysRequest instance
+                         */
+                        ListAgentGatewaysRequest.create = function create(properties) {
+                            return new ListAgentGatewaysRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAgentGatewaysRequest message. Does not implicitly {@link google.cloud.networkservices.v1.ListAgentGatewaysRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.ListAgentGatewaysRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListAgentGatewaysRequest} message ListAgentGatewaysRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAgentGatewaysRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.returnPartialSuccess != null && Object.hasOwnProperty.call(message, "returnPartialSuccess"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.returnPartialSuccess);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAgentGatewaysRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListAgentGatewaysRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListAgentGatewaysRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListAgentGatewaysRequest} message ListAgentGatewaysRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAgentGatewaysRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAgentGatewaysRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.ListAgentGatewaysRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.ListAgentGatewaysRequest} ListAgentGatewaysRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAgentGatewaysRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListAgentGatewaysRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.returnPartialSuccess = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAgentGatewaysRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListAgentGatewaysRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.ListAgentGatewaysRequest} ListAgentGatewaysRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAgentGatewaysRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAgentGatewaysRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.ListAgentGatewaysRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAgentGatewaysRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.returnPartialSuccess != null && message.hasOwnProperty("returnPartialSuccess"))
+                                if (typeof message.returnPartialSuccess !== "boolean")
+                                    return "returnPartialSuccess: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAgentGatewaysRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.ListAgentGatewaysRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.ListAgentGatewaysRequest} ListAgentGatewaysRequest
+                         */
+                        ListAgentGatewaysRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.ListAgentGatewaysRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.networkservices.v1.ListAgentGatewaysRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.returnPartialSuccess != null)
+                                message.returnPartialSuccess = Boolean(object.returnPartialSuccess);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAgentGatewaysRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.ListAgentGatewaysRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ListAgentGatewaysRequest} message ListAgentGatewaysRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAgentGatewaysRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.returnPartialSuccess = false;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.returnPartialSuccess != null && message.hasOwnProperty("returnPartialSuccess"))
+                                object.returnPartialSuccess = message.returnPartialSuccess;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAgentGatewaysRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.ListAgentGatewaysRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAgentGatewaysRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAgentGatewaysRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.ListAgentGatewaysRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAgentGatewaysRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.ListAgentGatewaysRequest";
+                        };
+    
+                        return ListAgentGatewaysRequest;
+                    })();
+    
+                    v1.ListAgentGatewaysResponse = (function() {
+    
+                        /**
+                         * Properties of a ListAgentGatewaysResponse.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IListAgentGatewaysResponse
+                         * @property {Array.<google.cloud.networkservices.v1.IAgentGateway>|null} [agentGateways] ListAgentGatewaysResponse agentGateways
+                         * @property {string|null} [nextPageToken] ListAgentGatewaysResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListAgentGatewaysResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListAgentGatewaysResponse.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a ListAgentGatewaysResponse.
+                         * @implements IListAgentGatewaysResponse
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IListAgentGatewaysResponse=} [properties] Properties to set
+                         */
+                        function ListAgentGatewaysResponse(properties) {
+                            this.agentGateways = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAgentGatewaysResponse agentGateways.
+                         * @member {Array.<google.cloud.networkservices.v1.IAgentGateway>} agentGateways
+                         * @memberof google.cloud.networkservices.v1.ListAgentGatewaysResponse
+                         * @instance
+                         */
+                        ListAgentGatewaysResponse.prototype.agentGateways = $util.emptyArray;
+    
+                        /**
+                         * ListAgentGatewaysResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networkservices.v1.ListAgentGatewaysResponse
+                         * @instance
+                         */
+                        ListAgentGatewaysResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListAgentGatewaysResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkservices.v1.ListAgentGatewaysResponse
+                         * @instance
+                         */
+                        ListAgentGatewaysResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListAgentGatewaysResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.ListAgentGatewaysResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListAgentGatewaysResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.ListAgentGatewaysResponse} ListAgentGatewaysResponse instance
+                         */
+                        ListAgentGatewaysResponse.create = function create(properties) {
+                            return new ListAgentGatewaysResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAgentGatewaysResponse message. Does not implicitly {@link google.cloud.networkservices.v1.ListAgentGatewaysResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.ListAgentGatewaysResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListAgentGatewaysResponse} message ListAgentGatewaysResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAgentGatewaysResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.agentGateways != null && message.agentGateways.length)
+                                for (var i = 0; i < message.agentGateways.length; ++i)
+                                    $root.google.cloud.networkservices.v1.AgentGateway.encode(message.agentGateways[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAgentGatewaysResponse message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListAgentGatewaysResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListAgentGatewaysResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListAgentGatewaysResponse} message ListAgentGatewaysResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAgentGatewaysResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAgentGatewaysResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.ListAgentGatewaysResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.ListAgentGatewaysResponse} ListAgentGatewaysResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAgentGatewaysResponse.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListAgentGatewaysResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.agentGateways && message.agentGateways.length))
+                                            message.agentGateways = [];
+                                        message.agentGateways.push($root.google.cloud.networkservices.v1.AgentGateway.decode(reader, reader.uint32(), undefined, long + 1));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAgentGatewaysResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListAgentGatewaysResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.ListAgentGatewaysResponse} ListAgentGatewaysResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAgentGatewaysResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAgentGatewaysResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.ListAgentGatewaysResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAgentGatewaysResponse.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.agentGateways != null && message.hasOwnProperty("agentGateways")) {
+                                if (!Array.isArray(message.agentGateways))
+                                    return "agentGateways: array expected";
+                                for (var i = 0; i < message.agentGateways.length; ++i) {
+                                    var error = $root.google.cloud.networkservices.v1.AgentGateway.verify(message.agentGateways[i], long + 1);
+                                    if (error)
+                                        return "agentGateways." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAgentGatewaysResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.ListAgentGatewaysResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.ListAgentGatewaysResponse} ListAgentGatewaysResponse
+                         */
+                        ListAgentGatewaysResponse.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.ListAgentGatewaysResponse)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.networkservices.v1.ListAgentGatewaysResponse();
+                            if (object.agentGateways) {
+                                if (!Array.isArray(object.agentGateways))
+                                    throw TypeError(".google.cloud.networkservices.v1.ListAgentGatewaysResponse.agentGateways: array expected");
+                                message.agentGateways = [];
+                                for (var i = 0; i < object.agentGateways.length; ++i) {
+                                    if (typeof object.agentGateways[i] !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.ListAgentGatewaysResponse.agentGateways: object expected");
+                                    message.agentGateways[i] = $root.google.cloud.networkservices.v1.AgentGateway.fromObject(object.agentGateways[i], long + 1);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkservices.v1.ListAgentGatewaysResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAgentGatewaysResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.ListAgentGatewaysResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ListAgentGatewaysResponse} message ListAgentGatewaysResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAgentGatewaysResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.agentGateways = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.agentGateways && message.agentGateways.length) {
+                                object.agentGateways = [];
+                                for (var j = 0; j < message.agentGateways.length; ++j)
+                                    object.agentGateways[j] = $root.google.cloud.networkservices.v1.AgentGateway.toObject(message.agentGateways[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAgentGatewaysResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.ListAgentGatewaysResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAgentGatewaysResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAgentGatewaysResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.ListAgentGatewaysResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAgentGatewaysResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.ListAgentGatewaysResponse";
+                        };
+    
+                        return ListAgentGatewaysResponse;
+                    })();
+    
+                    v1.GetAgentGatewayRequest = (function() {
+    
+                        /**
+                         * Properties of a GetAgentGatewayRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IGetAgentGatewayRequest
+                         * @property {string|null} [name] GetAgentGatewayRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetAgentGatewayRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a GetAgentGatewayRequest.
+                         * @implements IGetAgentGatewayRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IGetAgentGatewayRequest=} [properties] Properties to set
+                         */
+                        function GetAgentGatewayRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetAgentGatewayRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkservices.v1.GetAgentGatewayRequest
+                         * @instance
+                         */
+                        GetAgentGatewayRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetAgentGatewayRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.GetAgentGatewayRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGetAgentGatewayRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.GetAgentGatewayRequest} GetAgentGatewayRequest instance
+                         */
+                        GetAgentGatewayRequest.create = function create(properties) {
+                            return new GetAgentGatewayRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetAgentGatewayRequest message. Does not implicitly {@link google.cloud.networkservices.v1.GetAgentGatewayRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.GetAgentGatewayRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGetAgentGatewayRequest} message GetAgentGatewayRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetAgentGatewayRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetAgentGatewayRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.GetAgentGatewayRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.GetAgentGatewayRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGetAgentGatewayRequest} message GetAgentGatewayRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetAgentGatewayRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetAgentGatewayRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.GetAgentGatewayRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.GetAgentGatewayRequest} GetAgentGatewayRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetAgentGatewayRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GetAgentGatewayRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetAgentGatewayRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.GetAgentGatewayRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.GetAgentGatewayRequest} GetAgentGatewayRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetAgentGatewayRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetAgentGatewayRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.GetAgentGatewayRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetAgentGatewayRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetAgentGatewayRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.GetAgentGatewayRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.GetAgentGatewayRequest} GetAgentGatewayRequest
+                         */
+                        GetAgentGatewayRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.GetAgentGatewayRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.networkservices.v1.GetAgentGatewayRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetAgentGatewayRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.GetAgentGatewayRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.GetAgentGatewayRequest} message GetAgentGatewayRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetAgentGatewayRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetAgentGatewayRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.GetAgentGatewayRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetAgentGatewayRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetAgentGatewayRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.GetAgentGatewayRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetAgentGatewayRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.GetAgentGatewayRequest";
+                        };
+    
+                        return GetAgentGatewayRequest;
+                    })();
+    
+                    v1.CreateAgentGatewayRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateAgentGatewayRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface ICreateAgentGatewayRequest
+                         * @property {string|null} [parent] CreateAgentGatewayRequest parent
+                         * @property {string|null} [agentGatewayId] CreateAgentGatewayRequest agentGatewayId
+                         * @property {google.cloud.networkservices.v1.IAgentGateway|null} [agentGateway] CreateAgentGatewayRequest agentGateway
+                         */
+    
+                        /**
+                         * Constructs a new CreateAgentGatewayRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a CreateAgentGatewayRequest.
+                         * @implements ICreateAgentGatewayRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.ICreateAgentGatewayRequest=} [properties] Properties to set
+                         */
+                        function CreateAgentGatewayRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateAgentGatewayRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkservices.v1.CreateAgentGatewayRequest
+                         * @instance
+                         */
+                        CreateAgentGatewayRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateAgentGatewayRequest agentGatewayId.
+                         * @member {string} agentGatewayId
+                         * @memberof google.cloud.networkservices.v1.CreateAgentGatewayRequest
+                         * @instance
+                         */
+                        CreateAgentGatewayRequest.prototype.agentGatewayId = "";
+    
+                        /**
+                         * CreateAgentGatewayRequest agentGateway.
+                         * @member {google.cloud.networkservices.v1.IAgentGateway|null|undefined} agentGateway
+                         * @memberof google.cloud.networkservices.v1.CreateAgentGatewayRequest
+                         * @instance
+                         */
+                        CreateAgentGatewayRequest.prototype.agentGateway = null;
+    
+                        /**
+                         * Creates a new CreateAgentGatewayRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.CreateAgentGatewayRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ICreateAgentGatewayRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.CreateAgentGatewayRequest} CreateAgentGatewayRequest instance
+                         */
+                        CreateAgentGatewayRequest.create = function create(properties) {
+                            return new CreateAgentGatewayRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateAgentGatewayRequest message. Does not implicitly {@link google.cloud.networkservices.v1.CreateAgentGatewayRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.CreateAgentGatewayRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ICreateAgentGatewayRequest} message CreateAgentGatewayRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateAgentGatewayRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.agentGatewayId != null && Object.hasOwnProperty.call(message, "agentGatewayId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.agentGatewayId);
+                            if (message.agentGateway != null && Object.hasOwnProperty.call(message, "agentGateway"))
+                                $root.google.cloud.networkservices.v1.AgentGateway.encode(message.agentGateway, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateAgentGatewayRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.CreateAgentGatewayRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.CreateAgentGatewayRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ICreateAgentGatewayRequest} message CreateAgentGatewayRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateAgentGatewayRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateAgentGatewayRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.CreateAgentGatewayRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.CreateAgentGatewayRequest} CreateAgentGatewayRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateAgentGatewayRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.CreateAgentGatewayRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.agentGatewayId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.agentGateway = $root.google.cloud.networkservices.v1.AgentGateway.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateAgentGatewayRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.CreateAgentGatewayRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.CreateAgentGatewayRequest} CreateAgentGatewayRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateAgentGatewayRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateAgentGatewayRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.CreateAgentGatewayRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateAgentGatewayRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.agentGatewayId != null && message.hasOwnProperty("agentGatewayId"))
+                                if (!$util.isString(message.agentGatewayId))
+                                    return "agentGatewayId: string expected";
+                            if (message.agentGateway != null && message.hasOwnProperty("agentGateway")) {
+                                var error = $root.google.cloud.networkservices.v1.AgentGateway.verify(message.agentGateway, long + 1);
+                                if (error)
+                                    return "agentGateway." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateAgentGatewayRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.CreateAgentGatewayRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.CreateAgentGatewayRequest} CreateAgentGatewayRequest
+                         */
+                        CreateAgentGatewayRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.CreateAgentGatewayRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.networkservices.v1.CreateAgentGatewayRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.agentGatewayId != null)
+                                message.agentGatewayId = String(object.agentGatewayId);
+                            if (object.agentGateway != null) {
+                                if (typeof object.agentGateway !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.CreateAgentGatewayRequest.agentGateway: object expected");
+                                message.agentGateway = $root.google.cloud.networkservices.v1.AgentGateway.fromObject(object.agentGateway, long + 1);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateAgentGatewayRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.CreateAgentGatewayRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.CreateAgentGatewayRequest} message CreateAgentGatewayRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateAgentGatewayRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.agentGatewayId = "";
+                                object.agentGateway = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.agentGatewayId != null && message.hasOwnProperty("agentGatewayId"))
+                                object.agentGatewayId = message.agentGatewayId;
+                            if (message.agentGateway != null && message.hasOwnProperty("agentGateway"))
+                                object.agentGateway = $root.google.cloud.networkservices.v1.AgentGateway.toObject(message.agentGateway, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateAgentGatewayRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.CreateAgentGatewayRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateAgentGatewayRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateAgentGatewayRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.CreateAgentGatewayRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateAgentGatewayRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.CreateAgentGatewayRequest";
+                        };
+    
+                        return CreateAgentGatewayRequest;
+                    })();
+    
+                    v1.UpdateAgentGatewayRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateAgentGatewayRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IUpdateAgentGatewayRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateAgentGatewayRequest updateMask
+                         * @property {google.cloud.networkservices.v1.IAgentGateway|null} [agentGateway] UpdateAgentGatewayRequest agentGateway
+                         */
+    
+                        /**
+                         * Constructs a new UpdateAgentGatewayRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents an UpdateAgentGatewayRequest.
+                         * @implements IUpdateAgentGatewayRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IUpdateAgentGatewayRequest=} [properties] Properties to set
+                         */
+                        function UpdateAgentGatewayRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateAgentGatewayRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.networkservices.v1.UpdateAgentGatewayRequest
+                         * @instance
+                         */
+                        UpdateAgentGatewayRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateAgentGatewayRequest agentGateway.
+                         * @member {google.cloud.networkservices.v1.IAgentGateway|null|undefined} agentGateway
+                         * @memberof google.cloud.networkservices.v1.UpdateAgentGatewayRequest
+                         * @instance
+                         */
+                        UpdateAgentGatewayRequest.prototype.agentGateway = null;
+    
+                        /**
+                         * Creates a new UpdateAgentGatewayRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.UpdateAgentGatewayRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IUpdateAgentGatewayRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.UpdateAgentGatewayRequest} UpdateAgentGatewayRequest instance
+                         */
+                        UpdateAgentGatewayRequest.create = function create(properties) {
+                            return new UpdateAgentGatewayRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateAgentGatewayRequest message. Does not implicitly {@link google.cloud.networkservices.v1.UpdateAgentGatewayRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.UpdateAgentGatewayRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IUpdateAgentGatewayRequest} message UpdateAgentGatewayRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateAgentGatewayRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.agentGateway != null && Object.hasOwnProperty.call(message, "agentGateway"))
+                                $root.google.cloud.networkservices.v1.AgentGateway.encode(message.agentGateway, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateAgentGatewayRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.UpdateAgentGatewayRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.UpdateAgentGatewayRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IUpdateAgentGatewayRequest} message UpdateAgentGatewayRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateAgentGatewayRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateAgentGatewayRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.UpdateAgentGatewayRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.UpdateAgentGatewayRequest} UpdateAgentGatewayRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateAgentGatewayRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.UpdateAgentGatewayRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 2: {
+                                        message.agentGateway = $root.google.cloud.networkservices.v1.AgentGateway.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateAgentGatewayRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.UpdateAgentGatewayRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.UpdateAgentGatewayRequest} UpdateAgentGatewayRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateAgentGatewayRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateAgentGatewayRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.UpdateAgentGatewayRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateAgentGatewayRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask, long + 1);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.agentGateway != null && message.hasOwnProperty("agentGateway")) {
+                                var error = $root.google.cloud.networkservices.v1.AgentGateway.verify(message.agentGateway, long + 1);
+                                if (error)
+                                    return "agentGateway." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateAgentGatewayRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.UpdateAgentGatewayRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.UpdateAgentGatewayRequest} UpdateAgentGatewayRequest
+                         */
+                        UpdateAgentGatewayRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.UpdateAgentGatewayRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.networkservices.v1.UpdateAgentGatewayRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.UpdateAgentGatewayRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask, long + 1);
+                            }
+                            if (object.agentGateway != null) {
+                                if (typeof object.agentGateway !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.UpdateAgentGatewayRequest.agentGateway: object expected");
+                                message.agentGateway = $root.google.cloud.networkservices.v1.AgentGateway.fromObject(object.agentGateway, long + 1);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateAgentGatewayRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.UpdateAgentGatewayRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.UpdateAgentGatewayRequest} message UpdateAgentGatewayRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateAgentGatewayRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.agentGateway = null;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.agentGateway != null && message.hasOwnProperty("agentGateway"))
+                                object.agentGateway = $root.google.cloud.networkservices.v1.AgentGateway.toObject(message.agentGateway, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateAgentGatewayRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.UpdateAgentGatewayRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateAgentGatewayRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateAgentGatewayRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.UpdateAgentGatewayRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateAgentGatewayRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.UpdateAgentGatewayRequest";
+                        };
+    
+                        return UpdateAgentGatewayRequest;
+                    })();
+    
+                    v1.DeleteAgentGatewayRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteAgentGatewayRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IDeleteAgentGatewayRequest
+                         * @property {string|null} [name] DeleteAgentGatewayRequest name
+                         * @property {string|null} [etag] DeleteAgentGatewayRequest etag
+                         */
+    
+                        /**
+                         * Constructs a new DeleteAgentGatewayRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a DeleteAgentGatewayRequest.
+                         * @implements IDeleteAgentGatewayRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IDeleteAgentGatewayRequest=} [properties] Properties to set
+                         */
+                        function DeleteAgentGatewayRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteAgentGatewayRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkservices.v1.DeleteAgentGatewayRequest
+                         * @instance
+                         */
+                        DeleteAgentGatewayRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteAgentGatewayRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.networkservices.v1.DeleteAgentGatewayRequest
+                         * @instance
+                         */
+                        DeleteAgentGatewayRequest.prototype.etag = "";
+    
+                        /**
+                         * Creates a new DeleteAgentGatewayRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.DeleteAgentGatewayRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IDeleteAgentGatewayRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.DeleteAgentGatewayRequest} DeleteAgentGatewayRequest instance
+                         */
+                        DeleteAgentGatewayRequest.create = function create(properties) {
+                            return new DeleteAgentGatewayRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteAgentGatewayRequest message. Does not implicitly {@link google.cloud.networkservices.v1.DeleteAgentGatewayRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.DeleteAgentGatewayRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IDeleteAgentGatewayRequest} message DeleteAgentGatewayRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteAgentGatewayRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.etag);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteAgentGatewayRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.DeleteAgentGatewayRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.DeleteAgentGatewayRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IDeleteAgentGatewayRequest} message DeleteAgentGatewayRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteAgentGatewayRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteAgentGatewayRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.DeleteAgentGatewayRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.DeleteAgentGatewayRequest} DeleteAgentGatewayRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteAgentGatewayRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.DeleteAgentGatewayRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteAgentGatewayRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.DeleteAgentGatewayRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.DeleteAgentGatewayRequest} DeleteAgentGatewayRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteAgentGatewayRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteAgentGatewayRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.DeleteAgentGatewayRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteAgentGatewayRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteAgentGatewayRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.DeleteAgentGatewayRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.DeleteAgentGatewayRequest} DeleteAgentGatewayRequest
+                         */
+                        DeleteAgentGatewayRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.DeleteAgentGatewayRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.networkservices.v1.DeleteAgentGatewayRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteAgentGatewayRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.DeleteAgentGatewayRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.DeleteAgentGatewayRequest} message DeleteAgentGatewayRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteAgentGatewayRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.etag = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteAgentGatewayRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.DeleteAgentGatewayRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteAgentGatewayRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteAgentGatewayRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.DeleteAgentGatewayRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteAgentGatewayRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.DeleteAgentGatewayRequest";
+                        };
+    
+                        return DeleteAgentGatewayRequest;
+                    })();
+    
                     /**
                      * EnvoyHeaders enum.
                      * @name google.cloud.networkservices.v1.EnvoyHeaders
@@ -2206,11 +6186,29 @@
                      * @enum {number}
                      * @property {number} WIRE_FORMAT_UNSPECIFIED=0 WIRE_FORMAT_UNSPECIFIED value
                      * @property {number} EXT_PROC_GRPC=1 EXT_PROC_GRPC value
+                     * @property {number} EXT_AUTHZ_GRPC=3 EXT_AUTHZ_GRPC value
                      */
                     v1.WireFormat = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
                         values[valuesById[0] = "WIRE_FORMAT_UNSPECIFIED"] = 0;
                         values[valuesById[1] = "EXT_PROC_GRPC"] = 1;
+                        values[valuesById[3] = "EXT_AUTHZ_GRPC"] = 3;
+                        return values;
+                    })();
+    
+                    /**
+                     * BodySendMode enum.
+                     * @name google.cloud.networkservices.v1.BodySendMode
+                     * @enum {number}
+                     * @property {number} BODY_SEND_MODE_UNSPECIFIED=0 BODY_SEND_MODE_UNSPECIFIED value
+                     * @property {number} BODY_SEND_MODE_STREAMED=1 BODY_SEND_MODE_STREAMED value
+                     * @property {number} BODY_SEND_MODE_FULL_DUPLEX_STREAMED=2 BODY_SEND_MODE_FULL_DUPLEX_STREAMED value
+                     */
+                    v1.BodySendMode = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "BODY_SEND_MODE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "BODY_SEND_MODE_STREAMED"] = 1;
+                        values[valuesById[2] = "BODY_SEND_MODE_FULL_DUPLEX_STREAMED"] = 2;
                         return values;
                     })();
     
@@ -2732,7 +6730,11 @@
                              * @property {google.protobuf.IDuration|null} [timeout] Extension timeout
                              * @property {boolean|null} [failOpen] Extension failOpen
                              * @property {Array.<string>|null} [forwardHeaders] Extension forwardHeaders
+                             * @property {Array.<string>|null} [forwardAttributes] Extension forwardAttributes
                              * @property {google.protobuf.IStruct|null} [metadata] Extension metadata
+                             * @property {google.cloud.networkservices.v1.BodySendMode|null} [requestBodySendMode] Extension requestBodySendMode
+                             * @property {google.cloud.networkservices.v1.BodySendMode|null} [responseBodySendMode] Extension responseBodySendMode
+                             * @property {boolean|null} [observabilityMode] Extension observabilityMode
                              */
     
                             /**
@@ -2746,6 +6748,7 @@
                             function Extension(properties) {
                                 this.supportedEvents = [];
                                 this.forwardHeaders = [];
+                                this.forwardAttributes = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null && keys[i] !== "__proto__")
@@ -2809,12 +6812,44 @@
                             Extension.prototype.forwardHeaders = $util.emptyArray;
     
                             /**
+                             * Extension forwardAttributes.
+                             * @member {Array.<string>} forwardAttributes
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.Extension
+                             * @instance
+                             */
+                            Extension.prototype.forwardAttributes = $util.emptyArray;
+    
+                            /**
                              * Extension metadata.
                              * @member {google.protobuf.IStruct|null|undefined} metadata
                              * @memberof google.cloud.networkservices.v1.ExtensionChain.Extension
                              * @instance
                              */
                             Extension.prototype.metadata = null;
+    
+                            /**
+                             * Extension requestBodySendMode.
+                             * @member {google.cloud.networkservices.v1.BodySendMode} requestBodySendMode
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.Extension
+                             * @instance
+                             */
+                            Extension.prototype.requestBodySendMode = 0;
+    
+                            /**
+                             * Extension responseBodySendMode.
+                             * @member {google.cloud.networkservices.v1.BodySendMode} responseBodySendMode
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.Extension
+                             * @instance
+                             */
+                            Extension.prototype.responseBodySendMode = 0;
+    
+                            /**
+                             * Extension observabilityMode.
+                             * @member {boolean} observabilityMode
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.Extension
+                             * @instance
+                             */
+                            Extension.prototype.observabilityMode = false;
     
                             /**
                              * Creates a new Extension instance using the specified properties.
@@ -2859,8 +6894,17 @@
                                 if (message.forwardHeaders != null && message.forwardHeaders.length)
                                     for (var i = 0; i < message.forwardHeaders.length; ++i)
                                         writer.uint32(/* id 7, wireType 2 =*/58).string(message.forwardHeaders[i]);
+                                if (message.forwardAttributes != null && message.forwardAttributes.length)
+                                    for (var i = 0; i < message.forwardAttributes.length; ++i)
+                                        writer.uint32(/* id 8, wireType 2 =*/66).string(message.forwardAttributes[i]);
                                 if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
                                     $root.google.protobuf.Struct.encode(message.metadata, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                                if (message.requestBodySendMode != null && Object.hasOwnProperty.call(message, "requestBodySendMode"))
+                                    writer.uint32(/* id 14, wireType 0 =*/112).int32(message.requestBodySendMode);
+                                if (message.responseBodySendMode != null && Object.hasOwnProperty.call(message, "responseBodySendMode"))
+                                    writer.uint32(/* id 15, wireType 0 =*/120).int32(message.responseBodySendMode);
+                                if (message.observabilityMode != null && Object.hasOwnProperty.call(message, "observabilityMode"))
+                                    writer.uint32(/* id 16, wireType 0 =*/128).bool(message.observabilityMode);
                                 return writer;
                             };
     
@@ -2938,8 +6982,26 @@
                                             message.forwardHeaders.push(reader.string());
                                             break;
                                         }
+                                    case 8: {
+                                            if (!(message.forwardAttributes && message.forwardAttributes.length))
+                                                message.forwardAttributes = [];
+                                            message.forwardAttributes.push(reader.string());
+                                            break;
+                                        }
                                     case 9: {
                                             message.metadata = $root.google.protobuf.Struct.decode(reader, reader.uint32(), undefined, long + 1);
+                                            break;
+                                        }
+                                    case 14: {
+                                            message.requestBodySendMode = reader.int32();
+                                            break;
+                                        }
+                                    case 15: {
+                                            message.responseBodySendMode = reader.int32();
+                                            break;
+                                        }
+                                    case 16: {
+                                            message.observabilityMode = reader.bool();
                                             break;
                                         }
                                     default:
@@ -3022,11 +7084,39 @@
                                         if (!$util.isString(message.forwardHeaders[i]))
                                             return "forwardHeaders: string[] expected";
                                 }
+                                if (message.forwardAttributes != null && message.hasOwnProperty("forwardAttributes")) {
+                                    if (!Array.isArray(message.forwardAttributes))
+                                        return "forwardAttributes: array expected";
+                                    for (var i = 0; i < message.forwardAttributes.length; ++i)
+                                        if (!$util.isString(message.forwardAttributes[i]))
+                                            return "forwardAttributes: string[] expected";
+                                }
                                 if (message.metadata != null && message.hasOwnProperty("metadata")) {
                                     var error = $root.google.protobuf.Struct.verify(message.metadata, long + 1);
                                     if (error)
                                         return "metadata." + error;
                                 }
+                                if (message.requestBodySendMode != null && message.hasOwnProperty("requestBodySendMode"))
+                                    switch (message.requestBodySendMode) {
+                                    default:
+                                        return "requestBodySendMode: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.responseBodySendMode != null && message.hasOwnProperty("responseBodySendMode"))
+                                    switch (message.responseBodySendMode) {
+                                    default:
+                                        return "responseBodySendMode: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.observabilityMode != null && message.hasOwnProperty("observabilityMode"))
+                                    if (typeof message.observabilityMode !== "boolean")
+                                        return "observabilityMode: boolean expected";
                                 return null;
                             };
     
@@ -3107,11 +7197,60 @@
                                     for (var i = 0; i < object.forwardHeaders.length; ++i)
                                         message.forwardHeaders[i] = String(object.forwardHeaders[i]);
                                 }
+                                if (object.forwardAttributes) {
+                                    if (!Array.isArray(object.forwardAttributes))
+                                        throw TypeError(".google.cloud.networkservices.v1.ExtensionChain.Extension.forwardAttributes: array expected");
+                                    message.forwardAttributes = [];
+                                    for (var i = 0; i < object.forwardAttributes.length; ++i)
+                                        message.forwardAttributes[i] = String(object.forwardAttributes[i]);
+                                }
                                 if (object.metadata != null) {
                                     if (typeof object.metadata !== "object")
                                         throw TypeError(".google.cloud.networkservices.v1.ExtensionChain.Extension.metadata: object expected");
                                     message.metadata = $root.google.protobuf.Struct.fromObject(object.metadata, long + 1);
                                 }
+                                switch (object.requestBodySendMode) {
+                                default:
+                                    if (typeof object.requestBodySendMode === "number") {
+                                        message.requestBodySendMode = object.requestBodySendMode;
+                                        break;
+                                    }
+                                    break;
+                                case "BODY_SEND_MODE_UNSPECIFIED":
+                                case 0:
+                                    message.requestBodySendMode = 0;
+                                    break;
+                                case "BODY_SEND_MODE_STREAMED":
+                                case 1:
+                                    message.requestBodySendMode = 1;
+                                    break;
+                                case "BODY_SEND_MODE_FULL_DUPLEX_STREAMED":
+                                case 2:
+                                    message.requestBodySendMode = 2;
+                                    break;
+                                }
+                                switch (object.responseBodySendMode) {
+                                default:
+                                    if (typeof object.responseBodySendMode === "number") {
+                                        message.responseBodySendMode = object.responseBodySendMode;
+                                        break;
+                                    }
+                                    break;
+                                case "BODY_SEND_MODE_UNSPECIFIED":
+                                case 0:
+                                    message.responseBodySendMode = 0;
+                                    break;
+                                case "BODY_SEND_MODE_STREAMED":
+                                case 1:
+                                    message.responseBodySendMode = 1;
+                                    break;
+                                case "BODY_SEND_MODE_FULL_DUPLEX_STREAMED":
+                                case 2:
+                                    message.responseBodySendMode = 2;
+                                    break;
+                                }
+                                if (object.observabilityMode != null)
+                                    message.observabilityMode = Boolean(object.observabilityMode);
                                 return message;
                             };
     
@@ -3131,6 +7270,7 @@
                                 if (options.arrays || options.defaults) {
                                     object.supportedEvents = [];
                                     object.forwardHeaders = [];
+                                    object.forwardAttributes = [];
                                 }
                                 if (options.defaults) {
                                     object.name = "";
@@ -3139,6 +7279,9 @@
                                     object.timeout = null;
                                     object.failOpen = false;
                                     object.metadata = null;
+                                    object.requestBodySendMode = options.enums === String ? "BODY_SEND_MODE_UNSPECIFIED" : 0;
+                                    object.responseBodySendMode = options.enums === String ? "BODY_SEND_MODE_UNSPECIFIED" : 0;
+                                    object.observabilityMode = false;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -3160,8 +7303,19 @@
                                     for (var j = 0; j < message.forwardHeaders.length; ++j)
                                         object.forwardHeaders[j] = message.forwardHeaders[j];
                                 }
+                                if (message.forwardAttributes && message.forwardAttributes.length) {
+                                    object.forwardAttributes = [];
+                                    for (var j = 0; j < message.forwardAttributes.length; ++j)
+                                        object.forwardAttributes[j] = message.forwardAttributes[j];
+                                }
                                 if (message.metadata != null && message.hasOwnProperty("metadata"))
                                     object.metadata = $root.google.protobuf.Struct.toObject(message.metadata, options);
+                                if (message.requestBodySendMode != null && message.hasOwnProperty("requestBodySendMode"))
+                                    object.requestBodySendMode = options.enums === String ? $root.google.cloud.networkservices.v1.BodySendMode[message.requestBodySendMode] === undefined ? message.requestBodySendMode : $root.google.cloud.networkservices.v1.BodySendMode[message.requestBodySendMode] : message.requestBodySendMode;
+                                if (message.responseBodySendMode != null && message.hasOwnProperty("responseBodySendMode"))
+                                    object.responseBodySendMode = options.enums === String ? $root.google.cloud.networkservices.v1.BodySendMode[message.responseBodySendMode] === undefined ? message.responseBodySendMode : $root.google.cloud.networkservices.v1.BodySendMode[message.responseBodySendMode] : message.responseBodySendMode;
+                                if (message.observabilityMode != null && message.hasOwnProperty("observabilityMode"))
+                                    object.observabilityMode = message.observabilityMode;
                                 return object;
                             };
     
@@ -9667,6 +13821,7 @@
                          * @property {boolean|null} [failOpen] AuthzExtension failOpen
                          * @property {google.protobuf.IStruct|null} [metadata] AuthzExtension metadata
                          * @property {Array.<string>|null} [forwardHeaders] AuthzExtension forwardHeaders
+                         * @property {Array.<string>|null} [forwardAttributes] AuthzExtension forwardAttributes
                          * @property {google.cloud.networkservices.v1.WireFormat|null} [wireFormat] AuthzExtension wireFormat
                          */
     
@@ -9681,6 +13836,7 @@
                         function AuthzExtension(properties) {
                             this.labels = {};
                             this.forwardHeaders = [];
+                            this.forwardAttributes = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null && keys[i] !== "__proto__")
@@ -9784,6 +13940,14 @@
                         AuthzExtension.prototype.forwardHeaders = $util.emptyArray;
     
                         /**
+                         * AuthzExtension forwardAttributes.
+                         * @member {Array.<string>} forwardAttributes
+                         * @memberof google.cloud.networkservices.v1.AuthzExtension
+                         * @instance
+                         */
+                        AuthzExtension.prototype.forwardAttributes = $util.emptyArray;
+    
+                        /**
                          * AuthzExtension wireFormat.
                          * @member {google.cloud.networkservices.v1.WireFormat} wireFormat
                          * @memberof google.cloud.networkservices.v1.AuthzExtension
@@ -9841,6 +14005,9 @@
                             if (message.forwardHeaders != null && message.forwardHeaders.length)
                                 for (var i = 0; i < message.forwardHeaders.length; ++i)
                                     writer.uint32(/* id 12, wireType 2 =*/98).string(message.forwardHeaders[i]);
+                            if (message.forwardAttributes != null && message.forwardAttributes.length)
+                                for (var i = 0; i < message.forwardAttributes.length; ++i)
+                                    writer.uint32(/* id 13, wireType 2 =*/106).string(message.forwardAttributes[i]);
                             if (message.wireFormat != null && Object.hasOwnProperty.call(message, "wireFormat"))
                                 writer.uint32(/* id 14, wireType 0 =*/112).int32(message.wireFormat);
                             return writer;
@@ -9954,6 +14121,12 @@
                                         message.forwardHeaders.push(reader.string());
                                         break;
                                     }
+                                case 13: {
+                                        if (!(message.forwardAttributes && message.forwardAttributes.length))
+                                            message.forwardAttributes = [];
+                                        message.forwardAttributes.push(reader.string());
+                                        break;
+                                    }
                                 case 14: {
                                         message.wireFormat = reader.int32();
                                         break;
@@ -10056,12 +14229,20 @@
                                     if (!$util.isString(message.forwardHeaders[i]))
                                         return "forwardHeaders: string[] expected";
                             }
+                            if (message.forwardAttributes != null && message.hasOwnProperty("forwardAttributes")) {
+                                if (!Array.isArray(message.forwardAttributes))
+                                    return "forwardAttributes: array expected";
+                                for (var i = 0; i < message.forwardAttributes.length; ++i)
+                                    if (!$util.isString(message.forwardAttributes[i]))
+                                        return "forwardAttributes: string[] expected";
+                            }
                             if (message.wireFormat != null && message.hasOwnProperty("wireFormat"))
                                 switch (message.wireFormat) {
                                 default:
                                     return "wireFormat: enum value expected";
                                 case 0:
                                 case 1:
+                                case 3:
                                     break;
                                 }
                             return null;
@@ -10150,6 +14331,13 @@
                                 for (var i = 0; i < object.forwardHeaders.length; ++i)
                                     message.forwardHeaders[i] = String(object.forwardHeaders[i]);
                             }
+                            if (object.forwardAttributes) {
+                                if (!Array.isArray(object.forwardAttributes))
+                                    throw TypeError(".google.cloud.networkservices.v1.AuthzExtension.forwardAttributes: array expected");
+                                message.forwardAttributes = [];
+                                for (var i = 0; i < object.forwardAttributes.length; ++i)
+                                    message.forwardAttributes[i] = String(object.forwardAttributes[i]);
+                            }
                             switch (object.wireFormat) {
                             default:
                                 if (typeof object.wireFormat === "number") {
@@ -10164,6 +14352,10 @@
                             case "EXT_PROC_GRPC":
                             case 1:
                                 message.wireFormat = 1;
+                                break;
+                            case "EXT_AUTHZ_GRPC":
+                            case 3:
+                                message.wireFormat = 3;
                                 break;
                             }
                             return message;
@@ -10182,8 +14374,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.forwardHeaders = [];
+                                object.forwardAttributes = [];
+                            }
                             if (options.objects || options.defaults)
                                 object.labels = {};
                             if (options.defaults) {
@@ -10232,6 +14426,11 @@
                                 object.forwardHeaders = [];
                                 for (var j = 0; j < message.forwardHeaders.length; ++j)
                                     object.forwardHeaders[j] = message.forwardHeaders[j];
+                            }
+                            if (message.forwardAttributes && message.forwardAttributes.length) {
+                                object.forwardAttributes = [];
+                                for (var j = 0; j < message.forwardAttributes.length; ++j)
+                                    object.forwardAttributes[j] = message.forwardAttributes[j];
                             }
                             if (message.wireFormat != null && message.hasOwnProperty("wireFormat"))
                                 object.wireFormat = options.enums === String ? $root.google.cloud.networkservices.v1.WireFormat[message.wireFormat] === undefined ? message.wireFormat : $root.google.cloud.networkservices.v1.WireFormat[message.wireFormat] : message.wireFormat;
@@ -18938,6 +23137,7 @@
                          * @property {google.cloud.networkservices.v1.Gateway.Type|null} [type] Gateway type
                          * @property {Array.<string>|null} [addresses] Gateway addresses
                          * @property {Array.<number>|null} [ports] Gateway ports
+                         * @property {boolean|null} [allPorts] Gateway allPorts
                          * @property {string|null} [scope] Gateway scope
                          * @property {string|null} [serverTlsPolicy] Gateway serverTlsPolicy
                          * @property {Array.<string>|null} [certificateUrls] Gateway certificateUrls
@@ -18947,6 +23147,7 @@
                          * @property {google.cloud.networkservices.v1.Gateway.IpVersion|null} [ipVersion] Gateway ipVersion
                          * @property {google.cloud.networkservices.v1.EnvoyHeaders|null} [envoyHeaders] Gateway envoyHeaders
                          * @property {google.cloud.networkservices.v1.Gateway.RoutingMode|null} [routingMode] Gateway routingMode
+                         * @property {boolean|null} [allowGlobalAccess] Gateway allowGlobalAccess
                          */
     
                         /**
@@ -19041,6 +23242,14 @@
                         Gateway.prototype.ports = $util.emptyArray;
     
                         /**
+                         * Gateway allPorts.
+                         * @member {boolean} allPorts
+                         * @memberof google.cloud.networkservices.v1.Gateway
+                         * @instance
+                         */
+                        Gateway.prototype.allPorts = false;
+    
+                        /**
                          * Gateway scope.
                          * @member {string} scope
                          * @memberof google.cloud.networkservices.v1.Gateway
@@ -19111,6 +23320,14 @@
                          * @instance
                          */
                         Gateway.prototype.routingMode = 0;
+    
+                        /**
+                         * Gateway allowGlobalAccess.
+                         * @member {boolean} allowGlobalAccess
+                         * @memberof google.cloud.networkservices.v1.Gateway
+                         * @instance
+                         */
+                        Gateway.prototype.allowGlobalAccess = false;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -19188,6 +23405,10 @@
                                 writer.uint32(/* id 28, wireType 0 =*/224).int32(message.envoyHeaders);
                             if (message.routingMode != null && Object.hasOwnProperty.call(message, "routingMode"))
                                 writer.uint32(/* id 32, wireType 0 =*/256).int32(message.routingMode);
+                            if (message.allowGlobalAccess != null && Object.hasOwnProperty.call(message, "allowGlobalAccess"))
+                                writer.uint32(/* id 33, wireType 0 =*/264).bool(message.allowGlobalAccess);
+                            if (message.allPorts != null && Object.hasOwnProperty.call(message, "allPorts"))
+                                writer.uint32(/* id 34, wireType 0 =*/272).bool(message.allPorts);
                             return writer;
                         };
     
@@ -19294,6 +23515,10 @@
                                             message.ports.push(reader.int32());
                                         break;
                                     }
+                                case 34: {
+                                        message.allPorts = reader.bool();
+                                        break;
+                                    }
                                 case 8: {
                                         message.scope = reader.string();
                                         break;
@@ -19330,6 +23555,10 @@
                                     }
                                 case 32: {
                                         message.routingMode = reader.int32();
+                                        break;
+                                    }
+                                case 33: {
+                                        message.allowGlobalAccess = reader.bool();
                                         break;
                                     }
                                 default:
@@ -19422,6 +23651,9 @@
                                     if (!$util.isInteger(message.ports[i]))
                                         return "ports: integer[] expected";
                             }
+                            if (message.allPorts != null && message.hasOwnProperty("allPorts"))
+                                if (typeof message.allPorts !== "boolean")
+                                    return "allPorts: boolean expected";
                             if (message.scope != null && message.hasOwnProperty("scope"))
                                 if (!$util.isString(message.scope))
                                     return "scope: string expected";
@@ -19472,6 +23704,9 @@
                                 case 1:
                                     break;
                                 }
+                            if (message.allowGlobalAccess != null && message.hasOwnProperty("allowGlobalAccess"))
+                                if (typeof message.allowGlobalAccess !== "boolean")
+                                    return "allowGlobalAccess: boolean expected";
                             return null;
                         };
     
@@ -19551,6 +23786,8 @@
                                 for (var i = 0; i < object.ports.length; ++i)
                                     message.ports[i] = object.ports[i] | 0;
                             }
+                            if (object.allPorts != null)
+                                message.allPorts = Boolean(object.allPorts);
                             if (object.scope != null)
                                 message.scope = String(object.scope);
                             if (object.serverTlsPolicy != null)
@@ -19624,6 +23861,8 @@
                                 message.routingMode = 1;
                                 break;
                             }
+                            if (object.allowGlobalAccess != null)
+                                message.allowGlobalAccess = Boolean(object.allowGlobalAccess);
                             return message;
                         };
     
@@ -19661,6 +23900,8 @@
                                 object.gatewaySecurityPolicy = "";
                                 object.ipVersion = options.enums === String ? "IP_VERSION_UNSPECIFIED" : 0;
                                 object.routingMode = options.enums === String ? "EXPLICIT_ROUTING_MODE" : 0;
+                                object.allowGlobalAccess = false;
+                                object.allPorts = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -19717,6 +23958,10 @@
                             }
                             if (message.routingMode != null && message.hasOwnProperty("routingMode"))
                                 object.routingMode = options.enums === String ? $root.google.cloud.networkservices.v1.Gateway.RoutingMode[message.routingMode] === undefined ? message.routingMode : $root.google.cloud.networkservices.v1.Gateway.RoutingMode[message.routingMode] : message.routingMode;
+                            if (message.allowGlobalAccess != null && message.hasOwnProperty("allowGlobalAccess"))
+                                object.allowGlobalAccess = message.allowGlobalAccess;
+                            if (message.allPorts != null && message.hasOwnProperty("allPorts"))
+                                object.allPorts = message.allPorts;
                             return object;
                         };
     
@@ -32902,6 +37147,7 @@
                          * @property {number|null} [pageSize] ListHttpRoutesRequest pageSize
                          * @property {string|null} [pageToken] ListHttpRoutesRequest pageToken
                          * @property {boolean|null} [returnPartialSuccess] ListHttpRoutesRequest returnPartialSuccess
+                         * @property {string|null} [filter] ListHttpRoutesRequest filter
                          */
     
                         /**
@@ -32952,6 +37198,14 @@
                         ListHttpRoutesRequest.prototype.returnPartialSuccess = false;
     
                         /**
+                         * ListHttpRoutesRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.networkservices.v1.ListHttpRoutesRequest
+                         * @instance
+                         */
+                        ListHttpRoutesRequest.prototype.filter = "";
+    
+                        /**
                          * Creates a new ListHttpRoutesRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkservices.v1.ListHttpRoutesRequest
@@ -32983,6 +37237,8 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
                             if (message.returnPartialSuccess != null && Object.hasOwnProperty.call(message, "returnPartialSuccess"))
                                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.returnPartialSuccess);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.filter);
                             return writer;
                         };
     
@@ -33039,6 +37295,10 @@
                                         message.returnPartialSuccess = reader.bool();
                                         break;
                                     }
+                                case 5: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
@@ -33090,6 +37350,9 @@
                             if (message.returnPartialSuccess != null && message.hasOwnProperty("returnPartialSuccess"))
                                 if (typeof message.returnPartialSuccess !== "boolean")
                                     return "returnPartialSuccess: boolean expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
                             return null;
                         };
     
@@ -33117,6 +37380,8 @@
                                 message.pageToken = String(object.pageToken);
                             if (object.returnPartialSuccess != null)
                                 message.returnPartialSuccess = Boolean(object.returnPartialSuccess);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
                             return message;
                         };
     
@@ -33138,6 +37403,7 @@
                                 object.pageSize = 0;
                                 object.pageToken = "";
                                 object.returnPartialSuccess = false;
+                                object.filter = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -33147,6 +37413,8 @@
                                 object.pageToken = message.pageToken;
                             if (message.returnPartialSuccess != null && message.hasOwnProperty("returnPartialSuccess"))
                                 object.returnPartialSuccess = message.returnPartialSuccess;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
                             return object;
                         };
     
@@ -33707,6 +37975,7 @@
                          * @property {string|null} [parent] CreateHttpRouteRequest parent
                          * @property {string|null} [httpRouteId] CreateHttpRouteRequest httpRouteId
                          * @property {google.cloud.networkservices.v1.IHttpRoute|null} [httpRoute] CreateHttpRouteRequest httpRoute
+                         * @property {string|null} [requestId] CreateHttpRouteRequest requestId
                          */
     
                         /**
@@ -33749,6 +38018,14 @@
                         CreateHttpRouteRequest.prototype.httpRoute = null;
     
                         /**
+                         * CreateHttpRouteRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networkservices.v1.CreateHttpRouteRequest
+                         * @instance
+                         */
+                        CreateHttpRouteRequest.prototype.requestId = "";
+    
+                        /**
                          * Creates a new CreateHttpRouteRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkservices.v1.CreateHttpRouteRequest
@@ -33778,6 +38055,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.httpRouteId);
                             if (message.httpRoute != null && Object.hasOwnProperty.call(message, "httpRoute"))
                                 $root.google.cloud.networkservices.v1.HttpRoute.encode(message.httpRoute, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
                             return writer;
                         };
     
@@ -33830,6 +38109,10 @@
                                         message.httpRoute = $root.google.cloud.networkservices.v1.HttpRoute.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
@@ -33880,6 +38163,9 @@
                                 if (error)
                                     return "httpRoute." + error;
                             }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
                             return null;
                         };
     
@@ -33908,6 +38194,8 @@
                                     throw TypeError(".google.cloud.networkservices.v1.CreateHttpRouteRequest.httpRoute: object expected");
                                 message.httpRoute = $root.google.cloud.networkservices.v1.HttpRoute.fromObject(object.httpRoute, long + 1);
                             }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
                             return message;
                         };
     
@@ -33928,6 +38216,7 @@
                                 object.parent = "";
                                 object.httpRouteId = "";
                                 object.httpRoute = null;
+                                object.requestId = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -33935,6 +38224,8 @@
                                 object.httpRouteId = message.httpRouteId;
                             if (message.httpRoute != null && message.hasOwnProperty("httpRoute"))
                                 object.httpRoute = $root.google.cloud.networkservices.v1.HttpRoute.toObject(message.httpRoute, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
                             return object;
                         };
     
@@ -38392,6 +42683,171 @@
                          * @instance
                          * @param {google.cloud.networkservices.v1.IListMeshRouteViewsRequest} request ListMeshRouteViewsRequest message or plain object
                          * @returns {Promise<google.cloud.networkservices.v1.ListMeshRouteViewsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|listAgentGateways}.
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @typedef ListAgentGatewaysCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkservices.v1.ListAgentGatewaysResponse} [response] ListAgentGatewaysResponse
+                         */
+    
+                        /**
+                         * Calls ListAgentGateways.
+                         * @function listAgentGateways
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IListAgentGatewaysRequest} request ListAgentGatewaysRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.NetworkServices.ListAgentGatewaysCallback} callback Node-style callback called with the error, if any, and ListAgentGatewaysResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkServices.prototype.listAgentGateways = function listAgentGateways(request, callback) {
+                            return this.rpcCall(listAgentGateways, $root.google.cloud.networkservices.v1.ListAgentGatewaysRequest, $root.google.cloud.networkservices.v1.ListAgentGatewaysResponse, request, callback);
+                        }, "name", { value: "ListAgentGateways" });
+    
+                        /**
+                         * Calls ListAgentGateways.
+                         * @function listAgentGateways
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IListAgentGatewaysRequest} request ListAgentGatewaysRequest message or plain object
+                         * @returns {Promise<google.cloud.networkservices.v1.ListAgentGatewaysResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|getAgentGateway}.
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @typedef GetAgentGatewayCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkservices.v1.AgentGateway} [response] AgentGateway
+                         */
+    
+                        /**
+                         * Calls GetAgentGateway.
+                         * @function getAgentGateway
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IGetAgentGatewayRequest} request GetAgentGatewayRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.NetworkServices.GetAgentGatewayCallback} callback Node-style callback called with the error, if any, and AgentGateway
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkServices.prototype.getAgentGateway = function getAgentGateway(request, callback) {
+                            return this.rpcCall(getAgentGateway, $root.google.cloud.networkservices.v1.GetAgentGatewayRequest, $root.google.cloud.networkservices.v1.AgentGateway, request, callback);
+                        }, "name", { value: "GetAgentGateway" });
+    
+                        /**
+                         * Calls GetAgentGateway.
+                         * @function getAgentGateway
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IGetAgentGatewayRequest} request GetAgentGatewayRequest message or plain object
+                         * @returns {Promise<google.cloud.networkservices.v1.AgentGateway>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|createAgentGateway}.
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @typedef CreateAgentGatewayCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateAgentGateway.
+                         * @function createAgentGateway
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.ICreateAgentGatewayRequest} request CreateAgentGatewayRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.NetworkServices.CreateAgentGatewayCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkServices.prototype.createAgentGateway = function createAgentGateway(request, callback) {
+                            return this.rpcCall(createAgentGateway, $root.google.cloud.networkservices.v1.CreateAgentGatewayRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateAgentGateway" });
+    
+                        /**
+                         * Calls CreateAgentGateway.
+                         * @function createAgentGateway
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.ICreateAgentGatewayRequest} request CreateAgentGatewayRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|updateAgentGateway}.
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @typedef UpdateAgentGatewayCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateAgentGateway.
+                         * @function updateAgentGateway
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IUpdateAgentGatewayRequest} request UpdateAgentGatewayRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.NetworkServices.UpdateAgentGatewayCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkServices.prototype.updateAgentGateway = function updateAgentGateway(request, callback) {
+                            return this.rpcCall(updateAgentGateway, $root.google.cloud.networkservices.v1.UpdateAgentGatewayRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateAgentGateway" });
+    
+                        /**
+                         * Calls UpdateAgentGateway.
+                         * @function updateAgentGateway
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IUpdateAgentGatewayRequest} request UpdateAgentGatewayRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.NetworkServices|deleteAgentGateway}.
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @typedef DeleteAgentGatewayCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteAgentGateway.
+                         * @function deleteAgentGateway
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IDeleteAgentGatewayRequest} request DeleteAgentGatewayRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.NetworkServices.DeleteAgentGatewayCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetworkServices.prototype.deleteAgentGateway = function deleteAgentGateway(request, callback) {
+                            return this.rpcCall(deleteAgentGateway, $root.google.cloud.networkservices.v1.DeleteAgentGatewayRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteAgentGateway" });
+    
+                        /**
+                         * Calls DeleteAgentGateway.
+                         * @function deleteAgentGateway
+                         * @memberof google.cloud.networkservices.v1.NetworkServices
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IDeleteAgentGatewayRequest} request DeleteAgentGatewayRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
                          * @variation 2
                          */
     
@@ -48443,6 +52899,7 @@
                          * @property {Array.<google.cloud.networkservices.v1.TlsRoute.IRouteRule>|null} [rules] TlsRoute rules
                          * @property {Array.<string>|null} [meshes] TlsRoute meshes
                          * @property {Array.<string>|null} [gateways] TlsRoute gateways
+                         * @property {Array.<string>|null} [targetProxies] TlsRoute targetProxies
                          * @property {Object.<string,string>|null} [labels] TlsRoute labels
                          */
     
@@ -48458,6 +52915,7 @@
                             this.rules = [];
                             this.meshes = [];
                             this.gateways = [];
+                            this.targetProxies = [];
                             this.labels = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -48530,6 +52988,14 @@
                         TlsRoute.prototype.gateways = $util.emptyArray;
     
                         /**
+                         * TlsRoute targetProxies.
+                         * @member {Array.<string>} targetProxies
+                         * @memberof google.cloud.networkservices.v1.TlsRoute
+                         * @instance
+                         */
+                        TlsRoute.prototype.targetProxies = $util.emptyArray;
+    
+                        /**
                          * TlsRoute labels.
                          * @member {Object.<string,string>} labels
                          * @memberof google.cloud.networkservices.v1.TlsRoute
@@ -48583,6 +53049,9 @@
                             if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                                 for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 11, wireType 2 =*/90).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.targetProxies != null && message.targetProxies.length)
+                                for (var i = 0; i < message.targetProxies.length; ++i)
+                                    writer.uint32(/* id 13, wireType 2 =*/106).string(message.targetProxies[i]);
                             return writer;
                         };
     
@@ -48659,6 +53128,12 @@
                                         if (!(message.gateways && message.gateways.length))
                                             message.gateways = [];
                                         message.gateways.push(reader.string());
+                                        break;
+                                    }
+                                case 13: {
+                                        if (!(message.targetProxies && message.targetProxies.length))
+                                            message.targetProxies = [];
+                                        message.targetProxies.push(reader.string());
                                         break;
                                     }
                                 case 11: {
@@ -48767,6 +53242,13 @@
                                     if (!$util.isString(message.gateways[i]))
                                         return "gateways: string[] expected";
                             }
+                            if (message.targetProxies != null && message.hasOwnProperty("targetProxies")) {
+                                if (!Array.isArray(message.targetProxies))
+                                    return "targetProxies: array expected";
+                                for (var i = 0; i < message.targetProxies.length; ++i)
+                                    if (!$util.isString(message.targetProxies[i]))
+                                        return "targetProxies: string[] expected";
+                            }
                             if (message.labels != null && message.hasOwnProperty("labels")) {
                                 if (!$util.isObject(message.labels))
                                     return "labels: object expected";
@@ -48834,6 +53316,13 @@
                                 for (var i = 0; i < object.gateways.length; ++i)
                                     message.gateways[i] = String(object.gateways[i]);
                             }
+                            if (object.targetProxies) {
+                                if (!Array.isArray(object.targetProxies))
+                                    throw TypeError(".google.cloud.networkservices.v1.TlsRoute.targetProxies: array expected");
+                                message.targetProxies = [];
+                                for (var i = 0; i < object.targetProxies.length; ++i)
+                                    message.targetProxies[i] = String(object.targetProxies[i]);
+                            }
                             if (object.labels) {
                                 if (typeof object.labels !== "object")
                                     throw TypeError(".google.cloud.networkservices.v1.TlsRoute.labels: object expected");
@@ -48864,6 +53353,7 @@
                                 object.rules = [];
                                 object.meshes = [];
                                 object.gateways = [];
+                                object.targetProxies = [];
                             }
                             if (options.objects || options.defaults)
                                 object.labels = {};
@@ -48907,6 +53397,11 @@
                                         $util.makeProp(object.labels, keys2[j]);
                                     object.labels[keys2[j]] = message.labels[keys2[j]];
                                 }
+                            }
+                            if (message.targetProxies && message.targetProxies.length) {
+                                object.targetProxies = [];
+                                for (var j = 0; j < message.targetProxies.length; ++j)
+                                    object.targetProxies[j] = message.targetProxies[j];
                             }
                             return object;
                         };
@@ -60828,6 +65323,718 @@
                 return values;
             })();
     
+            api.ResourceDescriptor = (function() {
+    
+                /**
+                 * Properties of a ResourceDescriptor.
+                 * @memberof google.api
+                 * @interface IResourceDescriptor
+                 * @property {string|null} [type] ResourceDescriptor type
+                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
+                 * @property {string|null} [nameField] ResourceDescriptor nameField
+                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
+                 * @property {string|null} [plural] ResourceDescriptor plural
+                 * @property {string|null} [singular] ResourceDescriptor singular
+                 * @property {Array.<google.api.ResourceDescriptor.Style>|null} [style] ResourceDescriptor style
+                 */
+    
+                /**
+                 * Constructs a new ResourceDescriptor.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceDescriptor.
+                 * @implements IResourceDescriptor
+                 * @constructor
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 */
+                function ResourceDescriptor(properties) {
+                    this.pattern = [];
+                    this.style = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceDescriptor type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.type = "";
+    
+                /**
+                 * ResourceDescriptor pattern.
+                 * @member {Array.<string>} pattern
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.pattern = $util.emptyArray;
+    
+                /**
+                 * ResourceDescriptor nameField.
+                 * @member {string} nameField
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.nameField = "";
+    
+                /**
+                 * ResourceDescriptor history.
+                 * @member {google.api.ResourceDescriptor.History} history
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.history = 0;
+    
+                /**
+                 * ResourceDescriptor plural.
+                 * @member {string} plural
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.plural = "";
+    
+                /**
+                 * ResourceDescriptor singular.
+                 * @member {string} singular
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.singular = "";
+    
+                /**
+                 * ResourceDescriptor style.
+                 * @member {Array.<google.api.ResourceDescriptor.Style>} style
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.style = $util.emptyArray;
+    
+                /**
+                 * Creates a new ResourceDescriptor instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
+                 */
+                ResourceDescriptor.create = function create(properties) {
+                    return new ResourceDescriptor(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.pattern != null && message.pattern.length)
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
+                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
+                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
+                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
+                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
+                    if (message.style != null && message.style.length) {
+                        writer.uint32(/* id 10, wireType 2 =*/82).fork();
+                        for (var i = 0; i < message.style.length; ++i)
+                            writer.int32(message.style[i]);
+                        writer.ldelim();
+                    }
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decode = function decode(reader, length, error, long) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.pattern && message.pattern.length))
+                                    message.pattern = [];
+                                message.pattern.push(reader.string());
+                                break;
+                            }
+                        case 3: {
+                                message.nameField = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.history = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.plural = reader.string();
+                                break;
+                            }
+                        case 6: {
+                                message.singular = reader.string();
+                                break;
+                            }
+                        case 10: {
+                                if (!(message.style && message.style.length))
+                                    message.style = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.style.push(reader.int32());
+                                } else
+                                    message.style.push(reader.int32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7, long);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceDescriptor message.
+                 * @function verify
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceDescriptor.verify = function verify(message, long) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
+                        if (!Array.isArray(message.pattern))
+                            return "pattern: array expected";
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            if (!$util.isString(message.pattern[i]))
+                                return "pattern: string[] expected";
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        if (!$util.isString(message.nameField))
+                            return "nameField: string expected";
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        switch (message.history) {
+                        default:
+                            return "history: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        if (!$util.isString(message.plural))
+                            return "plural: string expected";
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        if (!$util.isString(message.singular))
+                            return "singular: string expected";
+                    if (message.style != null && message.hasOwnProperty("style")) {
+                        if (!Array.isArray(message.style))
+                            return "style: array expected";
+                        for (var i = 0; i < message.style.length; ++i)
+                            switch (message.style[i]) {
+                            default:
+                                return "style: enum value[] expected";
+                            case 0:
+                            case 1:
+                                break;
+                            }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 */
+                ResourceDescriptor.fromObject = function fromObject(object, long) {
+                    if (object instanceof $root.google.api.ResourceDescriptor)
+                        return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
+                    var message = new $root.google.api.ResourceDescriptor();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.pattern) {
+                        if (!Array.isArray(object.pattern))
+                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
+                        message.pattern = [];
+                        for (var i = 0; i < object.pattern.length; ++i)
+                            message.pattern[i] = String(object.pattern[i]);
+                    }
+                    if (object.nameField != null)
+                        message.nameField = String(object.nameField);
+                    switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
+                    case "HISTORY_UNSPECIFIED":
+                    case 0:
+                        message.history = 0;
+                        break;
+                    case "ORIGINALLY_SINGLE_PATTERN":
+                    case 1:
+                        message.history = 1;
+                        break;
+                    case "FUTURE_MULTI_PATTERN":
+                    case 2:
+                        message.history = 2;
+                        break;
+                    }
+                    if (object.plural != null)
+                        message.plural = String(object.plural);
+                    if (object.singular != null)
+                        message.singular = String(object.singular);
+                    if (object.style) {
+                        if (!Array.isArray(object.style))
+                            throw TypeError(".google.api.ResourceDescriptor.style: array expected");
+                        message.style = [];
+                        for (var i = 0; i < object.style.length; ++i)
+                            switch (object.style[i]) {
+                            default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
+                            case "STYLE_UNSPECIFIED":
+                            case 0:
+                                message.style[i] = 0;
+                                break;
+                            case "DECLARATIVE_FRIENDLY":
+                            case 1:
+                                message.style[i] = 1;
+                                break;
+                            }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceDescriptor.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.pattern = [];
+                        object.style = [];
+                    }
+                    if (options.defaults) {
+                        object.type = "";
+                        object.nameField = "";
+                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
+                        object.plural = "";
+                        object.singular = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.pattern && message.pattern.length) {
+                        object.pattern = [];
+                        for (var j = 0; j < message.pattern.length; ++j)
+                            object.pattern[j] = message.pattern[j];
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        object.nameField = message.nameField;
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        object.plural = message.plural;
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        object.singular = message.singular;
+                    if (message.style && message.style.length) {
+                        object.style = [];
+                        for (var j = 0; j < message.style.length; ++j)
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceDescriptor to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceDescriptor.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ResourceDescriptor
+                 * @function getTypeUrl
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ResourceDescriptor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.ResourceDescriptor";
+                };
+    
+                /**
+                 * History enum.
+                 * @name google.api.ResourceDescriptor.History
+                 * @enum {number}
+                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
+                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
+                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
+                 */
+                ResourceDescriptor.History = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
+                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
+                    return values;
+                })();
+    
+                /**
+                 * Style enum.
+                 * @name google.api.ResourceDescriptor.Style
+                 * @enum {number}
+                 * @property {number} STYLE_UNSPECIFIED=0 STYLE_UNSPECIFIED value
+                 * @property {number} DECLARATIVE_FRIENDLY=1 DECLARATIVE_FRIENDLY value
+                 */
+                ResourceDescriptor.Style = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "STYLE_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "DECLARATIVE_FRIENDLY"] = 1;
+                    return values;
+                })();
+    
+                return ResourceDescriptor;
+            })();
+    
+            api.ResourceReference = (function() {
+    
+                /**
+                 * Properties of a ResourceReference.
+                 * @memberof google.api
+                 * @interface IResourceReference
+                 * @property {string|null} [type] ResourceReference type
+                 * @property {string|null} [childType] ResourceReference childType
+                 */
+    
+                /**
+                 * Constructs a new ResourceReference.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceReference.
+                 * @implements IResourceReference
+                 * @constructor
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 */
+                function ResourceReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceReference type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.type = "";
+    
+                /**
+                 * ResourceReference childType.
+                 * @member {string} childType
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.childType = "";
+    
+                /**
+                 * Creates a new ResourceReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 * @returns {google.api.ResourceReference} ResourceReference instance
+                 */
+                ResourceReference.create = function create(properties) {
+                    return new ResourceReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decode = function decode(reader, length, error, long) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.childType = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7, long);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceReference message.
+                 * @function verify
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceReference.verify = function verify(message, long) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        if (!$util.isString(message.childType))
+                            return "childType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 */
+                ResourceReference.fromObject = function fromObject(object, long) {
+                    if (object instanceof $root.google.api.ResourceReference)
+                        return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
+                    var message = new $root.google.api.ResourceReference();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.childType != null)
+                        message.childType = String(object.childType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.ResourceReference} message ResourceReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type = "";
+                        object.childType = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        object.childType = message.childType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ResourceReference
+                 * @function getTypeUrl
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ResourceReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.ResourceReference";
+                };
+    
+                return ResourceReference;
+            })();
+    
             api.Http = (function() {
     
                 /**
@@ -67168,718 +72375,6 @@
                 };
     
                 return TypeReference;
-            })();
-    
-            api.ResourceDescriptor = (function() {
-    
-                /**
-                 * Properties of a ResourceDescriptor.
-                 * @memberof google.api
-                 * @interface IResourceDescriptor
-                 * @property {string|null} [type] ResourceDescriptor type
-                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
-                 * @property {string|null} [nameField] ResourceDescriptor nameField
-                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
-                 * @property {string|null} [plural] ResourceDescriptor plural
-                 * @property {string|null} [singular] ResourceDescriptor singular
-                 * @property {Array.<google.api.ResourceDescriptor.Style>|null} [style] ResourceDescriptor style
-                 */
-    
-                /**
-                 * Constructs a new ResourceDescriptor.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceDescriptor.
-                 * @implements IResourceDescriptor
-                 * @constructor
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 */
-                function ResourceDescriptor(properties) {
-                    this.pattern = [];
-                    this.style = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceDescriptor type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.type = "";
-    
-                /**
-                 * ResourceDescriptor pattern.
-                 * @member {Array.<string>} pattern
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.pattern = $util.emptyArray;
-    
-                /**
-                 * ResourceDescriptor nameField.
-                 * @member {string} nameField
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.nameField = "";
-    
-                /**
-                 * ResourceDescriptor history.
-                 * @member {google.api.ResourceDescriptor.History} history
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.history = 0;
-    
-                /**
-                 * ResourceDescriptor plural.
-                 * @member {string} plural
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.plural = "";
-    
-                /**
-                 * ResourceDescriptor singular.
-                 * @member {string} singular
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.singular = "";
-    
-                /**
-                 * ResourceDescriptor style.
-                 * @member {Array.<google.api.ResourceDescriptor.Style>} style
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.style = $util.emptyArray;
-    
-                /**
-                 * Creates a new ResourceDescriptor instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
-                 */
-                ResourceDescriptor.create = function create(properties) {
-                    return new ResourceDescriptor(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.pattern != null && message.pattern.length)
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
-                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
-                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
-                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
-                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
-                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
-                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
-                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
-                    if (message.style != null && message.style.length) {
-                        writer.uint32(/* id 10, wireType 2 =*/82).fork();
-                        for (var i = 0; i < message.style.length; ++i)
-                            writer.int32(message.style[i]);
-                        writer.ldelim();
-                    }
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decode = function decode(reader, length, error, long) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    if (long === undefined)
-                        long = 0;
-                    if (long > $Reader.recursionLimit)
-                        throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        if (tag === error)
-                            break;
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.type = reader.string();
-                                break;
-                            }
-                        case 2: {
-                                if (!(message.pattern && message.pattern.length))
-                                    message.pattern = [];
-                                message.pattern.push(reader.string());
-                                break;
-                            }
-                        case 3: {
-                                message.nameField = reader.string();
-                                break;
-                            }
-                        case 4: {
-                                message.history = reader.int32();
-                                break;
-                            }
-                        case 5: {
-                                message.plural = reader.string();
-                                break;
-                            }
-                        case 6: {
-                                message.singular = reader.string();
-                                break;
-                            }
-                        case 10: {
-                                if (!(message.style && message.style.length))
-                                    message.style = [];
-                                if ((tag & 7) === 2) {
-                                    var end2 = reader.uint32() + reader.pos;
-                                    while (reader.pos < end2)
-                                        message.style.push(reader.int32());
-                                } else
-                                    message.style.push(reader.int32());
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7, long);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceDescriptor message.
-                 * @function verify
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceDescriptor.verify = function verify(message, long) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (long === undefined)
-                        long = 0;
-                    if (long > $util.recursionLimit)
-                        return "maximum nesting depth exceeded";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
-                        if (!Array.isArray(message.pattern))
-                            return "pattern: array expected";
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            if (!$util.isString(message.pattern[i]))
-                                return "pattern: string[] expected";
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        if (!$util.isString(message.nameField))
-                            return "nameField: string expected";
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        switch (message.history) {
-                        default:
-                            return "history: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        if (!$util.isString(message.plural))
-                            return "plural: string expected";
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        if (!$util.isString(message.singular))
-                            return "singular: string expected";
-                    if (message.style != null && message.hasOwnProperty("style")) {
-                        if (!Array.isArray(message.style))
-                            return "style: array expected";
-                        for (var i = 0; i < message.style.length; ++i)
-                            switch (message.style[i]) {
-                            default:
-                                return "style: enum value[] expected";
-                            case 0:
-                            case 1:
-                                break;
-                            }
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 */
-                ResourceDescriptor.fromObject = function fromObject(object, long) {
-                    if (object instanceof $root.google.api.ResourceDescriptor)
-                        return object;
-                    if (long === undefined)
-                        long = 0;
-                    if (long > $util.recursionLimit)
-                        throw Error("maximum nesting depth exceeded");
-                    var message = new $root.google.api.ResourceDescriptor();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.pattern) {
-                        if (!Array.isArray(object.pattern))
-                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
-                        message.pattern = [];
-                        for (var i = 0; i < object.pattern.length; ++i)
-                            message.pattern[i] = String(object.pattern[i]);
-                    }
-                    if (object.nameField != null)
-                        message.nameField = String(object.nameField);
-                    switch (object.history) {
-                    default:
-                        if (typeof object.history === "number") {
-                            message.history = object.history;
-                            break;
-                        }
-                        break;
-                    case "HISTORY_UNSPECIFIED":
-                    case 0:
-                        message.history = 0;
-                        break;
-                    case "ORIGINALLY_SINGLE_PATTERN":
-                    case 1:
-                        message.history = 1;
-                        break;
-                    case "FUTURE_MULTI_PATTERN":
-                    case 2:
-                        message.history = 2;
-                        break;
-                    }
-                    if (object.plural != null)
-                        message.plural = String(object.plural);
-                    if (object.singular != null)
-                        message.singular = String(object.singular);
-                    if (object.style) {
-                        if (!Array.isArray(object.style))
-                            throw TypeError(".google.api.ResourceDescriptor.style: array expected");
-                        message.style = [];
-                        for (var i = 0; i < object.style.length; ++i)
-                            switch (object.style[i]) {
-                            default:
-                                if (typeof object.style[i] === "number") {
-                                    message.style[i] = object.style[i];
-                                    break;
-                                }
-                            case "STYLE_UNSPECIFIED":
-                            case 0:
-                                message.style[i] = 0;
-                                break;
-                            case "DECLARATIVE_FRIENDLY":
-                            case 1:
-                                message.style[i] = 1;
-                                break;
-                            }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceDescriptor.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults) {
-                        object.pattern = [];
-                        object.style = [];
-                    }
-                    if (options.defaults) {
-                        object.type = "";
-                        object.nameField = "";
-                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
-                        object.plural = "";
-                        object.singular = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.pattern && message.pattern.length) {
-                        object.pattern = [];
-                        for (var j = 0; j < message.pattern.length; ++j)
-                            object.pattern[j] = message.pattern[j];
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        object.nameField = message.nameField;
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        object.plural = message.plural;
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        object.singular = message.singular;
-                    if (message.style && message.style.length) {
-                        object.style = [];
-                        for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceDescriptor to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceDescriptor.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for ResourceDescriptor
-                 * @function getTypeUrl
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                ResourceDescriptor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.api.ResourceDescriptor";
-                };
-    
-                /**
-                 * History enum.
-                 * @name google.api.ResourceDescriptor.History
-                 * @enum {number}
-                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
-                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
-                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
-                 */
-                ResourceDescriptor.History = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
-                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
-                    return values;
-                })();
-    
-                /**
-                 * Style enum.
-                 * @name google.api.ResourceDescriptor.Style
-                 * @enum {number}
-                 * @property {number} STYLE_UNSPECIFIED=0 STYLE_UNSPECIFIED value
-                 * @property {number} DECLARATIVE_FRIENDLY=1 DECLARATIVE_FRIENDLY value
-                 */
-                ResourceDescriptor.Style = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "STYLE_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "DECLARATIVE_FRIENDLY"] = 1;
-                    return values;
-                })();
-    
-                return ResourceDescriptor;
-            })();
-    
-            api.ResourceReference = (function() {
-    
-                /**
-                 * Properties of a ResourceReference.
-                 * @memberof google.api
-                 * @interface IResourceReference
-                 * @property {string|null} [type] ResourceReference type
-                 * @property {string|null} [childType] ResourceReference childType
-                 */
-    
-                /**
-                 * Constructs a new ResourceReference.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceReference.
-                 * @implements IResourceReference
-                 * @constructor
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 */
-                function ResourceReference(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceReference type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.type = "";
-    
-                /**
-                 * ResourceReference childType.
-                 * @member {string} childType
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.childType = "";
-    
-                /**
-                 * Creates a new ResourceReference instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 * @returns {google.api.ResourceReference} ResourceReference instance
-                 */
-                ResourceReference.create = function create(properties) {
-                    return new ResourceReference(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decode = function decode(reader, length, error, long) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    if (long === undefined)
-                        long = 0;
-                    if (long > $Reader.recursionLimit)
-                        throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        if (tag === error)
-                            break;
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.type = reader.string();
-                                break;
-                            }
-                        case 2: {
-                                message.childType = reader.string();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7, long);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceReference message.
-                 * @function verify
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceReference.verify = function verify(message, long) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (long === undefined)
-                        long = 0;
-                    if (long > $util.recursionLimit)
-                        return "maximum nesting depth exceeded";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        if (!$util.isString(message.childType))
-                            return "childType: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 */
-                ResourceReference.fromObject = function fromObject(object, long) {
-                    if (object instanceof $root.google.api.ResourceReference)
-                        return object;
-                    if (long === undefined)
-                        long = 0;
-                    if (long > $util.recursionLimit)
-                        throw Error("maximum nesting depth exceeded");
-                    var message = new $root.google.api.ResourceReference();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.childType != null)
-                        message.childType = String(object.childType);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.ResourceReference} message ResourceReference
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceReference.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.type = "";
-                        object.childType = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        object.childType = message.childType;
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceReference to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceReference.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for ResourceReference
-                 * @function getTypeUrl
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                ResourceReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.api.ResourceReference";
-                };
-    
-                return ResourceReference;
             })();
     
             return api;
@@ -74420,8 +78915,8 @@
                  * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] FieldOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
-                 * @property {google.api.IFieldInfo|null} [".google.api.fieldInfo"] FieldOptions .google.api.fieldInfo
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
+                 * @property {google.api.IFieldInfo|null} [".google.api.fieldInfo"] FieldOptions .google.api.fieldInfo
                  */
     
                 /**
@@ -74564,20 +79059,20 @@
                 FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
     
                 /**
-                 * FieldOptions .google.api.fieldInfo.
-                 * @member {google.api.IFieldInfo|null|undefined} .google.api.fieldInfo
-                 * @memberof google.protobuf.FieldOptions
-                 * @instance
-                 */
-                FieldOptions.prototype[".google.api.fieldInfo"] = null;
-    
-                /**
                  * FieldOptions .google.api.resourceReference.
                  * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
                  * @memberof google.protobuf.FieldOptions
                  * @instance
                  */
                 FieldOptions.prototype[".google.api.resourceReference"] = null;
+    
+                /**
+                 * FieldOptions .google.api.fieldInfo.
+                 * @member {google.api.IFieldInfo|null|undefined} .google.api.fieldInfo
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.fieldInfo"] = null;
     
                 /**
                  * Creates a new FieldOptions instance using the specified properties.
@@ -74759,12 +79254,12 @@
                                     message[".google.api.fieldBehavior"].push(reader.int32());
                                 break;
                             }
-                        case 291403980: {
-                                message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.decode(reader, reader.uint32(), undefined, long + 1);
-                                break;
-                            }
                         case 1055: {
                                 message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32(), undefined, long + 1);
+                                break;
+                            }
+                        case 291403980: {
+                                message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
@@ -74918,15 +79413,15 @@
                                 break;
                             }
                     }
-                    if (message[".google.api.fieldInfo"] != null && message.hasOwnProperty(".google.api.fieldInfo")) {
-                        var error = $root.google.api.FieldInfo.verify(message[".google.api.fieldInfo"], long + 1);
-                        if (error)
-                            return ".google.api.fieldInfo." + error;
-                    }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
                         var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"], long + 1);
                         if (error)
                             return ".google.api.resourceReference." + error;
+                    }
+                    if (message[".google.api.fieldInfo"] != null && message.hasOwnProperty(".google.api.fieldInfo")) {
+                        var error = $root.google.api.FieldInfo.verify(message[".google.api.fieldInfo"], long + 1);
+                        if (error)
+                            return ".google.api.fieldInfo." + error;
                     }
                     return null;
                 };
@@ -75151,15 +79646,15 @@
                                 break;
                             }
                     }
-                    if (object[".google.api.fieldInfo"] != null) {
-                        if (typeof object[".google.api.fieldInfo"] !== "object")
-                            throw TypeError(".google.protobuf.FieldOptions..google.api.fieldInfo: object expected");
-                        message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.fromObject(object[".google.api.fieldInfo"], long + 1);
-                    }
                     if (object[".google.api.resourceReference"] != null) {
                         if (typeof object[".google.api.resourceReference"] !== "object")
                             throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
                         message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"], long + 1);
+                    }
+                    if (object[".google.api.fieldInfo"] != null) {
+                        if (typeof object[".google.api.fieldInfo"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.fieldInfo: object expected");
+                        message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.fromObject(object[".google.api.fieldInfo"], long + 1);
                     }
                     return message;
                 };
@@ -81489,6 +85984,239 @@
                 return values;
             })();
     
+            protobuf.FieldMask = (function() {
+    
+                /**
+                 * Properties of a FieldMask.
+                 * @memberof google.protobuf
+                 * @interface IFieldMask
+                 * @property {Array.<string>|null} [paths] FieldMask paths
+                 */
+    
+                /**
+                 * Constructs a new FieldMask.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a FieldMask.
+                 * @implements IFieldMask
+                 * @constructor
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
+                 */
+                function FieldMask(properties) {
+                    this.paths = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FieldMask paths.
+                 * @member {Array.<string>} paths
+                 * @memberof google.protobuf.FieldMask
+                 * @instance
+                 */
+                FieldMask.prototype.paths = $util.emptyArray;
+    
+                /**
+                 * Creates a new FieldMask instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
+                 * @returns {google.protobuf.FieldMask} FieldMask instance
+                 */
+                FieldMask.create = function create(properties) {
+                    return new FieldMask(properties);
+                };
+    
+                /**
+                 * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldMask.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.paths != null && message.paths.length)
+                        for (var i = 0; i < message.paths.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.paths[i]);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldMask.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FieldMask message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldMask.decode = function decode(reader, length, error, long) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.paths && message.paths.length))
+                                    message.paths = [];
+                                message.paths.push(reader.string());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7, long);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldMask.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FieldMask message.
+                 * @function verify
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FieldMask.verify = function verify(message, long) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
+                    if (message.paths != null && message.hasOwnProperty("paths")) {
+                        if (!Array.isArray(message.paths))
+                            return "paths: array expected";
+                        for (var i = 0; i < message.paths.length; ++i)
+                            if (!$util.isString(message.paths[i]))
+                                return "paths: string[] expected";
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 */
+                FieldMask.fromObject = function fromObject(object, long) {
+                    if (object instanceof $root.google.protobuf.FieldMask)
+                        return object;
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
+                    var message = new $root.google.protobuf.FieldMask();
+                    if (object.paths) {
+                        if (!Array.isArray(object.paths))
+                            throw TypeError(".google.protobuf.FieldMask.paths: array expected");
+                        message.paths = [];
+                        for (var i = 0; i < object.paths.length; ++i)
+                            message.paths[i] = String(object.paths[i]);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.FieldMask} message FieldMask
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FieldMask.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.paths = [];
+                    if (message.paths && message.paths.length) {
+                        object.paths = [];
+                        for (var j = 0; j < message.paths.length; ++j)
+                            object.paths[j] = message.paths[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this FieldMask to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.FieldMask
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FieldMask.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldMask
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldMask.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FieldMask";
+                };
+    
+                return FieldMask;
+            })();
+    
             protobuf.Timestamp = (function() {
     
                 /**
@@ -82436,239 +87164,6 @@
                 };
     
                 return Empty;
-            })();
-    
-            protobuf.FieldMask = (function() {
-    
-                /**
-                 * Properties of a FieldMask.
-                 * @memberof google.protobuf
-                 * @interface IFieldMask
-                 * @property {Array.<string>|null} [paths] FieldMask paths
-                 */
-    
-                /**
-                 * Constructs a new FieldMask.
-                 * @memberof google.protobuf
-                 * @classdesc Represents a FieldMask.
-                 * @implements IFieldMask
-                 * @constructor
-                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
-                 */
-                function FieldMask(properties) {
-                    this.paths = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * FieldMask paths.
-                 * @member {Array.<string>} paths
-                 * @memberof google.protobuf.FieldMask
-                 * @instance
-                 */
-                FieldMask.prototype.paths = $util.emptyArray;
-    
-                /**
-                 * Creates a new FieldMask instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
-                 * @returns {google.protobuf.FieldMask} FieldMask instance
-                 */
-                FieldMask.create = function create(properties) {
-                    return new FieldMask(properties);
-                };
-    
-                /**
-                 * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                FieldMask.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.paths != null && message.paths.length)
-                        for (var i = 0; i < message.paths.length; ++i)
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.paths[i]);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                FieldMask.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a FieldMask message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.FieldMask} FieldMask
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                FieldMask.decode = function decode(reader, length, error, long) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    if (long === undefined)
-                        long = 0;
-                    if (long > $Reader.recursionLimit)
-                        throw Error("maximum nesting depth exceeded");
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        if (tag === error)
-                            break;
-                        switch (tag >>> 3) {
-                        case 1: {
-                                if (!(message.paths && message.paths.length))
-                                    message.paths = [];
-                                message.paths.push(reader.string());
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7, long);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a FieldMask message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.FieldMask} FieldMask
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                FieldMask.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a FieldMask message.
-                 * @function verify
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                FieldMask.verify = function verify(message, long) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (long === undefined)
-                        long = 0;
-                    if (long > $util.recursionLimit)
-                        return "maximum nesting depth exceeded";
-                    if (message.paths != null && message.hasOwnProperty("paths")) {
-                        if (!Array.isArray(message.paths))
-                            return "paths: array expected";
-                        for (var i = 0; i < message.paths.length; ++i)
-                            if (!$util.isString(message.paths[i]))
-                                return "paths: string[] expected";
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.FieldMask} FieldMask
-                 */
-                FieldMask.fromObject = function fromObject(object, long) {
-                    if (object instanceof $root.google.protobuf.FieldMask)
-                        return object;
-                    if (long === undefined)
-                        long = 0;
-                    if (long > $util.recursionLimit)
-                        throw Error("maximum nesting depth exceeded");
-                    var message = new $root.google.protobuf.FieldMask();
-                    if (object.paths) {
-                        if (!Array.isArray(object.paths))
-                            throw TypeError(".google.protobuf.FieldMask.paths: array expected");
-                        message.paths = [];
-                        for (var i = 0; i < object.paths.length; ++i)
-                            message.paths[i] = String(object.paths[i]);
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.FieldMask} message FieldMask
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                FieldMask.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.paths = [];
-                    if (message.paths && message.paths.length) {
-                        object.paths = [];
-                        for (var j = 0; j < message.paths.length; ++j)
-                            object.paths[j] = message.paths[j];
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this FieldMask to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.FieldMask
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                FieldMask.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for FieldMask
-                 * @function getTypeUrl
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                FieldMask.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.protobuf.FieldMask";
-                };
-    
-                return FieldMask;
             })();
     
             protobuf.Struct = (function() {
