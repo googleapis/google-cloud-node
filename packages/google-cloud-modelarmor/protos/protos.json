@@ -206,6 +206,18 @@
                               }
                             }
                           ]
+                        },
+                        "StreamSanitizeUserPrompt": {
+                          "requestType": "SanitizeUserPromptRequest",
+                          "requestStream": true,
+                          "responseType": "SanitizeUserPromptResponse",
+                          "responseStream": true
+                        },
+                        "StreamSanitizeModelResponse": {
+                          "requestType": "SanitizeModelResponseRequest",
+                          "requestStream": true,
+                          "responseType": "SanitizeModelResponseResponse",
+                          "responseStream": true
                         }
                       }
                     },
@@ -256,6 +268,13 @@
                         "SUCCESS": 1,
                         "PARTIAL": 2,
                         "FAILURE": 3
+                      }
+                    },
+                    "StreamingMode": {
+                      "values": {
+                        "STREAMING_MODE_UNSPECIFIED": 0,
+                        "STREAMING_MODE_BUFFERED": 1,
+                        "STREAMING_MODE_REALTIME": 2
                       }
                     },
                     "Template": {
@@ -902,6 +921,13 @@
                       }
                     },
                     "SanitizeUserPromptRequest": {
+                      "oneofs": {
+                        "_streamingMode": {
+                          "oneof": [
+                            "streamingMode"
+                          ]
+                        }
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -924,10 +950,25 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "streamingMode": {
+                          "type": "StreamingMode",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
                     "SanitizeModelResponseRequest": {
+                      "oneofs": {
+                        "_streamingMode": {
+                          "oneof": [
+                            "streamingMode"
+                          ]
+                        }
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -956,6 +997,14 @@
                           "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "streamingMode": {
+                          "type": "StreamingMode",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -1028,6 +1077,13 @@
                             "ignorePartialInvocationFailures": {
                               "type": "bool",
                               "id": 3
+                            },
+                            "streamChunkProcessed": {
+                              "type": "DataItem",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         }
@@ -5255,6 +5311,34 @@
                 "nanos": {
                   "type": "int32",
                   "id": 2
+                }
+              }
+            }
+          }
+        },
+        "type": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/type/date;date",
+            "java_multiple_files": true,
+            "java_outer_classname": "DateProto",
+            "java_package": "com.google.type",
+            "objc_class_prefix": "GTP"
+          },
+          "nested": {
+            "Date": {
+              "fields": {
+                "year": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "month": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "day": {
+                  "type": "int32",
+                  "id": 3
                 }
               }
             }

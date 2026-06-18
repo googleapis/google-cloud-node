@@ -19,6 +19,589 @@
                     "(google.api.resource_definition).pattern": "accountTypes/{account_type}/accounts/{account}"
                   },
                   "nested": {
+                    "AdEvent": {
+                      "oneofs": {
+                        "eventSubtypeOneof": {
+                          "oneof": [
+                            "eventSubtype",
+                            "eventSubtypeString"
+                          ]
+                        },
+                        "adTypeOneof": {
+                          "oneof": [
+                            "adType",
+                            "adTypeString"
+                          ]
+                        },
+                        "adFormatOneof": {
+                          "oneof": [
+                            "adFormat",
+                            "adFormatString"
+                          ]
+                        },
+                        "adPlacementOneof": {
+                          "oneof": [
+                            "adPlacement",
+                            "adPlacementString"
+                          ]
+                        },
+                        "targetingTypeOneof": {
+                          "oneof": [
+                            "targetingType",
+                            "targetingTypeString"
+                          ]
+                        },
+                        "platformTypeOneof": {
+                          "oneof": [
+                            "platformType",
+                            "platformTypeString"
+                          ]
+                        },
+                        "platformOneof": {
+                          "oneof": [
+                            "platform",
+                            "platformString"
+                          ]
+                        },
+                        "_measurementAllowed": {
+                          "oneof": [
+                            "measurementAllowed"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "advertiserId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "eventType": {
+                          "type": "EventType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "eventSubtype": {
+                          "type": "EventSubtype",
+                          "id": 3
+                        },
+                        "eventSubtypeString": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "timestamp": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "eventId": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "userData": {
+                          "type": "UserData",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "deviceInfo": {
+                          "type": "DeviceInfo",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "mobileDeviceId": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "campaignId": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "campaignName": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "adGroupId": {
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "adId": {
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "adType": {
+                          "type": "AdType",
+                          "id": 14
+                        },
+                        "adTypeString": {
+                          "type": "string",
+                          "id": 15
+                        },
+                        "adFormat": {
+                          "type": "AdFormat",
+                          "id": 16
+                        },
+                        "adFormatString": {
+                          "type": "string",
+                          "id": 17
+                        },
+                        "adPlacement": {
+                          "type": "AdPlacement",
+                          "id": 18
+                        },
+                        "adPlacementString": {
+                          "type": "string",
+                          "id": 19
+                        },
+                        "adHeight": {
+                          "type": "int32",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "adWidth": {
+                          "type": "int32",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "regionCode": {
+                          "type": "string",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "source": {
+                          "type": "string",
+                          "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "medium": {
+                          "type": "string",
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "targetingType": {
+                          "type": "TargetingType",
+                          "id": 25
+                        },
+                        "targetingTypeString": {
+                          "type": "string",
+                          "id": 26
+                        },
+                        "platformType": {
+                          "type": "PlatformType",
+                          "id": 27
+                        },
+                        "platformTypeString": {
+                          "type": "string",
+                          "id": 28
+                        },
+                        "platform": {
+                          "type": "Platform",
+                          "id": 29
+                        },
+                        "platformString": {
+                          "type": "string",
+                          "id": 30
+                        },
+                        "attributionHint": {
+                          "type": "AttributionHint",
+                          "id": 31,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "viewabilityInfo": {
+                          "type": "ViewabilityInfo",
+                          "id": 32,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "measurementAllowed": {
+                          "type": "bool",
+                          "id": 33,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "EventType": {
+                          "values": {
+                            "EVENT_TYPE_UNSPECIFIED": 0,
+                            "EVENT_TYPE_VIEW": 1,
+                            "EVENT_TYPE_CLICK": 2
+                          }
+                        },
+                        "EventSubtype": {
+                          "values": {
+                            "EVENT_SUBTYPE_UNSPECIFIED": 0,
+                            "EVENT_SUBTYPE_IMPRESSION": 1,
+                            "EVENT_SUBTYPE_ENGAGED_VIEW": 2,
+                            "EVENT_SUBTYPE_ONSITE_CLICK": 3,
+                            "EVENT_SUBTYPE_OUTBOUND_CLICK": 4
+                          }
+                        }
+                      }
+                    },
+                    "AdType": {
+                      "values": {
+                        "AD_TYPE_UNSPECIFIED": 0,
+                        "AD_TYPE_DISPLAY": 1,
+                        "AD_TYPE_TEXT": 2,
+                        "AD_TYPE_IMAGE": 3,
+                        "AD_TYPE_RICH_MEDIA": 4,
+                        "AD_TYPE_HTML": 5,
+                        "AD_TYPE_AUDIO": 6,
+                        "AD_TYPE_VIDEO": 7
+                      }
+                    },
+                    "AdFormat": {
+                      "values": {
+                        "AD_FORMAT_UNSPECIFIED": 0,
+                        "AD_FORMAT_AR": 1,
+                        "AD_FORMAT_AUDIO": 2,
+                        "AD_FORMAT_BANNER": 3,
+                        "AD_FORMAT_BUMPER": 4,
+                        "AD_FORMAT_CAROUSEL": 5,
+                        "AD_FORMAT_COLLECTION": 6,
+                        "AD_FORMAT_IMAGE": 7,
+                        "AD_FORMAT_INTERACTIVE": 8,
+                        "AD_FORMAT_INTERSTITIAL": 9,
+                        "AD_FORMAT_IN_FEED": 10,
+                        "AD_FORMAT_IN_STREAM": 11,
+                        "AD_FORMAT_IN_STREAM_SKIPPABLE": 12,
+                        "AD_FORMAT_IN_STREAM_NON_SKIPPABLE": 13,
+                        "AD_FORMAT_NATIVE": 14,
+                        "AD_FORMAT_SHORTS": 15,
+                        "AD_FORMAT_STORY": 16,
+                        "AD_FORMAT_SPONSORED": 17,
+                        "AD_FORMAT_VIDEO": 18
+                      }
+                    },
+                    "AdPlacement": {
+                      "values": {
+                        "AD_PLACEMENT_UNSPECIFIED": 0,
+                        "AD_PLACEMENT_DISCOVER": 1,
+                        "AD_PLACEMENT_FEED": 2,
+                        "AD_PLACEMENT_FOOTER": 3,
+                        "AD_PLACEMENT_HEADER": 4,
+                        "AD_PLACEMENT_HOME": 5,
+                        "AD_PLACEMENT_IN_CONTENT": 6,
+                        "AD_PLACEMENT_PROMOTED": 7,
+                        "AD_PLACEMENT_SEARCH": 8,
+                        "AD_PLACEMENT_STORY": 9
+                      }
+                    },
+                    "TargetingType": {
+                      "values": {
+                        "TARGETING_TYPE_UNSPECIFIED": 0,
+                        "TARGETING_TYPE_AUDIENCE": 1,
+                        "TARGETING_TYPE_CONTEXTUAL": 2,
+                        "TARGETING_TYPE_DEMOGRAPHIC": 3,
+                        "TARGETING_TYPE_DEVICE": 4,
+                        "TARGETING_TYPE_GEO": 5,
+                        "TARGETING_TYPE_INTEREST": 6,
+                        "TARGETING_TYPE_PURCHASE_INTENT": 7,
+                        "TARGETING_TYPE_REMARKETING": 8
+                      }
+                    },
+                    "PlatformType": {
+                      "values": {
+                        "PLATFORM_TYPE_UNSPECIFIED": 0,
+                        "PLATFORM_TYPE_MOBILE": 1,
+                        "PLATFORM_TYPE_DESKTOP": 2,
+                        "PLATFORM_TYPE_CTV": 3,
+                        "PLATFORM_TYPE_PHONE": 4,
+                        "PLATFORM_TYPE_TABLET": 5
+                      }
+                    },
+                    "Platform": {
+                      "values": {
+                        "PLATFORM_UNSPECIFIED": 0,
+                        "PLATFORM_IOS": 1,
+                        "PLATFORM_ANDROID": 2,
+                        "PLATFORM_WEB": 3
+                      }
+                    },
+                    "AttributionHint": {
+                      "values": {
+                        "ATTRIBUTION_HINT_UNSPECIFIED": 0,
+                        "ATTRIBUTION_HINT_CONVERTED": 1,
+                        "ATTRIBUTION_HINT_NOT_CONVERTED": 2
+                      }
+                    },
+                    "DeviceInfo": {
+                      "fields": {
+                        "userAgent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "ipAddress": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4_OR_IPV6",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "category": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "screenHeight": {
+                          "type": "int32",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "screenWidth": {
+                          "type": "int32",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "operatingSystem": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "operatingSystemVersion": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "model": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "brand": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "browser": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "browserVersion": {
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UserData": {
+                      "fields": {
+                        "userIdentifiers": {
+                          "rule": "repeated",
+                          "type": "UserIdentifier",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UserIdentifier": {
+                      "oneofs": {
+                        "identifier": {
+                          "oneof": [
+                            "emailAddress",
+                            "phoneNumber",
+                            "address"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "emailAddress": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "phoneNumber": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "address": {
+                          "type": "AddressInfo",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "AddressInfo": {
+                      "fields": {
+                        "givenName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "familyName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "regionCode": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "postalCode": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ViewabilityInfo": {
+                      "fields": {
+                        "viewType": {
+                          "type": "ViewType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "viewablePercent": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "viewableDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "mediaSkippable": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "mediaQuartile": {
+                          "type": "MediaQuartile",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "mediaDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "mediaVolumePercent": {
+                          "type": "int32",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "playbackDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ViewType": {
+                      "values": {
+                        "VIEW_TYPE_UNSPECIFIED": 0,
+                        "VIEW_TYPE_MRC_VIEWED": 1,
+                        "VIEW_TYPE_MRC_RENDERED": 2
+                      }
+                    },
+                    "MediaQuartile": {
+                      "values": {
+                        "MEDIA_QUARTILE_UNSPECIFIED": 0,
+                        "MEDIA_QUARTILE_START": 1,
+                        "MEDIA_QUARTILE_FIRST_QUARTILE": 2,
+                        "MEDIA_QUARTILE_MIDPOINT": 3,
+                        "MEDIA_QUARTILE_THIRD_QUARTILE": 4,
+                        "MEDIA_QUARTILE_COMPLETE": 5
+                      }
+                    },
                     "AgeRange": {
                       "values": {
                         "AGE_RANGE_UNSPECIFIED": 0,
@@ -201,75 +784,6 @@
                         "CONSENT_STATUS_UNSPECIFIED": 0,
                         "CONSENT_GRANTED": 1,
                         "CONSENT_DENIED": 2
-                      }
-                    },
-                    "UserData": {
-                      "fields": {
-                        "userIdentifiers": {
-                          "rule": "repeated",
-                          "type": "UserIdentifier",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "UserIdentifier": {
-                      "oneofs": {
-                        "identifier": {
-                          "oneof": [
-                            "emailAddress",
-                            "phoneNumber",
-                            "address"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "emailAddress": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "phoneNumber": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "address": {
-                          "type": "AddressInfo",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "AddressInfo": {
-                      "fields": {
-                        "givenName": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "familyName": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "regionCode": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "postalCode": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
                       }
                     },
                     "CartData": {
@@ -507,7 +1021,7 @@
                           "type": "AccountType",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       },
@@ -536,94 +1050,6 @@
                         "DISPLAY_VIDEO_PARTNER": 2,
                         "DISPLAY_VIDEO_ADVERTISER": 3,
                         "DATA_PARTNER": 4
-                      }
-                    },
-                    "DeviceInfo": {
-                      "fields": {
-                        "userAgent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "ipAddress": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "category": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "languageCode": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "screenHeight": {
-                          "type": "int32",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "screenWidth": {
-                          "type": "int32",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "operatingSystem": {
-                          "type": "string",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "operatingSystemVersion": {
-                          "type": "string",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "model": {
-                          "type": "string",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "brand": {
-                          "type": "string",
-                          "id": 10,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "browser": {
-                          "type": "string",
-                          "id": 11,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "browserVersion": {
-                          "type": "string",
-                          "id": 12,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
                       }
                     },
                     "EncryptedUserId": {
@@ -683,7 +1109,8 @@
                         "wrappedKey": {
                           "oneof": [
                             "gcpWrappedKeyInfo",
-                            "awsWrappedKeyInfo"
+                            "awsWrappedKeyInfo",
+                            "coordinatorKeyInfo"
                           ]
                         }
                       },
@@ -695,6 +1122,10 @@
                         "awsWrappedKeyInfo": {
                           "type": "AwsWrappedKeyInfo",
                           "id": 2
+                        },
+                        "coordinatorKeyInfo": {
+                          "type": "CoordinatorKeyInfo",
+                          "id": 3
                         }
                       }
                     },
@@ -774,6 +1205,17 @@
                           "values": {
                             "KEY_TYPE_UNSPECIFIED": 0,
                             "XCHACHA20_POLY1305": 1
+                          }
+                        }
+                      }
+                    },
+                    "CoordinatorKeyInfo": {
+                      "fields": {
+                        "keyId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -1409,6 +1851,22 @@
                             }
                           ]
                         },
+                        "IngestAdEvents": {
+                          "requestType": "IngestAdEventsRequest",
+                          "responseType": "IngestAdEventsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/adEvents:ingest",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/adEvents:ingest",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
                         "RetrieveRequestStatus": {
                           "requestType": "RetrieveRequestStatusRequest",
                           "responseType": "RetrieveRequestStatusResponse",
@@ -1592,6 +2050,35 @@
                           "id": 1
                         }
                       }
+                    },
+                    "IngestAdEventsRequest": {
+                      "fields": {
+                        "adEvents": {
+                          "rule": "repeated",
+                          "type": "AdEvent",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "encryptionInfo": {
+                          "type": "EncryptionInfo",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "IngestAdEventsResponse": {
+                      "fields": {}
                     },
                     "RetrieveRequestStatusRequest": {
                       "fields": {
@@ -2412,7 +2899,72 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "featureSet": {
+                          "type": "FeatureSet",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "partnerCustomerAccount": {
+                          "type": "PartnerCustomerAccount",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "partnerLinkMetadata": {
+                          "type": "PartnerLinkMetadata",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
+                      }
+                    },
+                    "PartnerCustomerAccount": {
+                      "fields": {
+                        "accountId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "accountName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "accountType": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "PartnerLinkMetadata": {
+                      "fields": {
+                        "implicitAccounts": {
+                          "rule": "repeated",
+                          "type": "PartnerCustomerAccount",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "FeatureSet": {
+                      "values": {
+                        "FEATURE_SET_UNSPECIFIED": 0,
+                        "FEATURE_SET_AUDIENCE_AND_EVENT_MANAGEMENT": 1,
+                        "FEATURE_SET_AD_EVENT_MANAGEMENT": 2
                       }
                     },
                     "UserList": {
@@ -6127,7 +6679,7 @@
                 "VISIBILITY_EXPORT": 2
               }
             },
-            "Timestamp": {
+            "Duration": {
               "fields": {
                 "seconds": {
                   "type": "int64",
@@ -6139,7 +6691,7 @@
                 }
               }
             },
-            "Duration": {
+            "Timestamp": {
               "fields": {
                 "seconds": {
                   "type": "int64",
