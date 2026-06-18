@@ -38,6 +38,23 @@
       "changes": [
         {
           "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "0.1.9",
+      "language": "JAVASCRIPT",
+      "artifactName": "gapic-node-processing",
+      "id": "68a02aaa-17ed-404e-b452-e70bda09de60",
+      "createTime": "2026-06-18T00:26:09.228Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
           "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
           "message": "Remove vulnerable dependency `uuid`",
           "issues": [
