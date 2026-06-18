@@ -16,7 +16,40 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+'use strict';
 
 module.exports = {
-  ...require('gts/.prettierrc.json')
-}
+  opts: {
+    readme: './README.md',
+    package: './package.json',
+    template: './node_modules/jsdoc-fresh',
+    recurse: true,
+    verbose: true,
+    destination: './docs/'
+  },
+  plugins: [
+    'plugins/markdown',
+    'jsdoc-region-tag'
+  ],
+  source: {
+    excludePattern: '(^|\\/|\\\\)[._]',
+    include: [
+      'build/src',
+      'protos'
+    ],
+    includePattern: '\\.js$'
+  },
+  templates: {
+    copyright: 'Copyright 2026 Google LLC',
+    includeDate: false,
+    sourceFiles: false,
+    systemName: '@google-cloud/agentregistry',
+    theme: 'lumen',
+    default: {
+      outputSourceFiles: false
+    }
+  },
+  markdown: {
+    idInHeadings: true
+  }
+};
