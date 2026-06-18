@@ -1058,7 +1058,6 @@ libraries:
     apis:
       - path: google/monitoring/v3
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v3
       main_service: monitoring
