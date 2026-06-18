@@ -6,7 +6,8 @@
 
 
 # The cloud sdk nodejs team is the default owner for nodejs repositories.
-*     @pearigee @feywind @djbruce @shivanee-p
+# team_members: @pearigee @feywind @djbruce @shivanee-p
+*     @googleapis/cloud-sdk-nodejs-team
 /handwritten/bigquery @googleapis/bigquery-team
 /handwritten/cloud-profiler @googleapis/cloud-profiler-team
 /handwritten/storage @googleapis/gcs-team
