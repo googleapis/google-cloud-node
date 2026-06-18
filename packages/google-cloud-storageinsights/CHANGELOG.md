@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/storageinsights-v2.2.2...storageinsights-v2.3.0) (2026-06-16)
+
+
+### Features
+
+* Local OwlBot generation batch 4 ([#8615](https://github.com/googleapis/google-cloud-node/issues/8615)) ([f629251](https://github.com/googleapis/google-cloud-node/commit/f629251e27e51aa06003b4846a497d5a7c411cc2))
+
 ## [2.2.2](https://github.com/googleapis/google-cloud-node/compare/storageinsights-v2.2.1...storageinsights-v2.2.2) (2026-05-01)
 
 

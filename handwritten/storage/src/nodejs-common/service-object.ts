@@ -106,6 +106,7 @@ export interface CreateCallback<T> {
 }
 export type DeleteOptions = {
   ignoreNotFound?: boolean;
+  userProject?: string;
   ifGenerationMatch?: number | string;
   ifGenerationNotMatch?: number | string;
   ifMetagenerationMatch?: number | string;

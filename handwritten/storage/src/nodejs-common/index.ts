@@ -18,6 +18,7 @@ export {GoogleAuthOptions} from 'google-auth-library';
 export {
   BaseMetadata,
   DeleteCallback,
+  DeleteOptions,
   ExistsCallback,
   GetConfig,
   InstanceResponseCallback,
