@@ -97,6 +97,9 @@ export namespace google {
                     /** AutonomousDatabase adminPassword */
                     adminPassword?: (string|null);
 
+                    /** AutonomousDatabase adminPasswordSecretVersion */
+                    adminPasswordSecretVersion?: (string|null);
+
                     /** AutonomousDatabase properties */
                     properties?: (google.cloud.oracledatabase.v1.IAutonomousDatabaseProperties|null);
 
@@ -151,6 +154,9 @@ export namespace google {
 
                     /** AutonomousDatabase adminPassword. */
                     public adminPassword: string;
+
+                    /** AutonomousDatabase adminPasswordSecretVersion. */
+                    public adminPasswordSecretVersion: string;
 
                     /** AutonomousDatabase properties. */
                     public properties?: (google.cloud.oracledatabase.v1.IAutonomousDatabaseProperties|null);
@@ -554,6 +560,12 @@ export namespace google {
 
                     /** AutonomousDatabaseProperties serviceAgentEmail */
                     serviceAgentEmail?: (string|null);
+
+                    /** AutonomousDatabaseProperties localDataGuardEnabled */
+                    localDataGuardEnabled?: (boolean|null);
+
+                    /** AutonomousDatabaseProperties localAdgAutoFailoverMaxDataLossLimitDuration */
+                    localAdgAutoFailoverMaxDataLossLimitDuration?: (number|null);
                 }
 
                 /** Represents an AutonomousDatabaseProperties. */
@@ -754,6 +766,12 @@ export namespace google {
                     /** AutonomousDatabaseProperties serviceAgentEmail. */
                     public serviceAgentEmail: string;
 
+                    /** AutonomousDatabaseProperties localDataGuardEnabled. */
+                    public localDataGuardEnabled?: (boolean|null);
+
+                    /** AutonomousDatabaseProperties localAdgAutoFailoverMaxDataLossLimitDuration. */
+                    public localAdgAutoFailoverMaxDataLossLimitDuration?: (number|null);
+
                     /**
                      * Creates a new AutonomousDatabaseProperties instance using the specified properties.
                      * @param [properties] Properties to set
@@ -859,7 +877,8 @@ export namespace google {
                     enum LocalDisasterRecoveryType {
                         LOCAL_DISASTER_RECOVERY_TYPE_UNSPECIFIED = 0,
                         ADG = 1,
-                        BACKUP_BASED = 2
+                        BACKUP_BASED = 2,
+                        NOT_AVAILABLE = 3
                     }
 
                     /** DataSafeState enum. */
@@ -2971,8 +2990,14 @@ export namespace google {
                     /** Database adminPassword */
                     adminPassword?: (string|null);
 
+                    /** Database adminPasswordSecretVersion */
+                    adminPasswordSecretVersion?: (string|null);
+
                     /** Database tdeWalletPassword */
                     tdeWalletPassword?: (string|null);
+
+                    /** Database tdeWalletPasswordSecretVersion */
+                    tdeWalletPasswordSecretVersion?: (string|null);
 
                     /** Database characterSet */
                     characterSet?: (string|null);
@@ -3000,6 +3025,12 @@ export namespace google {
 
                     /** Database opsInsightsStatus */
                     opsInsightsStatus?: (google.cloud.oracledatabase.v1.Database.OperationsInsightsStatus|keyof typeof google.cloud.oracledatabase.v1.Database.OperationsInsightsStatus|null);
+
+                    /** Database pluggableDatabaseId */
+                    pluggableDatabaseId?: (string|null);
+
+                    /** Database pluggableDatabaseName */
+                    pluggableDatabaseName?: (string|null);
                 }
 
                 /** Represents a Database. */
@@ -3023,8 +3054,14 @@ export namespace google {
                     /** Database adminPassword. */
                     public adminPassword: string;
 
+                    /** Database adminPasswordSecretVersion. */
+                    public adminPasswordSecretVersion: string;
+
                     /** Database tdeWalletPassword. */
                     public tdeWalletPassword: string;
+
+                    /** Database tdeWalletPasswordSecretVersion. */
+                    public tdeWalletPasswordSecretVersion: string;
 
                     /** Database characterSet. */
                     public characterSet: string;
@@ -3052,6 +3089,12 @@ export namespace google {
 
                     /** Database opsInsightsStatus. */
                     public opsInsightsStatus: (google.cloud.oracledatabase.v1.Database.OperationsInsightsStatus|keyof typeof google.cloud.oracledatabase.v1.Database.OperationsInsightsStatus);
+
+                    /** Database pluggableDatabaseId. */
+                    public pluggableDatabaseId: string;
+
+                    /** Database pluggableDatabaseName. */
+                    public pluggableDatabaseName: string;
 
                     /**
                      * Creates a new Database instance using the specified properties.
@@ -6996,6 +7039,9 @@ export namespace google {
 
                     /** ListDbSystemsResponse nextPageToken */
                     nextPageToken?: (string|null);
+
+                    /** ListDbSystemsResponse unreachable */
+                    unreachable?: (string[]|null);
                 }
 
                 /** Represents a ListDbSystemsResponse. */
@@ -7012,6 +7058,9 @@ export namespace google {
 
                     /** ListDbSystemsResponse nextPageToken. */
                     public nextPageToken: string;
+
+                    /** ListDbSystemsResponse unreachable. */
+                    public unreachable: string[];
 
                     /**
                      * Creates a new ListDbSystemsResponse instance using the specified properties.
@@ -10191,6 +10240,9 @@ export namespace google {
 
                     /** ListExascaleDbStorageVaultsResponse nextPageToken */
                     nextPageToken?: (string|null);
+
+                    /** ListExascaleDbStorageVaultsResponse unreachable */
+                    unreachable?: (string[]|null);
                 }
 
                 /** Represents a ListExascaleDbStorageVaultsResponse. */
@@ -10207,6 +10259,9 @@ export namespace google {
 
                     /** ListExascaleDbStorageVaultsResponse nextPageToken. */
                     public nextPageToken: string;
+
+                    /** ListExascaleDbStorageVaultsResponse unreachable. */
+                    public unreachable: string[];
 
                     /**
                      * Creates a new ListExascaleDbStorageVaultsResponse instance using the specified properties.
@@ -10601,6 +10656,11948 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GiVersion
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoldengateConnection. */
+                interface IGoldengateConnection {
+
+                    /** GoldengateConnection name */
+                    name?: (string|null);
+
+                    /** GoldengateConnection properties */
+                    properties?: (google.cloud.oracledatabase.v1.IGoldengateConnectionProperties|null);
+
+                    /** GoldengateConnection gcpOracleZone */
+                    gcpOracleZone?: (string|null);
+
+                    /** GoldengateConnection labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** GoldengateConnection odbNetwork */
+                    odbNetwork?: (string|null);
+
+                    /** GoldengateConnection odbSubnet */
+                    odbSubnet?: (string|null);
+
+                    /** GoldengateConnection entitlementId */
+                    entitlementId?: (string|null);
+
+                    /** GoldengateConnection createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoldengateConnection ociUrl */
+                    ociUrl?: (string|null);
+                }
+
+                /** Represents a GoldengateConnection. */
+                class GoldengateConnection implements IGoldengateConnection {
+
+                    /**
+                     * Constructs a new GoldengateConnection.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateConnection);
+
+                    /** GoldengateConnection name. */
+                    public name: string;
+
+                    /** GoldengateConnection properties. */
+                    public properties?: (google.cloud.oracledatabase.v1.IGoldengateConnectionProperties|null);
+
+                    /** GoldengateConnection gcpOracleZone. */
+                    public gcpOracleZone: string;
+
+                    /** GoldengateConnection labels. */
+                    public labels: { [k: string]: string };
+
+                    /** GoldengateConnection odbNetwork. */
+                    public odbNetwork: string;
+
+                    /** GoldengateConnection odbSubnet. */
+                    public odbSubnet: string;
+
+                    /** GoldengateConnection entitlementId. */
+                    public entitlementId: string;
+
+                    /** GoldengateConnection createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoldengateConnection ociUrl. */
+                    public ociUrl: string;
+
+                    /**
+                     * Creates a new GoldengateConnection instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateConnection instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateConnection): google.cloud.oracledatabase.v1.GoldengateConnection;
+
+                    /**
+                     * Encodes the specified GoldengateConnection message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateConnection.verify|verify} messages.
+                     * @param message GoldengateConnection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateConnection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateConnection message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateConnection.verify|verify} messages.
+                     * @param message GoldengateConnection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateConnection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateConnection message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateConnection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateConnection;
+
+                    /**
+                     * Decodes a GoldengateConnection message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateConnection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateConnection;
+
+                    /**
+                     * Verifies a GoldengateConnection message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateConnection message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateConnection
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateConnection;
+
+                    /**
+                     * Creates a plain object from a GoldengateConnection message. Also converts values to other types if specified.
+                     * @param message GoldengateConnection
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateConnection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateConnection to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateConnection
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoldengateConnectionProperties. */
+                interface IGoldengateConnectionProperties {
+
+                    /** GoldengateConnectionProperties oracleConnectionProperties */
+                    oracleConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateOracleConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties goldengateConnectionProperties */
+                    goldengateConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateGoldengateConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties genericConnectionProperties */
+                    genericConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateGenericConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties googleCloudStorageConnectionProperties */
+                    googleCloudStorageConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateGoogleCloudStorageConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties googleBigQueryConnectionProperties */
+                    googleBigQueryConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateGoogleBigQueryConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties mysqlConnectionProperties */
+                    mysqlConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateMysqlConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties kafkaConnectionProperties */
+                    kafkaConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateKafkaConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties kafkaSchemaRegistryConnectionProperties */
+                    kafkaSchemaRegistryConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateKafkaSchemaRegistryConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties ociObjectStorageConnectionProperties */
+                    ociObjectStorageConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateOciObjectStorageConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties azureDataLakeStorageConnectionProperties */
+                    azureDataLakeStorageConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateAzureDataLakeStorageConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties azureSynapseAnalyticsConnectionProperties */
+                    azureSynapseAnalyticsConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateAzureSynapseAnalyticsConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties postgresqlConnectionProperties */
+                    postgresqlConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengatePostgresqlConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties microsoftSqlserverConnectionProperties */
+                    microsoftSqlserverConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateMicrosoftSqlserverConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties amazonS3ConnectionProperties */
+                    amazonS3ConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateAmazonS3ConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties hdfsConnectionProperties */
+                    hdfsConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateHdfsConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties javaMessageServiceConnectionProperties */
+                    javaMessageServiceConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateJavaMessageServiceConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties mongodbConnectionProperties */
+                    mongodbConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateMongodbConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties oracleNosqlConnectionProperties */
+                    oracleNosqlConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateOracleNosqlConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties snowflakeConnectionProperties */
+                    snowflakeConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateSnowflakeConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties amazonRedshiftConnectionProperties */
+                    amazonRedshiftConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateAmazonRedshiftConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties elasticsearchConnectionProperties */
+                    elasticsearchConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateElasticsearchConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties amazonKinesisConnectionProperties */
+                    amazonKinesisConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateAmazonKinesisConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties db2ConnectionProperties */
+                    db2ConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateDb2ConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties redisConnectionProperties */
+                    redisConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateRedisConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties databricksConnectionProperties */
+                    databricksConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateDatabricksConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties googlePubsubConnectionProperties */
+                    googlePubsubConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateGooglePubsubConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties microsoftFabricConnectionProperties */
+                    microsoftFabricConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateMicrosoftFabricConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties oracleAiDataPlatformConnectionProperties */
+                    oracleAiDataPlatformConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateOracleAIDataPlatformConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties icebergConnectionProperties */
+                    icebergConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateIcebergConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties connectionType */
+                    connectionType?: (google.cloud.oracledatabase.v1.GoldengateConnectionProperties.GoldengateConnectionType|keyof typeof google.cloud.oracledatabase.v1.GoldengateConnectionProperties.GoldengateConnectionType|null);
+
+                    /** GoldengateConnectionProperties ocid */
+                    ocid?: (string|null);
+
+                    /** GoldengateConnectionProperties displayName */
+                    displayName?: (string|null);
+
+                    /** GoldengateConnectionProperties description */
+                    description?: (string|null);
+
+                    /** GoldengateConnectionProperties lifecycleState */
+                    lifecycleState?: (google.cloud.oracledatabase.v1.GoldengateConnectionProperties.GoldengateConnectionLifecycleState|keyof typeof google.cloud.oracledatabase.v1.GoldengateConnectionProperties.GoldengateConnectionLifecycleState|null);
+
+                    /** GoldengateConnectionProperties lifecycleDetails */
+                    lifecycleDetails?: (string|null);
+
+                    /** GoldengateConnectionProperties updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoldengateConnectionProperties routingMethod */
+                    routingMethod?: (google.cloud.oracledatabase.v1.GoldengateConnectionProperties.GoldengateConnectionRoutingMethod|keyof typeof google.cloud.oracledatabase.v1.GoldengateConnectionProperties.GoldengateConnectionRoutingMethod|null);
+
+                    /** GoldengateConnectionProperties ingressIpAddresses */
+                    ingressIpAddresses?: (string[]|null);
+                }
+
+                /** Represents a GoldengateConnectionProperties. */
+                class GoldengateConnectionProperties implements IGoldengateConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengateConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateConnectionProperties);
+
+                    /** GoldengateConnectionProperties oracleConnectionProperties. */
+                    public oracleConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateOracleConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties goldengateConnectionProperties. */
+                    public goldengateConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateGoldengateConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties genericConnectionProperties. */
+                    public genericConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateGenericConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties googleCloudStorageConnectionProperties. */
+                    public googleCloudStorageConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateGoogleCloudStorageConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties googleBigQueryConnectionProperties. */
+                    public googleBigQueryConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateGoogleBigQueryConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties mysqlConnectionProperties. */
+                    public mysqlConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateMysqlConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties kafkaConnectionProperties. */
+                    public kafkaConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateKafkaConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties kafkaSchemaRegistryConnectionProperties. */
+                    public kafkaSchemaRegistryConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateKafkaSchemaRegistryConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties ociObjectStorageConnectionProperties. */
+                    public ociObjectStorageConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateOciObjectStorageConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties azureDataLakeStorageConnectionProperties. */
+                    public azureDataLakeStorageConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateAzureDataLakeStorageConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties azureSynapseAnalyticsConnectionProperties. */
+                    public azureSynapseAnalyticsConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateAzureSynapseAnalyticsConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties postgresqlConnectionProperties. */
+                    public postgresqlConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengatePostgresqlConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties microsoftSqlserverConnectionProperties. */
+                    public microsoftSqlserverConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateMicrosoftSqlserverConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties amazonS3ConnectionProperties. */
+                    public amazonS3ConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateAmazonS3ConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties hdfsConnectionProperties. */
+                    public hdfsConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateHdfsConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties javaMessageServiceConnectionProperties. */
+                    public javaMessageServiceConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateJavaMessageServiceConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties mongodbConnectionProperties. */
+                    public mongodbConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateMongodbConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties oracleNosqlConnectionProperties. */
+                    public oracleNosqlConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateOracleNosqlConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties snowflakeConnectionProperties. */
+                    public snowflakeConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateSnowflakeConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties amazonRedshiftConnectionProperties. */
+                    public amazonRedshiftConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateAmazonRedshiftConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties elasticsearchConnectionProperties. */
+                    public elasticsearchConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateElasticsearchConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties amazonKinesisConnectionProperties. */
+                    public amazonKinesisConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateAmazonKinesisConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties db2ConnectionProperties. */
+                    public db2ConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateDb2ConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties redisConnectionProperties. */
+                    public redisConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateRedisConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties databricksConnectionProperties. */
+                    public databricksConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateDatabricksConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties googlePubsubConnectionProperties. */
+                    public googlePubsubConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateGooglePubsubConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties microsoftFabricConnectionProperties. */
+                    public microsoftFabricConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateMicrosoftFabricConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties oracleAiDataPlatformConnectionProperties. */
+                    public oracleAiDataPlatformConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateOracleAIDataPlatformConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties icebergConnectionProperties. */
+                    public icebergConnectionProperties?: (google.cloud.oracledatabase.v1.IGoldengateIcebergConnectionProperties|null);
+
+                    /** GoldengateConnectionProperties connectionType. */
+                    public connectionType: (google.cloud.oracledatabase.v1.GoldengateConnectionProperties.GoldengateConnectionType|keyof typeof google.cloud.oracledatabase.v1.GoldengateConnectionProperties.GoldengateConnectionType);
+
+                    /** GoldengateConnectionProperties ocid. */
+                    public ocid: string;
+
+                    /** GoldengateConnectionProperties displayName. */
+                    public displayName: string;
+
+                    /** GoldengateConnectionProperties description. */
+                    public description: string;
+
+                    /** GoldengateConnectionProperties lifecycleState. */
+                    public lifecycleState: (google.cloud.oracledatabase.v1.GoldengateConnectionProperties.GoldengateConnectionLifecycleState|keyof typeof google.cloud.oracledatabase.v1.GoldengateConnectionProperties.GoldengateConnectionLifecycleState);
+
+                    /** GoldengateConnectionProperties lifecycleDetails. */
+                    public lifecycleDetails: string;
+
+                    /** GoldengateConnectionProperties updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoldengateConnectionProperties routingMethod. */
+                    public routingMethod: (google.cloud.oracledatabase.v1.GoldengateConnectionProperties.GoldengateConnectionRoutingMethod|keyof typeof google.cloud.oracledatabase.v1.GoldengateConnectionProperties.GoldengateConnectionRoutingMethod);
+
+                    /** GoldengateConnectionProperties ingressIpAddresses. */
+                    public ingressIpAddresses: string[];
+
+                    /** GoldengateConnectionProperties connectionDetails. */
+                    public connectionDetails?: ("oracleConnectionProperties"|"goldengateConnectionProperties"|"genericConnectionProperties"|"googleCloudStorageConnectionProperties"|"googleBigQueryConnectionProperties"|"mysqlConnectionProperties"|"kafkaConnectionProperties"|"kafkaSchemaRegistryConnectionProperties"|"ociObjectStorageConnectionProperties"|"azureDataLakeStorageConnectionProperties"|"azureSynapseAnalyticsConnectionProperties"|"postgresqlConnectionProperties"|"microsoftSqlserverConnectionProperties"|"amazonS3ConnectionProperties"|"hdfsConnectionProperties"|"javaMessageServiceConnectionProperties"|"mongodbConnectionProperties"|"oracleNosqlConnectionProperties"|"snowflakeConnectionProperties"|"amazonRedshiftConnectionProperties"|"elasticsearchConnectionProperties"|"amazonKinesisConnectionProperties"|"db2ConnectionProperties"|"redisConnectionProperties"|"databricksConnectionProperties"|"googlePubsubConnectionProperties"|"microsoftFabricConnectionProperties"|"oracleAiDataPlatformConnectionProperties"|"icebergConnectionProperties");
+
+                    /**
+                     * Creates a new GoldengateConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateConnectionProperties): google.cloud.oracledatabase.v1.GoldengateConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengateConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengateConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GoldengateConnectionProperties {
+
+                    /** GoldengateConnectionType enum. */
+                    enum GoldengateConnectionType {
+                        GOLDENGATE_CONNECTION_TYPE_UNSPECIFIED = 0,
+                        GOLDENGATE = 1,
+                        KAFKA = 2,
+                        KAFKA_SCHEMA_REGISTRY = 3,
+                        MYSQL = 4,
+                        JAVA_MESSAGE_SERVICE = 5,
+                        MICROSOFT_SQLSERVER = 6,
+                        OCI_OBJECT_STORAGE = 7,
+                        ORACLE = 8,
+                        AZURE_DATA_LAKE_STORAGE = 9,
+                        POSTGRESQL = 10,
+                        AZURE_SYNAPSE_ANALYTICS = 11,
+                        SNOWFLAKE = 12,
+                        AMAZON_S3 = 13,
+                        HDFS = 14,
+                        ORACLE_AI_DATA_PLATFORM = 15,
+                        ORACLE_NOSQL = 16,
+                        MONGODB = 17,
+                        AMAZON_KINESIS = 18,
+                        AMAZON_REDSHIFT = 19,
+                        DB2 = 20,
+                        REDIS = 21,
+                        ELASTICSEARCH = 22,
+                        GENERIC = 23,
+                        GOOGLE_CLOUD_STORAGE = 24,
+                        GOOGLE_BIGQUERY = 25,
+                        DATABRICKS = 26,
+                        GOOGLE_PUBSUB = 27,
+                        MICROSOFT_FABRIC = 28,
+                        ICEBERG = 29
+                    }
+
+                    /** GoldengateConnectionLifecycleState enum. */
+                    enum GoldengateConnectionLifecycleState {
+                        GOLDENGATE_CONNECTION_LIFECYCLE_STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        ACTIVE = 2,
+                        UPDATING = 3,
+                        DELETING = 4,
+                        DELETED = 5,
+                        FAILED = 6
+                    }
+
+                    /** GoldengateConnectionRoutingMethod enum. */
+                    enum GoldengateConnectionRoutingMethod {
+                        GOLDENGATE_CONNECTION_ROUTING_METHOD_UNSPECIFIED = 0,
+                        SHARED_DEPLOYMENT_ENDPOINT = 1,
+                        DEDICATED_ENDPOINT = 2
+                    }
+                }
+
+                /** Properties of a GoldengateOracleConnectionProperties. */
+                interface IGoldengateOracleConnectionProperties {
+
+                    /** GoldengateOracleConnectionProperties password */
+                    password?: (string|null);
+
+                    /** GoldengateOracleConnectionProperties passwordSecretVersion */
+                    passwordSecretVersion?: (string|null);
+
+                    /** GoldengateOracleConnectionProperties technologyType */
+                    technologyType?: (string|null);
+
+                    /** GoldengateOracleConnectionProperties username */
+                    username?: (string|null);
+
+                    /** GoldengateOracleConnectionProperties authenticationMode */
+                    authenticationMode?: (google.cloud.oracledatabase.v1.GoldengateOracleConnectionProperties.OracleAuthenticationMode|keyof typeof google.cloud.oracledatabase.v1.GoldengateOracleConnectionProperties.OracleAuthenticationMode|null);
+
+                    /** GoldengateOracleConnectionProperties connectionString */
+                    connectionString?: (string|null);
+
+                    /** GoldengateOracleConnectionProperties sessionMode */
+                    sessionMode?: (google.cloud.oracledatabase.v1.GoldengateOracleConnectionProperties.SessionMode|keyof typeof google.cloud.oracledatabase.v1.GoldengateOracleConnectionProperties.SessionMode|null);
+
+                    /** GoldengateOracleConnectionProperties gcpOracleDatabaseId */
+                    gcpOracleDatabaseId?: (string|null);
+
+                    /** GoldengateOracleConnectionProperties walletFile */
+                    walletFile?: (string|null);
+                }
+
+                /** Represents a GoldengateOracleConnectionProperties. */
+                class GoldengateOracleConnectionProperties implements IGoldengateOracleConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengateOracleConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateOracleConnectionProperties);
+
+                    /** GoldengateOracleConnectionProperties password. */
+                    public password?: (string|null);
+
+                    /** GoldengateOracleConnectionProperties passwordSecretVersion. */
+                    public passwordSecretVersion?: (string|null);
+
+                    /** GoldengateOracleConnectionProperties technologyType. */
+                    public technologyType: string;
+
+                    /** GoldengateOracleConnectionProperties username. */
+                    public username: string;
+
+                    /** GoldengateOracleConnectionProperties authenticationMode. */
+                    public authenticationMode: (google.cloud.oracledatabase.v1.GoldengateOracleConnectionProperties.OracleAuthenticationMode|keyof typeof google.cloud.oracledatabase.v1.GoldengateOracleConnectionProperties.OracleAuthenticationMode);
+
+                    /** GoldengateOracleConnectionProperties connectionString. */
+                    public connectionString: string;
+
+                    /** GoldengateOracleConnectionProperties sessionMode. */
+                    public sessionMode: (google.cloud.oracledatabase.v1.GoldengateOracleConnectionProperties.SessionMode|keyof typeof google.cloud.oracledatabase.v1.GoldengateOracleConnectionProperties.SessionMode);
+
+                    /** GoldengateOracleConnectionProperties gcpOracleDatabaseId. */
+                    public gcpOracleDatabaseId: string;
+
+                    /** GoldengateOracleConnectionProperties walletFile. */
+                    public walletFile: string;
+
+                    /** GoldengateOracleConnectionProperties connectionPasswordOptions. */
+                    public connectionPasswordOptions?: ("password"|"passwordSecretVersion");
+
+                    /**
+                     * Creates a new GoldengateOracleConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateOracleConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateOracleConnectionProperties): google.cloud.oracledatabase.v1.GoldengateOracleConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateOracleConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateOracleConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateOracleConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateOracleConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateOracleConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateOracleConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateOracleConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateOracleConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateOracleConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateOracleConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateOracleConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengateOracleConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateOracleConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateOracleConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengateOracleConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateOracleConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateOracleConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateOracleConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateOracleConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateOracleConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateOracleConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateOracleConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateOracleConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GoldengateOracleConnectionProperties {
+
+                    /** OracleAuthenticationMode enum. */
+                    enum OracleAuthenticationMode {
+                        ORACLE_AUTHENTICATION_MODE_UNSPECIFIED = 0,
+                        TLS = 1,
+                        MTLS = 2
+                    }
+
+                    /** SessionMode enum. */
+                    enum SessionMode {
+                        SESSION_MODE_UNSPECIFIED = 0,
+                        DIRECT = 1,
+                        REDIRECT = 2
+                    }
+                }
+
+                /** Properties of a GoldengateGoldengateConnectionProperties. */
+                interface IGoldengateGoldengateConnectionProperties {
+
+                    /** GoldengateGoldengateConnectionProperties password */
+                    password?: (string|null);
+
+                    /** GoldengateGoldengateConnectionProperties passwordSecretVersion */
+                    passwordSecretVersion?: (string|null);
+
+                    /** GoldengateGoldengateConnectionProperties technologyType */
+                    technologyType?: (string|null);
+
+                    /** GoldengateGoldengateConnectionProperties goldengateDeploymentId */
+                    goldengateDeploymentId?: (string|null);
+
+                    /** GoldengateGoldengateConnectionProperties host */
+                    host?: (string|null);
+
+                    /** GoldengateGoldengateConnectionProperties port */
+                    port?: (number|null);
+
+                    /** GoldengateGoldengateConnectionProperties username */
+                    username?: (string|null);
+                }
+
+                /** Represents a GoldengateGoldengateConnectionProperties. */
+                class GoldengateGoldengateConnectionProperties implements IGoldengateGoldengateConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengateGoldengateConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateGoldengateConnectionProperties);
+
+                    /** GoldengateGoldengateConnectionProperties password. */
+                    public password?: (string|null);
+
+                    /** GoldengateGoldengateConnectionProperties passwordSecretVersion. */
+                    public passwordSecretVersion?: (string|null);
+
+                    /** GoldengateGoldengateConnectionProperties technologyType. */
+                    public technologyType: string;
+
+                    /** GoldengateGoldengateConnectionProperties goldengateDeploymentId. */
+                    public goldengateDeploymentId: string;
+
+                    /** GoldengateGoldengateConnectionProperties host. */
+                    public host: string;
+
+                    /** GoldengateGoldengateConnectionProperties port. */
+                    public port: number;
+
+                    /** GoldengateGoldengateConnectionProperties username. */
+                    public username: string;
+
+                    /** GoldengateGoldengateConnectionProperties connectionPasswordOptions. */
+                    public connectionPasswordOptions?: ("password"|"passwordSecretVersion");
+
+                    /**
+                     * Creates a new GoldengateGoldengateConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateGoldengateConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateGoldengateConnectionProperties): google.cloud.oracledatabase.v1.GoldengateGoldengateConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateGoldengateConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateGoldengateConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateGoldengateConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateGoldengateConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateGoldengateConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateGoldengateConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateGoldengateConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateGoldengateConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateGoldengateConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateGoldengateConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateGoldengateConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengateGoldengateConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateGoldengateConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateGoldengateConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengateGoldengateConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateGoldengateConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateGoldengateConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateGoldengateConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateGoldengateConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateGoldengateConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateGoldengateConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateGoldengateConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateGoldengateConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoldengateGenericConnectionProperties. */
+                interface IGoldengateGenericConnectionProperties {
+
+                    /** GoldengateGenericConnectionProperties technologyType */
+                    technologyType?: (string|null);
+
+                    /** GoldengateGenericConnectionProperties host */
+                    host?: (string|null);
+                }
+
+                /** Represents a GoldengateGenericConnectionProperties. */
+                class GoldengateGenericConnectionProperties implements IGoldengateGenericConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengateGenericConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateGenericConnectionProperties);
+
+                    /** GoldengateGenericConnectionProperties technologyType. */
+                    public technologyType: string;
+
+                    /** GoldengateGenericConnectionProperties host. */
+                    public host: string;
+
+                    /**
+                     * Creates a new GoldengateGenericConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateGenericConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateGenericConnectionProperties): google.cloud.oracledatabase.v1.GoldengateGenericConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateGenericConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateGenericConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateGenericConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateGenericConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateGenericConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateGenericConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateGenericConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateGenericConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateGenericConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateGenericConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateGenericConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengateGenericConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateGenericConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateGenericConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengateGenericConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateGenericConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateGenericConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateGenericConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateGenericConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateGenericConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateGenericConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateGenericConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateGenericConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoldengateGoogleCloudStorageConnectionProperties. */
+                interface IGoldengateGoogleCloudStorageConnectionProperties {
+
+                    /** GoldengateGoogleCloudStorageConnectionProperties technologyType */
+                    technologyType?: (string|null);
+
+                    /** GoldengateGoogleCloudStorageConnectionProperties serviceAccountKeyFile */
+                    serviceAccountKeyFile?: (string|null);
+                }
+
+                /** Represents a GoldengateGoogleCloudStorageConnectionProperties. */
+                class GoldengateGoogleCloudStorageConnectionProperties implements IGoldengateGoogleCloudStorageConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengateGoogleCloudStorageConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateGoogleCloudStorageConnectionProperties);
+
+                    /** GoldengateGoogleCloudStorageConnectionProperties technologyType. */
+                    public technologyType: string;
+
+                    /** GoldengateGoogleCloudStorageConnectionProperties serviceAccountKeyFile. */
+                    public serviceAccountKeyFile: string;
+
+                    /**
+                     * Creates a new GoldengateGoogleCloudStorageConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateGoogleCloudStorageConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateGoogleCloudStorageConnectionProperties): google.cloud.oracledatabase.v1.GoldengateGoogleCloudStorageConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateGoogleCloudStorageConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateGoogleCloudStorageConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateGoogleCloudStorageConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateGoogleCloudStorageConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateGoogleCloudStorageConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateGoogleCloudStorageConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateGoogleCloudStorageConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateGoogleCloudStorageConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateGoogleCloudStorageConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateGoogleCloudStorageConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateGoogleCloudStorageConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengateGoogleCloudStorageConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateGoogleCloudStorageConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateGoogleCloudStorageConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengateGoogleCloudStorageConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateGoogleCloudStorageConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateGoogleCloudStorageConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateGoogleCloudStorageConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateGoogleCloudStorageConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateGoogleCloudStorageConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateGoogleCloudStorageConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateGoogleCloudStorageConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateGoogleCloudStorageConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoldengateGoogleBigQueryConnectionProperties. */
+                interface IGoldengateGoogleBigQueryConnectionProperties {
+
+                    /** GoldengateGoogleBigQueryConnectionProperties technologyType */
+                    technologyType?: (string|null);
+
+                    /** GoldengateGoogleBigQueryConnectionProperties serviceAccountKeyFile */
+                    serviceAccountKeyFile?: (string|null);
+                }
+
+                /** Represents a GoldengateGoogleBigQueryConnectionProperties. */
+                class GoldengateGoogleBigQueryConnectionProperties implements IGoldengateGoogleBigQueryConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengateGoogleBigQueryConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateGoogleBigQueryConnectionProperties);
+
+                    /** GoldengateGoogleBigQueryConnectionProperties technologyType. */
+                    public technologyType: string;
+
+                    /** GoldengateGoogleBigQueryConnectionProperties serviceAccountKeyFile. */
+                    public serviceAccountKeyFile: string;
+
+                    /**
+                     * Creates a new GoldengateGoogleBigQueryConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateGoogleBigQueryConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateGoogleBigQueryConnectionProperties): google.cloud.oracledatabase.v1.GoldengateGoogleBigQueryConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateGoogleBigQueryConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateGoogleBigQueryConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateGoogleBigQueryConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateGoogleBigQueryConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateGoogleBigQueryConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateGoogleBigQueryConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateGoogleBigQueryConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateGoogleBigQueryConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateGoogleBigQueryConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateGoogleBigQueryConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateGoogleBigQueryConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengateGoogleBigQueryConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateGoogleBigQueryConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateGoogleBigQueryConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengateGoogleBigQueryConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateGoogleBigQueryConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateGoogleBigQueryConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateGoogleBigQueryConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateGoogleBigQueryConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateGoogleBigQueryConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateGoogleBigQueryConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateGoogleBigQueryConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateGoogleBigQueryConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoldengateMysqlConnectionProperties. */
+                interface IGoldengateMysqlConnectionProperties {
+
+                    /** GoldengateMysqlConnectionProperties password */
+                    password?: (string|null);
+
+                    /** GoldengateMysqlConnectionProperties passwordSecretVersion */
+                    passwordSecretVersion?: (string|null);
+
+                    /** GoldengateMysqlConnectionProperties technologyType */
+                    technologyType?: (string|null);
+
+                    /** GoldengateMysqlConnectionProperties username */
+                    username?: (string|null);
+
+                    /** GoldengateMysqlConnectionProperties host */
+                    host?: (string|null);
+
+                    /** GoldengateMysqlConnectionProperties port */
+                    port?: (number|null);
+
+                    /** GoldengateMysqlConnectionProperties database */
+                    database?: (string|null);
+
+                    /** GoldengateMysqlConnectionProperties securityProtocol */
+                    securityProtocol?: (google.cloud.oracledatabase.v1.GoldengateMysqlConnectionProperties.MysqlSecurityProtocol|keyof typeof google.cloud.oracledatabase.v1.GoldengateMysqlConnectionProperties.MysqlSecurityProtocol|null);
+
+                    /** GoldengateMysqlConnectionProperties sslMode */
+                    sslMode?: (google.cloud.oracledatabase.v1.GoldengateMysqlConnectionProperties.SSLMode|keyof typeof google.cloud.oracledatabase.v1.GoldengateMysqlConnectionProperties.SSLMode|null);
+
+                    /** GoldengateMysqlConnectionProperties sslCaFile */
+                    sslCaFile?: (string|null);
+
+                    /** GoldengateMysqlConnectionProperties sslCrlFile */
+                    sslCrlFile?: (string|null);
+
+                    /** GoldengateMysqlConnectionProperties sslCertFile */
+                    sslCertFile?: (string|null);
+
+                    /** GoldengateMysqlConnectionProperties sslKeyFile */
+                    sslKeyFile?: (string|null);
+
+                    /** GoldengateMysqlConnectionProperties additionalAttributes */
+                    additionalAttributes?: (google.cloud.oracledatabase.v1.INameValuePair[]|null);
+
+                    /** GoldengateMysqlConnectionProperties dbSystemId */
+                    dbSystemId?: (string|null);
+                }
+
+                /** Represents a GoldengateMysqlConnectionProperties. */
+                class GoldengateMysqlConnectionProperties implements IGoldengateMysqlConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengateMysqlConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateMysqlConnectionProperties);
+
+                    /** GoldengateMysqlConnectionProperties password. */
+                    public password?: (string|null);
+
+                    /** GoldengateMysqlConnectionProperties passwordSecretVersion. */
+                    public passwordSecretVersion?: (string|null);
+
+                    /** GoldengateMysqlConnectionProperties technologyType. */
+                    public technologyType: string;
+
+                    /** GoldengateMysqlConnectionProperties username. */
+                    public username: string;
+
+                    /** GoldengateMysqlConnectionProperties host. */
+                    public host: string;
+
+                    /** GoldengateMysqlConnectionProperties port. */
+                    public port: number;
+
+                    /** GoldengateMysqlConnectionProperties database. */
+                    public database: string;
+
+                    /** GoldengateMysqlConnectionProperties securityProtocol. */
+                    public securityProtocol: (google.cloud.oracledatabase.v1.GoldengateMysqlConnectionProperties.MysqlSecurityProtocol|keyof typeof google.cloud.oracledatabase.v1.GoldengateMysqlConnectionProperties.MysqlSecurityProtocol);
+
+                    /** GoldengateMysqlConnectionProperties sslMode. */
+                    public sslMode: (google.cloud.oracledatabase.v1.GoldengateMysqlConnectionProperties.SSLMode|keyof typeof google.cloud.oracledatabase.v1.GoldengateMysqlConnectionProperties.SSLMode);
+
+                    /** GoldengateMysqlConnectionProperties sslCaFile. */
+                    public sslCaFile: string;
+
+                    /** GoldengateMysqlConnectionProperties sslCrlFile. */
+                    public sslCrlFile: string;
+
+                    /** GoldengateMysqlConnectionProperties sslCertFile. */
+                    public sslCertFile: string;
+
+                    /** GoldengateMysqlConnectionProperties sslKeyFile. */
+                    public sslKeyFile: string;
+
+                    /** GoldengateMysqlConnectionProperties additionalAttributes. */
+                    public additionalAttributes: google.cloud.oracledatabase.v1.INameValuePair[];
+
+                    /** GoldengateMysqlConnectionProperties dbSystemId. */
+                    public dbSystemId: string;
+
+                    /** GoldengateMysqlConnectionProperties connectionPasswordOptions. */
+                    public connectionPasswordOptions?: ("password"|"passwordSecretVersion");
+
+                    /**
+                     * Creates a new GoldengateMysqlConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateMysqlConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateMysqlConnectionProperties): google.cloud.oracledatabase.v1.GoldengateMysqlConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateMysqlConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateMysqlConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateMysqlConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateMysqlConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateMysqlConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateMysqlConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateMysqlConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateMysqlConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateMysqlConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateMysqlConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateMysqlConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengateMysqlConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateMysqlConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateMysqlConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengateMysqlConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateMysqlConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateMysqlConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateMysqlConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateMysqlConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateMysqlConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateMysqlConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateMysqlConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateMysqlConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GoldengateMysqlConnectionProperties {
+
+                    /** MysqlSecurityProtocol enum. */
+                    enum MysqlSecurityProtocol {
+                        MYSQL_SECURITY_PROTOCOL_UNSPECIFIED = 0,
+                        PLAIN = 1,
+                        TLS = 2,
+                        MTLS = 3
+                    }
+
+                    /** SSLMode enum. */
+                    enum SSLMode {
+                        SSL_MODE_UNSPECIFIED = 0,
+                        DISABLED = 1,
+                        PREFERRED = 2,
+                        REQUIRED = 3,
+                        VERIFY_CA = 4,
+                        VERIFY_IDENTITY = 5
+                    }
+                }
+
+                /** Properties of a GoldengateKafkaConnectionProperties. */
+                interface IGoldengateKafkaConnectionProperties {
+
+                    /** GoldengateKafkaConnectionProperties password */
+                    password?: (string|null);
+
+                    /** GoldengateKafkaConnectionProperties passwordSecretVersion */
+                    passwordSecretVersion?: (string|null);
+
+                    /** GoldengateKafkaConnectionProperties trustStorePassword */
+                    trustStorePassword?: (string|null);
+
+                    /** GoldengateKafkaConnectionProperties trustStorePasswordSecretVersion */
+                    trustStorePasswordSecretVersion?: (string|null);
+
+                    /** GoldengateKafkaConnectionProperties keyStorePassword */
+                    keyStorePassword?: (string|null);
+
+                    /** GoldengateKafkaConnectionProperties keyStorePasswordSecretVersion */
+                    keyStorePasswordSecretVersion?: (string|null);
+
+                    /** GoldengateKafkaConnectionProperties sslKeyPassword */
+                    sslKeyPassword?: (string|null);
+
+                    /** GoldengateKafkaConnectionProperties sslKeyPasswordSecretVersion */
+                    sslKeyPasswordSecretVersion?: (string|null);
+
+                    /** GoldengateKafkaConnectionProperties technologyType */
+                    technologyType?: (string|null);
+
+                    /** GoldengateKafkaConnectionProperties streamPoolId */
+                    streamPoolId?: (string|null);
+
+                    /** GoldengateKafkaConnectionProperties clusterId */
+                    clusterId?: (string|null);
+
+                    /** GoldengateKafkaConnectionProperties bootstrapServers */
+                    bootstrapServers?: (google.cloud.oracledatabase.v1.IKafkaBootstrapServer[]|null);
+
+                    /** GoldengateKafkaConnectionProperties securityProtocol */
+                    securityProtocol?: (google.cloud.oracledatabase.v1.GoldengateKafkaConnectionProperties.KafkaSecurityProtocol|keyof typeof google.cloud.oracledatabase.v1.GoldengateKafkaConnectionProperties.KafkaSecurityProtocol|null);
+
+                    /** GoldengateKafkaConnectionProperties username */
+                    username?: (string|null);
+
+                    /** GoldengateKafkaConnectionProperties trustStoreFile */
+                    trustStoreFile?: (string|null);
+
+                    /** GoldengateKafkaConnectionProperties keyStoreFile */
+                    keyStoreFile?: (string|null);
+
+                    /** GoldengateKafkaConnectionProperties consumerPropertiesFile */
+                    consumerPropertiesFile?: (string|null);
+
+                    /** GoldengateKafkaConnectionProperties producerPropertiesFile */
+                    producerPropertiesFile?: (string|null);
+
+                    /** GoldengateKafkaConnectionProperties useResourcePrincipal */
+                    useResourcePrincipal?: (boolean|null);
+                }
+
+                /** Represents a GoldengateKafkaConnectionProperties. */
+                class GoldengateKafkaConnectionProperties implements IGoldengateKafkaConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengateKafkaConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateKafkaConnectionProperties);
+
+                    /** GoldengateKafkaConnectionProperties password. */
+                    public password?: (string|null);
+
+                    /** GoldengateKafkaConnectionProperties passwordSecretVersion. */
+                    public passwordSecretVersion?: (string|null);
+
+                    /** GoldengateKafkaConnectionProperties trustStorePassword. */
+                    public trustStorePassword?: (string|null);
+
+                    /** GoldengateKafkaConnectionProperties trustStorePasswordSecretVersion. */
+                    public trustStorePasswordSecretVersion?: (string|null);
+
+                    /** GoldengateKafkaConnectionProperties keyStorePassword. */
+                    public keyStorePassword?: (string|null);
+
+                    /** GoldengateKafkaConnectionProperties keyStorePasswordSecretVersion. */
+                    public keyStorePasswordSecretVersion?: (string|null);
+
+                    /** GoldengateKafkaConnectionProperties sslKeyPassword. */
+                    public sslKeyPassword?: (string|null);
+
+                    /** GoldengateKafkaConnectionProperties sslKeyPasswordSecretVersion. */
+                    public sslKeyPasswordSecretVersion?: (string|null);
+
+                    /** GoldengateKafkaConnectionProperties technologyType. */
+                    public technologyType: string;
+
+                    /** GoldengateKafkaConnectionProperties streamPoolId. */
+                    public streamPoolId: string;
+
+                    /** GoldengateKafkaConnectionProperties clusterId. */
+                    public clusterId: string;
+
+                    /** GoldengateKafkaConnectionProperties bootstrapServers. */
+                    public bootstrapServers: google.cloud.oracledatabase.v1.IKafkaBootstrapServer[];
+
+                    /** GoldengateKafkaConnectionProperties securityProtocol. */
+                    public securityProtocol: (google.cloud.oracledatabase.v1.GoldengateKafkaConnectionProperties.KafkaSecurityProtocol|keyof typeof google.cloud.oracledatabase.v1.GoldengateKafkaConnectionProperties.KafkaSecurityProtocol);
+
+                    /** GoldengateKafkaConnectionProperties username. */
+                    public username: string;
+
+                    /** GoldengateKafkaConnectionProperties trustStoreFile. */
+                    public trustStoreFile: string;
+
+                    /** GoldengateKafkaConnectionProperties keyStoreFile. */
+                    public keyStoreFile: string;
+
+                    /** GoldengateKafkaConnectionProperties consumerPropertiesFile. */
+                    public consumerPropertiesFile: string;
+
+                    /** GoldengateKafkaConnectionProperties producerPropertiesFile. */
+                    public producerPropertiesFile: string;
+
+                    /** GoldengateKafkaConnectionProperties useResourcePrincipal. */
+                    public useResourcePrincipal: boolean;
+
+                    /** GoldengateKafkaConnectionProperties connectionPasswordOptions. */
+                    public connectionPasswordOptions?: ("password"|"passwordSecretVersion");
+
+                    /** GoldengateKafkaConnectionProperties trustStorePasswordOptions. */
+                    public trustStorePasswordOptions?: ("trustStorePassword"|"trustStorePasswordSecretVersion");
+
+                    /** GoldengateKafkaConnectionProperties keyStorePasswordOptions. */
+                    public keyStorePasswordOptions?: ("keyStorePassword"|"keyStorePasswordSecretVersion");
+
+                    /** GoldengateKafkaConnectionProperties sslKeyPasswordOptions. */
+                    public sslKeyPasswordOptions?: ("sslKeyPassword"|"sslKeyPasswordSecretVersion");
+
+                    /**
+                     * Creates a new GoldengateKafkaConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateKafkaConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateKafkaConnectionProperties): google.cloud.oracledatabase.v1.GoldengateKafkaConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateKafkaConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateKafkaConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateKafkaConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateKafkaConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateKafkaConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateKafkaConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateKafkaConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateKafkaConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateKafkaConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateKafkaConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateKafkaConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengateKafkaConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateKafkaConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateKafkaConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengateKafkaConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateKafkaConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateKafkaConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateKafkaConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateKafkaConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateKafkaConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateKafkaConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateKafkaConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateKafkaConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GoldengateKafkaConnectionProperties {
+
+                    /** KafkaSecurityProtocol enum. */
+                    enum KafkaSecurityProtocol {
+                        KAFKA_SECURITY_PROTOCOL_UNSPECIFIED = 0,
+                        SSL = 1,
+                        SASL_SSL = 2,
+                        PLAINTEXT = 3,
+                        SASL_PLAINTEXT = 4
+                    }
+                }
+
+                /** Properties of a GoldengateKafkaSchemaRegistryConnectionProperties. */
+                interface IGoldengateKafkaSchemaRegistryConnectionProperties {
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties password */
+                    password?: (string|null);
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties passwordSecretVersion */
+                    passwordSecretVersion?: (string|null);
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties trustStorePassword */
+                    trustStorePassword?: (string|null);
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties trustStorePasswordSecretVersion */
+                    trustStorePasswordSecretVersion?: (string|null);
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties keyStorePassword */
+                    keyStorePassword?: (string|null);
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties keyStorePasswordSecretVersion */
+                    keyStorePasswordSecretVersion?: (string|null);
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties sslKeyPassword */
+                    sslKeyPassword?: (string|null);
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties sslKeyPasswordSecretVersion */
+                    sslKeyPasswordSecretVersion?: (string|null);
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties technologyType */
+                    technologyType?: (string|null);
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties url */
+                    url?: (string|null);
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties authenticationType */
+                    authenticationType?: (google.cloud.oracledatabase.v1.GoldengateKafkaSchemaRegistryConnectionProperties.AuthenticationType|keyof typeof google.cloud.oracledatabase.v1.GoldengateKafkaSchemaRegistryConnectionProperties.AuthenticationType|null);
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties username */
+                    username?: (string|null);
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties trustStoreFile */
+                    trustStoreFile?: (string|null);
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties keyStoreFile */
+                    keyStoreFile?: (string|null);
+                }
+
+                /** Represents a GoldengateKafkaSchemaRegistryConnectionProperties. */
+                class GoldengateKafkaSchemaRegistryConnectionProperties implements IGoldengateKafkaSchemaRegistryConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengateKafkaSchemaRegistryConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateKafkaSchemaRegistryConnectionProperties);
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties password. */
+                    public password?: (string|null);
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties passwordSecretVersion. */
+                    public passwordSecretVersion?: (string|null);
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties trustStorePassword. */
+                    public trustStorePassword?: (string|null);
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties trustStorePasswordSecretVersion. */
+                    public trustStorePasswordSecretVersion?: (string|null);
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties keyStorePassword. */
+                    public keyStorePassword?: (string|null);
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties keyStorePasswordSecretVersion. */
+                    public keyStorePasswordSecretVersion?: (string|null);
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties sslKeyPassword. */
+                    public sslKeyPassword?: (string|null);
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties sslKeyPasswordSecretVersion. */
+                    public sslKeyPasswordSecretVersion?: (string|null);
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties technologyType. */
+                    public technologyType: string;
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties url. */
+                    public url: string;
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties authenticationType. */
+                    public authenticationType: (google.cloud.oracledatabase.v1.GoldengateKafkaSchemaRegistryConnectionProperties.AuthenticationType|keyof typeof google.cloud.oracledatabase.v1.GoldengateKafkaSchemaRegistryConnectionProperties.AuthenticationType);
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties username. */
+                    public username: string;
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties trustStoreFile. */
+                    public trustStoreFile: string;
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties keyStoreFile. */
+                    public keyStoreFile: string;
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties connectionPasswordOptions. */
+                    public connectionPasswordOptions?: ("password"|"passwordSecretVersion");
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties trustStorePasswordOptions. */
+                    public trustStorePasswordOptions?: ("trustStorePassword"|"trustStorePasswordSecretVersion");
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties keyStorePasswordOptions. */
+                    public keyStorePasswordOptions?: ("keyStorePassword"|"keyStorePasswordSecretVersion");
+
+                    /** GoldengateKafkaSchemaRegistryConnectionProperties sslKeyPasswordOptions. */
+                    public sslKeyPasswordOptions?: ("sslKeyPassword"|"sslKeyPasswordSecretVersion");
+
+                    /**
+                     * Creates a new GoldengateKafkaSchemaRegistryConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateKafkaSchemaRegistryConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateKafkaSchemaRegistryConnectionProperties): google.cloud.oracledatabase.v1.GoldengateKafkaSchemaRegistryConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateKafkaSchemaRegistryConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateKafkaSchemaRegistryConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateKafkaSchemaRegistryConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateKafkaSchemaRegistryConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateKafkaSchemaRegistryConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateKafkaSchemaRegistryConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateKafkaSchemaRegistryConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateKafkaSchemaRegistryConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateKafkaSchemaRegistryConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateKafkaSchemaRegistryConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateKafkaSchemaRegistryConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengateKafkaSchemaRegistryConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateKafkaSchemaRegistryConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateKafkaSchemaRegistryConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengateKafkaSchemaRegistryConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateKafkaSchemaRegistryConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateKafkaSchemaRegistryConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateKafkaSchemaRegistryConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateKafkaSchemaRegistryConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateKafkaSchemaRegistryConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateKafkaSchemaRegistryConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateKafkaSchemaRegistryConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateKafkaSchemaRegistryConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GoldengateKafkaSchemaRegistryConnectionProperties {
+
+                    /** AuthenticationType enum. */
+                    enum AuthenticationType {
+                        AUTHENTICATION_TYPE_UNSPECIFIED = 0,
+                        NONE = 1,
+                        BASIC = 2,
+                        MUTUAL = 3
+                    }
+                }
+
+                /** Properties of a GoldengateOciObjectStorageConnectionProperties. */
+                interface IGoldengateOciObjectStorageConnectionProperties {
+
+                    /** GoldengateOciObjectStorageConnectionProperties technologyType */
+                    technologyType?: (string|null);
+
+                    /** GoldengateOciObjectStorageConnectionProperties tenancyId */
+                    tenancyId?: (string|null);
+
+                    /** GoldengateOciObjectStorageConnectionProperties region */
+                    region?: (string|null);
+
+                    /** GoldengateOciObjectStorageConnectionProperties userId */
+                    userId?: (string|null);
+
+                    /** GoldengateOciObjectStorageConnectionProperties privateKeyFile */
+                    privateKeyFile?: (string|null);
+
+                    /** GoldengateOciObjectStorageConnectionProperties privateKeyPassphraseSecret */
+                    privateKeyPassphraseSecret?: (string|null);
+
+                    /** GoldengateOciObjectStorageConnectionProperties publicKeyFingerprint */
+                    publicKeyFingerprint?: (string|null);
+
+                    /** GoldengateOciObjectStorageConnectionProperties useResourcePrincipal */
+                    useResourcePrincipal?: (boolean|null);
+                }
+
+                /** Represents a GoldengateOciObjectStorageConnectionProperties. */
+                class GoldengateOciObjectStorageConnectionProperties implements IGoldengateOciObjectStorageConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengateOciObjectStorageConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateOciObjectStorageConnectionProperties);
+
+                    /** GoldengateOciObjectStorageConnectionProperties technologyType. */
+                    public technologyType: string;
+
+                    /** GoldengateOciObjectStorageConnectionProperties tenancyId. */
+                    public tenancyId: string;
+
+                    /** GoldengateOciObjectStorageConnectionProperties region. */
+                    public region: string;
+
+                    /** GoldengateOciObjectStorageConnectionProperties userId. */
+                    public userId: string;
+
+                    /** GoldengateOciObjectStorageConnectionProperties privateKeyFile. */
+                    public privateKeyFile: string;
+
+                    /** GoldengateOciObjectStorageConnectionProperties privateKeyPassphraseSecret. */
+                    public privateKeyPassphraseSecret: string;
+
+                    /** GoldengateOciObjectStorageConnectionProperties publicKeyFingerprint. */
+                    public publicKeyFingerprint: string;
+
+                    /** GoldengateOciObjectStorageConnectionProperties useResourcePrincipal. */
+                    public useResourcePrincipal: boolean;
+
+                    /**
+                     * Creates a new GoldengateOciObjectStorageConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateOciObjectStorageConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateOciObjectStorageConnectionProperties): google.cloud.oracledatabase.v1.GoldengateOciObjectStorageConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateOciObjectStorageConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateOciObjectStorageConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateOciObjectStorageConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateOciObjectStorageConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateOciObjectStorageConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateOciObjectStorageConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateOciObjectStorageConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateOciObjectStorageConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateOciObjectStorageConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateOciObjectStorageConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateOciObjectStorageConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengateOciObjectStorageConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateOciObjectStorageConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateOciObjectStorageConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengateOciObjectStorageConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateOciObjectStorageConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateOciObjectStorageConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateOciObjectStorageConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateOciObjectStorageConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateOciObjectStorageConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateOciObjectStorageConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateOciObjectStorageConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateOciObjectStorageConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoldengateAzureDataLakeStorageConnectionProperties. */
+                interface IGoldengateAzureDataLakeStorageConnectionProperties {
+
+                    /** GoldengateAzureDataLakeStorageConnectionProperties technologyType */
+                    technologyType?: (string|null);
+
+                    /** GoldengateAzureDataLakeStorageConnectionProperties authenticationType */
+                    authenticationType?: (google.cloud.oracledatabase.v1.GoldengateAzureDataLakeStorageConnectionProperties.AuthenticationType|keyof typeof google.cloud.oracledatabase.v1.GoldengateAzureDataLakeStorageConnectionProperties.AuthenticationType|null);
+
+                    /** GoldengateAzureDataLakeStorageConnectionProperties account */
+                    account?: (string|null);
+
+                    /** GoldengateAzureDataLakeStorageConnectionProperties accountKeySecret */
+                    accountKeySecret?: (string|null);
+
+                    /** GoldengateAzureDataLakeStorageConnectionProperties sasTokenSecret */
+                    sasTokenSecret?: (string|null);
+
+                    /** GoldengateAzureDataLakeStorageConnectionProperties azureTenantId */
+                    azureTenantId?: (string|null);
+
+                    /** GoldengateAzureDataLakeStorageConnectionProperties clientId */
+                    clientId?: (string|null);
+
+                    /** GoldengateAzureDataLakeStorageConnectionProperties clientSecret */
+                    clientSecret?: (string|null);
+
+                    /** GoldengateAzureDataLakeStorageConnectionProperties endpoint */
+                    endpoint?: (string|null);
+
+                    /** GoldengateAzureDataLakeStorageConnectionProperties azureAuthorityHost */
+                    azureAuthorityHost?: (string|null);
+                }
+
+                /** Represents a GoldengateAzureDataLakeStorageConnectionProperties. */
+                class GoldengateAzureDataLakeStorageConnectionProperties implements IGoldengateAzureDataLakeStorageConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengateAzureDataLakeStorageConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateAzureDataLakeStorageConnectionProperties);
+
+                    /** GoldengateAzureDataLakeStorageConnectionProperties technologyType. */
+                    public technologyType: string;
+
+                    /** GoldengateAzureDataLakeStorageConnectionProperties authenticationType. */
+                    public authenticationType: (google.cloud.oracledatabase.v1.GoldengateAzureDataLakeStorageConnectionProperties.AuthenticationType|keyof typeof google.cloud.oracledatabase.v1.GoldengateAzureDataLakeStorageConnectionProperties.AuthenticationType);
+
+                    /** GoldengateAzureDataLakeStorageConnectionProperties account. */
+                    public account: string;
+
+                    /** GoldengateAzureDataLakeStorageConnectionProperties accountKeySecret. */
+                    public accountKeySecret: string;
+
+                    /** GoldengateAzureDataLakeStorageConnectionProperties sasTokenSecret. */
+                    public sasTokenSecret: string;
+
+                    /** GoldengateAzureDataLakeStorageConnectionProperties azureTenantId. */
+                    public azureTenantId: string;
+
+                    /** GoldengateAzureDataLakeStorageConnectionProperties clientId. */
+                    public clientId: string;
+
+                    /** GoldengateAzureDataLakeStorageConnectionProperties clientSecret. */
+                    public clientSecret: string;
+
+                    /** GoldengateAzureDataLakeStorageConnectionProperties endpoint. */
+                    public endpoint: string;
+
+                    /** GoldengateAzureDataLakeStorageConnectionProperties azureAuthorityHost. */
+                    public azureAuthorityHost: string;
+
+                    /**
+                     * Creates a new GoldengateAzureDataLakeStorageConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateAzureDataLakeStorageConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateAzureDataLakeStorageConnectionProperties): google.cloud.oracledatabase.v1.GoldengateAzureDataLakeStorageConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateAzureDataLakeStorageConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateAzureDataLakeStorageConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateAzureDataLakeStorageConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateAzureDataLakeStorageConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateAzureDataLakeStorageConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateAzureDataLakeStorageConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateAzureDataLakeStorageConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateAzureDataLakeStorageConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateAzureDataLakeStorageConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateAzureDataLakeStorageConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateAzureDataLakeStorageConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengateAzureDataLakeStorageConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateAzureDataLakeStorageConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateAzureDataLakeStorageConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengateAzureDataLakeStorageConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateAzureDataLakeStorageConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateAzureDataLakeStorageConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateAzureDataLakeStorageConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateAzureDataLakeStorageConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateAzureDataLakeStorageConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateAzureDataLakeStorageConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateAzureDataLakeStorageConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateAzureDataLakeStorageConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GoldengateAzureDataLakeStorageConnectionProperties {
+
+                    /** AuthenticationType enum. */
+                    enum AuthenticationType {
+                        AUTHENTICATION_TYPE_UNSPECIFIED = 0,
+                        SHARED_KEY = 1,
+                        SHARED_ACCESS_SIGNATURE = 2,
+                        AZURE_ACTIVE_DIRECTORY = 3
+                    }
+                }
+
+                /** Properties of a GoldengateAzureSynapseAnalyticsConnectionProperties. */
+                interface IGoldengateAzureSynapseAnalyticsConnectionProperties {
+
+                    /** GoldengateAzureSynapseAnalyticsConnectionProperties password */
+                    password?: (string|null);
+
+                    /** GoldengateAzureSynapseAnalyticsConnectionProperties passwordSecretVersion */
+                    passwordSecretVersion?: (string|null);
+
+                    /** GoldengateAzureSynapseAnalyticsConnectionProperties technologyType */
+                    technologyType?: (string|null);
+
+                    /** GoldengateAzureSynapseAnalyticsConnectionProperties connectionString */
+                    connectionString?: (string|null);
+
+                    /** GoldengateAzureSynapseAnalyticsConnectionProperties username */
+                    username?: (string|null);
+                }
+
+                /** Represents a GoldengateAzureSynapseAnalyticsConnectionProperties. */
+                class GoldengateAzureSynapseAnalyticsConnectionProperties implements IGoldengateAzureSynapseAnalyticsConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengateAzureSynapseAnalyticsConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateAzureSynapseAnalyticsConnectionProperties);
+
+                    /** GoldengateAzureSynapseAnalyticsConnectionProperties password. */
+                    public password?: (string|null);
+
+                    /** GoldengateAzureSynapseAnalyticsConnectionProperties passwordSecretVersion. */
+                    public passwordSecretVersion?: (string|null);
+
+                    /** GoldengateAzureSynapseAnalyticsConnectionProperties technologyType. */
+                    public technologyType: string;
+
+                    /** GoldengateAzureSynapseAnalyticsConnectionProperties connectionString. */
+                    public connectionString: string;
+
+                    /** GoldengateAzureSynapseAnalyticsConnectionProperties username. */
+                    public username: string;
+
+                    /** GoldengateAzureSynapseAnalyticsConnectionProperties connectionPasswordOptions. */
+                    public connectionPasswordOptions?: ("password"|"passwordSecretVersion");
+
+                    /**
+                     * Creates a new GoldengateAzureSynapseAnalyticsConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateAzureSynapseAnalyticsConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateAzureSynapseAnalyticsConnectionProperties): google.cloud.oracledatabase.v1.GoldengateAzureSynapseAnalyticsConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateAzureSynapseAnalyticsConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateAzureSynapseAnalyticsConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateAzureSynapseAnalyticsConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateAzureSynapseAnalyticsConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateAzureSynapseAnalyticsConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateAzureSynapseAnalyticsConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateAzureSynapseAnalyticsConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateAzureSynapseAnalyticsConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateAzureSynapseAnalyticsConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateAzureSynapseAnalyticsConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateAzureSynapseAnalyticsConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengateAzureSynapseAnalyticsConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateAzureSynapseAnalyticsConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateAzureSynapseAnalyticsConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengateAzureSynapseAnalyticsConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateAzureSynapseAnalyticsConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateAzureSynapseAnalyticsConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateAzureSynapseAnalyticsConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateAzureSynapseAnalyticsConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateAzureSynapseAnalyticsConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateAzureSynapseAnalyticsConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateAzureSynapseAnalyticsConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateAzureSynapseAnalyticsConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoldengatePostgresqlConnectionProperties. */
+                interface IGoldengatePostgresqlConnectionProperties {
+
+                    /** GoldengatePostgresqlConnectionProperties password */
+                    password?: (string|null);
+
+                    /** GoldengatePostgresqlConnectionProperties passwordSecretVersion */
+                    passwordSecretVersion?: (string|null);
+
+                    /** GoldengatePostgresqlConnectionProperties technologyType */
+                    technologyType?: (string|null);
+
+                    /** GoldengatePostgresqlConnectionProperties database */
+                    database?: (string|null);
+
+                    /** GoldengatePostgresqlConnectionProperties host */
+                    host?: (string|null);
+
+                    /** GoldengatePostgresqlConnectionProperties port */
+                    port?: (number|null);
+
+                    /** GoldengatePostgresqlConnectionProperties username */
+                    username?: (string|null);
+
+                    /** GoldengatePostgresqlConnectionProperties additionalAttributes */
+                    additionalAttributes?: (google.cloud.oracledatabase.v1.INameValuePair[]|null);
+
+                    /** GoldengatePostgresqlConnectionProperties securityProtocol */
+                    securityProtocol?: (google.cloud.oracledatabase.v1.GoldengatePostgresqlConnectionProperties.PostgresqlSecurityProtocol|keyof typeof google.cloud.oracledatabase.v1.GoldengatePostgresqlConnectionProperties.PostgresqlSecurityProtocol|null);
+
+                    /** GoldengatePostgresqlConnectionProperties sslMode */
+                    sslMode?: (google.cloud.oracledatabase.v1.GoldengatePostgresqlConnectionProperties.PostgresqlSslMode|keyof typeof google.cloud.oracledatabase.v1.GoldengatePostgresqlConnectionProperties.PostgresqlSslMode|null);
+
+                    /** GoldengatePostgresqlConnectionProperties sslCaFile */
+                    sslCaFile?: (string|null);
+
+                    /** GoldengatePostgresqlConnectionProperties sslCrlFile */
+                    sslCrlFile?: (string|null);
+
+                    /** GoldengatePostgresqlConnectionProperties sslCertFile */
+                    sslCertFile?: (string|null);
+
+                    /** GoldengatePostgresqlConnectionProperties sslKeyFile */
+                    sslKeyFile?: (string|null);
+
+                    /** GoldengatePostgresqlConnectionProperties dbSystemId */
+                    dbSystemId?: (string|null);
+                }
+
+                /** Represents a GoldengatePostgresqlConnectionProperties. */
+                class GoldengatePostgresqlConnectionProperties implements IGoldengatePostgresqlConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengatePostgresqlConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengatePostgresqlConnectionProperties);
+
+                    /** GoldengatePostgresqlConnectionProperties password. */
+                    public password?: (string|null);
+
+                    /** GoldengatePostgresqlConnectionProperties passwordSecretVersion. */
+                    public passwordSecretVersion?: (string|null);
+
+                    /** GoldengatePostgresqlConnectionProperties technologyType. */
+                    public technologyType: string;
+
+                    /** GoldengatePostgresqlConnectionProperties database. */
+                    public database: string;
+
+                    /** GoldengatePostgresqlConnectionProperties host. */
+                    public host: string;
+
+                    /** GoldengatePostgresqlConnectionProperties port. */
+                    public port: number;
+
+                    /** GoldengatePostgresqlConnectionProperties username. */
+                    public username: string;
+
+                    /** GoldengatePostgresqlConnectionProperties additionalAttributes. */
+                    public additionalAttributes: google.cloud.oracledatabase.v1.INameValuePair[];
+
+                    /** GoldengatePostgresqlConnectionProperties securityProtocol. */
+                    public securityProtocol: (google.cloud.oracledatabase.v1.GoldengatePostgresqlConnectionProperties.PostgresqlSecurityProtocol|keyof typeof google.cloud.oracledatabase.v1.GoldengatePostgresqlConnectionProperties.PostgresqlSecurityProtocol);
+
+                    /** GoldengatePostgresqlConnectionProperties sslMode. */
+                    public sslMode: (google.cloud.oracledatabase.v1.GoldengatePostgresqlConnectionProperties.PostgresqlSslMode|keyof typeof google.cloud.oracledatabase.v1.GoldengatePostgresqlConnectionProperties.PostgresqlSslMode);
+
+                    /** GoldengatePostgresqlConnectionProperties sslCaFile. */
+                    public sslCaFile: string;
+
+                    /** GoldengatePostgresqlConnectionProperties sslCrlFile. */
+                    public sslCrlFile: string;
+
+                    /** GoldengatePostgresqlConnectionProperties sslCertFile. */
+                    public sslCertFile: string;
+
+                    /** GoldengatePostgresqlConnectionProperties sslKeyFile. */
+                    public sslKeyFile: string;
+
+                    /** GoldengatePostgresqlConnectionProperties dbSystemId. */
+                    public dbSystemId: string;
+
+                    /** GoldengatePostgresqlConnectionProperties connectionPasswordOptions. */
+                    public connectionPasswordOptions?: ("password"|"passwordSecretVersion");
+
+                    /**
+                     * Creates a new GoldengatePostgresqlConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengatePostgresqlConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengatePostgresqlConnectionProperties): google.cloud.oracledatabase.v1.GoldengatePostgresqlConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengatePostgresqlConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengatePostgresqlConnectionProperties.verify|verify} messages.
+                     * @param message GoldengatePostgresqlConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengatePostgresqlConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengatePostgresqlConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengatePostgresqlConnectionProperties.verify|verify} messages.
+                     * @param message GoldengatePostgresqlConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengatePostgresqlConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengatePostgresqlConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengatePostgresqlConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengatePostgresqlConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengatePostgresqlConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengatePostgresqlConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengatePostgresqlConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengatePostgresqlConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengatePostgresqlConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengatePostgresqlConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengatePostgresqlConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengatePostgresqlConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengatePostgresqlConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengatePostgresqlConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengatePostgresqlConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengatePostgresqlConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GoldengatePostgresqlConnectionProperties {
+
+                    /** PostgresqlSecurityProtocol enum. */
+                    enum PostgresqlSecurityProtocol {
+                        POSTGRESQL_SECURITY_PROTOCOL_UNSPECIFIED = 0,
+                        PLAIN = 1,
+                        TLS = 2,
+                        MTLS = 3
+                    }
+
+                    /** PostgresqlSslMode enum. */
+                    enum PostgresqlSslMode {
+                        POSTGRESQL_SSL_MODE_UNSPECIFIED = 0,
+                        PREFER = 1,
+                        REQUIRE = 2,
+                        VERIFY_CA = 3,
+                        VERIFY_FULL = 4
+                    }
+                }
+
+                /** Properties of a GoldengateMicrosoftSqlserverConnectionProperties. */
+                interface IGoldengateMicrosoftSqlserverConnectionProperties {
+
+                    /** GoldengateMicrosoftSqlserverConnectionProperties password */
+                    password?: (string|null);
+
+                    /** GoldengateMicrosoftSqlserverConnectionProperties passwordSecretVersion */
+                    passwordSecretVersion?: (string|null);
+
+                    /** GoldengateMicrosoftSqlserverConnectionProperties technologyType */
+                    technologyType?: (string|null);
+
+                    /** GoldengateMicrosoftSqlserverConnectionProperties database */
+                    database?: (string|null);
+
+                    /** GoldengateMicrosoftSqlserverConnectionProperties host */
+                    host?: (string|null);
+
+                    /** GoldengateMicrosoftSqlserverConnectionProperties port */
+                    port?: (number|null);
+
+                    /** GoldengateMicrosoftSqlserverConnectionProperties username */
+                    username?: (string|null);
+
+                    /** GoldengateMicrosoftSqlserverConnectionProperties additionalAttributes */
+                    additionalAttributes?: (google.cloud.oracledatabase.v1.INameValuePair[]|null);
+
+                    /** GoldengateMicrosoftSqlserverConnectionProperties securityProtocol */
+                    securityProtocol?: (google.cloud.oracledatabase.v1.GoldengateMicrosoftSqlserverConnectionProperties.MicrosoftSqlserverSecurityProtocol|keyof typeof google.cloud.oracledatabase.v1.GoldengateMicrosoftSqlserverConnectionProperties.MicrosoftSqlserverSecurityProtocol|null);
+
+                    /** GoldengateMicrosoftSqlserverConnectionProperties sslCaFile */
+                    sslCaFile?: (string|null);
+
+                    /** GoldengateMicrosoftSqlserverConnectionProperties serverCertificateValidationRequired */
+                    serverCertificateValidationRequired?: (boolean|null);
+                }
+
+                /** Represents a GoldengateMicrosoftSqlserverConnectionProperties. */
+                class GoldengateMicrosoftSqlserverConnectionProperties implements IGoldengateMicrosoftSqlserverConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengateMicrosoftSqlserverConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateMicrosoftSqlserverConnectionProperties);
+
+                    /** GoldengateMicrosoftSqlserverConnectionProperties password. */
+                    public password?: (string|null);
+
+                    /** GoldengateMicrosoftSqlserverConnectionProperties passwordSecretVersion. */
+                    public passwordSecretVersion?: (string|null);
+
+                    /** GoldengateMicrosoftSqlserverConnectionProperties technologyType. */
+                    public technologyType: string;
+
+                    /** GoldengateMicrosoftSqlserverConnectionProperties database. */
+                    public database: string;
+
+                    /** GoldengateMicrosoftSqlserverConnectionProperties host. */
+                    public host: string;
+
+                    /** GoldengateMicrosoftSqlserverConnectionProperties port. */
+                    public port: number;
+
+                    /** GoldengateMicrosoftSqlserverConnectionProperties username. */
+                    public username: string;
+
+                    /** GoldengateMicrosoftSqlserverConnectionProperties additionalAttributes. */
+                    public additionalAttributes: google.cloud.oracledatabase.v1.INameValuePair[];
+
+                    /** GoldengateMicrosoftSqlserverConnectionProperties securityProtocol. */
+                    public securityProtocol: (google.cloud.oracledatabase.v1.GoldengateMicrosoftSqlserverConnectionProperties.MicrosoftSqlserverSecurityProtocol|keyof typeof google.cloud.oracledatabase.v1.GoldengateMicrosoftSqlserverConnectionProperties.MicrosoftSqlserverSecurityProtocol);
+
+                    /** GoldengateMicrosoftSqlserverConnectionProperties sslCaFile. */
+                    public sslCaFile: string;
+
+                    /** GoldengateMicrosoftSqlserverConnectionProperties serverCertificateValidationRequired. */
+                    public serverCertificateValidationRequired: boolean;
+
+                    /** GoldengateMicrosoftSqlserverConnectionProperties connectionPasswordOptions. */
+                    public connectionPasswordOptions?: ("password"|"passwordSecretVersion");
+
+                    /**
+                     * Creates a new GoldengateMicrosoftSqlserverConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateMicrosoftSqlserverConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateMicrosoftSqlserverConnectionProperties): google.cloud.oracledatabase.v1.GoldengateMicrosoftSqlserverConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateMicrosoftSqlserverConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateMicrosoftSqlserverConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateMicrosoftSqlserverConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateMicrosoftSqlserverConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateMicrosoftSqlserverConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateMicrosoftSqlserverConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateMicrosoftSqlserverConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateMicrosoftSqlserverConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateMicrosoftSqlserverConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateMicrosoftSqlserverConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateMicrosoftSqlserverConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengateMicrosoftSqlserverConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateMicrosoftSqlserverConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateMicrosoftSqlserverConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengateMicrosoftSqlserverConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateMicrosoftSqlserverConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateMicrosoftSqlserverConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateMicrosoftSqlserverConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateMicrosoftSqlserverConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateMicrosoftSqlserverConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateMicrosoftSqlserverConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateMicrosoftSqlserverConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateMicrosoftSqlserverConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GoldengateMicrosoftSqlserverConnectionProperties {
+
+                    /** MicrosoftSqlserverSecurityProtocol enum. */
+                    enum MicrosoftSqlserverSecurityProtocol {
+                        MICROSOFT_SQLSERVER_SECURITY_PROTOCOL_UNSPECIFIED = 0,
+                        PLAIN = 1,
+                        TLS = 2
+                    }
+                }
+
+                /** Properties of a GoldengateAmazonS3ConnectionProperties. */
+                interface IGoldengateAmazonS3ConnectionProperties {
+
+                    /** GoldengateAmazonS3ConnectionProperties technologyType */
+                    technologyType?: (string|null);
+
+                    /** GoldengateAmazonS3ConnectionProperties accessKeyId */
+                    accessKeyId?: (string|null);
+
+                    /** GoldengateAmazonS3ConnectionProperties secretAccessKeySecret */
+                    secretAccessKeySecret?: (string|null);
+
+                    /** GoldengateAmazonS3ConnectionProperties endpoint */
+                    endpoint?: (string|null);
+
+                    /** GoldengateAmazonS3ConnectionProperties region */
+                    region?: (string|null);
+                }
+
+                /** Represents a GoldengateAmazonS3ConnectionProperties. */
+                class GoldengateAmazonS3ConnectionProperties implements IGoldengateAmazonS3ConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengateAmazonS3ConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateAmazonS3ConnectionProperties);
+
+                    /** GoldengateAmazonS3ConnectionProperties technologyType. */
+                    public technologyType: string;
+
+                    /** GoldengateAmazonS3ConnectionProperties accessKeyId. */
+                    public accessKeyId: string;
+
+                    /** GoldengateAmazonS3ConnectionProperties secretAccessKeySecret. */
+                    public secretAccessKeySecret: string;
+
+                    /** GoldengateAmazonS3ConnectionProperties endpoint. */
+                    public endpoint: string;
+
+                    /** GoldengateAmazonS3ConnectionProperties region. */
+                    public region: string;
+
+                    /**
+                     * Creates a new GoldengateAmazonS3ConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateAmazonS3ConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateAmazonS3ConnectionProperties): google.cloud.oracledatabase.v1.GoldengateAmazonS3ConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateAmazonS3ConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateAmazonS3ConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateAmazonS3ConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateAmazonS3ConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateAmazonS3ConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateAmazonS3ConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateAmazonS3ConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateAmazonS3ConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateAmazonS3ConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateAmazonS3ConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateAmazonS3ConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengateAmazonS3ConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateAmazonS3ConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateAmazonS3ConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengateAmazonS3ConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateAmazonS3ConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateAmazonS3ConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateAmazonS3ConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateAmazonS3ConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateAmazonS3ConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateAmazonS3ConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateAmazonS3ConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateAmazonS3ConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoldengateHdfsConnectionProperties. */
+                interface IGoldengateHdfsConnectionProperties {
+
+                    /** GoldengateHdfsConnectionProperties technologyType */
+                    technologyType?: (string|null);
+
+                    /** GoldengateHdfsConnectionProperties coreSiteXml */
+                    coreSiteXml?: (string|null);
+                }
+
+                /** Represents a GoldengateHdfsConnectionProperties. */
+                class GoldengateHdfsConnectionProperties implements IGoldengateHdfsConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengateHdfsConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateHdfsConnectionProperties);
+
+                    /** GoldengateHdfsConnectionProperties technologyType. */
+                    public technologyType: string;
+
+                    /** GoldengateHdfsConnectionProperties coreSiteXml. */
+                    public coreSiteXml: string;
+
+                    /**
+                     * Creates a new GoldengateHdfsConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateHdfsConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateHdfsConnectionProperties): google.cloud.oracledatabase.v1.GoldengateHdfsConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateHdfsConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateHdfsConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateHdfsConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateHdfsConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateHdfsConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateHdfsConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateHdfsConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateHdfsConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateHdfsConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateHdfsConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateHdfsConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengateHdfsConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateHdfsConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateHdfsConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengateHdfsConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateHdfsConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateHdfsConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateHdfsConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateHdfsConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateHdfsConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateHdfsConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateHdfsConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateHdfsConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoldengateJavaMessageServiceConnectionProperties. */
+                interface IGoldengateJavaMessageServiceConnectionProperties {
+
+                    /** GoldengateJavaMessageServiceConnectionProperties password */
+                    password?: (string|null);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties passwordSecretVersion */
+                    passwordSecretVersion?: (string|null);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties trustStorePassword */
+                    trustStorePassword?: (string|null);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties trustStorePasswordSecretVersion */
+                    trustStorePasswordSecretVersion?: (string|null);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties keyStorePassword */
+                    keyStorePassword?: (string|null);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties keyStorePasswordSecretVersion */
+                    keyStorePasswordSecretVersion?: (string|null);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties sslKeyPassword */
+                    sslKeyPassword?: (string|null);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties sslKeyPasswordSecretVersion */
+                    sslKeyPasswordSecretVersion?: (string|null);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties technologyType */
+                    technologyType?: (string|null);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties useJndi */
+                    useJndi?: (boolean|null);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties jndiConnectionFactory */
+                    jndiConnectionFactory?: (string|null);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties jndiProviderUrl */
+                    jndiProviderUrl?: (string|null);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties jndiInitialContextFactory */
+                    jndiInitialContextFactory?: (string|null);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties jndiSecurityPrincipal */
+                    jndiSecurityPrincipal?: (string|null);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties jndiSecurityCredentialsSecret */
+                    jndiSecurityCredentialsSecret?: (string|null);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties connectionUrl */
+                    connectionUrl?: (string|null);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties connectionFactory */
+                    connectionFactory?: (string|null);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties username */
+                    username?: (string|null);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties securityProtocol */
+                    securityProtocol?: (google.cloud.oracledatabase.v1.GoldengateJavaMessageServiceConnectionProperties.JmsSecurityProtocol|keyof typeof google.cloud.oracledatabase.v1.GoldengateJavaMessageServiceConnectionProperties.JmsSecurityProtocol|null);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties authenticationType */
+                    authenticationType?: (google.cloud.oracledatabase.v1.GoldengateJavaMessageServiceConnectionProperties.JmsAuthenticationType|keyof typeof google.cloud.oracledatabase.v1.GoldengateJavaMessageServiceConnectionProperties.JmsAuthenticationType|null);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties trustStoreFile */
+                    trustStoreFile?: (string|null);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties keyStoreFile */
+                    keyStoreFile?: (string|null);
+                }
+
+                /** Represents a GoldengateJavaMessageServiceConnectionProperties. */
+                class GoldengateJavaMessageServiceConnectionProperties implements IGoldengateJavaMessageServiceConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengateJavaMessageServiceConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateJavaMessageServiceConnectionProperties);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties password. */
+                    public password?: (string|null);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties passwordSecretVersion. */
+                    public passwordSecretVersion?: (string|null);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties trustStorePassword. */
+                    public trustStorePassword?: (string|null);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties trustStorePasswordSecretVersion. */
+                    public trustStorePasswordSecretVersion?: (string|null);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties keyStorePassword. */
+                    public keyStorePassword?: (string|null);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties keyStorePasswordSecretVersion. */
+                    public keyStorePasswordSecretVersion?: (string|null);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties sslKeyPassword. */
+                    public sslKeyPassword?: (string|null);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties sslKeyPasswordSecretVersion. */
+                    public sslKeyPasswordSecretVersion?: (string|null);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties technologyType. */
+                    public technologyType: string;
+
+                    /** GoldengateJavaMessageServiceConnectionProperties useJndi. */
+                    public useJndi: boolean;
+
+                    /** GoldengateJavaMessageServiceConnectionProperties jndiConnectionFactory. */
+                    public jndiConnectionFactory: string;
+
+                    /** GoldengateJavaMessageServiceConnectionProperties jndiProviderUrl. */
+                    public jndiProviderUrl: string;
+
+                    /** GoldengateJavaMessageServiceConnectionProperties jndiInitialContextFactory. */
+                    public jndiInitialContextFactory: string;
+
+                    /** GoldengateJavaMessageServiceConnectionProperties jndiSecurityPrincipal. */
+                    public jndiSecurityPrincipal: string;
+
+                    /** GoldengateJavaMessageServiceConnectionProperties jndiSecurityCredentialsSecret. */
+                    public jndiSecurityCredentialsSecret: string;
+
+                    /** GoldengateJavaMessageServiceConnectionProperties connectionUrl. */
+                    public connectionUrl: string;
+
+                    /** GoldengateJavaMessageServiceConnectionProperties connectionFactory. */
+                    public connectionFactory: string;
+
+                    /** GoldengateJavaMessageServiceConnectionProperties username. */
+                    public username: string;
+
+                    /** GoldengateJavaMessageServiceConnectionProperties securityProtocol. */
+                    public securityProtocol: (google.cloud.oracledatabase.v1.GoldengateJavaMessageServiceConnectionProperties.JmsSecurityProtocol|keyof typeof google.cloud.oracledatabase.v1.GoldengateJavaMessageServiceConnectionProperties.JmsSecurityProtocol);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties authenticationType. */
+                    public authenticationType: (google.cloud.oracledatabase.v1.GoldengateJavaMessageServiceConnectionProperties.JmsAuthenticationType|keyof typeof google.cloud.oracledatabase.v1.GoldengateJavaMessageServiceConnectionProperties.JmsAuthenticationType);
+
+                    /** GoldengateJavaMessageServiceConnectionProperties trustStoreFile. */
+                    public trustStoreFile: string;
+
+                    /** GoldengateJavaMessageServiceConnectionProperties keyStoreFile. */
+                    public keyStoreFile: string;
+
+                    /** GoldengateJavaMessageServiceConnectionProperties connectionPasswordOptions. */
+                    public connectionPasswordOptions?: ("password"|"passwordSecretVersion");
+
+                    /** GoldengateJavaMessageServiceConnectionProperties trustStorePasswordOptions. */
+                    public trustStorePasswordOptions?: ("trustStorePassword"|"trustStorePasswordSecretVersion");
+
+                    /** GoldengateJavaMessageServiceConnectionProperties keyStorePasswordOptions. */
+                    public keyStorePasswordOptions?: ("keyStorePassword"|"keyStorePasswordSecretVersion");
+
+                    /** GoldengateJavaMessageServiceConnectionProperties sslKeyPasswordOptions. */
+                    public sslKeyPasswordOptions?: ("sslKeyPassword"|"sslKeyPasswordSecretVersion");
+
+                    /**
+                     * Creates a new GoldengateJavaMessageServiceConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateJavaMessageServiceConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateJavaMessageServiceConnectionProperties): google.cloud.oracledatabase.v1.GoldengateJavaMessageServiceConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateJavaMessageServiceConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateJavaMessageServiceConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateJavaMessageServiceConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateJavaMessageServiceConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateJavaMessageServiceConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateJavaMessageServiceConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateJavaMessageServiceConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateJavaMessageServiceConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateJavaMessageServiceConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateJavaMessageServiceConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateJavaMessageServiceConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengateJavaMessageServiceConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateJavaMessageServiceConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateJavaMessageServiceConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengateJavaMessageServiceConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateJavaMessageServiceConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateJavaMessageServiceConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateJavaMessageServiceConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateJavaMessageServiceConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateJavaMessageServiceConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateJavaMessageServiceConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateJavaMessageServiceConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateJavaMessageServiceConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GoldengateJavaMessageServiceConnectionProperties {
+
+                    /** JmsSecurityProtocol enum. */
+                    enum JmsSecurityProtocol {
+                        JMS_SECURITY_PROTOCOL_UNSPECIFIED = 0,
+                        PLAIN = 1,
+                        TLS = 2,
+                        MTLS = 3
+                    }
+
+                    /** JmsAuthenticationType enum. */
+                    enum JmsAuthenticationType {
+                        JMS_AUTHENTICATION_TYPE_UNSPECIFIED = 0,
+                        NONE = 1,
+                        BASIC = 2
+                    }
+                }
+
+                /** Properties of a GoldengateMongodbConnectionProperties. */
+                interface IGoldengateMongodbConnectionProperties {
+
+                    /** GoldengateMongodbConnectionProperties password */
+                    password?: (string|null);
+
+                    /** GoldengateMongodbConnectionProperties passwordSecretVersion */
+                    passwordSecretVersion?: (string|null);
+
+                    /** GoldengateMongodbConnectionProperties tlsCertificateKeyFilePassword */
+                    tlsCertificateKeyFilePassword?: (string|null);
+
+                    /** GoldengateMongodbConnectionProperties tlsCertificateKeyFilePasswordSecretVersion */
+                    tlsCertificateKeyFilePasswordSecretVersion?: (string|null);
+
+                    /** GoldengateMongodbConnectionProperties technologyType */
+                    technologyType?: (string|null);
+
+                    /** GoldengateMongodbConnectionProperties connectionString */
+                    connectionString?: (string|null);
+
+                    /** GoldengateMongodbConnectionProperties username */
+                    username?: (string|null);
+
+                    /** GoldengateMongodbConnectionProperties databaseId */
+                    databaseId?: (string|null);
+
+                    /** GoldengateMongodbConnectionProperties securityProtocol */
+                    securityProtocol?: (google.cloud.oracledatabase.v1.GoldengateMongodbConnectionProperties.MongodbSecurityProtocol|keyof typeof google.cloud.oracledatabase.v1.GoldengateMongodbConnectionProperties.MongodbSecurityProtocol|null);
+
+                    /** GoldengateMongodbConnectionProperties tlsCaFile */
+                    tlsCaFile?: (string|null);
+
+                    /** GoldengateMongodbConnectionProperties tlsCertificateKeyFile */
+                    tlsCertificateKeyFile?: (string|null);
+                }
+
+                /** Represents a GoldengateMongodbConnectionProperties. */
+                class GoldengateMongodbConnectionProperties implements IGoldengateMongodbConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengateMongodbConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateMongodbConnectionProperties);
+
+                    /** GoldengateMongodbConnectionProperties password. */
+                    public password?: (string|null);
+
+                    /** GoldengateMongodbConnectionProperties passwordSecretVersion. */
+                    public passwordSecretVersion?: (string|null);
+
+                    /** GoldengateMongodbConnectionProperties tlsCertificateKeyFilePassword. */
+                    public tlsCertificateKeyFilePassword?: (string|null);
+
+                    /** GoldengateMongodbConnectionProperties tlsCertificateKeyFilePasswordSecretVersion. */
+                    public tlsCertificateKeyFilePasswordSecretVersion?: (string|null);
+
+                    /** GoldengateMongodbConnectionProperties technologyType. */
+                    public technologyType: string;
+
+                    /** GoldengateMongodbConnectionProperties connectionString. */
+                    public connectionString: string;
+
+                    /** GoldengateMongodbConnectionProperties username. */
+                    public username: string;
+
+                    /** GoldengateMongodbConnectionProperties databaseId. */
+                    public databaseId: string;
+
+                    /** GoldengateMongodbConnectionProperties securityProtocol. */
+                    public securityProtocol: (google.cloud.oracledatabase.v1.GoldengateMongodbConnectionProperties.MongodbSecurityProtocol|keyof typeof google.cloud.oracledatabase.v1.GoldengateMongodbConnectionProperties.MongodbSecurityProtocol);
+
+                    /** GoldengateMongodbConnectionProperties tlsCaFile. */
+                    public tlsCaFile: string;
+
+                    /** GoldengateMongodbConnectionProperties tlsCertificateKeyFile. */
+                    public tlsCertificateKeyFile: string;
+
+                    /** GoldengateMongodbConnectionProperties connectionPasswordOptions. */
+                    public connectionPasswordOptions?: ("password"|"passwordSecretVersion");
+
+                    /** GoldengateMongodbConnectionProperties tlsCertificateKeyFilePasswordOptions. */
+                    public tlsCertificateKeyFilePasswordOptions?: ("tlsCertificateKeyFilePassword"|"tlsCertificateKeyFilePasswordSecretVersion");
+
+                    /**
+                     * Creates a new GoldengateMongodbConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateMongodbConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateMongodbConnectionProperties): google.cloud.oracledatabase.v1.GoldengateMongodbConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateMongodbConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateMongodbConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateMongodbConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateMongodbConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateMongodbConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateMongodbConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateMongodbConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateMongodbConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateMongodbConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateMongodbConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateMongodbConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengateMongodbConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateMongodbConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateMongodbConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengateMongodbConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateMongodbConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateMongodbConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateMongodbConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateMongodbConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateMongodbConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateMongodbConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateMongodbConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateMongodbConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GoldengateMongodbConnectionProperties {
+
+                    /** MongodbSecurityProtocol enum. */
+                    enum MongodbSecurityProtocol {
+                        MONGODB_SECURITY_PROTOCOL_UNSPECIFIED = 0,
+                        PLAIN = 1,
+                        TLS = 2,
+                        MTLS = 3
+                    }
+                }
+
+                /** Properties of a GoldengateOracleNosqlConnectionProperties. */
+                interface IGoldengateOracleNosqlConnectionProperties {
+
+                    /** GoldengateOracleNosqlConnectionProperties technologyType */
+                    technologyType?: (string|null);
+
+                    /** GoldengateOracleNosqlConnectionProperties tenancyId */
+                    tenancyId?: (string|null);
+
+                    /** GoldengateOracleNosqlConnectionProperties region */
+                    region?: (string|null);
+
+                    /** GoldengateOracleNosqlConnectionProperties userId */
+                    userId?: (string|null);
+
+                    /** GoldengateOracleNosqlConnectionProperties privateKeyFile */
+                    privateKeyFile?: (string|null);
+
+                    /** GoldengateOracleNosqlConnectionProperties privateKeyPassphraseSecret */
+                    privateKeyPassphraseSecret?: (string|null);
+
+                    /** GoldengateOracleNosqlConnectionProperties publicKeyFingerprint */
+                    publicKeyFingerprint?: (string|null);
+
+                    /** GoldengateOracleNosqlConnectionProperties useResourcePrincipal */
+                    useResourcePrincipal?: (boolean|null);
+                }
+
+                /** Represents a GoldengateOracleNosqlConnectionProperties. */
+                class GoldengateOracleNosqlConnectionProperties implements IGoldengateOracleNosqlConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengateOracleNosqlConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateOracleNosqlConnectionProperties);
+
+                    /** GoldengateOracleNosqlConnectionProperties technologyType. */
+                    public technologyType: string;
+
+                    /** GoldengateOracleNosqlConnectionProperties tenancyId. */
+                    public tenancyId: string;
+
+                    /** GoldengateOracleNosqlConnectionProperties region. */
+                    public region: string;
+
+                    /** GoldengateOracleNosqlConnectionProperties userId. */
+                    public userId: string;
+
+                    /** GoldengateOracleNosqlConnectionProperties privateKeyFile. */
+                    public privateKeyFile: string;
+
+                    /** GoldengateOracleNosqlConnectionProperties privateKeyPassphraseSecret. */
+                    public privateKeyPassphraseSecret: string;
+
+                    /** GoldengateOracleNosqlConnectionProperties publicKeyFingerprint. */
+                    public publicKeyFingerprint: string;
+
+                    /** GoldengateOracleNosqlConnectionProperties useResourcePrincipal. */
+                    public useResourcePrincipal: boolean;
+
+                    /**
+                     * Creates a new GoldengateOracleNosqlConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateOracleNosqlConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateOracleNosqlConnectionProperties): google.cloud.oracledatabase.v1.GoldengateOracleNosqlConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateOracleNosqlConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateOracleNosqlConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateOracleNosqlConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateOracleNosqlConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateOracleNosqlConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateOracleNosqlConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateOracleNosqlConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateOracleNosqlConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateOracleNosqlConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateOracleNosqlConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateOracleNosqlConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengateOracleNosqlConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateOracleNosqlConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateOracleNosqlConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengateOracleNosqlConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateOracleNosqlConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateOracleNosqlConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateOracleNosqlConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateOracleNosqlConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateOracleNosqlConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateOracleNosqlConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateOracleNosqlConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateOracleNosqlConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoldengateSnowflakeConnectionProperties. */
+                interface IGoldengateSnowflakeConnectionProperties {
+
+                    /** GoldengateSnowflakeConnectionProperties password */
+                    password?: (string|null);
+
+                    /** GoldengateSnowflakeConnectionProperties passwordSecretVersion */
+                    passwordSecretVersion?: (string|null);
+
+                    /** GoldengateSnowflakeConnectionProperties technologyType */
+                    technologyType?: (string|null);
+
+                    /** GoldengateSnowflakeConnectionProperties connectionUrl */
+                    connectionUrl?: (string|null);
+
+                    /** GoldengateSnowflakeConnectionProperties authenticationType */
+                    authenticationType?: (google.cloud.oracledatabase.v1.GoldengateSnowflakeConnectionProperties.AuthenticationType|keyof typeof google.cloud.oracledatabase.v1.GoldengateSnowflakeConnectionProperties.AuthenticationType|null);
+
+                    /** GoldengateSnowflakeConnectionProperties username */
+                    username?: (string|null);
+
+                    /** GoldengateSnowflakeConnectionProperties privateKeyFile */
+                    privateKeyFile?: (string|null);
+
+                    /** GoldengateSnowflakeConnectionProperties privateKeyPassphraseSecret */
+                    privateKeyPassphraseSecret?: (string|null);
+                }
+
+                /** Represents a GoldengateSnowflakeConnectionProperties. */
+                class GoldengateSnowflakeConnectionProperties implements IGoldengateSnowflakeConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengateSnowflakeConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateSnowflakeConnectionProperties);
+
+                    /** GoldengateSnowflakeConnectionProperties password. */
+                    public password?: (string|null);
+
+                    /** GoldengateSnowflakeConnectionProperties passwordSecretVersion. */
+                    public passwordSecretVersion?: (string|null);
+
+                    /** GoldengateSnowflakeConnectionProperties technologyType. */
+                    public technologyType: string;
+
+                    /** GoldengateSnowflakeConnectionProperties connectionUrl. */
+                    public connectionUrl: string;
+
+                    /** GoldengateSnowflakeConnectionProperties authenticationType. */
+                    public authenticationType: (google.cloud.oracledatabase.v1.GoldengateSnowflakeConnectionProperties.AuthenticationType|keyof typeof google.cloud.oracledatabase.v1.GoldengateSnowflakeConnectionProperties.AuthenticationType);
+
+                    /** GoldengateSnowflakeConnectionProperties username. */
+                    public username: string;
+
+                    /** GoldengateSnowflakeConnectionProperties privateKeyFile. */
+                    public privateKeyFile: string;
+
+                    /** GoldengateSnowflakeConnectionProperties privateKeyPassphraseSecret. */
+                    public privateKeyPassphraseSecret: string;
+
+                    /** GoldengateSnowflakeConnectionProperties connectionPasswordOptions. */
+                    public connectionPasswordOptions?: ("password"|"passwordSecretVersion");
+
+                    /**
+                     * Creates a new GoldengateSnowflakeConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateSnowflakeConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateSnowflakeConnectionProperties): google.cloud.oracledatabase.v1.GoldengateSnowflakeConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateSnowflakeConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateSnowflakeConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateSnowflakeConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateSnowflakeConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateSnowflakeConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateSnowflakeConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateSnowflakeConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateSnowflakeConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateSnowflakeConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateSnowflakeConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateSnowflakeConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengateSnowflakeConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateSnowflakeConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateSnowflakeConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengateSnowflakeConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateSnowflakeConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateSnowflakeConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateSnowflakeConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateSnowflakeConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateSnowflakeConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateSnowflakeConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateSnowflakeConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateSnowflakeConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GoldengateSnowflakeConnectionProperties {
+
+                    /** AuthenticationType enum. */
+                    enum AuthenticationType {
+                        AUTHENTICATION_TYPE_UNSPECIFIED = 0,
+                        BASIC = 1,
+                        KEY_PAIR = 2
+                    }
+                }
+
+                /** Properties of a GoldengateAmazonRedshiftConnectionProperties. */
+                interface IGoldengateAmazonRedshiftConnectionProperties {
+
+                    /** GoldengateAmazonRedshiftConnectionProperties password */
+                    password?: (string|null);
+
+                    /** GoldengateAmazonRedshiftConnectionProperties passwordSecretVersion */
+                    passwordSecretVersion?: (string|null);
+
+                    /** GoldengateAmazonRedshiftConnectionProperties technologyType */
+                    technologyType?: (string|null);
+
+                    /** GoldengateAmazonRedshiftConnectionProperties connectionUrl */
+                    connectionUrl?: (string|null);
+
+                    /** GoldengateAmazonRedshiftConnectionProperties username */
+                    username?: (string|null);
+                }
+
+                /** Represents a GoldengateAmazonRedshiftConnectionProperties. */
+                class GoldengateAmazonRedshiftConnectionProperties implements IGoldengateAmazonRedshiftConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengateAmazonRedshiftConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateAmazonRedshiftConnectionProperties);
+
+                    /** GoldengateAmazonRedshiftConnectionProperties password. */
+                    public password?: (string|null);
+
+                    /** GoldengateAmazonRedshiftConnectionProperties passwordSecretVersion. */
+                    public passwordSecretVersion?: (string|null);
+
+                    /** GoldengateAmazonRedshiftConnectionProperties technologyType. */
+                    public technologyType: string;
+
+                    /** GoldengateAmazonRedshiftConnectionProperties connectionUrl. */
+                    public connectionUrl: string;
+
+                    /** GoldengateAmazonRedshiftConnectionProperties username. */
+                    public username: string;
+
+                    /** GoldengateAmazonRedshiftConnectionProperties connectionPasswordOptions. */
+                    public connectionPasswordOptions?: ("password"|"passwordSecretVersion");
+
+                    /**
+                     * Creates a new GoldengateAmazonRedshiftConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateAmazonRedshiftConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateAmazonRedshiftConnectionProperties): google.cloud.oracledatabase.v1.GoldengateAmazonRedshiftConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateAmazonRedshiftConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateAmazonRedshiftConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateAmazonRedshiftConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateAmazonRedshiftConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateAmazonRedshiftConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateAmazonRedshiftConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateAmazonRedshiftConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateAmazonRedshiftConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateAmazonRedshiftConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateAmazonRedshiftConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateAmazonRedshiftConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengateAmazonRedshiftConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateAmazonRedshiftConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateAmazonRedshiftConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengateAmazonRedshiftConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateAmazonRedshiftConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateAmazonRedshiftConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateAmazonRedshiftConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateAmazonRedshiftConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateAmazonRedshiftConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateAmazonRedshiftConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateAmazonRedshiftConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateAmazonRedshiftConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoldengateElasticsearchConnectionProperties. */
+                interface IGoldengateElasticsearchConnectionProperties {
+
+                    /** GoldengateElasticsearchConnectionProperties password */
+                    password?: (string|null);
+
+                    /** GoldengateElasticsearchConnectionProperties passwordSecretVersion */
+                    passwordSecretVersion?: (string|null);
+
+                    /** GoldengateElasticsearchConnectionProperties technologyType */
+                    technologyType?: (string|null);
+
+                    /** GoldengateElasticsearchConnectionProperties servers */
+                    servers?: (string|null);
+
+                    /** GoldengateElasticsearchConnectionProperties securityProtocol */
+                    securityProtocol?: (google.cloud.oracledatabase.v1.GoldengateElasticsearchConnectionProperties.ElasticsearchSecurityProtocol|keyof typeof google.cloud.oracledatabase.v1.GoldengateElasticsearchConnectionProperties.ElasticsearchSecurityProtocol|null);
+
+                    /** GoldengateElasticsearchConnectionProperties authenticationType */
+                    authenticationType?: (google.cloud.oracledatabase.v1.GoldengateElasticsearchConnectionProperties.ElasticsearchAuthenticationType|keyof typeof google.cloud.oracledatabase.v1.GoldengateElasticsearchConnectionProperties.ElasticsearchAuthenticationType|null);
+
+                    /** GoldengateElasticsearchConnectionProperties username */
+                    username?: (string|null);
+
+                    /** GoldengateElasticsearchConnectionProperties fingerprint */
+                    fingerprint?: (string|null);
+                }
+
+                /** Represents a GoldengateElasticsearchConnectionProperties. */
+                class GoldengateElasticsearchConnectionProperties implements IGoldengateElasticsearchConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengateElasticsearchConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateElasticsearchConnectionProperties);
+
+                    /** GoldengateElasticsearchConnectionProperties password. */
+                    public password?: (string|null);
+
+                    /** GoldengateElasticsearchConnectionProperties passwordSecretVersion. */
+                    public passwordSecretVersion?: (string|null);
+
+                    /** GoldengateElasticsearchConnectionProperties technologyType. */
+                    public technologyType: string;
+
+                    /** GoldengateElasticsearchConnectionProperties servers. */
+                    public servers: string;
+
+                    /** GoldengateElasticsearchConnectionProperties securityProtocol. */
+                    public securityProtocol: (google.cloud.oracledatabase.v1.GoldengateElasticsearchConnectionProperties.ElasticsearchSecurityProtocol|keyof typeof google.cloud.oracledatabase.v1.GoldengateElasticsearchConnectionProperties.ElasticsearchSecurityProtocol);
+
+                    /** GoldengateElasticsearchConnectionProperties authenticationType. */
+                    public authenticationType: (google.cloud.oracledatabase.v1.GoldengateElasticsearchConnectionProperties.ElasticsearchAuthenticationType|keyof typeof google.cloud.oracledatabase.v1.GoldengateElasticsearchConnectionProperties.ElasticsearchAuthenticationType);
+
+                    /** GoldengateElasticsearchConnectionProperties username. */
+                    public username: string;
+
+                    /** GoldengateElasticsearchConnectionProperties fingerprint. */
+                    public fingerprint: string;
+
+                    /** GoldengateElasticsearchConnectionProperties connectionPasswordOptions. */
+                    public connectionPasswordOptions?: ("password"|"passwordSecretVersion");
+
+                    /**
+                     * Creates a new GoldengateElasticsearchConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateElasticsearchConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateElasticsearchConnectionProperties): google.cloud.oracledatabase.v1.GoldengateElasticsearchConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateElasticsearchConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateElasticsearchConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateElasticsearchConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateElasticsearchConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateElasticsearchConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateElasticsearchConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateElasticsearchConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateElasticsearchConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateElasticsearchConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateElasticsearchConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateElasticsearchConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengateElasticsearchConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateElasticsearchConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateElasticsearchConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengateElasticsearchConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateElasticsearchConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateElasticsearchConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateElasticsearchConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateElasticsearchConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateElasticsearchConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateElasticsearchConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateElasticsearchConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateElasticsearchConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GoldengateElasticsearchConnectionProperties {
+
+                    /** ElasticsearchSecurityProtocol enum. */
+                    enum ElasticsearchSecurityProtocol {
+                        ELASTICSEARCH_SECURITY_PROTOCOL_UNSPECIFIED = 0,
+                        PLAIN = 1,
+                        TLS = 2
+                    }
+
+                    /** ElasticsearchAuthenticationType enum. */
+                    enum ElasticsearchAuthenticationType {
+                        ELASTICSEARCH_AUTHENTICATION_TYPE_UNSPECIFIED = 0,
+                        NONE = 1,
+                        BASIC = 2
+                    }
+                }
+
+                /** Properties of a GoldengateAmazonKinesisConnectionProperties. */
+                interface IGoldengateAmazonKinesisConnectionProperties {
+
+                    /** GoldengateAmazonKinesisConnectionProperties technologyType */
+                    technologyType?: (string|null);
+
+                    /** GoldengateAmazonKinesisConnectionProperties accessKeyId */
+                    accessKeyId?: (string|null);
+
+                    /** GoldengateAmazonKinesisConnectionProperties secretAccessKeySecret */
+                    secretAccessKeySecret?: (string|null);
+
+                    /** GoldengateAmazonKinesisConnectionProperties endpoint */
+                    endpoint?: (string|null);
+
+                    /** GoldengateAmazonKinesisConnectionProperties awsRegion */
+                    awsRegion?: (string|null);
+                }
+
+                /** Represents a GoldengateAmazonKinesisConnectionProperties. */
+                class GoldengateAmazonKinesisConnectionProperties implements IGoldengateAmazonKinesisConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengateAmazonKinesisConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateAmazonKinesisConnectionProperties);
+
+                    /** GoldengateAmazonKinesisConnectionProperties technologyType. */
+                    public technologyType: string;
+
+                    /** GoldengateAmazonKinesisConnectionProperties accessKeyId. */
+                    public accessKeyId: string;
+
+                    /** GoldengateAmazonKinesisConnectionProperties secretAccessKeySecret. */
+                    public secretAccessKeySecret: string;
+
+                    /** GoldengateAmazonKinesisConnectionProperties endpoint. */
+                    public endpoint: string;
+
+                    /** GoldengateAmazonKinesisConnectionProperties awsRegion. */
+                    public awsRegion: string;
+
+                    /**
+                     * Creates a new GoldengateAmazonKinesisConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateAmazonKinesisConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateAmazonKinesisConnectionProperties): google.cloud.oracledatabase.v1.GoldengateAmazonKinesisConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateAmazonKinesisConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateAmazonKinesisConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateAmazonKinesisConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateAmazonKinesisConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateAmazonKinesisConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateAmazonKinesisConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateAmazonKinesisConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateAmazonKinesisConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateAmazonKinesisConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateAmazonKinesisConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateAmazonKinesisConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengateAmazonKinesisConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateAmazonKinesisConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateAmazonKinesisConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengateAmazonKinesisConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateAmazonKinesisConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateAmazonKinesisConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateAmazonKinesisConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateAmazonKinesisConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateAmazonKinesisConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateAmazonKinesisConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateAmazonKinesisConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateAmazonKinesisConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoldengateDb2ConnectionProperties. */
+                interface IGoldengateDb2ConnectionProperties {
+
+                    /** GoldengateDb2ConnectionProperties password */
+                    password?: (string|null);
+
+                    /** GoldengateDb2ConnectionProperties passwordSecretVersion */
+                    passwordSecretVersion?: (string|null);
+
+                    /** GoldengateDb2ConnectionProperties technologyType */
+                    technologyType?: (string|null);
+
+                    /** GoldengateDb2ConnectionProperties host */
+                    host?: (string|null);
+
+                    /** GoldengateDb2ConnectionProperties port */
+                    port?: (number|null);
+
+                    /** GoldengateDb2ConnectionProperties database */
+                    database?: (string|null);
+
+                    /** GoldengateDb2ConnectionProperties username */
+                    username?: (string|null);
+
+                    /** GoldengateDb2ConnectionProperties securityProtocol */
+                    securityProtocol?: (google.cloud.oracledatabase.v1.GoldengateDb2ConnectionProperties.Db2SecurityProtocol|keyof typeof google.cloud.oracledatabase.v1.GoldengateDb2ConnectionProperties.Db2SecurityProtocol|null);
+
+                    /** GoldengateDb2ConnectionProperties additionalAttributes */
+                    additionalAttributes?: (google.cloud.oracledatabase.v1.INameValuePair[]|null);
+
+                    /** GoldengateDb2ConnectionProperties sslClientKeystoredbFile */
+                    sslClientKeystoredbFile?: (string|null);
+
+                    /** GoldengateDb2ConnectionProperties sslClientKeystashFile */
+                    sslClientKeystashFile?: (string|null);
+
+                    /** GoldengateDb2ConnectionProperties sslServerCertificateFile */
+                    sslServerCertificateFile?: (string|null);
+                }
+
+                /** Represents a GoldengateDb2ConnectionProperties. */
+                class GoldengateDb2ConnectionProperties implements IGoldengateDb2ConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengateDb2ConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateDb2ConnectionProperties);
+
+                    /** GoldengateDb2ConnectionProperties password. */
+                    public password?: (string|null);
+
+                    /** GoldengateDb2ConnectionProperties passwordSecretVersion. */
+                    public passwordSecretVersion?: (string|null);
+
+                    /** GoldengateDb2ConnectionProperties technologyType. */
+                    public technologyType: string;
+
+                    /** GoldengateDb2ConnectionProperties host. */
+                    public host: string;
+
+                    /** GoldengateDb2ConnectionProperties port. */
+                    public port: number;
+
+                    /** GoldengateDb2ConnectionProperties database. */
+                    public database: string;
+
+                    /** GoldengateDb2ConnectionProperties username. */
+                    public username: string;
+
+                    /** GoldengateDb2ConnectionProperties securityProtocol. */
+                    public securityProtocol: (google.cloud.oracledatabase.v1.GoldengateDb2ConnectionProperties.Db2SecurityProtocol|keyof typeof google.cloud.oracledatabase.v1.GoldengateDb2ConnectionProperties.Db2SecurityProtocol);
+
+                    /** GoldengateDb2ConnectionProperties additionalAttributes. */
+                    public additionalAttributes: google.cloud.oracledatabase.v1.INameValuePair[];
+
+                    /** GoldengateDb2ConnectionProperties sslClientKeystoredbFile. */
+                    public sslClientKeystoredbFile: string;
+
+                    /** GoldengateDb2ConnectionProperties sslClientKeystashFile. */
+                    public sslClientKeystashFile: string;
+
+                    /** GoldengateDb2ConnectionProperties sslServerCertificateFile. */
+                    public sslServerCertificateFile: string;
+
+                    /** GoldengateDb2ConnectionProperties connectionPasswordOptions. */
+                    public connectionPasswordOptions?: ("password"|"passwordSecretVersion");
+
+                    /**
+                     * Creates a new GoldengateDb2ConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateDb2ConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateDb2ConnectionProperties): google.cloud.oracledatabase.v1.GoldengateDb2ConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateDb2ConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateDb2ConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateDb2ConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateDb2ConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateDb2ConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateDb2ConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateDb2ConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateDb2ConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateDb2ConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateDb2ConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateDb2ConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengateDb2ConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateDb2ConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateDb2ConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengateDb2ConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateDb2ConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateDb2ConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateDb2ConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateDb2ConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateDb2ConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateDb2ConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateDb2ConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateDb2ConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GoldengateDb2ConnectionProperties {
+
+                    /** Db2SecurityProtocol enum. */
+                    enum Db2SecurityProtocol {
+                        DB2_SECURITY_PROTOCOL_UNSPECIFIED = 0,
+                        PLAIN = 1,
+                        TLS = 2
+                    }
+                }
+
+                /** Properties of a GoldengateRedisConnectionProperties. */
+                interface IGoldengateRedisConnectionProperties {
+
+                    /** GoldengateRedisConnectionProperties password */
+                    password?: (string|null);
+
+                    /** GoldengateRedisConnectionProperties passwordSecretVersion */
+                    passwordSecretVersion?: (string|null);
+
+                    /** GoldengateRedisConnectionProperties trustStorePassword */
+                    trustStorePassword?: (string|null);
+
+                    /** GoldengateRedisConnectionProperties trustStorePasswordSecretVersion */
+                    trustStorePasswordSecretVersion?: (string|null);
+
+                    /** GoldengateRedisConnectionProperties keyStorePassword */
+                    keyStorePassword?: (string|null);
+
+                    /** GoldengateRedisConnectionProperties keyStorePasswordSecretVersion */
+                    keyStorePasswordSecretVersion?: (string|null);
+
+                    /** GoldengateRedisConnectionProperties technologyType */
+                    technologyType?: (string|null);
+
+                    /** GoldengateRedisConnectionProperties servers */
+                    servers?: (string|null);
+
+                    /** GoldengateRedisConnectionProperties securityProtocol */
+                    securityProtocol?: (google.cloud.oracledatabase.v1.GoldengateRedisConnectionProperties.RedisSecurityProtocol|keyof typeof google.cloud.oracledatabase.v1.GoldengateRedisConnectionProperties.RedisSecurityProtocol|null);
+
+                    /** GoldengateRedisConnectionProperties authenticationType */
+                    authenticationType?: (google.cloud.oracledatabase.v1.GoldengateRedisConnectionProperties.RedisAuthenticationType|keyof typeof google.cloud.oracledatabase.v1.GoldengateRedisConnectionProperties.RedisAuthenticationType|null);
+
+                    /** GoldengateRedisConnectionProperties username */
+                    username?: (string|null);
+
+                    /** GoldengateRedisConnectionProperties redisClusterId */
+                    redisClusterId?: (string|null);
+
+                    /** GoldengateRedisConnectionProperties trustStoreFile */
+                    trustStoreFile?: (string|null);
+
+                    /** GoldengateRedisConnectionProperties keyStoreFile */
+                    keyStoreFile?: (string|null);
+                }
+
+                /** Represents a GoldengateRedisConnectionProperties. */
+                class GoldengateRedisConnectionProperties implements IGoldengateRedisConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengateRedisConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateRedisConnectionProperties);
+
+                    /** GoldengateRedisConnectionProperties password. */
+                    public password?: (string|null);
+
+                    /** GoldengateRedisConnectionProperties passwordSecretVersion. */
+                    public passwordSecretVersion?: (string|null);
+
+                    /** GoldengateRedisConnectionProperties trustStorePassword. */
+                    public trustStorePassword?: (string|null);
+
+                    /** GoldengateRedisConnectionProperties trustStorePasswordSecretVersion. */
+                    public trustStorePasswordSecretVersion?: (string|null);
+
+                    /** GoldengateRedisConnectionProperties keyStorePassword. */
+                    public keyStorePassword?: (string|null);
+
+                    /** GoldengateRedisConnectionProperties keyStorePasswordSecretVersion. */
+                    public keyStorePasswordSecretVersion?: (string|null);
+
+                    /** GoldengateRedisConnectionProperties technologyType. */
+                    public technologyType: string;
+
+                    /** GoldengateRedisConnectionProperties servers. */
+                    public servers: string;
+
+                    /** GoldengateRedisConnectionProperties securityProtocol. */
+                    public securityProtocol: (google.cloud.oracledatabase.v1.GoldengateRedisConnectionProperties.RedisSecurityProtocol|keyof typeof google.cloud.oracledatabase.v1.GoldengateRedisConnectionProperties.RedisSecurityProtocol);
+
+                    /** GoldengateRedisConnectionProperties authenticationType. */
+                    public authenticationType: (google.cloud.oracledatabase.v1.GoldengateRedisConnectionProperties.RedisAuthenticationType|keyof typeof google.cloud.oracledatabase.v1.GoldengateRedisConnectionProperties.RedisAuthenticationType);
+
+                    /** GoldengateRedisConnectionProperties username. */
+                    public username: string;
+
+                    /** GoldengateRedisConnectionProperties redisClusterId. */
+                    public redisClusterId: string;
+
+                    /** GoldengateRedisConnectionProperties trustStoreFile. */
+                    public trustStoreFile: string;
+
+                    /** GoldengateRedisConnectionProperties keyStoreFile. */
+                    public keyStoreFile: string;
+
+                    /** GoldengateRedisConnectionProperties connectionPasswordOptions. */
+                    public connectionPasswordOptions?: ("password"|"passwordSecretVersion");
+
+                    /** GoldengateRedisConnectionProperties trustStorePasswordOptions. */
+                    public trustStorePasswordOptions?: ("trustStorePassword"|"trustStorePasswordSecretVersion");
+
+                    /** GoldengateRedisConnectionProperties keyStorePasswordOptions. */
+                    public keyStorePasswordOptions?: ("keyStorePassword"|"keyStorePasswordSecretVersion");
+
+                    /**
+                     * Creates a new GoldengateRedisConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateRedisConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateRedisConnectionProperties): google.cloud.oracledatabase.v1.GoldengateRedisConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateRedisConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateRedisConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateRedisConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateRedisConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateRedisConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateRedisConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateRedisConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateRedisConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateRedisConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateRedisConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateRedisConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengateRedisConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateRedisConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateRedisConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengateRedisConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateRedisConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateRedisConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateRedisConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateRedisConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateRedisConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateRedisConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateRedisConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateRedisConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GoldengateRedisConnectionProperties {
+
+                    /** RedisSecurityProtocol enum. */
+                    enum RedisSecurityProtocol {
+                        REDIS_SECURITY_PROTOCOL_UNSPECIFIED = 0,
+                        PLAIN = 1,
+                        TLS = 2,
+                        MTLS = 3
+                    }
+
+                    /** RedisAuthenticationType enum. */
+                    enum RedisAuthenticationType {
+                        REDIS_AUTHENTICATION_TYPE_UNSPECIFIED = 0,
+                        NONE = 1,
+                        BASIC = 2
+                    }
+                }
+
+                /** Properties of a GoldengateDatabricksConnectionProperties. */
+                interface IGoldengateDatabricksConnectionProperties {
+
+                    /** GoldengateDatabricksConnectionProperties password */
+                    password?: (string|null);
+
+                    /** GoldengateDatabricksConnectionProperties passwordSecretVersion */
+                    passwordSecretVersion?: (string|null);
+
+                    /** GoldengateDatabricksConnectionProperties technologyType */
+                    technologyType?: (string|null);
+
+                    /** GoldengateDatabricksConnectionProperties authenticationType */
+                    authenticationType?: (google.cloud.oracledatabase.v1.GoldengateDatabricksConnectionProperties.DatabricksAuthenticationType|keyof typeof google.cloud.oracledatabase.v1.GoldengateDatabricksConnectionProperties.DatabricksAuthenticationType|null);
+
+                    /** GoldengateDatabricksConnectionProperties connectionUrl */
+                    connectionUrl?: (string|null);
+
+                    /** GoldengateDatabricksConnectionProperties clientId */
+                    clientId?: (string|null);
+
+                    /** GoldengateDatabricksConnectionProperties clientSecret */
+                    clientSecret?: (string|null);
+
+                    /** GoldengateDatabricksConnectionProperties storageCredential */
+                    storageCredential?: (string|null);
+                }
+
+                /** Represents a GoldengateDatabricksConnectionProperties. */
+                class GoldengateDatabricksConnectionProperties implements IGoldengateDatabricksConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengateDatabricksConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateDatabricksConnectionProperties);
+
+                    /** GoldengateDatabricksConnectionProperties password. */
+                    public password?: (string|null);
+
+                    /** GoldengateDatabricksConnectionProperties passwordSecretVersion. */
+                    public passwordSecretVersion?: (string|null);
+
+                    /** GoldengateDatabricksConnectionProperties technologyType. */
+                    public technologyType: string;
+
+                    /** GoldengateDatabricksConnectionProperties authenticationType. */
+                    public authenticationType: (google.cloud.oracledatabase.v1.GoldengateDatabricksConnectionProperties.DatabricksAuthenticationType|keyof typeof google.cloud.oracledatabase.v1.GoldengateDatabricksConnectionProperties.DatabricksAuthenticationType);
+
+                    /** GoldengateDatabricksConnectionProperties connectionUrl. */
+                    public connectionUrl: string;
+
+                    /** GoldengateDatabricksConnectionProperties clientId. */
+                    public clientId: string;
+
+                    /** GoldengateDatabricksConnectionProperties clientSecret. */
+                    public clientSecret: string;
+
+                    /** GoldengateDatabricksConnectionProperties storageCredential. */
+                    public storageCredential: string;
+
+                    /** GoldengateDatabricksConnectionProperties connectionPasswordOptions. */
+                    public connectionPasswordOptions?: ("password"|"passwordSecretVersion");
+
+                    /**
+                     * Creates a new GoldengateDatabricksConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateDatabricksConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateDatabricksConnectionProperties): google.cloud.oracledatabase.v1.GoldengateDatabricksConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateDatabricksConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateDatabricksConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateDatabricksConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateDatabricksConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateDatabricksConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateDatabricksConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateDatabricksConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateDatabricksConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateDatabricksConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateDatabricksConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateDatabricksConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengateDatabricksConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateDatabricksConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateDatabricksConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengateDatabricksConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateDatabricksConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateDatabricksConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateDatabricksConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateDatabricksConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateDatabricksConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateDatabricksConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateDatabricksConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateDatabricksConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GoldengateDatabricksConnectionProperties {
+
+                    /** DatabricksAuthenticationType enum. */
+                    enum DatabricksAuthenticationType {
+                        DATABRICKS_AUTHENTICATION_TYPE_UNSPECIFIED = 0,
+                        PERSONAL_ACCESS_TOKEN = 1,
+                        OAUTH_M2M = 2
+                    }
+                }
+
+                /** Properties of a GoldengateGooglePubsubConnectionProperties. */
+                interface IGoldengateGooglePubsubConnectionProperties {
+
+                    /** GoldengateGooglePubsubConnectionProperties technologyType */
+                    technologyType?: (string|null);
+
+                    /** GoldengateGooglePubsubConnectionProperties serviceAccountKeyFile */
+                    serviceAccountKeyFile?: (string|null);
+                }
+
+                /** Represents a GoldengateGooglePubsubConnectionProperties. */
+                class GoldengateGooglePubsubConnectionProperties implements IGoldengateGooglePubsubConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengateGooglePubsubConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateGooglePubsubConnectionProperties);
+
+                    /** GoldengateGooglePubsubConnectionProperties technologyType. */
+                    public technologyType: string;
+
+                    /** GoldengateGooglePubsubConnectionProperties serviceAccountKeyFile. */
+                    public serviceAccountKeyFile: string;
+
+                    /**
+                     * Creates a new GoldengateGooglePubsubConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateGooglePubsubConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateGooglePubsubConnectionProperties): google.cloud.oracledatabase.v1.GoldengateGooglePubsubConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateGooglePubsubConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateGooglePubsubConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateGooglePubsubConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateGooglePubsubConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateGooglePubsubConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateGooglePubsubConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateGooglePubsubConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateGooglePubsubConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateGooglePubsubConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateGooglePubsubConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateGooglePubsubConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengateGooglePubsubConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateGooglePubsubConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateGooglePubsubConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengateGooglePubsubConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateGooglePubsubConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateGooglePubsubConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateGooglePubsubConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateGooglePubsubConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateGooglePubsubConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateGooglePubsubConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateGooglePubsubConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateGooglePubsubConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoldengateMicrosoftFabricConnectionProperties. */
+                interface IGoldengateMicrosoftFabricConnectionProperties {
+
+                    /** GoldengateMicrosoftFabricConnectionProperties technologyType */
+                    technologyType?: (string|null);
+
+                    /** GoldengateMicrosoftFabricConnectionProperties tenantId */
+                    tenantId?: (string|null);
+
+                    /** GoldengateMicrosoftFabricConnectionProperties clientId */
+                    clientId?: (string|null);
+
+                    /** GoldengateMicrosoftFabricConnectionProperties clientSecret */
+                    clientSecret?: (string|null);
+
+                    /** GoldengateMicrosoftFabricConnectionProperties endpoint */
+                    endpoint?: (string|null);
+                }
+
+                /** Represents a GoldengateMicrosoftFabricConnectionProperties. */
+                class GoldengateMicrosoftFabricConnectionProperties implements IGoldengateMicrosoftFabricConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengateMicrosoftFabricConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateMicrosoftFabricConnectionProperties);
+
+                    /** GoldengateMicrosoftFabricConnectionProperties technologyType. */
+                    public technologyType: string;
+
+                    /** GoldengateMicrosoftFabricConnectionProperties tenantId. */
+                    public tenantId: string;
+
+                    /** GoldengateMicrosoftFabricConnectionProperties clientId. */
+                    public clientId: string;
+
+                    /** GoldengateMicrosoftFabricConnectionProperties clientSecret. */
+                    public clientSecret: string;
+
+                    /** GoldengateMicrosoftFabricConnectionProperties endpoint. */
+                    public endpoint: string;
+
+                    /**
+                     * Creates a new GoldengateMicrosoftFabricConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateMicrosoftFabricConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateMicrosoftFabricConnectionProperties): google.cloud.oracledatabase.v1.GoldengateMicrosoftFabricConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateMicrosoftFabricConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateMicrosoftFabricConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateMicrosoftFabricConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateMicrosoftFabricConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateMicrosoftFabricConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateMicrosoftFabricConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateMicrosoftFabricConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateMicrosoftFabricConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateMicrosoftFabricConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateMicrosoftFabricConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateMicrosoftFabricConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengateMicrosoftFabricConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateMicrosoftFabricConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateMicrosoftFabricConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengateMicrosoftFabricConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateMicrosoftFabricConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateMicrosoftFabricConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateMicrosoftFabricConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateMicrosoftFabricConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateMicrosoftFabricConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateMicrosoftFabricConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateMicrosoftFabricConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateMicrosoftFabricConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoldengateOracleAIDataPlatformConnectionProperties. */
+                interface IGoldengateOracleAIDataPlatformConnectionProperties {
+
+                    /** GoldengateOracleAIDataPlatformConnectionProperties technologyType */
+                    technologyType?: (string|null);
+
+                    /** GoldengateOracleAIDataPlatformConnectionProperties connectionUrl */
+                    connectionUrl?: (string|null);
+
+                    /** GoldengateOracleAIDataPlatformConnectionProperties tenancyId */
+                    tenancyId?: (string|null);
+
+                    /** GoldengateOracleAIDataPlatformConnectionProperties region */
+                    region?: (string|null);
+
+                    /** GoldengateOracleAIDataPlatformConnectionProperties userId */
+                    userId?: (string|null);
+
+                    /** GoldengateOracleAIDataPlatformConnectionProperties privateKeyFile */
+                    privateKeyFile?: (string|null);
+
+                    /** GoldengateOracleAIDataPlatformConnectionProperties privateKeyPassphraseSecret */
+                    privateKeyPassphraseSecret?: (string|null);
+
+                    /** GoldengateOracleAIDataPlatformConnectionProperties publicKeyFingerprint */
+                    publicKeyFingerprint?: (string|null);
+
+                    /** GoldengateOracleAIDataPlatformConnectionProperties useResourcePrincipal */
+                    useResourcePrincipal?: (boolean|null);
+                }
+
+                /** Represents a GoldengateOracleAIDataPlatformConnectionProperties. */
+                class GoldengateOracleAIDataPlatformConnectionProperties implements IGoldengateOracleAIDataPlatformConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengateOracleAIDataPlatformConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateOracleAIDataPlatformConnectionProperties);
+
+                    /** GoldengateOracleAIDataPlatformConnectionProperties technologyType. */
+                    public technologyType: string;
+
+                    /** GoldengateOracleAIDataPlatformConnectionProperties connectionUrl. */
+                    public connectionUrl: string;
+
+                    /** GoldengateOracleAIDataPlatformConnectionProperties tenancyId. */
+                    public tenancyId: string;
+
+                    /** GoldengateOracleAIDataPlatformConnectionProperties region. */
+                    public region: string;
+
+                    /** GoldengateOracleAIDataPlatformConnectionProperties userId. */
+                    public userId: string;
+
+                    /** GoldengateOracleAIDataPlatformConnectionProperties privateKeyFile. */
+                    public privateKeyFile: string;
+
+                    /** GoldengateOracleAIDataPlatformConnectionProperties privateKeyPassphraseSecret. */
+                    public privateKeyPassphraseSecret: string;
+
+                    /** GoldengateOracleAIDataPlatformConnectionProperties publicKeyFingerprint. */
+                    public publicKeyFingerprint: string;
+
+                    /** GoldengateOracleAIDataPlatformConnectionProperties useResourcePrincipal. */
+                    public useResourcePrincipal: boolean;
+
+                    /**
+                     * Creates a new GoldengateOracleAIDataPlatformConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateOracleAIDataPlatformConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateOracleAIDataPlatformConnectionProperties): google.cloud.oracledatabase.v1.GoldengateOracleAIDataPlatformConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateOracleAIDataPlatformConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateOracleAIDataPlatformConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateOracleAIDataPlatformConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateOracleAIDataPlatformConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateOracleAIDataPlatformConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateOracleAIDataPlatformConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateOracleAIDataPlatformConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateOracleAIDataPlatformConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateOracleAIDataPlatformConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateOracleAIDataPlatformConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateOracleAIDataPlatformConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengateOracleAIDataPlatformConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateOracleAIDataPlatformConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateOracleAIDataPlatformConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengateOracleAIDataPlatformConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateOracleAIDataPlatformConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateOracleAIDataPlatformConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateOracleAIDataPlatformConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateOracleAIDataPlatformConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateOracleAIDataPlatformConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateOracleAIDataPlatformConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateOracleAIDataPlatformConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateOracleAIDataPlatformConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GlueIcebergCatalog. */
+                interface IGlueIcebergCatalog {
+
+                    /** GlueIcebergCatalog glueId */
+                    glueId?: (string|null);
+                }
+
+                /** Represents a GlueIcebergCatalog. */
+                class GlueIcebergCatalog implements IGlueIcebergCatalog {
+
+                    /**
+                     * Constructs a new GlueIcebergCatalog.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGlueIcebergCatalog);
+
+                    /** GlueIcebergCatalog glueId. */
+                    public glueId: string;
+
+                    /**
+                     * Creates a new GlueIcebergCatalog instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GlueIcebergCatalog instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGlueIcebergCatalog): google.cloud.oracledatabase.v1.GlueIcebergCatalog;
+
+                    /**
+                     * Encodes the specified GlueIcebergCatalog message. Does not implicitly {@link google.cloud.oracledatabase.v1.GlueIcebergCatalog.verify|verify} messages.
+                     * @param message GlueIcebergCatalog message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGlueIcebergCatalog, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GlueIcebergCatalog message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GlueIcebergCatalog.verify|verify} messages.
+                     * @param message GlueIcebergCatalog message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGlueIcebergCatalog, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GlueIcebergCatalog message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GlueIcebergCatalog
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GlueIcebergCatalog;
+
+                    /**
+                     * Decodes a GlueIcebergCatalog message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GlueIcebergCatalog
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GlueIcebergCatalog;
+
+                    /**
+                     * Verifies a GlueIcebergCatalog message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GlueIcebergCatalog message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GlueIcebergCatalog
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GlueIcebergCatalog;
+
+                    /**
+                     * Creates a plain object from a GlueIcebergCatalog message. Also converts values to other types if specified.
+                     * @param message GlueIcebergCatalog
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GlueIcebergCatalog, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GlueIcebergCatalog to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GlueIcebergCatalog
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a NessieIcebergCatalog. */
+                interface INessieIcebergCatalog {
+
+                    /** NessieIcebergCatalog uri */
+                    uri?: (string|null);
+
+                    /** NessieIcebergCatalog branch */
+                    branch?: (string|null);
+                }
+
+                /** Represents a NessieIcebergCatalog. */
+                class NessieIcebergCatalog implements INessieIcebergCatalog {
+
+                    /**
+                     * Constructs a new NessieIcebergCatalog.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.INessieIcebergCatalog);
+
+                    /** NessieIcebergCatalog uri. */
+                    public uri: string;
+
+                    /** NessieIcebergCatalog branch. */
+                    public branch: string;
+
+                    /**
+                     * Creates a new NessieIcebergCatalog instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NessieIcebergCatalog instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.INessieIcebergCatalog): google.cloud.oracledatabase.v1.NessieIcebergCatalog;
+
+                    /**
+                     * Encodes the specified NessieIcebergCatalog message. Does not implicitly {@link google.cloud.oracledatabase.v1.NessieIcebergCatalog.verify|verify} messages.
+                     * @param message NessieIcebergCatalog message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.INessieIcebergCatalog, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NessieIcebergCatalog message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.NessieIcebergCatalog.verify|verify} messages.
+                     * @param message NessieIcebergCatalog message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.INessieIcebergCatalog, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NessieIcebergCatalog message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NessieIcebergCatalog
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.NessieIcebergCatalog;
+
+                    /**
+                     * Decodes a NessieIcebergCatalog message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NessieIcebergCatalog
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.NessieIcebergCatalog;
+
+                    /**
+                     * Verifies a NessieIcebergCatalog message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NessieIcebergCatalog message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NessieIcebergCatalog
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.NessieIcebergCatalog;
+
+                    /**
+                     * Creates a plain object from a NessieIcebergCatalog message. Also converts values to other types if specified.
+                     * @param message NessieIcebergCatalog
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.NessieIcebergCatalog, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NessieIcebergCatalog to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NessieIcebergCatalog
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PolarisIcebergCatalog. */
+                interface IPolarisIcebergCatalog {
+
+                    /** PolarisIcebergCatalog uri */
+                    uri?: (string|null);
+
+                    /** PolarisIcebergCatalog polarisCatalog */
+                    polarisCatalog?: (string|null);
+
+                    /** PolarisIcebergCatalog clientId */
+                    clientId?: (string|null);
+
+                    /** PolarisIcebergCatalog principalRole */
+                    principalRole?: (string|null);
+
+                    /** PolarisIcebergCatalog clientSecret */
+                    clientSecret?: (string|null);
+                }
+
+                /** Represents a PolarisIcebergCatalog. */
+                class PolarisIcebergCatalog implements IPolarisIcebergCatalog {
+
+                    /**
+                     * Constructs a new PolarisIcebergCatalog.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IPolarisIcebergCatalog);
+
+                    /** PolarisIcebergCatalog uri. */
+                    public uri: string;
+
+                    /** PolarisIcebergCatalog polarisCatalog. */
+                    public polarisCatalog: string;
+
+                    /** PolarisIcebergCatalog clientId. */
+                    public clientId: string;
+
+                    /** PolarisIcebergCatalog principalRole. */
+                    public principalRole: string;
+
+                    /** PolarisIcebergCatalog clientSecret. */
+                    public clientSecret: string;
+
+                    /**
+                     * Creates a new PolarisIcebergCatalog instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PolarisIcebergCatalog instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IPolarisIcebergCatalog): google.cloud.oracledatabase.v1.PolarisIcebergCatalog;
+
+                    /**
+                     * Encodes the specified PolarisIcebergCatalog message. Does not implicitly {@link google.cloud.oracledatabase.v1.PolarisIcebergCatalog.verify|verify} messages.
+                     * @param message PolarisIcebergCatalog message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IPolarisIcebergCatalog, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PolarisIcebergCatalog message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.PolarisIcebergCatalog.verify|verify} messages.
+                     * @param message PolarisIcebergCatalog message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IPolarisIcebergCatalog, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PolarisIcebergCatalog message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PolarisIcebergCatalog
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.PolarisIcebergCatalog;
+
+                    /**
+                     * Decodes a PolarisIcebergCatalog message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PolarisIcebergCatalog
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.PolarisIcebergCatalog;
+
+                    /**
+                     * Verifies a PolarisIcebergCatalog message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PolarisIcebergCatalog message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PolarisIcebergCatalog
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.PolarisIcebergCatalog;
+
+                    /**
+                     * Creates a plain object from a PolarisIcebergCatalog message. Also converts values to other types if specified.
+                     * @param message PolarisIcebergCatalog
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.PolarisIcebergCatalog, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PolarisIcebergCatalog to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PolarisIcebergCatalog
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RestIcebergCatalog. */
+                interface IRestIcebergCatalog {
+
+                    /** RestIcebergCatalog uri */
+                    uri?: (string|null);
+
+                    /** RestIcebergCatalog properties */
+                    properties?: (string|null);
+                }
+
+                /** Represents a RestIcebergCatalog. */
+                class RestIcebergCatalog implements IRestIcebergCatalog {
+
+                    /**
+                     * Constructs a new RestIcebergCatalog.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IRestIcebergCatalog);
+
+                    /** RestIcebergCatalog uri. */
+                    public uri: string;
+
+                    /** RestIcebergCatalog properties. */
+                    public properties: string;
+
+                    /**
+                     * Creates a new RestIcebergCatalog instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RestIcebergCatalog instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IRestIcebergCatalog): google.cloud.oracledatabase.v1.RestIcebergCatalog;
+
+                    /**
+                     * Encodes the specified RestIcebergCatalog message. Does not implicitly {@link google.cloud.oracledatabase.v1.RestIcebergCatalog.verify|verify} messages.
+                     * @param message RestIcebergCatalog message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IRestIcebergCatalog, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RestIcebergCatalog message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.RestIcebergCatalog.verify|verify} messages.
+                     * @param message RestIcebergCatalog message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IRestIcebergCatalog, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RestIcebergCatalog message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RestIcebergCatalog
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.RestIcebergCatalog;
+
+                    /**
+                     * Decodes a RestIcebergCatalog message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RestIcebergCatalog
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.RestIcebergCatalog;
+
+                    /**
+                     * Verifies a RestIcebergCatalog message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RestIcebergCatalog message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RestIcebergCatalog
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.RestIcebergCatalog;
+
+                    /**
+                     * Creates a plain object from a RestIcebergCatalog message. Also converts values to other types if specified.
+                     * @param message RestIcebergCatalog
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.RestIcebergCatalog, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RestIcebergCatalog to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RestIcebergCatalog
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an IcebergCatalog. */
+                interface IIcebergCatalog {
+
+                    /** IcebergCatalog glueIcebergCatalog */
+                    glueIcebergCatalog?: (google.cloud.oracledatabase.v1.IGlueIcebergCatalog|null);
+
+                    /** IcebergCatalog nessieIcebergCatalog */
+                    nessieIcebergCatalog?: (google.cloud.oracledatabase.v1.INessieIcebergCatalog|null);
+
+                    /** IcebergCatalog polarisIcebergCatalog */
+                    polarisIcebergCatalog?: (google.cloud.oracledatabase.v1.IPolarisIcebergCatalog|null);
+
+                    /** IcebergCatalog restIcebergCatalog */
+                    restIcebergCatalog?: (google.cloud.oracledatabase.v1.IRestIcebergCatalog|null);
+
+                    /** IcebergCatalog catalogType */
+                    catalogType?: (google.cloud.oracledatabase.v1.IcebergCatalog.CatalogType|keyof typeof google.cloud.oracledatabase.v1.IcebergCatalog.CatalogType|null);
+                }
+
+                /** Represents an IcebergCatalog. */
+                class IcebergCatalog implements IIcebergCatalog {
+
+                    /**
+                     * Constructs a new IcebergCatalog.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IIcebergCatalog);
+
+                    /** IcebergCatalog glueIcebergCatalog. */
+                    public glueIcebergCatalog?: (google.cloud.oracledatabase.v1.IGlueIcebergCatalog|null);
+
+                    /** IcebergCatalog nessieIcebergCatalog. */
+                    public nessieIcebergCatalog?: (google.cloud.oracledatabase.v1.INessieIcebergCatalog|null);
+
+                    /** IcebergCatalog polarisIcebergCatalog. */
+                    public polarisIcebergCatalog?: (google.cloud.oracledatabase.v1.IPolarisIcebergCatalog|null);
+
+                    /** IcebergCatalog restIcebergCatalog. */
+                    public restIcebergCatalog?: (google.cloud.oracledatabase.v1.IRestIcebergCatalog|null);
+
+                    /** IcebergCatalog catalogType. */
+                    public catalogType: (google.cloud.oracledatabase.v1.IcebergCatalog.CatalogType|keyof typeof google.cloud.oracledatabase.v1.IcebergCatalog.CatalogType);
+
+                    /** IcebergCatalog catalogDetails. */
+                    public catalogDetails?: ("glueIcebergCatalog"|"nessieIcebergCatalog"|"polarisIcebergCatalog"|"restIcebergCatalog");
+
+                    /**
+                     * Creates a new IcebergCatalog instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IcebergCatalog instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IIcebergCatalog): google.cloud.oracledatabase.v1.IcebergCatalog;
+
+                    /**
+                     * Encodes the specified IcebergCatalog message. Does not implicitly {@link google.cloud.oracledatabase.v1.IcebergCatalog.verify|verify} messages.
+                     * @param message IcebergCatalog message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IIcebergCatalog, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IcebergCatalog message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.IcebergCatalog.verify|verify} messages.
+                     * @param message IcebergCatalog message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IIcebergCatalog, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IcebergCatalog message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IcebergCatalog
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.IcebergCatalog;
+
+                    /**
+                     * Decodes an IcebergCatalog message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IcebergCatalog
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.IcebergCatalog;
+
+                    /**
+                     * Verifies an IcebergCatalog message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IcebergCatalog message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IcebergCatalog
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.IcebergCatalog;
+
+                    /**
+                     * Creates a plain object from an IcebergCatalog message. Also converts values to other types if specified.
+                     * @param message IcebergCatalog
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.IcebergCatalog, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IcebergCatalog to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IcebergCatalog
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace IcebergCatalog {
+
+                    /** CatalogType enum. */
+                    enum CatalogType {
+                        CATALOG_TYPE_UNSPECIFIED = 0,
+                        GLUE = 1,
+                        HADOOP = 2,
+                        NESSIE = 3,
+                        POLARIS = 4,
+                        REST = 5
+                    }
+                }
+
+                /** Properties of an AmazonS3IcebergStorage. */
+                interface IAmazonS3IcebergStorage {
+
+                    /** AmazonS3IcebergStorage schemeType */
+                    schemeType?: (google.cloud.oracledatabase.v1.AmazonS3IcebergStorage.SchemeType|keyof typeof google.cloud.oracledatabase.v1.AmazonS3IcebergStorage.SchemeType|null);
+
+                    /** AmazonS3IcebergStorage accessKeyId */
+                    accessKeyId?: (string|null);
+
+                    /** AmazonS3IcebergStorage region */
+                    region?: (string|null);
+
+                    /** AmazonS3IcebergStorage bucket */
+                    bucket?: (string|null);
+
+                    /** AmazonS3IcebergStorage endpoint */
+                    endpoint?: (string|null);
+
+                    /** AmazonS3IcebergStorage secretAccessKeySecret */
+                    secretAccessKeySecret?: (string|null);
+                }
+
+                /** Represents an AmazonS3IcebergStorage. */
+                class AmazonS3IcebergStorage implements IAmazonS3IcebergStorage {
+
+                    /**
+                     * Constructs a new AmazonS3IcebergStorage.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IAmazonS3IcebergStorage);
+
+                    /** AmazonS3IcebergStorage schemeType. */
+                    public schemeType: (google.cloud.oracledatabase.v1.AmazonS3IcebergStorage.SchemeType|keyof typeof google.cloud.oracledatabase.v1.AmazonS3IcebergStorage.SchemeType);
+
+                    /** AmazonS3IcebergStorage accessKeyId. */
+                    public accessKeyId: string;
+
+                    /** AmazonS3IcebergStorage region. */
+                    public region: string;
+
+                    /** AmazonS3IcebergStorage bucket. */
+                    public bucket: string;
+
+                    /** AmazonS3IcebergStorage endpoint. */
+                    public endpoint: string;
+
+                    /** AmazonS3IcebergStorage secretAccessKeySecret. */
+                    public secretAccessKeySecret: string;
+
+                    /**
+                     * Creates a new AmazonS3IcebergStorage instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AmazonS3IcebergStorage instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IAmazonS3IcebergStorage): google.cloud.oracledatabase.v1.AmazonS3IcebergStorage;
+
+                    /**
+                     * Encodes the specified AmazonS3IcebergStorage message. Does not implicitly {@link google.cloud.oracledatabase.v1.AmazonS3IcebergStorage.verify|verify} messages.
+                     * @param message AmazonS3IcebergStorage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IAmazonS3IcebergStorage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AmazonS3IcebergStorage message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.AmazonS3IcebergStorage.verify|verify} messages.
+                     * @param message AmazonS3IcebergStorage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IAmazonS3IcebergStorage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AmazonS3IcebergStorage message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AmazonS3IcebergStorage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.AmazonS3IcebergStorage;
+
+                    /**
+                     * Decodes an AmazonS3IcebergStorage message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AmazonS3IcebergStorage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.AmazonS3IcebergStorage;
+
+                    /**
+                     * Verifies an AmazonS3IcebergStorage message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AmazonS3IcebergStorage message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AmazonS3IcebergStorage
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.AmazonS3IcebergStorage;
+
+                    /**
+                     * Creates a plain object from an AmazonS3IcebergStorage message. Also converts values to other types if specified.
+                     * @param message AmazonS3IcebergStorage
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.AmazonS3IcebergStorage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AmazonS3IcebergStorage to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AmazonS3IcebergStorage
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AmazonS3IcebergStorage {
+
+                    /** SchemeType enum. */
+                    enum SchemeType {
+                        SCHEME_TYPE_UNSPECIFIED = 0,
+                        S3 = 1,
+                        S3A = 2
+                    }
+                }
+
+                /** Properties of a GoogleCloudStorageIcebergStorage. */
+                interface IGoogleCloudStorageIcebergStorage {
+
+                    /** GoogleCloudStorageIcebergStorage bucket */
+                    bucket?: (string|null);
+
+                    /** GoogleCloudStorageIcebergStorage projectId */
+                    projectId?: (string|null);
+
+                    /** GoogleCloudStorageIcebergStorage serviceAccountKeyFile */
+                    serviceAccountKeyFile?: (string|null);
+                }
+
+                /** Represents a GoogleCloudStorageIcebergStorage. */
+                class GoogleCloudStorageIcebergStorage implements IGoogleCloudStorageIcebergStorage {
+
+                    /**
+                     * Constructs a new GoogleCloudStorageIcebergStorage.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoogleCloudStorageIcebergStorage);
+
+                    /** GoogleCloudStorageIcebergStorage bucket. */
+                    public bucket: string;
+
+                    /** GoogleCloudStorageIcebergStorage projectId. */
+                    public projectId: string;
+
+                    /** GoogleCloudStorageIcebergStorage serviceAccountKeyFile. */
+                    public serviceAccountKeyFile: string;
+
+                    /**
+                     * Creates a new GoogleCloudStorageIcebergStorage instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoogleCloudStorageIcebergStorage instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoogleCloudStorageIcebergStorage): google.cloud.oracledatabase.v1.GoogleCloudStorageIcebergStorage;
+
+                    /**
+                     * Encodes the specified GoogleCloudStorageIcebergStorage message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoogleCloudStorageIcebergStorage.verify|verify} messages.
+                     * @param message GoogleCloudStorageIcebergStorage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoogleCloudStorageIcebergStorage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoogleCloudStorageIcebergStorage message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoogleCloudStorageIcebergStorage.verify|verify} messages.
+                     * @param message GoogleCloudStorageIcebergStorage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoogleCloudStorageIcebergStorage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoogleCloudStorageIcebergStorage message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoogleCloudStorageIcebergStorage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoogleCloudStorageIcebergStorage;
+
+                    /**
+                     * Decodes a GoogleCloudStorageIcebergStorage message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoogleCloudStorageIcebergStorage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoogleCloudStorageIcebergStorage;
+
+                    /**
+                     * Verifies a GoogleCloudStorageIcebergStorage message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoogleCloudStorageIcebergStorage message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoogleCloudStorageIcebergStorage
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoogleCloudStorageIcebergStorage;
+
+                    /**
+                     * Creates a plain object from a GoogleCloudStorageIcebergStorage message. Also converts values to other types if specified.
+                     * @param message GoogleCloudStorageIcebergStorage
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoogleCloudStorageIcebergStorage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoogleCloudStorageIcebergStorage to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoogleCloudStorageIcebergStorage
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AzureDataLakeStorageIcebergStorage. */
+                interface IAzureDataLakeStorageIcebergStorage {
+
+                    /** AzureDataLakeStorageIcebergStorage azureAccount */
+                    azureAccount?: (string|null);
+
+                    /** AzureDataLakeStorageIcebergStorage container */
+                    container?: (string|null);
+
+                    /** AzureDataLakeStorageIcebergStorage accountKeySecret */
+                    accountKeySecret?: (string|null);
+
+                    /** AzureDataLakeStorageIcebergStorage endpoint */
+                    endpoint?: (string|null);
+                }
+
+                /** Represents an AzureDataLakeStorageIcebergStorage. */
+                class AzureDataLakeStorageIcebergStorage implements IAzureDataLakeStorageIcebergStorage {
+
+                    /**
+                     * Constructs a new AzureDataLakeStorageIcebergStorage.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IAzureDataLakeStorageIcebergStorage);
+
+                    /** AzureDataLakeStorageIcebergStorage azureAccount. */
+                    public azureAccount: string;
+
+                    /** AzureDataLakeStorageIcebergStorage container. */
+                    public container: string;
+
+                    /** AzureDataLakeStorageIcebergStorage accountKeySecret. */
+                    public accountKeySecret: string;
+
+                    /** AzureDataLakeStorageIcebergStorage endpoint. */
+                    public endpoint: string;
+
+                    /**
+                     * Creates a new AzureDataLakeStorageIcebergStorage instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AzureDataLakeStorageIcebergStorage instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IAzureDataLakeStorageIcebergStorage): google.cloud.oracledatabase.v1.AzureDataLakeStorageIcebergStorage;
+
+                    /**
+                     * Encodes the specified AzureDataLakeStorageIcebergStorage message. Does not implicitly {@link google.cloud.oracledatabase.v1.AzureDataLakeStorageIcebergStorage.verify|verify} messages.
+                     * @param message AzureDataLakeStorageIcebergStorage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IAzureDataLakeStorageIcebergStorage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AzureDataLakeStorageIcebergStorage message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.AzureDataLakeStorageIcebergStorage.verify|verify} messages.
+                     * @param message AzureDataLakeStorageIcebergStorage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IAzureDataLakeStorageIcebergStorage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AzureDataLakeStorageIcebergStorage message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AzureDataLakeStorageIcebergStorage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.AzureDataLakeStorageIcebergStorage;
+
+                    /**
+                     * Decodes an AzureDataLakeStorageIcebergStorage message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AzureDataLakeStorageIcebergStorage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.AzureDataLakeStorageIcebergStorage;
+
+                    /**
+                     * Verifies an AzureDataLakeStorageIcebergStorage message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AzureDataLakeStorageIcebergStorage message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AzureDataLakeStorageIcebergStorage
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.AzureDataLakeStorageIcebergStorage;
+
+                    /**
+                     * Creates a plain object from an AzureDataLakeStorageIcebergStorage message. Also converts values to other types if specified.
+                     * @param message AzureDataLakeStorageIcebergStorage
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.AzureDataLakeStorageIcebergStorage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AzureDataLakeStorageIcebergStorage to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AzureDataLakeStorageIcebergStorage
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an IcebergStorage. */
+                interface IIcebergStorage {
+
+                    /** IcebergStorage amazonS3IcebergStorage */
+                    amazonS3IcebergStorage?: (google.cloud.oracledatabase.v1.IAmazonS3IcebergStorage|null);
+
+                    /** IcebergStorage googleCloudStorageIcebergStorage */
+                    googleCloudStorageIcebergStorage?: (google.cloud.oracledatabase.v1.IGoogleCloudStorageIcebergStorage|null);
+
+                    /** IcebergStorage azureDataLakeStorageIcebergStorage */
+                    azureDataLakeStorageIcebergStorage?: (google.cloud.oracledatabase.v1.IAzureDataLakeStorageIcebergStorage|null);
+
+                    /** IcebergStorage storageType */
+                    storageType?: (google.cloud.oracledatabase.v1.IcebergStorage.StorageType|keyof typeof google.cloud.oracledatabase.v1.IcebergStorage.StorageType|null);
+                }
+
+                /** Represents an IcebergStorage. */
+                class IcebergStorage implements IIcebergStorage {
+
+                    /**
+                     * Constructs a new IcebergStorage.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IIcebergStorage);
+
+                    /** IcebergStorage amazonS3IcebergStorage. */
+                    public amazonS3IcebergStorage?: (google.cloud.oracledatabase.v1.IAmazonS3IcebergStorage|null);
+
+                    /** IcebergStorage googleCloudStorageIcebergStorage. */
+                    public googleCloudStorageIcebergStorage?: (google.cloud.oracledatabase.v1.IGoogleCloudStorageIcebergStorage|null);
+
+                    /** IcebergStorage azureDataLakeStorageIcebergStorage. */
+                    public azureDataLakeStorageIcebergStorage?: (google.cloud.oracledatabase.v1.IAzureDataLakeStorageIcebergStorage|null);
+
+                    /** IcebergStorage storageType. */
+                    public storageType: (google.cloud.oracledatabase.v1.IcebergStorage.StorageType|keyof typeof google.cloud.oracledatabase.v1.IcebergStorage.StorageType);
+
+                    /** IcebergStorage storageDetails. */
+                    public storageDetails?: ("amazonS3IcebergStorage"|"googleCloudStorageIcebergStorage"|"azureDataLakeStorageIcebergStorage");
+
+                    /**
+                     * Creates a new IcebergStorage instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IcebergStorage instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IIcebergStorage): google.cloud.oracledatabase.v1.IcebergStorage;
+
+                    /**
+                     * Encodes the specified IcebergStorage message. Does not implicitly {@link google.cloud.oracledatabase.v1.IcebergStorage.verify|verify} messages.
+                     * @param message IcebergStorage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IIcebergStorage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IcebergStorage message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.IcebergStorage.verify|verify} messages.
+                     * @param message IcebergStorage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IIcebergStorage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IcebergStorage message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IcebergStorage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.IcebergStorage;
+
+                    /**
+                     * Decodes an IcebergStorage message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IcebergStorage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.IcebergStorage;
+
+                    /**
+                     * Verifies an IcebergStorage message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IcebergStorage message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IcebergStorage
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.IcebergStorage;
+
+                    /**
+                     * Creates a plain object from an IcebergStorage message. Also converts values to other types if specified.
+                     * @param message IcebergStorage
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.IcebergStorage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IcebergStorage to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IcebergStorage
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace IcebergStorage {
+
+                    /** StorageType enum. */
+                    enum StorageType {
+                        STORAGE_TYPE_UNSPECIFIED = 0,
+                        AMAZON_S3 = 1,
+                        GOOGLE_CLOUD_STORAGE = 2,
+                        AZURE_DATA_LAKE_STORAGE = 3
+                    }
+                }
+
+                /** Properties of a GoldengateIcebergConnectionProperties. */
+                interface IGoldengateIcebergConnectionProperties {
+
+                    /** GoldengateIcebergConnectionProperties technologyType */
+                    technologyType?: (string|null);
+
+                    /** GoldengateIcebergConnectionProperties catalog */
+                    catalog?: (google.cloud.oracledatabase.v1.IIcebergCatalog|null);
+
+                    /** GoldengateIcebergConnectionProperties storage */
+                    storage?: (google.cloud.oracledatabase.v1.IIcebergStorage|null);
+                }
+
+                /** Represents a GoldengateIcebergConnectionProperties. */
+                class GoldengateIcebergConnectionProperties implements IGoldengateIcebergConnectionProperties {
+
+                    /**
+                     * Constructs a new GoldengateIcebergConnectionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateIcebergConnectionProperties);
+
+                    /** GoldengateIcebergConnectionProperties technologyType. */
+                    public technologyType: string;
+
+                    /** GoldengateIcebergConnectionProperties catalog. */
+                    public catalog?: (google.cloud.oracledatabase.v1.IIcebergCatalog|null);
+
+                    /** GoldengateIcebergConnectionProperties storage. */
+                    public storage?: (google.cloud.oracledatabase.v1.IIcebergStorage|null);
+
+                    /**
+                     * Creates a new GoldengateIcebergConnectionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateIcebergConnectionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateIcebergConnectionProperties): google.cloud.oracledatabase.v1.GoldengateIcebergConnectionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateIcebergConnectionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateIcebergConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateIcebergConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateIcebergConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateIcebergConnectionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateIcebergConnectionProperties.verify|verify} messages.
+                     * @param message GoldengateIcebergConnectionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateIcebergConnectionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateIcebergConnectionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateIcebergConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateIcebergConnectionProperties;
+
+                    /**
+                     * Decodes a GoldengateIcebergConnectionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateIcebergConnectionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateIcebergConnectionProperties;
+
+                    /**
+                     * Verifies a GoldengateIcebergConnectionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateIcebergConnectionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateIcebergConnectionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateIcebergConnectionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateIcebergConnectionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateIcebergConnectionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateIcebergConnectionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateIcebergConnectionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateIcebergConnectionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateGoldengateConnectionRequest. */
+                interface ICreateGoldengateConnectionRequest {
+
+                    /** CreateGoldengateConnectionRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateGoldengateConnectionRequest goldengateConnectionId */
+                    goldengateConnectionId?: (string|null);
+
+                    /** CreateGoldengateConnectionRequest goldengateConnection */
+                    goldengateConnection?: (google.cloud.oracledatabase.v1.IGoldengateConnection|null);
+
+                    /** CreateGoldengateConnectionRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateGoldengateConnectionRequest. */
+                class CreateGoldengateConnectionRequest implements ICreateGoldengateConnectionRequest {
+
+                    /**
+                     * Constructs a new CreateGoldengateConnectionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.ICreateGoldengateConnectionRequest);
+
+                    /** CreateGoldengateConnectionRequest parent. */
+                    public parent: string;
+
+                    /** CreateGoldengateConnectionRequest goldengateConnectionId. */
+                    public goldengateConnectionId: string;
+
+                    /** CreateGoldengateConnectionRequest goldengateConnection. */
+                    public goldengateConnection?: (google.cloud.oracledatabase.v1.IGoldengateConnection|null);
+
+                    /** CreateGoldengateConnectionRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateGoldengateConnectionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateGoldengateConnectionRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.ICreateGoldengateConnectionRequest): google.cloud.oracledatabase.v1.CreateGoldengateConnectionRequest;
+
+                    /**
+                     * Encodes the specified CreateGoldengateConnectionRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.CreateGoldengateConnectionRequest.verify|verify} messages.
+                     * @param message CreateGoldengateConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.ICreateGoldengateConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateGoldengateConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.CreateGoldengateConnectionRequest.verify|verify} messages.
+                     * @param message CreateGoldengateConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.ICreateGoldengateConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateGoldengateConnectionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateGoldengateConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.CreateGoldengateConnectionRequest;
+
+                    /**
+                     * Decodes a CreateGoldengateConnectionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateGoldengateConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.CreateGoldengateConnectionRequest;
+
+                    /**
+                     * Verifies a CreateGoldengateConnectionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateGoldengateConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateGoldengateConnectionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.CreateGoldengateConnectionRequest;
+
+                    /**
+                     * Creates a plain object from a CreateGoldengateConnectionRequest message. Also converts values to other types if specified.
+                     * @param message CreateGoldengateConnectionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.CreateGoldengateConnectionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateGoldengateConnectionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateGoldengateConnectionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteGoldengateConnectionRequest. */
+                interface IDeleteGoldengateConnectionRequest {
+
+                    /** DeleteGoldengateConnectionRequest name */
+                    name?: (string|null);
+
+                    /** DeleteGoldengateConnectionRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteGoldengateConnectionRequest. */
+                class DeleteGoldengateConnectionRequest implements IDeleteGoldengateConnectionRequest {
+
+                    /**
+                     * Constructs a new DeleteGoldengateConnectionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IDeleteGoldengateConnectionRequest);
+
+                    /** DeleteGoldengateConnectionRequest name. */
+                    public name: string;
+
+                    /** DeleteGoldengateConnectionRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteGoldengateConnectionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteGoldengateConnectionRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IDeleteGoldengateConnectionRequest): google.cloud.oracledatabase.v1.DeleteGoldengateConnectionRequest;
+
+                    /**
+                     * Encodes the specified DeleteGoldengateConnectionRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.DeleteGoldengateConnectionRequest.verify|verify} messages.
+                     * @param message DeleteGoldengateConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IDeleteGoldengateConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteGoldengateConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.DeleteGoldengateConnectionRequest.verify|verify} messages.
+                     * @param message DeleteGoldengateConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IDeleteGoldengateConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteGoldengateConnectionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteGoldengateConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.DeleteGoldengateConnectionRequest;
+
+                    /**
+                     * Decodes a DeleteGoldengateConnectionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteGoldengateConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.DeleteGoldengateConnectionRequest;
+
+                    /**
+                     * Verifies a DeleteGoldengateConnectionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteGoldengateConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteGoldengateConnectionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.DeleteGoldengateConnectionRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteGoldengateConnectionRequest message. Also converts values to other types if specified.
+                     * @param message DeleteGoldengateConnectionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.DeleteGoldengateConnectionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteGoldengateConnectionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteGoldengateConnectionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetGoldengateConnectionRequest. */
+                interface IGetGoldengateConnectionRequest {
+
+                    /** GetGoldengateConnectionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetGoldengateConnectionRequest. */
+                class GetGoldengateConnectionRequest implements IGetGoldengateConnectionRequest {
+
+                    /**
+                     * Constructs a new GetGoldengateConnectionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGetGoldengateConnectionRequest);
+
+                    /** GetGoldengateConnectionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetGoldengateConnectionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetGoldengateConnectionRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGetGoldengateConnectionRequest): google.cloud.oracledatabase.v1.GetGoldengateConnectionRequest;
+
+                    /**
+                     * Encodes the specified GetGoldengateConnectionRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.GetGoldengateConnectionRequest.verify|verify} messages.
+                     * @param message GetGoldengateConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGetGoldengateConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetGoldengateConnectionRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GetGoldengateConnectionRequest.verify|verify} messages.
+                     * @param message GetGoldengateConnectionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGetGoldengateConnectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetGoldengateConnectionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetGoldengateConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GetGoldengateConnectionRequest;
+
+                    /**
+                     * Decodes a GetGoldengateConnectionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetGoldengateConnectionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GetGoldengateConnectionRequest;
+
+                    /**
+                     * Verifies a GetGoldengateConnectionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetGoldengateConnectionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetGoldengateConnectionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GetGoldengateConnectionRequest;
+
+                    /**
+                     * Creates a plain object from a GetGoldengateConnectionRequest message. Also converts values to other types if specified.
+                     * @param message GetGoldengateConnectionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GetGoldengateConnectionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetGoldengateConnectionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetGoldengateConnectionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListGoldengateConnectionsRequest. */
+                interface IListGoldengateConnectionsRequest {
+
+                    /** ListGoldengateConnectionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListGoldengateConnectionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListGoldengateConnectionsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListGoldengateConnectionsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListGoldengateConnectionsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListGoldengateConnectionsRequest. */
+                class ListGoldengateConnectionsRequest implements IListGoldengateConnectionsRequest {
+
+                    /**
+                     * Constructs a new ListGoldengateConnectionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListGoldengateConnectionsRequest);
+
+                    /** ListGoldengateConnectionsRequest parent. */
+                    public parent: string;
+
+                    /** ListGoldengateConnectionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListGoldengateConnectionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListGoldengateConnectionsRequest filter. */
+                    public filter: string;
+
+                    /** ListGoldengateConnectionsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListGoldengateConnectionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListGoldengateConnectionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListGoldengateConnectionsRequest): google.cloud.oracledatabase.v1.ListGoldengateConnectionsRequest;
+
+                    /**
+                     * Encodes the specified ListGoldengateConnectionsRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListGoldengateConnectionsRequest.verify|verify} messages.
+                     * @param message ListGoldengateConnectionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListGoldengateConnectionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListGoldengateConnectionsRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListGoldengateConnectionsRequest.verify|verify} messages.
+                     * @param message ListGoldengateConnectionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListGoldengateConnectionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListGoldengateConnectionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListGoldengateConnectionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListGoldengateConnectionsRequest;
+
+                    /**
+                     * Decodes a ListGoldengateConnectionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListGoldengateConnectionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListGoldengateConnectionsRequest;
+
+                    /**
+                     * Verifies a ListGoldengateConnectionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListGoldengateConnectionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListGoldengateConnectionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListGoldengateConnectionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListGoldengateConnectionsRequest message. Also converts values to other types if specified.
+                     * @param message ListGoldengateConnectionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListGoldengateConnectionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListGoldengateConnectionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListGoldengateConnectionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListGoldengateConnectionsResponse. */
+                interface IListGoldengateConnectionsResponse {
+
+                    /** ListGoldengateConnectionsResponse goldengateConnections */
+                    goldengateConnections?: (google.cloud.oracledatabase.v1.IGoldengateConnection[]|null);
+
+                    /** ListGoldengateConnectionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListGoldengateConnectionsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListGoldengateConnectionsResponse. */
+                class ListGoldengateConnectionsResponse implements IListGoldengateConnectionsResponse {
+
+                    /**
+                     * Constructs a new ListGoldengateConnectionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListGoldengateConnectionsResponse);
+
+                    /** ListGoldengateConnectionsResponse goldengateConnections. */
+                    public goldengateConnections: google.cloud.oracledatabase.v1.IGoldengateConnection[];
+
+                    /** ListGoldengateConnectionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListGoldengateConnectionsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListGoldengateConnectionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListGoldengateConnectionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListGoldengateConnectionsResponse): google.cloud.oracledatabase.v1.ListGoldengateConnectionsResponse;
+
+                    /**
+                     * Encodes the specified ListGoldengateConnectionsResponse message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListGoldengateConnectionsResponse.verify|verify} messages.
+                     * @param message ListGoldengateConnectionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListGoldengateConnectionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListGoldengateConnectionsResponse message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListGoldengateConnectionsResponse.verify|verify} messages.
+                     * @param message ListGoldengateConnectionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListGoldengateConnectionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListGoldengateConnectionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListGoldengateConnectionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListGoldengateConnectionsResponse;
+
+                    /**
+                     * Decodes a ListGoldengateConnectionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListGoldengateConnectionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListGoldengateConnectionsResponse;
+
+                    /**
+                     * Verifies a ListGoldengateConnectionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListGoldengateConnectionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListGoldengateConnectionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListGoldengateConnectionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListGoldengateConnectionsResponse message. Also converts values to other types if specified.
+                     * @param message ListGoldengateConnectionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListGoldengateConnectionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListGoldengateConnectionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListGoldengateConnectionsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a NameValuePair. */
+                interface INameValuePair {
+
+                    /** NameValuePair key */
+                    key?: (string|null);
+
+                    /** NameValuePair value */
+                    value?: (string|null);
+                }
+
+                /** Represents a NameValuePair. */
+                class NameValuePair implements INameValuePair {
+
+                    /**
+                     * Constructs a new NameValuePair.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.INameValuePair);
+
+                    /** NameValuePair key. */
+                    public key: string;
+
+                    /** NameValuePair value. */
+                    public value: string;
+
+                    /**
+                     * Creates a new NameValuePair instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NameValuePair instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.INameValuePair): google.cloud.oracledatabase.v1.NameValuePair;
+
+                    /**
+                     * Encodes the specified NameValuePair message. Does not implicitly {@link google.cloud.oracledatabase.v1.NameValuePair.verify|verify} messages.
+                     * @param message NameValuePair message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.INameValuePair, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NameValuePair message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.NameValuePair.verify|verify} messages.
+                     * @param message NameValuePair message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.INameValuePair, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NameValuePair message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NameValuePair
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.NameValuePair;
+
+                    /**
+                     * Decodes a NameValuePair message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NameValuePair
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.NameValuePair;
+
+                    /**
+                     * Verifies a NameValuePair message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NameValuePair message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NameValuePair
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.NameValuePair;
+
+                    /**
+                     * Creates a plain object from a NameValuePair message. Also converts values to other types if specified.
+                     * @param message NameValuePair
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.NameValuePair, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NameValuePair to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NameValuePair
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a KafkaBootstrapServer. */
+                interface IKafkaBootstrapServer {
+
+                    /** KafkaBootstrapServer host */
+                    host?: (string|null);
+
+                    /** KafkaBootstrapServer port */
+                    port?: (number|null);
+
+                    /** KafkaBootstrapServer privateIpAddress */
+                    privateIpAddress?: (string|null);
+                }
+
+                /** Represents a KafkaBootstrapServer. */
+                class KafkaBootstrapServer implements IKafkaBootstrapServer {
+
+                    /**
+                     * Constructs a new KafkaBootstrapServer.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IKafkaBootstrapServer);
+
+                    /** KafkaBootstrapServer host. */
+                    public host: string;
+
+                    /** KafkaBootstrapServer port. */
+                    public port: number;
+
+                    /** KafkaBootstrapServer privateIpAddress. */
+                    public privateIpAddress: string;
+
+                    /**
+                     * Creates a new KafkaBootstrapServer instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns KafkaBootstrapServer instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IKafkaBootstrapServer): google.cloud.oracledatabase.v1.KafkaBootstrapServer;
+
+                    /**
+                     * Encodes the specified KafkaBootstrapServer message. Does not implicitly {@link google.cloud.oracledatabase.v1.KafkaBootstrapServer.verify|verify} messages.
+                     * @param message KafkaBootstrapServer message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IKafkaBootstrapServer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified KafkaBootstrapServer message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.KafkaBootstrapServer.verify|verify} messages.
+                     * @param message KafkaBootstrapServer message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IKafkaBootstrapServer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a KafkaBootstrapServer message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns KafkaBootstrapServer
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.KafkaBootstrapServer;
+
+                    /**
+                     * Decodes a KafkaBootstrapServer message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns KafkaBootstrapServer
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.KafkaBootstrapServer;
+
+                    /**
+                     * Verifies a KafkaBootstrapServer message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a KafkaBootstrapServer message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns KafkaBootstrapServer
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.KafkaBootstrapServer;
+
+                    /**
+                     * Creates a plain object from a KafkaBootstrapServer message. Also converts values to other types if specified.
+                     * @param message KafkaBootstrapServer
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.KafkaBootstrapServer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this KafkaBootstrapServer to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for KafkaBootstrapServer
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoldengateConnectionAssignment. */
+                interface IGoldengateConnectionAssignment {
+
+                    /** GoldengateConnectionAssignment name */
+                    name?: (string|null);
+
+                    /** GoldengateConnectionAssignment properties */
+                    properties?: (google.cloud.oracledatabase.v1.IGoldengateConnectionAssignmentProperties|null);
+
+                    /** GoldengateConnectionAssignment createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoldengateConnectionAssignment labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** GoldengateConnectionAssignment displayName */
+                    displayName?: (string|null);
+
+                    /** GoldengateConnectionAssignment entitlementId */
+                    entitlementId?: (string|null);
+                }
+
+                /** Represents a GoldengateConnectionAssignment. */
+                class GoldengateConnectionAssignment implements IGoldengateConnectionAssignment {
+
+                    /**
+                     * Constructs a new GoldengateConnectionAssignment.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment);
+
+                    /** GoldengateConnectionAssignment name. */
+                    public name: string;
+
+                    /** GoldengateConnectionAssignment properties. */
+                    public properties?: (google.cloud.oracledatabase.v1.IGoldengateConnectionAssignmentProperties|null);
+
+                    /** GoldengateConnectionAssignment createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoldengateConnectionAssignment labels. */
+                    public labels: { [k: string]: string };
+
+                    /** GoldengateConnectionAssignment displayName. */
+                    public displayName: string;
+
+                    /** GoldengateConnectionAssignment entitlementId. */
+                    public entitlementId: string;
+
+                    /**
+                     * Creates a new GoldengateConnectionAssignment instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateConnectionAssignment instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment): google.cloud.oracledatabase.v1.GoldengateConnectionAssignment;
+
+                    /**
+                     * Encodes the specified GoldengateConnectionAssignment message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateConnectionAssignment.verify|verify} messages.
+                     * @param message GoldengateConnectionAssignment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateConnectionAssignment message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateConnectionAssignment.verify|verify} messages.
+                     * @param message GoldengateConnectionAssignment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateConnectionAssignment message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateConnectionAssignment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateConnectionAssignment;
+
+                    /**
+                     * Decodes a GoldengateConnectionAssignment message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateConnectionAssignment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateConnectionAssignment;
+
+                    /**
+                     * Verifies a GoldengateConnectionAssignment message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateConnectionAssignment message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateConnectionAssignment
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateConnectionAssignment;
+
+                    /**
+                     * Creates a plain object from a GoldengateConnectionAssignment message. Also converts values to other types if specified.
+                     * @param message GoldengateConnectionAssignment
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateConnectionAssignment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateConnectionAssignment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateConnectionAssignment
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoldengateConnectionAssignmentProperties. */
+                interface IGoldengateConnectionAssignmentProperties {
+
+                    /** GoldengateConnectionAssignmentProperties ocid */
+                    ocid?: (string|null);
+
+                    /** GoldengateConnectionAssignmentProperties goldengateConnection */
+                    goldengateConnection?: (string|null);
+
+                    /** GoldengateConnectionAssignmentProperties goldengateDeployment */
+                    goldengateDeployment?: (string|null);
+
+                    /** GoldengateConnectionAssignmentProperties alias */
+                    alias?: (string|null);
+
+                    /** GoldengateConnectionAssignmentProperties state */
+                    state?: (google.cloud.oracledatabase.v1.GoldengateConnectionAssignmentProperties.State|keyof typeof google.cloud.oracledatabase.v1.GoldengateConnectionAssignmentProperties.State|null);
+                }
+
+                /** Represents a GoldengateConnectionAssignmentProperties. */
+                class GoldengateConnectionAssignmentProperties implements IGoldengateConnectionAssignmentProperties {
+
+                    /**
+                     * Constructs a new GoldengateConnectionAssignmentProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateConnectionAssignmentProperties);
+
+                    /** GoldengateConnectionAssignmentProperties ocid. */
+                    public ocid: string;
+
+                    /** GoldengateConnectionAssignmentProperties goldengateConnection. */
+                    public goldengateConnection: string;
+
+                    /** GoldengateConnectionAssignmentProperties goldengateDeployment. */
+                    public goldengateDeployment: string;
+
+                    /** GoldengateConnectionAssignmentProperties alias. */
+                    public alias: string;
+
+                    /** GoldengateConnectionAssignmentProperties state. */
+                    public state: (google.cloud.oracledatabase.v1.GoldengateConnectionAssignmentProperties.State|keyof typeof google.cloud.oracledatabase.v1.GoldengateConnectionAssignmentProperties.State);
+
+                    /**
+                     * Creates a new GoldengateConnectionAssignmentProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateConnectionAssignmentProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateConnectionAssignmentProperties): google.cloud.oracledatabase.v1.GoldengateConnectionAssignmentProperties;
+
+                    /**
+                     * Encodes the specified GoldengateConnectionAssignmentProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateConnectionAssignmentProperties.verify|verify} messages.
+                     * @param message GoldengateConnectionAssignmentProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateConnectionAssignmentProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateConnectionAssignmentProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateConnectionAssignmentProperties.verify|verify} messages.
+                     * @param message GoldengateConnectionAssignmentProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateConnectionAssignmentProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateConnectionAssignmentProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateConnectionAssignmentProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateConnectionAssignmentProperties;
+
+                    /**
+                     * Decodes a GoldengateConnectionAssignmentProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateConnectionAssignmentProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateConnectionAssignmentProperties;
+
+                    /**
+                     * Verifies a GoldengateConnectionAssignmentProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateConnectionAssignmentProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateConnectionAssignmentProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateConnectionAssignmentProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateConnectionAssignmentProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateConnectionAssignmentProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateConnectionAssignmentProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateConnectionAssignmentProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateConnectionAssignmentProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GoldengateConnectionAssignmentProperties {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        ACTIVE = 2,
+                        FAILED = 3,
+                        UPDATING = 4,
+                        DELETING = 5
+                    }
+                }
+
+                /** Properties of a ListGoldengateConnectionAssignmentsRequest. */
+                interface IListGoldengateConnectionAssignmentsRequest {
+
+                    /** ListGoldengateConnectionAssignmentsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListGoldengateConnectionAssignmentsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListGoldengateConnectionAssignmentsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListGoldengateConnectionAssignmentsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListGoldengateConnectionAssignmentsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListGoldengateConnectionAssignmentsRequest. */
+                class ListGoldengateConnectionAssignmentsRequest implements IListGoldengateConnectionAssignmentsRequest {
+
+                    /**
+                     * Constructs a new ListGoldengateConnectionAssignmentsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsRequest);
+
+                    /** ListGoldengateConnectionAssignmentsRequest parent. */
+                    public parent: string;
+
+                    /** ListGoldengateConnectionAssignmentsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListGoldengateConnectionAssignmentsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListGoldengateConnectionAssignmentsRequest filter. */
+                    public filter: string;
+
+                    /** ListGoldengateConnectionAssignmentsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListGoldengateConnectionAssignmentsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListGoldengateConnectionAssignmentsRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsRequest): google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsRequest;
+
+                    /**
+                     * Encodes the specified ListGoldengateConnectionAssignmentsRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsRequest.verify|verify} messages.
+                     * @param message ListGoldengateConnectionAssignmentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListGoldengateConnectionAssignmentsRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsRequest.verify|verify} messages.
+                     * @param message ListGoldengateConnectionAssignmentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListGoldengateConnectionAssignmentsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListGoldengateConnectionAssignmentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsRequest;
+
+                    /**
+                     * Decodes a ListGoldengateConnectionAssignmentsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListGoldengateConnectionAssignmentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsRequest;
+
+                    /**
+                     * Verifies a ListGoldengateConnectionAssignmentsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListGoldengateConnectionAssignmentsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListGoldengateConnectionAssignmentsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsRequest;
+
+                    /**
+                     * Creates a plain object from a ListGoldengateConnectionAssignmentsRequest message. Also converts values to other types if specified.
+                     * @param message ListGoldengateConnectionAssignmentsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListGoldengateConnectionAssignmentsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListGoldengateConnectionAssignmentsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListGoldengateConnectionAssignmentsResponse. */
+                interface IListGoldengateConnectionAssignmentsResponse {
+
+                    /** ListGoldengateConnectionAssignmentsResponse goldengateConnectionAssignments */
+                    goldengateConnectionAssignments?: (google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment[]|null);
+
+                    /** ListGoldengateConnectionAssignmentsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListGoldengateConnectionAssignmentsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListGoldengateConnectionAssignmentsResponse. */
+                class ListGoldengateConnectionAssignmentsResponse implements IListGoldengateConnectionAssignmentsResponse {
+
+                    /**
+                     * Constructs a new ListGoldengateConnectionAssignmentsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsResponse);
+
+                    /** ListGoldengateConnectionAssignmentsResponse goldengateConnectionAssignments. */
+                    public goldengateConnectionAssignments: google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment[];
+
+                    /** ListGoldengateConnectionAssignmentsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListGoldengateConnectionAssignmentsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListGoldengateConnectionAssignmentsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListGoldengateConnectionAssignmentsResponse instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsResponse): google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsResponse;
+
+                    /**
+                     * Encodes the specified ListGoldengateConnectionAssignmentsResponse message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsResponse.verify|verify} messages.
+                     * @param message ListGoldengateConnectionAssignmentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListGoldengateConnectionAssignmentsResponse message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsResponse.verify|verify} messages.
+                     * @param message ListGoldengateConnectionAssignmentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListGoldengateConnectionAssignmentsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListGoldengateConnectionAssignmentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsResponse;
+
+                    /**
+                     * Decodes a ListGoldengateConnectionAssignmentsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListGoldengateConnectionAssignmentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsResponse;
+
+                    /**
+                     * Verifies a ListGoldengateConnectionAssignmentsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListGoldengateConnectionAssignmentsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListGoldengateConnectionAssignmentsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsResponse;
+
+                    /**
+                     * Creates a plain object from a ListGoldengateConnectionAssignmentsResponse message. Also converts values to other types if specified.
+                     * @param message ListGoldengateConnectionAssignmentsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListGoldengateConnectionAssignmentsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListGoldengateConnectionAssignmentsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetGoldengateConnectionAssignmentRequest. */
+                interface IGetGoldengateConnectionAssignmentRequest {
+
+                    /** GetGoldengateConnectionAssignmentRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetGoldengateConnectionAssignmentRequest. */
+                class GetGoldengateConnectionAssignmentRequest implements IGetGoldengateConnectionAssignmentRequest {
+
+                    /**
+                     * Constructs a new GetGoldengateConnectionAssignmentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGetGoldengateConnectionAssignmentRequest);
+
+                    /** GetGoldengateConnectionAssignmentRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetGoldengateConnectionAssignmentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetGoldengateConnectionAssignmentRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGetGoldengateConnectionAssignmentRequest): google.cloud.oracledatabase.v1.GetGoldengateConnectionAssignmentRequest;
+
+                    /**
+                     * Encodes the specified GetGoldengateConnectionAssignmentRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.GetGoldengateConnectionAssignmentRequest.verify|verify} messages.
+                     * @param message GetGoldengateConnectionAssignmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGetGoldengateConnectionAssignmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetGoldengateConnectionAssignmentRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GetGoldengateConnectionAssignmentRequest.verify|verify} messages.
+                     * @param message GetGoldengateConnectionAssignmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGetGoldengateConnectionAssignmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetGoldengateConnectionAssignmentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetGoldengateConnectionAssignmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GetGoldengateConnectionAssignmentRequest;
+
+                    /**
+                     * Decodes a GetGoldengateConnectionAssignmentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetGoldengateConnectionAssignmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GetGoldengateConnectionAssignmentRequest;
+
+                    /**
+                     * Verifies a GetGoldengateConnectionAssignmentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetGoldengateConnectionAssignmentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetGoldengateConnectionAssignmentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GetGoldengateConnectionAssignmentRequest;
+
+                    /**
+                     * Creates a plain object from a GetGoldengateConnectionAssignmentRequest message. Also converts values to other types if specified.
+                     * @param message GetGoldengateConnectionAssignmentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GetGoldengateConnectionAssignmentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetGoldengateConnectionAssignmentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetGoldengateConnectionAssignmentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateGoldengateConnectionAssignmentRequest. */
+                interface ICreateGoldengateConnectionAssignmentRequest {
+
+                    /** CreateGoldengateConnectionAssignmentRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateGoldengateConnectionAssignmentRequest goldengateConnectionAssignmentId */
+                    goldengateConnectionAssignmentId?: (string|null);
+
+                    /** CreateGoldengateConnectionAssignmentRequest goldengateConnectionAssignment */
+                    goldengateConnectionAssignment?: (google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment|null);
+
+                    /** CreateGoldengateConnectionAssignmentRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateGoldengateConnectionAssignmentRequest. */
+                class CreateGoldengateConnectionAssignmentRequest implements ICreateGoldengateConnectionAssignmentRequest {
+
+                    /**
+                     * Constructs a new CreateGoldengateConnectionAssignmentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.ICreateGoldengateConnectionAssignmentRequest);
+
+                    /** CreateGoldengateConnectionAssignmentRequest parent. */
+                    public parent: string;
+
+                    /** CreateGoldengateConnectionAssignmentRequest goldengateConnectionAssignmentId. */
+                    public goldengateConnectionAssignmentId: string;
+
+                    /** CreateGoldengateConnectionAssignmentRequest goldengateConnectionAssignment. */
+                    public goldengateConnectionAssignment?: (google.cloud.oracledatabase.v1.IGoldengateConnectionAssignment|null);
+
+                    /** CreateGoldengateConnectionAssignmentRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateGoldengateConnectionAssignmentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateGoldengateConnectionAssignmentRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.ICreateGoldengateConnectionAssignmentRequest): google.cloud.oracledatabase.v1.CreateGoldengateConnectionAssignmentRequest;
+
+                    /**
+                     * Encodes the specified CreateGoldengateConnectionAssignmentRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.CreateGoldengateConnectionAssignmentRequest.verify|verify} messages.
+                     * @param message CreateGoldengateConnectionAssignmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.ICreateGoldengateConnectionAssignmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateGoldengateConnectionAssignmentRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.CreateGoldengateConnectionAssignmentRequest.verify|verify} messages.
+                     * @param message CreateGoldengateConnectionAssignmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.ICreateGoldengateConnectionAssignmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateGoldengateConnectionAssignmentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateGoldengateConnectionAssignmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.CreateGoldengateConnectionAssignmentRequest;
+
+                    /**
+                     * Decodes a CreateGoldengateConnectionAssignmentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateGoldengateConnectionAssignmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.CreateGoldengateConnectionAssignmentRequest;
+
+                    /**
+                     * Verifies a CreateGoldengateConnectionAssignmentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateGoldengateConnectionAssignmentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateGoldengateConnectionAssignmentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.CreateGoldengateConnectionAssignmentRequest;
+
+                    /**
+                     * Creates a plain object from a CreateGoldengateConnectionAssignmentRequest message. Also converts values to other types if specified.
+                     * @param message CreateGoldengateConnectionAssignmentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.CreateGoldengateConnectionAssignmentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateGoldengateConnectionAssignmentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateGoldengateConnectionAssignmentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TestGoldengateConnectionAssignmentRequest. */
+                interface ITestGoldengateConnectionAssignmentRequest {
+
+                    /** TestGoldengateConnectionAssignmentRequest name */
+                    name?: (string|null);
+
+                    /** TestGoldengateConnectionAssignmentRequest type */
+                    type?: (google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentRequest.TestType|keyof typeof google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentRequest.TestType|null);
+                }
+
+                /** Represents a TestGoldengateConnectionAssignmentRequest. */
+                class TestGoldengateConnectionAssignmentRequest implements ITestGoldengateConnectionAssignmentRequest {
+
+                    /**
+                     * Constructs a new TestGoldengateConnectionAssignmentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentRequest);
+
+                    /** TestGoldengateConnectionAssignmentRequest name. */
+                    public name: string;
+
+                    /** TestGoldengateConnectionAssignmentRequest type. */
+                    public type: (google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentRequest.TestType|keyof typeof google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentRequest.TestType);
+
+                    /**
+                     * Creates a new TestGoldengateConnectionAssignmentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TestGoldengateConnectionAssignmentRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentRequest): google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentRequest;
+
+                    /**
+                     * Encodes the specified TestGoldengateConnectionAssignmentRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentRequest.verify|verify} messages.
+                     * @param message TestGoldengateConnectionAssignmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TestGoldengateConnectionAssignmentRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentRequest.verify|verify} messages.
+                     * @param message TestGoldengateConnectionAssignmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TestGoldengateConnectionAssignmentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TestGoldengateConnectionAssignmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentRequest;
+
+                    /**
+                     * Decodes a TestGoldengateConnectionAssignmentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TestGoldengateConnectionAssignmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentRequest;
+
+                    /**
+                     * Verifies a TestGoldengateConnectionAssignmentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TestGoldengateConnectionAssignmentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TestGoldengateConnectionAssignmentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentRequest;
+
+                    /**
+                     * Creates a plain object from a TestGoldengateConnectionAssignmentRequest message. Also converts values to other types if specified.
+                     * @param message TestGoldengateConnectionAssignmentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TestGoldengateConnectionAssignmentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TestGoldengateConnectionAssignmentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace TestGoldengateConnectionAssignmentRequest {
+
+                    /** TestType enum. */
+                    enum TestType {
+                        TEST_TYPE_UNSPECIFIED = 0,
+                        DEFAULT = 1
+                    }
+                }
+
+                /** Properties of a TestConnectionAssignmentError. */
+                interface ITestConnectionAssignmentError {
+
+                    /** TestConnectionAssignmentError code */
+                    code?: (string|null);
+
+                    /** TestConnectionAssignmentError message */
+                    message?: (string|null);
+
+                    /** TestConnectionAssignmentError action */
+                    action?: (string|null);
+
+                    /** TestConnectionAssignmentError issue */
+                    issue?: (string|null);
+                }
+
+                /** Represents a TestConnectionAssignmentError. */
+                class TestConnectionAssignmentError implements ITestConnectionAssignmentError {
+
+                    /**
+                     * Constructs a new TestConnectionAssignmentError.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.ITestConnectionAssignmentError);
+
+                    /** TestConnectionAssignmentError code. */
+                    public code: string;
+
+                    /** TestConnectionAssignmentError message. */
+                    public message: string;
+
+                    /** TestConnectionAssignmentError action. */
+                    public action: string;
+
+                    /** TestConnectionAssignmentError issue. */
+                    public issue: string;
+
+                    /**
+                     * Creates a new TestConnectionAssignmentError instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TestConnectionAssignmentError instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.ITestConnectionAssignmentError): google.cloud.oracledatabase.v1.TestConnectionAssignmentError;
+
+                    /**
+                     * Encodes the specified TestConnectionAssignmentError message. Does not implicitly {@link google.cloud.oracledatabase.v1.TestConnectionAssignmentError.verify|verify} messages.
+                     * @param message TestConnectionAssignmentError message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.ITestConnectionAssignmentError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TestConnectionAssignmentError message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.TestConnectionAssignmentError.verify|verify} messages.
+                     * @param message TestConnectionAssignmentError message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.ITestConnectionAssignmentError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TestConnectionAssignmentError message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TestConnectionAssignmentError
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.TestConnectionAssignmentError;
+
+                    /**
+                     * Decodes a TestConnectionAssignmentError message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TestConnectionAssignmentError
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.TestConnectionAssignmentError;
+
+                    /**
+                     * Verifies a TestConnectionAssignmentError message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TestConnectionAssignmentError message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TestConnectionAssignmentError
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.TestConnectionAssignmentError;
+
+                    /**
+                     * Creates a plain object from a TestConnectionAssignmentError message. Also converts values to other types if specified.
+                     * @param message TestConnectionAssignmentError
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.TestConnectionAssignmentError, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TestConnectionAssignmentError to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TestConnectionAssignmentError
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TestGoldengateConnectionAssignmentResponse. */
+                interface ITestGoldengateConnectionAssignmentResponse {
+
+                    /** TestGoldengateConnectionAssignmentResponse resultType */
+                    resultType?: (google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentResponse.ResultType|keyof typeof google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentResponse.ResultType|null);
+
+                    /** TestGoldengateConnectionAssignmentResponse error */
+                    error?: (google.cloud.oracledatabase.v1.ITestConnectionAssignmentError|null);
+
+                    /** TestGoldengateConnectionAssignmentResponse errors */
+                    errors?: (google.cloud.oracledatabase.v1.ITestConnectionAssignmentError[]|null);
+                }
+
+                /** Represents a TestGoldengateConnectionAssignmentResponse. */
+                class TestGoldengateConnectionAssignmentResponse implements ITestGoldengateConnectionAssignmentResponse {
+
+                    /**
+                     * Constructs a new TestGoldengateConnectionAssignmentResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentResponse);
+
+                    /** TestGoldengateConnectionAssignmentResponse resultType. */
+                    public resultType: (google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentResponse.ResultType|keyof typeof google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentResponse.ResultType);
+
+                    /** TestGoldengateConnectionAssignmentResponse error. */
+                    public error?: (google.cloud.oracledatabase.v1.ITestConnectionAssignmentError|null);
+
+                    /** TestGoldengateConnectionAssignmentResponse errors. */
+                    public errors: google.cloud.oracledatabase.v1.ITestConnectionAssignmentError[];
+
+                    /**
+                     * Creates a new TestGoldengateConnectionAssignmentResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TestGoldengateConnectionAssignmentResponse instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentResponse): google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentResponse;
+
+                    /**
+                     * Encodes the specified TestGoldengateConnectionAssignmentResponse message. Does not implicitly {@link google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentResponse.verify|verify} messages.
+                     * @param message TestGoldengateConnectionAssignmentResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TestGoldengateConnectionAssignmentResponse message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentResponse.verify|verify} messages.
+                     * @param message TestGoldengateConnectionAssignmentResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TestGoldengateConnectionAssignmentResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TestGoldengateConnectionAssignmentResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentResponse;
+
+                    /**
+                     * Decodes a TestGoldengateConnectionAssignmentResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TestGoldengateConnectionAssignmentResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentResponse;
+
+                    /**
+                     * Verifies a TestGoldengateConnectionAssignmentResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TestGoldengateConnectionAssignmentResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TestGoldengateConnectionAssignmentResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentResponse;
+
+                    /**
+                     * Creates a plain object from a TestGoldengateConnectionAssignmentResponse message. Also converts values to other types if specified.
+                     * @param message TestGoldengateConnectionAssignmentResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TestGoldengateConnectionAssignmentResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TestGoldengateConnectionAssignmentResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace TestGoldengateConnectionAssignmentResponse {
+
+                    /** ResultType enum. */
+                    enum ResultType {
+                        RESULT_TYPE_UNSPECIFIED = 0,
+                        SUCCEEDED = 1,
+                        FAILED = 2,
+                        TIMED_OUT = 3
+                    }
+                }
+
+                /** Properties of a DeleteGoldengateConnectionAssignmentRequest. */
+                interface IDeleteGoldengateConnectionAssignmentRequest {
+
+                    /** DeleteGoldengateConnectionAssignmentRequest name */
+                    name?: (string|null);
+
+                    /** DeleteGoldengateConnectionAssignmentRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteGoldengateConnectionAssignmentRequest. */
+                class DeleteGoldengateConnectionAssignmentRequest implements IDeleteGoldengateConnectionAssignmentRequest {
+
+                    /**
+                     * Constructs a new DeleteGoldengateConnectionAssignmentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IDeleteGoldengateConnectionAssignmentRequest);
+
+                    /** DeleteGoldengateConnectionAssignmentRequest name. */
+                    public name: string;
+
+                    /** DeleteGoldengateConnectionAssignmentRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteGoldengateConnectionAssignmentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteGoldengateConnectionAssignmentRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IDeleteGoldengateConnectionAssignmentRequest): google.cloud.oracledatabase.v1.DeleteGoldengateConnectionAssignmentRequest;
+
+                    /**
+                     * Encodes the specified DeleteGoldengateConnectionAssignmentRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.DeleteGoldengateConnectionAssignmentRequest.verify|verify} messages.
+                     * @param message DeleteGoldengateConnectionAssignmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IDeleteGoldengateConnectionAssignmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteGoldengateConnectionAssignmentRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.DeleteGoldengateConnectionAssignmentRequest.verify|verify} messages.
+                     * @param message DeleteGoldengateConnectionAssignmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IDeleteGoldengateConnectionAssignmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteGoldengateConnectionAssignmentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteGoldengateConnectionAssignmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.DeleteGoldengateConnectionAssignmentRequest;
+
+                    /**
+                     * Decodes a DeleteGoldengateConnectionAssignmentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteGoldengateConnectionAssignmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.DeleteGoldengateConnectionAssignmentRequest;
+
+                    /**
+                     * Verifies a DeleteGoldengateConnectionAssignmentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteGoldengateConnectionAssignmentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteGoldengateConnectionAssignmentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.DeleteGoldengateConnectionAssignmentRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteGoldengateConnectionAssignmentRequest message. Also converts values to other types if specified.
+                     * @param message DeleteGoldengateConnectionAssignmentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.DeleteGoldengateConnectionAssignmentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteGoldengateConnectionAssignmentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteGoldengateConnectionAssignmentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoldengateConnectionType. */
+                interface IGoldengateConnectionType {
+
+                    /** GoldengateConnectionType name */
+                    name?: (string|null);
+
+                    /** GoldengateConnectionType connectionType */
+                    connectionType?: (google.cloud.oracledatabase.v1.GoldengateConnectionType.ConnectionType|keyof typeof google.cloud.oracledatabase.v1.GoldengateConnectionType.ConnectionType|null);
+
+                    /** GoldengateConnectionType technologyTypes */
+                    technologyTypes?: (string[]|null);
+                }
+
+                /** Represents a GoldengateConnectionType. */
+                class GoldengateConnectionType implements IGoldengateConnectionType {
+
+                    /**
+                     * Constructs a new GoldengateConnectionType.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateConnectionType);
+
+                    /** GoldengateConnectionType name. */
+                    public name: string;
+
+                    /** GoldengateConnectionType connectionType. */
+                    public connectionType: (google.cloud.oracledatabase.v1.GoldengateConnectionType.ConnectionType|keyof typeof google.cloud.oracledatabase.v1.GoldengateConnectionType.ConnectionType);
+
+                    /** GoldengateConnectionType technologyTypes. */
+                    public technologyTypes: string[];
+
+                    /**
+                     * Creates a new GoldengateConnectionType instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateConnectionType instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateConnectionType): google.cloud.oracledatabase.v1.GoldengateConnectionType;
+
+                    /**
+                     * Encodes the specified GoldengateConnectionType message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateConnectionType.verify|verify} messages.
+                     * @param message GoldengateConnectionType message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateConnectionType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateConnectionType message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateConnectionType.verify|verify} messages.
+                     * @param message GoldengateConnectionType message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateConnectionType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateConnectionType message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateConnectionType
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateConnectionType;
+
+                    /**
+                     * Decodes a GoldengateConnectionType message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateConnectionType
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateConnectionType;
+
+                    /**
+                     * Verifies a GoldengateConnectionType message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateConnectionType message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateConnectionType
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateConnectionType;
+
+                    /**
+                     * Creates a plain object from a GoldengateConnectionType message. Also converts values to other types if specified.
+                     * @param message GoldengateConnectionType
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateConnectionType, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateConnectionType to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateConnectionType
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GoldengateConnectionType {
+
+                    /** ConnectionType enum. */
+                    enum ConnectionType {
+                        CONNECTION_TYPE_UNSPECIFIED = 0,
+                        GOLDENGATE = 1,
+                        KAFKA = 2,
+                        KAFKA_SCHEMA_REGISTRY = 3,
+                        MYSQL = 4,
+                        JAVA_MESSAGE_SERVICE = 5,
+                        MICROSOFT_SQLSERVER = 6,
+                        OCI_OBJECT_STORAGE = 7,
+                        ORACLE = 8,
+                        AZURE_DATA_LAKE_STORAGE = 9,
+                        POSTGRESQL = 10,
+                        AZURE_SYNAPSE_ANALYTICS = 11,
+                        SNOWFLAKE = 12,
+                        AMAZON_S3 = 13,
+                        HDFS = 14,
+                        ORACLE_AI_DATA_PLATFORM = 15,
+                        ORACLE_NOSQL = 16,
+                        MONGODB = 17,
+                        AMAZON_KINESIS = 18,
+                        AMAZON_REDSHIFT = 19,
+                        DB2 = 20,
+                        REDIS = 21,
+                        ELASTICSEARCH = 22,
+                        GENERIC = 23,
+                        GOOGLE_CLOUD_STORAGE = 24,
+                        GOOGLE_BIGQUERY = 25,
+                        DATABRICKS = 26,
+                        GOOGLE_PUBSUB = 27,
+                        MICROSOFT_FABRIC = 28,
+                        ICEBERG = 29
+                    }
+                }
+
+                /** Properties of a ListGoldengateConnectionTypesRequest. */
+                interface IListGoldengateConnectionTypesRequest {
+
+                    /** ListGoldengateConnectionTypesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListGoldengateConnectionTypesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListGoldengateConnectionTypesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListGoldengateConnectionTypesRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListGoldengateConnectionTypesRequest. */
+                class ListGoldengateConnectionTypesRequest implements IListGoldengateConnectionTypesRequest {
+
+                    /**
+                     * Constructs a new ListGoldengateConnectionTypesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesRequest);
+
+                    /** ListGoldengateConnectionTypesRequest parent. */
+                    public parent: string;
+
+                    /** ListGoldengateConnectionTypesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListGoldengateConnectionTypesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListGoldengateConnectionTypesRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListGoldengateConnectionTypesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListGoldengateConnectionTypesRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesRequest): google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesRequest;
+
+                    /**
+                     * Encodes the specified ListGoldengateConnectionTypesRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesRequest.verify|verify} messages.
+                     * @param message ListGoldengateConnectionTypesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListGoldengateConnectionTypesRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesRequest.verify|verify} messages.
+                     * @param message ListGoldengateConnectionTypesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListGoldengateConnectionTypesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListGoldengateConnectionTypesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesRequest;
+
+                    /**
+                     * Decodes a ListGoldengateConnectionTypesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListGoldengateConnectionTypesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesRequest;
+
+                    /**
+                     * Verifies a ListGoldengateConnectionTypesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListGoldengateConnectionTypesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListGoldengateConnectionTypesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesRequest;
+
+                    /**
+                     * Creates a plain object from a ListGoldengateConnectionTypesRequest message. Also converts values to other types if specified.
+                     * @param message ListGoldengateConnectionTypesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListGoldengateConnectionTypesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListGoldengateConnectionTypesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListGoldengateConnectionTypesResponse. */
+                interface IListGoldengateConnectionTypesResponse {
+
+                    /** ListGoldengateConnectionTypesResponse goldengateConnectionTypes */
+                    goldengateConnectionTypes?: (google.cloud.oracledatabase.v1.IGoldengateConnectionType[]|null);
+
+                    /** ListGoldengateConnectionTypesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListGoldengateConnectionTypesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListGoldengateConnectionTypesResponse. */
+                class ListGoldengateConnectionTypesResponse implements IListGoldengateConnectionTypesResponse {
+
+                    /**
+                     * Constructs a new ListGoldengateConnectionTypesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesResponse);
+
+                    /** ListGoldengateConnectionTypesResponse goldengateConnectionTypes. */
+                    public goldengateConnectionTypes: google.cloud.oracledatabase.v1.IGoldengateConnectionType[];
+
+                    /** ListGoldengateConnectionTypesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListGoldengateConnectionTypesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListGoldengateConnectionTypesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListGoldengateConnectionTypesResponse instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesResponse): google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesResponse;
+
+                    /**
+                     * Encodes the specified ListGoldengateConnectionTypesResponse message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesResponse.verify|verify} messages.
+                     * @param message ListGoldengateConnectionTypesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListGoldengateConnectionTypesResponse message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesResponse.verify|verify} messages.
+                     * @param message ListGoldengateConnectionTypesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListGoldengateConnectionTypesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListGoldengateConnectionTypesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesResponse;
+
+                    /**
+                     * Decodes a ListGoldengateConnectionTypesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListGoldengateConnectionTypesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesResponse;
+
+                    /**
+                     * Verifies a ListGoldengateConnectionTypesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListGoldengateConnectionTypesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListGoldengateConnectionTypesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesResponse;
+
+                    /**
+                     * Creates a plain object from a ListGoldengateConnectionTypesResponse message. Also converts values to other types if specified.
+                     * @param message ListGoldengateConnectionTypesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListGoldengateConnectionTypesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListGoldengateConnectionTypesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoldengateDeployment. */
+                interface IGoldengateDeployment {
+
+                    /** GoldengateDeployment name */
+                    name?: (string|null);
+
+                    /** GoldengateDeployment properties */
+                    properties?: (google.cloud.oracledatabase.v1.IGoldengateDeploymentProperties|null);
+
+                    /** GoldengateDeployment gcpOracleZone */
+                    gcpOracleZone?: (string|null);
+
+                    /** GoldengateDeployment labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** GoldengateDeployment odbNetwork */
+                    odbNetwork?: (string|null);
+
+                    /** GoldengateDeployment odbSubnet */
+                    odbSubnet?: (string|null);
+
+                    /** GoldengateDeployment entitlementId */
+                    entitlementId?: (string|null);
+
+                    /** GoldengateDeployment displayName */
+                    displayName?: (string|null);
+
+                    /** GoldengateDeployment createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoldengateDeployment ociUrl */
+                    ociUrl?: (string|null);
+                }
+
+                /** Represents a GoldengateDeployment. */
+                class GoldengateDeployment implements IGoldengateDeployment {
+
+                    /**
+                     * Constructs a new GoldengateDeployment.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateDeployment);
+
+                    /** GoldengateDeployment name. */
+                    public name: string;
+
+                    /** GoldengateDeployment properties. */
+                    public properties?: (google.cloud.oracledatabase.v1.IGoldengateDeploymentProperties|null);
+
+                    /** GoldengateDeployment gcpOracleZone. */
+                    public gcpOracleZone: string;
+
+                    /** GoldengateDeployment labels. */
+                    public labels: { [k: string]: string };
+
+                    /** GoldengateDeployment odbNetwork. */
+                    public odbNetwork: string;
+
+                    /** GoldengateDeployment odbSubnet. */
+                    public odbSubnet: string;
+
+                    /** GoldengateDeployment entitlementId. */
+                    public entitlementId: string;
+
+                    /** GoldengateDeployment displayName. */
+                    public displayName: string;
+
+                    /** GoldengateDeployment createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoldengateDeployment ociUrl. */
+                    public ociUrl: string;
+
+                    /**
+                     * Creates a new GoldengateDeployment instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateDeployment instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateDeployment): google.cloud.oracledatabase.v1.GoldengateDeployment;
+
+                    /**
+                     * Encodes the specified GoldengateDeployment message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateDeployment.verify|verify} messages.
+                     * @param message GoldengateDeployment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateDeployment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateDeployment message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateDeployment.verify|verify} messages.
+                     * @param message GoldengateDeployment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateDeployment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateDeployment message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateDeployment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateDeployment;
+
+                    /**
+                     * Decodes a GoldengateDeployment message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateDeployment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateDeployment;
+
+                    /**
+                     * Verifies a GoldengateDeployment message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateDeployment message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateDeployment
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateDeployment;
+
+                    /**
+                     * Creates a plain object from a GoldengateDeployment message. Also converts values to other types if specified.
+                     * @param message GoldengateDeployment
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateDeployment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateDeployment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateDeployment
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoldengateDeploymentProperties. */
+                interface IGoldengateDeploymentProperties {
+
+                    /** GoldengateDeploymentProperties ocid */
+                    ocid?: (string|null);
+
+                    /** GoldengateDeploymentProperties lifecycleState */
+                    lifecycleState?: (google.cloud.oracledatabase.v1.GoldengateDeploymentProperties.GoldengateDeploymentLifecycleState|keyof typeof google.cloud.oracledatabase.v1.GoldengateDeploymentProperties.GoldengateDeploymentLifecycleState|null);
+
+                    /** GoldengateDeploymentProperties licenseModel */
+                    licenseModel?: (google.cloud.oracledatabase.v1.GoldengateDeploymentProperties.LicenseModel|keyof typeof google.cloud.oracledatabase.v1.GoldengateDeploymentProperties.LicenseModel|null);
+
+                    /** GoldengateDeploymentProperties environmentType */
+                    environmentType?: (string|null);
+
+                    /** GoldengateDeploymentProperties cpuCoreCount */
+                    cpuCoreCount?: (number|null);
+
+                    /** GoldengateDeploymentProperties isAutoScalingEnabled */
+                    isAutoScalingEnabled?: (boolean|null);
+
+                    /** GoldengateDeploymentProperties description */
+                    description?: (string|null);
+
+                    /** GoldengateDeploymentProperties deploymentType */
+                    deploymentType?: (string|null);
+
+                    /** GoldengateDeploymentProperties oggData */
+                    oggData?: (google.cloud.oracledatabase.v1.IGoldengateOggDeployment|null);
+
+                    /** GoldengateDeploymentProperties maintenanceWindow */
+                    maintenanceWindow?: (google.cloud.oracledatabase.v1.IGoldengateMaintenanceWindow|null);
+
+                    /** GoldengateDeploymentProperties maintenanceConfig */
+                    maintenanceConfig?: (google.cloud.oracledatabase.v1.IGoldengateMaintenanceConfig|null);
+
+                    /** GoldengateDeploymentProperties fqdn */
+                    fqdn?: (string|null);
+
+                    /** GoldengateDeploymentProperties lifecycleSubState */
+                    lifecycleSubState?: (google.cloud.oracledatabase.v1.GoldengateDeploymentProperties.GoldengateDeploymentLifecycleSubState|keyof typeof google.cloud.oracledatabase.v1.GoldengateDeploymentProperties.GoldengateDeploymentLifecycleSubState|null);
+
+                    /** GoldengateDeploymentProperties category */
+                    category?: (google.cloud.oracledatabase.v1.GoldengateDeploymentProperties.GoldengateDeploymentCategory|keyof typeof google.cloud.oracledatabase.v1.GoldengateDeploymentProperties.GoldengateDeploymentCategory|null);
+
+                    /** GoldengateDeploymentProperties deploymentBackupId */
+                    deploymentBackupId?: (string|null);
+
+                    /** GoldengateDeploymentProperties updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoldengateDeploymentProperties lifecycleDetails */
+                    lifecycleDetails?: (string|null);
+
+                    /** GoldengateDeploymentProperties healthy */
+                    healthy?: (boolean|null);
+
+                    /** GoldengateDeploymentProperties loadBalancerSubnetId */
+                    loadBalancerSubnetId?: (string|null);
+
+                    /** GoldengateDeploymentProperties loadBalancerId */
+                    loadBalancerId?: (string|null);
+
+                    /** GoldengateDeploymentProperties nsgIds */
+                    nsgIds?: (string[]|null);
+
+                    /** GoldengateDeploymentProperties isPublic */
+                    isPublic?: (boolean|null);
+
+                    /** GoldengateDeploymentProperties publicIpAddress */
+                    publicIpAddress?: (string|null);
+
+                    /** GoldengateDeploymentProperties privateIpAddress */
+                    privateIpAddress?: (string|null);
+
+                    /** GoldengateDeploymentProperties deploymentUrl */
+                    deploymentUrl?: (string|null);
+
+                    /** GoldengateDeploymentProperties isLatestVersion */
+                    isLatestVersion?: (boolean|null);
+
+                    /** GoldengateDeploymentProperties upgradeRequiredTime */
+                    upgradeRequiredTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoldengateDeploymentProperties storageUtilizationBytes */
+                    storageUtilizationBytes?: (number|Long|string|null);
+
+                    /** GoldengateDeploymentProperties isStorageUtilizationLimitExceeded */
+                    isStorageUtilizationLimitExceeded?: (boolean|null);
+
+                    /** GoldengateDeploymentProperties deploymentDiagnosticData */
+                    deploymentDiagnosticData?: (google.cloud.oracledatabase.v1.IDeploymentDiagnosticData|null);
+
+                    /** GoldengateDeploymentProperties backupSchedule */
+                    backupSchedule?: (google.cloud.oracledatabase.v1.IGoldengateBackupSchedule|null);
+
+                    /** GoldengateDeploymentProperties nextMaintenanceTime */
+                    nextMaintenanceTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoldengateDeploymentProperties nextMaintenanceActionType */
+                    nextMaintenanceActionType?: (google.cloud.oracledatabase.v1.GoldengateDeploymentProperties.NextMaintenanceActionType|keyof typeof google.cloud.oracledatabase.v1.GoldengateDeploymentProperties.NextMaintenanceActionType|null);
+
+                    /** GoldengateDeploymentProperties nextMaintenanceDescription */
+                    nextMaintenanceDescription?: (string|null);
+
+                    /** GoldengateDeploymentProperties oggVersionSupportEndTime */
+                    oggVersionSupportEndTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoldengateDeploymentProperties ingressIps */
+                    ingressIps?: (google.cloud.oracledatabase.v1.IIngressIp[]|null);
+
+                    /** GoldengateDeploymentProperties deploymentRole */
+                    deploymentRole?: (google.cloud.oracledatabase.v1.GoldengateDeploymentProperties.GoldengateDeploymentRoleType|keyof typeof google.cloud.oracledatabase.v1.GoldengateDeploymentProperties.GoldengateDeploymentRoleType|null);
+
+                    /** GoldengateDeploymentProperties lastBackupScheduleTime */
+                    lastBackupScheduleTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoldengateDeploymentProperties nextBackupScheduleTime */
+                    nextBackupScheduleTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoldengateDeploymentProperties roleChangeTime */
+                    roleChangeTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoldengateDeploymentProperties locks */
+                    locks?: (google.cloud.oracledatabase.v1.IGoldengateDeploymentLock[]|null);
+
+                    /** GoldengateDeploymentProperties placements */
+                    placements?: (google.cloud.oracledatabase.v1.IGoldengatePlacement[]|null);
+                }
+
+                /** Represents a GoldengateDeploymentProperties. */
+                class GoldengateDeploymentProperties implements IGoldengateDeploymentProperties {
+
+                    /**
+                     * Constructs a new GoldengateDeploymentProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateDeploymentProperties);
+
+                    /** GoldengateDeploymentProperties ocid. */
+                    public ocid: string;
+
+                    /** GoldengateDeploymentProperties lifecycleState. */
+                    public lifecycleState: (google.cloud.oracledatabase.v1.GoldengateDeploymentProperties.GoldengateDeploymentLifecycleState|keyof typeof google.cloud.oracledatabase.v1.GoldengateDeploymentProperties.GoldengateDeploymentLifecycleState);
+
+                    /** GoldengateDeploymentProperties licenseModel. */
+                    public licenseModel: (google.cloud.oracledatabase.v1.GoldengateDeploymentProperties.LicenseModel|keyof typeof google.cloud.oracledatabase.v1.GoldengateDeploymentProperties.LicenseModel);
+
+                    /** GoldengateDeploymentProperties environmentType. */
+                    public environmentType: string;
+
+                    /** GoldengateDeploymentProperties cpuCoreCount. */
+                    public cpuCoreCount: number;
+
+                    /** GoldengateDeploymentProperties isAutoScalingEnabled. */
+                    public isAutoScalingEnabled: boolean;
+
+                    /** GoldengateDeploymentProperties description. */
+                    public description: string;
+
+                    /** GoldengateDeploymentProperties deploymentType. */
+                    public deploymentType: string;
+
+                    /** GoldengateDeploymentProperties oggData. */
+                    public oggData?: (google.cloud.oracledatabase.v1.IGoldengateOggDeployment|null);
+
+                    /** GoldengateDeploymentProperties maintenanceWindow. */
+                    public maintenanceWindow?: (google.cloud.oracledatabase.v1.IGoldengateMaintenanceWindow|null);
+
+                    /** GoldengateDeploymentProperties maintenanceConfig. */
+                    public maintenanceConfig?: (google.cloud.oracledatabase.v1.IGoldengateMaintenanceConfig|null);
+
+                    /** GoldengateDeploymentProperties fqdn. */
+                    public fqdn: string;
+
+                    /** GoldengateDeploymentProperties lifecycleSubState. */
+                    public lifecycleSubState: (google.cloud.oracledatabase.v1.GoldengateDeploymentProperties.GoldengateDeploymentLifecycleSubState|keyof typeof google.cloud.oracledatabase.v1.GoldengateDeploymentProperties.GoldengateDeploymentLifecycleSubState);
+
+                    /** GoldengateDeploymentProperties category. */
+                    public category: (google.cloud.oracledatabase.v1.GoldengateDeploymentProperties.GoldengateDeploymentCategory|keyof typeof google.cloud.oracledatabase.v1.GoldengateDeploymentProperties.GoldengateDeploymentCategory);
+
+                    /** GoldengateDeploymentProperties deploymentBackupId. */
+                    public deploymentBackupId: string;
+
+                    /** GoldengateDeploymentProperties updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoldengateDeploymentProperties lifecycleDetails. */
+                    public lifecycleDetails: string;
+
+                    /** GoldengateDeploymentProperties healthy. */
+                    public healthy: boolean;
+
+                    /** GoldengateDeploymentProperties loadBalancerSubnetId. */
+                    public loadBalancerSubnetId: string;
+
+                    /** GoldengateDeploymentProperties loadBalancerId. */
+                    public loadBalancerId: string;
+
+                    /** GoldengateDeploymentProperties nsgIds. */
+                    public nsgIds: string[];
+
+                    /** GoldengateDeploymentProperties isPublic. */
+                    public isPublic: boolean;
+
+                    /** GoldengateDeploymentProperties publicIpAddress. */
+                    public publicIpAddress: string;
+
+                    /** GoldengateDeploymentProperties privateIpAddress. */
+                    public privateIpAddress: string;
+
+                    /** GoldengateDeploymentProperties deploymentUrl. */
+                    public deploymentUrl: string;
+
+                    /** GoldengateDeploymentProperties isLatestVersion. */
+                    public isLatestVersion: boolean;
+
+                    /** GoldengateDeploymentProperties upgradeRequiredTime. */
+                    public upgradeRequiredTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoldengateDeploymentProperties storageUtilizationBytes. */
+                    public storageUtilizationBytes: (number|Long|string);
+
+                    /** GoldengateDeploymentProperties isStorageUtilizationLimitExceeded. */
+                    public isStorageUtilizationLimitExceeded: boolean;
+
+                    /** GoldengateDeploymentProperties deploymentDiagnosticData. */
+                    public deploymentDiagnosticData?: (google.cloud.oracledatabase.v1.IDeploymentDiagnosticData|null);
+
+                    /** GoldengateDeploymentProperties backupSchedule. */
+                    public backupSchedule?: (google.cloud.oracledatabase.v1.IGoldengateBackupSchedule|null);
+
+                    /** GoldengateDeploymentProperties nextMaintenanceTime. */
+                    public nextMaintenanceTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoldengateDeploymentProperties nextMaintenanceActionType. */
+                    public nextMaintenanceActionType: (google.cloud.oracledatabase.v1.GoldengateDeploymentProperties.NextMaintenanceActionType|keyof typeof google.cloud.oracledatabase.v1.GoldengateDeploymentProperties.NextMaintenanceActionType);
+
+                    /** GoldengateDeploymentProperties nextMaintenanceDescription. */
+                    public nextMaintenanceDescription: string;
+
+                    /** GoldengateDeploymentProperties oggVersionSupportEndTime. */
+                    public oggVersionSupportEndTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoldengateDeploymentProperties ingressIps. */
+                    public ingressIps: google.cloud.oracledatabase.v1.IIngressIp[];
+
+                    /** GoldengateDeploymentProperties deploymentRole. */
+                    public deploymentRole: (google.cloud.oracledatabase.v1.GoldengateDeploymentProperties.GoldengateDeploymentRoleType|keyof typeof google.cloud.oracledatabase.v1.GoldengateDeploymentProperties.GoldengateDeploymentRoleType);
+
+                    /** GoldengateDeploymentProperties lastBackupScheduleTime. */
+                    public lastBackupScheduleTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoldengateDeploymentProperties nextBackupScheduleTime. */
+                    public nextBackupScheduleTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoldengateDeploymentProperties roleChangeTime. */
+                    public roleChangeTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoldengateDeploymentProperties locks. */
+                    public locks: google.cloud.oracledatabase.v1.IGoldengateDeploymentLock[];
+
+                    /** GoldengateDeploymentProperties placements. */
+                    public placements: google.cloud.oracledatabase.v1.IGoldengatePlacement[];
+
+                    /**
+                     * Creates a new GoldengateDeploymentProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateDeploymentProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateDeploymentProperties): google.cloud.oracledatabase.v1.GoldengateDeploymentProperties;
+
+                    /**
+                     * Encodes the specified GoldengateDeploymentProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateDeploymentProperties.verify|verify} messages.
+                     * @param message GoldengateDeploymentProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateDeploymentProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateDeploymentProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateDeploymentProperties.verify|verify} messages.
+                     * @param message GoldengateDeploymentProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateDeploymentProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateDeploymentProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateDeploymentProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateDeploymentProperties;
+
+                    /**
+                     * Decodes a GoldengateDeploymentProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateDeploymentProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateDeploymentProperties;
+
+                    /**
+                     * Verifies a GoldengateDeploymentProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateDeploymentProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateDeploymentProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateDeploymentProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateDeploymentProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateDeploymentProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateDeploymentProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateDeploymentProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateDeploymentProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GoldengateDeploymentProperties {
+
+                    /** GoldengateDeploymentLifecycleState enum. */
+                    enum GoldengateDeploymentLifecycleState {
+                        GOLDENGATE_DEPLOYMENT_LIFECYCLE_STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        UPDATING = 2,
+                        ACTIVE = 3,
+                        INACTIVE = 4,
+                        DELETING = 5,
+                        DELETED = 6,
+                        FAILED = 7,
+                        NEEDS_ATTENTION = 8,
+                        IN_PROGRESS = 9,
+                        CANCELLING = 10,
+                        CANCELLED = 11,
+                        SUCCEEDED = 12,
+                        WAITING = 13
+                    }
+
+                    /** LicenseModel enum. */
+                    enum LicenseModel {
+                        LICENSE_MODEL_UNSPECIFIED = 0,
+                        LICENSE_INCLUDED = 1,
+                        BRING_YOUR_OWN_LICENSE = 2
+                    }
+
+                    /** GoldengateDeploymentLifecycleSubState enum. */
+                    enum GoldengateDeploymentLifecycleSubState {
+                        GOLDENGATE_DEPLOYMENT_LIFECYCLE_SUB_STATE_UNSPECIFIED = 0,
+                        RECOVERING = 1,
+                        STARTING = 2,
+                        STOPPING = 3,
+                        MOVING = 4,
+                        UPGRADING = 5,
+                        RESTORING = 6,
+                        BACKING_UP = 7,
+                        ROLLING_BACK = 8
+                    }
+
+                    /** GoldengateDeploymentCategory enum. */
+                    enum GoldengateDeploymentCategory {
+                        GOLDENGATE_DEPLOYMENT_CATEGORY_UNSPECIFIED = 0,
+                        DATA_REPLICATION = 1,
+                        DATA_TRANSFORMS = 2
+                    }
+
+                    /** NextMaintenanceActionType enum. */
+                    enum NextMaintenanceActionType {
+                        NEXT_MAINTENANCE_ACTION_TYPE_UNSPECIFIED = 0,
+                        UPGRADE = 1
+                    }
+
+                    /** GoldengateDeploymentRoleType enum. */
+                    enum GoldengateDeploymentRoleType {
+                        GOLDENGATE_DEPLOYMENT_ROLE_TYPE_UNSPECIFIED = 0,
+                        PRIMARY = 1,
+                        STANDBY = 2
+                    }
+                }
+
+                /** Properties of a GoldengateOggDeployment. */
+                interface IGoldengateOggDeployment {
+
+                    /** GoldengateOggDeployment adminPassword */
+                    adminPassword?: (string|null);
+
+                    /** GoldengateOggDeployment adminPasswordSecretVersion */
+                    adminPasswordSecretVersion?: (string|null);
+
+                    /** GoldengateOggDeployment deployment */
+                    deployment?: (string|null);
+
+                    /** GoldengateOggDeployment adminUsername */
+                    adminUsername?: (string|null);
+
+                    /** GoldengateOggDeployment oggVersion */
+                    oggVersion?: (string|null);
+
+                    /** GoldengateOggDeployment certificate */
+                    certificate?: (string|null);
+
+                    /** GoldengateOggDeployment credentialStore */
+                    credentialStore?: (google.cloud.oracledatabase.v1.GoldengateOggDeployment.CredentialStore|keyof typeof google.cloud.oracledatabase.v1.GoldengateOggDeployment.CredentialStore|null);
+
+                    /** GoldengateOggDeployment identityDomainId */
+                    identityDomainId?: (string|null);
+
+                    /** GoldengateOggDeployment passwordSecretId */
+                    passwordSecretId?: (string|null);
+
+                    /** GoldengateOggDeployment groupRolesMapping */
+                    groupRolesMapping?: (google.cloud.oracledatabase.v1.IGoldengateGroupToRolesMapping|null);
+                }
+
+                /** Represents a GoldengateOggDeployment. */
+                class GoldengateOggDeployment implements IGoldengateOggDeployment {
+
+                    /**
+                     * Constructs a new GoldengateOggDeployment.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateOggDeployment);
+
+                    /** GoldengateOggDeployment adminPassword. */
+                    public adminPassword?: (string|null);
+
+                    /** GoldengateOggDeployment adminPasswordSecretVersion. */
+                    public adminPasswordSecretVersion?: (string|null);
+
+                    /** GoldengateOggDeployment deployment. */
+                    public deployment: string;
+
+                    /** GoldengateOggDeployment adminUsername. */
+                    public adminUsername: string;
+
+                    /** GoldengateOggDeployment oggVersion. */
+                    public oggVersion: string;
+
+                    /** GoldengateOggDeployment certificate. */
+                    public certificate: string;
+
+                    /** GoldengateOggDeployment credentialStore. */
+                    public credentialStore: (google.cloud.oracledatabase.v1.GoldengateOggDeployment.CredentialStore|keyof typeof google.cloud.oracledatabase.v1.GoldengateOggDeployment.CredentialStore);
+
+                    /** GoldengateOggDeployment identityDomainId. */
+                    public identityDomainId: string;
+
+                    /** GoldengateOggDeployment passwordSecretId. */
+                    public passwordSecretId: string;
+
+                    /** GoldengateOggDeployment groupRolesMapping. */
+                    public groupRolesMapping?: (google.cloud.oracledatabase.v1.IGoldengateGroupToRolesMapping|null);
+
+                    /** GoldengateOggDeployment deploymentPasswordOptions. */
+                    public deploymentPasswordOptions?: ("adminPassword"|"adminPasswordSecretVersion");
+
+                    /**
+                     * Creates a new GoldengateOggDeployment instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateOggDeployment instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateOggDeployment): google.cloud.oracledatabase.v1.GoldengateOggDeployment;
+
+                    /**
+                     * Encodes the specified GoldengateOggDeployment message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateOggDeployment.verify|verify} messages.
+                     * @param message GoldengateOggDeployment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateOggDeployment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateOggDeployment message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateOggDeployment.verify|verify} messages.
+                     * @param message GoldengateOggDeployment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateOggDeployment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateOggDeployment message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateOggDeployment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateOggDeployment;
+
+                    /**
+                     * Decodes a GoldengateOggDeployment message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateOggDeployment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateOggDeployment;
+
+                    /**
+                     * Verifies a GoldengateOggDeployment message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateOggDeployment message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateOggDeployment
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateOggDeployment;
+
+                    /**
+                     * Creates a plain object from a GoldengateOggDeployment message. Also converts values to other types if specified.
+                     * @param message GoldengateOggDeployment
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateOggDeployment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateOggDeployment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateOggDeployment
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GoldengateOggDeployment {
+
+                    /** CredentialStore enum. */
+                    enum CredentialStore {
+                        CREDENTIAL_STORE_UNSPECIFIED = 0,
+                        GOLDENGATE = 1,
+                        IAM = 2
+                    }
+                }
+
+                /** Properties of a GoldengateMaintenanceWindow. */
+                interface IGoldengateMaintenanceWindow {
+
+                    /** GoldengateMaintenanceWindow day */
+                    day?: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek|null);
+
+                    /** GoldengateMaintenanceWindow startHour */
+                    startHour?: (number|null);
+                }
+
+                /** Represents a GoldengateMaintenanceWindow. */
+                class GoldengateMaintenanceWindow implements IGoldengateMaintenanceWindow {
+
+                    /**
+                     * Constructs a new GoldengateMaintenanceWindow.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateMaintenanceWindow);
+
+                    /** GoldengateMaintenanceWindow day. */
+                    public day: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek);
+
+                    /** GoldengateMaintenanceWindow startHour. */
+                    public startHour: number;
+
+                    /**
+                     * Creates a new GoldengateMaintenanceWindow instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateMaintenanceWindow instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateMaintenanceWindow): google.cloud.oracledatabase.v1.GoldengateMaintenanceWindow;
+
+                    /**
+                     * Encodes the specified GoldengateMaintenanceWindow message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateMaintenanceWindow.verify|verify} messages.
+                     * @param message GoldengateMaintenanceWindow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateMaintenanceWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateMaintenanceWindow message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateMaintenanceWindow.verify|verify} messages.
+                     * @param message GoldengateMaintenanceWindow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateMaintenanceWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateMaintenanceWindow message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateMaintenanceWindow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateMaintenanceWindow;
+
+                    /**
+                     * Decodes a GoldengateMaintenanceWindow message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateMaintenanceWindow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateMaintenanceWindow;
+
+                    /**
+                     * Verifies a GoldengateMaintenanceWindow message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateMaintenanceWindow message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateMaintenanceWindow
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateMaintenanceWindow;
+
+                    /**
+                     * Creates a plain object from a GoldengateMaintenanceWindow message. Also converts values to other types if specified.
+                     * @param message GoldengateMaintenanceWindow
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateMaintenanceWindow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateMaintenanceWindow to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateMaintenanceWindow
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoldengateMaintenanceConfig. */
+                interface IGoldengateMaintenanceConfig {
+
+                    /** GoldengateMaintenanceConfig isInterimReleaseAutoUpgradeEnabled */
+                    isInterimReleaseAutoUpgradeEnabled?: (boolean|null);
+
+                    /** GoldengateMaintenanceConfig interimReleaseUpgradePeriodDays */
+                    interimReleaseUpgradePeriodDays?: (number|null);
+
+                    /** GoldengateMaintenanceConfig bundleReleaseUpgradePeriodDays */
+                    bundleReleaseUpgradePeriodDays?: (number|null);
+
+                    /** GoldengateMaintenanceConfig majorReleaseUpgradePeriodDays */
+                    majorReleaseUpgradePeriodDays?: (number|null);
+
+                    /** GoldengateMaintenanceConfig securityPatchUpgradePeriodDays */
+                    securityPatchUpgradePeriodDays?: (number|null);
+                }
+
+                /** Represents a GoldengateMaintenanceConfig. */
+                class GoldengateMaintenanceConfig implements IGoldengateMaintenanceConfig {
+
+                    /**
+                     * Constructs a new GoldengateMaintenanceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateMaintenanceConfig);
+
+                    /** GoldengateMaintenanceConfig isInterimReleaseAutoUpgradeEnabled. */
+                    public isInterimReleaseAutoUpgradeEnabled: boolean;
+
+                    /** GoldengateMaintenanceConfig interimReleaseUpgradePeriodDays. */
+                    public interimReleaseUpgradePeriodDays: number;
+
+                    /** GoldengateMaintenanceConfig bundleReleaseUpgradePeriodDays. */
+                    public bundleReleaseUpgradePeriodDays: number;
+
+                    /** GoldengateMaintenanceConfig majorReleaseUpgradePeriodDays. */
+                    public majorReleaseUpgradePeriodDays: number;
+
+                    /** GoldengateMaintenanceConfig securityPatchUpgradePeriodDays. */
+                    public securityPatchUpgradePeriodDays: number;
+
+                    /**
+                     * Creates a new GoldengateMaintenanceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateMaintenanceConfig instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateMaintenanceConfig): google.cloud.oracledatabase.v1.GoldengateMaintenanceConfig;
+
+                    /**
+                     * Encodes the specified GoldengateMaintenanceConfig message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateMaintenanceConfig.verify|verify} messages.
+                     * @param message GoldengateMaintenanceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateMaintenanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateMaintenanceConfig message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateMaintenanceConfig.verify|verify} messages.
+                     * @param message GoldengateMaintenanceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateMaintenanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateMaintenanceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateMaintenanceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateMaintenanceConfig;
+
+                    /**
+                     * Decodes a GoldengateMaintenanceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateMaintenanceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateMaintenanceConfig;
+
+                    /**
+                     * Verifies a GoldengateMaintenanceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateMaintenanceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateMaintenanceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateMaintenanceConfig;
+
+                    /**
+                     * Creates a plain object from a GoldengateMaintenanceConfig message. Also converts values to other types if specified.
+                     * @param message GoldengateMaintenanceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateMaintenanceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateMaintenanceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateMaintenanceConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeploymentDiagnosticData. */
+                interface IDeploymentDiagnosticData {
+
+                    /** DeploymentDiagnosticData namespace */
+                    namespace?: (string|null);
+
+                    /** DeploymentDiagnosticData bucket */
+                    bucket?: (string|null);
+
+                    /** DeploymentDiagnosticData object */
+                    object?: (string|null);
+
+                    /** DeploymentDiagnosticData diagnosticState */
+                    diagnosticState?: (google.cloud.oracledatabase.v1.DeploymentDiagnosticData.DiagnosticState|keyof typeof google.cloud.oracledatabase.v1.DeploymentDiagnosticData.DiagnosticState|null);
+
+                    /** DeploymentDiagnosticData diagnosticStartTime */
+                    diagnosticStartTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeploymentDiagnosticData diagnosticEndTime */
+                    diagnosticEndTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a DeploymentDiagnosticData. */
+                class DeploymentDiagnosticData implements IDeploymentDiagnosticData {
+
+                    /**
+                     * Constructs a new DeploymentDiagnosticData.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IDeploymentDiagnosticData);
+
+                    /** DeploymentDiagnosticData namespace. */
+                    public namespace: string;
+
+                    /** DeploymentDiagnosticData bucket. */
+                    public bucket: string;
+
+                    /** DeploymentDiagnosticData object. */
+                    public object: string;
+
+                    /** DeploymentDiagnosticData diagnosticState. */
+                    public diagnosticState: (google.cloud.oracledatabase.v1.DeploymentDiagnosticData.DiagnosticState|keyof typeof google.cloud.oracledatabase.v1.DeploymentDiagnosticData.DiagnosticState);
+
+                    /** DeploymentDiagnosticData diagnosticStartTime. */
+                    public diagnosticStartTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeploymentDiagnosticData diagnosticEndTime. */
+                    public diagnosticEndTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new DeploymentDiagnosticData instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeploymentDiagnosticData instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IDeploymentDiagnosticData): google.cloud.oracledatabase.v1.DeploymentDiagnosticData;
+
+                    /**
+                     * Encodes the specified DeploymentDiagnosticData message. Does not implicitly {@link google.cloud.oracledatabase.v1.DeploymentDiagnosticData.verify|verify} messages.
+                     * @param message DeploymentDiagnosticData message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IDeploymentDiagnosticData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeploymentDiagnosticData message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.DeploymentDiagnosticData.verify|verify} messages.
+                     * @param message DeploymentDiagnosticData message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IDeploymentDiagnosticData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeploymentDiagnosticData message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeploymentDiagnosticData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.DeploymentDiagnosticData;
+
+                    /**
+                     * Decodes a DeploymentDiagnosticData message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeploymentDiagnosticData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.DeploymentDiagnosticData;
+
+                    /**
+                     * Verifies a DeploymentDiagnosticData message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeploymentDiagnosticData message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeploymentDiagnosticData
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.DeploymentDiagnosticData;
+
+                    /**
+                     * Creates a plain object from a DeploymentDiagnosticData message. Also converts values to other types if specified.
+                     * @param message DeploymentDiagnosticData
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.DeploymentDiagnosticData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeploymentDiagnosticData to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeploymentDiagnosticData
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DeploymentDiagnosticData {
+
+                    /** DiagnosticState enum. */
+                    enum DiagnosticState {
+                        DIAGNOSTIC_STATE_UNSPECIFIED = 0,
+                        IN_PROGRESS = 1,
+                        SUCCEEDED = 2,
+                        FAILED = 3
+                    }
+                }
+
+                /** Properties of a GoldengateBackupSchedule. */
+                interface IGoldengateBackupSchedule {
+
+                    /** GoldengateBackupSchedule bucket */
+                    bucket?: (string|null);
+
+                    /** GoldengateBackupSchedule compartmentId */
+                    compartmentId?: (string|null);
+
+                    /** GoldengateBackupSchedule frequencyBackupScheduled */
+                    frequencyBackupScheduled?: (google.cloud.oracledatabase.v1.GoldengateBackupSchedule.FrequencyBackupScheduled|keyof typeof google.cloud.oracledatabase.v1.GoldengateBackupSchedule.FrequencyBackupScheduled|null);
+
+                    /** GoldengateBackupSchedule metadataOnly */
+                    metadataOnly?: (boolean|null);
+
+                    /** GoldengateBackupSchedule namespace */
+                    namespace?: (string|null);
+
+                    /** GoldengateBackupSchedule backupScheduledTime */
+                    backupScheduledTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a GoldengateBackupSchedule. */
+                class GoldengateBackupSchedule implements IGoldengateBackupSchedule {
+
+                    /**
+                     * Constructs a new GoldengateBackupSchedule.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateBackupSchedule);
+
+                    /** GoldengateBackupSchedule bucket. */
+                    public bucket: string;
+
+                    /** GoldengateBackupSchedule compartmentId. */
+                    public compartmentId: string;
+
+                    /** GoldengateBackupSchedule frequencyBackupScheduled. */
+                    public frequencyBackupScheduled: (google.cloud.oracledatabase.v1.GoldengateBackupSchedule.FrequencyBackupScheduled|keyof typeof google.cloud.oracledatabase.v1.GoldengateBackupSchedule.FrequencyBackupScheduled);
+
+                    /** GoldengateBackupSchedule metadataOnly. */
+                    public metadataOnly: boolean;
+
+                    /** GoldengateBackupSchedule namespace. */
+                    public namespace: string;
+
+                    /** GoldengateBackupSchedule backupScheduledTime. */
+                    public backupScheduledTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new GoldengateBackupSchedule instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateBackupSchedule instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateBackupSchedule): google.cloud.oracledatabase.v1.GoldengateBackupSchedule;
+
+                    /**
+                     * Encodes the specified GoldengateBackupSchedule message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateBackupSchedule.verify|verify} messages.
+                     * @param message GoldengateBackupSchedule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateBackupSchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateBackupSchedule message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateBackupSchedule.verify|verify} messages.
+                     * @param message GoldengateBackupSchedule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateBackupSchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateBackupSchedule message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateBackupSchedule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateBackupSchedule;
+
+                    /**
+                     * Decodes a GoldengateBackupSchedule message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateBackupSchedule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateBackupSchedule;
+
+                    /**
+                     * Verifies a GoldengateBackupSchedule message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateBackupSchedule message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateBackupSchedule
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateBackupSchedule;
+
+                    /**
+                     * Creates a plain object from a GoldengateBackupSchedule message. Also converts values to other types if specified.
+                     * @param message GoldengateBackupSchedule
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateBackupSchedule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateBackupSchedule to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateBackupSchedule
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GoldengateBackupSchedule {
+
+                    /** FrequencyBackupScheduled enum. */
+                    enum FrequencyBackupScheduled {
+                        FREQUENCY_BACKUP_SCHEDULED_UNSPECIFIED = 0,
+                        DAILY = 1,
+                        WEEKLY = 2,
+                        MONTHLY = 3
+                    }
+                }
+
+                /** Properties of an IngressIp. */
+                interface IIngressIp {
+
+                    /** IngressIp ingressIpAddress */
+                    ingressIpAddress?: (string|null);
+                }
+
+                /** Represents an IngressIp. */
+                class IngressIp implements IIngressIp {
+
+                    /**
+                     * Constructs a new IngressIp.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IIngressIp);
+
+                    /** IngressIp ingressIpAddress. */
+                    public ingressIpAddress: string;
+
+                    /**
+                     * Creates a new IngressIp instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IngressIp instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IIngressIp): google.cloud.oracledatabase.v1.IngressIp;
+
+                    /**
+                     * Encodes the specified IngressIp message. Does not implicitly {@link google.cloud.oracledatabase.v1.IngressIp.verify|verify} messages.
+                     * @param message IngressIp message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IIngressIp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IngressIp message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.IngressIp.verify|verify} messages.
+                     * @param message IngressIp message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IIngressIp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IngressIp message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IngressIp
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.IngressIp;
+
+                    /**
+                     * Decodes an IngressIp message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IngressIp
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.IngressIp;
+
+                    /**
+                     * Verifies an IngressIp message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IngressIp message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IngressIp
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.IngressIp;
+
+                    /**
+                     * Creates a plain object from an IngressIp message. Also converts values to other types if specified.
+                     * @param message IngressIp
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.IngressIp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IngressIp to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IngressIp
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoldengateDeploymentLock. */
+                interface IGoldengateDeploymentLock {
+
+                    /** GoldengateDeploymentLock type */
+                    type?: (google.cloud.oracledatabase.v1.GoldengateDeploymentLock.LockType|keyof typeof google.cloud.oracledatabase.v1.GoldengateDeploymentLock.LockType|null);
+
+                    /** GoldengateDeploymentLock compartmentId */
+                    compartmentId?: (string|null);
+
+                    /** GoldengateDeploymentLock relatedResourceId */
+                    relatedResourceId?: (string|null);
+
+                    /** GoldengateDeploymentLock message */
+                    message?: (string|null);
+
+                    /** GoldengateDeploymentLock createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a GoldengateDeploymentLock. */
+                class GoldengateDeploymentLock implements IGoldengateDeploymentLock {
+
+                    /**
+                     * Constructs a new GoldengateDeploymentLock.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateDeploymentLock);
+
+                    /** GoldengateDeploymentLock type. */
+                    public type: (google.cloud.oracledatabase.v1.GoldengateDeploymentLock.LockType|keyof typeof google.cloud.oracledatabase.v1.GoldengateDeploymentLock.LockType);
+
+                    /** GoldengateDeploymentLock compartmentId. */
+                    public compartmentId: string;
+
+                    /** GoldengateDeploymentLock relatedResourceId. */
+                    public relatedResourceId: string;
+
+                    /** GoldengateDeploymentLock message. */
+                    public message: string;
+
+                    /** GoldengateDeploymentLock createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new GoldengateDeploymentLock instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateDeploymentLock instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateDeploymentLock): google.cloud.oracledatabase.v1.GoldengateDeploymentLock;
+
+                    /**
+                     * Encodes the specified GoldengateDeploymentLock message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateDeploymentLock.verify|verify} messages.
+                     * @param message GoldengateDeploymentLock message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateDeploymentLock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateDeploymentLock message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateDeploymentLock.verify|verify} messages.
+                     * @param message GoldengateDeploymentLock message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateDeploymentLock, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateDeploymentLock message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateDeploymentLock
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateDeploymentLock;
+
+                    /**
+                     * Decodes a GoldengateDeploymentLock message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateDeploymentLock
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateDeploymentLock;
+
+                    /**
+                     * Verifies a GoldengateDeploymentLock message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateDeploymentLock message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateDeploymentLock
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateDeploymentLock;
+
+                    /**
+                     * Creates a plain object from a GoldengateDeploymentLock message. Also converts values to other types if specified.
+                     * @param message GoldengateDeploymentLock
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateDeploymentLock, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateDeploymentLock to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateDeploymentLock
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GoldengateDeploymentLock {
+
+                    /** LockType enum. */
+                    enum LockType {
+                        LOCK_TYPE_UNSPECIFIED = 0,
+                        FULL = 1,
+                        DELETE = 2
+                    }
+                }
+
+                /** Properties of a GoldengatePlacement. */
+                interface IGoldengatePlacement {
+
+                    /** GoldengatePlacement availabilityDomain */
+                    availabilityDomain?: (string|null);
+
+                    /** GoldengatePlacement faultDomain */
+                    faultDomain?: (string|null);
+                }
+
+                /** Represents a GoldengatePlacement. */
+                class GoldengatePlacement implements IGoldengatePlacement {
+
+                    /**
+                     * Constructs a new GoldengatePlacement.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengatePlacement);
+
+                    /** GoldengatePlacement availabilityDomain. */
+                    public availabilityDomain: string;
+
+                    /** GoldengatePlacement faultDomain. */
+                    public faultDomain: string;
+
+                    /**
+                     * Creates a new GoldengatePlacement instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengatePlacement instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengatePlacement): google.cloud.oracledatabase.v1.GoldengatePlacement;
+
+                    /**
+                     * Encodes the specified GoldengatePlacement message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengatePlacement.verify|verify} messages.
+                     * @param message GoldengatePlacement message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengatePlacement, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengatePlacement message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengatePlacement.verify|verify} messages.
+                     * @param message GoldengatePlacement message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengatePlacement, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengatePlacement message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengatePlacement
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengatePlacement;
+
+                    /**
+                     * Decodes a GoldengatePlacement message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengatePlacement
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengatePlacement;
+
+                    /**
+                     * Verifies a GoldengatePlacement message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengatePlacement message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengatePlacement
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengatePlacement;
+
+                    /**
+                     * Creates a plain object from a GoldengatePlacement message. Also converts values to other types if specified.
+                     * @param message GoldengatePlacement
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengatePlacement, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengatePlacement to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengatePlacement
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoldengateGroupToRolesMapping. */
+                interface IGoldengateGroupToRolesMapping {
+
+                    /** GoldengateGroupToRolesMapping securityGroupId */
+                    securityGroupId?: (string|null);
+
+                    /** GoldengateGroupToRolesMapping administratorGroupId */
+                    administratorGroupId?: (string|null);
+
+                    /** GoldengateGroupToRolesMapping operatorGroupId */
+                    operatorGroupId?: (string|null);
+
+                    /** GoldengateGroupToRolesMapping userGroupId */
+                    userGroupId?: (string|null);
+                }
+
+                /** Represents a GoldengateGroupToRolesMapping. */
+                class GoldengateGroupToRolesMapping implements IGoldengateGroupToRolesMapping {
+
+                    /**
+                     * Constructs a new GoldengateGroupToRolesMapping.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateGroupToRolesMapping);
+
+                    /** GoldengateGroupToRolesMapping securityGroupId. */
+                    public securityGroupId: string;
+
+                    /** GoldengateGroupToRolesMapping administratorGroupId. */
+                    public administratorGroupId: string;
+
+                    /** GoldengateGroupToRolesMapping operatorGroupId. */
+                    public operatorGroupId: string;
+
+                    /** GoldengateGroupToRolesMapping userGroupId. */
+                    public userGroupId: string;
+
+                    /**
+                     * Creates a new GoldengateGroupToRolesMapping instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateGroupToRolesMapping instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateGroupToRolesMapping): google.cloud.oracledatabase.v1.GoldengateGroupToRolesMapping;
+
+                    /**
+                     * Encodes the specified GoldengateGroupToRolesMapping message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateGroupToRolesMapping.verify|verify} messages.
+                     * @param message GoldengateGroupToRolesMapping message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateGroupToRolesMapping, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateGroupToRolesMapping message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateGroupToRolesMapping.verify|verify} messages.
+                     * @param message GoldengateGroupToRolesMapping message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateGroupToRolesMapping, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateGroupToRolesMapping message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateGroupToRolesMapping
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateGroupToRolesMapping;
+
+                    /**
+                     * Decodes a GoldengateGroupToRolesMapping message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateGroupToRolesMapping
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateGroupToRolesMapping;
+
+                    /**
+                     * Verifies a GoldengateGroupToRolesMapping message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateGroupToRolesMapping message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateGroupToRolesMapping
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateGroupToRolesMapping;
+
+                    /**
+                     * Creates a plain object from a GoldengateGroupToRolesMapping message. Also converts values to other types if specified.
+                     * @param message GoldengateGroupToRolesMapping
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateGroupToRolesMapping, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateGroupToRolesMapping to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateGroupToRolesMapping
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateGoldengateDeploymentRequest. */
+                interface ICreateGoldengateDeploymentRequest {
+
+                    /** CreateGoldengateDeploymentRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateGoldengateDeploymentRequest goldengateDeploymentId */
+                    goldengateDeploymentId?: (string|null);
+
+                    /** CreateGoldengateDeploymentRequest goldengateDeployment */
+                    goldengateDeployment?: (google.cloud.oracledatabase.v1.IGoldengateDeployment|null);
+
+                    /** CreateGoldengateDeploymentRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateGoldengateDeploymentRequest. */
+                class CreateGoldengateDeploymentRequest implements ICreateGoldengateDeploymentRequest {
+
+                    /**
+                     * Constructs a new CreateGoldengateDeploymentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.ICreateGoldengateDeploymentRequest);
+
+                    /** CreateGoldengateDeploymentRequest parent. */
+                    public parent: string;
+
+                    /** CreateGoldengateDeploymentRequest goldengateDeploymentId. */
+                    public goldengateDeploymentId: string;
+
+                    /** CreateGoldengateDeploymentRequest goldengateDeployment. */
+                    public goldengateDeployment?: (google.cloud.oracledatabase.v1.IGoldengateDeployment|null);
+
+                    /** CreateGoldengateDeploymentRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateGoldengateDeploymentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateGoldengateDeploymentRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.ICreateGoldengateDeploymentRequest): google.cloud.oracledatabase.v1.CreateGoldengateDeploymentRequest;
+
+                    /**
+                     * Encodes the specified CreateGoldengateDeploymentRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.CreateGoldengateDeploymentRequest.verify|verify} messages.
+                     * @param message CreateGoldengateDeploymentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.ICreateGoldengateDeploymentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateGoldengateDeploymentRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.CreateGoldengateDeploymentRequest.verify|verify} messages.
+                     * @param message CreateGoldengateDeploymentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.ICreateGoldengateDeploymentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateGoldengateDeploymentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateGoldengateDeploymentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.CreateGoldengateDeploymentRequest;
+
+                    /**
+                     * Decodes a CreateGoldengateDeploymentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateGoldengateDeploymentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.CreateGoldengateDeploymentRequest;
+
+                    /**
+                     * Verifies a CreateGoldengateDeploymentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateGoldengateDeploymentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateGoldengateDeploymentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.CreateGoldengateDeploymentRequest;
+
+                    /**
+                     * Creates a plain object from a CreateGoldengateDeploymentRequest message. Also converts values to other types if specified.
+                     * @param message CreateGoldengateDeploymentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.CreateGoldengateDeploymentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateGoldengateDeploymentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateGoldengateDeploymentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteGoldengateDeploymentRequest. */
+                interface IDeleteGoldengateDeploymentRequest {
+
+                    /** DeleteGoldengateDeploymentRequest name */
+                    name?: (string|null);
+
+                    /** DeleteGoldengateDeploymentRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteGoldengateDeploymentRequest. */
+                class DeleteGoldengateDeploymentRequest implements IDeleteGoldengateDeploymentRequest {
+
+                    /**
+                     * Constructs a new DeleteGoldengateDeploymentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IDeleteGoldengateDeploymentRequest);
+
+                    /** DeleteGoldengateDeploymentRequest name. */
+                    public name: string;
+
+                    /** DeleteGoldengateDeploymentRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteGoldengateDeploymentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteGoldengateDeploymentRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IDeleteGoldengateDeploymentRequest): google.cloud.oracledatabase.v1.DeleteGoldengateDeploymentRequest;
+
+                    /**
+                     * Encodes the specified DeleteGoldengateDeploymentRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.DeleteGoldengateDeploymentRequest.verify|verify} messages.
+                     * @param message DeleteGoldengateDeploymentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IDeleteGoldengateDeploymentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteGoldengateDeploymentRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.DeleteGoldengateDeploymentRequest.verify|verify} messages.
+                     * @param message DeleteGoldengateDeploymentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IDeleteGoldengateDeploymentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteGoldengateDeploymentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteGoldengateDeploymentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.DeleteGoldengateDeploymentRequest;
+
+                    /**
+                     * Decodes a DeleteGoldengateDeploymentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteGoldengateDeploymentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.DeleteGoldengateDeploymentRequest;
+
+                    /**
+                     * Verifies a DeleteGoldengateDeploymentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteGoldengateDeploymentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteGoldengateDeploymentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.DeleteGoldengateDeploymentRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteGoldengateDeploymentRequest message. Also converts values to other types if specified.
+                     * @param message DeleteGoldengateDeploymentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.DeleteGoldengateDeploymentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteGoldengateDeploymentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteGoldengateDeploymentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetGoldengateDeploymentRequest. */
+                interface IGetGoldengateDeploymentRequest {
+
+                    /** GetGoldengateDeploymentRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetGoldengateDeploymentRequest. */
+                class GetGoldengateDeploymentRequest implements IGetGoldengateDeploymentRequest {
+
+                    /**
+                     * Constructs a new GetGoldengateDeploymentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGetGoldengateDeploymentRequest);
+
+                    /** GetGoldengateDeploymentRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetGoldengateDeploymentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetGoldengateDeploymentRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGetGoldengateDeploymentRequest): google.cloud.oracledatabase.v1.GetGoldengateDeploymentRequest;
+
+                    /**
+                     * Encodes the specified GetGoldengateDeploymentRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.GetGoldengateDeploymentRequest.verify|verify} messages.
+                     * @param message GetGoldengateDeploymentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGetGoldengateDeploymentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetGoldengateDeploymentRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GetGoldengateDeploymentRequest.verify|verify} messages.
+                     * @param message GetGoldengateDeploymentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGetGoldengateDeploymentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetGoldengateDeploymentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetGoldengateDeploymentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GetGoldengateDeploymentRequest;
+
+                    /**
+                     * Decodes a GetGoldengateDeploymentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetGoldengateDeploymentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GetGoldengateDeploymentRequest;
+
+                    /**
+                     * Verifies a GetGoldengateDeploymentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetGoldengateDeploymentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetGoldengateDeploymentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GetGoldengateDeploymentRequest;
+
+                    /**
+                     * Creates a plain object from a GetGoldengateDeploymentRequest message. Also converts values to other types if specified.
+                     * @param message GetGoldengateDeploymentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GetGoldengateDeploymentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetGoldengateDeploymentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetGoldengateDeploymentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListGoldengateDeploymentsRequest. */
+                interface IListGoldengateDeploymentsRequest {
+
+                    /** ListGoldengateDeploymentsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListGoldengateDeploymentsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListGoldengateDeploymentsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListGoldengateDeploymentsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListGoldengateDeploymentsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListGoldengateDeploymentsRequest. */
+                class ListGoldengateDeploymentsRequest implements IListGoldengateDeploymentsRequest {
+
+                    /**
+                     * Constructs a new ListGoldengateDeploymentsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListGoldengateDeploymentsRequest);
+
+                    /** ListGoldengateDeploymentsRequest parent. */
+                    public parent: string;
+
+                    /** ListGoldengateDeploymentsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListGoldengateDeploymentsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListGoldengateDeploymentsRequest filter. */
+                    public filter: string;
+
+                    /** ListGoldengateDeploymentsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListGoldengateDeploymentsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListGoldengateDeploymentsRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListGoldengateDeploymentsRequest): google.cloud.oracledatabase.v1.ListGoldengateDeploymentsRequest;
+
+                    /**
+                     * Encodes the specified ListGoldengateDeploymentsRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListGoldengateDeploymentsRequest.verify|verify} messages.
+                     * @param message ListGoldengateDeploymentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListGoldengateDeploymentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListGoldengateDeploymentsRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListGoldengateDeploymentsRequest.verify|verify} messages.
+                     * @param message ListGoldengateDeploymentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListGoldengateDeploymentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListGoldengateDeploymentsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListGoldengateDeploymentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListGoldengateDeploymentsRequest;
+
+                    /**
+                     * Decodes a ListGoldengateDeploymentsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListGoldengateDeploymentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListGoldengateDeploymentsRequest;
+
+                    /**
+                     * Verifies a ListGoldengateDeploymentsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListGoldengateDeploymentsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListGoldengateDeploymentsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListGoldengateDeploymentsRequest;
+
+                    /**
+                     * Creates a plain object from a ListGoldengateDeploymentsRequest message. Also converts values to other types if specified.
+                     * @param message ListGoldengateDeploymentsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListGoldengateDeploymentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListGoldengateDeploymentsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListGoldengateDeploymentsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListGoldengateDeploymentsResponse. */
+                interface IListGoldengateDeploymentsResponse {
+
+                    /** ListGoldengateDeploymentsResponse goldengateDeployments */
+                    goldengateDeployments?: (google.cloud.oracledatabase.v1.IGoldengateDeployment[]|null);
+
+                    /** ListGoldengateDeploymentsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListGoldengateDeploymentsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListGoldengateDeploymentsResponse. */
+                class ListGoldengateDeploymentsResponse implements IListGoldengateDeploymentsResponse {
+
+                    /**
+                     * Constructs a new ListGoldengateDeploymentsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListGoldengateDeploymentsResponse);
+
+                    /** ListGoldengateDeploymentsResponse goldengateDeployments. */
+                    public goldengateDeployments: google.cloud.oracledatabase.v1.IGoldengateDeployment[];
+
+                    /** ListGoldengateDeploymentsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListGoldengateDeploymentsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListGoldengateDeploymentsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListGoldengateDeploymentsResponse instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListGoldengateDeploymentsResponse): google.cloud.oracledatabase.v1.ListGoldengateDeploymentsResponse;
+
+                    /**
+                     * Encodes the specified ListGoldengateDeploymentsResponse message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListGoldengateDeploymentsResponse.verify|verify} messages.
+                     * @param message ListGoldengateDeploymentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListGoldengateDeploymentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListGoldengateDeploymentsResponse message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListGoldengateDeploymentsResponse.verify|verify} messages.
+                     * @param message ListGoldengateDeploymentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListGoldengateDeploymentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListGoldengateDeploymentsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListGoldengateDeploymentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListGoldengateDeploymentsResponse;
+
+                    /**
+                     * Decodes a ListGoldengateDeploymentsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListGoldengateDeploymentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListGoldengateDeploymentsResponse;
+
+                    /**
+                     * Verifies a ListGoldengateDeploymentsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListGoldengateDeploymentsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListGoldengateDeploymentsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListGoldengateDeploymentsResponse;
+
+                    /**
+                     * Creates a plain object from a ListGoldengateDeploymentsResponse message. Also converts values to other types if specified.
+                     * @param message ListGoldengateDeploymentsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListGoldengateDeploymentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListGoldengateDeploymentsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListGoldengateDeploymentsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a StopGoldengateDeploymentRequest. */
+                interface IStopGoldengateDeploymentRequest {
+
+                    /** StopGoldengateDeploymentRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a StopGoldengateDeploymentRequest. */
+                class StopGoldengateDeploymentRequest implements IStopGoldengateDeploymentRequest {
+
+                    /**
+                     * Constructs a new StopGoldengateDeploymentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IStopGoldengateDeploymentRequest);
+
+                    /** StopGoldengateDeploymentRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new StopGoldengateDeploymentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StopGoldengateDeploymentRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IStopGoldengateDeploymentRequest): google.cloud.oracledatabase.v1.StopGoldengateDeploymentRequest;
+
+                    /**
+                     * Encodes the specified StopGoldengateDeploymentRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.StopGoldengateDeploymentRequest.verify|verify} messages.
+                     * @param message StopGoldengateDeploymentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IStopGoldengateDeploymentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StopGoldengateDeploymentRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.StopGoldengateDeploymentRequest.verify|verify} messages.
+                     * @param message StopGoldengateDeploymentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IStopGoldengateDeploymentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StopGoldengateDeploymentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StopGoldengateDeploymentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.StopGoldengateDeploymentRequest;
+
+                    /**
+                     * Decodes a StopGoldengateDeploymentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StopGoldengateDeploymentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.StopGoldengateDeploymentRequest;
+
+                    /**
+                     * Verifies a StopGoldengateDeploymentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StopGoldengateDeploymentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StopGoldengateDeploymentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.StopGoldengateDeploymentRequest;
+
+                    /**
+                     * Creates a plain object from a StopGoldengateDeploymentRequest message. Also converts values to other types if specified.
+                     * @param message StopGoldengateDeploymentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.StopGoldengateDeploymentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StopGoldengateDeploymentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StopGoldengateDeploymentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a StartGoldengateDeploymentRequest. */
+                interface IStartGoldengateDeploymentRequest {
+
+                    /** StartGoldengateDeploymentRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a StartGoldengateDeploymentRequest. */
+                class StartGoldengateDeploymentRequest implements IStartGoldengateDeploymentRequest {
+
+                    /**
+                     * Constructs a new StartGoldengateDeploymentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IStartGoldengateDeploymentRequest);
+
+                    /** StartGoldengateDeploymentRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new StartGoldengateDeploymentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StartGoldengateDeploymentRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IStartGoldengateDeploymentRequest): google.cloud.oracledatabase.v1.StartGoldengateDeploymentRequest;
+
+                    /**
+                     * Encodes the specified StartGoldengateDeploymentRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.StartGoldengateDeploymentRequest.verify|verify} messages.
+                     * @param message StartGoldengateDeploymentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IStartGoldengateDeploymentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StartGoldengateDeploymentRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.StartGoldengateDeploymentRequest.verify|verify} messages.
+                     * @param message StartGoldengateDeploymentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IStartGoldengateDeploymentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StartGoldengateDeploymentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StartGoldengateDeploymentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.StartGoldengateDeploymentRequest;
+
+                    /**
+                     * Decodes a StartGoldengateDeploymentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StartGoldengateDeploymentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.StartGoldengateDeploymentRequest;
+
+                    /**
+                     * Verifies a StartGoldengateDeploymentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StartGoldengateDeploymentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StartGoldengateDeploymentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.StartGoldengateDeploymentRequest;
+
+                    /**
+                     * Creates a plain object from a StartGoldengateDeploymentRequest message. Also converts values to other types if specified.
+                     * @param message StartGoldengateDeploymentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.StartGoldengateDeploymentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StartGoldengateDeploymentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StartGoldengateDeploymentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoldengateDeploymentEnvironment. */
+                interface IGoldengateDeploymentEnvironment {
+
+                    /** GoldengateDeploymentEnvironment name */
+                    name?: (string|null);
+
+                    /** GoldengateDeploymentEnvironment category */
+                    category?: (google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment.DeploymentCategory|keyof typeof google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment.DeploymentCategory|null);
+
+                    /** GoldengateDeploymentEnvironment displayName */
+                    displayName?: (string|null);
+
+                    /** GoldengateDeploymentEnvironment defaultCpuCoreCount */
+                    defaultCpuCoreCount?: (number|null);
+
+                    /** GoldengateDeploymentEnvironment environmentType */
+                    environmentType?: (google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment.DeploymentEnvironmentType|keyof typeof google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment.DeploymentEnvironmentType|null);
+
+                    /** GoldengateDeploymentEnvironment autoScalingEnabled */
+                    autoScalingEnabled?: (boolean|null);
+
+                    /** GoldengateDeploymentEnvironment maxCpuCoreCount */
+                    maxCpuCoreCount?: (number|null);
+
+                    /** GoldengateDeploymentEnvironment memoryGbPerCpuCore */
+                    memoryGbPerCpuCore?: (number|null);
+
+                    /** GoldengateDeploymentEnvironment minCpuCoreCount */
+                    minCpuCoreCount?: (number|null);
+
+                    /** GoldengateDeploymentEnvironment networkBandwidthGbpsPerCpuCore */
+                    networkBandwidthGbpsPerCpuCore?: (number|null);
+
+                    /** GoldengateDeploymentEnvironment storageUsageLimitGbPerCpuCore */
+                    storageUsageLimitGbPerCpuCore?: (number|null);
+                }
+
+                /** Represents a GoldengateDeploymentEnvironment. */
+                class GoldengateDeploymentEnvironment implements IGoldengateDeploymentEnvironment {
+
+                    /**
+                     * Constructs a new GoldengateDeploymentEnvironment.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateDeploymentEnvironment);
+
+                    /** GoldengateDeploymentEnvironment name. */
+                    public name: string;
+
+                    /** GoldengateDeploymentEnvironment category. */
+                    public category: (google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment.DeploymentCategory|keyof typeof google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment.DeploymentCategory);
+
+                    /** GoldengateDeploymentEnvironment displayName. */
+                    public displayName: string;
+
+                    /** GoldengateDeploymentEnvironment defaultCpuCoreCount. */
+                    public defaultCpuCoreCount: number;
+
+                    /** GoldengateDeploymentEnvironment environmentType. */
+                    public environmentType: (google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment.DeploymentEnvironmentType|keyof typeof google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment.DeploymentEnvironmentType);
+
+                    /** GoldengateDeploymentEnvironment autoScalingEnabled. */
+                    public autoScalingEnabled: boolean;
+
+                    /** GoldengateDeploymentEnvironment maxCpuCoreCount. */
+                    public maxCpuCoreCount: number;
+
+                    /** GoldengateDeploymentEnvironment memoryGbPerCpuCore. */
+                    public memoryGbPerCpuCore: number;
+
+                    /** GoldengateDeploymentEnvironment minCpuCoreCount. */
+                    public minCpuCoreCount: number;
+
+                    /** GoldengateDeploymentEnvironment networkBandwidthGbpsPerCpuCore. */
+                    public networkBandwidthGbpsPerCpuCore: number;
+
+                    /** GoldengateDeploymentEnvironment storageUsageLimitGbPerCpuCore. */
+                    public storageUsageLimitGbPerCpuCore: number;
+
+                    /**
+                     * Creates a new GoldengateDeploymentEnvironment instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateDeploymentEnvironment instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateDeploymentEnvironment): google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment;
+
+                    /**
+                     * Encodes the specified GoldengateDeploymentEnvironment message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment.verify|verify} messages.
+                     * @param message GoldengateDeploymentEnvironment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateDeploymentEnvironment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateDeploymentEnvironment message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment.verify|verify} messages.
+                     * @param message GoldengateDeploymentEnvironment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateDeploymentEnvironment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateDeploymentEnvironment message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateDeploymentEnvironment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment;
+
+                    /**
+                     * Decodes a GoldengateDeploymentEnvironment message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateDeploymentEnvironment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment;
+
+                    /**
+                     * Verifies a GoldengateDeploymentEnvironment message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateDeploymentEnvironment message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateDeploymentEnvironment
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment;
+
+                    /**
+                     * Creates a plain object from a GoldengateDeploymentEnvironment message. Also converts values to other types if specified.
+                     * @param message GoldengateDeploymentEnvironment
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateDeploymentEnvironment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateDeploymentEnvironment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateDeploymentEnvironment
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GoldengateDeploymentEnvironment {
+
+                    /** DeploymentCategory enum. */
+                    enum DeploymentCategory {
+                        DEPLOYMENT_CATEGORY_UNSPECIFIED = 0,
+                        DATA_REPLICATION_CATEGORY = 1,
+                        DATA_TRANSFORMS_CATEGORY = 2
+                    }
+
+                    /** DeploymentEnvironmentType enum. */
+                    enum DeploymentEnvironmentType {
+                        DEPLOYMENT_ENVIRONMENT_TYPE_UNSPECIFIED = 0,
+                        PRODUCTION = 1,
+                        DEVELOPMENT_OR_TESTING = 2
+                    }
+                }
+
+                /** Properties of a ListGoldengateDeploymentEnvironmentsRequest. */
+                interface IListGoldengateDeploymentEnvironmentsRequest {
+
+                    /** ListGoldengateDeploymentEnvironmentsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListGoldengateDeploymentEnvironmentsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListGoldengateDeploymentEnvironmentsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListGoldengateDeploymentEnvironmentsRequest. */
+                class ListGoldengateDeploymentEnvironmentsRequest implements IListGoldengateDeploymentEnvironmentsRequest {
+
+                    /**
+                     * Constructs a new ListGoldengateDeploymentEnvironmentsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsRequest);
+
+                    /** ListGoldengateDeploymentEnvironmentsRequest parent. */
+                    public parent: string;
+
+                    /** ListGoldengateDeploymentEnvironmentsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListGoldengateDeploymentEnvironmentsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListGoldengateDeploymentEnvironmentsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListGoldengateDeploymentEnvironmentsRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsRequest): google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsRequest;
+
+                    /**
+                     * Encodes the specified ListGoldengateDeploymentEnvironmentsRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsRequest.verify|verify} messages.
+                     * @param message ListGoldengateDeploymentEnvironmentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListGoldengateDeploymentEnvironmentsRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsRequest.verify|verify} messages.
+                     * @param message ListGoldengateDeploymentEnvironmentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListGoldengateDeploymentEnvironmentsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListGoldengateDeploymentEnvironmentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsRequest;
+
+                    /**
+                     * Decodes a ListGoldengateDeploymentEnvironmentsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListGoldengateDeploymentEnvironmentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsRequest;
+
+                    /**
+                     * Verifies a ListGoldengateDeploymentEnvironmentsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListGoldengateDeploymentEnvironmentsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListGoldengateDeploymentEnvironmentsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsRequest;
+
+                    /**
+                     * Creates a plain object from a ListGoldengateDeploymentEnvironmentsRequest message. Also converts values to other types if specified.
+                     * @param message ListGoldengateDeploymentEnvironmentsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListGoldengateDeploymentEnvironmentsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListGoldengateDeploymentEnvironmentsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListGoldengateDeploymentEnvironmentsResponse. */
+                interface IListGoldengateDeploymentEnvironmentsResponse {
+
+                    /** ListGoldengateDeploymentEnvironmentsResponse goldengateDeploymentEnvironments */
+                    goldengateDeploymentEnvironments?: (google.cloud.oracledatabase.v1.IGoldengateDeploymentEnvironment[]|null);
+
+                    /** ListGoldengateDeploymentEnvironmentsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListGoldengateDeploymentEnvironmentsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListGoldengateDeploymentEnvironmentsResponse. */
+                class ListGoldengateDeploymentEnvironmentsResponse implements IListGoldengateDeploymentEnvironmentsResponse {
+
+                    /**
+                     * Constructs a new ListGoldengateDeploymentEnvironmentsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsResponse);
+
+                    /** ListGoldengateDeploymentEnvironmentsResponse goldengateDeploymentEnvironments. */
+                    public goldengateDeploymentEnvironments: google.cloud.oracledatabase.v1.IGoldengateDeploymentEnvironment[];
+
+                    /** ListGoldengateDeploymentEnvironmentsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListGoldengateDeploymentEnvironmentsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListGoldengateDeploymentEnvironmentsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListGoldengateDeploymentEnvironmentsResponse instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsResponse): google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsResponse;
+
+                    /**
+                     * Encodes the specified ListGoldengateDeploymentEnvironmentsResponse message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsResponse.verify|verify} messages.
+                     * @param message ListGoldengateDeploymentEnvironmentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListGoldengateDeploymentEnvironmentsResponse message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsResponse.verify|verify} messages.
+                     * @param message ListGoldengateDeploymentEnvironmentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListGoldengateDeploymentEnvironmentsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListGoldengateDeploymentEnvironmentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsResponse;
+
+                    /**
+                     * Decodes a ListGoldengateDeploymentEnvironmentsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListGoldengateDeploymentEnvironmentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsResponse;
+
+                    /**
+                     * Verifies a ListGoldengateDeploymentEnvironmentsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListGoldengateDeploymentEnvironmentsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListGoldengateDeploymentEnvironmentsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsResponse;
+
+                    /**
+                     * Creates a plain object from a ListGoldengateDeploymentEnvironmentsResponse message. Also converts values to other types if specified.
+                     * @param message ListGoldengateDeploymentEnvironmentsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListGoldengateDeploymentEnvironmentsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListGoldengateDeploymentEnvironmentsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoldengateDeploymentType. */
+                interface IGoldengateDeploymentType {
+
+                    /** GoldengateDeploymentType name */
+                    name?: (string|null);
+
+                    /** GoldengateDeploymentType deploymentType */
+                    deploymentType?: (google.cloud.oracledatabase.v1.GoldengateDeploymentType.DeploymentType|keyof typeof google.cloud.oracledatabase.v1.GoldengateDeploymentType.DeploymentType|null);
+
+                    /** GoldengateDeploymentType category */
+                    category?: (google.cloud.oracledatabase.v1.GoldengateDeploymentType.DeploymentCategory|keyof typeof google.cloud.oracledatabase.v1.GoldengateDeploymentType.DeploymentCategory|null);
+
+                    /** GoldengateDeploymentType connectionTypes */
+                    connectionTypes?: (string[]|null);
+
+                    /** GoldengateDeploymentType displayName */
+                    displayName?: (string|null);
+
+                    /** GoldengateDeploymentType oggVersion */
+                    oggVersion?: (string|null);
+
+                    /** GoldengateDeploymentType sourceTechnologies */
+                    sourceTechnologies?: (string[]|null);
+
+                    /** GoldengateDeploymentType supportedCapabilities */
+                    supportedCapabilities?: (string[]|null);
+
+                    /** GoldengateDeploymentType supportedTechnologiesUrl */
+                    supportedTechnologiesUrl?: (string|null);
+
+                    /** GoldengateDeploymentType targetTechnologies */
+                    targetTechnologies?: (string[]|null);
+
+                    /** GoldengateDeploymentType defaultUsername */
+                    defaultUsername?: (string|null);
+                }
+
+                /** Represents a GoldengateDeploymentType. */
+                class GoldengateDeploymentType implements IGoldengateDeploymentType {
+
+                    /**
+                     * Constructs a new GoldengateDeploymentType.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateDeploymentType);
+
+                    /** GoldengateDeploymentType name. */
+                    public name: string;
+
+                    /** GoldengateDeploymentType deploymentType. */
+                    public deploymentType: (google.cloud.oracledatabase.v1.GoldengateDeploymentType.DeploymentType|keyof typeof google.cloud.oracledatabase.v1.GoldengateDeploymentType.DeploymentType);
+
+                    /** GoldengateDeploymentType category. */
+                    public category: (google.cloud.oracledatabase.v1.GoldengateDeploymentType.DeploymentCategory|keyof typeof google.cloud.oracledatabase.v1.GoldengateDeploymentType.DeploymentCategory);
+
+                    /** GoldengateDeploymentType connectionTypes. */
+                    public connectionTypes: string[];
+
+                    /** GoldengateDeploymentType displayName. */
+                    public displayName: string;
+
+                    /** GoldengateDeploymentType oggVersion. */
+                    public oggVersion: string;
+
+                    /** GoldengateDeploymentType sourceTechnologies. */
+                    public sourceTechnologies: string[];
+
+                    /** GoldengateDeploymentType supportedCapabilities. */
+                    public supportedCapabilities: string[];
+
+                    /** GoldengateDeploymentType supportedTechnologiesUrl. */
+                    public supportedTechnologiesUrl: string;
+
+                    /** GoldengateDeploymentType targetTechnologies. */
+                    public targetTechnologies: string[];
+
+                    /** GoldengateDeploymentType defaultUsername. */
+                    public defaultUsername: string;
+
+                    /**
+                     * Creates a new GoldengateDeploymentType instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateDeploymentType instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateDeploymentType): google.cloud.oracledatabase.v1.GoldengateDeploymentType;
+
+                    /**
+                     * Encodes the specified GoldengateDeploymentType message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateDeploymentType.verify|verify} messages.
+                     * @param message GoldengateDeploymentType message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateDeploymentType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateDeploymentType message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateDeploymentType.verify|verify} messages.
+                     * @param message GoldengateDeploymentType message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateDeploymentType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateDeploymentType message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateDeploymentType
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateDeploymentType;
+
+                    /**
+                     * Decodes a GoldengateDeploymentType message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateDeploymentType
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateDeploymentType;
+
+                    /**
+                     * Verifies a GoldengateDeploymentType message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateDeploymentType message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateDeploymentType
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateDeploymentType;
+
+                    /**
+                     * Creates a plain object from a GoldengateDeploymentType message. Also converts values to other types if specified.
+                     * @param message GoldengateDeploymentType
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateDeploymentType, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateDeploymentType to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateDeploymentType
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GoldengateDeploymentType {
+
+                    /** DeploymentType enum. */
+                    enum DeploymentType {
+                        DEPLOYMENT_TYPE_UNSPECIFIED = 0,
+                        OGG = 1,
+                        DATABASE_ORACLE = 2,
+                        BIGDATA = 3,
+                        DATABASE_MICROSOFT_SQLSERVER = 4,
+                        DATABASE_MYSQL = 5,
+                        DATABASE_POSTGRESQL = 6,
+                        DATABASE_DB2ZOS = 7,
+                        DATABASE_DB2I = 8,
+                        GGSA = 9,
+                        DATA_TRANSFORMS = 10
+                    }
+
+                    /** DeploymentCategory enum. */
+                    enum DeploymentCategory {
+                        DEPLOYMENT_CATEGORY_UNSPECIFIED = 0,
+                        DATA_REPLICATION_CATEGORY = 1,
+                        DATA_TRANSFORMS_CATEGORY = 2
+                    }
+                }
+
+                /** Properties of a ListGoldengateDeploymentTypesRequest. */
+                interface IListGoldengateDeploymentTypesRequest {
+
+                    /** ListGoldengateDeploymentTypesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListGoldengateDeploymentTypesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListGoldengateDeploymentTypesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListGoldengateDeploymentTypesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListGoldengateDeploymentTypesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListGoldengateDeploymentTypesRequest. */
+                class ListGoldengateDeploymentTypesRequest implements IListGoldengateDeploymentTypesRequest {
+
+                    /**
+                     * Constructs a new ListGoldengateDeploymentTypesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesRequest);
+
+                    /** ListGoldengateDeploymentTypesRequest parent. */
+                    public parent: string;
+
+                    /** ListGoldengateDeploymentTypesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListGoldengateDeploymentTypesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListGoldengateDeploymentTypesRequest filter. */
+                    public filter: string;
+
+                    /** ListGoldengateDeploymentTypesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListGoldengateDeploymentTypesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListGoldengateDeploymentTypesRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesRequest): google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesRequest;
+
+                    /**
+                     * Encodes the specified ListGoldengateDeploymentTypesRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesRequest.verify|verify} messages.
+                     * @param message ListGoldengateDeploymentTypesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListGoldengateDeploymentTypesRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesRequest.verify|verify} messages.
+                     * @param message ListGoldengateDeploymentTypesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListGoldengateDeploymentTypesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListGoldengateDeploymentTypesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesRequest;
+
+                    /**
+                     * Decodes a ListGoldengateDeploymentTypesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListGoldengateDeploymentTypesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesRequest;
+
+                    /**
+                     * Verifies a ListGoldengateDeploymentTypesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListGoldengateDeploymentTypesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListGoldengateDeploymentTypesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesRequest;
+
+                    /**
+                     * Creates a plain object from a ListGoldengateDeploymentTypesRequest message. Also converts values to other types if specified.
+                     * @param message ListGoldengateDeploymentTypesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListGoldengateDeploymentTypesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListGoldengateDeploymentTypesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListGoldengateDeploymentTypesResponse. */
+                interface IListGoldengateDeploymentTypesResponse {
+
+                    /** ListGoldengateDeploymentTypesResponse goldengateDeploymentTypes */
+                    goldengateDeploymentTypes?: (google.cloud.oracledatabase.v1.IGoldengateDeploymentType[]|null);
+
+                    /** ListGoldengateDeploymentTypesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListGoldengateDeploymentTypesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListGoldengateDeploymentTypesResponse. */
+                class ListGoldengateDeploymentTypesResponse implements IListGoldengateDeploymentTypesResponse {
+
+                    /**
+                     * Constructs a new ListGoldengateDeploymentTypesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesResponse);
+
+                    /** ListGoldengateDeploymentTypesResponse goldengateDeploymentTypes. */
+                    public goldengateDeploymentTypes: google.cloud.oracledatabase.v1.IGoldengateDeploymentType[];
+
+                    /** ListGoldengateDeploymentTypesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListGoldengateDeploymentTypesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListGoldengateDeploymentTypesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListGoldengateDeploymentTypesResponse instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesResponse): google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesResponse;
+
+                    /**
+                     * Encodes the specified ListGoldengateDeploymentTypesResponse message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesResponse.verify|verify} messages.
+                     * @param message ListGoldengateDeploymentTypesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListGoldengateDeploymentTypesResponse message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesResponse.verify|verify} messages.
+                     * @param message ListGoldengateDeploymentTypesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListGoldengateDeploymentTypesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListGoldengateDeploymentTypesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesResponse;
+
+                    /**
+                     * Decodes a ListGoldengateDeploymentTypesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListGoldengateDeploymentTypesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesResponse;
+
+                    /**
+                     * Verifies a ListGoldengateDeploymentTypesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListGoldengateDeploymentTypesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListGoldengateDeploymentTypesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesResponse;
+
+                    /**
+                     * Creates a plain object from a ListGoldengateDeploymentTypesResponse message. Also converts values to other types if specified.
+                     * @param message ListGoldengateDeploymentTypesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListGoldengateDeploymentTypesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListGoldengateDeploymentTypesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoldengateDeploymentVersion. */
+                interface IGoldengateDeploymentVersion {
+
+                    /** GoldengateDeploymentVersion name */
+                    name?: (string|null);
+
+                    /** GoldengateDeploymentVersion ocid */
+                    ocid?: (string|null);
+
+                    /** GoldengateDeploymentVersion properties */
+                    properties?: (google.cloud.oracledatabase.v1.IGoldengateDeploymentVersionProperties|null);
+                }
+
+                /** Represents a GoldengateDeploymentVersion. */
+                class GoldengateDeploymentVersion implements IGoldengateDeploymentVersion {
+
+                    /**
+                     * Constructs a new GoldengateDeploymentVersion.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateDeploymentVersion);
+
+                    /** GoldengateDeploymentVersion name. */
+                    public name: string;
+
+                    /** GoldengateDeploymentVersion ocid. */
+                    public ocid: string;
+
+                    /** GoldengateDeploymentVersion properties. */
+                    public properties?: (google.cloud.oracledatabase.v1.IGoldengateDeploymentVersionProperties|null);
+
+                    /**
+                     * Creates a new GoldengateDeploymentVersion instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateDeploymentVersion instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateDeploymentVersion): google.cloud.oracledatabase.v1.GoldengateDeploymentVersion;
+
+                    /**
+                     * Encodes the specified GoldengateDeploymentVersion message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateDeploymentVersion.verify|verify} messages.
+                     * @param message GoldengateDeploymentVersion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateDeploymentVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateDeploymentVersion message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateDeploymentVersion.verify|verify} messages.
+                     * @param message GoldengateDeploymentVersion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateDeploymentVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateDeploymentVersion message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateDeploymentVersion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateDeploymentVersion;
+
+                    /**
+                     * Decodes a GoldengateDeploymentVersion message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateDeploymentVersion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateDeploymentVersion;
+
+                    /**
+                     * Verifies a GoldengateDeploymentVersion message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateDeploymentVersion message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateDeploymentVersion
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateDeploymentVersion;
+
+                    /**
+                     * Creates a plain object from a GoldengateDeploymentVersion message. Also converts values to other types if specified.
+                     * @param message GoldengateDeploymentVersion
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateDeploymentVersion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateDeploymentVersion to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateDeploymentVersion
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoldengateDeploymentVersionProperties. */
+                interface IGoldengateDeploymentVersionProperties {
+
+                    /** GoldengateDeploymentVersionProperties deploymentType */
+                    deploymentType?: (google.cloud.oracledatabase.v1.GoldengateDeploymentVersionProperties.DeploymentType|keyof typeof google.cloud.oracledatabase.v1.GoldengateDeploymentVersionProperties.DeploymentType|null);
+
+                    /** GoldengateDeploymentVersionProperties securityFix */
+                    securityFix?: (boolean|null);
+
+                    /** GoldengateDeploymentVersionProperties oggVersion */
+                    oggVersion?: (string|null);
+
+                    /** GoldengateDeploymentVersionProperties releaseType */
+                    releaseType?: (google.cloud.oracledatabase.v1.GoldengateDeploymentVersionProperties.DeploymentReleaseType|keyof typeof google.cloud.oracledatabase.v1.GoldengateDeploymentVersionProperties.DeploymentReleaseType|null);
+
+                    /** GoldengateDeploymentVersionProperties releaseTime */
+                    releaseTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoldengateDeploymentVersionProperties supportEndTime */
+                    supportEndTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a GoldengateDeploymentVersionProperties. */
+                class GoldengateDeploymentVersionProperties implements IGoldengateDeploymentVersionProperties {
+
+                    /**
+                     * Constructs a new GoldengateDeploymentVersionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGoldengateDeploymentVersionProperties);
+
+                    /** GoldengateDeploymentVersionProperties deploymentType. */
+                    public deploymentType: (google.cloud.oracledatabase.v1.GoldengateDeploymentVersionProperties.DeploymentType|keyof typeof google.cloud.oracledatabase.v1.GoldengateDeploymentVersionProperties.DeploymentType);
+
+                    /** GoldengateDeploymentVersionProperties securityFix. */
+                    public securityFix: boolean;
+
+                    /** GoldengateDeploymentVersionProperties oggVersion. */
+                    public oggVersion: string;
+
+                    /** GoldengateDeploymentVersionProperties releaseType. */
+                    public releaseType: (google.cloud.oracledatabase.v1.GoldengateDeploymentVersionProperties.DeploymentReleaseType|keyof typeof google.cloud.oracledatabase.v1.GoldengateDeploymentVersionProperties.DeploymentReleaseType);
+
+                    /** GoldengateDeploymentVersionProperties releaseTime. */
+                    public releaseTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GoldengateDeploymentVersionProperties supportEndTime. */
+                    public supportEndTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new GoldengateDeploymentVersionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoldengateDeploymentVersionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGoldengateDeploymentVersionProperties): google.cloud.oracledatabase.v1.GoldengateDeploymentVersionProperties;
+
+                    /**
+                     * Encodes the specified GoldengateDeploymentVersionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateDeploymentVersionProperties.verify|verify} messages.
+                     * @param message GoldengateDeploymentVersionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGoldengateDeploymentVersionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoldengateDeploymentVersionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GoldengateDeploymentVersionProperties.verify|verify} messages.
+                     * @param message GoldengateDeploymentVersionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGoldengateDeploymentVersionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoldengateDeploymentVersionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoldengateDeploymentVersionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GoldengateDeploymentVersionProperties;
+
+                    /**
+                     * Decodes a GoldengateDeploymentVersionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoldengateDeploymentVersionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GoldengateDeploymentVersionProperties;
+
+                    /**
+                     * Verifies a GoldengateDeploymentVersionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoldengateDeploymentVersionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoldengateDeploymentVersionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GoldengateDeploymentVersionProperties;
+
+                    /**
+                     * Creates a plain object from a GoldengateDeploymentVersionProperties message. Also converts values to other types if specified.
+                     * @param message GoldengateDeploymentVersionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GoldengateDeploymentVersionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoldengateDeploymentVersionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoldengateDeploymentVersionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GoldengateDeploymentVersionProperties {
+
+                    /** DeploymentType enum. */
+                    enum DeploymentType {
+                        DEPLOYMENT_TYPE_UNSPECIFIED = 0,
+                        OGG = 1,
+                        DATABASE_ORACLE = 2,
+                        BIGDATA = 3,
+                        DATABASE_MICROSOFT_SQLSERVER = 4,
+                        DATABASE_MYSQL = 5,
+                        DATABASE_POSTGRESQL = 6,
+                        DATABASE_DB2ZOS = 7,
+                        DATABASE_DB2I = 8,
+                        GGSA = 9,
+                        DATA_TRANSFORMS = 10
+                    }
+
+                    /** DeploymentReleaseType enum. */
+                    enum DeploymentReleaseType {
+                        DEPLOYMENT_RELEASE_TYPE_UNSPECIFIED = 0,
+                        MAJOR = 1,
+                        BUNDLE = 2,
+                        MINOR = 3
+                    }
+                }
+
+                /** Properties of a ListGoldengateDeploymentVersionsRequest. */
+                interface IListGoldengateDeploymentVersionsRequest {
+
+                    /** ListGoldengateDeploymentVersionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListGoldengateDeploymentVersionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListGoldengateDeploymentVersionsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListGoldengateDeploymentVersionsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListGoldengateDeploymentVersionsRequest. */
+                class ListGoldengateDeploymentVersionsRequest implements IListGoldengateDeploymentVersionsRequest {
+
+                    /**
+                     * Constructs a new ListGoldengateDeploymentVersionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsRequest);
+
+                    /** ListGoldengateDeploymentVersionsRequest parent. */
+                    public parent: string;
+
+                    /** ListGoldengateDeploymentVersionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListGoldengateDeploymentVersionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListGoldengateDeploymentVersionsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListGoldengateDeploymentVersionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListGoldengateDeploymentVersionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsRequest): google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsRequest;
+
+                    /**
+                     * Encodes the specified ListGoldengateDeploymentVersionsRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsRequest.verify|verify} messages.
+                     * @param message ListGoldengateDeploymentVersionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListGoldengateDeploymentVersionsRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsRequest.verify|verify} messages.
+                     * @param message ListGoldengateDeploymentVersionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListGoldengateDeploymentVersionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListGoldengateDeploymentVersionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsRequest;
+
+                    /**
+                     * Decodes a ListGoldengateDeploymentVersionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListGoldengateDeploymentVersionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsRequest;
+
+                    /**
+                     * Verifies a ListGoldengateDeploymentVersionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListGoldengateDeploymentVersionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListGoldengateDeploymentVersionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListGoldengateDeploymentVersionsRequest message. Also converts values to other types if specified.
+                     * @param message ListGoldengateDeploymentVersionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListGoldengateDeploymentVersionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListGoldengateDeploymentVersionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListGoldengateDeploymentVersionsResponse. */
+                interface IListGoldengateDeploymentVersionsResponse {
+
+                    /** ListGoldengateDeploymentVersionsResponse goldengateDeploymentVersions */
+                    goldengateDeploymentVersions?: (google.cloud.oracledatabase.v1.IGoldengateDeploymentVersion[]|null);
+
+                    /** ListGoldengateDeploymentVersionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListGoldengateDeploymentVersionsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListGoldengateDeploymentVersionsResponse. */
+                class ListGoldengateDeploymentVersionsResponse implements IListGoldengateDeploymentVersionsResponse {
+
+                    /**
+                     * Constructs a new ListGoldengateDeploymentVersionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsResponse);
+
+                    /** ListGoldengateDeploymentVersionsResponse goldengateDeploymentVersions. */
+                    public goldengateDeploymentVersions: google.cloud.oracledatabase.v1.IGoldengateDeploymentVersion[];
+
+                    /** ListGoldengateDeploymentVersionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListGoldengateDeploymentVersionsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListGoldengateDeploymentVersionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListGoldengateDeploymentVersionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsResponse): google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsResponse;
+
+                    /**
+                     * Encodes the specified ListGoldengateDeploymentVersionsResponse message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsResponse.verify|verify} messages.
+                     * @param message ListGoldengateDeploymentVersionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListGoldengateDeploymentVersionsResponse message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsResponse.verify|verify} messages.
+                     * @param message ListGoldengateDeploymentVersionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListGoldengateDeploymentVersionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListGoldengateDeploymentVersionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsResponse;
+
+                    /**
+                     * Decodes a ListGoldengateDeploymentVersionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListGoldengateDeploymentVersionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsResponse;
+
+                    /**
+                     * Verifies a ListGoldengateDeploymentVersionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListGoldengateDeploymentVersionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListGoldengateDeploymentVersionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListGoldengateDeploymentVersionsResponse message. Also converts values to other types if specified.
+                     * @param message ListGoldengateDeploymentVersionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListGoldengateDeploymentVersionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListGoldengateDeploymentVersionsResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -13217,6 +25214,202 @@ export namespace google {
                     public deleteDbSystem(request: google.cloud.oracledatabase.v1.IDeleteDbSystemRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls ListGoldengateDeployments.
+                     * @param request ListGoldengateDeploymentsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListGoldengateDeploymentsResponse
+                     */
+                    public listGoldengateDeployments(request: google.cloud.oracledatabase.v1.IListGoldengateDeploymentsRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.ListGoldengateDeploymentsCallback): void;
+
+                    /**
+                     * Calls ListGoldengateDeployments.
+                     * @param request ListGoldengateDeploymentsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listGoldengateDeployments(request: google.cloud.oracledatabase.v1.IListGoldengateDeploymentsRequest): Promise<google.cloud.oracledatabase.v1.ListGoldengateDeploymentsResponse>;
+
+                    /**
+                     * Calls GetGoldengateDeployment.
+                     * @param request GetGoldengateDeploymentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GoldengateDeployment
+                     */
+                    public getGoldengateDeployment(request: google.cloud.oracledatabase.v1.IGetGoldengateDeploymentRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.GetGoldengateDeploymentCallback): void;
+
+                    /**
+                     * Calls GetGoldengateDeployment.
+                     * @param request GetGoldengateDeploymentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getGoldengateDeployment(request: google.cloud.oracledatabase.v1.IGetGoldengateDeploymentRequest): Promise<google.cloud.oracledatabase.v1.GoldengateDeployment>;
+
+                    /**
+                     * Calls CreateGoldengateDeployment.
+                     * @param request CreateGoldengateDeploymentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createGoldengateDeployment(request: google.cloud.oracledatabase.v1.ICreateGoldengateDeploymentRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.CreateGoldengateDeploymentCallback): void;
+
+                    /**
+                     * Calls CreateGoldengateDeployment.
+                     * @param request CreateGoldengateDeploymentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createGoldengateDeployment(request: google.cloud.oracledatabase.v1.ICreateGoldengateDeploymentRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteGoldengateDeployment.
+                     * @param request DeleteGoldengateDeploymentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteGoldengateDeployment(request: google.cloud.oracledatabase.v1.IDeleteGoldengateDeploymentRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.DeleteGoldengateDeploymentCallback): void;
+
+                    /**
+                     * Calls DeleteGoldengateDeployment.
+                     * @param request DeleteGoldengateDeploymentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteGoldengateDeployment(request: google.cloud.oracledatabase.v1.IDeleteGoldengateDeploymentRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls StopGoldengateDeployment.
+                     * @param request StopGoldengateDeploymentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public stopGoldengateDeployment(request: google.cloud.oracledatabase.v1.IStopGoldengateDeploymentRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.StopGoldengateDeploymentCallback): void;
+
+                    /**
+                     * Calls StopGoldengateDeployment.
+                     * @param request StopGoldengateDeploymentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public stopGoldengateDeployment(request: google.cloud.oracledatabase.v1.IStopGoldengateDeploymentRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls StartGoldengateDeployment.
+                     * @param request StartGoldengateDeploymentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public startGoldengateDeployment(request: google.cloud.oracledatabase.v1.IStartGoldengateDeploymentRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.StartGoldengateDeploymentCallback): void;
+
+                    /**
+                     * Calls StartGoldengateDeployment.
+                     * @param request StartGoldengateDeploymentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public startGoldengateDeployment(request: google.cloud.oracledatabase.v1.IStartGoldengateDeploymentRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListGoldengateConnections.
+                     * @param request ListGoldengateConnectionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListGoldengateConnectionsResponse
+                     */
+                    public listGoldengateConnections(request: google.cloud.oracledatabase.v1.IListGoldengateConnectionsRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.ListGoldengateConnectionsCallback): void;
+
+                    /**
+                     * Calls ListGoldengateConnections.
+                     * @param request ListGoldengateConnectionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listGoldengateConnections(request: google.cloud.oracledatabase.v1.IListGoldengateConnectionsRequest): Promise<google.cloud.oracledatabase.v1.ListGoldengateConnectionsResponse>;
+
+                    /**
+                     * Calls GetGoldengateConnection.
+                     * @param request GetGoldengateConnectionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GoldengateConnection
+                     */
+                    public getGoldengateConnection(request: google.cloud.oracledatabase.v1.IGetGoldengateConnectionRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.GetGoldengateConnectionCallback): void;
+
+                    /**
+                     * Calls GetGoldengateConnection.
+                     * @param request GetGoldengateConnectionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getGoldengateConnection(request: google.cloud.oracledatabase.v1.IGetGoldengateConnectionRequest): Promise<google.cloud.oracledatabase.v1.GoldengateConnection>;
+
+                    /**
+                     * Calls CreateGoldengateConnection.
+                     * @param request CreateGoldengateConnectionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createGoldengateConnection(request: google.cloud.oracledatabase.v1.ICreateGoldengateConnectionRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.CreateGoldengateConnectionCallback): void;
+
+                    /**
+                     * Calls CreateGoldengateConnection.
+                     * @param request CreateGoldengateConnectionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createGoldengateConnection(request: google.cloud.oracledatabase.v1.ICreateGoldengateConnectionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteGoldengateConnection.
+                     * @param request DeleteGoldengateConnectionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteGoldengateConnection(request: google.cloud.oracledatabase.v1.IDeleteGoldengateConnectionRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.DeleteGoldengateConnectionCallback): void;
+
+                    /**
+                     * Calls DeleteGoldengateConnection.
+                     * @param request DeleteGoldengateConnectionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteGoldengateConnection(request: google.cloud.oracledatabase.v1.IDeleteGoldengateConnectionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListGoldengateDeploymentVersions.
+                     * @param request ListGoldengateDeploymentVersionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListGoldengateDeploymentVersionsResponse
+                     */
+                    public listGoldengateDeploymentVersions(request: google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.ListGoldengateDeploymentVersionsCallback): void;
+
+                    /**
+                     * Calls ListGoldengateDeploymentVersions.
+                     * @param request ListGoldengateDeploymentVersionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listGoldengateDeploymentVersions(request: google.cloud.oracledatabase.v1.IListGoldengateDeploymentVersionsRequest): Promise<google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsResponse>;
+
+                    /**
+                     * Calls ListGoldengateDeploymentTypes.
+                     * @param request ListGoldengateDeploymentTypesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListGoldengateDeploymentTypesResponse
+                     */
+                    public listGoldengateDeploymentTypes(request: google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.ListGoldengateDeploymentTypesCallback): void;
+
+                    /**
+                     * Calls ListGoldengateDeploymentTypes.
+                     * @param request ListGoldengateDeploymentTypesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listGoldengateDeploymentTypes(request: google.cloud.oracledatabase.v1.IListGoldengateDeploymentTypesRequest): Promise<google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesResponse>;
+
+                    /**
+                     * Calls ListGoldengateDeploymentEnvironments.
+                     * @param request ListGoldengateDeploymentEnvironmentsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListGoldengateDeploymentEnvironmentsResponse
+                     */
+                    public listGoldengateDeploymentEnvironments(request: google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.ListGoldengateDeploymentEnvironmentsCallback): void;
+
+                    /**
+                     * Calls ListGoldengateDeploymentEnvironments.
+                     * @param request ListGoldengateDeploymentEnvironmentsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listGoldengateDeploymentEnvironments(request: google.cloud.oracledatabase.v1.IListGoldengateDeploymentEnvironmentsRequest): Promise<google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsResponse>;
+
+                    /**
+                     * Calls ListGoldengateConnectionTypes.
+                     * @param request ListGoldengateConnectionTypesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListGoldengateConnectionTypesResponse
+                     */
+                    public listGoldengateConnectionTypes(request: google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.ListGoldengateConnectionTypesCallback): void;
+
+                    /**
+                     * Calls ListGoldengateConnectionTypes.
+                     * @param request ListGoldengateConnectionTypesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listGoldengateConnectionTypes(request: google.cloud.oracledatabase.v1.IListGoldengateConnectionTypesRequest): Promise<google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesResponse>;
+
+                    /**
                      * Calls ListDbVersions.
                      * @param request ListDbVersionsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListDbVersionsResponse
@@ -13243,6 +25436,76 @@ export namespace google {
                      * @returns Promise
                      */
                     public listDatabaseCharacterSets(request: google.cloud.oracledatabase.v1.IListDatabaseCharacterSetsRequest): Promise<google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsResponse>;
+
+                    /**
+                     * Calls ListGoldengateConnectionAssignments.
+                     * @param request ListGoldengateConnectionAssignmentsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListGoldengateConnectionAssignmentsResponse
+                     */
+                    public listGoldengateConnectionAssignments(request: google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.ListGoldengateConnectionAssignmentsCallback): void;
+
+                    /**
+                     * Calls ListGoldengateConnectionAssignments.
+                     * @param request ListGoldengateConnectionAssignmentsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listGoldengateConnectionAssignments(request: google.cloud.oracledatabase.v1.IListGoldengateConnectionAssignmentsRequest): Promise<google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsResponse>;
+
+                    /**
+                     * Calls GetGoldengateConnectionAssignment.
+                     * @param request GetGoldengateConnectionAssignmentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GoldengateConnectionAssignment
+                     */
+                    public getGoldengateConnectionAssignment(request: google.cloud.oracledatabase.v1.IGetGoldengateConnectionAssignmentRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.GetGoldengateConnectionAssignmentCallback): void;
+
+                    /**
+                     * Calls GetGoldengateConnectionAssignment.
+                     * @param request GetGoldengateConnectionAssignmentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getGoldengateConnectionAssignment(request: google.cloud.oracledatabase.v1.IGetGoldengateConnectionAssignmentRequest): Promise<google.cloud.oracledatabase.v1.GoldengateConnectionAssignment>;
+
+                    /**
+                     * Calls CreateGoldengateConnectionAssignment.
+                     * @param request CreateGoldengateConnectionAssignmentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createGoldengateConnectionAssignment(request: google.cloud.oracledatabase.v1.ICreateGoldengateConnectionAssignmentRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.CreateGoldengateConnectionAssignmentCallback): void;
+
+                    /**
+                     * Calls CreateGoldengateConnectionAssignment.
+                     * @param request CreateGoldengateConnectionAssignmentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createGoldengateConnectionAssignment(request: google.cloud.oracledatabase.v1.ICreateGoldengateConnectionAssignmentRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteGoldengateConnectionAssignment.
+                     * @param request DeleteGoldengateConnectionAssignmentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteGoldengateConnectionAssignment(request: google.cloud.oracledatabase.v1.IDeleteGoldengateConnectionAssignmentRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.DeleteGoldengateConnectionAssignmentCallback): void;
+
+                    /**
+                     * Calls DeleteGoldengateConnectionAssignment.
+                     * @param request DeleteGoldengateConnectionAssignmentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteGoldengateConnectionAssignment(request: google.cloud.oracledatabase.v1.IDeleteGoldengateConnectionAssignmentRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls TestGoldengateConnectionAssignment.
+                     * @param request TestGoldengateConnectionAssignmentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and TestGoldengateConnectionAssignmentResponse
+                     */
+                    public testGoldengateConnectionAssignment(request: google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.TestGoldengateConnectionAssignmentCallback): void;
+
+                    /**
+                     * Calls TestGoldengateConnectionAssignment.
+                     * @param request TestGoldengateConnectionAssignmentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public testGoldengateConnectionAssignment(request: google.cloud.oracledatabase.v1.ITestGoldengateConnectionAssignmentRequest): Promise<google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentResponse>;
                 }
 
                 namespace OracleDatabase {
@@ -13640,6 +25903,104 @@ export namespace google {
                     type DeleteDbSystemCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|listGoldengateDeployments}.
+                     * @param error Error, if any
+                     * @param [response] ListGoldengateDeploymentsResponse
+                     */
+                    type ListGoldengateDeploymentsCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.ListGoldengateDeploymentsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|getGoldengateDeployment}.
+                     * @param error Error, if any
+                     * @param [response] GoldengateDeployment
+                     */
+                    type GetGoldengateDeploymentCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.GoldengateDeployment) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|createGoldengateDeployment}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateGoldengateDeploymentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|deleteGoldengateDeployment}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteGoldengateDeploymentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|stopGoldengateDeployment}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type StopGoldengateDeploymentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|startGoldengateDeployment}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type StartGoldengateDeploymentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|listGoldengateConnections}.
+                     * @param error Error, if any
+                     * @param [response] ListGoldengateConnectionsResponse
+                     */
+                    type ListGoldengateConnectionsCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.ListGoldengateConnectionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|getGoldengateConnection}.
+                     * @param error Error, if any
+                     * @param [response] GoldengateConnection
+                     */
+                    type GetGoldengateConnectionCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.GoldengateConnection) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|createGoldengateConnection}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateGoldengateConnectionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|deleteGoldengateConnection}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteGoldengateConnectionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|listGoldengateDeploymentVersions}.
+                     * @param error Error, if any
+                     * @param [response] ListGoldengateDeploymentVersionsResponse
+                     */
+                    type ListGoldengateDeploymentVersionsCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|listGoldengateDeploymentTypes}.
+                     * @param error Error, if any
+                     * @param [response] ListGoldengateDeploymentTypesResponse
+                     */
+                    type ListGoldengateDeploymentTypesCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.ListGoldengateDeploymentTypesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|listGoldengateDeploymentEnvironments}.
+                     * @param error Error, if any
+                     * @param [response] ListGoldengateDeploymentEnvironmentsResponse
+                     */
+                    type ListGoldengateDeploymentEnvironmentsCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.ListGoldengateDeploymentEnvironmentsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|listGoldengateConnectionTypes}.
+                     * @param error Error, if any
+                     * @param [response] ListGoldengateConnectionTypesResponse
+                     */
+                    type ListGoldengateConnectionTypesCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.ListGoldengateConnectionTypesResponse) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|listDbVersions}.
                      * @param error Error, if any
                      * @param [response] ListDbVersionsResponse
@@ -13652,6 +26013,41 @@ export namespace google {
                      * @param [response] ListDatabaseCharacterSetsResponse
                      */
                     type ListDatabaseCharacterSetsCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|listGoldengateConnectionAssignments}.
+                     * @param error Error, if any
+                     * @param [response] ListGoldengateConnectionAssignmentsResponse
+                     */
+                    type ListGoldengateConnectionAssignmentsCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.ListGoldengateConnectionAssignmentsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|getGoldengateConnectionAssignment}.
+                     * @param error Error, if any
+                     * @param [response] GoldengateConnectionAssignment
+                     */
+                    type GetGoldengateConnectionAssignmentCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.GoldengateConnectionAssignment) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|createGoldengateConnectionAssignment}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateGoldengateConnectionAssignmentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|deleteGoldengateConnectionAssignment}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteGoldengateConnectionAssignmentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|testGoldengateConnectionAssignment}.
+                     * @param error Error, if any
+                     * @param [response] TestGoldengateConnectionAssignmentResponse
+                     */
+                    type TestGoldengateConnectionAssignmentCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentResponse) => void;
                 }
 
                 /** Properties of a ListCloudExadataInfrastructuresRequest. */
@@ -13783,6 +26179,9 @@ export namespace google {
 
                     /** ListCloudExadataInfrastructuresResponse nextPageToken */
                     nextPageToken?: (string|null);
+
+                    /** ListCloudExadataInfrastructuresResponse unreachable */
+                    unreachable?: (string[]|null);
                 }
 
                 /** Represents a ListCloudExadataInfrastructuresResponse. */
@@ -13799,6 +26198,9 @@ export namespace google {
 
                     /** ListCloudExadataInfrastructuresResponse nextPageToken. */
                     public nextPageToken: string;
+
+                    /** ListCloudExadataInfrastructuresResponse unreachable. */
+                    public unreachable: string[];
 
                     /**
                      * Creates a new ListCloudExadataInfrastructuresResponse instance using the specified properties.
@@ -14322,6 +26724,9 @@ export namespace google {
 
                     /** ListCloudVmClustersResponse nextPageToken */
                     nextPageToken?: (string|null);
+
+                    /** ListCloudVmClustersResponse unreachable */
+                    unreachable?: (string[]|null);
                 }
 
                 /** Represents a ListCloudVmClustersResponse. */
@@ -14338,6 +26743,9 @@ export namespace google {
 
                     /** ListCloudVmClustersResponse nextPageToken. */
                     public nextPageToken: string;
+
+                    /** ListCloudVmClustersResponse unreachable. */
+                    public unreachable: string[];
 
                     /**
                      * Creates a new ListCloudVmClustersResponse instance using the specified properties.
@@ -16078,6 +28486,9 @@ export namespace google {
 
                     /** ListAutonomousDatabasesResponse nextPageToken */
                     nextPageToken?: (string|null);
+
+                    /** ListAutonomousDatabasesResponse unreachable */
+                    unreachable?: (string[]|null);
                 }
 
                 /** Represents a ListAutonomousDatabasesResponse. */
@@ -16094,6 +28505,9 @@ export namespace google {
 
                     /** ListAutonomousDatabasesResponse nextPageToken. */
                     public nextPageToken: string;
+
+                    /** ListAutonomousDatabasesResponse unreachable. */
+                    public unreachable: string[];
 
                     /**
                      * Creates a new ListAutonomousDatabasesResponse instance using the specified properties.
@@ -18501,6 +30915,9 @@ export namespace google {
 
                     /** ListExadbVmClustersResponse nextPageToken */
                     nextPageToken?: (string|null);
+
+                    /** ListExadbVmClustersResponse unreachable */
+                    unreachable?: (string[]|null);
                 }
 
                 /** Represents a ListExadbVmClustersResponse. */
@@ -18517,6 +30934,9 @@ export namespace google {
 
                     /** ListExadbVmClustersResponse nextPageToken. */
                     public nextPageToken: string;
+
+                    /** ListExadbVmClustersResponse unreachable. */
+                    public unreachable: string[];
 
                     /**
                      * Creates a new ListExadbVmClustersResponse instance using the specified properties.

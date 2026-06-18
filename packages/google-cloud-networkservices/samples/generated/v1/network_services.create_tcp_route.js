@@ -30,7 +30,7 @@ function main(parent, tcpRouteId, tcpRoute) {
    */
   /**
    *  Required. The parent resource of the TcpRoute. Must be in the
-   *  format `projects/* /locations/global`.
+   *  format `projects/* /locations/*`.
    */
   // const parent = 'abc123'
   /**

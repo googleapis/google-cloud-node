@@ -33,6 +33,10 @@ function main(servingConfig, query) {
    *  `projects/* /locations/global/collections/default_collection/engines/* /servingConfigs/default_serving_config`,
    *  or
    *  `projects/* /locations/global/collections/default_collection/dataStores/* /servingConfigs/default_serving_config`.
+   *  Or the resource name of the agent engine serving config, such as:
+   *  `projects/* /locations/global/collections/default_collection/engines/* /servingConfigs/default_agent_answer`.
+   *  (use when `enable_agent_invocation` set to true, and you have custom
+   *  `AI_MODE` agent engine configured)
    *  This field is used to identify the serving configuration name, set
    *  of models used to make the search.
    */
@@ -100,6 +104,10 @@ function main(servingConfig, query) {
    *  for more details.
    */
   // const userLabels = [1,2,3,4]
+  /**
+   *  Optional. End user specification.
+   */
+  // const endUserSpec = {}
 
   // Imports the Discoveryengine library
   const {ConversationalSearchServiceClient} = require('@google-cloud/discoveryengine').v1beta;

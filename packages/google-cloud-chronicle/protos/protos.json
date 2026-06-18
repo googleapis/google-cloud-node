@@ -5481,7 +5481,7 @@
                     "ReferenceListService": {
                       "options": {
                         "(google.api.default_host)": "chronicle.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/chronicle,https://www.googleapis.com/auth/chronicle.readonly,https://www.googleapis.com/auth/cloud-platform"
                       },
                       "methods": {
                         "GetReferenceList": {
@@ -5557,6 +5557,22 @@
                             },
                             {
                               "(google.api.method_signature)": "reference_list,update_mask"
+                            }
+                          ]
+                        },
+                        "VerifyReferenceList": {
+                          "requestType": "VerifyReferenceListRequest",
+                          "responseType": "VerifyReferenceListResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{instance=projects/*/locations/*/instances/*}:verifyReferenceList",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{instance=projects/*/locations/*/instances/*}:verifyReferenceList",
+                                "body": "*"
+                              }
                             }
                           ]
                         }
@@ -5694,6 +5710,46 @@
                         }
                       }
                     },
+                    "VerifyReferenceListRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "chronicle.googleapis.com/Instance"
+                          }
+                        },
+                        "syntaxType": {
+                          "type": "ReferenceListSyntaxType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "entries": {
+                          "rule": "repeated",
+                          "type": "ReferenceListEntry",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "VerifyReferenceListResponse": {
+                      "fields": {
+                        "success": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "errors": {
+                          "rule": "repeated",
+                          "type": "ReferenceListError",
+                          "id": 2
+                        }
+                      }
+                    },
                     "ReferenceList": {
                       "options": {
                         "(google.api.resource).type": "chronicle.googleapis.com/ReferenceList",
@@ -5775,10 +5831,22 @@
                         }
                       }
                     },
+                    "ReferenceListError": {
+                      "fields": {
+                        "lineNumber": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "errorMessage": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "RuleService": {
                       "options": {
                         "(google.api.default_host)": "chronicle.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/chronicle,https://www.googleapis.com/auth/chronicle.readonly,https://www.googleapis.com/auth/cloud-platform"
                       },
                       "methods": {
                         "CreateRule": {
@@ -5872,6 +5940,26 @@
                             },
                             {
                               "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "VerifyRuleText": {
+                          "requestType": "VerifyRuleTextRequest",
+                          "responseType": "VerifyRuleTextResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{instance=projects/*/locations/*/instances/*}:verifyRuleText",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "instance,rule_text"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{instance=projects/*/locations/*/instances/*}:verifyRuleText",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "instance,rule_text"
                             }
                           ]
                         },
@@ -6418,6 +6506,38 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        }
+                      }
+                    },
+                    "VerifyRuleTextRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "chronicle.googleapis.com/Instance"
+                          }
+                        },
+                        "ruleText": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "VerifyRuleTextResponse": {
+                      "fields": {
+                        "success": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "compilationDiagnostics": {
+                          "rule": "repeated",
+                          "type": "CompilationDiagnostic",
+                          "id": 3
                         }
                       }
                     },

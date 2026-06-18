@@ -6,6 +6,13 @@
 [1]: https://www.npmjs.com/package/nodejs-logging?activeTab=versions
 
 
+## [11.2.3](https://github.com/googleapis/google-cloud-node/compare/logging-v11.2.2...logging-v11.2.3) (2026-06-16)
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+
 ## [11.2.2](https://github.com/googleapis/google-cloud-node/compare/logging-v11.2.1...logging-v11.2.2) (2026-05-11)
 
 
