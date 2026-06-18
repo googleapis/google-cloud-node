@@ -101,19 +101,39 @@ jobs:
                 team_reviewers: teamReviewers,
               });
             } else {
-              // Route to cloud-sdk-nodejs-team members with load balancing
-              console.log("Requesting review from a member of cloud-sdk-nodejs-team using load balancing.");
+              console.log("Fetching .github/CODEOWNERS to identify default reviewers...");
+              let defaultReviewers = [];
               try {
-                const { data: members } = await github.rest.teams.listMembersInOrg({
-                  org: 'googleapis',
-                  team_slug: 'cloud-sdk-nodejs-team',
+                const { data: codeownersData } = await github.rest.repos.getContent({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  path: '.github/CODEOWNERS',
                 });
-                
-                const memberLogins = members
-                  .map(m => m.login)
-                  .filter(login => login !== author);
+                const content = Buffer.from(codeownersData.content, 'base64').toString('utf-8');
+                const lines = content.split('\n');
+                for (const line of lines) {
+                  const commentIdx = line.indexOf('#');
+                  const cleanLine = (commentIdx !== -1 ? line.substring(0, commentIdx) : line).trim();
+                  if (!cleanLine) continue;
 
-                if (memberLogins.length > 0) {
+                  const parts = cleanLine.split(/\s+/);
+                  const pattern = parts[0];
+                  if (pattern === '*') {
+                    const owners = parts.slice(1);
+                    defaultReviewers = owners
+                      .filter(p => p.startsWith('@') && !p.includes('/'))
+                      .map(p => p.substring(1))
+                      .filter(login => login !== author);
+                    break;
+                  }
+                }
+              } catch (err) {
+                console.error("Failed to read or parse CODEOWNERS:", err);
+              }
+
+              if (defaultReviewers.length > 0) {
+                console.log(`Found default reviewers: ${defaultReviewers.join(', ')}. Load balancing among them.`);
+                try {
                   // Retrieve active open PRs to calculate load
                   const { data: openPRs } = await github.rest.pulls.list({
                     owner: context.repo.owner,
@@ -123,7 +143,7 @@ jobs:
                   });
 
                   const loadMap = {};
-                  for (const member of memberLogins) {
+                  for (const member of defaultReviewers) {
                     loadMap[member] = 0;
                   }
 
@@ -151,7 +171,7 @@ jobs:
                   // Find members with the minimum load
                   let minLoad = Infinity;
                   let selectedReviewers = [];
-                  for (const member of memberLogins) {
+                  for (const member of defaultReviewers) {
                     const load = loadMap[member];
                     if (load < minLoad) {
                       minLoad = load;
@@ -169,25 +189,11 @@ jobs:
                     repo: context.repo.repo,
                     pull_number: context.payload.pull_request.number,
                     reviewers: [leastLoadedReviewer],
-                    team_reviewers: ['cloud-sdk-nodejs-team'],
                   });
-                } else {
-                  console.log("No other members found in cloud-sdk-nodejs-team. Requesting team review only.");
-                  await github.rest.pulls.requestReviewers({
-                    owner: context.repo.owner,
-                    repo: context.repo.repo,
-                    pull_number: context.payload.pull_request.number,
-                    team_reviewers: ['cloud-sdk-nodejs-team'],
-                  });
+                } catch (err) {
+                  console.error("Failed to assign reviewers using load balancing:", err);
                 }
-              } catch (err) {
-                console.error("Failed to fetch team members or assign reviewers:", err);
-                // Fallback to just requesting the team review
-                await github.rest.pulls.requestReviewers({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  pull_number: context.payload.pull_request.number,
-                  team_reviewers: ['cloud-sdk-nodejs-team'],
-                });
+              } else {
+                console.warn("No default reviewers found in CODEOWNERS (or they only contained teams/author).");
               }
             }
