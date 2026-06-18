@@ -49116,6 +49116,39 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.ReferenceListService|verifyReferenceList}.
+                         * @memberof google.cloud.chronicle.v1.ReferenceListService
+                         * @typedef VerifyReferenceListCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.chronicle.v1.VerifyReferenceListResponse} [response] VerifyReferenceListResponse
+                         */
+    
+                        /**
+                         * Calls VerifyReferenceList.
+                         * @function verifyReferenceList
+                         * @memberof google.cloud.chronicle.v1.ReferenceListService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IVerifyReferenceListRequest} request VerifyReferenceListRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.ReferenceListService.VerifyReferenceListCallback} callback Node-style callback called with the error, if any, and VerifyReferenceListResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ReferenceListService.prototype.verifyReferenceList = function verifyReferenceList(request, callback) {
+                            return this.rpcCall(verifyReferenceList, $root.google.cloud.chronicle.v1.VerifyReferenceListRequest, $root.google.cloud.chronicle.v1.VerifyReferenceListResponse, request, callback);
+                        }, "name", { value: "VerifyReferenceList" });
+    
+                        /**
+                         * Calls VerifyReferenceList.
+                         * @function verifyReferenceList
+                         * @memberof google.cloud.chronicle.v1.ReferenceListService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IVerifyReferenceListRequest} request VerifyReferenceListRequest message or plain object
+                         * @returns {Promise<google.cloud.chronicle.v1.VerifyReferenceListResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return ReferenceListService;
                     })();
     
@@ -50966,6 +50999,583 @@
                         return UpdateReferenceListRequest;
                     })();
     
+                    v1.VerifyReferenceListRequest = (function() {
+    
+                        /**
+                         * Properties of a VerifyReferenceListRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IVerifyReferenceListRequest
+                         * @property {string|null} [instance] VerifyReferenceListRequest instance
+                         * @property {google.cloud.chronicle.v1.ReferenceListSyntaxType|null} [syntaxType] VerifyReferenceListRequest syntaxType
+                         * @property {Array.<google.cloud.chronicle.v1.IReferenceListEntry>|null} [entries] VerifyReferenceListRequest entries
+                         */
+    
+                        /**
+                         * Constructs a new VerifyReferenceListRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a VerifyReferenceListRequest.
+                         * @implements IVerifyReferenceListRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IVerifyReferenceListRequest=} [properties] Properties to set
+                         */
+                        function VerifyReferenceListRequest(properties) {
+                            this.entries = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * VerifyReferenceListRequest instance.
+                         * @member {string} instance
+                         * @memberof google.cloud.chronicle.v1.VerifyReferenceListRequest
+                         * @instance
+                         */
+                        VerifyReferenceListRequest.prototype.instance = "";
+    
+                        /**
+                         * VerifyReferenceListRequest syntaxType.
+                         * @member {google.cloud.chronicle.v1.ReferenceListSyntaxType} syntaxType
+                         * @memberof google.cloud.chronicle.v1.VerifyReferenceListRequest
+                         * @instance
+                         */
+                        VerifyReferenceListRequest.prototype.syntaxType = 0;
+    
+                        /**
+                         * VerifyReferenceListRequest entries.
+                         * @member {Array.<google.cloud.chronicle.v1.IReferenceListEntry>} entries
+                         * @memberof google.cloud.chronicle.v1.VerifyReferenceListRequest
+                         * @instance
+                         */
+                        VerifyReferenceListRequest.prototype.entries = $util.emptyArray;
+    
+                        /**
+                         * Creates a new VerifyReferenceListRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.VerifyReferenceListRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IVerifyReferenceListRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.VerifyReferenceListRequest} VerifyReferenceListRequest instance
+                         */
+                        VerifyReferenceListRequest.create = function create(properties) {
+                            return new VerifyReferenceListRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified VerifyReferenceListRequest message. Does not implicitly {@link google.cloud.chronicle.v1.VerifyReferenceListRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.VerifyReferenceListRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IVerifyReferenceListRequest} message VerifyReferenceListRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VerifyReferenceListRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.instance != null && Object.hasOwnProperty.call(message, "instance"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.instance);
+                            if (message.syntaxType != null && Object.hasOwnProperty.call(message, "syntaxType"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.syntaxType);
+                            if (message.entries != null && message.entries.length)
+                                for (var i = 0; i < message.entries.length; ++i)
+                                    $root.google.cloud.chronicle.v1.ReferenceListEntry.encode(message.entries[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified VerifyReferenceListRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.VerifyReferenceListRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.VerifyReferenceListRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IVerifyReferenceListRequest} message VerifyReferenceListRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VerifyReferenceListRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a VerifyReferenceListRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.VerifyReferenceListRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.VerifyReferenceListRequest} VerifyReferenceListRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VerifyReferenceListRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.VerifyReferenceListRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.instance = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.syntaxType = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.entries && message.entries.length))
+                                            message.entries = [];
+                                        message.entries.push($root.google.cloud.chronicle.v1.ReferenceListEntry.decode(reader, reader.uint32(), undefined, long + 1));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a VerifyReferenceListRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.VerifyReferenceListRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.VerifyReferenceListRequest} VerifyReferenceListRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VerifyReferenceListRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a VerifyReferenceListRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.VerifyReferenceListRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        VerifyReferenceListRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                if (!$util.isString(message.instance))
+                                    return "instance: string expected";
+                            if (message.syntaxType != null && message.hasOwnProperty("syntaxType"))
+                                switch (message.syntaxType) {
+                                default:
+                                    return "syntaxType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.entries != null && message.hasOwnProperty("entries")) {
+                                if (!Array.isArray(message.entries))
+                                    return "entries: array expected";
+                                for (var i = 0; i < message.entries.length; ++i) {
+                                    var error = $root.google.cloud.chronicle.v1.ReferenceListEntry.verify(message.entries[i], long + 1);
+                                    if (error)
+                                        return "entries." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a VerifyReferenceListRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.VerifyReferenceListRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.VerifyReferenceListRequest} VerifyReferenceListRequest
+                         */
+                        VerifyReferenceListRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.VerifyReferenceListRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.chronicle.v1.VerifyReferenceListRequest();
+                            if (object.instance != null)
+                                message.instance = String(object.instance);
+                            switch (object.syntaxType) {
+                            default:
+                                if (typeof object.syntaxType === "number") {
+                                    message.syntaxType = object.syntaxType;
+                                    break;
+                                }
+                                break;
+                            case "REFERENCE_LIST_SYNTAX_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.syntaxType = 0;
+                                break;
+                            case "REFERENCE_LIST_SYNTAX_TYPE_PLAIN_TEXT_STRING":
+                            case 1:
+                                message.syntaxType = 1;
+                                break;
+                            case "REFERENCE_LIST_SYNTAX_TYPE_REGEX":
+                            case 2:
+                                message.syntaxType = 2;
+                                break;
+                            case "REFERENCE_LIST_SYNTAX_TYPE_CIDR":
+                            case 3:
+                                message.syntaxType = 3;
+                                break;
+                            }
+                            if (object.entries) {
+                                if (!Array.isArray(object.entries))
+                                    throw TypeError(".google.cloud.chronicle.v1.VerifyReferenceListRequest.entries: array expected");
+                                message.entries = [];
+                                for (var i = 0; i < object.entries.length; ++i) {
+                                    if (typeof object.entries[i] !== "object")
+                                        throw TypeError(".google.cloud.chronicle.v1.VerifyReferenceListRequest.entries: object expected");
+                                    message.entries[i] = $root.google.cloud.chronicle.v1.ReferenceListEntry.fromObject(object.entries[i], long + 1);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a VerifyReferenceListRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.VerifyReferenceListRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.VerifyReferenceListRequest} message VerifyReferenceListRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        VerifyReferenceListRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.entries = [];
+                            if (options.defaults) {
+                                object.instance = "";
+                                object.syntaxType = options.enums === String ? "REFERENCE_LIST_SYNTAX_TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                object.instance = message.instance;
+                            if (message.syntaxType != null && message.hasOwnProperty("syntaxType"))
+                                object.syntaxType = options.enums === String ? $root.google.cloud.chronicle.v1.ReferenceListSyntaxType[message.syntaxType] === undefined ? message.syntaxType : $root.google.cloud.chronicle.v1.ReferenceListSyntaxType[message.syntaxType] : message.syntaxType;
+                            if (message.entries && message.entries.length) {
+                                object.entries = [];
+                                for (var j = 0; j < message.entries.length; ++j)
+                                    object.entries[j] = $root.google.cloud.chronicle.v1.ReferenceListEntry.toObject(message.entries[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this VerifyReferenceListRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.VerifyReferenceListRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        VerifyReferenceListRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for VerifyReferenceListRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.VerifyReferenceListRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        VerifyReferenceListRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.VerifyReferenceListRequest";
+                        };
+    
+                        return VerifyReferenceListRequest;
+                    })();
+    
+                    v1.VerifyReferenceListResponse = (function() {
+    
+                        /**
+                         * Properties of a VerifyReferenceListResponse.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IVerifyReferenceListResponse
+                         * @property {boolean|null} [success] VerifyReferenceListResponse success
+                         * @property {Array.<google.cloud.chronicle.v1.IReferenceListError>|null} [errors] VerifyReferenceListResponse errors
+                         */
+    
+                        /**
+                         * Constructs a new VerifyReferenceListResponse.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a VerifyReferenceListResponse.
+                         * @implements IVerifyReferenceListResponse
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IVerifyReferenceListResponse=} [properties] Properties to set
+                         */
+                        function VerifyReferenceListResponse(properties) {
+                            this.errors = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * VerifyReferenceListResponse success.
+                         * @member {boolean} success
+                         * @memberof google.cloud.chronicle.v1.VerifyReferenceListResponse
+                         * @instance
+                         */
+                        VerifyReferenceListResponse.prototype.success = false;
+    
+                        /**
+                         * VerifyReferenceListResponse errors.
+                         * @member {Array.<google.cloud.chronicle.v1.IReferenceListError>} errors
+                         * @memberof google.cloud.chronicle.v1.VerifyReferenceListResponse
+                         * @instance
+                         */
+                        VerifyReferenceListResponse.prototype.errors = $util.emptyArray;
+    
+                        /**
+                         * Creates a new VerifyReferenceListResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.VerifyReferenceListResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IVerifyReferenceListResponse=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.VerifyReferenceListResponse} VerifyReferenceListResponse instance
+                         */
+                        VerifyReferenceListResponse.create = function create(properties) {
+                            return new VerifyReferenceListResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified VerifyReferenceListResponse message. Does not implicitly {@link google.cloud.chronicle.v1.VerifyReferenceListResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.VerifyReferenceListResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IVerifyReferenceListResponse} message VerifyReferenceListResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VerifyReferenceListResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.success != null && Object.hasOwnProperty.call(message, "success"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.success);
+                            if (message.errors != null && message.errors.length)
+                                for (var i = 0; i < message.errors.length; ++i)
+                                    $root.google.cloud.chronicle.v1.ReferenceListError.encode(message.errors[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified VerifyReferenceListResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.VerifyReferenceListResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.VerifyReferenceListResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IVerifyReferenceListResponse} message VerifyReferenceListResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VerifyReferenceListResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a VerifyReferenceListResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.VerifyReferenceListResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.VerifyReferenceListResponse} VerifyReferenceListResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VerifyReferenceListResponse.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.VerifyReferenceListResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.success = reader.bool();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.errors && message.errors.length))
+                                            message.errors = [];
+                                        message.errors.push($root.google.cloud.chronicle.v1.ReferenceListError.decode(reader, reader.uint32(), undefined, long + 1));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a VerifyReferenceListResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.VerifyReferenceListResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.VerifyReferenceListResponse} VerifyReferenceListResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VerifyReferenceListResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a VerifyReferenceListResponse message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.VerifyReferenceListResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        VerifyReferenceListResponse.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.success != null && message.hasOwnProperty("success"))
+                                if (typeof message.success !== "boolean")
+                                    return "success: boolean expected";
+                            if (message.errors != null && message.hasOwnProperty("errors")) {
+                                if (!Array.isArray(message.errors))
+                                    return "errors: array expected";
+                                for (var i = 0; i < message.errors.length; ++i) {
+                                    var error = $root.google.cloud.chronicle.v1.ReferenceListError.verify(message.errors[i], long + 1);
+                                    if (error)
+                                        return "errors." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a VerifyReferenceListResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.VerifyReferenceListResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.VerifyReferenceListResponse} VerifyReferenceListResponse
+                         */
+                        VerifyReferenceListResponse.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.VerifyReferenceListResponse)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.chronicle.v1.VerifyReferenceListResponse();
+                            if (object.success != null)
+                                message.success = Boolean(object.success);
+                            if (object.errors) {
+                                if (!Array.isArray(object.errors))
+                                    throw TypeError(".google.cloud.chronicle.v1.VerifyReferenceListResponse.errors: array expected");
+                                message.errors = [];
+                                for (var i = 0; i < object.errors.length; ++i) {
+                                    if (typeof object.errors[i] !== "object")
+                                        throw TypeError(".google.cloud.chronicle.v1.VerifyReferenceListResponse.errors: object expected");
+                                    message.errors[i] = $root.google.cloud.chronicle.v1.ReferenceListError.fromObject(object.errors[i], long + 1);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a VerifyReferenceListResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.VerifyReferenceListResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.VerifyReferenceListResponse} message VerifyReferenceListResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        VerifyReferenceListResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.errors = [];
+                            if (options.defaults)
+                                object.success = false;
+                            if (message.success != null && message.hasOwnProperty("success"))
+                                object.success = message.success;
+                            if (message.errors && message.errors.length) {
+                                object.errors = [];
+                                for (var j = 0; j < message.errors.length; ++j)
+                                    object.errors[j] = $root.google.cloud.chronicle.v1.ReferenceListError.toObject(message.errors[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this VerifyReferenceListResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.VerifyReferenceListResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        VerifyReferenceListResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for VerifyReferenceListResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.VerifyReferenceListResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        VerifyReferenceListResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.VerifyReferenceListResponse";
+                        };
+    
+                        return VerifyReferenceListResponse;
+                    })();
+    
                     v1.ReferenceList = (function() {
     
                         /**
@@ -51663,6 +52273,247 @@
                         return ReferenceListEntry;
                     })();
     
+                    v1.ReferenceListError = (function() {
+    
+                        /**
+                         * Properties of a ReferenceListError.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IReferenceListError
+                         * @property {number|null} [lineNumber] ReferenceListError lineNumber
+                         * @property {string|null} [errorMessage] ReferenceListError errorMessage
+                         */
+    
+                        /**
+                         * Constructs a new ReferenceListError.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a ReferenceListError.
+                         * @implements IReferenceListError
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IReferenceListError=} [properties] Properties to set
+                         */
+                        function ReferenceListError(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ReferenceListError lineNumber.
+                         * @member {number} lineNumber
+                         * @memberof google.cloud.chronicle.v1.ReferenceListError
+                         * @instance
+                         */
+                        ReferenceListError.prototype.lineNumber = 0;
+    
+                        /**
+                         * ReferenceListError errorMessage.
+                         * @member {string} errorMessage
+                         * @memberof google.cloud.chronicle.v1.ReferenceListError
+                         * @instance
+                         */
+                        ReferenceListError.prototype.errorMessage = "";
+    
+                        /**
+                         * Creates a new ReferenceListError instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.ReferenceListError
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IReferenceListError=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.ReferenceListError} ReferenceListError instance
+                         */
+                        ReferenceListError.create = function create(properties) {
+                            return new ReferenceListError(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ReferenceListError message. Does not implicitly {@link google.cloud.chronicle.v1.ReferenceListError.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.ReferenceListError
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IReferenceListError} message ReferenceListError message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReferenceListError.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.lineNumber != null && Object.hasOwnProperty.call(message, "lineNumber"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.lineNumber);
+                            if (message.errorMessage != null && Object.hasOwnProperty.call(message, "errorMessage"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.errorMessage);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ReferenceListError message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ReferenceListError.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ReferenceListError
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IReferenceListError} message ReferenceListError message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReferenceListError.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ReferenceListError message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.ReferenceListError
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.ReferenceListError} ReferenceListError
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReferenceListError.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.ReferenceListError();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.lineNumber = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.errorMessage = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ReferenceListError message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ReferenceListError
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.ReferenceListError} ReferenceListError
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReferenceListError.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ReferenceListError message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.ReferenceListError
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ReferenceListError.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.lineNumber != null && message.hasOwnProperty("lineNumber"))
+                                if (!$util.isInteger(message.lineNumber))
+                                    return "lineNumber: integer expected";
+                            if (message.errorMessage != null && message.hasOwnProperty("errorMessage"))
+                                if (!$util.isString(message.errorMessage))
+                                    return "errorMessage: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ReferenceListError message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.ReferenceListError
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.ReferenceListError} ReferenceListError
+                         */
+                        ReferenceListError.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.ReferenceListError)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.chronicle.v1.ReferenceListError();
+                            if (object.lineNumber != null)
+                                message.lineNumber = object.lineNumber | 0;
+                            if (object.errorMessage != null)
+                                message.errorMessage = String(object.errorMessage);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ReferenceListError message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.ReferenceListError
+                         * @static
+                         * @param {google.cloud.chronicle.v1.ReferenceListError} message ReferenceListError
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ReferenceListError.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.lineNumber = 0;
+                                object.errorMessage = "";
+                            }
+                            if (message.lineNumber != null && message.hasOwnProperty("lineNumber"))
+                                object.lineNumber = message.lineNumber;
+                            if (message.errorMessage != null && message.hasOwnProperty("errorMessage"))
+                                object.errorMessage = message.errorMessage;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ReferenceListError to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.ReferenceListError
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ReferenceListError.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ReferenceListError
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.ReferenceListError
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ReferenceListError.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.ReferenceListError";
+                        };
+    
+                        return ReferenceListError;
+                    })();
+    
                     v1.RuleService = (function() {
     
                         /**
@@ -51857,6 +52708,39 @@
                          * @instance
                          * @param {google.cloud.chronicle.v1.IDeleteRuleRequest} request DeleteRuleRequest message or plain object
                          * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.RuleService|verifyRuleText}.
+                         * @memberof google.cloud.chronicle.v1.RuleService
+                         * @typedef VerifyRuleTextCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.chronicle.v1.VerifyRuleTextResponse} [response] VerifyRuleTextResponse
+                         */
+    
+                        /**
+                         * Calls VerifyRuleText.
+                         * @function verifyRuleText
+                         * @memberof google.cloud.chronicle.v1.RuleService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IVerifyRuleTextRequest} request VerifyRuleTextRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.RuleService.VerifyRuleTextCallback} callback Node-style callback called with the error, if any, and VerifyRuleTextResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RuleService.prototype.verifyRuleText = function verifyRuleText(request, callback) {
+                            return this.rpcCall(verifyRuleText, $root.google.cloud.chronicle.v1.VerifyRuleTextRequest, $root.google.cloud.chronicle.v1.VerifyRuleTextResponse, request, callback);
+                        }, "name", { value: "VerifyRuleText" });
+    
+                        /**
+                         * Calls VerifyRuleText.
+                         * @function verifyRuleText
+                         * @memberof google.cloud.chronicle.v1.RuleService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IVerifyRuleTextRequest} request VerifyRuleTextRequest message or plain object
+                         * @returns {Promise<google.cloud.chronicle.v1.VerifyRuleTextResponse>} Promise
                          * @variation 2
                          */
     
@@ -55501,6 +56385,509 @@
                         };
     
                         return DeleteRuleRequest;
+                    })();
+    
+                    v1.VerifyRuleTextRequest = (function() {
+    
+                        /**
+                         * Properties of a VerifyRuleTextRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IVerifyRuleTextRequest
+                         * @property {string|null} [instance] VerifyRuleTextRequest instance
+                         * @property {string|null} [ruleText] VerifyRuleTextRequest ruleText
+                         */
+    
+                        /**
+                         * Constructs a new VerifyRuleTextRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a VerifyRuleTextRequest.
+                         * @implements IVerifyRuleTextRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IVerifyRuleTextRequest=} [properties] Properties to set
+                         */
+                        function VerifyRuleTextRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * VerifyRuleTextRequest instance.
+                         * @member {string} instance
+                         * @memberof google.cloud.chronicle.v1.VerifyRuleTextRequest
+                         * @instance
+                         */
+                        VerifyRuleTextRequest.prototype.instance = "";
+    
+                        /**
+                         * VerifyRuleTextRequest ruleText.
+                         * @member {string} ruleText
+                         * @memberof google.cloud.chronicle.v1.VerifyRuleTextRequest
+                         * @instance
+                         */
+                        VerifyRuleTextRequest.prototype.ruleText = "";
+    
+                        /**
+                         * Creates a new VerifyRuleTextRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.VerifyRuleTextRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IVerifyRuleTextRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.VerifyRuleTextRequest} VerifyRuleTextRequest instance
+                         */
+                        VerifyRuleTextRequest.create = function create(properties) {
+                            return new VerifyRuleTextRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified VerifyRuleTextRequest message. Does not implicitly {@link google.cloud.chronicle.v1.VerifyRuleTextRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.VerifyRuleTextRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IVerifyRuleTextRequest} message VerifyRuleTextRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VerifyRuleTextRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.instance != null && Object.hasOwnProperty.call(message, "instance"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.instance);
+                            if (message.ruleText != null && Object.hasOwnProperty.call(message, "ruleText"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.ruleText);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified VerifyRuleTextRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.VerifyRuleTextRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.VerifyRuleTextRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IVerifyRuleTextRequest} message VerifyRuleTextRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VerifyRuleTextRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a VerifyRuleTextRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.VerifyRuleTextRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.VerifyRuleTextRequest} VerifyRuleTextRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VerifyRuleTextRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.VerifyRuleTextRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.instance = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.ruleText = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a VerifyRuleTextRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.VerifyRuleTextRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.VerifyRuleTextRequest} VerifyRuleTextRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VerifyRuleTextRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a VerifyRuleTextRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.VerifyRuleTextRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        VerifyRuleTextRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                if (!$util.isString(message.instance))
+                                    return "instance: string expected";
+                            if (message.ruleText != null && message.hasOwnProperty("ruleText"))
+                                if (!$util.isString(message.ruleText))
+                                    return "ruleText: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a VerifyRuleTextRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.VerifyRuleTextRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.VerifyRuleTextRequest} VerifyRuleTextRequest
+                         */
+                        VerifyRuleTextRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.VerifyRuleTextRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.chronicle.v1.VerifyRuleTextRequest();
+                            if (object.instance != null)
+                                message.instance = String(object.instance);
+                            if (object.ruleText != null)
+                                message.ruleText = String(object.ruleText);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a VerifyRuleTextRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.VerifyRuleTextRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.VerifyRuleTextRequest} message VerifyRuleTextRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        VerifyRuleTextRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.instance = "";
+                                object.ruleText = "";
+                            }
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                object.instance = message.instance;
+                            if (message.ruleText != null && message.hasOwnProperty("ruleText"))
+                                object.ruleText = message.ruleText;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this VerifyRuleTextRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.VerifyRuleTextRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        VerifyRuleTextRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for VerifyRuleTextRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.VerifyRuleTextRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        VerifyRuleTextRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.VerifyRuleTextRequest";
+                        };
+    
+                        return VerifyRuleTextRequest;
+                    })();
+    
+                    v1.VerifyRuleTextResponse = (function() {
+    
+                        /**
+                         * Properties of a VerifyRuleTextResponse.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IVerifyRuleTextResponse
+                         * @property {boolean|null} [success] VerifyRuleTextResponse success
+                         * @property {Array.<google.cloud.chronicle.v1.ICompilationDiagnostic>|null} [compilationDiagnostics] VerifyRuleTextResponse compilationDiagnostics
+                         */
+    
+                        /**
+                         * Constructs a new VerifyRuleTextResponse.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a VerifyRuleTextResponse.
+                         * @implements IVerifyRuleTextResponse
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IVerifyRuleTextResponse=} [properties] Properties to set
+                         */
+                        function VerifyRuleTextResponse(properties) {
+                            this.compilationDiagnostics = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * VerifyRuleTextResponse success.
+                         * @member {boolean} success
+                         * @memberof google.cloud.chronicle.v1.VerifyRuleTextResponse
+                         * @instance
+                         */
+                        VerifyRuleTextResponse.prototype.success = false;
+    
+                        /**
+                         * VerifyRuleTextResponse compilationDiagnostics.
+                         * @member {Array.<google.cloud.chronicle.v1.ICompilationDiagnostic>} compilationDiagnostics
+                         * @memberof google.cloud.chronicle.v1.VerifyRuleTextResponse
+                         * @instance
+                         */
+                        VerifyRuleTextResponse.prototype.compilationDiagnostics = $util.emptyArray;
+    
+                        /**
+                         * Creates a new VerifyRuleTextResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.VerifyRuleTextResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IVerifyRuleTextResponse=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.VerifyRuleTextResponse} VerifyRuleTextResponse instance
+                         */
+                        VerifyRuleTextResponse.create = function create(properties) {
+                            return new VerifyRuleTextResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified VerifyRuleTextResponse message. Does not implicitly {@link google.cloud.chronicle.v1.VerifyRuleTextResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.VerifyRuleTextResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IVerifyRuleTextResponse} message VerifyRuleTextResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VerifyRuleTextResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.success != null && Object.hasOwnProperty.call(message, "success"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.success);
+                            if (message.compilationDiagnostics != null && message.compilationDiagnostics.length)
+                                for (var i = 0; i < message.compilationDiagnostics.length; ++i)
+                                    $root.google.cloud.chronicle.v1.CompilationDiagnostic.encode(message.compilationDiagnostics[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified VerifyRuleTextResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.VerifyRuleTextResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.VerifyRuleTextResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IVerifyRuleTextResponse} message VerifyRuleTextResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VerifyRuleTextResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a VerifyRuleTextResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.VerifyRuleTextResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.VerifyRuleTextResponse} VerifyRuleTextResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VerifyRuleTextResponse.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.VerifyRuleTextResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.success = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.compilationDiagnostics && message.compilationDiagnostics.length))
+                                            message.compilationDiagnostics = [];
+                                        message.compilationDiagnostics.push($root.google.cloud.chronicle.v1.CompilationDiagnostic.decode(reader, reader.uint32(), undefined, long + 1));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a VerifyRuleTextResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.VerifyRuleTextResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.VerifyRuleTextResponse} VerifyRuleTextResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VerifyRuleTextResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a VerifyRuleTextResponse message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.VerifyRuleTextResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        VerifyRuleTextResponse.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.success != null && message.hasOwnProperty("success"))
+                                if (typeof message.success !== "boolean")
+                                    return "success: boolean expected";
+                            if (message.compilationDiagnostics != null && message.hasOwnProperty("compilationDiagnostics")) {
+                                if (!Array.isArray(message.compilationDiagnostics))
+                                    return "compilationDiagnostics: array expected";
+                                for (var i = 0; i < message.compilationDiagnostics.length; ++i) {
+                                    var error = $root.google.cloud.chronicle.v1.CompilationDiagnostic.verify(message.compilationDiagnostics[i], long + 1);
+                                    if (error)
+                                        return "compilationDiagnostics." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a VerifyRuleTextResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.VerifyRuleTextResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.VerifyRuleTextResponse} VerifyRuleTextResponse
+                         */
+                        VerifyRuleTextResponse.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.VerifyRuleTextResponse)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.chronicle.v1.VerifyRuleTextResponse();
+                            if (object.success != null)
+                                message.success = Boolean(object.success);
+                            if (object.compilationDiagnostics) {
+                                if (!Array.isArray(object.compilationDiagnostics))
+                                    throw TypeError(".google.cloud.chronicle.v1.VerifyRuleTextResponse.compilationDiagnostics: array expected");
+                                message.compilationDiagnostics = [];
+                                for (var i = 0; i < object.compilationDiagnostics.length; ++i) {
+                                    if (typeof object.compilationDiagnostics[i] !== "object")
+                                        throw TypeError(".google.cloud.chronicle.v1.VerifyRuleTextResponse.compilationDiagnostics: object expected");
+                                    message.compilationDiagnostics[i] = $root.google.cloud.chronicle.v1.CompilationDiagnostic.fromObject(object.compilationDiagnostics[i], long + 1);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a VerifyRuleTextResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.VerifyRuleTextResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.VerifyRuleTextResponse} message VerifyRuleTextResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        VerifyRuleTextResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.compilationDiagnostics = [];
+                            if (options.defaults)
+                                object.success = false;
+                            if (message.success != null && message.hasOwnProperty("success"))
+                                object.success = message.success;
+                            if (message.compilationDiagnostics && message.compilationDiagnostics.length) {
+                                object.compilationDiagnostics = [];
+                                for (var j = 0; j < message.compilationDiagnostics.length; ++j)
+                                    object.compilationDiagnostics[j] = $root.google.cloud.chronicle.v1.CompilationDiagnostic.toObject(message.compilationDiagnostics[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this VerifyRuleTextResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.VerifyRuleTextResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        VerifyRuleTextResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for VerifyRuleTextResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.VerifyRuleTextResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        VerifyRuleTextResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.VerifyRuleTextResponse";
+                        };
+    
+                        return VerifyRuleTextResponse;
                     })();
     
                     v1.ListRuleRevisionsRequest = (function() {
