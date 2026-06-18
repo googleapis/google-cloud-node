@@ -34,6 +34,7 @@ import {
   EnableLoggingOptions,
   GetBucketSignedUrlConfig,
   LifecycleRule,
+  ComposeCleanupError,
 } from '../src/bucket.js';
 import mime from 'mime';
 import {convertObjKeysToSnakeCase, getDirName} from '../src/util.js';
@@ -698,7 +699,7 @@ describe('Bucket', () => {
       const destination = bucket.file('destination.txt');
 
       storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
-        assert.strictEqual(reqOpts.queryParameters, options);
+        assert.deepStrictEqual(reqOpts.queryParameters, options);
         return Promise.resolve({});
       });
 
@@ -802,6 +803,149 @@ describe('Bucket', () => {
 
       bucket.combine(sources, destination, done);
     });
+
+    it('should delete source objects if deleteSourceObjects is true', done => {
+      const sources = [bucket.file('1.foo'), bucket.file('2.foo')];
+      const destination = bucket.file('destination.foo');
+
+      // Set generation on the first file and leave second file without generation
+      sources[0].generation = 12345;
+
+      let deletedCount = 0;
+      sources[0].delete = async (opts?: any) => {
+        assert.strictEqual(opts?.userProject, 'user-project-id');
+        assert.strictEqual(opts?.ignoreNotFound, true);
+        assert.strictEqual(opts?.ifGenerationMatch, 12345);
+        deletedCount++;
+        return [{}] as any;
+      };
+      sources[1].delete = async (opts?: any) => {
+        assert.strictEqual(opts?.userProject, 'user-project-id');
+        assert.strictEqual(opts?.ignoreNotFound, true);
+        assert.strictEqual(opts?.ifGenerationMatch, undefined);
+        deletedCount++;
+        return [{}] as any;
+      };
+
+      storageTransport.makeRequest = sandbox.stub().callsFake((reqOpts, callback) => {
+        assert.strictEqual((reqOpts.queryParameters as any)?.deleteSourceObjects, undefined);
+        const body = JSON.parse(reqOpts.body as string);
+        assert.strictEqual(body.deleteSourceObjects, undefined);
+        assert.strictEqual(body.sourceObjects[0].generation, 12345);
+        callback!(null, {});
+        return Promise.resolve();
+      });
+
+      bucket.combine(
+        sources,
+        destination,
+        {deleteSourceObjects: true, userProject: 'user-project-id'},
+        (err: any) => {
+          assert.ifError(err);
+          assert.strictEqual(deletedCount, 2);
+          done();
+        }
+      );
+    });
+
+    it('should not delete source objects if deleteSourceObjects is false/omitted', done => {
+      const sources = [bucket.file('1.foo'), bucket.file('2.foo')];
+      const destination = bucket.file('destination.foo');
+
+      let deletedCount = 0;
+      sources.forEach(source => {
+        source.delete = async () => {
+          deletedCount++;
+          return [{}] as any;
+        };
+      });
+
+      storageTransport.makeRequest = sandbox.stub().callsFake((reqOpts, callback) => {
+        const body = JSON.parse(reqOpts.body as string);
+        assert.strictEqual(body.deleteSourceObjects, undefined);
+        callback!(null, {});
+        return Promise.resolve();
+      });
+
+      bucket.combine(sources, destination, (err: any) => {
+        assert.ifError(err);
+        assert.strictEqual(deletedCount, 0);
+        done();
+      });
+    });
+
+    it('should not delete source objects if compose operation fails', done => {
+      const sources = [bucket.file('1.foo'), bucket.file('2.foo')];
+      const destination = bucket.file('destination.foo');
+      const composeError = new Error('Compose failed.');
+
+      let deletedCount = 0;
+      sources.forEach(source => {
+        source.delete = async () => {
+          deletedCount++;
+          return [{}] as any;
+        };
+      });
+
+      storageTransport.makeRequest = sandbox.stub().callsFake((reqOpts, callback) => {
+        const body = JSON.parse(reqOpts.body as string);
+        assert.strictEqual(body.deleteSourceObjects, undefined);
+        callback!(composeError);
+        return Promise.resolve();
+      });
+
+      bucket.combine(sources, destination, {deleteSourceObjects: true}, (err: any) => {
+        assert.strictEqual(err, composeError);
+        assert.strictEqual(deletedCount, 0);
+        done();
+      });
+    });
+
+    it('should return ComposeCleanupError if deleting source objects fails', done => {
+      const sources = [bucket.file('1.foo'), bucket.file('2.foo')];
+      const destination = bucket.file('destination.foo');
+      const deleteError = new Error('Delete failed.');
+
+      sources[0].delete = async (opts?: any) => {
+        assert.strictEqual(opts?.userProject, 'user-project-id');
+        assert.strictEqual(opts?.ignoreNotFound, true);
+        throw deleteError;
+      };
+      sources[1].delete = async (opts?: any) => {
+        assert.strictEqual(opts?.userProject, 'user-project-id');
+        assert.strictEqual(opts?.ignoreNotFound, true);
+        return [{}] as any;
+      };
+
+      storageTransport.makeRequest = sandbox.stub().callsFake((reqOpts, callback) => {
+        const body = JSON.parse(reqOpts.body as string);
+        assert.strictEqual(body.deleteSourceObjects, undefined);
+        callback!(null, {success: true});
+        return Promise.resolve();
+      });
+
+      bucket.combine(
+        sources,
+        destination,
+        {deleteSourceObjects: true, userProject: 'user-project-id'},
+        (err: any, newFile: any, apiResponse: any) => {
+          try {
+            assert.ok(err instanceof ComposeCleanupError);
+            assert.strictEqual(err.name, 'ComposeCleanupError');
+            assert.deepStrictEqual((err as any).errors, [deleteError]);
+            assert.strictEqual((err as any).newFile, destination);
+            assert.deepStrictEqual((err as any).apiResponse, {success: true});
+
+            // Also check callback arguments
+            assert.strictEqual(newFile, destination);
+            assert.deepStrictEqual(apiResponse, {success: true});
+            done();
+          } catch (assertErr) {
+            done(assertErr);
+          }
+        }
+      );
+    });
   });
 
   describe('createChannel', () => {
@@ -860,7 +1004,7 @@ describe('Bucket', () => {
       bucket.storageTransport.makeRequest = sandbox
         .stub()
         .callsFake(reqOpts => {
-          assert.strictEqual(reqOpts.queryParameters, options);
+          assert.deepStrictEqual(reqOpts.queryParameters, options);
           done();
         });
 
@@ -1915,7 +2059,7 @@ describe('Bucket', () => {
             reqOpts.url,
             `/storage/v1/b/${BUCKET_NAME}/notificationConfigs`,
           );
-          assert.strictEqual(reqOpts.queryParameters, options);
+          assert.deepStrictEqual(reqOpts.queryParameters, options);
           done();
         });
 

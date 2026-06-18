@@ -30,7 +30,7 @@ function main(parent, httpRouteId, httpRoute) {
    */
   /**
    *  Required. The parent resource of the HttpRoute. Must be in the
-   *  format `projects/* /locations/global`.
+   *  format `projects/* /locations/*`.
    */
   // const parent = 'abc123'
   /**
@@ -41,6 +41,10 @@ function main(parent, httpRouteId, httpRoute) {
    *  Required. HttpRoute resource to be created.
    */
   // const httpRoute = {}
+  /**
+   *  Optional. Idempotent request UUID.
+   */
+  // const requestId = 'abc123'
 
   // Imports the Networkservices library
   const {NetworkServicesClient} = require('@google-cloud/networkservices').v1;

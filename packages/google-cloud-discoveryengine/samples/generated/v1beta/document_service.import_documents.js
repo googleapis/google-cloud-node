@@ -137,10 +137,16 @@ function main(parent) {
    *  must be `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
    *  * SpannerSource google.cloud.discoveryengine.v1beta.SpannerSource.
    *  * CloudSqlSource google.cloud.discoveryengine.v1beta.CloudSqlSource.
-   *  * FirestoreSource google.cloud.discoveryengine.v1beta.FirestoreSource.
    *  * BigtableSource google.cloud.discoveryengine.v1beta.BigtableSource.
    */
   // const idField = 'abc123'
+  /**
+   *  Optional. Whether to force refresh the unstructured content of the
+   *  documents.
+   *  If set to `true`, the content part of the documents will be refreshed
+   *  regardless of the update status of the referencing content.
+   */
+  // const forceRefreshContent = true
 
   // Imports the Discoveryengine library
   const {DocumentServiceClient} = require('@google-cloud/discoveryengine').v1beta;
