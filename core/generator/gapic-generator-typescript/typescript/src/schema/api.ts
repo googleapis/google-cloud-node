@@ -212,8 +212,8 @@ export class API {
             .filter(
               service =>
                 (service.method && service.method.length > 0) ||
-                service.IAMPolicyMixin > 0 ||
-                service.LocationMixin > 0,
+                !!service.IAMPolicyMixin ||
+                !!service.LocationMixin,
             ),
         );
         return retval;
