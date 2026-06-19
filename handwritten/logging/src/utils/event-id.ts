@@ -16,10 +16,7 @@
 
 import * as crypto from 'crypto';
 
-const chars = '.PYFGCRLAOEUIDHTNSQJKXBMWVZ_pyfgcrlaoeuidhtnsqjkxbmwvz1234567890'
-  .split('')
-  .sort()
-  .join('');
+const chars = '.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz';
 
 function encode(data: Uint8Array): string {
   let s = '';
