@@ -27,7 +27,7 @@ PROJECT_ROOT=$(git rev-parse --show-toplevel)
 # Correctly resolve the script's directory
 SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 TEMPLATE_FILE="${SCRIPT_DIR}/cloudbuild.yaml.template"
-OUTPUT_DIR="${PROJECT_ROOT}/packages/google-cloud-${LIBRARY_NAME}"
+OUTPUT_DIR="${PROJECT_ROOT}/handwritten/${LIBRARY_NAME}"
 OUTPUT_FILE="${OUTPUT_DIR}/cloudbuild.yaml"
 
 if [ -f "${OUTPUT_FILE}" ]; then
