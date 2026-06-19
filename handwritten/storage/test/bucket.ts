@@ -2894,6 +2894,7 @@ describe('Bucket', () => {
         bucket.storage.retryOptions.autoRetry = true;
         bucket.storage.retryOptions.maxRetries = 2;
         bucket.storage.retryOptions.idempotencyStrategy = 1;
+        bucket.storage.retryOptions.retryableErrorFn = () => true;
 
         fakeFile.createWriteStream = (options_: CreateWriteStreamOptions) => {
           retryCount++;
@@ -2906,19 +2907,20 @@ describe('Bucket', () => {
           }
 
           const ws = new stream.PassThrough();
+          ws.resume();
 
           setImmediate(() => {
             if (retryCount === 1) {
               const error = new Error('Retryable failure') as GaxiosError;
               error.code = 500;
               error.status = 500;
-              ws.emit('error', error);
+              ws.destroy(error);
             } else {
               ws.emit('metadata', {});
-              ws.end();
             }
           });
-          return ws;
+          
+          return ws as any;
         };
 
         bucket.upload(filepath, options, err => {
