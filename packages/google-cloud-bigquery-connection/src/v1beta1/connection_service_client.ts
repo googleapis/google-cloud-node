@@ -52,7 +52,7 @@ export class ConnectionServiceClient {
   private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
-  private _log = logging.log('connection');
+  private _log = logging.log('bigquery-connection');
 
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
