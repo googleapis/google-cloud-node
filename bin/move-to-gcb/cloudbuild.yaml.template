@@ -6,7 +6,7 @@ steps:
   - '-c'
   - |
     npm install
-  dir: 'packages/google-cloud-{{LIBRARY_NAME}}'
+  dir: 'handwritten/{{LIBRARY_NAME}}'
   id: 'install-dependencies'
 
 # 2. Configure environment variables for the tests and run system tests
@@ -24,7 +24,7 @@ steps:
   - '-c'
   - |
     npm run system-test
-  dir: 'packages/google-cloud-{{LIBRARY_NAME}}'
+  dir: 'handwritten/{{LIBRARY_NAME}}'
   env:
   - 'GCLOUD_PROJECT=${_GCP_PROJECT_ID}' # Pass project ID via build variable
   # If you need specific credentials from Secret Manager, uncomment these:
@@ -56,7 +56,7 @@ steps:
     #   b) Replicate its functionality directly in this step.
     #   c) Store it in a GCS bucket and fetch it.
     echo "Codecov reporting (if desired) would be integrated here."
-  dir: 'packages/google-cloud-{{LIBRARY_NAME}}'
+  dir: 'handwritten/{{LIBRARY_NAME}}'
   id: 'coverage-report'
   waitFor: ['run-system-tests']
 
