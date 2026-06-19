@@ -16,6 +16,8 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+// Test
+
 import * as v1 from './v1';
 import * as v1beta1 from './v1beta1';
 import * as v1alpha from './v1alpha';
