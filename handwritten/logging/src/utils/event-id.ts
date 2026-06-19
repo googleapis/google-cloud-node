@@ -19,6 +19,7 @@ import * as crypto from 'crypto';
 const chars = '.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz';
 
 function encode(data: Uint8Array): string {
+  // Code for this encode method is copied verbatim from the eventid package.
   let s = '';
   const l = data.length;
   let hang = 0;
@@ -47,9 +48,12 @@ function encode(data: Uint8Array): string {
 export class EventId {
   private b = new Uint8Array(24);
   constructor() {
+    // Unlike the eventid package, we use crypto here to generate the buffer
+    // If we use the uuid package it will cause scan errors
     crypto.randomFillSync(this.b, 8, 16);
   }
   new(): string {
+    // Code in this new() method is copied verbatim from eventid package.
     for (let i = 7; i >= 0; i--) {
       if (this.b[i] !== 255) {
         this.b[i]++;
