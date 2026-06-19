@@ -43,7 +43,7 @@ function main(parent, maxResults) {
   // const pageToken = 'abc123'
 
   // Imports the Connection library
-  const {ConnectionServiceClient} = require('connection').v1beta1;
+  const {ConnectionServiceClient} = require('@google-cloud/bigquery-connection').v1beta1;
 
   // Instantiates a client
   const connectionClient = new ConnectionServiceClient();
