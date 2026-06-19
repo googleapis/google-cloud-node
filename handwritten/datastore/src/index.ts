@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-// Test
-
 /**
  * @namespace google
  */
