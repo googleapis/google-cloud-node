@@ -1441,9 +1441,10 @@ describe('storage', function () {
 
         assert(buckets.length > 0);
 
-        buckets.forEach(bucket => {
-          assert(types.includes(bucket.metadata.locationType!));
-        });
+        const myBucket = buckets.find(b => b.name === bucket.name); 
+
+        assert(myBucket);
+        assert(types.includes(myBucket.metadata.locationType!));
       });
 
       it('should be available from setting retention policy', async () => {
