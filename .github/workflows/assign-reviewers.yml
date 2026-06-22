@@ -60,27 +60,48 @@ jobs:
             if (isGoogler) {
               console.log(`${author} is a trusted bot. Treating as Googler.`);
             } else {
-              const orgs = ['googlers', 'GoogleCloudPlatform', 'googleapis'];
-              // Check membership in all organizations concurrently to minimize API latency.
-              const checks = orgs.map(async (org) => {
-                try {
-                  const res = await github.rest.orgs.checkMembershipForUser({
-                    org: org,
-                    username: author,
-                  });
-                  return { org, isMember: res.status === 204 };
-                } catch (error) {
-                  if (error.status !== 404) {
-                    console.warn(`Could not check membership in '${org}' organization: Status ${error.status}.`);
-                  }
-                  return { org, isMember: false };
+              // 1. First, check if the user is a collaborator of the repository.
+              // This check works with the default GITHUB_TOKEN and does not require secrets.
+              try {
+                const res = await github.rest.repos.checkCollaborator({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  username: author,
+                });
+                if (res.status === 204) {
+                  isGoogler = true;
+                  console.log(`${author} is a collaborator of the repository.`);
                 }
-              });
-              const results = await Promise.all(checks);
-              const memberOf = results.find(r => r.isMember);
-              if (memberOf) {
-                isGoogler = true;
-                console.log(`${author} is a member of '${memberOf.org}' organization.`);
+              } catch (error) {
+                if (error.status !== 404) {
+                  console.warn(`Could not check collaborator status for ${author}: Status ${error.status}.`);
+                }
+              }
+
+              // 2. Fall back to organization membership checks (requires GOOGLER_CHECK_TOKEN for private orgs).
+              if (!isGoogler) {
+                const orgs = ['googlers', 'GoogleCloudPlatform', 'googleapis'];
+                // Check membership in all organizations concurrently to minimize API latency.
+                const checks = orgs.map(async (org) => {
+                  try {
+                    const res = await github.rest.orgs.checkMembershipForUser({
+                      org: org,
+                      username: author,
+                    });
+                    return { org, isMember: res.status === 204 };
+                  } catch (error) {
+                    if (error.status !== 404) {
+                      console.warn(`Could not check membership in '${org}' organization: Status ${error.status}.`);
+                    }
+                    return { org, isMember: false };
+                  }
+                });
+                const results = await Promise.all(checks);
+                const memberOf = results.find(r => r.isMember);
+                if (memberOf) {
+                  isGoogler = true;
+                  console.log(`${author} is a member of '${memberOf.org}' organization.`);
+                }
               }
             }
 
