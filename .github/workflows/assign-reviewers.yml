@@ -61,24 +61,25 @@ jobs:
               console.log(`${author} is a trusted bot. Treating as Googler.`);
             } else {
               const orgs = ['googlers', 'GoogleCloudPlatform', 'googleapis'];
-              for (const org of orgs) {
+              const checks = orgs.map(async (org) => {
                 try {
                   const res = await github.rest.orgs.checkMembershipForUser({
                     org: org,
                     username: author,
                   });
-                  if (res.status === 204) {
-                    isGoogler = true;
-                    console.log(`${author} is a member of '${org}' organization.`);
-                    break;
-                  }
+                  return { org, isMember: res.status === 204 };
                 } catch (error) {
-                  if (error.status === 404) {
-                    console.log(`${author} is NOT a member of '${org}' organization.`);
-                  } else {
+                  if (error.status !== 404) {
                     console.warn(`Could not check membership in '${org}' organization: Status ${error.status}.`);
                   }
+                  return { org, isMember: false };
                 }
+              });
+              const results = await Promise.all(checks);
+              const memberOf = results.find(r => r.isMember);
+              if (memberOf) {
+                isGoogler = true;
+                console.log(`${author} is a member of '${memberOf.org}' organization.`);
               }
             }
 
@@ -93,22 +94,6 @@ jobs:
             const hasDefaultTeam = requestedTeams.some(team => team.slug === 'cloud-sdk-nodejs-team');
             const hasRouteSpecificTeam = requestedTeams.some(team => team.slug !== 'cloud-sdk-nodejs-team');
 
-            // Check if PR has already been reviewed
-            let hasReviews = false;
-            try {
-              const { data: reviews } = await github.rest.pulls.listReviews({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                pull_number: context.payload.pull_request.number,
-              });
-              if (reviews.length > 0) {
-                console.log("PR already has reviews.");
-                hasReviews = true;
-              }
-            } catch (err) {
-              console.warn("Failed to check PR reviews:", err.message || err);
-            }
-
             let shouldExit = false;
             if (requestedReviewers.length > 0) {
               console.log(`PR already has requested reviewers: ${requestedReviewers.map(r => r.login).join(', ')}.`);
@@ -116,8 +101,27 @@ jobs:
             } else if (hasRouteSpecificTeam) {
               console.log(`PR already has route-specific team reviewer requested: ${requestedTeams.map(t => t.slug).join(', ')}.`);
               shouldExit = true;
-            } else if (hasReviews) {
-              shouldExit = true;
+            }
+
+            // Check if PR has already been reviewed only if we aren't already exiting
+            let hasReviews = false;
+            if (!shouldExit && context.payload.action !== 'opened') {
+              try {
+                const { data: reviews } = await github.rest.pulls.listReviews({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: context.payload.pull_request.number,
+                });
+                if (reviews.length > 0) {
+                  console.log("PR already has reviews.");
+                  hasReviews = true;
+                  shouldExit = true;
+                }
+              } catch (err) {
+                console.warn("Failed to check PR reviews:", err.message || err);
+              }
+            } else if (context.payload.action === 'opened') {
+              console.log("PR is newly opened. Skipping review check.");
             }
 
             if (shouldExit) {
@@ -138,6 +142,7 @@ jobs:
               console.log("Skipping auto-assignment.");
               return;
             }
+
 
 
             // 2. Get list of files modified in the PR
