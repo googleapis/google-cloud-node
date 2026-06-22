@@ -45,7 +45,7 @@ function main(parent, viewId, view) {
   // const view = {}
 
   // Imports the Logging library
-  const {ConfigServiceV2Client} = require('@google-cloud/logging').v2;
+  const {ConfigServiceV2Client} = require('logging').v2;
 
   // Instantiates a client
   const loggingClient = new ConfigServiceV2Client();

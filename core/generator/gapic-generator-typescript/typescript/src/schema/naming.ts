@@ -17,56 +17,6 @@ import {commonPrefix} from '../util.js';
 import {API} from './api.js';
 import {BundleConfig} from '../bundle.js';
 import {ServiceYaml} from '../serviceyaml.js';
-import * as fs from 'fs';
-import * as path from 'path';
-import * as url from 'url';
-
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-
-function findMonorepoDirectory(publishName: string, defaultName: string): string {
-  if (!publishName) {
-    return defaultName;
-  }
-  let dir = __dirname;
-  let monorepoRoot = '';
-  while (dir !== path.dirname(dir)) {
-    if (fs.existsSync(path.join(dir, 'librarian.yaml'))) {
-      monorepoRoot = dir;
-      break;
-    }
-    dir = path.dirname(dir);
-  }
-
-  if (!monorepoRoot) {
-    return defaultName;
-  }
-
-  const packagesDir = path.join(monorepoRoot, 'packages');
-  if (fs.existsSync(packagesDir)) {
-    const subdirs = fs.readdirSync(packagesDir);
-    for (const subdir of subdirs) {
-      const packageJsonPath = path.join(packagesDir, subdir, 'package.json');
-      if (fs.existsSync(packageJsonPath)) {
-        try {
-          const content = fs.readFileSync(packageJsonPath, 'utf8');
-          const pkg = JSON.parse(content);
-          if (pkg.name === publishName) {
-            return subdir;
-          }
-        } catch (e) {
-          // ignore
-        }
-      }
-    }
-  }
-
-  if (publishName.startsWith('@')) {
-    return publishName.substring(1).replace('/', '-');
-  }
-
-  return defaultName;
-}
-
 
 export interface Options {
   grpcServiceConfig: protos.grpc.service_config.ServiceConfig;
@@ -157,11 +107,7 @@ export class Naming {
     this.protoPackage = rootPackage;
     this.namePath = segments.slice(0, versionIndex).join('-');
     this.namePathWithDashes = segments.slice(0, versionIndex).join('/');
-
-    this.monorepoDirectory = findMonorepoDirectory(
-      options?.publishName || '',
-      this.namePath,
-    );
+    this.monorepoDirectory = this.namePath;
 
     if (!this.version && protoPackages.length > 1) {
       throw new Error(

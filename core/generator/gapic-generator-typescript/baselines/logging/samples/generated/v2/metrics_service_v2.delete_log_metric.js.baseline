@@ -35,7 +35,7 @@ function main(metricName) {
   // const metricName = 'abc123'
 
   // Imports the Logging library
-  const {MetricsServiceV2Client} = require('@google-cloud/logging').v2;
+  const {MetricsServiceV2Client} = require('logging').v2;
 
   // Instantiates a client
   const loggingClient = new MetricsServiceV2Client();

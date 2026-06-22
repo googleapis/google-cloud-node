@@ -39,7 +39,7 @@ function main(group) {
   // const validateOnly = true
 
   // Imports the Monitoring library
-  const {GroupServiceClient} = require('@google-cloud/monitoring').v3;
+  const {GroupServiceClient} = require('monitoring').v3;
 
   // Instantiates a client
   const monitoringClient = new GroupServiceClient();

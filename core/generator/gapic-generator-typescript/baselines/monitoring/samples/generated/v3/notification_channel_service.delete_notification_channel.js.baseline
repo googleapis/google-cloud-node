@@ -42,7 +42,7 @@ function main(name) {
   // const force = true
 
   // Imports the Monitoring library
-  const {NotificationChannelServiceClient} = require('@google-cloud/monitoring').v3;
+  const {NotificationChannelServiceClient} = require('monitoring').v3;
 
   // Instantiates a client
   const monitoringClient = new NotificationChannelServiceClient();

@@ -44,7 +44,7 @@ function main(name, timeSeries) {
   // const timeSeries = [1,2,3,4]
 
   // Imports the Monitoring library
-  const {MetricServiceClient} = require('@google-cloud/monitoring').v3;
+  const {MetricServiceClient} = require('monitoring').v3;
 
   // Instantiates a client
   const monitoringClient = new MetricServiceClient();

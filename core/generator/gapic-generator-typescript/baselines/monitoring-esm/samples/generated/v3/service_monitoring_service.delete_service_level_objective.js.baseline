@@ -36,7 +36,7 @@ function main(name) {
   // const name = 'abc123'
 
   // Imports the Monitoring library
-  const {ServiceMonitoringServiceClient} = require('@google-cloud/monitoring').v3;
+  const {ServiceMonitoringServiceClient} = require('monitoring').v3;
 
   // Instantiates a client
   const monitoringClient = new ServiceMonitoringServiceClient();

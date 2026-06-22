@@ -1,6 +1,6 @@
 {
   "packageName": "google.pubsub.v1",
-  "publishName": "@google-cloud/pubsub",
+  "publishName": "pubsub",
   "naming": {
     "name": "Pubsub",
     "namespace": [
@@ -12,7 +12,7 @@
     "nameNotCapitalized": "pubsub",
     "namePath": "google-pubsub",
     "namePathWithDashes": "google/pubsub",
-    "monorepoDirectory": "google-cloud-pubsub"
+    "monorepoDirectory": "google-pubsub"
   },
   "hostname": "pubsub.googleapis.com",
   "port": "443",
