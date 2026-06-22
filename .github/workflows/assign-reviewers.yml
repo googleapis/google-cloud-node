@@ -66,6 +66,29 @@ jobs:
               return;
             }
 
+            // Check if PR already has individual reviewers requested
+            const requestedReviewers = context.payload.pull_request.requested_reviewers || [];
+            if (requestedReviewers.length > 0) {
+              console.log(`PR already has requested reviewers: ${requestedReviewers.map(r => r.login).join(', ')}. Skipping auto-assignment.`);
+              return;
+            }
+
+            // Check if PR has already been reviewed
+            try {
+              const { data: reviews } = await github.rest.pulls.listReviews({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.payload.pull_request.number,
+              });
+              if (reviews.length > 0) {
+                console.log("PR already has reviews. Skipping auto-assignment.");
+                return;
+              }
+            } catch (err) {
+              console.warn("Failed to check PR reviews:", err.message || err);
+            }
+
+
             // 2. Get list of files modified in the PR
             const { data: files } = await github.rest.pulls.listFiles({
               owner: context.repo.owner,
