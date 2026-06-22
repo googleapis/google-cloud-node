@@ -76,6 +76,7 @@ export class RegionalAccessBoundaryManager {
   private regionalAccessBoundaryCooldownTime = 0;
   private regionalAccessBoundaryCooldownBackoff = RAB_INITIAL_COOLDOWN_MILLIS;
   private options: RegionalAccessBoundaryManagerOptions;
+  private lookupUrl: string | null | undefined = undefined;
 
   constructor(options: RegionalAccessBoundaryManagerOptions) {
     this.options = options;
@@ -154,6 +155,10 @@ export class RegionalAccessBoundaryManager {
    * @param accessToken The access token to use for the lookup.
    */
   private maybeTriggerRegionalAccessBoundaryRefresh(accessToken: string): void {
+    if (this.lookupUrl === null) {
+      return;
+    }
+
     if (this.regionalAccessBoundaryRefreshPromise) {
       return;
     }
@@ -217,8 +222,10 @@ export class RegionalAccessBoundaryManager {
   private async fetchRegionalAccessBoundary(
     accessToken?: string,
   ): Promise<RegionalAccessBoundaryData | null> {
-    const regionalAccessBoundaryUrl = await this.options.getLookupUrl();
-    if (!regionalAccessBoundaryUrl) {
+    if (this.lookupUrl === undefined) {
+      this.lookupUrl = await this.options.getLookupUrl();
+    }
+    if (!this.lookupUrl) {
       return null;
     }
 
@@ -244,13 +251,13 @@ export class RegionalAccessBoundaryManager {
         ],
       },
       headers,
-      url: regionalAccessBoundaryUrl,
+      url: this.lookupUrl,
     };
 
     const {data: regionalAccessBoundaryData} =
       await this.options.transporter.request<RegionalAccessBoundaryData>(opts);
 
-    if (!regionalAccessBoundaryData.encodedLocations) {
+    if (!regionalAccessBoundaryData?.encodedLocations) {
       throw new Error(
         'RegionalAccessBoundary: Malformed response from lookup endpoint.',
       );

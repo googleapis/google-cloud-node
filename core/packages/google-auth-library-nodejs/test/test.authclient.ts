@@ -603,6 +603,59 @@ describe('AuthClient', () => {
 
         rabFail.done();
       });
+
+      it('should only call getLookupUrl once and cache the null result if RAB is not supported', async () => {
+        const compute = new Compute({
+          serviceAccountEmail: SERVICE_ACCOUNT_EMAIL,
+        });
+
+        const tokenScope = setupTokenNock(SERVICE_ACCOUNT_EMAIL);
+        const spy = sandbox.spy(compute, 'getRegionalAccessBoundaryUrl');
+        sandbox
+          .stub(compute as any, 'resolveServiceAccountEmail')
+          .resolves(null);
+
+        // Make first request. This triggers the background refresh which calls getRegionalAccessBoundaryUrl once.
+        await compute.getRequestHeaders('https://pubsub.googleapis.com');
+
+        // Wait a short moment to ensure the async background refresh has finished.
+        await new Promise(r => setTimeout(r, 50));
+
+        assert.strictEqual(spy.callCount, 1);
+
+        // Make second request. This should NOT trigger background refresh or call getRegionalAccessBoundaryUrl again.
+        await compute.getRequestHeaders('https://pubsub.googleapis.com');
+        await new Promise(r => setTimeout(r, 50));
+
+        assert.strictEqual(spy.callCount, 1);
+
+        tokenScope.done();
+      });
+
+      it('should throw malformed response error if the response data is null', async () => {
+        const compute = new Compute({
+          serviceAccountEmail: SERVICE_ACCOUNT_EMAIL,
+        });
+
+        const rabUrl = SERVICE_ACCOUNT_LOOKUP_ENDPOINT.replace(
+          '{service_account_email}',
+          encodeURIComponent(SERVICE_ACCOUNT_EMAIL),
+        );
+
+        // Reply with a 200 OK but null body
+        const rabNull = nock(new URL(rabUrl).origin)
+          .get(new URL(rabUrl).pathname)
+          .reply(200, null as any);
+
+        const manager = (compute as any).regionalAccessBoundaryManager;
+
+        await assert.rejects(
+          manager.fetchRegionalAccessBoundary('some-token'),
+          /RegionalAccessBoundary: Malformed response from lookup endpoint\./,
+        );
+
+        rabNull.done();
+      });
     });
   });
 });
