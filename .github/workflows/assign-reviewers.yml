@@ -73,6 +73,14 @@ jobs:
               return;
             }
 
+            // Check if a route-specific team reviewer is already requested (excluding the default team)
+            const requestedTeams = context.payload.pull_request.requested_teams || [];
+            const hasRouteSpecificTeam = requestedTeams.some(team => team.slug !== 'cloud-sdk-nodejs-team');
+            if (hasRouteSpecificTeam) {
+              console.log(`PR already has route-specific team reviewer requested: ${requestedTeams.map(t => t.slug).join(', ')}. Skipping auto-assignment.`);
+              return;
+            }
+
             // Check if PR has already been reviewed
             try {
               const { data: reviews } = await github.rest.pulls.listReviews({
