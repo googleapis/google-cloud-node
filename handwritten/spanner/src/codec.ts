@@ -147,8 +147,15 @@ export class SpannerDate extends Date {
         !Number.isNaN(month) &&
         !Number.isNaN(date)
       ) {
-        super(year, month, date);
-        return;
+        const check = new Date(year, month, date);
+        if (
+          check.getFullYear() === year &&
+          check.getMonth() === month &&
+          check.getDate() === date
+        ) {
+          super(year, month, date);
+          return;
+        }
       }
     }
 
@@ -1178,6 +1185,7 @@ function decode(
  */
 function parsePreciseDate(isoString: string): PreciseDate {
   if (
+    typeof isoString === 'string' &&
     isoString.length >= 20 &&
     (isoString[isoString.length - 1] === 'Z' ||
       isoString[isoString.length - 1] === 'z') &&

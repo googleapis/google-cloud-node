@@ -1485,6 +1485,32 @@ describe('codec', () => {
       assert.ok(isNaN(decoded.getTime()));
     });
 
+    it('should decode DATE and fallback when month/day out of range causes silent rollover', () => {
+      // 1. Month 00 is out of bounds
+      const invalidMonthStr = '2020-00-12';
+      const decodedMonth = codec.decode(invalidMonthStr, {
+        code: google.spanner.v1.TypeCode.DATE,
+      });
+      assert.ok(decodedMonth instanceof codec.SpannerDate);
+      assert.ok(isNaN(decodedMonth.getTime()));
+
+      // 2. Day 35 is out of bounds
+      const invalidDayStr = '2020-12-35';
+      const decodedDay = codec.decode(invalidDayStr, {
+        code: google.spanner.v1.TypeCode.DATE,
+      });
+      assert.ok(decodedDay instanceof codec.SpannerDate);
+      assert.ok(isNaN(decodedDay.getTime()));
+
+      // 3. February 30 causes rollover, yielding same output as native SpannerDate
+      const rolloverFebStr = '2020-02-30';
+      const decodedFeb = codec.decode(rolloverFebStr, {
+        code: google.spanner.v1.TypeCode.DATE,
+      });
+      const expectedFeb = new codec.SpannerDate(rolloverFebStr);
+      assert.deepStrictEqual(decodedFeb, expectedFeb);
+    });
+
     it('should decode TIMESTAMP and gracefully handle malformed strings by falling back', () => {
       // A string like '2020-0b-15T10:20:30.123456789Z' has correct length and format dividers but contains '0b' as month.
       // Loose parseInt would parse it as 2019-12-15T10:20:30.123456789Z.
@@ -1973,6 +1999,79 @@ describe('codec', () => {
         const jsonDefaultResult = jsonDefaultDecoder(input);
         assert(!(jsonDefaultResult instanceof codec.Struct));
         assert.deepStrictEqual(jsonDefaultResult, {field: 'test-value'});
+      });
+    });
+
+    describe('getDecoder wrapNumbers options', () => {
+      it('should decode FLOAT32 and FLOAT64 based on wrapNumbers', () => {
+        const float32Type = {code: google.spanner.v1.TypeCode.FLOAT32};
+        const float64Type = {code: google.spanner.v1.TypeCode.FLOAT64};
+
+        // wrapNumbers = true (default/standard mode)
+        const decoder32Wrapped = codec.getDecoder(
+          float32Type as any,
+          undefined,
+          undefined,
+        );
+        const decoder64Wrapped = codec.getDecoder(
+          float64Type as any,
+          undefined,
+          undefined,
+        );
+        assert(decoder32Wrapped('3.14') instanceof codec.Float32);
+        assert(decoder64Wrapped('3.14') instanceof codec.Float);
+
+        // wrapNumbers = false (JSON mode default)
+        const decoder32Raw = codec.getDecoder(float32Type as any, undefined, {
+          wrapNumbers: false,
+        });
+        const decoder64Raw = codec.getDecoder(float64Type as any, undefined, {
+          wrapNumbers: false,
+        });
+        assert.strictEqual(decoder32Raw('3.14'), 3.14);
+        assert.strictEqual(decoder64Raw('3.14'), 3.14);
+      });
+
+      it('should decode INT64 and PG_OID based on wrapNumbers', () => {
+        const int64Type = {code: google.spanner.v1.TypeCode.INT64};
+        const pgOidType = {
+          code: google.spanner.v1.TypeCode.INT64,
+          typeAnnotation: google.spanner.v1.TypeAnnotationCode.PG_OID,
+        };
+
+        // wrapNumbers = true
+        const decoder64Wrapped = codec.getDecoder(
+          int64Type as any,
+          undefined,
+          undefined,
+        );
+        const decoderOidWrapped = codec.getDecoder(
+          pgOidType as any,
+          undefined,
+          undefined,
+        );
+        assert(decoder64Wrapped('123') instanceof codec.Int);
+        assert(decoderOidWrapped('123') instanceof codec.PGOid);
+
+        // wrapNumbers = false
+        const decoder64Raw = codec.getDecoder(int64Type as any, undefined, {
+          wrapNumbers: false,
+        });
+        const decoderOidRaw = codec.getDecoder(pgOidType as any, undefined, {
+          wrapNumbers: false,
+        });
+        assert.strictEqual(decoder64Raw('123'), 123);
+        assert.strictEqual(decoderOidRaw('123'), 123);
+
+        // Should throw error if number is out of bounds
+        assert.throws(
+          () => decoder64Raw('9007199254740992'),
+          /Integer 9007199254740992 is out of bounds/,
+        );
+        assert.throws(
+          () => decoderOidRaw('9007199254740992'),
+          /PG.OID 9007199254740992 is out of bounds/,
+        );
       });
     });
   });
