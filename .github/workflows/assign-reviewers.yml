@@ -2,7 +2,7 @@ name: Auto Assign Reviewers
 
 on:
   pull_request:
-    types: [opened, ready_for_review]
+    types: [opened, ready_for_review, reopened]
 
 permissions:
   pull-requests: write
@@ -79,8 +79,6 @@ jobs:
               { prefix: 'handwritten/firestore/', team: 'firestore-team' },
               { prefix: 'handwritten/spanner/', team: 'spanner-team' },
               { prefix: 'handwritten/bigquery-storage/', team: 'bigquery-team' },
-              { prefix: 'handwritten/pubsub/', team: 'pubsub-team' },
-              { prefix: 'handwritten/bigtable/', team: 'bigtable-team' },
               { prefix: 'core/packages/google-auth-library-nodejs/', team: 'aion-team' }
             ];
 
@@ -199,10 +197,25 @@ jobs:
                     pull_number: context.payload.pull_request.number,
                     reviewers: [leastLoadedReviewer],
                   });
+                  assigned = true;
                 } catch (err) {
                   console.error("Failed to assign reviewers using load balancing:", err);
                 }
               } else {
                 console.warn("No default reviewers found in CODEOWNERS (or they only contained teams/author).");
+              }
+            }
+
+            if (assigned) {
+              console.log("Removing default cloud-sdk-nodejs-team reviewer...");
+              try {
+                await github.rest.pulls.removeRequestedReviewers({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: context.payload.pull_request.number,
+                  team_reviewers: ['cloud-sdk-nodejs-team'],
+                });
+              } catch (err) {
+                console.warn("Failed to remove default cloud-sdk-nodejs-team reviewer:", err.message || err);
               }
             }
