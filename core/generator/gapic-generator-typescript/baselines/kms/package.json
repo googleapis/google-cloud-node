@@ -1,6 +1,6 @@
 {
   "name": "kms",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "Kms client for Node.js",
   "repository": {
     "type": "git",

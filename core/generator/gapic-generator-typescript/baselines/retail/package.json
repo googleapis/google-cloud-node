@@ -1,6 +1,6 @@
 {
   "name": "retail",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "Retail client for Node.js",
   "repository": {
     "type": "git",

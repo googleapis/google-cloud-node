@@ -1,6 +1,6 @@
 {
   "name": "{{ api.publishName }}",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "{{ api.naming.productName }} client for Node.js",
   "repository": {
     "type": "git",

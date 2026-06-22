@@ -1,6 +1,6 @@
 {
   "name": "tasks",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "Tasks client for Node.js",
   "repository": {
     "type": "git",
