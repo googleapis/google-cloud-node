@@ -1,0 +1,193 @@
+name: Auto Assign Reviewers
+
+on:
+  pull_request:
+    types: [opened, ready_for_review]
+
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  assign-reviewers:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+    steps:
+      - name: Assign Reviewers
+        continue-on-error: true
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GOOGLER_CHECK_TOKEN || secrets.GITHUB_TOKEN }}
+          script: |
+            const author = context.payload.pull_request.user.login;
+            
+            const ALLOWED_BOTS = new Set([
+              'gcf-owl-bot[bot]',
+              'gcf-owl-bot',
+              'release-please[bot]',
+              'release-please',
+              'dependabot[bot]',
+              'dependabot',
+              'renovate-bot',
+              'renovate',
+              'yoshi-code-bot'
+            ]);
+
+            let isGoogler = ALLOWED_BOTS.has(author);
+            
+            if (isGoogler) {
+              console.log(`${author} is a trusted bot. Treating as Googler.`);
+            } else {
+              const orgs = ['googlers', 'GoogleCloudPlatform', 'googleapis'];
+              for (const org of orgs) {
+                try {
+                  const res = await github.rest.orgs.checkMembershipForUser({
+                    org: org,
+                    username: author,
+                  });
+                  if (res.status === 204) {
+                    isGoogler = true;
+                    console.log(`${author} is a member of '${org}' organization.`);
+                    break;
+                  }
+                } catch (error) {
+                  if (error.status === 404) {
+                    console.log(`${author} is NOT a member of '${org}' organization.`);
+                  } else {
+                    console.warn(`Could not check membership in '${org}' organization: Status ${error.status}.`);
+                  }
+                }
+              }
+            }
+
+            if (!isGoogler) {
+              console.log("PR not opened by a Googler. Skipping auto-assignment.");
+              return;
+            }
+
+            // 2. Get list of files modified in the PR
+            const { data: files } = await github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+            });
+
+            const PATH_ROUTING = [
+              { prefix: 'handwritten/bigquery/', team: 'bigquery-team' },
+              { prefix: 'handwritten/cloud-profiler/', team: 'cloud-profiler-team' },
+              { prefix: 'handwritten/storage/', team: 'gcs-team' },
+              { prefix: 'handwritten/firestore/', team: 'firestore-team' },
+              { prefix: 'handwritten/spanner/', team: 'spanner-team' },
+              { prefix: 'handwritten/bigquery-storage/', team: 'bigquery-team' },
+              { prefix: 'handwritten/pubsub/', team: 'pubsub-team' },
+              { prefix: 'handwritten/bigtable/', team: 'bigtable-team' },
+              { prefix: 'core/packages/google-auth-library-nodejs/', team: 'aion-team' }
+            ];
+
+            const assignedTeams = new Set();
+            for (const route of PATH_ROUTING) {
+              if (files.some(file => file.filename.startsWith(route.prefix))) {
+                assignedTeams.add(route.team);
+              }
+            }
+
+            if (assignedTeams.size > 0) {
+              const teamReviewers = Array.from(assignedTeams);
+              console.log(`PR contains changes matching specific routes. Requesting review from: ${teamReviewers.join(', ')}`);
+              await github.rest.pulls.requestReviewers({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.payload.pull_request.number,
+                team_reviewers: teamReviewers,
+              });
+            } else {
+              // Route to cloud-sdk-nodejs-team members with load balancing
+              console.log("Requesting review from a member of cloud-sdk-nodejs-team using load balancing.");
+              try {
+                const { data: members } = await github.rest.teams.listMembersInOrg({
+                  org: 'googleapis',
+                  team_slug: 'cloud-sdk-nodejs-team',
+                });
+                
+                const memberLogins = members
+                  .map(m => m.login)
+                  .filter(login => login !== author);
+
+                if (memberLogins.length > 0) {
+                  // Retrieve active open PRs to calculate load
+                  const { data: openPRs } = await github.rest.pulls.list({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    state: 'open',
+                    per_page: 100,
+                  });
+
+                  const loadMap = {};
+                  for (const member of memberLogins) {
+                    loadMap[member] = 0;
+                  }
+
+                  for (const pr of openPRs) {
+                    // Count pending review requests
+                    if (pr.requested_reviewers) {
+                      for (const reviewer of pr.requested_reviewers) {
+                        if (loadMap[reviewer.login] !== undefined) {
+                          loadMap[reviewer.login]++;
+                        }
+                      }
+                    }
+                    // Count assignees
+                    if (pr.assignees) {
+                      for (const assignee of pr.assignees) {
+                        if (loadMap[assignee.login] !== undefined) {
+                          loadMap[assignee.login]++;
+                        }
+                      }
+                    }
+                  }
+
+                  console.log("Current team workload:", loadMap);
+
+                  // Find members with the minimum load
+                  let minLoad = Infinity;
+                  let selectedReviewers = [];
+                  for (const member of memberLogins) {
+                    const load = loadMap[member];
+                    if (load < minLoad) {
+                      minLoad = load;
+                      selectedReviewers = [member];
+                    } else if (load === minLoad) {
+                      selectedReviewers.push(member);
+                    }
+                  }
+
+                  const leastLoadedReviewer = selectedReviewers[Math.floor(Math.random() * selectedReviewers.length)];
+                  console.log(`Selected reviewer with least load (load: ${minLoad}): ${leastLoadedReviewer}`);
+
+                  await github.rest.pulls.requestReviewers({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    pull_number: context.payload.pull_request.number,
+                    reviewers: [leastLoadedReviewer],
+                    team_reviewers: ['cloud-sdk-nodejs-team'],
+                  });
+                } else {
+                  console.log("No other members found in cloud-sdk-nodejs-team. Requesting team review only.");
+                  await github.rest.pulls.requestReviewers({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    pull_number: context.payload.pull_request.number,
+                    team_reviewers: ['cloud-sdk-nodejs-team'],
+                  });
+                }
+              } catch (err) {
+                console.error("Failed to fetch team members or assign reviewers:", err);
+                // Fallback to just requesting the team review
+                await github.rest.pulls.requestReviewers({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: context.payload.pull_request.number,
+                  team_reviewers: ['cloud-sdk-nodejs-team'],
+                });
+              }
+            }

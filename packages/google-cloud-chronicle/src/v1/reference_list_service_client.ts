@@ -324,6 +324,7 @@ export class ReferenceListServiceClient {
       'listReferenceLists',
       'createReferenceList',
       'updateReferenceList',
+      'verifyReferenceList',
     ];
     for (const methodName of referenceListServiceStubMethods) {
       const callPromise = this.referenceListServiceStub.then(
@@ -416,7 +417,11 @@ export class ReferenceListServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/chronicle',
+      'https://www.googleapis.com/auth/chronicle.readonly',
+      'https://www.googleapis.com/auth/cloud-platform',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -850,6 +855,150 @@ export class ReferenceListServiceClient {
           {} | undefined,
         ]) => {
           this._log.info('updateReferenceList response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * VerifyReferenceList validates list content and returns line errors, if any.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.instance
+   *   Required. The name of the parent resource, which is the SecOps instance
+   *   associated with the request. Format:
+   *   `projects/{project}/locations/{location}/instances/{instance}`
+   * @param {google.cloud.chronicle.v1.ReferenceListSyntaxType} request.syntaxType
+   *   Required. Type (format) of list lines.
+   * @param {number[]} request.entries
+   *   Required. The entries of the reference list.
+   *   Each line may be either an item in the list or a comment.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.VerifyReferenceListResponse|VerifyReferenceListResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/reference_list_service.verify_reference_list.js</caption>
+   * region_tag:chronicle_v1_generated_ReferenceListService_VerifyReferenceList_async
+   */
+  verifyReferenceList(
+    request?: protos.google.cloud.chronicle.v1.IVerifyReferenceListRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.IVerifyReferenceListResponse,
+      protos.google.cloud.chronicle.v1.IVerifyReferenceListRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  verifyReferenceList(
+    request: protos.google.cloud.chronicle.v1.IVerifyReferenceListRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.IVerifyReferenceListResponse,
+      | protos.google.cloud.chronicle.v1.IVerifyReferenceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  verifyReferenceList(
+    request: protos.google.cloud.chronicle.v1.IVerifyReferenceListRequest,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.IVerifyReferenceListResponse,
+      | protos.google.cloud.chronicle.v1.IVerifyReferenceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  verifyReferenceList(
+    request?: protos.google.cloud.chronicle.v1.IVerifyReferenceListRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.chronicle.v1.IVerifyReferenceListResponse,
+          | protos.google.cloud.chronicle.v1.IVerifyReferenceListRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.chronicle.v1.IVerifyReferenceListResponse,
+      | protos.google.cloud.chronicle.v1.IVerifyReferenceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.IVerifyReferenceListResponse,
+      protos.google.cloud.chronicle.v1.IVerifyReferenceListRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        instance: request.instance ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('verifyReferenceList request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.chronicle.v1.IVerifyReferenceListResponse,
+          | protos.google.cloud.chronicle.v1.IVerifyReferenceListRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('verifyReferenceList response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .verifyReferenceList(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.chronicle.v1.IVerifyReferenceListResponse,
+          (
+            | protos.google.cloud.chronicle.v1.IVerifyReferenceListRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('verifyReferenceList response %j', response);
           return [response, options, rawResponse];
         },
       )

@@ -16,8 +16,8 @@ version: v0.20.0
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
-    commit: 05c4b6d37258ab81054529451cdf804f2918441f
-    sha256: 4ddc45ca7bfc92cc723162ca9f6721c34c5c56003f2b0f6254350bf769593839
+    commit: 4c284f1366a46993646dc9267cba257acbab6f45
+    sha256: 449ecc0edd76de7d592cf7f5c2a98070bef11af2593f8b64428e71b11211857e
 default:
   keep:
     - librarian.js
@@ -192,6 +192,10 @@ libraries:
       nodejs_apis:
         - omit_common_resources: true
           path: google/cloud/advisorynotifications/v1
+  - name: google-cloud-agentregistry
+    apis:
+      - path: google/cloud/agentregistry/v1
+    copyright_year: "2026"
   - name: google-cloud-aiplatform
     version: 6.8.1
     apis:
@@ -375,7 +379,6 @@ libraries:
       - path: google/cloud/bigquery/connection/v1
       - path: google/cloud/bigquery/connection/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-bigquery-dataexchange
@@ -669,7 +672,6 @@ libraries:
     apis:
       - path: google/cloud/dataproc/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       main_service: dataproc
@@ -1059,7 +1061,6 @@ libraries:
     apis:
       - path: google/monitoring/v3
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v3
       main_service: monitoring
@@ -1567,9 +1568,7 @@ libraries:
     version: 0.1.1
     apis:
       - path: google/cloud/visionai/v1
-      - path: google/cloud/visionai/v1alpha1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-vmmigration
@@ -1862,7 +1861,6 @@ libraries:
     apis:
       - path: google/monitoring/dashboard/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/monitoring-dashboards'
@@ -2015,9 +2013,17 @@ libraries:
   - name: google-storage-control
     version: 0.10.0
     apis:
+      - path: google/storage/v2
       - path: google/storage/control/v2
     copyright_year: "2026"
-    skip_generate: true
+    keep:
+      - src/util/ast_utils.ts
+      - src/util/index_fix_utils.ts
+      - src/util/proto_utils.ts
+      - src/util/samples_and_doc_fix_utils.ts
+      - src/util/storage_control_utils.ts
+      - src/util/uber_client_builder.ts
+      - test/storage_control_compatibility.ts
     nodejs:
       default_version: v2
       package_name: '@google-cloud/storage-control'

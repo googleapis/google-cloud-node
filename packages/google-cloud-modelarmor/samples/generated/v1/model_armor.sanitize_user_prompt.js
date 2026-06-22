@@ -41,6 +41,10 @@ function main(name, userPromptData) {
    *  Optional. Metadata related to Multi Language Detection.
    */
   // const multiLanguageDetectionMetadata = {}
+  /**
+   *  Optional. Streaming Mode for StreamSanitize* API.
+   */
+  // const streamingMode = {}
 
   // Imports the Modelarmor library
   const {ModelArmorClient} = require('@google-cloud/modelarmor').v1;
