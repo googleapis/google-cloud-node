@@ -79,8 +79,6 @@ jobs:
               { prefix: 'handwritten/firestore/', team: 'firestore-team' },
               { prefix: 'handwritten/spanner/', team: 'spanner-team' },
               { prefix: 'handwritten/bigquery-storage/', team: 'bigquery-team' },
-              { prefix: 'handwritten/pubsub/', team: 'pubsub-team' },
-              { prefix: 'handwritten/bigtable/', team: 'bigtable-team' },
               { prefix: 'core/packages/google-auth-library-nodejs/', team: 'aion-team' }
             ];
 
