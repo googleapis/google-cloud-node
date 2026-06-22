@@ -29,6 +29,7 @@ jobs:
               'dependabot[bot]',
               'dependabot',
               'renovate-bot',
+              'renovate[bot]',
               'renovate',
               'yoshi-code-bot'
             ]);
