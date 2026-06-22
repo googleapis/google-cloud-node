@@ -29,7 +29,7 @@ import {
 } from './testBenchUtil';
 import * as crypto from 'crypto';
 import {getDirName} from '../src/util.js';
-import {StorageTransport} from '../src/storage-transport';
+import {StorageRequestOptions, StorageTransport} from '../src/storage-transport';
 
 const FILE_SIZE_BYTES = 9 * 1024 * 1024;
 
