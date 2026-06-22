@@ -1155,7 +1155,7 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
         const endpoint = opts.apiEndpoint || opts.servicePath;
         if (endpoint) {
           const scheme = endpoint.startsWith('http') ? '' : 'https://';
-          const formattedAudience = `${scheme}${endpoint}/`.replace(/\/+$/, '/');
+          const formattedAudience = `${scheme}${endpoint}`.replace(/\/+$/, '');
           const newClient = client.createWithGdchAudience(formattedAudience);
           this.cachedCredential = newClient;
           return newClient;

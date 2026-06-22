@@ -884,6 +884,7 @@
                          * @property {google.cloud.confidentialcomputing.v1.IConfidentialSpaceInfo|null} [confidentialSpaceInfo] VerifyAttestationRequest confidentialSpaceInfo
                          * @property {google.cloud.confidentialcomputing.v1.ITokenOptions|null} [tokenOptions] VerifyAttestationRequest tokenOptions
                          * @property {string|null} [attester] VerifyAttestationRequest attester
+                         * @property {string|null} [instance] VerifyAttestationRequest instance
                          */
     
                         /**
@@ -973,6 +974,14 @@
                          */
                         VerifyAttestationRequest.prototype.attester = "";
     
+                        /**
+                         * VerifyAttestationRequest instance.
+                         * @member {string} instance
+                         * @memberof google.cloud.confidentialcomputing.v1.VerifyAttestationRequest
+                         * @instance
+                         */
+                        VerifyAttestationRequest.prototype.instance = "";
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -1040,6 +1049,8 @@
                                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.attester);
                             if (message.nvidiaAttestation != null && Object.hasOwnProperty.call(message, "nvidiaAttestation"))
                                 $root.google.cloud.confidentialcomputing.v1.NvidiaAttestation.encode(message.nvidiaAttestation, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.instance != null && Object.hasOwnProperty.call(message, "instance"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.instance);
                             return writer;
                         };
     
@@ -1114,6 +1125,10 @@
                                     }
                                 case 8: {
                                         message.attester = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.instance = reader.string();
                                         break;
                                     }
                                 default:
@@ -1208,6 +1223,9 @@
                             if (message.attester != null && message.hasOwnProperty("attester"))
                                 if (!$util.isString(message.attester))
                                     return "attester: string expected";
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                if (!$util.isString(message.instance))
+                                    return "instance: string expected";
                             return null;
                         };
     
@@ -1266,6 +1284,8 @@
                             }
                             if (object.attester != null)
                                 message.attester = String(object.attester);
+                            if (object.instance != null)
+                                message.instance = String(object.instance);
                             return message;
                         };
     
@@ -1289,6 +1309,7 @@
                                 object.confidentialSpaceInfo = null;
                                 object.tokenOptions = null;
                                 object.attester = "";
+                                object.instance = "";
                             }
                             if (message.challenge != null && message.hasOwnProperty("challenge"))
                                 object.challenge = message.challenge;
@@ -1317,6 +1338,8 @@
                                 if (options.oneofs)
                                     object.deviceAttestation = "nvidiaAttestation";
                             }
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                object.instance = message.instance;
                             return object;
                         };
     
