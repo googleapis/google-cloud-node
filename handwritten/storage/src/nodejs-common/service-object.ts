@@ -23,11 +23,19 @@ import {
   GaxiosOptionsPrepared,
   GaxiosResponse,
 } from 'gaxios';
+import type { Bucket } from '../bucket.js';
 
-function isBucket(parent: any): boolean {
-  // TODO: remove any suppression during follow up PR to improve type safety.
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return parent && typeof (parent as any).getFiles === 'function';
+function isBucket(parent: unknown): parent is Bucket {
+  if (!parent || typeof parent !== 'object') {
+    return false;
+  }
+
+  const obj = parent as Record<string, unknown>;
+  return (
+    typeof obj.getFiles === 'function' &&
+    typeof obj.upload === 'function' &&
+    typeof obj.exists === 'function'
+  );
 }
 
 export type GetMetadataOptions = object;
