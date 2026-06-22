@@ -197,10 +197,25 @@ jobs:
                     pull_number: context.payload.pull_request.number,
                     reviewers: [leastLoadedReviewer],
                   });
+                  assigned = true;
                 } catch (err) {
                   console.error("Failed to assign reviewers using load balancing:", err);
                 }
               } else {
                 console.warn("No default reviewers found in CODEOWNERS (or they only contained teams/author).");
+              }
+            }
+
+            if (assigned) {
+              console.log("Removing default cloud-sdk-nodejs-team reviewer...");
+              try {
+                await github.rest.pulls.removeRequestedReviewers({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: context.payload.pull_request.number,
+                  team_reviewers: ['cloud-sdk-nodejs-team'],
+                });
+              } catch (err) {
+                console.warn("Failed to remove default cloud-sdk-nodejs-team reviewer:", err.message || err);
               }
             }
