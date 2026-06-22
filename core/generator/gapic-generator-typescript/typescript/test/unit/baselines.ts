@@ -67,6 +67,7 @@ describe('Baseline tests', () => {
     protoPath: 'google/monitoring/v3/*.proto',
     useCommonProto: false,
     mainServiceName: 'monitoring',
+    monorepoDir: 'google-cloud-monitoring',
   });
 
   // API that uses location mixin
@@ -145,6 +146,7 @@ describe('Baseline tests', () => {
     bundleConfig: 'google/logging/v2/logging_gapic.yaml',
     mainServiceName: 'LoggingService',
     grpcServiceConfig: 'google/logging/v2/logging_grpc_service_config.json',
+    monorepoDir: 'google-cloud-logging',
   });
 
   runBaselineTest({
@@ -178,6 +180,7 @@ describe('Baseline tests', () => {
     useCommonProto: true,
     metadata: false,
     template: 'api_dump',
+    monorepoDir: 'google-cloud-pubsub',
   });
 
   // Adding new baseline test for deprecated service and methods

@@ -47,6 +47,7 @@ export interface BaselineOptions {
   restNumericEnums?: boolean;
   mixins?: string;
   format?: string;
+  monorepoDir?: string;
 }
 
 const cwd = process.cwd();
@@ -146,6 +147,9 @@ export function runBaselineTest(options: BaselineOptions) {
     }
     if (options.mixins) {
       commandLine += ` --mixins="${options.mixins}"`;
+    }
+    if (options.monorepoDir) {
+      commandLine += ` --monorepo-dir=${options.monorepoDir}`;
     }
     execSync(commandLine);
     assert(equalToBaseline(outputDir, baselineDir));
