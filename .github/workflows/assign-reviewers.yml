@@ -66,22 +66,14 @@ jobs:
               return;
             }
 
-            // Check if PR already has individual reviewers requested
             const requestedReviewers = context.payload.pull_request.requested_reviewers || [];
-            if (requestedReviewers.length > 0) {
-              console.log(`PR already has requested reviewers: ${requestedReviewers.map(r => r.login).join(', ')}. Skipping auto-assignment.`);
-              return;
-            }
-
-            // Check if a route-specific team reviewer is already requested (excluding the default team)
             const requestedTeams = context.payload.pull_request.requested_teams || [];
+
+            const hasDefaultTeam = requestedTeams.some(team => team.slug === 'cloud-sdk-nodejs-team');
             const hasRouteSpecificTeam = requestedTeams.some(team => team.slug !== 'cloud-sdk-nodejs-team');
-            if (hasRouteSpecificTeam) {
-              console.log(`PR already has route-specific team reviewer requested: ${requestedTeams.map(t => t.slug).join(', ')}. Skipping auto-assignment.`);
-              return;
-            }
 
             // Check if PR has already been reviewed
+            let hasReviews = false;
             try {
               const { data: reviews } = await github.rest.pulls.listReviews({
                 owner: context.repo.owner,
@@ -89,11 +81,41 @@ jobs:
                 pull_number: context.payload.pull_request.number,
               });
               if (reviews.length > 0) {
-                console.log("PR already has reviews. Skipping auto-assignment.");
-                return;
+                console.log("PR already has reviews.");
+                hasReviews = true;
               }
             } catch (err) {
               console.warn("Failed to check PR reviews:", err.message || err);
+            }
+
+            let shouldExit = false;
+            if (requestedReviewers.length > 0) {
+              console.log(`PR already has requested reviewers: ${requestedReviewers.map(r => r.login).join(', ')}.`);
+              shouldExit = true;
+            } else if (hasRouteSpecificTeam) {
+              console.log(`PR already has route-specific team reviewer requested: ${requestedTeams.map(t => t.slug).join(', ')}.`);
+              shouldExit = true;
+            } else if (hasReviews) {
+              shouldExit = true;
+            }
+
+            if (shouldExit) {
+              if (hasDefaultTeam) {
+                console.log("PR already has individual, route-specific reviewers, or reviews, but default cloud-sdk-nodejs-team is still requested. Removing it...");
+                try {
+                  await github.rest.pulls.removeRequestedReviewers({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    pull_number: context.payload.pull_request.number,
+                    reviewers: [],
+                    team_reviewers: ['cloud-sdk-nodejs-team'],
+                  });
+                } catch (err) {
+                  console.warn("Failed to remove default cloud-sdk-nodejs-team reviewer:", err.message || err);
+                }
+              }
+              console.log("Skipping auto-assignment.");
+              return;
             }
 
 
