@@ -86,7 +86,6 @@ export class Generator {
   restNumericEnums?: boolean;
   mixinsOverride?: string[];
   format?: string | string[];
-  monorepoDir?: string;
 
   private root: protobuf.Root;
 
@@ -189,10 +188,6 @@ export class Generator {
     this.publishName = this.paramMap['package-name'];
   }
 
-  private readMonorepoDir() {
-    this.monorepoDir = this.paramMap['monorepo-dir'];
-  }
-
   private readMainServiceName() {
     this.mainServiceName = this.paramMap['main-service'];
   }
@@ -278,7 +273,6 @@ export class Generator {
       this.readHandwrittenLayer();
       this.readLegacyProtoLoad();
       this.readRestNumericEnums();
-      this.readMonorepoDir();
       this.readFormat();
     }
   }
@@ -340,7 +334,6 @@ export class Generator {
       legacyProtoLoad: this.legacyProtoLoad,
       restNumericEnums: this.restNumericEnums,
       mixinsOverridden: this.mixinsOverride !== undefined,
-      monorepoDir: this.monorepoDir,
     });
     return api;
   }

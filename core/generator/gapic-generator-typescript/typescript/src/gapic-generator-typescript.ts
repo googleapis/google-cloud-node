@@ -80,8 +80,6 @@ async function main(processArgv: string[]) {
     .describe('service-yaml', 'Path to service yaml')
     .alias('package-name', 'package_name')
     .describe('package-name', 'Publish package name')
-    .alias('monorepo-dir', 'monorepo_dir')
-    .describe('monorepo-dir', 'Monorepo directory name')
     .alias('main-service', 'main_service')
     .describe(
       'main_service',
@@ -148,7 +146,6 @@ async function main(processArgv: string[]) {
   const bundleConfig = argv.bundleConfig as string | undefined;
   const serviceYaml = argv.serviceYaml as string | undefined;
   const packageName = argv.packageName as string | undefined;
-  const monorepoDir = argv.monorepoDir as string | undefined;
   const mainServiceName = argv.mainService as string | undefined;
   const template = argv.template as string | undefined;
   const gapicValidatorOut = argv.gapicValidatorOut as string | undefined;
@@ -217,9 +214,6 @@ async function main(processArgv: string[]) {
   }
   if (packageName) {
     protocCommand.push(`--typescript_gapic_opt="package-name=${packageName}"`);
-  }
-  if (monorepoDir) {
-    protocCommand.push(`--typescript_gapic_opt="monorepo-dir=${monorepoDir}"`);
   }
   if (mainServiceName) {
     protocCommand.push(

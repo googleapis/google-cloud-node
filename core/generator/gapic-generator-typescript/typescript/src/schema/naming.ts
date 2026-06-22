@@ -30,7 +30,6 @@ export interface Options {
   legacyProtoLoad?: boolean;
   restNumericEnums?: boolean;
   mixinsOverridden?: boolean;
-  monorepoDir?: string;
 }
 
 export class Naming {
@@ -109,7 +108,20 @@ export class Naming {
     this.namePath = segments.slice(0, versionIndex).join('-');
     this.namePathWithDashes = segments.slice(0, versionIndex).join('/');
 
-    this.monorepoDirectory = options?.monorepoDir || this.namePath;
+    let monorepoDirectory = this.namePath;
+    if (this.namePath === 'google-monitoring') {
+      monorepoDirectory = 'google-cloud-monitoring';
+    } else if (this.namePath === 'google-logging') {
+      monorepoDirectory = 'google-cloud-logging';
+    } else if (this.namePath === 'google-pubsub') {
+      monorepoDirectory = 'google-cloud-pubsub';
+    } else if (
+      this.namePath === 'google-storage' &&
+      options?.publishName === '@google-cloud/storage-control'
+    ) {
+      monorepoDirectory = 'google-storage-control';
+    }
+    this.monorepoDirectory = monorepoDirectory;
 
     if (!this.version && protoPackages.length > 1) {
       throw new Error(
