@@ -1,6 +1,6 @@
 {
   "packageName": "google.pubsub.v1",
-  "publishName": "pubsub",
+  "publishName": "@google-cloud/pubsub",
   "naming": {
     "name": "Pubsub",
     "namespace": [

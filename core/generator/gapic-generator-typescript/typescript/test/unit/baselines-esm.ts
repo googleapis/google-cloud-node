@@ -74,6 +74,7 @@ describe('Baseline tests: ESM', () => {
     useCommonProto: false,
     mainServiceName: 'monitoring',
     format: 'esm',
+    packageName: '@google-cloud/monitoring',
   });
 
   runBaselineTest({
@@ -159,6 +160,7 @@ describe('Baseline tests: ESM', () => {
     mainServiceName: 'LoggingService',
     grpcServiceConfig: 'google/logging/v2/logging_grpc_service_config.json',
     format: 'esm',
+    packageName: '@google-cloud/logging',
   });
 
   runBaselineTest({
@@ -196,6 +198,7 @@ describe('Baseline tests: ESM', () => {
     metadata: false,
     template: 'api_dump',
     format: 'esm',
+    packageName: '@google-cloud/pubsub',
   });
 
   // Adding new baseline test for deprecated service and methods

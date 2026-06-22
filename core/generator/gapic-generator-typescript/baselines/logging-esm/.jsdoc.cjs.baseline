@@ -42,7 +42,7 @@ module.exports = {
     copyright: 'Copyright 2026 Google LLC',
     includeDate: false,
     sourceFiles: false,
-    systemName: 'logging',
+    systemName: '@google-cloud/logging',
     theme: 'lumen',
     default: {
       outputSourceFiles: false

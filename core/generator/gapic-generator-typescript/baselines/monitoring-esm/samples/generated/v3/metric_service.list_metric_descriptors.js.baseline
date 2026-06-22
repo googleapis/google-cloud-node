@@ -55,7 +55,7 @@ function main(name) {
   // const pageToken = 'abc123'
 
   // Imports the Monitoring library
-  const {MetricServiceClient} = require('monitoring').v3;
+  const {MetricServiceClient} = require('@google-cloud/monitoring').v3;
 
   // Instantiates a client
   const monitoringClient = new MetricServiceClient();

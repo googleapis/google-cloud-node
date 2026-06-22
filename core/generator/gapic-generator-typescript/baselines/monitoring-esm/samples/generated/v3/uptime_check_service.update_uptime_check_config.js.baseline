@@ -50,7 +50,7 @@ function main(uptimeCheckConfig) {
   // const uptimeCheckConfig = {}
 
   // Imports the Monitoring library
-  const {UptimeCheckServiceClient} = require('monitoring').v3;
+  const {UptimeCheckServiceClient} = require('@google-cloud/monitoring').v3;
 
   // Instantiates a client
   const monitoringClient = new UptimeCheckServiceClient();

@@ -52,7 +52,7 @@ function main(name) {
   // const pageToken = 'abc123'
 
   // Imports the Monitoring library
-  const {NotificationChannelServiceClient} = require('monitoring').v3;
+  const {NotificationChannelServiceClient} = require('@google-cloud/monitoring').v3;
 
   // Instantiates a client
   const monitoringClient = new NotificationChannelServiceClient();

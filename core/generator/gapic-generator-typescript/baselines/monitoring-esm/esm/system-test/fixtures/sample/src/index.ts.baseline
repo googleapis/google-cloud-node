@@ -24,7 +24,7 @@ import {
   NotificationChannelServiceClient,
   ServiceMonitoringServiceClient,
   UptimeCheckServiceClient,
-} from 'monitoring';
+} from '@google-cloud/monitoring';
 
 // check that the client class type name can be used
 function doStuffWithAlertPolicyServiceClient(client: AlertPolicyServiceClient) {

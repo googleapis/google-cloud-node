@@ -58,7 +58,7 @@ function main(alertPolicy) {
   // const alertPolicy = {}
 
   // Imports the Monitoring library
-  const {AlertPolicyServiceClient} = require('monitoring').v3;
+  const {AlertPolicyServiceClient} = require('@google-cloud/monitoring').v3;
 
   // Instantiates a client
   const monitoringClient = new AlertPolicyServiceClient();

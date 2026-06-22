@@ -78,7 +78,7 @@ function main(resourceNames) {
   // const pageToken = 'abc123'
 
   // Imports the Logging library
-  const {LoggingServiceV2Client} = require('logging').v2;
+  const {LoggingServiceV2Client} = require('@google-cloud/logging').v2;
 
   // Instantiates a client
   const loggingClient = new LoggingServiceV2Client();

@@ -21,7 +21,7 @@ import {
   ConfigServiceV2Client,
   LoggingServiceV2Client,
   MetricsServiceV2Client,
-} from 'logging';
+} from '@google-cloud/logging';
 
 // check that the client class type name can be used
 function doStuffWithConfigServiceV2Client(client: ConfigServiceV2Client) {

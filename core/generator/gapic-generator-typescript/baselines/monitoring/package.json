@@ -1,5 +1,5 @@
 {
-  "name": "monitoring",
+  "name": "@google-cloud/monitoring",
   "version": "0.0.0",
   "description": "Monitoring client for Node.js",
   "repository": {
