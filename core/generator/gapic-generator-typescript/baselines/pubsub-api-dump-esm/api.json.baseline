@@ -11,8 +11,7 @@
     "protoPackage": "google.pubsub.v1",
     "nameNotCapitalized": "pubsub",
     "namePath": "google-pubsub",
-    "namePathWithDashes": "google/pubsub",
-    "monorepoDirectory": "google-pubsub"
+    "namePathWithDashes": "google/pubsub"
   },
   "hostname": "pubsub.googleapis.com",
   "port": "443",

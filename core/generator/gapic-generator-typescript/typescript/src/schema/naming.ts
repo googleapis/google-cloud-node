@@ -41,7 +41,6 @@ export class Naming {
   nameNotCapitalized: string;
   namePath: string;
   namePathWithDashes: string;
-  monorepoDirectory: string;
 
   constructor(
     fileDescriptors: protos.google.protobuf.IFileDescriptorProto[],
@@ -107,7 +106,6 @@ export class Naming {
     this.protoPackage = rootPackage;
     this.namePath = segments.slice(0, versionIndex).join('-');
     this.namePathWithDashes = segments.slice(0, versionIndex).join('/');
-    this.monorepoDirectory = this.namePath;
 
     if (!this.version && protoPackages.length > 1) {
       throw new Error(
