@@ -55,7 +55,6 @@
     "@opentelemetry/api": "^1.7.0",
     "arrify": "^2.0.1",
     "dot-prop": "^6.0.0",
-    "eventid": "^2.0.0",
     "extend": "^3.0.2",
     "gcp-metadata": "^6.0.0",
     "google-auth-library": "^9.0.0",
