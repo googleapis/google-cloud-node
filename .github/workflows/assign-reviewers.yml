@@ -61,6 +61,7 @@ jobs:
               console.log(`${author} is a trusted bot. Treating as Googler.`);
             } else {
               const orgs = ['googlers', 'GoogleCloudPlatform', 'googleapis'];
+              // Check membership in all organizations concurrently to minimize API latency.
               const checks = orgs.map(async (org) => {
                 try {
                   const res = await github.rest.orgs.checkMembershipForUser({
@@ -95,6 +96,8 @@ jobs:
             const hasRouteSpecificTeam = requestedTeams.some(team => team.slug !== 'cloud-sdk-nodejs-team');
 
             let shouldExit = false;
+            // Exit early if the PR already has individual or route-specific team reviewers.
+            // Evaluating payload conditions first saves unnecessary API requests.
             if (requestedReviewers.length > 0) {
               console.log(`PR already has requested reviewers: ${requestedReviewers.map(r => r.login).join(', ')}.`);
               shouldExit = true;
@@ -103,7 +106,8 @@ jobs:
               shouldExit = true;
             }
 
-            // Check if PR has already been reviewed only if we aren't already exiting
+            // Check if PR has already been reviewed only if we aren't already exiting.
+            // Skip checking reviews if the action is 'opened', since a new PR cannot have reviews yet.
             let hasReviews = false;
             if (!shouldExit && context.payload.action !== 'opened') {
               try {
@@ -142,7 +146,6 @@ jobs:
               console.log("Skipping auto-assignment.");
               return;
             }
-
 
 
             // 2. Get list of files modified in the PR
