@@ -1805,6 +1805,64 @@ describe('common/util', () => {
       assert.deepStrictEqual(decoratedRequest.json, decoratedJson);
     });
 
+    it('should set Content-Type header on plain headers object when json is set', () => {
+      const projectId = 'project-id';
+      const reqOpts = {
+        uri: 'http://',
+        json: {},
+        headers: {},
+      };
+      replaceProjectIdTokenOverride = (x: any) => x;
+
+      const decoratedRequest = util.decorateRequest(reqOpts, projectId);
+      assert.strictEqual(
+        (decoratedRequest.headers as any)['Content-Type'],
+        'application/json'
+      );
+    });
+
+    it('should set Content-Type header on Headers instance when json is set', () => {
+      if (typeof Headers === 'undefined') {
+        return;
+      }
+      const projectId = 'project-id';
+      const headersInstance = new Headers();
+      const reqOpts = {
+        uri: 'http://',
+        json: {},
+        headers: headersInstance,
+      };
+      replaceProjectIdTokenOverride = (x: any) => x;
+
+      const decoratedRequest = util.decorateRequest(reqOpts as any, projectId);
+      assert.strictEqual(
+        (decoratedRequest.headers as any).get('Content-Type'),
+        'application/json'
+      );
+    });
+
+    it('should not overwrite existing Content-Type header if already present', () => {
+      const projectId = 'project-id';
+      const reqOpts = {
+        uri: 'http://',
+        json: {},
+        headers: {
+          'content-type': 'application/x-protobuf',
+        },
+      };
+      replaceProjectIdTokenOverride = (x: any) => x;
+
+      const decoratedRequest = util.decorateRequest(reqOpts, projectId);
+      assert.strictEqual(
+        (decoratedRequest.headers as any)['content-type'],
+        'application/x-protobuf'
+      );
+      assert.strictEqual(
+        (decoratedRequest.headers as any)['Content-Type'],
+        undefined
+      );
+    });
+
     it('should decorate the request', () => {
       const projectId = 'project-id';
       const reqOpts = {
