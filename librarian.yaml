@@ -202,6 +202,7 @@ libraries:
       - src/decorator.ts
       - src/enhanced-types.json
       - src/helpers.ts
+      - src/index.ts
       - src/value-converter.ts
       - test/helpers.test.ts
       - test/index.test.ts
