@@ -91,7 +91,7 @@ export interface GetExpirationDateCallback {
   (
     err: Error | null,
     expirationDate?: Date | null,
-    apiResponse?: unknown
+    apiResponse?: unknown,
   ): void;
 }
 
@@ -378,7 +378,7 @@ export interface MoveCallback {
   (
     err: Error | null,
     destinationFile?: File | null,
-    apiResponse?: unknown
+    apiResponse?: unknown,
   ): void;
 }
 
@@ -447,7 +447,7 @@ const COMPRESSIBLE_MIME_REGEX = new RegExp(
   ]
     .map(r => r.source)
     .join(''),
-  'i'
+  'i',
 );
 
 export interface FileOptions {
@@ -507,7 +507,7 @@ export enum SkipReason {
 
 export type DownloadCallback = (
   err: RequestError | null,
-  contents: Buffer
+  contents: Buffer,
 ) => void;
 
 export interface DownloadOptions extends CreateReadStreamOptions {
@@ -1247,7 +1247,7 @@ class File extends ServiceObject<File, FileMetadata> {
    * - if `idempotencyStrategy` is set to `RetryNever`
    */
   private shouldRetryBasedOnPreconditionAndIdempotencyStrat(
-    options?: PreconditionOptions
+    options?: PreconditionOptions,
   ): boolean {
     return !(
       (options?.ifGenerationMatch === undefined &&
@@ -1261,13 +1261,13 @@ class File extends ServiceObject<File, FileMetadata> {
 
   copy(
     destination: string | Bucket | File,
-    options?: CopyOptions
+    options?: CopyOptions,
   ): Promise<CopyResponse>;
   copy(destination: string | Bucket | File, callback: CopyCallback): void;
   copy(
     destination: string | Bucket | File,
     options: CopyOptions,
-    callback: CopyCallback
+    callback: CopyCallback,
   ): void;
   /**
    * @typedef {array} CopyResponse
@@ -1406,10 +1406,10 @@ class File extends ServiceObject<File, FileMetadata> {
   copy(
     destination: string | Bucket | File,
     optionsOrCallback?: CopyOptions | CopyCallback,
-    callback?: CopyCallback
+    callback?: CopyCallback,
   ): Promise<CopyResponse> | void {
     const noDestinationError = new Error(
-      FileExceptionMessages.DESTINATION_NO_NAME
+      FileExceptionMessages.DESTINATION_NO_NAME,
     );
 
     if (!destination) {
@@ -1426,7 +1426,7 @@ class File extends ServiceObject<File, FileMetadata> {
     if (options.contexts) {
       const validationError = handleContextValidation(
         options.contexts,
-        callback
+        callback,
       );
       if (validationError) return validationError;
     }
@@ -1480,38 +1480,27 @@ class File extends ServiceObject<File, FileMetadata> {
     if (this.encryptionKey !== undefined) {
       headers.set(
         'x-goog-copy-source-encryption-algorithm',
-        ENCRYPTION_ALGORITHM_AES256
+        ENCRYPTION_ALGORITHM_AES256,
       );
       headers.set(
         'x-goog-copy-source-encryption-key',
-        this.encryptionKeyBase64!
+        this.encryptionKeyBase64!,
       );
       headers.set(
         'x-goog-copy-source-encryption-key-sha256',
-        this.encryptionKeyHash!
+        this.encryptionKeyHash!,
       );
     }
 
-    const destinationKmsKeyName =
-      options.destinationKmsKeyName || options.kmsKeyName || newFile.kmsKeyName;
-
-    if (
-      this.encryptionKey &&
-      newFile.encryptionKey === undefined &&
-      !destinationKmsKeyName
-    ) {
-      newFile.setEncryptionKey(this.encryptionKey);
-    }
-
-    if (newFile.encryptionKey !== undefined && newFile.encryptionKey !== null) {
+    if (newFile.encryptionKey !== undefined) {
       headers.set('x-goog-encryption-algorithm', ENCRYPTION_ALGORITHM_AES256);
       headers.set('x-goog-encryption-key', newFile.encryptionKeyBase64 || '');
       headers.set(
         'x-goog-encryption-key-sha256',
-        newFile.encryptionKeyHash || ''
+        newFile.encryptionKeyHash || '',
       );
-    } else if (destinationKmsKeyName !== undefined) {
-      query.destinationKmsKeyName = destinationKmsKeyName;
+    } else if (options.destinationKmsKeyName !== undefined) {
+      query.destinationKmsKeyName = options.destinationKmsKeyName;
       delete options.destinationKmsKeyName;
       delete options.kmsKeyName;
     }
@@ -1521,7 +1510,7 @@ class File extends ServiceObject<File, FileMetadata> {
       this.kmsKeyName = query.destinationKmsKeyName;
 
       const keyIndex = this.storage.interceptors.indexOf(
-        this.encryptionKeyInterceptor!
+        this.encryptionKeyInterceptor!,
       );
       if (keyIndex > -1) {
         this.storage.interceptors.splice(keyIndex, 1);
@@ -1530,7 +1519,7 @@ class File extends ServiceObject<File, FileMetadata> {
 
     if (
       !this.shouldRetryBasedOnPreconditionAndIdempotencyStrat(
-        options?.preconditionOpts
+        options?.preconditionOpts,
       )
     ) {
       this.storage.retryOptions.autoRetry = false;
@@ -1576,7 +1565,7 @@ class File extends ServiceObject<File, FileMetadata> {
           }
 
           callback!(null, newFile, resp);
-        }
+        },
       )
       .catch(err => callback!(err));
   }
@@ -1727,7 +1716,7 @@ class File extends ServiceObject<File, FileMetadata> {
     const onResponse = async (
       err: Error | null,
       response: GaxiosResponse,
-      rawResponseStream: Readable
+      rawResponseStream: Readable,
     ) => {
       if (err) {
         // Get error message from the body.
@@ -1737,13 +1726,15 @@ class File extends ServiceObject<File, FileMetadata> {
           body => {
             err.message = body.toString('utf8');
             throughStream.destroy(err);
-          }
+          },
         );
 
         return;
       }
 
       const headers = response.headers;
+      const isStoredCompressed =
+        headers.get('x-goog-stored-content-encoding') === 'gzip';
       const isCompressed = headers.get('content-encoding') === 'gzip';
       const hashes: {crc32c?: string; md5?: string} = {};
 
@@ -1757,7 +1748,7 @@ class File extends ServiceObject<File, FileMetadata> {
 
       const transformStreams: Transform[] = [];
 
-      if (shouldRunValidation) {
+      if (shouldRunValidation && !isStoredCompressed) {
         // The x-goog-hash header should be set with a crc32c and md5 hash.
         // ex: headers.set('x-goog-hash', 'crc32c=xxxx,md5=xxxx')
         if (typeof headers.get('x-goog-hash') === 'string') {
@@ -1783,7 +1774,7 @@ class File extends ServiceObject<File, FileMetadata> {
 
       if (md5 && !hashes.md5) {
         const hashError = new RequestError(
-          FileExceptionMessages.MD5_NOT_AVAILABLE
+          FileExceptionMessages.MD5_NOT_AVAILABLE,
         );
         hashError.code = 'MD5_NOT_AVAILABLE';
         throughStream.destroy(hashError);
@@ -1802,7 +1793,7 @@ class File extends ServiceObject<File, FileMetadata> {
         rawResponseStream as Readable,
         ...(transformStreams as [Transform]),
         throughStream,
-        onComplete
+        onComplete,
       );
     };
 
@@ -1826,6 +1817,7 @@ class File extends ServiceObject<File, FileMetadata> {
       const headers = {
         'Accept-Encoding': 'gzip',
         'Cache-Control': 'no-store',
+        ...(this.encryptionKeyHeaders || {}),
       } as Headers;
 
       if (rangeRequest) {
@@ -1840,7 +1832,9 @@ class File extends ServiceObject<File, FileMetadata> {
         headers,
         queryParameters: query as unknown as StorageQueryParameters,
         responseType: 'stream',
-      };
+        decompress: options.decompress,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as any;
 
       if (options[GCCL_GCS_CMD_KEY]) {
         reqOpts[GCCL_GCS_CMD_KEY] = options[GCCL_GCS_CMD_KEY];
@@ -1850,7 +1844,7 @@ class File extends ServiceObject<File, FileMetadata> {
         .makeRequest(reqOpts, async (err, stream, rawResponse) => {
           if (err || !stream) {
             throughStream.destroy(
-              err || new Error(FileExceptionMessages.STREAM_NOT_AVAILABLE)
+              err || new Error(FileExceptionMessages.STREAM_NOT_AVAILABLE),
             );
             return;
           }
@@ -1869,11 +1863,11 @@ class File extends ServiceObject<File, FileMetadata> {
   }
 
   createResumableUpload(
-    options?: CreateResumableUploadOptions
+    options?: CreateResumableUploadOptions,
   ): Promise<CreateResumableUploadResponse>;
   createResumableUpload(
     options: CreateResumableUploadOptions,
-    callback: CreateResumableUploadCallback
+    callback: CreateResumableUploadCallback,
   ): void;
   createResumableUpload(callback: CreateResumableUploadCallback): void;
   /**
@@ -1963,7 +1957,7 @@ class File extends ServiceObject<File, FileMetadata> {
   createResumableUpload(
     optionsOrCallback?:
       CreateResumableUploadOptions | CreateResumableUploadCallback,
-    callback?: CreateResumableUploadCallback
+    callback?: CreateResumableUploadCallback,
   ): void | Promise<CreateResumableUploadResponse> {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
@@ -2003,7 +1997,7 @@ class File extends ServiceObject<File, FileMetadata> {
         universeDomain: this.bucket.storage.universeDomain,
         [GCCL_GCS_CMD_KEY]: options[GCCL_GCS_CMD_KEY],
       },
-      callback!
+      callback!,
     );
     this.storage.retryOptions.autoRetry = this.instanceRetryValue;
   }
@@ -2197,7 +2191,7 @@ class File extends ServiceObject<File, FileMetadata> {
 
       if (crc32c && !options.isPartialUpload && !options.resumeCRC32C) {
         throw new RangeError(
-          FileExceptionMessages.MISSING_RESUME_CRC32C_FINAL_UPLOAD
+          FileExceptionMessages.MISSING_RESUME_CRC32C_FINAL_UPLOAD,
         );
       }
     }
@@ -2400,13 +2394,30 @@ class File extends ServiceObject<File, FileMetadata> {
               pipelineCallback(e as Error);
             }
           }
-        );
-      } catch (err) {
-        emitStream.removeListener('error', noop);
-        emitStream.destroy(err as Error);
-        fileWriteStream.destroy(err as Error);
-        pipelineCallback(err as Error);
-      }
+
+          // Emit the local CRC32C value for future validation, if validation is enabled.
+          if (hashCalculatingStream?.crc32c) {
+            writeStream.emit('crc32c', hashCalculatingStream.crc32c);
+          }
+
+          try {
+            // Metadata may not be ready if the upload is a partial upload,
+            // nothing to validate yet.
+            const metadataNotReady = options.isPartialUpload && !this.metadata;
+
+            if (hashCalculatingStream && !metadataNotReady) {
+              await this.#validateIntegrity(hashCalculatingStream, {
+                crc32c,
+                md5,
+              });
+            }
+
+            pipelineCallback();
+          } catch (e) {
+            pipelineCallback(e as Error);
+          }
+        },
+      );
     });
 
     return writeStream;
@@ -2424,7 +2435,7 @@ class File extends ServiceObject<File, FileMetadata> {
   delete(callback: DeleteCallback): void;
   delete(
     optionsOrCallback?: DeleteOptions | DeleteCallback,
-    cb?: DeleteCallback
+    cb?: DeleteCallback,
   ): Promise<[GaxiosResponse]> | void {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
@@ -2433,7 +2444,7 @@ class File extends ServiceObject<File, FileMetadata> {
     this.disableAutoRetryConditionallyIdempotent_(
       this.methods.delete,
       AvailableServiceObjectMethods.delete,
-      options
+      options,
     );
 
     void (async () => {
@@ -2519,7 +2530,7 @@ class File extends ServiceObject<File, FileMetadata> {
    */
   download(
     optionsOrCallback?: DownloadOptions | DownloadCallback,
-    cb?: DownloadCallback
+    cb?: DownloadCallback,
   ): Promise<DownloadResponse> | void {
     let options: DownloadOptions;
     if (typeof optionsOrCallback === 'function') {
@@ -2590,6 +2601,18 @@ class File extends ServiceObject<File, FileMetadata> {
     }
   }
 
+  get encryptionKeyHeaders(): Record<string, string> | undefined {
+    if (!this.encryptionKey) {
+      return undefined;
+    }
+
+    return {
+      'x-goog-encryption-algorithm': ENCRYPTION_ALGORITHM_AES256,
+      'x-goog-encryption-key': this.encryptionKey.toString('base64'),
+      'x-goog-encryption-key-sha256': this.encryptionKeyHash || '',
+    };
+  }
+
   /**
    * The Storage API allows you to use a custom key for server-side encryption.
    *
@@ -2653,7 +2676,7 @@ class File extends ServiceObject<File, FileMetadata> {
     }
 
     this.encryptionKeyBase64 = Buffer.from(encryptionKey as string).toString(
-      'base64'
+      'base64',
     );
     this.encryptionKeyHash = crypto
       .createHash('sha256')
@@ -2666,12 +2689,12 @@ class File extends ServiceObject<File, FileMetadata> {
         reqOpts.headers = new Headers(reqOpts.headers || {});
         reqOpts.headers.set(
           'x-goog-encryption-algorithm',
-          ENCRYPTION_ALGORITHM_AES256
+          ENCRYPTION_ALGORITHM_AES256,
         );
         reqOpts.headers.set('x-goog-encryption-key', this.encryptionKeyBase64!);
         reqOpts.headers.set(
           'x-goog-encryption-key-sha256',
-          this.encryptionKeyHash!
+          this.encryptionKeyHash!,
         );
         return Promise.resolve(reqOpts);
       },
@@ -2693,7 +2716,7 @@ class File extends ServiceObject<File, FileMetadata> {
   static from(
     publicUrlOrGsUrl: string,
     storageInstance: Storage,
-    options?: FileOptions
+    options?: FileOptions,
   ): File {
     const gsMatches = [...publicUrlOrGsUrl.matchAll(GS_UTIL_URL_REGEX)];
     const httpsMatches = [...publicUrlOrGsUrl.matchAll(HTTPS_PUBLIC_URL_REGEX)];
@@ -2706,7 +2729,7 @@ class File extends ServiceObject<File, FileMetadata> {
       return new File(bucket, httpsMatches[0][4], options);
     } else {
       throw new Error(
-        'URL string must be of format gs://bucket/file or https://storage.googleapis.com/bucket/file'
+        'URL string must be of format gs://bucket/file or https://storage.googleapis.com/bucket/file',
       );
     }
   }
@@ -2716,7 +2739,7 @@ class File extends ServiceObject<File, FileMetadata> {
   get(options: GetFileOptions, callback: InstanceResponseCallback<File>): void;
   get(
     optionsOrCallback?: GetFileOptions | InstanceResponseCallback<File>,
-    cb?: InstanceResponseCallback<File>
+    cb?: InstanceResponseCallback<File>,
   ): Promise<GetResponse<File>> | void {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const options: any =
@@ -2765,14 +2788,14 @@ class File extends ServiceObject<File, FileMetadata> {
    * ```
    */
   getExpirationDate(
-    callback?: GetExpirationDateCallback
+    callback?: GetExpirationDateCallback,
   ): void | Promise<GetExpirationDateResponse> {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     this.getMetadata(
       (
         err: GaxiosError | null,
         metadata: FileMetadata,
-        apiResponse: unknown
+        apiResponse: unknown,
       ) => {
         if (err) {
           callback!(err, null, apiResponse);
@@ -2788,21 +2811,21 @@ class File extends ServiceObject<File, FileMetadata> {
         callback!(
           null,
           new Date(metadata.retentionExpirationTime),
-          apiResponse
+          apiResponse,
         );
-      }
+      },
     );
   }
 
   generateSignedPostPolicyV2(
-    options: GenerateSignedPostPolicyV2Options
+    options: GenerateSignedPostPolicyV2Options,
   ): Promise<GenerateSignedPostPolicyV2Response>;
   generateSignedPostPolicyV2(
     options: GenerateSignedPostPolicyV2Options,
-    callback: GenerateSignedPostPolicyV2Callback
+    callback: GenerateSignedPostPolicyV2Callback,
   ): void;
   generateSignedPostPolicyV2(
-    callback: GenerateSignedPostPolicyV2Callback
+    callback: GenerateSignedPostPolicyV2Callback,
   ): void;
   /**
    * @typedef {array} GenerateSignedPostPolicyV2Response
@@ -2896,16 +2919,16 @@ class File extends ServiceObject<File, FileMetadata> {
   generateSignedPostPolicyV2(
     optionsOrCallback?:
       GenerateSignedPostPolicyV2Options | GenerateSignedPostPolicyV2Callback,
-    cb?: GenerateSignedPostPolicyV2Callback
+    cb?: GenerateSignedPostPolicyV2Callback,
   ): void | Promise<GenerateSignedPostPolicyV2Response> {
     const args = normalize<GenerateSignedPostPolicyV2Options>(
       optionsOrCallback,
-      cb
+      cb,
     );
     let options = args.options;
     const callback = args.callback;
     const expires = new Date(
-      (options as GenerateSignedPostPolicyV2Options).expires
+      (options as GenerateSignedPostPolicyV2Options).expires,
     );
 
     if (isNaN(expires.getTime())) {
@@ -3000,19 +3023,19 @@ class File extends ServiceObject<File, FileMetadata> {
         err => {
           // eslint-disable-next-line promise/no-callback-in-promise
           callback(new SigningError(err.message));
-        }
+        },
       );
   }
 
   generateSignedPostPolicyV4(
-    options: GenerateSignedPostPolicyV4Options
+    options: GenerateSignedPostPolicyV4Options,
   ): Promise<GenerateSignedPostPolicyV4Response>;
   generateSignedPostPolicyV4(
     options: GenerateSignedPostPolicyV4Options,
-    callback: GenerateSignedPostPolicyV4Callback
+    callback: GenerateSignedPostPolicyV4Callback,
   ): void;
   generateSignedPostPolicyV4(
-    callback: GenerateSignedPostPolicyV4Callback
+    callback: GenerateSignedPostPolicyV4Callback,
   ): void;
   /**
    * @typedef {object} SignedPostPolicyV4Output
@@ -3105,7 +3128,7 @@ class File extends ServiceObject<File, FileMetadata> {
   generateSignedPostPolicyV4(
     optionsOrCallback?:
       GenerateSignedPostPolicyV4Options | GenerateSignedPostPolicyV4Callback,
-    cb?: GenerateSignedPostPolicyV4Callback
+    cb?: GenerateSignedPostPolicyV4Callback,
   ): void | Promise<GenerateSignedPostPolicyV4Response> {
     const args = normalize<
       GenerateSignedPostPolicyV4Options,
@@ -3114,7 +3137,7 @@ class File extends ServiceObject<File, FileMetadata> {
     let options = args.options;
     const callback = args.callback;
     const expires = new Date(
-      (options as GenerateSignedPostPolicyV4Options).expires
+      (options as GenerateSignedPostPolicyV4Options).expires,
     );
 
     if (isNaN(expires.getTime())) {
@@ -3127,7 +3150,7 @@ class File extends ServiceObject<File, FileMetadata> {
 
     if (expires.valueOf() - Date.now() > SEVEN_DAYS * 1000) {
       throw new Error(
-        `Max allowed expiration is seven days (${SEVEN_DAYS} seconds).`
+        `Max allowed expiration is seven days (${SEVEN_DAYS} seconds).`,
       );
     }
 
@@ -3175,7 +3198,7 @@ class File extends ServiceObject<File, FileMetadata> {
       try {
         const signature = await this.storage.storageTransport.authClient.sign(
           policyBase64,
-          options.signingEndpoint
+          options.signingEndpoint,
         );
         const signatureHex = Buffer.from(signature, 'base64').toString('hex');
         const universe = this.parent.storage.universeDomain;
@@ -3392,7 +3415,7 @@ class File extends ServiceObject<File, FileMetadata> {
    */
   getSignedUrl(
     cfg: GetSignedUrlConfig,
-    callback?: GetSignedUrlCallback
+    callback?: GetSignedUrlCallback,
   ): void | Promise<GetSignedUrlResponse> {
     const method = ActionToHTTPMethod[cfg.action];
     const extensionHeaders = objectKeyToLowercase(cfg.extensionHeaders || {});
@@ -3444,7 +3467,7 @@ class File extends ServiceObject<File, FileMetadata> {
         this.storage.storageTransport.authClient,
         this.bucket,
         this,
-        this.storage
+        this.storage,
       );
     }
 
@@ -3514,9 +3537,13 @@ class File extends ServiceObject<File, FileMetadata> {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const {callback: cb} = normalize<any, IsPublicCallback>(
       undefined,
-      callback
+      callback,
     );
-    const url = `https://${this.storage.apiEndpoint}/storage/v1/b/${this.bucket.name}/o/${encodeURIComponent(this.name)}`;
+    const baseUrl = this.storage.apiEndpoint.startsWith('http')
+      ? this.storage.apiEndpoint
+      : `https://${this.storage.apiEndpoint}`;
+
+    const url = `${baseUrl}/storage/v1/b/${this.bucket.name}/o/${encodeURIComponent(this.name)}`;
 
     const gaxios = new Gaxios();
     const storageInterceptors = this.storage?.interceptors || [];
@@ -3556,12 +3583,12 @@ class File extends ServiceObject<File, FileMetadata> {
   }
 
   makePrivate(
-    options?: MakeFilePrivateOptions
+    options?: MakeFilePrivateOptions,
   ): Promise<MakeFilePrivateResponse>;
   makePrivate(callback: MakeFilePrivateCallback): void;
   makePrivate(
     options: MakeFilePrivateOptions,
-    callback: MakeFilePrivateCallback
+    callback: MakeFilePrivateCallback,
   ): void;
   /**
    * @typedef {object} MakeFilePrivateOptions Configuration options for File#makePrivate().
@@ -3619,7 +3646,7 @@ class File extends ServiceObject<File, FileMetadata> {
    */
   makePrivate(
     optionsOrCallback?: MakeFilePrivateOptions | MakeFilePrivateCallback,
-    callback?: MakeFilePrivateCallback
+    callback?: MakeFilePrivateCallback,
   ): Promise<MakeFilePrivateResponse> | void {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
@@ -3691,7 +3718,7 @@ class File extends ServiceObject<File, FileMetadata> {
    * Another example:
    */
   makePublic(
-    callback?: MakeFilePublicCallback
+    callback?: MakeFilePublicCallback,
   ): Promise<MakeFilePublicResponse> | void {
     callback = callback || util.noop;
     this.acl.add(
@@ -3701,7 +3728,7 @@ class File extends ServiceObject<File, FileMetadata> {
       },
       (err, acl, resp) => {
         callback!(err, resp);
-      }
+      },
     );
   }
 
@@ -3730,16 +3757,16 @@ class File extends ServiceObject<File, FileMetadata> {
 
   moveFileAtomic(
     destination: string | File,
-    options?: MoveFileAtomicOptions
+    options?: MoveFileAtomicOptions,
   ): Promise<MoveFileAtomicResponse>;
   moveFileAtomic(
     destination: string | File,
-    callback: MoveFileAtomicCallback
+    callback: MoveFileAtomicCallback,
   ): void;
   moveFileAtomic(
     destination: string | File,
     options: MoveFileAtomicOptions,
-    callback: MoveFileAtomicCallback
+    callback: MoveFileAtomicCallback,
   ): void;
   /**
    * @typedef {array} MoveFileAtomicResponse
@@ -3839,10 +3866,10 @@ class File extends ServiceObject<File, FileMetadata> {
   moveFileAtomic(
     destination: string | File,
     optionsOrCallback?: MoveFileAtomicOptions | MoveFileAtomicCallback,
-    callback?: MoveFileAtomicCallback
+    callback?: MoveFileAtomicCallback,
   ): Promise<MoveFileAtomicResponse> | void {
     const noDestinationError = new Error(
-      FileExceptionMessages.DESTINATION_NO_NAME
+      FileExceptionMessages.DESTINATION_NO_NAME,
     );
 
     if (!destination) {
@@ -3879,7 +3906,7 @@ class File extends ServiceObject<File, FileMetadata> {
 
     if (
       !this.shouldRetryBasedOnPreconditionAndIdempotencyStrat(
-        options?.preconditionOpts
+        options?.preconditionOpts,
       )
     ) {
       this.storage.retryOptions.autoRetry = false;
@@ -3910,20 +3937,20 @@ class File extends ServiceObject<File, FileMetadata> {
           }
 
           callback!(null, newFile, resp);
-        }
+        },
       )
       .catch(err => callback!(err));
   }
 
   move(
     destination: string | Bucket | File,
-    options?: MoveOptions
+    options?: MoveOptions,
   ): Promise<MoveResponse>;
   move(destination: string | Bucket | File, callback: MoveCallback): void;
   move(
     destination: string | Bucket | File,
     options: MoveOptions,
-    callback: MoveCallback
+    callback: MoveCallback,
   ): void;
   /**
    * @typedef {array} MoveResponse
@@ -4058,7 +4085,7 @@ class File extends ServiceObject<File, FileMetadata> {
   move(
     destination: string | Bucket | File,
     optionsOrCallback?: MoveOptions | MoveCallback,
-    callback?: MoveCallback
+    callback?: MoveCallback,
   ): Promise<MoveResponse> | void {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
@@ -4094,13 +4121,13 @@ class File extends ServiceObject<File, FileMetadata> {
 
   rename(
     destinationFile: string | File,
-    options?: RenameOptions
+    options?: RenameOptions,
   ): Promise<RenameResponse>;
   rename(destinationFile: string | File, callback: RenameCallback): void;
   rename(
     destinationFile: string | File,
     options: RenameOptions,
-    callback: RenameCallback
+    callback: RenameCallback,
   ): void;
   /**
    * @typedef {array} RenameResponse
@@ -4189,7 +4216,7 @@ class File extends ServiceObject<File, FileMetadata> {
   rename(
     destinationFile: string | File,
     optionsOrCallback?: RenameOptions | RenameCallback,
-    callback?: RenameCallback
+    callback?: RenameCallback,
   ): Promise<RenameResponse> | void {
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
@@ -4227,21 +4254,21 @@ class File extends ServiceObject<File, FileMetadata> {
    * @returns {Promise<File>}
    */
   async restore(options: RestoreOptions): Promise<File> {
-    const file = await this.storageTransport.makeRequest<File>({
+    const response = await this.storageTransport.makeRequest<File>({
       method: 'POST',
       url: `/storage/v1/b/${this.bucket.name}/o/${encodeURIComponent(this.name)}/restore`,
       queryParameters: options as unknown as StorageQueryParameters,
     });
-    return file as File;
+    return response.data as File;
   }
 
   rotateEncryptionKey(
-    options?: RotateEncryptionKeyOptions
+    options?: RotateEncryptionKeyOptions,
   ): Promise<RotateEncryptionKeyResponse>;
   rotateEncryptionKey(callback: RotateEncryptionKeyCallback): void;
   rotateEncryptionKey(
     options: RotateEncryptionKeyOptions,
-    callback: RotateEncryptionKeyCallback
+    callback: RotateEncryptionKeyCallback,
   ): void;
   /**
    * @callback RotateEncryptionKeyCallback
@@ -4278,7 +4305,7 @@ class File extends ServiceObject<File, FileMetadata> {
   rotateEncryptionKey(
     optionsOrCallback?:
       RotateEncryptionKeyOptions | RotateEncryptionKeyCallback,
-    callback?: RotateEncryptionKeyCallback
+    callback?: RotateEncryptionKeyCallback,
   ): Promise<RotateEncryptionKeyResponse> | void {
     callback =
       typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
@@ -4377,7 +4404,7 @@ class File extends ServiceObject<File, FileMetadata> {
   save(
     data: SaveData,
     optionsOrCallback?: SaveOptions | SaveCallback,
-    callback?: SaveCallback
+    callback?: SaveCallback,
   ): Promise<void> | void {
     callback =
       typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
@@ -4386,14 +4413,14 @@ class File extends ServiceObject<File, FileMetadata> {
 
     const validationError = handleContextValidation(
       options.metadata?.contexts as FileMetadata['contexts'],
-      callback
+      callback,
     );
     if (validationError) return validationError;
 
     let maxRetries = this.storage.retryOptions.maxRetries;
     if (
       !this.shouldRetryBasedOnPreconditionAndIdempotencyStrat(
-        options?.preconditionOpts
+        options?.preconditionOpts,
       )
     ) {
       maxRetries = 0;
@@ -4452,7 +4479,7 @@ class File extends ServiceObject<File, FileMetadata> {
         factor: this.storage.retryOptions.retryDelayMultiplier,
         maxTimeout: this.storage.retryOptions.maxRetryDelay! * 1000, //convert to milliseconds
         maxRetryTime: this.storage.retryOptions.totalTimeout! * 1000, //convert to milliseconds
-      }
+      },
     );
     if (!callback) {
       return returnValue;
@@ -4470,21 +4497,21 @@ class File extends ServiceObject<File, FileMetadata> {
 
   setMetadata(
     metadata: FileMetadata,
-    options?: SetMetadataOptions
+    options?: SetMetadataOptions,
   ): Promise<SetMetadataResponse<FileMetadata>>;
   setMetadata(
     metadata: FileMetadata,
-    callback: MetadataCallback<FileMetadata>
+    callback: MetadataCallback<FileMetadata>,
   ): void;
   setMetadata(
     metadata: FileMetadata,
     options: SetMetadataOptions,
-    callback: MetadataCallback<FileMetadata>
+    callback: MetadataCallback<FileMetadata>,
   ): void;
   setMetadata(
     metadata: FileMetadata,
     optionsOrCallback: SetMetadataOptions | MetadataCallback<FileMetadata>,
-    cb?: MetadataCallback<FileMetadata>
+    cb?: MetadataCallback<FileMetadata>,
   ): Promise<SetMetadataResponse<FileMetadata>> | void {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const options: any =
@@ -4500,7 +4527,7 @@ class File extends ServiceObject<File, FileMetadata> {
     this.disableAutoRetryConditionallyIdempotent_(
       this.methods.setMetadata,
       AvailableServiceObjectMethods.setMetadata,
-      options
+      options,
     );
 
     void (async () => {
@@ -4519,16 +4546,16 @@ class File extends ServiceObject<File, FileMetadata> {
 
   setStorageClass(
     storageClass: string,
-    options?: SetStorageClassOptions
+    options?: SetStorageClassOptions,
   ): Promise<SetStorageClassResponse>;
   setStorageClass(
     storageClass: string,
     options: SetStorageClassOptions,
-    callback: SetStorageClassCallback
+    callback: SetStorageClassCallback,
   ): void;
   setStorageClass(
     storageClass: string,
-    callback?: SetStorageClassCallback
+    callback?: SetStorageClassCallback,
   ): void;
   /**
    * @typedef {array} SetStorageClassResponse
@@ -4579,7 +4606,7 @@ class File extends ServiceObject<File, FileMetadata> {
   setStorageClass(
     storageClass: string,
     optionsOrCallback?: SetStorageClassOptions | SetStorageClassCallback,
-    callback?: SetStorageClassCallback
+    callback?: SetStorageClassCallback,
   ): Promise<SetStorageClassResponse> | void {
     callback =
       typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
@@ -4639,14 +4666,14 @@ class File extends ServiceObject<File, FileMetadata> {
    */
   startResumableUpload_(
     dup: Duplexify,
-    options: CreateResumableUploadOptions = {}
+    options: CreateResumableUploadOptions = {},
   ): void {
     options.metadata ??= {};
 
     const retryOptions = this.storage.retryOptions;
     if (
       !this.shouldRetryBasedOnPreconditionAndIdempotencyStrat(
-        options.preconditionOpts
+        options.preconditionOpts,
       )
     ) {
       retryOptions.autoRetry = false;
@@ -4717,7 +4744,7 @@ class File extends ServiceObject<File, FileMetadata> {
    */
   startSimpleUpload_(
     dup: Duplexify,
-    options: CreateWriteStreamOptions = {}
+    options: CreateWriteStreamOptions = {},
   ): void {
     options.metadata ??= {};
 
@@ -4764,7 +4791,7 @@ class File extends ServiceObject<File, FileMetadata> {
     Object.assign(
       reqOpts.queryParameters!,
       this.instancePreconditionOpts,
-      options.preconditionOpts
+      options.preconditionOpts,
     );
 
     const writeStream = new ProgressStream();
@@ -4785,6 +4812,17 @@ class File extends ServiceObject<File, FileMetadata> {
       },
     ];
 
+    const headers: Record<string, string> = {};
+    if (this.encryptionKey) {
+      headers['x-goog-encryption-algorithm'] = ENCRYPTION_ALGORITHM_AES256;
+      headers['x-goog-encryption-key'] = this.encryptionKeyBase64!;
+      headers['x-goog-encryption-key-sha256'] = this.encryptionKeyHash!;
+    }
+    reqOpts.headers = {
+      ...reqOpts.headers,
+      ...headers,
+    };
+
     this.storageTransport
       .makeRequest(reqOpts as StorageRequestOptions, (err, body, resp) => {
         if (err) {
@@ -4804,7 +4842,7 @@ class File extends ServiceObject<File, FileMetadata> {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     coreOpts: any,
     methodType: AvailableServiceObjectMethods,
-    localPreconditionOptions?: PreconditionOptions
+    localPreconditionOptions?: PreconditionOptions,
   ): void {
     if (
       (typeof coreOpts === 'object' &&
@@ -4850,7 +4888,7 @@ class File extends ServiceObject<File, FileMetadata> {
    */
   async #validateIntegrity(
     hashCalculatingStream: HashStreamValidator,
-    verify: {crc32c?: boolean; md5?: boolean} = {}
+    verify: {crc32c?: boolean; md5?: boolean} = {},
   ) {
     const metadata = this.metadata;
 
