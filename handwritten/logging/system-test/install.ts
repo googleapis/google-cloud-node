@@ -20,6 +20,8 @@ import {packNTest} from 'pack-n-play';
 import {readFileSync} from 'fs';
 import {describe, it} from 'mocha';
 
+// Sample comment
+
 describe('📦 pack-n-play test', () => {
   it('TypeScript code', async function () {
     this.timeout(300000);
