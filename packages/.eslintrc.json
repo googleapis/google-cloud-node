@@ -1,4 +1,10 @@
 {
   "extends": "../node_modules/gts",
-  "root": true
+  "root": true,
+  "ignorePatterns": [
+    "**/build",
+    "**/protos",
+    "**/system-test/fixtures",
+    "**/samples/generated"
+  ]
 }
