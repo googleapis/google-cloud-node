@@ -213,7 +213,9 @@ export class API {
               service =>
                 (service.method && service.method.length > 0) ||
                 !!service.IAMPolicyMixin ||
-                !!service.LocationMixin,
+                !!service.LocationMixin ||
+                !!service.LongRunningOperationsMixin ||
+                (service.serviceYaml?.apis?.length ?? 0) > 0,
             ),
         );
         return retval;
