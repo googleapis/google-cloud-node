@@ -8,6 +8,7 @@
     "**/test/fixtures",
     "**/samples/generated",
     "**/.coverage",
-    "**/coverage"
+    "**/coverage",
+    "**/protos"
   ]
 }
