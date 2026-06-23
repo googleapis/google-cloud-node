@@ -41,6 +41,46 @@ export type Value = any;
 const DATE_REGEX = /^\d{4}-\d{1,2}-\d{1,2}/;
 const DIGITS_REGEX = /^\d+$/;
 
+const DAYS_IN_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+function isValidDate(year: number, month: number, date: number): boolean {
+  if (month < 0 || month > 11) {
+    return false;
+  }
+  if (date < 1) {
+    return false;
+  }
+  if (month === 1) {
+    const isLeap = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+    return date <= (isLeap ? 29 : 28);
+  }
+  return date <= DAYS_IN_MONTH[month];
+}
+
+function isValidTimestamp(
+  year: number,
+  month: number,
+  day: number,
+  hours: number,
+  minutes: number,
+  seconds: number,
+  milliseconds: number,
+): boolean {
+  if (hours < 0 || hours > 23) {
+    return false;
+  }
+  if (minutes < 0 || minutes > 59) {
+    return false;
+  }
+  if (seconds < 0 || seconds > 59) {
+    return false;
+  }
+  if (milliseconds < 0 || milliseconds > 999) {
+    return false;
+  }
+  return isValidDate(year, month, day);
+}
+
 let uuidUntypedFlagWarned = false;
 
 export interface Field {
@@ -144,18 +184,10 @@ export class SpannerDate extends Date {
       if (
         year >= 1970 &&
         !Number.isNaN(year) &&
-        !Number.isNaN(month) &&
-        !Number.isNaN(date)
+        isValidDate(year, month, date)
       ) {
-        const check = new Date(year, month, date);
-        if (
-          check.getFullYear() === year &&
-          check.getMonth() === month &&
-          check.getDate() === date
-        ) {
-          super(year, month, date);
-          return;
-        }
+        super(year, month, date);
+        return;
       }
     }
 
@@ -1248,14 +1280,8 @@ function parsePreciseDate(isoString: string): PreciseDate {
       milliseconds,
     );
 
-    const dateCheck = new Date(utcMillis);
     if (
-      dateCheck.getUTCFullYear() !== year ||
-      dateCheck.getUTCMonth() !== month ||
-      dateCheck.getUTCDate() !== day ||
-      dateCheck.getUTCHours() !== hours ||
-      dateCheck.getUTCMinutes() !== minutes ||
-      dateCheck.getUTCSeconds() !== seconds
+      !isValidTimestamp(year, month, day, hours, minutes, seconds, milliseconds)
     ) {
       return new PreciseDate(isoString);
     }
