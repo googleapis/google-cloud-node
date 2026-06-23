@@ -519,6 +519,14 @@ export class OracleDatabaseClient {
     const deleteCloudExadataInfrastructureMetadata = protoFilesRoot.lookup(
       '.google.cloud.oracledatabase.v1.OperationMetadata',
     ) as gax.protobuf.Type;
+    const configureExascaleCloudExadataInfrastructureResponse =
+      protoFilesRoot.lookup(
+        '.google.cloud.oracledatabase.v1.CloudExadataInfrastructure',
+      ) as gax.protobuf.Type;
+    const configureExascaleCloudExadataInfrastructureMetadata =
+      protoFilesRoot.lookup(
+        '.google.cloud.oracledatabase.v1.OperationMetadata',
+      ) as gax.protobuf.Type;
     const createCloudVmClusterResponse = protoFilesRoot.lookup(
       '.google.cloud.oracledatabase.v1.CloudVmCluster',
     ) as gax.protobuf.Type;
@@ -725,6 +733,16 @@ export class OracleDatabaseClient {
           ),
           deleteCloudExadataInfrastructureMetadata.decode.bind(
             deleteCloudExadataInfrastructureMetadata,
+          ),
+        ),
+      configureExascaleCloudExadataInfrastructure:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          configureExascaleCloudExadataInfrastructureResponse.decode.bind(
+            configureExascaleCloudExadataInfrastructureResponse,
+          ),
+          configureExascaleCloudExadataInfrastructureMetadata.decode.bind(
+            configureExascaleCloudExadataInfrastructureMetadata,
           ),
         ),
       createCloudVmCluster: new this._gaxModule.LongrunningDescriptor(
@@ -1021,6 +1039,7 @@ export class OracleDatabaseClient {
       'getCloudExadataInfrastructure',
       'createCloudExadataInfrastructure',
       'deleteCloudExadataInfrastructure',
+      'configureExascaleCloudExadataInfrastructure',
       'listCloudVmClusters',
       'getCloudVmCluster',
       'createCloudVmCluster',
@@ -3754,6 +3773,194 @@ export class OracleDatabaseClient {
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Configures Exascale for a single Exadata Infrastructure.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Cloud Exadata Infrastructure in the following
+   *   format:
+   *   projects/{project}/locations/{location}/cloudExadataInfrastructures/{cloud_exadata_infrastructure}.
+   * @param {number} request.totalStorageSizeGb
+   *   Required. The total storage to be allocated to Exascale in GBs.
+   * @param {string} [request.requestId]
+   *   Optional. An optional ID to identify the request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.configure_exascale_cloud_exadata_infrastructure.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_ConfigureExascaleCloudExadataInfrastructure_async
+   */
+  configureExascaleCloudExadataInfrastructure(
+    request?: protos.google.cloud.oracledatabase.v1.IConfigureExascaleCloudExadataInfrastructureRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  configureExascaleCloudExadataInfrastructure(
+    request: protos.google.cloud.oracledatabase.v1.IConfigureExascaleCloudExadataInfrastructureRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  configureExascaleCloudExadataInfrastructure(
+    request: protos.google.cloud.oracledatabase.v1.IConfigureExascaleCloudExadataInfrastructureRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  configureExascaleCloudExadataInfrastructure(
+    request?: protos.google.cloud.oracledatabase.v1.IConfigureExascaleCloudExadataInfrastructureRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'configureExascaleCloudExadataInfrastructure response %j',
+            rawResponse,
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info(
+      'configureExascaleCloudExadataInfrastructure request %j',
+      request,
+    );
+    return this.innerApiCalls
+      .configureExascaleCloudExadataInfrastructure(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.ICloudExadataInfrastructure,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'configureExascaleCloudExadataInfrastructure response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `configureExascaleCloudExadataInfrastructure()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.configure_exascale_cloud_exadata_infrastructure.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_ConfigureExascaleCloudExadataInfrastructure_async
+   */
+  async checkConfigureExascaleCloudExadataInfrastructureProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.oracledatabase.v1.CloudExadataInfrastructure,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >
+  > {
+    this._log.info('configureExascaleCloudExadataInfrastructure long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.configureExascaleCloudExadataInfrastructure,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.oracledatabase.v1.CloudExadataInfrastructure,
       protos.google.cloud.oracledatabase.v1.OperationMetadata
     >;
   }

@@ -16825,7 +16825,8 @@ export namespace google {
                 /** QuoteType enum. */
                 enum QuoteType {
                     QUOTE_TYPE_UNSPECIFIED = 0,
-                    REPLY = 1
+                    REPLY = 1,
+                    FORWARD = 2
                 }
             }
 
