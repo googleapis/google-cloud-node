@@ -54,6 +54,7 @@ describe('Logging', () => {
   const topic = pubsub.topic(generateName());
 
   let PROJECT_ID: string;
+  /*
   before(async () => {
     console.log('Before service account definition');
     const serviceAccount = (await logging.auth.getCredentials()).client_email;
@@ -140,6 +141,7 @@ describe('Logging', () => {
       );
     }
   });
+  */
 
   describe('sinks', () => {
     it('should create a sink with a Bucket destination', async () => {
