@@ -67,6 +67,7 @@ import {CRC32CValidatorGenerator} from './crc32c.js';
 import {URL} from 'url';
 import {
   BaseMetadata,
+  DeleteOptions,
   SetMetadataOptions,
 } from './nodejs-common/service-object.js';
 
@@ -190,6 +191,7 @@ export interface CombineOptions extends PreconditionOptions {
       [key: string]: ContextValue;
     } | null;
   };
+  deleteSourceObjects?: boolean;
 }
 
 export interface CombineCallback {
@@ -197,6 +199,24 @@ export interface CombineCallback {
 }
 
 export type CombineResponse = [File, unknown];
+
+export class ComposeCleanupError extends Error {
+  errors: Error[];
+  newFile: File;
+  apiResponse: unknown;
+  constructor(
+    message: string,
+    errors: Error[],
+    newFile: File,
+    apiResponse: unknown
+  ) {
+    super(message);
+    this.name = 'ComposeCleanupError';
+    this.errors = errors;
+    this.newFile = newFile;
+    this.apiResponse = apiResponse;
+  }
+}
 
 export interface CreateChannelConfig extends WatchAllOptions {
   address: string;
@@ -1579,7 +1599,9 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    * metadata's `kms_key_name` value, if any.
    * @property {string} [userProject] The ID of the project which will be
    *     billed for the request.
-   */
+    * @property {boolean} [deleteSourceObjects] If true, the source objects
+    *     will be permanently deleted after a successful compose operation.
+    */
   /**
    * @callback CombineCallback
    * @param {?Error} err Request error, if any.
@@ -1612,7 +1634,8 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    * metadata's `kms_key_name` value, if any.
    * @param {string} [options.userProject] The ID of the project which will be
    *     billed for the request.
-
+   * @param {boolean} [options.deleteSourceObjects] If true, the source objects
+   *     will be permanently deleted after a successful compose operation.
    * @param {CombineCallback} [callback] Callback function.
    * @returns {Promise<CombineResponse>}
    *
@@ -1709,8 +1732,17 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
       maxRetries = 0;
     }
 
-    if (options.ifGenerationMatch === undefined) {
-      Object.assign(options, destinationFile.instancePreconditionOpts, options);
+    const deleteSourceObjects = options.deleteSourceObjects;
+
+    const requestQueryObject = Object.assign({}, options);
+    delete requestQueryObject.deleteSourceObjects;
+
+    if (requestQueryObject.ifGenerationMatch === undefined) {
+      Object.assign(
+        requestQueryObject,
+        destinationFile.instancePreconditionOpts,
+        requestQueryObject
+      );
     }
 
     // Make the request from the destination File object.
@@ -1723,23 +1755,23 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
           destination: {
             contentType: destinationFile.metadata.contentType,
             contentEncoding: destinationFile.metadata.contentEncoding,
-            contexts: options.contexts || destinationFile.metadata.contexts,
+            contexts:
+              requestQueryObject.contexts || destinationFile.metadata.contexts,
           },
           sourceObjects: (sources as File[]).map(source => {
             const sourceObject = {
               name: source.name,
             } as SourceObject;
 
-            if (source.metadata && source.metadata.generation) {
-              sourceObject.generation = parseInt(
-                source.metadata.generation.toString(),
-              );
+            const generation = source.generation ?? source.metadata?.generation;
+            if (generation !== undefined) {
+              sourceObject.generation = parseInt(generation.toString());
             }
 
             return sourceObject;
           }),
         },
-        qs: options,
+        qs: requestQueryObject,
       },
       (err, resp) => {
         this.storage.retryOptions.autoRetry = this.instanceRetryValue;
@@ -1748,8 +1780,45 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
           return;
         }
 
-        callback!(null, destinationFile, resp);
-      },
+        if (deleteSourceObjects) {
+          const deletePromises = (sources as File[]).map(source => {
+            const deleteOptions: DeleteOptions = {
+              ignoreNotFound: true,
+              userProject: options.userProject,
+            };
+
+            const generation = source.generation ?? source.metadata?.generation;
+            if (generation !== undefined) {
+              deleteOptions.ifGenerationMatch = generation;
+            }
+
+            return source
+              .delete(deleteOptions)
+              .catch(deleteErr => deleteErr as Error);
+          });
+
+          Promise.all(deletePromises).then(results => {
+            const errors = results.filter(
+              (res): res is Error => res instanceof Error
+            );
+
+            if (errors.length > 0) {
+              const cleanupErr = new ComposeCleanupError(
+                `Compose operation succeeded, but cleaning up source objects failed. Failed to delete ${errors.length} source object(s).`,
+                errors,
+                destinationFile,
+                resp
+              );
+              callback!(cleanupErr, destinationFile, resp);
+              return;
+            }
+
+            callback!(null, destinationFile, resp);
+          });
+        } else {
+          callback!(null, destinationFile, resp);
+        }
+      }
     );
   }
 
