@@ -16,8 +16,8 @@ version: v0.20.0
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
-    commit: 4c284f1366a46993646dc9267cba257acbab6f45
-    sha256: 449ecc0edd76de7d592cf7f5c2a98070bef11af2593f8b64428e71b11211857e
+    commit: b6f9ff05aaec18070232a1ab36da98e684bc7909
+    sha256: 91788c6f956a0a409abe89a304c123cff73cb0ebb46b494e56d7ac9ece86f8cf
 default:
   keep:
     - librarian.js

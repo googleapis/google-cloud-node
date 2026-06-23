@@ -454,7 +454,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "dataFieldNames": {
@@ -462,7 +462,7 @@
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "outputFields": {
@@ -1669,6 +1669,13 @@
                             "(google.api.field_info).format": "UUID4",
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2089,6 +2096,13 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "vectorsearch.googleapis.com/Collection"
                           }
+                        },
+                        "fieldFilter": {
+                          "type": "FieldFilter",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -2114,6 +2128,46 @@
                               "values": {
                                 "FORMAT_UNSPECIFIED": 0,
                                 "JSONL": 2
+                              }
+                            }
+                          }
+                        },
+                        "FieldFilter": {
+                          "oneofs": {
+                            "selector": {
+                              "oneof": [
+                                "includedFields",
+                                "excludedFields"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "includedFields": {
+                              "type": "FieldList",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "excludedFields": {
+                              "type": "FieldList",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "FieldList": {
+                              "fields": {
+                                "fields": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
                               }
                             }
                           }
@@ -2724,7 +2778,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "dataFieldNames": {
@@ -2732,7 +2786,7 @@
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "outputFields": {
@@ -4067,6 +4121,13 @@
                             "(google.api.field_info).format": "UUID4",
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4487,6 +4548,13 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "vectorsearch.googleapis.com/Collection"
                           }
+                        },
+                        "fieldFilter": {
+                          "type": "FieldFilter",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -4518,6 +4586,46 @@
                                 "FORMAT_UNSPECIFIED": 0,
                                 "JSON": 1,
                                 "JSONL": 2
+                              }
+                            }
+                          }
+                        },
+                        "FieldFilter": {
+                          "oneofs": {
+                            "selector": {
+                              "oneof": [
+                                "includedFields",
+                                "excludedFields"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "includedFields": {
+                              "type": "FieldList",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "excludedFields": {
+                              "type": "FieldList",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "FieldList": {
+                              "fields": {
+                                "fields": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
                               }
                             }
                           }

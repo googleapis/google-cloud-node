@@ -8517,7 +8517,8 @@ export namespace google {
                         N1_HIGHCPU_32 = 2,
                         E2_HIGHCPU_8 = 5,
                         E2_HIGHCPU_32 = 6,
-                        E2_MEDIUM = 7
+                        E2_MEDIUM = 7,
+                        E2_STANDARD_2 = 11
                     }
 
                     /** SubstitutionOption enum. */
