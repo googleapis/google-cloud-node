@@ -13,17 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { promisifyAll } from '@google-cloud/promisify';
-import { EventEmitter } from 'events';
-import { util } from './util.js';
-import { StorageRequestOptions, StorageTransport } from '../storage-transport.js';
+import {promisifyAll} from '@google-cloud/promisify';
+import {EventEmitter} from 'events';
+import {util} from './util.js';
+import {StorageRequestOptions, StorageTransport } from '../storage-transport.js';
 import {
   GaxiosError,
   GaxiosInterceptor,
   GaxiosOptionsPrepared,
   GaxiosResponse,
 } from 'gaxios';
-import type { Bucket } from '../bucket.js';
+import type {Bucket} from '../bucket.js';
 
 function isBucket(parent: unknown): parent is Bucket {
   if (!parent || typeof parent !== 'object') {
@@ -110,7 +110,7 @@ export interface InstanceResponseCallback<T> {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface CreateOptions { }
+export interface CreateOptions {}
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
 export type CreateResponse<T> = any[];
 export interface CreateCallback<T> {
@@ -566,6 +566,6 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
   }
 }
 
-promisifyAll(ServiceObject, { exclude: ['getRequestInterceptors'] });
+promisifyAll(ServiceObject, {exclude: ['getRequestInterceptors']});
 
-export { ServiceObject };
+export {ServiceObject};
