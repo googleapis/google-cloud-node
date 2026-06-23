@@ -115,28 +115,27 @@ const env = new InstancedEnv({
 });
 
 function shouldRun() {
-  let shouldRun = true;
   if (typeof env.injected().projectId !== 'string') {
     console.log('The project id (projectId) was not set in the env');
-    shouldRun = false;
+    return false;
   }
 
   if (typeof env.injected().apiKey !== 'string') {
     console.log('The api key (apiKey) was not set as an env variable');
-    shouldRun = false;
+    return false;
   }
 
   if (typeof env.injected().projectNumber !== 'string') {
     console.log('The project number (projectNumber) was not set in the env');
-    shouldRun = false;
+    return false;
   }
 
   if (typeof env.injected().keyFilename !== 'string') {
     console.log('The key filename (keyFilename) was not set in the env');
-    shouldRun = false;
+    return false;
   }
 
-  return shouldRun;
+  return true;
 }
 
 function delay(ms: number) {
