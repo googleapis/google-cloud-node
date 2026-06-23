@@ -351,6 +351,11 @@ const GS_URL_REGEXP = /^gs:\/\/([a-z0-9_.-]+)\/(.+)$/;
 
 /**
  * @private
+ */
+const ENCRYPTION_ALGORITHM_AES256 = 'AES256';
+
+/**
+ * @private
  * This regex will match compressible content types. These are primarily text/*, +json, +text, +xml content types.
  * This was based off of mime-db and may periodically need to be updated if new compressible content types become
  * standards.
@@ -1393,7 +1398,10 @@ class File extends ServiceObject<File, FileMetadata> {
     const headers = new Headers();
 
     if (this.encryptionKey !== undefined) {
-      headers.set('x-goog-copy-source-encryption-algorithm', 'AES256');
+      headers.set(
+        'x-goog-copy-source-encryption-algorithm',
+        ENCRYPTION_ALGORITHM_AES256,
+      );
       headers.set(
         'x-goog-copy-source-encryption-key',
         this.encryptionKeyBase64!,
@@ -1405,7 +1413,12 @@ class File extends ServiceObject<File, FileMetadata> {
     }
 
     if (newFile.encryptionKey !== undefined) {
-      this.setEncryptionKey(newFile.encryptionKey!);
+      headers.set('x-goog-encryption-algorithm', ENCRYPTION_ALGORITHM_AES256);
+      headers.set('x-goog-encryption-key', newFile.encryptionKeyBase64 || '');
+      headers.set(
+        'x-goog-encryption-key-sha256',
+        newFile.encryptionKeyHash || '',
+      );
     } else if (options.destinationKmsKeyName !== undefined) {
       query.destinationKmsKeyName = options.destinationKmsKeyName;
       delete options.destinationKmsKeyName;
@@ -1639,6 +1652,8 @@ class File extends ServiceObject<File, FileMetadata> {
       }
 
       const headers = response.headers;
+      const isStoredCompressed =
+        headers.get('x-goog-stored-content-encoding') === 'gzip';
       const isCompressed = headers.get('content-encoding') === 'gzip';
       const hashes: {crc32c?: string; md5?: string} = {};
 
@@ -1652,7 +1667,7 @@ class File extends ServiceObject<File, FileMetadata> {
 
       const transformStreams: Transform[] = [];
 
-      if (shouldRunValidation) {
+      if (shouldRunValidation && !isStoredCompressed) {
         // The x-goog-hash header should be set with a crc32c and md5 hash.
         // ex: headers.set('x-goog-hash', 'crc32c=xxxx,md5=xxxx')
         if (typeof headers.get('x-goog-hash') === 'string') {
@@ -1721,6 +1736,7 @@ class File extends ServiceObject<File, FileMetadata> {
       const headers = {
         'Accept-Encoding': 'gzip',
         'Cache-Control': 'no-store',
+        ...(this.encryptionKeyHeaders || {}),
       } as Headers;
 
       if (rangeRequest) {
@@ -1735,7 +1751,9 @@ class File extends ServiceObject<File, FileMetadata> {
         headers,
         queryParameters: query as unknown as StorageQueryParameters,
         responseType: 'stream',
-      };
+        decompress: options.decompress,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as any;
 
       if (options[GCCL_GCS_CMD_KEY]) {
         reqOpts[GCCL_GCS_CMD_KEY] = options[GCCL_GCS_CMD_KEY];
@@ -2426,6 +2444,18 @@ class File extends ServiceObject<File, FileMetadata> {
     }
   }
 
+  get encryptionKeyHeaders(): Record<string, string> | undefined {
+    if (!this.encryptionKey) {
+      return undefined;
+    }
+
+    return {
+      'x-goog-encryption-algorithm': ENCRYPTION_ALGORITHM_AES256,
+      'x-goog-encryption-key': this.encryptionKey.toString('base64'),
+      'x-goog-encryption-key-sha256': this.encryptionKeyHash || '',
+    };
+  }
+
   /**
    * The Storage API allows you to use a custom key for server-side encryption.
    *
@@ -2485,7 +2515,10 @@ class File extends ServiceObject<File, FileMetadata> {
     this.encryptionKeyInterceptor = {
       resolved: reqOpts => {
         reqOpts.headers = new Headers(reqOpts.headers || {});
-        reqOpts.headers.set('x-goog-encryption-algorithm', 'AES256');
+        reqOpts.headers.set(
+          'x-goog-encryption-algorithm',
+          ENCRYPTION_ALGORITHM_AES256,
+        );
         reqOpts.headers.set('x-goog-encryption-key', this.encryptionKeyBase64!);
         reqOpts.headers.set(
           'x-goog-encryption-key-sha256',
@@ -3315,7 +3348,11 @@ class File extends ServiceObject<File, FileMetadata> {
       undefined,
       callback,
     );
-    const url = `https://${this.storage.apiEndpoint}/storage/v1/b/${this.bucket.name}/o/${encodeURIComponent(this.name)}`;
+    const baseUrl = this.storage.apiEndpoint.startsWith('http') 
+      ? this.storage.apiEndpoint 
+      : `https://${this.storage.apiEndpoint}`;
+
+    const url = `${baseUrl}/storage/v1/b/${this.bucket.name}/o/${encodeURIComponent(this.name)}`;
 
     const gaxios = new Gaxios();
     const storageInterceptors = this.storage?.interceptors || [];
@@ -4025,12 +4062,12 @@ class File extends ServiceObject<File, FileMetadata> {
    * @returns {Promise<File>}
    */
   async restore(options: RestoreOptions): Promise<File> {
-    const file = await this.storageTransport.makeRequest<File>({
+    const response = await this.storageTransport.makeRequest<File>({
       method: 'POST',
       url: `/storage/v1/b/${this.bucket.name}/o/${encodeURIComponent(this.name)}/restore`,
       queryParameters: options as unknown as StorageQueryParameters,
     });
-    return file as File;
+    return response.data as File;
   }
 
   rotateEncryptionKey(
@@ -4561,6 +4598,17 @@ class File extends ServiceObject<File, FileMetadata> {
         content: writeStream,
       },
     ];
+
+    const headers: Record<string, string> = {};
+    if (this.encryptionKey) {
+      headers['x-goog-encryption-algorithm'] = ENCRYPTION_ALGORITHM_AES256;
+      headers['x-goog-encryption-key'] = this.encryptionKeyBase64!;
+      headers['x-goog-encryption-key-sha256'] = this.encryptionKeyHash!;
+    }
+    reqOpts.headers = {
+      ...reqOpts.headers,
+      ...headers,
+    };
 
     this.storageTransport
       .makeRequest(reqOpts as StorageRequestOptions, (err, body, resp) => {
