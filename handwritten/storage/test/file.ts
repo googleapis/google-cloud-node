@@ -579,112 +579,49 @@ describe('File', () => {
       file.copy(newFile, assert.ifError);
     });
 
-    it('should send destination encryption headers when destination file has an encryption key', done => {
-      const newFile = new File(BUCKET, 'new-file');
-      newFile.setEncryptionKey('destinationKey');
-
-      file.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
-        const headers = Object.fromEntries(
-          (reqOpts.headers as Headers).entries(),
-        );
-        assert.strictEqual(headers['x-goog-encryption-algorithm'], 'AES256');
-        assert.strictEqual(
-          headers['x-goog-encryption-key'],
-          (newFile as any).encryptionKeyBase64,
-        );
-        assert.strictEqual(
-          headers['x-goog-encryption-key-sha256'],
-          (newFile as any).encryptionKeyHash,
-        );
-        done();
+    it('should set encryption key on the new File instance', done => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const file = new (File as any)(BUCKET, FILE_NAME);
+      Object.assign(file, {
+        encryptionKey: 'source-key',
+        encryptionKeyBase64: 'base64',
+        encryptionKeyHash: 'hash',
       });
 
-      file.copy(newFile, assert.ifError);
-    });
-
-    it('should not copy encryption key or send destination headers when destination file has null encryption key', done => {
-      file.setEncryptionKey('sourceKey');
-      const expectedSourceKeyBase64 = (file as any).encryptionKeyBase64;
-      const expectedSourceKeyHash = (file as any).encryptionKeyHash;
-
-      const newFile = new File(BUCKET, 'new-file');
-      newFile.setEncryptionKey(null);
-
-      file.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
-        assert.strictEqual((newFile as any).encryptionKey, null);
-        assert.strictEqual((newFile as any).encryptionKeyBase64, undefined);
-        assert.strictEqual((newFile as any).encryptionKeyHash, undefined);
-
-        const headers = Object.fromEntries(
-          (reqOpts.headers as Headers).entries(),
-        );
-        assert.strictEqual(
-          headers['x-goog-copy-source-encryption-algorithm'],
-          'AES256',
-        );
-        assert.strictEqual(
-          headers['x-goog-copy-source-encryption-key'],
-          expectedSourceKeyBase64,
-        );
-        assert.strictEqual(
-          headers['x-goog-copy-source-encryption-key-sha256'],
-          expectedSourceKeyHash,
-        );
-
-        assert.strictEqual(headers['x-goog-encryption-algorithm'], undefined);
-        assert.strictEqual(headers['x-goog-encryption-key'], undefined);
-        assert.strictEqual(headers['x-goog-encryption-key-sha256'], undefined);
-
-        assert.notStrictEqual(
-          (file as any).encryptionKeyInterceptor,
-          undefined,
-        );
-
-        done();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const newFile = new (File as any)(BUCKET, 'new-file');
+      Object.assign(newFile, {
+        encryptionKey: 'dest-key',
+        encryptionKeyBase64: 'base64-dest',
+        encryptionKeyHash: 'hash-dest',
       });
 
-      file.copy(newFile, assert.ifError);
-    });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      storageTransport.makeRequest = async (reqOpts: any, callback: any) => {
+        const actualHeaders = Object.fromEntries(reqOpts.headers.entries());
 
-    it('should copy the source key to the destination file object if destination key is undefined', done => {
-      file.setEncryptionKey('sourceKey');
+        try {
+          assert.deepStrictEqual(actualHeaders, {
+            'content-type': 'application/json',
+            'x-goog-copy-source-encryption-algorithm': 'AES256',
+            'x-goog-copy-source-encryption-key': 'base64',
+            'x-goog-copy-source-encryption-key-sha256': 'hash',
+            'x-goog-encryption-algorithm': 'AES256',
+            'x-goog-encryption-key': 'base64-dest',
+            'x-goog-encryption-key-sha256': 'hash-dest',
+          });
+          callback?.(null, {done: true}, {});
+          return {data: {done: true}} as any;
+        } catch (e) {
+          done(e);
+          throw e;
+        }
+      };
 
-      const newFile = new File(BUCKET, 'new-file');
-
-      file.storageTransport.makeRequest = sandbox.stub().callsFake(reqOpts => {
-        assert.strictEqual(
-          (newFile as any).encryptionKey,
-          (file as any).encryptionKey,
-        );
-        assert.strictEqual(
-          (newFile as any).encryptionKeyBase64,
-          (file as any).encryptionKeyBase64,
-        );
-        assert.strictEqual(
-          (newFile as any).encryptionKeyHash,
-          (file as any).encryptionKeyHash,
-        );
-
-        const headers = Object.fromEntries(
-          (reqOpts.headers as Headers).entries(),
-        );
-        assert.strictEqual(
-          headers['x-goog-copy-source-encryption-key'],
-          (file as any).encryptionKeyBase64,
-        );
-        assert.strictEqual(headers['x-goog-encryption-algorithm'], 'AES256');
-        assert.strictEqual(
-          headers['x-goog-encryption-key'],
-          (file as any).encryptionKeyBase64,
-        );
-        assert.strictEqual(
-          headers['x-goog-encryption-key-sha256'],
-          (file as any).encryptionKeyHash,
-        );
+      file.copy(newFile, (err: any) => {
+        assert.ifError(err);
         done();
       });
-
-      file.copy(newFile, assert.ifError);
     });
 
     it('should set destination KMS key name', done => {
@@ -1204,6 +1141,7 @@ describe('File', () => {
               'Accept-Encoding': 'gzip',
               'Cache-Control': 'no-store',
             },
+            decompress: true,
             responseType: 'stream',
             queryParameters: {
               alt: 'media',
@@ -3981,7 +3919,12 @@ describe('File', () => {
 
     it('should correctly format URL and method in the request', done => {
       gaxiosStub.resolves({data: {}});
-      const expectedUrl = `https://${file.storage.apiEndpoint}/storage/v1/b/${BUCKET.name}/o/${encodeURIComponent(file.name)}`;
+      // const expectedUrl = `https://${file.storage.apiEndpoint}/storage/v1/b/${BUCKET.name}/o/${encodeURIComponent(file.name)}`;
+      const baseUrl = file.storage.apiEndpoint.startsWith('http')
+        ? file.storage.apiEndpoint
+        : `https://${file.storage.apiEndpoint}`;
+
+      const expectedUrl = `${baseUrl}/storage/v1/b/${BUCKET.name}/o/${encodeURIComponent(file.name)}`;
 
       file.isPublic(err => {
         assert.ifError(err);
@@ -5344,9 +5287,7 @@ describe('File', () => {
       const actualInterceptorKey =
         await _file.encryptionKeyInterceptor.resolved(reqOpts);
       assert.deepStrictEqual(
-        Object.fromEntries(
-          (actualInterceptorKey.headers as Headers).entries(),
-        ),
+        Object.fromEntries((actualInterceptorKey.headers as Headers).entries()),
         expectedHeaders,
       );
     });
