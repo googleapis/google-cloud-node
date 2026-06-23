@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/google-auth-library?activeTab=versions
 
+## [10.8.1](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v10.8.0...google-auth-library-v10.8.1) (2026-06-23)
+
+
+### Bug Fixes
+
+* Strip trailing slashes from automatic GDCH audience ([#8692](https://github.com/googleapis/google-cloud-node/issues/8692)) ([4e4badf](https://github.com/googleapis/google-cloud-node/commit/4e4badf1a5c6fde28fa099fb184b02cf794d8dfd))
+
 ## [10.8.0](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v10.7.0...google-auth-library-v10.8.0) (2026-06-18)
 
 
