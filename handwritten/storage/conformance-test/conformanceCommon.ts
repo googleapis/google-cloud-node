@@ -15,7 +15,7 @@
  */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import * as jsonToNodeApiMapping from './test-data/retryInvocationMap.json';
-import * as libraryMethods from './libraryMethods';
+import * as libraryMethods from './libraryMethods.js';
 import {Bucket, File, Gaxios, HmacKey, Notification, Storage} from '../src';
 import * as crypto from 'crypto';
 import * as assert from 'assert';
@@ -23,8 +23,8 @@ import {
   StorageRequestOptions,
   StorageTransport,
   StorageTransportCallback,
-} from '../src/storage-transport';
-import {getDirName} from '../src/util';
+} from '../src/storage-transport.js';
+import {getDirName} from '../src/util.js';
 import path from 'path';
 import {GoogleAuth} from 'google-auth-library';
 interface RetryCase {
