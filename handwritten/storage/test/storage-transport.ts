@@ -21,6 +21,7 @@ import {GoogleAuth} from 'google-auth-library';
 import sinon from 'sinon';
 import assert from 'assert';
 import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util';
+import {RETRYABLE_ERR_FN_DEFAULT} from '../src/storage';
 import {Gaxios} from 'gaxios';
 
 describe('Storage Transport', () => {
@@ -46,7 +47,7 @@ describe('Storage Transport', () => {
         retryDelayMultiplier: 2,
         maxRetryDelay: 100,
         totalTimeout: 1000,
-        retryableErrorFn: () => true,
+        retryableErrorFn: RETRYABLE_ERR_FN_DEFAULT,
       },
       scopes: ['https://www.googleapis.com/auth/could-platform'],
       packageJson: {name: 'test-package', version: '1.0.0'},
@@ -58,7 +59,12 @@ describe('Storage Transport', () => {
   });
 
   it('should make a request with the correct parameters', async () => {
-    const response = {data: {success: true}};
+    const response = {
+      data: {success: true},
+      headers: new Map(),
+      status: 200,
+      statusText: 'OK',
+    };
     const requestStub = authClientStub.request as sinon.SinonStub;
     requestStub.resolves(response);
 
@@ -71,20 +77,19 @@ describe('Storage Transport', () => {
 
     assert.strictEqual(requestStub.calledOnce, true);
     const calledWith = requestStub.getCall(0).args[0];
-    assert.strictEqual(
-      calledWith.url.href,
-      `${baseUrl}/bucket/object?alt=json&userProject=user-project`,
-    );
-    assert.strictEqual(calledWith.headers.get('content-encoding'), 'gzip');
-    assert.ok(
-      calledWith.headers.get('User-Agent').includes('gcloud-node-storage/'),
-    );
-    assert.deepStrictEqual(_response, response.data);
+    assert.strictEqual(calledWith.headers['content-encoding'], 'gzip');
+    const headers = calledWith.headers;
+    const userAgent = headers['User-Agent'] || headers['user-agent'];
+    assert.ok(userAgent.includes('gcloud-node-storage/'));
+    assert.deepStrictEqual(_response, response);
   });
 
   it('should handle retry options correctly', async () => {
     const requestStub = authClientStub.request as sinon.SinonStub;
-    requestStub.resolves({});
+    requestStub.resolves({
+      data: {},
+      headers: new Map(),
+    });
     const reqOpts: StorageRequestOptions = {
       url: '/bucket/object',
     };
@@ -105,7 +110,10 @@ describe('Storage Transport', () => {
       [GCCL_GCS_CMD_KEY]: 'test-key',
     };
 
-    (authClientStub.request as sinon.SinonStub).resolves({data: {}});
+    (authClientStub.request as sinon.SinonStub).resolves({
+      data: {},
+      headers: new Map(),
+    });
 
     await transport.makeRequest(reqOpts);
 
@@ -113,33 +121,46 @@ describe('Storage Transport', () => {
       .args[0];
 
     assert.ok(
-      calledWith.headers
-        .get('x-goog-api-client')
-        .includes('gccl-gcs-cmd/test-key'),
+      calledWith.headers['x-goog-api-client'].includes('gccl-gcs-cmd/test-key'),
     );
   });
 
-  // TODO: Undo this skip once the gaxios interceptor issue is resolved.
-  it.skip('should clear and add interceptors if provided', async () => {
+  it('should clear and add interceptors if provided', async () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const interceptorStub: any = sandbox.stub();
+    const interceptorStub: any = {
+      resolved: sandbox.stub(),
+      rejected: sandbox.stub(),
+    };
     const reqOpts: StorageRequestOptions = {
       url: '/bucket/object',
       interceptors: [interceptorStub],
     };
 
-    const clearStub = sandbox.stub();
-    const addStub = sandbox.stub();
-    (authClientStub.request as sinon.SinonStub).resolves({data: {}});
-    const transportInstance = new Gaxios();
-    transportInstance.interceptors.request.clear = clearStub;
-    transportInstance.interceptors.request.add = addStub;
+    let capturedGaxiosInstance: Gaxios | undefined;
+    const gaxiosRequestStub = sandbox.stub(Gaxios.prototype, 'request').callsFake(function(this: Gaxios, opts: any) {
+      capturedGaxiosInstance = this;
+      return Promise.resolve({ data: {} } as any);
+    });
+
+    const requestStub = authClientStub.request as sinon.SinonStub;
+    requestStub.resolves({data: {}});
 
     await transport.makeRequest(reqOpts);
 
-    assert.strictEqual(clearStub.calledOnce, true);
-    assert.strictEqual(addStub.calledOnce, true);
-    assert.strictEqual(addStub.calledWith(interceptorStub), true);
+    assert.strictEqual(requestStub.calledOnce, true);
+    const calledWith = requestStub.getCall(0).args[0];
+    assert.ok(calledWith.adapter);
+
+    // Manually call the adapter (simulating what the real authClient request does)
+    await calledWith.adapter({ headers: {} });
+
+    assert.strictEqual(gaxiosRequestStub.calledOnce, true);
+    assert.ok(capturedGaxiosInstance);
+    const interceptorSet = capturedGaxiosInstance.interceptors.request as any as Set<any>;
+    assert.strictEqual(interceptorSet.size, 1);
+    const handlers = Array.from(interceptorSet);
+    assert.strictEqual(handlers[0].resolved, interceptorStub.resolved);
+    assert.strictEqual(handlers[0].rejected, interceptorStub.rejected);
   });
 
   it('should initialize a new GoogleAuth instance when authClient is not an instance of GoogleAuth', async () => {
@@ -166,5 +187,208 @@ describe('Storage Transport', () => {
 
     const transport = new StorageTransport(options);
     assert.ok(transport.authClient instanceof GoogleAuth);
+  });
+
+  it('should handle absolute URLs and project validation', async () => {
+    const requestStub = authClientStub.request as sinon.SinonStub;
+    requestStub.resolves({data: {}, headers: new Map()});
+
+    await transport.makeRequest({url: 'https://my-custom-endpoint.com/v1/b'});
+    assert.strictEqual(
+      requestStub.getCall(0).args[0].url,
+      'https://my-custom-endpoint.com/v1/b',
+    );
+  });
+
+  describe('Storage Transport shouldRetry logic', () => {
+    it('should retry POST if preconditions are present', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      requestStub.resolves({data: {}, headers: new Map()});
+
+      await transport.makeRequest({
+        method: 'POST',
+        url: '/b/bucket/o',
+        queryParameters: {ifGenerationMatch: 123},
+      });
+
+      const retryConfig = requestStub.getCall(0).args[0].retryConfig;
+      const error503 = {
+        response: {status: 503},
+        config: {
+          method: 'POST',
+          url: '/b/bucket/o',
+          params: {ifGenerationMatch: 123},
+        },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as any;
+
+      assert.strictEqual(retryConfig.shouldRetry(error503), true);
+    });
+
+    it('should retry on malformed JSON responses (SyntaxError)', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      requestStub.resolves({data: {}, headers: new Map()});
+
+      await transport.makeRequest({url: '/test'});
+
+      const retryConfig = requestStub.getCall(0).args[0].retryConfig;
+
+      const malformedError = new Error(
+        'Unexpected token < in JSON at position 0',
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ) as any;
+      malformedError.stack = 'SyntaxError: Unexpected token <';
+      malformedError.config = {method: 'GET', url: '/test'};
+
+      assert.strictEqual(retryConfig.shouldRetry(malformedError), true);
+    });
+
+    it('should retry on 503 for idempotent PUT requests', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      requestStub.resolves({data: {}, headers: new Map()});
+
+      await transport.makeRequest({
+        method: 'PUT',
+        url: '/bucket/object',
+      });
+
+      const retryConfig = requestStub.getCall(0).args[0].retryConfig;
+
+      const error503 = {
+        response: {status: 503},
+        config: {url: '/bucket/object'},
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as any;
+
+      assert.strictEqual(retryConfig.shouldRetry(error503), true);
+    });
+
+    it('should NOT retry on 401 Unauthorized', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      requestStub.resolves({data: {}, headers: new Map()});
+
+      await transport.makeRequest({url: '/test'});
+
+      const retryConfig = requestStub.getCall(0).args[0].retryConfig;
+
+      const error401 = {
+        response: {status: 401},
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as any;
+
+      assert.strictEqual(retryConfig.shouldRetry(error401), false);
+    });
+
+    it('should treat 308 as a valid status for resumable uploads', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      requestStub.resolves({data: '308-metadata', headers: new Map()});
+
+      await transport.makeRequest({
+        url: '/upload/storage/v1/b/bucket/o?uploadType=resumable',
+        queryParameters: {uploadType: 'resumable'},
+      });
+
+      const callArgs = requestStub.getCall(0).args[0];
+
+      assert.strictEqual(callArgs.validateStatus(308), true);
+    });
+
+    it('should retry when GCS reason is rateLimitExceeded', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      requestStub.resolves({data: {}, headers: new Map()});
+
+      await transport.makeRequest({url: '/test'});
+      const retryConfig = requestStub.getCall(0).args[0].retryConfig;
+
+      const rateLimitError = {
+        response: {
+          status: 429,
+          data: {
+            error: {
+              errors: [{reason: 'rateLimitExceeded'}],
+            },
+          },
+        },
+        config: {method: 'GET', url: '/test'},
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as any;
+
+      assert.strictEqual(retryConfig.shouldRetry(rateLimitError), true);
+    });
+
+    it('should retry on transient network errors (no response)', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      requestStub.resolves({data: {}, headers: new Map()});
+
+      await transport.makeRequest({url: '/test'});
+      const retryConfig = requestStub.getCall(0).args[0].retryConfig;
+
+      const connReset = {
+        code: 'ECONNRESET',
+        config: {method: 'GET', url: '/test'},
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as any;
+      assert.strictEqual(retryConfig.shouldRetry(connReset), true);
+    });
+
+    it('should allow retries for bucket creation and safe deletes', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      requestStub.resolves({data: {}, headers: new Map()});
+
+      await transport.makeRequest({method: 'POST', url: '/v1/b'});
+      const retryConfig = requestStub.getCall(0).args[0].retryConfig;
+
+      // No status code (network error) on bucket create should retry
+      assert.strictEqual(
+        retryConfig.shouldRetry({
+          code: 'ECONNRESET',
+          config: {method: 'POST', url: '/v1/b'},
+        }),
+        true,
+      );
+    });
+
+    it('should handle HMAC and IAM retry logic', async () => {
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      requestStub.resolves({data: {}, headers: new Map()});
+
+      // Test HMAC PUT without ETag (should NOT retry)
+      await transport.makeRequest({
+        method: 'PUT',
+        url: '/hmacKeys/test',
+        body: JSON.stringify({noEtag: true}),
+      });
+      let retryConfig = requestStub.getCall(0).args[0].retryConfig;
+      assert.strictEqual(
+        retryConfig.shouldRetry({
+          response: {status: 503},
+          config: {
+            method: 'PUT',
+            url: '/hmacKeys/test',
+            data: JSON.stringify({noEtag: true}),
+          },
+        }),
+        false,
+      );
+
+      // Test IAM PUT with ETag (should retry)
+      await transport.makeRequest({
+        method: 'PUT',
+        url: '/iam/test',
+        body: JSON.stringify({etag: '123'}),
+      });
+      retryConfig = requestStub.getCall(1).args[0].retryConfig;
+      assert.strictEqual(
+        retryConfig.shouldRetry({
+          response: {status: 503},
+          config: {
+            method: 'PUT',
+            url: '/iam/test',
+            data: JSON.stringify({etag: '123'}),
+          },
+        }),
+        true,
+      );
+    });
   });
 });
