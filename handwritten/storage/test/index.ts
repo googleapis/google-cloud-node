@@ -234,8 +234,15 @@ describe('Storage', () => {
       const storage = new Storage({
         projectId: PROJECT_ID,
       });
-      const error = new GaxiosError('Broken pipe', {} as GaxiosOptionsPrepared);
-      error.code = 'Socket connection timeout';
+      const mockConfig = {
+        method: 'GET',
+        url: 'http://127.0.0.1/test',
+        headers: {},
+      } as unknown as GaxiosOptionsPrepared;
+
+      const error = new GaxiosError('socket connection timeout', mockConfig);
+
+      error.code = 'ETIMEDOUT';
       assert.strictEqual(storage.retryOptions.retryableErrorFn!(error), true);
     });
 
