@@ -53,10 +53,14 @@ describe('Logging', () => {
   const dataset = bigQuery.dataset(generateName().replace(/-/g, '_'));
   const topic = pubsub.topic(generateName());
 
-  let PROJECT_ID: string;
+  // Hardcode the project id used for the integration tests
+  const PROJECT_ID = 'long-door-651';
+
   /*
   before(async () => {
     console.log('Before service account definition');
+    // Skipping this hook for now.
+    // The next line appears to not be able to fetch the client_email.
     const serviceAccount = (await logging.auth.getCredentials()).client_email;
     console.log(serviceAccount);
     PROJECT_ID = await logging.auth.getProjectId();
