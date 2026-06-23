@@ -31,7 +31,7 @@ import {randomUUID} from 'crypto';
 // @ts-ignore
 import {getPackageJSON} from './package-json-helper.cjs';
 import {GCCL_GCS_CMD_KEY} from './nodejs-common/util.js';
-import {RetryOptions} from './storage.js';
+import {RETRYABLE_ERR_FN_DEFAULT, RetryOptions} from './storage.js';
 
 export interface StandardStorageQueryParams {
   alt?: 'json' | 'media';
@@ -58,6 +58,7 @@ export interface StorageRequestOptions extends GaxiosOptions {
   projectId?: string;
   queryParameters?: StorageQueryParameters;
   shouldReturnStream?: boolean;
+  hasPrecondition?: boolean;
 }
 
 interface TransportParameters extends Omit<GoogleAuthOptions, 'authClient'> {
@@ -113,7 +114,11 @@ export class StorageTransport {
     }
     this.providedUserAgent = options.userAgent;
     this.packageJson = getPackageJSON();
-    this.retryOptions = options.retryOptions;
+    this.retryOptions = {
+      ...options.retryOptions,
+      retryableErrorFn:
+        options.retryOptions?.retryableErrorFn || RETRYABLE_ERR_FN_DEFAULT,
+    };
     this.baseUrl = options.baseUrl;
     this.timeout = options.timeout;
     this.projectId = options.projectId;
@@ -123,28 +128,28 @@ export class StorageTransport {
   async makeRequest<T>(
     reqOpts: StorageRequestOptions,
     callback?: StorageTransportCallback<T>,
-  ): Promise<void | T> {
-    const resolvedProjectId =
-      reqOpts.projectId ||
-      this.projectId ||
-      (await this.authClient.getProjectId());
-
+  ): Promise<GaxiosResponse<T>> {
+    // Project ID Resolution
     if (!this.projectId) {
-      this.projectId = resolvedProjectId;
+      this.projectId =
+        reqOpts.projectId || (await this.authClient.getProjectId());
     }
 
-    const queryParameters = {
-      project: resolvedProjectId,
-      ...reqOpts.queryParameters,
-    };
+    if (reqOpts.queryParameters && 'project' in reqOpts.queryParameters) {
+      reqOpts.queryParameters.project = this.projectId;
+    }
 
     // Header Construction
     const headers = this.#prepareHeaders(reqOpts);
 
+    // Interceptor Management
+    const requestGaxiosInstance = reqOpts.interceptors
+      ? new Gaxios()
+      : this.gaxiosInstance;
+
     if (reqOpts.interceptors) {
-      this.gaxiosInstance.interceptors.request.clear();
       for (const inter of reqOpts.interceptors) {
-        this.gaxiosInstance.interceptors.request.add(inter);
+        requestGaxiosInstance.interceptors.request.add(inter);
       }
     }
 
@@ -156,53 +161,95 @@ export class StorageTransport {
       ? urlString
       : new URL(urlString, this.baseUrl).toString();
 
+    let hasEtagInBody = false;
+    if (reqOpts.body && typeof reqOpts.body === 'string') {
+      try {
+        const parsed = JSON.parse(reqOpts.body);
+        if (parsed && parsed.etag) {
+          hasEtagInBody = true;
+        }
+      } catch (e) {
+        // If it's not valid JSON, it's just a raw string/file upload. 
+        // We safely ignore it to prevent false positives.
+        hasEtagInBody = false;
+      }
+    }
+
+    // Compute the final hasPrecondition flag
+    const hasPrecondition = !!(
+      reqOpts.hasPrecondition ||
+      reqOpts.queryParameters?.ifGenerationMatch !== undefined ||
+      reqOpts.queryParameters?.ifMetagenerationMatch !== undefined ||
+      reqOpts.queryParameters?.ifSourceGenerationMatch !== undefined ||
+      hasEtagInBody
+    );
+
     try {
       const requestPromise = this.authClient.request<T>({
+        adapter: async (opts: GaxiosOptions) => {
+          const innerOpts = {
+            ...opts,
+            adapter: undefined,
+          };
+          return requestGaxiosInstance.request(innerOpts);
+        },
         retryConfig: {
           retry: this.retryOptions.maxRetries,
           noResponseRetries: this.retryOptions.maxRetries,
           maxRetryDelay: this.retryOptions.maxRetryDelay,
           retryDelayMultiplier: this.retryOptions.retryDelayMultiplier,
-          shouldRetry: this.retryOptions.retryableErrorFn,
           totalTimeout: this.retryOptions.totalTimeout,
+          shouldRetry: (err: GaxiosError) => !!this.retryOptions.retryableErrorFn?.(err),
         },
         ...reqOpts,
-        params: queryParameters,
+        hasPrecondition, // Pass flag to Gaxios / AuthClient options
+        params: reqOpts.queryParameters,
         paramsSerializer: this.#paramsSerializer,
         headers,
         url: requestUrl,
         timeout: this.timeout,
-      });
+        validateStatus: (status: number): boolean => {
+          const isResumable = !!(
+            reqOpts.queryParameters?.uploadType === 'resumable' ||
+            reqOpts.url?.toString().includes('uploadType=resumable')
+          );
+          return (
+            (status >= 200 && status < 300) || (isResumable && status === 308)
+          );
+        },
+      } as any);
 
-      // Response Handling
-      const isPlainObject = (obj: any): boolean =>
-        obj !== null &&
-        typeof obj === 'object' &&
-        !(obj instanceof Buffer) &&
-        !(typeof obj.on === 'function') &&
-        !Array.isArray(obj);
-
-      const responseHandler = (resp: GaxiosResponse<T>) => {
+      // Helper to decorate plain JSON objects with metadata for backward-compatibility callbacks
+      const decorateMetadata = (resp: GaxiosResponse<T>) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const data = resp.data as any;
+        const isPlainObject = (obj: any): boolean =>
+          obj !== null &&
+          typeof obj === 'object' &&
+          !(obj instanceof Buffer) &&
+          !(typeof obj.on === 'function') &&
+          !Array.isArray(obj);
+
         if (isPlainObject(data)) {
           data.headers = resp.headers;
           data.status = resp.status;
-          return data;
         }
-        return resp;
+        return data;
       };
 
       if (callback) {
         requestPromise
-          .then(resp => callback(null, responseHandler(resp), resp))
+          .then(resp => callback(null, decorateMetadata(resp), resp))
           .catch(err => callback(err, null, err.response));
-        return;
+        return requestPromise;
       }
 
-      return requestPromise.then(responseHandler);
+      return requestPromise;
     } catch (e) {
-      if (callback) return callback(e as GaxiosError);
+      if (callback) {
+        callback(e as GaxiosError);
+        return Promise.reject(e);
+      }
       throw e;
     }
   }

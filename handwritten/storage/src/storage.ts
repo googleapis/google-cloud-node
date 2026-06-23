@@ -316,40 +316,103 @@ const IDEMPOTENCY_STRATEGY_DEFAULT = IdempotencyStrategy.RetryConditional;
  * @param {error} err - The API error to check if it is appropriate to retry.
  * @return {boolean} True if the API request should be retried, false otherwise.
  */
-export const RETRYABLE_ERR_FN_DEFAULT = function (err?: GaxiosError) {
-  const isConnectionProblem = (reason: string) => {
-    return (
-      reason.includes('eai_again') || // DNS lookup error
-      reason === 'econnreset' ||
-      reason === 'unexpected connection closure' ||
-      reason === 'epipe' ||
-      reason === 'socket connection timeout'
-    );
-  };
+/**
+ * Checks if the error represents a transient network, status code, or stream closure error.
+ * @private
+ */
+export function isTransientError(err: GaxiosError): boolean {
+  const status = err.response?.status;
+  const errCode = err.code?.toString().toUpperCase() || '';
+  const message = err.message?.toLowerCase() || '';
 
-  if (err) {
-    if ([408, 429, 500, 502, 503, 504].indexOf(err.status!) !== -1) {
-      return true;
-    }
+  // Immediate exit for non-retryable status codes
+  if (status && [401, 405, 412].includes(status)) return false;
 
-    if (typeof err.code === 'string') {
-      if (['408', '429', '500', '502', '503', '504'].indexOf(err.code) !== -1) {
-        return true;
-      }
-      const reason = (err.code as string).toLowerCase();
-      if (isConnectionProblem(reason)) {
-        return true;
-      }
-    }
+  const gcsErrors = err.response?.data?.error?.errors || [];
+  const hasRateLimitReason = gcsErrors.some((e: any) =>
+    ['rateLimitExceeded', 'userRateLimitExceeded'].includes(e.reason),
+  );
+  if (hasRateLimitReason) return true;
 
-    if (err) {
-      const reason = err?.code?.toString().toLowerCase();
-      if (reason && isConnectionProblem(reason)) {
-        return true;
-      }
-    }
+  // Unified HTTP Status Codes
+  const retryableCodes = [408, 429, 500, 502, 503, 504];
+  if (status && retryableCodes.includes(status)) return true;
+  if (retryableCodes.includes(Number(errCode))) return true;
+
+  // Standard Node.js Connection / DNS Errors
+  const connectionErrors = [
+    'ECONNRESET',
+    'EPIPE',
+    'ETIMEDOUT',
+    'EADDRINUSE',
+    'ECONNREFUSED',
+    'ENOTFOUND',
+    'ENETUNREACH',
+    'EAI_AGAIN',
+  ];
+  if (connectionErrors.includes(errCode) || message.includes('socket hang up')) {
+    return true;
   }
+
+  // Handle malformed responses, stream closures, or cancellations
+  if (
+    message.includes('unexpected end of json input') ||
+    message.includes('unexpected token') ||
+    message.includes('operation was aborted') ||
+    message.includes('unexpected connection closure')
+  ) {
+    return true;
+  }
+
   return false;
+}
+
+/**
+ * Evaluates request configurations to determine if the request is idempotent and safe to retry.
+ * @private
+ */
+export function isRequestIdempotent(config: any): boolean {
+  const method = (config.method || 'GET').toUpperCase();
+  const url = config.url ? config.url.toString() : '';
+  const params = config.params || {};
+
+  // Optimized Precondition Check
+  const hasPrecondition = !!(
+    params.ifGenerationMatch !== undefined ||
+    params.ifMetagenerationMatch !== undefined ||
+    params.ifSourceGenerationMatch !== undefined ||
+    config.hasPrecondition
+  );
+
+  if (['GET', 'HEAD'].includes(method) || hasPrecondition) {
+    return true;
+  }
+
+  if (method === 'PUT') {
+    const isResumable = url.includes('upload_id=');
+    const isSpecialMutation =
+      /\/iam($|\?)/.test(url) || /\/hmacKeys\//.test(url);
+    return isResumable || !isSpecialMutation;
+  }
+
+  if (method === 'DELETE') {
+    return !url.includes('/o/');
+  }
+
+  if (method === 'POST') {
+    return (
+      url.includes('/v1/b') &&
+      !url.includes('/o') &&
+      !url.includes('/notificationConfigs')
+    );
+  }
+
+  return false;
+}
+
+export const RETRYABLE_ERR_FN_DEFAULT = function (err?: GaxiosError) {
+  if (!err || !err.config) return false;
+  return isRequestIdempotent(err.config) && isTransientError(err);
 };
 
 /*! Developer Documentation
