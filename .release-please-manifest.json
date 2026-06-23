@@ -262,5 +262,6 @@
   "packages/google-cloud-appoptimize": "0.2.0",
   "packages/google-devicesandservices-health": "0.3.0",
   "packages/google-cloud-databasecenter": "0.3.0",
-  "packages/google-maps-mapmanagement": "0.1.0"
+  "packages/google-maps-mapmanagement": "0.1.0",
+  "packages/google-cloud-agentregistry": "0.0.0"
 }
