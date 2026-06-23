@@ -3470,13 +3470,13 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    * @returns {Promise<Bucket>}
    */
   async restore(options: RestoreOptions): Promise<Bucket> {
-    const bucket = await this.storageTransport.makeRequest<Bucket>({
+    const response = await this.storageTransport.makeRequest<Bucket>({
       method: 'POST',
       url: `${this.baseUrl}/${this.name}/restore`,
       queryParameters: options as unknown as StorageQueryParameters,
     });
 
-    return bucket as Bucket;
+    return response.data as Bucket;
   }
 
   makePrivate(
