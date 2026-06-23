@@ -610,7 +610,11 @@ libraries:
     version: 5.2.2
     apis:
       - path: google/cloud/datacatalog/v1
+        nodejs:
+          mixins: none
       - path: google/cloud/datacatalog/v1beta1
+        nodejs:
+          mixins: none
     copyright_year: "2026"
     nodejs:
       default_version: v1
@@ -660,6 +664,8 @@ libraries:
     version: 5.6.0
     apis:
       - path: google/cloud/dataplex/v1
+        nodejs:
+          mixins: google.cloud.location.Locations;google.longrunning.Operations
     copyright_year: "2026"
     nodejs:
       default_version: v1
@@ -722,7 +728,11 @@ libraries:
     version: 5.8.2
     apis:
       - path: google/cloud/dialogflow/cx/v3
+        nodejs:
+          mixins: google.longrunning.Operations;google.cloud.location.Locations
       - path: google/cloud/dialogflow/cx/v3beta1
+        nodejs:
+          mixins: google.longrunning.Operations;google.cloud.location.Locations
     copyright_year: "2026"
     skip_generate: true
     nodejs:
@@ -809,9 +819,17 @@ libraries:
     version: 4.2.2
     apis:
       - path: google/cloud/functions/v2
+        nodejs:
+          mixins: google.longrunning.Operations;google.cloud.location.Locations;google.iam.v1.IAMPolicy
       - path: google/cloud/functions/v1
+        nodejs:
+          mixins: google.longrunning.Operations;google.cloud.location.Locations
       - path: google/cloud/functions/v2beta
+        nodejs:
+          mixins: google.longrunning.Operations;google.cloud.location.Locations;google.iam.v1.IAMPolicy
       - path: google/cloud/functions/v2alpha
+        nodejs:
+          mixins: google.longrunning.Operations;google.cloud.location.Locations;google.iam.v1.IAMPolicy
     copyright_year: "2026"
     skip_generate: true
     nodejs:
@@ -1275,8 +1293,14 @@ libraries:
     version: 4.4.0
     apis:
       - path: google/cloud/retail/v2
+        nodejs:
+          mixins: google.longrunning.Operations;google.cloud.location.Locations
       - path: google/cloud/retail/v2beta
+        nodejs:
+          mixins: google.longrunning.Operations;google.cloud.location.Locations
       - path: google/cloud/retail/v2alpha
+        nodejs:
+          mixins: google.longrunning.Operations;google.cloud.location.Locations
     copyright_year: "2026"
     nodejs:
       default_version: v2beta
