@@ -1784,8 +1784,10 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
           const deletePromises = (sources as File[]).map(source => {
             const deleteOptions: DeleteOptions = {
               ignoreNotFound: true,
-              userProject: options.userProject,
             };
+            if (options.userProject !== undefined) {
+              deleteOptions.userProject = options.userProject;
+            }
 
             const generation = source.generation ?? source.metadata?.generation;
             if (generation !== undefined) {
