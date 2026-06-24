@@ -1458,52 +1458,20 @@ function formatRetryError(
 ): Error {
   const parts: string[] = [];
 
-  if (resp.status !== undefined && !isNaN(resp.status)) {
+  if (typeof resp.status === 'number' && !isNaN(resp.status)) {
     parts.push(`status: ${resp.status}`);
   }
 
   const err = resp.data;
   if (err !== undefined && err !== null) {
-    if (err instanceof Error) {
-      const gaxiosErr = err as GaxiosError;
-      const errParts: string[] = [];
-      if (gaxiosErr.message) {
-        errParts.push(gaxiosErr.message);
-      }
-      const status = gaxiosErr.status ?? gaxiosErr.response?.status;
-      if (status !== undefined && !isNaN(status) && status !== resp.status) {
-        errParts.push(`status: ${status}`);
-      }
-      const statusText = gaxiosErr.response?.statusText;
-      if (statusText) {
-        errParts.push(`statusText: ${statusText}`);
-      }
-      const responseData = gaxiosErr.response?.data;
-      if (responseData !== undefined && responseData !== null && responseData !== '') {
-        errParts.push(
-          `response: ${
-            typeof responseData === 'object'
-              ? JSON.stringify(responseData)
-              : responseData
-          }`,
-        );
-      }
-      if (gaxiosErr.code) {
-        errParts.push(`code: ${gaxiosErr.code}`);
-      }
-      if (errParts.length > 0) {
-        parts.push(...errParts);
-      } else {
-        parts.push(gaxiosErr.toString() || gaxiosErr.name || 'Unknown Error');
-      }
-    } else if (typeof err === 'object') {
-      const errParts: string[] = [];
+    if (typeof err === 'object') {
       const gaxiosErrLike = err as any;
+      const errParts: string[] = [];
       if (gaxiosErrLike.message) {
         errParts.push(String(gaxiosErrLike.message));
       }
       const status = gaxiosErrLike.status ?? gaxiosErrLike.response?.status;
-      if (status !== undefined && !isNaN(status) && status !== resp.status) {
+      if (typeof status === 'number' && !isNaN(status) && status !== resp.status) {
         errParts.push(`status: ${status}`);
       }
       const statusText = gaxiosErrLike.response?.statusText;
@@ -1526,6 +1494,8 @@ function formatRetryError(
 
       if (errParts.length > 0) {
         parts.push(...errParts);
+      } else if (err instanceof Error) {
+        parts.push(err.toString() || err.name || 'Unknown Error');
       } else {
         const stringified = JSON.stringify(err);
         if (stringified && stringified !== '{}') {
