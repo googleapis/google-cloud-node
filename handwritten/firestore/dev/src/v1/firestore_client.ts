@@ -151,9 +151,6 @@ export class FirestoreClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-
-    // TODO(dlarocque): Remove this if we decide not to increase the default.
-    const windowSize = 10485760;
     opts = Object.assign(
       {
         servicePath,
@@ -163,9 +160,6 @@ export class FirestoreClient {
       },
       opts,
     );
-    const channelOptions: gax.grpc.ChannelOptions = {
-      'grpc-node.flow_control_window': 10485760,
-    };
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -318,14 +312,15 @@ export class FirestoreClient {
     // Clone the existing options to avoid mutating shared state
     const clientOpts: ClientOptions = Object.assign({}, this._opts);
 
-    // Inject @grpc/grpc-js arguments
+    const flowControlWindowSize = 256 * 1024; // 256 KB
+    const maxMessageLength = 17 * 1024 * 1024; // 17 MB (16 MB documents + overlead)
     clientOpts.grpcOptions = Object.assign(
       {
-        'grpc.max_receive_message_length': 17 * 1024 * 1024, // 17MB
-        'grpc.max_send_message_length': 17 * 1024 * 1024, // 17MB
-        'grpc-node.flow_control_window': 256 * 1024, // 256KB
+        'grpc.max_receive_message_length': maxMessageLength,
+        'grpc.max_send_message_length': maxMessageLength,
+        'grpc-node.flow_control_window': flowControlWindowSize
       },
-      clientOpts.grpcOptions,
+      clientOpts.grpcOptions, // Can overwrite grpc options
     );
 
     // Pass the updated options into the stub creator

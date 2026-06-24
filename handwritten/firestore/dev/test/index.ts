@@ -807,7 +807,7 @@ describe('instantiation', () => {
       createStubSpy.restore();
     });
 
-    it('defaults flow_control_window to 256kb', async () => {
+    it('defaults flow_control_window to 256 KB', async () => {
       const firestore = new Firestore.Firestore(DEFAULT_SETTINGS);
       // Trigger client creation & initialize() which calls createStub
       await firestore['_clientPool'].run('tag', /* requiresGrpc= */ true, async (client: any) => {
@@ -818,7 +818,7 @@ describe('instantiation', () => {
       const clientOpts = createStubSpy.firstCall.args[1];
       expect(clientOpts.grpcOptions).to.exist;
       expect(clientOpts.grpcOptions['grpc-node.flow_control_window']).to.equal(
-        256 * 1024,
+        256 * 1024, // 256 KB
       );
     });
 
