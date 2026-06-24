@@ -20,6 +20,10 @@ import {OriginalAndCamel, originalOrCamelOptions} from '../util';
 import {log as makeLog} from 'google-logging-utils';
 
 import {PRODUCT_NAME, USER_AGENT} from '../shared.cjs';
+import {
+  RegionalAccessBoundaryData,
+  RegionalAccessBoundaryManager,
+} from './regionalaccessboundary';
 
 /**
  * An interface for enforcing `fetch`-type compliance.
@@ -232,6 +236,7 @@ export abstract class AuthClient
   eagerRefreshThresholdMillis = DEFAULT_EAGER_REFRESH_THRESHOLD_MILLIS;
   forceRefreshOnFailure = false;
   universeDomain = DEFAULT_UNIVERSE;
+  protected regionalAccessBoundaryManager: RegionalAccessBoundaryManager;
 
   /**
    * Symbols that can be added to GaxiosOptions to specify the method name that is
@@ -257,6 +262,12 @@ export abstract class AuthClient
 
     // Shared client options
     this.transporter = opts.transporter ?? new Gaxios(opts.transporterOptions);
+
+    this.regionalAccessBoundaryManager = new RegionalAccessBoundaryManager({
+      transporter: this.transporter,
+      getLookupUrl: async () => this.getRegionalAccessBoundaryUrl(),
+      isUniverseDomainDefault: () => this.universeDomain === DEFAULT_UNIVERSE,
+    });
 
     if (options.get('useAuthRequestParameters') !== false) {
       this.transporter.interceptors.request.add(
@@ -362,10 +373,41 @@ export abstract class AuthClient
   }>;
 
   /**
+   * Returns the regional access boundary lookup URL for the current client.
+   * This method is intended for internal use by the RegionalAccessBoundaryManager
+   * and should not be called directly by users.
+   *
+   * @return The regional access boundary URL string, or `null` if the client type
+   * does not support regional access boundaries.
+   * @throws {Error} If the URL cannot be constructed for a compatible client,
+   * for instance, if a required property like a service account email is missing.
+   * @internal
+   */
+  public async getRegionalAccessBoundaryUrl(): Promise<string | null> {
+    return null;
+  }
+
+  /**
    * Sets the auth credentials.
    */
   setCredentials(credentials: Credentials) {
     this.credentials = credentials;
+  }
+
+  /**
+   * Returns the current regional access boundary data.
+   * @internal
+   */
+  getRegionalAccessBoundary(): RegionalAccessBoundaryData | null {
+    return this.regionalAccessBoundaryManager.data;
+  }
+
+  /**
+   * Returns the current regional access boundary cooldown time in milliseconds.
+   * @internal
+   */
+  getRegionalAccessBoundaryCooldownTime(): number {
+    return this.regionalAccessBoundaryManager.cooldownTime;
   }
 
   /**
@@ -386,23 +428,47 @@ export abstract class AuthClient
     ) {
       headers.set('x-goog-user-project', this.quotaProjectId);
     }
+
     return headers;
   }
 
   /**
-   * Adds the `x-goog-user-project` and `authorization` headers to the target Headers
+   * Applies regional access boundary rules to the provided headers.
+   * This includes adding the x-allowed-locations header and triggering
+   * a background refresh if needed.
+   * @param headers The headers to update.
+   * @param url Optional destination URL of the request. If missing, assumed global.
+   */
+  protected applyRegionalAccessBoundary(
+    headers: Headers,
+    url?: string | URL,
+  ): void {
+    const rabHeader =
+      this.regionalAccessBoundaryManager.getRegionalAccessBoundaryHeader(
+        url,
+        headers,
+      );
+    if (rabHeader) {
+      headers.set('x-allowed-locations', rabHeader);
+    }
+  }
+
+  /**
+   * Adds the `x-goog-user-project`, `authorization`, and 'x-allowed-locations'
+   * headers to the target Headers
    * object, if they exist on the source.
    *
    * @param target the headers to target
    * @param source the headers to source from
    * @returns the target headers
    */
-  protected addUserProjectAndAuthHeaders<T extends Headers>(
+  protected applyHeadersFromSource<T extends Headers>(
     target: T,
     source: Headers,
   ): T {
     const xGoogUserProject = source.get('x-goog-user-project');
     const authorizationHeader = source.get('authorization');
+    const xGoogAllowedLocs = source.get('x-allowed-locations');
 
     if (xGoogUserProject) {
       target.set('x-goog-user-project', xGoogUserProject);
@@ -410,6 +476,10 @@ export abstract class AuthClient
 
     if (authorizationHeader) {
       target.set('authorization', authorizationHeader);
+    }
+
+    if (xGoogAllowedLocs) {
+      target.set('x-allowed-locations', xGoogAllowedLocs);
     }
 
     return target;
@@ -548,6 +618,20 @@ export abstract class AuthClient
         httpMethodsToRetry: ['GET', 'PUT', 'POST', 'HEAD', 'OPTIONS', 'DELETE'],
       },
     };
+  }
+
+  /**
+   * Returns whether the provided credentials are expired or will expire within
+   * eagerRefreshThresholdMillismilliseconds.
+   * If there is no expiry time, assumes the token is not expired or expiring.
+   * @param credentials The credentials to check for expiration.
+   * @return Whether the credentials are expired or not.
+   */
+  protected isExpired(credentials: Credentials = this.credentials): boolean {
+    const now = new Date().getTime();
+    return credentials.expiry_date
+      ? now >= credentials.expiry_date - this.eagerRefreshThresholdMillis
+      : false;
   }
 }
 

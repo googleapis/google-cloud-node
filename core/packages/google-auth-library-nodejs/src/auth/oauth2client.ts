@@ -378,6 +378,11 @@ export interface RefreshAccessTokenResponse {
 export interface RequestMetadataResponse {
   headers: Headers;
   res?: GaxiosResponse<void> | null;
+  /**
+   * Whether the returned headers contain an ID token (OIDC) instead of an
+   * access token. ID tokens are out of scope for Regional Access Boundaries.
+   */
+  isIDToken?: boolean;
 }
 
 export interface RequestMetadataCallback {
@@ -901,8 +906,7 @@ export class OAuth2Client extends AuthClient {
   }
 
   private async getAccessTokenAsync(): Promise<GetAccessTokenResponse> {
-    const shouldRefresh =
-      !this.credentials.access_token || this.isTokenExpiring();
+    const shouldRefresh = !this.credentials.access_token || this.isExpired();
     if (shouldRefresh) {
       if (!this.credentials.refresh_token) {
         if (this.refreshHandler) {
@@ -938,7 +942,10 @@ export class OAuth2Client extends AuthClient {
    * { authorization: 'Bearer <access_token_value>' }
    */
   async getRequestHeaders(url?: string | URL): Promise<Headers> {
-    const headers = (await this.getRequestMetadataAsync(url)).headers;
+    const {headers, isIDToken} = await this.getRequestMetadataAsync(url);
+    if (!isIDToken) {
+      this.applyRegionalAccessBoundary(headers, url);
+    }
     return headers;
   }
 
@@ -1118,17 +1125,23 @@ export class OAuth2Client extends AuthClient {
     opts: GaxiosOptions,
     reAuthRetried = false,
   ): Promise<GaxiosResponse<T>> {
+    const requestOpts = {...opts};
     try {
-      const r = await this.getRequestMetadataAsync();
-      opts.headers = Gaxios.mergeHeaders(opts.headers);
+      const {headers, isIDToken} = await this.getRequestMetadataAsync();
+      requestOpts.headers = Gaxios.mergeHeaders(requestOpts.headers);
 
-      this.addUserProjectAndAuthHeaders(opts.headers, r.headers);
+      this.applyHeadersFromSource(requestOpts.headers, headers);
 
       if (this.apiKey) {
-        opts.headers.set('X-Goog-Api-Key', this.apiKey);
+        requestOpts.headers.set('X-Goog-Api-Key', this.apiKey);
       }
 
-      return await this.transporter.request<T>(opts);
+      if (!isIDToken) {
+        // Id token flows are outside the scope of Regional Access Boundary.
+        this.applyRegionalAccessBoundary(requestOpts.headers, opts.url);
+      }
+
+      return await this.transporter.request<T>(requestOpts);
     } catch (e) {
       const res = (e as GaxiosError).response;
       if (res) {
