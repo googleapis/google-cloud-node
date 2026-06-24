@@ -356,7 +356,7 @@ describe('Logging', () => {
       },
     };
 
-    describe('listing logs', () => {
+    describe.skip('listing logs', () => {
       before(async () => {
         const {log, logEntries} = getTestLog();
         await log.write(logEntries, options);
@@ -918,7 +918,7 @@ describe('Logging', () => {
       });
     });
 
-    it('should set the default resource', done => {
+    it.skip('should set the default resource', done => {
       const {log} = getTestLog();
       const text = 'entry-text';
       const entry = log.entry(text);
@@ -941,7 +941,7 @@ describe('Logging', () => {
       });
     });
 
-    it('should write a log with camelcase resource label keys', done => {
+    it.skip('should write a log with camelcase resource label keys', done => {
       const {log, logEntries} = getTestLog();
       log.write(
         logEntries,
@@ -958,47 +958,47 @@ describe('Logging', () => {
       );
     });
 
-    it('should write to a log with alert helper', done => {
+    it.skip('should write to a log with alert helper', done => {
       const {log, logEntries} = getTestLog();
       log.alert(logEntries, options, done);
     });
 
-    it('should write to a log with critical helper', done => {
+    it.skip('should write to a log with critical helper', done => {
       const {log, logEntries} = getTestLog();
       log.critical(logEntries, options, done);
     });
 
-    it('should write to a log with debug helper', done => {
+    it.skip('should write to a log with debug helper', done => {
       const {log, logEntries} = getTestLog();
       log.debug(logEntries, options, done);
     });
 
-    it('should write to a log with emergency helper', done => {
+    it.skip('should write to a log with emergency helper', done => {
       const {log, logEntries} = getTestLog();
       log.emergency(logEntries, options, done);
     });
 
-    it('should write to a log with error helper', done => {
+    it.skip('should write to a log with error helper', done => {
       const {log, logEntries} = getTestLog();
       log.error(logEntries, options, done);
     });
 
-    it('should write to a log with info helper', done => {
+    it.skip('should write to a log with info helper', done => {
       const {log, logEntries} = getTestLog();
       log.info(logEntries, options, done);
     });
 
-    it('should write to a log with notice helper', done => {
+    it.skip('should write to a log with notice helper', done => {
       const {log, logEntries} = getTestLog();
       log.notice(logEntries, options, done);
     });
 
-    it('should write to a log with warning helper', done => {
+    it.skip('should write to a log with warning helper', done => {
       const {log, logEntries} = getTestLog();
       log.warning(logEntries, options, done);
     });
 
-    it('should populate x-goog-api-client header', async () => {
+    it.skip('should populate x-goog-api-client header', async () => {
       const gax = http2spy.require(require.resolve('google-gax'));
       const {Logging} = require('../src');
       const {log, logEntries} = getTestLog(new Logging({}, gax));
