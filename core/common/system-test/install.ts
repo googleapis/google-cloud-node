@@ -35,7 +35,12 @@ const spawnp = (
   options: cp.SpawnOptions = {},
 ) => {
   return new Promise<void>((resolve, reject) => {
-    cp.spawn(command, args, Object.assign(options, {stdio: 'inherit'}))
+    const spawnOptions = {
+      ...options,
+      stdio: 'inherit' as const,
+      shell: os.platform() === 'win32' ? true : options.shell,
+    };
+    cp.spawn(command, args, spawnOptions)
       .on('close', code => {
         if (code === 0) {
           resolve();
