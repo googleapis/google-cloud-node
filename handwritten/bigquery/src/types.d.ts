@@ -13,7 +13,7 @@
 // limitations under the License.
 
 /**
- * Discovery Revision: 20260429
+ * Discovery Revision: 20260605
  */
 
 /**
@@ -1766,7 +1766,7 @@ declare namespace bigquery {
      */
     timestampFormat?: string;
     /**
-     * Precisions (maximum number of total digits in base 10) for seconds of TIMESTAMP types that are allowed to the destination table for autodetection mode. Available for the formats: CSV, PARQUET, and AVRO. Possible values include: Not Specified, [], or [6]: timestamp(6) for all auto detected TIMESTAMP columns [6, 12]: timestamp(6) for all auto detected TIMESTAMP columns that have less than 6 digits of subseconds. timestamp(12) for all auto detected TIMESTAMP columns that have more than 6 digits of subseconds. [12]: timestamp(12) for all auto detected TIMESTAMP columns. The order of the elements in this array is ignored. Inputs that have higher precision than the highest target precision in this array will be truncated.
+     * Precisions (maximum number of total digits in base 10) for seconds of TIMESTAMP types that are allowed to the destination table for autodetection mode. Available for the formats: CSV, PARQUET, AVRO, and Iceberg External Table. Possible values include: Not Specified, [], or [6]: timestamp(6) for all auto detected TIMESTAMP columns [6, 12]: timestamp(6) for all auto detected TIMESTAMP columns that have less than 6 digits of subseconds. timestamp(12) for all auto detected TIMESTAMP columns that have more than 6 digits of subseconds. [12]: timestamp(12) for all auto detected TIMESTAMP columns. The order of the elements in this array is ignored. Inputs that have higher precision than the highest target precision in this array will be truncated.
      */
     timestampTargetPrecision?: Array<number>;
   };
@@ -1798,7 +1798,7 @@ declare namespace bigquery {
      */
     containerMemory?: string;
     /**
-     * Optional. Maximum number of requests that a Cloud Run instance can handle concurrently. If absent or if `0`, a default concurrency is used.
+     * Optional. Maximum number of requests that a Python UDF container instance can handle concurrently. If absent or if `0`, a default concurrency is used.
      */
     containerRequestConcurrency?: string;
     /**
@@ -2861,7 +2861,7 @@ declare namespace bigquery {
      */
     timestampFormat?: string;
     /**
-     * Precisions (maximum number of total digits in base 10) for seconds of TIMESTAMP types that are allowed to the destination table for autodetection mode. Available for the formats: CSV, PARQUET, and AVRO. Possible values include: Not Specified, [], or [6]: timestamp(6) for all auto detected TIMESTAMP columns [6, 12]: timestamp(6) for all auto detected TIMESTAMP columns that have less than 6 digits of subseconds. timestamp(12) for all auto detected TIMESTAMP columns that have more than 6 digits of subseconds. [12]: timestamp(12) for all auto detected TIMESTAMP columns. The order of the elements in this array is ignored. Inputs that have higher precision than the highest target precision in this array will be truncated.
+     * Precisions (maximum number of total digits in base 10) for seconds of TIMESTAMP types that are allowed to the destination table for autodetection mode. Available for the formats: CSV, PARQUET, AVRO, and Iceberg External Table. Possible values include: Not Specified, [], or [6]: timestamp(6) for all auto detected TIMESTAMP columns [6, 12]: timestamp(6) for all auto detected TIMESTAMP columns that have less than 6 digits of subseconds. timestamp(12) for all auto detected TIMESTAMP columns that have more than 6 digits of subseconds. [12]: timestamp(12) for all auto detected TIMESTAMP columns. The order of the elements in this array is ignored. Inputs that have higher precision than the highest target precision in this array will be truncated.
      */
     timestampTargetPrecision?: Array<number>;
     /**
@@ -3440,7 +3440,7 @@ declare namespace bigquery {
      */
     totalSlotMs?: string;
     /**
-     * Output only. Total bytes transferred for cross-cloud queries such as Cross Cloud Transfer and CREATE TABLE AS SELECT (CTAS).
+     * Output only. Total bytes transferred for BigQuery Omni queries from the remote cloud back to Google Cloud. This tracks data movement over Google-managed connections (like query results). It doesn't include input data read from the external data lake (for example, S3) because that data stays within the remote cloud.
      */
     transferredBytes?: string;
     /**
@@ -6864,7 +6864,7 @@ declare namespace bigquery {
 
   namespace datasets {
     /**
-     * Deletes the dataset specified by the datasetId value. Before you can delete a dataset, you must delete all its tables, either manually or by specifying deleteContents. Immediately after deletion, you can create another dataset with the same name.
+     * Deletes the dataset specified by the datasetId value. Before you can delete a dataset, you must delete all its tables, either manually or by specifying deleteContents. Immediately after deletion, you can create another dataset with the same name. # IAM Permissions Requires the `bigquery.datasets.delete` permission on the dataset.
      */
     type IDeleteParams = {
       /**
@@ -6874,7 +6874,7 @@ declare namespace bigquery {
     };
 
     /**
-     * Returns the dataset specified by datasetID.
+     * Returns the dataset specified by datasetID. # IAM Permissions Requires the `bigquery.datasets.get` permission on the dataset.
      */
     type IGetParams = {
       /**
@@ -6888,7 +6888,7 @@ declare namespace bigquery {
     };
 
     /**
-     * Creates a new empty dataset.
+     * Creates a new empty dataset. # IAM Permissions Requires the `bigquery.datasets.create` permission on the project.
      */
     type IInsertParams = {
       /**
@@ -6898,7 +6898,7 @@ declare namespace bigquery {
     };
 
     /**
-     * Lists all datasets in the specified project to which the user has been granted the READER dataset role.
+     * Lists all datasets in the specified project to which the user has been granted the READER dataset role. # IAM Permissions Requires no specific IAM permission(s) to use this method. Results are filtered to only include datasets on which the caller has the `bigquery.datasets.get` permission.
      */
     type IListParams = {
       /**
@@ -6920,7 +6920,7 @@ declare namespace bigquery {
     };
 
     /**
-     * Updates information in an existing dataset. The update method replaces the entire dataset resource, whereas the patch method only replaces fields that are provided in the submitted dataset resource. This method supports RFC5789 patch semantics.
+     * Updates information in an existing dataset. The update method replaces the entire dataset resource, whereas the patch method only replaces fields that are provided in the submitted dataset resource. This method supports RFC5789 patch semantics. # IAM Permissions Requires the following IAM permission(s) to use this method: - `bigquery.datasets.update` on the dataset. - `bigquery.datasets.get` on the dataset.
      */
     type IPatchParams = {
       /**
@@ -6938,7 +6938,7 @@ declare namespace bigquery {
     };
 
     /**
-     * Updates information in an existing dataset. The update method replaces the entire dataset resource, whereas the patch method only replaces fields that are provided in the submitted dataset resource.
+     * Updates information in an existing dataset. The update method replaces the entire dataset resource, whereas the patch method only replaces fields that are provided in the submitted dataset resource. # IAM Permissions Requires the `bigquery.datasets.update` permission on the dataset.
      */
     type IUpdateParams = {
       /**
@@ -6958,7 +6958,7 @@ declare namespace bigquery {
 
   namespace jobs {
     /**
-     * Requests that a job be cancelled. This call will return immediately, and the client will need to poll for the job status to see if the cancel completed successfully. Cancelled jobs may still incur costs.
+     * Requests that a job be cancelled. This call will return immediately, and the client will need to poll for the job status to see if the cancel completed successfully. Cancelled jobs may still incur costs. # IAM Permissions Requires the `bigquery.jobs.update` permission on the job resource. If the user matches the creator of the job, the `bigquery.jobs.create` permission on the project is required instead.
      */
     type ICancelParams = {
       /**
@@ -6968,7 +6968,7 @@ declare namespace bigquery {
     };
 
     /**
-     * Requests the deletion of the metadata of a job. This call returns when the job's metadata is deleted.
+     * Requests the deletion of the metadata of a job. This call returns when the job's metadata is deleted. # IAM Permissions Requires the `bigquery.jobs.delete` permission on the job resource.
      */
     type IDeleteParams = {
       /**
@@ -6978,7 +6978,7 @@ declare namespace bigquery {
     };
 
     /**
-     * Returns information about a specific job. Job information is available for a six month period after creation. Requires that you're the person who ran the job, or have the Is Owner project role.
+     * Returns information about a specific job. Job information is available for a six month period after creation. Requires that you're the person who ran the job, or have the Is Owner project role. # IAM Permissions Requires the `bigquery.jobs.get` permission on the job resource. If the user matches the creator of the job, the `bigquery.jobs.create` permission on the project is required instead.
      */
     type IGetParams = {
       /**
@@ -6988,7 +6988,7 @@ declare namespace bigquery {
     };
 
     /**
-     * RPC to get the results of a query job.
+     * RPC to get the results of a query job. # IAM Permissions Requires the following IAM permission(s) to use this method: - `bigquery.jobs.get` on the job. - `bigquery.tables.getData` on the destination table. If the user matches the creator of the job, the following IAM permission(s) are required instead: - `bigquery.jobs.create` on the project. - `bigquery.tables.getData` on the destination table.
      */
     type IGetQueryResultsParams = {
       /**
@@ -7026,7 +7026,7 @@ declare namespace bigquery {
     };
 
     /**
-     * Lists all jobs that you started in the specified project. Job information is available for a six month period after creation. The job list is sorted in reverse chronological order, by job creation time. Requires the Can View project role, or the Is Owner project role if you set the allUsers property.
+     * Lists all jobs that you started in the specified project. Job information is available for a six month period after creation. The job list is sorted in reverse chronological order, by job creation time. Requires the Can View project role, or the Is Owner project role if you set the allUsers property. # IAM Permissions Requires no specific IAM permission(s) to use this method. Users are able to list the jobs they created. Additional access is granted based on the following permissions: - Users with the `bigquery.jobs.listAll` permission can list all jobs with all metadata. - Users with the `bigquery.jobs.list` permission can list all jobs, but with redacted information for jobs they did not create.
      */
     type IListParams = {
       /**
@@ -7066,7 +7066,7 @@ declare namespace bigquery {
 
   namespace models {
     /**
-     * Lists all models in the specified dataset. Requires the READER dataset role. After retrieving the list of models, you can get information about a particular model by calling the models.get method.
+     * Lists all models in the specified dataset. Requires the READER dataset role. After retrieving the list of models, you can get information about a particular model by calling the models.get method. # IAM Permissions Requires the `bigquery.models.list` permission on the dataset.
      */
     type IListParams = {
       /**
@@ -7082,7 +7082,7 @@ declare namespace bigquery {
 
   namespace projects {
     /**
-     * RPC to list projects to which the user has been granted any project role. Users of this method are encouraged to consider the [Resource Manager](https://cloud.google.com/resource-manager/docs/) API, which provides the underlying data for this method and has more capabilities.
+     * RPC to list projects to which the user has been granted any project role. Users of this method are encouraged to consider the [Resource Manager](https://cloud.google.com/resource-manager/docs/) API, which provides the underlying data for this method and has more capabilities. # IAM Permissions Requires no specific IAM permission(s) to use this method. The results are filtered to only include projects on which the caller has been granted a project-level role such as a BigQuery predefined IAM role or a basic role such as Viewer or Owner.
      */
     type IListParams = {
       /**
@@ -7098,7 +7098,7 @@ declare namespace bigquery {
 
   namespace routines {
     /**
-     * Gets the specified routine resource by routine ID.
+     * Gets the specified routine resource by routine ID. # IAM Permissions Requires the `bigquery.routines.get` permission on the routine.
      */
     type IGetParams = {
       /**
@@ -7108,7 +7108,7 @@ declare namespace bigquery {
     };
 
     /**
-     * Lists all routines in the specified dataset. Requires the READER dataset role.
+     * Lists all routines in the specified dataset. Requires the READER dataset role. # IAM Permissions Requires the `bigquery.routines.list` permission on the dataset.
      */
     type IListParams = {
       /**
@@ -7132,7 +7132,7 @@ declare namespace bigquery {
 
   namespace rowAccessPolicies {
     /**
-     * Deletes a row access policy.
+     * Deletes a row access policy. # IAM Permissions Requires the following IAM permission(s) on the table: - `bigquery.rowAccessPolicies.delete` - `bigquery.rowAccessPolicies.setIamPolicy`
      */
     type IDeleteParams = {
       /**
@@ -7142,7 +7142,7 @@ declare namespace bigquery {
     };
 
     /**
-     * Lists all row access policies on the specified table.
+     * Lists all row access policies on the specified table. # IAM Permissions Requires the `bigquery.rowAccessPolicies.list` permission on the table.
      */
     type IListParams = {
       /**
@@ -7158,7 +7158,7 @@ declare namespace bigquery {
 
   namespace tabledata {
     /**
-     * List the content of a table in rows.
+     * List the content of a table in rows. # IAM Permissions Requires the `bigquery.tables.getData` permission on the table.
      */
     type IListParams = {
       /**
@@ -7194,7 +7194,7 @@ declare namespace bigquery {
 
   namespace tables {
     /**
-     * Gets the specified table resource by table ID. This method does not return the data in the table, it only returns the table resource, which describes the structure of this table.
+     * Gets the specified table resource by table ID. This method does not return the data in the table, it only returns the table resource, which describes the structure of this table. # IAM Permissions Requires the `bigquery.tables.get` permission on the table.
      */
     type IGetParams = {
       /**
@@ -7212,7 +7212,7 @@ declare namespace bigquery {
     };
 
     /**
-     * Lists all tables in the specified dataset. Requires the READER dataset role.
+     * Lists all tables in the specified dataset. Requires the READER dataset role. # IAM Permissions Requires the `bigquery.tables.list` permission on the dataset.
      */
     type IListParams = {
       /**
@@ -7226,7 +7226,7 @@ declare namespace bigquery {
     };
 
     /**
-     * Updates information in an existing table. The update method replaces the entire table resource, whereas the patch method only replaces fields that are provided in the submitted table resource. This method supports RFC5789 patch semantics.
+     * Updates information in an existing table. The update method replaces the entire table resource, whereas the patch method only replaces fields that are provided in the submitted table resource. This method supports RFC5789 patch semantics. # IAM Permissions Requires the following IAM permission(s) on the table: - `bigquery.tables.update` - `bigquery.tables.get`
      */
     type IPatchParams = {
       /**
@@ -7236,7 +7236,7 @@ declare namespace bigquery {
     };
 
     /**
-     * Updates information in an existing table. The update method replaces the entire Table resource, whereas the patch method only replaces fields that are provided in the submitted Table resource.
+     * Updates information in an existing table. The update method replaces the entire Table resource, whereas the patch method only replaces fields that are provided in the submitted Table resource. # IAM Permissions Requires the `bigquery.tables.update` permission on the table.
      */
     type IUpdateParams = {
       /**
