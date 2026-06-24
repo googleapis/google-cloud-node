@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/precise-date",
-  "version": "5.0.1",
+  "version": "5.1.0",
   "description": "A simple utility for precise-dateing functions and classes.",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
