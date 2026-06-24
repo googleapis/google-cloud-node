@@ -26,4 +26,5 @@ export { FeaturedContentNativeDashboardServiceClient } from './featured_content_
 export { InstanceServiceClient } from './instance_service_client';
 export { NativeDashboardServiceClient } from './native_dashboard_service_client';
 export { ReferenceListServiceClient } from './reference_list_service_client';
+export { RuleExecutionErrorServiceClient } from './rule_execution_error_service_client';
 export { RuleServiceClient } from './rule_service_client';

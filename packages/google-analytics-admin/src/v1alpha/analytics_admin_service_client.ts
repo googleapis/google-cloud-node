@@ -679,6 +679,7 @@ export class AnalyticsAdminServiceClient {
       'updateSubpropertySyncConfig',
       'getSubpropertySyncConfig',
       'getReportingIdentitySettings',
+      'updateReportingIdentitySettings',
       'getUserProvidedDataSettings',
     ];
     for (const methodName of analyticsAdminServiceStubMethods) {
@@ -19257,6 +19258,163 @@ export class AnalyticsAdminServiceClient {
           {} | undefined,
         ]) => {
           this._log.info('getReportingIdentitySettings response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Updates the reporting identity settings for this property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.analytics.admin.v1alpha.ReportingIdentitySettings} request.reportingIdentitySettings
+   *   Required. The reporting identity settings to update.
+   *   The settings' `name` field is used to identify the settings.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to be updated. Field names must be in snake
+   *   case (for example, "field_to_update"). Omitted fields will not be updated.
+   *   To replace the entire entity, use one path with the string "*" to match all
+   *   fields. If omitted, the service will treat it as an implied field mask
+   *   equivalent to all fields that are populated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.ReportingIdentitySettings|ReportingIdentitySettings}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_reporting_identity_settings.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateReportingIdentitySettings_async
+   */
+  updateReportingIdentitySettings(
+    request?: protos.google.analytics.admin.v1alpha.IUpdateReportingIdentitySettingsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IReportingIdentitySettings,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateReportingIdentitySettingsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateReportingIdentitySettings(
+    request: protos.google.analytics.admin.v1alpha.IUpdateReportingIdentitySettingsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IReportingIdentitySettings,
+      | protos.google.analytics.admin.v1alpha.IUpdateReportingIdentitySettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateReportingIdentitySettings(
+    request: protos.google.analytics.admin.v1alpha.IUpdateReportingIdentitySettingsRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IReportingIdentitySettings,
+      | protos.google.analytics.admin.v1alpha.IUpdateReportingIdentitySettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateReportingIdentitySettings(
+    request?: protos.google.analytics.admin.v1alpha.IUpdateReportingIdentitySettingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IReportingIdentitySettings,
+          | protos.google.analytics.admin.v1alpha.IUpdateReportingIdentitySettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IReportingIdentitySettings,
+      | protos.google.analytics.admin.v1alpha.IUpdateReportingIdentitySettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IReportingIdentitySettings,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateReportingIdentitySettingsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'reporting_identity_settings.name':
+          request.reportingIdentitySettings!.name?.toString() ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('updateReportingIdentitySettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IReportingIdentitySettings,
+          | protos.google.analytics.admin.v1alpha.IUpdateReportingIdentitySettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'updateReportingIdentitySettings response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateReportingIdentitySettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.analytics.admin.v1alpha.IReportingIdentitySettings,
+          (
+            | protos.google.analytics.admin.v1alpha.IUpdateReportingIdentitySettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateReportingIdentitySettings response %j',
+            response,
+          );
           return [response, options, rawResponse];
         },
       )

@@ -95,6 +95,11 @@
                 "deleteCloudExadataInfrastructure"
               ]
             },
+            "ConfigureExascaleCloudExadataInfrastructure": {
+              "methods": [
+                "configureExascaleCloudExadataInfrastructure"
+              ]
+            },
             "CreateCloudVmCluster": {
               "methods": [
                 "createCloudVmCluster"
@@ -541,6 +546,11 @@
             "DeleteCloudExadataInfrastructure": {
               "methods": [
                 "deleteCloudExadataInfrastructure"
+              ]
+            },
+            "ConfigureExascaleCloudExadataInfrastructure": {
+              "methods": [
+                "configureExascaleCloudExadataInfrastructure"
               ]
             },
             "CreateCloudVmCluster": {

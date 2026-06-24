@@ -5360,6 +5360,9 @@ export namespace google {
 
                     /** DeleteCollectionRequest requestId */
                     requestId?: (string|null);
+
+                    /** DeleteCollectionRequest force */
+                    force?: (boolean|null);
                 }
 
                 /** Represents a DeleteCollectionRequest. */
@@ -5376,6 +5379,9 @@ export namespace google {
 
                     /** DeleteCollectionRequest requestId. */
                     public requestId: string;
+
+                    /** DeleteCollectionRequest force. */
+                    public force: boolean;
 
                     /**
                      * Creates a new DeleteCollectionRequest instance using the specified properties.
@@ -6843,6 +6849,9 @@ export namespace google {
 
                     /** ExportDataObjectsRequest name */
                     name?: (string|null);
+
+                    /** ExportDataObjectsRequest fieldFilter */
+                    fieldFilter?: (google.cloud.vectorsearch.v1.ExportDataObjectsRequest.IFieldFilter|null);
                 }
 
                 /** Represents an ExportDataObjectsRequest. */
@@ -6859,6 +6868,9 @@ export namespace google {
 
                     /** ExportDataObjectsRequest name. */
                     public name: string;
+
+                    /** ExportDataObjectsRequest fieldFilter. */
+                    public fieldFilter?: (google.cloud.vectorsearch.v1.ExportDataObjectsRequest.IFieldFilter|null);
 
                     /** ExportDataObjectsRequest destination. */
                     public destination?: "gcsDestination";
@@ -7052,6 +7064,212 @@ export namespace google {
                         enum Format {
                             FORMAT_UNSPECIFIED = 0,
                             JSONL = 2
+                        }
+                    }
+
+                    /** Properties of a FieldFilter. */
+                    interface IFieldFilter {
+
+                        /** FieldFilter includedFields */
+                        includedFields?: (google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.IFieldList|null);
+
+                        /** FieldFilter excludedFields */
+                        excludedFields?: (google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.IFieldList|null);
+                    }
+
+                    /** Represents a FieldFilter. */
+                    class FieldFilter implements IFieldFilter {
+
+                        /**
+                         * Constructs a new FieldFilter.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vectorsearch.v1.ExportDataObjectsRequest.IFieldFilter);
+
+                        /** FieldFilter includedFields. */
+                        public includedFields?: (google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.IFieldList|null);
+
+                        /** FieldFilter excludedFields. */
+                        public excludedFields?: (google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.IFieldList|null);
+
+                        /** FieldFilter selector. */
+                        public selector?: ("includedFields"|"excludedFields");
+
+                        /**
+                         * Creates a new FieldFilter instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FieldFilter instance
+                         */
+                        public static create(properties?: google.cloud.vectorsearch.v1.ExportDataObjectsRequest.IFieldFilter): google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter;
+
+                        /**
+                         * Encodes the specified FieldFilter message. Does not implicitly {@link google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.verify|verify} messages.
+                         * @param message FieldFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vectorsearch.v1.ExportDataObjectsRequest.IFieldFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FieldFilter message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.verify|verify} messages.
+                         * @param message FieldFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vectorsearch.v1.ExportDataObjectsRequest.IFieldFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FieldFilter message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FieldFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter;
+
+                        /**
+                         * Decodes a FieldFilter message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FieldFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter;
+
+                        /**
+                         * Verifies a FieldFilter message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FieldFilter message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FieldFilter
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter;
+
+                        /**
+                         * Creates a plain object from a FieldFilter message. Also converts values to other types if specified.
+                         * @param message FieldFilter
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FieldFilter to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FieldFilter
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace FieldFilter {
+
+                        /** Properties of a FieldList. */
+                        interface IFieldList {
+
+                            /** FieldList fields */
+                            fields?: (string[]|null);
+                        }
+
+                        /** Represents a FieldList. */
+                        class FieldList implements IFieldList {
+
+                            /**
+                             * Constructs a new FieldList.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.IFieldList);
+
+                            /** FieldList fields. */
+                            public fields: string[];
+
+                            /**
+                             * Creates a new FieldList instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns FieldList instance
+                             */
+                            public static create(properties?: google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.IFieldList): google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList;
+
+                            /**
+                             * Encodes the specified FieldList message. Does not implicitly {@link google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList.verify|verify} messages.
+                             * @param message FieldList message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.IFieldList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified FieldList message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList.verify|verify} messages.
+                             * @param message FieldList message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.IFieldList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a FieldList message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns FieldList
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList;
+
+                            /**
+                             * Decodes a FieldList message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns FieldList
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList;
+
+                            /**
+                             * Verifies a FieldList message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a FieldList message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns FieldList
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList;
+
+                            /**
+                             * Creates a plain object from a FieldList message. Also converts values to other types if specified.
+                             * @param message FieldList
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter.FieldList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this FieldList to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for FieldList
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
                 }
@@ -13501,6 +13719,9 @@ export namespace google {
 
                     /** DeleteCollectionRequest requestId */
                     requestId?: (string|null);
+
+                    /** DeleteCollectionRequest force */
+                    force?: (boolean|null);
                 }
 
                 /** Represents a DeleteCollectionRequest. */
@@ -13517,6 +13738,9 @@ export namespace google {
 
                     /** DeleteCollectionRequest requestId. */
                     public requestId: string;
+
+                    /** DeleteCollectionRequest force. */
+                    public force: boolean;
 
                     /**
                      * Creates a new DeleteCollectionRequest instance using the specified properties.
@@ -14984,6 +15208,9 @@ export namespace google {
 
                     /** ExportDataObjectsRequest name */
                     name?: (string|null);
+
+                    /** ExportDataObjectsRequest fieldFilter */
+                    fieldFilter?: (google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.IFieldFilter|null);
                 }
 
                 /** Represents an ExportDataObjectsRequest. */
@@ -15000,6 +15227,9 @@ export namespace google {
 
                     /** ExportDataObjectsRequest name. */
                     public name: string;
+
+                    /** ExportDataObjectsRequest fieldFilter. */
+                    public fieldFilter?: (google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.IFieldFilter|null);
 
                     /** ExportDataObjectsRequest destination. */
                     public destination?: "gcsDestination";
@@ -15194,6 +15424,212 @@ export namespace google {
                             FORMAT_UNSPECIFIED = 0,
                             JSON = 1,
                             JSONL = 2
+                        }
+                    }
+
+                    /** Properties of a FieldFilter. */
+                    interface IFieldFilter {
+
+                        /** FieldFilter includedFields */
+                        includedFields?: (google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.IFieldList|null);
+
+                        /** FieldFilter excludedFields */
+                        excludedFields?: (google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.IFieldList|null);
+                    }
+
+                    /** Represents a FieldFilter. */
+                    class FieldFilter implements IFieldFilter {
+
+                        /**
+                         * Constructs a new FieldFilter.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.IFieldFilter);
+
+                        /** FieldFilter includedFields. */
+                        public includedFields?: (google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.IFieldList|null);
+
+                        /** FieldFilter excludedFields. */
+                        public excludedFields?: (google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.IFieldList|null);
+
+                        /** FieldFilter selector. */
+                        public selector?: ("includedFields"|"excludedFields");
+
+                        /**
+                         * Creates a new FieldFilter instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FieldFilter instance
+                         */
+                        public static create(properties?: google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.IFieldFilter): google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter;
+
+                        /**
+                         * Encodes the specified FieldFilter message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.verify|verify} messages.
+                         * @param message FieldFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.IFieldFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FieldFilter message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.verify|verify} messages.
+                         * @param message FieldFilter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.IFieldFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FieldFilter message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FieldFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter;
+
+                        /**
+                         * Decodes a FieldFilter message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FieldFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter;
+
+                        /**
+                         * Verifies a FieldFilter message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FieldFilter message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FieldFilter
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter;
+
+                        /**
+                         * Creates a plain object from a FieldFilter message. Also converts values to other types if specified.
+                         * @param message FieldFilter
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FieldFilter to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FieldFilter
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace FieldFilter {
+
+                        /** Properties of a FieldList. */
+                        interface IFieldList {
+
+                            /** FieldList fields */
+                            fields?: (string[]|null);
+                        }
+
+                        /** Represents a FieldList. */
+                        class FieldList implements IFieldList {
+
+                            /**
+                             * Constructs a new FieldList.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.IFieldList);
+
+                            /** FieldList fields. */
+                            public fields: string[];
+
+                            /**
+                             * Creates a new FieldList instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns FieldList instance
+                             */
+                            public static create(properties?: google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.IFieldList): google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList;
+
+                            /**
+                             * Encodes the specified FieldList message. Does not implicitly {@link google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList.verify|verify} messages.
+                             * @param message FieldList message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.IFieldList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified FieldList message, length delimited. Does not implicitly {@link google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList.verify|verify} messages.
+                             * @param message FieldList message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.IFieldList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a FieldList message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns FieldList
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList;
+
+                            /**
+                             * Decodes a FieldList message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns FieldList
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList;
+
+                            /**
+                             * Verifies a FieldList message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a FieldList message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns FieldList
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList;
+
+                            /**
+                             * Creates a plain object from a FieldList message. Also converts values to other types if specified.
+                             * @param message FieldList
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.vectorsearch.v1beta.ExportDataObjectsRequest.FieldFilter.FieldList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this FieldList to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for FieldList
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
                 }

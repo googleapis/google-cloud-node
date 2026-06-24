@@ -16,8 +16,8 @@ version: v0.20.0
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
-    commit: 4c284f1366a46993646dc9267cba257acbab6f45
-    sha256: 449ecc0edd76de7d592cf7f5c2a98070bef11af2593f8b64428e71b11211857e
+    commit: b6f9ff05aaec18070232a1ab36da98e684bc7909
+    sha256: 91788c6f956a0a409abe89a304c123cff73cb0ebb46b494e56d7ac9ece86f8cf
 default:
   keep:
     - librarian.js
@@ -611,12 +611,15 @@ libraries:
     version: 5.2.2
     apis:
       - path: google/cloud/datacatalog/v1
+        nodejs:
+          mixins: none
       - path: google/cloud/datacatalog/v1beta1
+        nodejs:
+          mixins: none
     copyright_year: "2026"
     nodejs:
       default_version: v1
       main_service: DataCatalog
-      mixins: none
   - name: google-cloud-datacatalog-lineage
     version: 2.2.0
     apis:
@@ -662,10 +665,11 @@ libraries:
     version: 5.6.0
     apis:
       - path: google/cloud/dataplex/v1
+        nodejs:
+          mixins: google.cloud.location.Locations;google.longrunning.Operations
     copyright_year: "2026"
     nodejs:
       default_version: v1
-      mixins: google.cloud.location.Locations;google.longrunning.Operations
       client_documentation_override: https://cloud.google.com/dataplex
   - name: google-cloud-dataproc
     version: 6.6.0
@@ -725,12 +729,15 @@ libraries:
     version: 5.8.2
     apis:
       - path: google/cloud/dialogflow/cx/v3
+        nodejs:
+          mixins: google.longrunning.Operations;google.cloud.location.Locations
       - path: google/cloud/dialogflow/cx/v3beta1
+        nodejs:
+          mixins: google.longrunning.Operations;google.cloud.location.Locations
     copyright_year: "2026"
     skip_generate: true
     nodejs:
       default_version: v3
-      mixins: google.longrunning.Operations;google.cloud.location.Locations
   - name: google-cloud-discoveryengine
     version: 2.7.0
     apis:
@@ -813,14 +820,21 @@ libraries:
     version: 4.2.2
     apis:
       - path: google/cloud/functions/v2
+        nodejs:
+          mixins: google.longrunning.Operations;google.cloud.location.Locations;google.iam.v1.IAMPolicy
       - path: google/cloud/functions/v1
+        nodejs:
+          mixins: google.longrunning.Operations;google.cloud.location.Locations
       - path: google/cloud/functions/v2beta
+        nodejs:
+          mixins: google.longrunning.Operations;google.cloud.location.Locations;google.iam.v1.IAMPolicy
       - path: google/cloud/functions/v2alpha
+        nodejs:
+          mixins: google.longrunning.Operations;google.cloud.location.Locations;google.iam.v1.IAMPolicy
     copyright_year: "2026"
     skip_generate: true
     nodejs:
       default_version: v1
-      mixins: google.longrunning.Operations;google.cloud.location.Locations
   - name: google-cloud-gdchardwaremanagement
     version: 0.10.1
     apis:
@@ -1280,12 +1294,17 @@ libraries:
     version: 4.4.0
     apis:
       - path: google/cloud/retail/v2
+        nodejs:
+          mixins: google.longrunning.Operations;google.cloud.location.Locations
       - path: google/cloud/retail/v2beta
+        nodejs:
+          mixins: google.longrunning.Operations;google.cloud.location.Locations
       - path: google/cloud/retail/v2alpha
+        nodejs:
+          mixins: google.longrunning.Operations;google.cloud.location.Locations
     copyright_year: "2026"
     nodejs:
       default_version: v2beta
-      mixins: google.longrunning.Operations;google.cloud.location.Locations
   - name: google-cloud-run
     version: 3.3.0
     apis:

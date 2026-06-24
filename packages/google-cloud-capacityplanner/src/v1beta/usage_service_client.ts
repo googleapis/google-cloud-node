@@ -18,11 +18,18 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +51,7 @@ export class UsageServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('capacityplanner');
@@ -57,10 +64,10 @@ export class UsageServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  usageServiceStub?: Promise<{[name: string]: Function}>;
+  usageServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of UsageServiceClient.
@@ -101,21 +108,42 @@ export class UsageServiceClient {
    *     const client = new UsageServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof UsageServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'capacityplanner.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -140,7 +168,7 @@ export class UsageServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -154,10 +182,7 @@ export class UsageServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -178,29 +203,28 @@ export class UsageServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      capacityPlanPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/capacityPlans/{capacity_plan}'
-      ),
       folderLocationForecastsPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/locations/{location}/forecasts/{forecast}'
+        'folders/{folder}/locations/{location}/forecasts/{forecast}',
       ),
       folderLocationReservationsPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/locations/{location}/reservations/{reservation}'
+        'folders/{folder}/locations/{location}/reservations/{reservation}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
-      organizationLocationForecastsPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/forecasts/{forecast}'
-      ),
-      organizationLocationReservationsPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/reservations/{reservation}'
-      ),
+      organizationLocationForecastsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/forecasts/{forecast}',
+        ),
+      organizationLocationReservationsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/reservations/{reservation}',
+        ),
       projectLocationForecastsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/forecasts/{forecast}'
+        'projects/{project}/locations/{location}/forecasts/{forecast}',
       ),
       projectLocationReservationsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/reservations/{reservation}'
+        'projects/{project}/locations/{location}/reservations/{reservation}',
       ),
     };
 
@@ -210,45 +234,63 @@ export class UsageServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const exportUsageHistoriesResponse = protoFilesRoot.lookup(
-      '.google.cloud.capacityplanner.v1beta.ExportUsageHistoriesResponse') as gax.protobuf.Type;
+      '.google.cloud.capacityplanner.v1beta.ExportUsageHistoriesResponse',
+    ) as gax.protobuf.Type;
     const exportUsageHistoriesMetadata = protoFilesRoot.lookup(
-      '.google.cloud.capacityplanner.v1beta.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.capacityplanner.v1beta.OperationMetadata',
+    ) as gax.protobuf.Type;
     const exportForecastsResponse = protoFilesRoot.lookup(
-      '.google.cloud.capacityplanner.v1beta.ExportForecastsResponse') as gax.protobuf.Type;
+      '.google.cloud.capacityplanner.v1beta.ExportForecastsResponse',
+    ) as gax.protobuf.Type;
     const exportForecastsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.capacityplanner.v1beta.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.capacityplanner.v1beta.OperationMetadata',
+    ) as gax.protobuf.Type;
     const exportReservationsUsageResponse = protoFilesRoot.lookup(
-      '.google.cloud.capacityplanner.v1beta.ExportReservationsUsageResponse') as gax.protobuf.Type;
+      '.google.cloud.capacityplanner.v1beta.ExportReservationsUsageResponse',
+    ) as gax.protobuf.Type;
     const exportReservationsUsageMetadata = protoFilesRoot.lookup(
-      '.google.cloud.capacityplanner.v1beta.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.capacityplanner.v1beta.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       exportUsageHistories: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportUsageHistoriesResponse.decode.bind(exportUsageHistoriesResponse),
-        exportUsageHistoriesMetadata.decode.bind(exportUsageHistoriesMetadata)),
+        exportUsageHistoriesMetadata.decode.bind(exportUsageHistoriesMetadata),
+      ),
       exportForecasts: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportForecastsResponse.decode.bind(exportForecastsResponse),
-        exportForecastsMetadata.decode.bind(exportForecastsMetadata)),
+        exportForecastsMetadata.decode.bind(exportForecastsMetadata),
+      ),
       exportReservationsUsage: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        exportReservationsUsageResponse.decode.bind(exportReservationsUsageResponse),
-        exportReservationsUsageMetadata.decode.bind(exportReservationsUsageMetadata))
+        exportReservationsUsageResponse.decode.bind(
+          exportReservationsUsageResponse,
+        ),
+        exportReservationsUsageMetadata.decode.bind(
+          exportReservationsUsageMetadata,
+        ),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.capacityplanner.v1beta.UsageService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.capacityplanner.v1beta.UsageService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -279,37 +321,48 @@ export class UsageServiceClient {
     // Put together the "service stub" for
     // google.cloud.capacityplanner.v1beta.UsageService.
     this.usageServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.capacityplanner.v1beta.UsageService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.capacityplanner.v1beta.UsageService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.capacityplanner.v1beta.UsageService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.capacityplanner.v1beta
+            .UsageService,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const usageServiceStubMethods =
-        ['queryUsageHistories', 'queryForecasts', 'queryReservations', 'exportUsageHistories', 'exportForecasts', 'exportReservationsUsage'];
+    const usageServiceStubMethods = [
+      'queryUsageHistories',
+      'queryForecasts',
+      'queryReservations',
+      'exportUsageHistories',
+      'exportForecasts',
+      'exportReservationsUsage',
+    ];
     for (const methodName of usageServiceStubMethods) {
       const callPromise = this.usageServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.longrunning[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.longrunning[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -324,8 +377,14 @@ export class UsageServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'capacityplanner.googleapis.com';
   }
@@ -336,8 +395,14 @@ export class UsageServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'capacityplanner.googleapis.com';
   }
@@ -370,7 +435,7 @@ export class UsageServiceClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/devstorage.full_control'
+      'https://www.googleapis.com/auth/devstorage.full_control',
     ];
   }
 
@@ -380,8 +445,9 @@ export class UsageServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -392,894 +458,1191 @@ export class UsageServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Returns a list of the usage histories that are in the parent parameter
- * and match your specified filters.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The compute engine resource and location for the time series
- *   values to return. The format is:
- *
- *       projects/{project}/locations/{location} or
- *       organizations/{organization}/locations/{location} or
- *       folders/{folder}/locations/{location}
- * @param {google.cloud.capacityplanner.v1beta.TimeSeries.LocationType} [request.locationLevel]
- *   Optional. The location level of the reservations usage timeseries.
- * @param {boolean} [request.isSpot]
- *   Optional. The is_spot flag is used to fetch the usage data for preemptible
- *   Resources.
- * @param {string} request.machineFamily
- *   The machine family for the `UsageHistory` values to return. Possible values
- *   include "n1", and "n2d". See
- *   https://cloud.google.com/compute/docs/machine-types for more examples.
- *   Empty machine_family will return results matching all machine families.
- * @param {google.cloud.capacityplanner.v1beta.MachineShape} [request.machineShape]
- *   Optional. The machine shape for the `UsageHistory` values to return.
- * @param {string} [request.diskType]
- *   Optional. The disk_type for the `UsageHistory` values to return request
- *   with persistent-disk cloud_resource_type. Empty disk_type will return
- *   results matching all disk types.
- * @param {boolean} [request.confidentialMode]
- *   Optional. Whether the persistent disk is in confidential mode.
- * @param {string} [request.gpuType]
- *   Optional. The GPU type for the `UsageHistory` values to return. Sample
- *   values are "nvidia-tesla-t4", and "nvidia-tesla-a100". See
- *   https://cloud.google.com/compute/docs/gpus for a list. Empty gpu_type
- *   will return results matching all GPUs.
- * @param {string} [request.tpuType]
- *   Optional. The TPU type for the `UsageHistory` values to return. Empty
- *   tpu_type will return results matching all TPUs.
- * @param {string} request.cloudResourceType
- *   The resource for the `UsageHistory` values to return. Possible values
- *   include "gce-vcpus", "gce-ram", "gce-local-ssd", "gce-persistent-disk",
- *   "gce-gpu" and "gce-tpu".
- *   Empty cloud_resource_type will return results matching all resources.
- * @param {google.cloud.capacityplanner.v1beta.UsageHistory.AggregationMethod} request.usageAggregationMethod
- *   The method that should be used to convert sampled usage data to daily
- *   usage values.
- *   AGGREGATION_METHOD_UNSPECIFIED will return results matching all the
- *   aggregation methods.
- * @param {google.type.Date} [request.startDate]
- *   Optional. The start date of reservations usage.
- * @param {google.type.Date} [request.endDate]
- *   Optional. The end date of reservations usage.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.capacityplanner.v1beta.QueryUsageHistoriesResponse|QueryUsageHistoriesResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/usage_service.query_usage_histories.js</caption>
- * region_tag:capacityplanner_v1beta_generated_UsageService_QueryUsageHistories_async
- */
+  /**
+   * Returns a list of the usage histories that are in the parent parameter
+   * and match your specified filters.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The compute engine resource and location for the time series
+   *   values to return. The format is:
+   *
+   *       projects/{project}/locations/{location} or
+   *       organizations/{organization}/locations/{location} or
+   *       folders/{folder}/locations/{location}
+   * @param {google.cloud.capacityplanner.v1beta.TimeSeries.LocationType} [request.locationLevel]
+   *   Optional. The location level of the reservations usage timeseries.
+   * @param {boolean} [request.isSpot]
+   *   Optional. The is_spot flag is used to fetch the usage data for preemptible
+   *   Resources.
+   * @param {string} request.machineFamily
+   *   The machine family for the `UsageHistory` values to return. Possible values
+   *   include "n1", and "n2d". See
+   *   https://cloud.google.com/compute/docs/machine-types for more examples.
+   *   Empty machine_family will return results matching all machine families.
+   * @param {google.cloud.capacityplanner.v1beta.MachineShape} [request.machineShape]
+   *   Optional. The machine shape for the `UsageHistory` values to return.
+   * @param {string} [request.diskType]
+   *   Optional. The disk_type for the `UsageHistory` values to return request
+   *   with persistent-disk cloud_resource_type. Empty disk_type will return
+   *   results matching all disk types.
+   * @param {boolean} [request.confidentialMode]
+   *   Optional. Whether the persistent disk is in confidential mode.
+   * @param {string} [request.gpuType]
+   *   Optional. The GPU type for the `UsageHistory` values to return. Sample
+   *   values are "nvidia-tesla-t4", and "nvidia-tesla-a100". See
+   *   https://cloud.google.com/compute/docs/gpus for a list. Empty gpu_type
+   *   will return results matching all GPUs.
+   * @param {string} [request.tpuType]
+   *   Optional. The TPU type for the `UsageHistory` values to return. Empty
+   *   tpu_type will return results matching all TPUs.
+   * @param {string} request.cloudResourceType
+   *   Required. The resource for the `UsageHistory` values to return. Possible
+   *   values include "gce-vcpus", "gce-ram", "gce-local-ssd",
+   *   "gce-persistent-disk", "gce-gpu" and "gce-tpu". Empty cloud_resource_type
+   *   will return results matching all resources.
+   * @param {google.cloud.capacityplanner.v1beta.UsageHistory.AggregationMethod} request.usageAggregationMethod
+   *   The method that should be used to convert sampled usage data to daily
+   *   usage values.
+   *   AGGREGATION_METHOD_UNSPECIFIED will return results matching all the
+   *   aggregation methods.
+   * @param {google.type.Date} [request.startDate]
+   *   Optional. The start date of reservations usage.
+   * @param {google.type.Date} [request.endDate]
+   *   Optional. The end date of reservations usage.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.capacityplanner.v1beta.QueryUsageHistoriesResponse|QueryUsageHistoriesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/usage_service.query_usage_histories.js</caption>
+   * region_tag:capacityplanner_v1beta_generated_UsageService_QueryUsageHistories_async
+   */
   queryUsageHistories(
-      request?: protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesResponse,
-        protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesResponse,
+      (
+        | protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   queryUsageHistories(
-      request: protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesResponse,
-          protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesResponse,
+      | protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   queryUsageHistories(
-      request: protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesRequest,
-      callback: Callback<
-          protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesResponse,
-          protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesRequest,
+    callback: Callback<
+      protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesResponse,
+      | protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   queryUsageHistories(
-      request?: protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesResponse,
-          protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesResponse,
-          protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesResponse,
-        protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesResponse,
+      | protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesResponse,
+      (
+        | protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('queryUsageHistories request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesResponse,
-        protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesResponse,
+          | protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('queryUsageHistories response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.queryUsageHistories(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesResponse,
-        protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('queryUsageHistories response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .queryUsageHistories(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesResponse,
+          (
+            | protos.google.cloud.capacityplanner.v1beta.IQueryUsageHistoriesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('queryUsageHistories response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Returns a list of the forecasts that are in the parent parameter
- * and match your specified filters.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The compute engine resource and location for the time series
- *   values to return. The format is:
- *
- *   projects/{project}/locations/{location} or
- *   organizations/{organization}/locations/{location} or
- *   folders/{folder}/locations/{location}
- * @param {string} request.machineFamily
- *   The machine family to use to select the `Forecast` values to return.
- *   Possible values include "n1", and "n2d".
- *   Empty machine_family will return results matching all machine families.
- * @param {google.cloud.capacityplanner.v1beta.MachineShape} [request.machineShape]
- *   Optional. The machine shape for the time series values to return.
- * @param {string} [request.diskType]
- *   Optional. The disk_type for the `Forecast` values to return with request
- *   persistent-disk cloud_resource_type.
- *   Empty disk_type will return results matching all disk types.
- * @param {boolean} [request.confidentialMode]
- *   Optional. Whether the persistent disk is in confidential mode.
- * @param {string} [request.gpuType]
- *   Optional. The GPU type for the `Forecast` values to return. Sample values
- *   are "nvidia-tesla-t4", and "nvidia-tesla-a100". See
- *   https://cloud.google.com/compute/docs/gpus for a list. Empty gpu_type
- *   will return results matching all GPUs.
- * @param {string} [request.tpuType]
- *   Optional. The TPU type for the `Forecast` values to return. Empty tpu_type
- *   will return results matching all TPUs.
- * @param {string} request.cloudResourceType
- *   The resource for the `Forecast` values to return. Possible values include
- *   "gce-vcpus", "gce-ram", "gce-local-ssd", "gce-persistent-disk", "gce-gpu"
- *   and "gce-tpu".
- *   Empty cloud_resource_type will return results matching all resources.
- * @param {google.cloud.capacityplanner.v1beta.Forecast.ForecastType} request.forecastType
- *   The type of forecast to use to select the `Forecast` values to return.
- *   FORECAST_TYPE_UNSPECIFIED will return results matching all the forecast
- *   types.
- * @param {google.cloud.capacityplanner.v1beta.Forecast.PredictionInterval} request.predictionInterval
- *   The prediction interval to use to select the `Forecast` values to return.
- *   PREDICTION_INTERVAL_UNSPECIFIED will return results matching all prediction
- *   intervals.
- * @param {google.cloud.capacityplanner.v1beta.UsageHistory.AggregationMethod} request.aggregationMethod
- *   Aggregation Method of the historical usage for which the forecast is
- *   generated
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.capacityplanner.v1beta.QueryForecastsResponse|QueryForecastsResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/usage_service.query_forecasts.js</caption>
- * region_tag:capacityplanner_v1beta_generated_UsageService_QueryForecasts_async
- */
+  /**
+   * Returns a list of the forecasts that are in the parent parameter
+   * and match your specified filters.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The compute engine resource and location for the time series
+   *   values to return. The format is:
+   *
+   *   projects/{project}/locations/{location} or
+   *   organizations/{organization}/locations/{location} or
+   *   folders/{folder}/locations/{location}
+   * @param {string} request.machineFamily
+   *   The machine family to use to select the `Forecast` values to return.
+   *   Possible values include "n1", and "n2d".
+   *   Empty machine_family will return results matching all machine families.
+   * @param {google.cloud.capacityplanner.v1beta.MachineShape} [request.machineShape]
+   *   Optional. The machine shape for the time series values to return.
+   * @param {string} [request.diskType]
+   *   Optional. The disk_type for the `Forecast` values to return with request
+   *   persistent-disk cloud_resource_type.
+   *   Empty disk_type will return results matching all disk types.
+   * @param {boolean} [request.confidentialMode]
+   *   Optional. Whether the persistent disk is in confidential mode.
+   * @param {string} [request.gpuType]
+   *   Optional. The GPU type for the `Forecast` values to return. Sample values
+   *   are "nvidia-tesla-t4", and "nvidia-tesla-a100". See
+   *   https://cloud.google.com/compute/docs/gpus for a list. Empty gpu_type
+   *   will return results matching all GPUs.
+   * @param {string} [request.tpuType]
+   *   Optional. The TPU type for the `Forecast` values to return. Empty tpu_type
+   *   will return results matching all TPUs.
+   * @param {string} request.cloudResourceType
+   *   Required. The resource for the `Forecast` values to return. Possible values
+   *   include "gce-vcpus", "gce-ram", "gce-local-ssd", "gce-persistent-disk",
+   *   "gce-gpu" and "gce-tpu". Empty cloud_resource_type will return results
+   *   matching all resources.
+   * @param {google.cloud.capacityplanner.v1beta.Forecast.ForecastType} request.forecastType
+   *   The type of forecast to use to select the `Forecast` values to return.
+   *   FORECAST_TYPE_UNSPECIFIED will return results matching all the forecast
+   *   types.
+   * @param {google.cloud.capacityplanner.v1beta.Forecast.PredictionInterval} request.predictionInterval
+   *   The prediction interval to use to select the `Forecast` values to return.
+   *   PREDICTION_INTERVAL_UNSPECIFIED will return results matching all prediction
+   *   intervals.
+   * @param {google.cloud.capacityplanner.v1beta.UsageHistory.AggregationMethod} request.aggregationMethod
+   *   Aggregation Method of the historical usage for which the forecast is
+   *   generated
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.capacityplanner.v1beta.QueryForecastsResponse|QueryForecastsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/usage_service.query_forecasts.js</caption>
+   * region_tag:capacityplanner_v1beta_generated_UsageService_QueryForecasts_async
+   */
   queryForecasts(
-      request?: protos.google.cloud.capacityplanner.v1beta.IQueryForecastsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.capacityplanner.v1beta.IQueryForecastsResponse,
-        protos.google.cloud.capacityplanner.v1beta.IQueryForecastsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.capacityplanner.v1beta.IQueryForecastsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.capacityplanner.v1beta.IQueryForecastsResponse,
+      (
+        | protos.google.cloud.capacityplanner.v1beta.IQueryForecastsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   queryForecasts(
-      request: protos.google.cloud.capacityplanner.v1beta.IQueryForecastsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.capacityplanner.v1beta.IQueryForecastsResponse,
-          protos.google.cloud.capacityplanner.v1beta.IQueryForecastsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.capacityplanner.v1beta.IQueryForecastsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.capacityplanner.v1beta.IQueryForecastsResponse,
+      | protos.google.cloud.capacityplanner.v1beta.IQueryForecastsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   queryForecasts(
-      request: protos.google.cloud.capacityplanner.v1beta.IQueryForecastsRequest,
-      callback: Callback<
-          protos.google.cloud.capacityplanner.v1beta.IQueryForecastsResponse,
-          protos.google.cloud.capacityplanner.v1beta.IQueryForecastsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.capacityplanner.v1beta.IQueryForecastsRequest,
+    callback: Callback<
+      protos.google.cloud.capacityplanner.v1beta.IQueryForecastsResponse,
+      | protos.google.cloud.capacityplanner.v1beta.IQueryForecastsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   queryForecasts(
-      request?: protos.google.cloud.capacityplanner.v1beta.IQueryForecastsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.capacityplanner.v1beta.IQueryForecastsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.capacityplanner.v1beta.IQueryForecastsResponse,
-          protos.google.cloud.capacityplanner.v1beta.IQueryForecastsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.capacityplanner.v1beta.IQueryForecastsResponse,
-          protos.google.cloud.capacityplanner.v1beta.IQueryForecastsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.capacityplanner.v1beta.IQueryForecastsResponse,
-        protos.google.cloud.capacityplanner.v1beta.IQueryForecastsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.capacityplanner.v1beta.IQueryForecastsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.capacityplanner.v1beta.IQueryForecastsResponse,
+      | protos.google.cloud.capacityplanner.v1beta.IQueryForecastsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.capacityplanner.v1beta.IQueryForecastsResponse,
+      (
+        | protos.google.cloud.capacityplanner.v1beta.IQueryForecastsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('queryForecasts request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.capacityplanner.v1beta.IQueryForecastsResponse,
-        protos.google.cloud.capacityplanner.v1beta.IQueryForecastsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.capacityplanner.v1beta.IQueryForecastsResponse,
+          | protos.google.cloud.capacityplanner.v1beta.IQueryForecastsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('queryForecasts response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.queryForecasts(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.capacityplanner.v1beta.IQueryForecastsResponse,
-        protos.google.cloud.capacityplanner.v1beta.IQueryForecastsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('queryForecasts response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .queryForecasts(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.capacityplanner.v1beta.IQueryForecastsResponse,
+          (
+            | protos.google.cloud.capacityplanner.v1beta.IQueryForecastsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('queryForecasts response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Returns a list of the reservations that are in the parent parameter
- * and match your specified filters.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The compute engine resource and location for the time series
- *   values to return. The format is:
- *
- *   projects/{project}/locations/{location} or
- *   organizations/{organization}/locations/{location} or
- *   folders/{folder}/locations/{location}
- * @param {google.cloud.capacityplanner.v1beta.TimeSeries.LocationType} [request.locationLevel]
- *   Optional. The location level of the reservations usage timeseries.
- * @param {string} [request.machineFamily]
- *   Optional. The machine family to use to select the aggregate reserved values
- *   to return. Possible values include "n1", and "n2d" etc. Empty
- *   machine_family will return results matching all machine families.
- * @param {google.cloud.capacityplanner.v1beta.MachineShape} [request.machineShape]
- *   Optional. The machine_shape as a filter to select matching reservations.
- * @param {string} [request.gpuType]
- *   Optional. The GPU type for the reserved values to return. Sample values
- *   are "nvidia-tesla-t4", and "nvidia-tesla-a100". See
- *   https://cloud.google.com/compute/docs/gpus for a list. Empty gpu_type
- *   will return results matching all GPUs.
- * @param {string} [request.cloudResourceType]
- *   Optional. The resource for the reserved values to return. Possible values
- *   include "gce-vcpus", "gce-ram", "gce-local-ssd", "gce-gpu" and "gce-vm".
- * @param {google.cloud.capacityplanner.v1beta.QueryReservationsRequest.ReservationType} [request.reservationType]
- *   Optional. The Reservation type for example, future reservation request and
- *   allocation. If unspecified, all types are
- *   included.
- * @param {google.cloud.capacityplanner.v1beta.QueryReservationsRequest.ShareType} [request.shareType]
- *   Optional. Types of share settings to filter reservations in response. If
- *   unspecified, all types are included.
- * @param {google.cloud.capacityplanner.v1beta.QueryReservationsRequest.OwnershipType} [request.ownershipType]
- *   Optional. Types of ownerships to filter reservations based on.
- *   In case of OWNED, it filters reservations which are owned by selected
- *   parent project/folder/organization. If unspecified, all types are
- *   included.
- * @param {google.cloud.capacityplanner.v1beta.QueryReservationsRequest.ReservationDataLevel} [request.reservationDataLevel]
- *   Optional. Reservations output data format.
- * @param {boolean} [request.includeUnapprovedReservations]
- *   Optional. Whether to include pending for approval reservations in the
- *   response. This field is only applicable for future reservations.
- * @param {google.cloud.capacityplanner.v1beta.UsageHistory.AggregationMethod} [request.aggregationMethod]
- *   Optional. Aggregation Method of the historical reservation usage
- * @param {google.type.Date} [request.startDate]
- *   Optional. The start date of reservations usage.
- * @param {google.type.Date} [request.endDate]
- *   Optional. The end date of reservations usage.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.capacityplanner.v1beta.QueryReservationsResponse|QueryReservationsResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/usage_service.query_reservations.js</caption>
- * region_tag:capacityplanner_v1beta_generated_UsageService_QueryReservations_async
- */
+  /**
+   * Returns a list of the reservations that are in the parent parameter
+   * and match your specified filters.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The compute engine resource and location for the time series
+   *   values to return. The format is:
+   *
+   *   projects/{project}/locations/{location} or
+   *   organizations/{organization}/locations/{location} or
+   *   folders/{folder}/locations/{location}
+   * @param {google.cloud.capacityplanner.v1beta.TimeSeries.LocationType} [request.locationLevel]
+   *   Optional. The location level of the reservations usage timeseries.
+   * @param {string} [request.machineFamily]
+   *   Optional. The machine family to use to select the aggregate reserved values
+   *   to return. Possible values include "n1", and "n2d" etc. Empty
+   *   machine_family will return results matching all machine families.
+   * @param {google.cloud.capacityplanner.v1beta.MachineShape} [request.machineShape]
+   *   Optional. The machine_shape as a filter to select matching reservations.
+   * @param {string} [request.gpuType]
+   *   Optional. The GPU type for the reserved values to return. Sample values
+   *   are "nvidia-tesla-t4", and "nvidia-tesla-a100". See
+   *   https://cloud.google.com/compute/docs/gpus for a list. Empty gpu_type
+   *   will return results matching all GPUs.
+   * @param {string} request.cloudResourceType
+   *   Required. The resource for the reserved values to return. Possible values
+   *   include "gce-vcpus", "gce-ram", "gce-local-ssd", "gce-gpu" and "gce-vm".
+   * @param {google.cloud.capacityplanner.v1beta.QueryReservationsRequest.ReservationType} request.reservationType
+   *   Required. The Reservation type for example, future reservation request and
+   *   allocation. If unspecified, all types are
+   *   included.
+   * @param {google.cloud.capacityplanner.v1beta.QueryReservationsRequest.ShareType} [request.shareType]
+   *   Optional. Types of share settings to filter reservations in response. If
+   *   unspecified, all types are included.
+   * @param {google.cloud.capacityplanner.v1beta.QueryReservationsRequest.OwnershipType} [request.ownershipType]
+   *   Optional. Types of ownerships to filter reservations based on.
+   *   In case of OWNED, it filters reservations which are owned by selected
+   *   parent project/folder/organization. If unspecified, all types are
+   *   included.
+   * @param {google.cloud.capacityplanner.v1beta.QueryReservationsRequest.ReservationDataLevel} request.reservationDataLevel
+   *   Required. Reservations output data format.
+   * @param {boolean} [request.includeUnapprovedReservations]
+   *   Optional. Whether to include pending for approval reservations in the
+   *   response. This field is only applicable for future reservations.
+   * @param {google.cloud.capacityplanner.v1beta.UsageHistory.AggregationMethod} [request.aggregationMethod]
+   *   Optional. Aggregation Method of the historical reservation usage
+   * @param {google.type.Date} [request.startDate]
+   *   Optional. The start date of reservations usage.
+   * @param {google.type.Date} [request.endDate]
+   *   Optional. The end date of reservations usage.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.capacityplanner.v1beta.QueryReservationsResponse|QueryReservationsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/usage_service.query_reservations.js</caption>
+   * region_tag:capacityplanner_v1beta_generated_UsageService_QueryReservations_async
+   */
   queryReservations(
-      request?: protos.google.cloud.capacityplanner.v1beta.IQueryReservationsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.capacityplanner.v1beta.IQueryReservationsResponse,
-        protos.google.cloud.capacityplanner.v1beta.IQueryReservationsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.capacityplanner.v1beta.IQueryReservationsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.capacityplanner.v1beta.IQueryReservationsResponse,
+      (
+        | protos.google.cloud.capacityplanner.v1beta.IQueryReservationsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   queryReservations(
-      request: protos.google.cloud.capacityplanner.v1beta.IQueryReservationsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.capacityplanner.v1beta.IQueryReservationsResponse,
-          protos.google.cloud.capacityplanner.v1beta.IQueryReservationsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.capacityplanner.v1beta.IQueryReservationsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.capacityplanner.v1beta.IQueryReservationsResponse,
+      | protos.google.cloud.capacityplanner.v1beta.IQueryReservationsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   queryReservations(
-      request: protos.google.cloud.capacityplanner.v1beta.IQueryReservationsRequest,
-      callback: Callback<
-          protos.google.cloud.capacityplanner.v1beta.IQueryReservationsResponse,
-          protos.google.cloud.capacityplanner.v1beta.IQueryReservationsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.capacityplanner.v1beta.IQueryReservationsRequest,
+    callback: Callback<
+      protos.google.cloud.capacityplanner.v1beta.IQueryReservationsResponse,
+      | protos.google.cloud.capacityplanner.v1beta.IQueryReservationsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   queryReservations(
-      request?: protos.google.cloud.capacityplanner.v1beta.IQueryReservationsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.capacityplanner.v1beta.IQueryReservationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.capacityplanner.v1beta.IQueryReservationsResponse,
-          protos.google.cloud.capacityplanner.v1beta.IQueryReservationsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.capacityplanner.v1beta.IQueryReservationsResponse,
-          protos.google.cloud.capacityplanner.v1beta.IQueryReservationsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.capacityplanner.v1beta.IQueryReservationsResponse,
-        protos.google.cloud.capacityplanner.v1beta.IQueryReservationsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.capacityplanner.v1beta.IQueryReservationsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.capacityplanner.v1beta.IQueryReservationsResponse,
+      | protos.google.cloud.capacityplanner.v1beta.IQueryReservationsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.capacityplanner.v1beta.IQueryReservationsResponse,
+      (
+        | protos.google.cloud.capacityplanner.v1beta.IQueryReservationsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('queryReservations request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.capacityplanner.v1beta.IQueryReservationsResponse,
-        protos.google.cloud.capacityplanner.v1beta.IQueryReservationsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.capacityplanner.v1beta.IQueryReservationsResponse,
+          | protos.google.cloud.capacityplanner.v1beta.IQueryReservationsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('queryReservations response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.queryReservations(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.capacityplanner.v1beta.IQueryReservationsResponse,
-        protos.google.cloud.capacityplanner.v1beta.IQueryReservationsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('queryReservations response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .queryReservations(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.capacityplanner.v1beta.IQueryReservationsResponse,
+          (
+            | protos.google.cloud.capacityplanner.v1beta.IQueryReservationsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('queryReservations response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Exports historical usage data requested by user into either an existing
- * Cloud Storage bucket or a BigQuery table.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The compute engine resource and location for the time series
- *   values to return. The format is:
- *      projects/{project}/locations/{location} or
- *      organizations/{organization}/locations/{location} or
- *      folders/{folder}/locations/{location}
- * @param {boolean} [request.isSpot]
- *   Optional. Set true to export usage for spot resources.
- * @param {string} [request.machineFamily]
- *   Optional. The machine family for the `UsageHistory` values to return.
- *   Possible values include "n1", and "n2d". See
- *   https://cloud.google.com/compute/docs/machine-types for more examples.
- * @param {google.cloud.capacityplanner.v1beta.MachineShape} [request.machineShape]
- *   Optional. The machine shape for the time series values to export.
- * @param {string} [request.diskType]
- *   Optional. The disk_type for the `UsageHistory` values to return request
- *   with persistent-disk resource_type. Possible values include "pd-ssd",
- *   "pd-standard", "pd-balanced", and "pd-extreme".
- * @param {string} [request.gpuType]
- *   Optional. The GPU type for the `UsageHistory` values to return. Sample
- *   values are "nvidia-tesla-t4", and "nvidia-tesla-a100". See
- *   https://cloud.google.com/compute/docs/gpus for a list. Empty gpu_type
- *   will return results matching all GPUs.
- * @param {string} [request.tpuType]
- *   Optional. The TPU type for the `UsageHistory` values to return. Empty
- *   tpu_type will return results matching all TPUs.
- * @param {string} request.resourceType
- *   Required. The resource for the `UsageHistory` values to return. Possible
- *   values include "gce-vcpus", "gce-ram", "gce-local-ssd",
- *   "gce-persistent-disk", "gce-gpu" and "gce-tpu".
- * @param {google.cloud.capacityplanner.v1beta.UsageHistory.AggregationMethod} [request.usageAggregationMethod]
- *   Optional. The method that should be used to convert sampled usage data to
- *   daily usage values. AGGREGATION_METHOD_UNSPECIFIED will return results
- *   matching all the aggregation methods.
- * @param {google.type.Date} [request.startDate]
- *   Optional. The start date of usage.
- * @param {google.type.Date} [request.endDate]
- *   Optional. The end date of usage.
- * @param {google.cloud.capacityplanner.v1beta.OutputConfig} request.outputConfig
- *   Required. Output configuration indicating where the results will be output
- *   to.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/usage_service.export_usage_histories.js</caption>
- * region_tag:capacityplanner_v1beta_generated_UsageService_ExportUsageHistories_async
- */
+  /**
+   * Exports historical usage data requested by user into either an existing
+   * Cloud Storage bucket or a BigQuery table.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The compute engine resource and location for the time series
+   *   values to return. The format is:
+   *      projects/{project}/locations/{location} or
+   *      organizations/{organization}/locations/{location} or
+   *      folders/{folder}/locations/{location}
+   * @param {boolean} [request.isSpot]
+   *   Optional. Set true to export usage for spot resources.
+   * @param {string} [request.machineFamily]
+   *   Optional. The machine family for the `UsageHistory` values to return.
+   *   Possible values include "n1", and "n2d". See
+   *   https://cloud.google.com/compute/docs/machine-types for more examples.
+   * @param {google.cloud.capacityplanner.v1beta.MachineShape} [request.machineShape]
+   *   Optional. The machine shape for the time series values to export.
+   * @param {string} [request.diskType]
+   *   Optional. The disk_type for the `UsageHistory` values to return request
+   *   with persistent-disk resource_type. Possible values include "pd-ssd",
+   *   "pd-standard", "pd-balanced", and "pd-extreme".
+   * @param {string} [request.gpuType]
+   *   Optional. The GPU type for the `UsageHistory` values to return. Sample
+   *   values are "nvidia-tesla-t4", and "nvidia-tesla-a100". See
+   *   https://cloud.google.com/compute/docs/gpus for a list. Empty gpu_type
+   *   will return results matching all GPUs.
+   * @param {string} [request.tpuType]
+   *   Optional. The TPU type for the `UsageHistory` values to return. Empty
+   *   tpu_type will return results matching all TPUs.
+   * @param {string} request.resourceType
+   *   Required. The resource for the `UsageHistory` values to return. Possible
+   *   values include "gce-vcpus", "gce-ram", "gce-local-ssd",
+   *   "gce-persistent-disk", "gce-gpu" and "gce-tpu".
+   * @param {google.cloud.capacityplanner.v1beta.UsageHistory.AggregationMethod} [request.usageAggregationMethod]
+   *   Optional. The method that should be used to convert sampled usage data to
+   *   daily usage values. AGGREGATION_METHOD_UNSPECIFIED will return results
+   *   matching all the aggregation methods.
+   * @param {google.type.Date} [request.startDate]
+   *   Optional. The start date of usage.
+   * @param {google.type.Date} [request.endDate]
+   *   Optional. The end date of usage.
+   * @param {google.cloud.capacityplanner.v1beta.OutputConfig} request.outputConfig
+   *   Required. Output configuration indicating where the results will be output
+   *   to.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/usage_service.export_usage_histories.js</caption>
+   * region_tag:capacityplanner_v1beta_generated_UsageService_ExportUsageHistories_async
+   */
   exportUsageHistories(
-      request?: protos.google.cloud.capacityplanner.v1beta.IExportUsageHistoriesRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.capacityplanner.v1beta.IExportUsageHistoriesResponse, protos.google.cloud.capacityplanner.v1beta.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.capacityplanner.v1beta.IExportUsageHistoriesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.capacityplanner.v1beta.IExportUsageHistoriesResponse,
+        protos.google.cloud.capacityplanner.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   exportUsageHistories(
-      request: protos.google.cloud.capacityplanner.v1beta.IExportUsageHistoriesRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.capacityplanner.v1beta.IExportUsageHistoriesResponse, protos.google.cloud.capacityplanner.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.capacityplanner.v1beta.IExportUsageHistoriesRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.capacityplanner.v1beta.IExportUsageHistoriesResponse,
+        protos.google.cloud.capacityplanner.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   exportUsageHistories(
-      request: protos.google.cloud.capacityplanner.v1beta.IExportUsageHistoriesRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.capacityplanner.v1beta.IExportUsageHistoriesResponse, protos.google.cloud.capacityplanner.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.capacityplanner.v1beta.IExportUsageHistoriesRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.capacityplanner.v1beta.IExportUsageHistoriesResponse,
+        protos.google.cloud.capacityplanner.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   exportUsageHistories(
-      request?: protos.google.cloud.capacityplanner.v1beta.IExportUsageHistoriesRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.capacityplanner.v1beta.IExportUsageHistoriesResponse, protos.google.cloud.capacityplanner.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.capacityplanner.v1beta.IExportUsageHistoriesResponse, protos.google.cloud.capacityplanner.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.capacityplanner.v1beta.IExportUsageHistoriesResponse, protos.google.cloud.capacityplanner.v1beta.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.capacityplanner.v1beta.IExportUsageHistoriesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.capacityplanner.v1beta.IExportUsageHistoriesResponse,
+            protos.google.cloud.capacityplanner.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.capacityplanner.v1beta.IExportUsageHistoriesResponse,
+        protos.google.cloud.capacityplanner.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.capacityplanner.v1beta.IExportUsageHistoriesResponse,
+        protos.google.cloud.capacityplanner.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.capacityplanner.v1beta.IExportUsageHistoriesResponse, protos.google.cloud.capacityplanner.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.capacityplanner.v1beta.IExportUsageHistoriesResponse,
+            protos.google.cloud.capacityplanner.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('exportUsageHistories response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('exportUsageHistories request %j', request);
-    return this.innerApiCalls.exportUsageHistories(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.capacityplanner.v1beta.IExportUsageHistoriesResponse, protos.google.cloud.capacityplanner.v1beta.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('exportUsageHistories response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .exportUsageHistories(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.capacityplanner.v1beta.IExportUsageHistoriesResponse,
+            protos.google.cloud.capacityplanner.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportUsageHistories response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `exportUsageHistories()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/usage_service.export_usage_histories.js</caption>
- * region_tag:capacityplanner_v1beta_generated_UsageService_ExportUsageHistories_async
- */
-  async checkExportUsageHistoriesProgress(name: string): Promise<LROperation<protos.google.cloud.capacityplanner.v1beta.ExportUsageHistoriesResponse, protos.google.cloud.capacityplanner.v1beta.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `exportUsageHistories()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/usage_service.export_usage_histories.js</caption>
+   * region_tag:capacityplanner_v1beta_generated_UsageService_ExportUsageHistories_async
+   */
+  async checkExportUsageHistoriesProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.capacityplanner.v1beta.ExportUsageHistoriesResponse,
+      protos.google.cloud.capacityplanner.v1beta.OperationMetadata
+    >
+  > {
     this._log.info('exportUsageHistories long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.exportUsageHistories, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.capacityplanner.v1beta.ExportUsageHistoriesResponse, protos.google.cloud.capacityplanner.v1beta.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.exportUsageHistories,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.capacityplanner.v1beta.ExportUsageHistoriesResponse,
+      protos.google.cloud.capacityplanner.v1beta.OperationMetadata
+    >;
   }
-/**
- * Exports forecasted usage data requested by user into either an existing
- * Cloud Storage bucket or a BigQuery table.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The compute engine resource and location for the time series
- *   values to return. The format is:
- *      projects/{project}/locations/{location} or
- *      organizations/{organization}/locations/{location} or
- *      folders/{folder}/locations/{location}
- * @param {string} [request.machineFamily]
- *   Optional. The machine family to use to select the `Forecast` values to
- *   return. Possible values include "n1", and "n2d".
- * @param {google.cloud.capacityplanner.v1beta.MachineShape} [request.machineShape]
- *   Optional. The machine shape for the time series values to export.
- * @param {string} [request.diskType]
- *   Optional. The disk_type for the `Forecast` values to return with request
- *   persistent-disk resource_type.
- * @param {string} [request.gpuType]
- *   Optional. The GPU type for the `Forecast` values to return. Sample values
- *   are "nvidia-tesla-t4", and "nvidia-tesla-a100". See
- *   https://cloud.google.com/compute/docs/gpus for a list. Empty gpu_type
- *   will return results matching all GPUs.
- * @param {string} [request.tpuType]
- *   Optional. The TPU type for the `Forecast` values to return. Empty tpu_type
- *   will return results matching all TPUs.
- * @param {string} request.resourceType
- *   Required. The resource for the `Forecast` values to return. Possible values
- *   include "gce-vcpus", "gce-ram", "gce-local-ssd", "gce-persistent-disk",
- *   "gce-gpu" and "gce-tpu".
- * @param {google.cloud.capacityplanner.v1beta.Forecast.PredictionInterval} [request.predictionInterval]
- *   Optional. The prediction interval to use to select the `Forecast` values to
- *   return. PREDICTION_INTERVAL_UNSPECIFIED will return results matching all
- *   prediction intervals.
- * @param {google.cloud.capacityplanner.v1beta.UsageHistory.AggregationMethod} [request.aggregationMethod]
- *   Optional. Aggregation Method of the historical usage for which the forecast
- *   is generated.
- * @param {google.type.Date} [request.startDate]
- *   Optional. The start date of forecasts.
- * @param {google.type.Date} [request.endDate]
- *   Optional. The end date of forecasts.
- * @param {google.cloud.capacityplanner.v1beta.OutputConfig} request.outputConfig
- *   Required. Output configuration indicating where the results will be output
- *   to.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/usage_service.export_forecasts.js</caption>
- * region_tag:capacityplanner_v1beta_generated_UsageService_ExportForecasts_async
- */
+  /**
+   * Exports forecasted usage data requested by user into either an existing
+   * Cloud Storage bucket or a BigQuery table.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The compute engine resource and location for the time series
+   *   values to return. The format is:
+   *      projects/{project}/locations/{location} or
+   *      organizations/{organization}/locations/{location} or
+   *      folders/{folder}/locations/{location}
+   * @param {string} [request.machineFamily]
+   *   Optional. The machine family to use to select the `Forecast` values to
+   *   return. Possible values include "n1", and "n2d".
+   * @param {google.cloud.capacityplanner.v1beta.MachineShape} [request.machineShape]
+   *   Optional. The machine shape for the time series values to export.
+   * @param {string} [request.diskType]
+   *   Optional. The disk_type for the `Forecast` values to return with request
+   *   persistent-disk resource_type.
+   * @param {string} [request.gpuType]
+   *   Optional. The GPU type for the `Forecast` values to return. Sample values
+   *   are "nvidia-tesla-t4", and "nvidia-tesla-a100". See
+   *   https://cloud.google.com/compute/docs/gpus for a list. Empty gpu_type
+   *   will return results matching all GPUs.
+   * @param {string} [request.tpuType]
+   *   Optional. The TPU type for the `Forecast` values to return. Empty tpu_type
+   *   will return results matching all TPUs.
+   * @param {string} request.resourceType
+   *   Required. The resource for the `Forecast` values to return. Possible values
+   *   include "gce-vcpus", "gce-ram", "gce-local-ssd", "gce-persistent-disk",
+   *   "gce-gpu" and "gce-tpu".
+   * @param {google.cloud.capacityplanner.v1beta.Forecast.PredictionInterval} [request.predictionInterval]
+   *   Optional. The prediction interval to use to select the `Forecast` values to
+   *   return. PREDICTION_INTERVAL_UNSPECIFIED will return results matching all
+   *   prediction intervals.
+   * @param {google.cloud.capacityplanner.v1beta.UsageHistory.AggregationMethod} [request.aggregationMethod]
+   *   Optional. Aggregation Method of the historical usage for which the forecast
+   *   is generated.
+   * @param {google.type.Date} [request.startDate]
+   *   Optional. The start date of forecasts.
+   * @param {google.type.Date} [request.endDate]
+   *   Optional. The end date of forecasts.
+   * @param {google.cloud.capacityplanner.v1beta.OutputConfig} request.outputConfig
+   *   Required. Output configuration indicating where the results will be output
+   *   to.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/usage_service.export_forecasts.js</caption>
+   * region_tag:capacityplanner_v1beta_generated_UsageService_ExportForecasts_async
+   */
   exportForecasts(
-      request?: protos.google.cloud.capacityplanner.v1beta.IExportForecastsRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.capacityplanner.v1beta.IExportForecastsResponse, protos.google.cloud.capacityplanner.v1beta.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.capacityplanner.v1beta.IExportForecastsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.capacityplanner.v1beta.IExportForecastsResponse,
+        protos.google.cloud.capacityplanner.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   exportForecasts(
-      request: protos.google.cloud.capacityplanner.v1beta.IExportForecastsRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.capacityplanner.v1beta.IExportForecastsResponse, protos.google.cloud.capacityplanner.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.capacityplanner.v1beta.IExportForecastsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.capacityplanner.v1beta.IExportForecastsResponse,
+        protos.google.cloud.capacityplanner.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   exportForecasts(
-      request: protos.google.cloud.capacityplanner.v1beta.IExportForecastsRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.capacityplanner.v1beta.IExportForecastsResponse, protos.google.cloud.capacityplanner.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.capacityplanner.v1beta.IExportForecastsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.capacityplanner.v1beta.IExportForecastsResponse,
+        protos.google.cloud.capacityplanner.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   exportForecasts(
-      request?: protos.google.cloud.capacityplanner.v1beta.IExportForecastsRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.capacityplanner.v1beta.IExportForecastsResponse, protos.google.cloud.capacityplanner.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.capacityplanner.v1beta.IExportForecastsResponse, protos.google.cloud.capacityplanner.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.capacityplanner.v1beta.IExportForecastsResponse, protos.google.cloud.capacityplanner.v1beta.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.capacityplanner.v1beta.IExportForecastsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.capacityplanner.v1beta.IExportForecastsResponse,
+            protos.google.cloud.capacityplanner.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.capacityplanner.v1beta.IExportForecastsResponse,
+        protos.google.cloud.capacityplanner.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.capacityplanner.v1beta.IExportForecastsResponse,
+        protos.google.cloud.capacityplanner.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.capacityplanner.v1beta.IExportForecastsResponse, protos.google.cloud.capacityplanner.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.capacityplanner.v1beta.IExportForecastsResponse,
+            protos.google.cloud.capacityplanner.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('exportForecasts response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('exportForecasts request %j', request);
-    return this.innerApiCalls.exportForecasts(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.capacityplanner.v1beta.IExportForecastsResponse, protos.google.cloud.capacityplanner.v1beta.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('exportForecasts response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .exportForecasts(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.capacityplanner.v1beta.IExportForecastsResponse,
+            protos.google.cloud.capacityplanner.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportForecasts response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `exportForecasts()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/usage_service.export_forecasts.js</caption>
- * region_tag:capacityplanner_v1beta_generated_UsageService_ExportForecasts_async
- */
-  async checkExportForecastsProgress(name: string): Promise<LROperation<protos.google.cloud.capacityplanner.v1beta.ExportForecastsResponse, protos.google.cloud.capacityplanner.v1beta.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `exportForecasts()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/usage_service.export_forecasts.js</caption>
+   * region_tag:capacityplanner_v1beta_generated_UsageService_ExportForecasts_async
+   */
+  async checkExportForecastsProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.capacityplanner.v1beta.ExportForecastsResponse,
+      protos.google.cloud.capacityplanner.v1beta.OperationMetadata
+    >
+  > {
     this._log.info('exportForecasts long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.exportForecasts, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.capacityplanner.v1beta.ExportForecastsResponse, protos.google.cloud.capacityplanner.v1beta.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.exportForecasts,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.capacityplanner.v1beta.ExportForecastsResponse,
+      protos.google.cloud.capacityplanner.v1beta.OperationMetadata
+    >;
   }
-/**
- * Exports reservations usage data requested by user into either an existing
- * Cloud Storage bucket or a new/existing BigQuery table.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} [request.machineFamily]
- *   Optional. The machine family to query reservations and usage by. For
- *   example: n1, n2d.
- * @param {google.cloud.capacityplanner.v1beta.MachineShape} [request.machineShape]
- *   Optional. The machine_shape as a filter to select matching reservations
- *   and its usage.
- * @param {string} [request.gpuType]
- *   Optional. The GPU type to query reservations and usage  by. For example:
- *   NVIDIA T4.
- * @param {string} request.parent
- *   Required. The compute engine resource and location of the
- *   reservationsusage. The format is:
- *      projects/{project}/locations/{location} or
- *      organizations/{organization}/locations/{location} or
- *      folders/{folder}/locations/{location}
- * @param {google.cloud.capacityplanner.v1beta.TimeSeries.LocationType} [request.locationLevel]
- *   Optional. The location level of the reservations usage timeseries.
- * @param {string} request.cloudResourceType
- *   Required. The resource for the `ReservationsUsage` values to return.
- *   Possible values include "gce-vcpus", "gce-ram", "gce-local-ssd", and
- *   "gce-gpu".
- * @param {google.cloud.capacityplanner.v1beta.UsageHistory.AggregationMethod} request.usageAggregationMethod
- *   Required. The method that should be used to convert sampled reservations
- *   data to daily usage values.
- * @param {google.cloud.capacityplanner.v1beta.ExportReservationsUsageRequest.ShareType} [request.shareType]
- *   Optional. Type of share settings to filter reservations in response. If
- *   unspecified, all types are included.
- * @param {google.type.Date} [request.startDate]
- *   Optional. The start date of reservations usage.
- * @param {google.type.Date} [request.endDate]
- *   Optional. The end date of reservations usage.
- * @param {google.cloud.capacityplanner.v1beta.OutputConfig} request.outputConfig
- *   Required. Output configuration indicating where the results will be output
- *   to.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/usage_service.export_reservations_usage.js</caption>
- * region_tag:capacityplanner_v1beta_generated_UsageService_ExportReservationsUsage_async
- */
+  /**
+   * Exports reservations usage data requested by user into either an existing
+   * Cloud Storage bucket or a new/existing BigQuery table.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} [request.machineFamily]
+   *   Optional. The machine family to query reservations and usage by. For
+   *   example: n1, n2d.
+   * @param {google.cloud.capacityplanner.v1beta.MachineShape} [request.machineShape]
+   *   Optional. The machine_shape as a filter to select matching reservations
+   *   and its usage.
+   * @param {string} [request.gpuType]
+   *   Optional. The GPU type to query reservations and usage  by. For example:
+   *   NVIDIA T4.
+   * @param {string} request.parent
+   *   Required. The compute engine resource and location of the
+   *   reservationsusage. The format is:
+   *      projects/{project}/locations/{location} or
+   *      organizations/{organization}/locations/{location} or
+   *      folders/{folder}/locations/{location}
+   * @param {google.cloud.capacityplanner.v1beta.TimeSeries.LocationType} [request.locationLevel]
+   *   Optional. The location level of the reservations usage timeseries.
+   * @param {string} request.cloudResourceType
+   *   Required. The resource for the `ReservationsUsage` values to return.
+   *   Possible values include "gce-vcpus", "gce-ram", "gce-local-ssd", and
+   *   "gce-gpu".
+   * @param {google.cloud.capacityplanner.v1beta.UsageHistory.AggregationMethod} request.usageAggregationMethod
+   *   Required. The method that should be used to convert sampled reservations
+   *   data to daily usage values.
+   * @param {google.cloud.capacityplanner.v1beta.ExportReservationsUsageRequest.ShareType} [request.shareType]
+   *   Optional. Type of share settings to filter reservations in response. If
+   *   unspecified, all types are included.
+   * @param {google.type.Date} [request.startDate]
+   *   Optional. The start date of reservations usage.
+   * @param {google.type.Date} [request.endDate]
+   *   Optional. The end date of reservations usage.
+   * @param {google.cloud.capacityplanner.v1beta.OutputConfig} request.outputConfig
+   *   Required. Output configuration indicating where the results will be output
+   *   to.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/usage_service.export_reservations_usage.js</caption>
+   * region_tag:capacityplanner_v1beta_generated_UsageService_ExportReservationsUsage_async
+   */
   exportReservationsUsage(
-      request?: protos.google.cloud.capacityplanner.v1beta.IExportReservationsUsageRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.capacityplanner.v1beta.IExportReservationsUsageResponse, protos.google.cloud.capacityplanner.v1beta.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.capacityplanner.v1beta.IExportReservationsUsageRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.capacityplanner.v1beta.IExportReservationsUsageResponse,
+        protos.google.cloud.capacityplanner.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   exportReservationsUsage(
-      request: protos.google.cloud.capacityplanner.v1beta.IExportReservationsUsageRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.capacityplanner.v1beta.IExportReservationsUsageResponse, protos.google.cloud.capacityplanner.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.capacityplanner.v1beta.IExportReservationsUsageRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.capacityplanner.v1beta.IExportReservationsUsageResponse,
+        protos.google.cloud.capacityplanner.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   exportReservationsUsage(
-      request: protos.google.cloud.capacityplanner.v1beta.IExportReservationsUsageRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.capacityplanner.v1beta.IExportReservationsUsageResponse, protos.google.cloud.capacityplanner.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.capacityplanner.v1beta.IExportReservationsUsageRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.capacityplanner.v1beta.IExportReservationsUsageResponse,
+        protos.google.cloud.capacityplanner.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   exportReservationsUsage(
-      request?: protos.google.cloud.capacityplanner.v1beta.IExportReservationsUsageRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.capacityplanner.v1beta.IExportReservationsUsageResponse, protos.google.cloud.capacityplanner.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.capacityplanner.v1beta.IExportReservationsUsageResponse, protos.google.cloud.capacityplanner.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.capacityplanner.v1beta.IExportReservationsUsageResponse, protos.google.cloud.capacityplanner.v1beta.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.capacityplanner.v1beta.IExportReservationsUsageRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.capacityplanner.v1beta.IExportReservationsUsageResponse,
+            protos.google.cloud.capacityplanner.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.capacityplanner.v1beta.IExportReservationsUsageResponse,
+        protos.google.cloud.capacityplanner.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.capacityplanner.v1beta.IExportReservationsUsageResponse,
+        protos.google.cloud.capacityplanner.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.capacityplanner.v1beta.IExportReservationsUsageResponse, protos.google.cloud.capacityplanner.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.capacityplanner.v1beta.IExportReservationsUsageResponse,
+            protos.google.cloud.capacityplanner.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('exportReservationsUsage response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('exportReservationsUsage request %j', request);
-    return this.innerApiCalls.exportReservationsUsage(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.capacityplanner.v1beta.IExportReservationsUsageResponse, protos.google.cloud.capacityplanner.v1beta.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('exportReservationsUsage response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .exportReservationsUsage(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.capacityplanner.v1beta.IExportReservationsUsageResponse,
+            protos.google.cloud.capacityplanner.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportReservationsUsage response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `exportReservationsUsage()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/usage_service.export_reservations_usage.js</caption>
- * region_tag:capacityplanner_v1beta_generated_UsageService_ExportReservationsUsage_async
- */
-  async checkExportReservationsUsageProgress(name: string): Promise<LROperation<protos.google.cloud.capacityplanner.v1beta.ExportReservationsUsageResponse, protos.google.cloud.capacityplanner.v1beta.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `exportReservationsUsage()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/usage_service.export_reservations_usage.js</caption>
+   * region_tag:capacityplanner_v1beta_generated_UsageService_ExportReservationsUsage_async
+   */
+  async checkExportReservationsUsageProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.capacityplanner.v1beta.ExportReservationsUsageResponse,
+      protos.google.cloud.capacityplanner.v1beta.OperationMetadata
+    >
+  > {
     this._log.info('exportReservationsUsage long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.exportReservationsUsage, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.capacityplanner.v1beta.ExportReservationsUsageResponse, protos.google.cloud.capacityplanner.v1beta.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.exportReservationsUsage,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.capacityplanner.v1beta.ExportReservationsUsageResponse,
+      protos.google.cloud.capacityplanner.v1beta.OperationMetadata
+    >;
   }
   // --------------------
   // -- Path templates --
   // --------------------
-
-  /**
-   * Return a fully-qualified capacityPlan resource name string.
-   *
-   * @param {string} project
-   * @param {string} capacity_plan
-   * @returns {string} Resource name string.
-   */
-  capacityPlanPath(project:string,capacityPlan:string) {
-    return this.pathTemplates.capacityPlanPathTemplate.render({
-      project: project,
-      capacity_plan: capacityPlan,
-    });
-  }
-
-  /**
-   * Parse the project from CapacityPlan resource.
-   *
-   * @param {string} capacityPlanName
-   *   A fully-qualified path representing CapacityPlan resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromCapacityPlanName(capacityPlanName: string) {
-    return this.pathTemplates.capacityPlanPathTemplate.match(capacityPlanName).project;
-  }
-
-  /**
-   * Parse the capacity_plan from CapacityPlan resource.
-   *
-   * @param {string} capacityPlanName
-   *   A fully-qualified path representing CapacityPlan resource.
-   * @returns {string} A string representing the capacity_plan.
-   */
-  matchCapacityPlanFromCapacityPlanName(capacityPlanName: string) {
-    return this.pathTemplates.capacityPlanPathTemplate.match(capacityPlanName).capacity_plan;
-  }
 
   /**
    * Return a fully-qualified folderLocationForecasts resource name string.
@@ -1289,7 +1652,11 @@ export class UsageServiceClient {
    * @param {string} forecast
    * @returns {string} Resource name string.
    */
-  folderLocationForecastsPath(folder:string,location:string,forecast:string) {
+  folderLocationForecastsPath(
+    folder: string,
+    location: string,
+    forecast: string,
+  ) {
     return this.pathTemplates.folderLocationForecastsPathTemplate.render({
       folder: folder,
       location: location,
@@ -1304,8 +1671,12 @@ export class UsageServiceClient {
    *   A fully-qualified path representing folder_location_forecasts resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderLocationForecastsName(folderLocationForecastsName: string) {
-    return this.pathTemplates.folderLocationForecastsPathTemplate.match(folderLocationForecastsName).folder;
+  matchFolderFromFolderLocationForecastsName(
+    folderLocationForecastsName: string,
+  ) {
+    return this.pathTemplates.folderLocationForecastsPathTemplate.match(
+      folderLocationForecastsName,
+    ).folder;
   }
 
   /**
@@ -1315,8 +1686,12 @@ export class UsageServiceClient {
    *   A fully-qualified path representing folder_location_forecasts resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFolderLocationForecastsName(folderLocationForecastsName: string) {
-    return this.pathTemplates.folderLocationForecastsPathTemplate.match(folderLocationForecastsName).location;
+  matchLocationFromFolderLocationForecastsName(
+    folderLocationForecastsName: string,
+  ) {
+    return this.pathTemplates.folderLocationForecastsPathTemplate.match(
+      folderLocationForecastsName,
+    ).location;
   }
 
   /**
@@ -1326,8 +1701,12 @@ export class UsageServiceClient {
    *   A fully-qualified path representing folder_location_forecasts resource.
    * @returns {string} A string representing the forecast.
    */
-  matchForecastFromFolderLocationForecastsName(folderLocationForecastsName: string) {
-    return this.pathTemplates.folderLocationForecastsPathTemplate.match(folderLocationForecastsName).forecast;
+  matchForecastFromFolderLocationForecastsName(
+    folderLocationForecastsName: string,
+  ) {
+    return this.pathTemplates.folderLocationForecastsPathTemplate.match(
+      folderLocationForecastsName,
+    ).forecast;
   }
 
   /**
@@ -1338,7 +1717,11 @@ export class UsageServiceClient {
    * @param {string} reservation
    * @returns {string} Resource name string.
    */
-  folderLocationReservationsPath(folder:string,location:string,reservation:string) {
+  folderLocationReservationsPath(
+    folder: string,
+    location: string,
+    reservation: string,
+  ) {
     return this.pathTemplates.folderLocationReservationsPathTemplate.render({
       folder: folder,
       location: location,
@@ -1353,8 +1736,12 @@ export class UsageServiceClient {
    *   A fully-qualified path representing folder_location_reservations resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderLocationReservationsName(folderLocationReservationsName: string) {
-    return this.pathTemplates.folderLocationReservationsPathTemplate.match(folderLocationReservationsName).folder;
+  matchFolderFromFolderLocationReservationsName(
+    folderLocationReservationsName: string,
+  ) {
+    return this.pathTemplates.folderLocationReservationsPathTemplate.match(
+      folderLocationReservationsName,
+    ).folder;
   }
 
   /**
@@ -1364,8 +1751,12 @@ export class UsageServiceClient {
    *   A fully-qualified path representing folder_location_reservations resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFolderLocationReservationsName(folderLocationReservationsName: string) {
-    return this.pathTemplates.folderLocationReservationsPathTemplate.match(folderLocationReservationsName).location;
+  matchLocationFromFolderLocationReservationsName(
+    folderLocationReservationsName: string,
+  ) {
+    return this.pathTemplates.folderLocationReservationsPathTemplate.match(
+      folderLocationReservationsName,
+    ).location;
   }
 
   /**
@@ -1375,8 +1766,12 @@ export class UsageServiceClient {
    *   A fully-qualified path representing folder_location_reservations resource.
    * @returns {string} A string representing the reservation.
    */
-  matchReservationFromFolderLocationReservationsName(folderLocationReservationsName: string) {
-    return this.pathTemplates.folderLocationReservationsPathTemplate.match(folderLocationReservationsName).reservation;
+  matchReservationFromFolderLocationReservationsName(
+    folderLocationReservationsName: string,
+  ) {
+    return this.pathTemplates.folderLocationReservationsPathTemplate.match(
+      folderLocationReservationsName,
+    ).reservation;
   }
 
   /**
@@ -1386,7 +1781,7 @@ export class UsageServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -1423,7 +1818,11 @@ export class UsageServiceClient {
    * @param {string} forecast
    * @returns {string} Resource name string.
    */
-  organizationLocationForecastsPath(organization:string,location:string,forecast:string) {
+  organizationLocationForecastsPath(
+    organization: string,
+    location: string,
+    forecast: string,
+  ) {
     return this.pathTemplates.organizationLocationForecastsPathTemplate.render({
       organization: organization,
       location: location,
@@ -1438,8 +1837,12 @@ export class UsageServiceClient {
    *   A fully-qualified path representing organization_location_forecasts resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationForecastsName(organizationLocationForecastsName: string) {
-    return this.pathTemplates.organizationLocationForecastsPathTemplate.match(organizationLocationForecastsName).organization;
+  matchOrganizationFromOrganizationLocationForecastsName(
+    organizationLocationForecastsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationForecastsPathTemplate.match(
+      organizationLocationForecastsName,
+    ).organization;
   }
 
   /**
@@ -1449,8 +1852,12 @@ export class UsageServiceClient {
    *   A fully-qualified path representing organization_location_forecasts resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationForecastsName(organizationLocationForecastsName: string) {
-    return this.pathTemplates.organizationLocationForecastsPathTemplate.match(organizationLocationForecastsName).location;
+  matchLocationFromOrganizationLocationForecastsName(
+    organizationLocationForecastsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationForecastsPathTemplate.match(
+      organizationLocationForecastsName,
+    ).location;
   }
 
   /**
@@ -1460,8 +1867,12 @@ export class UsageServiceClient {
    *   A fully-qualified path representing organization_location_forecasts resource.
    * @returns {string} A string representing the forecast.
    */
-  matchForecastFromOrganizationLocationForecastsName(organizationLocationForecastsName: string) {
-    return this.pathTemplates.organizationLocationForecastsPathTemplate.match(organizationLocationForecastsName).forecast;
+  matchForecastFromOrganizationLocationForecastsName(
+    organizationLocationForecastsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationForecastsPathTemplate.match(
+      organizationLocationForecastsName,
+    ).forecast;
   }
 
   /**
@@ -1472,12 +1883,18 @@ export class UsageServiceClient {
    * @param {string} reservation
    * @returns {string} Resource name string.
    */
-  organizationLocationReservationsPath(organization:string,location:string,reservation:string) {
-    return this.pathTemplates.organizationLocationReservationsPathTemplate.render({
-      organization: organization,
-      location: location,
-      reservation: reservation,
-    });
+  organizationLocationReservationsPath(
+    organization: string,
+    location: string,
+    reservation: string,
+  ) {
+    return this.pathTemplates.organizationLocationReservationsPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        reservation: reservation,
+      },
+    );
   }
 
   /**
@@ -1487,8 +1904,12 @@ export class UsageServiceClient {
    *   A fully-qualified path representing organization_location_reservations resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationReservationsName(organizationLocationReservationsName: string) {
-    return this.pathTemplates.organizationLocationReservationsPathTemplate.match(organizationLocationReservationsName).organization;
+  matchOrganizationFromOrganizationLocationReservationsName(
+    organizationLocationReservationsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationReservationsPathTemplate.match(
+      organizationLocationReservationsName,
+    ).organization;
   }
 
   /**
@@ -1498,8 +1919,12 @@ export class UsageServiceClient {
    *   A fully-qualified path representing organization_location_reservations resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationReservationsName(organizationLocationReservationsName: string) {
-    return this.pathTemplates.organizationLocationReservationsPathTemplate.match(organizationLocationReservationsName).location;
+  matchLocationFromOrganizationLocationReservationsName(
+    organizationLocationReservationsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationReservationsPathTemplate.match(
+      organizationLocationReservationsName,
+    ).location;
   }
 
   /**
@@ -1509,8 +1934,12 @@ export class UsageServiceClient {
    *   A fully-qualified path representing organization_location_reservations resource.
    * @returns {string} A string representing the reservation.
    */
-  matchReservationFromOrganizationLocationReservationsName(organizationLocationReservationsName: string) {
-    return this.pathTemplates.organizationLocationReservationsPathTemplate.match(organizationLocationReservationsName).reservation;
+  matchReservationFromOrganizationLocationReservationsName(
+    organizationLocationReservationsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationReservationsPathTemplate.match(
+      organizationLocationReservationsName,
+    ).reservation;
   }
 
   /**
@@ -1521,7 +1950,11 @@ export class UsageServiceClient {
    * @param {string} forecast
    * @returns {string} Resource name string.
    */
-  projectLocationForecastsPath(project:string,location:string,forecast:string) {
+  projectLocationForecastsPath(
+    project: string,
+    location: string,
+    forecast: string,
+  ) {
     return this.pathTemplates.projectLocationForecastsPathTemplate.render({
       project: project,
       location: location,
@@ -1536,8 +1969,12 @@ export class UsageServiceClient {
    *   A fully-qualified path representing project_location_forecasts resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationForecastsName(projectLocationForecastsName: string) {
-    return this.pathTemplates.projectLocationForecastsPathTemplate.match(projectLocationForecastsName).project;
+  matchProjectFromProjectLocationForecastsName(
+    projectLocationForecastsName: string,
+  ) {
+    return this.pathTemplates.projectLocationForecastsPathTemplate.match(
+      projectLocationForecastsName,
+    ).project;
   }
 
   /**
@@ -1547,8 +1984,12 @@ export class UsageServiceClient {
    *   A fully-qualified path representing project_location_forecasts resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationForecastsName(projectLocationForecastsName: string) {
-    return this.pathTemplates.projectLocationForecastsPathTemplate.match(projectLocationForecastsName).location;
+  matchLocationFromProjectLocationForecastsName(
+    projectLocationForecastsName: string,
+  ) {
+    return this.pathTemplates.projectLocationForecastsPathTemplate.match(
+      projectLocationForecastsName,
+    ).location;
   }
 
   /**
@@ -1558,8 +1999,12 @@ export class UsageServiceClient {
    *   A fully-qualified path representing project_location_forecasts resource.
    * @returns {string} A string representing the forecast.
    */
-  matchForecastFromProjectLocationForecastsName(projectLocationForecastsName: string) {
-    return this.pathTemplates.projectLocationForecastsPathTemplate.match(projectLocationForecastsName).forecast;
+  matchForecastFromProjectLocationForecastsName(
+    projectLocationForecastsName: string,
+  ) {
+    return this.pathTemplates.projectLocationForecastsPathTemplate.match(
+      projectLocationForecastsName,
+    ).forecast;
   }
 
   /**
@@ -1570,7 +2015,11 @@ export class UsageServiceClient {
    * @param {string} reservation
    * @returns {string} Resource name string.
    */
-  projectLocationReservationsPath(project:string,location:string,reservation:string) {
+  projectLocationReservationsPath(
+    project: string,
+    location: string,
+    reservation: string,
+  ) {
     return this.pathTemplates.projectLocationReservationsPathTemplate.render({
       project: project,
       location: location,
@@ -1585,8 +2034,12 @@ export class UsageServiceClient {
    *   A fully-qualified path representing project_location_reservations resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationReservationsName(projectLocationReservationsName: string) {
-    return this.pathTemplates.projectLocationReservationsPathTemplate.match(projectLocationReservationsName).project;
+  matchProjectFromProjectLocationReservationsName(
+    projectLocationReservationsName: string,
+  ) {
+    return this.pathTemplates.projectLocationReservationsPathTemplate.match(
+      projectLocationReservationsName,
+    ).project;
   }
 
   /**
@@ -1596,8 +2049,12 @@ export class UsageServiceClient {
    *   A fully-qualified path representing project_location_reservations resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationReservationsName(projectLocationReservationsName: string) {
-    return this.pathTemplates.projectLocationReservationsPathTemplate.match(projectLocationReservationsName).location;
+  matchLocationFromProjectLocationReservationsName(
+    projectLocationReservationsName: string,
+  ) {
+    return this.pathTemplates.projectLocationReservationsPathTemplate.match(
+      projectLocationReservationsName,
+    ).location;
   }
 
   /**
@@ -1607,8 +2064,12 @@ export class UsageServiceClient {
    *   A fully-qualified path representing project_location_reservations resource.
    * @returns {string} A string representing the reservation.
    */
-  matchReservationFromProjectLocationReservationsName(projectLocationReservationsName: string) {
-    return this.pathTemplates.projectLocationReservationsPathTemplate.match(projectLocationReservationsName).reservation;
+  matchReservationFromProjectLocationReservationsName(
+    projectLocationReservationsName: string,
+  ) {
+    return this.pathTemplates.projectLocationReservationsPathTemplate.match(
+      projectLocationReservationsName,
+    ).reservation;
   }
 
   /**
@@ -1619,7 +2080,7 @@ export class UsageServiceClient {
    */
   close(): Promise<void> {
     if (this.usageServiceStub && !this._terminated) {
-      return this.usageServiceStub.then(stub => {
+      return this.usageServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

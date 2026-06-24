@@ -34,16 +34,16 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  The maximum number of resources to return.
+   *  Optional. The maximum number of resources to return.
    *  If unspecified, at most 50 resources will be returned.
    *  The maximum value is 200; (higher values will be coerced to the maximum)
    */
   // const pageSize = 1234
   /**
-   *  A page token, received from a previous `ListConversionEvents` call.
-   *  Provide this to retrieve the subsequent page.
-   *  When paginating, all other parameters provided to `ListConversionEvents`
-   *  must match the call that provided the page token.
+   *  Optional. A page token, received from a previous `ListConversionEvents`
+   *  call. Provide this to retrieve the subsequent page. When paginating, all
+   *  other parameters provided to `ListConversionEvents` must match the call
+   *  that provided the page token.
    */
   // const pageToken = 'abc123'
 

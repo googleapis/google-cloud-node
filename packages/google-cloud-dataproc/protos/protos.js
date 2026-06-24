@@ -16830,6 +16830,7 @@
                          * @property {google.cloud.dataproc.v1.INodeGroupAffinity|null} [nodeGroupAffinity] GceClusterConfig nodeGroupAffinity
                          * @property {google.cloud.dataproc.v1.IShieldedInstanceConfig|null} [shieldedInstanceConfig] GceClusterConfig shieldedInstanceConfig
                          * @property {google.cloud.dataproc.v1.IConfidentialInstanceConfig|null} [confidentialInstanceConfig] GceClusterConfig confidentialInstanceConfig
+                         * @property {Object.<string,string>|null} [resourceManagerTags] GceClusterConfig resourceManagerTags
                          */
     
                         /**
@@ -16844,6 +16845,7 @@
                             this.serviceAccountScopes = [];
                             this.tags = [];
                             this.metadata = {};
+                            this.resourceManagerTags = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null && keys[i] !== "__proto__")
@@ -16954,6 +16956,14 @@
                          */
                         GceClusterConfig.prototype.confidentialInstanceConfig = null;
     
+                        /**
+                         * GceClusterConfig resourceManagerTags.
+                         * @member {Object.<string,string>} resourceManagerTags
+                         * @memberof google.cloud.dataproc.v1.GceClusterConfig
+                         * @instance
+                         */
+                        GceClusterConfig.prototype.resourceManagerTags = $util.emptyObject;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -17016,6 +17026,9 @@
                                 $root.google.cloud.dataproc.v1.ShieldedInstanceConfig.encode(message.shieldedInstanceConfig, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                             if (message.confidentialInstanceConfig != null && Object.hasOwnProperty.call(message, "confidentialInstanceConfig"))
                                 $root.google.cloud.dataproc.v1.ConfidentialInstanceConfig.encode(message.confidentialInstanceConfig, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                            if (message.resourceManagerTags != null && Object.hasOwnProperty.call(message, "resourceManagerTags"))
+                                for (var keys = Object.keys(message.resourceManagerTags), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 16, wireType 2 =*/130).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.resourceManagerTags[keys[i]]).ldelim();
                             return writer;
                         };
     
@@ -17133,6 +17146,31 @@
                                         message.confidentialInstanceConfig = $root.google.cloud.dataproc.v1.ConfidentialInstanceConfig.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
+                                case 16: {
+                                        if (message.resourceManagerTags === $util.emptyObject)
+                                            message.resourceManagerTags = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7, long);
+                                                break;
+                                            }
+                                        }
+                                        if (key === "__proto__")
+                                            $util.makeProp(message.resourceManagerTags, key);
+                                        message.resourceManagerTags[key] = value;
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
@@ -17242,6 +17280,14 @@
                                 if (error)
                                     return "confidentialInstanceConfig." + error;
                             }
+                            if (message.resourceManagerTags != null && message.hasOwnProperty("resourceManagerTags")) {
+                                if (!$util.isObject(message.resourceManagerTags))
+                                    return "resourceManagerTags: object expected";
+                                var key = Object.keys(message.resourceManagerTags);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.resourceManagerTags[key[i]]))
+                                        return "resourceManagerTags: string{k:string} expected";
+                            }
                             return null;
                         };
     
@@ -17339,6 +17385,16 @@
                                     throw TypeError(".google.cloud.dataproc.v1.GceClusterConfig.confidentialInstanceConfig: object expected");
                                 message.confidentialInstanceConfig = $root.google.cloud.dataproc.v1.ConfidentialInstanceConfig.fromObject(object.confidentialInstanceConfig, long + 1);
                             }
+                            if (object.resourceManagerTags) {
+                                if (typeof object.resourceManagerTags !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.GceClusterConfig.resourceManagerTags: object expected");
+                                message.resourceManagerTags = {};
+                                for (var keys = Object.keys(object.resourceManagerTags), i = 0; i < keys.length; ++i) {
+                                    if (keys[i] === "__proto__")
+                                        $util.makeProp(message.resourceManagerTags, keys[i]);
+                                    message.resourceManagerTags[keys[i]] = String(object.resourceManagerTags[keys[i]]);
+                                }
+                            }
                             return message;
                         };
     
@@ -17359,8 +17415,10 @@
                                 object.serviceAccountScopes = [];
                                 object.tags = [];
                             }
-                            if (options.objects || options.defaults)
+                            if (options.objects || options.defaults) {
                                 object.metadata = {};
+                                object.resourceManagerTags = {};
+                            }
                             if (options.defaults) {
                                 object.zoneUri = "";
                                 object.networkUri = "";
@@ -17414,6 +17472,14 @@
                                 object.shieldedInstanceConfig = $root.google.cloud.dataproc.v1.ShieldedInstanceConfig.toObject(message.shieldedInstanceConfig, options);
                             if (message.confidentialInstanceConfig != null && message.hasOwnProperty("confidentialInstanceConfig"))
                                 object.confidentialInstanceConfig = $root.google.cloud.dataproc.v1.ConfidentialInstanceConfig.toObject(message.confidentialInstanceConfig, options);
+                            if (message.resourceManagerTags && (keys2 = Object.keys(message.resourceManagerTags)).length) {
+                                object.resourceManagerTags = {};
+                                for (var j = 0; j < keys2.length; ++j) {
+                                    if (keys2[j] === "__proto__")
+                                        $util.makeProp(object.resourceManagerTags, keys2[j]);
+                                    object.resourceManagerTags[keys2[j]] = message.resourceManagerTags[keys2[j]];
+                                }
+                            }
                             return object;
                         };
     
@@ -17984,6 +18050,7 @@
                          * @memberof google.cloud.dataproc.v1
                          * @interface IConfidentialInstanceConfig
                          * @property {boolean|null} [enableConfidentialCompute] ConfidentialInstanceConfig enableConfidentialCompute
+                         * @property {google.cloud.dataproc.v1.ConfidentialInstanceConfig.ConfidentialInstanceType|null} [confidentialInstanceType] ConfidentialInstanceConfig confidentialInstanceType
                          */
     
                         /**
@@ -18008,6 +18075,14 @@
                          * @instance
                          */
                         ConfidentialInstanceConfig.prototype.enableConfidentialCompute = false;
+    
+                        /**
+                         * ConfidentialInstanceConfig confidentialInstanceType.
+                         * @member {google.cloud.dataproc.v1.ConfidentialInstanceConfig.ConfidentialInstanceType} confidentialInstanceType
+                         * @memberof google.cloud.dataproc.v1.ConfidentialInstanceConfig
+                         * @instance
+                         */
+                        ConfidentialInstanceConfig.prototype.confidentialInstanceType = 0;
     
                         /**
                          * Creates a new ConfidentialInstanceConfig instance using the specified properties.
@@ -18035,6 +18110,8 @@
                                 writer = $Writer.create();
                             if (message.enableConfidentialCompute != null && Object.hasOwnProperty.call(message, "enableConfidentialCompute"))
                                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableConfidentialCompute);
+                            if (message.confidentialInstanceType != null && Object.hasOwnProperty.call(message, "confidentialInstanceType"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.confidentialInstanceType);
                             return writer;
                         };
     
@@ -18079,6 +18156,10 @@
                                         message.enableConfidentialCompute = reader.bool();
                                         break;
                                     }
+                                case 2: {
+                                        message.confidentialInstanceType = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
@@ -18121,6 +18202,16 @@
                             if (message.enableConfidentialCompute != null && message.hasOwnProperty("enableConfidentialCompute"))
                                 if (typeof message.enableConfidentialCompute !== "boolean")
                                     return "enableConfidentialCompute: boolean expected";
+                            if (message.confidentialInstanceType != null && message.hasOwnProperty("confidentialInstanceType"))
+                                switch (message.confidentialInstanceType) {
+                                default:
+                                    return "confidentialInstanceType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -18142,6 +18233,30 @@
                             var message = new $root.google.cloud.dataproc.v1.ConfidentialInstanceConfig();
                             if (object.enableConfidentialCompute != null)
                                 message.enableConfidentialCompute = Boolean(object.enableConfidentialCompute);
+                            switch (object.confidentialInstanceType) {
+                            default:
+                                if (typeof object.confidentialInstanceType === "number") {
+                                    message.confidentialInstanceType = object.confidentialInstanceType;
+                                    break;
+                                }
+                                break;
+                            case "CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.confidentialInstanceType = 0;
+                                break;
+                            case "SEV":
+                            case 1:
+                                message.confidentialInstanceType = 1;
+                                break;
+                            case "SEV_SNP":
+                            case 2:
+                                message.confidentialInstanceType = 2;
+                                break;
+                            case "TDX":
+                            case 3:
+                                message.confidentialInstanceType = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -18158,10 +18273,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.enableConfidentialCompute = false;
+                                object.confidentialInstanceType = options.enums === String ? "CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED" : 0;
+                            }
                             if (message.enableConfidentialCompute != null && message.hasOwnProperty("enableConfidentialCompute"))
                                 object.enableConfidentialCompute = message.enableConfidentialCompute;
+                            if (message.confidentialInstanceType != null && message.hasOwnProperty("confidentialInstanceType"))
+                                object.confidentialInstanceType = options.enums === String ? $root.google.cloud.dataproc.v1.ConfidentialInstanceConfig.ConfidentialInstanceType[message.confidentialInstanceType] === undefined ? message.confidentialInstanceType : $root.google.cloud.dataproc.v1.ConfidentialInstanceConfig.ConfidentialInstanceType[message.confidentialInstanceType] : message.confidentialInstanceType;
                             return object;
                         };
     
@@ -18190,6 +18309,24 @@
                             }
                             return typeUrlPrefix + "/google.cloud.dataproc.v1.ConfidentialInstanceConfig";
                         };
+    
+                        /**
+                         * ConfidentialInstanceType enum.
+                         * @name google.cloud.dataproc.v1.ConfidentialInstanceConfig.ConfidentialInstanceType
+                         * @enum {number}
+                         * @property {number} CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED=0 CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED value
+                         * @property {number} SEV=1 SEV value
+                         * @property {number} SEV_SNP=2 SEV_SNP value
+                         * @property {number} TDX=3 TDX value
+                         */
+                        ConfidentialInstanceConfig.ConfidentialInstanceType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SEV"] = 1;
+                            values[valuesById[2] = "SEV_SNP"] = 2;
+                            values[valuesById[3] = "TDX"] = 3;
+                            return values;
+                        })();
     
                         return ConfidentialInstanceConfig;
                     })();
