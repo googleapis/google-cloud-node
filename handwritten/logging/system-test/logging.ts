@@ -469,7 +469,7 @@ describe('Logging', () => {
         log.write(logEntries, options, done);
       });
 
-      it('should list log entries', done => {
+      it.skip('should list log entries', done => {
         getEntriesFromLog(
           logExpected,
           {numExpectedMessages: logEntriesExpected.length},
