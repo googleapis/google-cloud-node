@@ -290,7 +290,7 @@ export class DownscopedClient extends AuthClient {
       const requestHeaders = await this.getRequestHeaders();
       opts.headers = Gaxios.mergeHeaders(opts.headers);
 
-      this.addUserProjectAndAuthHeaders(opts.headers, requestHeaders);
+      this.applyHeadersFromSource(opts.headers, requestHeaders);
 
       response = await this.transporter.request<T>(opts);
     } catch (e) {
@@ -380,19 +380,5 @@ export class DownscopedClient extends AuthClient {
     });
     // Return the cached access token.
     return this.cachedDownscopedAccessToken;
-  }
-
-  /**
-   * Returns whether the provided credentials are expired or not.
-   * If there is no expiry time, assumes the token is not expired or expiring.
-   * @param downscopedAccessToken The credentials to check for expiration.
-   * @return Whether the credentials are expired or not.
-   */
-  private isExpired(downscopedAccessToken: Credentials): boolean {
-    const now = new Date().getTime();
-    return downscopedAccessToken.expiry_date
-      ? now >=
-          downscopedAccessToken.expiry_date - this.eagerRefreshThresholdMillis
-      : false;
   }
 }

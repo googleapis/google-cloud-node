@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/service-directory-v6.1.3...service-directory-v6.2.0) (2026-06-16)
+
+
+### Features
+
+* Local OwlBot generation batch 3 ([#8614](https://github.com/googleapis/google-cloud-node/issues/8614)) ([fae15ec](https://github.com/googleapis/google-cloud-node/commit/fae15ecca725f8e978341156e2c99c623ce74fcc))
+
 ## [6.1.3](https://github.com/googleapis/google-cloud-node/compare/service-directory-v6.1.2...service-directory-v6.1.3) (2026-06-01)
 
 

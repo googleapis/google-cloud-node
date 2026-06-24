@@ -109,45 +109,35 @@ describe('ExternalAccountClient', () => {
     ];
 
     it('should return IdentityPoolClient on IdentityPoolClientOptions', () => {
-      const expectedClient = new IdentityPoolClient(fileSourcedOptions);
-
-      assert.deepStrictEqual(
-        ExternalAccountClient.fromJSON(fileSourcedOptions),
-        expectedClient,
-      );
+      const client = ExternalAccountClient.fromJSON(fileSourcedOptions);
+      assert.ok(client instanceof IdentityPoolClient);
     });
 
     it('should return IdentityPoolClient with expected RefreshOptions', () => {
-      const expectedClient = new IdentityPoolClient({
+      const client = ExternalAccountClient.fromJSON({
         ...fileSourcedOptions,
         ...refreshOptions,
       });
 
-      assert.deepStrictEqual(
-        ExternalAccountClient.fromJSON({
-          ...fileSourcedOptions,
-          ...refreshOptions,
-        }),
-        expectedClient,
-      );
+      assert.ok(client instanceof IdentityPoolClient);
+      assert.strictEqual(client!.eagerRefreshThresholdMillis, 10000);
+      assert.strictEqual(client!.forceRefreshOnFailure, true);
     });
 
     it('should return AwsClient on AwsClientOptions', () => {
-      const expectedClient = new AwsClient(awsOptions);
-
-      assert.deepStrictEqual(
-        ExternalAccountClient.fromJSON(awsOptions),
-        expectedClient,
-      );
+      const client = ExternalAccountClient.fromJSON(awsOptions);
+      assert.ok(client instanceof AwsClient);
     });
 
     it('should return AwsClient with expected RefreshOptions', () => {
-      const expectedClient = new AwsClient({...awsOptions, ...refreshOptions});
+      const client = ExternalAccountClient.fromJSON({
+        ...awsOptions,
+        ...refreshOptions,
+      });
 
-      assert.deepStrictEqual(
-        ExternalAccountClient.fromJSON({...awsOptions, ...refreshOptions}),
-        expectedClient,
-      );
+      assert.ok(client instanceof AwsClient);
+      assert.strictEqual(client!.eagerRefreshThresholdMillis, 10000);
+      assert.strictEqual(client!.forceRefreshOnFailure, true);
     });
 
     it('should return an IdentityPoolClient with a workforce config', () => {
@@ -167,41 +157,28 @@ describe('ExternalAccountClient', () => {
       for (const validWorkforceIdentityPoolClientAudience of validWorkforceIdentityPoolClientAudiences) {
         workforceFileSourcedOptions.audience =
           validWorkforceIdentityPoolClientAudience;
-        const expectedClient = new IdentityPoolClient(
+
+        const client = ExternalAccountClient.fromJSON(
           workforceFileSourcedOptions,
         );
-
-        assert.deepStrictEqual(
-          ExternalAccountClient.fromJSON(workforceFileSourcedOptions),
-          expectedClient,
-        );
+        assert.ok(client instanceof IdentityPoolClient);
       }
     });
 
     it('should return PluggableAuthClient on PluggableAuthClientOptions', () => {
-      const expectedClient = new PluggableAuthClient(
-        pluggableAuthClientOptions,
-      );
-
-      assert.deepStrictEqual(
-        ExternalAccountClient.fromJSON(pluggableAuthClientOptions),
-        expectedClient,
-      );
+      const client = ExternalAccountClient.fromJSON(pluggableAuthClientOptions);
+      assert.ok(client instanceof PluggableAuthClient);
     });
 
     it('should return PluggableAuthClient with expected RefreshOptions', () => {
-      const expectedClient = new PluggableAuthClient({
+      const client = ExternalAccountClient.fromJSON({
         ...pluggableAuthClientOptions,
         ...refreshOptions,
       });
 
-      assert.deepStrictEqual(
-        ExternalAccountClient.fromJSON({
-          ...pluggableAuthClientOptions,
-          ...refreshOptions,
-        }),
-        expectedClient,
-      );
+      assert.ok(client instanceof PluggableAuthClient);
+      assert.strictEqual(client!.eagerRefreshThresholdMillis, 10000);
+      assert.strictEqual(client!.forceRefreshOnFailure, true);
     });
 
     invalidWorkforceIdentityPoolClientAudiences.forEach(

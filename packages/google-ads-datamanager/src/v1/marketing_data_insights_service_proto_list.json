@@ -1,4 +1,5 @@
 [
+  "../../protos/google/ads/datamanager/v1/ad_event.proto",
   "../../protos/google/ads/datamanager/v1/age_range.proto",
   "../../protos/google/ads/datamanager/v1/audience.proto",
   "../../protos/google/ads/datamanager/v1/cart_data.proto",
@@ -31,5 +32,6 @@
   "../../protos/google/ads/datamanager/v1/user_list_license_pricing.proto",
   "../../protos/google/ads/datamanager/v1/user_list_license_status.proto",
   "../../protos/google/ads/datamanager/v1/user_list_service.proto",
-  "../../protos/google/ads/datamanager/v1/user_properties.proto"
+  "../../protos/google/ads/datamanager/v1/user_properties.proto",
+  "../../protos/google/ads/datamanager/v1/viewability_info.proto"
 ]

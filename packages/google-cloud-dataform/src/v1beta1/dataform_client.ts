@@ -389,11 +389,29 @@ export class DataformClient {
     this.operationsClient = this._gaxModule
       .lro(lroOptions)
       .operationsClient(opts);
+    const deleteTeamFolderTreeResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
+    const deleteTeamFolderTreeMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata',
+    ) as gax.protobuf.Type;
+    const deleteFolderTreeResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
+    const deleteFolderTreeMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata',
+    ) as gax.protobuf.Type;
     const moveFolderResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty',
     ) as gax.protobuf.Type;
     const moveFolderMetadata = protoFilesRoot.lookup(
       '.google.cloud.dataform.v1beta1.MoveFolderMetadata',
+    ) as gax.protobuf.Type;
+    const deleteRepositoryLongRunningResponse = protoFilesRoot.lookup(
+      '.google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningResponse',
+    ) as gax.protobuf.Type;
+    const deleteRepositoryLongRunningMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata',
     ) as gax.protobuf.Type;
     const moveRepositoryResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty',
@@ -403,10 +421,29 @@ export class DataformClient {
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
+      deleteTeamFolderTree: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteTeamFolderTreeResponse.decode.bind(deleteTeamFolderTreeResponse),
+        deleteTeamFolderTreeMetadata.decode.bind(deleteTeamFolderTreeMetadata),
+      ),
+      deleteFolderTree: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteFolderTreeResponse.decode.bind(deleteFolderTreeResponse),
+        deleteFolderTreeMetadata.decode.bind(deleteFolderTreeMetadata),
+      ),
       moveFolder: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         moveFolderResponse.decode.bind(moveFolderResponse),
         moveFolderMetadata.decode.bind(moveFolderMetadata),
+      ),
+      deleteRepositoryLongRunning: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteRepositoryLongRunningResponse.decode.bind(
+          deleteRepositoryLongRunningResponse,
+        ),
+        deleteRepositoryLongRunningMetadata.decode.bind(
+          deleteRepositoryLongRunningMetadata,
+        ),
       ),
       moveRepository: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -469,12 +506,14 @@ export class DataformClient {
       'createTeamFolder',
       'updateTeamFolder',
       'deleteTeamFolder',
+      'deleteTeamFolderTree',
       'queryTeamFolderContents',
       'searchTeamFolders',
       'getFolder',
       'createFolder',
       'updateFolder',
       'deleteFolder',
+      'deleteFolderTree',
       'queryFolderContents',
       'queryUserRootContents',
       'moveFolder',
@@ -483,6 +522,7 @@ export class DataformClient {
       'createRepository',
       'updateRepository',
       'deleteRepository',
+      'deleteRepositoryLongRunning',
       'moveRepository',
       'commitRepositoryChanges',
       'readRepositoryFile',
@@ -804,6 +844,8 @@ export class DataformClient {
    * @param {google.cloud.dataform.v1beta1.TeamFolder} request.teamFolder
    *   Required. The TeamFolder to create.
    * @param {string} request.teamFolderId
+   *   Deprecated: This field is not used. The resource name is generated
+   *   automatically.
    *   The ID to use for the TeamFolder, which will become the final component of
    *   the TeamFolder's resource name.
    * @param {object} [options]
@@ -1352,6 +1394,8 @@ export class DataformClient {
    * @param {google.cloud.dataform.v1beta1.Folder} request.folder
    *   Required. The Folder to create.
    * @param {string} request.folderId
+   *   Deprecated: This field is not used. The resource name is generated
+   *   automatically.
    *   The ID to use for the Folder, which will become the final component of
    *   the Folder's resource name.
    * @param {object} [options]
@@ -8154,6 +8198,364 @@ export class DataformClient {
   }
 
   /**
+   * Deletes a TeamFolder with its contents (Folders, Repositories, Workspaces,
+   * ReleaseConfigs, and WorkflowConfigs).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The TeamFolder's name.
+   *   Format: projects/{project}/locations/{location}/teamFolders/{team_folder}
+   * @param {boolean} [request.force]
+   *   Optional. If `false` (default): The operation will fail if any
+   *   Repository within the folder hierarchy has associated Release Configs or
+   *   Workflow Configs.
+   *
+   *   If `true`: The operation will attempt to delete everything, including any
+   *   Release Configs and Workflow Configs linked to Repositories within the
+   *   folder hierarchy. This permanently removes schedules and resources.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataform.delete_team_folder_tree.js</caption>
+   * region_tag:dataform_v1beta1_generated_Dataform_DeleteTeamFolderTree_async
+   */
+  deleteTeamFolderTree(
+    request?: protos.google.cloud.dataform.v1beta1.IDeleteTeamFolderTreeRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteTeamFolderTree(
+    request: protos.google.cloud.dataform.v1beta1.IDeleteTeamFolderTreeRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteTeamFolderTree(
+    request: protos.google.cloud.dataform.v1beta1.IDeleteTeamFolderTreeRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteTeamFolderTree(
+    request?: protos.google.cloud.dataform.v1beta1.IDeleteTeamFolderTreeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteTeamFolderTree response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteTeamFolderTree request %j', request);
+    return this.innerApiCalls
+      .deleteTeamFolderTree(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTeamFolderTree response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteTeamFolderTree()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataform.delete_team_folder_tree.js</caption>
+   * region_tag:dataform_v1beta1_generated_Dataform_DeleteTeamFolderTree_async
+   */
+  async checkDeleteTeamFolderTreeProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata
+    >
+  > {
+    this._log.info('deleteTeamFolderTree long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteTeamFolderTree,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata
+    >;
+  }
+  /**
+   * Deletes a Folder with its contents (Folders, Repositories, Workspaces,
+   * ReleaseConfigs, and WorkflowConfigs).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The Folder's name.
+   *   Format: projects/{project}/locations/{location}/folders/{folder}
+   * @param {boolean} [request.force]
+   *   Optional. If `false` (default): The operation will fail if any
+   *   Repository within the folder hierarchy has associated Release Configs or
+   *   Workflow Configs.
+   *
+   *   If `true`: The operation will attempt to delete everything, including any
+   *   Release Configs and Workflow Configs linked to Repositories within the
+   *   folder hierarchy. This permanently removes schedules and resources.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataform.delete_folder_tree.js</caption>
+   * region_tag:dataform_v1beta1_generated_Dataform_DeleteFolderTree_async
+   */
+  deleteFolderTree(
+    request?: protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteFolderTree(
+    request: protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteFolderTree(
+    request: protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteFolderTree(
+    request?: protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteFolderTree response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteFolderTree request %j', request);
+    return this.innerApiCalls
+      .deleteFolderTree(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteFolderTree response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteFolderTree()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataform.delete_folder_tree.js</caption>
+   * region_tag:dataform_v1beta1_generated_Dataform_DeleteFolderTree_async
+   */
+  async checkDeleteFolderTreeProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata
+    >
+  > {
+    this._log.info('deleteFolderTree long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteFolderTree,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata
+    >;
+  }
+  /**
    * Moves a Folder to a new Folder, TeamFolder, or the root location.
    *
    * @param {Object} request
@@ -8324,6 +8726,189 @@ export class DataformClient {
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
       protos.google.cloud.dataform.v1beta1.MoveFolderMetadata
+    >;
+  }
+  /**
+   * Deletes a single repository asynchronously.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The repository's name.
+   * @param {boolean} [request.force]
+   *   Optional. If set to true, child resources of this repository (compilation
+   *   results and workflow invocations) will also be deleted. Otherwise, the
+   *   request will only succeed if the repository has no child resources.
+   *
+   *   **Note:** *This flag doesn't support deletion of workspaces, release
+   *   configs or workflow configs. If any of such resources exists in the
+   *   repository, the request will fail.*
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataform.delete_repository_long_running.js</caption>
+   * region_tag:dataform_v1beta1_generated_Dataform_DeleteRepositoryLongRunning_async
+   */
+  deleteRepositoryLongRunning(
+    request?: protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningResponse,
+        protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteRepositoryLongRunning(
+    request: protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningResponse,
+        protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteRepositoryLongRunning(
+    request: protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningResponse,
+        protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteRepositoryLongRunning(
+    request?: protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningResponse,
+            protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningResponse,
+        protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningResponse,
+        protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningResponse,
+            protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'deleteRepositoryLongRunning response %j',
+            rawResponse,
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteRepositoryLongRunning request %j', request);
+    return this.innerApiCalls
+      .deleteRepositoryLongRunning(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningResponse,
+            protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteRepositoryLongRunning response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteRepositoryLongRunning()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataform.delete_repository_long_running.js</caption>
+   * region_tag:dataform_v1beta1_generated_Dataform_DeleteRepositoryLongRunning_async
+   */
+  async checkDeleteRepositoryLongRunningProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningResponse,
+      protos.google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata
+    >
+  > {
+    this._log.info('deleteRepositoryLongRunning long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteRepositoryLongRunning,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningResponse,
+      protos.google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata
     >;
   }
   /**
@@ -8506,7 +9091,7 @@ export class DataformClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.teamFolder
-   *   Required. Name of the team_folder whose contents to list.
+   *   Required. Resource name of the TeamFolder to list contents for.
    *   Format: `projects/* /locations/* /teamFolders/*`.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of paths to return. The server may return fewer
@@ -8525,14 +9110,16 @@ export class DataformClient {
    *   order. Supported keywords: `display_name` (default), `create_time`,
    *   last_modified_time.
    *   Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -8653,7 +9240,7 @@ export class DataformClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.teamFolder
-   *   Required. Name of the team_folder whose contents to list.
+   *   Required. Resource name of the TeamFolder to list contents for.
    *   Format: `projects/* /locations/* /teamFolders/*`.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of paths to return. The server may return fewer
@@ -8672,14 +9259,16 @@ export class DataformClient {
    *   order. Supported keywords: `display_name` (default), `create_time`,
    *   last_modified_time.
    *   Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -8723,7 +9312,7 @@ export class DataformClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.teamFolder
-   *   Required. Name of the team_folder whose contents to list.
+   *   Required. Resource name of the TeamFolder to list contents for.
    *   Format: `projects/* /locations/* /teamFolders/*`.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of paths to return. The server may return fewer
@@ -8742,14 +9331,16 @@ export class DataformClient {
    *   order. Supported keywords: `display_name` (default), `create_time`,
    *   last_modified_time.
    *   Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -8796,9 +9387,9 @@ export class DataformClient {
    *   Required. Location in which to query TeamFolders.
    *   Format: `projects/* /locations/*`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of TeamFolders to return. The server may return
-   *   fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
+   *   Optional. Maximum number of `TeamFolders` to return. The server may return
+   *   fewer items than requested. If unspecified, the server will pick a default
+   *   of `page_size` = 50.
    * @param {string} [request.pageToken]
    *   Optional. Page token received from a previous `SearchTeamFolders` call.
    *   Provide this to retrieve the subsequent page.
@@ -8810,14 +9401,16 @@ export class DataformClient {
    *   Optional. Field to additionally sort results by.
    *   Supported keywords: `display_name` (default), `create_time`,
    *   `last_modified_time`. Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -8941,9 +9534,9 @@ export class DataformClient {
    *   Required. Location in which to query TeamFolders.
    *   Format: `projects/* /locations/*`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of TeamFolders to return. The server may return
-   *   fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
+   *   Optional. Maximum number of `TeamFolders` to return. The server may return
+   *   fewer items than requested. If unspecified, the server will pick a default
+   *   of `page_size` = 50.
    * @param {string} [request.pageToken]
    *   Optional. Page token received from a previous `SearchTeamFolders` call.
    *   Provide this to retrieve the subsequent page.
@@ -8955,14 +9548,16 @@ export class DataformClient {
    *   Optional. Field to additionally sort results by.
    *   Supported keywords: `display_name` (default), `create_time`,
    *   `last_modified_time`. Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -9009,9 +9604,9 @@ export class DataformClient {
    *   Required. Location in which to query TeamFolders.
    *   Format: `projects/* /locations/*`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of TeamFolders to return. The server may return
-   *   fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
+   *   Optional. Maximum number of `TeamFolders` to return. The server may return
+   *   fewer items than requested. If unspecified, the server will pick a default
+   *   of `page_size` = 50.
    * @param {string} [request.pageToken]
    *   Optional. Page token received from a previous `SearchTeamFolders` call.
    *   Provide this to retrieve the subsequent page.
@@ -9023,14 +9618,16 @@ export class DataformClient {
    *   Optional. Field to additionally sort results by.
    *   Supported keywords: `display_name` (default), `create_time`,
    *   `last_modified_time`. Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -9073,7 +9670,7 @@ export class DataformClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.folder
-   *   Required. Name of the folder whose contents to list.
+   *   Required. Resource name of the Folder to list contents for.
    *   Format: projects/* /locations/* /folders/*
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of paths to return. The server may return fewer
@@ -9092,14 +9689,16 @@ export class DataformClient {
    *   order. Supported keywords: display_name (default), create_time,
    *   last_modified_time.
    *   Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -9220,7 +9819,7 @@ export class DataformClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.folder
-   *   Required. Name of the folder whose contents to list.
+   *   Required. Resource name of the Folder to list contents for.
    *   Format: projects/* /locations/* /folders/*
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of paths to return. The server may return fewer
@@ -9239,14 +9838,16 @@ export class DataformClient {
    *   order. Supported keywords: display_name (default), create_time,
    *   last_modified_time.
    *   Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -9290,7 +9891,7 @@ export class DataformClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.folder
-   *   Required. Name of the folder whose contents to list.
+   *   Required. Resource name of the Folder to list contents for.
    *   Format: projects/* /locations/* /folders/*
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of paths to return. The server may return fewer
@@ -9309,14 +9910,16 @@ export class DataformClient {
    *   order. Supported keywords: display_name (default), create_time,
    *   last_modified_time.
    *   Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -9361,7 +9964,7 @@ export class DataformClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.location
-   *   Required. Location of the user root folder whose contents to list.
+   *   Required. Location of the user root folder to list contents for.
    *   Format: projects/* /locations/*
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of paths to return. The server may return fewer
@@ -9379,14 +9982,16 @@ export class DataformClient {
    *   Will order Folders before Repositories, and then by `order_by` in ascending
    *   order. Supported keywords: display_name (default), created_at,
    *   last_modified_at. Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -9507,7 +10112,7 @@ export class DataformClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.location
-   *   Required. Location of the user root folder whose contents to list.
+   *   Required. Location of the user root folder to list contents for.
    *   Format: projects/* /locations/*
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of paths to return. The server may return fewer
@@ -9525,14 +10130,16 @@ export class DataformClient {
    *   Will order Folders before Repositories, and then by `order_by` in ascending
    *   order. Supported keywords: display_name (default), created_at,
    *   last_modified_at. Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -9576,7 +10183,7 @@ export class DataformClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.location
-   *   Required. Location of the user root folder whose contents to list.
+   *   Required. Location of the user root folder to list contents for.
    *   Format: projects/* /locations/*
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of paths to return. The server may return fewer
@@ -9594,14 +10201,16 @@ export class DataformClient {
    *   Will order Folders before Repositories, and then by `order_by` in ascending
    *   order. Supported keywords: display_name (default), created_at,
    *   last_modified_at. Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -10696,6 +11305,11 @@ export class DataformClient {
    *   When paginating, all other parameters provided to
    *   `QueryDirectoryContents`, with the exception of `page_size`, must match the
    *   call that provided the page token.
+   * @param {google.cloud.dataform.v1beta1.DirectoryContentsView} [request.view]
+   *   Optional. Specifies the metadata to return for each directory entry.
+   *   If unspecified, the default is `DIRECTORY_CONTENTS_VIEW_BASIC`.
+   *   Currently the `DIRECTORY_CONTENTS_VIEW_METADATA` view is not supported by
+   *   CMEK-protected workspaces.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -10831,6 +11445,11 @@ export class DataformClient {
    *   When paginating, all other parameters provided to
    *   `QueryDirectoryContents`, with the exception of `page_size`, must match the
    *   call that provided the page token.
+   * @param {google.cloud.dataform.v1beta1.DirectoryContentsView} [request.view]
+   *   Optional. Specifies the metadata to return for each directory entry.
+   *   If unspecified, the default is `DIRECTORY_CONTENTS_VIEW_BASIC`.
+   *   Currently the `DIRECTORY_CONTENTS_VIEW_METADATA` view is not supported by
+   *   CMEK-protected workspaces.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -10889,6 +11508,11 @@ export class DataformClient {
    *   When paginating, all other parameters provided to
    *   `QueryDirectoryContents`, with the exception of `page_size`, must match the
    *   call that provided the page token.
+   * @param {google.cloud.dataform.v1beta1.DirectoryContentsView} [request.view]
+   *   Optional. Specifies the metadata to return for each directory entry.
+   *   If unspecified, the default is `DIRECTORY_CONTENTS_VIEW_BASIC`.
+   *   Currently the `DIRECTORY_CONTENTS_VIEW_METADATA` view is not supported by
+   *   CMEK-protected workspaces.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

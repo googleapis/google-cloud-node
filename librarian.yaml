@@ -16,8 +16,8 @@ version: v0.20.0
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
-    commit: ff15be54722218705740b9fc6223d264c4cdb6dd
-    sha256: 13dc3b1a01767be8d486980d3ddcb7fe6f6b89c3da8d41c358d5c2536c86de3c
+    commit: b6f9ff05aaec18070232a1ab36da98e684bc7909
+    sha256: 91788c6f956a0a409abe89a304c123cff73cb0ebb46b494e56d7ac9ece86f8cf
 default:
   keep:
     - librarian.js
@@ -36,12 +36,11 @@ libraries:
     apis:
       - path: google/ads/admanager/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/admanager/latest
   - name: google-ads-datamanager
-    version: 0.3.0
+    version: 0.4.0
     apis:
       - path: google/ads/datamanager/v1
     copyright_year: "2026"
@@ -57,7 +56,6 @@ libraries:
       - path: google/ai/generativelanguage/v1beta
       - path: google/ai/generativelanguage/v1alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta
       client_documentation_override: https://developers.generativeai.google/guide/palm_api_overview
@@ -67,7 +65,6 @@ libraries:
       - path: google/analytics/admin/v1beta
       - path: google/analytics/admin/v1alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1alpha
       dependencies:
@@ -80,7 +77,6 @@ libraries:
       - path: google/analytics/data/v1beta
       - path: google/analytics/data/v1alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta
       client_documentation_override: https://googleapis.dev/nodejs/analytics-data/latest/
@@ -112,7 +108,6 @@ libraries:
       - path: google/api/servicecontrol/v2
       - path: google/api/servicecontrol/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/service-control'
@@ -166,7 +161,6 @@ libraries:
     apis:
       - path: google/area120/tables/v1alpha1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1alpha1
       package_name: '@google/area120-tables'
@@ -176,7 +170,6 @@ libraries:
     apis:
       - path: google/chat/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-apps/chat'
@@ -199,6 +192,10 @@ libraries:
       nodejs_apis:
         - omit_common_resources: true
           path: google/cloud/advisorynotifications/v1
+  - name: google-cloud-agentregistry
+    apis:
+      - path: google/cloud/agentregistry/v1
+    copyright_year: "2026"
   - name: google-cloud-aiplatform
     version: 6.8.1
     apis:
@@ -209,7 +206,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-alloydb
-    version: 2.5.1
+    version: 2.6.0
     apis:
       - path: google/cloud/alloydb/v1
       - path: google/cloud/alloydb/v1beta
@@ -218,7 +215,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-apigateway
-    version: 4.2.2
+    version: 4.3.0
     apis:
       - path: google/cloud/apigateway/v1
     copyright_year: "2026"
@@ -226,7 +223,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/api-gateway'
   - name: google-cloud-apigeeconnect
-    version: 4.2.2
+    version: 4.3.0
     apis:
       - path: google/cloud/apigeeconnect/v1
     copyright_year: "2026"
@@ -238,7 +235,6 @@ libraries:
     apis:
       - path: google/cloud/apigeeregistry/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/apigee-registry'
@@ -247,7 +243,6 @@ libraries:
     apis:
       - path: google/cloud/apihub/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-apiregistry
@@ -256,15 +251,13 @@ libraries:
       - path: google/cloud/apiregistry/v1
       - path: google/cloud/apiregistry/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
-      default_version: v1beta
+      default_version: v1
   - name: google-cloud-apphub
     version: 0.6.2
     apis:
       - path: google/cloud/apphub/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-appoptimize
@@ -272,7 +265,6 @@ libraries:
     apis:
       - path: google/cloud/appoptimize/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta
   - name: google-cloud-asset
@@ -284,7 +276,6 @@ libraries:
       - path: google/cloud/asset/v1p2beta1
       - path: google/cloud/asset/v1p1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-assuredworkloads
@@ -301,7 +292,6 @@ libraries:
     apis:
       - path: google/cloud/auditmanager/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-automl
@@ -310,7 +300,6 @@ libraries:
       - path: google/cloud/automl/v1
       - path: google/cloud/automl/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       main_service: automl
@@ -319,7 +308,6 @@ libraries:
     apis:
       - path: google/cloud/backupdr/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-baremetalsolution
@@ -327,7 +315,6 @@ libraries:
     apis:
       - path: google/cloud/baremetalsolution/v2
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v2
       package_name: '@google-cloud/bare-metal-solution'
@@ -337,7 +324,6 @@ libraries:
       - path: google/cloud/batch/v1
       - path: google/cloud/batch/v1alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-beyondcorp-appconnections
@@ -345,7 +331,6 @@ libraries:
     apis:
       - path: google/cloud/beyondcorp/appconnections/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/appconnections'
@@ -354,7 +339,6 @@ libraries:
     apis:
       - path: google/cloud/beyondcorp/appconnectors/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/appconnectors'
@@ -363,7 +347,6 @@ libraries:
     apis:
       - path: google/cloud/beyondcorp/appgateways/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/appgateways'
@@ -372,7 +355,6 @@ libraries:
     apis:
       - path: google/cloud/beyondcorp/clientconnectorservices/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/clientconnectorservices'
@@ -381,7 +363,6 @@ libraries:
     apis:
       - path: google/cloud/beyondcorp/clientgateways/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/clientgateways'
@@ -390,7 +371,6 @@ libraries:
     apis:
       - path: google/cloud/bigquery/analyticshub/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-bigquery-connection
@@ -399,7 +379,6 @@ libraries:
       - path: google/cloud/bigquery/connection/v1
       - path: google/cloud/bigquery/connection/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-bigquery-dataexchange
@@ -407,7 +386,6 @@ libraries:
     apis:
       - path: google/cloud/bigquery/dataexchange/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta1
       package_name: '@google-cloud/bigquery-data-exchange'
@@ -419,7 +397,6 @@ libraries:
       - path: google/cloud/bigquery/datapolicies/v2beta1
       - path: google/cloud/bigquery/datapolicies/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta1
   - name: google-cloud-bigquery-datatransfer
@@ -427,7 +404,8 @@ libraries:
     apis:
       - path: google/cloud/bigquery/datatransfer/v1
     copyright_year: "2026"
-    skip_generate: true
+    keep:
+      - smoke-test/data_transfer_service_smoke_test.js
     nodejs:
       default_version: v1
       package_name: '@google-cloud/bigquery-data-transfer'
@@ -437,7 +415,6 @@ libraries:
       - path: google/cloud/bigquery/migration/v2
       - path: google/cloud/bigquery/migration/v2alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v2
   - name: google-cloud-bigquery-reservation
@@ -445,7 +422,6 @@ libraries:
     apis:
       - path: google/cloud/bigquery/reservation/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-billing
@@ -453,7 +429,6 @@ libraries:
     apis:
       - path: google/cloud/billing/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       nodejs_apis:
@@ -465,7 +440,8 @@ libraries:
       - path: google/cloud/billing/budgets/v1
       - path: google/cloud/billing/budgets/v1beta1
     copyright_year: "2026"
-    skip_generate: true
+    keep:
+      - system-test/system.js
     nodejs:
       default_version: v1
   - name: google-cloud-binaryauthorization
@@ -474,7 +450,6 @@ libraries:
       - path: google/cloud/binaryauthorization/v1
       - path: google/cloud/binaryauthorization/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/binary-authorization'
@@ -491,17 +466,15 @@ libraries:
     apis:
       - path: google/cloud/certificatemanager/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/certificate-manager'
   - name: google-cloud-ces
-    version: 0.4.0
+    version: 0.4.1
     apis:
       - path: google/cloud/ces/v1
       - path: google/cloud/ces/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-channel
@@ -509,7 +482,6 @@ libraries:
     apis:
       - path: google/cloud/channel/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-chronicle
@@ -517,7 +489,6 @@ libraries:
     apis:
       - path: google/cloud/chronicle/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-cloudcontrolspartner
@@ -526,7 +497,6 @@ libraries:
       - path: google/cloud/cloudcontrolspartner/v1
       - path: google/cloud/cloudcontrolspartner/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta
   - name: google-cloud-clouddms
@@ -534,7 +504,6 @@ libraries:
     apis:
       - path: google/cloud/clouddms/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/dms'
@@ -543,7 +512,6 @@ libraries:
     apis:
       - path: google/cloud/cloudsecuritycompliance/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-commerce-consumer-procurement
@@ -552,7 +520,6 @@ libraries:
       - path: google/cloud/commerce/consumer/procurement/v1
       - path: google/cloud/commerce/consumer/procurement/v1alpha1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/procurement'
@@ -580,7 +547,6 @@ libraries:
       - src/v1small/region_operations_proto_list.json
       - test/gapic_addresses_v1small.ts
       - test/gapic_region_operations_v1small.ts
-    skip_generate: true
     nodejs:
       default_version: v1
       nodejs_apis:
@@ -594,7 +560,6 @@ libraries:
       - path: google/cloud/confidentialcomputing/v1
       - path: google/cloud/confidentialcomputing/v1alpha1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1alpha1
   - name: google-cloud-config
@@ -602,7 +567,6 @@ libraries:
     apis:
       - path: google/cloud/config/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-configdelivery
@@ -612,7 +576,6 @@ libraries:
       - path: google/cloud/configdelivery/v1beta
       - path: google/cloud/configdelivery/v1alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-connectors
@@ -620,7 +583,6 @@ libraries:
     apis:
       - path: google/cloud/connectors/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-contactcenterinsights
@@ -628,7 +590,6 @@ libraries:
     apis:
       - path: google/cloud/contactcenterinsights/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/contact-center-insights'
@@ -637,7 +598,6 @@ libraries:
     apis:
       - path: google/cloud/contentwarehouse/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-databasecenter
@@ -645,26 +605,26 @@ libraries:
     apis:
       - path: google/cloud/databasecenter/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta
   - name: google-cloud-datacatalog
     version: 5.2.2
     apis:
       - path: google/cloud/datacatalog/v1
+        nodejs:
+          mixins: none
       - path: google/cloud/datacatalog/v1beta1
+        nodejs:
+          mixins: none
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       main_service: DataCatalog
-      mixins: none
   - name: google-cloud-datacatalog-lineage
     version: 2.2.0
     apis:
       - path: google/cloud/datacatalog/lineage/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/lineage'
@@ -673,7 +633,6 @@ libraries:
     apis:
       - path: google/cloud/datacatalog/lineage/configmanagement/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/configmanagement'
@@ -683,7 +642,6 @@ libraries:
       - path: google/cloud/dataform/v1
       - path: google/cloud/dataform/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta1
   - name: google-cloud-datafusion
@@ -692,7 +650,6 @@ libraries:
       - path: google/cloud/datafusion/v1
       - path: google/cloud/datafusion/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/data-fusion'
@@ -701,7 +658,6 @@ libraries:
     apis:
       - path: google/cloud/datalabeling/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta1
       main_service: datalabeling
@@ -709,18 +665,17 @@ libraries:
     version: 5.6.0
     apis:
       - path: google/cloud/dataplex/v1
+        nodejs:
+          mixins: google.cloud.location.Locations;google.longrunning.Operations
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
-      mixins: google.cloud.location.Locations;google.longrunning.Operations
       client_documentation_override: https://cloud.google.com/dataplex
   - name: google-cloud-dataproc
-    version: 6.5.1
+    version: 6.6.0
     apis:
       - path: google/cloud/dataproc/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       main_service: dataproc
@@ -729,7 +684,6 @@ libraries:
     apis:
       - path: google/cloud/dataqna/v1alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1alpha
       package_name: '@google-cloud/data-qna'
@@ -739,7 +693,6 @@ libraries:
       - path: google/cloud/datastream/v1
       - path: google/cloud/datastream/v1alpha1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-deploy
@@ -747,7 +700,6 @@ libraries:
     apis:
       - path: google/cloud/deploy/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-developerconnect
@@ -755,7 +707,6 @@ libraries:
     apis:
       - path: google/cloud/developerconnect/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-devicestreaming
@@ -763,7 +714,6 @@ libraries:
     apis:
       - path: google/cloud/devicestreaming/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-dialogflow
@@ -772,7 +722,6 @@ libraries:
       - path: google/cloud/dialogflow/v2
       - path: google/cloud/dialogflow/v2beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v2
       main_service: dialogflow
@@ -780,12 +729,15 @@ libraries:
     version: 5.8.2
     apis:
       - path: google/cloud/dialogflow/cx/v3
+        nodejs:
+          mixins: google.longrunning.Operations;google.cloud.location.Locations
       - path: google/cloud/dialogflow/cx/v3beta1
+        nodejs:
+          mixins: google.longrunning.Operations;google.cloud.location.Locations
     copyright_year: "2026"
     skip_generate: true
     nodejs:
       default_version: v3
-      mixins: google.longrunning.Operations;google.cloud.location.Locations
   - name: google-cloud-discoveryengine
     version: 2.7.0
     apis:
@@ -793,7 +745,6 @@ libraries:
       - path: google/cloud/discoveryengine/v1beta
       - path: google/cloud/discoveryengine/v1alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-documentai
@@ -802,7 +753,6 @@ libraries:
       - path: google/cloud/documentai/v1
       - path: google/cloud/documentai/v1beta3
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-domains
@@ -812,7 +762,6 @@ libraries:
       - path: google/cloud/domains/v1beta1
       - path: google/cloud/domains/v1alpha2
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-edgecontainer
@@ -820,7 +769,6 @@ libraries:
     apis:
       - path: google/cloud/edgecontainer/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-edgenetwork
@@ -828,7 +776,6 @@ libraries:
     apis:
       - path: google/cloud/edgenetwork/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-essentialcontacts
@@ -836,7 +783,6 @@ libraries:
     apis:
       - path: google/cloud/essentialcontacts/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/essential-contacts'
@@ -845,7 +791,6 @@ libraries:
     apis:
       - path: google/cloud/eventarc/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-eventarc-publishing
@@ -853,7 +798,6 @@ libraries:
     apis:
       - path: google/cloud/eventarc/publishing/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       client_documentation_override: https://googleapis.dev/nodejs/publishing/latest/
@@ -863,7 +807,6 @@ libraries:
       - path: google/cloud/filestore/v1
       - path: google/cloud/filestore/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-financialservices
@@ -871,27 +814,32 @@ libraries:
     apis:
       - path: google/cloud/financialservices/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-functions
     version: 4.2.2
     apis:
       - path: google/cloud/functions/v2
+        nodejs:
+          mixins: google.longrunning.Operations;google.cloud.location.Locations;google.iam.v1.IAMPolicy
       - path: google/cloud/functions/v1
+        nodejs:
+          mixins: google.longrunning.Operations;google.cloud.location.Locations
       - path: google/cloud/functions/v2beta
+        nodejs:
+          mixins: google.longrunning.Operations;google.cloud.location.Locations;google.iam.v1.IAMPolicy
       - path: google/cloud/functions/v2alpha
+        nodejs:
+          mixins: google.longrunning.Operations;google.cloud.location.Locations;google.iam.v1.IAMPolicy
     copyright_year: "2026"
     skip_generate: true
     nodejs:
       default_version: v1
-      mixins: google.longrunning.Operations;google.cloud.location.Locations
   - name: google-cloud-gdchardwaremanagement
     version: 0.10.1
     apis:
       - path: google/cloud/gdchardwaremanagement/v1alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1alpha
   - name: google-cloud-geminidataanalytics
@@ -901,15 +849,13 @@ libraries:
       - path: google/cloud/geminidataanalytics/v1beta
       - path: google/cloud/geminidataanalytics/v1alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
-      default_version: v1beta
+      default_version: v1
   - name: google-cloud-gkebackup
     version: 2.2.2
     apis:
       - path: google/cloud/gkebackup/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/gke-backup'
@@ -919,7 +865,6 @@ libraries:
       - path: google/cloud/gkeconnect/gateway/v1
       - path: google/cloud/gkeconnect/gateway/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta1
       package_name: '@google-cloud/gke-connect-gateway'
@@ -931,7 +876,6 @@ libraries:
       - path: google/cloud/gkehub/v1beta
       - path: google/cloud/gkehub/v1alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/gke-hub'
@@ -940,7 +884,6 @@ libraries:
     apis:
       - path: google/cloud/gkemulticloud/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-gkerecommender
@@ -948,7 +891,6 @@ libraries:
     apis:
       - path: google/cloud/gkerecommender/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-gsuiteaddons
@@ -956,7 +898,6 @@ libraries:
     apis:
       - path: google/cloud/gsuiteaddons/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-hypercomputecluster
@@ -966,7 +907,6 @@ libraries:
       - path: google/cloud/hypercomputecluster/v1beta
       - path: google/cloud/hypercomputecluster/v1alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta
   - name: google-cloud-iap
@@ -975,7 +915,6 @@ libraries:
       - path: google/cloud/iap/v1
       - path: google/cloud/iap/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-ids
@@ -983,7 +922,6 @@ libraries:
     apis:
       - path: google/cloud/ids/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       client_documentation_override: https://cloud.google.com/intrusion-detection-system
@@ -992,7 +930,8 @@ libraries:
     apis:
       - path: google/cloud/iot/v1
     copyright_year: "2026"
-    skip_generate: true
+    keep:
+      - smoke-test/device_manager_smoke_test.js
     nodejs:
       default_version: v1
       main_service: iot
@@ -1001,7 +940,6 @@ libraries:
     apis:
       - path: google/cloud/kms/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-kms-inventory
@@ -1009,7 +947,6 @@ libraries:
     apis:
       - path: google/cloud/kms/inventory/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-language
@@ -1019,7 +956,6 @@ libraries:
       - path: google/cloud/language/v1
       - path: google/cloud/language/v1beta2
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-licensemanager
@@ -1038,11 +974,10 @@ libraries:
       default_version: v2beta
       package_name: '@google-cloud/life-sciences'
   - name: google-cloud-locationfinder
-    version: 0.1.2
+    version: 0.2.0
     apis:
       - path: google/cloud/locationfinder/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-lustre
@@ -1058,9 +993,8 @@ libraries:
       - path: google/cloud/maintenance/api/v1
       - path: google/cloud/maintenance/api/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
-      default_version: v1beta
+      default_version: v1
   - name: google-cloud-managedidentities
     version: 4.2.2
     apis:
@@ -1090,7 +1024,8 @@ libraries:
     apis:
       - path: google/cloud/mediatranslation/v1beta1
     copyright_year: "2026"
-    skip_generate: true
+    keep:
+      - samples/resources/audio.raw
     nodejs:
       default_version: v1beta1
       package_name: '@google-cloud/media-translation'
@@ -1108,7 +1043,6 @@ libraries:
       - path: google/cloud/memorystore/v1
       - path: google/cloud/memorystore/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-metastore
@@ -1134,7 +1068,6 @@ libraries:
       - path: google/cloud/modelarmor/v1
       - path: google/cloud/modelarmor/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-monitoring
@@ -1142,7 +1075,6 @@ libraries:
     apis:
       - path: google/monitoring/v3
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v3
       main_service: monitoring
@@ -1160,7 +1092,6 @@ libraries:
       - path: google/cloud/networkconnectivity/v1beta
       - path: google/cloud/networkconnectivity/v1alpha1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/network-connectivity'
@@ -1205,7 +1136,6 @@ libraries:
     apis:
       - path: google/cloud/oracledatabase/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-orchestration-airflow-service
@@ -1232,7 +1162,6 @@ libraries:
       - path: google/cloud/osconfig/v1beta
       - path: google/cloud/osconfig/v1alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       main_service: OsConfigServiceClient
@@ -1243,7 +1172,6 @@ libraries:
       - path: google/cloud/oslogin/v1
       - path: google/cloud/oslogin/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/os-login'
@@ -1291,7 +1219,6 @@ libraries:
       - path: google/cloud/policytroubleshooter/iam/v3
       - path: google/cloud/policytroubleshooter/iam/v3beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v3beta
       package_name: '@google-cloud/policy-troubleshooter-iam'
@@ -1328,7 +1255,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/recaptcha-enterprise'
   - name: google-cloud-recommender
-    version: 7.2.2
+    version: 7.3.0
     apis:
       - path: google/cloud/recommender/v1
       - path: google/cloud/recommender/v1beta1
@@ -1336,30 +1263,27 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-redis
-    version: 5.2.2
+    version: 5.3.0
     apis:
       - path: google/cloud/redis/v1
       - path: google/cloud/redis/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-redis-cluster
-    version: 0.10.0
+    version: 0.11.0
     apis:
       - path: google/cloud/redis/cluster/v1
       - path: google/cloud/redis/cluster/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/redis/latest
   - name: google-cloud-resourcemanager
-    version: 6.2.2
+    version: 6.3.0
     apis:
       - path: google/cloud/resourcemanager/v3
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v3
       nodejs_apis:
@@ -1367,22 +1291,25 @@ libraries:
           path: google/cloud/resourcemanager/v3
       package_name: '@google-cloud/resource-manager'
   - name: google-cloud-retail
-    version: 4.3.1
+    version: 4.4.0
     apis:
       - path: google/cloud/retail/v2
+        nodejs:
+          mixins: google.longrunning.Operations;google.cloud.location.Locations
       - path: google/cloud/retail/v2beta
+        nodejs:
+          mixins: google.longrunning.Operations;google.cloud.location.Locations
       - path: google/cloud/retail/v2alpha
+        nodejs:
+          mixins: google.longrunning.Operations;google.cloud.location.Locations
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v2beta
-      mixins: google.longrunning.Operations;google.cloud.location.Locations
   - name: google-cloud-run
-    version: 3.2.1
+    version: 3.3.0
     apis:
       - path: google/cloud/run/v2
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v2
   - name: google-cloud-saasplatform-saasservicemgmt
@@ -1394,81 +1321,73 @@ libraries:
       default_version: v1beta1
       package_name: '@google-cloud/saasservicemgmt'
   - name: google-cloud-scheduler
-    version: 5.3.2
+    version: 5.4.0
     apis:
       - path: google/cloud/scheduler/v1
       - path: google/cloud/scheduler/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       main_service: scheduler
   - name: google-cloud-secretmanager
-    version: 6.1.3
+    version: 6.2.0
     apis:
       - path: google/cloud/secretmanager/v1
       - path: google/cloud/secretmanager/v1beta2
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/secret-manager'
   - name: google-cloud-securesourcemanager
-    version: 0.9.1
+    version: 0.10.0
     apis:
       - path: google/cloud/securesourcemanager/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-security-privateca
-    version: 7.1.0
+    version: 7.2.0
     apis:
       - path: google/cloud/security/privateca/v1
       - path: google/cloud/security/privateca/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/security-private-ca'
   - name: google-cloud-security-publicca
-    version: 2.2.2
+    version: 2.3.0
     apis:
       - path: google/cloud/security/publicca/v1
       - path: google/cloud/security/publicca/v1beta1
       - path: google/cloud/security/publicca/v1alpha1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta1
       package_name: '@google-cloud/publicca'
   - name: google-cloud-securitycenter
-    version: 9.3.2
+    version: 9.4.0
     apis:
       - path: google/cloud/securitycenter/v2
       - path: google/cloud/securitycenter/v1
       - path: google/cloud/securitycenter/v1p1beta1
       - path: google/cloud/securitycenter/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/security-center'
   - name: google-cloud-securitycentermanagement
-    version: 0.7.2
+    version: 0.8.0
     apis:
       - path: google/cloud/securitycentermanagement/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-servicedirectory
-    version: 6.1.3
+    version: 6.2.0
     apis:
       - path: google/cloud/servicedirectory/v1
       - path: google/cloud/servicedirectory/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       dependencies:
@@ -1476,29 +1395,37 @@ libraries:
       main_service: ServiceDirectory
       package_name: '@google-cloud/service-directory'
   - name: google-cloud-servicehealth
-    version: 0.7.2
+    version: 0.8.0
     apis:
       - path: google/cloud/servicehealth/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-shell
-    version: 4.1.2
+    version: 4.2.0
     apis:
       - path: google/cloud/shell/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-speech
-    version: 7.3.2
+    version: 7.4.0
     apis:
       - path: google/cloud/speech/v2
       - path: google/cloud/speech/v1
       - path: google/cloud/speech/v1p1beta1
     copyright_year: "2026"
-    skip_generate: true
+    keep:
+      - src/helpers.ts
+      - src/index.ts
+      - system-test/fixtures/streamingRecognize/input.wav
+      - system-test/speech_system_test.js
+      - system-test/speech_system_test_v1.js
+      - system-test/speech_system_test_v1p1beta1.js
+      - system-test/speech_typescript_system_test.ts
+      - system-test/speech_typescript_system_test_v1.ts
+      - system-test/speech_typescript_system_test_v1p1beta1.ts
+      - test/helpers.test.ts
     nodejs:
       default_version: v1
       dependencies:
@@ -1516,37 +1443,33 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-storagebatchoperations
-    version: 0.4.0
+    version: 0.5.0
     apis:
       - path: google/cloud/storagebatchoperations/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-storageinsights
-    version: 2.2.2
+    version: 2.3.0
     apis:
       - path: google/cloud/storageinsights/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-support
-    version: 2.3.0
+    version: 2.4.0
     apis:
       - path: google/cloud/support/v2
       - path: google/cloud/support/v2beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v2
   - name: google-cloud-talent
-    version: 7.1.3
+    version: 7.2.0
     apis:
       - path: google/cloud/talent/v4
       - path: google/cloud/talent/v4beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v4
       main_service: talent
@@ -1556,7 +1479,6 @@ libraries:
       - path: google/cloud/tasks/v2
       - path: google/cloud/tasks/v2beta3
       - path: google/cloud/tasks/v2beta2
-    skip_generate: true
     nodejs:
       default_version: v2
       esm: true
@@ -1567,7 +1489,6 @@ libraries:
       - path: google/cloud/telcoautomation/v1
       - path: google/cloud/telcoautomation/v1alpha1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-texttospeech
@@ -1576,7 +1497,6 @@ libraries:
       - path: google/cloud/texttospeech/v1
       - path: google/cloud/texttospeech/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/text-to-speech'
@@ -1587,7 +1507,6 @@ libraries:
       - path: google/cloud/tpu/v1
       - path: google/cloud/tpu/v2alpha1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-translate
@@ -1611,15 +1530,13 @@ libraries:
       - path: google/cloud/vectorsearch/v1
       - path: google/cloud/vectorsearch/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
-      default_version: v1beta
+      default_version: v1
   - name: google-cloud-video-livestream
     version: 2.2.3
     apis:
       - path: google/cloud/video/livestream/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/livestream'
@@ -1628,7 +1545,6 @@ libraries:
     apis:
       - path: google/cloud/video/stitcher/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       client_documentation_override: https://googleapis.dev/nodejs/videostitcher/latest/
@@ -1637,7 +1553,6 @@ libraries:
     apis:
       - path: google/cloud/video/transcoder/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-videointelligence
@@ -1649,7 +1564,6 @@ libraries:
       - path: google/cloud/videointelligence/v1p1beta1
       - path: google/cloud/videointelligence/v1beta2
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       main_service: videointelligence
@@ -1673,9 +1587,7 @@ libraries:
     version: 0.1.1
     apis:
       - path: google/cloud/visionai/v1
-      - path: google/cloud/visionai/v1alpha1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-vmmigration
@@ -1683,7 +1595,6 @@ libraries:
     apis:
       - path: google/cloud/vmmigration/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-vmwareengine
@@ -1691,7 +1602,6 @@ libraries:
     apis:
       - path: google/cloud/vmwareengine/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-vpcaccess
@@ -1699,7 +1609,6 @@ libraries:
     apis:
       - path: google/cloud/vpcaccess/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/vpc-access'
@@ -1709,7 +1618,9 @@ libraries:
       - path: google/cloud/webrisk/v1
       - path: google/cloud/webrisk/v1beta1
     copyright_year: "2026"
-    skip_generate: true
+    keep:
+      - system-test/header.ts
+      - system-test/test.ts
     nodejs:
       default_version: v1
       package_name: '@google-cloud/web-risk'
@@ -1720,7 +1631,6 @@ libraries:
       - path: google/cloud/websecurityscanner/v1beta
       - path: google/cloud/websecurityscanner/v1alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta
       package_name: '@google-cloud/web-security-scanner'
@@ -1738,16 +1648,14 @@ libraries:
     apis:
       - path: google/cloud/workloadmanager/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-workstations
-    version: 2.2.2
+    version: 2.3.0
     apis:
       - path: google/cloud/workstations/v1
       - path: google/cloud/workstations/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta
   - name: google-container
@@ -1756,7 +1664,6 @@ libraries:
       - path: google/container/v1
       - path: google/container/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/container'
@@ -1765,7 +1672,6 @@ libraries:
     apis:
       - path: google/dataflow/v1beta3
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta3
       package_name: '@google-cloud/dataflow'
@@ -1774,7 +1680,6 @@ libraries:
     apis:
       - path: google/devicesandservices/health/v4
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v4
       package_name: '@google-cloud/health'
@@ -1793,7 +1698,8 @@ libraries:
       - path: google/devtools/cloudbuild/v2
       - path: google/devtools/cloudbuild/v1
     copyright_year: "2026"
-    skip_generate: true
+    keep:
+      - system-test/system.js
     nodejs:
       default_version: v1
       package_name: '@google-cloud/cloudbuild'
@@ -1806,17 +1712,23 @@ libraries:
       default_version: v2
       package_name: '@google-cloud/cloudprofiler'
   - name: google-devtools-containeranalysis
-    version: 6.7.2
+    version: 6.8.0
     apis:
       - path: google/devtools/containeranalysis/v1
       - path: google/devtools/containeranalysis/v1beta1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       dependencies:
         '@google-cloud/grafeas': ^6.0.0
       main_service: containeranalysis
+      nodejs_apis:
+        - additional_protos:
+            - grafeas/v1/grafeas.proto
+          path: google/devtools/containeranalysis/v1
+        - additional_protos:
+            - google/devtools/containeranalysis/v1beta1/grafeas/grafeas.proto
+          path: google/devtools/containeranalysis/v1beta1
       package_name: '@google-cloud/containeranalysis'
   - name: google-iam
     version: 2.4.0
@@ -1891,11 +1803,10 @@ libraries:
       default_version: v4
       package_name: '@google-cloud/geocode'
   - name: google-maps-mapmanagement
-    version: 0.0.0
+    version: 0.1.0
     apis:
       - path: google/maps/mapmanagement/v2beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v2beta
       package_name: '@google-cloud/mapmanagement'
@@ -1969,7 +1880,6 @@ libraries:
     apis:
       - path: google/monitoring/dashboard/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/monitoring-dashboards'
@@ -1978,7 +1888,6 @@ libraries:
     apis:
       - path: google/privacy/dlp/v2
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v2
       package_name: '@google-cloud/dlp'
@@ -2107,7 +2016,6 @@ libraries:
       - path: google/shopping/merchant/reports/v1beta
       - path: google/shopping/merchant/reports/v1alpha
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-shopping/reports'
@@ -2124,9 +2032,17 @@ libraries:
   - name: google-storage-control
     version: 0.10.0
     apis:
+      - path: google/storage/v2
       - path: google/storage/control/v2
     copyright_year: "2026"
-    skip_generate: true
+    keep:
+      - src/util/ast_utils.ts
+      - src/util/index_fix_utils.ts
+      - src/util/proto_utils.ts
+      - src/util/samples_and_doc_fix_utils.ts
+      - src/util/storage_control_utils.ts
+      - src/util/uber_client_builder.ts
+      - test/storage_control_compatibility.ts
     nodejs:
       default_version: v2
       package_name: '@google-cloud/storage-control'
@@ -2135,7 +2051,11 @@ libraries:
     apis:
       - path: google/storagetransfer/v1
     copyright_year: "2026"
-    skip_generate: true
+    keep:
+      - samples/test/utils/bucket.js
+      - samples/test/utils/index.js
+      - samples/test/utils/sample.js
+      - samples/test/utils/transfer.js
     nodejs:
       default_version: v1
       package_name: '@google-cloud/storage-transfer'
@@ -2150,11 +2070,10 @@ libraries:
       package_name: '@googlemaps/streetview-publish'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/publish/latest
   - name: grafeas
-    version: 6.1.2
+    version: 6.2.0
     apis:
       - path: grafeas/v1
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/grafeas'

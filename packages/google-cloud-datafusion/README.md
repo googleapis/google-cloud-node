@@ -65,7 +65,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list instances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1/data_fusion.list_instances.js) |
 | restart instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1/data_fusion.restart_instance.js) |
 | update instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1/data_fusion.update_instance.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1/snippet_metadata_google.cloud.datafusion.v1.json) |
 | add dns peering | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.add_dns_peering.js) |
 | create instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.create_instance.js) |
 | delete instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.delete_instance.js) |
@@ -79,7 +78,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | restart instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.restart_instance.js) |
 | update instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.update_instance.js) |
 | upgrade instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1beta1/data_fusion.upgrade_instance.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datafusion/samples/generated/v1beta1/snippet_metadata_google.cloud.datafusion.v1beta1.json) |
 
 
 ## Supported Node.js Versions

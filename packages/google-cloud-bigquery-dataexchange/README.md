@@ -73,7 +73,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-dataexchange/samples/generated/v1beta1/analytics_hub_service.test_iam_permissions.js) |
 | update data exchange | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-dataexchange/samples/generated/v1beta1/analytics_hub_service.update_data_exchange.js) |
 | update listing | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-dataexchange/samples/generated/v1beta1/analytics_hub_service.update_listing.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-dataexchange/samples/generated/v1beta1/snippet_metadata_google.cloud.bigquery.dataexchange.v1beta1.json) |
 
 
 ## Supported Node.js Versions

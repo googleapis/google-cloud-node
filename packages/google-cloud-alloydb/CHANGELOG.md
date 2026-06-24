@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v2.5.1...alloydb-v2.6.0) (2026-06-16)
+
+
+### Features
+
+* Migrate google-cloud-alloydb to librarian ([#8491](https://github.com/googleapis/google-cloud-node/issues/8491)) ([2a7f823](https://github.com/googleapis/google-cloud-node/commit/2a7f82336695397220cae1ee249f8ff5e1871b60))
+
 ## [2.5.1](https://github.com/googleapis/google-cloud-node/compare/alloydb-v2.5.0...alloydb-v2.5.1) (2026-05-01)
 
 
