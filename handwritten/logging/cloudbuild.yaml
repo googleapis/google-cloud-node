@@ -1,0 +1,74 @@
+steps:
+# 1. Set up Node.js environment
+- name: 'node:24'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    npm install
+  dir: 'handwritten/logging'
+  id: 'install-dependencies'
+
+# 2. Configure environment variables for the tests and run system tests
+#    - GOOGLE_APPLICATION_CREDENTIALS: GCB steps run as a service account
+#      that is typically granted permissions directly. Explicitly setting
+#      GOOGLE_APPLICATION_CREDENTIALS might not be needed if the GCB service
+#      account has the right roles (e.g., Bigtable Admin, Bigtable User).
+#      If you need to use specific service account key JSON, you'd store it
+#      in Secret Manager and mount it here. For simplicity, we'll rely on
+#      the GCB service account's inherent permissions.
+#    - GCLOUD_PROJECT: Can be passed as a build variable.
+- name: 'node:24'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    npm run system-test
+  dir: 'handwritten/logging'
+  env:
+  - 'GCLOUD_PROJECT=${_GCP_PROJECT_ID}' # Pass project ID via build variable
+  # If you need specific credentials from Secret Manager, uncomment these:
+  # - 'GOOGLE_APPLICATION_CREDENTIALS=/secrets/sa-key.json'
+  id: 'run-system-tests'
+  waitFor: ['install-dependencies']
+  # For Secret Manager, uncomment these (adjust secret name and volume path as needed):
+  # secretEnv: ['SA_KEY']
+  # volumes:
+  #   - name: 'sa-keys'
+  #     path: '/secrets'
+
+# 3. (Optional) Code Coverage Reporting
+- name: 'node:24'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    # Check if nyc is installed and run report
+    if [ -f ./node_modules/nyc/bin/nyc.js ]; then
+      ./node_modules/nyc/bin/nyc.js report || true # `|| true` prevents build failure if nyc report itself exits non-zero
+    else
+      echo "nyc not found, skipping coverage report."
+    fi
+    # The original codecov.sh script from Kokoro needs to be made available to GCB.
+    # Options:
+    #   a) Commit codecov.sh into your repo (e.g., .kokoro/codecov.sh) and call it:
+    #      if [ -f .kokoro/codecov.sh ]; then . ./.kokoro/codecov.sh; fi
+    #   b) Replicate its functionality directly in this step.
+    #   c) Store it in a GCS bucket and fetch it.
+    echo "Codecov reporting (if desired) would be integrated here."
+  dir: 'handwritten/logging'
+  id: 'coverage-report'
+  waitFor: ['run-system-tests']
+
+# If you use Secret Manager for credentials, uncomment and configure:
+# availableSecrets:
+#   secretManager:
+#   - versionName: projects/${PROJECT_ID}/secrets/YOUR_SERVICE_ACCOUNT_KEY_SECRET_NAME/versions/latest
+#     env: 'SA_KEY' # This env var will hold the secret value. Use it as GOOGLE_APPLICATION_CREDENTIALS in step 3 if needed.
+
+# Define a substitution variable for your project ID
+# Replace 'long-door-651' with the actual GCP Project ID your system tests should run against.
+substitutions:
+  _GCP_PROJECT_ID: 'long-door-651'
+
+timeout: '3600s'
