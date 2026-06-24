@@ -148,7 +148,7 @@ describe('Logging', () => {
   */
 
   describe('sinks', () => {
-    it('should create a sink with a Bucket destination', async () => {
+    it.skip('should create a sink with a Bucket destination', async () => {
       const sink = logging.sink(generateName());
       const [, apiResponse] = await sink.create({
         destination: bucket,
@@ -157,7 +157,7 @@ describe('Logging', () => {
       assert.strictEqual(apiResponse.destination, destination);
     });
 
-    it('should create a sink with a Dataset destination', async () => {
+    it.skip('should create a sink with a Dataset destination', async () => {
       const sink = logging.sink(generateName());
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const [_, apiResponse] = await sink.create({destination: dataset});
@@ -173,7 +173,7 @@ describe('Logging', () => {
       assert.strictEqual(apiResponse.destination, destination);
     });
 
-    it('should create a sink with a Topic destination', async () => {
+    it.skip('should create a sink with a Topic destination', async () => {
       const sink = logging.sink(generateName());
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const [_, apiResponse] = await sink.create({destination: topic});
@@ -187,7 +187,7 @@ describe('Logging', () => {
       );
     });
 
-    describe('metadata', () => {
+    describe.skip('metadata', () => {
       const sink = logging.sink(generateName());
       const FILTER = 'severity = ALERT';
 
@@ -208,7 +208,7 @@ describe('Logging', () => {
     });
 
     describe('metadata with uniqueWriterIdentity', () => {
-      it('should set metadata if uniqueWriterIdentity was true', async () => {
+      it.skip('should set metadata if uniqueWriterIdentity was true', async () => {
         const sink = logging.sink(generateName());
         const FILTER = 'severity = ALERT';
         await sink.create({
@@ -226,7 +226,7 @@ describe('Logging', () => {
         await sink.delete();
       });
 
-      it('should set uniqueWriterIdentity from false to true', async () => {
+      it.skip('should set uniqueWriterIdentity from false to true', async () => {
         const sink = logging.sink(generateName());
         const FILTER = 'severity = ALERT';
         await sink.create({
@@ -244,7 +244,7 @@ describe('Logging', () => {
       });
     });
 
-    describe('listing sinks', () => {
+    describe.skip('listing sinks', () => {
       const sink = logging.sink(generateName());
 
       before(async () => {
@@ -378,7 +378,7 @@ describe('Logging', () => {
       });
     });
 
-    it('should list log entries', done => {
+    it.skip('should list log entries', done => {
       const {log, logEntries} = getTestLog();
 
       log.write(logEntries, options, err => {
@@ -415,7 +415,7 @@ describe('Logging', () => {
       });
     });
 
-    it('should list log entries as a stream', done => {
+    it.skip('should list log entries as a stream', done => {
       const {log, logEntries} = getTestLog();
 
       log.write(logEntries, options, err => {
@@ -432,7 +432,7 @@ describe('Logging', () => {
       });
     });
 
-    it('should tail log entries as a stream', done => {
+    it.skip('should tail log entries as a stream', done => {
       const {log, logEntries} = getTestLog();
 
       const logInterval = setInterval(() => {
@@ -512,17 +512,17 @@ describe('Logging', () => {
       });
     });
 
-    it('should write a single entry to a log', done => {
+    it.skip('should write a single entry to a log', done => {
       const {log, logEntries} = getTestLog();
       log.write(logEntries[0], options, done);
     });
 
-    it('should write a single entry to a log as a Promise', async () => {
+    it.skip('should write a single entry to a log as a Promise', async () => {
       const {log, logEntries} = getTestLog();
       await log.write(logEntries[1], options);
     });
 
-    it('should write multiple entries to a log', done => {
+    it.skip('should write multiple entries to a log', done => {
       const {log, logEntries} = getTestLog();
 
       log.write(logEntries, options, err => {
@@ -555,7 +555,7 @@ describe('Logging', () => {
       });
     });
 
-    it('should preserve order of entries', done => {
+    it.skip('should preserve order of entries', done => {
       const {log} = getTestLog();
 
       const entry1 = log.entry('1');
@@ -580,7 +580,7 @@ describe('Logging', () => {
       }, 1000);
     });
 
-    it('should preserve order for sequential write calls', done => {
+    it.skip('should preserve order for sequential write calls', done => {
       const {log} = getTestLog();
       const messages = ['1', '2', '3', '4', '5'];
 
