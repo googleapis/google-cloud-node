@@ -1345,7 +1345,7 @@ export class Upload extends Writable {
       },
     };
     const res = await this.authClient.request(combinedReqOpts);
-    const successfulRequest = this.onResponse(res);
+    const successfulRequest = await this.onResponse(res);
     this.removeListener('error', errorCallback);
 
     return successfulRequest ? res : null;
@@ -1354,7 +1354,7 @@ export class Upload extends Writable {
   /**
    * @return {bool} is the request good?
    */
-  private onResponse(resp: GaxiosResponse) {
+  private async onResponse(resp: GaxiosResponse) {
     if (
       resp.status !== 200 &&
       this.retryOptions.retryableErrorFn!({
@@ -1363,7 +1363,7 @@ export class Upload extends Writable {
         name: resp.statusText,
       })
     ) {
-      this.attemptDelayedRetry(resp);
+      await this.attemptDelayedRetry(resp);
       return false;
     }
 
@@ -1386,9 +1386,7 @@ export class Upload extends Writable {
 
         if (retryDelay <= 0) {
           this.destroy(
-            new Error(
-              `Retry total time limit exceeded - ${JSON.stringify(resp.data)}`,
-            ),
+            formatRetryError('Retry total time limit exceeded', resp),
           );
           return;
         }
@@ -1409,9 +1407,7 @@ export class Upload extends Writable {
       }
       this.numRetries++;
     } else {
-      this.destroy(
-        new Error(`Retry limit exceeded - ${JSON.stringify(resp.data)}`),
-      );
+      this.destroy(formatRetryError('Retry limit exceeded', resp));
     }
   }
 
@@ -1454,6 +1450,99 @@ export class Upload extends Writable {
   public isSuccessfulResponse(status: number): boolean {
     return status >= 200 && status < 300;
   }
+}
+
+function formatRetryError(
+  prefix: string,
+  resp: Pick<GaxiosResponse, 'data' | 'status'>,
+): Error {
+  const parts: string[] = [];
+
+  if (resp.status !== undefined && !isNaN(resp.status)) {
+    parts.push(`status: ${resp.status}`);
+  }
+
+  const err = resp.data;
+  if (err !== undefined && err !== null) {
+    if (err instanceof Error) {
+      const gaxiosErr = err as GaxiosError;
+      const errParts: string[] = [];
+      if (gaxiosErr.message) {
+        errParts.push(gaxiosErr.message);
+      }
+      const status = gaxiosErr.status ?? gaxiosErr.response?.status;
+      if (status !== undefined && !isNaN(status) && status !== resp.status) {
+        errParts.push(`status: ${status}`);
+      }
+      const statusText = gaxiosErr.response?.statusText;
+      if (statusText) {
+        errParts.push(`statusText: ${statusText}`);
+      }
+      const responseData = gaxiosErr.response?.data;
+      if (responseData !== undefined && responseData !== null && responseData !== '') {
+        errParts.push(
+          `response: ${
+            typeof responseData === 'object'
+              ? JSON.stringify(responseData)
+              : responseData
+          }`,
+        );
+      }
+      if (gaxiosErr.code) {
+        errParts.push(`code: ${gaxiosErr.code}`);
+      }
+      if (errParts.length > 0) {
+        parts.push(...errParts);
+      } else {
+        parts.push(gaxiosErr.toString() || gaxiosErr.name || 'Unknown Error');
+      }
+    } else if (typeof err === 'object') {
+      const errParts: string[] = [];
+      const gaxiosErrLike = err as any;
+      if (gaxiosErrLike.message) {
+        errParts.push(String(gaxiosErrLike.message));
+      }
+      const status = gaxiosErrLike.status ?? gaxiosErrLike.response?.status;
+      if (status !== undefined && !isNaN(status) && status !== resp.status) {
+        errParts.push(`status: ${status}`);
+      }
+      const statusText = gaxiosErrLike.response?.statusText;
+      if (statusText) {
+        errParts.push(`statusText: ${statusText}`);
+      }
+      const responseData = gaxiosErrLike.response?.data;
+      if (responseData !== undefined && responseData !== null && responseData !== '') {
+        errParts.push(
+          `response: ${
+            typeof responseData === 'object'
+              ? JSON.stringify(responseData)
+              : responseData
+          }`,
+        );
+      }
+      if (gaxiosErrLike.code) {
+        errParts.push(`code: ${String(gaxiosErrLike.code)}`);
+      }
+
+      if (errParts.length > 0) {
+        parts.push(...errParts);
+      } else {
+        const stringified = JSON.stringify(err);
+        if (stringified && stringified !== '{}') {
+          parts.push(stringified);
+        }
+      }
+    } else if (typeof err === 'string') {
+      if (err !== '') {
+        parts.push(err);
+      }
+    } else {
+      parts.push(String(err));
+    }
+  }
+
+  const suffix = parts.join(' - ');
+  return new Error(`${prefix} - ${suffix || 'Unknown Error'}`);
 }
 
 export function upload(cfg: UploadConfig) {
