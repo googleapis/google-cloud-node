@@ -23831,6 +23831,393 @@ export namespace google {
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
+
+                /** Represents a RuleExecutionErrorService */
+                class RuleExecutionErrorService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new RuleExecutionErrorService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new RuleExecutionErrorService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): RuleExecutionErrorService;
+
+                    /**
+                     * Calls ListRuleExecutionErrors.
+                     * @param request ListRuleExecutionErrorsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListRuleExecutionErrorsResponse
+                     */
+                    public listRuleExecutionErrors(request: google.cloud.chronicle.v1.IListRuleExecutionErrorsRequest, callback: google.cloud.chronicle.v1.RuleExecutionErrorService.ListRuleExecutionErrorsCallback): void;
+
+                    /**
+                     * Calls ListRuleExecutionErrors.
+                     * @param request ListRuleExecutionErrorsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listRuleExecutionErrors(request: google.cloud.chronicle.v1.IListRuleExecutionErrorsRequest): Promise<google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse>;
+                }
+
+                namespace RuleExecutionErrorService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.RuleExecutionErrorService|listRuleExecutionErrors}.
+                     * @param error Error, if any
+                     * @param [response] ListRuleExecutionErrorsResponse
+                     */
+                    type ListRuleExecutionErrorsCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse) => void;
+                }
+
+                /** Properties of a ListRuleExecutionErrorsRequest. */
+                interface IListRuleExecutionErrorsRequest {
+
+                    /** ListRuleExecutionErrorsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListRuleExecutionErrorsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListRuleExecutionErrorsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListRuleExecutionErrorsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListRuleExecutionErrorsRequest. */
+                class ListRuleExecutionErrorsRequest implements IListRuleExecutionErrorsRequest {
+
+                    /**
+                     * Constructs a new ListRuleExecutionErrorsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IListRuleExecutionErrorsRequest);
+
+                    /** ListRuleExecutionErrorsRequest parent. */
+                    public parent: string;
+
+                    /** ListRuleExecutionErrorsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListRuleExecutionErrorsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListRuleExecutionErrorsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListRuleExecutionErrorsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRuleExecutionErrorsRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IListRuleExecutionErrorsRequest): google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest;
+
+                    /**
+                     * Encodes the specified ListRuleExecutionErrorsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest.verify|verify} messages.
+                     * @param message ListRuleExecutionErrorsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IListRuleExecutionErrorsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRuleExecutionErrorsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest.verify|verify} messages.
+                     * @param message ListRuleExecutionErrorsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IListRuleExecutionErrorsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRuleExecutionErrorsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRuleExecutionErrorsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest;
+
+                    /**
+                     * Decodes a ListRuleExecutionErrorsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRuleExecutionErrorsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest;
+
+                    /**
+                     * Verifies a ListRuleExecutionErrorsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRuleExecutionErrorsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRuleExecutionErrorsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest;
+
+                    /**
+                     * Creates a plain object from a ListRuleExecutionErrorsRequest message. Also converts values to other types if specified.
+                     * @param message ListRuleExecutionErrorsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRuleExecutionErrorsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRuleExecutionErrorsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRuleExecutionErrorsResponse. */
+                interface IListRuleExecutionErrorsResponse {
+
+                    /** ListRuleExecutionErrorsResponse ruleExecutionErrors */
+                    ruleExecutionErrors?: (google.cloud.chronicle.v1.IRuleExecutionError[]|null);
+
+                    /** ListRuleExecutionErrorsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListRuleExecutionErrorsResponse. */
+                class ListRuleExecutionErrorsResponse implements IListRuleExecutionErrorsResponse {
+
+                    /**
+                     * Constructs a new ListRuleExecutionErrorsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IListRuleExecutionErrorsResponse);
+
+                    /** ListRuleExecutionErrorsResponse ruleExecutionErrors. */
+                    public ruleExecutionErrors: google.cloud.chronicle.v1.IRuleExecutionError[];
+
+                    /** ListRuleExecutionErrorsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListRuleExecutionErrorsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRuleExecutionErrorsResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IListRuleExecutionErrorsResponse): google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse;
+
+                    /**
+                     * Encodes the specified ListRuleExecutionErrorsResponse message. Does not implicitly {@link google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse.verify|verify} messages.
+                     * @param message ListRuleExecutionErrorsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IListRuleExecutionErrorsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRuleExecutionErrorsResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse.verify|verify} messages.
+                     * @param message ListRuleExecutionErrorsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IListRuleExecutionErrorsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRuleExecutionErrorsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRuleExecutionErrorsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse;
+
+                    /**
+                     * Decodes a ListRuleExecutionErrorsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRuleExecutionErrorsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse;
+
+                    /**
+                     * Verifies a ListRuleExecutionErrorsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRuleExecutionErrorsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRuleExecutionErrorsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse;
+
+                    /**
+                     * Creates a plain object from a ListRuleExecutionErrorsResponse message. Also converts values to other types if specified.
+                     * @param message ListRuleExecutionErrorsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRuleExecutionErrorsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRuleExecutionErrorsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RuleExecutionError. */
+                interface IRuleExecutionError {
+
+                    /** RuleExecutionError rule */
+                    rule?: (string|null);
+
+                    /** RuleExecutionError curatedRule */
+                    curatedRule?: (string|null);
+
+                    /** RuleExecutionError name */
+                    name?: (string|null);
+
+                    /** RuleExecutionError error */
+                    error?: (google.rpc.IStatus|null);
+
+                    /** RuleExecutionError timeRange */
+                    timeRange?: (google.type.IInterval|null);
+                }
+
+                /** Represents a RuleExecutionError. */
+                class RuleExecutionError implements IRuleExecutionError {
+
+                    /**
+                     * Constructs a new RuleExecutionError.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IRuleExecutionError);
+
+                    /** RuleExecutionError rule. */
+                    public rule?: (string|null);
+
+                    /** RuleExecutionError curatedRule. */
+                    public curatedRule?: (string|null);
+
+                    /** RuleExecutionError name. */
+                    public name: string;
+
+                    /** RuleExecutionError error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /** RuleExecutionError timeRange. */
+                    public timeRange?: (google.type.IInterval|null);
+
+                    /** RuleExecutionError source. */
+                    public source?: ("rule"|"curatedRule");
+
+                    /**
+                     * Creates a new RuleExecutionError instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RuleExecutionError instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IRuleExecutionError): google.cloud.chronicle.v1.RuleExecutionError;
+
+                    /**
+                     * Encodes the specified RuleExecutionError message. Does not implicitly {@link google.cloud.chronicle.v1.RuleExecutionError.verify|verify} messages.
+                     * @param message RuleExecutionError message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IRuleExecutionError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RuleExecutionError message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.RuleExecutionError.verify|verify} messages.
+                     * @param message RuleExecutionError message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IRuleExecutionError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RuleExecutionError message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RuleExecutionError
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.RuleExecutionError;
+
+                    /**
+                     * Decodes a RuleExecutionError message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RuleExecutionError
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.RuleExecutionError;
+
+                    /**
+                     * Verifies a RuleExecutionError message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RuleExecutionError message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RuleExecutionError
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.RuleExecutionError;
+
+                    /**
+                     * Creates a plain object from a RuleExecutionError message. Also converts values to other types if specified.
+                     * @param message RuleExecutionError
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.RuleExecutionError, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RuleExecutionError to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RuleExecutionError
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
             }
         }
     }

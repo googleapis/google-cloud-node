@@ -60866,6 +60866,968 @@
                         return InputsUsed;
                     })();
     
+                    v1.RuleExecutionErrorService = (function() {
+    
+                        /**
+                         * Constructs a new RuleExecutionErrorService service.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a RuleExecutionErrorService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function RuleExecutionErrorService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (RuleExecutionErrorService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = RuleExecutionErrorService;
+    
+                        /**
+                         * Creates new RuleExecutionErrorService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.RuleExecutionErrorService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {RuleExecutionErrorService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        RuleExecutionErrorService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.chronicle.v1.RuleExecutionErrorService|listRuleExecutionErrors}.
+                         * @memberof google.cloud.chronicle.v1.RuleExecutionErrorService
+                         * @typedef ListRuleExecutionErrorsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse} [response] ListRuleExecutionErrorsResponse
+                         */
+    
+                        /**
+                         * Calls ListRuleExecutionErrors.
+                         * @function listRuleExecutionErrors
+                         * @memberof google.cloud.chronicle.v1.RuleExecutionErrorService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IListRuleExecutionErrorsRequest} request ListRuleExecutionErrorsRequest message or plain object
+                         * @param {google.cloud.chronicle.v1.RuleExecutionErrorService.ListRuleExecutionErrorsCallback} callback Node-style callback called with the error, if any, and ListRuleExecutionErrorsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(RuleExecutionErrorService.prototype.listRuleExecutionErrors = function listRuleExecutionErrors(request, callback) {
+                            return this.rpcCall(listRuleExecutionErrors, $root.google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest, $root.google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse, request, callback);
+                        }, "name", { value: "ListRuleExecutionErrors" });
+    
+                        /**
+                         * Calls ListRuleExecutionErrors.
+                         * @function listRuleExecutionErrors
+                         * @memberof google.cloud.chronicle.v1.RuleExecutionErrorService
+                         * @instance
+                         * @param {google.cloud.chronicle.v1.IListRuleExecutionErrorsRequest} request ListRuleExecutionErrorsRequest message or plain object
+                         * @returns {Promise<google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        return RuleExecutionErrorService;
+                    })();
+    
+                    v1.ListRuleExecutionErrorsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListRuleExecutionErrorsRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IListRuleExecutionErrorsRequest
+                         * @property {string|null} [parent] ListRuleExecutionErrorsRequest parent
+                         * @property {number|null} [pageSize] ListRuleExecutionErrorsRequest pageSize
+                         * @property {string|null} [pageToken] ListRuleExecutionErrorsRequest pageToken
+                         * @property {string|null} [filter] ListRuleExecutionErrorsRequest filter
+                         */
+    
+                        /**
+                         * Constructs a new ListRuleExecutionErrorsRequest.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a ListRuleExecutionErrorsRequest.
+                         * @implements IListRuleExecutionErrorsRequest
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IListRuleExecutionErrorsRequest=} [properties] Properties to set
+                         */
+                        function ListRuleExecutionErrorsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListRuleExecutionErrorsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest
+                         * @instance
+                         */
+                        ListRuleExecutionErrorsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListRuleExecutionErrorsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest
+                         * @instance
+                         */
+                        ListRuleExecutionErrorsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListRuleExecutionErrorsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest
+                         * @instance
+                         */
+                        ListRuleExecutionErrorsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListRuleExecutionErrorsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest
+                         * @instance
+                         */
+                        ListRuleExecutionErrorsRequest.prototype.filter = "";
+    
+                        /**
+                         * Creates a new ListRuleExecutionErrorsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListRuleExecutionErrorsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest} ListRuleExecutionErrorsRequest instance
+                         */
+                        ListRuleExecutionErrorsRequest.create = function create(properties) {
+                            return new ListRuleExecutionErrorsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListRuleExecutionErrorsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListRuleExecutionErrorsRequest} message ListRuleExecutionErrorsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRuleExecutionErrorsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListRuleExecutionErrorsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListRuleExecutionErrorsRequest} message ListRuleExecutionErrorsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRuleExecutionErrorsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListRuleExecutionErrorsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest} ListRuleExecutionErrorsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRuleExecutionErrorsRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListRuleExecutionErrorsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest} ListRuleExecutionErrorsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRuleExecutionErrorsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListRuleExecutionErrorsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListRuleExecutionErrorsRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListRuleExecutionErrorsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest} ListRuleExecutionErrorsRequest
+                         */
+                        ListRuleExecutionErrorsRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListRuleExecutionErrorsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest
+                         * @static
+                         * @param {google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest} message ListRuleExecutionErrorsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListRuleExecutionErrorsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListRuleExecutionErrorsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListRuleExecutionErrorsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListRuleExecutionErrorsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListRuleExecutionErrorsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest";
+                        };
+    
+                        return ListRuleExecutionErrorsRequest;
+                    })();
+    
+                    v1.ListRuleExecutionErrorsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListRuleExecutionErrorsResponse.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IListRuleExecutionErrorsResponse
+                         * @property {Array.<google.cloud.chronicle.v1.IRuleExecutionError>|null} [ruleExecutionErrors] ListRuleExecutionErrorsResponse ruleExecutionErrors
+                         * @property {string|null} [nextPageToken] ListRuleExecutionErrorsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListRuleExecutionErrorsResponse.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a ListRuleExecutionErrorsResponse.
+                         * @implements IListRuleExecutionErrorsResponse
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IListRuleExecutionErrorsResponse=} [properties] Properties to set
+                         */
+                        function ListRuleExecutionErrorsResponse(properties) {
+                            this.ruleExecutionErrors = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListRuleExecutionErrorsResponse ruleExecutionErrors.
+                         * @member {Array.<google.cloud.chronicle.v1.IRuleExecutionError>} ruleExecutionErrors
+                         * @memberof google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse
+                         * @instance
+                         */
+                        ListRuleExecutionErrorsResponse.prototype.ruleExecutionErrors = $util.emptyArray;
+    
+                        /**
+                         * ListRuleExecutionErrorsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse
+                         * @instance
+                         */
+                        ListRuleExecutionErrorsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListRuleExecutionErrorsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListRuleExecutionErrorsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse} ListRuleExecutionErrorsResponse instance
+                         */
+                        ListRuleExecutionErrorsResponse.create = function create(properties) {
+                            return new ListRuleExecutionErrorsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListRuleExecutionErrorsResponse message. Does not implicitly {@link google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListRuleExecutionErrorsResponse} message ListRuleExecutionErrorsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRuleExecutionErrorsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.ruleExecutionErrors != null && message.ruleExecutionErrors.length)
+                                for (var i = 0; i < message.ruleExecutionErrors.length; ++i)
+                                    $root.google.cloud.chronicle.v1.RuleExecutionError.encode(message.ruleExecutionErrors[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListRuleExecutionErrorsResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IListRuleExecutionErrorsResponse} message ListRuleExecutionErrorsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRuleExecutionErrorsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListRuleExecutionErrorsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse} ListRuleExecutionErrorsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRuleExecutionErrorsResponse.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.ruleExecutionErrors && message.ruleExecutionErrors.length))
+                                            message.ruleExecutionErrors = [];
+                                        message.ruleExecutionErrors.push($root.google.cloud.chronicle.v1.RuleExecutionError.decode(reader, reader.uint32(), undefined, long + 1));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListRuleExecutionErrorsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse} ListRuleExecutionErrorsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRuleExecutionErrorsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListRuleExecutionErrorsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListRuleExecutionErrorsResponse.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.ruleExecutionErrors != null && message.hasOwnProperty("ruleExecutionErrors")) {
+                                if (!Array.isArray(message.ruleExecutionErrors))
+                                    return "ruleExecutionErrors: array expected";
+                                for (var i = 0; i < message.ruleExecutionErrors.length; ++i) {
+                                    var error = $root.google.cloud.chronicle.v1.RuleExecutionError.verify(message.ruleExecutionErrors[i], long + 1);
+                                    if (error)
+                                        return "ruleExecutionErrors." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListRuleExecutionErrorsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse} ListRuleExecutionErrorsResponse
+                         */
+                        ListRuleExecutionErrorsResponse.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse();
+                            if (object.ruleExecutionErrors) {
+                                if (!Array.isArray(object.ruleExecutionErrors))
+                                    throw TypeError(".google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse.ruleExecutionErrors: array expected");
+                                message.ruleExecutionErrors = [];
+                                for (var i = 0; i < object.ruleExecutionErrors.length; ++i) {
+                                    if (typeof object.ruleExecutionErrors[i] !== "object")
+                                        throw TypeError(".google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse.ruleExecutionErrors: object expected");
+                                    message.ruleExecutionErrors[i] = $root.google.cloud.chronicle.v1.RuleExecutionError.fromObject(object.ruleExecutionErrors[i], long + 1);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListRuleExecutionErrorsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse
+                         * @static
+                         * @param {google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse} message ListRuleExecutionErrorsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListRuleExecutionErrorsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.ruleExecutionErrors = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.ruleExecutionErrors && message.ruleExecutionErrors.length) {
+                                object.ruleExecutionErrors = [];
+                                for (var j = 0; j < message.ruleExecutionErrors.length; ++j)
+                                    object.ruleExecutionErrors[j] = $root.google.cloud.chronicle.v1.RuleExecutionError.toObject(message.ruleExecutionErrors[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListRuleExecutionErrorsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListRuleExecutionErrorsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListRuleExecutionErrorsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListRuleExecutionErrorsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse";
+                        };
+    
+                        return ListRuleExecutionErrorsResponse;
+                    })();
+    
+                    v1.RuleExecutionError = (function() {
+    
+                        /**
+                         * Properties of a RuleExecutionError.
+                         * @memberof google.cloud.chronicle.v1
+                         * @interface IRuleExecutionError
+                         * @property {string|null} [rule] RuleExecutionError rule
+                         * @property {string|null} [curatedRule] RuleExecutionError curatedRule
+                         * @property {string|null} [name] RuleExecutionError name
+                         * @property {google.rpc.IStatus|null} [error] RuleExecutionError error
+                         * @property {google.type.IInterval|null} [timeRange] RuleExecutionError timeRange
+                         */
+    
+                        /**
+                         * Constructs a new RuleExecutionError.
+                         * @memberof google.cloud.chronicle.v1
+                         * @classdesc Represents a RuleExecutionError.
+                         * @implements IRuleExecutionError
+                         * @constructor
+                         * @param {google.cloud.chronicle.v1.IRuleExecutionError=} [properties] Properties to set
+                         */
+                        function RuleExecutionError(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RuleExecutionError rule.
+                         * @member {string|null|undefined} rule
+                         * @memberof google.cloud.chronicle.v1.RuleExecutionError
+                         * @instance
+                         */
+                        RuleExecutionError.prototype.rule = null;
+    
+                        /**
+                         * RuleExecutionError curatedRule.
+                         * @member {string|null|undefined} curatedRule
+                         * @memberof google.cloud.chronicle.v1.RuleExecutionError
+                         * @instance
+                         */
+                        RuleExecutionError.prototype.curatedRule = null;
+    
+                        /**
+                         * RuleExecutionError name.
+                         * @member {string} name
+                         * @memberof google.cloud.chronicle.v1.RuleExecutionError
+                         * @instance
+                         */
+                        RuleExecutionError.prototype.name = "";
+    
+                        /**
+                         * RuleExecutionError error.
+                         * @member {google.rpc.IStatus|null|undefined} error
+                         * @memberof google.cloud.chronicle.v1.RuleExecutionError
+                         * @instance
+                         */
+                        RuleExecutionError.prototype.error = null;
+    
+                        /**
+                         * RuleExecutionError timeRange.
+                         * @member {google.type.IInterval|null|undefined} timeRange
+                         * @memberof google.cloud.chronicle.v1.RuleExecutionError
+                         * @instance
+                         */
+                        RuleExecutionError.prototype.timeRange = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * RuleExecutionError source.
+                         * @member {"rule"|"curatedRule"|undefined} source
+                         * @memberof google.cloud.chronicle.v1.RuleExecutionError
+                         * @instance
+                         */
+                        Object.defineProperty(RuleExecutionError.prototype, "source", {
+                            get: $util.oneOfGetter($oneOfFields = ["rule", "curatedRule"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new RuleExecutionError instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.chronicle.v1.RuleExecutionError
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IRuleExecutionError=} [properties] Properties to set
+                         * @returns {google.cloud.chronicle.v1.RuleExecutionError} RuleExecutionError instance
+                         */
+                        RuleExecutionError.create = function create(properties) {
+                            return new RuleExecutionError(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RuleExecutionError message. Does not implicitly {@link google.cloud.chronicle.v1.RuleExecutionError.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.chronicle.v1.RuleExecutionError
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IRuleExecutionError} message RuleExecutionError message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RuleExecutionError.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                                $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.timeRange != null && Object.hasOwnProperty.call(message, "timeRange"))
+                                $root.google.type.Interval.encode(message.timeRange, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.rule != null && Object.hasOwnProperty.call(message, "rule"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.rule);
+                            if (message.curatedRule != null && Object.hasOwnProperty.call(message, "curatedRule"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.curatedRule);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RuleExecutionError message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.RuleExecutionError.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.chronicle.v1.RuleExecutionError
+                         * @static
+                         * @param {google.cloud.chronicle.v1.IRuleExecutionError} message RuleExecutionError message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RuleExecutionError.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RuleExecutionError message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.chronicle.v1.RuleExecutionError
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.chronicle.v1.RuleExecutionError} RuleExecutionError
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RuleExecutionError.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.chronicle.v1.RuleExecutionError();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 4: {
+                                        message.rule = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.curatedRule = reader.string();
+                                        break;
+                                    }
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.error = $root.google.rpc.Status.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 3: {
+                                        message.timeRange = $root.google.type.Interval.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RuleExecutionError message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.chronicle.v1.RuleExecutionError
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.chronicle.v1.RuleExecutionError} RuleExecutionError
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RuleExecutionError.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RuleExecutionError message.
+                         * @function verify
+                         * @memberof google.cloud.chronicle.v1.RuleExecutionError
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RuleExecutionError.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            var properties = {};
+                            if (message.rule != null && message.hasOwnProperty("rule")) {
+                                properties.source = 1;
+                                if (!$util.isString(message.rule))
+                                    return "rule: string expected";
+                            }
+                            if (message.curatedRule != null && message.hasOwnProperty("curatedRule")) {
+                                if (properties.source === 1)
+                                    return "source: multiple values";
+                                properties.source = 1;
+                                if (!$util.isString(message.curatedRule))
+                                    return "curatedRule: string expected";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.error != null && message.hasOwnProperty("error")) {
+                                var error = $root.google.rpc.Status.verify(message.error, long + 1);
+                                if (error)
+                                    return "error." + error;
+                            }
+                            if (message.timeRange != null && message.hasOwnProperty("timeRange")) {
+                                var error = $root.google.type.Interval.verify(message.timeRange, long + 1);
+                                if (error)
+                                    return "timeRange." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RuleExecutionError message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.chronicle.v1.RuleExecutionError
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.chronicle.v1.RuleExecutionError} RuleExecutionError
+                         */
+                        RuleExecutionError.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.chronicle.v1.RuleExecutionError)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.chronicle.v1.RuleExecutionError();
+                            if (object.rule != null)
+                                message.rule = String(object.rule);
+                            if (object.curatedRule != null)
+                                message.curatedRule = String(object.curatedRule);
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.error != null) {
+                                if (typeof object.error !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.RuleExecutionError.error: object expected");
+                                message.error = $root.google.rpc.Status.fromObject(object.error, long + 1);
+                            }
+                            if (object.timeRange != null) {
+                                if (typeof object.timeRange !== "object")
+                                    throw TypeError(".google.cloud.chronicle.v1.RuleExecutionError.timeRange: object expected");
+                                message.timeRange = $root.google.type.Interval.fromObject(object.timeRange, long + 1);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RuleExecutionError message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.chronicle.v1.RuleExecutionError
+                         * @static
+                         * @param {google.cloud.chronicle.v1.RuleExecutionError} message RuleExecutionError
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RuleExecutionError.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.error = null;
+                                object.timeRange = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.error != null && message.hasOwnProperty("error"))
+                                object.error = $root.google.rpc.Status.toObject(message.error, options);
+                            if (message.timeRange != null && message.hasOwnProperty("timeRange"))
+                                object.timeRange = $root.google.type.Interval.toObject(message.timeRange, options);
+                            if (message.rule != null && message.hasOwnProperty("rule")) {
+                                object.rule = message.rule;
+                                if (options.oneofs)
+                                    object.source = "rule";
+                            }
+                            if (message.curatedRule != null && message.hasOwnProperty("curatedRule")) {
+                                object.curatedRule = message.curatedRule;
+                                if (options.oneofs)
+                                    object.source = "curatedRule";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RuleExecutionError to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.chronicle.v1.RuleExecutionError
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RuleExecutionError.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RuleExecutionError
+                         * @function getTypeUrl
+                         * @memberof google.cloud.chronicle.v1.RuleExecutionError
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RuleExecutionError.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.chronicle.v1.RuleExecutionError";
+                        };
+    
+                        return RuleExecutionError;
+                    })();
+    
                     return v1;
                 })();
     
