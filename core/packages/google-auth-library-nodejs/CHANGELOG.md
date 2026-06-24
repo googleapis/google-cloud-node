@@ -5,6 +5,18 @@
 
 [1]: https://www.npmjs.com/package/google-auth-library?activeTab=versions
 
+## [10.9.0](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v10.8.1...google-auth-library-v10.9.0) (2026-06-24)
+
+
+### Features
+
+* **auth:** Regional access boundaries main merge ([#8665](https://github.com/googleapis/google-cloud-node/issues/8665)) ([76e6d3b](https://github.com/googleapis/google-cloud-node/commit/76e6d3b6dea6032547780155c045e41552e27f40))
+
+
+### Bug Fixes
+
+* Correct repository URLs in core package.json files ([#8722](https://github.com/googleapis/google-cloud-node/issues/8722)) ([368f18e](https://github.com/googleapis/google-cloud-node/commit/368f18ecc361310e7bfb323ba0e7836186ea08d1))
+
 ## [10.8.1](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v10.8.0...google-auth-library-v10.8.1) (2026-06-23)
 
 

@@ -4,6 +4,32 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "76e6d3b6dea6032547780155c045e41552e27f40",
+          "message": "Regional access boundaries main merge",
+          "issues": [
+            "8665"
+          ],
+          "scope": "auth"
+        },
+        {
+          "type": "fix",
+          "sha": "368f18ecc361310e7bfb323ba0e7836186ea08d1",
+          "message": "Correct repository URLs in core package.json files",
+          "issues": [
+            "8722"
+          ]
+        }
+      ],
+      "version": "10.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-auth-library",
+      "id": "9bf256fa-a10d-42ce-94cf-dd824ab8d864",
+      "createTime": "2026-06-24T17:44:31.336Z"
+    },
+    {
+      "changes": [
+        {
           "type": "perf",
           "sha": "6ab8de0035e901d5781523a472b441880b3605ac",
           "message": "Optimize query result decoding",
@@ -80905,5 +80931,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-06-24T06:53:36.034Z"
+  "updateTime": "2026-06-24T17:44:31.336Z"
 }
