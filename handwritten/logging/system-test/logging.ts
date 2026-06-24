@@ -58,13 +58,10 @@ describe('Logging', () => {
 
   /*
   before(async () => {
-    console.log('Before service account definition');
     // Skipping this hook for now.
     // The next line appears to not be able to fetch the client_email.
     const serviceAccount = (await logging.auth.getCredentials()).client_email;
-    console.log(serviceAccount);
     PROJECT_ID = await logging.auth.getProjectId();
-    console.log(PROJECT_ID);
     await bucket.create();
     await bucket.iam.setPolicy({
       bindings: [
