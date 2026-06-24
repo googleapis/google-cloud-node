@@ -47356,9 +47356,6 @@ export namespace google {
                     /** AgentTool description */
                     description?: (string|null);
 
-                    /** AgentTool rootAgent */
-                    rootAgent?: (string|null);
-
                     /** AgentTool agent */
                     agent?: (string|null);
                 }
@@ -47377,9 +47374,6 @@ export namespace google {
 
                     /** AgentTool description. */
                     public description: string;
-
-                    /** AgentTool rootAgent. */
-                    public rootAgent: string;
 
                     /** AgentTool agent. */
                     public agent: string;

@@ -4,6 +4,23 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "4e4badf1a5c6fde28fa099fb184b02cf794d8dfd",
+          "message": "Strip trailing slashes from automatic GDCH audience",
+          "issues": [
+            "8692"
+          ]
+        }
+      ],
+      "version": "10.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-auth-library",
+      "id": "1234fa56-56ae-4a3f-9f4c-3ede08d18b0e",
+      "createTime": "2026-06-23T14:18:08.208Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "75f148ca83618193c884e139ff8ed76e28854d2d",
           "message": "Port GDCH credentials support to Node.js Auth SDK",
@@ -80774,5 +80791,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-06-18T00:26:09.772Z"
+  "updateTime": "2026-06-23T14:18:08.208Z"
 }
