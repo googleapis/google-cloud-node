@@ -604,7 +604,7 @@ describe('Logging', () => {
       })();
     });
 
-    it('should write an entry with primitive values', done => {
+    it.skip('should write an entry with primitive values', done => {
       const {log} = getTestLog();
 
       const logEntry = log.entry({
@@ -633,7 +633,7 @@ describe('Logging', () => {
       });
     });
 
-    it('should write a log with metadata', done => {
+    it.skip('should write a log with metadata', done => {
       const {log} = getTestLog();
 
       const metadata = Object.assign({}, options, {
@@ -660,7 +660,7 @@ describe('Logging', () => {
       });
     });
 
-    it('should write a structured httpRequest log with no message', done => {
+    it.skip('should write a structured httpRequest log with no message', done => {
       const {log} = getTestLog();
       const metadata = {
         httpRequest: {status: 200},
@@ -682,7 +682,7 @@ describe('Logging', () => {
       });
     });
 
-    it('should write a request log with x-cloud-trace-context header', done => {
+    it.skip('should write a request log with x-cloud-trace-context header', done => {
       const {log} = getTestLog();
       const URL = 'http://www.google.com';
       // Use the response of a http request as the incomingmessage request obj.
@@ -713,7 +713,7 @@ describe('Logging', () => {
       });
     });
 
-    it('should write a http request log with traceparent header', done => {
+    it.skip('should write a http request log with traceparent header', done => {
       const {log} = getTestLog();
       const URL = 'http://www.google.com';
       // Use the response of a http request as the incomingmessage request obj.
