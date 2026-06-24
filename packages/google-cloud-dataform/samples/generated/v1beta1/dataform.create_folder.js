@@ -37,11 +37,6 @@ function main(parent, folder) {
    *  Required. The Folder to create.
    */
   // const folder = {}
-  /**
-   *  The ID to use for the Folder, which will become the final component of
-   *  the Folder's resource name.
-   */
-  // const folderId = 'abc123'
 
   // Imports the Dataform library
   const {DataformClient} = require('@google-cloud/dataform').v1beta1;
