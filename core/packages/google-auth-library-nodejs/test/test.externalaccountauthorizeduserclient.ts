@@ -17,7 +17,7 @@ import {describe, it, afterEach, beforeEach} from 'mocha';
 import * as nock from 'nock';
 import * as sinon from 'sinon';
 import * as qs from 'querystring';
-import {assertGaxiosResponsePresent} from './externalclienthelper';
+import {assertGaxiosResponsePresent, getAudience} from './externalclienthelper';
 import {
   EXTERNAL_ACCOUNT_AUTHORIZED_USER_TYPE,
   ExternalAccountAuthorizedUserClient,
@@ -31,10 +31,6 @@ import {
 } from '../src/auth/oauth2common';
 import {DEFAULT_UNIVERSE} from '../src/auth/authclient';
 import {TestUtils} from './utils';
-import {
-  RegionalAccessBoundaryData,
-  WORKFORCE_LOOKUP_ENDPOINT,
-} from '../src/auth/regionalaccessboundary';
 
 nock.disableNetConnect();
 
@@ -87,11 +83,10 @@ describe('ExternalAccountAuthorizedUserClient', () => {
 
   let clock: sinon.SinonFakeTimers;
   const referenceDate = new Date('2020-08-11T06:55:22.345Z');
-  const workforcePoolAudience =
-    '//iam.googleapis.com/locations/global/workforcePools/pool-id-123/providers/provider-id-abc';
+  const audience = getAudience();
   const externalAccountAuthorizedUserCredentialOptions = {
     type: EXTERNAL_ACCOUNT_AUTHORIZED_USER_TYPE,
-    audience: workforcePoolAudience,
+    audience: audience,
     client_id: 'clientId',
     client_secret: 'clientSecret',
     refresh_token: 'refreshToken',
@@ -100,7 +95,7 @@ describe('ExternalAccountAuthorizedUserClient', () => {
   } as ExternalAccountAuthorizedUserClientOptions;
   const externalAccountAuthorizedUserCredentialOptionsNoToken = {
     type: EXTERNAL_ACCOUNT_AUTHORIZED_USER_TYPE,
-    audience: workforcePoolAudience,
+    audience: audience,
     client_id: 'clientId',
     client_secret: 'clientSecret',
     refresh_token: 'refreshToken',
@@ -896,92 +891,6 @@ describe('ExternalAccountAuthorizedUserClient', () => {
 
       assert.deepStrictEqual(actualResponse.data, exampleResponse);
       scopes.forEach(scope => scope.done());
-    });
-  });
-
-  describe('regional access boundaries', () => {
-    const MOCK_ACCESS_TOKEN = 'newAccessToken';
-    const MOCK_AUTH_HEADER = `Bearer ${MOCK_ACCESS_TOKEN}`;
-    const EXPECTED_RAB_DATA: RegionalAccessBoundaryData = {
-      locations: ['some-locations'],
-      encodedLocations: '0xdeadbeef',
-    };
-
-    beforeEach(() => {
-      clock.restore();
-    });
-
-    afterEach(() => {
-      nock.cleanAll();
-    });
-
-    it('should trigger asynchronous RAB refresh successfully', async () => {
-      const workforcePoolId = 'pool-id-123';
-      const client = new ExternalAccountAuthorizedUserClient(
-        externalAccountAuthorizedUserCredentialOptions,
-      );
-
-      const stsScope = mockStsTokenRefresh(BASE_URL, REFRESH_PATH, [
-        {
-          statusCode: 200,
-          response: successfulRefreshResponse,
-          request: {
-            grant_type: 'refresh_token',
-            refresh_token: 'refreshToken',
-          },
-        },
-      ]);
-
-      const lookupUrl = WORKFORCE_LOOKUP_ENDPOINT.replace(
-        '{pool_id}',
-        encodeURIComponent(workforcePoolId),
-      );
-
-      let rabLookupCalled = false;
-      const rabScope = nock(new URL(lookupUrl).origin)
-        .get(new URL(lookupUrl).pathname)
-        .matchHeader('authorization', MOCK_AUTH_HEADER)
-        .reply(() => {
-          rabLookupCalled = true;
-          return [200, EXPECTED_RAB_DATA];
-        });
-
-      // Initial call - should NOT have the header yet
-      const headers = await client.getRequestHeaders();
-      assert.strictEqual(headers.get('x-allowed-locations'), null);
-
-      // Wait for background lookup
-      let attempts = 0;
-      while (!rabLookupCalled && attempts < 20) {
-        await new Promise(r => setTimeout(r, 100));
-        attempts++;
-      }
-      assert.strictEqual(rabLookupCalled, true);
-
-      await new Promise(r => setTimeout(r, 100));
-      assert.deepStrictEqual(
-        client.getRegionalAccessBoundary(),
-        EXPECTED_RAB_DATA,
-      );
-
-      stsScope.done();
-      rabScope.done();
-    });
-
-    it('should fail background lookup for an invalid audience', async () => {
-      const invalidAudience = 'invalid-audience-format';
-      const options = {
-        ...externalAccountAuthorizedUserCredentialOptions,
-        audience: invalidAudience,
-      };
-      const client = new ExternalAccountAuthorizedUserClient(options);
-
-      // Note: background refresh fails silently in terms of getRequestHeaders resolving.
-      // But we can manually trigger getRegionalAccessBoundaryUrl to verify it throws.
-      await assert.rejects(
-        client.getRegionalAccessBoundaryUrl(),
-        /RegionalAccessBoundary: A workforce pool ID is required for regional access boundary lookups but could not be determined from the audience/,
-      );
     });
   });
 });
