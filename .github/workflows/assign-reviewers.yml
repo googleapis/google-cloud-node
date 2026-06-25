@@ -243,67 +243,20 @@ jobs:
               }
 
               if (defaultReviewers.length > 0) {
-                console.log(`Found default reviewers: ${defaultReviewers.join(', ')}. Load balancing among them.`);
+                // Select a reviewer deterministically based on the PR number to distribute load evenly without slow API calls.
+                const prNumber = context.payload.pull_request.number;
+                const reviewer = defaultReviewers[prNumber % defaultReviewers.length];
+                console.log(`Assigning default reviewer deterministically (PR #${prNumber}): ${reviewer}`);
                 try {
-                  // Retrieve active open PRs to calculate load
-                  const { data: openPRs } = await github.rest.pulls.list({
-                    owner: context.repo.owner,
-                    repo: context.repo.repo,
-                    state: 'open',
-                    per_page: 100,
-                  });
-
-                  const loadMap = {};
-                  for (const member of defaultReviewers) {
-                    loadMap[member] = 0;
-                  }
-
-                  for (const pr of openPRs) {
-                    // Count pending review requests
-                    if (pr.requested_reviewers) {
-                      for (const reviewer of pr.requested_reviewers) {
-                        if (loadMap[reviewer.login] !== undefined) {
-                          loadMap[reviewer.login]++;
-                        }
-                      }
-                    }
-                    // Count assignees
-                    if (pr.assignees) {
-                      for (const assignee of pr.assignees) {
-                        if (loadMap[assignee.login] !== undefined) {
-                          loadMap[assignee.login]++;
-                        }
-                      }
-                    }
-                  }
-
-                  console.log("Current team workload:", loadMap);
-
-                  // Find members with the minimum load
-                  let minLoad = Infinity;
-                  let selectedReviewers = [];
-                  for (const member of defaultReviewers) {
-                    const load = loadMap[member];
-                    if (load < minLoad) {
-                      minLoad = load;
-                      selectedReviewers = [member];
-                    } else if (load === minLoad) {
-                      selectedReviewers.push(member);
-                    }
-                  }
-
-                  const leastLoadedReviewer = selectedReviewers[Math.floor(Math.random() * selectedReviewers.length)];
-                  console.log(`Selected reviewer with least load (load: ${minLoad}): ${leastLoadedReviewer}`);
-
                   await github.rest.pulls.requestReviewers({
                     owner: context.repo.owner,
                     repo: context.repo.repo,
-                    pull_number: context.payload.pull_request.number,
-                    reviewers: [leastLoadedReviewer],
+                    pull_number: prNumber,
+                    reviewers: [reviewer],
                   });
                   assigned = true;
                 } catch (err) {
-                  console.error("Failed to assign reviewers using load balancing:", err);
+                  console.error("Failed to assign default reviewer:", err.message || err);
                 }
               } else {
                 console.warn("No default reviewers found in CODEOWNERS (or they only contained teams/author).");
