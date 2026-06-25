@@ -4501,11 +4501,11 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
             ) {
               newFile.storage.retryOptions.autoRetry = false;
             }
-            const readStream = fs.createReadStream(pathString);
             const writable = newFile.createWriteStream(options);
             if (options.onUploadProgress) {
               writable.on('progress', options.onUploadProgress);
             }
+            const readStream = fs.createReadStream(pathString);
             readStream
               .on('error', err => {
                 readStream.destroy();
