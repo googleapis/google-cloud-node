@@ -96,15 +96,15 @@
   },
   "repository": {
     "type": "git",
-    "directory": "packages/gax",
-    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+    "directory": "core/packages/gax",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "author": "Google API Authors",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/googleapis/google-cloud-node-core/issues"
+    "url": "https://github.com/googleapis/google-cloud-node/issues"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/gax",
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/packages/gax",
   "engines": {
     "node": ">=18"
   },

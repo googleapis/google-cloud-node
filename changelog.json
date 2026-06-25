@@ -4,6 +4,146 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "76e6d3b6dea6032547780155c045e41552e27f40",
+          "message": "Regional access boundaries main merge",
+          "issues": [
+            "8665"
+          ],
+          "scope": "auth"
+        },
+        {
+          "type": "fix",
+          "sha": "368f18ecc361310e7bfb323ba0e7836186ea08d1",
+          "message": "Correct repository URLs in core package.json files",
+          "issues": [
+            "8722"
+          ]
+        }
+      ],
+      "version": "10.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-auth-library",
+      "id": "9bf256fa-a10d-42ce-94cf-dd824ab8d864",
+      "createTime": "2026-06-24T17:44:31.336Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "perf",
+          "sha": "6ab8de0035e901d5781523a472b441880b3605ac",
+          "message": "Optimize query result decoding",
+          "issues": [
+            "8452"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "894cd8d4728a4aa74dc9df5ce4960b24a24c3bec",
+          "message": "Precompute common headers",
+          "issues": [
+            "8451"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "2a7c79feb906e5a8c7fa5520e26e59607dcffac1",
+          "message": "Avoid overriding host context manager and isolate session creation context",
+          "issues": [
+            "8441"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "feat",
+          "sha": "28b6350209bfb60125e0575331b2aa297500eb75",
+          "message": "Optimize replaceProjectIdToken from projectify",
+          "issues": [
+            "8412"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "f9e1102daa40a155d3eafeed31b63625f91c6d6c",
+          "message": "Isolate OpenTelemetry background timers in ROOT_CONTEXT to prevent context and memory leaks",
+          "issues": [
+            "8399"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "fix",
+          "sha": "600ccca895ff8429fed55c1d14523b2533080818",
+          "message": "Resolve prelint, eslint, and prettier CI build failures",
+          "issues": [
+            "8359"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "feat",
+          "sha": "a59dde9b4827e7c601cd5f18a1cf528e9bae1847",
+          "message": "Optimize RequestId propagation and minimize OpenTelemetry active tracing overhead",
+          "issues": [
+            "8329"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "feat",
+          "sha": "f1d31f94690486f4d443400fa4018a32b8bea04e",
+          "message": "Add cache updates API",
+          "issues": [
+            "8307"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "f81f0a63fde72a238dcb987be90f0f93e0757f0e",
+          "message": "Specify explicit destinations in spanner owlbot.py",
+          "issues": [
+            "8304"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "4715de939397c0a08926076bb57c563dab240673",
+          "message": "Add cache updates API",
+          "issues": [
+            "8124"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "feat",
+          "sha": "4715de939397c0a08926076bb57c563dab240673",
+          "message": "`isolation_level` and `read_lock_mode` are added to message `.google.spanner.v1.CommitResponse`",
+          "issues": [],
+          "scope": "spanner"
+        }
+      ],
+      "version": "8.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/spanner",
+      "id": "95c9e714-badc-44e9-930e-3a67aaf8e392",
+      "createTime": "2026-06-24T06:53:36.034Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "4e4badf1a5c6fde28fa099fb184b02cf794d8dfd",
           "message": "Strip trailing slashes from automatic GDCH audience",
@@ -80791,5 +80931,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-06-23T14:18:08.208Z"
+  "updateTime": "2026-06-24T17:44:31.336Z"
 }

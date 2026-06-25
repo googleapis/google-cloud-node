@@ -1,17 +1,16 @@
 {
+    "api_description": "Train high-quality custom machine learning models with minimal machine\nlearning expertise and effort.",
     "api_id": "aiplatform.googleapis.com",
     "api_shortname": "aiplatform",
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/aiplatform/latest",
-    "codeowner_team": "@googleapis/ml-apis",
     "default_version": "v1",
     "distribution_name": "@google-cloud/aiplatform",
-    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1130925&template=1637248",
     "language": "nodejs",
-    "library_type": "GAPIC_COMBO",
+    "library_type": "GAPIC_AUTO",
     "name": "aiplatform",
     "name_pretty": "Vertex AI",
-    "product_documentation": "https://cloud.google.com/vertex-ai/docs",
+    "product_documentation": "https://cloud.google.com/ai-platform/docs",
     "release_level": "stable",
-    "repo": "googleapis/google-cloud-node",
-    "requires_billing": true
+    "repo": "googleapis/google-cloud-node"
 }
