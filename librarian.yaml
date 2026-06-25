@@ -1668,6 +1668,7 @@ libraries:
       - path: google/cloud/vision/v1p3beta1
       - path: google/cloud/vision/v1p2beta1
       - path: google/cloud/vision/v1p1beta1
+    copyright_year: "2026"
     keep:
       - smoke-test/image_annotator_smoke_test.js
       - src/helpers.ts
@@ -1682,7 +1683,6 @@ libraries:
       - test/fixtures/image.jpg
       - test/helpers.test.ts
       - test/index.test.ts
-    copyright_year: "2026"
     nodejs:
       default_version: v1
       dependencies:
