@@ -1386,7 +1386,7 @@ export class Upload extends Writable {
 
         if (retryDelay <= 0) {
           this.destroy(
-            formatRetryError('Retry total time limit exceeded', resp),
+            buildRetryError('Retry total time limit exceeded', resp),
           );
           return;
         }
@@ -1407,7 +1407,7 @@ export class Upload extends Writable {
       }
       this.numRetries++;
     } else {
-      this.destroy(formatRetryError('Retry limit exceeded', resp));
+      this.destroy(buildRetryError('Retry limit exceeded', resp));
     }
   }
 
@@ -1452,7 +1452,7 @@ export class Upload extends Writable {
   }
 }
 
-function formatRetryError(
+function buildRetryError(
   prefix: string,
   resp: Pick<GaxiosResponse, 'data' | 'status'>,
 ): Error {
