@@ -10763,6 +10763,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|updateReportingIdentitySettings}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef UpdateReportingIdentitySettingsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.ReportingIdentitySettings} [response] ReportingIdentitySettings
+                         */
+    
+                        /**
+                         * Calls UpdateReportingIdentitySettings.
+                         * @function updateReportingIdentitySettings
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IUpdateReportingIdentitySettingsRequest} request UpdateReportingIdentitySettingsRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateReportingIdentitySettingsCallback} callback Node-style callback called with the error, if any, and ReportingIdentitySettings
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.updateReportingIdentitySettings = function updateReportingIdentitySettings(request, callback) {
+                            return this.rpcCall(updateReportingIdentitySettings, $root.google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest, $root.google.analytics.admin.v1alpha.ReportingIdentitySettings, request, callback);
+                        }, "name", { value: "UpdateReportingIdentitySettings" });
+    
+                        /**
+                         * Calls UpdateReportingIdentitySettings.
+                         * @function updateReportingIdentitySettings
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IUpdateReportingIdentitySettingsRequest} request UpdateReportingIdentitySettingsRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.ReportingIdentitySettings>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|getUserProvidedDataSettings}.
                          * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
                          * @typedef GetUserProvidedDataSettingsCallback
@@ -58640,6 +58673,257 @@
                         return GetReportingIdentitySettingsRequest;
                     })();
     
+                    v1alpha.UpdateReportingIdentitySettingsRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateReportingIdentitySettingsRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IUpdateReportingIdentitySettingsRequest
+                         * @property {google.analytics.admin.v1alpha.IReportingIdentitySettings|null} [reportingIdentitySettings] UpdateReportingIdentitySettingsRequest reportingIdentitySettings
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateReportingIdentitySettingsRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateReportingIdentitySettingsRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents an UpdateReportingIdentitySettingsRequest.
+                         * @implements IUpdateReportingIdentitySettingsRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IUpdateReportingIdentitySettingsRequest=} [properties] Properties to set
+                         */
+                        function UpdateReportingIdentitySettingsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateReportingIdentitySettingsRequest reportingIdentitySettings.
+                         * @member {google.analytics.admin.v1alpha.IReportingIdentitySettings|null|undefined} reportingIdentitySettings
+                         * @memberof google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest
+                         * @instance
+                         */
+                        UpdateReportingIdentitySettingsRequest.prototype.reportingIdentitySettings = null;
+    
+                        /**
+                         * UpdateReportingIdentitySettingsRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest
+                         * @instance
+                         */
+                        UpdateReportingIdentitySettingsRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateReportingIdentitySettingsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IUpdateReportingIdentitySettingsRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest} UpdateReportingIdentitySettingsRequest instance
+                         */
+                        UpdateReportingIdentitySettingsRequest.create = function create(properties) {
+                            return new UpdateReportingIdentitySettingsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateReportingIdentitySettingsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IUpdateReportingIdentitySettingsRequest} message UpdateReportingIdentitySettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateReportingIdentitySettingsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.reportingIdentitySettings != null && Object.hasOwnProperty.call(message, "reportingIdentitySettings"))
+                                $root.google.analytics.admin.v1alpha.ReportingIdentitySettings.encode(message.reportingIdentitySettings, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateReportingIdentitySettingsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IUpdateReportingIdentitySettingsRequest} message UpdateReportingIdentitySettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateReportingIdentitySettingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateReportingIdentitySettingsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest} UpdateReportingIdentitySettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateReportingIdentitySettingsRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.reportingIdentitySettings = $root.google.analytics.admin.v1alpha.ReportingIdentitySettings.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateReportingIdentitySettingsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest} UpdateReportingIdentitySettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateReportingIdentitySettingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateReportingIdentitySettingsRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateReportingIdentitySettingsRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.reportingIdentitySettings != null && message.hasOwnProperty("reportingIdentitySettings")) {
+                                var error = $root.google.analytics.admin.v1alpha.ReportingIdentitySettings.verify(message.reportingIdentitySettings, long + 1);
+                                if (error)
+                                    return "reportingIdentitySettings." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask, long + 1);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateReportingIdentitySettingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest} UpdateReportingIdentitySettingsRequest
+                         */
+                        UpdateReportingIdentitySettingsRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest();
+                            if (object.reportingIdentitySettings != null) {
+                                if (typeof object.reportingIdentitySettings !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest.reportingIdentitySettings: object expected");
+                                message.reportingIdentitySettings = $root.google.analytics.admin.v1alpha.ReportingIdentitySettings.fromObject(object.reportingIdentitySettings, long + 1);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask, long + 1);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateReportingIdentitySettingsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest} message UpdateReportingIdentitySettingsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateReportingIdentitySettingsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.reportingIdentitySettings = null;
+                                object.updateMask = null;
+                            }
+                            if (message.reportingIdentitySettings != null && message.hasOwnProperty("reportingIdentitySettings"))
+                                object.reportingIdentitySettings = $root.google.analytics.admin.v1alpha.ReportingIdentitySettings.toObject(message.reportingIdentitySettings, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateReportingIdentitySettingsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateReportingIdentitySettingsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateReportingIdentitySettingsRequest
+                         * @function getTypeUrl
+                         * @memberof google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateReportingIdentitySettingsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest";
+                        };
+    
+                        return UpdateReportingIdentitySettingsRequest;
+                    })();
+    
                     v1alpha.GetUserProvidedDataSettingsRequest = (function() {
     
                         /**
@@ -72921,6 +73205,7 @@
                          * @property {string|null} [displayName] PropertySummary displayName
                          * @property {google.analytics.admin.v1alpha.PropertyType|null} [propertyType] PropertySummary propertyType
                          * @property {string|null} [parent] PropertySummary parent
+                         * @property {boolean|null} [canEdit] PropertySummary canEdit
                          */
     
                         /**
@@ -72971,6 +73256,14 @@
                         PropertySummary.prototype.parent = "";
     
                         /**
+                         * PropertySummary canEdit.
+                         * @member {boolean} canEdit
+                         * @memberof google.analytics.admin.v1alpha.PropertySummary
+                         * @instance
+                         */
+                        PropertySummary.prototype.canEdit = false;
+    
+                        /**
                          * Creates a new PropertySummary instance using the specified properties.
                          * @function create
                          * @memberof google.analytics.admin.v1alpha.PropertySummary
@@ -73002,6 +73295,8 @@
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.propertyType);
                             if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.parent);
+                            if (message.canEdit != null && Object.hasOwnProperty.call(message, "canEdit"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.canEdit);
                             return writer;
                         };
     
@@ -73056,6 +73351,10 @@
                                     }
                                 case 4: {
                                         message.parent = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.canEdit = reader.bool();
                                         break;
                                     }
                                 default:
@@ -73116,6 +73415,9 @@
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
+                            if (message.canEdit != null && message.hasOwnProperty("canEdit"))
+                                if (typeof message.canEdit !== "boolean")
+                                    return "canEdit: boolean expected";
                             return null;
                         };
     
@@ -73165,6 +73467,8 @@
                             }
                             if (object.parent != null)
                                 message.parent = String(object.parent);
+                            if (object.canEdit != null)
+                                message.canEdit = Boolean(object.canEdit);
                             return message;
                         };
     
@@ -73186,6 +73490,7 @@
                                 object.displayName = "";
                                 object.propertyType = options.enums === String ? "PROPERTY_TYPE_UNSPECIFIED" : 0;
                                 object.parent = "";
+                                object.canEdit = false;
                             }
                             if (message.property != null && message.hasOwnProperty("property"))
                                 object.property = message.property;
@@ -73195,6 +73500,8 @@
                                 object.propertyType = options.enums === String ? $root.google.analytics.admin.v1alpha.PropertyType[message.propertyType] === undefined ? message.propertyType : $root.google.analytics.admin.v1alpha.PropertyType[message.propertyType] : message.propertyType;
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
+                            if (message.canEdit != null && message.hasOwnProperty("canEdit"))
+                                object.canEdit = message.canEdit;
                             return object;
                         };
     
@@ -116330,6 +116637,7 @@
                          * @property {string|null} [displayName] PropertySummary displayName
                          * @property {google.analytics.admin.v1beta.PropertyType|null} [propertyType] PropertySummary propertyType
                          * @property {string|null} [parent] PropertySummary parent
+                         * @property {boolean|null} [canEdit] PropertySummary canEdit
                          */
     
                         /**
@@ -116380,6 +116688,14 @@
                         PropertySummary.prototype.parent = "";
     
                         /**
+                         * PropertySummary canEdit.
+                         * @member {boolean} canEdit
+                         * @memberof google.analytics.admin.v1beta.PropertySummary
+                         * @instance
+                         */
+                        PropertySummary.prototype.canEdit = false;
+    
+                        /**
                          * Creates a new PropertySummary instance using the specified properties.
                          * @function create
                          * @memberof google.analytics.admin.v1beta.PropertySummary
@@ -116411,6 +116727,8 @@
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.propertyType);
                             if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.parent);
+                            if (message.canEdit != null && Object.hasOwnProperty.call(message, "canEdit"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.canEdit);
                             return writer;
                         };
     
@@ -116465,6 +116783,10 @@
                                     }
                                 case 4: {
                                         message.parent = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.canEdit = reader.bool();
                                         break;
                                     }
                                 default:
@@ -116525,6 +116847,9 @@
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
+                            if (message.canEdit != null && message.hasOwnProperty("canEdit"))
+                                if (typeof message.canEdit !== "boolean")
+                                    return "canEdit: boolean expected";
                             return null;
                         };
     
@@ -116574,6 +116899,8 @@
                             }
                             if (object.parent != null)
                                 message.parent = String(object.parent);
+                            if (object.canEdit != null)
+                                message.canEdit = Boolean(object.canEdit);
                             return message;
                         };
     
@@ -116595,6 +116922,7 @@
                                 object.displayName = "";
                                 object.propertyType = options.enums === String ? "PROPERTY_TYPE_UNSPECIFIED" : 0;
                                 object.parent = "";
+                                object.canEdit = false;
                             }
                             if (message.property != null && message.hasOwnProperty("property"))
                                 object.property = message.property;
@@ -116604,6 +116932,8 @@
                                 object.propertyType = options.enums === String ? $root.google.analytics.admin.v1beta.PropertyType[message.propertyType] === undefined ? message.propertyType : $root.google.analytics.admin.v1beta.PropertyType[message.propertyType] : message.propertyType;
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
+                            if (message.canEdit != null && message.hasOwnProperty("canEdit"))
+                                object.canEdit = message.canEdit;
                             return object;
                         };
     

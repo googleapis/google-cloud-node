@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(endpoint, model, instances, contents) {
-  // [START aiplatform_v1beta1_generated_LlmUtilityService_CountTokens_async]
+function main(name, totalStorageSizeGb) {
+  // [START oracledatabase_v1_generated_OracleDatabase_ConfigureExascaleCloudExadataInfrastructure_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,49 +29,41 @@ function main(endpoint, model, instances, contents) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the Endpoint requested to perform token counting.
-   *  Format:
-   *  `projects/{project}/locations/{location}/endpoints/{endpoint}`
+   *  Required. The name of the Cloud Exadata Infrastructure in the following
+   *  format:
+   *  projects/{project}/locations/{location}/cloudExadataInfrastructures/{cloud_exadata_infrastructure}.
    */
-  // const endpoint = 'abc123'
+  // const name = 'abc123'
   /**
-   *  Required. The name of the publisher model requested to serve the
-   *  prediction. Format:
-   *  `projects/{project}/locations/{location}/publishers/* /models/*`
+   *  Required. The total storage to be allocated to Exascale in GBs.
    */
-  // const model = 'abc123'
+  // const totalStorageSizeGb = 1234
   /**
-   *  Required. The instances that are the input to token counting call.
-   *  Schema is identical to the prediction schema of the underlying model.
+   *  Optional. An optional ID to identify the request.
    */
-  // const instances = [1,2,3,4]
-  /**
-   *  Required. Input content.
-   */
-  // const contents = [1,2,3,4]
+  // const requestId = 'abc123'
 
-  // Imports the Aiplatform library
-  const {LlmUtilityServiceClient} = require('@google-cloud/aiplatform').v1beta1;
+  // Imports the Oracledatabase library
+  const {OracleDatabaseClient} = require('@google-cloud/oracledatabase').v1;
 
   // Instantiates a client
-  const aiplatformClient = new LlmUtilityServiceClient();
+  const oracledatabaseClient = new OracleDatabaseClient();
 
-  async function callCountTokens() {
+  async function callConfigureExascaleCloudExadataInfrastructure() {
     // Construct request
     const request = {
-      endpoint,
-      model,
-      instances,
-      contents,
+      name,
+      totalStorageSizeGb,
     };
 
     // Run request
-    const response = await aiplatformClient.countTokens(request);
+    const [operation] = await oracledatabaseClient.configureExascaleCloudExadataInfrastructure(request);
+    const [response] = await operation.promise();
     console.log(response);
   }
 
-  callCountTokens();
-  // [END aiplatform_v1beta1_generated_LlmUtilityService_CountTokens_async]
+  callConfigureExascaleCloudExadataInfrastructure();
+  // [END oracledatabase_v1_generated_OracleDatabase_ConfigureExascaleCloudExadataInfrastructure_async]
 }
 
 process.on('unhandledRejection', err => {

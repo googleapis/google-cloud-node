@@ -17817,6 +17817,153 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
     });
   });
 
+  describe('updateReportingIdentitySettings', () => {
+    it('invokes updateReportingIdentitySettings without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest(),
+      );
+      request.reportingIdentitySettings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest',
+        ['reportingIdentitySettings', 'name'],
+      );
+      request.reportingIdentitySettings.name = defaultValue1;
+      const expectedHeaderRequestParams = `reporting_identity_settings.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ReportingIdentitySettings(),
+      );
+      client.innerApiCalls.updateReportingIdentitySettings =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateReportingIdentitySettings(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateReportingIdentitySettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateReportingIdentitySettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateReportingIdentitySettings without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest(),
+      );
+      request.reportingIdentitySettings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest',
+        ['reportingIdentitySettings', 'name'],
+      );
+      request.reportingIdentitySettings.name = defaultValue1;
+      const expectedHeaderRequestParams = `reporting_identity_settings.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ReportingIdentitySettings(),
+      );
+      client.innerApiCalls.updateReportingIdentitySettings =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateReportingIdentitySettings(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.IReportingIdentitySettings | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateReportingIdentitySettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateReportingIdentitySettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateReportingIdentitySettings with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest(),
+      );
+      request.reportingIdentitySettings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest',
+        ['reportingIdentitySettings', 'name'],
+      );
+      request.reportingIdentitySettings.name = defaultValue1;
+      const expectedHeaderRequestParams = `reporting_identity_settings.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateReportingIdentitySettings = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.updateReportingIdentitySettings(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateReportingIdentitySettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateReportingIdentitySettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateReportingIdentitySettings with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest(),
+      );
+      request.reportingIdentitySettings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateReportingIdentitySettingsRequest',
+        ['reportingIdentitySettings', 'name'],
+      );
+      request.reportingIdentitySettings.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.updateReportingIdentitySettings(request),
+        expectedError,
+      );
+    });
+  });
+
   describe('getUserProvidedDataSettings', () => {
     it('invokes getUserProvidedDataSettings without error', async () => {
       const client =

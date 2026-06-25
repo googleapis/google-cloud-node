@@ -3703,6 +3703,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "exascaleConfig": {
+                          "type": "ExascaleConfig",
+                          "id": 32,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -3716,6 +3723,24 @@
                             "TERMINATED": 5,
                             "FAILED": 6,
                             "MAINTENANCE_IN_PROGRESS": 7
+                          }
+                        }
+                      }
+                    },
+                    "ExascaleConfig": {
+                      "fields": {
+                        "totalStorageSizeGb": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "availableStorageSizeGb": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -3803,6 +3828,33 @@
                             "PATCHING_MODE_UNSPECIFIED": 0,
                             "ROLLING": 1,
                             "NON_ROLLING": 2
+                          }
+                        }
+                      }
+                    },
+                    "ConfigureExascaleCloudExadataInfrastructureRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "oracledatabase.googleapis.com/CloudExadataInfrastructure"
+                          }
+                        },
+                        "totalStorageSizeGb": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -4125,6 +4177,14 @@
                           "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "exadataInfrastructure": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "oracledatabase.googleapis.com/CloudExadataInfrastructure"
                           }
                         }
                       }
@@ -9912,6 +9972,34 @@
                             }
                           ]
                         },
+                        "ConfigureExascaleCloudExadataInfrastructure": {
+                          "requestType": "ConfigureExascaleCloudExadataInfrastructureRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/cloudExadataInfrastructures/*}:configureExascale",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,total_storage_size_gb",
+                            "(google.longrunning.operation_info).response_type": "CloudExadataInfrastructure",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/cloudExadataInfrastructures/*}:configureExascale",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,total_storage_size_gb"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "CloudExadataInfrastructure",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "ListCloudVmClusters": {
                           "requestType": "ListCloudVmClustersRequest",
                           "responseType": "ListCloudVmClustersResponse",
@@ -12759,6 +12847,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "exascaleDbStorageVault": {
+                          "type": "string",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "oracledatabase.googleapis.com/ExascaleDbStorageVault"
+                          }
                         }
                       }
                     },
@@ -12997,6 +13093,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "storageManagementType": {
+                          "type": "StorageManagementType",
+                          "id": 38,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -13024,6 +13127,13 @@
                             "TERMINATED": 5,
                             "FAILED": 6,
                             "MAINTENANCE_IN_PROGRESS": 7
+                          }
+                        },
+                        "StorageManagementType": {
+                          "values": {
+                            "STORAGE_MANAGEMENT_TYPE_UNSPECIFIED": 0,
+                            "ASM": 1,
+                            "EXASCALE": 2
                           }
                         }
                       }
