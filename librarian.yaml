@@ -1668,8 +1668,21 @@ libraries:
       - path: google/cloud/vision/v1p3beta1
       - path: google/cloud/vision/v1p2beta1
       - path: google/cloud/vision/v1p1beta1
+    keep:
+      - smoke-test/image_annotator_smoke_test.js
+      - src/helpers.ts
+      - src/index.ts
+      - system-test/data/document.jpg
+      - system-test/data/logo.jpg
+      - system-test/data/rushmore.jpg
+      - system-test/data/text.png
+      - system-test/image_annotator_smoke_test.ts
+      - system-test/vision-v1p2beta1.ts
+      - system-test/vision.ts
+      - test/fixtures/image.jpg
+      - test/helpers.test.ts
+      - test/index.test.ts
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
       dependencies:
