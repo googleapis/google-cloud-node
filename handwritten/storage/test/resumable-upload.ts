@@ -2275,10 +2275,10 @@ describe('resumable-upload', () => {
     describe('500s', () => {
       const RESP = {status: 500, data: 'error message from server'};
 
-      it('should increase the retry count if less than limit', async () => {
+      it('should increase the retry count if less than limit', () => {
         up.getRetryDelay = () => 1;
         assert.strictEqual(up.numRetries, 0);
-        assert.strictEqual(await up.onResponse(RESP), false);
+        assert.strictEqual(up.onResponse(RESP), false);
         assert.strictEqual(up.numRetries, 1);
       });
 
@@ -2292,12 +2292,10 @@ describe('resumable-upload', () => {
           done();
         };
 
-        (async () => {
-          await up.onResponse(RESP);
-          await up.onResponse(RESP);
-          await up.onResponse(RESP);
-          await up.onResponse(RESP);
-        })().catch(done);
+        up.onResponse(RESP);
+        up.onResponse(RESP);
+        up.onResponse(RESP);
+        up.onResponse(RESP);
       });
 
       describe('exponential back off', () => {
@@ -2323,7 +2321,7 @@ describe('resumable-upload', () => {
             assert(delay <= maxTime);
 
             // make it keep retrying until the limit is reached
-            void up.onResponse(RESP);
+            up.onResponse(RESP);
           };
 
           up.on('error', (err: Error) => {
@@ -2335,7 +2333,7 @@ describe('resumable-upload', () => {
             done();
           });
 
-          void up.onResponse(RESP);
+          up.onResponse(RESP);
           clock.runAll();
         });
       });
@@ -2350,22 +2348,22 @@ describe('resumable-upload', () => {
           assert.strictEqual(resp, RESP);
           done();
         });
-        void up.onResponse(RESP);
+        up.onResponse(RESP);
       });
 
-      it('should return true', async () => {
+      it('should return true', () => {
         up.getRetryDelay = () => 1;
-        assert.strictEqual(await up.onResponse(RESP), true);
+        assert.strictEqual(up.onResponse(RESP), true);
       });
 
-      it('should handle a custom status code when passed a retry function', async () => {
+      it('should handle a custom status code when passed a retry function', () => {
         up.getRetryDelay = () => 1;
         const RESP = {status: 1000};
         const customHandlerFunction = (err: ApiError) => {
           return err.code === 1000;
         };
         up.retryOptions.retryableErrorFn = customHandlerFunction;
-        assert.strictEqual(await up.onResponse(RESP), false);
+        assert.strictEqual(up.onResponse(RESP), false);
       });
     });
   });

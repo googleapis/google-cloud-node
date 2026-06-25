@@ -1345,7 +1345,7 @@ export class Upload extends Writable {
       },
     };
     const res = await this.authClient.request(combinedReqOpts);
-    const successfulRequest = await this.onResponse(res);
+    const successfulRequest = this.onResponse(res);
     this.removeListener('error', errorCallback);
 
     return successfulRequest ? res : null;
@@ -1354,7 +1354,7 @@ export class Upload extends Writable {
   /**
    * @return {bool} is the request good?
    */
-  private async onResponse(resp: GaxiosResponse) {
+  private onResponse(resp: GaxiosResponse) {
     if (
       resp.status !== 200 &&
       this.retryOptions.retryableErrorFn!({
@@ -1363,7 +1363,7 @@ export class Upload extends Writable {
         name: resp.statusText,
       })
     ) {
-      await this.attemptDelayedRetry(resp);
+      this.attemptDelayedRetry(resp);
       return false;
     }
 
