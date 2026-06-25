@@ -1613,6 +1613,7 @@ libraries:
       - system-test/fixtures/sample/src/index.js
       - system-test/fixtures/sample/src/index.ts
       - system-test/install.ts
+      - test/index.ts
     nodejs:
       default_version: v3
       dependencies:
