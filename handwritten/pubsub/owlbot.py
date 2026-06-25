@@ -24,5 +24,8 @@ node.owlbot_main(relative_dir="handwritten/pubsub",templates_excludes=[
     '.eslintignore',
     '.OwlBot.yaml',
     'renovate.json',
-    "README.md"
+    "README.md",
+    ".kokoro/system-test.sh",
+    ".kokoro/continuous/node18/system-test.cfg",
+    ".kokoro/presubmit/node18/system-test.cfg",
 ])
