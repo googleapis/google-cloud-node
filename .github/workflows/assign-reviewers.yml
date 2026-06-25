@@ -20,6 +20,27 @@ jobs:
           github-token: ${{ secrets.GOOGLER_CHECK_TOKEN || secrets.GITHUB_TOKEN }}
           script: |
             const author = context.payload.pull_request.user.login;
+
+            // Release PRs should remain the responsibility of the oncall,
+            // so we route them only to the default team rather than individual team members.
+            if (author === 'release-please[bot]' || author === 'release-please') {
+              console.log(`PR opened by ${author}. Ensuring cloud-sdk-nodejs-team is assigned as a reviewer.`);
+              const requestedTeams = context.payload.pull_request.requested_teams || [];
+              const hasDefaultTeam = requestedTeams.some(team => team.slug === 'cloud-sdk-nodejs-team');
+              if (!hasDefaultTeam) {
+                try {
+                  await github.rest.pulls.requestReviewers({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    pull_number: context.payload.pull_request.number,
+                    team_reviewers: ['cloud-sdk-nodejs-team'],
+                  });
+                } catch (err) {
+                  console.error("Failed to assign default cloud-sdk-nodejs-team reviewer:", err.message || err);
+                }
+              }
+              return;
+            }
             
             const ALLOWED_BOTS = new Set([
               'gcf-owl-bot[bot]',
