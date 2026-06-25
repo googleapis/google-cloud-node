@@ -3,6 +3,7 @@ name: Publish logging-winston package
 on:
   release:
     types: [published]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -12,14 +13,20 @@ jobs:
   publish:
     runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v4
+    defaults:
+      run:
+        working-directory: handwritten/logging-winston
 
-      - uses: actions/setup-node@v4
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v6
         with:
           node-version: 24
           registry-url: https://npm.pkg.github.com
           scope: '@your-org'
+          cache-dependency-path: handwritten/logging-winston/
+
 
       - run: npm ci
 
