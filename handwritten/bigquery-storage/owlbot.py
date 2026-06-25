@@ -15,5 +15,9 @@
 import synthtool.languages.node_mono_repo as node
 
 node.owlbot_main(relative_dir="handwritten/bigquery-storage", 
-    templates_excludes=['src/index.ts', 'README.md']
+    templates_excludes=[
+        'src/index.ts',
+        'README.md',
+        '.kokoro/system-test.sh'
+    ]
     )
