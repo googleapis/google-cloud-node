@@ -5,7 +5,7 @@
   "engines": {
     "node": ">=18"
   },
-  "repository": "googleapis/gax-nodejs",
+  "repository": "googleapis/google-cloud-node",
   "private": true,
   "scripts": {
     "test": "c8 mocha system-test"

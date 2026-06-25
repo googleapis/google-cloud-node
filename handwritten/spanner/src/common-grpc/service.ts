@@ -772,21 +772,28 @@ export class GrpcService extends Service {
    * @return {*} - The decoded value.
    */
   static decodeValue_(value) {
-    switch (value.kind) {
-      case 'structValue': {
-        return GrpcService.structToObj_(value.structValue);
+    const kind = value.kind;
+    switch (kind) {
+      case 'stringValue': {
+        return value.stringValue;
       }
-
+      case 'numberValue': {
+        return value.numberValue;
+      }
+      case 'boolValue': {
+        return value.boolValue;
+      }
       case 'nullValue': {
         return null;
       }
-
+      case 'structValue': {
+        return GrpcService.structToObj_(value.structValue);
+      }
       case 'listValue': {
         return value.listValue.values.map(GrpcService.decodeValue_);
       }
-
       default: {
-        return value[value.kind];
+        return value[kind];
       }
     }
   }
