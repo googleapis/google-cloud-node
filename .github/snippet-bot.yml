@@ -1,3 +1,0 @@
-ignoreFiles:
-  - core/packages/typeless-sample-bot/test/fixtures/**/*.js
-  - core/packages/typeless-sample-bot/test/fixtures/**/*.ts

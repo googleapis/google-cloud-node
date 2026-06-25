@@ -1,8 +1,11 @@
 {
-  "name": "@google-cloud/logging-winston",
+  "name": "@guestbutler/logging-winston",
   "description": "Cloud Logging transport for Winston",
   "version": "6.0.2",
   "license": "Apache-2.0",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "author": "Google Inc.",
   "engines": {
     "node": ">=18"
@@ -10,7 +13,7 @@
   "repository": {
     "type": "git",
     "directory": "handwritten/logging-winston",
-    "url": "https://github.com/googleapis/google-cloud-node.git"
+    "url": "https://github.com/GuestButler/google-cloud-node.git"
   },
   "main": "./build/src/index.js",
   "types": "./build/src/index.d.ts",
@@ -81,5 +84,5 @@
   "peerDependencies": {
     "winston": ">=3.2.1"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/logging-winston"
+  "homepage": "https://github.com/GuestButler/google-cloud-node/tree/main/handwritten/logging-winston"
 }

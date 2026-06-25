@@ -1,3 +1,15 @@
+# GuestButler fork of Google Cloud Node.js Client Libraries
+
+Some Google-cloud-node libraries (notably `@google-cloud/winston-logging`) are not actively maintained
+by Google at the moment. We have created a fork of their git repository to make some changes for our use case.
+
+If or when Google resumes maintenance of these libraries, we can start using their version again.
+
+In this fork, we have made the following changes:
+
+- replaced github config in `.github` in order to easily release changes of our fork.
+- Added support for additional features in `@google-cloud/winston-logging` (see [here](./handwritten/logging-winston)). These are released to a private npm package repository.
+
 # Google Cloud Node.js Client Libraries
 
 > Node.js idiomatic client libraries for [Google Cloud Platform](https://cloud.google.com/) services.
