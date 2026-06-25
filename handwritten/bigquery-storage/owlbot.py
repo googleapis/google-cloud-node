@@ -14,10 +14,12 @@
 """This script is used to synthesize generated parts of this library."""
 import synthtool.languages.node_mono_repo as node
 
-node.owlbot_main(relative_dir="handwritten/bigquery-storage", 
+node.owlbot_main(relative_dir="handwritten/bigquery-storage",
     templates_excludes=[
         'src/index.ts',
         'README.md',
-        '.kokoro/system-test.sh'
+        '.kokoro/system-test.sh',
+        '.kokoro/continuous/node18/system-test.cfg',
+        '.kokoro/presubmit/node18/system-test.cfg',
     ]
     )
