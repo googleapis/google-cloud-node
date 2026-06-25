@@ -32,6 +32,18 @@ jobs:
 
       - run: npm test
 
+      - name: Set package version from release tag
+        run: |
+          if [ "${{ github.event_name }}" = "release" ]; then
+            VERSION="${{ github.event.release.tag_name }}"
+          else
+            VERSION="${{ github.event.inputs.version }}"
+          fi
+
+          VERSION="${VERSION#v}"
+
+          npm version "$VERSION" --no-git-tag-version
+
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
