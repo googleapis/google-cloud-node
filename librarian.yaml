@@ -1606,8 +1606,13 @@ libraries:
     apis:
       - path: google/cloud/translate/v3
       - path: google/cloud/translate/v3beta1
+    keep:
+      - src/v2/index.ts
+      - src/index.ts
+      - system-test/fixtures/sample/src/index.js
+      - system-test/fixtures/sample/src/index.ts
+      - system-test/install.ts
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v3
       dependencies:
