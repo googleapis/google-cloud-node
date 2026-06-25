@@ -4509,6 +4509,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
             readStream
               .on('error', err => {
                 readStream.destroy();
+                writable.destroy();
                 bail(err);
               })
               .pipe(writable)

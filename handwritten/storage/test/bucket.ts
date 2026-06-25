@@ -241,6 +241,7 @@ describe('Bucket', () => {
 
   beforeEach(() => {
     fsStatOverride = null;
+    fsCreateReadStreamOverride = null;
     pLimitOverride = null;
     bucket = new Bucket(STORAGE, BUCKET_NAME);
   });
@@ -3265,6 +3266,7 @@ describe('Bucket', () => {
       bucket.upload(textfilepath, options, (err: Error) => {
         try {
           assert.strictEqual(err.message, 'write error');
+          assert.ok(readStream);
           assert.ok(readStream.destroyed);
           done();
         } catch (e) {
