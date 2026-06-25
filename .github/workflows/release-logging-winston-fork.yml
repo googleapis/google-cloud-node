@@ -24,11 +24,14 @@ jobs:
         with:
           node-version: 24
           registry-url: https://npm.pkg.github.com
-          scope: '@your-org'
+          scope: '@guestbutler'
+          cache: npm
           cache-dependency-path: handwritten/logging-winston/
 
-
-      - run: npm ci
+      - run: |
+          pwd
+          ls
+          npm ci
 
       - run: npm test
 
