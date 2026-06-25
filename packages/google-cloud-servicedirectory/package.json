@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/service-directory",
-  "version": "6.1.3",
+  "version": "6.2.0",
   "description": "Servicedirectory client for Node.js",
   "repository": {
     "type": "git",

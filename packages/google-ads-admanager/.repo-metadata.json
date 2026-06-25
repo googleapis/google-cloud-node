@@ -1,17 +1,16 @@
 {
-  "name": "admanager",
-  "name_pretty": "Google Ad Manager API",
-  "product_documentation": "https://developers.google.com/ad-manager/api/beta",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/admanager/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-ads/admanager",
-  "api_id": "admanager.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "admanager"
+    "api_description": "Manage your Ad Manager inventory, run reports and more.",
+    "api_id": "admanager.googleapis.com",
+    "api_shortname": "admanager",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/admanager/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-ads/admanager",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1265187&template=1787490",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "admanager",
+    "name_pretty": "Google Ad Manager",
+    "product_documentation": "https://developers.google.com/ad-manager/api/beta",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

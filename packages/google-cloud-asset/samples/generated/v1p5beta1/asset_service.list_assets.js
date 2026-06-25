@@ -78,7 +78,7 @@ function main(parent) {
   // const pageToken = 'abc123'
 
   // Imports the Asset library
-  const {AssetServiceClient} = require('asset').v1p5beta1;
+  const {AssetServiceClient} = require('@google-cloud/asset').v1p5beta1;
 
   // Instantiates a client
   const assetClient = new AssetServiceClient();

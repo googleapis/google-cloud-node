@@ -34,9 +34,9 @@ function main(location) {
    */
   // const location = 'abc123'
   /**
-   *  Optional. Maximum number of TeamFolders to return. The server may return
-   *  fewer items than requested. If unspecified, the server will pick an
-   *  appropriate default.
+   *  Optional. Maximum number of `TeamFolders` to return. The server may return
+   *  fewer items than requested. If unspecified, the server will pick a default
+   *  of `page_size` = 50.
    */
   // const pageSize = 1234
   /**
@@ -51,15 +51,15 @@ function main(location) {
    *  Optional. Field to additionally sort results by.
    *  Supported keywords: `display_name` (default), `create_time`,
    *  `last_modified_time`. Examples:
-   *    - `orderBy="display_name"`
-   *    - `orderBy="display_name desc"`
+   *  * `orderBy="display_name"`
+   *  * `orderBy="display_name desc"`
    */
   // const orderBy = 'abc123'
   /**
    *  Optional. Optional filtering for the returned list. Filtering is currently
    *  only supported on the `display_name` field.
    *  Example:
-   *   - `filter="display_name="MyFolder""`
+   *  * `filter="display_name="MyFolder""`
    */
   // const filter = 'abc123'
 

@@ -61,7 +61,7 @@ function main(model, content) {
   // const outputDimensionality = 1234
 
   // Imports the Generativelanguage library
-  const {GenerativeServiceClient} = require('@google-cloud/generativelanguage').v1alpha;
+  const {GenerativeServiceClient} = require('@google-ai/generativelanguage').v1alpha;
 
   // Instantiates a client
   const generativelanguageClient = new GenerativeServiceClient();

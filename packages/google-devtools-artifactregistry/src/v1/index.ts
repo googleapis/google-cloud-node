@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {ArtifactRegistryClient} from './artifact_registry_client';
+export { ArtifactRegistryClient } from './artifact_registry_client';

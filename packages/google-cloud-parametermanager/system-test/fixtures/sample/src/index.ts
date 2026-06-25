@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {ParameterManagerClient} from '@google-cloud/parametermanager';
+import { ParameterManagerClient } from '@google-cloud/parametermanager';
 
 // check that the client class type name can be used
 function doStuffWithParameterManagerClient(client: ParameterManagerClient) {

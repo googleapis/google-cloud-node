@@ -1,17 +1,16 @@
 {
-  "name": "cloudcontrolspartner",
-  "name_pretty": "Cloud Controls Partner API",
-  "product_documentation": "https://cloud.google.com/sovereign-controls-by-partners/docs/sovereign-partners",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/cloudcontrolspartner/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "stable",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/cloudcontrolspartner",
-  "api_id": "cloudcontrolspartner.googleapis.com",
-  "default_version": "v1beta",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "cloudcontrolspartner"
+    "api_description": "Provides insights about your customers and their Assured Workloads based on\nyour Sovereign Controls by Partners offering.",
+    "api_id": "cloudcontrolspartner.googleapis.com",
+    "api_shortname": "cloudcontrolspartner",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/cloudcontrolspartner/latest",
+    "default_version": "v1beta",
+    "distribution_name": "@google-cloud/cloudcontrolspartner",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1504051",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "cloudcontrolspartner",
+    "name_pretty": "Cloud Controls Partner",
+    "product_documentation": "https://cloud.google.com/sovereign-controls-by-partners/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

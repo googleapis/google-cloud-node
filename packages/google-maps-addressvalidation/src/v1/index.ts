@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {AddressValidationClient} from './address_validation_client';
+export { AddressValidationClient } from './address_validation_client';

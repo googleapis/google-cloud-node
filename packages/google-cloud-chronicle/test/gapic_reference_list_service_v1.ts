@@ -745,6 +745,143 @@ describe('v1.ReferenceListServiceClient', () => {
     });
   });
 
+  describe('verifyReferenceList', () => {
+    it('invokes verifyReferenceList without error', async () => {
+      const client =
+        new referencelistserviceModule.v1.ReferenceListServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.VerifyReferenceListRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.VerifyReferenceListRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue1;
+      const expectedHeaderRequestParams = `instance=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.VerifyReferenceListResponse(),
+      );
+      client.innerApiCalls.verifyReferenceList =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.verifyReferenceList(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.verifyReferenceList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.verifyReferenceList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes verifyReferenceList without error using callback', async () => {
+      const client =
+        new referencelistserviceModule.v1.ReferenceListServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.VerifyReferenceListRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.VerifyReferenceListRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue1;
+      const expectedHeaderRequestParams = `instance=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.VerifyReferenceListResponse(),
+      );
+      client.innerApiCalls.verifyReferenceList =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.verifyReferenceList(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.chronicle.v1.IVerifyReferenceListResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.verifyReferenceList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.verifyReferenceList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes verifyReferenceList with error', async () => {
+      const client =
+        new referencelistserviceModule.v1.ReferenceListServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.VerifyReferenceListRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.VerifyReferenceListRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue1;
+      const expectedHeaderRequestParams = `instance=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.verifyReferenceList = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.verifyReferenceList(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.verifyReferenceList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.verifyReferenceList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes verifyReferenceList with closed client', async () => {
+      const client =
+        new referencelistserviceModule.v1.ReferenceListServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.VerifyReferenceListRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.VerifyReferenceListRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.verifyReferenceList(request), expectedError);
+    });
+  });
+
   describe('listReferenceLists', () => {
     it('invokes listReferenceLists without error', async () => {
       const client =
@@ -2360,6 +2497,99 @@ describe('v1.ReferenceListServiceClient', () => {
         assert.strictEqual(result, 'ruleValue');
         assert(
           (client.pathTemplates.ruleDeploymentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('ruleExecutionError', async () => {
+      const fakePath = '/rendered/path/ruleExecutionError';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        rule_execution_error: 'ruleExecutionErrorValue',
+      };
+      const client =
+        new referencelistserviceModule.v1.ReferenceListServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.ruleExecutionErrorPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.ruleExecutionErrorPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('ruleExecutionErrorPath', () => {
+        const result = client.ruleExecutionErrorPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'ruleExecutionErrorValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.ruleExecutionErrorPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromRuleExecutionErrorName', () => {
+        const result = client.matchProjectFromRuleExecutionErrorName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.ruleExecutionErrorPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromRuleExecutionErrorName', () => {
+        const result = client.matchLocationFromRuleExecutionErrorName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.ruleExecutionErrorPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromRuleExecutionErrorName', () => {
+        const result = client.matchInstanceFromRuleExecutionErrorName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (
+            client.pathTemplates.ruleExecutionErrorPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRuleExecutionErrorFromRuleExecutionErrorName', () => {
+        const result =
+          client.matchRuleExecutionErrorFromRuleExecutionErrorName(fakePath);
+        assert.strictEqual(result, 'ruleExecutionErrorValue');
+        assert(
+          (
+            client.pathTemplates.ruleExecutionErrorPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath),
         );

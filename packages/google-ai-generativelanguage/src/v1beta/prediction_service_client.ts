@@ -18,11 +18,18 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +51,7 @@ export class PredictionServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('generativelanguage');
@@ -57,10 +64,10 @@ export class PredictionServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  predictionServiceStub?: Promise<{[name: string]: Function}>;
+  predictionServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of PredictionServiceClient.
@@ -101,21 +108,42 @@ export class PredictionServiceClient {
    *     const client = new PredictionServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof PredictionServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'generativelanguage.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -140,7 +168,7 @@ export class PredictionServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -154,10 +182,7 @@ export class PredictionServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -179,31 +204,25 @@ export class PredictionServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       cachedContentPathTemplate: new this._gaxModule.PathTemplate(
-        'cachedContents/{id}'
+        'cachedContents/{id}',
       ),
       chunkPathTemplate: new this._gaxModule.PathTemplate(
-        'corpora/{corpus}/documents/{document}/chunks/{chunk}'
+        'corpora/{corpus}/documents/{document}/chunks/{chunk}',
       ),
-      corpusPathTemplate: new this._gaxModule.PathTemplate(
-        'corpora/{corpus}'
-      ),
+      corpusPathTemplate: new this._gaxModule.PathTemplate('corpora/{corpus}'),
       corpusPermissionsPathTemplate: new this._gaxModule.PathTemplate(
-        'corpora/{corpus}/permissions/{permission}'
+        'corpora/{corpus}/permissions/{permission}',
       ),
       documentPathTemplate: new this._gaxModule.PathTemplate(
-        'corpora/{corpus}/documents/{document}'
+        'corpora/{corpus}/documents/{document}',
       ),
-      filePathTemplate: new this._gaxModule.PathTemplate(
-        'files/{file}'
-      ),
-      modelPathTemplate: new this._gaxModule.PathTemplate(
-        'models/{model}'
-      ),
+      filePathTemplate: new this._gaxModule.PathTemplate('files/{file}'),
+      modelPathTemplate: new this._gaxModule.PathTemplate('models/{model}'),
       tunedModelPathTemplate: new this._gaxModule.PathTemplate(
-        'tunedModels/{tuned_model}'
+        'tunedModels/{tuned_model}',
       ),
       tunedModelPermissionsPathTemplate: new this._gaxModule.PathTemplate(
-        'tunedModels/{tuned_model}/permissions/{permission}'
+        'tunedModels/{tuned_model}/permissions/{permission}',
       ),
     };
 
@@ -213,31 +232,64 @@ export class PredictionServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1beta/{name=batches/*}:cancel',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1beta/{name=batches/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1beta/{name=tunedModels/*/operations/*}',additional_bindings: [{get: '/v1beta/{name=generatedFiles/*/operations/*}',},{get: '/v1beta/{name=batches/*}',},{get: '/v1beta/{name=models/*/operations/*}',},{get: '/v1beta/{name=corpora/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1beta/{name=tunedModels/*}/operations',additional_bindings: [{get: '/v1beta/{name=batches}',},{get: '/v1beta/{name=models/*}/operations',}],
-      }];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1beta/{name=batches/*}:cancel',
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1beta/{name=batches/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1beta/{name=tunedModels/*/operations/*}',
+          additional_bindings: [
+            { get: '/v1beta/{name=generatedFiles/*/operations/*}' },
+            { get: '/v1beta/{name=batches/*}' },
+            { get: '/v1beta/{name=models/*/operations/*}' },
+            { get: '/v1beta/{name=corpora/*/operations/*}' },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1beta/{name=tunedModels/*}/operations',
+          additional_bindings: [
+            { get: '/v1beta/{name=batches}' },
+            { get: '/v1beta/{name=models/*}/operations' },
+          ],
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const predictLongRunningResponse = protoFilesRoot.lookup(
-      '.google.ai.generativelanguage.v1beta.PredictLongRunningResponse') as gax.protobuf.Type;
+      '.google.ai.generativelanguage.v1beta.PredictLongRunningResponse',
+    ) as gax.protobuf.Type;
     const predictLongRunningMetadata = protoFilesRoot.lookup(
-      '.google.ai.generativelanguage.v1beta.PredictLongRunningMetadata') as gax.protobuf.Type;
+      '.google.ai.generativelanguage.v1beta.PredictLongRunningMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       predictLongRunning: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         predictLongRunningResponse.decode.bind(predictLongRunningResponse),
-        predictLongRunningMetadata.decode.bind(predictLongRunningMetadata))
+        predictLongRunningMetadata.decode.bind(predictLongRunningMetadata),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.ai.generativelanguage.v1beta.PredictionService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.ai.generativelanguage.v1beta.PredictionService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -268,37 +320,41 @@ export class PredictionServiceClient {
     // Put together the "service stub" for
     // google.ai.generativelanguage.v1beta.PredictionService.
     this.predictionServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.ai.generativelanguage.v1beta.PredictionService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.ai.generativelanguage.v1beta.PredictionService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.ai.generativelanguage.v1beta.PredictionService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.ai.generativelanguage.v1beta
+            .PredictionService,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const predictionServiceStubMethods =
-        ['predict', 'predictLongRunning'];
+    const predictionServiceStubMethods = ['predict', 'predictLongRunning'];
     for (const methodName of predictionServiceStubMethods) {
       const callPromise = this.predictionServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.longrunning[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.longrunning[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -313,8 +369,14 @@ export class PredictionServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'generativelanguage.googleapis.com';
   }
@@ -325,8 +387,14 @@ export class PredictionServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'generativelanguage.googleapis.com';
   }
@@ -366,8 +434,9 @@ export class PredictionServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -378,219 +447,324 @@ export class PredictionServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Performs a prediction request.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.model
- *   Required. The name of the model for prediction.
- *   Format: `name=models/{model}`.
- * @param {number[]} request.instances
- *   Required. The instances that are the input to the prediction call.
- * @param {google.protobuf.Value} [request.parameters]
- *   Optional. The parameters that govern the prediction call.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.PredictResponse|PredictResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/prediction_service.predict.js</caption>
- * region_tag:generativelanguage_v1beta_generated_PredictionService_Predict_async
- */
+  /**
+   * Performs a prediction request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.model
+   *   Required. The name of the model for prediction.
+   *   Format: `name=models/{model}`.
+   * @param {number[]} request.instances
+   *   Required. The instances that are the input to the prediction call.
+   * @param {google.protobuf.Value} [request.parameters]
+   *   Optional. The parameters that govern the prediction call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.PredictResponse|PredictResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/prediction_service.predict.js</caption>
+   * region_tag:generativelanguage_v1beta_generated_PredictionService_Predict_async
+   */
   predict(
-      request?: protos.google.ai.generativelanguage.v1beta.IPredictRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ai.generativelanguage.v1beta.IPredictResponse,
-        protos.google.ai.generativelanguage.v1beta.IPredictRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.ai.generativelanguage.v1beta.IPredictRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ai.generativelanguage.v1beta.IPredictResponse,
+      protos.google.ai.generativelanguage.v1beta.IPredictRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   predict(
-      request: protos.google.ai.generativelanguage.v1beta.IPredictRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.ai.generativelanguage.v1beta.IPredictResponse,
-          protos.google.ai.generativelanguage.v1beta.IPredictRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IPredictRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ai.generativelanguage.v1beta.IPredictResponse,
+      | protos.google.ai.generativelanguage.v1beta.IPredictRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   predict(
-      request: protos.google.ai.generativelanguage.v1beta.IPredictRequest,
-      callback: Callback<
-          protos.google.ai.generativelanguage.v1beta.IPredictResponse,
-          protos.google.ai.generativelanguage.v1beta.IPredictRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IPredictRequest,
+    callback: Callback<
+      protos.google.ai.generativelanguage.v1beta.IPredictResponse,
+      | protos.google.ai.generativelanguage.v1beta.IPredictRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   predict(
-      request?: protos.google.ai.generativelanguage.v1beta.IPredictRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.ai.generativelanguage.v1beta.IPredictRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.ai.generativelanguage.v1beta.IPredictResponse,
-          protos.google.ai.generativelanguage.v1beta.IPredictRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.ai.generativelanguage.v1beta.IPredictResponse,
-          protos.google.ai.generativelanguage.v1beta.IPredictRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.ai.generativelanguage.v1beta.IPredictResponse,
-        protos.google.ai.generativelanguage.v1beta.IPredictRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.ai.generativelanguage.v1beta.IPredictRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ai.generativelanguage.v1beta.IPredictResponse,
+      | protos.google.ai.generativelanguage.v1beta.IPredictRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ai.generativelanguage.v1beta.IPredictResponse,
+      protos.google.ai.generativelanguage.v1beta.IPredictRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'model': request.model ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        model: request.model ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('predict request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.ai.generativelanguage.v1beta.IPredictResponse,
-        protos.google.ai.generativelanguage.v1beta.IPredictRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1beta.IPredictResponse,
+          | protos.google.ai.generativelanguage.v1beta.IPredictRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('predict response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.predict(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.ai.generativelanguage.v1beta.IPredictResponse,
-        protos.google.ai.generativelanguage.v1beta.IPredictRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('predict response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .predict(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1beta.IPredictResponse,
+          (
+            | protos.google.ai.generativelanguage.v1beta.IPredictRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('predict response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Same as Predict but returns an LRO.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.model
- *   Required. The name of the model for prediction.
- *   Format: `name=models/{model}`.
- * @param {number[]} request.instances
- *   Required. The instances that are the input to the prediction call.
- * @param {google.protobuf.Value} [request.parameters]
- *   Optional. The parameters that govern the prediction call.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/prediction_service.predict_long_running.js</caption>
- * region_tag:generativelanguage_v1beta_generated_PredictionService_PredictLongRunning_async
- */
+  /**
+   * Same as Predict but returns an LRO.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.model
+   *   Required. The name of the model for prediction.
+   *   Format: `name=models/{model}`.
+   * @param {number[]} request.instances
+   *   Required. The instances that are the input to the prediction call.
+   * @param {google.protobuf.Value} [request.parameters]
+   *   Optional. The parameters that govern the prediction call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/prediction_service.predict_long_running.js</caption>
+   * region_tag:generativelanguage_v1beta_generated_PredictionService_PredictLongRunning_async
+   */
   predictLongRunning(
-      request?: protos.google.ai.generativelanguage.v1beta.IPredictLongRunningRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.ai.generativelanguage.v1beta.IPredictLongRunningResponse, protos.google.ai.generativelanguage.v1beta.IPredictLongRunningMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.ai.generativelanguage.v1beta.IPredictLongRunningRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.ai.generativelanguage.v1beta.IPredictLongRunningResponse,
+        protos.google.ai.generativelanguage.v1beta.IPredictLongRunningMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   predictLongRunning(
-      request: protos.google.ai.generativelanguage.v1beta.IPredictLongRunningRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.ai.generativelanguage.v1beta.IPredictLongRunningResponse, protos.google.ai.generativelanguage.v1beta.IPredictLongRunningMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IPredictLongRunningRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.ai.generativelanguage.v1beta.IPredictLongRunningResponse,
+        protos.google.ai.generativelanguage.v1beta.IPredictLongRunningMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   predictLongRunning(
-      request: protos.google.ai.generativelanguage.v1beta.IPredictLongRunningRequest,
-      callback: Callback<
-          LROperation<protos.google.ai.generativelanguage.v1beta.IPredictLongRunningResponse, protos.google.ai.generativelanguage.v1beta.IPredictLongRunningMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IPredictLongRunningRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.ai.generativelanguage.v1beta.IPredictLongRunningResponse,
+        protos.google.ai.generativelanguage.v1beta.IPredictLongRunningMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   predictLongRunning(
-      request?: protos.google.ai.generativelanguage.v1beta.IPredictLongRunningRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.ai.generativelanguage.v1beta.IPredictLongRunningResponse, protos.google.ai.generativelanguage.v1beta.IPredictLongRunningMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.ai.generativelanguage.v1beta.IPredictLongRunningResponse, protos.google.ai.generativelanguage.v1beta.IPredictLongRunningMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.ai.generativelanguage.v1beta.IPredictLongRunningResponse, protos.google.ai.generativelanguage.v1beta.IPredictLongRunningMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.ai.generativelanguage.v1beta.IPredictLongRunningRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.ai.generativelanguage.v1beta.IPredictLongRunningResponse,
+            protos.google.ai.generativelanguage.v1beta.IPredictLongRunningMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.ai.generativelanguage.v1beta.IPredictLongRunningResponse,
+        protos.google.ai.generativelanguage.v1beta.IPredictLongRunningMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.ai.generativelanguage.v1beta.IPredictLongRunningResponse,
+        protos.google.ai.generativelanguage.v1beta.IPredictLongRunningMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'model': request.model ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        model: request.model ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.ai.generativelanguage.v1beta.IPredictLongRunningResponse, protos.google.ai.generativelanguage.v1beta.IPredictLongRunningMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.ai.generativelanguage.v1beta.IPredictLongRunningResponse,
+            protos.google.ai.generativelanguage.v1beta.IPredictLongRunningMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('predictLongRunning response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('predictLongRunning request %j', request);
-    return this.innerApiCalls.predictLongRunning(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.ai.generativelanguage.v1beta.IPredictLongRunningResponse, protos.google.ai.generativelanguage.v1beta.IPredictLongRunningMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('predictLongRunning response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .predictLongRunning(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.ai.generativelanguage.v1beta.IPredictLongRunningResponse,
+            protos.google.ai.generativelanguage.v1beta.IPredictLongRunningMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('predictLongRunning response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `predictLongRunning()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/prediction_service.predict_long_running.js</caption>
- * region_tag:generativelanguage_v1beta_generated_PredictionService_PredictLongRunning_async
- */
-  async checkPredictLongRunningProgress(name: string): Promise<LROperation<protos.google.ai.generativelanguage.v1beta.PredictLongRunningResponse, protos.google.ai.generativelanguage.v1beta.PredictLongRunningMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `predictLongRunning()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/prediction_service.predict_long_running.js</caption>
+   * region_tag:generativelanguage_v1beta_generated_PredictionService_PredictLongRunning_async
+   */
+  async checkPredictLongRunningProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.ai.generativelanguage.v1beta.PredictLongRunningResponse,
+      protos.google.ai.generativelanguage.v1beta.PredictLongRunningMetadata
+    >
+  > {
     this._log.info('predictLongRunning long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.predictLongRunning, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.ai.generativelanguage.v1beta.PredictLongRunningResponse, protos.google.ai.generativelanguage.v1beta.PredictLongRunningMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.predictLongRunning,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.ai.generativelanguage.v1beta.PredictLongRunningResponse,
+      protos.google.ai.generativelanguage.v1beta.PredictLongRunningMetadata
+    >;
   }
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -633,22 +807,22 @@ export class PredictionServiceClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -683,15 +857,15 @@ export class PredictionServiceClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -725,7 +899,7 @@ export class PredictionServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -738,25 +912,24 @@ export class PredictionServiceClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -795,22 +968,22 @@ export class PredictionServiceClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -824,7 +997,7 @@ export class PredictionServiceClient {
    * @param {string} id
    * @returns {string} Resource name string.
    */
-  cachedContentPath(id:string) {
+  cachedContentPath(id: string) {
     return this.pathTemplates.cachedContentPathTemplate.render({
       id: id,
     });
@@ -838,7 +1011,8 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the id.
    */
   matchIdFromCachedContentName(cachedContentName: string) {
-    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName).id;
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .id;
   }
 
   /**
@@ -849,7 +1023,7 @@ export class PredictionServiceClient {
    * @param {string} chunk
    * @returns {string} Resource name string.
    */
-  chunkPath(corpus:string,document:string,chunk:string) {
+  chunkPath(corpus: string, document: string, chunk: string) {
     return this.pathTemplates.chunkPathTemplate.render({
       corpus: corpus,
       document: document,
@@ -896,7 +1070,7 @@ export class PredictionServiceClient {
    * @param {string} corpus
    * @returns {string} Resource name string.
    */
-  corpusPath(corpus:string) {
+  corpusPath(corpus: string) {
     return this.pathTemplates.corpusPathTemplate.render({
       corpus: corpus,
     });
@@ -920,7 +1094,7 @@ export class PredictionServiceClient {
    * @param {string} permission
    * @returns {string} Resource name string.
    */
-  corpusPermissionsPath(corpus:string,permission:string) {
+  corpusPermissionsPath(corpus: string, permission: string) {
     return this.pathTemplates.corpusPermissionsPathTemplate.render({
       corpus: corpus,
       permission: permission,
@@ -935,7 +1109,9 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the corpus.
    */
   matchCorpusFromCorpusPermissionsName(corpusPermissionsName: string) {
-    return this.pathTemplates.corpusPermissionsPathTemplate.match(corpusPermissionsName).corpus;
+    return this.pathTemplates.corpusPermissionsPathTemplate.match(
+      corpusPermissionsName,
+    ).corpus;
   }
 
   /**
@@ -946,7 +1122,9 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the permission.
    */
   matchPermissionFromCorpusPermissionsName(corpusPermissionsName: string) {
-    return this.pathTemplates.corpusPermissionsPathTemplate.match(corpusPermissionsName).permission;
+    return this.pathTemplates.corpusPermissionsPathTemplate.match(
+      corpusPermissionsName,
+    ).permission;
   }
 
   /**
@@ -956,7 +1134,7 @@ export class PredictionServiceClient {
    * @param {string} document
    * @returns {string} Resource name string.
    */
-  documentPath(corpus:string,document:string) {
+  documentPath(corpus: string, document: string) {
     return this.pathTemplates.documentPathTemplate.render({
       corpus: corpus,
       document: document,
@@ -991,7 +1169,7 @@ export class PredictionServiceClient {
    * @param {string} file
    * @returns {string} Resource name string.
    */
-  filePath(file:string) {
+  filePath(file: string) {
     return this.pathTemplates.filePathTemplate.render({
       file: file,
     });
@@ -1014,7 +1192,7 @@ export class PredictionServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(model:string) {
+  modelPath(model: string) {
     return this.pathTemplates.modelPathTemplate.render({
       model: model,
     });
@@ -1037,7 +1215,7 @@ export class PredictionServiceClient {
    * @param {string} tuned_model
    * @returns {string} Resource name string.
    */
-  tunedModelPath(tunedModel:string) {
+  tunedModelPath(tunedModel: string) {
     return this.pathTemplates.tunedModelPathTemplate.render({
       tuned_model: tunedModel,
     });
@@ -1051,7 +1229,8 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the tuned_model.
    */
   matchTunedModelFromTunedModelName(tunedModelName: string) {
-    return this.pathTemplates.tunedModelPathTemplate.match(tunedModelName).tuned_model;
+    return this.pathTemplates.tunedModelPathTemplate.match(tunedModelName)
+      .tuned_model;
   }
 
   /**
@@ -1061,7 +1240,7 @@ export class PredictionServiceClient {
    * @param {string} permission
    * @returns {string} Resource name string.
    */
-  tunedModelPermissionsPath(tunedModel:string,permission:string) {
+  tunedModelPermissionsPath(tunedModel: string, permission: string) {
     return this.pathTemplates.tunedModelPermissionsPathTemplate.render({
       tuned_model: tunedModel,
       permission: permission,
@@ -1075,8 +1254,12 @@ export class PredictionServiceClient {
    *   A fully-qualified path representing tuned_model_permissions resource.
    * @returns {string} A string representing the tuned_model.
    */
-  matchTunedModelFromTunedModelPermissionsName(tunedModelPermissionsName: string) {
-    return this.pathTemplates.tunedModelPermissionsPathTemplate.match(tunedModelPermissionsName).tuned_model;
+  matchTunedModelFromTunedModelPermissionsName(
+    tunedModelPermissionsName: string,
+  ) {
+    return this.pathTemplates.tunedModelPermissionsPathTemplate.match(
+      tunedModelPermissionsName,
+    ).tuned_model;
   }
 
   /**
@@ -1086,8 +1269,12 @@ export class PredictionServiceClient {
    *   A fully-qualified path representing tuned_model_permissions resource.
    * @returns {string} A string representing the permission.
    */
-  matchPermissionFromTunedModelPermissionsName(tunedModelPermissionsName: string) {
-    return this.pathTemplates.tunedModelPermissionsPathTemplate.match(tunedModelPermissionsName).permission;
+  matchPermissionFromTunedModelPermissionsName(
+    tunedModelPermissionsName: string,
+  ) {
+    return this.pathTemplates.tunedModelPermissionsPathTemplate.match(
+      tunedModelPermissionsName,
+    ).permission;
   }
 
   /**
@@ -1098,7 +1285,7 @@ export class PredictionServiceClient {
    */
   close(): Promise<void> {
     if (this.predictionServiceStub && !this._terminated) {
-      return this.predictionServiceStub.then(stub => {
+      return this.predictionServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
