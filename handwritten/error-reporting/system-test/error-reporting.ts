@@ -125,7 +125,7 @@ function shouldRun() {
     // During the migration from kokoro to GCB the environment changed.
     // We want to avoid throwing an error so that only specific tests need to
     // be skipped.
-    // return false;
+    // TODO: b/528388119 - Add return false; when we fix the GCB environment
   }
 
   if (typeof env.injected().projectNumber !== 'string') {
@@ -133,7 +133,7 @@ function shouldRun() {
     // During the migration from kokoro to GCB the environment changed.
     // We want to avoid throwing an error so that only specific tests need to
     // be skipped.
-    // return false;
+    // TODO: b/528388119 - Add return false; when we fix the GCB environment
   }
 
   if (typeof env.injected().keyFilename !== 'string') {
@@ -141,7 +141,7 @@ function shouldRun() {
     // During the migration from kokoro to GCB the environment changed.
     // We want to avoid throwing an error so that only specific tests need to
     // be skipped.
-    // return false;
+    // TODO: b/528388119 - Add return false; when we fix the GCB environment
   }
 
   return true;
