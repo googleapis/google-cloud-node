@@ -4,6 +4,446 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "368f18ecc361310e7bfb323ba0e7836186ea08d1",
+          "message": "Correct repository URLs in core package.json files",
+          "issues": [
+            "8722"
+          ]
+        }
+      ],
+      "version": "5.0.4",
+      "language": "JAVASCRIPT",
+      "artifactName": "jsdoc-fresh",
+      "id": "2f8f9920-3169-4787-a275-17024fa3abc6",
+      "createTime": "2026-06-25T19:00:36.034Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa",
+          "message": "Update sources and regenerate",
+          "issues": [
+            "8714"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "b17c6531144b6f52259342bde6570e5479f8be50",
+          "message": "Onboard a new library",
+          "issues": [
+            "8673"
+          ],
+          "scope": "google/cloud/agentregistry/v1"
+        },
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/agentregistry",
+      "id": "e730d357-a6b1-4d4e-bd9b-f0c66e2bac15",
+      "createTime": "2026-06-25T13:39:13.639Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "00c8b21b5f76f1b60d6da5100bbbe487bbaff2be",
+          "message": "Unblock release by upgrading @types/sinon for mapmanagement package",
+          "issues": [
+            "8674"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/mapmanagement",
+      "id": "408f0c55-180b-4260-a309-31e3e9c78a4a",
+      "createTime": "2026-06-25T13:39:13.613Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa",
+          "message": "Update sources and regenerate",
+          "issues": [
+            "8714"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/ces",
+      "id": "bbdafb0d-53e3-4236-b18f-4fb06dccef38",
+      "createTime": "2026-06-25T13:39:13.576Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ce4d8493844e1a95a2b1cc952674dcdbee1bc566",
+          "message": "Regenerated google-monitoring-dashboard",
+          "issues": [
+            "8643"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/monitoring-dashboards",
+      "id": "3eaf0bd8-8230-42a7-87f2-a9dc9985babf",
+      "createTime": "2026-06-25T13:39:13.546Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa",
+          "message": "Update sources and regenerate",
+          "issues": [
+            "8714"
+          ]
+        }
+      ],
+      "version": "5.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "99eaa370-ea7e-4ef8-9df6-46469f23020b",
+      "createTime": "2026-06-25T13:39:13.515Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa",
+          "message": "Update sources and regenerate",
+          "issues": [
+            "8714"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vectorsearch",
+      "id": "7e5356a1-1b8a-4e0d-84eb-d7a5207c4ad7",
+      "createTime": "2026-06-25T13:39:13.478Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "44360026d32a0461beb10de497803b658c96c668",
+          "message": "Migrate google-cloud-speech to librarian (keep helpers)",
+          "issues": [
+            "8648"
+          ]
+        }
+      ],
+      "version": "7.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "aa9156f4-a8f1-4cc3-97be-8db057d3a76e",
+      "createTime": "2026-06-25T13:39:13.430Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa",
+          "message": "Update sources and regenerate",
+          "issues": [
+            "8714"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/oracledatabase",
+      "id": "12efaa21-5536-4fa4-8abe-c75d3ffc25ff",
+      "createTime": "2026-06-25T13:39:13.392Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa",
+          "message": "Update sources and regenerate",
+          "issues": [
+            "8714"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        }
+      ],
+      "version": "0.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/networkservices",
+      "id": "3426dd4c-5612-4826-af4d-0e8b4594ae99",
+      "createTime": "2026-06-25T13:39:13.365Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa",
+          "message": "Update sources and regenerate",
+          "issues": [
+            "8714"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        }
+      ],
+      "version": "5.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "3c516a00-996a-4d02-9e31-d97d4023a306",
+      "createTime": "2026-06-25T13:39:13.334Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5a5a0c1ac9500f885a2f4e94175f1776d501fe25",
+          "message": "Regenerate google-cloud-monitoring",
+          "issues": [
+            "8640"
+          ]
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/monitoring",
+      "id": "12395709-9586-4505-8538-02f7cce6e726",
+      "createTime": "2026-06-25T13:39:13.304Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/modelarmor",
+      "id": "1ebfa08b-bf65-426b-b910-0ea509523822",
+      "createTime": "2026-06-25T13:39:13.278Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        }
+      ],
+      "version": "2.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "6278b566-0ee2-408d-8f04-3061fc8a5caa",
+      "createTime": "2026-06-25T13:39:13.254Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa",
+          "message": "Update sources and regenerate",
+          "issues": [
+            "8714"
+          ]
+        }
+      ],
+      "version": "7.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "d84fca65-bf22-443f-b340-7bc0cec9a210",
+      "createTime": "2026-06-25T13:39:13.227Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa",
+          "message": "Update sources and regenerate",
+          "issues": [
+            "8714"
+          ]
+        }
+      ],
+      "version": "6.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "13d68bef-c1b4-44dd-9e6a-0a45feb8112a",
+      "createTime": "2026-06-25T13:39:13.202Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa",
+          "message": "Update sources and regenerate",
+          "issues": [
+            "8714"
+          ]
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataform",
+      "id": "d53195d8-c487-4036-8d3d-2b4ec692b181",
+      "createTime": "2026-06-25T13:39:13.177Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/confidentialcomputing",
+      "id": "71662095-91fb-4b5c-bd3f-08615717da8a",
+      "createTime": "2026-06-25T13:39:13.146Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa",
+          "message": "Update sources and regenerate",
+          "issues": [
+            "8714"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/chronicle",
+      "id": "58ea0fff-b377-4920-bc69-b3e81e2978e6",
+      "createTime": "2026-06-25T13:39:13.121Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        }
+      ],
+      "version": "2.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "d4d39001-923b-4718-bba9-77e41a363f06",
+      "createTime": "2026-06-25T13:39:13.090Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa",
+          "message": "Update sources and regenerate",
+          "issues": [
+            "8714"
+          ]
+        }
+      ],
+      "version": "0.25.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "ea0e607a-d8aa-4637-8e12-d54d021acfd2",
+      "createTime": "2026-06-25T13:39:13.062Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa",
+          "message": "Update sources and regenerate",
+          "issues": [
+            "8714"
+          ]
+        }
+      ],
+      "version": "9.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/admin",
+      "id": "3e4badf2-68df-4c08-aba2-f6d0856d841b",
+      "createTime": "2026-06-25T13:39:13.036Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/datamanager",
+      "id": "9d11a7e7-9865-4e27-b485-8c00ef86dfb0",
+      "createTime": "2026-06-25T13:39:13.011Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "76e6d3b6dea6032547780155c045e41552e27f40",
           "message": "Regional access boundaries main merge",
@@ -80931,5 +81371,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-06-24T17:44:31.336Z"
+  "updateTime": "2026-06-25T19:00:36.034Z"
 }

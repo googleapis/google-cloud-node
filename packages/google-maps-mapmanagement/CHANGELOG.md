@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/mapmanagement-v0.1.0...mapmanagement-v0.1.1) (2026-06-25)
+
+
+### Bug Fixes
+
+* Unblock release by upgrading @types/sinon for mapmanagement package ([#8674](https://github.com/googleapis/google-cloud-node/issues/8674)) ([00c8b21](https://github.com/googleapis/google-cloud-node/commit/00c8b21b5f76f1b60d6da5100bbbe487bbaff2be))
+
 ## 0.1.0 (2026-06-16)
 
 
