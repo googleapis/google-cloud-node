@@ -1200,7 +1200,10 @@ describe('Subscriber', () => {
       assert.strictEqual(spans[0].events.length, 2);
       const firstSpan = spans.pop();
       assert.ok(firstSpan);
-      assert.strictEqual(firstSpan.parentSpanId, parentSpanContext.spanId);
+      assert.strictEqual(
+        firstSpan.parentSpanContext?.spanId,
+        parentSpanContext.spanId,
+      );
       assert.strictEqual(
         firstSpan.name,
         `${subId} subscribe`,
