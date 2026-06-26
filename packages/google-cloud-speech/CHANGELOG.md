@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [7.5.0](https://github.com/googleapis/google-cloud-node/compare/speech-v7.4.0...speech-v7.5.0) (2026-06-25)
+
+
+### Features
+
+* Migrate google-cloud-speech to librarian (keep helpers) ([#8648](https://github.com/googleapis/google-cloud-node/issues/8648)) ([4436002](https://github.com/googleapis/google-cloud-node/commit/44360026d32a0461beb10de497803b658c96c668))
+
 ## [7.4.0](https://github.com/googleapis/google-cloud-node/compare/speech-v7.3.2...speech-v7.4.0) (2026-06-16)
 
 
