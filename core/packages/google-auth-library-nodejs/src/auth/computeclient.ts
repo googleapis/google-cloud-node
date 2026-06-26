@@ -189,7 +189,7 @@ export class Compute extends OAuth2Client {
 
       // If the metadata server returned an non-email format, log a warning only once.
       if (!email || !Compute.EMAIL_REGEX.test(email)) {
-        AuthClient.log.info(
+        AuthClient.log.debug(
           `RegionalAccessBoundary: Service account email "${email}" is not in a valid email format. Skipping regional access boundary lookup.`,
         );
         this.isNonEmailAccount = true;

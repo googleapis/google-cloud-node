@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {Gaxios, GaxiosOptions} from 'gaxios';
-import {log as makeLog} from 'google-logging-utils';
+import { Gaxios, GaxiosOptions } from 'gaxios';
+import { log as makeLog } from 'google-logging-utils';
 
 const log = makeLog('auth');
 
@@ -205,7 +205,7 @@ export class RegionalAccessBoundaryManager {
         this.regionalAccessBoundaryCooldownBackoff * 2,
         RAB_MAX_COOLDOWN_MILLIS,
       );
-      log.error(
+      log.debug(
         'RegionalAccessBoundary: Lookup failed. Entering cooldown.',
         error,
       );
@@ -254,7 +254,7 @@ export class RegionalAccessBoundaryManager {
       url: this.lookupUrl,
     };
 
-    const {data: regionalAccessBoundaryData} =
+    const { data: regionalAccessBoundaryData } =
       await this.options.transporter.request<RegionalAccessBoundaryData>(opts);
 
     if (!regionalAccessBoundaryData?.encodedLocations) {
