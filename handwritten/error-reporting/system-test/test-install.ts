@@ -50,7 +50,7 @@ new ErrorReporting({
         'imports the module and starts with a complete `serviceContext`',
     },
     {
-      ts: `import * as express from 'express';
+      cjs: `import * as express from 'express';
 
 import {ErrorReporting} from '@google-cloud/error-reporting';
 const errors = new ErrorReporting();
@@ -126,7 +126,7 @@ start().catch(console.error);
       devDependencies: ['@types/hapi@17.x.x'],
     },
     {
-      ts: `import * as Koa from 'koa';
+      cjs: `import * as Koa from 'koa';
 
 import {ErrorReporting} from '@google-cloud/error-reporting';
 const errors = new ErrorReporting();
@@ -150,7 +150,7 @@ app.use(function *(this: any): IterableIterator<any> {
       devDependencies: ['@types/koa@3.x.x'],
     },
     {
-      ts: `import * as Koa from 'koa';
+      cjs: `import * as Koa from 'koa';
 
 import {ErrorReporting} from '@google-cloud/error-reporting';
 const errors = new ErrorReporting();
@@ -174,7 +174,7 @@ app.use(async (ctx: Koa.Context, next: {}): Promise<void> => {
       devDependencies: ['@types/koa@2.x.x'],
     },
     {
-      ts: `import * as restify from 'restify';
+      cjs: `import * as restify from 'restify';
 
 import {ErrorReporting} from '@google-cloud/error-reporting';
 const errors = new ErrorReporting();
@@ -345,7 +345,7 @@ app.use(async (ctx, next) => {
       dependencies: ['koa@2.x.x'],
     },
     {
-      js: `const restify = require('restify');
+      cjs: `const restify = require('restify');
 
 const ErrorReporting = require('@google-cloud/error-reporting').ErrorReporting;
 const errors = new ErrorReporting();
