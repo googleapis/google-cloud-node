@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: nodejs
-version: v0.20.0
+version: v0.21.0
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
@@ -40,7 +40,7 @@ libraries:
       default_version: v1
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/admanager/latest
   - name: google-ads-datamanager
-    version: 0.4.0
+    version: 0.5.0
     apis:
       - path: google/ads/datamanager/v1
     copyright_year: "2026"
@@ -60,7 +60,7 @@ libraries:
       default_version: v1beta
       client_documentation_override: https://developers.generativeai.google/guide/palm_api_overview
   - name: google-analytics-admin
-    version: 9.1.0
+    version: 9.2.0
     apis:
       - path: google/analytics/admin/v1beta
       - path: google/analytics/admin/v1alpha
@@ -166,7 +166,7 @@ libraries:
       package_name: '@google/area120-tables'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/area120-tables/latest
   - name: google-chat
-    version: 0.24.0
+    version: 0.25.0
     apis:
       - path: google/chat/v1
     copyright_year: "2026"
@@ -196,6 +196,7 @@ libraries:
     apis:
       - path: google/cloud/agentregistry/v1
     copyright_year: "2026"
+    version: 0.1.0
   - name: google-cloud-aiplatform
     version: 6.8.1
     apis:
@@ -298,7 +299,7 @@ libraries:
             - google/cloud/aiplatform/v1beta1/schema/dataset_metadata.proto
           path: google/cloud/aiplatform/v1beta1
   - name: google-cloud-alloydb
-    version: 2.6.0
+    version: 2.7.0
     apis:
       - path: google/cloud/alloydb/v1
       - path: google/cloud/alloydb/v1beta
@@ -562,7 +563,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/certificate-manager'
   - name: google-cloud-ces
-    version: 0.4.1
+    version: 0.5.0
     apis:
       - path: google/cloud/ces/v1
       - path: google/cloud/ces/v1beta
@@ -577,7 +578,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-chronicle
-    version: 0.4.0
+    version: 0.5.0
     apis:
       - path: google/cloud/chronicle/v1
     copyright_year: "2026"
@@ -647,7 +648,7 @@ libraries:
         - diregapic: true
           path: google/cloud/compute/v1beta
   - name: google-cloud-confidentialcomputing
-    version: 2.2.3
+    version: 2.3.0
     apis:
       - path: google/cloud/confidentialcomputing/v1
       - path: google/cloud/confidentialcomputing/v1alpha1
@@ -729,7 +730,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/configmanagement'
   - name: google-cloud-dataform
-    version: 2.3.0
+    version: 2.4.0
     apis:
       - path: google/cloud/dataform/v1
       - path: google/cloud/dataform/v1beta1
@@ -764,7 +765,7 @@ libraries:
       default_version: v1
       client_documentation_override: https://cloud.google.com/dataplex
   - name: google-cloud-dataproc
-    version: 6.6.0
+    version: 6.7.0
     apis:
       - path: google/cloud/dataproc/v1
     copyright_year: "2026"
@@ -809,7 +810,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-dialogflow
-    version: 7.6.2
+    version: 7.7.0
     apis:
       - path: google/cloud/dialogflow/v2
       - path: google/cloud/dialogflow/v2beta1
@@ -831,7 +832,7 @@ libraries:
     nodejs:
       default_version: v3
   - name: google-cloud-discoveryengine
-    version: 2.7.0
+    version: 2.8.0
     apis:
       - path: google/cloud/discoveryengine/v1
       - path: google/cloud/discoveryengine/v1beta
@@ -1155,7 +1156,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-modelarmor
-    version: 0.5.0
+    version: 0.6.0
     apis:
       - path: google/cloud/modelarmor/v1
       - path: google/cloud/modelarmor/v1beta
@@ -1163,7 +1164,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-monitoring
-    version: 5.3.3
+    version: 5.4.0
     apis:
       - path: google/monitoring/v3
     copyright_year: "2026"
@@ -1188,7 +1189,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/network-connectivity'
   - name: google-cloud-networkmanagement
-    version: 5.4.0
+    version: 5.5.0
     apis:
       - path: google/cloud/networkmanagement/v1
       - path: google/cloud/networkmanagement/v1beta1
@@ -1207,7 +1208,7 @@ libraries:
       default_version: v1beta1
       package_name: '@google-cloud/network-security'
   - name: google-cloud-networkservices
-    version: 0.12.1
+    version: 0.13.0
     apis:
       - path: google/cloud/networkservices/v1
       - path: google/cloud/networkservices/v1beta1
@@ -1224,7 +1225,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-oracledatabase
-    version: 0.7.1
+    version: 0.8.0
     apis:
       - path: google/cloud/oracledatabase/v1
     copyright_year: "2026"
@@ -1501,7 +1502,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-speech
-    version: 7.4.0
+    version: 7.5.0
     apis:
       - path: google/cloud/speech/v2
       - path: google/cloud/speech/v1
@@ -1607,7 +1608,13 @@ libraries:
       - path: google/cloud/translate/v3
       - path: google/cloud/translate/v3beta1
     copyright_year: "2026"
-    skip_generate: true
+    keep:
+      - src/v2/index.ts
+      - src/index.ts
+      - system-test/fixtures/sample/src/index.js
+      - system-test/fixtures/sample/src/index.ts
+      - system-test/install.ts
+      - test/index.ts
     nodejs:
       default_version: v3
       dependencies:
@@ -1617,7 +1624,7 @@ libraries:
         extend: ^3.0.2
         is-html: ^2.0.0
   - name: google-cloud-vectorsearch
-    version: 0.7.0
+    version: 0.8.0
     apis:
       - path: google/cloud/vectorsearch/v1
       - path: google/cloud/vectorsearch/v1beta
@@ -1785,7 +1792,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/artifact-registry'
   - name: google-devtools-cloudbuild
-    version: 5.5.1
+    version: 5.6.0
     apis:
       - path: google/devtools/cloudbuild/v2
       - path: google/devtools/cloudbuild/v1
@@ -1895,7 +1902,7 @@ libraries:
       default_version: v4
       package_name: '@google-cloud/geocode'
   - name: google-maps-mapmanagement
-    version: 0.1.0
+    version: 0.1.1
     apis:
       - path: google/maps/mapmanagement/v2beta
     copyright_year: "2026"
@@ -1968,7 +1975,7 @@ libraries:
       package_name: '@google-ads/marketing-platform-admin'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/marketingplatformadminapi/latest
   - name: google-monitoring-dashboard
-    version: 4.1.2
+    version: 4.2.0
     apis:
       - path: google/monitoring/dashboard/v1
     copyright_year: "2026"

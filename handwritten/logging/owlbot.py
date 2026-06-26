@@ -22,7 +22,10 @@ node.owlbot_main(relative_dir="handwritten/logging",
     staging_excludes=[
         ".eslintignore", ".prettierignore", "src/index.ts", "README.md", "package.json",
         "system-test/fixtures/sample/src/index.js",
-        "system-test/fixtures/sample/src/index.ts"],
+        "system-test/fixtures/sample/src/index.ts",
+        ".kokoro/system-test.sh",
+        ".kokoro/continuous/node14/system-test.cfg",
+        ".kokoro/presubmit/node14/system-test.cfg"],
     templates_excludes=[
         "src/index.ts",
         ".eslintignore",
@@ -32,7 +35,10 @@ node.owlbot_main(relative_dir="handwritten/logging",
         ".github/release-please.yml",
         ".github/CODEOWNERS",
         ".github/sync-repo-settings.yaml",
-        "README.md"
+        "README.md",
+        ".kokoro/system-test.sh",
+        ".kokoro/continuous/node14/system-test.cfg",
+        ".kokoro/presubmit/node14/system-test.cfg"
     ]
 )
 

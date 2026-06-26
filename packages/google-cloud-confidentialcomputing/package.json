@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/confidentialcomputing",
-  "version": "2.2.3",
+  "version": "2.3.0",
   "description": "Confidential Computing API client for Node.js",
   "repository": {
     "type": "git",
