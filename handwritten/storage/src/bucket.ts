@@ -4517,7 +4517,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
                 readStream.destroy();
                 if (
                   this.storage.retryOptions.autoRetry &&
-                  this.storage.retryOptions.retryableErrorFn!(err as any)
+                  this.storage.retryOptions.retryableErrorFn!(err as ApiError)
                 ) {
                   return reject(err);
                 } else {
