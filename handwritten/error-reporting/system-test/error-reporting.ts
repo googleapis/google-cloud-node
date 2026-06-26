@@ -122,7 +122,7 @@ function shouldRun() {
 
   if (typeof env.injected().apiKey !== 'string') {
     console.log('The api key (apiKey) was not set as an env variable');
-    // During the migration from kokoro to GCB the environment changed
+    // During the migration from kokoro to GCB the environment changed.
     // We want to avoid throwing an error so that only specific tests need to
     // be skipped.
     // return false;
@@ -130,12 +130,18 @@ function shouldRun() {
 
   if (typeof env.injected().projectNumber !== 'string') {
     console.log('The project number (projectNumber) was not set in the env');
-    return false;
+    // During the migration from kokoro to GCB the environment changed.
+    // We want to avoid throwing an error so that only specific tests need to
+    // be skipped.
+    // return false;
   }
 
   if (typeof env.injected().keyFilename !== 'string') {
     console.log('The key filename (keyFilename) was not set in the env');
-    return false;
+    // During the migration from kokoro to GCB the environment changed.
+    // We want to avoid throwing an error so that only specific tests need to
+    // be skipped.
+    // return false;
   }
 
   return true;
