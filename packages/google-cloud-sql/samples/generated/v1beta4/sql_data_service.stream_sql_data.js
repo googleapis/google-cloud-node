@@ -21,7 +21,7 @@
 'use strict';
 
 function main() {
-  // [START sqladmin_v1beta4_generated_SqlInstancesService_Clone_async]
+  // [START sqladmin_v1beta4_generated_SqlDataService_StreamSqlData_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,36 +29,50 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The ID of the Cloud SQL instance to be cloned (source). This does not
-   *  include the project ID.
+   *  Optional. Acknowledges data received by the client.
    */
-  // const instance = 'abc123'
+  // const ack = {}
   /**
-   *  Project ID of the source Cloud SQL instance.
+   *  Starts a new session. When starting a new session, this is the first
+   *  message the client sends.
    */
-  // const project = 'my-project'
+  // const startSession = {}
   /**
+   *  Continues an existing session. When continuing an existing session, this
+   *  is the first message the client sends.
    */
-  // const body = {}
+  // const continueSession = {}
+  /**
+   *  Database data.
+   */
+  // const data = {}
+  /**
+   *  Terminates the session. This closes the connection to the database.
+   */
+  // const terminateSession = {}
 
   // Imports the Sql library
-  const {SqlInstancesServiceClient} = require('@google-cloud/sql').v1beta4;
+  const {SqlDataServiceClient} = require('@google-cloud/sql').v1beta4;
 
   // Instantiates a client
-  const sqlClient = new SqlInstancesServiceClient();
+  const sqlClient = new SqlDataServiceClient();
 
-  async function callClone() {
+  async function callStreamSqlData() {
     // Construct request
     const request = {
     };
 
     // Run request
-    const response = await sqlClient.clone(request);
-    console.log(response);
+    const stream = await sqlClient.streamSqlData();
+    stream.on('data', (response) => { console.log(response) });
+    stream.on('error', (err) => { throw(err) });
+    stream.on('end', () => { /* API call completed */ });
+    stream.write(request);
+    stream.end();
   }
 
-  callClone();
-  // [END sqladmin_v1beta4_generated_SqlInstancesService_Clone_async]
+  callStreamSqlData();
+  // [END sqladmin_v1beta4_generated_SqlDataService_StreamSqlData_async]
 }
 
 process.on('unhandledRejection', err => {

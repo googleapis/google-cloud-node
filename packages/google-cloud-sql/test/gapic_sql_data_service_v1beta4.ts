@@ -21,7 +21,9 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import { SinonStub } from 'sinon';
 import { describe, it } from 'mocha';
-import * as sqlflagsserviceModule from '../src';
+import * as sqldataserviceModule from '../src';
+
+import { PassThrough } from 'stream';
 
 import { protobuf, LocationProtos } from 'google-gax';
 
@@ -55,13 +57,18 @@ function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
     : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(
+function stubBidiStreamingCall<ResponseType>(
   response?: ResponseType,
   error?: Error,
 ) {
-  return error
+  const transformStub = error
     ? sinon.stub().callsArgWith(2, error)
     : sinon.stub().callsArgWith(2, null, response);
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  return sinon.stub().returns(mockStream);
 }
 
 function stubAsyncIterationCall<ResponseType>(
@@ -87,16 +94,16 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1.SqlFlagsServiceClient', () => {
+describe('v1beta4.SqlDataServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
-      const client = new sqlflagsserviceModule.v1.SqlFlagsServiceClient();
+      const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'sqladmin.googleapis.com');
     });
 
     it('has universeDomain', () => {
-      const client = new sqlflagsserviceModule.v1.SqlFlagsServiceClient();
+      const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -108,7 +115,7 @@ describe('v1.SqlFlagsServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          sqlflagsserviceModule.v1.SqlFlagsServiceClient.servicePath;
+          sqldataserviceModule.v1beta4.SqlDataServiceClient.servicePath;
         assert.strictEqual(servicePath, 'sqladmin.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -117,14 +124,14 @@ describe('v1.SqlFlagsServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          sqlflagsserviceModule.v1.SqlFlagsServiceClient.apiEndpoint;
+          sqldataserviceModule.v1beta4.SqlDataServiceClient.apiEndpoint;
         assert.strictEqual(apiEndpoint, 'sqladmin.googleapis.com');
         assert(stub.called);
         stub.restore();
       });
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new sqlflagsserviceModule.v1.SqlFlagsServiceClient({
+      const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
         universeDomain: 'example.com',
       });
       const servicePath = client.apiEndpoint;
@@ -132,7 +139,7 @@ describe('v1.SqlFlagsServiceClient', () => {
     });
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new sqlflagsserviceModule.v1.SqlFlagsServiceClient({
+      const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
         universe_domain: 'example.com',
       });
       const servicePath = client.apiEndpoint;
@@ -144,7 +151,8 @@ describe('v1.SqlFlagsServiceClient', () => {
         it('sets apiEndpoint from environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new sqlflagsserviceModule.v1.SqlFlagsServiceClient();
+          const client =
+            new sqldataserviceModule.v1beta4.SqlDataServiceClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'sqladmin.example.com');
           if (saved) {
@@ -157,7 +165,7 @@ describe('v1.SqlFlagsServiceClient', () => {
         it('value configured in code has priority over environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new sqlflagsserviceModule.v1.SqlFlagsServiceClient({
+          const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
             universeDomain: 'configured.example.com',
           });
           const servicePath = client.apiEndpoint;
@@ -172,7 +180,7 @@ describe('v1.SqlFlagsServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new sqlflagsserviceModule.v1.SqlFlagsServiceClient({
+        new sqldataserviceModule.v1beta4.SqlDataServiceClient({
           universe_domain: 'example.com',
           universeDomain: 'example.net',
         });
@@ -180,42 +188,42 @@ describe('v1.SqlFlagsServiceClient', () => {
     });
 
     it('has port', () => {
-      const port = sqlflagsserviceModule.v1.SqlFlagsServiceClient.port;
+      const port = sqldataserviceModule.v1beta4.SqlDataServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client = new sqlflagsserviceModule.v1.SqlFlagsServiceClient();
+      const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new sqlflagsserviceModule.v1.SqlFlagsServiceClient({
+      const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
         fallback: true,
       });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new sqlflagsserviceModule.v1.SqlFlagsServiceClient({
+      const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
-      assert.strictEqual(client.sqlFlagsServiceStub, undefined);
+      assert.strictEqual(client.sqlDataServiceStub, undefined);
       await client.initialize();
-      assert(client.sqlFlagsServiceStub);
+      assert(client.sqlDataServiceStub);
     });
 
     it('has close method for the initialized client', (done) => {
-      const client = new sqlflagsserviceModule.v1.SqlFlagsServiceClient({
+      const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       client.initialize().catch((err) => {
         throw err;
       });
-      assert(client.sqlFlagsServiceStub);
+      assert(client.sqlDataServiceStub);
       client
         .close()
         .then(() => {
@@ -227,11 +235,11 @@ describe('v1.SqlFlagsServiceClient', () => {
     });
 
     it('has close method for the non-initialized client', (done) => {
-      const client = new sqlflagsserviceModule.v1.SqlFlagsServiceClient({
+      const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
-      assert.strictEqual(client.sqlFlagsServiceStub, undefined);
+      assert.strictEqual(client.sqlDataServiceStub, undefined);
       client
         .close()
         .then(() => {
@@ -244,7 +252,7 @@ describe('v1.SqlFlagsServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new sqlflagsserviceModule.v1.SqlFlagsServiceClient({
+      const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
@@ -256,7 +264,7 @@ describe('v1.SqlFlagsServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new sqlflagsserviceModule.v1.SqlFlagsServiceClient({
+      const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
@@ -277,89 +285,94 @@ describe('v1.SqlFlagsServiceClient', () => {
     });
   });
 
-  describe('list', () => {
-    it('invokes list without error', async () => {
-      const client = new sqlflagsserviceModule.v1.SqlFlagsServiceClient({
+  describe('streamSqlData', () => {
+    it('invokes streamSqlData without error', async () => {
+      const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.sql.v1.SqlFlagsListRequest(),
+        new protos.google.cloud.sql.v1beta4.StreamSqlDataRequest(),
       );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.sql.v1.FlagsListResponse(),
-      );
-      client.innerApiCalls.list = stubSimpleCall(expectedResponse);
-      const [response] = await client.list(request);
-      assert.deepStrictEqual(response, expectedResponse);
-    });
 
-    it('invokes list without error using callback', async () => {
-      const client = new sqlflagsserviceModule.v1.SqlFlagsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.sql.v1.SqlFlagsListRequest(),
-      );
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.sql.v1.FlagsListResponse(),
+        new protos.google.cloud.sql.v1beta4.StreamSqlDataResponse(),
       );
-      client.innerApiCalls.list = stubSimpleCallWithCallback(expectedResponse);
+      client.innerApiCalls.streamSqlData =
+        stubBidiStreamingCall(expectedResponse);
+      const stream = client.streamSqlData();
       const promise = new Promise((resolve, reject) => {
-        client.list(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.sql.v1.IFlagsListResponse | null,
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
+        stream.on(
+          'data',
+          (response: protos.google.cloud.sql.v1beta4.StreamSqlDataResponse) => {
+            resolve(response);
           },
         );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+        stream.write(request);
+        stream.end();
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.streamSqlData as SinonStub)
+          .getCall(0)
+          .calledWith(null),
+      );
+      assert.deepStrictEqual(
+        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
+          .args[0],
+        request,
+      );
     });
 
-    it('invokes list with error', async () => {
-      const client = new sqlflagsserviceModule.v1.SqlFlagsServiceClient({
+    it('invokes streamSqlData with error', async () => {
+      const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.sql.v1.SqlFlagsListRequest(),
+        new protos.google.cloud.sql.v1beta4.StreamSqlDataRequest(),
       );
       const expectedError = new Error('expected');
-      client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.list(request), expectedError);
-    });
-
-    it('invokes list with closed client', async () => {
-      const client = new sqlflagsserviceModule.v1.SqlFlagsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.sql.v1.SqlFlagsListRequest(),
+      client.innerApiCalls.streamSqlData = stubBidiStreamingCall(
+        undefined,
+        expectedError,
       );
-      const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
-        throw err;
+      const stream = client.streamSqlData();
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (response: protos.google.cloud.sql.v1beta4.StreamSqlDataResponse) => {
+            resolve(response);
+          },
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+        stream.write(request);
+        stream.end();
       });
-      await assert.rejects(client.list(request), expectedError);
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.innerApiCalls.streamSqlData as SinonStub)
+          .getCall(0)
+          .calledWith(null),
+      );
+      assert.deepStrictEqual(
+        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
+          .args[0],
+        request,
+      );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
-      const client = new sqlflagsserviceModule.v1.SqlFlagsServiceClient({
+      const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
@@ -389,7 +402,7 @@ describe('v1.SqlFlagsServiceClient', () => {
       );
     });
     it('invokes getLocation without error using callback', async () => {
-      const client = new sqlflagsserviceModule.v1.SqlFlagsServiceClient({
+      const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
@@ -433,7 +446,7 @@ describe('v1.SqlFlagsServiceClient', () => {
       assert((client.locationsClient.getLocation as SinonStub).getCall(0));
     });
     it('invokes getLocation with error', async () => {
-      const client = new sqlflagsserviceModule.v1.SqlFlagsServiceClient({
+      const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
@@ -468,7 +481,7 @@ describe('v1.SqlFlagsServiceClient', () => {
   });
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
-      const client = new sqlflagsserviceModule.v1.SqlFlagsServiceClient({
+      const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
@@ -516,7 +529,7 @@ describe('v1.SqlFlagsServiceClient', () => {
       );
     });
     it('uses async iteration with listLocations with error', async () => {
-      const client = new sqlflagsserviceModule.v1.SqlFlagsServiceClient({
+      const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
@@ -563,7 +576,7 @@ describe('v1.SqlFlagsServiceClient', () => {
         project: 'projectValue',
         backup: 'backupValue',
       };
-      const client = new sqlflagsserviceModule.v1.SqlFlagsServiceClient({
+      const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
@@ -600,6 +613,55 @@ describe('v1.SqlFlagsServiceClient', () => {
         assert.strictEqual(result, 'backupValue');
         assert(
           (client.pathTemplates.backupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('instance', async () => {
+      const fakePath = '/rendered/path/instance';
+      const expectedParameters = {
+        project: 'projectValue',
+        instance: 'instanceValue',
+      };
+      const client = new sqldataserviceModule.v1beta4.SqlDataServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.instancePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.instancePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('instancePath', () => {
+        const result = client.instancePath('projectValue', 'instanceValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.instancePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromInstanceName', () => {
+        const result = client.matchProjectFromInstanceName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.instancePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromInstanceName', () => {
+        const result = client.matchInstanceFromInstanceName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.instancePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

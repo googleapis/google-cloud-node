@@ -19,6 +19,7 @@ package google.cloud.sql.v1;
 import "google/api/annotations.proto";
 import "google/api/client.proto";
 import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
 import "google/cloud/sql/v1/cloud_sql_resources.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
@@ -196,6 +197,10 @@ message User {
     // Read-only. Login for a service account that belongs to the
     // Cloud IAM group.
     CLOUD_IAM_GROUP_SERVICE_ACCOUNT = 5;
+
+    // Cloud IAM workforce identity user managed via workforce identity
+    // federation.
+    CLOUD_IAM_WORKFORCE_IDENTITY = 6;
 
     // Microsoft Entra ID user.
     ENTRAID_USER = 7;

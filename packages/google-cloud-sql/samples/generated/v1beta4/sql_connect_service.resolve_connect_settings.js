@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main() {
-  // [START sqladmin_v1beta4_generated_SqlInstancesService_Clone_async]
+function main(dnsName, location) {
+  // [START sqladmin_v1beta4_generated_SqlConnectService_ResolveConnectSettings_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,36 +29,34 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The ID of the Cloud SQL instance to be cloned (source). This does not
-   *  include the project ID.
+   *  Required. Cloud SQL instance ID. This does not include the project ID.
    */
-  // const instance = 'abc123'
+  // const dnsName = 'abc123'
   /**
-   *  Project ID of the source Cloud SQL instance.
+   *  Required. The region of the instance.
    */
-  // const project = 'my-project'
-  /**
-   */
-  // const body = {}
+  // const location = 'abc123'
 
   // Imports the Sql library
-  const {SqlInstancesServiceClient} = require('@google-cloud/sql').v1beta4;
+  const {SqlConnectServiceClient} = require('@google-cloud/sql').v1beta4;
 
   // Instantiates a client
-  const sqlClient = new SqlInstancesServiceClient();
+  const sqlClient = new SqlConnectServiceClient();
 
-  async function callClone() {
+  async function callResolveConnectSettings() {
     // Construct request
     const request = {
+      dnsName,
+      location,
     };
 
     // Run request
-    const response = await sqlClient.clone(request);
+    const response = await sqlClient.resolveConnectSettings(request);
     console.log(response);
   }
 
-  callClone();
-  // [END sqladmin_v1beta4_generated_SqlInstancesService_Clone_async]
+  callResolveConnectSettings();
+  // [END sqladmin_v1beta4_generated_SqlConnectService_ResolveConnectSettings_async]
 }
 
 process.on('unhandledRejection', err => {
