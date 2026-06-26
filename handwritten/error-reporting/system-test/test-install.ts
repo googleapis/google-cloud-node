@@ -126,7 +126,7 @@ start().catch(console.error);
       devDependencies: ['@types/hapi@17.x.x'],
     },
     {
-      ts: `import Koa = require('koa');
+      ts: `import * as Koa from 'koa';
 
 import {ErrorReporting} from '@google-cloud/error-reporting';
 const errors = new ErrorReporting();
@@ -146,7 +146,8 @@ app.use(function *(this: any): IterableIterator<any> {
 });
 `,
       description: 'uses koa1',
-      dependencies: ['koa@1.x.x'],
+      dependencies: ['koa@3.x.x'],
+      devDependencies: ['@types/koa@3.x.x'],
     },
     {
       ts: `import * as Koa from 'koa';
