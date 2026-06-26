@@ -122,7 +122,10 @@ function shouldRun() {
 
   if (typeof env.injected().apiKey !== 'string') {
     console.log('The api key (apiKey) was not set as an env variable');
-    return false;
+    // During the migration from kokoro to GCB the environment changed
+    // We want to avoid throwing an error so that only specific tests need to
+    // be skipped.
+    // return false;
   }
 
   if (typeof env.injected().projectNumber !== 'string') {
