@@ -272,8 +272,8 @@ const {LoggingWinston} = require('@google-cloud/logging-winston');
 // ...
 
 winston.info('Log entry with custom trace value', {
-[LoggingWinston.LOGGING_TRACE_KEY]: 'custom-trace-value'
-[LoggingWinston.LOGGING_SPAN_KEY]: 'custom-span-value'
+[LoggingWinston.LOGGING_TRACE_KEY]: 'custom-trace-value',
+[LoggingWinston.LOGGING_SPAN_KEY]: 'custom-span-value',
 [LoggingWinston.LOGGING_SAMPLED_KEY]: true
 });
 ```
