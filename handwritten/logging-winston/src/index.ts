@@ -77,6 +77,32 @@ export interface Options extends LoggingOptions {
    */
   serviceContext?: ServiceContext;
 
+  /**
+   * Controls integration with
+   * [Google Cloud Error Reporting](https://cloud.google.com/error-reporting).
+   *
+   * When enabled, qualifying log entries will be formatted so they are
+   * automatically picked up by Error Reporting: the entry's `jsonPayload`
+   * will include the `@type` field set to
+   * `type.googleapis.com/google.devtools.clouderrorreporting.v1beta1.ReportedErrorEvent`
+   * and the `serviceContext` (from {@link Options#serviceContext}) will be
+   * attached. If the message does not contain a stack trace, the message
+   * itself will be used as the error message.
+   *
+   * Accepted values:
+   *  - `false` (default): disabled; preserves backwards compatible behaviour.
+   *  - `true`: enabled for entries at severity `error` or higher (equivalent
+   *    to `'error'`).
+   *  - A winston level name (e.g. `'warn'`, `'error'`): enabled for entries
+   *    at that level or higher (more severe). The level name must exist in
+   *    {@link Options#levels} (or in the default npm levels).
+   *
+   * Note: for Error Reporting to actually ingest the event, a
+   * `serviceContext.service` must be provided either via
+   * {@link Options#serviceContext} or through the runtime environment.
+   */
+  errorReportingEnabled?: boolean | string;
+
   logname?: string;
 
   prefix?: string;

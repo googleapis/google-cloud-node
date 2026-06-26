@@ -34,10 +34,20 @@ import {LogSyncOptions} from '@google-cloud/logging/build/src/log-sync';
 type Callback = (err: Error | null, apiResponse?: {}) => void;
 export type MonitoredResource = protos.google.api.MonitoredResource;
 
+/**
+ * Special `@type` value that marks a log entry's jsonPayload as a
+ * `ReportedErrorEvent` so that it is ingested by Google Cloud
+ * Error Reporting.
+ * See https://cloud.google.com/error-reporting/docs/formatting-error-messages
+ */
+export const ERROR_EVENT_TYPE =
+  'type.googleapis.com/google.devtools.clouderrorreporting.v1beta1.ReportedErrorEvent';
+
 export interface StackdriverData {
   serviceContext?: ServiceContext;
   message?: string;
   metadata?: Metadata | MetadataArg;
+  '@type'?: string;
 }
 
 export interface Metadata {
@@ -129,6 +139,9 @@ export class LoggingCommon {
   cloudLog: LogSeverityFunctions;
   private resource: protos.google.api.IMonitoredResource | undefined;
   private serviceContext: ServiceContext | undefined;
+  // Threshold level code (inclusive, lower = more severe) at which Error
+  // Reporting formatting kicks in. `undefined` means disabled.
+  private errorReportingMinLevelCode: number | undefined;
   private prefix: string | undefined;
   private labels: object | undefined;
   private defaultCallback?: Callback;
@@ -173,6 +186,10 @@ export class LoggingCommon {
     }
     this.resource = options.resource;
     this.serviceContext = options.serviceContext;
+    this.errorReportingMinLevelCode = resolveErrorReportingMinLevelCode(
+      options.errorReportingEnabled,
+      this.levels,
+    );
     this.prefix = options.prefix;
     this.labels = options.labels;
     this.defaultCallback = options.defaultCallback;
@@ -224,6 +241,20 @@ export class LoggingCommon {
     if (metadata.stack) {
       message += (message ? ' ' : '') + metadata.stack;
       data.serviceContext = this.serviceContext;
+    }
+
+    // If Error Reporting integration is enabled, annotate any log entry whose
+    // severity is `error` or higher (levelCode <= 3) so that it is recognized
+    // as a ReportedErrorEvent by Google Cloud Error Reporting.
+    // See https://cloud.google.com/error-reporting/docs/formatting-error-messages
+    if (
+      this.errorReportingMinLevelCode !== undefined &&
+      levelCode <= this.errorReportingMinLevelCode
+    ) {
+      data['@type'] = ERROR_EVENT_TYPE;
+      if (this.serviceContext) {
+        data.serviceContext = this.serviceContext;
+      }
     }
 
     data.message = this.prefix ? `[${this.prefix}] ` : '';
@@ -351,6 +382,38 @@ export class LoggingCommon {
     }
     return (this.cloudLog as Log).entry(metadata, data);
   }
+}
+
+/**
+ * Resolves the `errorReportingEnabled` option into a numeric level-code
+ * threshold (inclusive, lower = more severe). Returns `undefined` when the
+ * integration is disabled.
+ *
+ *  - `undefined` / `false` -> disabled
+ *  - `true` -> enabled at `error` and higher (uses the configured `error`
+ *    level code if present, otherwise the default npm `error` code)
+ *  - string -> winston level name; must exist in `levels`
+ */
+export function resolveErrorReportingMinLevelCode(
+  option: boolean | string | undefined,
+  levels: {[name: string]: number},
+): number | undefined {
+  if (option === undefined || option === false) {
+    return undefined;
+  }
+  if (option === true) {
+    return levels.error ?? NPM_LEVEL_NAME_TO_CODE.error;
+  }
+  if (typeof option === 'string') {
+    const code = levels[option];
+    if (code === undefined) {
+      throw new Error(
+        `Unknown log level for errorReportingEnabled: '${option}'`,
+      );
+    }
+    return code;
+  }
+  return undefined;
 }
 
 export function getNodejsLibraryVersion() {

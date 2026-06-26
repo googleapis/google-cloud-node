@@ -177,6 +177,33 @@ serviceContext: {
 
 It is an error to specify a `serviceContext` but not specify `serviceContext.service`.
 
+By default, Error Reporting will only pick up entries that include a full stack
+trace in the message. If you want log entries to be reported even when the
+message has no stack trace, use the `errorReportingEnabled` option. When set,
+the transport will add the `@type` marker
+(`type.googleapis.com/google.devtools.clouderrorreporting.v1beta1.ReportedErrorEvent`)
+and the configured `serviceContext` to the `jsonPayload`, which is the
+formatting required by Error Reporting.
+
+`errorReportingEnabled` accepts:
+
+- `false` (default): disabled.
+- `true`: enabled for entries at severity `error` or higher.
+- A winston level name (e.g. `'warn'`, `'error'`): enabled for entries at
+  that level or higher (more severe). The level must exist in your `levels`
+  map (or the default npm levels).
+
+```javascript
+const loggingWinston = new LoggingWinston({
+  serviceContext: {
+    service: 'my-service',
+    version: 'my-version',
+  },
+  // Report warnings and errors to Error Reporting.
+  errorReportingEnabled: 'warn',
+});
+```
+
 Make sure to add logs to your [uncaught exception](https://nodejs.org/api/process.html#process_event_uncaughtexception) and [unhandled rejection](https://nodejs.org/api/process.html#process_event_unhandledrejection) handlers if you want to see those errors too.
 
 You may also want to see the [@google-cloud/error-reporting](https://github.com/googleapis/nodejs-error-reporting) module which provides direct access to the Error Reporting API.

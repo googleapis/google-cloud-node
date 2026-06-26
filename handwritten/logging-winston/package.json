@@ -13,7 +13,7 @@
   "repository": {
     "type": "git",
     "directory": "handwritten/logging-winston",
-    "url": "https://github.com/GuestButler/google-cloud-node.git"
+    "url": "git+https://github.com/GuestButler/google-cloud-node.git"
   },
   "main": "./build/src/index.js",
   "types": "./build/src/index.d.ts",
