@@ -2827,6 +2827,12 @@ export class SqlInstancesServiceClient {
    *   Cloud SQL instance ID. This does not include the project ID.
    * @param {string} request.project
    *   Project ID of the project that contains the instance.
+   * @param {boolean} [request.reconcilePscNetworking]
+   *   Optional. Set PSC config to the same value as the existing config to
+   *   reconcile the PSC networking.
+   * @param {boolean} [request.reconcilePscNetworkingForce]
+   *   Optional. Set PSC config to the same value as the existing config and force
+   *   reconcile the PSC networking.
    * @param {google.cloud.sql.v1.DatabaseInstance} request.body
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.

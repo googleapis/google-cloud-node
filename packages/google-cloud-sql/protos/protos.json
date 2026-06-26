@@ -397,7 +397,11 @@
                         },
                         "replicationLogArchivingEnabled": {
                           "type": "google.protobuf.BoolValue",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "location": {
                           "type": "string",
@@ -1277,6 +1281,11 @@
                           "oneof": [
                             "pscWriteEndpointDnsEnabled"
                           ]
+                        },
+                        "_pscAutoConnectionPolicyEnabled": {
+                          "oneof": [
+                            "pscAutoConnectionPolicyEnabled"
+                          ]
                         }
                       },
                       "fields": {
@@ -1325,6 +1334,14 @@
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
+                        },
+                        "pscAutoConnectionPolicyEnabled": {
+                          "type": "bool",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -1343,6 +1360,26 @@
                         "_consumerNetworkStatus": {
                           "oneof": [
                             "consumerNetworkStatus"
+                          ]
+                        },
+                        "_serviceConnectionPolicy": {
+                          "oneof": [
+                            "serviceConnectionPolicy"
+                          ]
+                        },
+                        "_serviceConnectionPolicyCreationResult": {
+                          "oneof": [
+                            "serviceConnectionPolicyCreationResult"
+                          ]
+                        },
+                        "_instanceAutoDnsStatus": {
+                          "oneof": [
+                            "instanceAutoDnsStatus"
+                          ]
+                        },
+                        "_writeEndpointAutoDnsStatus": {
+                          "oneof": [
+                            "writeEndpointAutoDnsStatus"
                           ]
                         }
                       },
@@ -1380,6 +1417,39 @@
                           "type": "string",
                           "id": 5,
                           "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "serviceConnectionPolicy": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/ServiceConnectionPolicy",
+                            "proto3_optional": true
+                          }
+                        },
+                        "serviceConnectionPolicyCreationResult": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "instanceAutoDnsStatus": {
+                          "type": "AutoDnsStatus",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "writeEndpointAutoDnsStatus": {
+                          "type": "AutoDnsStatus",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
                           }
                         }
@@ -1754,7 +1824,8 @@
                             "ENHANCED_BACKUP": 51,
                             "REPAIR_READ_POOL": 52,
                             "CREATE_READ_POOL": 53,
-                            "PRE_CHECK_MAJOR_VERSION_UPGRADE": 54
+                            "PRE_CHECK_MAJOR_VERSION_UPGRADE": 54,
+                            "SETUP_MIGRATION": 55
                           }
                         },
                         "SqlOperationStatus": {
@@ -2183,7 +2254,8 @@
                           "values": {
                             "EDITION_UNSPECIFIED": 0,
                             "ENTERPRISE": 2,
-                            "ENTERPRISE_PLUS": 3
+                            "ENTERPRISE_PLUS": 3,
+                            "DEVELOPER": 5
                           }
                         },
                         "ConnectorEnforcement": {
@@ -2232,6 +2304,41 @@
                         "_transactionDurationThreshold": {
                           "oneof": [
                             "transactionDurationThreshold"
+                          ]
+                        },
+                        "_cpuUtilizationThresholdPercent": {
+                          "oneof": [
+                            "cpuUtilizationThresholdPercent"
+                          ]
+                        },
+                        "_memoryUsageThresholdPercent": {
+                          "oneof": [
+                            "memoryUsageThresholdPercent"
+                          ]
+                        },
+                        "_transactionLockWaitThresholdCount": {
+                          "oneof": [
+                            "transactionLockWaitThresholdCount"
+                          ]
+                        },
+                        "_semaphoreWaitThresholdCount": {
+                          "oneof": [
+                            "semaphoreWaitThresholdCount"
+                          ]
+                        },
+                        "_historyListLengthThresholdCount": {
+                          "oneof": [
+                            "historyListLengthThresholdCount"
+                          ]
+                        },
+                        "_transactionKillThresholdSeconds": {
+                          "oneof": [
+                            "transactionKillThresholdSeconds"
+                          ]
+                        },
+                        "_transactionKillType": {
+                          "oneof": [
+                            "transactionKillType"
                           ]
                         }
                       },
@@ -2282,6 +2389,79 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
+                          }
+                        },
+                        "cpuUtilizationThresholdPercent": {
+                          "type": "int32",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "memoryUsageThresholdPercent": {
+                          "type": "int32",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "transactionLockWaitThresholdCount": {
+                          "type": "int32",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "semaphoreWaitThresholdCount": {
+                          "type": "int32",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "historyListLengthThresholdCount": {
+                          "type": "int32",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "transactionKillThresholdSeconds": {
+                          "type": "int32",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "transactionKillExcludedUserHosts": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "transactionKillType": {
+                          "type": "TransactionKillType",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "TransactionKillType": {
+                          "values": {
+                            "TRANSACTION_KILL_TYPE_UNSPECIFIED": 0,
+                            "READ_ONLY_TRANSACTIONS": 1,
+                            "ALL_TRANSACTIONS": 2
                           }
                         }
                       }
@@ -2702,6 +2882,7 @@
                         "POSTGRES_17": 408,
                         "POSTGRES_18": 557,
                         "POSTGRES_19": 684,
+                        "POSTGRES_20": 781,
                         "SQLSERVER_2019_STANDARD": 26,
                         "SQLSERVER_2019_ENTERPRISE": 27,
                         "SQLSERVER_2019_EXPRESS": 28,
@@ -2866,6 +3047,14 @@
                             "CLOUD_SQL_AUTOMATION": 2
                           }
                         }
+                      }
+                    },
+                    "AutoDnsStatus": {
+                      "values": {
+                        "AUTO_DNS_STATUS_UNSPECIFIED": 0,
+                        "AUTO_DNS_OK": 1,
+                        "AUTO_DNS_FAILED": 2,
+                        "AUTO_DNS_UNKNOWN": 3
                       }
                     },
                     "SqlBackupsService": {
@@ -4230,6 +4419,18 @@
                       }
                     },
                     "SqlInstancesPatchRequest": {
+                      "oneofs": {
+                        "_reconcilePscNetworking": {
+                          "oneof": [
+                            "reconcilePscNetworking"
+                          ]
+                        },
+                        "_reconcilePscNetworkingForce": {
+                          "oneof": [
+                            "reconcilePscNetworkingForce"
+                          ]
+                        }
+                      },
                       "fields": {
                         "instance": {
                           "type": "string",
@@ -4238,6 +4439,22 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "reconcilePscNetworking": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "reconcilePscNetworkingForce": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         },
                         "body": {
                           "type": "DatabaseInstance",
@@ -6698,6 +6915,20 @@
                             }
                           ]
                         },
+                        "ResolveConnectSettings": {
+                          "requestType": "ResolveConnectSettingsRequest",
+                          "responseType": "ConnectSettings",
+                          "options": {
+                            "(google.api.http).get": "/v1/locations/{location}/dns/{dns_name}:resolveConnectSettings"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/locations/{location}/dns/{dns_name}:resolveConnectSettings"
+                              }
+                            }
+                          ]
+                        },
                         "GenerateEphemeralCert": {
                           "requestType": "GenerateEphemeralCertRequest",
                           "responseType": "GenerateEphemeralCertResponse",
@@ -6731,6 +6962,24 @@
                           "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ResolveConnectSettingsRequest": {
+                      "fields": {
+                        "dnsName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -6813,6 +7062,13 @@
                           "rule": "repeated",
                           "type": "MdxProtocolSupport",
                           "id": 39,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "connectionName": {
+                          "type": "string",
+                          "id": 40,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -7995,6 +8251,7 @@
                             "CLOUD_IAM_GROUP": 3,
                             "CLOUD_IAM_GROUP_USER": 4,
                             "CLOUD_IAM_GROUP_SERVICE_ACCOUNT": 5,
+                            "CLOUD_IAM_WORKFORCE_IDENTITY": 6,
                             "ENTRAID_USER": 7
                           }
                         },

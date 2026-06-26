@@ -431,6 +431,165 @@ describe('v1.SqlConnectServiceClient', () => {
     });
   });
 
+  describe('resolveConnectSettings', () => {
+    it('invokes resolveConnectSettings without error', async () => {
+      const client = new sqlconnectserviceModule.v1.SqlConnectServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1.ResolveConnectSettingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.ResolveConnectSettingsRequest',
+        ['location'],
+      );
+      request.location = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.ResolveConnectSettingsRequest',
+        ['dnsName'],
+      );
+      request.dnsName = defaultValue2;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}&dns_name=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.sql.v1.ConnectSettings(),
+      );
+      client.innerApiCalls.resolveConnectSettings =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.resolveConnectSettings(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.resolveConnectSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resolveConnectSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes resolveConnectSettings without error using callback', async () => {
+      const client = new sqlconnectserviceModule.v1.SqlConnectServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1.ResolveConnectSettingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.ResolveConnectSettingsRequest',
+        ['location'],
+      );
+      request.location = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.ResolveConnectSettingsRequest',
+        ['dnsName'],
+      );
+      request.dnsName = defaultValue2;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}&dns_name=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.sql.v1.ConnectSettings(),
+      );
+      client.innerApiCalls.resolveConnectSettings =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.resolveConnectSettings(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.sql.v1.IConnectSettings | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.resolveConnectSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resolveConnectSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes resolveConnectSettings with error', async () => {
+      const client = new sqlconnectserviceModule.v1.SqlConnectServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1.ResolveConnectSettingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.ResolveConnectSettingsRequest',
+        ['location'],
+      );
+      request.location = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.ResolveConnectSettingsRequest',
+        ['dnsName'],
+      );
+      request.dnsName = defaultValue2;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}&dns_name=${defaultValue2 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.resolveConnectSettings = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.resolveConnectSettings(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.resolveConnectSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resolveConnectSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes resolveConnectSettings with closed client', async () => {
+      const client = new sqlconnectserviceModule.v1.SqlConnectServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1.ResolveConnectSettingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.ResolveConnectSettingsRequest',
+        ['location'],
+      );
+      request.location = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.ResolveConnectSettingsRequest',
+        ['dnsName'],
+      );
+      request.dnsName = defaultValue2;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.resolveConnectSettings(request),
+        expectedError,
+      );
+    });
+  });
+
   describe('generateEphemeralCert', () => {
     it('invokes generateEphemeralCert without error', async () => {
       const client = new sqlconnectserviceModule.v1.SqlConnectServiceClient({

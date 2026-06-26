@@ -4721,6 +4721,9 @@ export namespace google {
 
                     /** PscConfig pscWriteEndpointDnsEnabled */
                     pscWriteEndpointDnsEnabled?: (boolean|null);
+
+                    /** PscConfig pscAutoConnectionPolicyEnabled */
+                    pscAutoConnectionPolicyEnabled?: (boolean|null);
                 }
 
                 /** Represents a PscConfig. */
@@ -4749,6 +4752,9 @@ export namespace google {
 
                     /** PscConfig pscWriteEndpointDnsEnabled. */
                     public pscWriteEndpointDnsEnabled?: (boolean|null);
+
+                    /** PscConfig pscAutoConnectionPolicyEnabled. */
+                    public pscAutoConnectionPolicyEnabled?: (boolean|null);
 
                     /**
                      * Creates a new PscConfig instance using the specified properties.
@@ -4845,6 +4851,18 @@ export namespace google {
 
                     /** PscAutoConnectionConfig consumerNetworkStatus */
                     consumerNetworkStatus?: (string|null);
+
+                    /** PscAutoConnectionConfig serviceConnectionPolicy */
+                    serviceConnectionPolicy?: (string|null);
+
+                    /** PscAutoConnectionConfig serviceConnectionPolicyCreationResult */
+                    serviceConnectionPolicyCreationResult?: (string|null);
+
+                    /** PscAutoConnectionConfig instanceAutoDnsStatus */
+                    instanceAutoDnsStatus?: (google.cloud.sql.v1.AutoDnsStatus|keyof typeof google.cloud.sql.v1.AutoDnsStatus|null);
+
+                    /** PscAutoConnectionConfig writeEndpointAutoDnsStatus */
+                    writeEndpointAutoDnsStatus?: (google.cloud.sql.v1.AutoDnsStatus|keyof typeof google.cloud.sql.v1.AutoDnsStatus|null);
                 }
 
                 /** Represents a PscAutoConnectionConfig. */
@@ -4870,6 +4888,18 @@ export namespace google {
 
                     /** PscAutoConnectionConfig consumerNetworkStatus. */
                     public consumerNetworkStatus?: (string|null);
+
+                    /** PscAutoConnectionConfig serviceConnectionPolicy. */
+                    public serviceConnectionPolicy?: (string|null);
+
+                    /** PscAutoConnectionConfig serviceConnectionPolicyCreationResult. */
+                    public serviceConnectionPolicyCreationResult?: (string|null);
+
+                    /** PscAutoConnectionConfig instanceAutoDnsStatus. */
+                    public instanceAutoDnsStatus?: (google.cloud.sql.v1.AutoDnsStatus|keyof typeof google.cloud.sql.v1.AutoDnsStatus|null);
+
+                    /** PscAutoConnectionConfig writeEndpointAutoDnsStatus. */
+                    public writeEndpointAutoDnsStatus?: (google.cloud.sql.v1.AutoDnsStatus|keyof typeof google.cloud.sql.v1.AutoDnsStatus|null);
 
                     /**
                      * Creates a new PscAutoConnectionConfig instance using the specified properties.
@@ -6263,7 +6293,8 @@ export namespace google {
                         ENHANCED_BACKUP = 51,
                         REPAIR_READ_POOL = 52,
                         CREATE_READ_POOL = 53,
-                        PRE_CHECK_MAJOR_VERSION_UPGRADE = 54
+                        PRE_CHECK_MAJOR_VERSION_UPGRADE = 54,
+                        SETUP_MIGRATION = 55
                     }
 
                     /** SqlOperationStatus enum. */
@@ -7210,7 +7241,8 @@ export namespace google {
                     enum Edition {
                         EDITION_UNSPECIFIED = 0,
                         ENTERPRISE = 2,
-                        ENTERPRISE_PLUS = 3
+                        ENTERPRISE_PLUS = 3,
+                        DEVELOPER = 5
                     }
 
                     /** ConnectorEnforcement enum. */
@@ -7248,6 +7280,30 @@ export namespace google {
 
                     /** PerformanceCaptureConfig transactionDurationThreshold */
                     transactionDurationThreshold?: (number|null);
+
+                    /** PerformanceCaptureConfig cpuUtilizationThresholdPercent */
+                    cpuUtilizationThresholdPercent?: (number|null);
+
+                    /** PerformanceCaptureConfig memoryUsageThresholdPercent */
+                    memoryUsageThresholdPercent?: (number|null);
+
+                    /** PerformanceCaptureConfig transactionLockWaitThresholdCount */
+                    transactionLockWaitThresholdCount?: (number|null);
+
+                    /** PerformanceCaptureConfig semaphoreWaitThresholdCount */
+                    semaphoreWaitThresholdCount?: (number|null);
+
+                    /** PerformanceCaptureConfig historyListLengthThresholdCount */
+                    historyListLengthThresholdCount?: (number|null);
+
+                    /** PerformanceCaptureConfig transactionKillThresholdSeconds */
+                    transactionKillThresholdSeconds?: (number|null);
+
+                    /** PerformanceCaptureConfig transactionKillExcludedUserHosts */
+                    transactionKillExcludedUserHosts?: (string[]|null);
+
+                    /** PerformanceCaptureConfig transactionKillType */
+                    transactionKillType?: (google.cloud.sql.v1.PerformanceCaptureConfig.TransactionKillType|keyof typeof google.cloud.sql.v1.PerformanceCaptureConfig.TransactionKillType|null);
                 }
 
                 /** Represents a PerformanceCaptureConfig. */
@@ -7276,6 +7332,30 @@ export namespace google {
 
                     /** PerformanceCaptureConfig transactionDurationThreshold. */
                     public transactionDurationThreshold?: (number|null);
+
+                    /** PerformanceCaptureConfig cpuUtilizationThresholdPercent. */
+                    public cpuUtilizationThresholdPercent?: (number|null);
+
+                    /** PerformanceCaptureConfig memoryUsageThresholdPercent. */
+                    public memoryUsageThresholdPercent?: (number|null);
+
+                    /** PerformanceCaptureConfig transactionLockWaitThresholdCount. */
+                    public transactionLockWaitThresholdCount?: (number|null);
+
+                    /** PerformanceCaptureConfig semaphoreWaitThresholdCount. */
+                    public semaphoreWaitThresholdCount?: (number|null);
+
+                    /** PerformanceCaptureConfig historyListLengthThresholdCount. */
+                    public historyListLengthThresholdCount?: (number|null);
+
+                    /** PerformanceCaptureConfig transactionKillThresholdSeconds. */
+                    public transactionKillThresholdSeconds?: (number|null);
+
+                    /** PerformanceCaptureConfig transactionKillExcludedUserHosts. */
+                    public transactionKillExcludedUserHosts: string[];
+
+                    /** PerformanceCaptureConfig transactionKillType. */
+                    public transactionKillType?: (google.cloud.sql.v1.PerformanceCaptureConfig.TransactionKillType|keyof typeof google.cloud.sql.v1.PerformanceCaptureConfig.TransactionKillType|null);
 
                     /**
                      * Creates a new PerformanceCaptureConfig instance using the specified properties.
@@ -7353,6 +7433,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace PerformanceCaptureConfig {
+
+                    /** TransactionKillType enum. */
+                    enum TransactionKillType {
+                        TRANSACTION_KILL_TYPE_UNSPECIFIED = 0,
+                        READ_ONLY_TRANSACTIONS = 1,
+                        ALL_TRANSACTIONS = 2
+                    }
                 }
 
                 /** Properties of a ConnectionPoolFlags. */
@@ -8576,6 +8666,7 @@ export namespace google {
                     POSTGRES_17 = 408,
                     POSTGRES_18 = 557,
                     POSTGRES_19 = 684,
+                    POSTGRES_20 = 781,
                     SQLSERVER_2019_STANDARD = 26,
                     SQLSERVER_2019_ENTERPRISE = 27,
                     SQLSERVER_2019_EXPRESS = 28,
@@ -8880,6 +8971,14 @@ export namespace google {
                         CUSTOMER = 1,
                         CLOUD_SQL_AUTOMATION = 2
                     }
+                }
+
+                /** AutoDnsStatus enum. */
+                enum AutoDnsStatus {
+                    AUTO_DNS_STATUS_UNSPECIFIED = 0,
+                    AUTO_DNS_OK = 1,
+                    AUTO_DNS_FAILED = 2,
+                    AUTO_DNS_UNKNOWN = 3
                 }
 
                 /** Represents a SqlBackupsService */
@@ -12548,6 +12647,12 @@ export namespace google {
                     /** SqlInstancesPatchRequest project */
                     project?: (string|null);
 
+                    /** SqlInstancesPatchRequest reconcilePscNetworking */
+                    reconcilePscNetworking?: (boolean|null);
+
+                    /** SqlInstancesPatchRequest reconcilePscNetworkingForce */
+                    reconcilePscNetworkingForce?: (boolean|null);
+
                     /** SqlInstancesPatchRequest body */
                     body?: (google.cloud.sql.v1.IDatabaseInstance|null);
                 }
@@ -12566,6 +12671,12 @@ export namespace google {
 
                     /** SqlInstancesPatchRequest project. */
                     public project: string;
+
+                    /** SqlInstancesPatchRequest reconcilePscNetworking. */
+                    public reconcilePscNetworking?: (boolean|null);
+
+                    /** SqlInstancesPatchRequest reconcilePscNetworkingForce. */
+                    public reconcilePscNetworkingForce?: (boolean|null);
 
                     /** SqlInstancesPatchRequest body. */
                     public body?: (google.cloud.sql.v1.IDatabaseInstance|null);
@@ -22431,6 +22542,20 @@ export namespace google {
                     public getConnectSettings(request: google.cloud.sql.v1.IGetConnectSettingsRequest): Promise<google.cloud.sql.v1.ConnectSettings>;
 
                     /**
+                     * Calls ResolveConnectSettings.
+                     * @param request ResolveConnectSettingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ConnectSettings
+                     */
+                    public resolveConnectSettings(request: google.cloud.sql.v1.IResolveConnectSettingsRequest, callback: google.cloud.sql.v1.SqlConnectService.ResolveConnectSettingsCallback): void;
+
+                    /**
+                     * Calls ResolveConnectSettings.
+                     * @param request ResolveConnectSettingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public resolveConnectSettings(request: google.cloud.sql.v1.IResolveConnectSettingsRequest): Promise<google.cloud.sql.v1.ConnectSettings>;
+
+                    /**
                      * Calls GenerateEphemeralCert.
                      * @param request GenerateEphemeralCertRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and GenerateEphemeralCertResponse
@@ -22453,6 +22578,13 @@ export namespace google {
                      * @param [response] ConnectSettings
                      */
                     type GetConnectSettingsCallback = (error: (Error|null), response?: google.cloud.sql.v1.ConnectSettings) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.sql.v1.SqlConnectService|resolveConnectSettings}.
+                     * @param error Error, if any
+                     * @param [response] ConnectSettings
+                     */
+                    type ResolveConnectSettingsCallback = (error: (Error|null), response?: google.cloud.sql.v1.ConnectSettings) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.sql.v1.SqlConnectService|generateEphemeralCert}.
@@ -22571,6 +22703,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ResolveConnectSettingsRequest. */
+                interface IResolveConnectSettingsRequest {
+
+                    /** ResolveConnectSettingsRequest dnsName */
+                    dnsName?: (string|null);
+
+                    /** ResolveConnectSettingsRequest location */
+                    location?: (string|null);
+                }
+
+                /** Represents a ResolveConnectSettingsRequest. */
+                class ResolveConnectSettingsRequest implements IResolveConnectSettingsRequest {
+
+                    /**
+                     * Constructs a new ResolveConnectSettingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1.IResolveConnectSettingsRequest);
+
+                    /** ResolveConnectSettingsRequest dnsName. */
+                    public dnsName: string;
+
+                    /** ResolveConnectSettingsRequest location. */
+                    public location: string;
+
+                    /**
+                     * Creates a new ResolveConnectSettingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResolveConnectSettingsRequest instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1.IResolveConnectSettingsRequest): google.cloud.sql.v1.ResolveConnectSettingsRequest;
+
+                    /**
+                     * Encodes the specified ResolveConnectSettingsRequest message. Does not implicitly {@link google.cloud.sql.v1.ResolveConnectSettingsRequest.verify|verify} messages.
+                     * @param message ResolveConnectSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1.IResolveConnectSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResolveConnectSettingsRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1.ResolveConnectSettingsRequest.verify|verify} messages.
+                     * @param message ResolveConnectSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1.IResolveConnectSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResolveConnectSettingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResolveConnectSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1.ResolveConnectSettingsRequest;
+
+                    /**
+                     * Decodes a ResolveConnectSettingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResolveConnectSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1.ResolveConnectSettingsRequest;
+
+                    /**
+                     * Verifies a ResolveConnectSettingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResolveConnectSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResolveConnectSettingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1.ResolveConnectSettingsRequest;
+
+                    /**
+                     * Creates a plain object from a ResolveConnectSettingsRequest message. Also converts values to other types if specified.
+                     * @param message ResolveConnectSettingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1.ResolveConnectSettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResolveConnectSettingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResolveConnectSettingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a ConnectSettings. */
                 interface IConnectSettings {
 
@@ -22615,6 +22850,9 @@ export namespace google {
 
                     /** ConnectSettings mdxProtocolSupport */
                     mdxProtocolSupport?: (google.cloud.sql.v1.ConnectSettings.MdxProtocolSupport[]|null);
+
+                    /** ConnectSettings connectionName */
+                    connectionName?: (string|null);
                 }
 
                 /** Represents a ConnectSettings. */
@@ -22667,6 +22905,9 @@ export namespace google {
 
                     /** ConnectSettings mdxProtocolSupport. */
                     public mdxProtocolSupport: google.cloud.sql.v1.ConnectSettings.MdxProtocolSupport[];
+
+                    /** ConnectSettings connectionName. */
+                    public connectionName: string;
 
                     /**
                      * Creates a new ConnectSettings instance using the specified properties.
@@ -27299,6 +27540,7 @@ export namespace google {
                         CLOUD_IAM_GROUP = 3,
                         CLOUD_IAM_GROUP_USER = 4,
                         CLOUD_IAM_GROUP_SERVICE_ACCOUNT = 5,
+                        CLOUD_IAM_WORKFORCE_IDENTITY = 6,
                         ENTRAID_USER = 7
                     }
 
