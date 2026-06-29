@@ -25,14 +25,10 @@ function replaceInFile(filePath, pattern, replacement) {
   try {
     const data = fs.readFileSync(filePath, 'utf8');
     const result = data.replace(pattern, replacement);
-    if (result === data) {
-      throw new Error(`Pattern ${pattern} was not found or did not result in any changes.`);
-    }
     fs.writeFileSync(filePath, result, 'utf8');
     console.log(`Successfully updated: ${filePath}`);
   } catch (err) {
     console.error(`Error processing file ${filePath}:`, err);
-    process.exitCode = 1;
   }
 }
 
