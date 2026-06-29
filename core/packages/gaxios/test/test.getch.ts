@@ -213,7 +213,7 @@ describe('🚙 error handling', () => {
       );
     });
 
-    it('split accross mixed type chunks (string, Buffer, Uint8Array)', async () => {
+    it('split across mixed type chunks (string, Buffer, Uint8Array)', async () => {
       const chunks = [
         '{"error": {"code": 400, ',
         Buffer.from('"message": "Invalid '),
