@@ -32,7 +32,7 @@ function sleep(timeoutMs: number) {
 export class ShowcaseServer {
   server: execa.ExecaChildProcess | undefined;
 
-  async start() {
+  async start(args: string[] = ['run']) {
     const testDir = path.join(process.cwd(), '.showcase-server-dir');
     const platform = process.platform;
     const arch = process.arch === 'x64' ? 'amd64' : process.arch;
@@ -48,7 +48,7 @@ export class ShowcaseServer {
 
     await download(fallbackServerUrl, testDir);
     await execa('tar', ['xzf', tarballFilename]);
-    const childProcess = execa(binaryName, ['run'], {
+    const childProcess = execa(binaryName, args, {
       cwd: testDir,
       stdio: 'inherit',
     });
