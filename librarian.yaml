@@ -193,10 +193,10 @@ libraries:
         - omit_common_resources: true
           path: google/cloud/advisorynotifications/v1
   - name: google-cloud-agentregistry
+    version: 0.1.0
     apis:
       - path: google/cloud/agentregistry/v1
     copyright_year: "2026"
-    version: 0.1.0
   - name: google-cloud-aiplatform
     version: 6.8.1
     apis:
