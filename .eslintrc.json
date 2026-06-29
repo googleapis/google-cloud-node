@@ -1,6 +1,18 @@
 {
-  "extends": "./node_modules/gts",
+  "extends": [
+    "./node_modules/gts",
+    "plugin:prettier/recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript",
+    "plugin:promise/recommended"
+  ],
   "root": true,
+  "rules": {
+    "import/no-unresolved": "off",
+    "import/no-extraneous-dependencies": "error",
+    "promise/catch-or-return": "error",
+    "promise/always-return": "error"
+  },
   "ignorePatterns": [
     "**/node_modules",
     "**/build",

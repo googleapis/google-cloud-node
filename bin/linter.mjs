@@ -65,29 +65,6 @@ function getChangedFiles() {
   }
 }
 
-function checkPrettierFormatting(filesToCheck) {
-  if (filesToCheck.length === 0) {
-    return true;
-  }
-
-  try {
-    execFileSync(
-      'node',
-      ['node_modules/prettier/bin/prettier.cjs', '--check', ...filesToCheck],
-      {stdio: 'inherit'},
-    );
-    return true;
-  } catch (err) {
-    console.error(
-      '\n[ERROR] Prettier formatting check failed! Please run the following command to format your files:',
-    );
-    console.error(
-      `  npx prettier --write ${filesToCheck.map(f => `"${f}"`).join(' ')}`,
-    );
-    return false;
-  }
-}
-
 function checkEslint(filesToCheck) {
   if (filesToCheck.length === 0) {
     return true;
@@ -170,12 +147,11 @@ function run() {
       return;
     }
 
-    // Run Prettier, ESLint, and Type check sequentially
-    const prettierPassed = checkPrettierFormatting(changedTsFiles);
+    // Run ESLint (which now includes Prettier checks) and Type checks
     const eslintPassed = checkEslint(changedTsFiles);
     const typeSafetyPassed = checkTypeSafety(changedTsFiles);
 
-    if (!prettierPassed || !eslintPassed || !typeSafetyPassed) {
+    if (!eslintPassed || !typeSafetyPassed) {
       throw new Error('Linter checks failed.');
     }
   } catch (err) {
