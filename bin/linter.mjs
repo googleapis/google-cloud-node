@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 // Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,16 +13,16 @@
 // limitations under the License.
 
 import {execFileSync} from 'child_process';
-import {existsSync} from 'fs';
+import {existsSync, readFileSync} from 'fs';
 import path from 'path';
+import {ESLint} from 'eslint';
+import prettier from 'prettier';
 
 // Define the base branch to compare against
 const baseBranch = process.env.GITHUB_BASE_REF || 'main';
 
 // Extensions to check for Prettier and ESLint/GTS
-const targetExtensions = new Set([
-  '.ts',
-]);
+const targetExtensions = new Set(['.ts']);
 
 function getChangedFiles() {
   try {
@@ -36,68 +34,105 @@ function getChangedFiles() {
     return output
       .split('\n')
       .map(f => f.trim())
-      .filter(f => f.length > 0 && targetExtensions.has(path.extname(f).toLowerCase()) && existsSync(f));
+      .filter(
+        f =>
+          f.length > 0 &&
+          targetExtensions.has(path.extname(f).toLowerCase()) &&
+          existsSync(f),
+      );
   } catch (err) {
-    console.error(
-      `Error finding changed files against ${baseBranch}:`,
-      err.message,
+    throw new Error(
+      `Error finding changed files against ${baseBranch}: ${err.message}`,
     );
-    process.exit(1);
   }
 }
 
-function checkPrettierFormatting(filesToCheck) {
+async function checkPrettierFormatting(filesToCheck) {
+  if (filesToCheck.length === 0) {
+    return;
+  }
+
+  const results = await Promise.all(
+    filesToCheck.map(async file => {
+      try {
+        const fileInfo = await prettier.getFileInfo(file);
+        if (fileInfo.ignored) {
+          return {file, isFormatted: true};
+        }
+
+        const config = await prettier.resolveConfig(file);
+        const fileContent = readFileSync(file, 'utf8');
+
+        const isFormatted = await prettier.check(fileContent, {
+          ...config,
+          filepath: file,
+        });
+
+        return {file, isFormatted};
+      } catch (err) {
+        throw new Error(
+          `Error checking formatting for ${file}: ${err.message}`,
+        );
+      }
+    }),
+  );
+
+  const unformattedFiles = results.filter(r => !r.isFormatted).map(r => r.file);
+
+  if (unformattedFiles.length > 0) {
+    console.error(
+      '\n[ERROR] Prettier formatting check failed! Please run the following command to format your files:',
+    );
+    console.error(
+      `  npx prettier --write ${unformattedFiles.map(f => `"${f}"`).join(' ')}`,
+    );
+    throw new Error('Prettier formatting check failed.');
+  }
+}
+
+async function checkEslint(filesToCheck) {
   if (filesToCheck.length === 0) {
     return;
   }
 
   try {
-    // Run prettier check using local prettier binary
-    execFileSync(
-      'node',
-      ['node_modules/prettier/bin/prettier.cjs', '--check', ...filesToCheck],
-      {
-        stdio: 'inherit',
-      },
-    );
+    const eslint = new ESLint({
+      // Only report errors, suppress warnings
+      quiet: true,
+    });
+
+    const results = await eslint.lintFiles(filesToCheck);
+
+    // Check if there are any errors in the results
+    const hasErrors = results.some(result => result.errorCount > 0);
+
+    if (hasErrors) {
+      const formatter = await eslint.loadFormatter('stylish');
+      const resultText = formatter.format(results);
+
+      console.warn('\n[WARNING] ESLint issues were detected in touched files:');
+      console.warn(resultText);
+      console.warn(
+        'These errors are currently non-blocking while the repository transitions to GTS standards.',
+      );
+      console.warn(
+        `To fix: npx eslint --fix ${filesToCheck.map(f => `"${f}"`).join(' ')}`,
+      );
+    }
   } catch (err) {
-    console.error(
-      '\nFormatting check failed! Please run the following command to format your files:',
-    );
-    console.error(
-      `  npx prettier --write ${filesToCheck.map(f => `"${f}"`).join(' ')}`,
-    );
-    process.exit(1);
+    console.error('Error running ESLint programmatically:', err);
   }
 }
 
-function checkEslint(filesToCheck) {
-  if (filesToCheck.length === 0) {
-    return;
-  }
+(async () => {
+  const changedTsFiles = getChangedFiles();
 
-  try {
-    // Run eslint check in quiet mode using local eslint binary directly
-    execFileSync(
-      'node',
-      ['node_modules/eslint/bin/eslint.js', '--quiet', ...filesToCheck],
-      {
-        stdio: 'inherit',
-      },
-    );
-  } catch (err) {
-    console.warn(
-      '\n[WARNING] ESLint issues were detected in touched files:',
-    );
-    console.warn(
-      'These errors are currently non-blocking while the repository transitions to GTS standards.',
-    );
-    console.warn(
-      `To fix: npx eslint --fix ${filesToCheck.map(f => `"${f}"`).join(' ')}`,
-    );
-  }
-}
-
-const changedTsFiles = getChangedFiles();
-checkPrettierFormatting(changedTsFiles);
-checkEslint(changedTsFiles);
+  // Run Prettier and ESLint concurrently
+  await Promise.all([
+    checkPrettierFormatting(changedTsFiles),
+    checkEslint(changedTsFiles),
+  ]);
+})().catch(err => {
+  console.error('\nLinter failed:', err.message);
+  process.exitCode = 1;
+});
