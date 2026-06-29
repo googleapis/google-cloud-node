@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: nodejs
-version: v0.21.0
+version: v0.22.0
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
@@ -193,10 +193,10 @@ libraries:
         - omit_common_resources: true
           path: google/cloud/advisorynotifications/v1
   - name: google-cloud-agentregistry
+    version: 0.1.0
     apis:
       - path: google/cloud/agentregistry/v1
     copyright_year: "2026"
-    version: 0.1.0
   - name: google-cloud-aiplatform
     version: 6.8.1
     apis:
@@ -551,7 +551,6 @@ libraries:
     apis:
       - path: google/cloud/capacityplanner/v1beta
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1beta
   - name: google-cloud-certificatemanager
