@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: nodejs
-version: v0.21.0
+version: v0.22.0
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
@@ -1676,7 +1676,20 @@ libraries:
       - path: google/cloud/vision/v1p2beta1
       - path: google/cloud/vision/v1p1beta1
     copyright_year: "2026"
-    skip_generate: true
+    keep:
+      - smoke-test/image_annotator_smoke_test.js
+      - src/helpers.ts
+      - src/index.ts
+      - system-test/data/document.jpg
+      - system-test/data/logo.jpg
+      - system-test/data/rushmore.jpg
+      - system-test/data/text.png
+      - system-test/image_annotator_smoke_test.ts
+      - system-test/vision-v1p2beta1.ts
+      - system-test/vision.ts
+      - test/fixtures/image.jpg
+      - test/helpers.test.ts
+      - test/index.test.ts
     nodejs:
       default_version: v1
       dependencies:

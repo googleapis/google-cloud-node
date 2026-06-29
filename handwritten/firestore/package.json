@@ -51,7 +51,6 @@
     "system-test:nightly": "FIRESTORE_TARGET_BACKEND=nightly FIRESTORE_DATABASE_ID=enterprise RUN_ENTERPRISE_TESTS=yes GCLOUD_PROJECT=firestore-sdk-nightly mocha build/system-test --timeout 1200000",
     "system-test:emulator": "concurrently -p \"[{name}]\" -n \"grpc,rest,enterprise-grpc,enterprise-rest\" -c \"cyan,magenta,blue,yellow\" \"npm:system-test:emulator:grpc\" \"npm:system-test:emulator:rest\" \"npm:system-test:enterprise:emulator:grpc\" \"npm:system-test:enterprise:emulator:rest\"",
     "presystem-test": "npm run compile",
-    "samples-test": "npm link && cd samples/ && npm link ../ && npm test && cd ../",
     "conformance": "mocha build/conformance",
     "preconformance": "npm run compile",
     "test-only": "c8 mocha build/test",
@@ -63,7 +62,6 @@
     "postcompile": "node scripts/init-directories.js && cp -r dev/protos build && cp dev/src/v1beta1/*.json build/src/v1beta1/ && cp dev/src/v1/*.json build/src/v1/ && cp dev/conformance/test-definition.proto build/conformance && cp dev/conformance/conformance-tests/*.json build/conformance/conformance-tests && minifyProtoJson",
     "fix": "gts fix",
     "prepare": "npm run compile",
-    "prelint": "cd samples; npm link ../; npm install",
     "precompile": "gts clean"
   },
   "dependencies": {
