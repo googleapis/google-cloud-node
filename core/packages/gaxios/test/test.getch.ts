@@ -189,6 +189,51 @@ describe('🚙 error handling', () => {
     );
   });
 
+  it('should handle stream error responses with Uint8Array chunks without corrupting them', async () => {
+    const chunks = [
+      new Uint8Array(Buffer.from('{"error": {"code": 400, ')),
+      new Uint8Array(Buffer.from('"message": "Invalid ')),
+      new Uint8Array(Buffer.from('argument", "status": "INVALID_ARGUMENT"}}')),
+    ];
+    const readableStream = Readable.from(chunks);
+    const scope = nock(url).get('/').reply(400, readableStream);
+
+    await assert.rejects(
+      request({url, responseType: 'stream'}),
+      (err: GaxiosError) => {
+        scope.done();
+        const apiError = JSON.parse(err.message);
+        return (
+          apiError.error.code === 400 &&
+          apiError.error.message === 'Invalid argument' &&
+          apiError.error.status === 'INVALID_ARGUMENT'
+        );
+      },
+    );
+  });
+
+  it('should handle stream error responses with mixed chunks (string, Buffer, Uint8Array) without corrupting them', async () => {
+    const chunks = [
+      '{"error": {"code": 400, ',
+      Buffer.from('"message": "Invalid '),
+      new Uint8Array(Buffer.from('argument", "status": "INVALID_ARGUMENT"}}')),
+    ];
+    const readableStream = Readable.from(chunks);
+    const scope = nock(url).get('/').reply(400, readableStream);
+    await assert.rejects(
+      request({url, responseType: 'stream'}),
+      (err: GaxiosError) => {
+        scope.done();
+        const apiError = JSON.parse(err.message);
+        return (
+          apiError.error.code === 400 &&
+          apiError.error.message === 'Invalid argument' &&
+          apiError.error.status === 'INVALID_ARGUMENT'
+        );
+      },
+    );
+  });
+
   it('should not throw an error during a translation error', () => {
     const notJSON = '.';
     const response = {
