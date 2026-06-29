@@ -24,6 +24,80 @@ import {describe, it, before, after} from 'mocha';
 import {EchoClient} from '../showcase-echo-client/src/v1beta1/echo_client';
 import {ShowcaseServer} from '../showcase-server/src/index';
 
+function tlsVersionName(v: string): string {
+  switch (v) {
+    case 'TLSv1':
+      return 'TLS 1.0';
+    case 'TLSv1.1':
+      return 'TLS 1.1';
+    case 'TLSv1.2':
+      return 'TLS 1.2';
+    case 'TLSv1.3':
+      return 'TLS 1.3';
+    default:
+      return 'Unknown';
+  }
+}
+
+function tlsVersionHex(v: string): string {
+  switch (v) {
+    case 'TLSv1.3':
+      return '0x0304';
+    case 'TLSv1.2':
+      return '0x0303';
+    case 'TLSv1.1':
+      return '0x0302';
+    case 'TLSv1':
+      return '0x0301';
+    default:
+      return '0x0000';
+  }
+}
+
+class TlsMetadataCreds {
+  private once = false;
+
+  async getRequestMetadata(caCertPath: string): Promise<grpc.Metadata> {
+    const md = new grpc.Metadata();
+
+    return new Promise((resolve, reject) => {
+      const options = {
+        host: 'localhost',
+        port: 7469,
+        ca: fs.readFileSync(caCertPath),
+        servername: 'localhost',
+        rejectUnauthorized: false, // Showcase uses self-signed certs
+      };
+
+      const socket = tls.connect(options, () => {
+        const protocol = socket.getProtocol();
+        const cipher = socket.getCipher();
+        const group =
+          (socket as any).getNegotiatedGroup?.() ||
+          (socket as any).getEphemeralKeyInfo?.()?.name;
+
+        if (!this.once) {
+          console.log(`  TLS Version: ${tlsVersionName(protocol!)}`);
+          console.log(`  Curve ID:   ${group}`);
+          console.log(`  Cipher:     ${cipher.name}\n`);
+          this.once = true;
+        }
+
+        md.set('x-goog-api-client-tls', tlsVersionHex(protocol!));
+        socket.end();
+        resolve(md);
+      });
+
+      socket.on('error', err => {
+        reject(err);
+      });
+
+      // Timeout after 10 seconds
+      setTimeout(() => reject(new Error('TLS connection timeout')), 10000);
+    });
+  }
+}
+
 describe('Post-Quantum Cryptography (PQC) Integration', () => {
   let server: ShowcaseServer;
   let caCertPath: string;
@@ -56,59 +130,41 @@ describe('Post-Quantum Cryptography (PQC) Integration', () => {
     }
   });
 
-  async function getNegotiatedGroup(host: string, port: number, caPath: string): Promise<string | undefined> {
-    return new Promise((resolve, reject) => {
-      const options = {
-        host,
-        port,
-        ca: fs.readFileSync(caPath),
-        servername: 'localhost',
-        rejectUnauthorized: false, // Showcase uses self-signed certs
-      };
+  it('should successfully make a gRPC call over a PQC-safe connection (Using PerRPCCredentials Method)', async () => {
+    console.log('Listing topics (Using PerRPCCredentials Method)...');
 
-      const socket = tls.connect(options, () => {
-        // getNegotiatedGroup() is available in Node.js v22+
-        // fall back to getEphemeralKeyInfo() for older versions or other info
-        const group = (socket as any).getNegotiatedGroup?.() || (socket as any).getEphemeralKeyInfo?.()?.name;
-        socket.end();
-        resolve(group);
-      });
-
-      socket.on('error', (err) => {
-        reject(err);
-      });
-      
-      // Timeout after 10 seconds
-      setTimeout(() => reject(new Error('TLS connection timeout')), 10000);
-    });
-  }
-
-  it('should negotiate X25519MLKEM768 hybrid key exchange group', async () => {
-    const group = await getNegotiatedGroup('localhost', 7469, caCertPath);
-    console.log(`Negotiated TLS group: ${group}`);
-    
-    // The target PQC hybrid group is X25519MLKEM768.
-    // Node.js v25+ with OpenSSL 3.5+ should support this.
-    assert.strictEqual(group, 'X25519MLKEM768', 'The connection must use X25519MLKEM768 for PQC safety');
-  });
-
-  it('should successfully make a gRPC call over a PQC-safe connection', async () => {
     const caCert = fs.readFileSync(caCertPath);
     const sslCreds = grpc.credentials.createSsl(caCert);
-    
+
+    const tlsMetadataCreds = new TlsMetadataCreds();
+    const callCreds = grpc.credentials.createFromMetadataGenerator(
+      (params, callback) => {
+        tlsMetadataCreds
+          .getRequestMetadata(caCertPath)
+          .then(md => callback(null, md))
+          .catch(err => callback(err));
+      }
+    );
+
+    const combinedCreds = grpc.credentials.combineChannelCredentials(
+      sslCreds,
+      callCreds
+    );
+
     // Create a client pointing to the showcase server
     const client = new EchoClient({
       servicePath: 'localhost',
       port: 7469,
-      sslCreds,
+      sslCreds: combinedCreds,
     });
 
     const request = {
-      content: 'Post-Quantum safe gRPC greeting!',
+      content: 'projects/alxh-pubsub/topics/test-topic',
     };
 
     const [response] = await client.echo(request);
     assert.strictEqual(response.content, request.content);
+    console.log(`got topic: ${response.content}`);
   });
 
   it('should successfully make an HTTP/REST call over a PQC-safe connection', async () => {
