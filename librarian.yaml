@@ -192,6 +192,10 @@ libraries:
       nodejs_apis:
         - omit_common_resources: true
           path: google/cloud/advisorynotifications/v1
+  - name: google-cloud-agentregistry
+    apis:
+      - path: google/cloud/agentregistry/v1
+    copyright_year: "2026"
   - name: google-cloud-aiplatform
     version: 6.8.1
     apis:
@@ -613,7 +617,6 @@ libraries:
     nodejs:
       default_version: v1
       main_service: DataCatalog
-      mixins: none
   - name: google-cloud-datacatalog-lineage
     version: 2.2.0
     apis:
@@ -662,7 +665,6 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1
-      mixins: google.cloud.location.Locations;google.longrunning.Operations
       client_documentation_override: https://cloud.google.com/dataplex
   - name: google-cloud-dataproc
     version: 6.6.0
@@ -727,7 +729,6 @@ libraries:
     skip_generate: true
     nodejs:
       default_version: v3
-      mixins: google.longrunning.Operations;google.cloud.location.Locations
   - name: google-cloud-discoveryengine
     version: 2.7.0
     apis:
@@ -817,7 +818,6 @@ libraries:
     skip_generate: true
     nodejs:
       default_version: v1
-      mixins: google.longrunning.Operations;google.cloud.location.Locations
   - name: google-cloud-gdchardwaremanagement
     version: 0.10.1
     apis:
@@ -1283,7 +1283,6 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v2beta
-      mixins: google.longrunning.Operations;google.cloud.location.Locations
   - name: google-cloud-run
     version: 3.3.0
     apis:
