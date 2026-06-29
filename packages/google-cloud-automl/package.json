@@ -31,12 +31,12 @@
     "Cloud AutoML API"
   ],
   "scripts": {
-    "test": "c8 mocha build/test",
+    "test": "c8 mocha --config ../../.mocharc.cjs build/test",
     "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "lint": "gts check",
     "fix": "gts fix",
     "prelint": "cd samples; npm link ../; npm install",
-    "system-test": "npm run compile && c8 mocha build/system-test",
+    "system-test": "npm run compile && c8 mocha --config ../../.mocharc.cjs --no-parallel build/system-test",
     "docs": "jsdoc -c .jsdoc.js",
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r protos build/",
