@@ -69,36 +69,37 @@ function findFiles(baseDir, filePattern) {
 }
 
 const filesToDelete = [
-  'packages/google-cloud-sql/src/v1/sql_available_database_versions_service_client.ts',
-  'packages/google-cloud-sql/src/v1/sql_available_database_versions_service_client_config.json',
-  'packages/google-cloud-sql/src/v1/sql_available_database_versions_service_proto_list.json',
-  'packages/google-cloud-sql/src/v1/sql_events_service_client.ts',
-  'packages/google-cloud-sql/src/v1/sql_events_service_client_config.json',
-  'packages/google-cloud-sql/src/v1/sql_events_service_proto_list.json',
-  'packages/google-cloud-sql/src/v1/sql_iam_policies_service_client.ts',
-  'packages/google-cloud-sql/src/v1/sql_iam_policies_service_client_config.json',
-  'packages/google-cloud-sql/src/v1/sql_iam_policies_service_proto_list.json',
-  'packages/google-cloud-sql/src/v1/sql_instance_names_service_client.ts',
-  'packages/google-cloud-sql/src/v1/sql_instance_names_service_client_config.json',
-  'packages/google-cloud-sql/src/v1/sql_instance_names_service_proto_list.json',
-  'packages/google-cloud-sql/src/v1/sql_regions_service_client.ts',
-  'packages/google-cloud-sql/src/v1/sql_regions_service_client_config.json',
-  'packages/google-cloud-sql/src/v1/sql_regions_service_proto_list.json',
-  'packages/google-cloud-sql/src/v1beta4/sql_iam_policies_service_client.ts',
-  'packages/google-cloud-sql/src/v1beta4/sql_iam_policies_service_client_config.json',
-  'packages/google-cloud-sql/src/v1beta4/sql_iam_policies_service_proto_list.json',
-  'packages/google-cloud-sql/test/gapic_sql_available_database_versions_service_v1.ts',
-  'packages/google-cloud-sql/test/gapic_sql_events_service_v1.ts',
-  'packages/google-cloud-sql/test/gapic_sql_iam_policies_service_v1.ts',
-  'packages/google-cloud-sql/test/gapic_sql_iam_policies_service_v1beta4.ts',
-  'packages/google-cloud-sql/test/gapic_sql_instance_names_service_v1.ts',
-  'packages/google-cloud-sql/test/gapic_sql_regions_service_v1.ts',
+  'src/v1/sql_available_database_versions_service_client.ts',
+  'src/v1/sql_available_database_versions_service_client_config.json',
+  'src/v1/sql_available_database_versions_service_proto_list.json',
+  'src/v1/sql_events_service_client.ts',
+  'src/v1/sql_events_service_client_config.json',
+  'src/v1/sql_events_service_proto_list.json',
+  'src/v1/sql_iam_policies_service_client.ts',
+  'src/v1/sql_iam_policies_service_client_config.json',
+  'src/v1/sql_iam_policies_service_proto_list.json',
+  'src/v1/sql_instance_names_service_client.ts',
+  'src/v1/sql_instance_names_service_client_config.json',
+  'src/v1/sql_instance_names_service_proto_list.json',
+  'src/v1/sql_regions_service_client.ts',
+  'src/v1/sql_regions_service_client_config.json',
+  'src/v1/sql_regions_service_proto_list.json',
+  'src/v1beta4/sql_iam_policies_service_client.ts',
+  'src/v1beta4/sql_iam_policies_service_client_config.json',
+  'src/v1beta4/sql_iam_policies_service_proto_list.json',
+  'test/gapic_sql_available_database_versions_service_v1.ts',
+  'test/gapic_sql_events_service_v1.ts',
+  'test/gapic_sql_iam_policies_service_v1.ts',
+  'test/gapic_sql_iam_policies_service_v1beta4.ts',
+  'test/gapic_sql_instance_names_service_v1.ts',
+  'test/gapic_sql_regions_service_v1.ts',
 ];
 
 filesToDelete.forEach(file => {
   try {
-    fs.unlinkSync(path.resolve(file));
-    console.log(`Successfully deleted: ${file}`);
+    const fullPath = path.resolve(__dirname, file);
+    fs.unlinkSync(fullPath);
+    console.log(`Successfully deleted: ${fullPath}`);
   } catch (err) {
     if (err.code === 'ENOENT') {
       console.log(`File not found, skipping deletion: ${file}`);
@@ -242,7 +243,8 @@ const replacements = [
 ];
 
 replacements.forEach(r => {
-  const files = findFiles(path.resolve('.'), r.files);
+  const relativePattern = r.files.replace(/^packages\/google-cloud-sql\//, '');
+  const files = findFiles(__dirname, relativePattern);
   files.forEach(file => {
     replaceInFile(path.resolve(file), r.searchPattern, r.replacement);
   });
