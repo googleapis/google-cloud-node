@@ -10,6 +10,32 @@
           "issues": [
             "8722"
           ]
+        },
+        {
+          "type": "fix",
+          "sha": "aae55b30b22c27d004d2eaa0fc25b61cbd742832",
+          "message": "Filter out empty services from api.services",
+          "issues": [
+            "8686"
+          ],
+          "scope": "generator"
+        }
+      ],
+      "version": "4.12.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gapic-generator",
+      "id": "e01c0552-8f1b-4b06-a2ab-086b141dbec9",
+      "createTime": "2026-06-26T14:32:48.723Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "368f18ecc361310e7bfb323ba0e7836186ea08d1",
+          "message": "Correct repository URLs in core package.json files",
+          "issues": [
+            "8722"
+          ]
         }
       ],
       "version": "5.0.4",
@@ -81371,5 +81397,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-06-25T19:00:36.034Z"
+  "updateTime": "2026-06-26T14:32:48.723Z"
 }
