@@ -1,6 +1,14 @@
 # Changelog
 
 
+## [4.12.1](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v4.12.0...gapic-generator-v4.12.1) (2026-06-26)
+
+
+### Bug Fixes
+
+* Correct repository URLs in core package.json files ([#8722](https://github.com/googleapis/google-cloud-node/issues/8722)) ([368f18e](https://github.com/googleapis/google-cloud-node/commit/368f18ecc361310e7bfb323ba0e7836186ea08d1))
+* **generator:** Filter out empty services from api.services ([#8686](https://github.com/googleapis/google-cloud-node/issues/8686)) ([aae55b3](https://github.com/googleapis/google-cloud-node/commit/aae55b30b22c27d004d2eaa0fc25b61cbd742832))
+
 ## [4.12.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v4.11.14...gapic-generator-v4.12.0) (2026-06-08)
 
 
