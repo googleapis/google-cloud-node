@@ -626,6 +626,75 @@ describe('File', () => {
       file.copy(newFile, assert.ifError);
     });
 
+    it('should not copy encryption key or send destination headers when destination file has null encryption key', done => {
+      file.encryptionKey = 'sourceKey';
+      file.encryptionKeyBase64 = 'sourceKeyBase64';
+      file.encryptionKeyHash = 'sourceKeyHash';
+
+      const newFile = new File(BUCKET, 'new-file');
+      newFile.setEncryptionKey(null);
+
+      file.request = (reqOpts: DecorateRequestOptions) => {
+        assert.strictEqual(newFile.encryptionKey, null);
+        assert.strictEqual(newFile.encryptionKeyBase64, undefined);
+        assert.strictEqual(newFile.encryptionKeyHash, undefined);
+
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-copy-source-encryption-algorithm'],
+          'AES256'
+        );
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-copy-source-encryption-key'],
+          'sourceKeyBase64'
+        );
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-copy-source-encryption-key-sha256'],
+          'sourceKeyHash'
+        );
+
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-encryption-algorithm'],
+          undefined
+        );
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-encryption-key'],
+          undefined
+        );
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-encryption-key-sha256'],
+          undefined
+        );
+
+        assert.strictEqual(file.encryptionKeyInterceptor, undefined);
+
+        done();
+      };
+
+      file.copy(newFile, assert.ifError);
+    });
+
+    it('should copy the source key to the destination file object if destination key is undefined', done => {
+      file.encryptionKey = 'sourceKey';
+      file.encryptionKeyBase64 = 'sourceKeyBase64';
+      file.encryptionKeyHash = 'sourceKeyHash';
+
+      const newFile = new File(BUCKET, 'new-file');
+
+      file.request = (reqOpts: DecorateRequestOptions) => {
+        assert.strictEqual(newFile.encryptionKey, file.encryptionKey);
+        assert.strictEqual(newFile.encryptionKeyBase64, file.encryptionKeyBase64);
+        assert.strictEqual(newFile.encryptionKeyHash, file.encryptionKeyHash);
+
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-copy-source-encryption-key'],
+          file.encryptionKeyBase64
+        );
+        done();
+      };
+
+      file.copy(newFile, assert.ifError);
+    });
+
     it('should set destination KMS key name', done => {
       const newFile = new File(BUCKET, 'new-file');
       newFile.kmsKeyName = 'kms-key-name';
@@ -5458,6 +5527,30 @@ describe('File', () => {
       );
 
       done();
+    });
+
+    describe('null key', () => {
+      beforeEach(() => {
+        file.setEncryptionKey(KEY);
+        file.setEncryptionKey(null);
+      });
+
+      it('should localize the key to null', () => {
+        assert.strictEqual(file.encryptionKey, null);
+      });
+
+      it('should clear the base64 key', () => {
+        assert.strictEqual(file.encryptionKeyBase64, undefined);
+      });
+
+      it('should clear the hash', () => {
+        assert.strictEqual(file.encryptionKeyHash, undefined);
+      });
+
+      it('should remove the request interceptor', () => {
+        assert.strictEqual(file.encryptionKeyInterceptor, undefined);
+        assert.strictEqual(file.interceptors.length, 0);
+      });
     });
   });
 
