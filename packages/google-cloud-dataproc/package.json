@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/dataproc",
   "description": "Google Cloud Dataproc API client for Node.js",
-  "version": "6.6.0",
+  "version": "6.7.0",
   "license": "Apache-2.0",
   "author": "Google Inc",
   "engines": {
@@ -42,8 +42,8 @@
     "prelint": "cd samples; npm link ../; npm i",
     "postpack": "minifyProtoJson",
     "samples-test": "cd samples/ && npm link ../ && npm i && npm test",
-    "system-test": "c8 mocha build/system-test",
-    "test": "c8 mocha build/test"
+    "system-test": "c8 mocha --config ../../.mocharc.cjs --no-parallel build/system-test",
+    "test": "c8 mocha --config ../../.mocharc.cjs build/test"
   },
   "dependencies": {
     "google-gax": "^5.0.0"
