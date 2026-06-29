@@ -596,9 +596,7 @@ describe('File', () => {
     });
 
     it('should set correct headers when file is encrypted', done => {
-      file.encryptionKey = {};
-      file.encryptionKeyBase64 = 'base64';
-      file.encryptionKeyHash = 'hash';
+      file.setEncryptionKey('sourceKey');
 
       const newFile = new File(BUCKET, 'new-file');
 
@@ -607,6 +605,9 @@ describe('File', () => {
           'x-goog-copy-source-encryption-algorithm': 'AES256',
           'x-goog-copy-source-encryption-key': file.encryptionKeyBase64,
           'x-goog-copy-source-encryption-key-sha256': file.encryptionKeyHash,
+          'x-goog-encryption-algorithm': 'AES256',
+          'x-goog-encryption-key': file.encryptionKeyBase64,
+          'x-goog-encryption-key-sha256': file.encryptionKeyHash,
         });
         done();
       };
@@ -614,12 +615,23 @@ describe('File', () => {
       file.copy(newFile, assert.ifError);
     });
 
-    it('should set encryption key on the new File instance', done => {
+    it('should send destination encryption headers when destination file has an encryption key', done => {
       const newFile = new File(BUCKET, 'new-file');
-      newFile.encryptionKey = 'encryptionKey';
+      newFile.setEncryptionKey('destinationKey');
 
-      file.setEncryptionKey = (encryptionKey: {}) => {
-        assert.strictEqual(encryptionKey, newFile.encryptionKey);
+      file.request = (reqOpts: DecorateRequestOptions) => {
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-encryption-algorithm'],
+          'AES256'
+        );
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-encryption-key'],
+          newFile.encryptionKeyBase64
+        );
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-encryption-key-sha256'],
+          newFile.encryptionKeyHash
+        );
         done();
       };
 
@@ -627,9 +639,9 @@ describe('File', () => {
     });
 
     it('should not copy encryption key or send destination headers when destination file has null encryption key', done => {
-      file.encryptionKey = 'sourceKey';
-      file.encryptionKeyBase64 = 'sourceKeyBase64';
-      file.encryptionKeyHash = 'sourceKeyHash';
+      file.setEncryptionKey('sourceKey');
+      const expectedSourceKeyBase64 = file.encryptionKeyBase64;
+      const expectedSourceKeyHash = file.encryptionKeyHash;
 
       const newFile = new File(BUCKET, 'new-file');
       newFile.setEncryptionKey(null);
@@ -645,11 +657,11 @@ describe('File', () => {
         );
         assert.strictEqual(
           reqOpts.headers!['x-goog-copy-source-encryption-key'],
-          'sourceKeyBase64'
+          expectedSourceKeyBase64
         );
         assert.strictEqual(
           reqOpts.headers!['x-goog-copy-source-encryption-key-sha256'],
-          'sourceKeyHash'
+          expectedSourceKeyHash
         );
 
         assert.strictEqual(
@@ -665,7 +677,7 @@ describe('File', () => {
           undefined
         );
 
-        assert.strictEqual(file.encryptionKeyInterceptor, undefined);
+        assert.notStrictEqual(file.encryptionKeyInterceptor, undefined);
 
         done();
       };
@@ -674,9 +686,7 @@ describe('File', () => {
     });
 
     it('should copy the source key to the destination file object if destination key is undefined', done => {
-      file.encryptionKey = 'sourceKey';
-      file.encryptionKeyBase64 = 'sourceKeyBase64';
-      file.encryptionKeyHash = 'sourceKeyHash';
+      file.setEncryptionKey('sourceKey');
 
       const newFile = new File(BUCKET, 'new-file');
 
@@ -688,6 +698,18 @@ describe('File', () => {
         assert.strictEqual(
           reqOpts.headers!['x-goog-copy-source-encryption-key'],
           file.encryptionKeyBase64
+        );
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-encryption-algorithm'],
+          'AES256'
+        );
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-encryption-key'],
+          file.encryptionKeyBase64
+        );
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-encryption-key-sha256'],
+          file.encryptionKeyHash
         );
         done();
       };

@@ -1461,20 +1461,18 @@ class File extends ServiceObject<File, FileMetadata> {
         this.encryptionKeyHash;
     }
 
-    let copiedKey = false;
     if (
       this.encryptionKey !== undefined &&
       this.encryptionKey !== null &&
       newFile.encryptionKey === undefined
     ) {
-      newFile.encryptionKey = this.encryptionKey;
-      newFile.encryptionKeyBase64 = this.encryptionKeyBase64;
-      newFile.encryptionKeyHash = this.encryptionKeyHash;
-      copiedKey = true;
+      newFile.setEncryptionKey(this.encryptionKey);
     }
 
-    if (newFile.encryptionKey !== undefined && !copiedKey) {
-      this.setEncryptionKey(newFile.encryptionKey!);
+    if (newFile.encryptionKey !== undefined && newFile.encryptionKey !== null) {
+      headers['x-goog-encryption-algorithm'] = 'AES256';
+      headers['x-goog-encryption-key'] = newFile.encryptionKeyBase64;
+      headers['x-goog-encryption-key-sha256'] = newFile.encryptionKeyHash;
     } else if (options.destinationKmsKeyName !== undefined) {
       query.destinationKmsKeyName = options.destinationKmsKeyName;
       delete options.destinationKmsKeyName;
@@ -1505,6 +1503,14 @@ class File extends ServiceObject<File, FileMetadata> {
       query.ifGenerationMatch = options.preconditionOpts?.ifGenerationMatch;
       delete options.preconditionOpts;
     }
+
+    const originalGetRequestInterceptors = this.getRequestInterceptors;
+    this.getRequestInterceptors = () => {
+      return originalGetRequestInterceptors.call(this).filter(
+        interceptorFn =>
+          interceptorFn !== this.encryptionKeyInterceptor?.request
+      );
+    };
 
     this.request(
       {
@@ -1543,6 +1549,8 @@ class File extends ServiceObject<File, FileMetadata> {
         callback!(null, newFile, resp);
       },
     );
+
+    this.getRequestInterceptors = originalGetRequestInterceptors;
   }
 
   /**
