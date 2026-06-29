@@ -101,6 +101,9 @@ describe('Bigtable/ReadRows', () => {
     readStream.on('error', (err: GoogleError) => {
       done(err);
     });
+    readStream.on('metadata', (metadata: any) => {
+      console.log(metadata);
+    })
     readStream.on('data', (row: Row) => {
       ++receivedRowCount;
       const key = parseInt(row.id);

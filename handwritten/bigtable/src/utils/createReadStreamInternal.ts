@@ -323,6 +323,8 @@ export function createReadStreamInternal(
     requestStream.on('data', () => {
       // This handler is necessary for recording firstResponseLatencies.
       metricsCollector.onResponse();
+    }).on('metadata', (metadata: any) => {
+      console.log(metadata);
     });
 
     activeRequestStream = requestStream!;
