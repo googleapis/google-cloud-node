@@ -1504,18 +1504,12 @@ class File extends ServiceObject<File, FileMetadata> {
       delete options.preconditionOpts;
     }
 
-    const originalGetRequestInterceptors = this.getRequestInterceptors;
-    this.getRequestInterceptors = () => {
-      return originalGetRequestInterceptors.call(this).filter(
-        interceptorFn =>
-          interceptorFn !== this.encryptionKeyInterceptor?.request
-      );
-    };
-
-    this.request(
+    this.bucket.request(
       {
         method: 'POST',
-        uri: `/rewriteTo/b/${destBucket.name}/o/${encodeURIComponent(
+        uri: `/o/${encodeURIComponent(
+          this.name,
+        )}/rewriteTo/b/${destBucket.name}/o/${encodeURIComponent(
           newFile.name,
         )}`,
         qs: query,
@@ -1549,8 +1543,6 @@ class File extends ServiceObject<File, FileMetadata> {
         callback!(null, newFile, resp);
       },
     );
-
-    this.getRequestInterceptors = originalGetRequestInterceptors;
   }
 
   /**

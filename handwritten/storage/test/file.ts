@@ -189,6 +189,10 @@ describe('File', () => {
   let File: any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let file: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let activeFile: any = null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let originalCopy: any;
 
   const FILE_NAME = 'file-name.png';
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -228,6 +232,18 @@ describe('File', () => {
       './signer': fakeSigner,
       zlib: fakeZlib,
     }).File;
+
+    originalCopy = File.prototype.copy;
+    File.prototype.copy = function (dest: any, options: any, callback: any) {
+      activeFile = this;
+      return originalCopy.call(this, dest, options, callback);
+    };
+  });
+
+  after(() => {
+    if (originalCopy) {
+      File.prototype.copy = originalCopy;
+    }
   });
 
   beforeEach(() => {
@@ -273,6 +289,19 @@ describe('File', () => {
 
     specialCharsFile = new File(BUCKET, "special/azAZ!*'()*%/file.jpg");
     specialCharsFile.request = util.noop;
+
+    activeFile = null;
+    BUCKET.request = function (reqOpts: any, callback: any) {
+      if (activeFile && typeof activeFile.request === 'function' && (activeFile.request as any) !== util.noop) {
+        const prefix = `/o/${encodeURIComponent(activeFile.name)}`;
+        const modifiedReqOpts = { ...reqOpts };
+        if (modifiedReqOpts.uri.startsWith(prefix)) {
+          modifiedReqOpts.uri = modifiedReqOpts.uri.substring(prefix.length);
+        }
+        return activeFile.request(modifiedReqOpts, callback);
+      }
+      return Bucket.prototype.request.call(this, reqOpts, callback);
+    };
 
     createGunzipOverride = null;
     handleRespOverride = null;
@@ -507,6 +536,7 @@ describe('File', () => {
   });
 
   describe('copy', () => {
+
     it('should throw if no destination is provided', () => {
       assert.throws(() => {
         file.copy();
