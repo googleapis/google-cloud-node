@@ -18,17 +18,37 @@ import path from 'path';
 import {ESLint} from 'eslint';
 import prettier from 'prettier';
 
-// Define the base branch to compare against
-const baseBranch = process.env.GITHUB_BASE_REF || 'main';
-
 // Extensions to check for Prettier and ESLint/GTS
 const targetExtensions = new Set(['.ts']);
 
+function getGitTarget() {
+  const base = process.env.GITHUB_BASE_REF || 'main';
+
+  // Helper to check if a ref exists in git
+  const refExists = ref => {
+    try {
+      execFileSync('git', ['rev-parse', '--verify', ref], {stdio: 'ignore'});
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
+  if (refExists(base)) {
+    return base;
+  }
+  if (refExists(`origin/${base}`)) {
+    return `origin/${base}`;
+  }
+  return 'HEAD~1';
+}
+
 function getChangedFiles() {
+  const targetRef = getGitTarget();
   try {
     const output = execFileSync(
       'git',
-      ['diff', '--name-only', '--diff-filter=ACMRT', baseBranch],
+      ['diff', '--name-only', '--diff-filter=ACMRT', targetRef],
       {encoding: 'utf8'},
     );
     return output
@@ -42,16 +62,17 @@ function getChangedFiles() {
       );
   } catch (err) {
     throw new Error(
-      `Error finding changed files against ${baseBranch}: ${err.message}`,
+      `Error finding changed files against ${targetRef}: ${err.message}`,
     );
   }
 }
 
 async function checkPrettierFormatting(filesToCheck) {
   if (filesToCheck.length === 0) {
-    return;
+    return true;
   }
 
+  const configCache = new Map();
   const results = await Promise.all(
     filesToCheck.map(async file => {
       try {
@@ -60,7 +81,14 @@ async function checkPrettierFormatting(filesToCheck) {
           return {file, isFormatted: true};
         }
 
-        const config = await prettier.resolveConfig(file);
+        const dir = path.dirname(file);
+        // Cache Prettier configs by directory to avoid redundant disk I/O
+        let config = configCache.get(dir);
+        if (!config) {
+          config = await prettier.resolveConfig(file);
+          configCache.set(dir, config);
+        }
+
         const fileContent = readFileSync(file, 'utf8');
 
         const isFormatted = await prettier.check(fileContent, {
@@ -86,13 +114,15 @@ async function checkPrettierFormatting(filesToCheck) {
     console.error(
       `  npx prettier --write ${unformattedFiles.map(f => `"${f}"`).join(' ')}`,
     );
-    throw new Error('Prettier formatting check failed.');
+    return false;
   }
+
+  return true;
 }
 
 async function checkEslint(filesToCheck) {
   if (filesToCheck.length === 0) {
-    return;
+    return true;
   }
 
   try {
@@ -119,19 +149,67 @@ async function checkEslint(filesToCheck) {
         `To fix: npx eslint --fix ${filesToCheck.map(f => `"${f}"`).join(' ')}`,
       );
     }
+    return true;
   } catch (err) {
-    console.error('Error running ESLint programmatically:', err);
+    throw new Error(`ESLint execution failed: ${err.message}`);
   }
+}
+
+function checkTypeSafety(filesToCheck) {
+  if (filesToCheck.length === 0) {
+    return true;
+  }
+
+  // Map files to their package directories
+  const packagesToCheck = new Set();
+  for (const file of filesToCheck) {
+    const parts = file.split(path.sep);
+    // e.g. packages/google-cloud-storage/src/index.ts -> packages/google-cloud-storage
+    if (parts[0] === 'packages' && parts.length > 1) {
+      const packageDir = path.join(parts[0], parts[1]);
+      if (existsSync(path.join(packageDir, 'tsconfig.json'))) {
+        packagesToCheck.add(packageDir);
+      }
+    }
+  }
+
+  if (packagesToCheck.size === 0) {
+    return true;
+  }
+
+  console.log(
+    `\nRunning TypeScript type checks for ${packagesToCheck.size} package(s)...`,
+  );
+  let passed = true;
+
+  for (const pkg of packagesToCheck) {
+    try {
+      console.log(`  Type checking ${pkg}...`);
+      execFileSync(
+        'npx',
+        ['tsc', '--noEmit', '--project', path.join(pkg, 'tsconfig.json')],
+        {stdio: 'inherit'},
+      );
+    } catch (err) {
+      console.error(`\n[ERROR] TypeScript type check failed in ${pkg}`);
+      passed = false;
+    }
+  }
+
+  return passed;
 }
 
 (async () => {
   const changedTsFiles = getChangedFiles();
 
-  // Run Prettier and ESLint concurrently
-  await Promise.all([
-    checkPrettierFormatting(changedTsFiles),
-    checkEslint(changedTsFiles),
-  ]);
+  // Run Prettier, ESLint, and Type check sequentially
+  const prettierPassed = await checkPrettierFormatting(changedTsFiles);
+  const eslintPassed = await checkEslint(changedTsFiles);
+  const typeSafetyPassed = checkTypeSafety(changedTsFiles);
+
+  if (!prettierPassed || !eslintPassed || !typeSafetyPassed) {
+    throw new Error('Linter checks failed.');
+  }
 })().catch(err => {
   console.error('\nLinter failed:', err.message);
   process.exitCode = 1;
