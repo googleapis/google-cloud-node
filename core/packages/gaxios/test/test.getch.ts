@@ -166,6 +166,29 @@ describe('🚙 error handling', () => {
     );
   });
 
+  it('should handle stream error responses split across multiple Buffer chunks without corrupting them with commas', async () => {
+    const chunks = [
+      Buffer.from('{"error": {"code": 400, '),
+      Buffer.from('"message": "Invalid '),
+      Buffer.from('argument", "status": "INVALID_ARGUMENT"}}'),
+    ];
+    const readableStream = Readable.from(chunks);
+    const scope = nock(url).get('/').reply(400, readableStream);
+
+    await assert.rejects(
+      request({url, responseType: 'stream'}),
+      (err: GaxiosError) => {
+        scope.done();
+        const apiError = JSON.parse(err.message);
+        return (
+          apiError.error.code === 400 &&
+          apiError.error.message === 'Invalid argument' &&
+          apiError.error.status === 'INVALID_ARGUMENT'
+        );
+      },
+    );
+  });
+
   it('should not throw an error during a translation error', () => {
     const notJSON = '.';
     const response = {
