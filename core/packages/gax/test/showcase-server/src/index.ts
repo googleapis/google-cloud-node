@@ -37,6 +37,12 @@ export class ShowcaseServer {
     const platform = process.platform;
     const arch = process.arch === 'x64' ? 'amd64' : process.arch;
     const showcaseVersion = process.env['SHOWCASE_VERSION'] || '0.36.2';
+    // If PQC is requested, ensure we use a version that supports it and add necessary flags
+    if (args.includes('--pqc')) {
+      if (!args.includes('--ca-cert-output-file')) {
+        args.push('--ca-cert-output-file', 'ca.crt');
+      }
+    }
     const tarballFilename = `gapic-showcase-${showcaseVersion}-${platform}-${arch}.tar.gz`;
     const fallbackServerUrl = `https://github.com/googleapis/gapic-showcase/releases/download/v${showcaseVersion}/${tarballFilename}`;
     const binaryName = './gapic-showcase';

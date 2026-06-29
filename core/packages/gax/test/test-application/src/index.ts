@@ -20,6 +20,7 @@ import {ShowcaseServer} from 'showcase-server';
 import * as assert from 'assert';
 import {promises as fsp} from 'fs';
 import * as path from 'path';
+import * as tls from 'tls';
 import {
   protobuf,
   grpc,
@@ -2902,6 +2903,133 @@ async function testStreamingErrorAfterDataNoBufferNoRetry(
   });
 }
 
+async function testPqc() {
+  console.log('Testing Post-Quantum Cryptography (PQC)...');
+  const server = new ShowcaseServer();
+  try {
+    // Start showcase server with PQC enabled.
+    // The server will run in .showcase-server-dir
+    await server.start(['run', '--pqc', '--ca-cert-output-file', 'ca.crt']);
+
+    const caCertPath = path.join(
+      process.cwd(),
+      '.showcase-server-dir',
+      'ca.crt',
+    );
+
+    // Wait for the CA cert to be written
+    let retries = 10;
+    while (retries > 0 && !(await fsp.stat(caCertPath).catch(() => null))) {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      retries--;
+    }
+
+    if (!(await fsp.stat(caCertPath).catch(() => null))) {
+      throw new Error(`CA cert not found at ${caCertPath}`);
+    }
+
+    const caCert = await fsp.readFile(caCertPath);
+    const sslCreds = grpc.credentials.createSsl(caCert);
+
+    // 1. Verify gRPC PQC negotiation
+    await new Promise<void>((resolve, reject) => {
+      const options = {
+        host: 'localhost',
+        port: 7469,
+        ca: caCert,
+        servername: 'localhost',
+        rejectUnauthorized: false,
+      };
+
+      const socket = tls.connect(options, () => {
+        const group =
+          (socket as any).getNegotiatedGroup?.() ||
+          (socket as any).getEphemeralKeyInfo?.()?.name;
+        console.log(`  Negotiated TLS group: ${group}`);
+        try {
+          assert.strictEqual(
+            group,
+            'X25519MLKEM768',
+            'gRPC connection must be PQC-safe',
+          );
+          socket.end();
+          resolve();
+        } catch (e) {
+          socket.end();
+          reject(e);
+        }
+      });
+
+      socket.on('error', reject);
+      setTimeout(() => reject(new Error('TLS connection timeout')), 10000);
+    });
+
+    // 2. Make a gRPC call using the PQC-safe connection
+    const client = new EchoClient({
+      servicePath: 'localhost',
+      port: 7469,
+      sslCreds,
+    });
+
+    const [response] = await client.echo({content: 'PQC test'});
+    assert.strictEqual(response.content, 'PQC test');
+    console.log('  PQC gRPC call successful');
+
+    // 3. Verify HTTP/REST PQC negotiation
+    // Showcase REST server usually runs on port 7469 as well (multiplexed) or 7470.
+    // In current gapic-showcase, it's often multiplexed.
+    const https = await import('node:https');
+    const agent = new https.Agent({
+      ca: caCert,
+      servername: 'localhost',
+      rejectUnauthorized: false,
+    });
+
+    await new Promise<void>((resolve, reject) => {
+      const options = {
+        hostname: 'localhost',
+        port: 7469,
+        path: '/v1beta1/echo:echo',
+        method: 'POST',
+        agent: agent,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      const req = https.request(options, res => {
+        let data = '';
+        res.on('data', chunk => {
+          data += chunk;
+        });
+        res.on('end', () => {
+          try {
+            const group =
+              (res.socket as any).getNegotiatedGroup?.() ||
+              (res.socket as any).getEphemeralKeyInfo?.()?.name;
+            console.log(`  HTTP Negotiated TLS group: ${group}`);
+            assert.strictEqual(
+              group,
+              'X25519MLKEM768',
+              'HTTP connection must be PQC-safe',
+            );
+            resolve();
+          } catch (e) {
+            reject(e);
+          }
+        });
+      });
+
+      req.on('error', reject);
+      req.write(JSON.stringify({content: 'PQC REST test'}));
+      req.end();
+    });
+    console.log('  PQC HTTP call successful');
+  } finally {
+    server.stop();
+  }
+}
+
 async function main() {
   const showcaseServer = new ShowcaseServer();
   try {
@@ -2910,6 +3038,7 @@ async function main() {
   } finally {
     showcaseServer.stop();
   }
+  await testPqc();
 }
 
 main();
