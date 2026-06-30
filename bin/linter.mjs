@@ -32,9 +32,11 @@ async function run() {
       return;
     }
 
-    // Run ESLint and Type checks
-    const eslintPassed = await checkEslint(changedTsFiles);
-    const typeSafetyPassed = await checkTypeSafety(changedTsFiles);
+    // Run ESLint and Type checks in parallel to optimize CPU utilization
+    const [eslintPassed, typeSafetyPassed] = await Promise.all([
+      checkEslint(changedTsFiles),
+      checkTypeSafety(changedTsFiles),
+    ]);
 
     if (!eslintPassed || !typeSafetyPassed) {
       throw new Error('Linter checks failed.');
