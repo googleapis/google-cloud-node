@@ -2903,16 +2903,13 @@ async function testStreamingErrorAfterDataNoBufferNoRetry(
 }
 
 async function main() {
-  // const showcaseServer = new ShowcaseServer();
-  await testShowcase();
-  /*
+  const showcaseServer = new ShowcaseServer();
   try {
     await showcaseServer.start();
-
+    await testShowcase();
   } finally {
     showcaseServer.stop();
   }
-   */
 }
 
 main();
