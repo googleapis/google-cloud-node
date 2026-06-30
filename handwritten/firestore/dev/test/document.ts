@@ -25,7 +25,7 @@ import {
   GeoPoint,
   setLogFunction,
   Timestamp,
-  BsonBinaryData,
+  Bytes,
   BsonObjectId,
   BsonTimestamp,
   Decimal128Value,
@@ -522,7 +522,7 @@ describe('serialize document', () => {
                 },
               },
             }),
-          })
+          }),
         );
         return response(writeResult(1));
       },
@@ -549,7 +549,7 @@ describe('serialize document', () => {
                 },
               },
             }),
-          })
+          }),
         );
         return response(writeResult(1));
       },
@@ -585,7 +585,7 @@ describe('serialize document', () => {
                 },
               },
             }),
-          })
+          }),
         );
         return response(writeResult(1));
       },
@@ -612,7 +612,7 @@ describe('serialize document', () => {
                 },
               },
             }),
-          })
+          }),
         );
         return response(writeResult(1));
       },
@@ -639,7 +639,7 @@ describe('serialize document', () => {
                 },
               },
             }),
-          })
+          }),
         );
         return response(writeResult(1));
       },
@@ -666,7 +666,7 @@ describe('serialize document', () => {
                 },
               },
             }),
-          })
+          }),
         );
         return response(writeResult(1));
       },
@@ -702,7 +702,7 @@ describe('serialize document', () => {
                 },
               },
             }),
-          })
+          }),
         );
         return response(writeResult(1));
       },
@@ -729,7 +729,7 @@ describe('serialize document', () => {
                 },
               },
             }),
-          })
+          }),
         );
         return response(writeResult(1));
       },
@@ -737,7 +737,7 @@ describe('serialize document', () => {
 
     const firestore = await createInstance(overrides);
     await firestore.doc('collectionId/documentId').set({
-      myBsonBinaryData: new BsonBinaryData(250, Buffer.from([1, 2, 3])),
+      myBsonBinaryData: Bytes.fromUint8Array(Buffer.from([1, 2, 3]), 250),
     });
   });
 });

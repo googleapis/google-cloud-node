@@ -24,7 +24,7 @@ import {
   Timestamp,
   GeoPoint,
   DocumentReference,
-  BsonBinaryData,
+  Bytes,
   BsonObjectId,
   BsonTimestamp,
   Decimal128Value,
@@ -265,17 +265,17 @@ describe('Order', () => {
       [blob([0])],
       [
         blob([0, 1, 2, 3, 4]),
-        wrap(new BsonBinaryData(0, Buffer.from([0, 1, 2, 3, 4]))),
+        wrap(Bytes.fromUint8Array(Buffer.from([0, 1, 2, 3, 4]), 0)),
       ],
       [blob([0, 1, 2, 4, 3])],
       [blob([255])],
 
       [
-        wrap(new BsonBinaryData(5, Buffer.from([1, 2, 3]))),
-        wrap(new BsonBinaryData(5, new Uint8Array([1, 2, 3]))),
+        wrap(Bytes.fromUint8Array(Buffer.from([1, 2, 3]), 5)),
+        wrap(Bytes.fromUint8Array(new Uint8Array([1, 2, 3]), 5)),
       ],
-      [wrap(new BsonBinaryData(7, Buffer.from([1])))],
-      [wrap(new BsonBinaryData(7, Buffer.from([2])))],
+      [wrap(Bytes.fromUint8Array(Buffer.from([1]), 7))],
+      [wrap(Bytes.fromUint8Array(Buffer.from([2]), 7))],
 
       // resource names
       [resource('projects/p1/databases/d1/documents/c1/doc1')],

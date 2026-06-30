@@ -121,7 +121,7 @@ function bytesFromJson(bytesValue: string | Uint8Array): Uint8Array {
  * @param mapValue The map value to probe.
  */
 function detectMapRepresentation(
-  mapValue: api.IMapValue | null | undefined
+  mapValue: api.IMapValue | null | undefined,
 ): string {
   const fields = mapValue?.fields;
   if (fields) {

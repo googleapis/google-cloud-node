@@ -44,7 +44,7 @@ import {
   Int32Value,
   Decimal128Value,
   BsonTimestamp,
-  BsonBinaryData,
+  Bytes,
   BsonObjectId,
   RegexValue,
   Query,
@@ -8739,7 +8739,7 @@ describe.skipClassic('non-native Firestore types', () => {
       },
       err => {
         deferred.reject(err);
-      }
+      },
     );
 
     const snapshot_1 = await deferred.promise!;
@@ -8828,16 +8828,16 @@ describe.skipClassic('non-native Firestore types', () => {
     await checkRoundTrip(new Decimal128Value('4.2e-3'));
     await checkRoundTrip(new Decimal128Value('Infinity'));
     await checkRoundTrip(
-      new Decimal128Value('0.1234567890123456789012345678901234')
+      new Decimal128Value('0.1234567890123456789012345678901234'),
     );
     await checkRoundTrip(
-      new Decimal128Value('1234567890123456789012345678901234')
+      new Decimal128Value('1234567890123456789012345678901234'),
     );
     await checkRoundTrip(
-      new Decimal128Value('-0.1234567890123456789012345678901234')
+      new Decimal128Value('-0.1234567890123456789012345678901234'),
     );
     await checkRoundTrip(
-      new Decimal128Value('-1234567890123456789012345678901234')
+      new Decimal128Value('-1234567890123456789012345678901234'),
     );
   });
 
@@ -8873,7 +8873,7 @@ describe.skipClassic('non-native Firestore types', () => {
   });
 
   it('round trip BSON binary data', async () => {
-    await checkRoundTrip(new BsonBinaryData(128, Buffer.from([5, 6, 7])));
+    await checkRoundTrip(Bytes.fromUint8Array(Buffer.from([5, 6, 7]), 128));
   });
 
   it('invalid 32-bit integer gets rejected', async () => {
@@ -8886,7 +8886,7 @@ describe.skipClassic('non-native Firestore types', () => {
 
     expect(error1).to.not.be.null;
     expect(error1!.message).to.contain(
-      "The field '__int__' value (2,147,483,648) is too large to be converted to a 32-bit integer"
+      "The field '__int__' value (2,147,483,648) is too large to be converted to a 32-bit integer",
     );
 
     let error2: Error | null = null;
@@ -8897,7 +8897,7 @@ describe.skipClassic('non-native Firestore types', () => {
     }
     expect(error2).to.not.be.null;
     expect(error2!.message).to.contain(
-      "The field '__int__' value (-2,147,483,650) is too large to be converted to a 32-bit integer."
+      "The field '__int__' value (-2,147,483,650) is too large to be converted to a 32-bit integer.",
     );
   });
 
@@ -8911,7 +8911,7 @@ describe.skipClassic('non-native Firestore types', () => {
 
     expect(error).to.not.be.null;
     expect(error!.message).to.contain(
-      "BsonTimestamp 'seconds' must be in the range of a 32-bit unsigned integer."
+      "BsonTimestamp 'seconds' must be in the range of a 32-bit unsigned integer.",
     );
 
     error = null;
@@ -8923,7 +8923,7 @@ describe.skipClassic('non-native Firestore types', () => {
 
     expect(error).to.not.be.null;
     expect(error!.message).to.contain(
-      "BsonTimestamp 'increment' must be in the range of a 32-bit unsigned integer."
+      "BsonTimestamp 'increment' must be in the range of a 32-bit unsigned integer.",
     );
   });
 
@@ -8937,7 +8937,7 @@ describe.skipClassic('non-native Firestore types', () => {
 
     expect(error).to.not.be.null;
     expect(error!.message).to.contain(
-      "BsonTimestamp 'seconds' must be in the range of a 32-bit unsigned integer."
+      "BsonTimestamp 'seconds' must be in the range of a 32-bit unsigned integer.",
     );
 
     error = null;
@@ -8949,7 +8949,7 @@ describe.skipClassic('non-native Firestore types', () => {
 
     expect(error).to.not.be.null;
     expect(error!.message).to.contain(
-      "BsonTimestamp 'increment' must be in the range of a 32-bit unsigned integer."
+      "BsonTimestamp 'increment' must be in the range of a 32-bit unsigned integer.",
     );
   });
 
@@ -8963,7 +8963,7 @@ describe.skipClassic('non-native Firestore types', () => {
 
     expect(error).to.not.be.null;
     expect(error!.message).to.contain(
-      "Invalid regex option 'a'. Supported options are 'i', 'm', 's', 'u', and 'x'."
+      "Invalid regex option 'a'. Supported options are 'i', 'm', 's', 'u', and 'x'.",
     );
   });
 
@@ -8977,15 +8977,15 @@ describe.skipClassic('non-native Firestore types', () => {
 
     expect(error).to.not.be.null;
     expect(error!.message).to.contain(
-      'Object ID hex string has incorrect length.'
+      'Object ID hex string has incorrect length.',
     );
   });
 
-  it('invalid bsonBinaryData value gets rejected', async () => {
+  it('invalid Bytes subtype gets rejected', async () => {
     let error: Error | null = null;
     try {
       await doc.set({
-        key: new BsonBinaryData(1234, new Uint8Array([1, 2, 3])),
+        key: Bytes.fromUint8Array(new Uint8Array([1, 2, 3]), 1234),
       });
     } catch (e) {
       error = e;
@@ -8993,7 +8993,7 @@ describe.skipClassic('non-native Firestore types', () => {
 
     expect(error).to.not.be.null;
     expect(error!.message).to.contain(
-      'The subtype for BsonBinaryData must be a value in the inclusive [0, 255] range.'
+      'The subtype for Bytes must be a value in the inclusive [0, 255] range.',
     );
   });
 
@@ -9223,22 +9223,22 @@ describe.skipClassic('non-native Firestore types', () => {
 
   it('can filter and order Binary values', async () => {
     const testDocs = {
-      a: {key: new BsonBinaryData(1, new Uint8Array([1, 2, 3]))},
-      b: {key: new BsonBinaryData(1, new Uint8Array([1, 2, 4]))},
-      c: {key: new BsonBinaryData(2, new Uint8Array([1, 2, 3]))},
+      a: {key: Bytes.fromUint8Array(new Uint8Array([1, 2, 3]), 1)},
+      b: {key: Bytes.fromUint8Array(new Uint8Array([1, 2, 4]), 1)},
+      c: {key: Bytes.fromUint8Array(new Uint8Array([1, 2, 3]), 2)},
     };
     await addDocs(testDocs);
 
     let orderedQuery = randomCol
-      .where('key', '>', new BsonBinaryData(1, new Uint8Array([1, 2, 3])))
+      .where('key', '>', Bytes.fromUint8Array(new Uint8Array([1, 2, 3]), 1))
       .orderBy('key', 'desc');
 
     let snapshot = await getFirstSnapshot(orderedQuery);
     expect(toDataArray(snapshot)).to.deep.equal([testDocs['c'], testDocs['b']]);
 
     orderedQuery = randomCol
-      .where('key', '>=', new BsonBinaryData(1, new Uint8Array([1, 2, 3])))
-      .where('key', '<', new BsonBinaryData(2, new Uint8Array([1, 2, 3])))
+      .where('key', '>=', Bytes.fromUint8Array(new Uint8Array([1, 2, 3]), 1))
+      .where('key', '<', Bytes.fromUint8Array(new Uint8Array([1, 2, 3]), 2))
       .orderBy('key', 'desc');
 
     snapshot = await getFirstSnapshot(orderedQuery);
@@ -9257,8 +9257,8 @@ describe.skipClassic('non-native Firestore types', () => {
       .where(
         Filter.or(
           Filter.where('key', '>', new RegexValue('^bar', 'x')),
-          Filter.where('key', '!=', new RegexValue('^bar', 'x'))
-        )
+          Filter.where('key', '!=', new RegexValue('^bar', 'x')),
+        ),
       )
       .orderBy('key', 'desc');
 
@@ -9311,7 +9311,7 @@ describe.skipClassic('non-native Firestore types', () => {
       j: {key: new BsonTimestamp(1, 2)},
       k: {key: 'string'},
       l: {key: new Uint8Array([0, 1, 255])},
-      m: {key: new BsonBinaryData(1, new Uint8Array([1, 2, 3]))},
+      m: {key: Bytes.fromUint8Array(new Uint8Array([1, 2, 3]), 1)},
       n: {key: randomCol.firestore.collection('c1').doc('doc')},
       o: {key: new BsonObjectId('507f191e810c19729de860ea')},
       p: {key: new GeoPoint(0, 0)},
@@ -9350,7 +9350,7 @@ describe.skipClassic('non-native Firestore types', () => {
     expect(result.docs.map(e => e.id)).to.deep.equal(expectedResult);
 
     const listenerResult = await getFirstSnapshot(
-      randomCol.orderBy('key', 'desc')
+      randomCol.orderBy('key', 'desc'),
     );
     expect(listenerResult.docs.map(e => e.id)).to.deep.equal(expectedResult);
   });

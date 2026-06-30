@@ -47,7 +47,7 @@ function customDeepEqual(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   customMatchers: Array<CustomMatcher<any>>,
   left: unknown,
-  right: unknown
+  right: unknown,
 ): boolean {
   for (const customMatcher of customMatchers) {
     if (
@@ -146,7 +146,7 @@ export function addEqualityMatcher(
               'expected #{act} to not roughly deeply equal #{exp}',
               expected,
               actual,
-              /*showDiff=*/ true
+              /*showDiff=*/ true,
             );
           } else if (originalFunction) {
             originalFunction.call(this, expected);

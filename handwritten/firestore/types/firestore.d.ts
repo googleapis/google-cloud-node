@@ -2829,23 +2829,33 @@ declare namespace FirebaseFirestore {
     isEqual(other: BsonTimestamp): boolean;
   }
 
-  /** Represents a BSON Binary Data type in Firestore documents. */
-  export class BsonBinaryData {
-    constructor(subtype: number, data: Uint8Array);
+  /** An immutable object representing an array of bytes. */
+  export class Bytes {
+    private constructor();
 
     /** The subtype for the data */
     readonly subtype: number;
 
-    /** The binary data as a byte array */
-    readonly data: Uint8Array;
+    /** Returns the underlying bytes as a Uint8Array. */
+    get data(): Uint8Array;
 
-    /**
-     * Returns true if this `BsonBinaryData` is equal to the provided one.
-     *
-     * @param other The `BsonBinaryData` or `Uint8Array` to compare against.
-     * @return 'true' if this `BsonBinaryData` is equal to the provided one.
-     */
-    isEqual(other: BsonBinaryData | Uint8Array): boolean;
+    /** Creates a new Bytes object from the given Base64 string. */
+    static fromBase64String(base64: string, subtype?: number): Bytes;
+
+    /** Creates a new Bytes object from the given Uint8Array. */
+    static fromUint8Array(array: Uint8Array, subtype?: number): Bytes;
+
+    /** Returns the underlying bytes as a Base64-encoded string. */
+    toBase64(): string;
+
+    /** Returns the underlying bytes in a new Uint8Array. */
+    toUint8Array(): Uint8Array;
+
+    /** Returns a string representation of the Bytes object. */
+    toString(): string;
+
+    /** Returns true if this Bytes object is equal to the provided one. */
+    isEqual(other: Bytes | Uint8Array): boolean;
   }
   /**
    * Sentinel values that can be used when writing document fields with set(),

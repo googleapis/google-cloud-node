@@ -173,7 +173,7 @@ import {
   CollectionReference,
   FieldPath,
   Firestore,
-  BsonBinaryData,
+  Bytes,
 } from '../src';
 
 import {expect, use} from 'chai';
@@ -946,9 +946,12 @@ describe.skipClassic('Pipeline class', () => {
     });
 
     describe.skipClassic('extended BSON types', () => {
-      it('accepts and returns BsonBinaryData in pipelines', async () => {
-        const bsonSubtype0 = new BsonBinaryData(0, new Uint8Array([7, 8, 9]));
-        const bsonSubtype1 = new BsonBinaryData(128, new Uint8Array([7, 8, 9]));
+      it('accepts and returns Bytes in pipelines', async () => {
+        const bsonSubtype0 = Bytes.fromUint8Array(new Uint8Array([7, 8, 9]), 0);
+        const bsonSubtype1 = Bytes.fromUint8Array(
+          new Uint8Array([7, 8, 9]),
+          128,
+        );
 
         const ppl = firestore
           .pipeline()
@@ -7430,7 +7433,9 @@ describe.skipClassic('Pipeline search', () => {
             });
 
           const isRestTest = isRest(firestore);
-          const expectedErrorPattern = isRestTest ? /"code": 400/ : /3 INVALID_ARGUMENT.*/;
+          const expectedErrorPattern = isRestTest
+            ? /"code": 400/
+            : /3 INVALID_ARGUMENT.*/;
           await expect(ppl.execute()).to.be.rejectedWith(expectedErrorPattern);
         });
       });
@@ -7483,7 +7488,9 @@ describe.skipClassic('Pipeline search', () => {
 
           snapshot = await ppl.execute();
           expect(snapshot.results.length).to.equal(1);
-          expect(['solTacos', 'eastsideTacos']).to.include(snapshot.results[0].id);
+          expect(['solTacos', 'eastsideTacos']).to.include(
+            snapshot.results[0].id,
+          );
         });
       });
 

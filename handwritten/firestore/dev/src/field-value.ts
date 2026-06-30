@@ -173,7 +173,7 @@ export class RegexValue implements firestore.RegexValue {
    */
   constructor(
     readonly pattern: string,
-    readonly options: string
+    readonly options: string,
   ) {}
 
   /**
@@ -281,7 +281,7 @@ export class Int32Value implements firestore.Int32Value {
    */
   static _fromProto(proto: api.IValue): Int32Value {
     const value = Number(
-      proto.mapValue!.fields?.[RESERVED_INT32_KEY]?.integerValue
+      proto.mapValue!.fields?.[RESERVED_INT32_KEY]?.integerValue,
     );
     return new Int32Value(value);
   }
@@ -362,16 +362,16 @@ export class BsonTimestamp implements firestore.BsonTimestamp {
    */
   constructor(
     readonly seconds: number,
-    readonly increment: number
+    readonly increment: number,
   ) {
     if (seconds < 0 || seconds > 4294967295) {
       throw new Error(
-        "BsonTimestamp 'seconds' must be in the range of a 32-bit unsigned integer."
+        "BsonTimestamp 'seconds' must be in the range of a 32-bit unsigned integer.",
       );
     }
     if (increment < 0 || increment > 4294967295) {
       throw new Error(
-        "BsonTimestamp 'increment' must be in the range of a 32-bit unsigned integer."
+        "BsonTimestamp 'increment' must be in the range of a 32-bit unsigned integer.",
       );
     }
   }
@@ -392,11 +392,11 @@ export class BsonTimestamp implements firestore.BsonTimestamp {
     const fields = proto.mapValue!.fields?.[RESERVED_BSON_TIMESTAMP_KEY];
     const seconds = Number(
       fields?.mapValue?.fields?.[RESERVED_BSON_TIMESTAMP_SECONDS_KEY]
-        ?.integerValue
+        ?.integerValue,
     );
     const increment = Number(
       fields?.mapValue?.fields?.[RESERVED_BSON_TIMESTAMP_INCREMENT_KEY]
-        ?.integerValue
+        ?.integerValue,
     );
     return new BsonTimestamp(seconds, increment);
   }
@@ -412,28 +412,104 @@ export class BsonTimestamp implements firestore.BsonTimestamp {
   }
 }
 
-/** Represents a BSON Binary Data type in Firestore documents. */
-export class BsonBinaryData implements firestore.BsonBinaryData {
-  /**
-   * Creates a new BSON Binary Data from the given values.
-   *
-   * @param subtype - The subtype of the data.
-   * @param data - The byte array that contains the data.
-   *
-   * @private
-   * @internal
-   */
-  constructor(
-    readonly subtype: number,
-    readonly data: Uint8Array
+/** An immutable object representing an array of bytes. */
+export class Bytes implements firestore.Bytes {
+  readonly data: Uint8Array;
+
+  private constructor(
+    data: Uint8Array,
+    readonly subtype = 0,
   ) {
-    // By definition the subtype should be 1 byte and should therefore
-    // have a value between 0 and 255
-    if (subtype < 0 || subtype > 255) {
+    if (!Number.isInteger(subtype) || subtype < 0 || subtype > 255) {
       throw new Error(
-        'The subtype for BsonBinaryData must be a value in the inclusive [0, 255] range.'
+        'The subtype for Bytes must be a value in the inclusive [0, 255] range.',
       );
     }
+    this.data = data instanceof Uint8Array ? data : new Uint8Array(data);
+    this.subtype = subtype;
+  }
+
+  /**
+   * Creates a new `Bytes` object from the given Base64 string, converting it to
+   * bytes.
+   *
+   * @param base64 - The Base64 string used to create the `Bytes` object.
+   * @param subtype - Optional subtype value.
+   */
+  static fromBase64String(base64: string, subtype = 0): Bytes {
+    try {
+      const buffer = Buffer.from(base64, 'base64');
+      const data = new Uint8Array(
+        buffer.buffer,
+        buffer.byteOffset,
+        buffer.byteLength,
+      );
+      return new Bytes(data, subtype);
+    } catch (e) {
+      throw new Error('Failed to parse base64 string: ' + e);
+    }
+  }
+
+  /**
+   * Creates a new `Bytes` object from the given Uint8Array.
+   *
+   * @param array - The Uint8Array used to create the `Bytes` object.
+   * @param subtype - Optional subtype value.
+   */
+  static fromUint8Array(array: Uint8Array, subtype = 0): Bytes {
+    return new Bytes(array, subtype);
+  }
+
+  /**
+   * Returns the underlying bytes as a Base64-encoded string.
+   *
+   * @returns The Base64-encoded string created from the `Bytes` object.
+   */
+  toBase64(): string {
+    return Buffer.from(
+      this.data.buffer,
+      this.data.byteOffset,
+      this.data.byteLength,
+    ).toString('base64');
+  }
+
+  /**
+   * Returns the underlying bytes in a new `Uint8Array`.
+   *
+   * @returns The Uint8Array created from the `Bytes` object.
+   */
+  toUint8Array(): Uint8Array {
+    return Uint8Array.from(this.data);
+  }
+
+  /**
+   * Returns a string representation of the `Bytes` object.
+   *
+   * @returns A string representation of the `Bytes` object.
+   */
+  toString(): string {
+    return (
+      'Bytes(base64: ' + this.toBase64() + ', subtype: ' + this.subtype + ')'
+    );
+  }
+
+  /**
+   * Returns true if this `Bytes` object is equal to the provided one.
+   *
+   * @param other - The `Bytes` object to compare against.
+   * @returns true if this `Bytes` object is equal to the provided one.
+   */
+  isEqual(other: any): boolean {
+    if (other instanceof Bytes) {
+      return (
+        this.subtype === other.subtype &&
+        Buffer.from(this.data).equals(other.data)
+      );
+    }
+    if (other instanceof Uint8Array) {
+      return this.subtype === 0 && Buffer.from(this.data).equals(other);
+    }
+    return false;
   }
 
   /**
@@ -453,37 +529,22 @@ export class BsonBinaryData implements firestore.BsonBinaryData {
    * @private
    * @internal
    */
-  static _fromProto(proto: api.IValue): BsonBinaryData {
+  static _fromProto(proto: api.IValue): Bytes {
     const fields = proto.mapValue!.fields?.[RESERVED_BSON_BINARY_KEY];
     const subtypeAndData = fields?.bytesValue;
     if (!subtypeAndData) {
-      throw new Error('Received incorrect bytesValue for BsonBinaryData');
+      throw new Error('Received incorrect bytesValue for Bytes');
     }
-    if (subtypeAndData.length === 0) {
-      throw new Error('Received empty bytesValue for BsonBinaryData');
+    const bytes =
+      typeof subtypeAndData === 'string'
+        ? Buffer.from(subtypeAndData, 'base64')
+        : subtypeAndData;
+    if (bytes.length === 0) {
+      throw new Error('Received empty bytesValue for Bytes');
     }
-    const subtype = subtypeAndData[0];
-    const data = subtypeAndData.slice(1);
-    return new BsonBinaryData(subtype, data);
-  }
-
-  /**
-   * Returns true if this `BsonBinaryData` is equal to the provided one.
-   *
-   * @param other The `BsonBinaryData` to compare against.
-   * @return 'true' if this `BsonBinaryData` is equal to the provided one.
-   */
-  isEqual(other: any): boolean {
-    if (other instanceof BsonBinaryData) {
-      return (
-        this.subtype === other.subtype &&
-        Buffer.from(this.data).equals(other.data)
-      );
-    }
-    if (other instanceof Uint8Array) {
-      return this.subtype === 0 && Buffer.from(this.data).equals(other);
-    }
-    return false;
+    const subtype = bytes[0];
+    const data = bytes.slice(1);
+    return new Bytes(data, subtype);
   }
 }
 

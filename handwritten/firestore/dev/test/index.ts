@@ -25,7 +25,7 @@ import {
   DocumentSnapshot,
   FieldPath,
   FieldValue,
-  BsonBinaryData,
+  Bytes,
   BsonObjectId,
   BsonTimestamp,
   Decimal128Value,
@@ -500,7 +500,7 @@ const allSupportedTypesInput = {
   maxKeyValue: MaxKey.instance(),
   regexValue: new RegexValue('myRegexPattern', 'myRegexOptions'),
   bsonTimestampValue: new BsonTimestamp(123, 456),
-  bsonBinaryValue: new BsonBinaryData(155, Buffer.from([7, 90, 250])),
+  bsonBinaryValue: Bytes.fromUint8Array(Buffer.from([7, 90, 250]), 155),
   bsonObjectIdValue: new BsonObjectId('my24CharacterHexString'),
   dateValue: new Date('Mar 18, 1985 08:20:00.123 GMT+0100 (CET)'),
   timestampValue: Firestore.Timestamp.fromDate(
@@ -542,7 +542,7 @@ const allSupportedTypesOutput: {[field: string]: unknown} = {
   maxKeyValue: MaxKey.instance(),
   regexValue: new RegexValue('myRegexPattern', 'myRegexOptions'),
   bsonTimestampValue: new BsonTimestamp(123, 456),
-  bsonBinaryValue: new BsonBinaryData(155, Buffer.from([7, 90, 250])),
+  bsonBinaryValue: Bytes.fromUint8Array(Buffer.from([7, 90, 250]), 155),
   bsonObjectIdValue: new BsonObjectId('my24CharacterHexString'),
   dateValue: Firestore.Timestamp.fromDate(
     new Date('Mar 18, 1985 08:20:00.123 GMT+0100 (CET)'),

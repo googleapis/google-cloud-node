@@ -23,7 +23,7 @@ export class Quadruple {
     negative: boolean,
     biasedExponent: number,
     mantHi: bigint,
-    mantLo: bigint
+    mantLo: bigint,
   ) {
     this.negative = negative;
     this.biasedExponent = biasedExponent;
@@ -42,32 +42,32 @@ export class Quadruple {
     false,
     Quadruple.#exponentOfInfinity,
     1n << 63n,
-    0n
+    0n,
   );
   static negativeInfinity: Quadruple = new Quadruple(
     true,
     Quadruple.#exponentOfInfinity,
     0n,
-    0n
+    0n,
   );
   static positiveInfinity: Quadruple = new Quadruple(
     false,
     Quadruple.#exponentOfInfinity,
     0n,
-    0n
+    0n,
   );
   static #minLong: Quadruple = new Quadruple(true, Quadruple.#bias(63), 0n, 0n);
   static #positiveOne: Quadruple = new Quadruple(
     false,
     Quadruple.#bias(0),
     0n,
-    0n
+    0n,
   );
   static #negativeOne: Quadruple = new Quadruple(
     true,
     Quadruple.#bias(0),
     0n,
-    0n
+    0n,
   );
   /** Return the (unbiased) exponent of this {@link Quadruple}. */
   exponent(): number {
@@ -180,7 +180,7 @@ export class Quadruple {
       value < 0,
       Quadruple.#bias(exponent - 1023),
       mantHi,
-      0n
+      0n,
     );
   }
   /**
@@ -256,7 +256,7 @@ export class Quadruple {
       negative,
       parsed.exponent,
       parsed.mantHi,
-      parsed.mantLo
+      parsed.mantLo,
     );
   }
   static #isDigit(s: string, i: number): boolean {

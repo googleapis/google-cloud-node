@@ -19,7 +19,7 @@ import * as firestore from '@google-cloud/firestore';
 import * as proto from '../protos/firestore_v1_proto_api';
 
 import {
-  BsonBinaryData,
+  Bytes,
   BsonTimestamp,
   DeleteTransform,
   FieldTransform,
@@ -225,7 +225,7 @@ export class Serializer {
       val instanceof Int32Value ||
       val instanceof Decimal128Value ||
       val instanceof BsonTimestamp ||
-      val instanceof BsonBinaryData ||
+      val instanceof Bytes ||
       val instanceof BsonObjectId ||
       val instanceof MinKey ||
       val instanceof MaxKey
@@ -578,7 +578,7 @@ export class Serializer {
         return BsonTimestamp._fromProto(proto);
       }
       case 'bsonBinaryValue': {
-        return BsonBinaryData._fromProto(proto);
+        return Bytes._fromProto(proto);
       }
       case 'geoPointValue': {
         return GeoPoint.fromProto(proto.geoPointValue!);
@@ -758,7 +758,7 @@ export function validateUserInput(
     value instanceof Int32Value ||
     value instanceof Decimal128Value ||
     value instanceof BsonTimestamp ||
-    value instanceof BsonBinaryData ||
+    value instanceof Bytes ||
     value instanceof MinKey ||
     value instanceof MaxKey
   ) {

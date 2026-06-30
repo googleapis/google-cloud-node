@@ -19,7 +19,7 @@ import {
   MaxKey,
   MinKey,
   FieldValue,
-  BsonBinaryData,
+  Bytes,
   BsonObjectId,
   BsonTimestamp,
   Decimal128Value,
@@ -469,8 +469,8 @@ describe('non-native types', () => {
               },
             },
           },
-        }
-      )
+        },
+      ),
     ).to.equal(0);
 
     // Null comes before MinKey.
@@ -487,8 +487,8 @@ describe('non-native types', () => {
               },
             },
           },
-        }
-      )
+        },
+      ),
     ).to.equal(-1);
   });
 
@@ -500,14 +500,14 @@ describe('non-native types', () => {
     expect(value1).to.not.equal(other);
   });
 
-  it('BSON binary data', () => {
-    const value = new BsonBinaryData(128, Uint8Array.from([7, 8, 9]));
+  it('Bytes with subtype', () => {
+    const value = Bytes.fromUint8Array(Uint8Array.from([7, 8, 9]), 128);
     expect(value.subtype).to.equal(128);
     expect(value.data).to.deep.equal(Uint8Array.from([7, 8, 9]));
   });
 
-  it('BSON binary data can have empty data', () => {
-    const value = BsonBinaryData._fromProto({
+  it('Bytes can have empty data', () => {
+    const value = (Bytes as any)._fromProto({
       mapValue: {
         fields: {
           [RESERVED_BSON_BINARY_KEY]: {
@@ -518,27 +518,27 @@ describe('non-native types', () => {
     });
     expect(value.subtype).to.equal(128);
     expect(value.data).to.deep.equal(Uint8Array.from([]));
-    expect(value.isEqual(new BsonBinaryData(128, Uint8Array.from([])))).to.be
+    expect(value.isEqual(Bytes.fromUint8Array(Uint8Array.from([]), 128))).to.be
       .true;
   });
 
-  it('BSON binary data with subtype 0 acts as native bytes', () => {
-    const bson = new BsonBinaryData(0, Uint8Array.from([1, 2, 3]));
+  it('Bytes with subtype 0 acts as native bytes', () => {
+    const bson = Bytes.fromUint8Array(Uint8Array.from([1, 2, 3]), 0);
     const native = Uint8Array.from([1, 2, 3]);
     const otherNative = Uint8Array.from([1, 2, 4]);
 
     expect(bson.isEqual(native)).to.be.true;
     expect(bson.isEqual(otherNative)).to.be.false;
 
-    // Serializing BsonBinaryData with subtype 0 returns bytesValue
+    // Serializing Bytes with subtype 0 returns bytesValue
     const proto = (bson as any)._toProto(null as any);
     expect(proto).to.deep.equal({
       bytesValue: Uint8Array.from([1, 2, 3]),
     });
   });
 
-  it('BSON binary data with subtype > 0 does not act as native bytes', () => {
-    const bson = new BsonBinaryData(1, Uint8Array.from([1, 2, 3]));
+  it('Bytes with subtype > 0 does not act as native bytes', () => {
+    const bson = Bytes.fromUint8Array(Uint8Array.from([1, 2, 3]), 1);
     const native = Uint8Array.from([1, 2, 3]);
 
     expect(bson.isEqual(native)).to.be.false;
@@ -561,7 +561,7 @@ describe('non-native types', () => {
     }
     expect(error1).to.not.be.null;
     expect(error1!.message!).to.equal(
-      "BsonTimestamp 'seconds' must be in the range of a 32-bit unsigned integer."
+      "BsonTimestamp 'seconds' must be in the range of a 32-bit unsigned integer.",
     );
 
     // Larger than 2^32-1 seconds
@@ -573,7 +573,7 @@ describe('non-native types', () => {
     }
     expect(error2).to.not.be.null;
     expect(error2!.message!).to.equal(
-      "BsonTimestamp 'seconds' must be in the range of a 32-bit unsigned integer."
+      "BsonTimestamp 'seconds' must be in the range of a 32-bit unsigned integer.",
     );
 
     // Negative increment
@@ -585,7 +585,7 @@ describe('non-native types', () => {
     }
     expect(error3).to.not.be.null;
     expect(error3!.message!).to.equal(
-      "BsonTimestamp 'increment' must be in the range of a 32-bit unsigned integer."
+      "BsonTimestamp 'increment' must be in the range of a 32-bit unsigned integer.",
     );
 
     // Larger than 2^32-1 increment
@@ -597,7 +597,7 @@ describe('non-native types', () => {
     }
     expect(error4).to.not.be.null;
     expect(error4!.message!).to.equal(
-      "BsonTimestamp 'increment' must be in the range of a 32-bit unsigned integer."
+      "BsonTimestamp 'increment' must be in the range of a 32-bit unsigned integer.",
     );
   });
 
@@ -652,9 +652,9 @@ describe('non-native types', () => {
     expect(v10.isEqual(v13)).to.be.true;
   });
 
-  it('can create BSON binary data using new', () => {
-    const value1 = new BsonBinaryData(128, Uint8Array.from([7, 8, 9]));
-    const value2 = new BsonBinaryData(128, Uint8Array.from([7, 8, 9]));
+  it('can create Bytes using static factories', () => {
+    const value1 = Bytes.fromUint8Array(Uint8Array.from([7, 8, 9]), 128);
+    const value2 = Bytes.fromUint8Array(Uint8Array.from([7, 8, 9]), 128);
     expect(value1.isEqual(value2)).to.be.true;
     expect(value2.isEqual(value1)).to.be.true;
   });

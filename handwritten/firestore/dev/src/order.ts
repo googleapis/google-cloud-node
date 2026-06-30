@@ -181,7 +181,7 @@ function compareNumberProtos(left: api.IValue, right: api.IValue): number {
 
   return compareNumbers(
     convertProtoValueToNumber(left),
-    convertProtoValueToNumber(right)
+    convertProtoValueToNumber(right),
   );
 }
 
@@ -202,7 +202,7 @@ function convertProtoValueToNumber(value: api.IValue): number {
   }
 
   throw new Error(
-    'convertProtoValueToNumber was called on an unsupported type.'
+    'convertProtoValueToNumber was called on an unsupported type.',
   );
 }
 
@@ -216,7 +216,7 @@ function convertProtoValueToNumber(value: api.IValue): number {
 function convertNumberToQuadruple(value: api.IValue): Quadruple {
   if (detectValueType(value) === 'decimal128Value') {
     return Quadruple.fromString(
-      value.mapValue!.fields![RESERVED_DECIMAL128_KEY].stringValue!
+      value.mapValue!.fields![RESERVED_DECIMAL128_KEY].stringValue!,
     );
   } else {
     return Quadruple.fromNumber(convertProtoValueToNumber(value));
@@ -247,20 +247,20 @@ function compareBsonTimestamps(left: api.IValue, right: api.IValue): number {
   const leftFields = left.mapValue!.fields?.[RESERVED_BSON_TIMESTAMP_KEY];
   const leftSeconds = Number(
     leftFields?.mapValue?.fields?.[RESERVED_BSON_TIMESTAMP_SECONDS_KEY]
-      ?.integerValue
+      ?.integerValue,
   );
   const leftIncrement = Number(
     leftFields?.mapValue?.fields?.[RESERVED_BSON_TIMESTAMP_INCREMENT_KEY]
-      ?.integerValue
+      ?.integerValue,
   );
   const rightFields = right.mapValue!.fields?.[RESERVED_BSON_TIMESTAMP_KEY];
   const rightSeconds = Number(
     rightFields?.mapValue?.fields?.[RESERVED_BSON_TIMESTAMP_SECONDS_KEY]
-      ?.integerValue
+      ?.integerValue,
   );
   const rightIncrement = Number(
     rightFields?.mapValue?.fields?.[RESERVED_BSON_TIMESTAMP_INCREMENT_KEY]
-      ?.integerValue
+      ?.integerValue,
   );
   const secondsDiff = compareNumbers(leftSeconds, rightSeconds);
   return secondsDiff !== 0
@@ -280,7 +280,9 @@ function getSubtype(value: api.IValue): number {
   if (bsonBinaryFields && bsonBinaryFields.bytesValue) {
     return bsonBinaryFields.bytesValue[0];
   }
-  throw new Error('Cannot get subtype for non-blob value: ' + JSON.stringify(value));
+  throw new Error(
+    'Cannot get subtype for non-blob value: ' + JSON.stringify(value),
+  );
 }
 
 function getData(value: api.IValue): Uint8Array {
@@ -291,7 +293,9 @@ function getData(value: api.IValue): Uint8Array {
   if (bsonBinaryFields && bsonBinaryFields.bytesValue) {
     return bsonBinaryFields.bytesValue.slice(1);
   }
-  throw new Error('Cannot get data for non-blob value: ' + JSON.stringify(value));
+  throw new Error(
+    'Cannot get data for non-blob value: ' + JSON.stringify(value),
+  );
 }
 
 /*!
@@ -310,7 +314,10 @@ function compareBlobs(left: api.IValue, right: api.IValue): number {
   if (leftSubtype !== rightSubtype) {
     return primitiveComparator(leftSubtype, rightSubtype);
   }
-  return Buffer.compare(Buffer.from(getData(left)), Buffer.from(getData(right)));
+  return Buffer.compare(
+    Buffer.from(getData(left)),
+    Buffer.from(getData(right)),
+  );
 }
 
 /*!

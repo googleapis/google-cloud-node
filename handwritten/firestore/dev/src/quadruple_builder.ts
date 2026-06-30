@@ -634,7 +634,7 @@ export class QuadrupleBuilder {
     if (digits.length - firstDigit > QuadrupleBuilder.MAX_MANTISSA_LENGTH) {
       const carry: boolean = digits[QuadrupleBuilder.MAX_MANTISSA_LENGTH] >= 5; // The highest digit to be truncated
       const truncated: number[] = new Array(
-        QuadrupleBuilder.MAX_MANTISSA_LENGTH
+        QuadrupleBuilder.MAX_MANTISSA_LENGTH,
       ).fill(0);
       for (let i = 0; i < QuadrupleBuilder.MAX_MANTISSA_LENGTH; i++) {
         truncated[i] = digits[i + firstDigit];
@@ -706,7 +706,7 @@ export class QuadrupleBuilder {
     // decimal value of the mantissa in range 1.0..9.9999...
     const mant10d: number = Number(mant10) / QuadrupleBuilder.TWO_POW_63_DIV_10;
     return Math.floor(
-      Number(exp10) * QuadrupleBuilder.LOG2_10 + this.log2(mant10d)
+      Number(exp10) * QuadrupleBuilder.LOG2_10 + this.log2(mant10d),
     ); // Binary exponent
   }
   // Calculates log<sub>2</sub> of the given x
@@ -802,7 +802,7 @@ export class QuadrupleBuilder {
   multPacked3x64_AndAdjustExponent(
     factor1: bigint[],
     factor2: bigint[],
-    result: bigint[]
+    result: bigint[],
   ): void {
     this.multPacked3x64_simply(factor1, factor2, this.buffer12x32);
     const expCorr: number = this.correctPossibleUnderflow(this.buffer12x32);
@@ -820,7 +820,7 @@ export class QuadrupleBuilder {
   multPacked3x64_simply(
     factor1: bigint[],
     factor2: bigint[],
-    result: bigint[]
+    result: bigint[],
   ): void {
     for (let i = 0; i < result.length; i++) {
       result[i] = 0n;
@@ -895,7 +895,7 @@ export class QuadrupleBuilder {
   multUnpacked6x32byPacked(
     factor1: bigint[],
     factor2: bigint[],
-    product: bigint[]
+    product: bigint[],
   ): void {
     for (let i = 0; i < product.length; i++) {
       product[i] = 0n;
