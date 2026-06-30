@@ -151,19 +151,98 @@ export interface SignedPostPolicyV4Output {
 
 export interface GetSignedUrlConfig
   extends Pick<SignerGetSignedUrlConfig, 'host' | 'signingEndpoint'> {
-  action: 'read' | 'write' | 'delete' | 'resumable';
-  version?: 'v2' | 'v4';
-  virtualHostedStyle?: boolean;
-  cname?: string;
-  contentMd5?: string;
-  contentType?: string;
-  expires: string | number | Date;
+  /**
+   * The date and time when the signed URL becomes active/usable.
+   * Maps to the `X-Goog-Date` query parameter in V4 signed URLs.
+   * If not specified, the current time is used by default. This is useful for pre-generating
+   * URLs that are only valid starting at a future point in time, or for pinning a static date
+   * to ensure consistent URL generation across identical calls (beneficial for caching).
+   */
   accessibleAt?: string | number | Date;
+
+  /**
+   * The action/operation permitted by the signed URL.
+   * Supported values are:
+   * - `'read'`: Allows retrieving file data (HTTP GET method).
+   * - `'write'`: Allows uploading or overwriting file data (HTTP PUT method).
+   * - `'delete'`: Allows deleting the file (HTTP DELETE method).
+   * - `'resumable'`: Allows starting or resuming a resumable upload (HTTP POST method).
+   */
+  action: 'read' | 'write' | 'delete' | 'resumable';
+
+  /**
+   * The Custom Domain Name (CNAME) to use instead of the default GCS hostname.
+   * If you have configured a custom domain for your bucket, specifying this option
+   * will format the generated URL with your custom domain.
+   */
+  cname?: string;
+
+  /**
+   * The MD5 digest of the content as a base64-encoded string.
+   * Required if you want to enforce integrity checking on upload. The client
+   * must send the exact matching `Content-MD5` header when using the signed URL.
+   */
+  contentMd5?: string;
+
+  /**
+   * The expected MIME type (Content-Type) of the file.
+   * Useful when using `'write'` or `'resumable'` actions to enforce that the client upload
+   * carries a specific `Content-Type` header matching this value.
+   */
+  contentType?: string;
+
+  /**
+   * The expiration date/time when the signed URL will no longer be valid.
+   * The value can be a JavaScript `Date` object, an epoch timestamp (number of milliseconds),
+   * or a date string. The maximum validity period is 7 days for V4 signed URLs.
+   */
+  expires: string | number | Date;
+
+  /**
+   * Custom HTTP extension headers to be included as signed headers in the signed URL.
+   * Keys must be header names (e.g., `x-goog-meta-custom`) and values must be their expected values.
+   * The user must send these exact headers when making the HTTP request using the signed URL.
+   */
   extensionHeaders?: http.OutgoingHttpHeaders;
+
+  /**
+   * A convenience option to prompt the browser to save the downloaded file with a specific filename.
+   * This is a friendly shortcut that automatically formats the `responseDisposition` parameter
+   * under the hood to `attachment; filename="<filename>"`.
+   */
   promptSaveAs?: string;
-  responseDisposition?: string;
-  responseType?: string;
+
+  /**
+   * Additional query parameters to include in the signature and append to the final signed URL.
+   */
   queryParams?: Query;
+
+  /**
+   * Overrides the `Content-Disposition` response header returned by GCS on download.
+   * For example, setting this to `attachment; filename="new-name.png"` forces the browser
+   * to download the file with the specified filename.
+   */
+  responseDisposition?: string;
+
+  /**
+   * Overrides the `Content-Type` response header returned by GCS on download.
+   * Useful if you want GCS to serve a file with a specific MIME type when accessed
+   * via this signed URL, overriding its stored metadata.
+   */
+  responseType?: string;
+
+  /**
+   * The signature version to use when generating the signed URL.
+   * - `'v4'`: Google's recommended SHA256-based signing mechanism (default).
+   * - `'v2'`: The legacy SHA1-based signing mechanism.
+   */
+  version?: 'v2' | 'v4';
+
+  /**
+   * If true, uses virtual hosted-style URLs (e.g. `https://bucket-name.storage.googleapis.com/object-name`)
+   * instead of path-style URLs (e.g. `https://storage.googleapis.com/bucket-name/object-name`).
+   */
+  virtualHostedStyle?: boolean;
 }
 
 export interface GetFileMetadataOptions {
