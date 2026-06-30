@@ -22,48 +22,32 @@ function runGit(args, options = {}) {
   return execFileSync('git', args, {encoding: 'utf8', ...options});
 }
 
-function getGitTarget() {
-  const base = process.env.GITHUB_BASE_REF || 'main';
-
-  // Helper to check if a ref exists in git
-  const refExists = ref => {
-    try {
-      runGit(['rev-parse', '--verify', ref], {stdio: 'ignore'});
-      return true;
-    } catch {
-      return false;
-    }
-  };
-
-  if (refExists(`origin/${base}`)) {
-    return `origin/${base}`;
-  }
-  if (refExists(base)) {
-    return base;
-  }
-  return 'HEAD~1';
-}
-
 function getChangedFiles() {
-  const targetRef = getGitTarget();
-  try {
-    const output = runGit([
-      'diff',
-      '--name-only',
-      '--diff-filter=ACMRT',
-      targetRef,
-      '--',
-      '*.ts',
-    ]);
-    return output
-      .split('\n')
-      .map(f => f.trim())
-      .filter(f => f.length > 0 && existsSync(f));
-  } catch (err) {
-    throw new Error(
-      `Error finding changed files against ${targetRef}: ${err.message}`,
-    );
+  const base = process.env.GITHUB_BASE_REF || 'main';
+  const refsToTry = [`origin/${base}`, base, 'HEAD~1'];
+
+  for (const ref of refsToTry) {
+    try {
+      const output = runGit([
+        'diff',
+        '--name-only',
+        '--diff-filter=ACMRT',
+        ref,
+        '--',
+        '*.ts',
+      ]);
+      return output
+        .split('\n')
+        .map(f => f.trim())
+        .filter(f => f.length > 0 && existsSync(f));
+    } catch {
+      // Continue to the next fallback ref
+    }
   }
+
+  throw new Error(
+    `Error finding changed files: Tried refs [${refsToTry.join(', ')}] but all failed.`
+  );
 }
 
 function checkEslint(filesToCheck) {
