@@ -86,7 +86,11 @@ class NativeSpannerDatabase {
       for (const [key, value] of Object.entries(params)) {
         encodedParams[key] = codec.encode(value);
         if (types && types[key]) {
-          paramTypes[key] = codec.createTypeObject(types[key]); // Converts string type to protobuf Type obj
+          const typeObj = codec.createTypeObject(types[key]);
+          if (typeof typeObj.code === 'string') {
+            typeObj.code = spannerProto.TypeCode[typeObj.code];
+          }
+          paramTypes[key] = typeObj;
         }
       }
       requestMsg.params = { fields: encodedParams };
