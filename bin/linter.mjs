@@ -16,8 +16,7 @@ import {execFileSync} from 'child_process';
 import {existsSync} from 'fs';
 import path from 'path';
 
-// Extensions to check for Prettier and ESLint/GTS
-const targetExtensions = new Set(['.ts']);
+
 
 function getGitTarget() {
   const base = process.env.GITHUB_BASE_REF || 'main';
@@ -46,18 +45,13 @@ function getChangedFiles() {
   try {
     const output = execFileSync(
       'git',
-      ['diff', '--name-only', '--diff-filter=ACMRT', targetRef],
+      ['diff', '--name-only', '--diff-filter=ACMRT', targetRef, '--', '*.ts'],
       {encoding: 'utf8'},
     );
     return output
       .split('\n')
       .map(f => f.trim())
-      .filter(
-        f =>
-          f.length > 0 &&
-          targetExtensions.has(path.extname(f).toLowerCase()) &&
-          existsSync(f),
-      );
+      .filter(f => f.length > 0 && existsSync(f));
   } catch (err) {
     throw new Error(
       `Error finding changed files against ${targetRef}: ${err.message}`,
