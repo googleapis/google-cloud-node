@@ -18,8 +18,8 @@ const SQL = {
   sql: `SELECT * FROM ${TABLE} WHERE id = @id AND status = @status`,
   params: { id: 12345, status: 'ACTIVE' },
   types: { 
-    id: { typeCode: 2 }, // INT64
-    status: { typeCode: 6 } // STRING
+    id: 'int64',
+    status: 'string'
   }
 };
 const WARMUP_MS = process.env.LOCAL_MOCK_TEST ? 100 : 10_000;
