@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import {execFileSync, execFile} from 'child_process';
-import {existsSync, readFileSync} from 'fs';
+import {existsSync} from 'fs';
 import path from 'path';
 import {promisify} from 'util';
 import {ESLint} from 'eslint';
@@ -92,36 +92,9 @@ function getChangedFiles() {
 // --- ESLint Checker ---
 
 /**
- * Parses .eslintrc.json and returns a Set of rules configured as "error".
- */
-function getBlockingRules() {
-  try {
-    const configPath = path.join(process.cwd(), '.eslintrc.json');
-    if (!existsSync(configPath)) {
-      return new Set();
-    }
-    const content = readFileSync(configPath, 'utf8')
-      .replace(/\/\/.*/g, '') // Strip inline comments
-      .replace(/\/\*[\s\S]*?\*\//g, ''); // Strip block comments
-    const config = JSON.parse(content);
-    const rules = config.rules || {};
-    const blocking = [];
-    for (const [ruleId, value] of Object.entries(rules)) {
-      if (value === 'error' || (Array.isArray(value) && value[0] === 'error')) {
-        blocking.push(ruleId);
-      }
-    }
-    return new Set(blocking);
-  } catch (err) {
-    console.error('Failed to parse ESLint config for blocking rules:', err.message);
-    return new Set();
-  }
-}
-
-/**
  * Runs ESLint programmatically.
- * Non-blocking for general styling/GTS warnings, but blocks the PR if any rule 
- * configured as "error" in .eslintrc.json has violations.
+ * Non-blocking for 'prettier/prettier' formatting violations, but blocks the PR
+ * if any other rule configured as "error" (severity: 2) fails.
  */
 async function checkEslint(filesToCheck) {
   if (filesToCheck.length === 0) {
@@ -138,12 +111,13 @@ async function checkEslint(filesToCheck) {
       console.log(resultText);
     }
 
-    const blockingRules = getBlockingRules();
     let hasBlockingErrors = false;
 
     for (const fileResult of results) {
       for (const message of fileResult.messages) {
-        if (message.severity === 2 && blockingRules.has(message.ruleId)) {
+        // message.severity === 2 indicates an error level rule configuration.
+        // We block on all error-level rules except 'prettier/prettier' (formatting).
+        if (message.severity === 2 && message.ruleId !== 'prettier/prettier') {
           hasBlockingErrors = true;
         }
       }
@@ -151,7 +125,7 @@ async function checkEslint(filesToCheck) {
 
     if (hasBlockingErrors) {
       console.error('\n[ERROR] Blocking ESLint rule violations were detected.');
-      console.error('These rules are configured as "error" in .eslintrc.json and must be fixed.');
+      console.error('All ESLint rule errors (except prettier formatting) are blocking and must be fixed.');
       return false;
     }
 
