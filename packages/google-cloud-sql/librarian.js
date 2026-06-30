@@ -113,27 +113,27 @@ const replacements = [
   },
   {
     files: 'packages/google-cloud-sql/src/*/index.ts',
-    searchPattern: /export {SqlAvailableDatabaseVersionsServiceClient} from '\.\/sql_available_database_versions_service_client';/gs,
+    searchPattern: /export {\s*SqlAvailableDatabaseVersionsServiceClient\s*} from '\.\/sql_available_database_versions_service_client';/gs,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/src/*/index.ts',
-    searchPattern: /export {SqlEventsServiceClient} from '\.\/sql_events_service_client';/gs,
+    searchPattern: /export {\s*SqlEventsServiceClient\s*} from '\.\/sql_events_service_client';/gs,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/src/*/index.ts',
-    searchPattern: /export {SqlIamPoliciesServiceClient} from '\.\/sql_iam_policies_service_client';/gs,
+    searchPattern: /export {\s*SqlIamPoliciesServiceClient\s*} from '\.\/sql_iam_policies_service_client';/gs,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/src/*/index.ts',
-    searchPattern: /export {SqlInstanceNamesServiceClient} from '\.\/sql_instance_names_service_client';/gs,
+    searchPattern: /export {\s*SqlInstanceNamesServiceClient\s*} from '\.\/sql_instance_names_service_client';/gs,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/src/*/index.ts',
-    searchPattern: /export {SqlRegionsServiceClient} from '\.\/sql_regions_service_client';/gs,
+    searchPattern: /export {\s*SqlRegionsServiceClient\s*} from '\.\/sql_regions_service_client';/gs,
     replacement: ''
   },
   {
