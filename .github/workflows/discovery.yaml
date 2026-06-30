@@ -1,4 +1,7 @@
 on:
+
+permissions:
+  contents: read
   schedule:
     - cron: '0 12 * * TUE'
   workflow_dispatch:

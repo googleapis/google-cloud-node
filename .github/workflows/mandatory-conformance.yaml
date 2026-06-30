@@ -14,6 +14,9 @@
 # Github action job to test core java library features on
 # downstream client libraries before they are released.
 on:
+
+permissions:
+  contents: read
   push:
     branches:
     - main
