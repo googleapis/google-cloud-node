@@ -12,9 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {execFileSync} from 'child_process';
+import {execFileSync, execFile} from 'child_process';
 import {existsSync} from 'fs';
 import path from 'path';
+import {promisify} from 'util';
+
+const execFileAsync = promisify(execFile);
 
 
 
@@ -72,21 +75,38 @@ function checkEslint(filesToCheck) {
   }
 }
 
+const tsconfigCache = new Map();
+
 function findTsconfigDir(filePath) {
   let dir = path.dirname(filePath);
+  const visited = [];
+
   while (dir && dir !== '.' && dir !== path.sep) {
+    if (tsconfigCache.has(dir)) {
+      const cachedVal = tsconfigCache.get(dir);
+      for (const v of visited) {
+        tsconfigCache.set(v, cachedVal);
+      }
+      return cachedVal;
+    }
+    visited.push(dir);
     if (existsSync(path.join(dir, 'tsconfig.json'))) {
+      for (const v of visited) {
+        tsconfigCache.set(v, dir);
+      }
       return dir;
     }
     dir = path.dirname(dir);
   }
-  if (dir === '.' && existsSync(path.join('.', 'tsconfig.json'))) {
-    return '.';
+
+  const result = (dir === '.' && existsSync(path.join('.', 'tsconfig.json'))) ? '.' : null;
+  for (const v of visited) {
+    tsconfigCache.set(v, result);
   }
-  return null;
+  return result;
 }
 
-function checkTypeSafety(filesToCheck) {
+async function checkTypeSafety(filesToCheck) {
   if (filesToCheck.length === 0) {
     return true;
   }
@@ -107,31 +127,34 @@ function checkTypeSafety(filesToCheck) {
   console.log(
     `\nRunning TypeScript type checks for ${packagesToCheck.size} package(s)...`,
   );
-  let passed = true;
 
-  for (const pkg of packagesToCheck) {
+  const checks = Array.from(packagesToCheck).map(async pkg => {
     try {
       console.log(`  Type checking ${pkg}...`);
-      execFileSync(
-        'node',
-        [
-          'node_modules/typescript/bin/tsc',
-          '--noEmit',
-          '--project',
-          path.join(pkg, 'tsconfig.json'),
-        ],
-        {stdio: 'inherit'},
-      );
+      await execFileAsync('node', [
+        'node_modules/typescript/bin/tsc',
+        '--noEmit',
+        '--project',
+        path.join(pkg, 'tsconfig.json'),
+      ]);
+      return { pkg, passed: true };
     } catch (err) {
       console.error(`\n[ERROR] TypeScript type check failed in ${pkg}`);
-      passed = false;
+      if (err.stdout) {
+        console.error(err.stdout);
+      }
+      if (err.stderr) {
+        console.error(err.stderr);
+      }
+      return { pkg, passed: false };
     }
-  }
+  });
 
-  return passed;
+  const results = await Promise.all(checks);
+  return results.every(r => r.passed);
 }
 
-function run() {
+async function run() {
   try {
     const changedTsFiles = getChangedFiles();
 
@@ -142,7 +165,7 @@ function run() {
 
     // Run ESLint (which now includes Prettier checks) and Type checks
     checkEslint(changedTsFiles);
-    const typeSafetyPassed = checkTypeSafety(changedTsFiles);
+    const typeSafetyPassed = await checkTypeSafety(changedTsFiles);
 
     if (!typeSafetyPassed) {
       throw new Error('Linter checks failed.');
