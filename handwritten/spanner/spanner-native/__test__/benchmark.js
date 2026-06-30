@@ -288,7 +288,8 @@ async function runVerificationPlanTests(db) {
   for (const q of t1Queries) {
     console.log(`  Executing: ${q.label}...`);
     const js = await runBenchmark(() => db.executeSqlJs(q.sql), 16, 5000); // 16 concurrency, 5s duration
-    const rust = await runBenchmark(() => db.executeSqlNative(q.sql, 16), 16, 5000);
+    const testDb16 = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 16);
+    const rust = await runBenchmark(() => testDb16.executeSqlNative(q.sql), 16, 5000);
     console.log(`    JavaScript QPS / Lag: ${js.qps.toFixed(1)} QPS / ${js.avgLagMs.toFixed(2)}ms`);
     console.log(`    Rust (16 Ch) QPS / Lag: ${rust.qps.toFixed(1)} QPS / ${rust.avgLagMs.toFixed(2)}ms`);
     console.log(`    Speedup / Lat Imp   : ${(rust.qps / js.qps).toFixed(2)}x / ${(((js.p95 - rust.p95) / js.p95) * 100).toFixed(1)}%`);
@@ -320,7 +321,8 @@ async function runVerificationPlanTests(db) {
     const json = row.toJSON({ wrapNumbers: true });
     return Object.values(json).map(v => String(v ?? 'null'));
   });
-  const rustMapped = await db.executeSqlNative(typeQuery, 4);
+  const testDb4 = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 4);
+  const rustMapped = await testDb4.executeSqlNative(typeQuery);
   
   console.log('    JavaScript returned:', JSON.stringify(jsMapped[0]));
   console.log('    Rust Native returned:', JSON.stringify(rustMapped[0]));
@@ -348,18 +350,19 @@ async function runVerificationPlanTests(db) {
   console.log('  Running Scenario 4a: Standard Session Pool (Multiplexing: OFF)...');
   process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false';
   // Force connection/pool reset to recreate standard pool
-  const standardDb = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE);
+  const standardDb = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 16);
   // Small warmup
   await runBenchmark(() => standardDb.executeSqlJs(SQL), 4, 3000);
   const poolJs = await runBenchmark(() => standardDb.executeSqlJs(SQL), stressConcurrency, 5000);
-  const poolRust = await runBenchmark(() => standardDb.executeSqlNative(SQL, 16), stressConcurrency, 5000);
+  const poolRust = await runBenchmark(() => standardDb.executeSqlNative(SQL), stressConcurrency, 5000);
   await standardDb.database.close(); // close the standard db
 
   // Scenario 4b: Multiplexed Session (Enabled Multiplexing)
   console.log('  Running Scenario 4b: Multiplexed Session (Multiplexing: ON)...');
   process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'true';
-  const multiJs = await runBenchmark(() => db.executeSqlJs(SQL), stressConcurrency, 5000);
-  const multiRust = await runBenchmark(() => db.executeSqlNative(SQL, 16), stressConcurrency, 5000);
+  const multiDb = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 16);
+  const multiJs = await runBenchmark(() => multiDb.executeSqlJs(SQL), stressConcurrency, 5000);
+  const multiRust = await runBenchmark(() => multiDb.executeSqlNative(SQL), stressConcurrency, 5000);
 
   console.log('\n  [Test 4 Results Comparison]');
   console.log(`    Standard Pool (OFF) QPS: JS ${poolJs.qps.toFixed(1)} / Rust ${poolRust.qps.toFixed(1)} (Error Rate: ${poolJs.errorRate * 100}%)`);
@@ -393,14 +396,20 @@ async function main() {
   console.log('Initializing Spanner connections...');
   const db = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE);
 
+  // Pre-initialize matrix clients
+  const rustClients = {};
+  for (const channels of [1, 4, 8, 10, 12, 16, 20, 32, 50]) {
+    rustClients[channels] = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, channels);
+  }
+
   console.log('Warming up connection pools, auth tokens, and JIT compiler...');
   await runBenchmark(() => db.executeSqlJs(SQL), 4, WARMUP_MS);
-  await runBenchmark(() => db.executeSqlNative(SQL, 1), 4, WARMUP_MS);
-  await runBenchmark(() => db.executeSqlNative(SQL, 4), 4, WARMUP_MS);
-  await runBenchmark(() => db.executeSqlNative(SQL, 8), 4, WARMUP_MS);
-  await runBenchmark(() => db.executeSqlNative(SQL, 16), 4, WARMUP_MS);
-  await runBenchmark(() => db.executeSqlNative(SQL, 32), 4, WARMUP_MS);
-  await runBenchmark(() => db.executeSqlNative(SQL, 50), 4, WARMUP_MS);
+  await runBenchmark(() => rustClients[1].executeSqlNative(SQL), 4, WARMUP_MS);
+  await runBenchmark(() => rustClients[4].executeSqlNative(SQL), 4, WARMUP_MS);
+  await runBenchmark(() => rustClients[8].executeSqlNative(SQL), 4, WARMUP_MS);
+  await runBenchmark(() => rustClients[16].executeSqlNative(SQL), 4, WARMUP_MS);
+  await runBenchmark(() => rustClients[32].executeSqlNative(SQL), 4, WARMUP_MS);
+  await runBenchmark(() => rustClients[50].executeSqlNative(SQL), 4, WARMUP_MS);
   console.log('Warmup complete.');
 
   // Run Advanced Systems Verification Plan tests (Test 1 to 4)
@@ -415,19 +424,19 @@ async function main() {
 
   // 2. Rust Multi-Channel (4 Channels) Customer Case
   console.log('Running Rust (4 Channels) extension...');
-  const custRust4 = await runFixedCountBenchmark(() => db.executeSqlNative(SQL, 4), 110, 1000);
+  const custRust4 = await runFixedCountBenchmark(() => rustClients[4].executeSqlNative(SQL), 110, 1000);
 
   // 3. Rust Multi-Channel (16 Channels) Customer Case
   console.log('Running Rust (16 Channels) extension...');
-  const custRust16 = await runFixedCountBenchmark(() => db.executeSqlNative(SQL, 16), 110, 1000);
+  const custRust16 = await runFixedCountBenchmark(() => rustClients[16].executeSqlNative(SQL), 110, 1000);
 
   // 4. Rust Multi-Channel (32 Channels) Customer Case
   console.log('Running Rust (32 Channels) extension...');
-  const custRust32 = await runFixedCountBenchmark(() => db.executeSqlNative(SQL, 32), 110, 1000);
+  const custRust32 = await runFixedCountBenchmark(() => rustClients[32].executeSqlNative(SQL), 110, 1000);
 
   // 5. Rust Multi-Channel (50 Channels) Customer Case
   console.log('Running Rust (50 Channels) extension...');
-  const custRust50 = await runFixedCountBenchmark(() => db.executeSqlNative(SQL, 50), 110, 1000);
+  const custRust50 = await runFixedCountBenchmark(() => rustClients[50].executeSqlNative(SQL), 110, 1000);
 
   console.log('\n' + '='.repeat(100));
   console.log('CUSTOMER BENCHMARK REPLICATION SUMMARY');
@@ -516,7 +525,7 @@ async function main() {
 
     // 2. Rust Native Dynamic Connection Channels Execution
     for (const channels of CHANNELS_TEST) {
-      const rustRes = await runBenchmark(() => db.executeSqlNative(SQL, channels), concurrency, DURATION_MS);
+      const rustRes = await runBenchmark(() => rustClients[channels].executeSqlNative(SQL), concurrency, DURATION_MS);
       const speedup = jsRes.qps > 0 ? rustRes.qps / jsRes.qps : 0.0;
       const latImp = jsRes.p95 > 0 ? ((jsRes.p95 - rustRes.p95) / jsRes.p95) * 100 : 0.0;
       

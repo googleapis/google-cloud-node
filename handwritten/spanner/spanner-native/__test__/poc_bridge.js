@@ -1,60 +1,43 @@
 const { promisify } = require('util');
+const { Readable } = require('stream');
 // Require the parent Spanner package relatively since we are running inside the repository
 const { Spanner } = require('../../');
-const { GoogleAuth } = require('google-auth-library');
 
-// Require the generated entry point of the napi-rs compiled extension
-const spannerNative = require('../index.js');
+// The new JS Binding Wrapper
+const { NativeBinding } = require('./native_binding.js');
+// The generated protobuf JS types
+const spannerProto = require('../../build/protos/protos.js').google.spanner.v1;
+// Spanner codec for parameter encoding
+const { codec } = require('../../build/src/codec.js');
 
+// ==============================================================================
+// LAYER 1: NODE LIBRARY LAYER (JavaScript/TypeScript)
+// Simulates the handwritten client library structure and types.
+// ==============================================================================
 class NativeSpannerDatabase {
-  /**
-   * Bridges the official @google-cloud/spanner library with our compiled Rust extension.
-   * Retains standard session pool management and OAuth credentials from Node.js.
-   */
-  constructor(projectId, instanceId, databaseId) {
+  constructor(projectId, instanceId, databaseId, channelCount = 1) {
+    this.projectId = projectId;
     this.spanner = new Spanner({ projectId });
     this.instance = this.spanner.instance(instanceId);
     this.database = this.instance.database(databaseId);
     this._cachedSessionName = null;
     this._authClient = null;
 
-    // Build standard auth client with spanner scope
-    this.auth = new GoogleAuth({
-      scopes: ['https://www.googleapis.com/auth/spanner.data'],
-    });
+    // LAYER 1.5: The binding wrapper is instantiated here
+    // In production, we'd pass ADC credentials path to NativeBinding here
+    this._nativeBinding = new NativeBinding(channelCount);
   }
 
-  /**
-   * Retrieves a valid, fresh OAuth access token.
-   * Internally cached and automatically refreshed by the library.
-   */
-  async _getFreshToken() {
-    if (!this._authClient) {
-      this._authClient = await this.auth.getClient();
-    }
-    const tokenResponse = await this._authClient.getAccessToken();
-    return tokenResponse.token;
-  }
-
-  /**
-   * Acquires a session name dynamically. Supports both multiplexed sessions and standard pools.
-   * Caches the session name if it is a multiplexed session to completely bypass V8 pool checkouts.
-   */
   async _getSessionName() {
-    // Return cached session name instantly if available (Multiplexed case)
     if (this._cachedSessionName) {
       return this._cachedSessionName;
     }
-
     const factory = this.database.sessionFactory_;
-    // Promisify the unified factory getSession method
     const getSession = promisify(factory.getSession.bind(factory));
     let session;
     try {
       session = await getSession();
       const name = session.formattedName_;
-      
-      // Cache the session name string if multiplexed (safe to reuse indefinitely)
       if (session.metadata?.multiplexed) {
         this._cachedSessionName = name;
       }
@@ -67,31 +50,125 @@ class NativeSpannerDatabase {
   }
 
   /**
-   * Executes SQL query natively via the Rust napi-rs extension (non-blocking on V8 event loop).
-   * Route across dynamic channel_count connections.
+   * Exposes a runStream(query)-style entry point.
    */
-  async executeSqlNative(sql, channelCount = 1) {
+  async runStream(query) {
     const sessionName = await this._getSessionName();
 
-    return new Promise((resolve, reject) => {
-      spannerNative.executeStreamingSqlNative(
-        sessionName,
-        sql,
-        channelCount,
-        (err, result) => {
-          if (err) reject(err);
-          else resolve(result);
+    let sql;
+    let params;
+    let types;
+
+    if (typeof query === 'string') {
+      sql = query;
+    } else {
+      sql = query.sql;
+      params = query.params;
+      types = query.types;
+    }
+
+    // 1. Build the ExecuteSqlRequest payload
+    const requestMsg = {
+      session: sessionName,
+      sql: sql,
+    };
+
+    // 2. Encode params using Spanner's codec (matching production logic)
+    if (params) {
+      const encodedParams = {};
+      const paramTypes = {};
+      for (const [key, value] of Object.entries(params)) {
+        encodedParams[key] = codec.encode(value);
+        if (types && types[key]) {
+          paramTypes[key] = types[key]; // Type inference handled by Spanner type mapping in prod
         }
-      );
+      }
+      requestMsg.params = { fields: encodedParams };
+      requestMsg.paramTypes = paramTypes;
+    }
+
+    // 3. Serialize that request to protobuf wire bytes.
+    const requestProto = spannerProto.ExecuteSqlRequest.create(requestMsg);
+    const requestBytes = spannerProto.ExecuteSqlRequest.encode(requestProto).finish();
+
+    // 4. Build metadata headers (Notice Auth is completely gone! Rust handles it)
+    const metadata = [
+      ['x-goog-request-params', `session=${encodeURIComponent(sessionName)}`],
+      ['x-goog-spanner-route-to-leader', 'true'],
+      ['x-goog-user-project', this.projectId],
+      ['x-goog-api-client', 'spanner-node-poc/1.0.0']
+    ];
+
+    // 4.5 Define GAX Retry Options to pass to Rust
+    const gaxOptions = {
+      retry: {
+        retryCodes: [14, 13], // UNAVAILABLE, INTERNAL
+        backoffSettings: {
+          initialRetryDelayMillis: 100,
+          maxRetryDelayMillis: 60000,
+          retryDelayMultiplier: 1.3,
+        }
+      },
+      timeoutMillis: 30000
+    };
+
+    // 5. Node Readable stream for receiving decoded rows back (simulating PartialResultStream)
+    const partialResultStream = new Readable({
+      objectMode: true,
+      read() {
+        // backpressure handled lazily
+      }
+    });
+
+    // 6. Call the binding layer
+    this._nativeBinding.executeStreamingSql(
+      sessionName,
+      metadata,
+      requestBytes,
+      gaxOptions,
+      (err, batch, telemetry) => {
+        if (err) {
+          partialResultStream.destroy(err);
+          return;
+        }
+        if (batch === null) {
+          partialResultStream.push(null);
+        } else {
+          if (telemetry) {
+            partialResultStream.emit('telemetry', telemetry);
+          }
+          for (const row of batch) {
+            partialResultStream.push(row);
+          }
+        }
+      }
+    );
+
+    return partialResultStream;
+  }
+
+  /**
+   * Benchmark wrapper: consumes the stream and returns a promise for all rows.
+   */
+  async executeSqlNative(sql) {
+    const stream = await this.runStream(sql);
+    return new Promise((resolve, reject) => {
+      const rows = [];
+      stream.on('data', row => rows.push(row));
+      // For demonstration, we could log telemetry here: stream.on('telemetry', t => console.log(t));
+      stream.on('error', err => reject(err));
+      stream.on('end', () => resolve(rows));
     });
   }
 
   /**
-   * Baseline baseline execution path using official @google-cloud/spanner JS package.
+   * Baseline execution path using official @google-cloud/spanner JS package.
+   * Note: does String(v) stringification which is fine for benchmark timing, 
+   * but not a strict correctness comparison.
    */
   async executeSqlJs(sql) {
+    // PRODUCTION: Lock-free cached token is not shown here
     const [rows] = await this.database.run({ sql });
-    // Map rows to simple arrays of stringified values to match Rust's output format
     return rows.map((row) => {
       const json = row.toJSON();
       return Object.values(json).map((v) => String(v ?? 'null'));

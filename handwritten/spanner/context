@@ -1,0 +1,965 @@
+You are an expert Rust and Node.js systems engineer. Your task is to build
+a working proof-of-concept (POC) that demonstrates throughput and latency
+improvement in the Node.js Google Cloud Spanner client library
+(@google-cloud/spanner) by replacing the JavaScript gRPC dispatch hot path
+with a Rust native extension using napi-rs. The extension offloads Protobuf
+serialization, gRPC channel management, and network I/O to Rust and Tokio,
+freeing the V8 event loop thread from per-request CPU work.
+
+This prompt is fully self-contained. You have no prior context about this
+project. Every decision, every architecture choice, every known issue is
+specified below. Do not make assumptions. Do not ask clarifying questions.
+Implement exactly what is described.
+
+════════════════════════════════════════════════════════════════
+BACKGROUND — READ THIS FULLY BEFORE WRITING ANY CODE
+════════════════════════════════════════════════════════════════
+
+THE NODE.JS THROUGHPUT PROBLEM:
+Node.js executes JavaScript on a single V8 thread. There is one thread
+and it does everything: runs your application code, handles callbacks,
+processes Promise resolutions, and executes gRPC client code. Node.js
+is not multi-threaded from JavaScript's perspective.
+
+Per-request cost breakdown for a Spanner read in Node.js today:
+
+  JavaScript CPU work (V8 thread, blocking):
+    Serialize params into gRPC request object:  ~20–40µs
+    grpc-js internal JavaScript overhead:       ~15–25µs
+    Deserialize Protobuf response to JS objects:~40–80µs
+    Total V8-blocking CPU time per request:     ~75–145µs
+
+  Network + Spanner processing:                 ~3–6ms
+    (handled by libuv native thread pool
+     underneath Node — V8 thread is theoretically
+     free here but only if JS is not blocking it)
+
+At approximately 3000–5000 QPS, the single V8 thread spends 100% of
+its time on JavaScript-layer CPU overhead and cannot keep up with
+incoming work. New requests queue inside the event loop. Latency
+climbs. Throughput plateaus. No amount of configuration or tuning
+can raise this ceiling because the bottleneck is the single V8 thread.
+
+THE FIX:
+Move the per-request JavaScript CPU work — Protobuf encode and decode,
+gRPC dispatch coordination — into a Rust native extension. The Rust
+extension is compiled to a .node binary file that Node.js loads and
+calls like a normal JavaScript module. Inside the extension, a Tokio
+async runtime handles the gRPC connection and network I/O on its own
+thread pool, completely separate from Node's V8 thread and libuv pool.
+
+The V8 thread hands a request to the Rust extension, receives a Promise
+back immediately (non-blocking), and is free to handle other work. When
+Rust/Tokio completes the network round-trip, it calls back into V8 via
+a thread-safe callback to resolve the Promise. From JavaScript this looks
+like a completely normal async function call.
+
+V8 thread CPU time per request drops from ~75–145µs to ~10–15µs.
+At high concurrency this means the V8 thread is never saturated,
+latency stays flat, and throughput scales significantly beyond the
+JavaScript-layer ceiling.
+
+THE BINDING LAYER — napi-rs:
+napi-rs is a Rust crate that provides safe, ergonomic bindings between
+Rust code and the Node.js N-API (Node API). N-API is a stable C API
+that Node.js exposes for native extensions — stable means a .node file
+compiled for Node 18 works on Node 20 and 22 without recompilation.
+napi-rs wraps the N-API in safe Rust code and handles:
+  - JavaScript ↔ Rust type conversion (JS string → Rust String, etc)
+  - Promise creation and resolution from Rust code
+  - ThreadsafeFunction: calling back into V8 from a Tokio thread
+  - AsyncTask: running work on a background thread, resolving a Promise
+
+THE TOKIO RUNTIME:
+Tokio is Rust's async runtime. It manages a pool of OS threads that
+execute async Rust tasks. When the Rust extension receives a request,
+it spawns an async task onto Tokio. Tokio sends the gRPC request over
+the network, waits for the response, decodes the Protobuf, and calls
+back into V8 when done. Tokio's threads are entirely separate from
+Node's V8 thread and libuv thread pool. They coexist without conflict.
+
+THE gRPC LIBRARY — tonic:
+tonic is a Rust gRPC client library built on Tokio. It handles HTTP/2
+connection management, TLS, and Protobuf-encoded request/response over
+the wire. One tonic Channel is a persistent HTTP/2 connection that
+multiplexes hundreds of concurrent request streams. There is no need
+for multiple channels — one channel is sufficient for any throughput
+level because HTTP/2 multiplexing handles concurrent streams natively.
+
+THE PROTOBUF LIBRARY — prost:
+prost is a Rust Protobuf library. It compiles .proto files into Rust
+structs at build time via a build script (build.rs). These structs
+represent Spanner API request and response messages. Encoding a request
+into Protobuf bytes and decoding a response from Protobuf bytes happens
+entirely in Rust, with zero JavaScript involvement.
+
+WHAT THE POC MUST PROVE:
+  1. V8 thread CPU time per request decreases measurably
+  2. Throughput scales beyond the JavaScript-layer ceiling
+  3. p50 and p99 latency improve at high concurrency levels
+  4. The V8 event loop stays responsive under load (low event loop lag)
+  5. QPS scales near-linearly with concurrency up to network limits
+
+WHAT THE POC DOES NOT NEED:
+  - Session pool management in Rust (reuse existing JS session pool)
+  - Transaction support (read-only benchmark queries only)
+  - Authentication in Rust (reuse existing google-auth-library tokens)
+  - Production error handling, retry logic, or circuit breaking
+  - Windows builds (Linux x86_64 and macOS arm64 only for POC)
+  - Any change to the public @google-cloud/spanner JavaScript API
+  - The existing @google-cloud/spanner library is not modified at all
+
+════════════════════════════════════════════════════════════════
+ENVIRONMENT
+════════════════════════════════════════════════════════════════
+
+Already available on the machine:
+  - Node.js 20 LTS with npm
+  - @google-cloud/spanner npm package installed
+  - google-auth-library npm package installed
+  - Access to a real Google Cloud Spanner instance
+    IMPORTANT: do NOT use the Spanner emulator. Real network
+    latency is required to demonstrate the throughput improvement.
+    Without real network latency the benchmark results are meaningless.
+  - A machine with multiple CPU cores for benchmarking
+
+Needs to be installed as part of setup (setup_and_run.sh handles this):
+  - Rust toolchain via rustup (https://rustup.rs)
+  - @napi-rs/cli via npm (the napi-rs build tool)
+
+════════════════════════════════════════════════════════════════
+ARCHITECTURE DECISIONS — ALREADY MADE, DO NOT DEVIATE
+════════════════════════════════════════════════════════════════
+
+1.  napi-rs version: 2.x latest stable
+2.  Tokio version: 1, features = ["full"]
+3.  tonic version: 0.12, features = ["tls", "tls-roots"]
+    The "tls-roots" feature bundles Mozilla's root certificates
+    into the binary to avoid system certificate store issues on
+    some Linux configurations.
+4.  prost version: 0.13
+5.  prost-types version: 0.13 (for well-known proto types like Value)
+6.  once_cell version: 1 (for lazy static initialization)
+7.  Build tool: @napi-rs/cli, command: napi build --platform --release
+8.  crate-type: ["cdylib"] — produces a .node file for Node.js require()
+9.  Tokio worker threads: 4 inside the static runtime
+10. gRPC endpoint: spanner.googleapis.com:443 with TLS
+11. Auth strategy: JavaScript caller obtains a token string using
+    google-auth-library and passes it to the Rust function as a
+    plain string on each call. Rust injects it as a Bearer token
+    header. Rust does not handle authentication itself.
+12. Session strategy: JavaScript caller obtains a session name string
+    from the existing @google-cloud/spanner session pool and passes it
+    to the Rust function as a plain string. Rust uses it in the gRPC
+    request. Rust does not manage sessions.
+13. Static Tokio runtime: use once_cell::sync::Lazy<tokio::runtime::Runtime>
+    Created once on first use, reused for all subsequent requests.
+    CRITICAL: do NOT create a new Tokio runtime per request. Creating
+    a runtime allocates thread pools, I/O reactors, and timer state.
+    Destroying it waits for all internal threads to shut down. At high
+    QPS this overhead dominates and eliminates the performance benefit.
+    The static runtime is created once and lives for the process lifetime.
+14. Static gRPC channel: use once_cell::sync::Lazy<tonic::transport::Channel>
+    Created once on first use, reused for all requests via HTTP/2
+    multiplexing. Do NOT create a new channel per request (same reason
+    as above — channel creation involves TLS handshake, TCP connection
+    establishment, HTTP/2 settings negotiation — hundreds of milliseconds).
+    Do NOT create multiple channels. One channel with HTTP/2 multiplexing
+    handles unlimited concurrent streams.
+15. AsyncTask pattern for non-blocking V8 dispatch (see constraint below)
+16. Proto source: clone googleapis/googleapis to /tmp/googleapis
+    and compile spanner/v1/*.proto via build.rs using tonic-build
+17. N-API version target: napi4 minimum (required for ThreadsafeFunction
+    and AsyncTask support). This covers Node 18, 20, and 22.
+18. Single compiled module: produce one .node file, not multiple packages
+
+════════════════════════════════════════════════════════════════
+CRITICAL ARCHITECTURAL CONSTRAINT — DO NOT VIOLATE
+════════════════════════════════════════════════════════════════
+
+THE V8 EVENT LOOP THREAD MUST NEVER BE BLOCKED.
+
+This is the single most important constraint in this entire POC.
+If you block the V8 thread you defeat the entire purpose.
+
+Node.js is built on the assumption that JavaScript never blocks.
+If JavaScript blocks (e.g. by calling a synchronous function that
+waits for I/O), the entire event loop stalls. All pending Promises,
+all incoming requests, all timers — everything stops until the
+blocking call returns. This is catastrophic for a server application.
+
+WRONG — this blocks the V8 thread, do not use:
+  // This pattern is WRONG for Node.js
+  #[napi]
+  fn execute_sql(session: String, sql: String, token: String)
+      -> Vec<Vec<String>> {
+      // block_on() on V8 thread = entire event loop stalls
+      RUNTIME.block_on(async {
+          client.execute_sql(request).await
+      })
+  }
+
+CORRECT — AsyncTask runs work on background thread, returns Promise:
+  #[napi]
+  fn execute_sql_native(
+      session_name: String,
+      sql: String,
+      token: String,
+  ) -> AsyncTask<SpannerTask> {
+      // Returns immediately — napi-rs wraps this in a Promise
+      // The actual work happens in SpannerTask::compute()
+      // which runs on a background thread, not V8 thread
+      AsyncTask::new(SpannerTask { session: session_name, sql, token })
+  }
+
+The napi-rs AsyncTask pattern works as follows:
+  - JavaScript calls executeSqlNative(session, sql, token)
+  - napi-rs creates a Promise and returns it to JavaScript immediately
+  - napi-rs schedules SpannerTask on a background thread (libuv pool)
+  - SpannerTask::compute() runs on the background thread:
+      it calls RUNTIME.block_on() which is SAFE here because
+      this is a background thread, not the V8 thread
+  - When compute() returns, napi-rs calls SpannerTask::resolve()
+      back on the V8 thread to convert Rust types to JS objects
+  - The Promise resolves with the result
+  - JavaScript awaits the Promise — non-blocking in JS
+
+════════════════════════════════════════════════════════════════
+DIRECTORY STRUCTURE TO CREATE
+════════════════════════════════════════════════════════════════
+
+Create the following structure. Do not create anything outside it.
+Place it inside the google-cloud-node repository at:
+packages/spanner/spanner-native/
+
+  packages/spanner/spanner-native/
+    Cargo.toml              ← Rust package manifest and dependencies
+    package.json            ← npm package config for napi-rs
+    build.rs                ← proto compilation + napi-rs build setup
+    src/
+      lib.rs                ← Rust extension: core implementation
+    proto/                  ← Spanner .proto files (copied from googleapis)
+      google/
+        spanner/v1/
+          spanner.proto
+          transaction.proto
+          result_set.proto
+        api/
+          (google.api dependency protos)
+    __test__/
+      poc_bridge.js         ← JS wrapper using existing session/auth
+      benchmark.js          ← benchmark measuring QPS and latency
+    setup_and_run.sh        ← single script: install, build, benchmark
+    README.md               ← reproduction steps and explanation
+
+════════════════════════════════════════════════════════════════
+DETAILED IMPLEMENTATION REQUIREMENTS
+════════════════════════════════════════════════════════════════
+
+── Cargo.toml ──────────────────────────────────────────────────
+
+[package]
+name = "spanner-native"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.75"
+description = "Rust native extension for Node.js Spanner throughput POC"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+napi = { version = "2", features = ["async", "napi4"] }
+napi-derive = "2"
+tokio = { version = "1", features = ["full"] }
+tonic = { version = "0.12", features = ["tls", "tls-roots"] }
+prost = "0.13"
+prost-types = "0.13"
+once_cell = "1"
+
+[build-dependencies]
+napi-build = "2"
+tonic-build = "0.12"
+
+── package.json ────────────────────────────────────────────────
+
+{
+  "name": "@google-cloud/spanner-native",
+  "version": "0.1.0",
+  "main": "index.js",
+  "napi": {
+    "name": "spanner-native",
+    "triples": {
+      "defaults": true,
+      "additional": ["aarch64-apple-darwin"]
+    }
+  },
+  "scripts": {
+    "build": "napi build --platform --release",
+    "build:debug": "napi build --platform"
+  },
+  "devDependencies": {
+    "@napi-rs/cli": "^2"
+  }
+}
+
+napi-rs will generate an index.js file after build that detects
+the platform and requires the correct .node file. The benchmark
+should require this generated index.js, not the .node file directly.
+
+── build.rs ────────────────────────────────────────────────────
+
+Two responsibilities, in this exact order:
+
+1. Call napi_build::setup() as the very first line.
+   This is mandatory for napi-rs to configure linker flags
+   correctly. If this is missing the .node file will not load.
+
+2. Compile Spanner .proto files using tonic_build::configure():
+   - .build_server(false) — generate client code only
+   - .compile() with these proto files:
+       "proto/google/spanner/v1/spanner.proto"
+       "proto/google/spanner/v1/transaction.proto"
+       "proto/google/spanner/v1/result_set.proto"
+   - Include paths:
+       "proto/"
+       "/tmp/googleapis"
+   Both include paths are needed because some proto imports use
+   paths relative to the googleapis root.
+
+If proto compilation fails, print a clear error identifying
+which proto file failed and why, then panic with the error.
+
+── src/lib.rs ──────────────────────────────────────────────────
+
+Structure the file in this exact order:
+
+1. Top-of-file module comment explaining in plain English:
+   - What this file does
+   - Why we cannot block the V8 thread
+   - How AsyncTask solves the non-blocking requirement
+   - How Tokio runs alongside Node's libuv without conflict
+   Write this for a JavaScript engineer who does not know Rust.
+
+2. Crate-level attribute for napi-rs:
+   #![deny(clippy::all)]
+   #[macro_use]
+   extern crate napi_derive;
+
+3. Import declarations (use statements):
+   - once_cell::sync::Lazy
+   - napi::bindgen_prelude::*
+   - napi::{Task, Env, Result, JsObject}
+   - tonic::transport::{Channel, ClientTlsConfig}
+   - tonic::service::Interceptor
+   - The generated proto types via tonic::include_proto!
+
+4. Proto module declaration to bring in generated types:
+   pub mod google {
+     pub mod spanner {
+       pub mod v1 {
+         tonic::include_proto!("google.spanner.v1");
+       }
+     }
+   }
+   use google::spanner::v1::spanner_client::SpannerClient;
+   use google::spanner::v1::{ExecuteSqlRequest, ResultSet};
+
+5. Static RUNTIME using once_cell::sync::Lazy:
+   static RUNTIME: Lazy<tokio::runtime::Runtime> = Lazy::new(|| {
+     tokio::runtime::Builder::new_multi_thread()
+       .worker_threads(4)
+       .enable_all()
+       .build()
+       .expect("Failed to initialize Tokio runtime")
+   });
+   
+   Add a comment explaining: this is created once when the first
+   request is made and reused for all subsequent requests.
+   Creating a new runtime per request would cost hundreds of
+   microseconds per call and eliminate the performance benefit.
+
+6. Static CHANNEL using once_cell::sync::Lazy:
+   Establish a single persistent TLS connection to
+   spanner.googleapis.com:443. The channel is created using
+   RUNTIME.block_on() during initialization.
+   
+   TLS configuration — try loading system CA certificates
+   from these paths in order, stopping at the first success:
+     "/etc/ssl/certs/ca-certificates.crt"      (Debian/Ubuntu)
+     "/etc/pki/tls/certs/ca-bundle.crt"        (RHEL/CentOS)
+     "/etc/ssl/ca-bundle.pem"                  (OpenSUSE)
+     "/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem" (Fedora)
+   If none of these paths exist, fall back to the bundled
+   Mozilla root certificates provided by the tls-roots feature:
+     tls_config = tls_config.with_enabled_roots();
+   
+   Add a comment explaining: one channel handles unlimited
+   concurrent requests via HTTP/2 stream multiplexing. Multiple
+   channels would add TCP connection overhead with no benefit.
+
+7. AuthInterceptor struct implementing tonic::service::Interceptor:
+   Injects two headers on every gRPC request:
+   a. "authorization: Bearer {token}" for authentication
+   b. "google-cloud-resource-prefix: {database_path}" for
+      optimal routing — extract database path from session name
+      by taking everything before "/sessions/" in the session string
+      Format: projects/P/instances/I/databases/D/sessions/S
+      Prefix: projects/P/instances/I/databases/D
+
+8. SpannerTask struct:
+   pub struct SpannerTask {
+     session: String,
+     sql: String,
+     token: String,
+   }
+
+9. impl Task for SpannerTask:
+
+   type Output = Vec<Vec<String>>;
+   type JsValue = Array;
+
+   fn compute(&mut self) -> Result<Self::Output>:
+     IMPORTANT: This method runs on a background thread managed
+     by libuv. It is safe to call RUNTIME.block_on() here because
+     we are NOT on the V8 thread.
+     
+     Implementation:
+     a. Clone CHANNEL (Channel clone is cheap — it is an Arc)
+     b. Create SpannerClient::with_interceptor(channel, interceptor)
+        where interceptor is AuthInterceptor with self.token and
+        self.session cloned in
+     c. Build ExecuteSqlRequest:
+          session: self.session.clone()
+          sql: self.sql.clone()
+          transaction: None
+          params: None
+          param_types: Default::default()
+          query_mode: 0 (NORMAL mode)
+          all other fields: Default::default()
+     d. Call RUNTIME.block_on(async move {
+          client.execute_sql(request).await
+        })
+     e. On success: decode ResultSet into Vec<Vec<String>>
+        by calling decode_result_set() helper (defined below)
+     f. On tonic error: map to napi::Error using
+        napi::Error::from_reason(status.to_string())
+
+   fn resolve(&mut self, env: Env, output: Self::Output)
+       -> Result<Self::JsValue>:
+     IMPORTANT: This method runs back on the V8 thread.
+     It is safe to create JavaScript objects here.
+     
+     Implementation:
+     a. Create outer napi Array with env.create_array(0)?
+     b. For each row in output (Vec<String>):
+          Create inner Array
+          For each cell string: env.create_string(cell)?
+          Append cell to inner array
+          Append inner array to outer array
+     c. Return the outer Array
+
+10. decode_result_set helper function (private, not exported):
+    fn decode_result_set(result: ResultSet) -> Vec<Vec<String>>
+    
+    Iterates result.rows, for each row iterates row.values,
+    calls proto_value_to_string() on each value, collects into
+    Vec<Vec<String>>.
+
+11. proto_value_to_string helper function (private, not exported):
+    fn proto_value_to_string(value: &prost_types::Value) -> String
+    
+    Converts prost_types::value::Kind variants to String:
+      NullValue   → "null".to_string()
+      NumberValue → format!("{}", n)  (use n.to_string())
+      StringValue → s.clone()
+      BoolValue   → if b { "true" } else { "false" }.to_string()
+      ListValue   → format simple JSON array representation
+      StructValue → format simple JSON object representation
+      None        → "".to_string()
+
+12. Exported napi function:
+    #[napi]
+    pub fn execute_sql_native(
+        session_name: String,
+        sql: String,
+        token: String,
+    ) -> AsyncTask<SpannerTask> {
+        AsyncTask::new(SpannerTask {
+            session: session_name,
+            sql,
+            token,
+        })
+    }
+    
+    This function returns immediately. napi-rs automatically
+    wraps AsyncTask<SpannerTask> in a JavaScript Promise<Array>.
+    The V8 thread is never blocked.
+
+── poc_bridge.js ───────────────────────────────────────────────
+
+JavaScript bridge between existing @google-cloud/spanner library
+and the Rust native extension. Written as CommonJS (require/module.exports)
+compatible with Node 20.
+
+Load the native extension via the napi-rs generated index.js:
+  const spannerNative = require('../index.js');
+  // index.js is generated by napi build and handles platform detection
+
+Class NativeSpannerDatabase:
+
+  constructor(projectId, instanceId, databaseId):
+    - Create Spanner client: new Spanner({ projectId })
+      from @google-cloud/spanner
+    - Get instance reference: this.spanner.instance(instanceId)
+    - Get database reference: this.instance.database(databaseId)
+    - Create GoogleAuth client from google-auth-library:
+      this.auth = new GoogleAuth({
+        scopes: ['https://www.googleapis.com/auth/spanner.data']
+      })
+    - Store references for later use
+
+  async _getFreshToken():
+    - const client = await this.auth.getClient()
+    - const tokenResponse = await client.getAccessToken()
+    - return tokenResponse.token
+    - google-auth-library handles token caching and refresh
+      automatically. No manual locking or expiry checking needed.
+      Calling getAccessToken() is safe to call concurrently.
+
+  async _getSessionName():
+    - Access the internal session pool: this.database.pool_
+    - Acquire a session: const session = await this.database.pool_.acquire()
+    - Read the session name: const name = session.formattedName_
+    - CRITICAL: release the session immediately after reading name:
+      this.database.pool_.release(session)
+    - Return name
+    - Add a comment: this is a POC hack accessing internal API.
+      Production would use a Rust-owned session pool.
+    - Wrap in try/finally to guarantee release even on error:
+      let session;
+      try {
+        session = await this.database.pool_.acquire();
+        return session.formattedName_;
+      } finally {
+        if (session) this.database.pool_.release(session);
+      }
+    - If pool_.acquire() throws, try this.database.pool_.getSession()
+      as a fallback. Add a comment noting the API may vary by version.
+
+  async executeSqlNative(sql):
+    - const sessionName = await this._getSessionName()
+    - const token = await this._getFreshToken()
+    - const rows = await spannerNative.executeSqlNative(
+        sessionName, sql, token)
+    - return rows
+
+  async executeSqlJs(sql):
+    - const [rows] = await this.database.run({ sql })
+    - Convert to array of arrays to match Rust output format:
+      return rows.map(row => {
+        const json = row.toJSON();
+        return Object.values(json).map(v => String(v ?? 'null'));
+      })
+
+module.exports = { NativeSpannerDatabase };
+
+── benchmark.js ────────────────────────────────────────────────
+
+The benchmark is the most important file. It must produce clear,
+unambiguous evidence of the throughput and latency improvement.
+
+Configuration constants at the top — user fills these in:
+  const PROJECT          = 'your-project';
+  const INSTANCE         = 'your-instance';
+  const DATABASE         = 'your-database';
+  const TABLE            = 'your-table';
+  const SQL              = `SELECT * FROM ${TABLE} LIMIT 1`;
+  const WARMUP_MS        = 10_000;
+  const DURATION_MS      = 30_000;
+  const CONCURRENCY_LEVELS = [1, 2, 4, 8, 16, 32, 64, 128];
+
+HOW TO MEASURE CONCURRENCY IN NODE.JS:
+Unlike threads in other languages, Node.js concurrency means having
+N Promises in flight simultaneously. Do NOT use Promise.all() with
+fixed arrays — this creates synchronization barriers that artificially
+limit throughput by making all N requests start and stop together.
+
+Use the keep-N-in-flight pattern:
+
+  async function keepNInFlight(executeFn, concurrency, durationMs) {
+    const latencies = [];
+    let errors = 0;
+    let stopped = false;
+    let inFlight = 0;
+
+    return new Promise((resolve) => {
+      function launchOne() {
+        if (stopped && inFlight === 0) {
+          resolve({ latencies, errors });
+          return;
+        }
+        if (stopped) return;
+
+        inFlight++;
+        const start = performance.now();
+
+        executeFn()
+          .then(() => {
+            latencies.push(performance.now() - start);
+          })
+          .catch(() => {
+            errors++;
+          })
+          .finally(() => {
+            inFlight--;
+            launchOne();
+            if (stopped && inFlight === 0) {
+              resolve({ latencies, errors });
+            }
+          });
+      }
+
+      for (let i = 0; i < concurrency; i++) launchOne();
+      setTimeout(() => { stopped = true; }, durationMs);
+    });
+  }
+
+This pattern maintains exactly N requests in flight at all times.
+When one completes, another launches immediately. This correctly
+models a high-throughput server under sustained load.
+
+EVENT LOOP LAG MEASUREMENT:
+This is a unique and powerful metric for Node.js benchmarks.
+It measures how late the event loop is processing ticks.
+High lag means the V8 thread is overloaded.
+Near-zero lag means the V8 thread is free.
+
+  function measureEventLoopLag(durationMs) {
+    const lags = [];
+    let stopped = false;
+
+    const measure = () => {
+      if (stopped) return;
+      const before = performance.now();
+      setImmediate(() => {
+        lags.push(performance.now() - before);
+        setTimeout(measure, 10);
+      });
+    };
+
+    measure();
+    return new Promise(resolve =>
+      setTimeout(() => {
+        stopped = true;
+        const maxLag = Math.max(...lags, 0);
+        const avgLag = lags.reduce((a, b) => a + b, 0) / (lags.length || 1);
+        resolve({ maxLag, avgLag });
+      }, durationMs)
+    );
+  }
+
+Function runBenchmark(executeFn, concurrency, durationMs):
+  - Start event loop lag measurement and benchmark simultaneously:
+    const [{ latencies, errors }, lagStats] = await Promise.all([
+      keepNInFlight(executeFn, concurrency, durationMs),
+      measureEventLoopLag(durationMs)
+    ]);
+  - Compute:
+      qps = latencies.length / (durationMs / 1000)
+      p50 = percentile(latencies, 50)
+      p95 = percentile(latencies, 95)
+      p99 = percentile(latencies, 99)
+      errorRate = errors / (latencies.length + errors)
+  - Return { qps, p50, p95, p99, errorRate, maxLagMs: lagStats.maxLag }
+
+Percentile helper function:
+  function percentile(arr, p) {
+    if (arr.length === 0) return 0;
+    const sorted = [...arr].sort((a, b) => a - b);
+    const idx = Math.ceil((p / 100) * sorted.length) - 1;
+    return sorted[Math.max(0, idx)];
+  }
+
+Function main():
+  1. Check if any config value is still a placeholder
+     ('your-project', 'your-instance', etc). If so:
+       console.error('Please fill in PROJECT, INSTANCE, DATABASE,
+         TABLE in benchmark.js');
+       process.exit(1);
+
+  2. Print system info:
+       Node.js version: process.version
+       CPUs: os.cpus().length
+       Platform: os.platform() + ' ' + os.arch()
+       Target query: SQL
+
+  3. Instantiate NativeSpannerDatabase
+
+  4. Warmup phase (results discarded):
+     console.log('Running warmup...')
+     Run both executeSqlJs and executeSqlNative at concurrency=4
+     for WARMUP_MS each. This ensures:
+       - gRPC channel TLS handshake is complete
+       - Session pool is fully warmed
+       - Auth token is cached
+       - Tokio runtime is initialized
+       - JIT compilation has run on hot paths
+
+  5. For each concurrency level in CONCURRENCY_LEVELS:
+     a. Run JS baseline: runBenchmark(db.executeSqlJs.bind(db), ...)
+     b. Run Rust native: runBenchmark(db.executeSqlNative.bind(db), ...)
+     c. Calculate speedup = rustResult.qps / jsResult.qps
+     d. Print comparison rows
+
+  6. Print formatted results table:
+     Columns: Concurrency | Method | QPS | p50ms | p95ms | p99ms |
+              EL Lag ms | Speedup
+     Use console.log with padStart/padEnd for alignment.
+
+  7. Print summary section:
+     - JS ceiling: lowest concurrency where QPS stopped growing
+     - Rust peak QPS and at which concurrency
+     - Peak speedup
+     - Note about event loop lag: explain what the numbers mean
+
+  8. Write benchmark_results.json:
+     JSON.stringify({ systemInfo, config, runs }, null, 2)
+     Write with fs.writeFileSync
+
+  9. Call process.exit(0) explicitly to cleanly shut down the
+     Spanner client and all connections.
+
+── setup_and_run.sh ────────────────────────────────────────────
+
+Idempotent bash script. Safe to run multiple times.
+Must be executable (chmod +x).
+
+Steps in order:
+
+  1. Check Node.js 18 or higher is installed:
+     node_version=$(node -e "process.stdout.write(process.version)")
+     If not found or below 18, print clear error and exit 1.
+
+  2. Install Rust toolchain if not present:
+     if ! command -v rustc &> /dev/null; then
+       curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs \
+         | sh -s -- -y
+     fi
+     source "$HOME/.cargo/env"
+     Print Rust version to confirm: rustc --version
+
+  3. Install @napi-rs/cli globally if not present:
+     if ! command -v napi &> /dev/null; then
+       npm install -g @napi-rs/cli
+     fi
+
+  4. Clone googleapis protos if not already present:
+     if [ ! -d "/tmp/googleapis" ]; then
+       git clone --depth=1 \
+         https://github.com/googleapis/googleapis.git \
+         /tmp/googleapis
+     else
+       echo "/tmp/googleapis already exists, skipping clone"
+     fi
+
+  5. Copy required proto files into proto/ directory:
+     Create proto/google/spanner/v1/ and copy:
+       spanner.proto, transaction.proto, result_set.proto
+     Create proto/google/api/ and copy any .proto files
+     that spanner.proto imports from google/api/
+     The include paths in build.rs cover /tmp/googleapis
+     so transitive imports resolve from there.
+
+  6. cd into spanner-native directory
+
+  7. Install npm dependencies:
+     npm install
+
+  8. Build the Rust extension with full optimizations:
+     napi build --platform --release
+     CRITICAL: --release flag is mandatory.
+     Debug builds are 10–50x slower than release builds.
+     Benchmarking a debug build produces meaningless results.
+     If this step fails, print the full cargo error and exit 1.
+
+  9. Verify the .node file was produced:
+     Check that spanner-native.*.node exists in the directory.
+     If not, print error and exit 1.
+
+  10. Check config placeholders in benchmark.js:
+      If PROJECT, INSTANCE, DATABASE, or TABLE still contain
+      'your-project', 'your-instance', 'your-database', 'your-table':
+        Print: "Please edit __test__/benchmark.js and fill in your
+                GCP project, instance, database, and table name"
+        exit 1
+
+  11. Run the benchmark:
+      node __test__/benchmark.js
+
+════════════════════════════════════════════════════════════════
+KNOWN ISSUES — HANDLE THESE PROACTIVELY
+════════════════════════════════════════════════════════════════
+
+1. Proto transitive dependency imports:
+   Spanner protos import these transitive dependencies:
+     google/api/annotations.proto
+     google/api/client.proto
+     google/api/field_behavior.proto
+     google/api/resource.proto
+     google/protobuf/struct.proto     (in prost-types crate)
+     google/protobuf/timestamp.proto  (in prost-types crate)
+     google/rpc/status.proto
+   
+   The tonic-build include path must be set to /tmp/googleapis
+   so all google/api/ and google/rpc/ imports resolve correctly.
+   The google/protobuf/ well-known types are bundled inside
+   the prost-types crate — tonic-build finds them automatically
+   via the OUT_DIR environment variable set by cargo.
+   
+   If compilation fails with "import not found", check that
+   /tmp/googleapis was cloned successfully and contains the
+   google/api/ directory.
+
+2. napi-rs generated index.js file:
+   After running napi build, napi-rs generates an index.js file
+   in the package root. This file detects the platform at runtime
+   and requires the correct platform-specific .node file.
+   poc_bridge.js must require this index.js, not the .node file
+   directly, because the .node filename contains the platform
+   (e.g. spanner-native.linux-x64-gnu.node).
+   
+   Correct: const spannerNative = require('../index.js')
+   Wrong:   const spannerNative = require('../spanner-native.node')
+
+3. Session pool internal API variations:
+   The @google-cloud/spanner session pool exposes database.pool_
+   as its internal pool object. The acquire method may be named
+   differently across library versions:
+     Try: await this.database.pool_.acquire()
+     Fallback: await this.database.pool_.getSession()
+   
+   Use try/catch to attempt both and throw a descriptive error
+   if neither works, explaining this is a POC internal API access
+   and the user may need to check their library version.
+   
+   CRITICAL: always release the session back to the pool.
+   Use try/finally to guarantee release even if an error occurs.
+   Leaking sessions causes the pool to exhaust under sustained load
+   and the benchmark will fail with session-related errors.
+
+4. SpannerTask must implement Send:
+   napi-rs requires AsyncTask implementations to be Send
+   (safe to move between threads). The SpannerTask struct
+   contains only String fields which are Send automatically.
+   Do not add any Rc<T>, RefCell<T>, or raw pointer fields
+   as these are not Send and will cause a compile error.
+
+5. Token refresh concurrency:
+   google-auth-library's getAccessToken() is safe to call
+   concurrently — it internally handles caching and deduplicates
+   concurrent refresh requests. No lock or mutex is needed in
+   _getFreshToken(). Simply call it on every request.
+
+6. TLS on corporate network or VM:
+   Some Linux VMs on corporate networks require the corporate
+   proxy CA certificate to be trusted. The code tries loading
+   system CA bundles from common paths before falling back to
+   bundled Mozilla roots. If TLS still fails, the user may need
+   to add their corporate CA certificate to the system bundle.
+
+7. process.exit() after benchmark:
+   The @google-cloud/spanner library keeps background timers
+   running (session keepalive, metrics). Without process.exit(0)
+   the Node process will hang after the benchmark completes.
+   Always call process.exit(0) at the end of main().
+
+8. Benchmark event loop lag and the Rust path:
+   At high concurrency the Rust path should show near-zero
+   event loop lag because the V8 thread is freed during all
+   network I/O. The JS path will show increasing lag as the
+   V8 thread becomes saturated. If both paths show high lag,
+   the AsyncTask implementation is incorrectly blocking V8.
+   This is the most important correctness signal in the benchmark.
+
+════════════════════════════════════════════════════════════════
+README.md CONTENT REQUIREMENTS
+════════════════════════════════════════════════════════════════
+
+Sections in order:
+
+  1. One-paragraph executive summary:
+     What this POC proves and why it matters.
+     Written for someone who knows Node.js but not Rust.
+     Focus on the V8 event loop bottleneck and how offloading
+     CPU work to Rust frees the event loop thread.
+
+  2. Prerequisites:
+     Node.js 20+, npm, access to GCP Spanner instance,
+     Application Default Credentials configured (gcloud auth)
+
+  3. Configuration:
+     How to edit PROJECT, INSTANCE, DATABASE, TABLE in benchmark.js
+
+  4. Running:
+     Single command: ./setup_and_run.sh
+     What it does step by step.
+
+  5. Understanding the results:
+     Explain each output column.
+     Emphasize the Event Loop Lag column — explain that near-zero
+     lag on the Rust path proves the V8 thread is being freed
+     during network I/O, while the JS path shows growing lag
+     as the V8 thread becomes saturated at high concurrency.
+
+  6. How it works — plain English:
+     Explain AsyncTask: JavaScript calls the function, gets a
+     Promise immediately, Rust/Tokio does the work on a background
+     thread, Promise resolves when done. V8 never waits.
+     Explain why one tonic Channel is sufficient (HTTP/2 multiplexing).
+     Explain why static RUNTIME and CHANNEL matter (one-time init).
+
+  7. Limitations of this POC vs production:
+     Session pool hack (uses internal pool_ API)
+     No Rust-side session management
+     No retry logic
+     Read-only queries only
+     Linux x86_64 and macOS arm64 only
+     Token passed as string per request
+
+════════════════════════════════════════════════════════════════
+OUTPUT VERIFICATION CHECKLIST
+════════════════════════════════════════════════════════════════
+
+After producing all files confirm each item:
+
+  [ ] Cargo.toml: napi features include "async" and "napi4"
+  [ ] Cargo.toml: napi-build in build-dependencies
+  [ ] build.rs: first line calls napi_build::setup()
+  [ ] build.rs: compiles spanner/v1 protos via tonic-build
+  [ ] src/lib.rs: uses AsyncTask — NOT block_on on V8 thread
+  [ ] src/lib.rs: static RUNTIME via once_cell::sync::Lazy
+  [ ] src/lib.rs: static CHANNEL via once_cell::sync::Lazy
+  [ ] src/lib.rs: RUNTIME.block_on() only inside compute()
+  [ ] src/lib.rs: resolve() creates JS objects (runs on V8 thread)
+  [ ] src/lib.rs: NO new runtime or channel created per request
+  [ ] poc_bridge.js: requires ../index.js not .node file directly
+  [ ] poc_bridge.js: sessions released via try/finally
+  [ ] poc_bridge.js: uses await authClient.getAccessToken()
+  [ ] benchmark.js: uses keep-N-in-flight pattern
+  [ ] benchmark.js: measures event loop lag alongside throughput
+  [ ] benchmark.js: warmup runs for both paths before measurement
+  [ ] benchmark.js: calls process.exit(0) at end
+  [ ] setup_and_run.sh: uses napi build --platform --release
+  [ ] setup_and_run.sh: checks for placeholder config values
+  [ ] README.md: explains event loop lag metric clearly
+
+Produce files in this order:
+Cargo.toml, package.json, build.rs, src/lib.rs,
+__test__/poc_bridge.js, __test__/benchmark.js,
+setup_and_run.sh, README.md
+
+Do not produce any file not listed in the directory structure.
+Do not add features beyond the POC scope defined above.
+Do not ask clarifying questions. All decisions are made above.
+Begin immediately with Cargo.toml.
