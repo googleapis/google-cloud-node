@@ -16,19 +16,24 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
 const sql = require('@google-cloud/sql');
 
 function main() {
+  const sqlAvailableDatabaseVersionsServiceClient = new sql.SqlAvailableDatabaseVersionsServiceClient();
   const sqlBackupRunsServiceClient = new sql.SqlBackupRunsServiceClient();
+  const sqlBackupsServiceClient = new sql.SqlBackupsServiceClient();
   const sqlConnectServiceClient = new sql.SqlConnectServiceClient();
   const sqlDatabasesServiceClient = new sql.SqlDatabasesServiceClient();
-
+  
+  const sqlFeatureEligibilityServiceClient = new sql.SqlFeatureEligibilityServiceClient();
   const sqlFlagsServiceClient = new sql.SqlFlagsServiceClient();
-
+  
+  
   const sqlInstancesServiceClient = new sql.SqlInstancesServiceClient();
   const sqlOperationsServiceClient = new sql.SqlOperationsServiceClient();
-
+  
   const sqlSslCertsServiceClient = new sql.SqlSslCertsServiceClient();
   const sqlTiersServiceClient = new sql.SqlTiersServiceClient();
   const sqlUsersServiceClient = new sql.SqlUsersServiceClient();

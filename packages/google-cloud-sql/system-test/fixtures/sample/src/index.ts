@@ -17,44 +17,72 @@
 // ** All changes to this file may be overwritten. **
 
 import {
+  
   SqlBackupRunsServiceClient,
+  SqlBackupsServiceClient,
   SqlConnectServiceClient,
   SqlDatabasesServiceClient,
+  
+  SqlFeatureEligibilityServiceClient,
   SqlFlagsServiceClient,
+  
+  
   SqlInstancesServiceClient,
   SqlOperationsServiceClient,
+  
   SqlSslCertsServiceClient,
   SqlTiersServiceClient,
   SqlUsersServiceClient,
 } from '@google-cloud/sql';
 
 // check that the client class type name can be used
-
-function doStuffWithSqlBackupRunsServiceClient(
-  client: SqlBackupRunsServiceClient
+function doStuffWithSqlAvailableDatabaseVersionsServiceClient(
+  client: 
 ) {
+  client.close();
+}
+function doStuffWithSqlBackupRunsServiceClient(
+  client: SqlBackupRunsServiceClient,
+) {
+  client.close();
+}
+function doStuffWithSqlBackupsServiceClient(client: SqlBackupsServiceClient) {
   client.close();
 }
 function doStuffWithSqlConnectServiceClient(client: SqlConnectServiceClient) {
   client.close();
 }
 function doStuffWithSqlDatabasesServiceClient(
-  client: SqlDatabasesServiceClient
+  client: SqlDatabasesServiceClient,
 ) {
   client.close();
 }
 
+function doStuffWithSqlFeatureEligibilityServiceClient(
+  client: SqlFeatureEligibilityServiceClient,
+) {
+  client.close();
+}
 function doStuffWithSqlFlagsServiceClient(client: SqlFlagsServiceClient) {
   client.close();
 }
-
+function doStuffWithSqlIamPoliciesServiceClient(
+  client: 
+) {
+  client.close();
+}
+function doStuffWithSqlInstanceNamesServiceClient(
+  client: 
+) {
+  client.close();
+}
 function doStuffWithSqlInstancesServiceClient(
-  client: SqlInstancesServiceClient
+  client: SqlInstancesServiceClient,
 ) {
   client.close();
 }
 function doStuffWithSqlOperationsServiceClient(
-  client: SqlOperationsServiceClient
+  client: SqlOperationsServiceClient,
 ) {
   client.close();
 }
@@ -71,9 +99,17 @@ function doStuffWithSqlUsersServiceClient(client: SqlUsersServiceClient) {
 
 function main() {
   // check that the client instance can be created
+  const sqlAvailableDatabaseVersionsServiceClient =
+    new SqlAvailableDatabaseVersionsServiceClient();
+  doStuffWithSqlAvailableDatabaseVersionsServiceClient(
+    sqlAvailableDatabaseVersionsServiceClient,
+  );
   // check that the client instance can be created
   const sqlBackupRunsServiceClient = new SqlBackupRunsServiceClient();
   doStuffWithSqlBackupRunsServiceClient(sqlBackupRunsServiceClient);
+  // check that the client instance can be created
+  const sqlBackupsServiceClient = new SqlBackupsServiceClient();
+  doStuffWithSqlBackupsServiceClient(sqlBackupsServiceClient);
   // check that the client instance can be created
   const sqlConnectServiceClient = new SqlConnectServiceClient();
   doStuffWithSqlConnectServiceClient(sqlConnectServiceClient);
@@ -81,14 +117,20 @@ function main() {
   const sqlDatabasesServiceClient = new SqlDatabasesServiceClient();
   doStuffWithSqlDatabasesServiceClient(sqlDatabasesServiceClient);
   // check that the client instance can be created
-
+  
+  // check that the client instance can be created
+  const sqlFeatureEligibilityServiceClient =
+    new SqlFeatureEligibilityServiceClient();
+  doStuffWithSqlFeatureEligibilityServiceClient(
+    sqlFeatureEligibilityServiceClient,
+  );
   // check that the client instance can be created
   const sqlFlagsServiceClient = new SqlFlagsServiceClient();
   doStuffWithSqlFlagsServiceClient(sqlFlagsServiceClient);
   // check that the client instance can be created
-
+  
   // check that the client instance can be created
-
+  
   // check that the client instance can be created
   const sqlInstancesServiceClient = new SqlInstancesServiceClient();
   doStuffWithSqlInstancesServiceClient(sqlInstancesServiceClient);
@@ -96,7 +138,7 @@ function main() {
   const sqlOperationsServiceClient = new SqlOperationsServiceClient();
   doStuffWithSqlOperationsServiceClient(sqlOperationsServiceClient);
   // check that the client instance can be created
-
+  
   // check that the client instance can be created
   const sqlSslCertsServiceClient = new SqlSslCertsServiceClient();
   doStuffWithSqlSslCertsServiceClient(sqlSslCertsServiceClient);
