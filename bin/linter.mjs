@@ -83,21 +83,31 @@ function checkEslint(filesToCheck) {
   }
 }
 
+function findTsconfigDir(filePath) {
+  let dir = path.dirname(filePath);
+  while (dir && dir !== '.' && dir !== path.sep) {
+    if (existsSync(path.join(dir, 'tsconfig.json'))) {
+      return dir;
+    }
+    dir = path.dirname(dir);
+  }
+  if (dir === '.' && existsSync(path.join('.', 'tsconfig.json'))) {
+    return '.';
+  }
+  return null;
+}
+
 function checkTypeSafety(filesToCheck) {
   if (filesToCheck.length === 0) {
     return true;
   }
 
-  // Map files to their package directories
+  // Map files to their package directories (by walking up to the nearest tsconfig.json)
   const packagesToCheck = new Set();
   for (const file of filesToCheck) {
-    const parts = file.split(path.sep);
-    // e.g. packages/google-cloud-storage/src/index.ts -> packages/google-cloud-storage
-    if (parts[0] === 'packages' && parts.length > 1) {
-      const packageDir = path.join(parts[0], parts[1]);
-      if (existsSync(path.join(packageDir, 'tsconfig.json'))) {
-        packagesToCheck.add(packageDir);
-      }
+    const tsconfigDir = findTsconfigDir(file);
+    if (tsconfigDir) {
+      packagesToCheck.add(tsconfigDir);
     }
   }
 
