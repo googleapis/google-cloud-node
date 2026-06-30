@@ -237,9 +237,11 @@ async function testShowcase() {
   );
   */
 
+  console.log('running testStreamingPipelineErrorAfterDataNoBufferYesRetryPipeline');
   await testStreamingPipelineErrorAfterDataNoBufferYesRetryPipeline(
     grpcSequenceClientWithServerStreamingRetries,
   );
+  console.log('ending running testStreamingPipelineErrorAfterDataNoBufferYesRetryPipeline');
 }
 
 function createStreamingSequenceRequestFactory(
@@ -2908,6 +2910,8 @@ async function testStreamingErrorAfterDataNoBufferNoRetry(
 }
 
 async function main() {
+  await testShowcase();
+  /*
   const showcaseServer = new ShowcaseServer();
   try {
     await showcaseServer.start();
@@ -2915,6 +2919,7 @@ async function main() {
   } finally {
     showcaseServer.stop();
   }
+   */
 }
 
 main();
