@@ -15,7 +15,7 @@ const DATABASE = 'benchmark_db_async';
 const TABLE    = 'AsyncBenchmarkTable';
 
 const SQL = {
-  sql: `SELECT * FROM ${TABLE} WHERE id = @id AND status = @status`,
+  sql: `SELECT @id as id, @status as status`,
   params: { id: '12345', status: 'ACTIVE' },
   types: { 
     id: 'string',
