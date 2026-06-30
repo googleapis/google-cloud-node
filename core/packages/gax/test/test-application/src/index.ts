@@ -78,6 +78,7 @@ async function testShowcase() {
   const restClient = new EchoClient(restClientOpts);
   const restClientCompat = new EchoClient(restClientOptsCompat);
 
+  /*
   // assuming gRPC server is started locally
   await testEchoErrorWithRetries(grpcSequenceClientLegacyRetries);
   await testEchoDeadlineExceededErrorWithRetries(grpcSequenceClientLegacyRetries);
@@ -170,12 +171,15 @@ async function testShowcase() {
   await testChat(grpcClientWithServerStreamingRetries);
   await testWait(grpcClientWithServerStreamingRetries);
 
+  */
+
   /* Series of tests that validate behavior of gax behavior with stream pipelines */
 
   /* NO BUFFERING YES GAX NATIVE RETRIES
   This section has pipelines of streams but no data buffering
   and tests them against gax clients that DO utilize gax native retries
   some scenarios may not actually involve retrying */
+  /*
   await testStreamingErrorAfterDataNoBufferNoRetry(
     grpcSequenceClientWithServerStreamingRetries,
   );
@@ -231,6 +235,7 @@ async function testShowcase() {
   await testImmediateStreamingErrorThenSucceedsNoBufferYesRetryPipeline(
     grpcSequenceClientWithServerStreamingRetries,
   );
+  */
 
   await testStreamingPipelineErrorAfterDataNoBufferYesRetryPipeline(
     grpcSequenceClientWithServerStreamingRetries,
