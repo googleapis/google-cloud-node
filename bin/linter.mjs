@@ -43,8 +43,8 @@ async function run() {
     console.error('\nLinter failed:', err.message);
     // Setting exit code 1 to indicate failure. In the CI pipeline,
     // a non-zero exit code will cause the check to fail and block the PR.
-    // Note: TypeScript (tsc) failures and select ESLint rule errors (configured as "error"
-    // in .eslintrc.json) are blocking. Formatting/Prettier checks remain non-blocking.
+    // Note: TypeScript (tsc) failures and all ESLint errors (configured as "error"
+    // in .eslintrc.json, including formatting/Prettier) are blocking.
     process.exitCode = 1;
   }
 }
@@ -93,8 +93,7 @@ function getChangedFiles() {
 
 /**
  * Runs ESLint programmatically.
- * Non-blocking for 'prettier/prettier' formatting violations, but blocks the PR
- * if any other rule configured as "error" (severity: 2) fails.
+ * Blocks the PR if any rule configured as "error" (severity: 2, including Prettier formatting) fails.
  */
 async function checkEslint(filesToCheck) {
   if (filesToCheck.length === 0) {
@@ -115,17 +114,16 @@ async function checkEslint(filesToCheck) {
 
     for (const fileResult of results) {
       for (const message of fileResult.messages) {
-        // message.severity === 2 indicates an error level rule configuration.
-        // We block on all error-level rules except 'prettier/prettier' (formatting).
-        if (message.severity === 2 && message.ruleId !== 'prettier/prettier') {
+        // message.severity === 2 indicates an error-level rule configuration (including formatting).
+        if (message.severity === 2) {
           hasBlockingErrors = true;
         }
       }
     }
 
     if (hasBlockingErrors) {
-      console.error('\n[ERROR] Blocking ESLint rule violations were detected.');
-      console.error('All ESLint rule errors (except prettier formatting) are blocking and must be fixed.');
+      console.error('\n[ERROR] Blocking ESLint violations were detected.');
+      console.error('All ESLint errors (including Prettier formatting) are blocking and must be fixed.');
       return false;
     }
 
