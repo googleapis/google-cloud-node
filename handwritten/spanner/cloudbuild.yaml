@@ -30,6 +30,7 @@ steps:
   # If you need specific credentials from Secret Manager, uncomment these:
   # - 'GOOGLE_APPLICATION_CREDENTIALS=/secrets/sa-key.json'
   id: 'run-system-tests'
+  timeout: '7200s'
   waitFor: ['install-dependencies']
   # For Secret Manager, uncomment these (adjust secret name and volume path as needed):
   # secretEnv: ['SA_KEY']
@@ -71,4 +72,4 @@ steps:
 substitutions:
   _GCP_PROJECT_ID: 'long-door-651'
 
-timeout: '3600s'
+timeout: '7200s'

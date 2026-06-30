@@ -34,7 +34,7 @@
     "docs": "jsdoc -c .jsdoc.js",
     "predocs": "npm run compile",
     "lint": "gts check",
-    "system-test": "mocha build/system-test --timeout 16000000",
+    "system-test": "mocha build/system-test --timeout 1600000",
     "observability-test": "mocha build/observability-test --timeout 1600000",
     "cleanup": "mocha scripts/cleanup.js --timeout 30000",
     "test": "mocha build/test build/test/common build/observability-test",
