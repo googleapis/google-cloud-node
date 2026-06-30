@@ -13,9 +13,10 @@
 // limitations under the License.
 
 import {execFileSync, execFile} from 'child_process';
-import {existsSync} from 'fs';
+import {existsSync, readFileSync} from 'fs';
 import path from 'path';
 import {promisify} from 'util';
+import {ESLint} from 'eslint';
 
 // --- Globals & Promisified API Wrappers ---
 const execFileAsync = promisify(execFile);
@@ -32,18 +33,18 @@ async function run() {
     }
 
     // Run ESLint (which now includes Prettier checks) and Type checks
-    checkEslint(changedTsFiles);
+    const eslintPassed = await checkEslint(changedTsFiles);
     const typeSafetyPassed = await checkTypeSafety(changedTsFiles);
 
-    if (!typeSafetyPassed) {
+    if (!eslintPassed || !typeSafetyPassed) {
       throw new Error('Linter checks failed.');
     }
   } catch (err) {
     console.error('\nLinter failed:', err.message);
     // Setting exit code 1 to indicate failure. In the CI pipeline,
     // a non-zero exit code will cause the check to fail and block the PR.
-    // Note: ESLint failures are currently non-blocking and will not trigger this exit code,
-    // whereas TypeScript type-checking (tsc) failures are blocking.
+    // Note: TypeScript (tsc) failures and select ESLint rule errors (configured as "error"
+    // in .eslintrc.json) are blocking. Formatting/Prettier checks remain non-blocking.
     process.exitCode = 1;
   }
 }
@@ -91,27 +92,73 @@ function getChangedFiles() {
 // --- ESLint Checker ---
 
 /**
- * Runs ESLint on target changed files. ESLint warnings are currently non-blocking.
+ * Parses .eslintrc.json and returns a Set of rules configured as "error".
  */
-function checkEslint(filesToCheck) {
+function getBlockingRules() {
+  try {
+    const configPath = path.join(process.cwd(), '.eslintrc.json');
+    if (!existsSync(configPath)) {
+      return new Set();
+    }
+    const content = readFileSync(configPath, 'utf8')
+      .replace(/\/\/.*/g, '') // Strip inline comments
+      .replace(/\/\*[\s\S]*?\*\//g, ''); // Strip block comments
+    const config = JSON.parse(content);
+    const rules = config.rules || {};
+    const blocking = [];
+    for (const [ruleId, value] of Object.entries(rules)) {
+      if (value === 'error' || (Array.isArray(value) && value[0] === 'error')) {
+        blocking.push(ruleId);
+      }
+    }
+    return new Set(blocking);
+  } catch (err) {
+    console.error('Failed to parse ESLint config for blocking rules:', err.message);
+    return new Set();
+  }
+}
+
+/**
+ * Runs ESLint programmatically.
+ * Non-blocking for general styling/GTS warnings, but blocks the PR if any rule 
+ * configured as "error" in .eslintrc.json has violations.
+ */
+async function checkEslint(filesToCheck) {
   if (filesToCheck.length === 0) {
-    return;
+    return true;
   }
 
   try {
-    execFileSync(
-      'node',
-      ['node_modules/eslint/bin/eslint.js', '--quiet', ...filesToCheck],
-      {stdio: 'inherit'},
-    );
+    const eslint = new ESLint();
+    const results = await eslint.lintFiles(filesToCheck);
+    const formatter = await eslint.loadFormatter('stylish');
+    const resultText = formatter.format(results);
+
+    if (resultText) {
+      console.log(resultText);
+    }
+
+    const blockingRules = getBlockingRules();
+    let hasBlockingErrors = false;
+
+    for (const fileResult of results) {
+      for (const message of fileResult.messages) {
+        if (message.severity === 2 && blockingRules.has(message.ruleId)) {
+          hasBlockingErrors = true;
+        }
+      }
+    }
+
+    if (hasBlockingErrors) {
+      console.error('\n[ERROR] Blocking ESLint rule violations were detected.');
+      console.error('These rules are configured as "error" in .eslintrc.json and must be fixed.');
+      return false;
+    }
+
+    return true;
   } catch (err) {
-    console.warn('\n[WARNING] ESLint issues were detected in touched files:');
-    console.warn(
-      'These errors are currently non-blocking while the repository transitions to GTS standards.',
-    );
-    console.warn(
-      `To fix: npx eslint --fix ${filesToCheck.map(f => `"${f}"`).join(' ')}`,
-    );
+    console.error('\n[ERROR] Failed running ESLint:', err.message);
+    return false;
   }
 }
 

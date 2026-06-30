@@ -7,8 +7,8 @@
     "plugin:promise/recommended"
   ],
   "root": true,
-  // Note: Rules set to "error" here are currently non-blocking in the PR CI
-  // because bin/linter.mjs catches ESLint failures and treats them as warnings.
+  // Note: Rules set to "error" here are blocking in the PR CI pipeline,
+  // whereas general styling/GTS warnings remain non-blocking.
   "rules": {
     "import/no-unresolved": "off",
     "import/no-extraneous-dependencies": "error",
