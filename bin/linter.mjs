@@ -17,14 +17,45 @@ import {existsSync} from 'fs';
 import path from 'path';
 import {promisify} from 'util';
 
+// --- Globals & Promisified API Wrappers ---
 const execFileAsync = promisify(execFile);
+const tsconfigCache = new Map();
 
+// --- Main Runner (Entry Point) ---
+async function run() {
+  try {
+    const changedTsFiles = getChangedFiles();
 
+    if (changedTsFiles.length === 0) {
+      console.log('No TypeScript files changed. Skipping checks.');
+      return;
+    }
 
+    // Run ESLint (which now includes Prettier checks) and Type checks
+    checkEslint(changedTsFiles);
+    const typeSafetyPassed = await checkTypeSafety(changedTsFiles);
+
+    if (!typeSafetyPassed) {
+      throw new Error('Linter checks failed.');
+    }
+  } catch (err) {
+    console.error('\nLinter failed:', err.message);
+    process.exitCode = 1;
+  }
+}
+
+// --- Git Changed Files Logic ---
+
+/**
+ * Executes a Git command synchronously.
+ */
 function runGit(args, options = {}) {
   return execFileSync('git', args, {encoding: 'utf8', ...options});
 }
 
+/**
+ * Returns a list of changed TypeScript files comparing against target branches/references.
+ */
 function getChangedFiles() {
   const base = process.env.GITHUB_BASE_REF || 'main';
   const refsToTry = [`origin/${base}`, base, 'HEAD~1'];
@@ -53,6 +84,11 @@ function getChangedFiles() {
   );
 }
 
+// --- ESLint Checker ---
+
+/**
+ * Runs ESLint on target changed files. ESLint warnings are currently non-blocking.
+ */
 function checkEslint(filesToCheck) {
   if (filesToCheck.length === 0) {
     return;
@@ -75,8 +111,12 @@ function checkEslint(filesToCheck) {
   }
 }
 
-const tsconfigCache = new Map();
+// --- TypeScript Type Checker ---
 
+/**
+ * Finds the nearest package directory containing a tsconfig.json by walking up the path.
+ * Caches directories to avoid redundant disk operations.
+ */
 function findTsconfigDir(filePath) {
   let dir = path.dirname(filePath);
   const visited = [];
@@ -106,6 +146,9 @@ function findTsconfigDir(filePath) {
   return result;
 }
 
+/**
+ * Performs concurrent TypeScript type checking for changed packages.
+ */
 async function checkTypeSafety(filesToCheck) {
   if (filesToCheck.length === 0) {
     return true;
@@ -154,26 +197,5 @@ async function checkTypeSafety(filesToCheck) {
   return results.every(r => r.passed);
 }
 
-async function run() {
-  try {
-    const changedTsFiles = getChangedFiles();
-
-    if (changedTsFiles.length === 0) {
-      console.log('No TypeScript files changed. Skipping checks.');
-      return;
-    }
-
-    // Run ESLint (which now includes Prettier checks) and Type checks
-    checkEslint(changedTsFiles);
-    const typeSafetyPassed = await checkTypeSafety(changedTsFiles);
-
-    if (!typeSafetyPassed) {
-      throw new Error('Linter checks failed.');
-    }
-  } catch (err) {
-    console.error('\nLinter failed:', err.message);
-    process.exitCode = 1;
-  }
-}
-
+// --- Execution ---
 run();
