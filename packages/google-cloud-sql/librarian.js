@@ -138,77 +138,77 @@ const replacements = [
   },
   {
     files: 'packages/google-cloud-sql/src/index.ts',
-    searchPattern: /'const SqlAvailableDatabaseVersionsServiceClient = v1.SqlAvailableDatabaseVersionsServiceClient;'/gs,
+    searchPattern: /const SqlAvailableDatabaseVersionsServiceClient = v1\.SqlAvailableDatabaseVersionsServiceClient;/gs,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/src/index.ts',
-    searchPattern: /'type SqlAvailableDatabaseVersionsServiceClient = v1.SqlAvailableDatabaseVersionsServiceClient;'/gs,
+    searchPattern: /type SqlAvailableDatabaseVersionsServiceClient = v1\.SqlAvailableDatabaseVersionsServiceClient;/gs,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/src/index.ts',
-    searchPattern: /'const SqlEventsServiceClient = v1.SqlEventsServiceClient;'/gs,
+    searchPattern: /const SqlEventsServiceClient = v1\.SqlEventsServiceClient;/gs,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/src/index.ts',
-    searchPattern: /'type SqlEventsServiceClient = v1.SqlEventsServiceClient;'/gs,
+    searchPattern: /type SqlEventsServiceClient = v1\.SqlEventsServiceClient;/gs,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/src/index.ts',
-    searchPattern: /'const SqlIamPoliciesServiceClient = v1.SqlIamPoliciesServiceClient;'/gs,
+    searchPattern: /const SqlIamPoliciesServiceClient = v1\.SqlIamPoliciesServiceClient;/gs,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/src/index.ts',
-    searchPattern: /'type SqlIamPoliciesServiceClient = v1.SqlIamPoliciesServiceClient;'/gs,
+    searchPattern: /type SqlIamPoliciesServiceClient = v1\.SqlIamPoliciesServiceClient;/gs,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/src/index.ts',
-    searchPattern: /'const SqlInstanceNamesServiceClient = v1.SqlInstanceNamesServiceClient;'/gs,
+    searchPattern: /const SqlInstanceNamesServiceClient = v1\.SqlInstanceNamesServiceClient;/gs,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/src/index.ts',
-    searchPattern: /'type SqlInstanceNamesServiceClient = v1.SqlInstanceNamesServiceClient;'/gs,
+    searchPattern: /type SqlInstanceNamesServiceClient = v1\.SqlInstanceNamesServiceClient;/gs,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/src/index.ts',
-    searchPattern: /'const SqlRegionsServiceClient = v1.SqlRegionsServiceClient;'/gs,
+    searchPattern: /const SqlRegionsServiceClient = v1\.SqlRegionsServiceClient;/gs,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/src/index.ts',
-    searchPattern: /'type SqlRegionsServiceClient = v1.SqlRegionsServiceClient;'/gs,
+    searchPattern: /type SqlRegionsServiceClient = v1\.SqlRegionsServiceClient;/gs,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/src/index.ts',
-    searchPattern: /'SqlAvailableDatabaseVersionsServiceClient,'/gs,
+    searchPattern: /SqlAvailableDatabaseVersionsServiceClient,/gs,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/src/index.ts',
-    searchPattern: /'SqlEventsServiceClient,'/gs,
+    searchPattern: /SqlEventsServiceClient,/gs,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/src/index.ts',
-    searchPattern: /'SqlIamPoliciesServiceClient,'/gs,
+    searchPattern: /SqlIamPoliciesServiceClient,/gs,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/src/index.ts',
-    searchPattern: /'SqlInstanceNamesServiceClient,'/gs,
+    searchPattern: /SqlInstanceNamesServiceClient,/gs,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/src/index.ts',
-    searchPattern: /'SqlRegionsServiceClient,'/gs,
+    searchPattern: /SqlRegionsServiceClient,/gs,
     replacement: ''
   },
   {
