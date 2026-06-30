@@ -7,8 +7,8 @@
     "plugin:promise/recommended"
   ],
   "root": true,
-  // Note: All rules configured as "error" (including those from extended configs like GTS
-  // and Prettier) are blocking in the PR CI pipeline. Only rules configured as "warn" remain non-blocking.
+  // Note: All rules configured as "error" are blocking in the PR CI pipeline.
+  // Only rules configured as "warn" remain non-blocking.
   "rules": {
     "import/no-unresolved": "off",
     "import/no-extraneous-dependencies": "error",
