@@ -18,13 +18,17 @@ import path from 'path';
 
 
 
+function runGit(args, options = {}) {
+  return execFileSync('git', args, {encoding: 'utf8', ...options});
+}
+
 function getGitTarget() {
   const base = process.env.GITHUB_BASE_REF || 'main';
 
   // Helper to check if a ref exists in git
   const refExists = ref => {
     try {
-      execFileSync('git', ['rev-parse', '--verify', ref], {stdio: 'ignore'});
+      runGit(['rev-parse', '--verify', ref], {stdio: 'ignore'});
       return true;
     } catch {
       return false;
@@ -43,11 +47,14 @@ function getGitTarget() {
 function getChangedFiles() {
   const targetRef = getGitTarget();
   try {
-    const output = execFileSync(
-      'git',
-      ['diff', '--name-only', '--diff-filter=ACMRT', targetRef, '--', '*.ts'],
-      {encoding: 'utf8'},
-    );
+    const output = runGit([
+      'diff',
+      '--name-only',
+      '--diff-filter=ACMRT',
+      targetRef,
+      '--',
+      '*.ts',
+    ]);
     return output
       .split('\n')
       .map(f => f.trim())
@@ -61,7 +68,7 @@ function getChangedFiles() {
 
 function checkEslint(filesToCheck) {
   if (filesToCheck.length === 0) {
-    return true;
+    return;
   }
 
   try {
@@ -70,7 +77,6 @@ function checkEslint(filesToCheck) {
       ['node_modules/eslint/bin/eslint.js', '--quiet', ...filesToCheck],
       {stdio: 'inherit'},
     );
-    return true;
   } catch (err) {
     console.warn('\n[WARNING] ESLint issues were detected in touched files:');
     console.warn(
@@ -79,7 +85,6 @@ function checkEslint(filesToCheck) {
     console.warn(
       `To fix: npx eslint --fix ${filesToCheck.map(f => `"${f}"`).join(' ')}`,
     );
-    return true; // Non-blocking, so we return true
   }
 }
 
@@ -152,10 +157,10 @@ function run() {
     }
 
     // Run ESLint (which now includes Prettier checks) and Type checks
-    const eslintPassed = checkEslint(changedTsFiles);
+    checkEslint(changedTsFiles);
     const typeSafetyPassed = checkTypeSafety(changedTsFiles);
 
-    if (!eslintPassed || !typeSafetyPassed) {
+    if (!typeSafetyPassed) {
       throw new Error('Linter checks failed.');
     }
   } catch (err) {
