@@ -1,6 +1,6 @@
 {
   "interfaces": {
-    "google.cloud.sql.v1beta4.SqlConnectService": {
+    "google.cloud.sql.v1beta4.SqlDataService": {
       "retry_codes": {
         "non_idempotent": [],
         "idempotent": [
@@ -20,15 +20,7 @@
         }
       },
       "methods": {
-        "GetConnectSettings": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
-        },
-        "ResolveConnectSettings": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
-        },
-        "GenerateEphemeralCert": {
+        "StreamSqlData": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

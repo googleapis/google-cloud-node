@@ -26,24 +26,25 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-
+import { PassThrough } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
- * `src/v1beta4/sql_flags_service_client_config.json`.
+ * `src/v1beta4/sql_data_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './sql_flags_service_client_config.json';
+import * as gapicConfig from './sql_data_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
+ *  Service for streaming data to and from Cloud SQL instances.
  * @class
  * @memberof v1beta4
  */
-export class SqlFlagsServiceClient {
+export class SqlDataServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -66,10 +67,10 @@ export class SqlFlagsServiceClient {
   innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
   pathTemplates: { [name: string]: gax.PathTemplate };
-  sqlFlagsServiceStub?: Promise<{ [name: string]: Function }>;
+  sqlDataServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
-   * Construct an instance of SqlFlagsServiceClient.
+   * Construct an instance of SqlDataServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -104,7 +105,7 @@ export class SqlFlagsServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new SqlFlagsServiceClient({fallback: true}, gax);
+   *     const client = new SqlDataServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -112,7 +113,7 @@ export class SqlFlagsServiceClient {
     gaxInstance?: typeof gax | typeof gax.fallback,
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof SqlFlagsServiceClient;
+    const staticMembers = this.constructor as typeof SqlDataServiceClient;
     if (
       opts?.universe_domain &&
       opts?.universeDomain &&
@@ -209,14 +210,24 @@ export class SqlFlagsServiceClient {
       backupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/backups/{backup}',
       ),
-      projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}',
+      instancePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/instances/{instance}',
+      ),
+    };
+
+    // Some of the methods on this service provide streaming responses.
+    // Provide descriptors for these.
+    this.descriptors.stream = {
+      streamSqlData: new this._gaxModule.StreamDescriptor(
+        this._gaxModule.StreamType.BIDI_STREAMING,
+        !!opts.fallback,
+        !!opts.gaxServerStreamingRetries,
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.sql.v1beta4.SqlFlagsService',
+      'google.cloud.sql.v1beta4.SqlDataService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       { 'x-goog-api-client': clientHeader.join(' ') },
@@ -244,31 +255,43 @@ export class SqlFlagsServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.sqlFlagsServiceStub) {
-      return this.sqlFlagsServiceStub;
+    if (this.sqlDataServiceStub) {
+      return this.sqlDataServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.sql.v1beta4.SqlFlagsService.
-    this.sqlFlagsServiceStub = this._gaxGrpc.createStub(
+    // google.cloud.sql.v1beta4.SqlDataService.
+    this.sqlDataServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.sql.v1beta4.SqlFlagsService',
+            'google.cloud.sql.v1beta4.SqlDataService',
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.sql.v1beta4.SqlFlagsService,
+          (this._protos as any).google.cloud.sql.v1beta4.SqlDataService,
       this._opts,
       this._providedCustomServicePath,
     ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const sqlFlagsServiceStubMethods = ['list'];
-    for (const methodName of sqlFlagsServiceStubMethods) {
-      const callPromise = this.sqlFlagsServiceStub.then(
+    const sqlDataServiceStubMethods = ['streamSqlData'];
+    for (const methodName of sqlDataServiceStubMethods) {
+      const callPromise = this.sqlDataServiceStub.then(
         (stub) =>
           (...args: Array<{}>) => {
             if (this._terminated) {
+              if (methodName in this.descriptors.stream) {
+                const stream = new PassThrough({ objectMode: true });
+                setImmediate(() => {
+                  stream.emit(
+                    'error',
+                    new this._gaxModule.GoogleError(
+                      'The client has already been closed.',
+                    ),
+                  );
+                });
+                return stream;
+              }
               return Promise.reject('The client has already been closed.');
             }
             const func = stub[methodName];
@@ -279,7 +302,7 @@ export class SqlFlagsServiceClient {
         },
       );
 
-      const descriptor = undefined;
+      const descriptor = this.descriptors.stream[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -290,7 +313,7 @@ export class SqlFlagsServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.sqlFlagsServiceStub;
+    return this.sqlDataServiceStub;
   }
 
   /**
@@ -380,133 +403,62 @@ export class SqlFlagsServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
+
   /**
-   * Lists all available database flags for Cloud SQL instances.
+   * `StreamSqlData` establishes a bidirectional stream to a Cloud SQL instance,
+   * and then streams data to and from the instance.
    *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.databaseVersion
-   *   Database type and version you want to retrieve flags for. By default, this
-   *   method returns flags for all database types and versions.
-   * @param {google.cloud.sql.v1beta4.SqlFlagScope} [request.flagScope]
-   *   Optional. Specify the scope of flags to be returned by SqlFlagsListService.
-   *   Return list of database flags if unspecified.
+   * The first message from the client MUST be a `StreamSqlDataRequest` request
+   * with configuration settings, including required values for the
+   * `connection_settings` field. Subsequent messages from the client may
+   * contain the `payload` field.
+   *
+   * Messages from the server may contain the `payload` field.
+   *
+   * The `payload` fields of the request and response streams contain the raw
+   * data of the database's native wire protocol (e.g., PostgreSQL wire
+   * protocol). The database client is responsible for generating and parsing
+   * this data.
+   *
+   * Any errors on initial connection (e.g., connection failure, authorization
+   * issues, network problems) will result in the stream being terminated with
+   * an appropriate RPC status exception.
+   *
+   * After a successful connection is made, if an error occurs, then the server
+   * terminates connection and returns the appropriate RPC status exception.
+   *
+   * Add the request params headers to the request to ensure that
+   * the streaming request is routed to the correct service for your database.
+   *
+   * Use this format for the request params header:
+   *
+   *    `x-goog-request-params`:
+   *        location_id={location_path}&instance_id={instance_path}`
+   *
+   *  `location_path` is `locations/{location_name}`
+   *  `instance_path` is `projects/{project_name}/instances/{instance_name}`
+   *
+   * for example:
+   *     `x-goog-request-params`:
+   *     `location_id=locations/us-central1&instance_id=projects/myproject/instances/instancename`
+   *
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.FlagsListResponse|FlagsListResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   * @returns {Stream}
+   *   An object stream which is both readable and writable. It accepts objects
+   *   representing {@link protos.google.cloud.sql.v1beta4.StreamSqlDataRequest|StreamSqlDataRequest} for write() method, and
+   *   will emit objects representing {@link protos.google.cloud.sql.v1beta4.StreamSqlDataResponse|StreamSqlDataResponse} on 'data' event asynchronously.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta4/sql_flags_service.list.js</caption>
-   * region_tag:sqladmin_v1beta4_generated_SqlFlagsService_List_async
+   * @example <caption>include:samples/generated/v1beta4/sql_data_service.stream_sql_data.js</caption>
+   * region_tag:sqladmin_v1beta4_generated_SqlDataService_StreamSqlData_async
    */
-  list(
-    request?: protos.google.cloud.sql.v1beta4.ISqlFlagsListRequest,
-    options?: CallOptions,
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IFlagsListResponse,
-      protos.google.cloud.sql.v1beta4.ISqlFlagsListRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  list(
-    request: protos.google.cloud.sql.v1beta4.ISqlFlagsListRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IFlagsListResponse,
-      protos.google.cloud.sql.v1beta4.ISqlFlagsListRequest | null | undefined,
-      {} | null | undefined
-    >,
-  ): void;
-  list(
-    request: protos.google.cloud.sql.v1beta4.ISqlFlagsListRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1beta4.IFlagsListResponse,
-      protos.google.cloud.sql.v1beta4.ISqlFlagsListRequest | null | undefined,
-      {} | null | undefined
-    >,
-  ): void;
-  list(
-    request?: protos.google.cloud.sql.v1beta4.ISqlFlagsListRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IFlagsListResponse,
-          | protos.google.cloud.sql.v1beta4.ISqlFlagsListRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1beta4.IFlagsListResponse,
-      protos.google.cloud.sql.v1beta4.ISqlFlagsListRequest | null | undefined,
-      {} | null | undefined
-    >,
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1beta4.IFlagsListResponse,
-      protos.google.cloud.sql.v1beta4.ISqlFlagsListRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
+  streamSqlData(options?: CallOptions): gax.CancellableStream {
     this.initialize().catch((err) => {
       throw err;
     });
-    this._log.info('list request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1beta4.IFlagsListResponse,
-          | protos.google.cloud.sql.v1beta4.ISqlFlagsListRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('list response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls
-      .list(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1beta4.IFlagsListResponse,
-          protos.google.cloud.sql.v1beta4.ISqlFlagsListRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('list response %j', response);
-          return [response, options, rawResponse];
-        },
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos,
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos,
-          );
-        }
-        throw error;
-      });
+    this._log.info('streamSqlData stream %j', options);
+    return this.innerApiCalls.streamSqlData(null, options);
   }
 
   /**
@@ -627,26 +579,39 @@ export class SqlFlagsServiceClient {
   }
 
   /**
-   * Return a fully-qualified project resource name string.
+   * Return a fully-qualified instance resource name string.
    *
    * @param {string} project
+   * @param {string} instance
    * @returns {string} Resource name string.
    */
-  projectPath(project: string) {
-    return this.pathTemplates.projectPathTemplate.render({
+  instancePath(project: string, instance: string) {
+    return this.pathTemplates.instancePathTemplate.render({
       project: project,
+      instance: instance,
     });
   }
 
   /**
-   * Parse the project from Project resource.
+   * Parse the project from Instance resource.
    *
-   * @param {string} projectName
-   *   A fully-qualified path representing Project resource.
+   * @param {string} instanceName
+   *   A fully-qualified path representing Instance resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectName(projectName: string) {
-    return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  matchProjectFromInstanceName(instanceName: string) {
+    return this.pathTemplates.instancePathTemplate.match(instanceName).project;
+  }
+
+  /**
+   * Parse the instance from Instance resource.
+   *
+   * @param {string} instanceName
+   *   A fully-qualified path representing Instance resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromInstanceName(instanceName: string) {
+    return this.pathTemplates.instancePathTemplate.match(instanceName).instance;
   }
 
   /**
@@ -656,8 +621,8 @@ export class SqlFlagsServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.sqlFlagsServiceStub && !this._terminated) {
-      return this.sqlFlagsServiceStub.then((stub) => {
+    if (this.sqlDataServiceStub && !this._terminated) {
+      return this.sqlDataServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
