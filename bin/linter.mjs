@@ -40,6 +40,10 @@ async function run() {
     }
   } catch (err) {
     console.error('\nLinter failed:', err.message);
+    // Setting exit code 1 to indicate failure. In the CI pipeline,
+    // a non-zero exit code will cause the check to fail and block the PR.
+    // Note: ESLint failures are currently non-blocking and will not trigger this exit code,
+    // whereas TypeScript type-checking (tsc) failures are blocking.
     process.exitCode = 1;
   }
 }
