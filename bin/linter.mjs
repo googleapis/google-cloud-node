@@ -32,7 +32,7 @@ async function run() {
       return;
     }
 
-    // Run ESLint (which now includes Prettier checks) and Type checks
+    // Run ESLint and Type checks
     const eslintPassed = await checkEslint(changedTsFiles);
     const typeSafetyPassed = await checkTypeSafety(changedTsFiles);
 
@@ -43,8 +43,8 @@ async function run() {
     console.error('\nLinter failed:', err.message);
     // Setting exit code 1 to indicate failure. In the CI pipeline,
     // a non-zero exit code will cause the check to fail and block the PR.
-    // Note: TypeScript (tsc) compile failures and all ESLint errors (severity 2, 
-    // including formatting/Prettier) are blocking.
+    // Note: TypeScript (tsc) compile failures and ESLint errors (severity 2)
+    // are blocking.
     process.exitCode = 1;
   }
 }
@@ -93,7 +93,7 @@ function getChangedFiles() {
 
 /**
  * Runs ESLint programmatically.
- * Blocks the PR if any rule configured as "error" (severity: 2, including Prettier formatting) fails.
+ * Blocks the PR if any rule configured as "error" (severity 2) fails.
  */
 async function checkEslint(filesToCheck) {
   if (filesToCheck.length === 0) {
@@ -111,19 +111,28 @@ async function checkEslint(filesToCheck) {
     }
 
     let hasBlockingErrors = false;
+    let hasFormattingErrors = false;
 
     for (const fileResult of results) {
       for (const message of fileResult.messages) {
-        // message.severity === 2 indicates an error-level rule configuration (including formatting).
+        // message.severity === 2 indicates an error-level rule configuration.
         if (message.severity === 2) {
           hasBlockingErrors = true;
+          if (message.ruleId === 'prettier/prettier') {
+            hasFormattingErrors = true;
+          }
         }
       }
     }
 
     if (hasBlockingErrors) {
       console.error('\n[ERROR] Blocking ESLint violations were detected.');
-      console.error('All ESLint errors (including Prettier formatting) are blocking and must be fixed.');
+      console.error('ESLint errors are blocking and must be fixed.');
+      if (hasFormattingErrors) {
+        console.log(
+          `\nTo fix formatting issues, run:\n  npx eslint --fix ${filesToCheck.map(f => `"${f}"`).join(' ')}`,
+        );
+      }
       return false;
     }
 
