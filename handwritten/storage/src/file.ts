@@ -209,11 +209,15 @@ export interface GetSignedUrlConfig
    * A convenience option to prompt the browser to save the downloaded file with a specific filename.
    * This is a friendly shortcut that automatically formats the `responseDisposition` parameter
    * under the hood to `attachment; filename="<filename>"`.
+   * Note: If both `promptSaveAs` and `responseDisposition` are specified, `promptSaveAs` takes precedence
+   * and overrides `responseDisposition`.
    */
   promptSaveAs?: string;
 
   /**
-   * Additional query parameters to include in the signature and append to the final signed URL.
+   * Additional query parameters to append to the final signed URL.
+   * Note: For V4 signed URLs, only query parameters starting with `x-goog-` are included in the signature
+   * (and thus protected against tampering). Other custom query parameters are appended to the URL but not signed.
    */
   queryParams?: Query;
 
@@ -221,6 +225,7 @@ export interface GetSignedUrlConfig
    * Overrides the `Content-Disposition` response header returned by GCS on download.
    * For example, setting this to `attachment; filename="new-name.png"` forces the browser
    * to download the file with the specified filename.
+   * Note: This option will be overridden if `promptSaveAs` is also specified.
    */
   responseDisposition?: string;
 
