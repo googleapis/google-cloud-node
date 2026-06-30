@@ -1917,7 +1917,6 @@
                                 case 408:
                                 case 557:
                                 case 684:
-                                case 781:
                                 case 26:
                                 case 27:
                                 case 28:
@@ -2271,10 +2270,6 @@
                             case "POSTGRES_19":
                             case 684:
                                 message.databaseVersion = 684;
-                                break;
-                            case "POSTGRES_20":
-                            case 781:
-                                message.databaseVersion = 781;
                                 break;
                             case "SQLSERVER_2019_STANDARD":
                             case 26:
@@ -5125,7 +5120,6 @@
                                 case 408:
                                 case 557:
                                 case 684:
-                                case 781:
                                 case 26:
                                 case 27:
                                 case 28:
@@ -5352,10 +5346,6 @@
                             case "POSTGRES_19":
                             case 684:
                                 message.targetDatabaseVersion = 684;
-                                break;
-                            case "POSTGRES_20":
-                            case 781:
-                                message.targetDatabaseVersion = 781;
                                 break;
                             case "SQLSERVER_2019_STANDARD":
                             case 26:
@@ -13408,7 +13398,6 @@
                          * @property {string|null} [networkAttachmentUri] PscConfig networkAttachmentUri
                          * @property {boolean|null} [pscAutoDnsEnabled] PscConfig pscAutoDnsEnabled
                          * @property {boolean|null} [pscWriteEndpointDnsEnabled] PscConfig pscWriteEndpointDnsEnabled
-                         * @property {boolean|null} [pscAutoConnectionPolicyEnabled] PscConfig pscAutoConnectionPolicyEnabled
                          */
     
                         /**
@@ -13476,14 +13465,6 @@
                          */
                         PscConfig.prototype.pscWriteEndpointDnsEnabled = null;
     
-                        /**
-                         * PscConfig pscAutoConnectionPolicyEnabled.
-                         * @member {boolean|null|undefined} pscAutoConnectionPolicyEnabled
-                         * @memberof google.cloud.sql.v1.PscConfig
-                         * @instance
-                         */
-                        PscConfig.prototype.pscAutoConnectionPolicyEnabled = null;
-    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -13502,12 +13483,6 @@
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(PscConfig.prototype, "_pscWriteEndpointDnsEnabled", {
                             get: $util.oneOfGetter($oneOfFields = ["pscWriteEndpointDnsEnabled"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        // Virtual OneOf for proto3 optional field
-                        Object.defineProperty(PscConfig.prototype, "_pscAutoConnectionPolicyEnabled", {
-                            get: $util.oneOfGetter($oneOfFields = ["pscAutoConnectionPolicyEnabled"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -13549,8 +13524,6 @@
                                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.pscAutoDnsEnabled);
                             if (message.pscWriteEndpointDnsEnabled != null && Object.hasOwnProperty.call(message, "pscWriteEndpointDnsEnabled"))
                                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.pscWriteEndpointDnsEnabled);
-                            if (message.pscAutoConnectionPolicyEnabled != null && Object.hasOwnProperty.call(message, "pscAutoConnectionPolicyEnabled"))
-                                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.pscAutoConnectionPolicyEnabled);
                             return writer;
                         };
     
@@ -13617,10 +13590,6 @@
                                     }
                                 case 6: {
                                         message.pscWriteEndpointDnsEnabled = reader.bool();
-                                        break;
-                                    }
-                                case 7: {
-                                        message.pscAutoConnectionPolicyEnabled = reader.bool();
                                         break;
                                     }
                                 default:
@@ -13697,11 +13666,6 @@
                                 if (typeof message.pscWriteEndpointDnsEnabled !== "boolean")
                                     return "pscWriteEndpointDnsEnabled: boolean expected";
                             }
-                            if (message.pscAutoConnectionPolicyEnabled != null && message.hasOwnProperty("pscAutoConnectionPolicyEnabled")) {
-                                properties._pscAutoConnectionPolicyEnabled = 1;
-                                if (typeof message.pscAutoConnectionPolicyEnabled !== "boolean")
-                                    return "pscAutoConnectionPolicyEnabled: boolean expected";
-                            }
                             return null;
                         };
     
@@ -13746,8 +13710,6 @@
                                 message.pscAutoDnsEnabled = Boolean(object.pscAutoDnsEnabled);
                             if (object.pscWriteEndpointDnsEnabled != null)
                                 message.pscWriteEndpointDnsEnabled = Boolean(object.pscWriteEndpointDnsEnabled);
-                            if (object.pscAutoConnectionPolicyEnabled != null)
-                                message.pscAutoConnectionPolicyEnabled = Boolean(object.pscAutoConnectionPolicyEnabled);
                             return message;
                         };
     
@@ -13797,11 +13759,6 @@
                                 if (options.oneofs)
                                     object._pscWriteEndpointDnsEnabled = "pscWriteEndpointDnsEnabled";
                             }
-                            if (message.pscAutoConnectionPolicyEnabled != null && message.hasOwnProperty("pscAutoConnectionPolicyEnabled")) {
-                                object.pscAutoConnectionPolicyEnabled = message.pscAutoConnectionPolicyEnabled;
-                                if (options.oneofs)
-                                    object._pscAutoConnectionPolicyEnabled = "pscAutoConnectionPolicyEnabled";
-                            }
                             return object;
                         };
     
@@ -13845,10 +13802,6 @@
                          * @property {string|null} [ipAddress] PscAutoConnectionConfig ipAddress
                          * @property {string|null} [status] PscAutoConnectionConfig status
                          * @property {string|null} [consumerNetworkStatus] PscAutoConnectionConfig consumerNetworkStatus
-                         * @property {string|null} [serviceConnectionPolicy] PscAutoConnectionConfig serviceConnectionPolicy
-                         * @property {string|null} [serviceConnectionPolicyCreationResult] PscAutoConnectionConfig serviceConnectionPolicyCreationResult
-                         * @property {google.cloud.sql.v1.AutoDnsStatus|null} [instanceAutoDnsStatus] PscAutoConnectionConfig instanceAutoDnsStatus
-                         * @property {google.cloud.sql.v1.AutoDnsStatus|null} [writeEndpointAutoDnsStatus] PscAutoConnectionConfig writeEndpointAutoDnsStatus
                          */
     
                         /**
@@ -13906,38 +13859,6 @@
                          */
                         PscAutoConnectionConfig.prototype.consumerNetworkStatus = null;
     
-                        /**
-                         * PscAutoConnectionConfig serviceConnectionPolicy.
-                         * @member {string|null|undefined} serviceConnectionPolicy
-                         * @memberof google.cloud.sql.v1.PscAutoConnectionConfig
-                         * @instance
-                         */
-                        PscAutoConnectionConfig.prototype.serviceConnectionPolicy = null;
-    
-                        /**
-                         * PscAutoConnectionConfig serviceConnectionPolicyCreationResult.
-                         * @member {string|null|undefined} serviceConnectionPolicyCreationResult
-                         * @memberof google.cloud.sql.v1.PscAutoConnectionConfig
-                         * @instance
-                         */
-                        PscAutoConnectionConfig.prototype.serviceConnectionPolicyCreationResult = null;
-    
-                        /**
-                         * PscAutoConnectionConfig instanceAutoDnsStatus.
-                         * @member {google.cloud.sql.v1.AutoDnsStatus|null|undefined} instanceAutoDnsStatus
-                         * @memberof google.cloud.sql.v1.PscAutoConnectionConfig
-                         * @instance
-                         */
-                        PscAutoConnectionConfig.prototype.instanceAutoDnsStatus = null;
-    
-                        /**
-                         * PscAutoConnectionConfig writeEndpointAutoDnsStatus.
-                         * @member {google.cloud.sql.v1.AutoDnsStatus|null|undefined} writeEndpointAutoDnsStatus
-                         * @memberof google.cloud.sql.v1.PscAutoConnectionConfig
-                         * @instance
-                         */
-                        PscAutoConnectionConfig.prototype.writeEndpointAutoDnsStatus = null;
-    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -13956,30 +13877,6 @@
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(PscAutoConnectionConfig.prototype, "_consumerNetworkStatus", {
                             get: $util.oneOfGetter($oneOfFields = ["consumerNetworkStatus"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        // Virtual OneOf for proto3 optional field
-                        Object.defineProperty(PscAutoConnectionConfig.prototype, "_serviceConnectionPolicy", {
-                            get: $util.oneOfGetter($oneOfFields = ["serviceConnectionPolicy"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        // Virtual OneOf for proto3 optional field
-                        Object.defineProperty(PscAutoConnectionConfig.prototype, "_serviceConnectionPolicyCreationResult", {
-                            get: $util.oneOfGetter($oneOfFields = ["serviceConnectionPolicyCreationResult"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        // Virtual OneOf for proto3 optional field
-                        Object.defineProperty(PscAutoConnectionConfig.prototype, "_instanceAutoDnsStatus", {
-                            get: $util.oneOfGetter($oneOfFields = ["instanceAutoDnsStatus"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        // Virtual OneOf for proto3 optional field
-                        Object.defineProperty(PscAutoConnectionConfig.prototype, "_writeEndpointAutoDnsStatus", {
-                            get: $util.oneOfGetter($oneOfFields = ["writeEndpointAutoDnsStatus"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -14017,14 +13914,6 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.status);
                             if (message.consumerNetworkStatus != null && Object.hasOwnProperty.call(message, "consumerNetworkStatus"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.consumerNetworkStatus);
-                            if (message.serviceConnectionPolicy != null && Object.hasOwnProperty.call(message, "serviceConnectionPolicy"))
-                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.serviceConnectionPolicy);
-                            if (message.serviceConnectionPolicyCreationResult != null && Object.hasOwnProperty.call(message, "serviceConnectionPolicyCreationResult"))
-                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.serviceConnectionPolicyCreationResult);
-                            if (message.instanceAutoDnsStatus != null && Object.hasOwnProperty.call(message, "instanceAutoDnsStatus"))
-                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.instanceAutoDnsStatus);
-                            if (message.writeEndpointAutoDnsStatus != null && Object.hasOwnProperty.call(message, "writeEndpointAutoDnsStatus"))
-                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.writeEndpointAutoDnsStatus);
                             return writer;
                         };
     
@@ -14083,22 +13972,6 @@
                                     }
                                 case 5: {
                                         message.consumerNetworkStatus = reader.string();
-                                        break;
-                                    }
-                                case 6: {
-                                        message.serviceConnectionPolicy = reader.string();
-                                        break;
-                                    }
-                                case 7: {
-                                        message.serviceConnectionPolicyCreationResult = reader.string();
-                                        break;
-                                    }
-                                case 8: {
-                                        message.instanceAutoDnsStatus = reader.int32();
-                                        break;
-                                    }
-                                case 9: {
-                                        message.writeEndpointAutoDnsStatus = reader.int32();
                                         break;
                                     }
                                 default:
@@ -14162,40 +14035,6 @@
                                 if (!$util.isString(message.consumerNetworkStatus))
                                     return "consumerNetworkStatus: string expected";
                             }
-                            if (message.serviceConnectionPolicy != null && message.hasOwnProperty("serviceConnectionPolicy")) {
-                                properties._serviceConnectionPolicy = 1;
-                                if (!$util.isString(message.serviceConnectionPolicy))
-                                    return "serviceConnectionPolicy: string expected";
-                            }
-                            if (message.serviceConnectionPolicyCreationResult != null && message.hasOwnProperty("serviceConnectionPolicyCreationResult")) {
-                                properties._serviceConnectionPolicyCreationResult = 1;
-                                if (!$util.isString(message.serviceConnectionPolicyCreationResult))
-                                    return "serviceConnectionPolicyCreationResult: string expected";
-                            }
-                            if (message.instanceAutoDnsStatus != null && message.hasOwnProperty("instanceAutoDnsStatus")) {
-                                properties._instanceAutoDnsStatus = 1;
-                                switch (message.instanceAutoDnsStatus) {
-                                default:
-                                    return "instanceAutoDnsStatus: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                case 3:
-                                    break;
-                                }
-                            }
-                            if (message.writeEndpointAutoDnsStatus != null && message.hasOwnProperty("writeEndpointAutoDnsStatus")) {
-                                properties._writeEndpointAutoDnsStatus = 1;
-                                switch (message.writeEndpointAutoDnsStatus) {
-                                default:
-                                    return "writeEndpointAutoDnsStatus: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                case 3:
-                                    break;
-                                }
-                            }
                             return null;
                         };
     
@@ -14225,58 +14064,6 @@
                                 message.status = String(object.status);
                             if (object.consumerNetworkStatus != null)
                                 message.consumerNetworkStatus = String(object.consumerNetworkStatus);
-                            if (object.serviceConnectionPolicy != null)
-                                message.serviceConnectionPolicy = String(object.serviceConnectionPolicy);
-                            if (object.serviceConnectionPolicyCreationResult != null)
-                                message.serviceConnectionPolicyCreationResult = String(object.serviceConnectionPolicyCreationResult);
-                            switch (object.instanceAutoDnsStatus) {
-                            default:
-                                if (typeof object.instanceAutoDnsStatus === "number") {
-                                    message.instanceAutoDnsStatus = object.instanceAutoDnsStatus;
-                                    break;
-                                }
-                                break;
-                            case "AUTO_DNS_STATUS_UNSPECIFIED":
-                            case 0:
-                                message.instanceAutoDnsStatus = 0;
-                                break;
-                            case "AUTO_DNS_OK":
-                            case 1:
-                                message.instanceAutoDnsStatus = 1;
-                                break;
-                            case "AUTO_DNS_FAILED":
-                            case 2:
-                                message.instanceAutoDnsStatus = 2;
-                                break;
-                            case "AUTO_DNS_UNKNOWN":
-                            case 3:
-                                message.instanceAutoDnsStatus = 3;
-                                break;
-                            }
-                            switch (object.writeEndpointAutoDnsStatus) {
-                            default:
-                                if (typeof object.writeEndpointAutoDnsStatus === "number") {
-                                    message.writeEndpointAutoDnsStatus = object.writeEndpointAutoDnsStatus;
-                                    break;
-                                }
-                                break;
-                            case "AUTO_DNS_STATUS_UNSPECIFIED":
-                            case 0:
-                                message.writeEndpointAutoDnsStatus = 0;
-                                break;
-                            case "AUTO_DNS_OK":
-                            case 1:
-                                message.writeEndpointAutoDnsStatus = 1;
-                                break;
-                            case "AUTO_DNS_FAILED":
-                            case 2:
-                                message.writeEndpointAutoDnsStatus = 2;
-                                break;
-                            case "AUTO_DNS_UNKNOWN":
-                            case 3:
-                                message.writeEndpointAutoDnsStatus = 3;
-                                break;
-                            }
                             return message;
                         };
     
@@ -14315,26 +14102,6 @@
                                 object.consumerNetworkStatus = message.consumerNetworkStatus;
                                 if (options.oneofs)
                                     object._consumerNetworkStatus = "consumerNetworkStatus";
-                            }
-                            if (message.serviceConnectionPolicy != null && message.hasOwnProperty("serviceConnectionPolicy")) {
-                                object.serviceConnectionPolicy = message.serviceConnectionPolicy;
-                                if (options.oneofs)
-                                    object._serviceConnectionPolicy = "serviceConnectionPolicy";
-                            }
-                            if (message.serviceConnectionPolicyCreationResult != null && message.hasOwnProperty("serviceConnectionPolicyCreationResult")) {
-                                object.serviceConnectionPolicyCreationResult = message.serviceConnectionPolicyCreationResult;
-                                if (options.oneofs)
-                                    object._serviceConnectionPolicyCreationResult = "serviceConnectionPolicyCreationResult";
-                            }
-                            if (message.instanceAutoDnsStatus != null && message.hasOwnProperty("instanceAutoDnsStatus")) {
-                                object.instanceAutoDnsStatus = options.enums === String ? $root.google.cloud.sql.v1.AutoDnsStatus[message.instanceAutoDnsStatus] === undefined ? message.instanceAutoDnsStatus : $root.google.cloud.sql.v1.AutoDnsStatus[message.instanceAutoDnsStatus] : message.instanceAutoDnsStatus;
-                                if (options.oneofs)
-                                    object._instanceAutoDnsStatus = "instanceAutoDnsStatus";
-                            }
-                            if (message.writeEndpointAutoDnsStatus != null && message.hasOwnProperty("writeEndpointAutoDnsStatus")) {
-                                object.writeEndpointAutoDnsStatus = options.enums === String ? $root.google.cloud.sql.v1.AutoDnsStatus[message.writeEndpointAutoDnsStatus] === undefined ? message.writeEndpointAutoDnsStatus : $root.google.cloud.sql.v1.AutoDnsStatus[message.writeEndpointAutoDnsStatus] : message.writeEndpointAutoDnsStatus;
-                                if (options.oneofs)
-                                    object._writeEndpointAutoDnsStatus = "writeEndpointAutoDnsStatus";
                             }
                             return object;
                         };
@@ -17657,7 +17424,6 @@
                                 case 52:
                                 case 53:
                                 case 54:
-                                case 55:
                                     break;
                                 }
                             if (message.importContext != null && message.hasOwnProperty("importContext")) {
@@ -17995,10 +17761,6 @@
                             case 54:
                                 message.operationType = 54;
                                 break;
-                            case "SETUP_MIGRATION":
-                            case 55:
-                                message.operationType = 55;
-                                break;
                             }
                             if (object.importContext != null) {
                                 if (typeof object.importContext !== "object")
@@ -18202,7 +17964,6 @@
                          * @property {number} REPAIR_READ_POOL=52 REPAIR_READ_POOL value
                          * @property {number} CREATE_READ_POOL=53 CREATE_READ_POOL value
                          * @property {number} PRE_CHECK_MAJOR_VERSION_UPGRADE=54 PRE_CHECK_MAJOR_VERSION_UPGRADE value
-                         * @property {number} SETUP_MIGRATION=55 SETUP_MIGRATION value
                          */
                         Operation.SqlOperationType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -18259,7 +18020,6 @@
                             values[valuesById[52] = "REPAIR_READ_POOL"] = 52;
                             values[valuesById[53] = "CREATE_READ_POOL"] = 53;
                             values[valuesById[54] = "PRE_CHECK_MAJOR_VERSION_UPGRADE"] = 54;
-                            values[valuesById[55] = "SETUP_MIGRATION"] = 55;
                             return values;
                         })();
     
@@ -20773,7 +20533,6 @@
                                 case 0:
                                 case 2:
                                 case 3:
-                                case 5:
                                     break;
                                 }
                             if (message.connectorEnforcement != null && message.hasOwnProperty("connectorEnforcement"))
@@ -21150,10 +20909,6 @@
                             case "ENTERPRISE_PLUS":
                             case 3:
                                 message.edition = 3;
-                                break;
-                            case "DEVELOPER":
-                            case 5:
-                                message.edition = 5;
                                 break;
                             }
                             switch (object.connectorEnforcement) {
@@ -21532,14 +21287,12 @@
                          * @property {number} EDITION_UNSPECIFIED=0 EDITION_UNSPECIFIED value
                          * @property {number} ENTERPRISE=2 ENTERPRISE value
                          * @property {number} ENTERPRISE_PLUS=3 ENTERPRISE_PLUS value
-                         * @property {number} DEVELOPER=5 DEVELOPER value
                          */
                         Settings.Edition = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "EDITION_UNSPECIFIED"] = 0;
                             values[valuesById[2] = "ENTERPRISE"] = 2;
                             values[valuesById[3] = "ENTERPRISE_PLUS"] = 3;
-                            values[valuesById[5] = "DEVELOPER"] = 5;
                             return values;
                         })();
     
@@ -21590,14 +21343,6 @@
                          * @property {number|null} [runningThreadsThreshold] PerformanceCaptureConfig runningThreadsThreshold
                          * @property {number|null} [secondsBehindSourceThreshold] PerformanceCaptureConfig secondsBehindSourceThreshold
                          * @property {number|null} [transactionDurationThreshold] PerformanceCaptureConfig transactionDurationThreshold
-                         * @property {number|null} [cpuUtilizationThresholdPercent] PerformanceCaptureConfig cpuUtilizationThresholdPercent
-                         * @property {number|null} [memoryUsageThresholdPercent] PerformanceCaptureConfig memoryUsageThresholdPercent
-                         * @property {number|null} [transactionLockWaitThresholdCount] PerformanceCaptureConfig transactionLockWaitThresholdCount
-                         * @property {number|null} [semaphoreWaitThresholdCount] PerformanceCaptureConfig semaphoreWaitThresholdCount
-                         * @property {number|null} [historyListLengthThresholdCount] PerformanceCaptureConfig historyListLengthThresholdCount
-                         * @property {number|null} [transactionKillThresholdSeconds] PerformanceCaptureConfig transactionKillThresholdSeconds
-                         * @property {Array.<string>|null} [transactionKillExcludedUserHosts] PerformanceCaptureConfig transactionKillExcludedUserHosts
-                         * @property {google.cloud.sql.v1.PerformanceCaptureConfig.TransactionKillType|null} [transactionKillType] PerformanceCaptureConfig transactionKillType
                          */
     
                         /**
@@ -21609,7 +21354,6 @@
                          * @param {google.cloud.sql.v1.IPerformanceCaptureConfig=} [properties] Properties to set
                          */
                         function PerformanceCaptureConfig(properties) {
-                            this.transactionKillExcludedUserHosts = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null && keys[i] !== "__proto__")
@@ -21664,70 +21408,6 @@
                          */
                         PerformanceCaptureConfig.prototype.transactionDurationThreshold = null;
     
-                        /**
-                         * PerformanceCaptureConfig cpuUtilizationThresholdPercent.
-                         * @member {number|null|undefined} cpuUtilizationThresholdPercent
-                         * @memberof google.cloud.sql.v1.PerformanceCaptureConfig
-                         * @instance
-                         */
-                        PerformanceCaptureConfig.prototype.cpuUtilizationThresholdPercent = null;
-    
-                        /**
-                         * PerformanceCaptureConfig memoryUsageThresholdPercent.
-                         * @member {number|null|undefined} memoryUsageThresholdPercent
-                         * @memberof google.cloud.sql.v1.PerformanceCaptureConfig
-                         * @instance
-                         */
-                        PerformanceCaptureConfig.prototype.memoryUsageThresholdPercent = null;
-    
-                        /**
-                         * PerformanceCaptureConfig transactionLockWaitThresholdCount.
-                         * @member {number|null|undefined} transactionLockWaitThresholdCount
-                         * @memberof google.cloud.sql.v1.PerformanceCaptureConfig
-                         * @instance
-                         */
-                        PerformanceCaptureConfig.prototype.transactionLockWaitThresholdCount = null;
-    
-                        /**
-                         * PerformanceCaptureConfig semaphoreWaitThresholdCount.
-                         * @member {number|null|undefined} semaphoreWaitThresholdCount
-                         * @memberof google.cloud.sql.v1.PerformanceCaptureConfig
-                         * @instance
-                         */
-                        PerformanceCaptureConfig.prototype.semaphoreWaitThresholdCount = null;
-    
-                        /**
-                         * PerformanceCaptureConfig historyListLengthThresholdCount.
-                         * @member {number|null|undefined} historyListLengthThresholdCount
-                         * @memberof google.cloud.sql.v1.PerformanceCaptureConfig
-                         * @instance
-                         */
-                        PerformanceCaptureConfig.prototype.historyListLengthThresholdCount = null;
-    
-                        /**
-                         * PerformanceCaptureConfig transactionKillThresholdSeconds.
-                         * @member {number|null|undefined} transactionKillThresholdSeconds
-                         * @memberof google.cloud.sql.v1.PerformanceCaptureConfig
-                         * @instance
-                         */
-                        PerformanceCaptureConfig.prototype.transactionKillThresholdSeconds = null;
-    
-                        /**
-                         * PerformanceCaptureConfig transactionKillExcludedUserHosts.
-                         * @member {Array.<string>} transactionKillExcludedUserHosts
-                         * @memberof google.cloud.sql.v1.PerformanceCaptureConfig
-                         * @instance
-                         */
-                        PerformanceCaptureConfig.prototype.transactionKillExcludedUserHosts = $util.emptyArray;
-    
-                        /**
-                         * PerformanceCaptureConfig transactionKillType.
-                         * @member {google.cloud.sql.v1.PerformanceCaptureConfig.TransactionKillType|null|undefined} transactionKillType
-                         * @memberof google.cloud.sql.v1.PerformanceCaptureConfig
-                         * @instance
-                         */
-                        PerformanceCaptureConfig.prototype.transactionKillType = null;
-    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -21767,48 +21447,6 @@
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
-                        // Virtual OneOf for proto3 optional field
-                        Object.defineProperty(PerformanceCaptureConfig.prototype, "_cpuUtilizationThresholdPercent", {
-                            get: $util.oneOfGetter($oneOfFields = ["cpuUtilizationThresholdPercent"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        // Virtual OneOf for proto3 optional field
-                        Object.defineProperty(PerformanceCaptureConfig.prototype, "_memoryUsageThresholdPercent", {
-                            get: $util.oneOfGetter($oneOfFields = ["memoryUsageThresholdPercent"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        // Virtual OneOf for proto3 optional field
-                        Object.defineProperty(PerformanceCaptureConfig.prototype, "_transactionLockWaitThresholdCount", {
-                            get: $util.oneOfGetter($oneOfFields = ["transactionLockWaitThresholdCount"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        // Virtual OneOf for proto3 optional field
-                        Object.defineProperty(PerformanceCaptureConfig.prototype, "_semaphoreWaitThresholdCount", {
-                            get: $util.oneOfGetter($oneOfFields = ["semaphoreWaitThresholdCount"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        // Virtual OneOf for proto3 optional field
-                        Object.defineProperty(PerformanceCaptureConfig.prototype, "_historyListLengthThresholdCount", {
-                            get: $util.oneOfGetter($oneOfFields = ["historyListLengthThresholdCount"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        // Virtual OneOf for proto3 optional field
-                        Object.defineProperty(PerformanceCaptureConfig.prototype, "_transactionKillThresholdSeconds", {
-                            get: $util.oneOfGetter($oneOfFields = ["transactionKillThresholdSeconds"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        // Virtual OneOf for proto3 optional field
-                        Object.defineProperty(PerformanceCaptureConfig.prototype, "_transactionKillType", {
-                            get: $util.oneOfGetter($oneOfFields = ["transactionKillType"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
                         /**
                          * Creates a new PerformanceCaptureConfig instance using the specified properties.
                          * @function create
@@ -21845,23 +21483,6 @@
                                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.secondsBehindSourceThreshold);
                             if (message.transactionDurationThreshold != null && Object.hasOwnProperty.call(message, "transactionDurationThreshold"))
                                 writer.uint32(/* id 8, wireType 0 =*/64).int32(message.transactionDurationThreshold);
-                            if (message.cpuUtilizationThresholdPercent != null && Object.hasOwnProperty.call(message, "cpuUtilizationThresholdPercent"))
-                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.cpuUtilizationThresholdPercent);
-                            if (message.memoryUsageThresholdPercent != null && Object.hasOwnProperty.call(message, "memoryUsageThresholdPercent"))
-                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.memoryUsageThresholdPercent);
-                            if (message.transactionLockWaitThresholdCount != null && Object.hasOwnProperty.call(message, "transactionLockWaitThresholdCount"))
-                                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.transactionLockWaitThresholdCount);
-                            if (message.semaphoreWaitThresholdCount != null && Object.hasOwnProperty.call(message, "semaphoreWaitThresholdCount"))
-                                writer.uint32(/* id 12, wireType 0 =*/96).int32(message.semaphoreWaitThresholdCount);
-                            if (message.historyListLengthThresholdCount != null && Object.hasOwnProperty.call(message, "historyListLengthThresholdCount"))
-                                writer.uint32(/* id 13, wireType 0 =*/104).int32(message.historyListLengthThresholdCount);
-                            if (message.transactionKillThresholdSeconds != null && Object.hasOwnProperty.call(message, "transactionKillThresholdSeconds"))
-                                writer.uint32(/* id 14, wireType 0 =*/112).int32(message.transactionKillThresholdSeconds);
-                            if (message.transactionKillExcludedUserHosts != null && message.transactionKillExcludedUserHosts.length)
-                                for (var i = 0; i < message.transactionKillExcludedUserHosts.length; ++i)
-                                    writer.uint32(/* id 16, wireType 2 =*/130).string(message.transactionKillExcludedUserHosts[i]);
-                            if (message.transactionKillType != null && Object.hasOwnProperty.call(message, "transactionKillType"))
-                                writer.uint32(/* id 17, wireType 0 =*/136).int32(message.transactionKillType);
                             return writer;
                         };
     
@@ -21924,40 +21545,6 @@
                                     }
                                 case 8: {
                                         message.transactionDurationThreshold = reader.int32();
-                                        break;
-                                    }
-                                case 9: {
-                                        message.cpuUtilizationThresholdPercent = reader.int32();
-                                        break;
-                                    }
-                                case 10: {
-                                        message.memoryUsageThresholdPercent = reader.int32();
-                                        break;
-                                    }
-                                case 11: {
-                                        message.transactionLockWaitThresholdCount = reader.int32();
-                                        break;
-                                    }
-                                case 12: {
-                                        message.semaphoreWaitThresholdCount = reader.int32();
-                                        break;
-                                    }
-                                case 13: {
-                                        message.historyListLengthThresholdCount = reader.int32();
-                                        break;
-                                    }
-                                case 14: {
-                                        message.transactionKillThresholdSeconds = reader.int32();
-                                        break;
-                                    }
-                                case 16: {
-                                        if (!(message.transactionKillExcludedUserHosts && message.transactionKillExcludedUserHosts.length))
-                                            message.transactionKillExcludedUserHosts = [];
-                                        message.transactionKillExcludedUserHosts.push(reader.string());
-                                        break;
-                                    }
-                                case 17: {
-                                        message.transactionKillType = reader.int32();
                                         break;
                                     }
                                 default:
@@ -22030,54 +21617,6 @@
                                 if (!$util.isInteger(message.transactionDurationThreshold))
                                     return "transactionDurationThreshold: integer expected";
                             }
-                            if (message.cpuUtilizationThresholdPercent != null && message.hasOwnProperty("cpuUtilizationThresholdPercent")) {
-                                properties._cpuUtilizationThresholdPercent = 1;
-                                if (!$util.isInteger(message.cpuUtilizationThresholdPercent))
-                                    return "cpuUtilizationThresholdPercent: integer expected";
-                            }
-                            if (message.memoryUsageThresholdPercent != null && message.hasOwnProperty("memoryUsageThresholdPercent")) {
-                                properties._memoryUsageThresholdPercent = 1;
-                                if (!$util.isInteger(message.memoryUsageThresholdPercent))
-                                    return "memoryUsageThresholdPercent: integer expected";
-                            }
-                            if (message.transactionLockWaitThresholdCount != null && message.hasOwnProperty("transactionLockWaitThresholdCount")) {
-                                properties._transactionLockWaitThresholdCount = 1;
-                                if (!$util.isInteger(message.transactionLockWaitThresholdCount))
-                                    return "transactionLockWaitThresholdCount: integer expected";
-                            }
-                            if (message.semaphoreWaitThresholdCount != null && message.hasOwnProperty("semaphoreWaitThresholdCount")) {
-                                properties._semaphoreWaitThresholdCount = 1;
-                                if (!$util.isInteger(message.semaphoreWaitThresholdCount))
-                                    return "semaphoreWaitThresholdCount: integer expected";
-                            }
-                            if (message.historyListLengthThresholdCount != null && message.hasOwnProperty("historyListLengthThresholdCount")) {
-                                properties._historyListLengthThresholdCount = 1;
-                                if (!$util.isInteger(message.historyListLengthThresholdCount))
-                                    return "historyListLengthThresholdCount: integer expected";
-                            }
-                            if (message.transactionKillThresholdSeconds != null && message.hasOwnProperty("transactionKillThresholdSeconds")) {
-                                properties._transactionKillThresholdSeconds = 1;
-                                if (!$util.isInteger(message.transactionKillThresholdSeconds))
-                                    return "transactionKillThresholdSeconds: integer expected";
-                            }
-                            if (message.transactionKillExcludedUserHosts != null && message.hasOwnProperty("transactionKillExcludedUserHosts")) {
-                                if (!Array.isArray(message.transactionKillExcludedUserHosts))
-                                    return "transactionKillExcludedUserHosts: array expected";
-                                for (var i = 0; i < message.transactionKillExcludedUserHosts.length; ++i)
-                                    if (!$util.isString(message.transactionKillExcludedUserHosts[i]))
-                                        return "transactionKillExcludedUserHosts: string[] expected";
-                            }
-                            if (message.transactionKillType != null && message.hasOwnProperty("transactionKillType")) {
-                                properties._transactionKillType = 1;
-                                switch (message.transactionKillType) {
-                                default:
-                                    return "transactionKillType: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                    break;
-                                }
-                            }
                             return null;
                         };
     
@@ -22109,45 +21648,6 @@
                                 message.secondsBehindSourceThreshold = object.secondsBehindSourceThreshold | 0;
                             if (object.transactionDurationThreshold != null)
                                 message.transactionDurationThreshold = object.transactionDurationThreshold | 0;
-                            if (object.cpuUtilizationThresholdPercent != null)
-                                message.cpuUtilizationThresholdPercent = object.cpuUtilizationThresholdPercent | 0;
-                            if (object.memoryUsageThresholdPercent != null)
-                                message.memoryUsageThresholdPercent = object.memoryUsageThresholdPercent | 0;
-                            if (object.transactionLockWaitThresholdCount != null)
-                                message.transactionLockWaitThresholdCount = object.transactionLockWaitThresholdCount | 0;
-                            if (object.semaphoreWaitThresholdCount != null)
-                                message.semaphoreWaitThresholdCount = object.semaphoreWaitThresholdCount | 0;
-                            if (object.historyListLengthThresholdCount != null)
-                                message.historyListLengthThresholdCount = object.historyListLengthThresholdCount | 0;
-                            if (object.transactionKillThresholdSeconds != null)
-                                message.transactionKillThresholdSeconds = object.transactionKillThresholdSeconds | 0;
-                            if (object.transactionKillExcludedUserHosts) {
-                                if (!Array.isArray(object.transactionKillExcludedUserHosts))
-                                    throw TypeError(".google.cloud.sql.v1.PerformanceCaptureConfig.transactionKillExcludedUserHosts: array expected");
-                                message.transactionKillExcludedUserHosts = [];
-                                for (var i = 0; i < object.transactionKillExcludedUserHosts.length; ++i)
-                                    message.transactionKillExcludedUserHosts[i] = String(object.transactionKillExcludedUserHosts[i]);
-                            }
-                            switch (object.transactionKillType) {
-                            default:
-                                if (typeof object.transactionKillType === "number") {
-                                    message.transactionKillType = object.transactionKillType;
-                                    break;
-                                }
-                                break;
-                            case "TRANSACTION_KILL_TYPE_UNSPECIFIED":
-                            case 0:
-                                message.transactionKillType = 0;
-                                break;
-                            case "READ_ONLY_TRANSACTIONS":
-                            case 1:
-                                message.transactionKillType = 1;
-                                break;
-                            case "ALL_TRANSACTIONS":
-                            case 2:
-                                message.transactionKillType = 2;
-                                break;
-                            }
                             return message;
                         };
     
@@ -22164,8 +21664,6 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
-                                object.transactionKillExcludedUserHosts = [];
                             if (message.enabled != null && message.hasOwnProperty("enabled")) {
                                 object.enabled = message.enabled;
                                 if (options.oneofs)
@@ -22196,46 +21694,6 @@
                                 if (options.oneofs)
                                     object._transactionDurationThreshold = "transactionDurationThreshold";
                             }
-                            if (message.cpuUtilizationThresholdPercent != null && message.hasOwnProperty("cpuUtilizationThresholdPercent")) {
-                                object.cpuUtilizationThresholdPercent = message.cpuUtilizationThresholdPercent;
-                                if (options.oneofs)
-                                    object._cpuUtilizationThresholdPercent = "cpuUtilizationThresholdPercent";
-                            }
-                            if (message.memoryUsageThresholdPercent != null && message.hasOwnProperty("memoryUsageThresholdPercent")) {
-                                object.memoryUsageThresholdPercent = message.memoryUsageThresholdPercent;
-                                if (options.oneofs)
-                                    object._memoryUsageThresholdPercent = "memoryUsageThresholdPercent";
-                            }
-                            if (message.transactionLockWaitThresholdCount != null && message.hasOwnProperty("transactionLockWaitThresholdCount")) {
-                                object.transactionLockWaitThresholdCount = message.transactionLockWaitThresholdCount;
-                                if (options.oneofs)
-                                    object._transactionLockWaitThresholdCount = "transactionLockWaitThresholdCount";
-                            }
-                            if (message.semaphoreWaitThresholdCount != null && message.hasOwnProperty("semaphoreWaitThresholdCount")) {
-                                object.semaphoreWaitThresholdCount = message.semaphoreWaitThresholdCount;
-                                if (options.oneofs)
-                                    object._semaphoreWaitThresholdCount = "semaphoreWaitThresholdCount";
-                            }
-                            if (message.historyListLengthThresholdCount != null && message.hasOwnProperty("historyListLengthThresholdCount")) {
-                                object.historyListLengthThresholdCount = message.historyListLengthThresholdCount;
-                                if (options.oneofs)
-                                    object._historyListLengthThresholdCount = "historyListLengthThresholdCount";
-                            }
-                            if (message.transactionKillThresholdSeconds != null && message.hasOwnProperty("transactionKillThresholdSeconds")) {
-                                object.transactionKillThresholdSeconds = message.transactionKillThresholdSeconds;
-                                if (options.oneofs)
-                                    object._transactionKillThresholdSeconds = "transactionKillThresholdSeconds";
-                            }
-                            if (message.transactionKillExcludedUserHosts && message.transactionKillExcludedUserHosts.length) {
-                                object.transactionKillExcludedUserHosts = [];
-                                for (var j = 0; j < message.transactionKillExcludedUserHosts.length; ++j)
-                                    object.transactionKillExcludedUserHosts[j] = message.transactionKillExcludedUserHosts[j];
-                            }
-                            if (message.transactionKillType != null && message.hasOwnProperty("transactionKillType")) {
-                                object.transactionKillType = options.enums === String ? $root.google.cloud.sql.v1.PerformanceCaptureConfig.TransactionKillType[message.transactionKillType] === undefined ? message.transactionKillType : $root.google.cloud.sql.v1.PerformanceCaptureConfig.TransactionKillType[message.transactionKillType] : message.transactionKillType;
-                                if (options.oneofs)
-                                    object._transactionKillType = "transactionKillType";
-                            }
                             return object;
                         };
     
@@ -22264,22 +21722,6 @@
                             }
                             return typeUrlPrefix + "/google.cloud.sql.v1.PerformanceCaptureConfig";
                         };
-    
-                        /**
-                         * TransactionKillType enum.
-                         * @name google.cloud.sql.v1.PerformanceCaptureConfig.TransactionKillType
-                         * @enum {number}
-                         * @property {number} TRANSACTION_KILL_TYPE_UNSPECIFIED=0 TRANSACTION_KILL_TYPE_UNSPECIFIED value
-                         * @property {number} READ_ONLY_TRANSACTIONS=1 READ_ONLY_TRANSACTIONS value
-                         * @property {number} ALL_TRANSACTIONS=2 ALL_TRANSACTIONS value
-                         */
-                        PerformanceCaptureConfig.TransactionKillType = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "TRANSACTION_KILL_TYPE_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "READ_ONLY_TRANSACTIONS"] = 1;
-                            values[valuesById[2] = "ALL_TRANSACTIONS"] = 2;
-                            return values;
-                        })();
     
                         return PerformanceCaptureConfig;
                     })();
@@ -25455,7 +24897,6 @@
                      * @property {number} POSTGRES_17=408 POSTGRES_17 value
                      * @property {number} POSTGRES_18=557 POSTGRES_18 value
                      * @property {number} POSTGRES_19=684 POSTGRES_19 value
-                     * @property {number} POSTGRES_20=781 POSTGRES_20 value
                      * @property {number} SQLSERVER_2019_STANDARD=26 SQLSERVER_2019_STANDARD value
                      * @property {number} SQLSERVER_2019_ENTERPRISE=27 SQLSERVER_2019_ENTERPRISE value
                      * @property {number} SQLSERVER_2019_EXPRESS=28 SQLSERVER_2019_EXPRESS value
@@ -25514,7 +24955,6 @@
                         values[valuesById[408] = "POSTGRES_17"] = 408;
                         values[valuesById[557] = "POSTGRES_18"] = 557;
                         values[valuesById[684] = "POSTGRES_19"] = 684;
-                        values[valuesById[781] = "POSTGRES_20"] = 781;
                         values[valuesById[26] = "SQLSERVER_2019_STANDARD"] = 26;
                         values[valuesById[27] = "SQLSERVER_2019_ENTERPRISE"] = 27;
                         values[valuesById[28] = "SQLSERVER_2019_EXPRESS"] = 28;
@@ -26362,24 +25802,6 @@
                         })();
     
                         return DnsNameMapping;
-                    })();
-    
-                    /**
-                     * AutoDnsStatus enum.
-                     * @name google.cloud.sql.v1.AutoDnsStatus
-                     * @enum {number}
-                     * @property {number} AUTO_DNS_STATUS_UNSPECIFIED=0 AUTO_DNS_STATUS_UNSPECIFIED value
-                     * @property {number} AUTO_DNS_OK=1 AUTO_DNS_OK value
-                     * @property {number} AUTO_DNS_FAILED=2 AUTO_DNS_FAILED value
-                     * @property {number} AUTO_DNS_UNKNOWN=3 AUTO_DNS_UNKNOWN value
-                     */
-                    v1.AutoDnsStatus = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "AUTO_DNS_STATUS_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "AUTO_DNS_OK"] = 1;
-                        values[valuesById[2] = "AUTO_DNS_FAILED"] = 2;
-                        values[valuesById[3] = "AUTO_DNS_UNKNOWN"] = 3;
-                        return values;
                     })();
     
                     v1.SqlBackupsService = (function() {
@@ -28731,7 +28153,6 @@
                                 case 408:
                                 case 557:
                                 case 684:
-                                case 781:
                                 case 26:
                                 case 27:
                                 case 28:
@@ -29096,10 +28517,6 @@
                             case "POSTGRES_19":
                             case 684:
                                 message.databaseVersion = 684;
-                                break;
-                            case "POSTGRES_20":
-                            case 781:
-                                message.databaseVersion = 781;
                                 break;
                             case "SQLSERVER_2019_STANDARD":
                             case 26:
@@ -35030,8 +34447,6 @@
                          * @interface ISqlInstancesPatchRequest
                          * @property {string|null} [instance] SqlInstancesPatchRequest instance
                          * @property {string|null} [project] SqlInstancesPatchRequest project
-                         * @property {boolean|null} [reconcilePscNetworking] SqlInstancesPatchRequest reconcilePscNetworking
-                         * @property {boolean|null} [reconcilePscNetworkingForce] SqlInstancesPatchRequest reconcilePscNetworkingForce
                          * @property {google.cloud.sql.v1.IDatabaseInstance|null} [body] SqlInstancesPatchRequest body
                          */
     
@@ -35067,43 +34482,12 @@
                         SqlInstancesPatchRequest.prototype.project = "";
     
                         /**
-                         * SqlInstancesPatchRequest reconcilePscNetworking.
-                         * @member {boolean|null|undefined} reconcilePscNetworking
-                         * @memberof google.cloud.sql.v1.SqlInstancesPatchRequest
-                         * @instance
-                         */
-                        SqlInstancesPatchRequest.prototype.reconcilePscNetworking = null;
-    
-                        /**
-                         * SqlInstancesPatchRequest reconcilePscNetworkingForce.
-                         * @member {boolean|null|undefined} reconcilePscNetworkingForce
-                         * @memberof google.cloud.sql.v1.SqlInstancesPatchRequest
-                         * @instance
-                         */
-                        SqlInstancesPatchRequest.prototype.reconcilePscNetworkingForce = null;
-    
-                        /**
                          * SqlInstancesPatchRequest body.
                          * @member {google.cloud.sql.v1.IDatabaseInstance|null|undefined} body
                          * @memberof google.cloud.sql.v1.SqlInstancesPatchRequest
                          * @instance
                          */
                         SqlInstancesPatchRequest.prototype.body = null;
-    
-                        // OneOf field names bound to virtual getters and setters
-                        var $oneOfFields;
-    
-                        // Virtual OneOf for proto3 optional field
-                        Object.defineProperty(SqlInstancesPatchRequest.prototype, "_reconcilePscNetworking", {
-                            get: $util.oneOfGetter($oneOfFields = ["reconcilePscNetworking"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        // Virtual OneOf for proto3 optional field
-                        Object.defineProperty(SqlInstancesPatchRequest.prototype, "_reconcilePscNetworkingForce", {
-                            get: $util.oneOfGetter($oneOfFields = ["reconcilePscNetworkingForce"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
     
                         /**
                          * Creates a new SqlInstancesPatchRequest instance using the specified properties.
@@ -35133,10 +34517,6 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.instance);
                             if (message.project != null && Object.hasOwnProperty.call(message, "project"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.project);
-                            if (message.reconcilePscNetworking != null && Object.hasOwnProperty.call(message, "reconcilePscNetworking"))
-                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.reconcilePscNetworking);
-                            if (message.reconcilePscNetworkingForce != null && Object.hasOwnProperty.call(message, "reconcilePscNetworkingForce"))
-                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.reconcilePscNetworkingForce);
                             if (message.body != null && Object.hasOwnProperty.call(message, "body"))
                                 $root.google.cloud.sql.v1.DatabaseInstance.encode(message.body, writer.uint32(/* id 100, wireType 2 =*/802).fork()).ldelim();
                             return writer;
@@ -35187,14 +34567,6 @@
                                         message.project = reader.string();
                                         break;
                                     }
-                                case 4: {
-                                        message.reconcilePscNetworking = reader.bool();
-                                        break;
-                                    }
-                                case 5: {
-                                        message.reconcilePscNetworkingForce = reader.bool();
-                                        break;
-                                    }
                                 case 100: {
                                         message.body = $root.google.cloud.sql.v1.DatabaseInstance.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
@@ -35238,23 +34610,12 @@
                                 long = 0;
                             if (long > $util.recursionLimit)
                                 return "maximum nesting depth exceeded";
-                            var properties = {};
                             if (message.instance != null && message.hasOwnProperty("instance"))
                                 if (!$util.isString(message.instance))
                                     return "instance: string expected";
                             if (message.project != null && message.hasOwnProperty("project"))
                                 if (!$util.isString(message.project))
                                     return "project: string expected";
-                            if (message.reconcilePscNetworking != null && message.hasOwnProperty("reconcilePscNetworking")) {
-                                properties._reconcilePscNetworking = 1;
-                                if (typeof message.reconcilePscNetworking !== "boolean")
-                                    return "reconcilePscNetworking: boolean expected";
-                            }
-                            if (message.reconcilePscNetworkingForce != null && message.hasOwnProperty("reconcilePscNetworkingForce")) {
-                                properties._reconcilePscNetworkingForce = 1;
-                                if (typeof message.reconcilePscNetworkingForce !== "boolean")
-                                    return "reconcilePscNetworkingForce: boolean expected";
-                            }
                             if (message.body != null && message.hasOwnProperty("body")) {
                                 var error = $root.google.cloud.sql.v1.DatabaseInstance.verify(message.body, long + 1);
                                 if (error)
@@ -35283,10 +34644,6 @@
                                 message.instance = String(object.instance);
                             if (object.project != null)
                                 message.project = String(object.project);
-                            if (object.reconcilePscNetworking != null)
-                                message.reconcilePscNetworking = Boolean(object.reconcilePscNetworking);
-                            if (object.reconcilePscNetworkingForce != null)
-                                message.reconcilePscNetworkingForce = Boolean(object.reconcilePscNetworkingForce);
                             if (object.body != null) {
                                 if (typeof object.body !== "object")
                                     throw TypeError(".google.cloud.sql.v1.SqlInstancesPatchRequest.body: object expected");
@@ -35317,16 +34674,6 @@
                                 object.instance = message.instance;
                             if (message.project != null && message.hasOwnProperty("project"))
                                 object.project = message.project;
-                            if (message.reconcilePscNetworking != null && message.hasOwnProperty("reconcilePscNetworking")) {
-                                object.reconcilePscNetworking = message.reconcilePscNetworking;
-                                if (options.oneofs)
-                                    object._reconcilePscNetworking = "reconcilePscNetworking";
-                            }
-                            if (message.reconcilePscNetworkingForce != null && message.hasOwnProperty("reconcilePscNetworkingForce")) {
-                                object.reconcilePscNetworkingForce = message.reconcilePscNetworkingForce;
-                                if (options.oneofs)
-                                    object._reconcilePscNetworkingForce = "reconcilePscNetworkingForce";
-                            }
                             if (message.body != null && message.hasOwnProperty("body"))
                                 object.body = $root.google.cloud.sql.v1.DatabaseInstance.toObject(message.body, options);
                             return object;
@@ -50250,7 +49597,6 @@
                                 case 408:
                                 case 557:
                                 case 684:
-                                case 781:
                                 case 26:
                                 case 27:
                                 case 28:
@@ -50786,10 +50132,6 @@
                             case "POSTGRES_19":
                             case 684:
                                 message.databaseVersion = 684;
-                                break;
-                            case "POSTGRES_20":
-                            case 781:
-                                message.databaseVersion = 781;
                                 break;
                             case "SQLSERVER_2019_STANDARD":
                             case 26:
@@ -62035,39 +61377,6 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.sql.v1.SqlConnectService|resolveConnectSettings}.
-                         * @memberof google.cloud.sql.v1.SqlConnectService
-                         * @typedef ResolveConnectSettingsCallback
-                         * @type {function}
-                         * @param {Error|null} error Error, if any
-                         * @param {google.cloud.sql.v1.ConnectSettings} [response] ConnectSettings
-                         */
-    
-                        /**
-                         * Calls ResolveConnectSettings.
-                         * @function resolveConnectSettings
-                         * @memberof google.cloud.sql.v1.SqlConnectService
-                         * @instance
-                         * @param {google.cloud.sql.v1.IResolveConnectSettingsRequest} request ResolveConnectSettingsRequest message or plain object
-                         * @param {google.cloud.sql.v1.SqlConnectService.ResolveConnectSettingsCallback} callback Node-style callback called with the error, if any, and ConnectSettings
-                         * @returns {undefined}
-                         * @variation 1
-                         */
-                        Object.defineProperty(SqlConnectService.prototype.resolveConnectSettings = function resolveConnectSettings(request, callback) {
-                            return this.rpcCall(resolveConnectSettings, $root.google.cloud.sql.v1.ResolveConnectSettingsRequest, $root.google.cloud.sql.v1.ConnectSettings, request, callback);
-                        }, "name", { value: "ResolveConnectSettings" });
-    
-                        /**
-                         * Calls ResolveConnectSettings.
-                         * @function resolveConnectSettings
-                         * @memberof google.cloud.sql.v1.SqlConnectService
-                         * @instance
-                         * @param {google.cloud.sql.v1.IResolveConnectSettingsRequest} request ResolveConnectSettingsRequest message or plain object
-                         * @returns {Promise<google.cloud.sql.v1.ConnectSettings>} Promise
-                         * @variation 2
-                         */
-    
-                        /**
                          * Callback as used by {@link google.cloud.sql.v1.SqlConnectService|generateEphemeralCert}.
                          * @memberof google.cloud.sql.v1.SqlConnectService
                          * @typedef GenerateEphemeralCertCallback
@@ -62372,247 +61681,6 @@
                         return GetConnectSettingsRequest;
                     })();
     
-                    v1.ResolveConnectSettingsRequest = (function() {
-    
-                        /**
-                         * Properties of a ResolveConnectSettingsRequest.
-                         * @memberof google.cloud.sql.v1
-                         * @interface IResolveConnectSettingsRequest
-                         * @property {string|null} [dnsName] ResolveConnectSettingsRequest dnsName
-                         * @property {string|null} [location] ResolveConnectSettingsRequest location
-                         */
-    
-                        /**
-                         * Constructs a new ResolveConnectSettingsRequest.
-                         * @memberof google.cloud.sql.v1
-                         * @classdesc Represents a ResolveConnectSettingsRequest.
-                         * @implements IResolveConnectSettingsRequest
-                         * @constructor
-                         * @param {google.cloud.sql.v1.IResolveConnectSettingsRequest=} [properties] Properties to set
-                         */
-                        function ResolveConnectSettingsRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * ResolveConnectSettingsRequest dnsName.
-                         * @member {string} dnsName
-                         * @memberof google.cloud.sql.v1.ResolveConnectSettingsRequest
-                         * @instance
-                         */
-                        ResolveConnectSettingsRequest.prototype.dnsName = "";
-    
-                        /**
-                         * ResolveConnectSettingsRequest location.
-                         * @member {string} location
-                         * @memberof google.cloud.sql.v1.ResolveConnectSettingsRequest
-                         * @instance
-                         */
-                        ResolveConnectSettingsRequest.prototype.location = "";
-    
-                        /**
-                         * Creates a new ResolveConnectSettingsRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.sql.v1.ResolveConnectSettingsRequest
-                         * @static
-                         * @param {google.cloud.sql.v1.IResolveConnectSettingsRequest=} [properties] Properties to set
-                         * @returns {google.cloud.sql.v1.ResolveConnectSettingsRequest} ResolveConnectSettingsRequest instance
-                         */
-                        ResolveConnectSettingsRequest.create = function create(properties) {
-                            return new ResolveConnectSettingsRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified ResolveConnectSettingsRequest message. Does not implicitly {@link google.cloud.sql.v1.ResolveConnectSettingsRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.sql.v1.ResolveConnectSettingsRequest
-                         * @static
-                         * @param {google.cloud.sql.v1.IResolveConnectSettingsRequest} message ResolveConnectSettingsRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ResolveConnectSettingsRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.dnsName != null && Object.hasOwnProperty.call(message, "dnsName"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.dnsName);
-                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.location);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified ResolveConnectSettingsRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1.ResolveConnectSettingsRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.sql.v1.ResolveConnectSettingsRequest
-                         * @static
-                         * @param {google.cloud.sql.v1.IResolveConnectSettingsRequest} message ResolveConnectSettingsRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ResolveConnectSettingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a ResolveConnectSettingsRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.sql.v1.ResolveConnectSettingsRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.sql.v1.ResolveConnectSettingsRequest} ResolveConnectSettingsRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ResolveConnectSettingsRequest.decode = function decode(reader, length, error, long) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            if (long === undefined)
-                                long = 0;
-                            if (long > $Reader.recursionLimit)
-                                throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.sql.v1.ResolveConnectSettingsRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.dnsName = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.location = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7, long);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a ResolveConnectSettingsRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.sql.v1.ResolveConnectSettingsRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.sql.v1.ResolveConnectSettingsRequest} ResolveConnectSettingsRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ResolveConnectSettingsRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a ResolveConnectSettingsRequest message.
-                         * @function verify
-                         * @memberof google.cloud.sql.v1.ResolveConnectSettingsRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        ResolveConnectSettingsRequest.verify = function verify(message, long) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (long === undefined)
-                                long = 0;
-                            if (long > $util.recursionLimit)
-                                return "maximum nesting depth exceeded";
-                            if (message.dnsName != null && message.hasOwnProperty("dnsName"))
-                                if (!$util.isString(message.dnsName))
-                                    return "dnsName: string expected";
-                            if (message.location != null && message.hasOwnProperty("location"))
-                                if (!$util.isString(message.location))
-                                    return "location: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a ResolveConnectSettingsRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.sql.v1.ResolveConnectSettingsRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.sql.v1.ResolveConnectSettingsRequest} ResolveConnectSettingsRequest
-                         */
-                        ResolveConnectSettingsRequest.fromObject = function fromObject(object, long) {
-                            if (object instanceof $root.google.cloud.sql.v1.ResolveConnectSettingsRequest)
-                                return object;
-                            if (long === undefined)
-                                long = 0;
-                            if (long > $util.recursionLimit)
-                                throw Error("maximum nesting depth exceeded");
-                            var message = new $root.google.cloud.sql.v1.ResolveConnectSettingsRequest();
-                            if (object.dnsName != null)
-                                message.dnsName = String(object.dnsName);
-                            if (object.location != null)
-                                message.location = String(object.location);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a ResolveConnectSettingsRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.sql.v1.ResolveConnectSettingsRequest
-                         * @static
-                         * @param {google.cloud.sql.v1.ResolveConnectSettingsRequest} message ResolveConnectSettingsRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        ResolveConnectSettingsRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.dnsName = "";
-                                object.location = "";
-                            }
-                            if (message.dnsName != null && message.hasOwnProperty("dnsName"))
-                                object.dnsName = message.dnsName;
-                            if (message.location != null && message.hasOwnProperty("location"))
-                                object.location = message.location;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this ResolveConnectSettingsRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.sql.v1.ResolveConnectSettingsRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        ResolveConnectSettingsRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for ResolveConnectSettingsRequest
-                         * @function getTypeUrl
-                         * @memberof google.cloud.sql.v1.ResolveConnectSettingsRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        ResolveConnectSettingsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.sql.v1.ResolveConnectSettingsRequest";
-                        };
-    
-                        return ResolveConnectSettingsRequest;
-                    })();
-    
                     v1.ConnectSettings = (function() {
     
                         /**
@@ -62633,7 +61701,6 @@
                          * @property {number|null} [nodeCount] ConnectSettings nodeCount
                          * @property {Array.<google.cloud.sql.v1.ConnectSettings.IConnectPoolNodeConfig>|null} [nodes] ConnectSettings nodes
                          * @property {Array.<google.cloud.sql.v1.ConnectSettings.MdxProtocolSupport>|null} [mdxProtocolSupport] ConnectSettings mdxProtocolSupport
-                         * @property {string|null} [connectionName] ConnectSettings connectionName
                          */
     
                         /**
@@ -62768,14 +61835,6 @@
                          */
                         ConnectSettings.prototype.mdxProtocolSupport = $util.emptyArray;
     
-                        /**
-                         * ConnectSettings connectionName.
-                         * @member {string} connectionName
-                         * @memberof google.cloud.sql.v1.ConnectSettings
-                         * @instance
-                         */
-                        ConnectSettings.prototype.connectionName = "";
-    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -62840,8 +61899,6 @@
                                     writer.int32(message.mdxProtocolSupport[i]);
                                 writer.ldelim();
                             }
-                            if (message.connectionName != null && Object.hasOwnProperty.call(message, "connectionName"))
-                                writer.uint32(/* id 40, wireType 2 =*/322).string(message.connectionName);
                             if (message.nodeCount != null && Object.hasOwnProperty.call(message, "nodeCount"))
                                 writer.uint32(/* id 63, wireType 0 =*/504).int32(message.nodeCount);
                             if (message.nodes != null && message.nodes.length)
@@ -62958,10 +62015,6 @@
                                             message.mdxProtocolSupport.push(reader.int32());
                                         break;
                                     }
-                                case 40: {
-                                        message.connectionName = reader.string();
-                                        break;
-                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
@@ -63070,7 +62123,6 @@
                                 case 408:
                                 case 557:
                                 case 684:
-                                case 781:
                                 case 26:
                                 case 27:
                                 case 28:
@@ -63152,9 +62204,6 @@
                                         break;
                                     }
                             }
-                            if (message.connectionName != null && message.hasOwnProperty("connectionName"))
-                                if (!$util.isString(message.connectionName))
-                                    return "connectionName: string expected";
                             return null;
                         };
     
@@ -63376,10 +62425,6 @@
                             case 684:
                                 message.databaseVersion = 684;
                                 break;
-                            case "POSTGRES_20":
-                            case 781:
-                                message.databaseVersion = 781;
-                                break;
                             case "SQLSERVER_2019_STANDARD":
                             case 26:
                                 message.databaseVersion = 26;
@@ -63527,8 +62572,6 @@
                                         break;
                                     }
                             }
-                            if (object.connectionName != null)
-                                message.connectionName = String(object.connectionName);
                             return message;
                         };
     
@@ -63561,7 +62604,6 @@
                                 object.pscEnabled = false;
                                 object.dnsName = "";
                                 object.serverCaMode = options.enums === String ? "CA_MODE_UNSPECIFIED" : 0;
-                                object.connectionName = "";
                             }
                             if (message.kind != null && message.hasOwnProperty("kind"))
                                 object.kind = message.kind;
@@ -63599,8 +62641,6 @@
                                 for (var j = 0; j < message.mdxProtocolSupport.length; ++j)
                                     object.mdxProtocolSupport[j] = options.enums === String ? $root.google.cloud.sql.v1.ConnectSettings.MdxProtocolSupport[message.mdxProtocolSupport[j]] === undefined ? message.mdxProtocolSupport[j] : $root.google.cloud.sql.v1.ConnectSettings.MdxProtocolSupport[message.mdxProtocolSupport[j]] : message.mdxProtocolSupport[j];
                             }
-                            if (message.connectionName != null && message.hasOwnProperty("connectionName"))
-                                object.connectionName = message.connectionName;
                             if (message.nodeCount != null && message.hasOwnProperty("nodeCount")) {
                                 object.nodeCount = message.nodeCount;
                                 if (options.oneofs)
@@ -67528,7 +66568,6 @@
                                     case 408:
                                     case 557:
                                     case 684:
-                                    case 781:
                                     case 26:
                                     case 27:
                                     case 28:
@@ -67851,10 +66890,6 @@
                                     case "POSTGRES_19":
                                     case 684:
                                         message.appliesTo[i] = 684;
-                                        break;
-                                    case "POSTGRES_20":
-                                    case 781:
-                                        message.appliesTo[i] = 781;
                                         break;
                                     case "SQLSERVER_2019_STANDARD":
                                     case 26:
@@ -74943,7 +73978,6 @@
                                 case 3:
                                 case 4:
                                 case 5:
-                                case 6:
                                 case 7:
                                     break;
                                 }
@@ -75056,10 +74090,6 @@
                             case "CLOUD_IAM_GROUP_SERVICE_ACCOUNT":
                             case 5:
                                 message.type = 5;
-                                break;
-                            case "CLOUD_IAM_WORKFORCE_IDENTITY":
-                            case 6:
-                                message.type = 6;
                                 break;
                             case "ENTRAID_USER":
                             case 7:
@@ -75238,7 +74268,6 @@
                          * @property {number} CLOUD_IAM_GROUP=3 CLOUD_IAM_GROUP value
                          * @property {number} CLOUD_IAM_GROUP_USER=4 CLOUD_IAM_GROUP_USER value
                          * @property {number} CLOUD_IAM_GROUP_SERVICE_ACCOUNT=5 CLOUD_IAM_GROUP_SERVICE_ACCOUNT value
-                         * @property {number} CLOUD_IAM_WORKFORCE_IDENTITY=6 CLOUD_IAM_WORKFORCE_IDENTITY value
                          * @property {number} ENTRAID_USER=7 ENTRAID_USER value
                          */
                         User.SqlUserType = (function() {
@@ -75249,7 +74278,6 @@
                             values[valuesById[3] = "CLOUD_IAM_GROUP"] = 3;
                             values[valuesById[4] = "CLOUD_IAM_GROUP_USER"] = 4;
                             values[valuesById[5] = "CLOUD_IAM_GROUP_SERVICE_ACCOUNT"] = 5;
-                            values[valuesById[6] = "CLOUD_IAM_WORKFORCE_IDENTITY"] = 6;
                             values[valuesById[7] = "ENTRAID_USER"] = 7;
                             return values;
                         })();

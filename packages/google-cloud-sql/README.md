@@ -69,7 +69,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_backups_service.update_backup.js) |
 | generate ephemeral cert | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_connect_service.generate_ephemeral_cert.js) |
 | get connect settings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_connect_service.get_connect_settings.js) |
-| resolve connect settings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_connect_service.resolve_connect_settings.js) |
 | delete | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_databases_service.delete.js) |
 | get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_databases_service.get.js) |
 | insert | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_databases_service.insert.js) |

@@ -37,16 +37,6 @@ function main() {
    */
   // const project = 'my-project'
   /**
-   *  Optional. Set PSC config to the same value as the existing config to
-   *  reconcile the PSC networking.
-   */
-  // const reconcilePscNetworking = true
-  /**
-   *  Optional. Set PSC config to the same value as the existing config and force
-   *  reconcile the PSC networking.
-   */
-  // const reconcilePscNetworkingForce = true
-  /**
    */
   // const body = {}
 
