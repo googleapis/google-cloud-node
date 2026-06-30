@@ -3,9 +3,11 @@ fn main() {
         .build_server(false)
         .compile_protos(
             &[
+                "/tmp/googleapis/google/rpc/status.proto",
                 "/tmp/googleapis/google/spanner/v1/spanner.proto",
                 "/tmp/googleapis/google/spanner/v1/transaction.proto",
                 "/tmp/googleapis/google/spanner/v1/result_set.proto",
+                "/tmp/googleapis/google/spanner/v1/type.proto",
             ],
             &["/tmp/googleapis"],
         )

@@ -13,13 +13,16 @@ use tonic::{transport::{Channel, ClientTlsConfig}, Request};
 
 // Protobuf generated types
 pub mod google {
+    pub mod rpc {
+        tonic::include_proto!("google.rpc");
+    }
     pub mod spanner {
         pub mod v1 {
             tonic::include_proto!("google.spanner.v1");
         }
     }
 }
-use google::spanner::v1::{ExecuteSqlRequest, spanner_client::SpannerClient, struct_type::Field, Type, type_code::TypeCode};
+use google::spanner::v1::{ExecuteSqlRequest, spanner_client::SpannerClient, struct_type::Field, Type, TypeCode};
 
 /// CoreClient handle created once at init
 #[derive(Clone)]
