@@ -15,7 +15,7 @@ use spanner_core::{CoreClient, SpannerValue, SpannerResult, execute_streaming_sq
 
 // A global registry or we can return an External to JS holding the CoreClient
 // For simplicity, we wrap CoreClient in a struct and pass it as External.
-#[napi(custom_finalize)]
+#[napi]
 pub struct CoreClientHandle {
     client: Arc<CoreClient>,
 }
@@ -75,7 +75,7 @@ fn convert_to_js(env: &Env, val: &SpannerValue) -> Result<JsUnknown> {
 pub fn execute_streaming_sql_native(
     _env: Env,
     handle: &CoreClientHandle,
-    _routing_key: String,
+    routing_key: String,
     metadata_js: Vec<Vec<String>>,
     request_bytes: Uint8Array,
     _gax_options: JsObject,
