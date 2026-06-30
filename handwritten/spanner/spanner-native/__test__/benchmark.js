@@ -14,11 +14,18 @@ const INSTANCE = 'suvham-testing';
 const DATABASE = 'benchmark_db_async';
 const TABLE    = 'AsyncBenchmarkTable';
 
-const SQL = `SELECT * FROM ${TABLE} LIMIT 1`;
-const WARMUP_MS = 10_000;
-const DURATION_MS = 30_000;
-const CONCURRENCY_LEVELS = [1, 2, 4, 8, 12, 32];
-const CHANNELS_TEST = [1, 4, 8, 10, 12, 16, 20];
+const SQL = {
+  sql: `SELECT * FROM ${TABLE} WHERE id = @id AND status = @status`,
+  params: { id: 12345, status: 'ACTIVE' },
+  types: { 
+    id: { typeCode: 2 }, // INT64
+    status: { typeCode: 6 } // STRING
+  }
+};
+const WARMUP_MS = process.env.LOCAL_MOCK_TEST ? 100 : 10_000;
+const DURATION_MS = process.env.LOCAL_MOCK_TEST ? 200 : 30_000;
+const CONCURRENCY_LEVELS = process.env.LOCAL_MOCK_TEST ? [1] : [1, 2, 4, 8, 12, 32];
+const CHANNELS_TEST = process.env.LOCAL_MOCK_TEST ? [4] : [1, 4, 8, 10, 12, 16, 20];
 
 class CPUMonitor {
   constructor() {

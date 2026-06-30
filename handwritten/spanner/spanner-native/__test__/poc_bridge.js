@@ -32,6 +32,12 @@ class NativeSpannerDatabase {
     if (this._cachedSessionName) {
       return this._cachedSessionName;
     }
+
+    if (process.env.LOCAL_MOCK_TEST) {
+      this._cachedSessionName = `projects/${this.projectId}/instances/mock/databases/mock/sessions/mux-123`;
+      return this._cachedSessionName;
+    }
+
     const factory = this.database.sessionFactory_;
     const getSession = promisify(factory.getSession.bind(factory));
     let session;
@@ -166,9 +172,20 @@ class NativeSpannerDatabase {
    * Note: does String(v) stringification which is fine for benchmark timing, 
    * but not a strict correctness comparison.
    */
-  async executeSqlJs(sql) {
+  async executeSqlJs(query) {
+    if (process.env.LOCAL_MOCK_TEST) {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          const rows = [];
+          for (let i = 0; i < 100; i++) rows.push([String(i), "mock_data", "3.14159"]);
+          resolve(rows);
+        }, 0);
+      });
+    }
+
     // PRODUCTION: Lock-free cached token is not shown here
-    const [rows] = await this.database.run({ sql });
+    const spannerQuery = typeof query === 'string' ? { sql: query } : query;
+    const [rows] = await this.database.run(spannerQuery);
     return rows.map((row) => {
       const json = row.toJSON();
       return Object.values(json).map((v) => String(v ?? 'null'));
