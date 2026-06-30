@@ -130,7 +130,7 @@ async function checkEslint(filesToCheck) {
       console.error('ESLint errors are blocking and must be fixed.');
       if (hasFormattingErrors) {
         console.log(
-          `\nTo fix formatting issues, run:\n  npx eslint --fix ${filesToCheck.map(f => `"${f}"`).join(' ')}`,
+          `\nTo fix formatting issues, run:\n  ./node_modules/.bin/eslint --fix ${filesToCheck.map(f => `"${f}"`).join(' ')}`,
         );
       }
       return false;
