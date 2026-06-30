@@ -8,9 +8,10 @@
 use napi::bindgen_prelude::*;
 use napi::{Env, Result, JsObject, JsFunction, JsUnknown};
 use napi::threadsafe_function::{ThreadsafeFunction, ThreadsafeFunctionCallMode, ErrorStrategy, ThreadSafeCallContext};
+use napi_derive::napi;
 use std::sync::Arc;
 
-use spanner_core::{CoreClient, SpannerValue, SpannerResult, SpannerError, execute_streaming_sql};
+use spanner_core::{CoreClient, SpannerValue, SpannerResult, execute_streaming_sql};
 
 // A global registry or we can return an External to JS holding the CoreClient
 // For simplicity, we wrap CoreClient in a struct and pass it as External.
@@ -72,12 +73,12 @@ fn convert_to_js(env: &Env, val: &SpannerValue) -> Result<JsUnknown> {
 
 #[napi]
 pub fn execute_streaming_sql_native(
-    env: Env,
+    _env: Env,
     handle: &CoreClientHandle,
-    routing_key: String,
+    _routing_key: String,
     metadata_js: Vec<Vec<String>>,
     request_bytes: Uint8Array,
-    gax_options: JsObject,
+    _gax_options: JsObject,
     callback: JsFunction,
 ) -> Result<()> {
     // PRODUCTION: Parse gax_options into Rust GAX RetrySettings
