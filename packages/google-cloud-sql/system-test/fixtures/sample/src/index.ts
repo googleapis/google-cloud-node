@@ -98,20 +98,12 @@ function main() {
   // check that the client instance can be created
   const sqlDatabasesServiceClient = new SqlDatabasesServiceClient();
   doStuffWithSqlDatabasesServiceClient(sqlDatabasesServiceClient);
-  // check that the client instance can be created
   
-  // check that the client instance can be created
-  const sqlFeatureEligibilityServiceClient =
-    new SqlFeatureEligibilityServiceClient();
-  doStuffWithSqlFeatureEligibilityServiceClient(
-    sqlFeatureEligibilityServiceClient,
-  );
+  
   // check that the client instance can be created
   const sqlFlagsServiceClient = new SqlFlagsServiceClient();
   doStuffWithSqlFlagsServiceClient(sqlFlagsServiceClient);
-  // check that the client instance can be created
   
-  // check that the client instance can be created
   
   // check that the client instance can be created
   const sqlInstancesServiceClient = new SqlInstancesServiceClient();
@@ -119,7 +111,6 @@ function main() {
   // check that the client instance can be created
   const sqlOperationsServiceClient = new SqlOperationsServiceClient();
   doStuffWithSqlOperationsServiceClient(sqlOperationsServiceClient);
-  // check that the client instance can be created
   
   // check that the client instance can be created
   const sqlSslCertsServiceClient = new SqlSslCertsServiceClient();
