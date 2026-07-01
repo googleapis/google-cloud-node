@@ -188,31 +188,6 @@ const replacements = [
   },
   {
     files: 'packages/google-cloud-sql/src/index.ts',
-    searchPattern: /SqlAvailableDatabaseVersionsServiceClient,/gs,
-    replacement: ''
-  },
-  {
-    files: 'packages/google-cloud-sql/src/index.ts',
-    searchPattern: /SqlEventsServiceClient,/gs,
-    replacement: ''
-  },
-  {
-    files: 'packages/google-cloud-sql/src/index.ts',
-    searchPattern: /SqlIamPoliciesServiceClient,/gs,
-    replacement: ''
-  },
-  {
-    files: 'packages/google-cloud-sql/src/index.ts',
-    searchPattern: /SqlInstanceNamesServiceClient,/gs,
-    replacement: ''
-  },
-  {
-    files: 'packages/google-cloud-sql/src/index.ts',
-    searchPattern: /SqlRegionsServiceClient,/gs,
-    replacement: ''
-  },
-  {
-    files: 'packages/google-cloud-sql/src/index.ts',
     searchPattern: /const SqlBackupsServiceClient = v1\.SqlBackupsServiceClient;/gs,
     replacement: ''
   },
@@ -229,6 +204,31 @@ const replacements = [
   {
     files: 'packages/google-cloud-sql/src/index.ts',
     searchPattern: /type SqlFeatureEligibilityServiceClient = v1\.SqlFeatureEligibilityServiceClient;/gs,
+    replacement: ''
+  },
+  {
+    files: 'packages/google-cloud-sql/src/index.ts',
+    searchPattern: /SqlAvailableDatabaseVersionsServiceClient, /gs,
+    replacement: ''
+  },
+  {
+    files: 'packages/google-cloud-sql/src/index.ts',
+    searchPattern: /SqlEventsServiceClient, /gs,
+    replacement: ''
+  },
+  {
+    files: 'packages/google-cloud-sql/src/index.ts',
+    searchPattern: /SqlIamPoliciesServiceClient, /gs,
+    replacement: ''
+  },
+  {
+    files: 'packages/google-cloud-sql/src/index.ts',
+    searchPattern: /SqlInstanceNamesServiceClient, /gs,
+    replacement: ''
+  },
+  {
+    files: 'packages/google-cloud-sql/src/index.ts',
+    searchPattern: /SqlRegionsServiceClient, /gs,
     replacement: ''
   },
   {
