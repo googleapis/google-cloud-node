@@ -62,16 +62,8 @@ function doStuffWithSqlFeatureEligibilityServiceClient(
 function doStuffWithSqlFlagsServiceClient(client: SqlFlagsServiceClient) {
   client.close();
 }
-function doStuffWithSqlIamPoliciesServiceClient(
-  client: SqlIamPoliciesServiceClient,
-) {
-  client.close();
-}
-function doStuffWithSqlInstanceNamesServiceClient(
-  client: SqlInstanceNamesServiceClient,
-) {
-  client.close();
-}
+
+
 function doStuffWithSqlInstancesServiceClient(
   client: SqlInstancesServiceClient,
 ) {
