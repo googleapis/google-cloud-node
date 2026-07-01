@@ -21,13 +21,13 @@
 const sql = require('@google-cloud/sql');
 
 function main() {
-  const sqlAvailableDatabaseVersionsServiceClient = new sql.SqlAvailableDatabaseVersionsServiceClient();
+  
   const sqlBackupRunsServiceClient = new sql.SqlBackupRunsServiceClient();
-  const sqlBackupsServiceClient = new sql.SqlBackupsServiceClient();
+  
   const sqlConnectServiceClient = new sql.SqlConnectServiceClient();
   const sqlDatabasesServiceClient = new sql.SqlDatabasesServiceClient();
   
-  const sqlFeatureEligibilityServiceClient = new sql.SqlFeatureEligibilityServiceClient();
+  
   const sqlFlagsServiceClient = new sql.SqlFlagsServiceClient();
   
   
