@@ -26,7 +26,7 @@ import {defaultOptions} from './default-options';
 import {Duration} from './temporal';
 import {ExponentialRetry} from './exponential-retry';
 import {DebugMessage} from './debug';
-import {logs as baseLogs} from './logs';
+import {logs as baseLogs, LoggingFunction} from './logs';
 
 /**
  * Loggers. Exported for unit tests.
@@ -34,7 +34,7 @@ import {logs as baseLogs} from './logs';
  * @private
  */
 export const logs = {
-  subscriberStreams: baseLogs.pubsub.sublog('subscriber-streams'),
+  subscriberStreams: baseLogs.pubsub.sublog('subscriber-streams') as LoggingFunction,
 };
 
 /*!

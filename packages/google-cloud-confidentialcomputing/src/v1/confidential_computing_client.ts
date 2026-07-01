@@ -211,6 +211,9 @@ export class ConfidentialComputingClient {
       challengePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/challenges/{uuid}',
       ),
+      instancePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/zones/{zone}/instances/{instance}',
+      ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}',
       ),
@@ -562,6 +565,10 @@ export class ConfidentialComputingClient {
    * @param {string} [request.attester]
    *   Optional. An optional indicator of the attester, only applies to certain
    *   products.
+   * @param {string} [request.instance]
+   *   Optional. Optional resource link of the Compute Engine instance.
+   *   Format:
+   *   `projects/{project_number}/zones/{zone}/instances/{instance_id}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1146,6 +1153,55 @@ export class ConfidentialComputingClient {
    */
   matchUuidFromChallengeName(challengeName: string) {
     return this.pathTemplates.challengePathTemplate.match(challengeName).uuid;
+  }
+
+  /**
+   * Return a fully-qualified instance resource name string.
+   *
+   * @param {string} project
+   * @param {string} zone
+   * @param {string} instance
+   * @returns {string} Resource name string.
+   */
+  instancePath(project: string, zone: string, instance: string) {
+    return this.pathTemplates.instancePathTemplate.render({
+      project: project,
+      zone: zone,
+      instance: instance,
+    });
+  }
+
+  /**
+   * Parse the project from Instance resource.
+   *
+   * @param {string} instanceName
+   *   A fully-qualified path representing Instance resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromInstanceName(instanceName: string) {
+    return this.pathTemplates.instancePathTemplate.match(instanceName).project;
+  }
+
+  /**
+   * Parse the zone from Instance resource.
+   *
+   * @param {string} instanceName
+   *   A fully-qualified path representing Instance resource.
+   * @returns {string} A string representing the zone.
+   */
+  matchZoneFromInstanceName(instanceName: string) {
+    return this.pathTemplates.instancePathTemplate.match(instanceName).zone;
+  }
+
+  /**
+   * Parse the instance from Instance resource.
+   *
+   * @param {string} instanceName
+   *   A fully-qualified path representing Instance resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromInstanceName(instanceName: string) {
+    return this.pathTemplates.instancePathTemplate.match(instanceName).instance;
   }
 
   /**

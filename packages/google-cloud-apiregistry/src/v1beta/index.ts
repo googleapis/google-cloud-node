@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {CloudApiRegistryClient} from './cloud_api_registry_client';
+export { CloudApiRegistryClient } from './cloud_api_registry_client';

@@ -31,7 +31,7 @@ import {
   NormalCallback,
   ResourceCallback,
   PagedOptionsWithFilter,
-  getCommonHeaders,
+  CLOUD_RESOURCE_HEADER,
 } from './common';
 import {Duplex} from 'stream';
 import {SessionPoolOptions, SessionPool} from './session-pool';
@@ -239,10 +239,10 @@ class Instance extends common.GrpcServiceObject {
     this.requestStream = spanner.requestStream.bind(spanner);
     this.databases_ = new Map<string, Database>();
     this._observabilityOptions = spanner._observabilityOptions;
-    this.commonHeaders_ = getCommonHeaders(
-      this.formattedName_,
-      this._observabilityOptions?.enableEndToEndTracing,
-    );
+    this.commonHeaders_ = {
+      ...spanner.commonHeaders_,
+      [CLOUD_RESOURCE_HEADER]: this.formattedName_,
+    };
   }
 
   /**

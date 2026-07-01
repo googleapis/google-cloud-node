@@ -16,7 +16,13 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AutokeyClient, AutokeyAdminClient, EkmServiceClient, HsmManagementClient, KeyManagementServiceClient} from '@google-cloud/kms';
+import {
+  AutokeyClient,
+  AutokeyAdminClient,
+  EkmServiceClient,
+  HsmManagementClient,
+  KeyManagementServiceClient,
+} from '@google-cloud/kms';
 
 // check that the client class type name can be used
 function doStuffWithAutokeyClient(client: AutokeyClient) {
@@ -31,7 +37,9 @@ function doStuffWithEkmServiceClient(client: EkmServiceClient) {
 function doStuffWithHsmManagementClient(client: HsmManagementClient) {
   client.close();
 }
-function doStuffWithKeyManagementServiceClient(client: KeyManagementServiceClient) {
+function doStuffWithKeyManagementServiceClient(
+  client: KeyManagementServiceClient,
+) {
   client.close();
 }
 

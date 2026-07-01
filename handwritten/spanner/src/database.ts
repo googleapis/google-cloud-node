@@ -92,8 +92,8 @@ import {
   RequestCallback,
   ResourceCallback,
   Schema,
+  CLOUD_RESOURCE_HEADER,
   addLeaderAwareRoutingHeader,
-  getCommonHeaders,
 } from './common';
 import {finished, Duplex, Readable, Transform} from 'stream';
 import {PreciseDate} from '@google-cloud/precise-date';
@@ -490,10 +490,10 @@ class Database extends common.GrpcServiceObject {
       this._clientId = instance._nthClientId;
     }
     this._observabilityOptions = instance._observabilityOptions;
-    this.commonHeaders_ = getCommonHeaders(
-      this.formattedName_,
-      this._observabilityOptions?.enableEndToEndTracing,
-    );
+    this.commonHeaders_ = {
+      ...instance.commonHeaders_,
+      [CLOUD_RESOURCE_HEADER]: this.formattedName_,
+    };
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.requestStream = instance.requestStream as any;

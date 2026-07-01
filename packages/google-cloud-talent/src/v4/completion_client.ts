@@ -18,11 +18,16 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +49,7 @@ export class CompletionClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('talent');
@@ -57,9 +62,9 @@ export class CompletionClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  completionStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  completionStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of CompletionClient.
@@ -100,21 +105,42 @@ export class CompletionClient {
    *     const client = new CompletionClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof CompletionClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'jobs.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -139,7 +165,7 @@ export class CompletionClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -153,10 +179,7 @@ export class CompletionClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -178,20 +201,23 @@ export class CompletionClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       companyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/tenants/{tenant}/companies/{company}'
+        'projects/{project}/tenants/{tenant}/companies/{company}',
       ),
       jobPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/tenants/{tenant}/jobs/{job}'
+        'projects/{project}/tenants/{tenant}/jobs/{job}',
       ),
       tenantPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/tenants/{tenant}'
+        'projects/{project}/tenants/{tenant}',
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.talent.v4.Completion', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.talent.v4.Completion',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -222,36 +248,40 @@ export class CompletionClient {
     // Put together the "service stub" for
     // google.cloud.talent.v4.Completion.
     this.completionStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.talent.v4.Completion') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.talent.v4.Completion',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.talent.v4.Completion,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const completionStubMethods =
-        ['completeQuery'];
+    const completionStubMethods = ['completeQuery'];
     for (const methodName of completionStubMethods) {
       const callPromise = this.completionStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -266,8 +296,14 @@ export class CompletionClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'jobs.googleapis.com';
   }
@@ -278,8 +314,14 @@ export class CompletionClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'jobs.googleapis.com';
   }
@@ -312,7 +354,7 @@ export class CompletionClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/jobs'
+      'https://www.googleapis.com/auth/jobs',
     ];
   }
 
@@ -322,8 +364,9 @@ export class CompletionClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -334,127 +377,161 @@ export class CompletionClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Completes the specified prefix with keyword suggestions.
- * Intended for use by a job search auto-complete search box.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.tenant
- *   Required. Resource name of tenant the completion is performed within.
- *
- *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
- *   "projects/foo/tenants/bar".
- * @param {string} request.query
- *   Required. The query used to generate suggestions.
- *
- *   The maximum number of allowed characters is 255.
- * @param {string[]} request.languageCodes
- *   The list of languages of the query. This is
- *   the BCP-47 language code, such as "en-US" or "sr-Latn".
- *   For more information, see
- *   [Tags for Identifying Languages](https://tools.ietf.org/html/bcp47).
- *
- *   The maximum number of allowed characters is 255.
- * @param {number} request.pageSize
- *   Required. Completion result count.
- *
- *   The maximum allowed page size is 10.
- * @param {string} request.company
- *   If provided, restricts completion to specified company.
- *
- *   The format is
- *   "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}", for
- *   example, "projects/foo/tenants/bar/companies/baz".
- * @param {google.cloud.talent.v4.CompleteQueryRequest.CompletionScope} request.scope
- *   The scope of the completion. The defaults is
- *   {@link protos.google.cloud.talent.v4.CompleteQueryRequest.CompletionScope.PUBLIC|CompletionScope.PUBLIC}.
- * @param {google.cloud.talent.v4.CompleteQueryRequest.CompletionType} request.type
- *   The completion topic. The default is
- *   {@link protos.google.cloud.talent.v4.CompleteQueryRequest.CompletionType.COMBINED|CompletionType.COMBINED}.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.talent.v4.CompleteQueryResponse|CompleteQueryResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v4/completion.complete_query.js</caption>
- * region_tag:jobs_v4_generated_Completion_CompleteQuery_async
- */
+  /**
+   * Completes the specified prefix with keyword suggestions.
+   * Intended for use by a job search auto-complete search box.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.tenant
+   *   Required. Resource name of tenant the completion is performed within.
+   *
+   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+   *   "projects/foo/tenants/bar".
+   * @param {string} request.query
+   *   Required. The query used to generate suggestions.
+   *
+   *   The maximum number of allowed characters is 255.
+   * @param {string[]} request.languageCodes
+   *   The list of languages of the query. This is
+   *   the BCP-47 language code, such as "en-US" or "sr-Latn".
+   *   For more information, see
+   *   [Tags for Identifying Languages](https://tools.ietf.org/html/bcp47).
+   *
+   *   The maximum number of allowed characters is 255.
+   * @param {number} request.pageSize
+   *   Required. Completion result count.
+   *
+   *   The maximum allowed page size is 10.
+   * @param {string} request.company
+   *   If provided, restricts completion to specified company.
+   *
+   *   The format is
+   *   "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}", for
+   *   example, "projects/foo/tenants/bar/companies/baz".
+   * @param {google.cloud.talent.v4.CompleteQueryRequest.CompletionScope} request.scope
+   *   The scope of the completion. The defaults is
+   *   {@link protos.google.cloud.talent.v4.CompleteQueryRequest.CompletionScope.PUBLIC|CompletionScope.PUBLIC}.
+   * @param {google.cloud.talent.v4.CompleteQueryRequest.CompletionType} request.type
+   *   The completion topic. The default is
+   *   {@link protos.google.cloud.talent.v4.CompleteQueryRequest.CompletionType.COMBINED|CompletionType.COMBINED}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.talent.v4.CompleteQueryResponse|CompleteQueryResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v4/completion.complete_query.js</caption>
+   * region_tag:jobs_v4_generated_Completion_CompleteQuery_async
+   */
   completeQuery(
-      request?: protos.google.cloud.talent.v4.ICompleteQueryRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.talent.v4.ICompleteQueryResponse,
-        protos.google.cloud.talent.v4.ICompleteQueryRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.talent.v4.ICompleteQueryRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.talent.v4.ICompleteQueryResponse,
+      protos.google.cloud.talent.v4.ICompleteQueryRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   completeQuery(
-      request: protos.google.cloud.talent.v4.ICompleteQueryRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.talent.v4.ICompleteQueryResponse,
-          protos.google.cloud.talent.v4.ICompleteQueryRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.talent.v4.ICompleteQueryRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.talent.v4.ICompleteQueryResponse,
+      protos.google.cloud.talent.v4.ICompleteQueryRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   completeQuery(
-      request: protos.google.cloud.talent.v4.ICompleteQueryRequest,
-      callback: Callback<
-          protos.google.cloud.talent.v4.ICompleteQueryResponse,
-          protos.google.cloud.talent.v4.ICompleteQueryRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.talent.v4.ICompleteQueryRequest,
+    callback: Callback<
+      protos.google.cloud.talent.v4.ICompleteQueryResponse,
+      protos.google.cloud.talent.v4.ICompleteQueryRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   completeQuery(
-      request?: protos.google.cloud.talent.v4.ICompleteQueryRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.talent.v4.ICompleteQueryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.talent.v4.ICompleteQueryResponse,
-          protos.google.cloud.talent.v4.ICompleteQueryRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.talent.v4.ICompleteQueryResponse,
-          protos.google.cloud.talent.v4.ICompleteQueryRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.talent.v4.ICompleteQueryResponse,
-        protos.google.cloud.talent.v4.ICompleteQueryRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.talent.v4.ICompleteQueryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.talent.v4.ICompleteQueryResponse,
+      protos.google.cloud.talent.v4.ICompleteQueryRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.talent.v4.ICompleteQueryResponse,
+      protos.google.cloud.talent.v4.ICompleteQueryRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'tenant': request.tenant ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        tenant: request.tenant ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('completeQuery request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.talent.v4.ICompleteQueryResponse,
-        protos.google.cloud.talent.v4.ICompleteQueryRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.talent.v4.ICompleteQueryResponse,
+          | protos.google.cloud.talent.v4.ICompleteQueryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('completeQuery response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.completeQuery(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.talent.v4.ICompleteQueryResponse,
-        protos.google.cloud.talent.v4.ICompleteQueryRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('completeQuery response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .completeQuery(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.talent.v4.ICompleteQueryResponse,
+          protos.google.cloud.talent.v4.ICompleteQueryRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('completeQuery response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
@@ -472,7 +549,7 @@ export class CompletionClient {
    * @param {string} company
    * @returns {string} Resource name string.
    */
-  companyPath(project:string,tenant:string,company:string) {
+  companyPath(project: string, tenant: string, company: string) {
     return this.pathTemplates.companyPathTemplate.render({
       project: project,
       tenant: tenant,
@@ -521,7 +598,7 @@ export class CompletionClient {
    * @param {string} job
    * @returns {string} Resource name string.
    */
-  jobPath(project:string,tenant:string,job:string) {
+  jobPath(project: string, tenant: string, job: string) {
     return this.pathTemplates.jobPathTemplate.render({
       project: project,
       tenant: tenant,
@@ -569,7 +646,7 @@ export class CompletionClient {
    * @param {string} tenant
    * @returns {string} Resource name string.
    */
-  tenantPath(project:string,tenant:string) {
+  tenantPath(project: string, tenant: string) {
     return this.pathTemplates.tenantPathTemplate.render({
       project: project,
       tenant: tenant,
@@ -606,7 +683,7 @@ export class CompletionClient {
    */
   close(): Promise<void> {
     if (this.completionStub && !this._terminated) {
-      return this.completionStub.then(stub => {
+      return this.completionStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

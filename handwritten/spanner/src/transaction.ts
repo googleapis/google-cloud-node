@@ -34,11 +34,7 @@ import {Session} from './session';
 import {Key} from './table';
 import {Span} from './instrument';
 import {google as spannerClient} from '../protos/protos';
-import {
-  NormalCallback,
-  addLeaderAwareRoutingHeader,
-  getCommonHeaders,
-} from './common';
+import {NormalCallback, addLeaderAwareRoutingHeader} from './common';
 import {google} from '../protos/protos';
 import IsolationLevel = google.spanner.v1.TransactionOptions.IsolationLevel;
 import IAny = google.protobuf.IAny;
@@ -374,10 +370,7 @@ export class Snapshot extends EventEmitter {
     this._waitingRequests = [];
     this._inlineBeginStarted = false;
     this._observabilityOptions = session._observabilityOptions;
-    this.commonHeaders_ = getCommonHeaders(
-      this._dbName,
-      this._observabilityOptions?.enableEndToEndTracing,
-    );
+    this.commonHeaders_ = {...session.commonHeaders_};
     this._traceConfig = {
       opts: this._observabilityOptions,
       dbName: this._dbName,

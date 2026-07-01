@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/speech",
   "description": "Cloud Speech Client Library for Node.js",
-  "version": "7.3.2",
+  "version": "7.5.0",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
@@ -44,8 +44,8 @@
     "prelint": "cd samples; npm link ../; npm i",
     "postpack": "minifyProtoJson",
     "samples-test": "cd samples/ && npm link ../ && npm i && npm test",
-    "system-test": "c8 mocha build/system-test",
-    "test": "c8 mocha build/test"
+    "system-test": "c8 mocha --config ../../.mocharc.cjs --no-parallel build/system-test",
+    "test": "c8 mocha --config ../../.mocharc.cjs build/test"
   },
   "dependencies": {
     "@google-cloud/common": "^6.0.0",

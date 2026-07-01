@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/api-gateway-v4.2.2...api-gateway-v4.3.0) (2026-06-16)
+
+
+### Features
+
+* Migrate google-cloud-apigateway to librarian ([#8492](https://github.com/googleapis/google-cloud-node/issues/8492)) ([29e4147](https://github.com/googleapis/google-cloud-node/commit/29e4147e202ac786d7a943e0156be4160bba459f))
+
 ## [4.2.2](https://github.com/googleapis/google-cloud-node/compare/api-gateway-v4.2.1...api-gateway-v4.2.2) (2026-05-01)
 
 

@@ -1040,6 +1040,12 @@ export class ClusterManagerClient {
    *   The name (project, location, cluster, node pool) of the node pool to
    *   update. Specified in the format
    *   `projects/* /locations/* /clusters/* /nodePools/*`.
+   * @param {string} request.image
+   *   The desired name of the image name to use for this node.
+   *   This is used to create clusters using a custom image.
+   * @param {string} request.imageProject
+   *   The project containing the desired image to use for this node pool.
+   *   This is used to create clusters using a custom image.
    * @param {string[]} request.locations
    *   The desired list of Google Compute Engine
    *   [zones](https://cloud.google.com/compute/docs/zones#available)

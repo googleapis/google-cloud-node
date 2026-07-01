@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {WorkloadManagerClient} from '@google-cloud/workloadmanager';
+import { WorkloadManagerClient } from '@google-cloud/workloadmanager';
 
 // check that the client class type name can be used
 function doStuffWithWorkloadManagerClient(client: WorkloadManagerClient) {

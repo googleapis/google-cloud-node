@@ -179,7 +179,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get sip trunk | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/sip_trunks.get_sip_trunk.js) |
 | list sip trunks | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/sip_trunks.list_sip_trunks.js) |
 | update sip trunk | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/sip_trunks.update_sip_trunk.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/snippet_metadata_google.cloud.dialogflow.v2.json) |
 | create tool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/tools.create_tool.js) |
 | delete tool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/tools.delete_tool.js) |
 | get tool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/tools.get_tool.js) |
@@ -304,7 +303,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get sip trunk | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/sip_trunks.get_sip_trunk.js) |
 | list sip trunks | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/sip_trunks.list_sip_trunks.js) |
 | update sip trunk | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/sip_trunks.update_sip_trunk.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/snippet_metadata_google.cloud.dialogflow.v2beta1.json) |
 | create tool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/tools.create_tool.js) |
 | delete tool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/tools.delete_tool.js) |
 | get tool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/tools.get_tool.js) |

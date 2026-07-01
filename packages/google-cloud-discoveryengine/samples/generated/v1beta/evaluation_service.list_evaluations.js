@@ -38,7 +38,7 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  Maximum number of
+   *  Optional. Maximum number of
    *  Evaluation google.cloud.discoveryengine.v1beta.Evaluation s to return. If
    *  unspecified, defaults to 100. The maximum allowed value is 1000. Values
    *  above 1000 will be coerced to 1000.
@@ -46,7 +46,7 @@ function main(parent) {
    */
   // const pageSize = 1234
   /**
-   *  A page token
+   *  Optional. A page token
    *  ListEvaluationsResponse.next_page_token google.cloud.discoveryengine.v1beta.ListEvaluationsResponse.next_page_token,
    *  received from a previous
    *  EvaluationService.ListEvaluations google.cloud.discoveryengine.v1beta.EvaluationService.ListEvaluations 

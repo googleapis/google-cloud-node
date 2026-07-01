@@ -1,17 +1,15 @@
 {
-  "name": "clientconnectorservices",
-  "name_pretty": "BeyondCorp API",
-  "product_documentation": "",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/clientconnectorservices/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/clientconnectorservices",
-  "api_id": "beyondcorp.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "beyondcorp"
+    "api_description": "Beyondcorp Enterprise provides identity and context aware access controls\nfor enterprise resources and enables zero-trust access. Using the\nBeyondcorp Enterprise APIs, enterprises can set up multi-cloud and on-prem\nconnectivity using the App Connector hybrid connectivity solution.",
+    "api_id": "beyondcorp.googleapis.com",
+    "api_shortname": "beyondcorp",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/clientconnectorservices/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/clientconnectorservices",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "beyondcorp",
+    "name_pretty": "BeyondCorp",
+    "product_documentation": "https://cloud.google.com/beyondcorp/docs",
+    "release_level": "stable",
+    "repo": "googleapis/google-cloud-node"
 }
-

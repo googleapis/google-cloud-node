@@ -734,6 +734,10 @@ export class ToolServiceClient {
    * @param {string[]} [request.toolIds]
    *   Optional. The identifiers of the tools to retrieve from the toolset.
    *   If empty, all tools in the toolset will be returned.
+   * @param {boolean} [request.bypassPersistenceConfig]
+   *   Optional. If true, the returned tools will contain raw descriptions and
+   *   schemas directly from the server, bypassing any stored persistence
+   *   configurations (overrides/snapshots).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

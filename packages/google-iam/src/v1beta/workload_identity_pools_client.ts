@@ -18,11 +18,20 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +53,7 @@ export class WorkloadIdentityPoolsClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('iam');
@@ -57,10 +66,10 @@ export class WorkloadIdentityPoolsClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  workloadIdentityPoolsStub?: Promise<{[name: string]: Function}>;
+  workloadIdentityPoolsStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of WorkloadIdentityPoolsClient.
@@ -101,21 +110,43 @@ export class WorkloadIdentityPoolsClient {
    *     const client = new WorkloadIdentityPoolsClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof WorkloadIdentityPoolsClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    const staticMembers = this
+      .constructor as typeof WorkloadIdentityPoolsClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'iam.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -140,7 +171,7 @@ export class WorkloadIdentityPoolsClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -154,10 +185,7 @@ export class WorkloadIdentityPoolsClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -179,24 +207,31 @@ export class WorkloadIdentityPoolsClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
       workloadIdentityPoolPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/workloadIdentityPools/{workload_identity_pool}'
+        'projects/{project}/locations/{location}/workloadIdentityPools/{workload_identity_pool}',
       ),
-      workloadIdentityPoolProviderPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/workloadIdentityPools/{workload_identity_pool}/providers/{workload_identity_pool_provider}'
-      ),
+      workloadIdentityPoolProviderPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/workloadIdentityPools/{workload_identity_pool}/providers/{workload_identity_pool_provider}',
+        ),
     };
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listWorkloadIdentityPools:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'workloadIdentityPools'),
-      listWorkloadIdentityPoolProviders:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'workloadIdentityPoolProviders')
+      listWorkloadIdentityPools: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'workloadIdentityPools',
+      ),
+      listWorkloadIdentityPoolProviders: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'workloadIdentityPoolProviders',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -205,89 +240,191 @@ export class WorkloadIdentityPoolsClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1beta/{name=projects/*/locations/*/workloadIdentityPools/*/operations/*}:cancel',body: '*',additional_bindings: [{post: '/v1beta/{name=projects/*/locations/*/workloadIdentityPools/*/providers/*/operations/*}:cancel',body: '*',}],
-      },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1beta/{name=projects/*/locations/*/workloadIdentityPools/*/operations/*}',additional_bindings: [{delete: '/v1beta/{name=projects/*/locations/*/workloadIdentityPools/*/providers/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v1beta/{name=projects/*/locations/*/workloadIdentityPools/*/operations/*}',additional_bindings: [{get: '/v1beta/{name=projects/*/locations/*/workloadIdentityPools/*/providers/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1beta/{name=projects/*/locations/*/workloadIdentityPools/*}/operations',additional_bindings: [{get: '/v1beta/{name=projects/*/locations/*/workloadIdentityPools/*/providers/*}/operations',}],
-      }];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1beta/{name=projects/*/locations/*/workloadIdentityPools/*/operations/*}:cancel',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1beta/{name=projects/*/locations/*/workloadIdentityPools/*/providers/*/operations/*}:cancel',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete:
+            '/v1beta/{name=projects/*/locations/*/workloadIdentityPools/*/operations/*}',
+          additional_bindings: [
+            {
+              delete:
+                '/v1beta/{name=projects/*/locations/*/workloadIdentityPools/*/providers/*/operations/*}',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1beta/{name=projects/*/locations/*/workloadIdentityPools/*/operations/*}',
+          additional_bindings: [
+            {
+              get: '/v1beta/{name=projects/*/locations/*/workloadIdentityPools/*/providers/*/operations/*}',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1beta/{name=projects/*/locations/*/workloadIdentityPools/*}/operations',
+          additional_bindings: [
+            {
+              get: '/v1beta/{name=projects/*/locations/*/workloadIdentityPools/*/providers/*}/operations',
+            },
+          ],
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createWorkloadIdentityPoolResponse = protoFilesRoot.lookup(
-      '.google.iam.v1beta.WorkloadIdentityPool') as gax.protobuf.Type;
+      '.google.iam.v1beta.WorkloadIdentityPool',
+    ) as gax.protobuf.Type;
     const createWorkloadIdentityPoolMetadata = protoFilesRoot.lookup(
-      '.google.iam.v1beta.WorkloadIdentityPoolOperationMetadata') as gax.protobuf.Type;
+      '.google.iam.v1beta.WorkloadIdentityPoolOperationMetadata',
+    ) as gax.protobuf.Type;
     const updateWorkloadIdentityPoolResponse = protoFilesRoot.lookup(
-      '.google.iam.v1beta.WorkloadIdentityPool') as gax.protobuf.Type;
+      '.google.iam.v1beta.WorkloadIdentityPool',
+    ) as gax.protobuf.Type;
     const updateWorkloadIdentityPoolMetadata = protoFilesRoot.lookup(
-      '.google.iam.v1beta.WorkloadIdentityPoolOperationMetadata') as gax.protobuf.Type;
+      '.google.iam.v1beta.WorkloadIdentityPoolOperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteWorkloadIdentityPoolResponse = protoFilesRoot.lookup(
-      '.google.iam.v1beta.WorkloadIdentityPool') as gax.protobuf.Type;
+      '.google.iam.v1beta.WorkloadIdentityPool',
+    ) as gax.protobuf.Type;
     const deleteWorkloadIdentityPoolMetadata = protoFilesRoot.lookup(
-      '.google.iam.v1beta.WorkloadIdentityPoolOperationMetadata') as gax.protobuf.Type;
+      '.google.iam.v1beta.WorkloadIdentityPoolOperationMetadata',
+    ) as gax.protobuf.Type;
     const undeleteWorkloadIdentityPoolResponse = protoFilesRoot.lookup(
-      '.google.iam.v1beta.WorkloadIdentityPool') as gax.protobuf.Type;
+      '.google.iam.v1beta.WorkloadIdentityPool',
+    ) as gax.protobuf.Type;
     const undeleteWorkloadIdentityPoolMetadata = protoFilesRoot.lookup(
-      '.google.iam.v1beta.WorkloadIdentityPoolOperationMetadata') as gax.protobuf.Type;
+      '.google.iam.v1beta.WorkloadIdentityPoolOperationMetadata',
+    ) as gax.protobuf.Type;
     const createWorkloadIdentityPoolProviderResponse = protoFilesRoot.lookup(
-      '.google.iam.v1beta.WorkloadIdentityPoolProvider') as gax.protobuf.Type;
+      '.google.iam.v1beta.WorkloadIdentityPoolProvider',
+    ) as gax.protobuf.Type;
     const createWorkloadIdentityPoolProviderMetadata = protoFilesRoot.lookup(
-      '.google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata') as gax.protobuf.Type;
+      '.google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata',
+    ) as gax.protobuf.Type;
     const updateWorkloadIdentityPoolProviderResponse = protoFilesRoot.lookup(
-      '.google.iam.v1beta.WorkloadIdentityPoolProvider') as gax.protobuf.Type;
+      '.google.iam.v1beta.WorkloadIdentityPoolProvider',
+    ) as gax.protobuf.Type;
     const updateWorkloadIdentityPoolProviderMetadata = protoFilesRoot.lookup(
-      '.google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata') as gax.protobuf.Type;
+      '.google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteWorkloadIdentityPoolProviderResponse = protoFilesRoot.lookup(
-      '.google.iam.v1beta.WorkloadIdentityPoolProvider') as gax.protobuf.Type;
+      '.google.iam.v1beta.WorkloadIdentityPoolProvider',
+    ) as gax.protobuf.Type;
     const deleteWorkloadIdentityPoolProviderMetadata = protoFilesRoot.lookup(
-      '.google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata') as gax.protobuf.Type;
+      '.google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata',
+    ) as gax.protobuf.Type;
     const undeleteWorkloadIdentityPoolProviderResponse = protoFilesRoot.lookup(
-      '.google.iam.v1beta.WorkloadIdentityPoolProvider') as gax.protobuf.Type;
+      '.google.iam.v1beta.WorkloadIdentityPoolProvider',
+    ) as gax.protobuf.Type;
     const undeleteWorkloadIdentityPoolProviderMetadata = protoFilesRoot.lookup(
-      '.google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata') as gax.protobuf.Type;
+      '.google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createWorkloadIdentityPool: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createWorkloadIdentityPoolResponse.decode.bind(createWorkloadIdentityPoolResponse),
-        createWorkloadIdentityPoolMetadata.decode.bind(createWorkloadIdentityPoolMetadata)),
+        createWorkloadIdentityPoolResponse.decode.bind(
+          createWorkloadIdentityPoolResponse,
+        ),
+        createWorkloadIdentityPoolMetadata.decode.bind(
+          createWorkloadIdentityPoolMetadata,
+        ),
+      ),
       updateWorkloadIdentityPool: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updateWorkloadIdentityPoolResponse.decode.bind(updateWorkloadIdentityPoolResponse),
-        updateWorkloadIdentityPoolMetadata.decode.bind(updateWorkloadIdentityPoolMetadata)),
+        updateWorkloadIdentityPoolResponse.decode.bind(
+          updateWorkloadIdentityPoolResponse,
+        ),
+        updateWorkloadIdentityPoolMetadata.decode.bind(
+          updateWorkloadIdentityPoolMetadata,
+        ),
+      ),
       deleteWorkloadIdentityPool: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteWorkloadIdentityPoolResponse.decode.bind(deleteWorkloadIdentityPoolResponse),
-        deleteWorkloadIdentityPoolMetadata.decode.bind(deleteWorkloadIdentityPoolMetadata)),
+        deleteWorkloadIdentityPoolResponse.decode.bind(
+          deleteWorkloadIdentityPoolResponse,
+        ),
+        deleteWorkloadIdentityPoolMetadata.decode.bind(
+          deleteWorkloadIdentityPoolMetadata,
+        ),
+      ),
       undeleteWorkloadIdentityPool: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        undeleteWorkloadIdentityPoolResponse.decode.bind(undeleteWorkloadIdentityPoolResponse),
-        undeleteWorkloadIdentityPoolMetadata.decode.bind(undeleteWorkloadIdentityPoolMetadata)),
-      createWorkloadIdentityPoolProvider: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        createWorkloadIdentityPoolProviderResponse.decode.bind(createWorkloadIdentityPoolProviderResponse),
-        createWorkloadIdentityPoolProviderMetadata.decode.bind(createWorkloadIdentityPoolProviderMetadata)),
-      updateWorkloadIdentityPoolProvider: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        updateWorkloadIdentityPoolProviderResponse.decode.bind(updateWorkloadIdentityPoolProviderResponse),
-        updateWorkloadIdentityPoolProviderMetadata.decode.bind(updateWorkloadIdentityPoolProviderMetadata)),
-      deleteWorkloadIdentityPoolProvider: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        deleteWorkloadIdentityPoolProviderResponse.decode.bind(deleteWorkloadIdentityPoolProviderResponse),
-        deleteWorkloadIdentityPoolProviderMetadata.decode.bind(deleteWorkloadIdentityPoolProviderMetadata)),
-      undeleteWorkloadIdentityPoolProvider: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        undeleteWorkloadIdentityPoolProviderResponse.decode.bind(undeleteWorkloadIdentityPoolProviderResponse),
-        undeleteWorkloadIdentityPoolProviderMetadata.decode.bind(undeleteWorkloadIdentityPoolProviderMetadata))
+        undeleteWorkloadIdentityPoolResponse.decode.bind(
+          undeleteWorkloadIdentityPoolResponse,
+        ),
+        undeleteWorkloadIdentityPoolMetadata.decode.bind(
+          undeleteWorkloadIdentityPoolMetadata,
+        ),
+      ),
+      createWorkloadIdentityPoolProvider:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          createWorkloadIdentityPoolProviderResponse.decode.bind(
+            createWorkloadIdentityPoolProviderResponse,
+          ),
+          createWorkloadIdentityPoolProviderMetadata.decode.bind(
+            createWorkloadIdentityPoolProviderMetadata,
+          ),
+        ),
+      updateWorkloadIdentityPoolProvider:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          updateWorkloadIdentityPoolProviderResponse.decode.bind(
+            updateWorkloadIdentityPoolProviderResponse,
+          ),
+          updateWorkloadIdentityPoolProviderMetadata.decode.bind(
+            updateWorkloadIdentityPoolProviderMetadata,
+          ),
+        ),
+      deleteWorkloadIdentityPoolProvider:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          deleteWorkloadIdentityPoolProviderResponse.decode.bind(
+            deleteWorkloadIdentityPoolProviderResponse,
+          ),
+          deleteWorkloadIdentityPoolProviderMetadata.decode.bind(
+            deleteWorkloadIdentityPoolProviderMetadata,
+          ),
+        ),
+      undeleteWorkloadIdentityPoolProvider:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          undeleteWorkloadIdentityPoolProviderResponse.decode.bind(
+            undeleteWorkloadIdentityPoolProviderResponse,
+          ),
+          undeleteWorkloadIdentityPoolProviderMetadata.decode.bind(
+            undeleteWorkloadIdentityPoolProviderMetadata,
+          ),
+        ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.iam.v1beta.WorkloadIdentityPools', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.iam.v1beta.WorkloadIdentityPools',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -318,28 +455,46 @@ export class WorkloadIdentityPoolsClient {
     // Put together the "service stub" for
     // google.iam.v1beta.WorkloadIdentityPools.
     this.workloadIdentityPoolsStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.iam.v1beta.WorkloadIdentityPools') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.iam.v1beta.WorkloadIdentityPools',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.iam.v1beta.WorkloadIdentityPools,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const workloadIdentityPoolsStubMethods =
-        ['listWorkloadIdentityPools', 'getWorkloadIdentityPool', 'createWorkloadIdentityPool', 'updateWorkloadIdentityPool', 'deleteWorkloadIdentityPool', 'undeleteWorkloadIdentityPool', 'listWorkloadIdentityPoolProviders', 'getWorkloadIdentityPoolProvider', 'createWorkloadIdentityPoolProvider', 'updateWorkloadIdentityPoolProvider', 'deleteWorkloadIdentityPoolProvider', 'undeleteWorkloadIdentityPoolProvider'];
+    const workloadIdentityPoolsStubMethods = [
+      'listWorkloadIdentityPools',
+      'getWorkloadIdentityPool',
+      'createWorkloadIdentityPool',
+      'updateWorkloadIdentityPool',
+      'deleteWorkloadIdentityPool',
+      'undeleteWorkloadIdentityPool',
+      'listWorkloadIdentityPoolProviders',
+      'getWorkloadIdentityPoolProvider',
+      'createWorkloadIdentityPoolProvider',
+      'updateWorkloadIdentityPoolProvider',
+      'deleteWorkloadIdentityPoolProvider',
+      'undeleteWorkloadIdentityPoolProvider',
+    ];
     for (const methodName of workloadIdentityPoolsStubMethods) {
       const callPromise = this.workloadIdentityPoolsStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -349,7 +504,7 @@ export class WorkloadIdentityPoolsClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -364,8 +519,14 @@ export class WorkloadIdentityPoolsClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'iam.googleapis.com';
   }
@@ -376,8 +537,14 @@ export class WorkloadIdentityPoolsClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'iam.googleapis.com';
   }
@@ -408,9 +575,7 @@ export class WorkloadIdentityPoolsClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -419,8 +584,9 @@ export class WorkloadIdentityPoolsClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -431,1191 +597,1839 @@ export class WorkloadIdentityPoolsClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets an individual
- * {@link protos.google.iam.v1beta.WorkloadIdentityPool|WorkloadIdentityPool}.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the pool to retrieve.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.iam.v1beta.WorkloadIdentityPool|WorkloadIdentityPool}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/workload_identity_pools.get_workload_identity_pool.js</caption>
- * region_tag:iam_v1beta_generated_WorkloadIdentityPools_GetWorkloadIdentityPool_async
- */
+  /**
+   * Gets an individual
+   * {@link protos.google.iam.v1beta.WorkloadIdentityPool|WorkloadIdentityPool}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the pool to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.iam.v1beta.WorkloadIdentityPool|WorkloadIdentityPool}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/workload_identity_pools.get_workload_identity_pool.js</caption>
+   * region_tag:iam_v1beta_generated_WorkloadIdentityPools_GetWorkloadIdentityPool_async
+   */
   getWorkloadIdentityPool(
-      request?: protos.google.iam.v1beta.IGetWorkloadIdentityPoolRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.iam.v1beta.IWorkloadIdentityPool,
-        protos.google.iam.v1beta.IGetWorkloadIdentityPoolRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.iam.v1beta.IGetWorkloadIdentityPoolRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.iam.v1beta.IWorkloadIdentityPool,
+      protos.google.iam.v1beta.IGetWorkloadIdentityPoolRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getWorkloadIdentityPool(
-      request: protos.google.iam.v1beta.IGetWorkloadIdentityPoolRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.iam.v1beta.IWorkloadIdentityPool,
-          protos.google.iam.v1beta.IGetWorkloadIdentityPoolRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1beta.IGetWorkloadIdentityPoolRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.v1beta.IWorkloadIdentityPool,
+      | protos.google.iam.v1beta.IGetWorkloadIdentityPoolRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getWorkloadIdentityPool(
-      request: protos.google.iam.v1beta.IGetWorkloadIdentityPoolRequest,
-      callback: Callback<
-          protos.google.iam.v1beta.IWorkloadIdentityPool,
-          protos.google.iam.v1beta.IGetWorkloadIdentityPoolRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1beta.IGetWorkloadIdentityPoolRequest,
+    callback: Callback<
+      protos.google.iam.v1beta.IWorkloadIdentityPool,
+      | protos.google.iam.v1beta.IGetWorkloadIdentityPoolRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getWorkloadIdentityPool(
-      request?: protos.google.iam.v1beta.IGetWorkloadIdentityPoolRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.iam.v1beta.IGetWorkloadIdentityPoolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.iam.v1beta.IWorkloadIdentityPool,
-          protos.google.iam.v1beta.IGetWorkloadIdentityPoolRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.iam.v1beta.IWorkloadIdentityPool,
-          protos.google.iam.v1beta.IGetWorkloadIdentityPoolRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.iam.v1beta.IWorkloadIdentityPool,
-        protos.google.iam.v1beta.IGetWorkloadIdentityPoolRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.iam.v1beta.IGetWorkloadIdentityPoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.iam.v1beta.IWorkloadIdentityPool,
+      | protos.google.iam.v1beta.IGetWorkloadIdentityPoolRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.iam.v1beta.IWorkloadIdentityPool,
+      protos.google.iam.v1beta.IGetWorkloadIdentityPoolRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getWorkloadIdentityPool request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.iam.v1beta.IWorkloadIdentityPool,
-        protos.google.iam.v1beta.IGetWorkloadIdentityPoolRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1beta.IWorkloadIdentityPool,
+          | protos.google.iam.v1beta.IGetWorkloadIdentityPoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getWorkloadIdentityPool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getWorkloadIdentityPool(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.iam.v1beta.IWorkloadIdentityPool,
-        protos.google.iam.v1beta.IGetWorkloadIdentityPoolRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getWorkloadIdentityPool response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getWorkloadIdentityPool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1beta.IWorkloadIdentityPool,
+          protos.google.iam.v1beta.IGetWorkloadIdentityPoolRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getWorkloadIdentityPool response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets an individual
- * {@link protos.google.iam.v1beta.WorkloadIdentityPoolProvider|WorkloadIdentityPoolProvider}.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the provider to retrieve.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.iam.v1beta.WorkloadIdentityPoolProvider|WorkloadIdentityPoolProvider}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/workload_identity_pools.get_workload_identity_pool_provider.js</caption>
- * region_tag:iam_v1beta_generated_WorkloadIdentityPools_GetWorkloadIdentityPoolProvider_async
- */
+  /**
+   * Gets an individual
+   * {@link protos.google.iam.v1beta.WorkloadIdentityPoolProvider|WorkloadIdentityPoolProvider}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the provider to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.iam.v1beta.WorkloadIdentityPoolProvider|WorkloadIdentityPoolProvider}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/workload_identity_pools.get_workload_identity_pool_provider.js</caption>
+   * region_tag:iam_v1beta_generated_WorkloadIdentityPools_GetWorkloadIdentityPoolProvider_async
+   */
   getWorkloadIdentityPoolProvider(
-      request?: protos.google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
-        protos.google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+      (
+        | protos.google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getWorkloadIdentityPoolProvider(
-      request: protos.google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
-          protos.google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+      | protos.google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getWorkloadIdentityPoolProvider(
-      request: protos.google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest,
-      callback: Callback<
-          protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
-          protos.google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest,
+    callback: Callback<
+      protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+      | protos.google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getWorkloadIdentityPoolProvider(
-      request?: protos.google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
-          protos.google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
-          protos.google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
-        protos.google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+      | protos.google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+      (
+        | protos.google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getWorkloadIdentityPoolProvider request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
-        protos.google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+          | protos.google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getWorkloadIdentityPoolProvider response %j', response);
+          this._log.info(
+            'getWorkloadIdentityPoolProvider response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getWorkloadIdentityPoolProvider(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
-        protos.google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getWorkloadIdentityPoolProvider response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getWorkloadIdentityPoolProvider(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+          (
+            | protos.google.iam.v1beta.IGetWorkloadIdentityPoolProviderRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getWorkloadIdentityPoolProvider response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Creates a new
- * {@link protos.google.iam.v1beta.WorkloadIdentityPool|WorkloadIdentityPool}.
- *
- * You cannot reuse the name of a deleted pool until 30 days after deletion.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource to create the pool in. The only supported
- *   location is `global`.
- * @param {google.iam.v1beta.WorkloadIdentityPool} request.workloadIdentityPool
- *   Required. The pool to create.
- * @param {string} request.workloadIdentityPoolId
- *   Required. The ID to use for the pool, which becomes the
- *   final component of the resource name. This value should be 4-32 characters,
- *   and may contain the characters [a-z0-9-]. The prefix `gcp-` is
- *   reserved for use by Google, and may not be specified.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/workload_identity_pools.create_workload_identity_pool.js</caption>
- * region_tag:iam_v1beta_generated_WorkloadIdentityPools_CreateWorkloadIdentityPool_async
- */
+  /**
+   * Creates a new
+   * {@link protos.google.iam.v1beta.WorkloadIdentityPool|WorkloadIdentityPool}.
+   *
+   * You cannot reuse the name of a deleted pool until 30 days after deletion.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource to create the pool in. The only supported
+   *   location is `global`.
+   * @param {google.iam.v1beta.WorkloadIdentityPool} request.workloadIdentityPool
+   *   Required. The pool to create.
+   * @param {string} request.workloadIdentityPoolId
+   *   Required. The ID to use for the pool, which becomes the
+   *   final component of the resource name. This value should be 4-32 characters,
+   *   and may contain the characters [a-z0-9-]. The prefix `gcp-` is
+   *   reserved for use by Google, and may not be specified.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/workload_identity_pools.create_workload_identity_pool.js</caption>
+   * region_tag:iam_v1beta_generated_WorkloadIdentityPools_CreateWorkloadIdentityPool_async
+   */
   createWorkloadIdentityPool(
-      request?: protos.google.iam.v1beta.ICreateWorkloadIdentityPoolRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.iam.v1beta.ICreateWorkloadIdentityPoolRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPool,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createWorkloadIdentityPool(
-      request: protos.google.iam.v1beta.ICreateWorkloadIdentityPoolRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1beta.ICreateWorkloadIdentityPoolRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPool,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createWorkloadIdentityPool(
-      request: protos.google.iam.v1beta.ICreateWorkloadIdentityPoolRequest,
-      callback: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1beta.ICreateWorkloadIdentityPoolRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPool,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createWorkloadIdentityPool(
-      request?: protos.google.iam.v1beta.ICreateWorkloadIdentityPoolRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.iam.v1beta.ICreateWorkloadIdentityPoolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.iam.v1beta.IWorkloadIdentityPool,
+            protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPool,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPool,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.iam.v1beta.IWorkloadIdentityPool,
+            protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createWorkloadIdentityPool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createWorkloadIdentityPool request %j', request);
-    return this.innerApiCalls.createWorkloadIdentityPool(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createWorkloadIdentityPool response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createWorkloadIdentityPool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.iam.v1beta.IWorkloadIdentityPool,
+            protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createWorkloadIdentityPool response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createWorkloadIdentityPool()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/workload_identity_pools.create_workload_identity_pool.js</caption>
- * region_tag:iam_v1beta_generated_WorkloadIdentityPools_CreateWorkloadIdentityPool_async
- */
-  async checkCreateWorkloadIdentityPoolProgress(name: string): Promise<LROperation<protos.google.iam.v1beta.WorkloadIdentityPool, protos.google.iam.v1beta.WorkloadIdentityPoolOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createWorkloadIdentityPool()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/workload_identity_pools.create_workload_identity_pool.js</caption>
+   * region_tag:iam_v1beta_generated_WorkloadIdentityPools_CreateWorkloadIdentityPool_async
+   */
+  async checkCreateWorkloadIdentityPoolProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.iam.v1beta.WorkloadIdentityPool,
+      protos.google.iam.v1beta.WorkloadIdentityPoolOperationMetadata
+    >
+  > {
     this._log.info('createWorkloadIdentityPool long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createWorkloadIdentityPool, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.iam.v1beta.WorkloadIdentityPool, protos.google.iam.v1beta.WorkloadIdentityPoolOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createWorkloadIdentityPool,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.iam.v1beta.WorkloadIdentityPool,
+      protos.google.iam.v1beta.WorkloadIdentityPoolOperationMetadata
+    >;
   }
-/**
- * Updates an existing
- * {@link protos.google.iam.v1beta.WorkloadIdentityPool|WorkloadIdentityPool}.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.iam.v1beta.WorkloadIdentityPool} request.workloadIdentityPool
- *   Required. The pool to update. The `name` field is used to identify the pool.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. The list of fields update.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/workload_identity_pools.update_workload_identity_pool.js</caption>
- * region_tag:iam_v1beta_generated_WorkloadIdentityPools_UpdateWorkloadIdentityPool_async
- */
+  /**
+   * Updates an existing
+   * {@link protos.google.iam.v1beta.WorkloadIdentityPool|WorkloadIdentityPool}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.iam.v1beta.WorkloadIdentityPool} request.workloadIdentityPool
+   *   Required. The pool to update. The `name` field is used to identify the pool.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/workload_identity_pools.update_workload_identity_pool.js</caption>
+   * region_tag:iam_v1beta_generated_WorkloadIdentityPools_UpdateWorkloadIdentityPool_async
+   */
   updateWorkloadIdentityPool(
-      request?: protos.google.iam.v1beta.IUpdateWorkloadIdentityPoolRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.iam.v1beta.IUpdateWorkloadIdentityPoolRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPool,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateWorkloadIdentityPool(
-      request: protos.google.iam.v1beta.IUpdateWorkloadIdentityPoolRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1beta.IUpdateWorkloadIdentityPoolRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPool,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateWorkloadIdentityPool(
-      request: protos.google.iam.v1beta.IUpdateWorkloadIdentityPoolRequest,
-      callback: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1beta.IUpdateWorkloadIdentityPoolRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPool,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateWorkloadIdentityPool(
-      request?: protos.google.iam.v1beta.IUpdateWorkloadIdentityPoolRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.iam.v1beta.IUpdateWorkloadIdentityPoolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.iam.v1beta.IWorkloadIdentityPool,
+            protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPool,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPool,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'workload_identity_pool.name': request.workloadIdentityPool!.name?.toString() ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'workload_identity_pool.name':
+          request.workloadIdentityPool!.name?.toString() ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.iam.v1beta.IWorkloadIdentityPool,
+            protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateWorkloadIdentityPool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateWorkloadIdentityPool request %j', request);
-    return this.innerApiCalls.updateWorkloadIdentityPool(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateWorkloadIdentityPool response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateWorkloadIdentityPool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.iam.v1beta.IWorkloadIdentityPool,
+            protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateWorkloadIdentityPool response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateWorkloadIdentityPool()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/workload_identity_pools.update_workload_identity_pool.js</caption>
- * region_tag:iam_v1beta_generated_WorkloadIdentityPools_UpdateWorkloadIdentityPool_async
- */
-  async checkUpdateWorkloadIdentityPoolProgress(name: string): Promise<LROperation<protos.google.iam.v1beta.WorkloadIdentityPool, protos.google.iam.v1beta.WorkloadIdentityPoolOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateWorkloadIdentityPool()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/workload_identity_pools.update_workload_identity_pool.js</caption>
+   * region_tag:iam_v1beta_generated_WorkloadIdentityPools_UpdateWorkloadIdentityPool_async
+   */
+  async checkUpdateWorkloadIdentityPoolProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.iam.v1beta.WorkloadIdentityPool,
+      protos.google.iam.v1beta.WorkloadIdentityPoolOperationMetadata
+    >
+  > {
     this._log.info('updateWorkloadIdentityPool long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateWorkloadIdentityPool, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.iam.v1beta.WorkloadIdentityPool, protos.google.iam.v1beta.WorkloadIdentityPoolOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateWorkloadIdentityPool,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.iam.v1beta.WorkloadIdentityPool,
+      protos.google.iam.v1beta.WorkloadIdentityPoolOperationMetadata
+    >;
   }
-/**
- * Deletes a
- * {@link protos.google.iam.v1beta.WorkloadIdentityPool|WorkloadIdentityPool}.
- *
- * You cannot use a deleted pool to exchange external
- * credentials for Google Cloud credentials. However, deletion does
- * not revoke credentials that have already been issued.
- * Credentials issued for a deleted pool do not grant access to resources.
- * If the pool is undeleted, and the credentials are not expired, they
- * grant access again.
- * You can undelete a pool for 30 days. After 30 days, deletion is
- * permanent.
- * You cannot update deleted pools. However, you can view and list them.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the pool to delete.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/workload_identity_pools.delete_workload_identity_pool.js</caption>
- * region_tag:iam_v1beta_generated_WorkloadIdentityPools_DeleteWorkloadIdentityPool_async
- */
+  /**
+   * Deletes a
+   * {@link protos.google.iam.v1beta.WorkloadIdentityPool|WorkloadIdentityPool}.
+   *
+   * You cannot use a deleted pool to exchange external
+   * credentials for Google Cloud credentials. However, deletion does
+   * not revoke credentials that have already been issued.
+   * Credentials issued for a deleted pool do not grant access to resources.
+   * If the pool is undeleted, and the credentials are not expired, they
+   * grant access again.
+   * You can undelete a pool for 30 days. After 30 days, deletion is
+   * permanent.
+   * You cannot update deleted pools. However, you can view and list them.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the pool to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/workload_identity_pools.delete_workload_identity_pool.js</caption>
+   * region_tag:iam_v1beta_generated_WorkloadIdentityPools_DeleteWorkloadIdentityPool_async
+   */
   deleteWorkloadIdentityPool(
-      request?: protos.google.iam.v1beta.IDeleteWorkloadIdentityPoolRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.iam.v1beta.IDeleteWorkloadIdentityPoolRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPool,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteWorkloadIdentityPool(
-      request: protos.google.iam.v1beta.IDeleteWorkloadIdentityPoolRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1beta.IDeleteWorkloadIdentityPoolRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPool,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteWorkloadIdentityPool(
-      request: protos.google.iam.v1beta.IDeleteWorkloadIdentityPoolRequest,
-      callback: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1beta.IDeleteWorkloadIdentityPoolRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPool,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteWorkloadIdentityPool(
-      request?: protos.google.iam.v1beta.IDeleteWorkloadIdentityPoolRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.iam.v1beta.IDeleteWorkloadIdentityPoolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.iam.v1beta.IWorkloadIdentityPool,
+            protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPool,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPool,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.iam.v1beta.IWorkloadIdentityPool,
+            protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteWorkloadIdentityPool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteWorkloadIdentityPool request %j', request);
-    return this.innerApiCalls.deleteWorkloadIdentityPool(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteWorkloadIdentityPool response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteWorkloadIdentityPool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.iam.v1beta.IWorkloadIdentityPool,
+            protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteWorkloadIdentityPool response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteWorkloadIdentityPool()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/workload_identity_pools.delete_workload_identity_pool.js</caption>
- * region_tag:iam_v1beta_generated_WorkloadIdentityPools_DeleteWorkloadIdentityPool_async
- */
-  async checkDeleteWorkloadIdentityPoolProgress(name: string): Promise<LROperation<protos.google.iam.v1beta.WorkloadIdentityPool, protos.google.iam.v1beta.WorkloadIdentityPoolOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteWorkloadIdentityPool()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/workload_identity_pools.delete_workload_identity_pool.js</caption>
+   * region_tag:iam_v1beta_generated_WorkloadIdentityPools_DeleteWorkloadIdentityPool_async
+   */
+  async checkDeleteWorkloadIdentityPoolProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.iam.v1beta.WorkloadIdentityPool,
+      protos.google.iam.v1beta.WorkloadIdentityPoolOperationMetadata
+    >
+  > {
     this._log.info('deleteWorkloadIdentityPool long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteWorkloadIdentityPool, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.iam.v1beta.WorkloadIdentityPool, protos.google.iam.v1beta.WorkloadIdentityPoolOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteWorkloadIdentityPool,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.iam.v1beta.WorkloadIdentityPool,
+      protos.google.iam.v1beta.WorkloadIdentityPoolOperationMetadata
+    >;
   }
-/**
- * Undeletes a {@link protos.google.iam.v1beta.WorkloadIdentityPool|WorkloadIdentityPool},
- * as long as it was deleted fewer than 30 days ago.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the pool to undelete.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/workload_identity_pools.undelete_workload_identity_pool.js</caption>
- * region_tag:iam_v1beta_generated_WorkloadIdentityPools_UndeleteWorkloadIdentityPool_async
- */
+  /**
+   * Undeletes a {@link protos.google.iam.v1beta.WorkloadIdentityPool|WorkloadIdentityPool},
+   * as long as it was deleted fewer than 30 days ago.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the pool to undelete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/workload_identity_pools.undelete_workload_identity_pool.js</caption>
+   * region_tag:iam_v1beta_generated_WorkloadIdentityPools_UndeleteWorkloadIdentityPool_async
+   */
   undeleteWorkloadIdentityPool(
-      request?: protos.google.iam.v1beta.IUndeleteWorkloadIdentityPoolRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.iam.v1beta.IUndeleteWorkloadIdentityPoolRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPool,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   undeleteWorkloadIdentityPool(
-      request: protos.google.iam.v1beta.IUndeleteWorkloadIdentityPoolRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1beta.IUndeleteWorkloadIdentityPoolRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPool,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   undeleteWorkloadIdentityPool(
-      request: protos.google.iam.v1beta.IUndeleteWorkloadIdentityPoolRequest,
-      callback: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1beta.IUndeleteWorkloadIdentityPoolRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPool,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   undeleteWorkloadIdentityPool(
-      request?: protos.google.iam.v1beta.IUndeleteWorkloadIdentityPoolRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.iam.v1beta.IUndeleteWorkloadIdentityPoolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.iam.v1beta.IWorkloadIdentityPool,
+            protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPool,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPool,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.iam.v1beta.IWorkloadIdentityPool,
+            protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('undeleteWorkloadIdentityPool response %j', rawResponse);
+          this._log.info(
+            'undeleteWorkloadIdentityPool response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('undeleteWorkloadIdentityPool request %j', request);
-    return this.innerApiCalls.undeleteWorkloadIdentityPool(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.iam.v1beta.IWorkloadIdentityPool, protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('undeleteWorkloadIdentityPool response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .undeleteWorkloadIdentityPool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.iam.v1beta.IWorkloadIdentityPool,
+            protos.google.iam.v1beta.IWorkloadIdentityPoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'undeleteWorkloadIdentityPool response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `undeleteWorkloadIdentityPool()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/workload_identity_pools.undelete_workload_identity_pool.js</caption>
- * region_tag:iam_v1beta_generated_WorkloadIdentityPools_UndeleteWorkloadIdentityPool_async
- */
-  async checkUndeleteWorkloadIdentityPoolProgress(name: string): Promise<LROperation<protos.google.iam.v1beta.WorkloadIdentityPool, protos.google.iam.v1beta.WorkloadIdentityPoolOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `undeleteWorkloadIdentityPool()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/workload_identity_pools.undelete_workload_identity_pool.js</caption>
+   * region_tag:iam_v1beta_generated_WorkloadIdentityPools_UndeleteWorkloadIdentityPool_async
+   */
+  async checkUndeleteWorkloadIdentityPoolProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.iam.v1beta.WorkloadIdentityPool,
+      protos.google.iam.v1beta.WorkloadIdentityPoolOperationMetadata
+    >
+  > {
     this._log.info('undeleteWorkloadIdentityPool long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.undeleteWorkloadIdentityPool, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.iam.v1beta.WorkloadIdentityPool, protos.google.iam.v1beta.WorkloadIdentityPoolOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.undeleteWorkloadIdentityPool,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.iam.v1beta.WorkloadIdentityPool,
+      protos.google.iam.v1beta.WorkloadIdentityPoolOperationMetadata
+    >;
   }
-/**
- * Creates a new
- * {@link protos.google.iam.v1beta.WorkloadIdentityProvider|WorkloadIdentityPoolProvider}
- * in a {@link protos.google.iam.v1beta.WorkloadIdentityPool|WorkloadIdentityPool}.
- *
- * You cannot reuse the name of a deleted provider until 30 days after
- * deletion.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The pool to create this provider in.
- * @param {google.iam.v1beta.WorkloadIdentityPoolProvider} request.workloadIdentityPoolProvider
- *   Required. The provider to create.
- * @param {string} request.workloadIdentityPoolProviderId
- *   Required. The ID for the provider, which becomes the
- *   final component of the resource name. This value must be 4-32 characters,
- *   and may contain the characters [a-z0-9-]. The prefix `gcp-` is
- *   reserved for use by Google, and may not be specified.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/workload_identity_pools.create_workload_identity_pool_provider.js</caption>
- * region_tag:iam_v1beta_generated_WorkloadIdentityPools_CreateWorkloadIdentityPoolProvider_async
- */
+  /**
+   * Creates a new
+   * {@link protos.google.iam.v1beta.WorkloadIdentityProvider|WorkloadIdentityPoolProvider}
+   * in a {@link protos.google.iam.v1beta.WorkloadIdentityPool|WorkloadIdentityPool}.
+   *
+   * You cannot reuse the name of a deleted provider until 30 days after
+   * deletion.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The pool to create this provider in.
+   * @param {google.iam.v1beta.WorkloadIdentityPoolProvider} request.workloadIdentityPoolProvider
+   *   Required. The provider to create.
+   * @param {string} request.workloadIdentityPoolProviderId
+   *   Required. The ID for the provider, which becomes the
+   *   final component of the resource name. This value must be 4-32 characters,
+   *   and may contain the characters [a-z0-9-]. The prefix `gcp-` is
+   *   reserved for use by Google, and may not be specified.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/workload_identity_pools.create_workload_identity_pool_provider.js</caption>
+   * region_tag:iam_v1beta_generated_WorkloadIdentityPools_CreateWorkloadIdentityPoolProvider_async
+   */
   createWorkloadIdentityPoolProvider(
-      request?: protos.google.iam.v1beta.ICreateWorkloadIdentityPoolProviderRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.iam.v1beta.ICreateWorkloadIdentityPoolProviderRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createWorkloadIdentityPoolProvider(
-      request: protos.google.iam.v1beta.ICreateWorkloadIdentityPoolProviderRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1beta.ICreateWorkloadIdentityPoolProviderRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createWorkloadIdentityPoolProvider(
-      request: protos.google.iam.v1beta.ICreateWorkloadIdentityPoolProviderRequest,
-      callback: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1beta.ICreateWorkloadIdentityPoolProviderRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createWorkloadIdentityPoolProvider(
-      request?: protos.google.iam.v1beta.ICreateWorkloadIdentityPoolProviderRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.iam.v1beta.ICreateWorkloadIdentityPoolProviderRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+            protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+            protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createWorkloadIdentityPoolProvider response %j', rawResponse);
+          this._log.info(
+            'createWorkloadIdentityPoolProvider response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createWorkloadIdentityPoolProvider request %j', request);
-    return this.innerApiCalls.createWorkloadIdentityPoolProvider(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createWorkloadIdentityPoolProvider response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createWorkloadIdentityPoolProvider(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+            protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createWorkloadIdentityPoolProvider response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createWorkloadIdentityPoolProvider()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/workload_identity_pools.create_workload_identity_pool_provider.js</caption>
- * region_tag:iam_v1beta_generated_WorkloadIdentityPools_CreateWorkloadIdentityPoolProvider_async
- */
-  async checkCreateWorkloadIdentityPoolProviderProgress(name: string): Promise<LROperation<protos.google.iam.v1beta.WorkloadIdentityPoolProvider, protos.google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createWorkloadIdentityPoolProvider()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/workload_identity_pools.create_workload_identity_pool_provider.js</caption>
+   * region_tag:iam_v1beta_generated_WorkloadIdentityPools_CreateWorkloadIdentityPoolProvider_async
+   */
+  async checkCreateWorkloadIdentityPoolProviderProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.iam.v1beta.WorkloadIdentityPoolProvider,
+      protos.google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata
+    >
+  > {
     this._log.info('createWorkloadIdentityPoolProvider long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createWorkloadIdentityPoolProvider, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.iam.v1beta.WorkloadIdentityPoolProvider, protos.google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createWorkloadIdentityPoolProvider,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.iam.v1beta.WorkloadIdentityPoolProvider,
+      protos.google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata
+    >;
   }
-/**
- * Updates an existing
- * {@link protos.google.iam.v1beta.WorkloadIdentityProvider|WorkloadIdentityPoolProvider}.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.iam.v1beta.WorkloadIdentityPoolProvider} request.workloadIdentityPoolProvider
- *   Required. The provider to update.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. The list of fields to update.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/workload_identity_pools.update_workload_identity_pool_provider.js</caption>
- * region_tag:iam_v1beta_generated_WorkloadIdentityPools_UpdateWorkloadIdentityPoolProvider_async
- */
+  /**
+   * Updates an existing
+   * {@link protos.google.iam.v1beta.WorkloadIdentityProvider|WorkloadIdentityPoolProvider}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.iam.v1beta.WorkloadIdentityPoolProvider} request.workloadIdentityPoolProvider
+   *   Required. The provider to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/workload_identity_pools.update_workload_identity_pool_provider.js</caption>
+   * region_tag:iam_v1beta_generated_WorkloadIdentityPools_UpdateWorkloadIdentityPoolProvider_async
+   */
   updateWorkloadIdentityPoolProvider(
-      request?: protos.google.iam.v1beta.IUpdateWorkloadIdentityPoolProviderRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.iam.v1beta.IUpdateWorkloadIdentityPoolProviderRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateWorkloadIdentityPoolProvider(
-      request: protos.google.iam.v1beta.IUpdateWorkloadIdentityPoolProviderRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1beta.IUpdateWorkloadIdentityPoolProviderRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateWorkloadIdentityPoolProvider(
-      request: protos.google.iam.v1beta.IUpdateWorkloadIdentityPoolProviderRequest,
-      callback: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1beta.IUpdateWorkloadIdentityPoolProviderRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateWorkloadIdentityPoolProvider(
-      request?: protos.google.iam.v1beta.IUpdateWorkloadIdentityPoolProviderRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.iam.v1beta.IUpdateWorkloadIdentityPoolProviderRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+            protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'workload_identity_pool_provider.name': request.workloadIdentityPoolProvider!.name?.toString() ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'workload_identity_pool_provider.name':
+          request.workloadIdentityPoolProvider!.name?.toString() ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+            protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateWorkloadIdentityPoolProvider response %j', rawResponse);
+          this._log.info(
+            'updateWorkloadIdentityPoolProvider response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateWorkloadIdentityPoolProvider request %j', request);
-    return this.innerApiCalls.updateWorkloadIdentityPoolProvider(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateWorkloadIdentityPoolProvider response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateWorkloadIdentityPoolProvider(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+            protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateWorkloadIdentityPoolProvider response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateWorkloadIdentityPoolProvider()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/workload_identity_pools.update_workload_identity_pool_provider.js</caption>
- * region_tag:iam_v1beta_generated_WorkloadIdentityPools_UpdateWorkloadIdentityPoolProvider_async
- */
-  async checkUpdateWorkloadIdentityPoolProviderProgress(name: string): Promise<LROperation<protos.google.iam.v1beta.WorkloadIdentityPoolProvider, protos.google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateWorkloadIdentityPoolProvider()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/workload_identity_pools.update_workload_identity_pool_provider.js</caption>
+   * region_tag:iam_v1beta_generated_WorkloadIdentityPools_UpdateWorkloadIdentityPoolProvider_async
+   */
+  async checkUpdateWorkloadIdentityPoolProviderProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.iam.v1beta.WorkloadIdentityPoolProvider,
+      protos.google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata
+    >
+  > {
     this._log.info('updateWorkloadIdentityPoolProvider long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateWorkloadIdentityPoolProvider, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.iam.v1beta.WorkloadIdentityPoolProvider, protos.google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateWorkloadIdentityPoolProvider,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.iam.v1beta.WorkloadIdentityPoolProvider,
+      protos.google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata
+    >;
   }
-/**
- * Deletes a
- * {@link protos.google.iam.v1beta.WorkloadIdentityProvider|WorkloadIdentityPoolProvider}.
- * Deleting a provider does not revoke credentials that have already been
- * issued; they continue to grant access.
- * You can undelete a provider for 30 days. After 30 days, deletion is
- * permanent.
- * You cannot update deleted providers. However, you can view and list them.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the provider to delete.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/workload_identity_pools.delete_workload_identity_pool_provider.js</caption>
- * region_tag:iam_v1beta_generated_WorkloadIdentityPools_DeleteWorkloadIdentityPoolProvider_async
- */
+  /**
+   * Deletes a
+   * {@link protos.google.iam.v1beta.WorkloadIdentityProvider|WorkloadIdentityPoolProvider}.
+   * Deleting a provider does not revoke credentials that have already been
+   * issued; they continue to grant access.
+   * You can undelete a provider for 30 days. After 30 days, deletion is
+   * permanent.
+   * You cannot update deleted providers. However, you can view and list them.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the provider to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/workload_identity_pools.delete_workload_identity_pool_provider.js</caption>
+   * region_tag:iam_v1beta_generated_WorkloadIdentityPools_DeleteWorkloadIdentityPoolProvider_async
+   */
   deleteWorkloadIdentityPoolProvider(
-      request?: protos.google.iam.v1beta.IDeleteWorkloadIdentityPoolProviderRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.iam.v1beta.IDeleteWorkloadIdentityPoolProviderRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteWorkloadIdentityPoolProvider(
-      request: protos.google.iam.v1beta.IDeleteWorkloadIdentityPoolProviderRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1beta.IDeleteWorkloadIdentityPoolProviderRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteWorkloadIdentityPoolProvider(
-      request: protos.google.iam.v1beta.IDeleteWorkloadIdentityPoolProviderRequest,
-      callback: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1beta.IDeleteWorkloadIdentityPoolProviderRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteWorkloadIdentityPoolProvider(
-      request?: protos.google.iam.v1beta.IDeleteWorkloadIdentityPoolProviderRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.iam.v1beta.IDeleteWorkloadIdentityPoolProviderRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+            protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+            protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteWorkloadIdentityPoolProvider response %j', rawResponse);
+          this._log.info(
+            'deleteWorkloadIdentityPoolProvider response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteWorkloadIdentityPoolProvider request %j', request);
-    return this.innerApiCalls.deleteWorkloadIdentityPoolProvider(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteWorkloadIdentityPoolProvider response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteWorkloadIdentityPoolProvider(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+            protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteWorkloadIdentityPoolProvider response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteWorkloadIdentityPoolProvider()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/workload_identity_pools.delete_workload_identity_pool_provider.js</caption>
- * region_tag:iam_v1beta_generated_WorkloadIdentityPools_DeleteWorkloadIdentityPoolProvider_async
- */
-  async checkDeleteWorkloadIdentityPoolProviderProgress(name: string): Promise<LROperation<protos.google.iam.v1beta.WorkloadIdentityPoolProvider, protos.google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteWorkloadIdentityPoolProvider()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/workload_identity_pools.delete_workload_identity_pool_provider.js</caption>
+   * region_tag:iam_v1beta_generated_WorkloadIdentityPools_DeleteWorkloadIdentityPoolProvider_async
+   */
+  async checkDeleteWorkloadIdentityPoolProviderProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.iam.v1beta.WorkloadIdentityPoolProvider,
+      protos.google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata
+    >
+  > {
     this._log.info('deleteWorkloadIdentityPoolProvider long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteWorkloadIdentityPoolProvider, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.iam.v1beta.WorkloadIdentityPoolProvider, protos.google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteWorkloadIdentityPoolProvider,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.iam.v1beta.WorkloadIdentityPoolProvider,
+      protos.google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata
+    >;
   }
-/**
- * Undeletes a
- * {@link protos.google.iam.v1beta.WorkloadIdentityProvider|WorkloadIdentityPoolProvider},
- * as long as it was deleted fewer than 30 days ago.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the provider to undelete.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/workload_identity_pools.undelete_workload_identity_pool_provider.js</caption>
- * region_tag:iam_v1beta_generated_WorkloadIdentityPools_UndeleteWorkloadIdentityPoolProvider_async
- */
+  /**
+   * Undeletes a
+   * {@link protos.google.iam.v1beta.WorkloadIdentityProvider|WorkloadIdentityPoolProvider},
+   * as long as it was deleted fewer than 30 days ago.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the provider to undelete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/workload_identity_pools.undelete_workload_identity_pool_provider.js</caption>
+   * region_tag:iam_v1beta_generated_WorkloadIdentityPools_UndeleteWorkloadIdentityPoolProvider_async
+   */
   undeleteWorkloadIdentityPoolProvider(
-      request?: protos.google.iam.v1beta.IUndeleteWorkloadIdentityPoolProviderRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.iam.v1beta.IUndeleteWorkloadIdentityPoolProviderRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   undeleteWorkloadIdentityPoolProvider(
-      request: protos.google.iam.v1beta.IUndeleteWorkloadIdentityPoolProviderRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1beta.IUndeleteWorkloadIdentityPoolProviderRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   undeleteWorkloadIdentityPoolProvider(
-      request: protos.google.iam.v1beta.IUndeleteWorkloadIdentityPoolProviderRequest,
-      callback: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1beta.IUndeleteWorkloadIdentityPoolProviderRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   undeleteWorkloadIdentityPoolProvider(
-      request?: protos.google.iam.v1beta.IUndeleteWorkloadIdentityPoolProviderRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.iam.v1beta.IUndeleteWorkloadIdentityPoolProviderRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+            protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+        protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+            protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('undeleteWorkloadIdentityPoolProvider response %j', rawResponse);
+          this._log.info(
+            'undeleteWorkloadIdentityPoolProvider response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('undeleteWorkloadIdentityPoolProvider request %j', request);
-    return this.innerApiCalls.undeleteWorkloadIdentityPoolProvider(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider, protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('undeleteWorkloadIdentityPoolProvider response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .undeleteWorkloadIdentityPoolProvider(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.iam.v1beta.IWorkloadIdentityPoolProvider,
+            protos.google.iam.v1beta.IWorkloadIdentityPoolProviderOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'undeleteWorkloadIdentityPoolProvider response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `undeleteWorkloadIdentityPoolProvider()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/workload_identity_pools.undelete_workload_identity_pool_provider.js</caption>
- * region_tag:iam_v1beta_generated_WorkloadIdentityPools_UndeleteWorkloadIdentityPoolProvider_async
- */
-  async checkUndeleteWorkloadIdentityPoolProviderProgress(name: string): Promise<LROperation<protos.google.iam.v1beta.WorkloadIdentityPoolProvider, protos.google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `undeleteWorkloadIdentityPoolProvider()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/workload_identity_pools.undelete_workload_identity_pool_provider.js</caption>
+   * region_tag:iam_v1beta_generated_WorkloadIdentityPools_UndeleteWorkloadIdentityPoolProvider_async
+   */
+  async checkUndeleteWorkloadIdentityPoolProviderProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.iam.v1beta.WorkloadIdentityPoolProvider,
+      protos.google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata
+    >
+  > {
     this._log.info('undeleteWorkloadIdentityPoolProvider long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.undeleteWorkloadIdentityPoolProvider, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.iam.v1beta.WorkloadIdentityPoolProvider, protos.google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.undeleteWorkloadIdentityPoolProvider,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.iam.v1beta.WorkloadIdentityPoolProvider,
+      protos.google.iam.v1beta.WorkloadIdentityPoolProviderOperationMetadata
+    >;
   }
- /**
- * Lists all non-deleted
- * {@link protos.google.iam.v1beta.WorkloadIdentityPool|WorkloadIdentityPool}s in a
- * project. If `show_deleted` is set to `true`, then deleted pools are also
- * listed.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource to list pools for.
- * @param {number} request.pageSize
- *   The maximum number of pools to return.
- *   If unspecified, at most 50 pools are returned.
- *   The maximum value is 1000; values above are 1000 truncated to 1000.
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListWorkloadIdentityPools`
- *   call. Provide this to retrieve the subsequent page.
- * @param {boolean} request.showDeleted
- *   Whether to return soft-deleted pools.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.iam.v1beta.WorkloadIdentityPool|WorkloadIdentityPool}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listWorkloadIdentityPoolsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists all non-deleted
+   * {@link protos.google.iam.v1beta.WorkloadIdentityPool|WorkloadIdentityPool}s in a
+   * project. If `show_deleted` is set to `true`, then deleted pools are also
+   * listed.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource to list pools for.
+   * @param {number} request.pageSize
+   *   The maximum number of pools to return.
+   *   If unspecified, at most 50 pools are returned.
+   *   The maximum value is 1000; values above are 1000 truncated to 1000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListWorkloadIdentityPools`
+   *   call. Provide this to retrieve the subsequent page.
+   * @param {boolean} request.showDeleted
+   *   Whether to return soft-deleted pools.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.iam.v1beta.WorkloadIdentityPool|WorkloadIdentityPool}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listWorkloadIdentityPoolsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listWorkloadIdentityPools(
-      request?: protos.google.iam.v1beta.IListWorkloadIdentityPoolsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.iam.v1beta.IWorkloadIdentityPool[],
-        protos.google.iam.v1beta.IListWorkloadIdentityPoolsRequest|null,
-        protos.google.iam.v1beta.IListWorkloadIdentityPoolsResponse
-      ]>;
+    request?: protos.google.iam.v1beta.IListWorkloadIdentityPoolsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.iam.v1beta.IWorkloadIdentityPool[],
+      protos.google.iam.v1beta.IListWorkloadIdentityPoolsRequest | null,
+      protos.google.iam.v1beta.IListWorkloadIdentityPoolsResponse,
+    ]
+  >;
   listWorkloadIdentityPools(
-      request: protos.google.iam.v1beta.IListWorkloadIdentityPoolsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.iam.v1beta.IListWorkloadIdentityPoolsRequest,
-          protos.google.iam.v1beta.IListWorkloadIdentityPoolsResponse|null|undefined,
-          protos.google.iam.v1beta.IWorkloadIdentityPool>): void;
+    request: protos.google.iam.v1beta.IListWorkloadIdentityPoolsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.iam.v1beta.IListWorkloadIdentityPoolsRequest,
+      | protos.google.iam.v1beta.IListWorkloadIdentityPoolsResponse
+      | null
+      | undefined,
+      protos.google.iam.v1beta.IWorkloadIdentityPool
+    >,
+  ): void;
   listWorkloadIdentityPools(
-      request: protos.google.iam.v1beta.IListWorkloadIdentityPoolsRequest,
-      callback: PaginationCallback<
-          protos.google.iam.v1beta.IListWorkloadIdentityPoolsRequest,
-          protos.google.iam.v1beta.IListWorkloadIdentityPoolsResponse|null|undefined,
-          protos.google.iam.v1beta.IWorkloadIdentityPool>): void;
+    request: protos.google.iam.v1beta.IListWorkloadIdentityPoolsRequest,
+    callback: PaginationCallback<
+      protos.google.iam.v1beta.IListWorkloadIdentityPoolsRequest,
+      | protos.google.iam.v1beta.IListWorkloadIdentityPoolsResponse
+      | null
+      | undefined,
+      protos.google.iam.v1beta.IWorkloadIdentityPool
+    >,
+  ): void;
   listWorkloadIdentityPools(
-      request?: protos.google.iam.v1beta.IListWorkloadIdentityPoolsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.iam.v1beta.IListWorkloadIdentityPoolsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.iam.v1beta.IListWorkloadIdentityPoolsRequest,
-          protos.google.iam.v1beta.IListWorkloadIdentityPoolsResponse|null|undefined,
-          protos.google.iam.v1beta.IWorkloadIdentityPool>,
-      callback?: PaginationCallback<
-          protos.google.iam.v1beta.IListWorkloadIdentityPoolsRequest,
-          protos.google.iam.v1beta.IListWorkloadIdentityPoolsResponse|null|undefined,
-          protos.google.iam.v1beta.IWorkloadIdentityPool>):
-      Promise<[
-        protos.google.iam.v1beta.IWorkloadIdentityPool[],
-        protos.google.iam.v1beta.IListWorkloadIdentityPoolsRequest|null,
-        protos.google.iam.v1beta.IListWorkloadIdentityPoolsResponse
-      ]>|void {
+          | protos.google.iam.v1beta.IListWorkloadIdentityPoolsResponse
+          | null
+          | undefined,
+          protos.google.iam.v1beta.IWorkloadIdentityPool
+        >,
+    callback?: PaginationCallback<
+      protos.google.iam.v1beta.IListWorkloadIdentityPoolsRequest,
+      | protos.google.iam.v1beta.IListWorkloadIdentityPoolsResponse
+      | null
+      | undefined,
+      protos.google.iam.v1beta.IWorkloadIdentityPool
+    >,
+  ): Promise<
+    [
+      protos.google.iam.v1beta.IWorkloadIdentityPool[],
+      protos.google.iam.v1beta.IListWorkloadIdentityPoolsRequest | null,
+      protos.google.iam.v1beta.IListWorkloadIdentityPoolsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.iam.v1beta.IListWorkloadIdentityPoolsRequest,
-      protos.google.iam.v1beta.IListWorkloadIdentityPoolsResponse|null|undefined,
-      protos.google.iam.v1beta.IWorkloadIdentityPool>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.iam.v1beta.IListWorkloadIdentityPoolsRequest,
+          | protos.google.iam.v1beta.IListWorkloadIdentityPoolsResponse
+          | null
+          | undefined,
+          protos.google.iam.v1beta.IWorkloadIdentityPool
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listWorkloadIdentityPools values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1624,208 +2438,237 @@ export class WorkloadIdentityPoolsClient {
     this._log.info('listWorkloadIdentityPools request %j', request);
     return this.innerApiCalls
       .listWorkloadIdentityPools(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.iam.v1beta.IWorkloadIdentityPool[],
-        protos.google.iam.v1beta.IListWorkloadIdentityPoolsRequest|null,
-        protos.google.iam.v1beta.IListWorkloadIdentityPoolsResponse
-      ]) => {
-        this._log.info('listWorkloadIdentityPools values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.iam.v1beta.IWorkloadIdentityPool[],
+          protos.google.iam.v1beta.IListWorkloadIdentityPoolsRequest | null,
+          protos.google.iam.v1beta.IListWorkloadIdentityPoolsResponse,
+        ]) => {
+          this._log.info('listWorkloadIdentityPools values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listWorkloadIdentityPools`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource to list pools for.
- * @param {number} request.pageSize
- *   The maximum number of pools to return.
- *   If unspecified, at most 50 pools are returned.
- *   The maximum value is 1000; values above are 1000 truncated to 1000.
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListWorkloadIdentityPools`
- *   call. Provide this to retrieve the subsequent page.
- * @param {boolean} request.showDeleted
- *   Whether to return soft-deleted pools.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.iam.v1beta.WorkloadIdentityPool|WorkloadIdentityPool} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listWorkloadIdentityPoolsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listWorkloadIdentityPools`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource to list pools for.
+   * @param {number} request.pageSize
+   *   The maximum number of pools to return.
+   *   If unspecified, at most 50 pools are returned.
+   *   The maximum value is 1000; values above are 1000 truncated to 1000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListWorkloadIdentityPools`
+   *   call. Provide this to retrieve the subsequent page.
+   * @param {boolean} request.showDeleted
+   *   Whether to return soft-deleted pools.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.iam.v1beta.WorkloadIdentityPool|WorkloadIdentityPool} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listWorkloadIdentityPoolsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listWorkloadIdentityPoolsStream(
-      request?: protos.google.iam.v1beta.IListWorkloadIdentityPoolsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.iam.v1beta.IListWorkloadIdentityPoolsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listWorkloadIdentityPools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listWorkloadIdentityPools stream %j', request);
     return this.descriptors.page.listWorkloadIdentityPools.createStream(
       this.innerApiCalls.listWorkloadIdentityPools as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listWorkloadIdentityPools`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource to list pools for.
- * @param {number} request.pageSize
- *   The maximum number of pools to return.
- *   If unspecified, at most 50 pools are returned.
- *   The maximum value is 1000; values above are 1000 truncated to 1000.
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListWorkloadIdentityPools`
- *   call. Provide this to retrieve the subsequent page.
- * @param {boolean} request.showDeleted
- *   Whether to return soft-deleted pools.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.iam.v1beta.WorkloadIdentityPool|WorkloadIdentityPool}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/workload_identity_pools.list_workload_identity_pools.js</caption>
- * region_tag:iam_v1beta_generated_WorkloadIdentityPools_ListWorkloadIdentityPools_async
- */
+  /**
+   * Equivalent to `listWorkloadIdentityPools`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource to list pools for.
+   * @param {number} request.pageSize
+   *   The maximum number of pools to return.
+   *   If unspecified, at most 50 pools are returned.
+   *   The maximum value is 1000; values above are 1000 truncated to 1000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListWorkloadIdentityPools`
+   *   call. Provide this to retrieve the subsequent page.
+   * @param {boolean} request.showDeleted
+   *   Whether to return soft-deleted pools.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.iam.v1beta.WorkloadIdentityPool|WorkloadIdentityPool}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/workload_identity_pools.list_workload_identity_pools.js</caption>
+   * region_tag:iam_v1beta_generated_WorkloadIdentityPools_ListWorkloadIdentityPools_async
+   */
   listWorkloadIdentityPoolsAsync(
-      request?: protos.google.iam.v1beta.IListWorkloadIdentityPoolsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.iam.v1beta.IWorkloadIdentityPool>{
+    request?: protos.google.iam.v1beta.IListWorkloadIdentityPoolsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.iam.v1beta.IWorkloadIdentityPool> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listWorkloadIdentityPools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listWorkloadIdentityPools iterate %j', request);
     return this.descriptors.page.listWorkloadIdentityPools.asyncIterate(
       this.innerApiCalls['listWorkloadIdentityPools'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.iam.v1beta.IWorkloadIdentityPool>;
   }
- /**
- * Lists all non-deleted
- * {@link protos.google.iam.v1beta.WorkloadIdentityPoolProvider|WorkloadIdentityPoolProvider}s
- * in a {@link protos.google.iam.v1beta.WorkloadIdentityPool|WorkloadIdentityPool}.
- * If `show_deleted` is set to `true`, then deleted providers are also listed.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The pool to list providers for.
- * @param {number} request.pageSize
- *   The maximum number of providers to return.
- *   If unspecified, at most 50 providers are returned.
- *   The maximum value is 100; values above 100 are truncated to 100.
- * @param {string} request.pageToken
- *   A page token, received from a previous
- *   `ListWorkloadIdentityPoolProviders` call. Provide this to retrieve the
- *   subsequent page.
- * @param {boolean} request.showDeleted
- *   Whether to return soft-deleted providers.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.iam.v1beta.WorkloadIdentityPoolProvider|WorkloadIdentityPoolProvider}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listWorkloadIdentityPoolProvidersAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists all non-deleted
+   * {@link protos.google.iam.v1beta.WorkloadIdentityPoolProvider|WorkloadIdentityPoolProvider}s
+   * in a {@link protos.google.iam.v1beta.WorkloadIdentityPool|WorkloadIdentityPool}.
+   * If `show_deleted` is set to `true`, then deleted providers are also listed.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The pool to list providers for.
+   * @param {number} request.pageSize
+   *   The maximum number of providers to return.
+   *   If unspecified, at most 50 providers are returned.
+   *   The maximum value is 100; values above 100 are truncated to 100.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous
+   *   `ListWorkloadIdentityPoolProviders` call. Provide this to retrieve the
+   *   subsequent page.
+   * @param {boolean} request.showDeleted
+   *   Whether to return soft-deleted providers.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.iam.v1beta.WorkloadIdentityPoolProvider|WorkloadIdentityPoolProvider}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listWorkloadIdentityPoolProvidersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listWorkloadIdentityPoolProviders(
-      request?: protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.iam.v1beta.IWorkloadIdentityPoolProvider[],
-        protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest|null,
-        protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersResponse
-      ]>;
+    request?: protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.iam.v1beta.IWorkloadIdentityPoolProvider[],
+      protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest | null,
+      protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersResponse,
+    ]
+  >;
   listWorkloadIdentityPoolProviders(
-      request: protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest,
-          protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersResponse|null|undefined,
-          protos.google.iam.v1beta.IWorkloadIdentityPoolProvider>): void;
+    request: protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest,
+      | protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersResponse
+      | null
+      | undefined,
+      protos.google.iam.v1beta.IWorkloadIdentityPoolProvider
+    >,
+  ): void;
   listWorkloadIdentityPoolProviders(
-      request: protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest,
-      callback: PaginationCallback<
-          protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest,
-          protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersResponse|null|undefined,
-          protos.google.iam.v1beta.IWorkloadIdentityPoolProvider>): void;
+    request: protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest,
+    callback: PaginationCallback<
+      protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest,
+      | protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersResponse
+      | null
+      | undefined,
+      protos.google.iam.v1beta.IWorkloadIdentityPoolProvider
+    >,
+  ): void;
   listWorkloadIdentityPoolProviders(
-      request?: protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest,
-          protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersResponse|null|undefined,
-          protos.google.iam.v1beta.IWorkloadIdentityPoolProvider>,
-      callback?: PaginationCallback<
-          protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest,
-          protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersResponse|null|undefined,
-          protos.google.iam.v1beta.IWorkloadIdentityPoolProvider>):
-      Promise<[
-        protos.google.iam.v1beta.IWorkloadIdentityPoolProvider[],
-        protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest|null,
-        protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersResponse
-      ]>|void {
+          | protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersResponse
+          | null
+          | undefined,
+          protos.google.iam.v1beta.IWorkloadIdentityPoolProvider
+        >,
+    callback?: PaginationCallback<
+      protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest,
+      | protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersResponse
+      | null
+      | undefined,
+      protos.google.iam.v1beta.IWorkloadIdentityPoolProvider
+    >,
+  ): Promise<
+    [
+      protos.google.iam.v1beta.IWorkloadIdentityPoolProvider[],
+      protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest | null,
+      protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest,
-      protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersResponse|null|undefined,
-      protos.google.iam.v1beta.IWorkloadIdentityPoolProvider>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest,
+          | protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersResponse
+          | null
+          | undefined,
+          protos.google.iam.v1beta.IWorkloadIdentityPoolProvider
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listWorkloadIdentityPoolProviders values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1834,118 +2677,127 @@ export class WorkloadIdentityPoolsClient {
     this._log.info('listWorkloadIdentityPoolProviders request %j', request);
     return this.innerApiCalls
       .listWorkloadIdentityPoolProviders(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.iam.v1beta.IWorkloadIdentityPoolProvider[],
-        protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest|null,
-        protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersResponse
-      ]) => {
-        this._log.info('listWorkloadIdentityPoolProviders values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.iam.v1beta.IWorkloadIdentityPoolProvider[],
+          protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest | null,
+          protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersResponse,
+        ]) => {
+          this._log.info(
+            'listWorkloadIdentityPoolProviders values %j',
+            response,
+          );
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listWorkloadIdentityPoolProviders`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The pool to list providers for.
- * @param {number} request.pageSize
- *   The maximum number of providers to return.
- *   If unspecified, at most 50 providers are returned.
- *   The maximum value is 100; values above 100 are truncated to 100.
- * @param {string} request.pageToken
- *   A page token, received from a previous
- *   `ListWorkloadIdentityPoolProviders` call. Provide this to retrieve the
- *   subsequent page.
- * @param {boolean} request.showDeleted
- *   Whether to return soft-deleted providers.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.iam.v1beta.WorkloadIdentityPoolProvider|WorkloadIdentityPoolProvider} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listWorkloadIdentityPoolProvidersAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listWorkloadIdentityPoolProviders`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The pool to list providers for.
+   * @param {number} request.pageSize
+   *   The maximum number of providers to return.
+   *   If unspecified, at most 50 providers are returned.
+   *   The maximum value is 100; values above 100 are truncated to 100.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous
+   *   `ListWorkloadIdentityPoolProviders` call. Provide this to retrieve the
+   *   subsequent page.
+   * @param {boolean} request.showDeleted
+   *   Whether to return soft-deleted providers.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.iam.v1beta.WorkloadIdentityPoolProvider|WorkloadIdentityPoolProvider} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listWorkloadIdentityPoolProvidersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listWorkloadIdentityPoolProvidersStream(
-      request?: protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
-    const defaultCallSettings = this._defaults['listWorkloadIdentityPoolProviders'];
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listWorkloadIdentityPoolProviders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listWorkloadIdentityPoolProviders stream %j', request);
     return this.descriptors.page.listWorkloadIdentityPoolProviders.createStream(
       this.innerApiCalls.listWorkloadIdentityPoolProviders as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listWorkloadIdentityPoolProviders`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The pool to list providers for.
- * @param {number} request.pageSize
- *   The maximum number of providers to return.
- *   If unspecified, at most 50 providers are returned.
- *   The maximum value is 100; values above 100 are truncated to 100.
- * @param {string} request.pageToken
- *   A page token, received from a previous
- *   `ListWorkloadIdentityPoolProviders` call. Provide this to retrieve the
- *   subsequent page.
- * @param {boolean} request.showDeleted
- *   Whether to return soft-deleted providers.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.iam.v1beta.WorkloadIdentityPoolProvider|WorkloadIdentityPoolProvider}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/workload_identity_pools.list_workload_identity_pool_providers.js</caption>
- * region_tag:iam_v1beta_generated_WorkloadIdentityPools_ListWorkloadIdentityPoolProviders_async
- */
+  /**
+   * Equivalent to `listWorkloadIdentityPoolProviders`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The pool to list providers for.
+   * @param {number} request.pageSize
+   *   The maximum number of providers to return.
+   *   If unspecified, at most 50 providers are returned.
+   *   The maximum value is 100; values above 100 are truncated to 100.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous
+   *   `ListWorkloadIdentityPoolProviders` call. Provide this to retrieve the
+   *   subsequent page.
+   * @param {boolean} request.showDeleted
+   *   Whether to return soft-deleted providers.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.iam.v1beta.WorkloadIdentityPoolProvider|WorkloadIdentityPoolProvider}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/workload_identity_pools.list_workload_identity_pool_providers.js</caption>
+   * region_tag:iam_v1beta_generated_WorkloadIdentityPools_ListWorkloadIdentityPoolProviders_async
+   */
   listWorkloadIdentityPoolProvidersAsync(
-      request?: protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider>{
+    request?: protos.google.iam.v1beta.IListWorkloadIdentityPoolProvidersRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
-    const defaultCallSettings = this._defaults['listWorkloadIdentityPoolProviders'];
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listWorkloadIdentityPoolProviders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listWorkloadIdentityPoolProviders iterate %j', request);
     return this.descriptors.page.listWorkloadIdentityPoolProviders.asyncIterate(
       this.innerApiCalls['listWorkloadIdentityPoolProviders'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.iam.v1beta.IWorkloadIdentityPoolProvider>;
   }
   // --------------------
@@ -1958,7 +2810,7 @@ export class WorkloadIdentityPoolsClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -1983,7 +2835,11 @@ export class WorkloadIdentityPoolsClient {
    * @param {string} workload_identity_pool
    * @returns {string} Resource name string.
    */
-  workloadIdentityPoolPath(project:string,location:string,workloadIdentityPool:string) {
+  workloadIdentityPoolPath(
+    project: string,
+    location: string,
+    workloadIdentityPool: string,
+  ) {
     return this.pathTemplates.workloadIdentityPoolPathTemplate.render({
       project: project,
       location: location,
@@ -1999,7 +2855,9 @@ export class WorkloadIdentityPoolsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromWorkloadIdentityPoolName(workloadIdentityPoolName: string) {
-    return this.pathTemplates.workloadIdentityPoolPathTemplate.match(workloadIdentityPoolName).project;
+    return this.pathTemplates.workloadIdentityPoolPathTemplate.match(
+      workloadIdentityPoolName,
+    ).project;
   }
 
   /**
@@ -2010,7 +2868,9 @@ export class WorkloadIdentityPoolsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromWorkloadIdentityPoolName(workloadIdentityPoolName: string) {
-    return this.pathTemplates.workloadIdentityPoolPathTemplate.match(workloadIdentityPoolName).location;
+    return this.pathTemplates.workloadIdentityPoolPathTemplate.match(
+      workloadIdentityPoolName,
+    ).location;
   }
 
   /**
@@ -2020,8 +2880,12 @@ export class WorkloadIdentityPoolsClient {
    *   A fully-qualified path representing WorkloadIdentityPool resource.
    * @returns {string} A string representing the workload_identity_pool.
    */
-  matchWorkloadIdentityPoolFromWorkloadIdentityPoolName(workloadIdentityPoolName: string) {
-    return this.pathTemplates.workloadIdentityPoolPathTemplate.match(workloadIdentityPoolName).workload_identity_pool;
+  matchWorkloadIdentityPoolFromWorkloadIdentityPoolName(
+    workloadIdentityPoolName: string,
+  ) {
+    return this.pathTemplates.workloadIdentityPoolPathTemplate.match(
+      workloadIdentityPoolName,
+    ).workload_identity_pool;
   }
 
   /**
@@ -2033,7 +2897,12 @@ export class WorkloadIdentityPoolsClient {
    * @param {string} workload_identity_pool_provider
    * @returns {string} Resource name string.
    */
-  workloadIdentityPoolProviderPath(project:string,location:string,workloadIdentityPool:string,workloadIdentityPoolProvider:string) {
+  workloadIdentityPoolProviderPath(
+    project: string,
+    location: string,
+    workloadIdentityPool: string,
+    workloadIdentityPoolProvider: string,
+  ) {
     return this.pathTemplates.workloadIdentityPoolProviderPathTemplate.render({
       project: project,
       location: location,
@@ -2049,8 +2918,12 @@ export class WorkloadIdentityPoolsClient {
    *   A fully-qualified path representing WorkloadIdentityPoolProvider resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromWorkloadIdentityPoolProviderName(workloadIdentityPoolProviderName: string) {
-    return this.pathTemplates.workloadIdentityPoolProviderPathTemplate.match(workloadIdentityPoolProviderName).project;
+  matchProjectFromWorkloadIdentityPoolProviderName(
+    workloadIdentityPoolProviderName: string,
+  ) {
+    return this.pathTemplates.workloadIdentityPoolProviderPathTemplate.match(
+      workloadIdentityPoolProviderName,
+    ).project;
   }
 
   /**
@@ -2060,8 +2933,12 @@ export class WorkloadIdentityPoolsClient {
    *   A fully-qualified path representing WorkloadIdentityPoolProvider resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromWorkloadIdentityPoolProviderName(workloadIdentityPoolProviderName: string) {
-    return this.pathTemplates.workloadIdentityPoolProviderPathTemplate.match(workloadIdentityPoolProviderName).location;
+  matchLocationFromWorkloadIdentityPoolProviderName(
+    workloadIdentityPoolProviderName: string,
+  ) {
+    return this.pathTemplates.workloadIdentityPoolProviderPathTemplate.match(
+      workloadIdentityPoolProviderName,
+    ).location;
   }
 
   /**
@@ -2071,8 +2948,12 @@ export class WorkloadIdentityPoolsClient {
    *   A fully-qualified path representing WorkloadIdentityPoolProvider resource.
    * @returns {string} A string representing the workload_identity_pool.
    */
-  matchWorkloadIdentityPoolFromWorkloadIdentityPoolProviderName(workloadIdentityPoolProviderName: string) {
-    return this.pathTemplates.workloadIdentityPoolProviderPathTemplate.match(workloadIdentityPoolProviderName).workload_identity_pool;
+  matchWorkloadIdentityPoolFromWorkloadIdentityPoolProviderName(
+    workloadIdentityPoolProviderName: string,
+  ) {
+    return this.pathTemplates.workloadIdentityPoolProviderPathTemplate.match(
+      workloadIdentityPoolProviderName,
+    ).workload_identity_pool;
   }
 
   /**
@@ -2082,8 +2963,12 @@ export class WorkloadIdentityPoolsClient {
    *   A fully-qualified path representing WorkloadIdentityPoolProvider resource.
    * @returns {string} A string representing the workload_identity_pool_provider.
    */
-  matchWorkloadIdentityPoolProviderFromWorkloadIdentityPoolProviderName(workloadIdentityPoolProviderName: string) {
-    return this.pathTemplates.workloadIdentityPoolProviderPathTemplate.match(workloadIdentityPoolProviderName).workload_identity_pool_provider;
+  matchWorkloadIdentityPoolProviderFromWorkloadIdentityPoolProviderName(
+    workloadIdentityPoolProviderName: string,
+  ) {
+    return this.pathTemplates.workloadIdentityPoolProviderPathTemplate.match(
+      workloadIdentityPoolProviderName,
+    ).workload_identity_pool_provider;
   }
 
   /**
@@ -2094,7 +2979,7 @@ export class WorkloadIdentityPoolsClient {
    */
   close(): Promise<void> {
     if (this.workloadIdentityPoolsStub && !this._terminated) {
-      return this.workloadIdentityPoolsStub.then(stub => {
+      return this.workloadIdentityPoolsStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

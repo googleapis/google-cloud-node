@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AssetServiceClient} from '@google-cloud/asset';
+import { AssetServiceClient } from '@google-cloud/asset';
 
 // check that the client class type name can be used
 function doStuffWithAssetServiceClient(client: AssetServiceClient) {

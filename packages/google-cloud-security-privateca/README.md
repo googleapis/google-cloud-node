@@ -87,7 +87,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update certificate authority | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.update_certificate_authority.js) |
 | update certificate revocation list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.update_certificate_revocation_list.js) |
 | update certificate template | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/certificate_authority_service.update_certificate_template.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1/snippet_metadata_google.cloud.security.privateca.v1.json) |
 | activate certificate authority | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.activate_certificate_authority.js) |
 | create certificate | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.create_certificate.js) |
 | create certificate authority | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.create_certificate_authority.js) |
@@ -108,7 +107,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update certificate | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.update_certificate.js) |
 | update certificate authority | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.update_certificate_authority.js) |
 | update certificate revocation list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1beta1/certificate_authority_service.update_certificate_revocation_list.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-privateca/samples/generated/v1beta1/snippet_metadata_google.cloud.security.privateca.v1beta1.json) |
 
 
 ## Supported Node.js Versions
