@@ -323,12 +323,12 @@ const replacements = [
   },
   {
     files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts',
-    searchPattern: /function doStuffWithSqlIamPoliciesServiceClient\(\n  client: SqlIamPoliciesServiceClient\n\) {\n  client.close\(\);\n}/gs,
+    searchPattern: /function doStuffWithSqlIamPoliciesServiceClient\s*\(\s*client:\s*SqlIamPoliciesServiceClient,?\s*\)\s*\{\s*client\.close\(\);\s*\}/gs,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts',
-    searchPattern: /function doStuffWithSqlInstanceNamesServiceClient\(\n  client: SqlInstanceNamesServiceClient\n\) {\n  client.close\(\);\n}/gs,
+    searchPattern: /function doStuffWithSqlInstanceNamesServiceClient\s*\(\s*client:\s*SqlInstanceNamesServiceClient,?\s*\)\s*\{\s*client\.close\(\);\s*\}/gs,
     replacement: ''
   },
   {
