@@ -830,6 +830,8 @@ libraries:
 
     nodejs:
       default_version: v3
+      metadata_name_override: dialogflow-cx
+      name_pretty_override: Dialogflow CX API
   - name: google-cloud-discoveryengine
     version: 2.8.0
     apis:
