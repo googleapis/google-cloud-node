@@ -318,7 +318,17 @@ const replacements = [
   },
   {
     files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts',
-    searchPattern: /function doStuffWithSqlEventsServiceClient\(client: SqlEventsServiceClient\) {\n  client.close\(\);\n}/gs,
+    searchPattern: /function doStuffWithSqlBackupsServiceClient\s*\(\s*client:\s*SqlBackupsServiceClient,?\s*\)\s*\{\s*client\.close\(\);\s*\}/gs,
+    replacement: ''
+  },
+  {
+    files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts',
+    searchPattern: /function doStuffWithSqlEventsServiceClient\s*\(\s*client:\s*SqlEventsServiceClient,?\s*\)\s*\{\s*client\.close\(\);\s*\}/gs,
+    replacement: ''
+  },
+  {
+    files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts',
+    searchPattern: /function doStuffWithSqlFeatureEligibilityServiceClient\s*\(\s*client:\s*SqlFeatureEligibilityServiceClient,?\s*\)\s*\{\s*client\.close\(\);\s*\}/gs,
     replacement: ''
   },
   {
