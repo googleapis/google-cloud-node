@@ -1533,7 +1533,6 @@ libraries:
       - path: google/cloud/sql/v1
       - path: google/cloud/sql/v1beta4
     copyright_year: "2026"
-    skip_generate: true
     nodejs:
       default_version: v1
   - name: google-cloud-storagebatchoperations
