@@ -212,6 +212,36 @@ const replacements = [
     replacement: ''
   },
   {
+    files: 'packages/google-cloud-sql/src/index.ts',
+    searchPattern: /const SqlBackupsServiceClient = v1\.SqlBackupsServiceClient;/gs,
+    replacement: ''
+  },
+  {
+    files: 'packages/google-cloud-sql/src/index.ts',
+    searchPattern: /type SqlBackupsServiceClient = v1\.SqlBackupsServiceClient;/gs,
+    replacement: ''
+  },
+  {
+    files: 'packages/google-cloud-sql/src/index.ts',
+    searchPattern: /const SqlFeatureEligibilityServiceClient = v1\.SqlFeatureEligibilityServiceClient;/gs,
+    replacement: ''
+  },
+  {
+    files: 'packages/google-cloud-sql/src/index.ts',
+    searchPattern: /type SqlFeatureEligibilityServiceClient = v1\.SqlFeatureEligibilityServiceClient;/gs,
+    replacement: ''
+  },
+  {
+    files: 'packages/google-cloud-sql/src/index.ts',
+    searchPattern: /SqlBackupsServiceClient, /gs,
+    replacement: ''
+  },
+  {
+    files: 'packages/google-cloud-sql/src/index.ts',
+    searchPattern: /SqlFeatureEligibilityServiceClient, /gs,
+    replacement: ''
+  },
+  {
     files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.js',
     searchPattern: /const sqlAvailableDatabaseVersionsServiceClient =\n    new sql.SqlAvailableDatabaseVersionsServiceClient\(\);/gs,
     replacement: ''
