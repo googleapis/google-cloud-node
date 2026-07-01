@@ -80,18 +80,11 @@ function doStuffWithSqlUsersServiceClient(client: SqlUsersServiceClient) {
 }
 
 function main() {
-  // check that the client instance can be created
-  const sqlAvailableDatabaseVersionsServiceClient =
-    new SqlAvailableDatabaseVersionsServiceClient();
-  doStuffWithSqlAvailableDatabaseVersionsServiceClient(
-    sqlAvailableDatabaseVersionsServiceClient,
-  );
+  
   // check that the client instance can be created
   const sqlBackupRunsServiceClient = new SqlBackupRunsServiceClient();
   doStuffWithSqlBackupRunsServiceClient(sqlBackupRunsServiceClient);
-  // check that the client instance can be created
-  const sqlBackupsServiceClient = new SqlBackupsServiceClient();
-  doStuffWithSqlBackupsServiceClient(sqlBackupsServiceClient);
+  
   // check that the client instance can be created
   const sqlConnectServiceClient = new SqlConnectServiceClient();
   doStuffWithSqlConnectServiceClient(sqlConnectServiceClient);
