@@ -22,10 +22,7 @@ node.owlbot_main(relative_dir="handwritten/logging",
     staging_excludes=[
         ".eslintignore", ".prettierignore", "src/index.ts", "README.md", "package.json",
         "system-test/fixtures/sample/src/index.js",
-        "system-test/fixtures/sample/src/index.ts",
-        ".kokoro/system-test.sh",
-        ".kokoro/continuous/node14/system-test.cfg",
-        ".kokoro/presubmit/node14/system-test.cfg"],
+        "system-test/fixtures/sample/src/index.ts"],
     templates_excludes=[
         "src/index.ts",
         ".eslintignore",
