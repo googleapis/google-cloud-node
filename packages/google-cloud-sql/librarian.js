@@ -348,6 +348,16 @@ const replacements = [
   },
   {
     files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts',
+    searchPattern: /\/\/ check that the client instance can be created\s*const sqlAvailableDatabaseVersionsServiceClient =\s*new SqlAvailableDatabaseVersionsServiceClient\(\);\s*doStuffWithSqlAvailableDatabaseVersionsServiceClient\(\s*sqlAvailableDatabaseVersionsServiceClient,?\s*\);/gs,
+    replacement: ''
+  },
+  {
+    files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts',
+    searchPattern: /\/\/ check that the client instance can be created\s*const sqlBackupsServiceClient =\s*new SqlBackupsServiceClient\(\);\s*doStuffWithSqlBackupsServiceClient\(\s*sqlBackupsServiceClient,?\s*\);/gs,
+    replacement: ''
+  },
+  {
+    files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts',
     searchPattern: /\/\/ check that the client instance can be created\s*const sqlFeatureEligibilityServiceClient =\s*new SqlFeatureEligibilityServiceClient\(\);\s*doStuffWithSqlFeatureEligibilityServiceClient\(\s*sqlFeatureEligibilityServiceClient,?\s*\);/gs,
     replacement: ''
   },
