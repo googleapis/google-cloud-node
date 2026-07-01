@@ -348,27 +348,27 @@ const replacements = [
   },
   {
     files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts',
-    searchPattern: /\n  const sqlAvailableDatabaseVersionsServiceClient =\n    new SqlAvailableDatabaseVersionsServiceClient\(\);\n  doStuffWithSqlAvailableDatabaseVersionsServiceClient\(\n    sqlAvailableDatabaseVersionsServiceClient\n  \);/gs,
+    searchPattern: /\/\/ check that the client instance can be created\s*const sqlFeatureEligibilityServiceClient =\s*new SqlFeatureEligibilityServiceClient\(\);\s*doStuffWithSqlFeatureEligibilityServiceClient\(\s*sqlFeatureEligibilityServiceClient,?\s*\);/gs,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts',
-    searchPattern: /const sqlEventsServiceClient = new SqlEventsServiceClient\(\);\n  doStuffWithSqlEventsServiceClient\(sqlEventsServiceClient\);/gs,
+    searchPattern: /\/\/ check that the client instance can be created\s*const sqlEventsServiceClient = new SqlEventsServiceClient\(\);\n  doStuffWithSqlEventsServiceClient\(sqlEventsServiceClient\);/gs,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts',
-    searchPattern: /const sqlIamPoliciesServiceClient = new SqlIamPoliciesServiceClient\(\);\n  doStuffWithSqlIamPoliciesServiceClient\(sqlIamPoliciesServiceClient\);/gs,
+    searchPattern: /\/\/ check that the client instance can be created\s*const sqlIamPoliciesServiceClient = new SqlIamPoliciesServiceClient\(\);\n  doStuffWithSqlIamPoliciesServiceClient\(sqlIamPoliciesServiceClient\);/gs,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts',
-    searchPattern: /const sqlInstanceNamesServiceClient = new SqlInstanceNamesServiceClient\(\);\n  doStuffWithSqlInstanceNamesServiceClient\(sqlInstanceNamesServiceClient\);/gs,
+    searchPattern: /\/\/ check that the client instance can be created\s*const sqlInstanceNamesServiceClient = new SqlInstanceNamesServiceClient\(\);\n  doStuffWithSqlInstanceNamesServiceClient\(sqlInstanceNamesServiceClient\);/gs,
     replacement: ''
   },
   {
     files: 'packages/google-cloud-sql/system-test/fixtures/sample/src/index.ts',
-    searchPattern: /const sqlRegionsServiceClient = new SqlRegionsServiceClient\(\);\n  doStuffWithSqlRegionsServiceClient\(sqlRegionsServiceClient\);/gs,
+    searchPattern: /\/\/ check that the client instance can be created\s*const sqlRegionsServiceClient = new SqlRegionsServiceClient\(\);\n  doStuffWithSqlRegionsServiceClient\(sqlRegionsServiceClient\);/gs,
     replacement: ''
   }
 ];
